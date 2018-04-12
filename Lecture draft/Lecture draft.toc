@@ -1,0 +1,43 @@
+\contentsline {section}{\numberline {1}Lecture 1:From AS to APS}{3}{section.1}
+\contentsline {section}{\numberline {2}Lecture 2: The $b$-integral and $b$-trace}{9}{section.2}
+\contentsline {section}{\numberline {3}Lecture 3:Blow up of manifolds with corners}{17}{section.3}
+\contentsline {section}{\numberline {4}Lecture 4:Geometry of manifold with corners}{29}{section.4}
+\contentsline {section}{\numberline {5}Lecture 5:The ${}^b$-category invented by Melrose}{37}{section.5}
+\contentsline {section}{\numberline {6}Lecture 6: The $b$-principal symbol}{48}{section.6}
+\contentsline {section}{\numberline {7}Lecture 7: Blow ups in general}{56}{section.7}
+\contentsline {section}{\numberline {8}Lecture 8: New function spaces}{64}{section.8}
+\contentsline {section}{\numberline {9}Lecture 9: Conormal distributions}{68}{section.9}
+\contentsline {section}{\numberline {10}Lecture 10: The composition formula}{75}{section.10}
+\contentsline {section}{\numberline {11}Lecture 11: Conormal distribution spaces}{82}{section.11}
+\contentsline {section}{\numberline {12}Lecture 12: The normal operator}{95}{section.12}
+\contentsline {section}{\numberline {13}Lecture 13: The right function space}{104}{section.13}
+\contentsline {subsection}{\numberline {13.1}Exercises for Lecture 13}{109}{subsection.13.1}
+\contentsline {section}{\numberline {14}Lecture 14: Analytical Fredholm theory - I}{111}{section.14}
+\contentsline {section}{\numberline {15}Lecture 15: Analytical Fredholm theory, Part II}{115}{section.15}
+\contentsline {subsection}{\numberline {15.1}Exercise for Lecture 14}{117}{subsection.15.1}
+\contentsline {subsection}{\numberline {15.2}Application to the normal operator}{119}{subsection.15.2}
+\contentsline {section}{\numberline {16}Lecture 16: Fredholmness in the space $x^{\epsilon }\mathcal {S}^{0}$}{122}{section.16}
+\contentsline {subsection}{\numberline {16.1}interlude}{122}{subsection.16.1}
+\contentsline {subsection}{\numberline {16.2}class discussion}{122}{subsection.16.2}
+\contentsline {section}{\numberline {17}Lecture 17: Revisit the ${}^{b}$-trace}{128}{section.17}
+\contentsline {subsection}{\numberline {17.1}Adjoints}{128}{subsection.17.1}
+\contentsline {subsection}{\numberline {17.2}${}^{b}$-integral and ${}^{b}$ trace}{129}{subsection.17.2}
+\contentsline {section}{\numberline {18}Lecture 18: Revisit the Dirac operator}{134}{section.18}
+\contentsline {subsection}{\numberline {18.1}Finishing last theorem}{134}{subsection.18.1}
+\contentsline {subsection}{\numberline {18.2}Product structures}{136}{subsection.18.2}
+\contentsline {subsection}{\numberline {18.3}Clifford Action}{136}{subsection.18.3}
+\contentsline {subsection}{\numberline {18.4}Dirac operator}{138}{subsection.18.4}
+\contentsline {subsection}{\numberline {18.5}The $b$-category case}{140}{subsection.18.5}
+\contentsline {section}{\numberline {19}Lecture 19: Revisit the heat kernel for manifold with boundary}{141}{section.19}
+\contentsline {subsection}{\numberline {19.1}The gluing construction}{141}{subsection.19.1}
+\contentsline {subsection}{\numberline {19.2}The patched up heat kernel}{146}{subsection.19.2}
+\contentsline {subsection}{\numberline {19.3}Step 1}{149}{subsection.19.3}
+\contentsline {subsection}{\numberline {19.4}Step 2}{152}{subsection.19.4}
+\contentsline {subsection}{\numberline {19.5}Return to the Dirac case}{154}{subsection.19.5}
+\contentsline {subsection}{\numberline {19.6}Homework for Lecture 19}{155}{subsection.19.6}
+\contentsline {section}{\numberline {20}Lecture 20: Proof of APS theorem}{156}{section.20}
+\contentsline {subsection}{\numberline {20.1}Eta invariant}{156}{subsection.20.1}
+\contentsline {section}{\numberline {21}Lecture 21: In-depth study of the eta-invariant}{157}{section.21}
+\contentsline {section}{\numberline {22}Lecture 22:Semi-classical operators and blow up space}{157}{section.22}
+\contentsline {section}{\numberline {23}Lecture 23: Construction of heat kernel in semi-classical operators}{157}{section.23}
+\contentsline {section}{\numberline {24}Lecture 24: Symbol spaces of heat kernel in semi-classical operators}{157}{section.24}

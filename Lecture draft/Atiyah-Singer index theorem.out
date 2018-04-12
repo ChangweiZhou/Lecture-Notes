@@ -1,0 +1,99 @@
+\BOOKMARK [0][-]{chapter.1}{Review of Riemannian manifolds}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Connections and curvature}{chapter.1}% 2
+\BOOKMARK [2][-]{subsection.1.1.1}{Connection on Rn}{section.1.1}% 3
+\BOOKMARK [2][-]{subsection.1.1.2}{Connection on Riemannian manifold}{section.1.1}% 4
+\BOOKMARK [1][-]{section.1.2}{Introducing Riemannian Curvature}{chapter.1}% 5
+\BOOKMARK [1][-]{section.1.3}{Neat application of Levi-Civita connection}{chapter.1}% 6
+\BOOKMARK [0][-]{chapter.2}{The road to Gauss-Bonnet}{}% 7
+\BOOKMARK [1][-]{section.2.1}{Definition of Differential Operators}{chapter.2}% 8
+\BOOKMARK [1][-]{section.2.2}{Differential Operator on Manifolds}{chapter.2}% 9
+\BOOKMARK [1][-]{section.2.3}{Differential Operator On Manifolds, II}{chapter.2}% 10
+\BOOKMARK [1][-]{section.2.4}{Vector Bundles}{chapter.2}% 11
+\BOOKMARK [1][-]{section.2.5}{Adjoints}{chapter.2}% 12
+\BOOKMARK [1][-]{section.2.6}{Principal Symbol}{chapter.2}% 13
+\BOOKMARK [1][-]{section.2.7}{Reivew of previous section}{chapter.2}% 14
+\BOOKMARK [1][-]{section.2.8}{Adjoints, Review}{chapter.2}% 15
+\BOOKMARK [1][-]{section.2.9}{Index of a Dirac Operator}{chapter.2}% 16
+\BOOKMARK [1][-]{section.2.10}{Hodge decomposition Theorem}{chapter.2}% 17
+\BOOKMARK [1][-]{section.2.11}{Determinants and Traces}{chapter.2}% 18
+\BOOKMARK [1][-]{section.2.12}{-genus}{chapter.2}% 19
+\BOOKMARK [1][-]{section.2.13}{Relative Chern Character}{chapter.2}% 20
+\BOOKMARK [1][-]{section.2.14}{From Principle symbol to Atiyah-Singer}{chapter.2}% 21
+\BOOKMARK [1][-]{section.2.15}{Exterior covariant derivative}{chapter.2}% 22
+\BOOKMARK [1][-]{section.2.16}{Extension}{chapter.2}% 23
+\BOOKMARK [1][-]{section.2.17}{Towards Gauss Bonnet}{chapter.2}% 24
+\BOOKMARK [1][-]{section.2.18}{Gauss-Bonnet}{chapter.2}% 25
+\BOOKMARK [0][-]{chapter.3}{Heat kernel asymptotics}{}% 26
+\BOOKMARK [1][-]{section.3.1}{Heat Kernel}{chapter.3}% 27
+\BOOKMARK [1][-]{section.3.2}{Smoothing operators}{chapter.3}% 28
+\BOOKMARK [1][-]{section.3.3}{Paramatrix}{chapter.3}% 29
+\BOOKMARK [1][-]{section.3.4}{Revisit Heat kernel}{chapter.3}% 30
+\BOOKMARK [1][-]{section.3.5}{Constructing the Heat kernel}{chapter.3}% 31
+\BOOKMARK [1][-]{section.3.6}{The space pn and smoothing operators}{chapter.3}% 32
+\BOOKMARK [1][-]{section.3.7}{More Properties of p}{chapter.3}% 33
+\BOOKMARK [1][-]{section.3.8}{Towards Hodge Theorem}{chapter.3}% 34
+\BOOKMARK [1][-]{section.3.9}{The idea of approximating the heat kernel using paramatrix}{chapter.3}% 35
+\BOOKMARK [1][-]{section.3.10}{Moving forward}{chapter.3}% 36
+\BOOKMARK [1][-]{section.3.11}{Brief Review}{chapter.3}% 37
+\BOOKMARK [1][-]{section.3.12}{Move on to the manifolds}{chapter.3}% 38
+\BOOKMARK [1][-]{section.3.13}{Proof of Hodge theorem}{chapter.3}% 39
+\BOOKMARK [1][-]{section.3.14}{Finishing the proof of Hodge theorem}{chapter.3}% 40
+\BOOKMARK [1][-]{section.3.15}{Explicit construction of Heat kernel}{chapter.3}% 41
+\BOOKMARK [1][-]{section.3.16}{asympototic expansion}{chapter.3}% 42
+\BOOKMARK [0][-]{chapter.4}{Clifford Modules}{}% 43
+\BOOKMARK [1][-]{section.4.1}{Background review}{chapter.4}% 44
+\BOOKMARK [1][-]{section.4.2}{Brief overview}{chapter.4}% 45
+\BOOKMARK [1][-]{section.4.3}{Index and the heat operator}{chapter.4}% 46
+\BOOKMARK [1][-]{section.4.4}{The spin representation}{chapter.4}% 47
+\BOOKMARK [1][-]{section.4.5}{Clifford and forms}{chapter.4}% 48
+\BOOKMARK [1][-]{section.4.6}{Clifford algebra and manifolds}{chapter.4}% 49
+\BOOKMARK [0][-]{chapter.5}{Proof of Atiyah-Singer index theorem}{}% 50
+\BOOKMARK [1][-]{section.5.1}{Reveal the secret of Atiyah-Singer index theorem}{chapter.5}% 51
+\BOOKMARK [1][-]{section.5.2}{Clifford Connections}{chapter.5}% 52
+\BOOKMARK [1][-]{section.5.3}{Connection and curvature}{chapter.5}% 53
+\BOOKMARK [1][-]{section.5.4}{Curvature}{chapter.5}% 54
+\BOOKMARK [1][-]{section.5.5}{Ricci Curvature}{chapter.5}% 55
+\BOOKMARK [1][-]{section.5.6}{Connection Laplacian}{chapter.5}% 56
+\BOOKMARK [1][-]{section.5.7}{Local index theorem}{chapter.5}% 57
+\BOOKMARK [1][-]{section.5.8}{The heat kernel}{chapter.5}% 58
+\BOOKMARK [1][-]{section.5.9}{Heat symbols}{chapter.5}% 59
+\BOOKMARK [1][-]{section.5.10}{Finishing the proof of Atiyah-Singer index theorem}{chapter.5}% 60
+\BOOKMARK [0][-]{chapter.6}{Proof of signature theorem}{}% 61
+\BOOKMARK [1][-]{section.6.1}{Lecture 1}{chapter.6}% 62
+\BOOKMARK [1][-]{section.6.2}{Lecture 2}{chapter.6}% 63
+\BOOKMARK [1][-]{section.6.3}{Lecture 3}{chapter.6}% 64
+\BOOKMARK [1][-]{section.6.4}{Lecture 4, The proof}{chapter.6}% 65
+\BOOKMARK [0][-]{chapter.7}{Complex structures}{}% 66
+\BOOKMARK [1][-]{section.7.1}{Almost complex structure}{chapter.7}% 67
+\BOOKMARK [1][-]{section.7.2}{Complex and Kahler manifolds}{chapter.7}% 68
+\BOOKMARK [1][-]{section.7.3}{Review}{chapter.7}% 69
+\BOOKMARK [1][-]{section.7.4}{p,q forms}{chapter.7}% 70
+\BOOKMARK [1][-]{section.7.5}{Hermitian Metrics and almost complex structures}{chapter.7}% 71
+\BOOKMARK [1][-]{section.7.6}{-complex}{chapter.7}% 72
+\BOOKMARK [1][-]{section.7.7}{Inner product on manifolds}{chapter.7}% 73
+\BOOKMARK [1][-]{section.7.8}{Next class}{chapter.7}% 74
+\BOOKMARK [1][-]{section.7.9}{An error}{chapter.7}% 75
+\BOOKMARK [1][-]{section.7.10}{Twisted index theorem}{chapter.7}% 76
+\BOOKMARK [1][-]{section.7.11}{Atiyah-Singer index theorem}{chapter.7}% 77
+\BOOKMARK [1][-]{section.7.12}{Error}{chapter.7}% 78
+\BOOKMARK [1][-]{section.7.13}{ complex}{chapter.7}% 79
+\BOOKMARK [1][-]{section.7.14}{Almost Dolbeault operator on an ACM}{chapter.7}% 80
+\BOOKMARK [1][-]{section.7.15}{almost Riemann-Roch and characteristic classes}{chapter.7}% 81
+\BOOKMARK [1][-]{section.7.16}{Characteristic classes}{chapter.7}% 82
+\BOOKMARK [1][-]{section.7.17}{New lecture}{chapter.7}% 83
+\BOOKMARK [1][-]{section.7.18}{Dirac complexs}{chapter.7}% 84
+\BOOKMARK [1][-]{section.7.19}{Almost Hermitian Manifolds}{chapter.7}% 85
+\BOOKMARK [1][-]{section.7.20}{Adam's claim}{chapter.7}% 86
+\BOOKMARK [1][-]{section.7.21}{Complex manifolds}{chapter.7}% 87
+\BOOKMARK [1][-]{section.7.22}{almost complex structures}{chapter.7}% 88
+\BOOKMARK [0][-]{chapter.8}{Riemann-Roch}{}% 89
+\BOOKMARK [1][-]{section.8.1}{ on complex manifolds}{chapter.8}% 90
+\BOOKMARK [1][-]{section.8.2}{Dolbeault complex}{chapter.8}% 91
+\BOOKMARK [1][-]{section.8.3}{ on holomorphic vector bundles}{chapter.8}% 92
+\BOOKMARK [1][-]{section.8.4}{Adam's question}{chapter.8}% 93
+\BOOKMARK [1][-]{section.8.5}{E, E holomorphic vector bundles}{chapter.8}% 94
+\BOOKMARK [1][-]{section.8.6}{Line bundles and Riemann Surfaces}{chapter.8}% 95
+\BOOKMARK [1][-]{section.8.7}{HRR}{chapter.8}% 96
+\BOOKMARK [1][-]{section.8.8}{To Riemannian-Roch}{chapter.8}% 97
+\BOOKMARK [1][-]{section.8.9}{Proof of Riemann-Roch}{chapter.8}% 98
+\BOOKMARK [1][-]{section.8.10}{Final Proof}{chapter.8}% 99
