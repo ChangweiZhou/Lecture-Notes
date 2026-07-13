@@ -51,8 +51,18 @@
 \clearpage
 \hypersetup{pageanchor=true}
 \frontmatter
+\begingroup
+\small
 \tableofcontents
+\endgroup
+\clearpage
+\begingroup
+\makeatletter
+\let\addvspace\@gobble
+\makeatother
 \listoffigures
+\endgroup
+\clearpage
 
 \mainmatter
 
@@ -195,7 +205,7 @@ The Riemann curvature tensor is
  \node[red!40!black] at (2.45,-.62)
    {returned vector: \(Z+\varepsilon^2R(X,Y)Z+O(\varepsilon^3)\)};
 \end{tikzpicture}
-\caption{Curvature is the second-order failure of parallel transport
+\caption[Curvature as infinitesimal holonomy]{Curvature is the second-order failure of parallel transport
 around an infinitesimal parallelogram to return a vector unchanged.}
 \end{figure}
 
@@ -511,7 +521,7 @@ with both displayed identities.
  &Q\arrow[l,"\text{compose}"']
 \end{tikzcd}
 \]
-\caption{Ellipticity is converted into Fredholmness through symbol
+\caption[From elliptic symbol to Fredholm operator]{Ellipticity is converted into Fredholmness through symbol
 inversion, quantization, and compact remainders.}
 \end{figure}
 
@@ -689,7 +699,7 @@ The two notions of index fit into the diagram
  & \mathbb Z .
 \end{tikzcd}
 \]
-\caption{The Atiyah--Singer theorem states that the analytic index factors
+\caption[Analytic and topological index]{The Atiyah--Singer theorem states that the analytic index factors
 through the compactly supported symbol class.}
 \end{figure}
 
@@ -976,7 +986,7 @@ parametrix of the form
  \node at (2.5,-.55)
    {\(e^{-d(x,y)^2/(4t)}\) localizes near the diagonal};
 \end{tikzpicture}
-\caption{As \(t\downarrow0\), the heat kernel concentrates in a
+\caption[Heat-kernel localization near the diagonal]{As \(t\downarrow0\), the heat kernel concentrates in a
 \(\sqrt t\)-neighborhood of the diagonal; the transport equations resolve
 its coefficients along radial geodesics.}
 \end{figure}
@@ -1457,7 +1467,7 @@ identified at its associated graded level with the exterior algebra:
  \node at (0,-2.8)
    {geometry freezes to its curvature model at \(p\)};
 \end{tikzpicture}
-\caption{Getzler rescaling magnifies a shrinking neighborhood of \(p\).
+\caption[Getzler rescaling near a base point]{Getzler rescaling magnifies a shrinking neighborhood of \(p\).
 The metric becomes Euclidean while the first nontrivial connection terms
 retain the curvature.}
 \end{figure}
@@ -1815,7 +1825,7 @@ Dualizing and taking exterior powers gives
 \Lambda^kT_\mathbb C^*M
 =\bigoplus_{p+q=k}\Lambda^{p,q}T^*M.
 \]
-\caption{An almost complex structure splits the complexified tangent
+\caption[Almost-complex type decomposition]{An almost complex structure splits the complexified tangent
 bundle and induces the \((p,q)\)-decomposition of forms.}
 \end{figure}
 
@@ -1963,7 +1973,7 @@ Kähler condition alone.
  &\text{complex Hermitian}
 \end{tikzcd}
 \]
-\caption{Kähler geometry is the simultaneous symplectic and integrable
+\caption[Kähler geometry inside almost-Hermitian geometry]{Kähler geometry is the simultaneous symplectic and integrable
 specialization of almost Hermitian geometry.}
 \end{figure}
 
@@ -2234,7 +2244,7 @@ The logical chain is
  && \chi(M,E)\arrow[u,equal].
 \end{tikzcd}
 \]
-\caption{For an integrable complex structure, Dolbeault Hodge theory
+\caption[Dolbeault cohomology and the Dirac index]{For an integrable complex structure, Dolbeault Hodge theory
 identifies the Dirac index with the holomorphic Euler characteristic.}
 \end{figure}
 

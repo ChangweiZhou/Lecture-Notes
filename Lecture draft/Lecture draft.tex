@@ -37,9 +37,21 @@
 \date{}
 
 \begin{document}
+\hypersetup{pageanchor=false}
 \maketitle
+\thispagestyle{empty}
+\clearpage
+\hypersetup{pageanchor=true}
+\pagenumbering{roman}
+\begingroup
+\small
 \tableofcontents
+\endgroup
+\clearpage
 \listoffigures
+\clearpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
 
 \section{Elliptic Fredholm theory on closed manifolds}
 
@@ -255,7 +267,7 @@ mode form a Weyl sequence at zero.
  \node at (10.5,.85) {\(\overline X\)};
  \node[above] at (9.0,1.5) {\(x=0\)};
 \end{tikzpicture}
-\caption{The infinite cylinder becomes a boundary hypersurface under
+\caption[Cylinder compactification]{The infinite cylinder becomes a boundary hypersurface under
 \(x=e^{-t}\). Translation in \(t\) becomes dilation in \(x\).}
 \end{figure}
 
@@ -344,7 +356,7 @@ subspace of \(A\).
    node[midway,below=7pt] {removed by \(\Pi_{\geq0}\)};
  \node[red!70!black,above] at (0,.35) {zero modes};
 \end{tikzpicture}
-\caption{The APS condition is nonlocal: it uses the global spectral
+\caption[APS spectral boundary projection]{The APS condition is nonlocal: it uses the global spectral
 decomposition of the tangential operator rather than pointwise boundary
 values.}
 \end{figure}
@@ -581,7 +593,7 @@ so that $\Delta_b=\{z=0,\;Y=0\}$.
   \node at (1.7,-.65) {\(X_b^2\)};
  \end{scope}
 \end{tikzpicture}
-\caption{Blowing up the boundary corner replaces one point of approach by
+\caption[Blow-up of the boundary corner]{Blowing up the boundary corner replaces one point of approach by
 the front face of limiting normal ratios; the diagonal lifts
 transversely.}
 \end{figure}
@@ -760,7 +772,7 @@ product density $a\,|dt\,dy|$.
  \node at (4,2.35)
    {\({}^bTX\) remains a rank-\(n\) bundle};
 \end{tikzpicture}
-\caption{A b-vector field is tangent to the boundary. The normal generator
+\caption[The b-tangent anchor at the boundary]{A b-vector field is tangent to the boundary. The normal generator
 \(x\partial_x\) is nonzero in \({}^bTX\), although its image in \(TX\)
 vanishes at \(x=0\).}
 \end{figure}
@@ -960,7 +972,7 @@ to infinite order at the boundary.
  \node[below] at (3.2,0) {\(\mathrm{rb}\)};
  \node[blue!70!black,below left] at (5.05,5.05) {\(\Delta_b\)};
 \end{tikzpicture}
-\caption{A small-calculus kernel is conormal to the lifted diagonal,
+\caption[Conormal kernel on the b-double space]{A small-calculus kernel is conormal to the lifted diagonal,
 extends to the front face, and vanishes rapidly at the two side faces.}
 \end{figure}
 
@@ -1315,7 +1327,7 @@ direction in which the weight is moved.
  \node[red!75!black,align=left] at (-1.2,1.75)
    {indicial roots};
 \end{tikzpicture}
-\caption{Changing the weight moves the Mellin contour. The index is
+\caption[Mellin contours and indicial roots]{Changing the weight moves the Mellin contour. The index is
 constant between indicial roots and jumps when the contour crosses one.}
 \end{figure}
 
@@ -1389,7 +1401,7 @@ two-sided parametrix below.
  \draw[->] (q1)--(r1) node[midway,above] {remove boundary error};
  \draw[->] (r1)--(q) node[midway,below] {residual iteration};
 \end{tikzpicture}
-\caption{The full parametrix alternates interior symbol inversion with
+\caption[Construction of the full b-parametrix]{The full parametrix alternates interior symbol inversion with
 indicial correction at the front face; the remaining residual error is
 then iterated away.}
 \end{figure}
@@ -1514,7 +1526,7 @@ corresponding spectral subspace; the correction at zero is
  \node[below,align=center] at (0,-.25)
    {zero mode\\requires a choice};
 \end{tikzpicture}
-\caption{On the outward cylinder, the tangential spectrum splits boundary
+\caption[APS splitting of cylindrical modes]{On the outward cylinder, the tangential spectrum splits boundary
 data into decaying and growing modes. The APS projection makes this split
 at \(\lambda=0\).}
 \end{figure}
@@ -1854,7 +1866,7 @@ kernel as \(t\downarrow0\).
   \node at (1.7,-.6) {parabolic blow-up};
  \end{scope}
 \end{tikzpicture}
-\caption{The temporal diagonal is parabolically blown up. The new face
+\caption[Parabolic blow-up of the temporal diagonal]{The temporal diagonal is parabolically blown up. The new face
 keeps the heat variable \(r/\sqrt t\) finite and carries the Gaussian
 model.}
 \end{figure}
