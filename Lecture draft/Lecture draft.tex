@@ -5,6 +5,7 @@
 \usepackage{mathpazo}
 \usepackage[margin=1in]{geometry}
 \usepackage{microtype}
+\usepackage{tikz-cd}
 \usepackage[hidelinks]{hyperref}
 \hypersetup{
   pdftitle={Notes on the b-Calculus and the APS Index Theorem},
@@ -19,9 +20,15 @@
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{question}[theorem]{Question}
 
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem*{discussion}{Discussion}
+\newenvironment{answer}{\begin{proof}[Answer]}{\end{proof}}
 
 \title{Notes on the b-Calculus and the APS Index Theorem}
 \author{Changwei Zhou}
@@ -44,7 +51,7 @@ be its Dirac operator. On the collar we use the convention
  D=c(du)(\partial_u+A),
 \]
 where $A$ is the self-adjoint tangential Dirac operator and
-$c(dx)A=-Ac(dx)$.
+$c(du)A=-Ac(du)$.
 
 \subsection{Closed manifolds}
 
@@ -120,6 +127,24 @@ $h=\dim\ker A$, the Atiyah--Patodi--Singer formula is
 When $A$ is invertible, $h=0$, and this equals the $L^2$ index on
 $X_\infty$.
 
+\begin{question}
+Why does attaching a cylinder help if the resulting manifold is
+noncompact?
+\end{question}
+
+\begin{answer}
+The cylinder does not remove the analytic difficulty; it puts that
+difficulty into a translation-invariant form. On the compact manifold
+with boundary, the APS condition is the nonlocal projection determined by
+the spectrum of \(A\). On the cylinder, the same condition is encoded by
+square integrability. Indeed, on an \(A\)-eigenvector with eigenvalue
+\(\lambda\), the equation \((\partial_x+A)u=0\) becomes an elementary ODE,
+and exactly one spectral half gives decaying solutions on the outward end.
+Thus the APS projection and the \(L^2\) condition select the same boundary
+data. The remaining translation-invariant part is what the normal operator
+and the \(b\)-trace measure.
+\end{answer}
+
 \section{Regularized b-integrals and b-traces}
 
 Put $\rho=e^u$ on the cylindrical end \(u\in(-\infty,0]\). Then \(\rho\)
@@ -171,6 +196,14 @@ supertrace.
 Unlike the ordinary trace, the $b$-trace need not vanish on commutators.
 Its defect is a boundary term determined by the indicial family. The
 precise formula and its application to the heat kernel appear below.
+
+\begin{discussion}
+This finite part is not an arbitrary subtraction. If the cylinder is cut
+at \(u=-T\), then the diagonal integral has the form \(cT+C+o(1)\). The
+\(b\)-integral is the constant term \(C\). The coefficient \(c\) depends
+only on the translation-invariant kernel at infinity, so the same boundary
+model that obstructs trace class also controls the trace defect.
+\end{discussion}
 \section{Real blow-up and the b-double space}
 
 A smooth $n$-manifold with corners is locally modelled on
@@ -201,6 +234,22 @@ lifts $\mathrm{lb}$ and $\mathrm{rb}$ of
 $\partial X\times X$ and $X\times\partial X$. The lifted diagonal
 $\Delta_b$ is the closure of the interior diagonal.
 
+The geometry is summarized by the blow-down square
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+ \Delta_b \arrow[r,hook] \arrow[d,"\beta|_{\Delta_b}"']
+   & X_b^2 \arrow[d,"\beta"] \\
+ \Delta \arrow[r,hook]
+   & X^2 .
+\end{tikzcd}
+\qquad
+\beta(\mathrm{ff})=\partial X\times\partial X.
+\]
+The blow-down is an isomorphism away from
+\(\partial X\times\partial X\). Over that corner, the front face records
+the ratio of the two normal variables and
+therefore remembers how the corner is approached.
+
 Near $\partial X$, choose product coordinates $(x,y)$ and $(x',y')$ on
 the two factors. Two useful projective coordinate systems are
 \[
@@ -215,6 +264,22 @@ Near the interior of the front face one may instead use
  r=x,\qquad z=\log(x/x'),\qquad y,\qquad Y=y-y',
 \]
 so that $\Delta_b=\{z=0,\;Y=0\}$.
+
+\begin{question}
+Why not work directly on \(X^2\)?
+\end{question}
+
+\begin{answer}
+The ratio \(x/x'\) has no limit at \((x,x')=(0,0)\) on \(X^2\). Kernels of
+translation-invariant operators on the cylinder depend on
+\(\log(x/x')\), so they cannot be smooth functions of \(x,x'\) at that
+corner. Blow-up replaces the corner by the set of limiting ratios. In the
+projective chart \(x'=sx\), the same kernel is a function of
+\(-\log s\), which is smooth in the interior of the front face and has
+controlled asymptotics as \(s\to0\) or \(s\to\infty\). The singularity
+has not been discarded; it has been separated into geometrically distinct
+boundary faces.
+\end{answer}
 
 \subsection{A one-dimensional model}
 
@@ -484,6 +549,19 @@ b-fibrations
 \]
 lifting the three coordinate projections.
 
+Their roles in composition are displayed by
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+ & X_b^3
+   \arrow[dl,"\pi_{12}"']
+   \arrow[d,"\pi_{13}"]
+   \arrow[dr,"\pi_{23}"] & \\
+ X_b^2 & X_b^2 & X_b^2 .
+\end{tikzcd}
+\]
+The left and right arrows pull back the two kernels; the middle arrow
+integrates out the shared variable.
+
 If \(A\in\Psi_b^m(X;E,F)\) and
 \(B\in\Psi_b^{m'}(X;G,E)\), then
 \[
@@ -506,6 +584,16 @@ The leading oscillatory amplitudes multiply, so
  =
  {}^b\sigma_m(A)\,{}^b\sigma_{m'}(B).
 \]
+
+To see the order \(m+m'\) directly, work near the lifted diagonal and
+write the two kernels as oscillatory integrals. Their product has amplitude
+of order \(m+m'\). Stationary phase in the intermediate variable identifies
+the two covectors and produces the usual symbol product. Away from the
+lifted diagonal, at least one factor is smooth; the push-forward is then
+smooth. At every boundary face, the exponent contributed by the product is
+the sum of the pulled-back exponents minus the fibre-density exponent. The
+infinite-order side-face vanishing in the small calculus places that sum
+strictly above the integrability threshold.
 
 The residual part of the full calculus allows polyhomogeneous expansions at
 the boundary faces. In the positive-weight case used below, products remain
@@ -537,6 +625,22 @@ in the small b-calculus need not be compact on an unweighted b-Sobolev
 space: after passage to the cylindrical coordinate \(t=-\log x\), it may
 retain translation-invariant behavior as \(t\to\infty\). The normal operator,
 introduced next, detects precisely this missing boundary condition.
+
+\begin{question}
+Why is a smooth residual kernel not automatically compact?
+\end{question}
+
+\begin{answer}
+Compactness on a compact manifold follows from smoothing plus Rellich's
+lemma. The \(b\)-metric turns a boundary collar into an infinite cylinder,
+so translations can escape every compact set. If a residual operator has a
+nonzero translation-invariant limit \(K_\infty(t-t',y,y')\), choose a fixed
+compactly supported section \(u\) on the cylinder and translate it to
+\(u_j(t,y)=u(t-j,y)\). The sequence \(u_j\) is bounded and has no convergent
+subsequence, while \(Ku_j\) is asymptotic to the corresponding translate of
+\(K_\infty u\). Hence \(K\) is not compact unless its boundary model
+vanishes or decays.
+\end{answer}
 
 
 \section{The normal operator and indicial family}
@@ -598,6 +702,29 @@ factor, so its invertibility is intrinsic. Multiplicativity gives
  I(AB,\lambda)=I(A,\lambda)I(B,\lambda).
 \]
 
+The two symbol maps control complementary regimes:
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+ \Psi_b^m(X)
+   \arrow[r,"{}^b\!\sigma_m"]
+   \arrow[d,"N"']
+ & S^{[m]}({}^bT^*X) \\
+ \Psi_{\mathrm{sus}}^m(\partial X)
+   \arrow[r,"\mathcal F_t"']
+ & \{I(A,\lambda)\}_{\lambda\in\mathbb R} .
+\end{tikzcd}
+\]
+The principal symbol sees large covectors at a fixed point. The indicial
+family sees bounded frequency while the base point escapes down the
+cylinder. Full ellipticity requires invertibility in both regimes.
+
+\begin{discussion}
+This is why the normal operator is often called a second symbol. It is not
+lower-order information: a smoothing \(b\)-operator has zero principal
+symbol but may have a nonzero normal operator, and that nonzero boundary
+model can destroy compactness.
+\end{discussion}
+
 For a product b-Dirac operator
 \[
  D=c\!\left(\frac{dx}{x}\right)(x\partial_x+A_{\partial}),
@@ -643,6 +770,11 @@ corresponds to the Mellin line
  \operatorname{Im}\lambda=-\delta.
 \]
 
+Indeed, write \(\lambda=\tau-i\delta\). Then
+\(x^{i\lambda}=x^{\delta}x^{i\tau}\). Thus conjugating by \(x^\delta\)
+moves the real Fourier line for the cylindrical variable to
+\(\operatorname{Im}\lambda=-\delta\); no sign convention is hidden.
+
 \begin{definition}
 A b-elliptic operator \(P\) is fully elliptic at weight \(\delta\) if
 \[
@@ -669,14 +801,44 @@ part of a Laurent expansion at a pole has finite rank.
 \end{theorem}
 
 \begin{proof}
-Choose a local Fredholm parametrix \(Q(\lambda)\). Then
-\(T(\lambda)Q(\lambda)=I-K(\lambda)\), where \(K(\lambda)\) is a
-holomorphic compact family. A finite-rank perturbation makes
-\(I-K(\lambda)\) invertible at a chosen point. The inverse of the perturbed
-family is holomorphic nearby, and the remaining problem is the inversion
-of a finite-dimensional holomorphic matrix. Cramer's rule makes that
-inverse meromorphic. Its principal parts, and hence those of
-\(T(\lambda)^{-1}\), have finite-dimensional range.
+Fix \(\lambda_*\). Choose closed complements
+\[
+ X=\ker T(\lambda_*)\oplus X_1,
+ \qquad
+ Y=\operatorname{ran}T(\lambda_*)\oplus C,
+\]
+where \(C\) is finite-dimensional. Since the index is zero,
+\(\dim C=\dim\ker T(\lambda_*)\). Relative to these decompositions, write
+\[
+ T(\lambda)=
+ \begin{pmatrix}a(\lambda)&b(\lambda)\\
+                 c(\lambda)&d(\lambda)
+ \end{pmatrix}.
+\]
+The block \(d(\lambda_*):X_1\to\operatorname{ran}T(\lambda_*)\) is an
+isomorphism, so \(d(\lambda)^{-1}\) is holomorphic near \(\lambda_*\). Block
+Gaussian elimination reduces invertibility of \(T(\lambda)\) to that of
+the finite-dimensional Schur complement
+\[
+ S(\lambda)=a(\lambda)-b(\lambda)d(\lambda)^{-1}c(\lambda):
+ \ker T(\lambda_*)\longrightarrow C.
+\]
+Where \(S\) is invertible, the block inverse formula expresses
+\(T(\lambda)^{-1}\) using \(d(\lambda)^{-1}\) and \(S(\lambda)^{-1}\).
+Cramer's rule gives
+\[
+ S(\lambda)^{-1}
+ =\frac{\operatorname{adj}S(\lambda)}{\det S(\lambda)},
+\]
+so this inverse is meromorphic. Its negative Laurent coefficients have
+range contained in a finite-dimensional space obtained from \(C\) and
+\(\ker T(\lambda_*)\).
+
+It remains to exclude \(\det S\equiv0\) on every overlapping
+neighborhood. That would make \(T(\lambda)\) noninvertible throughout the
+connected domain, contrary to invertibility at \(\lambda_0\). Analytic
+continuation therefore makes the local meromorphic inverses agree and
+produces the claimed global meromorphic inverse.
 \end{proof}
 
 Applied to \(I(P,\lambda)\), this theorem yields a discrete set
@@ -717,6 +879,38 @@ with polyhomogeneous expansions at the boundary faces. Its exponents are
 governed by the poles of \(I(P,\lambda)^{-1}\). This is the reason the
 full b-calculus, rather than only the small calculus, is needed.
 
+Here are the details of this correction. Choose a horizontal line
+\(\Gamma_\delta=\{\operatorname{Im}\lambda=-\delta\}\) avoiding the boundary
+spectrum. With cutoffs \(\chi(x)\chi(x')\), the inverse Mellin formula
+\[
+ K_C(x,y;x',y')
+ =
+ \frac1{2\pi}\int_{\Gamma_\delta}
+ \left(\frac{x}{x'}\right)^{i\lambda}
+ I(P,\lambda)^{-1}I(R_0,\lambda)(y,y')\,d\lambda
+\]
+defines a residual correction \(C\) near the front face. Parameter-elliptic
+estimates make the integral rapidly convergent in
+\(\operatorname{Re}\lambda\). Applying \(P\), using Mellin
+multiplicativity, and restricting to the front face gives
+\[
+ N(P(Q_0+C)-I)=0.
+\]
+If the contour is shifted, the residue theorem adds terms
+\[
+ x^{i\lambda_0}(\log x)^j a_{\lambda_0,j}(y,y'),
+\]
+where \(\lambda_0\) is an indicial root and \(j\) is one less than the
+order of the corresponding pole. These are precisely the
+polyhomogeneous terms allowed in the full calculus.
+
+The construction is performed on both sides. Any mismatch between the two
+corrections is residual and has zero normal operator. A Neumann iteration
+in the residual ideal removes its successive boundary coefficients; Borel
+summation removes all of them at once. An interior symbolic correction then
+restores infinite-order vanishing at the lifted diagonal. This yields the
+two-sided parametrix below.
+
 Iterating at the interior diagonal and at the boundary faces gives
 \(Q\in\Psi_b^{-m}\) in the full calculus with
 \[
@@ -739,6 +933,25 @@ the cylinder at \(t=T\). On the compact part, Rellich's lemma makes the
 operator compact; on the tail, the operator norm tends to zero as
 \(T\to\infty\). Hence the full operator is a norm limit of compact
 operators.
+
+More explicitly, let \(\chi_T\) equal one on \(t\leq T\) and vanish on
+\(t\geq T+1\). The operator \(\chi_TR\chi_T\) factors as
+\[
+ H_b^s\xrightarrow{\,R\,}H_b^{s+N}
+ \xrightarrow{\,\chi_T\,}H_b^s
+\]
+for any \(N>0\); the second arrow is compact by Rellich on the truncated
+cylinder. The full-calculus estimates and \(N(R)=0\) give
+\[
+ \|(1-\chi_T)R\|+\|R(1-\chi_T)\|\longrightarrow0.
+\]
+Therefore
+\[
+ R-\chi_TR\chi_T
+ =(1-\chi_T)R+\chi_TR(1-\chi_T)
+\]
+tends to zero in operator norm. This proves compactness without assuming
+that the noncompact \(b\)-manifold itself has a compact Sobolev embedding.
 \end{proof}
 
 \begin{theorem}[Fredholm theorem for b-operators]
@@ -884,15 +1097,14 @@ and near \(\partial X\) it has the form
 where \(u\) is the inward normal coordinate and \(A\) is the self-adjoint
 tangential Dirac operator.
 
-On the attached outward half-cylinder, put \(t=-u\geq0\) and
-\(x=e^{-t}\). After absorbing the normal-orientation sign into the
-definition of \(A\), the operator has the b-form
+Extend the collar coordinate \(u\) to negative values on the attached
+outward cylinder, put \(t=-u\geq0\), and set \(x=e^{-t}=e^u\). Then
+\(du=dx/x\) and \(\partial_u=x\partial_x\), so the product formula becomes
 \[
  D=c\!\left(\frac{dx}{x}\right)(x\partial_x+A),
 \]
-up to the harmless sign determined by the orientation of \(u\). We fix the
-sign so that the APS formula below contains
-\(-(\eta_A(0)+\dim\ker A)/2\).
+with the same \(A\) as above. This convention fixes the sign of the APS
+correction to be \(-(\eta_A(0)+\dim\ker A)/2\).
 
 The Weitzenböck formula is
 \[
@@ -943,6 +1155,25 @@ positive times. Here
  (K_1*K_2)(t)=\int_0^tK_1(t-s)K_2(s)\,ds.
 \]
 Thus \(H(t)=e^{-tD^2}\).
+
+The convergence uses the ordered time simplex, a point that is easy to
+lose in a formal Neumann-series argument. If
+\(\|R(t)\|\leq C\) for \(0\leq t\leq t_0\), then
+\[
+ R^{*k}(t)
+ =
+ \int_{\substack{s_j\geq0\\s_1+\cdots+s_k=t}}
+ R(s_1)\cdots R(s_k)\,ds_1\cdots ds_{k-1}
+\]
+and the simplex has volume \(t^{k-1}/(k-1)!\). Hence
+\[
+ \|R^{*k}(t)\|
+ \leq \frac{C^k t^{k-1}}{(k-1)!}.
+\]
+The factorial proves absolute convergence. The same estimate after
+applying \(b\)-derivatives proves convergence in the residual heat
+calculus. Since \(R\) vanishes to infinite order at \(t=0\), so does every
+correction term, and the initial value remains the identity.
 
 The construction also proves Duhamel's formula. If \(L_r\) is a smooth
 family of nonnegative self-adjoint elliptic operators, then
@@ -1022,6 +1253,27 @@ The eta function of a self-adjoint elliptic differential operator of
 positive order on a closed manifold is regular at \(s=0\).
 \end{theorem}
 
+\begin{proof}
+Split the Mellin integral at \(t=1\). On the orthogonal complement of the
+kernel, the large-time integrand is exponentially decreasing, so that
+part is entire. For an operator of order \(r\) on a \(d\)-manifold, the
+pseudodifferential heat calculus gives a polyhomogeneous expansion of
+\(\Tr(Ae^{-tA^2})\) as \(t\downarrow0\). Termwise Mellin integration gives
+the meromorphic continuation.
+
+The possible residue at zero is a constant multiple of the
+noncommutative residue of the order-zero operator
+\[
+ \operatorname{sgn}(A)=A|A|^{-1}
+\]
+on \(\ker A^\perp\). Modulo a finite-rank operator,
+\(\operatorname{sgn}(A)=2\Pi_+-I\), where \(\Pi_+\) is the positive spectral
+projection. The noncommutative residue vanishes on the identity, on
+finite-rank operators, and on pseudodifferential projections. The possible
+residue is therefore zero. For a Dirac-type operator the same cancellation
+is visible directly in the parity of its local Clifford heat coefficients.
+\end{proof}
+
 For a Dirac-type operator, regularity is also visible from the parity of the
 Clifford heat coefficients. Write
 \[
@@ -1047,7 +1299,24 @@ Apply the graded b-trace defect formula and use
  =
  c\!\left(\frac{dx}{x}\right)(i\lambda+A).
 \]
-The Gaussian integral in \(\lambda\) gives
+Moreover,
+\[
+ I(De^{-tD^2},\lambda)
+ =
+ c\!\left(\frac{dx}{x}\right)(i\lambda+A)
+ e^{-t(\lambda^2+A^2)},
+\qquad
+ \partial_\lambda I(D,\lambda)=i\,c\!\left(\frac{dx}{x}\right).
+\]
+The Clifford relation \(c(dx/x)^2=-I\), together with the graded matrix
+trace, leaves the term containing \(A\); the term odd in \(\lambda\)
+integrates to zero. Finally,
+\[
+ \int_{\mathbb R}e^{-t\lambda^2}\,d\lambda
+ =\sqrt{\frac{\pi}{t}}.
+\]
+Substitution into the defect formula, including the factor \(1/2\) above,
+gives
 \[
  F'(t)
  =
@@ -1080,9 +1349,32 @@ Integrating the trace-defect identity and using the Mellin formula at
  -\frac12\eta(A).
 \]
 
+Indeed,
+\[
+ F(\infty)-F(0)
+ =
+ -\frac1{2\sqrt\pi}
+ \int_0^\infty t^{-1/2}\Tr(Ae^{-tA^2})\,dt
+ =-\frac12\eta_A(0).
+\]
+At the lower endpoint, this means: first insert \(t^{s/2}\) for
+\(\operatorname{Re}s\) large, use the Mellin identity, and then continue
+to \(s=0\).
+
 If \(A\) has kernel, perturb it by a finite-rank operator on
 \(\ker A\), or equivalently use the APS spectral projection and pass to the
 limit. The zero modes contribute \(h(A)/2\).
+
+To determine the contribution and its sign, put
+\(A_\varepsilon=A+\varepsilon\Pi_0\), where \(\Pi_0\) projects onto
+\(\ker A\) and \(\varepsilon>0\). Then
+\[
+ \eta(A_\varepsilon)=\eta(A)+h(A).
+\]
+The decaying-mode condition on the perturbed cylinder converges to
+\(\Pi_{\geq0}(A)(u|_{\partial X})=0\). The Fredholm index is constant for
+\(\varepsilon>0\), so passage to the limit gives
+\(-(\eta(A)+h(A))/2\).
 
 \begin{theorem}[Atiyah--Patodi--Singer]
 Let \(D^+\) be a product-type graded Dirac operator on an
@@ -1109,7 +1401,19 @@ one has
 The interior term is local. The eta invariant and the kernel dimension are
 the global spectral correction forced by the cylindrical end.
 
-\section*{References}
+\begin{question}
+Why can the boundary correction not be another local curvature integral?
+\end{question}
+
+\begin{answer}
+The derivative \(F'(t)\) is the full spectral trace
+\(\Tr(Ae^{-tA^2})\), not the integral of one fixed heat coefficient.
+Integrating it from zero to infinity uses every eigenvalue of \(A\).
+Small-time asymptotics control the meromorphic continuation, but the value
+\(\eta_A(0)\) also contains large-time information and therefore depends on
+the global spectral asymmetry. This is exactly the information lost when a
+local index density is integrated on a manifold with boundary.
+\end{answer}
 
 \begin{thebibliography}{9}
 

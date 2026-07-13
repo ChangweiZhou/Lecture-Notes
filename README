@@ -8,11 +8,13 @@ Two proof-focused manuscripts are maintained:
   kernels, Clifford modules, the local index theorem, Gauss--Bonnet, the
   signature theorem, and Riemann--Roch.
 
-The July 2026 revision replaced the original lecture transcriptions with a
-line-by-line mathematical edit. Classroom dialogue, duplicated chapters,
-screenshots, generated files, and unrelated archive material were removed.
-Definitions now precede use, theorem hypotheses are explicit, and proof gaps
-are either filled or identified as standard input.
+The July 2026 revision is a line-by-line mathematical edit of the original
+lecture transcriptions. Relevant classroom discussion is retained as concise
+Discussion and Question/Answer interludes; speaker attributions, unresolved
+chatter, duplicated chapters, generated files, and unrelated archive material
+are omitted. Definitions precede use, theorem hypotheses are explicit, and
+proof gaps are filled or identified as standard input. Reproducible TikZ
+diagrams replace the useful hand-drawn figures.
 
 ## Build
 
