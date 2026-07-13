@@ -1,1 +1,30 @@
-This is a folder storing lecture notes I took when I was a young PhD student. My ex-advisor Paul Loya wanted to turn the material into two books. However nothing was being done, partly due to his family problems. I do not think the notes will ever be published. Warning: Please use it as a reference, there are numerous mistakes in the notes. 
+# Lecture Notes
+
+Two proof-focused manuscripts are maintained:
+
+- `Lecture draft/Lecture draft.tex`: the b-calculus, Fredholm theory on
+  cylindrical ends, and K-theoretic and heat-kernel proofs of the
+  Atiyah--Patodi--Singer theorem.
+- `Lecture draft/Atiyah-Singer index theorem.tex`: elliptic operators,
+  K-theoretic push-forward, heat kernels, Clifford modules, the local index
+  theorem, Gauss--Bonnet, the signature theorem, and Riemann--Roch.
+
+The July 2026 revision is a line-by-line mathematical edit of the original
+lecture transcriptions. Relevant classroom discussion is retained as concise
+Discussion and Question/Answer interludes; speaker attributions, unresolved
+chatter, duplicated chapters, generated files, and unrelated archive material
+are omitted. Definitions precede use, theorem hypotheses are explicit, and
+proof gaps are filled or identified as standard input. Reproducible TikZ
+diagrams replace the useful hand-drawn figures.
+
+## Build
+
+From `Lecture draft/`:
+
+```sh
+latexmk -pdf -interaction=nonstopmode -halt-on-error "Lecture draft.tex"
+latexmk -pdf -interaction=nonstopmode -halt-on-error "Atiyah-Singer index theorem.tex"
+```
+
+Both manuscripts build with pdfLaTeX. Build products are intentionally
+untracked.
