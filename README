@@ -1,39 +1,27 @@
-Lecture Notes
-=============
+# Lecture Notes
 
-These are lecture notes transcribed while I was a PhD student. They were
-originally intended as source material for two books with Paul Loya, but they
-remain working notes rather than a published text.
+Two proof-focused manuscripts are maintained:
 
-Main sources
-------------
+- `Lecture draft/Lecture draft.tex`: the b-calculus, Fredholm theory on
+  cylindrical ends, the b-trace defect, and the Atiyah--Patodi--Singer theorem.
+- `Lecture draft/Atiyah-Singer index theorem.tex`: elliptic operators, heat
+  kernels, Clifford modules, the local index theorem, Gauss--Bonnet, the
+  signature theorem, and Riemann--Roch.
 
-* `Lecture draft/Lecture draft.tex` -- b-calculus, APS theory, and related
-  analytic material.
-* `Lecture draft/Atiyah-Singer index theorem.tex` -- Dirac operators, heat
-  kernels, Clifford modules, characteristic classes, and the index theorem.
-* `Lecture draft/Chapter 11.tex` -- a stand-alone extract from the first set of
-  notes.
+The July 2026 revision replaced the original lecture transcriptions with a
+line-by-line mathematical edit. Classroom dialogue, duplicated chapters,
+screenshots, generated files, and unrelated archive material were removed.
+Definitions now precede use, theorem hypotheses are explicit, and proof gaps
+are either filled or identified as standard input.
 
-Building
---------
+## Build
 
-Run the builds from `Lecture draft/` so that the image paths resolve:
+From `Lecture draft/`:
 
-```
-latexmk -pdf "Lecture draft.tex"
-latexmk -pdf "Atiyah-Singer index theorem.tex"
+```sh
+latexmk -pdf -interaction=nonstopmode -halt-on-error "Lecture draft.tex"
+latexmk -pdf -interaction=nonstopmode -halt-on-error "Atiyah-Singer index theorem.tex"
 ```
 
-Both main sources compile with pdfLaTeX. Generated PDFs and some historical
-build artifacts are retained because they were part of the original archive.
-
-Editorial status
-----------------
-
-The July 2026 audit repaired several substantive gaps in the heat-calculus,
-Clifford-algebra, Dolbeault, and eta-invariant discussions and restored clean
-builds. The manuscripts are large historical transcriptions, however, and
-still contain informal lecture commentary, typographical errors, and claims
-that have not received a line-by-line mathematical audit. Cite a standard
-reference for any result used in research.
+Both manuscripts build with pdfLaTeX. Build products are intentionally
+untracked.
