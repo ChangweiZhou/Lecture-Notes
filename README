@@ -3,19 +3,23 @@
 Two proof-focused manuscripts are maintained:
 
 - `Lecture draft/Lecture draft.tex`: the b-calculus, Fredholm theory on
-  cylindrical ends, and K-theoretic and heat-kernel proofs of the
-  Atiyah--Patodi--Singer theorem.
+  closed manifolds and cylindrical ends, the APS spectral boundary problem,
+  and K-theoretic and heat-kernel proofs of the Atiyah--Patodi--Singer theorem.
 - `Lecture draft/Atiyah-Singer index theorem.tex`: elliptic operators,
   K-theoretic push-forward, heat kernels, Clifford modules, the local index
-  theorem, Gauss--Bonnet, the signature theorem, and Riemann--Roch.
+  theorem, Gauss--Bonnet, the signature theorem, almost Hermitian and almost
+  Kähler geometry, the almost Dolbeault operator, and Riemann--Roch.
 
 The July 2026 revision is a line-by-line mathematical edit of the original
 lecture transcriptions. Relevant classroom discussion is retained as concise
 Discussion and Question/Answer interludes; speaker attributions, unresolved
 chatter, duplicated chapters, generated files, and unrelated archive material
 are omitted. Definitions precede use, theorem hypotheses are explicit, and
-proof gaps are filled or identified as standard input. Reproducible TikZ
-diagrams replace the useful hand-drawn figures.
+proof gaps are filled or identified as standard input. The original diagrams
+were audited against the surrounding arguments, then redrawn and consolidated
+as captioned, reproducible TikZ figures; additional diagrams mark the symbol,
+blow-up, spectral, parametrix, and heat-kernel constructions where the geometry
+is easier to see than to infer from formulas alone.
 
 ## Build
 

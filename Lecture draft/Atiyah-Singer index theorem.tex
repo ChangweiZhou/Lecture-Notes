@@ -6,6 +6,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{microtype}
 \usepackage{tikz-cd}
+\usetikzlibrary{arrows.meta,calc,decorations.pathreplacing,positioning,patterns}
 \usepackage[hidelinks]{hyperref}
 \hypersetup{
   pdftitle={Heat Kernels and Index Theory},
@@ -51,6 +52,7 @@
 \hypersetup{pageanchor=true}
 \frontmatter
 \tableofcontents
+\listoffigures
 
 \mainmatter
 
@@ -175,6 +177,28 @@ The Riemann curvature tensor is
  =
  \nabla_X\nabla_YZ-\nabla_Y\nabla_XZ-\nabla_{[X,Y]}Z.
 \]
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,thick]
+ \coordinate (O) at (0,0);
+ \coordinate (A) at (4,0);
+ \coordinate (B) at (.9,2.3);
+ \coordinate (C) at (4.9,2.3);
+ \draw[->,blue!70!black] (O)--(A) node[midway,below] {\(\varepsilon X\)};
+ \draw[->,blue!70!black] (A)--(C) node[midway,right] {\(\varepsilon Y\)};
+ \draw[->,blue!70!black] (C)--(B);
+ \draw[->,blue!70!black] (B)--(O);
+ \draw[->,red!70!black,very thick] (O)--(.4,1.3)
+   node[above left] {\(Z\)};
+ \draw[->,red!40!black,very thick] (O)--(.7,1.2);
+ \node[red!40!black] at (2.45,-.62)
+   {returned vector: \(Z+\varepsilon^2R(X,Y)Z+O(\varepsilon^3)\)};
+\end{tikzpicture}
+\caption{Curvature is the second-order failure of parallel transport
+around an infinitesimal parallelogram to return a vector unchanged.}
+\end{figure}
+
 With \(R(X,Y,Z,W)=g(R(X,Y)Z,W)\), it satisfies
 \[
 \begin{aligned}
@@ -472,6 +496,25 @@ order once \(QP-I\) does. A smoothing correction then gives one operator
 with both displayed identities.
 \end{proof}
 
+\begin{figure}[htbp]
+\centering
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+ P
+ \arrow[r,"\sigma_m"]
+ &p_m
+ \arrow[r,"\text{invert}"]
+ &p_m^{-1}
+ \arrow[d,"\text{recursive corrections}"]\\
+ \operatorname{ind}P
+ &I-\text{compact}\arrow[l,"\text{Atkinson}"']
+ &Q\arrow[l,"\text{compose}"']
+\end{tikzcd}
+\]
+\caption{Ellipticity is converted into Fredholmness through symbol
+inversion, quantization, and compact remainders.}
+\end{figure}
+
 Let \(H^s(M;E)\) denote the Sobolev space of order \(s\). An operator in
 \(\Psi^m\) extends boundedly
 \[
@@ -635,6 +678,8 @@ Homotopic elliptic symbols determine the same class.
 
 Let \(\mathcal E(M)\) denote stable homotopy classes of elliptic operators.
 The two notions of index fit into the diagram
+\begin{figure}[htbp]
+\centering
 \[
 \begin{tikzcd}[column sep=huge,row sep=large]
  \mathcal E(M)
@@ -644,6 +689,9 @@ The two notions of index fit into the diagram
  & \mathbb Z .
 \end{tikzcd}
 \]
+\caption{The Atiyah--Singer theorem states that the analytic index factors
+through the compactly supported symbol class.}
+\end{figure}
 
 \begin{theorem}[Atiyah--Singer index theorem]
 There is a topological index homomorphism
@@ -915,6 +963,24 @@ parametrix of the form
  (4\pi t)^{-n/2}e^{-r(x,y)^2/(4t)}
  \sum_{j=0}^Nt^j u_j(x,y).
 \]
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,thick]
+ \draw[fill=gray!6] (0,0) rectangle (5,5);
+ \draw[blue!15,line width=18pt] (.35,.35)--(4.65,4.65);
+ \draw[blue!70!black,very thick] (.25,.25)--(4.75,4.75)
+   node[above left] {\(\Delta\subset M\times M\)};
+ \draw[<->,red!70!black] (2.1,2.65)--(2.65,2.1)
+   node[midway,below left] {\(O(\sqrt t)\)};
+ \node at (2.5,-.55)
+   {\(e^{-d(x,y)^2/(4t)}\) localizes near the diagonal};
+\end{tikzpicture}
+\caption{As \(t\downarrow0\), the heat kernel concentrates in a
+\(\sqrt t\)-neighborhood of the diagonal; the transport equations resolve
+its coefficients along radial geodesics.}
+\end{figure}
+
 Substitution into \((\partial_t+L_x)H_N=0\) first determines \(u_0\) by
 parallel transport and the Riemannian density, then determines each
 \(u_j\) from a transport equation along the radial geodesic.
@@ -1378,6 +1444,24 @@ identified at its associated graded level with the exterior algebra:
  dx^{i_1}\wedge\cdots\wedge dx^{i_k}.
 \]
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,thick]
+ \fill[blue!5] (0,0) circle (2.25);
+ \draw[blue!35] (0,0) circle (2.25);
+ \draw[blue!55] (0,0) circle (1.45);
+ \draw[blue!75!black] (0,0) circle (.65);
+ \fill (0,0) circle (2pt) node[below right] {\(p\)};
+ \draw[->,red!70!black] (.2,.2)--(3.7,1.8)
+   node[right,align=left] {\(X=x/\sqrt t\) fixed\\as \(t\downarrow0\)};
+ \node at (0,-2.8)
+   {geometry freezes to its curvature model at \(p\)};
+\end{tikzpicture}
+\caption{Getzler rescaling magnifies a shrinking neighborhood of \(p\).
+The metric becomes Euclidean while the first nontrivial connection terms
+retain the curvature.}
+\end{figure}
+
 The rescaled model of \(D^2\) is a harmonic oscillator with coefficients
 given by \(R^{TM}_p\), together with the constant twisting curvature
 \(F^{E/S}_p\). All terms of lower Getzler order disappear in the limit.
@@ -1698,12 +1782,61 @@ An almost complex structure on a \(2m\)-manifold is an endomorphism
 \[
  T_\C M=T^{1,0}M\oplus T^{0,1}M,
 \]
-the \(+i\) and \(-i\) eigenspaces of \(J\). Accordingly,
+the \(+i\) and \(-i\) eigenspaces of \(J\). The projections are
+\[
+ \Pi^{1,0}=\frac12(I-iJ),\qquad
+ \Pi^{0,1}=\frac12(I+iJ).
+\]
+For a real vector \(v\),
+\[
+ v^{1,0}=\frac12(v-iJv),\qquad
+ v^{0,1}=\frac12(v+iJv).
+\]
+Dualizing and taking exterior powers gives
 \[
  \Lambda^kT_\C^*M
  =
  \bigoplus_{p+q=k}\Lambda^{p,q}T^*M.
 \]
+
+\begin{figure}[htbp]
+\centering
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+ &T^{1,0}M\\
+ TM
+ \arrow[r,"\mathbb C\otimes_{\mathbb R}(-)"]
+ &T_\mathbb C M
+ \arrow[u,"\Pi^{1,0}"]
+ \arrow[d,"\Pi^{0,1}"']\\
+ &T^{0,1}M
+\end{tikzcd}
+\qquad
+\Lambda^kT_\mathbb C^*M
+=\bigoplus_{p+q=k}\Lambda^{p,q}T^*M.
+\]
+\caption{An almost complex structure splits the complexified tangent
+bundle and induces the \((p,q)\)-decomposition of forms.}
+\end{figure}
+
+\begin{proposition}
+Every almost complex manifold is canonically oriented.
+\end{proposition}
+
+\begin{proof}
+Choose real vectors \(v_1,\ldots,v_m\) such that
+\[
+ v_1,Jv_1,\ldots,v_m,Jv_m
+\]
+is a basis and declare it positive. A second complex frame is related to
+the first by a matrix \(A\in\operatorname{GL}(m,\mathbb C)\). Viewed as a
+real matrix,
+\[
+ \det_{\mathbb R}A=|\det_{\mathbb C}A|^2>0.
+\]
+Thus every complex change of frame preserves the declared orientation,
+which patches smoothly over \(M\).
+\end{proof}
 
 The Nijenhuis tensor is
 \[
@@ -1761,44 +1894,244 @@ does \(\bar\partial\) define cohomology and only then can the spin\(^{c}\)
 index be interpreted as a holomorphic Euler characteristic.
 \end{answer}
 
-\section{Hermitian and Kähler geometry}
+\begin{example}[Complex projective space]
+The charts
+\[
+ U_j=\{[z_0:\cdots:z_m]:z_j\ne0\},\qquad
+ [z]\longmapsto
+ \left(\frac{z_0}{z_j},\ldots,
+ \widehat{\frac{z_j}{z_j}},\ldots,\frac{z_m}{z_j}\right)
+\]
+have holomorphic transition functions and define the complex manifold
+\(\mathbb{CP}^m\). Its induced almost complex structure is integrable by
+construction, and the Fubini--Study form makes it Kähler.
+\end{example}
 
-A Riemannian metric is Hermitian if
+\section{Almost Hermitian and almost Kähler geometry}
+
+An almost Hermitian structure is a pair \((J,g)\) satisfying
 \[
  g(JX,JY)=g(X,Y).
 \]
-Its fundamental form is
+Its fundamental form
 \[
- \omega(X,Y)=g(JX,Y).
+ \omega(X,Y)=g(JX,Y)
 \]
-A Hermitian manifold is Kähler when \(d\omega=0\). Equivalently,
-\(\nabla^{TM}J=0\) for the Levi--Civita connection.
+is a nondegenerate real two-form. Compatible metrics always exist.
 
-On a compact Hermitian manifold, let \(\bar\partial^*\) be the formal
-adjoint of \(\bar\partial\), and set
+\begin{proposition}
+Every almost complex structure admits a compatible Riemannian metric.
+\end{proposition}
+
+\begin{proof}
+Start with any Riemannian metric \(g_0\) and set
+\[
+ g(X,Y)=\frac12\bigl(g_0(X,Y)+g_0(JX,JY)\bigr).
+\]
+This is positive definite, and
+\[
+ g(JX,JY)
+ =\frac12\bigl(g_0(JX,JY)+g_0(J^2X,J^2Y)\bigr)
+ =g(X,Y).
+\]
+\end{proof}
+
+An almost Hermitian manifold is \emph{almost Kähler} when
+\[
+ d\omega=0.
+\]
+It is \emph{Kähler} when \(J\) is integrable and \(d\omega=0\).
+For an almost Hermitian structure,
+\[
+ \nabla^{TM}J=0
+ \quad\Longleftrightarrow\quad
+ N_J=0\ \text{and}\ d\omega=0.
+\]
+Thus parallel \(J\) characterizes the Kähler condition, not the almost
+Kähler condition alone.
+
+\begin{figure}[htbp]
+\centering
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+ &\nabla^{TM}J=0
+   \arrow[d,leftrightarrow]&\\
+ \text{almost Kähler}
+ &\text{Kähler}
+   \arrow[l,swap,"d\omega=0"]
+   \arrow[r,"N_J=0"]
+ &\text{complex Hermitian}
+\end{tikzcd}
+\]
+\caption{Kähler geometry is the simultaneous symplectic and integrable
+specialization of almost Hermitian geometry.}
+\end{figure}
+
+\begin{discussion}
+The two lower conditions are independent in general. A symplectic
+manifold with a compatible almost complex structure is almost Kähler, but
+the chosen \(J\) need not be integrable. Conversely, a Hermitian metric on
+a complex manifold need not have closed fundamental form. Kähler geometry
+is the intersection of the symplectic and integrable conditions.
+\end{discussion}
+
+The Hermitian metric induces an inner product on \((p,q)\)-forms. The
+complex-linear extension of the Hodge star has type
+\[
+ *:\Omega^{p,q}(M)\longrightarrow\Omega^{m-q,m-p}(M).
+\]
+On a compact complex Hermitian manifold, define
 \[
  \Box_{\bar\partial}
  =
  \bar\partial\bar\partial^*
  +\bar\partial^*\bar\partial.
 \]
-This is elliptic. Hodge theory therefore gives
+This is elliptic, and Hodge theory gives
 \[
  H^{p,q}_{\bar\partial}(M)
  \cong
  \ker\bigl(\Box_{\bar\partial}:\Omega^{p,q}\to\Omega^{p,q}\bigr).
 \]
 
-On a compact Kähler manifold, the Kähler identities imply
+\begin{theorem}[Kähler identities]
+Let \(L=\omega\wedge(-)\) and let \(\Lambda=L^*\). Then
 \[
- \Delta_d=2\Box_{\bar\partial}=2\Box_\partial.
+ [\Lambda,\partial]=i\bar\partial^*,\qquad
+ [\Lambda,\bar\partial]=-i\partial^*.
 \]
-Consequently
+Consequently,
+\[
+ \Box_\partial=\Box_{\bar\partial},
+ \qquad
+ \Delta_d=2\Box_{\bar\partial}.
+\]
+\end{theorem}
+
+\begin{proof}
+At a fixed point choose a unitary frame whose connection coefficients
+vanish. There \(L\) is a sum of products of holomorphic and
+antiholomorphic exterior multiplications, while \(\Lambda\) is the
+corresponding sum of contractions. The relation
+\[
+ \iota_v\varepsilon(\alpha)
+ +\varepsilon(\alpha)\iota_v=\alpha(v)
+\]
+gives the two commutator identities term by term. Both sides are
+tensorial, so the pointwise calculation is global.
+
+The graded Jacobi identity and
+\(\partial\bar\partial+\bar\partial\partial=0\) give
+\[
+ \Box_{\bar\partial}
+ =-i[\bar\partial,[\Lambda,\partial]]
+ =i[\partial,[\Lambda,\bar\partial]]
+ =\Box_\partial.
+\]
+The same identities cancel the mixed terms in \(\Delta_d\), leaving
+\(\Box_\partial+\Box_{\bar\partial}=2\Box_{\bar\partial}\).
+\end{proof}
+
+It follows that
 \[
  H^k(M;\C)
  =
- \bigoplus_{p+q=k}H^{p,q}_{\bar\partial}(M).
+ \bigoplus_{p+q=k}H^{p,q}_{\bar\partial}(M)
 \]
+on every compact Kähler manifold.
+
+\section{The almost Dolbeault operator}
+
+On an almost complex manifold the type decomposition exists, but the
+exterior derivative has four components:
+\[
+ d=\mu+\partial+\bar\partial+\bar\mu,
+\]
+of bidegrees
+\[
+ (2,-1),\qquad(1,0),\qquad(0,1),\qquad(-1,2).
+\]
+The components \(\mu\) and \(\bar\mu\) are algebraic expressions in the
+Nijenhuis tensor and vanish exactly when \(J\) is integrable. Thus
+\(\bar\partial\) exists by projection for every almost complex structure,
+but \(\bar\partial^2\) need not vanish.
+
+Nevertheless,
+\[
+ S=\Lambda^{0,\bullet}T^*M,\qquad
+ S^\pm=\Lambda^{0,\mathrm{ev/odd}}T^*M
+\]
+is the spinor bundle of the canonical spin\(^{c}\) structure. On a real
+covector \(\xi\), Clifford multiplication is
+\[
+ c(\xi)=\sqrt2\left(
+ \varepsilon(\xi^{0,1})
+ -\iota_{(\xi^\sharp)^{0,1}}
+ \right),
+\qquad c(\xi)^2=-|\xi|^2.
+\]
+Choose a Hermitian connection preserving \(J\) and \(g\). It induces a
+Clifford connection on \(S\), hence a Dirac operator
+\[
+ D_J:C^\infty(S^+)\longrightarrow C^\infty(S^-).
+\]
+Its principal symbol is \(i\,c(\xi)\), so \(D_J\) is elliptic. The
+operator \(\sqrt2(\bar\partial+\bar\partial^*)\) has the same principal
+symbol and differs from \(D_J\) by a zero-order torsion term. Therefore
+the two operators have the same index even when \(\bar\partial\) is not a
+differential.
+
+\begin{theorem}[Almost-complex Riemann--Roch]
+Let \(M^{2m}\) be compact almost complex and let \(E\) be a complex vector
+bundle. For the canonical spin\(^{c}\) Dirac operator twisted by \(E\),
+\[
+ \operatorname{ind}D_{J,E}^+
+ =
+ \int_M
+ \left[
+ \operatorname{Td}(T^{1,0}M)\operatorname{ch}(E)
+ \right]_{[2m]}.
+\]
+\end{theorem}
+
+\begin{proof}
+The determinant line of the canonical spin\(^{c}\) structure is
+\[
+ K_M^{-1}=\det T^{1,0}M.
+\]
+The spin\(^{c}\) index theorem gives
+\[
+ \operatorname{ind}D_{J,E}^+
+ =
+ \int_M
+ \left[
+ e^{c_1(K_M^{-1})/2}\Ahat(TM)\operatorname{ch}(E)
+ \right]_{[2m]}.
+\]
+If \(x_1,\ldots,x_m\) are the formal Chern roots of \(T^{1,0}M\), then
+\[
+ e^{x_j/2}\frac{x_j/2}{\sinh(x_j/2)}
+ =\frac{x_j}{1-e^{-x_j}}.
+\]
+Multiplying these identities yields
+\[
+ e^{c_1(K_M^{-1})/2}\Ahat(TM)
+ =\operatorname{Td}(T^{1,0}M),
+\]
+which proves the formula.
+\end{proof}
+
+\begin{question}
+What is lost when the almost complex structure is not integrable?
+\end{question}
+
+\begin{answer}
+Not the elliptic symbol and not its index. What is lost is the cochain
+complex: \(\bar\partial^2\) may be nonzero, so there is no Dolbeault
+cohomology whose alternating dimension equals the index. Integrability
+turns the same spin\(^{c}\) index into the holomorphic Euler
+characteristic.
+\end{answer}
 
 \section{Holomorphic vector bundles}
 
@@ -1886,6 +2219,8 @@ Hodge theory gives
 \]
 
 The logical chain is
+\begin{figure}[htbp]
+\centering
 \[
 \begin{tikzcd}[column sep=large,row sep=large]
  (\Omega^{0,\bullet}(E),\bar\partial_E)
@@ -1899,6 +2234,9 @@ The logical chain is
  && \chi(M,E)\arrow[u,equal].
 \end{tikzcd}
 \]
+\caption{For an integrable complex structure, Dolbeault Hodge theory
+identifies the Dirac index with the holomorphic Euler characteristic.}
+\end{figure}
 
 \section{Hirzebruch--Riemann--Roch}
 

@@ -6,6 +6,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{microtype}
 \usepackage{tikz-cd}
+\usetikzlibrary{arrows.meta,calc,decorations.pathreplacing,positioning,patterns}
 \usepackage[hidelinks]{hyperref}
 \hypersetup{
   pdftitle={Notes on the b-Calculus and the APS Index Theorem},
@@ -18,6 +19,7 @@
 
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{question}[theorem]{Question}
@@ -37,6 +39,140 @@
 \begin{document}
 \maketitle
 \tableofcontents
+\listoffigures
+
+\section{Elliptic Fredholm theory on closed manifolds}
+
+The b-calculus is a boundary refinement of ordinary elliptic theory, so we
+first record the closed-manifold argument that will later fail at the
+cylindrical end. Let \(M\) be closed and let
+\[
+ P:C^\infty(M;E)\longrightarrow C^\infty(M;F)
+\]
+be a differential or classical pseudodifferential operator of order \(m\).
+Its principal symbol
+\[
+ \sigma_m(P)(x,\xi):E_x\longrightarrow F_x
+\]
+is obtained by retaining the terms homogeneous of degree \(m\) in
+\(\xi\). The operator is elliptic when this map is invertible for every
+\(\xi\ne0\).
+
+For every \(s\in\mathbb R\), an operator of order \(m\) extends boundedly
+as
+\[
+ P:H^s(M;E)\longrightarrow H^{s-m}(M;F).
+\]
+Ellipticity permits the inverse symbol to be quantized and corrected
+recursively.
+
+\begin{theorem}[Elliptic parametrix]
+If \(P\) is elliptic, there is \(Q\in\Psi^{-m}(M;F,E)\) such that
+\[
+ QP=I-R_L,\qquad PQ=I-R_R,
+ \qquad R_L,R_R\in\Psi^{-\infty}(M).
+\]
+\end{theorem}
+
+\begin{proof}
+Let \(p\sim p_m+p_{m-1}+\cdots\) be the complete symbol of \(P\).
+Choose \(q_{-m}=p_m^{-1}\) away from the zero section. If
+\(q_{-m},\ldots,q_{-m-j+1}\) are known, the degree \(-j\) part of
+\(q\# p-I\) is affine in the unknown \(q_{-m-j}\), with coefficient
+\(p_m\). Multiplication by \(p_m^{-1}\) therefore determines
+\(q_{-m-j}\) and removes that term. Borel summation produces a classical
+symbol \(q\) for which \(q\# p-I\) has order \(-\infty\). Repeating on
+the other side and applying a smoothing correction gives one \(Q\) with
+both displayed identities.
+\end{proof}
+
+The logic of the construction is:
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+ P
+ \arrow[r,"\sigma_m"]
+ &p_m
+ \arrow[r,"\text{invert}"]
+ &p_m^{-1}
+ \arrow[d,"\text{symbol recursion}"]\\
+ \text{Fredholm}
+ &I-\text{compact}\arrow[l,"\text{Atkinson}"']
+ &Q\arrow[l,"\text{compose}"']
+\end{tikzcd}
+\]
+
+\begin{theorem}[Closed elliptic Fredholm theorem]
+For every \(s\), the map
+\[
+ P:H^s(M;E)\longrightarrow H^{s-m}(M;F)
+\]
+is Fredholm. Its kernel is smooth, its range is closed, and
+\[
+ \operatorname{coker}P\cong\ker P^*.
+\]
+If \(Pu\in H^{r-m}\), then \(u\in H^r\).
+\end{theorem}
+
+\begin{proof}
+The parametrix gives
+\[
+ u=QPu+R_Lu.
+\]
+This proves elliptic regularity because \(Q\) gains \(m\) derivatives and
+\(R_L\) is smoothing. On a closed manifold, a smoothing operator factors
+through \(H^{s+N}\hookrightarrow H^s\), which is compact by Rellich's
+lemma. Thus \(P\) is invertible modulo compact operators and is Fredholm
+by Atkinson's theorem. The orthogonal complement of its closed range is
+\(\ker P^*\), giving the cokernel statement.
+\end{proof}
+
+The analytic index
+\[
+ \operatorname{ind}P=\dim\ker P-\dim\ker P^*
+\]
+is independent of \(s\) and constant in continuous families of elliptic
+operators. A lower-order perturbation preserves the principal symbol and
+hence the index.
+
+\begin{lemma}[Fedosov trace formula]
+Suppose \(Q\) is a parametrix for the Fredholm operator \(P\) and
+\[
+ S_L=I-QP,\qquad S_R=I-PQ
+\]
+are trace class. Then
+\[
+ \operatorname{ind}P=\Tr(S_L)-\Tr(S_R).
+\]
+\end{lemma}
+
+\begin{proof}
+Let \(G\) be the generalized inverse of \(P\), equal to the inverse from
+\((\ker P)^\perp\) onto \(\operatorname{ran}P\) and zero on
+\(\ker P^*\). If \(\Pi_0,\Pi_1\) are the orthogonal projections onto
+\(\ker P,\ker P^*\), then
+\[
+ GP=I-\Pi_0,\qquad PG=I-\Pi_1.
+\]
+Hence
+\(\operatorname{ind}P=\Tr(\Pi_0)-\Tr(\Pi_1)\).
+Subtracting these identities from the identities for \(Q\) shows that
+\((Q-G)P\) and \(P(Q-G)\) are trace class. Cyclicity gives them equal
+traces, so
+\[
+ \Tr(S_L)-\Tr(S_R)
+ =\Tr(\Pi_0)-\Tr(\Pi_1).
+\]
+\end{proof}
+
+\begin{discussion}
+Both hypotheses in the closed theorem matter. Ellipticity produces
+smoothing remainders; compactness of the base turns the Sobolev gain into
+a compact map. On a cylinder, translations of a fixed bump remain bounded
+but have no convergent subsequence. The b-calculus must therefore control
+not only high frequency, through the principal symbol, but also escape to
+infinity, through the normal operator.
+\end{discussion}
+
 \section{From the closed index theorem to the APS formula}
 
 Let $X$ be a compact even-dimensional Riemannian manifold with boundary
@@ -101,6 +237,28 @@ exponential estimates.
 If \(0\in\operatorname{spec}(A)\), translates of a fixed cutoff in a zero
 mode form a Weyl sequence at zero.
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,thick]
+ \draw[rounded corners=7pt,fill=gray!10] (0,0) rectangle (3.0,1.7);
+ \node at (1.5,.85) {\(X\)};
+ \draw[fill=blue!8] (3.0,.2) rectangle (7.2,1.5);
+ \foreach \x in {3.6,4.4,5.2,6.0,6.8}
+   \draw[gray!60] (\x,.2) -- (\x,1.5);
+ \draw[->] (7.35,.85) -- (8.55,.85);
+ \node[above] at (7.95,.85) {compactify};
+ \node[below] at (5.1,.15) {\([0,\infty)_t\times Y\)};
+ \draw[->,blue!70!black] (4.0,2.2) -- (6.8,2.2)
+   node[midway,above] {\(x=e^{-t}\)};
+ \draw[fill=blue!20] (9.0,.2) rectangle (12.0,1.5);
+ \draw[very thick,blue!70!black] (9.0,.2) -- (9.0,1.5);
+ \node at (10.5,.85) {\(\overline X\)};
+ \node[above] at (9.0,1.5) {\(x=0\)};
+\end{tikzpicture}
+\caption{The infinite cylinder becomes a boundary hypersurface under
+\(x=e^{-t}\). Translation in \(t\) becomes dilation in \(x\).}
+\end{figure}
+
 Although $D^+$ is Fredholm when $A$ is invertible, the two heat
 operators are not separately trace class: their kernels are
 translation invariant to leading order on the infinite cylinder. Their
@@ -143,6 +301,135 @@ and exactly one spectral half gives decaying solutions on the outward end.
 Thus the APS projection and the \(L^2\) condition select the same boundary
 data. The remaining translation-invariant part is what the normal operator
 and the \(b\)-trace measure.
+\end{answer}
+
+\section{The APS boundary problem}
+
+Let
+\[
+ \gamma:H^1(X;E^+)\longrightarrow H^{1/2}(Y;E^+|_Y)
+\]
+be the trace map. Since \(A\) is self-adjoint and elliptic on the closed
+manifold \(Y\), its spectral projections are order-zero
+pseudodifferential operators. Define
+\[
+ \Pi_{\geq0}(A)
+ =
+ \sum_{\lambda\geq0}\Pi_\lambda
+\]
+and the APS domain
+\[
+ \mathcal D_{\mathrm{APS}}(D^+)
+ =
+ \left\{
+ u\in H^1(X;E^+):
+ \Pi_{\geq0}(A)\gamma u=0
+ \right\}.
+\]
+Thus the boundary value is allowed to lie only in the negative spectral
+subspace of \(A\).
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,thick]
+ \draw[->] (-4.3,0)--(4.3,0) node[right] {\(\operatorname{spec}(A)\)};
+ \foreach \x in {-3.4,-2.6,-1.5,-.7,.8,1.7,2.8,3.5}
+   \fill (\x,0) circle (2pt);
+ \fill (0,0) circle (2.5pt);
+ \draw[decorate,decoration={brace,amplitude=6pt},blue!70!black]
+   (-3.8,.35)--(-.2,.35)
+   node[midway,above=7pt] {allowed boundary data};
+ \draw[decorate,decoration={brace,amplitude=6pt,mirror},red!70!black]
+   (.2,-.35)--(3.8,-.35)
+   node[midway,below=7pt] {removed by \(\Pi_{\geq0}\)};
+ \node[red!70!black,above] at (0,.35) {zero modes};
+\end{tikzpicture}
+\caption{The APS condition is nonlocal: it uses the global spectral
+decomposition of the tangential operator rather than pointwise boundary
+values.}
+\end{figure}
+
+Green's formula fixes the complementary adjoint condition. With the
+collar convention above,
+\[
+ \langle D^+u,v\rangle_X-\langle u,D^-v\rangle_X
+ =
+ -\langle c(du)\gamma u,\gamma v\rangle_Y.
+\]
+Since \(c(du)\) interchanges the positive and negative spectral subspaces,
+the adjoint of \(D^+_{\mathrm{APS}}\) is \(D^-\) with the complementary
+strict projection. This distinction at zero is responsible for the
+\(\dim\ker A\) term in the index formula.
+
+\begin{theorem}[Fredholmness of the APS realization]
+The operator
+\[
+ D^+_{\mathrm{APS}}:
+ \mathcal D_{\mathrm{APS}}(D^+)
+ \longrightarrow L^2(X;E^-)
+\]
+is Fredholm. If \(A\) is invertible, its kernel and cokernel agree with
+those of the \(L^2\) realization on \(X_\infty\); in particular,
+\[
+ \operatorname{ind}D^+_{\mathrm{APS}}
+ =\operatorname{ind}_{L^2}D^+_{X_\infty}.
+\]
+\end{theorem}
+
+\begin{proof}
+On the collar, expand
+\[
+ u(u,y)=\sum_\lambda u_\lambda(u)\phi_\lambda(y),
+ \qquad A\phi_\lambda=\lambda\phi_\lambda.
+\]
+The principal part of \(D^+\) is the direct sum of the one-dimensional
+operators \(\partial_u+\lambda\). The APS condition sets
+\(u_\lambda(0)=0\) for \(\lambda\geq0\). Integration by parts in each
+mode gives the uniform collar estimate
+\[
+ \|u\|_{H^1([0,\varepsilon)\times Y)}
+ \leq C\left(
+ \|D^+u\|_{L^2}
+ +\|u\|_{L^2}
+ +\|u\|_{H^1(\{u>\varepsilon/2\})}
+ \right).
+\]
+An interior elliptic estimate absorbs the last term and yields
+\[
+ \|u\|_{H^1(X)}
+ \leq C\bigl(\|D^+u\|_{L^2(X)}+\|u\|_{L^2(X)}\bigr)
+\]
+on the APS domain. The same estimate holds for the adjoint boundary
+problem. Since \(H^1(X)\hookrightarrow L^2(X)\) is compact, the standard
+compactness argument gives finite-dimensional kernels and closed range;
+the adjoint estimate gives finite-dimensional cokernel. Hence the
+realization is Fredholm.
+
+Assume now that \(A\) is invertible and write the outward cylinder
+coordinate as \(t=-u\geq0\). A boundary eigenmode extends as a solution of
+the product equation by
+\[
+ u_\lambda(t)=e^{\lambda t}u_\lambda(0).
+\]
+This extension is square integrable exactly when \(\lambda<0\), precisely
+the modes allowed by the APS condition. Restriction and extension
+therefore identify the kernels. Applying the same argument to the adjoint
+identifies the cokernels, proving equality of indices.
+\end{proof}
+
+\begin{question}
+Why is an elliptic differential operator on a manifold with boundary not
+automatically Fredholm?
+\end{question}
+
+\begin{answer}
+The interior principal symbol controls high-frequency behavior away from
+the boundary but does not select boundary data. For example, the
+\(\bar\partial\)-operator on a disk has the infinite-dimensional space of
+holomorphic functions in its kernel if no boundary condition is imposed.
+An elliptic boundary condition removes half of the Cauchy data. The APS
+condition makes that choice spectrally; the b-calculus makes the same
+choice through decay on the attached cylinder.
 \end{answer}
 
 \section{Regularized b-integrals and b-traces}
@@ -265,6 +552,40 @@ Near the interior of the front face one may instead use
 \]
 so that $\Delta_b=\{z=0,\;Y=0\}$.
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,thick,scale=.9]
+ \begin{scope}
+  \draw[->] (0,0)--(3.6,0) node[right] {\(x\)};
+  \draw[->] (0,0)--(0,3.6) node[above] {\(x'\)};
+  \draw[blue!70!black,very thick] (0,0)--(3.2,3.2)
+    node[above right] {\(\Delta\)};
+  \fill[red!70!black] (0,0) circle (2.5pt);
+  \node[below left] at (0,0) {\(\partial X\times\partial X\)};
+  \node at (1.7,-.65) {\(X^2\)};
+ \end{scope}
+ \draw[->,line width=1pt] (4.0,1.7)--(5.2,1.7)
+   node[midway,above] {blow up};
+ \begin{scope}[xshift=6cm]
+  \draw[fill=gray!8] (0,3.5)--(0,1)
+    arc[start angle=180,end angle=270,radius=1]--(3.5,0)--(3.5,3.5)--cycle;
+  \draw[very thick] (0,3.5)--(0,1);
+  \draw[very thick] (1,0)--(3.5,0);
+  \draw[very thick,red!70!black]
+    (0,1) arc[start angle=180,end angle=270,radius=1];
+  \draw[blue!70!black,very thick] (.293,.293)--(3.25,3.25);
+  \node[left] at (0,2.2) {\(\mathrm{lb}\)};
+  \node[below] at (2.2,0) {\(\mathrm{rb}\)};
+  \node[below left,red!70!black] at (.35,.35) {\(\mathrm{ff}\)};
+  \node[above right,blue!70!black] at (2.2,2.2) {\(\Delta_b\)};
+  \node at (1.7,-.65) {\(X_b^2\)};
+ \end{scope}
+\end{tikzpicture}
+\caption{Blowing up the boundary corner replaces one point of approach by
+the front face of limiting normal ratios; the diagonal lifts
+transversely.}
+\end{figure}
+
 \begin{question}
 Why not work directly on \(X^2\)?
 \end{question}
@@ -309,6 +630,86 @@ $\mathrm{lb}$ and $\mathrm{rb}$. This model explains why the
 $b$-calculus resolves the simultaneous limit $x,x'\to0$ while retaining
 the translation-invariant variable $\log(x/x')$.
 
+\subsection{General and iterated blow-ups}
+
+The construction is not limited to a corner of a double space. A
+\emph{p-submanifold} \(S\) of a manifold with corners \(Z\) is a
+submanifold that, in suitable product coordinates
+\[
+ (x_1,\ldots,x_k,y_1,\ldots,y_\ell),
+\]
+is given by the vanishing of a subset of the \(x\)- and \(y\)-coordinates.
+Its inward spherical normal bundle is therefore well defined, and the real
+blow-up
+\[
+ [Z;S]=(Z\setminus S)\sqcup S^+NS
+\]
+has a canonical smooth structure.
+
+In the model \(Z=[0,\infty)^2\), \(S=\{(0,0)\}\), the two projective charts
+are
+\[
+ U_x:(x,s=x'/x),\qquad
+ U_{x'}:(s'=x/x',x').
+\]
+On their overlap,
+\[
+ s'=s^{-1},\qquad x'=sx.
+\]
+These transition functions are smooth where \(s,s'>0\), and the front
+face is \(x=0\) in the first chart and \(x'=0\) in the second.
+
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+ U_x=\{(x,s)\}
+ \arrow[rr,bend left=18,"{x'=sx,\ s'=s^{-1}}"]
+ &&
+ U_{x'}=\{(s',x')\}
+ \arrow[ll,bend left=18,"{x=s'x',\ s=(s')^{-1}}"]
+\end{tikzcd}
+\]
+
+\begin{proposition}[Coordinate invariance]
+The blow-up \([Z;S]\), its front face, and its blow-down map are
+independent up to canonical diffeomorphism of the product coordinates
+used in the construction.
+\end{proposition}
+
+\begin{proof}
+A product-coordinate change preserving \(S\) has, in the normal
+variables, the form
+\[
+ \widetilde z=A(w)z+O(|z|^2),
+\]
+where \(A(w)\) is invertible and preserves the inward normal cone.
+Writing \(z=r\omega\) gives
+\[
+ \widetilde r
+ =r\,|A(w)\omega+O(r)|,\qquad
+ \widetilde\omega
+ =\frac{A(w)\omega+O(r)}
+ {|A(w)\omega+O(r)|}.
+\]
+Both expressions are smooth down to \(r=0\); the second restricts there
+to the induced map on the spherical normal bundle. Hence every allowed
+coordinate change lifts smoothly, and the lifted changes satisfy the
+same cocycle identities.
+\end{proof}
+
+Iterated blow-ups are used for \(X_b^3\) and \(X_{b,h}^2\). If two
+centers are disjoint or meet transversely, their blow-ups commute. If one
+center is contained in another, blowing up the smaller center first makes
+the lift of the larger one a p-submanifold. These facts justify the rule
+used below: blow up nested centers in increasing order of dimension and
+then blow up the transverse lifts.
+
+\begin{discussion}
+The order is geometric, not cosmetic. Blowing up a larger center first can
+destroy the product structure of a smaller center and make its lift
+ill-defined. The triple-space construction specifies the order precisely
+so that all three lifted projections become b-fibrations.
+\end{discussion}
+
 \section{The b-tangent and b-cotangent bundles}
 
 Let $\mathcal V_b(X)$ be the Lie algebra of smooth vector fields tangent
@@ -343,6 +744,26 @@ A positive $b$-density is locally
 \]
 Under the cylindrical variables $x_j=e^{t_j}$, this is the ordinary
 product density $a\,|dt\,dy|$.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,thick]
+ \fill[blue!5] (0,0) rectangle (8,2.8);
+ \draw[very thick,blue!70!black] (0,0)--(0,2.8)
+   node[midway,left] {\(\partial X\)};
+ \foreach \x/\len in {6.8/1.0,5.2/.75,3.6/.5,2.0/.28,.7/.1}
+   \draw[->,red!70!black] (\x,1.35)--++(\len,0);
+ \draw[->,blue!70!black] (.15,.7)--(.15,2.15)
+   node[above] {\(\partial_y\)};
+ \node[red!70!black] at (5.4,.75)
+   {\(x\partial_x\) shrinks under the anchor};
+ \node at (4,2.35)
+   {\({}^bTX\) remains a rank-\(n\) bundle};
+\end{tikzpicture}
+\caption{A b-vector field is tangent to the boundary. The normal generator
+\(x\partial_x\) is nonzero in \({}^bTX\), although its image in \(TX\)
+vanishes at \(x=0\).}
+\end{figure}
 
 \section{b-differential operators and their symbols}
 
@@ -520,6 +941,28 @@ continuously
 \]
 and preserve the space \(\dot{\mathcal C}^\infty(X)\) of sections vanishing
 to infinite order at the boundary.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[thick,scale=.9]
+ \draw[fill=gray!7] (0,3.6)--(0,1)
+   arc[start angle=180,end angle=270,radius=1]--(5.5,0)--(5.5,5.5)--cycle;
+ \draw[very thick] (0,3.6)--(0,1);
+ \draw[very thick] (1,0)--(5.5,0);
+ \draw[very thick,red!70!black]
+   (0,1) arc[start angle=180,end angle=270,radius=1];
+ \draw[blue!15,line width=13pt,opacity=.8] (.293,.293)--(5.1,5.1);
+ \draw[blue!70!black,very thick] (.293,.293)--(5.1,5.1);
+ \node[rotate=45,blue!70!black,above] at (2.75,2.75)
+   {conormal singularity};
+ \node[red!70!black] at (.3,1.35) {\(\mathrm{ff}\)};
+ \node[left] at (0,2.4) {\(\mathrm{lb}\)};
+ \node[below] at (3.2,0) {\(\mathrm{rb}\)};
+ \node[blue!70!black,below left] at (5.05,5.05) {\(\Delta_b\)};
+\end{tikzpicture}
+\caption{A small-calculus kernel is conormal to the lifted diagonal,
+extends to the front face, and vanishes rapidly at the two side faces.}
+\end{figure}
 
 The principal symbol is a homogeneous bundle map on
 \({}^bT^*X\setminus0\),
@@ -856,6 +1299,26 @@ root does not change the Fredholm index. When a root is crossed, the index
 jump is determined by its algebraic multiplicity; the sign depends on the
 direction in which the weight is moved.
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,thick]
+ \draw[->] (-4,0)--(4.3,0) node[below right] {\(\operatorname{Re}\lambda\)};
+ \draw[->] (0,-2.4)--(0,2.5) node[above] {\(\operatorname{Im}\lambda\)};
+ \foreach \p in {(-2.5,.9),(-1.1,-.4),(.8,.55),(2.4,-1.15),(3.0,1.45)}
+   \fill[red!75!black] \p circle (2.7pt);
+ \draw[blue!70!black,very thick] (-3.8,-1.65)--(3.8,-1.65);
+ \node[blue!70!black,above] at (3.45,-1.65) {\(\Gamma_{\delta_0}\)};
+ \draw[blue!40,dashed,very thick] (-3.8,.05)--(3.8,.05);
+ \node[blue!50,above] at (3.45,.05) {\(\Gamma_{\delta_1}\)};
+ \draw[->,blue!70!black] (-3.2,-1.45)--(-3.2,-.15);
+ \node[align=left] at (2.25,-2.05) {admissible line};
+ \node[red!75!black,align=left] at (-1.2,1.75)
+   {indicial roots};
+\end{tikzpicture}
+\caption{Changing the weight moves the Mellin contour. The index is
+constant between indicial roots and jumps when the contour crosses one.}
+\end{figure}
+
 \section{The full b-calculus and the Fredholm parametrix}
 
 The symbolic parametrix constructed in the small calculus has smooth
@@ -910,6 +1373,26 @@ in the residual ideal removes its successive boundary coefficients; Borel
 summation removes all of them at once. An interior symbolic correction then
 restores infinite-order vanishing at the lifted diagonal. This yields the
 two-sided parametrix below.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,thick]
+ \node (q0) at (0,1.8) {\(Q_0\)};
+ \node (r0) at (3.2,1.8) {\(R_0\)};
+ \node (cff) at (6.4,1.8) {\(C_{\mathrm{ff}}\)};
+ \node (q1) at (6.4,0) {\(Q_0+C_{\mathrm{ff}}\)};
+ \node (r1) at (3.2,0) {\(N(R_1)=0\)};
+ \node (q) at (0,0) {\(Q\)};
+ \draw[->] (q0)--(r0) node[midway,above] {symbolic inversion};
+ \draw[->] (r0)--(cff) node[midway,above] {invert \(I(P,\lambda)\)};
+ \draw[->] (cff)--(q1) node[midway,right] {inverse Mellin};
+ \draw[->] (q1)--(r1) node[midway,above] {remove boundary error};
+ \draw[->] (r1)--(q) node[midway,below] {residual iteration};
+\end{tikzpicture}
+\caption{The full parametrix alternates interior symbol inversion with
+indicial correction at the front face; the remaining residual error is
+then iterated away.}
+\end{figure}
 
 Iterating at the interior diagonal and at the boundary faces gives
 \(Q\in\Psi_b^{-m}\) in the full calculus with
@@ -1012,6 +1495,29 @@ weighted realization is Fredholm, but its index depends on the side from
 which the zero indicial roots are crossed. The APS projection selects the
 corresponding spectral subspace; the correction at zero is
 \(\frac12\dim\ker A_{\partial}\) in the index formula.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,thick]
+ \draw[->] (-4.2,0)--(4.2,0) node[right] {\(\lambda\)};
+ \draw[very thick,blue!70!black] (-3.8,0)--(-.18,0);
+ \draw[very thick,red!70!black] (.18,0)--(3.8,0);
+ \fill (0,0) circle (2.5pt);
+ \foreach \x in {-3.2,-2.3,-1.4,1.2,2.1,3.1}
+   \fill (\x,0) circle (2pt);
+ \draw[->,blue!70!black] (-2.7,.35)--(-2.7,1.2);
+ \node[blue!70!black,above,align=center] at (-2.7,1.2)
+   {\(e^{\lambda t}\) decays\\APS-allowed};
+ \draw[->,red!70!black] (2.4,.35)--(2.4,1.2);
+ \node[red!70!black,above,align=center] at (2.4,1.2)
+   {\(e^{\lambda t}\) grows\\projected out};
+ \node[below,align=center] at (0,-.25)
+   {zero mode\\requires a choice};
+\end{tikzpicture}
+\caption{On the outward cylinder, the tangential spectrum splits boundary
+data into decaying and growing modes. The APS projection makes this split
+at \(\lambda=0\).}
+\end{figure}
 
 \section{The K-theoretic proof architecture}
 
@@ -1324,10 +1830,73 @@ where the final blow-up assigns weight one to spatial variables and weight
 two to \(t\). The new temporal front face resolves the singularity of the
 kernel as \(t\downarrow0\).
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,thick,scale=.95]
+ \begin{scope}
+  \draw[->] (0,0)--(3.6,0) node[right] {\(r=d(\,\cdot\,,\Delta_b)\)};
+  \draw[->] (0,0)--(0,3.3) node[above] {\(\sqrt t\)};
+  \fill[red!70!black] (0,0) circle (2.5pt);
+  \node at (1.7,-.6) {before blow-up};
+ \end{scope}
+ \draw[->] (4.0,1.55)--(5.2,1.55);
+ \begin{scope}[xshift=6cm]
+  \draw[fill=gray!8] (0,3.2)--(0,1)
+    arc[start angle=180,end angle=270,radius=1]--(3.6,0);
+  \draw[very thick,red!70!black]
+    (0,1) arc[start angle=180,end angle=270,radius=1];
+  \draw[->] (1,0)--(3.6,0) node[right] {\(r\)};
+  \draw[->] (0,1)--(0,3.2) node[above] {\(\sqrt t\)};
+  \draw[blue!70!black,very thick] (.293,.293)--(2.5,2.5);
+  \node[red!70!black] at (.6,1.2) {tf};
+  \node[blue!70!black,above right] at (1.8,1.8)
+    {\(r/\sqrt t=\mathrm{const}\)};
+  \node at (1.7,-.6) {parabolic blow-up};
+ \end{scope}
+\end{tikzpicture}
+\caption{The temporal diagonal is parabolically blown up. The new face
+keeps the heat variable \(r/\sqrt t\) finite and carries the Gaussian
+model.}
+\end{figure}
+
 At the temporal front face, the model equation is the Euclidean heat
 equation on each b-tangent fibre. At the boundary front face, the model is
 the heat equation for the normal operator on the cylinder. Full ellipticity
 makes the large-cylinder model invertible in the required weighted space.
+
+\begin{proposition}[Compatibility of the heat models]
+The Euclidean model at the temporal front face and the cylindrical normal
+model at the boundary front face have the same restriction to their
+intersection. They therefore determine a single leading kernel on
+\(X_{b,h}^2\).
+\end{proposition}
+
+\begin{proof}
+Near a boundary point use b-normal coordinates
+\[
+ (t,y)=(-\log x,y).
+\]
+After parabolic rescaling about the diagonal, the coefficients of \(D^2\)
+freeze at the base point. The temporal model is therefore the Gaussian
+heat kernel of the constant-coefficient operator on
+\({}^bT_pX\). If the base point tends to the boundary, the same frozen
+operator splits into the normal line in \(t\) and the tangential operator
+on \(T_yY\). This is exactly the small-time restriction of the
+translation-invariant normal heat kernel. Thus both models restrict to
+\[
+ (4\pi)^{-n/2}e^{-|V|^2/4}
+\]
+times parallel transport at the corner of the two faces.
+\end{proof}
+
+The compatibility permits one to extend the two prescribed normal
+operators to a global initial parametrix. Successive transport equations
+remove the Taylor coefficients of the error at the temporal face;
+successive normal-operator inversions remove its coefficients at the
+boundary face. Because the corrections agree at the corner, alternating
+between the two faces improves the error without spoiling work already
+done at the other face. Borel summation produces a kernel whose heat error
+vanishes to infinite order at every temporal boundary.
 
 Starting with the Gaussian model, solve the transport equations
 successively along the temporal front face. Borel summation gives a
