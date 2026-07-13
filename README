@@ -3,10 +3,11 @@
 Two proof-focused manuscripts are maintained:
 
 - `Lecture draft/Lecture draft.tex`: the b-calculus, Fredholm theory on
-  cylindrical ends, the b-trace defect, and the Atiyah--Patodi--Singer theorem.
-- `Lecture draft/Atiyah-Singer index theorem.tex`: elliptic operators, heat
-  kernels, Clifford modules, the local index theorem, Gauss--Bonnet, the
-  signature theorem, and Riemann--Roch.
+  cylindrical ends, and K-theoretic and heat-kernel proofs of the
+  Atiyah--Patodi--Singer theorem.
+- `Lecture draft/Atiyah-Singer index theorem.tex`: elliptic operators,
+  K-theoretic push-forward, heat kernels, Clifford modules, the local index
+  theorem, Gauss--Bonnet, the signature theorem, and Riemann--Roch.
 
 The July 2026 revision is a line-by-line mathematical edit of the original
 lecture transcriptions. Relevant classroom discussion is retained as concise

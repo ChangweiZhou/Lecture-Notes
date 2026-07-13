@@ -689,6 +689,152 @@ separate prevents the Dirac calculation from being mistaken for a proof
 that silently assumes every elliptic operator is already of Dirac type.
 \end{discussion}
 
+\section{The K-theoretic proof}
+
+The preceding construction defines the topological index. We now explain
+why it equals the analytic index. The proof is short only after three
+substantial facts have been isolated: an elliptic symbol can be quantized,
+the analytic index commutes with Thom push-forward, and the Bott generator
+has index one. This is the standard \(K\)-theoretic proof architecture of
+Atiyah and Singer \cite{ASI,ABS}.
+
+First define the analytic index directly on compactly supported
+\(K\)-theory. A class in \(K_c^0(T^*M)\) is represented, after
+stabilization, by
+
+\[
+ \alpha=[\pi^*E,\pi^*F,a],
+\]
+
+where \(a:\pi^*E\to\pi^*F\) is invertible outside a compact set. Radial
+deformation makes \(a\) homogeneous for large covectors, and symbol
+quantization produces an elliptic pseudodifferential operator
+\(P_a:E\to F\) with principal symbol \(a\). Set
+
+\[
+ \operatorname{a\text{-}ind}(\alpha)=\ind P_a.
+\]
+
+This integer is well defined. A homotopy of symbols quantizes to a
+continuous family of Fredholm operators between fixed Sobolev spaces, so
+its index is constant. Direct sum gives additivity, and adding the symbol
+of an invertible bundle map adds an invertible operator and hence index
+zero. These are precisely the relations used to define
+\(K_c^0(T^*M)\).
+
+\begin{lemma}[Compatibility with push-forward]
+Let \(i:M\hookrightarrow N\) be an embedding of closed manifolds. For
+every \(\alpha\in K_c^0(T^*M)\),
+\[
+ \operatorname{a\text{-}ind}(i_!\alpha)
+ =\operatorname{a\text{-}ind}(\alpha).
+\]
+\end{lemma}
+
+\begin{proof}
+Choose a tubular neighborhood with normal bundle \(\nu\). The normal
+bundle of \(T^*M\) in \(T^*N\) is \(\pi^*(\nu\oplus\nu)\), with complex
+structure
+\[
+ J(v,w)=(-w,v).
+\]
+Consequently \(i_!\) is, in the tubular neighborhood, exterior product
+with the Bott--Thom class, followed by extension to \(T^*N\).
+
+Here is the analytic representative of that class. On a Euclidean fibre
+\(V\) act on \(\Lambda^\bullet V_\mathbb C^*\) by
+\[
+ c(v)=\varepsilon(v^\flat)-\iota_v,
+ \qquad
+ \widehat c(v)=\varepsilon(v^\flat)+\iota_v.
+\]
+For an orthonormal basis \(e_1,\ldots,e_r\), the odd Bott operator is
+\[
+ B_V=\sum_{j=1}^r c(e_j)\frac{\partial}{\partial v_j}
+      +\widehat c(v).
+\]
+Its full symbol in the position and covariable pair \((v,\xi)\) is
+\(i\,c(\xi)+\widehat c(v)\), the Bott class on \(V\oplus V^*\). With the
+conventions above,
+\[
+ B_V^2=-\Delta+|v|^2+
+ \sum_{j=1}^r c(e_j)\widehat c(e_j).
+\]
+The harmonic-oscillator decomposition shows that its kernel is the
+one-dimensional Gaussian vacuum in even Bott degree and that its odd
+kernel is zero. In particular, \(B_V\) is Fredholm and
+\[
+ \operatorname{ind}B_V=1.
+\]
+
+Write \(P_a\) as the odd self-adjoint operator
+\[
+ \mathcal P_a=
+ \begin{pmatrix}0&P_a^*\\ P_a&0\end{pmatrix}
+ \quad\text{on }E\oplus F.
+\]
+Let \(\Gamma_{E\oplus F}\) act by \(+1\) on \(E\) and by \(-1\) on
+\(F\). Over the tubular neighborhood, the graded product
+\[
+ \mathcal P_a\widehat\otimes 1
+ +\Gamma_{E\oplus F}\widehat\otimes B_\nu
+\]
+has symbol \(\alpha\) multiplied by the Thom class. Its kernel is the
+kernel of \(\mathcal P_a\) tensored with the Gaussian vacuum; equivalently,
+the Fredholm product formula gives
+\[
+ \operatorname{ind}(P_a\mathbin{\#}B_\nu)
+ =\operatorname{ind}(P_a)\operatorname{ind}(B_\nu)
+ =\operatorname{ind}(P_a).
+\]
+A connection patches the fibrewise construction over \(M\). Changing the
+connection or the tubular neighborhood changes only lower-order terms
+through a Fredholm homotopy. Finally, extension from the tubular
+neighborhood is excision: the symbol is invertible off that neighborhood,
+so the complementary part contributes index zero. These steps give the
+claimed equality.
+\end{proof}
+
+We can now finish the proof of the index theorem. Choose an embedding
+\(i:M\hookrightarrow\mathbb R^N\). Bott periodicity gives
+\[
+ K_c^0(T^*\mathbb R^N)
+ \cong K_c^0(\mathbb R^{2N})
+ \cong\mathbb Z.
+\]
+Let \(\beta_N\) be the Bott generator, normalized by
+\(\operatorname{a\text{-}ind}(\beta_N)=1\). If
+\(i_!\alpha=k\beta_N\), then the push-forward lemma gives
+\[
+ \operatorname{a\text{-}ind}(\alpha)
+ =\operatorname{a\text{-}ind}(i_!\alpha)
+ =k.
+\]
+By definition the topological index of \(\alpha\) is the same integer
+\(k\). Therefore
+\[
+ \operatorname{a\text{-}ind}=\operatorname{t\text{-}ind}
+ \quad\text{on }K_c^0(T^*M),
+\]
+which proves the Atiyah--Singer theorem for every elliptic operator.
+Applying the compactly supported Chern character and the Thom identity
+turns this equality into the cohomological formula. For a Dirac symbol,
+the characteristic classes simplify to the
+\(\widehat A\operatorname{ch}\)-density computed by the heat kernel.
+
+\begin{question}
+Where is the difficult geometry hidden in this short proof?
+\end{question}
+
+\begin{answer}
+It is concentrated in the push-forward lemma. Quantization converts
+symbol homotopy into Fredholm homotopy; the Thom class becomes the
+fibrewise Bott operator; and excision identifies a tubular neighborhood
+with its normal model. Once those compatibilities and
+\(\operatorname{ind}B_V=1\) are proved, the final reduction to
+\(K_c^0(\mathbb R^{2N})\cong\mathbb Z\) is formal.
+\end{answer}
+
 
 \chapter{Heat kernels}
 
@@ -1935,6 +2081,14 @@ under the displayed hypothesis.
 
 \backmatter
 \begin{thebibliography}{9}
+
+\bibitem{ASI}
+M.~F. Atiyah and I.~M. Singer,
+\emph{The index of elliptic operators I}.
+
+\bibitem{ABS}
+M.~F. Atiyah, R.~Bott, and A.~Shapiro,
+\emph{Clifford modules}.
 
 \bibitem{BGV}
 N.~Berline, E.~Getzler, and M.~Vergne,

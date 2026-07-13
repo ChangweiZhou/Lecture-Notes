@@ -1013,6 +1013,198 @@ which the zero indicial roots are crossed. The APS projection selects the
 corresponding spectral subspace; the correction at zero is
 \(\frac12\dim\ker A_{\partial}\) in the index formula.
 
+\section{The K-theoretic proof architecture}
+
+The closed index theorem has two layers: an elliptic symbol defines a
+\(K\)-class, and the analytic index is the unique push-forward of that
+class normalized by the Bott operator. On a manifold with boundary, the
+interior symbol alone is insufficient. One must also record an invertible
+model at the cylindrical end. The b-calculus packages exactly these two
+pieces \cite{Melrose,MelrosePiazza}.
+
+Let \(\mathcal A_b\) be the operator-norm closure of the stabilized
+order-zero b-calculus, and let \(\Sigma_b\) be its joint symbol algebra.
+An element of \(\Sigma_b\) is a compatible pair
+\[
+ (a,q)=
+ \bigl({}^b\sigma_0(P),I(P,\lambda)\bigr),
+\]
+where \(a\) is the b-principal symbol and \(q\) is the suspended indicial
+family. Compatibility means that the principal symbol of \(q\) is the
+restriction of \(a\) to the boundary. The full symbol sequence is
+\[
+ 0\longrightarrow\mathcal K
+ \longrightarrow\mathcal A_b
+ \xrightarrow{\,j\,}\Sigma_b
+ \longrightarrow0.
+\]
+Indeed, a b-operator with zero principal symbol and zero normal operator is
+compact; the parametrix construction proves exactness at the other terms.
+
+If \(P\) is fully elliptic, \(j(P)\) is invertible. After stabilization it
+defines a class \([j(P)]\in K_1(\Sigma_b)\). The six-term exact sequence
+has a connecting map
+\[
+ \partial:K_1(\Sigma_b)\longrightarrow
+ K_0(\mathcal K)\cong\mathbb Z.
+\]
+
+\begin{lemma}[The connecting map is the Fredholm index]
+With the usual sign convention for \(\partial\),
+\[
+ \partial[j(P)]=\operatorname{ind}P.
+\]
+\end{lemma}
+
+\begin{proof}
+Lift \(j(P)^{-1}\) to a b-parametrix \(Q\). Then
+\[
+ I-QP\in\mathcal K,\qquad I-PQ\in\mathcal K.
+\]
+After a compact perturbation, the polar part \(V\) of \(P\) is a partial
+isometry. The definition of the connecting map gives
+\[
+ \partial[j(P)]
+ =[I-V^*V]-[I-VV^*].
+\]
+The first defect projection is the orthogonal projection onto
+\(\ker P\), and the second is the projection onto \(\ker P^*\). Under
+\(K_0(\mathcal K)\cong\mathbb Z\), their difference is
+\(\dim\ker P-\dim\ker P^*=\operatorname{ind}P\).
+\end{proof}
+
+For the product Dirac operator, the unbounded joint elliptic data are
+\[
+ \left({}^b\sigma_1(D),\,
+ I(D,\lambda)=
+ c\!\left(\frac{dx}{x}\right)(i\lambda+A)\right).
+\]
+Composing on the right with the inverse of a fixed positive elliptic
+family of order one normalizes this to an order-zero element of
+\(\Sigma_b\) without changing invertibility or the index class.
+Equivalently, one may use the bounded transform of \(D\), whose indicial
+family includes the corresponding factor of order minus one.
+If \(A\) is invertible, this pair is fully elliptic. If \(A\) has kernel,
+replace it in the indicial family by
+\[
+ A_\varepsilon=A+\varepsilon\Pi_0,\qquad \varepsilon>0,
+\]
+where \(\Pi_0\) projects onto \(\ker A\). This smoothing perturbation is
+finite rank, and the perturbed family is invertible. It chooses the same
+side of the zero modes as the APS
+projection \(\Pi_{\geq0}(A)\). Thus the APS condition is not extra data
+unrelated to the symbol: it is the boundary trivialization needed to make
+the joint symbol a \(K\)-class.
+
+Denote the resulting stable class by
+\[
+ [\sigma_{\mathrm{APS}}(D^+)]
+ \in K_{\mathrm{APS}}^0({}^bT^*X).
+\]
+This notation means stable homotopy classes of b-symbols equipped with
+their invertible boundary trivializations. A neat embedding
+\[
+ i:(X,\partial X)\hookrightarrow
+ (\mathbb R_+^N,\mathbb R^{N-1})
+\]
+defines a Thom push-forward of these relative classes. Normal deformation
+and collar doubling identify the target with the Bott group
+\[
+ K_c^0(\mathbb R^{2N})\cong\mathbb Z.
+\]
+Call the resulting integer
+\(\operatorname{t\text{-}ind}_{\mathrm{APS}}\).
+
+\begin{theorem}[K-theoretic APS index theorem]
+For a product-type graded Dirac operator,
+\[
+ \operatorname{ind}(D^+_{\mathrm{APS}})
+ =
+ \operatorname{t\text{-}ind}_{\mathrm{APS}}
+ [\sigma_{\mathrm{APS}}(D^+)].
+\]
+\end{theorem}
+
+The theorem asserts that the following diagram commutes; the left vertical
+map is the connecting-map index of the joint symbol.
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+ K_{\mathrm{APS}}^0({}^bT^*X)
+ \arrow[r,"i_!"]
+ \arrow[d,"{\operatorname{a\text{-}ind}_{\mathrm{APS}}}"']
+ &K_c^0(\mathbb R^{2N})
+ \arrow[d,"\mathrm{Bott}"]\\
+ \mathbb Z\arrow[r,equal]&\mathbb Z
+\end{tikzcd}
+\]
+
+\begin{proof}
+The proof follows the closed push-forward argument. In a tubular
+neighborhood, the Thom class is represented analytically by the
+fibrewise Bott operator
+\[
+ B_\nu=\sum_j c(e_j)\partial_{v_j}+\widehat c(v),
+\]
+on \(\Lambda^\bullet\nu_\mathbb C^*\), where
+\(c(v)=\varepsilon(v^\flat)-\iota_v\) and
+\(\widehat c(v)=\varepsilon(v^\flat)+\iota_v\).
+Its even kernel is the Gaussian line and its odd kernel is zero.
+Taking the graded product with \(D^+_{\mathrm{APS}}\) therefore preserves
+the index. On the boundary collar the normal Bott factor is product type,
+so it carries the chosen indicial trivialization to the pushed-forward
+operator without changing which zero modes are selected. Excision removes
+the complement of the tubular neighborhood.
+
+After the neat embedding and collar doubling, the class is an integer
+multiple of the Bott generator. The Bott operator has index one, so both
+the analytic index, computed by the connecting map above, and the
+topological push-forward equal that integer. This proves the formula.
+\end{proof}
+
+This theorem proves the equality of two \emph{integer} indices. Ordinary
+\(K\)-theory does not by itself determine the real number
+\[
+ \bar\eta(A)=\frac{\eta(A)+\dim\ker A}{2}.
+\]
+That number is a secondary, differential refinement of the boundary
+\(K\)-class: it can vary continuously with the metric and connection even
+when the underlying \(K\)-class is fixed. The heat-kernel and b-trace
+argument below supplies its canonical real lift and proves the numerical
+formula
+\[
+ \operatorname{ind}(D^+_{\mathrm{APS}})
+ =
+ \int_X
+ \left[\widehat A(TX)\operatorname{ch}(E/S)\right]_{[n]}
+ -\bar\eta(A).
+\]
+Equivalently,
+\[
+ \bar\eta(A)\equiv
+ \int_X
+ \left[\widehat A(TX)\operatorname{ch}(E/S)\right]_{[n]}
+ \pmod{\mathbb Z}.
+\]
+Thus the exponentiated eta invariant is the boundary transgression of the
+local index form. The \(K\)-theoretic
+proof explains integrality and homotopy invariance, while the heat proof
+identifies the precise spectral correction.
+
+\begin{question}
+Why can \(\bar\eta(A)\) vary while the \(K\)-theoretic APS index is
+constant?
+\end{question}
+
+\begin{answer}
+As the geometric data vary without a zero eigenvalue crossing, the local
+integral and \(\bar\eta(A)\) vary by the same amount, so their difference
+remains the fixed integer index. At a crossing, the spectral projection
+changes by a finite-dimensional space; spectral flow changes the
+\(K\)-theoretic boundary trivialization and accounts for the integer jump.
+Ordinary \(K\)-theory records that jump, whereas the eta invariant records
+the continuous real-valued refinement between jumps.
+\end{answer}
+
 \section{The b-trace defect}
 
 Let \(A\) be a residual b-operator whose lifted kernel has a full expansion
@@ -1424,6 +1616,10 @@ M.~F. Atiyah, V.~K. Patodi, and I.~M. Singer,
 \bibitem{Melrose}
 R.~B. Melrose,
 \emph{The Atiyah--Patodi--Singer Index Theorem}.
+
+\bibitem{MelrosePiazza}
+R.~B. Melrose and P.~Piazza,
+\emph{Families of Dirac operators, boundaries and the b-calculus}.
 
 \end{thebibliography}
 
