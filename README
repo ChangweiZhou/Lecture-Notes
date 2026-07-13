@@ -1,6 +1,6 @@
 # Lecture Notes
 
-Two proof-focused manuscripts are maintained:
+Three proof-focused manuscripts are maintained:
 
 - `Lecture draft/Lecture draft.tex`: the b-calculus, Fredholm theory on
   closed manifolds and cylindrical ends, the APS spectral boundary problem,
@@ -9,6 +9,16 @@ Two proof-focused manuscripts are maintained:
   K-theoretic push-forward, heat kernels, Clifford modules, the local index
   theorem, Gauss--Bonnet, the signature theorem, almost Hermitian and almost
   Kähler geometry, the almost Dolbeault operator, and Riemann--Roch.
+- `Lecture draft/Hochschild homology of b-pseudodifferential operators.tex`:
+  the continuous Hochschild homology of the Laurent complete-symbol algebra
+  of the b-calculus, including the filtration, Poisson differential, Laurent
+  de Rham model, face decomposition, and residual-operator caveat.
+
+Compiled releases, with stable contents and figure lists, are available here:
+
+- [Heat Kernels and Index Theory](<output/pdf/Atiyah-Singer index theorem.pdf>)
+- [Notes on the b-Calculus and the APS Index Theorem](<output/pdf/Lecture draft.pdf>)
+- [Hochschild Homology of the b-Pseudodifferential Symbol Algebra](<output/pdf/Hochschild homology of b-pseudodifferential operators.pdf>)
 
 The July 2026 revision is a line-by-line mathematical edit of the original
 lecture transcriptions. Relevant classroom discussion is retained as concise
@@ -23,12 +33,12 @@ is easier to see than to infer from formulas alone.
 
 ## Build
 
-From `Lecture draft/`:
+From the repository root:
 
 ```sh
-latexmk -pdf -interaction=nonstopmode -halt-on-error "Lecture draft.tex"
-latexmk -pdf -interaction=nonstopmode -halt-on-error "Atiyah-Singer index theorem.tex"
+make
 ```
 
-Both manuscripts build with pdfLaTeX. Build products are intentionally
-untracked.
+The build uses `latexmk` with pdfLaTeX until references, tables of contents,
+and lists of figures stabilize. Intermediate files go to `tmp/pdfs/`; the
+three release PDFs in `output/pdf/` are intentionally tracked.
