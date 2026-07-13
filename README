@@ -1,1 +1,39 @@
-This is a folder storing lecture notes I took when I was a young PhD student. My ex-advisor Paul Loya wanted to turn the material into two books. However nothing was being done, partly due to his family problems. I do not think the notes will ever be published. Warning: Please use it as a reference, there are numerous mistakes in the notes. 
+Lecture Notes
+=============
+
+These are lecture notes transcribed while I was a PhD student. They were
+originally intended as source material for two books with Paul Loya, but they
+remain working notes rather than a published text.
+
+Main sources
+------------
+
+* `Lecture draft/Lecture draft.tex` -- b-calculus, APS theory, and related
+  analytic material.
+* `Lecture draft/Atiyah-Singer index theorem.tex` -- Dirac operators, heat
+  kernels, Clifford modules, characteristic classes, and the index theorem.
+* `Lecture draft/Chapter 11.tex` -- a stand-alone extract from the first set of
+  notes.
+
+Building
+--------
+
+Run the builds from `Lecture draft/` so that the image paths resolve:
+
+```
+latexmk -pdf "Lecture draft.tex"
+latexmk -pdf "Atiyah-Singer index theorem.tex"
+```
+
+Both main sources compile with pdfLaTeX. Generated PDFs and some historical
+build artifacts are retained because they were part of the original archive.
+
+Editorial status
+----------------
+
+The July 2026 audit repaired several substantive gaps in the heat-calculus,
+Clifford-algebra, Dolbeault, and eta-invariant discussions and restored clean
+builds. The manuscripts are large historical transcriptions, however, and
+still contain informal lecture commentary, typographical errors, and claims
+that have not received a line-by-line mathematical audit. Cite a standard
+reference for any result used in research.

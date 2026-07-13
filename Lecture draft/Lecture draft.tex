@@ -2379,7 +2379,7 @@ and we will be done.
 \discussion
 Let us use $x,x'$ for the coordinates off from the front face. Then using the theorem from last semester we can prove it in a different way. Here is the second way. I want to do it without using last semester's notation. Let $\pi_{L,b}=\pi_L$ in the coordinates $r,z$, in other words
 \begin{align}
-(\pi_{L,b})(r,z)=\pi_{L}(x,x'), r=x, z=\log(\frac{x}{x'})，e^{z}=\frac{x}{x'}=e^{-z}r
+(\pi_{L,b})(r,z)=\pi_{L}(x,x'), r=x, z=\log(\frac{x}{x'}),\quad e^{z}=\frac{x}{x'},\quad x'=e^{-z}r
 \end{align}
 Therefore
 \begin{align}
@@ -2397,7 +2397,7 @@ We have $A\in \Psi^{-\infty, \epsilon}_{b}, B\in \Psi^{-\infty, \epsilon}_b$, an
 \proof
 We now wish to prove the first statement. We know $A$ has kernel $\mu_1(x,x')d\mu$, $B$ has kernel $\mu_2(x,x')d\mu$, and we may assume
 \begin{align}
-\mu_1\in \mathcal{S}^{0,\epsilon, \epsilon+\delta_1, \epsilon+\delta_1}, 、\mu_2\in\mathcal{S}^{0,\epsilon, \epsilon+\delta_2,\epsilon+\delta_2}
+\mu_1\in \mathcal{S}^{0,\epsilon, \epsilon+\delta_1, \epsilon+\delta_1},\quad \mu_2\in\mathcal{S}^{0,\epsilon, \epsilon+\delta_2,\epsilon+\delta_2}
 \end{align}
 Away from the boundary with $K_{A}=\mu_1(x,x')\mu(x')$ and $K_B=\mu_2(x,x')\mu(x')$, we have
 \begin{align}
@@ -5001,18 +5001,17 @@ The notes on this is barely legible, needs some correction. Also I have some con
 I think I am kind of confused with the assignment. 
 \section{Lecture 20: Proof of APS theorem}
 \subsection{Eta invariant}
-Let $\lambda$ be positive. Let us consider for $a>0$, we have the following principal value argument:
-\begin{center}
-\includegraphics[width=120mm]{drawing114.png}
-\end{center}
+For $\lambda\ne0$, the symmetric principal value is
 \begin{align}
-\lim_{\alpha\rightarrow \infty}\frac{1}{\pi}\int^a_{-a}(i\tau+\lambda)^{-1}d\tau&=\lim_{\alpha\rightarrow \infty}\frac{1}{\pi}\log(i\tau+\lambda)|^{a}_{-a}\\
-&=\lim_{\alpha\rightarrow \infty}\frac{1}{\pi}(\log(ia+\lambda)-\log(-ia+\lambda))\\
-&=\lim_{\alpha\rightarrow \infty}\frac{1}{\pi}(i\theta-(-i\theta))\\
-&=\lim_{\theta\rightarrow \frac{\pi}{2}}\frac{2\theta}{\pi}\\
-&=1
+\operatorname{pv}\frac{1}{\pi}\int_{\R}(i\tau+\lambda)^{-1}\,d\tau
+&=\lim_{A\to\infty}\frac{1}{\pi}
+  \int_{-A}^{A}\frac{\lambda-i\tau}{\lambda^2+\tau^2}\,d\tau\\
+&=\lim_{A\to\infty}\frac{2}{\pi}
+  \arctan\!\left(\frac{A}{|\lambda|}\right)\operatorname{sgn}(\lambda)\\
+&=\operatorname{sgn}(\lambda).
 \end{align}
-Similarly, if $\lambda<0$, we would have $\frac{1}{\pi}\int_{\R}(i\tau+\lambda)^{-1}=1$. In particular if $\lambda_1\cdots \lambda_N\in \R/\{0\}$, then we have
+The imaginary part vanishes because it is odd. In particular, for
+nonzero real numbers $\lambda_1,\ldots,\lambda_N$, we have
 
 \section{Lecture 21: In-depth study of the eta-invariant}
 

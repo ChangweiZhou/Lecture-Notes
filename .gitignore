@@ -1,0 +1,8 @@
+# LaTeX build products (historical tracked copies remain in the archive).
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc

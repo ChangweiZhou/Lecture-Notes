@@ -2,12 +2,9 @@
 \usepackage{amssymb, amsthm, amsmath, amsfonts}
 \usepackage{graphics}
 \usepackage[pdftex]{graphicx}
-\usepackage{amsrefs}
-\usepackage{mnsymbol}
 \usepackage{charter}
 \usepackage[scaled]{helvet}
 \usepackage{mathtools}
-\include{psfig}
 \usepackage{color}% http://ctan.org/pkg/color
 \usepackage[linkbordercolor={1 0 1}]{hyperref}
 \hypersetup{linktocpage}
@@ -72,6 +69,8 @@
 \newcommand{\vp}{\varphi}
 \newcommand{\SH}{\mathbb{S}(\R^{n},\R^{n})}
 \newcommand{\supp}{\mathop{\mathrm{supp}}}
+% Interior multiplication (formerly supplied by the optional mnsymbol package).
+\newcommand{\invneg}{\mathbin{\lrcorner}}
 \usepackage{amsmath}
 \DeclareMathOperator{\Tr}{Tr}
 %---------------------Style File---------------------------
@@ -664,7 +663,7 @@ P\in DIFF(U)\leftrightarrow P=\sum_{|I|\le m}b_{I}\partial_{Y_{I}}
 \]
 where $b_{I}\in C^{\infty}(U)$. In other words, we know 
 \begin{center}
-$\DIFF(U)$ is coordinate independent. 
+$\DIFF(U)$ is coordinate independent.
 \end{center}
 \proof
 Induction on $m$, for $m=0$ this is trivial. For $m=1$ we have
@@ -2274,37 +2273,34 @@ $$
 Ind(D^{+})=\chi(M)
 $$
 
-\proposition(linear algebra fact)
-\theorem Let $V$ be a finite dimensional vector space and let $A_{1}\cdots A_{n}\in Hom(V)$ be anti-commuting involutions. Let $I=(i_{1}\cdots, i_{n})$ where $n=2m$ is even. and $i_{1}\cdots i_{k}\in \{1, \cdots n\}, k\le n$. Then we have
-$$
-\Tr(A_{1}\circ \cdots \circ A_{n}\circ A_{I})=(-1)^{m}sgn(I)\dim(V)
-$$
-where the sign is identical with the one from group theory if $i_{1}\cdots i_{k}$ is a permutation of $\{1\cdots n\}$. 
-\proof
-Consider $I=1$, then since $n$ is even we have
-$$
-\Tr(A_{1}\cdots \circ A_{n}\circ A_{1})=(-1)^{n-1}\Tr(A_{1}\circ A_{1}\circ A_{2}\circ \cdots A_{n})=-\Tr(A_{2}\circ \cdots\circ A_{n})
-$$
-On the other hand since $A_{1}$ is an involution:
-$$
-\Tr(A_{1}\circ A_{1})=\Tr(A_{1})\Tr(A_{1})=1, \rightarrow Tr(A_{1})=\pm 1
-$$
-Now if $\Tr(A_{1})=1$, then we have reduced the case to
-$$
-\Tr(A_{1}\circ \cdots A_{1})=\Tr(A_{1})\Tr(A_{2}\circ \cdots A_{n})\Tr(A_{1})=\Tr(A_{2}\circ \cdots A_{n})
-$$
-and we reach a contradiction unless $\Tr(A_{1}\circ \cdots A_{1})=0$. Similarly if $\Tr(A_{1})=-1$ we can reach a contradiction as well. This settled the case for $I=1$. Without loss of generality this proof can be generalized to all $I$ where $|I|$ is odd. 
+\begin{proposition}[Patodi's linear-algebra lemma]
+Let $V$ be a finite-dimensional vector space and let
+$A_1,\ldots,A_n\in\operatorname{End}(V)$ be pairwise anti-commuting
+involutions, where $n=2m$.  If $I=(i_1,\ldots,i_k)$ is an ordered
+list of distinct indices and $A_I=A_{i_1}\cdots A_{i_k}$, then
+\[
+ \Tr(A_1\cdots A_nA_I)=0\qquad (k<n).
+\]
+If $k=n$, so that $I$ is a permutation of $(1,\ldots,n)$, then
+\[
+ \Tr(A_1\cdots A_nA_I)=(-1)^m\operatorname{sgn}(I)\dim V.
+\]
+\begin{proof}
+Using $A_j^2=1$ and the anti-commutation relations, the product
+$A_1\cdots A_nA_I$ is, up to sign, the Clifford monomial $A_J$ whose
+indices form the complement of $I$.  If $J$ is nonempty and proper,
+choose $r\in J$ when $|J|$ is even and $r\notin J$ when $|J|$ is odd.
+Conjugation by $A_r$ sends $A_J$ to $-A_J$.  Invariance of trace under
+conjugation therefore gives $\Tr(A_J)=-\Tr(A_J)=0$.
 
-For the case $|I|=k$ is even, we have
-$$
-\Tr(\gamma A_{i_1}A_{I}A_{i_k})=\Tr(A_{i_1}\gamma A_I A_{i_k})=-\Tr(\gamma A_{I}), i\in n-\{i_{1}\cdots I_{k}\}
-$$
-and the proof for $k=n$ follows by:
-$$
-\Tr(\gamma A_{i_{1}}\cdots A_{i_{n}})=(-1)^{m}sgn(I)
-$$This is called Patodi's lemma. 
-\remark 
-I think the $\dim(V)$ is a typo in the pdf file. The proof when $n$ is even seems to be wrong, too.  
+When $I$ contains all indices, moving its factors into the order
+$1,\ldots,n$ contributes $\operatorname{sgn}(I)$, and
+\[
+ (A_1\cdots A_n)^2=(-1)^{n(n-1)/2}I=(-1)^mI.
+\]
+Taking traces proves the last assertion.
+\end{proof}
+\end{proposition}
 
 Recall that
 $$
@@ -2795,11 +2791,12 @@ If $e^{-tL}$ exists, then we guess
 $$
 e^{-tL}\vp=\int h(t,x,y)\vp(y)dg(y)
 $$
-We would guess that
-$$
-h(t,x,y)=t^{-n/2}q(t^{1/2},x\frac{x-y}{t^{1/2}})
-$$
-\remark This may be wrong. 
+The correct parabolic ansatz is
+\[
+h(t,x,y)=t^{-n/2}q\left(t^{1/2},x,\frac{x-y}{t^{1/2}}\right).
+\]
+The first variable $s=t^{1/2}$ records the polyhomogeneous expansion,
+while the last variable is the scale-invariant normal variable.
 \discussion(continue)
 where
 $$
@@ -3114,7 +3111,7 @@ $$
 +
 For $p$ odd, if $Q\in \Psi^{p}_{n}(\R^{n})$, then
 $$
-Q:C^{\infty}_{c}(\R^{n})\rightarrow t^{\frac{p-1}{2}}C^{\infty}([0,\infty)_{t}\times \R^{n})
+Q:C^{\infty}_{c}(\R^{n})\rightarrow t^{-\frac{p+1}{2}}C^{\infty}([0,\infty)_{t}\times \R^{n})
 $$
 In particular, if
 $$
@@ -3126,8 +3123,9 @@ Q:C^{\infty}_{c}(\R^{n})\rightarrow C^{\infty}([0,\infty)_{t}\times \R^{n})
 $$
 and it vanishes when $t=0$.
 
-\remark
-I think there is another typo here. $p\ge 3$ instead of $p\le -3$. 
+Here the exponent in the odd case is $-(p+1)/2$: the parity condition
+forces one factor of $t^{1/2}$ after integration. Thus $p\leq -3$ is
+indeed the range in which the result vanishes at $t=0$.
 
 \proof
 We review the proof from last time:
@@ -3156,49 +3154,45 @@ $$
 Qu(x,t)=t^{-\frac{p}{2}-1}\int \tilde{q}(x,t^{1/2},\omega)d\omega
 $$
 
-\proposition(Taylor expansion)
-For all $N\in \N$, we have
-$$
-\tilde{q}(x,s,\omega)=\sum^{N-1}_{k=1}s^{k}(\partial^{k}_{s}\tilde{q})(x,s,\omega)+s^{2N}\tilde{q}_{2N}(x,s,\omega)
-$$
-Note that
-$$
-(\partial_{s}^{k}\tilde{q})(x,s,-\omega)=(-1)^{p+k}(\partial_{s}^{k}\tilde{q})(x,s,\omega)
-$$
-by the property of $\Psi^{-p}$ and chain rule. 
-\proof
-Should be trivial. 
+\begin{proposition}[Taylor expansion with parity]
+For every $N\in\N$,
+\[
+\tilde q(x,s,\omega)=
+ \sum_{k=0}^{2N-1}\frac{s^k}{k!}
+ (\partial_s^k\tilde q)(x,0,\omega)
+ {}+s^{2N}r_{2N}(x,s,\omega),
+\]
+where $r_{2N}$ is smooth and remains Schwartz in $\omega$, locally
+uniformly in $x$. Moreover,
+\[
+(\partial_s^k\tilde q)(x,0,-\omega)
+ =(-1)^{p+k}(\partial_s^k\tilde q)(x,0,\omega).
+\]
+\begin{proof}
+Taylor's formula with integral remainder gives the expansion and
+preserves the Schwartz estimates. Differentiate
+$\tilde q(x,-s,-\omega)=(-1)^p\tilde q(x,s,\omega)$ $k$ times and set
+$s=0$ to obtain the parity assertion.
+\end{proof}
+\end{proposition}
 
 \discussion
-Some cases:
-If $p$ is even, then
-$$
-\partial^{k}_{s}\tilde{q}(x,s,\omega)
-$$
-has the same even/odd parity with $k$. We can write
-$$
-Qu(x,t)=t^{-\frac{p}{2}-1}\sum^{N-1}_{k=0}t^{k/2}\int \partial^{k}_{s}\tilde{q}(x,s,\omega)d\omega+t^{-\frac{p}{2}-1}(t^{1/2})^{2N}\int \tilde{q}(x,t^{1/2},\omega)
-$$
-where as the term
-$$
-\partial^{k}_{s}\tilde{q}(x,s,\omega)d\omega=0
-$$
-if $k$ is odd because of the even/odd parity. We note we can rewrite it as
-$$
-t^{-\frac{p}{2}-1}\sum^{N-1}_{k=0}t^{k}f_{2k}(x)+t^{-p/2}t^{N}F_{2N}(x,t)
-$$
+Suppose $p$ is even. The integrals of the odd Taylor coefficients
+vanish, so the preceding proposition gives
+\[
+Qu(x,t)=t^{-\frac p2-1}
+ \sum_{k=0}^{N-1}t^k f_{2k}(x)
+ {}+t^{-\frac p2-1+N}F_{2N}(x,t),
+\]
 where
-$$
-f_{2k}(x)=\int_{\R^{n}}\partial^{2k}_{s}(q(x,0,\omega))d\omega\in C^{\infty}(\R^{n}_{t}), F_{2N}(x,t)=\int_{\R^{n}}\tilde{q}(x,t^{1/2},\omega)
-$$
-\remark
-I think there is some typo on the indices for the fourth equation. 
-
-\corollary
-In conclusion we have
-$$
-Qu(t,x)\in t^{-\frac{p}{2}-1}\in C^{\infty}([0,\infty)_{t}\times \R^{n})
-$$
+\[
+f_{2k}(x)=\frac1{(2k)!}\int_{\R^n}
+ (\partial_s^{2k}\tilde q)(x,0,\omega)\,d\omega,
+\]
+and $F_{2N}$ is smooth down to $t=0$. In conclusion,
+\[
+Qu(t,x)\in t^{-\frac{p}{2}-1}C^{\infty}([0,\infty)_{t}\times \R^{n})
+\]
 \execrise
 Try to do the same thing for $p$ is odd. 
 
@@ -3211,51 +3205,69 @@ $$
 and
 +
 $$
-\partial_k:\Psi_h^{p}\rightarrow \Psi^{p+2}_{h}
+\partial_t:\Psi_h^{p}\rightarrow \Psi^{p+2}_{h}
 $$
 +
 $$
 P\in \DIFF^{m}(\R^{n})\rightarrow P:\Psi^{p}\rightarrow \Psi^{p+m}_{h}
 $$
 
-\proof
-We prove explicitly. Let $Q\in \Psi^{p}_{n}$. Then we have
-\begin{align}
-Qu=(Q\vp)(t,x)&=t^{-\frac{n}{2}-\frac{p}{2}-1}\int q(t^{1/2},x,\frac{x-y}{t^{1/2}})\vp(y)dy
-\\
-&=t^{-\frac{n}{2}-\frac{p+k}{2}-1}\int t^{k/2} q(t^{1/2},x,\frac{x-y}{t^{1/2}})\vp(y)dy\\
-&=t^{-\frac{n}{2}-\frac{p+k}{2}-1}\int \tilde{q}(x,t^{1/2},\frac{x-y}{t^{1/2}})dy\\
-\end{align}
-Check if it is okay with with even-odd parity: 
-$$
-\tilde{q}(x,s,\omega)=s^{k}q(x,s,\omega)
-$$
-\remark
-I think this "proof" is completely false. This should follow straightforwardly from chain rule. 
+\begin{proof}
+For the inclusion, write the same kernel with amplitude
+$\widetilde q(s,x,\omega)=s^kq(s,x,\omega)$. It is still Schwartz and
+\[
+ \widetilde q(-s,x,-\omega)=(-1)^{p+k}\widetilde q(s,x,\omega),
+\]
+so $Q\in\Psi_n^{p+k}$.
+
+Put $a=(n+p+2)/2$, $s=t^{1/2}$ and
+$\omega=(x-y)/s$. Differentiation under the integral gives
+\[
+ \partial_t Q=t^{-a-1}\int
+ \left(-a q+\frac{s}{2}\partial_s q
+             -\frac12\omega\cdot\partial_\omega q\right)u(y)\,dy.
+\]
+The amplitude in parentheses has the required parity for
+$\Psi_n^{p+2}$. Similarly,
+\[
+ \partial_{x_j}Q=t^{-a-1/2}\int
+ \left(s\partial_{x_j}q+\partial_{\omega_j}q\right)u(y)\,dy
+ \in\Psi_n^{p+1}.
+\]
+Iterating the last identity and applying the Leibniz rule to smooth
+coefficients proves $P\Psi_n^p\subseteq\Psi_n^{p+m}$ for every
+differential operator $P$ of order at most $m$.
+\end{proof}
 
 \definition
-Let $Q\in \Psi^{p}_{n}$, such that its smoothing kernel is given by
-$$
-Q=t^{-\frac{n}{2}-\frac{p}{2}-1}\int q(x,t^{n/2},\frac{x-y}{t^{1/2}})dg(y)
-$$
-Then we have
-$$
-\sigma_{p}(Q)(x,\omega)=q(x,s,\omega)
-:\Psi^{p}_{n}\rightarrow \mathbb{S}^{-\infty}(\R^{n};\R^{n})
-$$
-\theorem
-The following sequence is exact:  
-$$
-0\rightarrow \Psi^{p-1}_{n}\rightarrow \Psi^{p}_{n}\xrightarrow{\sigma_{p}}\SH\rightarrow 0
-$$
-where
-$$
-\sigma_{p}(Q)=0
-\leftrightarrow 
-Q\in \Psi^{p-1}_{n}
-$$
-\proof
-Obvious. 
+Let
+\[
+ \mathcal S_p=\{a(x,\omega)\in\mathbb S^{-\infty}(\R^n_x;\R^n_\omega):
+ a(x,-\omega)=(-1)^pa(x,\omega)\}.
+\]
+For $Q\in\Psi_n^p$ represented by the amplitude $q$, define its leading
+heat symbol by
+\[
+ \sigma_p(Q)(x,\omega)=q(0,x,\omega)\in\mathcal S_p.
+\]
+
+\begin{theorem}[Exact heat-symbol sequence]
+The sequence
+\[
+0\longrightarrow\Psi_n^{p-1}\longrightarrow\Psi_n^p
+ \xrightarrow{\ \sigma_p\ }\mathcal S_p\longrightarrow0
+\]
+is exact.
+\begin{proof}
+The parity condition puts $q(0,x,\cdot)$ in $\mathcal S_p$.
+Surjectivity follows by extending any $a\in\mathcal S_p$ constantly in
+$s$ near zero and multiplying by an even cutoff in $s$. If
+$\sigma_p(Q)=0$, Hadamard's lemma gives $q=sq_1$ with $q_1$ smooth,
+Schwartz in $\omega$, and of parity $p-1$. Rewriting the prefactor
+shows $Q\in\Psi_n^{p-1}$. The converse is the same calculation in
+reverse.
+\end{proof}
+\end{theorem}
 \discussion
 Why is $\sigma_{p}$ important?
 
@@ -4454,55 +4466,33 @@ f(0,x)=0
 $$
 In other words, $f$ solves the in homogeneous heat equation!
 
-\proof
-Given $H$, let $G=\tilde{H}$. Given $G$, let $H=\partial_{t}G$. We now prove both claims:
-+
-Assume $H$ exists, define
-$$
-f=Gg=\tilde{H}g=\int^{t}_{0}H(t-s)g(s)ds, H(t-s)g(s)(x)=(Hg(s))(t-s,x)
-$$ 
-Let us show that
-$$
-\begin{cases}
-(\partial_{t}+L)f=g\\
-f|_{t=0}=0
-\end{cases}
-$$
-We have
-$$
-(\partial_{t}+L)f=H(0)g(t,x)+\int^{t}_{0}\partial_{t}H(t-s)g(s)ds+\int^{t}_{0}LH(t-s)g(s)ds=g(t,x)
-$$
-\remark
-I think $H(0)g(t,x)$ is confusing, it should be $(Hg(t))(0,x)=g(t,x)$, where $g(t)$ is understand as fixed $t$ function on $M$, and $Hg(t)$ maps it to a function on $[0,\infty)\times M$.
+\begin{proof}
+If $H$ exists, define the Volterra operator
+\[
+ (Gg)(t)=\int_0^t H(t-s)g(s)\,ds.
+\]
+Leibniz' rule, $H(0)=I$, and $(\partial_t+L)H=0$ give
+\[
+ (\partial_t+L)Gg
+ =g(t)+\int_0^t(\partial_t+L)H(t-s)g(s)\,ds=g(t),
+\]
+and the integral is zero at $t=0$.
 
-+
-Assume there exists $G:C^{\infty}([0\times \infty)\times M)\rightarrow C^{\infty}([0,\infty)\times M)$ such that
-$$
-(\partial_t+L)G(g)=g, \forall g\in C^{\infty}([0,\infty)\times M), G(g)|_{t=0}=0
-$$
-Define 
-$$
-H:\underbrace{C^{\infty}M}_{u(x)}\rightarrow C^{\infty}([0,\infty)\times M)
-$$
-by
-$$
-(Hu)(t,x)=\partial_{t}G(u)\in C^{\infty}([0,\infty)\times M)
-$$
-We claim that
-$$
-(\partial_{t}+L)(Hu)=0, Hu|_{t=0}=u
-$$
-because 
-$$
-(\partial_{t}+L)(Hu)=(\partial_{t}+L)\partial_{t}G(u)=\partial_{t}((\partial_{t}+L))G(u)=\partial_{t}u=0
-$$
-Using this we have
-$$
-(\partial_{t}+L)G(u)|_{t=0}=\partial_{t}G(g)|_{t=0}+LG(u)|_{t=0}=\partial_{t}G(u)|_{t=0}+G(u)|_{t=0}=\partial_{t}G(u)|_{t=0}=u
-$$
-because $u(x,t)$'s value is not dependent on $t$. 
-\remark
-I think it is a bit odd that $u(x,t)=u(x)$ at all times. I do not know if I understand it wrong.
+Conversely, suppose $G$ has the stated properties. For
+$u\in C^\infty(M)$ let $\iota u$ denote the time-independent function
+$(\iota u)(t,x)=u(x)$ and set
+\[
+ Hu=\partial_tG(\iota u).
+\]
+Because $L$ is independent of $t$, differentiating
+$(\partial_t+L)G(\iota u)=\iota u$ gives
+$(\partial_t+L)Hu=0$. At $t=0$,
+\[
+ u=((\partial_t+L)G(\iota u))(0)
+   =Hu(0)+L(G(\iota u)(0))=Hu(0),
+\]
+since $G(\iota u)(0)=0$. Thus $H(0)=I$.
+\end{proof}
 
 \discussion
 With this in mind, we will have to show that there exist 
@@ -4562,21 +4552,17 @@ $$
 $$
 where $\tilde{S}\in \Psi^{-\infty}_{\HH}$.
 \corollary
-Heat kernel exists!
+The heat kernel exists.
 \proof
-We have
-\begin{align}
-G&=\tilde{Q}+\tilde{Q}\circ \tilde{S}\\
-&\rightarrow H=\partial_{t}(\tilde{Q}+\tilde{Q}\circ \tilde{S})\\
-&=\partial_{t}\tilde{Q}+\partial_{t}\tilde{Q}\circ \tilde{S}+\tilde{S}\circ \partial_{t}\tilde{S}\\
-&=Q+\underbrace{Q\circ \tilde{S}+\tilde{Q}\circ S}_{\in \Psi^{-\infty}_{\HH}(M)}
-\end{align}
-\remark
-I think there is one item missing at here, we have
-$$
-G(g)|_{t=0}=0,\forall g\in C^{\infty}([0,\infty)\times M)
-$$
-It follows trivially from the construction, but one need this detail. 
+Set $G=\tilde Q\circ(I+\tilde{\RR})^{-1}$. The preceding identities
+give $(\partial_t+L)G=I$. Both factors are Volterra operators, hence
+$Gg|_{t=0}=0$ for every $g$. Duhamel's principle therefore yields
+\[
+ H=\partial_tG,\qquad (\partial_t+L)H=0,\qquad H|_{t=0}=I.
+\]
+Since the inverse differs from the identity by a smooth Volterra
+operator flat at $t=0$, the constructed $H$ differs from the
+parametrix $Q$ by an element of $\Psi_{\HH}^{-\infty}(M)$.
 
 \proof(of Theorem)
 Consider $\mathcal{L}$ be the collection of all convolution operators, where one identifies the convolution with a continuous function. So we have
@@ -4591,80 +4577,64 @@ where $C_{f}$ is convolution with $f$. Then we have
 \begin{align}
 (Id+\tilde{\RR})^{-1}&=Id+\sum(-\tilde{\RR})^{k}\\
 &=Id+\sum (-C_{f})^{k}\\
-&=Id+\sum^{\infty}_{k=1}C_{(-f)^{k}}
+&=Id+\sum^{\infty}_{k=1}(-1)^k C_{f^{*k}}
 \end{align}
 
 We still need to address the issue of convergence. For this we have the following theorem:
 
-\theorem(About convergence)
-Let $h\in C^{0}([0,\infty)\times M\times M)$, then the series
-$$
-j(t,x,y)=\sum(-h)^{k}(t,x,y)
-$$
-converges point-wise and for any $t_{0}>0$ it converges uniformly on 
-$$
-[0,t_0]\times M\times M
-$$
-In particular, we have
-$$
-j\in C^{\infty}([0,\infty)\times M\times M)
-$$
-\proof
+\begin{theorem}[Volterra-series convergence]
+Let $h\in C^{0}([0,\infty)\times M\times M)$ and write $h^{*k}$ for
+the $k$-fold Volterra convolution. Then
+\[
+j(t,x,y)=\sum_{k=1}^{\infty}(-1)^k h^{*k}(t,x,y)
+\]
+converges uniformly on $[0,t_0]\times M\times M$ for every $t_0>0$.
+The limit is continuous. If $h$ is smooth, then $j$ is smooth; if $h$
+is flat at $t=0$, then so is $j$.
+\begin{proof}
 Let $t_0>0$. We want to show that $j$ converges uniformly. Claim: Let $|\cdot  |_{\infty}$ to be the sup norm on $C^{0}([0,t_0)\times M\times M')$, so it is complete. Then for all $f_1, f_2\in C^{\infty}([0,t_0])\times M\times M)$ we have
 $$
 |f_1\circ f_2(t,x,y)|_{\infty}\le t \text{vol}M |f_1|_{\infty}|f_2|_{\infty}
 $$
 This is proved earlier in Lemma 26. We now claim that
 $$
-|h\times h\times h\cdots (t,x,y)|_{\infty}\le \frac{t^{k-1}vol(M)^{k-1}(|h|_{\infty})^{k}}{(k-1)!}
+|h^{*k}(t,x,y)|\le
+\frac{t^{k-1}\operatorname{vol}(M)^{k-1}\|h\|_{\infty}^{k}}{(k-1)!}
 $$
-\execrise:
-Consider $k=3$, then use induction. 
-\remark
-This is not trivial. I do not really know where the $\frac{1}{(k-1)!}$ term coming from. Is it because we are integrating over a simplex? For example, for $k=3$ we have
-$$
-h^{3}(x,y)=\int_{M} (\int_{M} h(x,z)h(w,z)dg(z))h(y,w)dg(w)
-$$
-which equals
-$$
-\int_{M\times M}h(x,z)h(w,z)h(y,w)dg(z)dg(w)\le |h|_{\infty}^{3}\int_{M\times M}dg(w)dg(z)
-$$
-and it is hard to simplify this integral as $\omega,z$ should have nothing to do with each other. So we can only bound it by $\text{vol}(M)^{2}$. But in general we need a better estimate. 
-
-\theorem
-We have
-$$
-|h^{k}|_{\infty}\le \frac{t_0^{k-1}\text{vol}(M)^{k-1}|h|^{k}_{\infty}}{(k-1)!}
-$$
+Indeed, $h^{*k}$ is an integral over $M^{k-1}$ and the time simplex
+\[
+ \{(s_1,\ldots,s_{k-1}):s_i\geq0,\ s_1+\cdots+s_{k-1}\leq t\}.
+\]
+The spatial integral contributes at most
+$\operatorname{vol}(M)^{k-1}$ and the simplex has volume
+$t^{k-1}/(k-1)!$, which proves the estimate.
 \discussion
 Observe that the right hand side equal
 $$
-|h|_{\infty}e^{t_0}\text{vol}(M)<\infty
+\|h\|_{\infty}
+ \exp\!\bigl(t_0\operatorname{vol}(M)\|h\|_{\infty}\bigr)<\infty
 $$
 Therefore
 $$
-\sum (-h)^{k}
+\sum_{k\geq1}(-1)^k h^{*k}
 $$
 converges in $C^{0}([0,t_{0}]\times M\times M)$. 
 Therefore, since $t_0$ is arbitrary, it converges pointwise to all $t_0$. 
 We note that
 $$
-j=-h-j*h=-h-h*j=-h+h*h^2+h*j*h
+j=-h-h*j=-h-j*h
 $$
-Thus, $(Id+\underbrace{C_{f})^{-1}}_{\tilde{\RR}}$ exists. Now by the previous lemma, we have
+Thus $(Id+C_f)^{-1}=Id+C_j$ exists. Taking $h=f$, write $g=j$.
 $$
-g(t,x,y)=\sum^{\infty}_{k=1}(-f)^{k}\in C^{\infty}([0,\infty)\times M\times M)
+g(t,x,y)=\sum^{\infty}_{k=1}(-1)^k f^{*k}
+ \in C^{\infty}([0,\infty)\times M\times M)
 $$
 and converges uniformly on $[0,t_0]\times M\times M$, for all $t_0>0$.
-\lemma
-Now we claim that 
-$$
-g(t,x,y)\in C^{\infty}([0,\infty)\times M\times M), \partial^{k}_{t}g(t,x,y)=0,\forall k
-$$
-\proof
-Easy!
-\remark
-I think the first one should follow directly. The second one is proved earlier in a different setting. 
+The same estimates after differentiation prove smooth convergence when
+$f$ is smooth. If $f$ is flat at $t=0$, the convolution estimates
+applied to every derivative show that $g$ is flat as well.
+\end{proof}
+\end{theorem}
 
 \lemma
 We have 
@@ -4810,7 +4780,7 @@ q(x,s,0)\sim \sum^{\infty}_{k=0}s^{2k}\tilde{a}_{k}(x)
 $$
 where
 $$
-\tilde{a}_{k}(x)=\frac{\partial_{s}^{2k}q(x,0,0)}{k!}
+\tilde{a}_{k}(x)=\frac{\partial_{s}^{2k}q(x,0,0)}{(2k)!}
 $$
 So we have
 \begin{align}
@@ -4818,10 +4788,9 @@ q(x,t^{1/2},0)\sim \sum^{\infty}_{k=0}t^{k}\tilde{a}_{k}(x)
 \end{align}
 Therefore
 $$
-t^{n/2}\Tr(Q)=\sum^{\infty}_{k=0}t^{k}a_{k}, a_{k}\in \C
+t^{n/2}\Tr(Q)\sim\sum^{\infty}_{k=0}t^{k}a_{k},
+\qquad a_k=\int_M\tilde a_k(x)\,dg(x)
 $$
-\remark
-A notation issue - why $\tilde{a}$ becomes $a$ now?
 \proof(continue)
 Thus we have
 $$
@@ -4830,22 +4799,18 @@ $$
 \corollary
 We have
 $$
-\Tr(e^{-t\D^{-}\D^{+}})\xrightarrow{t\rightarrow 0}\sum^{\infty}_{k=1}t^{-\frac{n}{2}+k}a_{k}^{+}
+\Tr(e^{-t\D^{-}\D^{+}})\sim\sum^{\infty}_{k=0}t^{-\frac{n}{2}+k}a_{k}^{+}
 $$
 as well as
 $$
-\Tr(e^{-t\D^{+}\D^{-}})\xrightarrow{t\rightarrow 0}\sum^{\infty}_{k=0}t^{-\frac{n}{2}+k}a_{k}^{-}
+\Tr(e^{-t\D^{+}\D^{-}})\sim\sum^{\infty}_{k=0}t^{-\frac{n}{2}+k}a_{k}^{-}
 $$
 because we used Taylor expansion at the origin. In fact we have
 $$
-a_{k}^{\pm}=(\frac{d}{dt})^{k}t^{\frac{n}{2}}\Tr(e^{-\D^{\mp}\D^{\pm})}|_{t=0}
+a_{k}^{\pm}=\frac1{k!}
+ \left.\left(\frac{d}{dt}\right)^{k}
+ \left[t^{\frac n2}\Tr(e^{-t\D^{\mp}\D^{\pm}})\right]\right|_{t=0}
 $$
-\remark
-Is there a typo here? I think there should be an
-$
-\frac{1}{(k)!}
-$
-factor involved. 
 
 \corollary
 We have
@@ -4876,17 +4841,19 @@ a^{+}_{k}-a^{-}_{k}=0,\forall k, k\not=m
 $$
 and for $k=m$ we have
 $$
-\IND=m!(a_{m}^{+}-a_{m}^{-})
+\IND=a_{m}^{+}-a_{m}^{-}
 $$
 \theorem
 We have
 $$
-\IND=m!(a_{m}^{+}-a_{m}^{-})
+\IND=a_{m}^{+}-a_{m}^{-}
 $$
-where the difference is the $m$-th term in the Taylor series of $t^{m}(\Tr(e^{t\D^{-}\D^{+}}))-\Tr(e^{t\D^{+}\D^{-}}))$. 
-
-\remark
-With all respect I think the $m!$ term is not needed. This is either a typo or a mistake. 
+where the difference is the coefficient of $t^m$ in the Taylor
+expansion of
+\[
+t^{m}\left(\Tr(e^{-t\D^{-}\D^{+}})
+          -\Tr(e^{-t\D^{+}\D^{-}})\right).
+\]
 \discussion
 So we have reduced the topological problem to an analytical problem of Taylor series!
 
@@ -4959,29 +4926,27 @@ $$
 $$
 is a Clifford module, where $\D$ is a $\Z_2$ graded generalized Dirac operator. 
 
-\lemma
-If $\xi, \eta\in V, \xi\perp \eta$, then we have
+\begin{lemma}[Clifford relation]
+For all $\xi,\eta\in V$,
 \[
-\sigma(\xi)\sigma(\eta)+\sigma(\eta)\sigma(\xi)=0
+ \sigma(\xi)\sigma(\eta)+\sigma(\eta)\sigma(\xi)
+ =2\langle\xi,\eta\rangle I.
 \]
-More generally we have
-$$
-\sigma(\eta)\sigma(\xi)=-\sigma(\eta)\sigma(\xi)+2\langle \xi,\eta\rangle Id
-$$
-\proof
-We have
-\begin{align}
-\sigma(\xi+\eta)^{2}&=|\xi+\eta|^{2}\\
-&=\langle \xi,\xi\rangle+2\langle \xi,\eta\rangle+\langle \eta, \eta\rangle\\
-&=\langle \xi,\xi\rangle+\langle \eta, \eta\rangle\\
-&=\sigma(\xi)^{2}+\sigma(\eta)^{2}
-\end{align}
-On the other hand by linearity
-\begin{align}
-\sigma(\xi+\eta)^{2}&=(\sigma(\xi)+\sigma(\eta))(\sigma(\eta)+\sigma(\xi))\\
-&=\sigma(\xi)^{2}+\sigma(\eta)^{2}+\sigma(\xi)\sigma(\eta)+\sigma(\eta)\sigma(\xi)
-\end{align}
-Comparing (4.4) and (4.6) give the desired result. 
+In particular, the two endomorphisms anti-commute when
+$\xi\perp\eta$.
+\begin{proof}
+By linearity and the identity $\sigma(\zeta)^2=|\zeta|^2I$,
+\[
+\begin{aligned}
+|\xi+\eta|^2I
+ &=\sigma(\xi+\eta)^2\\
+ &=\sigma(\xi)^2+\sigma(\eta)^2
+   {}+\sigma(\xi)\sigma(\eta)+\sigma(\eta)\sigma(\xi).
+\end{aligned}
+\]
+Subtracting $(|\xi|^2+|\eta|^2)I$ from both sides proves the formula.
+\end{proof}
+\end{lemma}
 \discussion
 Let us look at the structure of Clifford modules in relation to $\wedge^{*}V$. Observe that $\C\wedge^{*}V$ has a basis
 $$
@@ -4995,17 +4960,30 @@ while
 $$
 \sigma(\vp_{i})\sigma(\vp_{j})=-\sigma(\vp_{j})\sigma(\vp_{i})
 $$
-\theorem
-We let $Cl(V)$ be the algebra generated by $\sigma(\xi)\in Hom(W),\xi\in V$. Then we have the isomorphism:
-$$
-Cl(V)\cong \C\wedge^{*}V
-$$
-To prove this, we do it by hand.
-
-\execrise
-Do it!
-
-\remark I think this should follow directly by extending the map and Patodi's lemma. 
+\begin{theorem}[Vector-space structure of the Clifford algebra]
+Let $\operatorname{Cl}_{\C}(V)$ be the universal complex algebra
+generated by $V$ with relations
+\[
+ vw+wv=2\langle v,w\rangle.
+\]
+If $e_1,\ldots,e_n$ is an orthonormal basis, then the monomials
+$e_{i_1}\cdots e_{i_k}$ with $i_1<\cdots<i_k$ form a basis. Hence the
+symbol map gives a vector-space isomorphism
+\[
+ \operatorname{Cl}_{\C}(V)\cong\C\otimes\bigwedge\nolimits^*V.
+\]
+This is not an isomorphism of algebras: the Clifford product corresponds
+to exterior multiplication plus contraction.
+\begin{proof}
+The Clifford relations reorder every word into a linear combination of
+the displayed monomials, so they span. Filter the Clifford algebra by
+word length. Its associated graded algebra is a quotient of
+$\bigwedge^*V$; conversely the standard exterior-algebra representation
+$c(v)=\varepsilon(v)+\iota(v)$ has these monomials as independent
+principal symbols. Thus the quotient map on associated graded spaces is
+an isomorphism, proving linear independence.
+\end{proof}
+\end{theorem}
 
 \definition
 We let
@@ -5032,83 +5010,35 @@ $$
 I think this is the so called `spin representation' in other books. 
 \remark The last time in the page is not readable. 
 
-\theorem
-For all $\lambda=(\lambda_1,\cdots \lambda_m)\in \Z^{m}_{2}$, let 
-$$
-W_{\lambda}=\{w\in W|c_{k}w=\lambda_{k}w\}
-$$
-Then we have
-$$
-W=\oplus_{\lambda \in \Z_{2}^{m}}W_{\lambda},\forall \lambda\in \Z_{2}^{m}, \dim W_{\lambda}=\frac{\dim W}{2^{m}}
-$$
-\proof
-For the first part, do it. For the second part, for all $\lambda \in \Z_{2}^{m}$ and $1\le k\le m$, in fact we have
-$$
-A_{k}:W_{(\lambda_{1}\cdots \lambda_{m})}\rightarrow W_{(\lambda_{1}\cdots \lambda_{k}\cdots \lambda_{m})}
-$$
-and it is an isomorphism. Please fill in details. 
-
-\remark
-The fact that $A_{k}$ satisfies the properties should be straightforward, since it anti-commutes or commutes with $c_{k}$ depending on the grading. Therefore their eigenspaces must be the same. Since $A_{k}$ is an involution, it must be an isomorphism.  
-
-For the statement itself, it suffice to prove the following:
-+
-$$
-\dim(Hom(W))=2^{2m}
-$$
-This follows directly from definition. 
-+
-$$
-\forall \lambda^{1}\not=\lambda^{2}, W_{\lambda^{1}}\cap W_{\lambda^{2}}=\emptyset
-$$
-This should also follow directly, as different eigenspaces have empty intersection. 
-+
-$$
-\dim(W_{\lambda})=2^{m},\forall \lambda\in \Z^{m}_{2}
-$$
-Obviously once we establish this, then by dimension counting we would prove 
-$$
-W=\bigoplus W_{\lambda},\lambda\in \Z_{2}^{m}
-$$
-We consider the base case where $|m|=1$, so we want to show
-$$
-W=W_{1}\oplus W_{-1},\lambda=1,-1
-$$
-for $c_{1}=i\vp_{1}\vp_{2}$. We have
-$$
-c_{1}c_{1}=i\sigma(\vp_{1})\sigma(\vp_{2})i\sigma(\vp_1)\sigma(\vp_2)=\sigma(\vp_1)^{2}\sigma(\vp_2)^{2}=1
-$$
-as $\vp_1,\vp_2$ are orthogonal basis vectors. Therefore if $\lambda$ is an eigenvalue for $c_{1}$, we have
-$$
-c_{1}c_{1}w_{\lambda}=\lambda^{2}w_{\lambda}\rightarrow \lambda^{2}=1\rightarrow \lambda=\pm 1
-$$
-Now we only need to prove that
-$$
-\langle w_{1},w_{-1}\rangle=0,\forall w_{1}\in W_1, w_{-1}\in W_{-1}
-$$
-But we have
-$$
-\langle w_{1},w_{-1}\rangle=\langle c_{1}^{2}w_{1},w_{-1}\rangle=\langle c_{1}w_{1},c_{1}w_{-1}\rangle=-\langle w_{1},w_{-1}\rangle
-$$
-Therefore
-$$
-W_{1}\perp W_{-1}
-$$
-Further, any vector $w$ in $W$ is a unique combination of some vector in $W_1$ and some vector in $ W_{-1}$. To see this we have
-$$
-c_{1}(\frac{w_{1}+c_{1}w_{1}}{2})=(\frac{w_{1}+c_{1}w_{1}}{2})
-$$
-and similarly
-$$
-c_{1}(\frac{w_{1}-c_{1}w_{1}}{2})=-(\frac{w_{1}-c_{1}w_{1}}{2})
-$$
-It is clear that our discussion can be extended for any subspace of $W$. Therefore using induction we can prove the statement. 
-
-\remark
-I think there is a typo here. The $\Z_{2}$ grading can only have eigenvalue $-1,1$, not $0,1$. Otherwise $c_1$ would not be an isomorphism. Therefore the only eigenvalue for $c_{1}$ is $\pm 1$. 
-
-\remark 
-I think this is the so called `half spin representation' in Roe's book. However the construction seems very different. 
+\begin{theorem}[Joint eigenspace decomposition]
+For $\lambda=(\lambda_1,\ldots,\lambda_m)\in\{\pm1\}^m$, set
+\[
+ W_\lambda=\{w\in W:c_kw=\lambda_kw\text{ for every }k\}.
+\]
+Then
+\[
+ W=\bigoplus_{\lambda\in\{\pm1\}^m}W_\lambda,
+ \qquad \dim W_\lambda=\frac{\dim W}{2^m}.
+\]
+\begin{proof}
+The operators $c_k$ are commuting self-adjoint involutions, hence the
+spectral theorem gives their simultaneous orthogonal eigenspace
+decomposition, with eigenvalues in $\{\pm1\}$. Let
+$\lambda^{(k)}$ be obtained from $\lambda$ by changing the sign of its
+$k$th coordinate. For $w\in W_\lambda$,
+\[
+ c_j(A_kw)=
+ \begin{cases}
+  -A_kc_kw=-\lambda_kA_kw,&j=k,\\
+  A_kc_jw=\lambda_jA_kw,&j\ne k.
+ \end{cases}
+\]
+Thus $A_k:W_\lambda\to W_{\lambda^{(k)}}$. Since $A_k^2=I$, this map is
+an isomorphism. Any two sign vectors are joined by a sequence of such
+sign changes, so all $2^m$ joint eigenspaces have the same dimension.
+Their direct sum is $W$, which gives the stated value.
+\end{proof}
+\end{theorem}
 
 \definition
 Let $$Cl=\langle 1, (i_{1},\cdots i_{k}), 1\le k\le n, 1\le i_{1}<\cdots <i_{k}\le n\rangle$$
@@ -10516,59 +10446,59 @@ such that
 \]
 In particular, a $C^{\infty}$ function $f:M\rightarrow \C$ is holomorphic if $\OP_{z_{j}}f\equiv 0$ in all holomorphic coordinate patches. 
 
-We can also discuss holomorphic $(p,q)$ forms:
+A holomorphic $p$-form means a holomorphic section of
+$\Omega_M^p=\wedge^{p,0}T^*M$. Thus it is a form of type $(p,0)$
+which, in every holomorphic chart, has the form
 \[
-\OP:C^{\infty}(\wedge^{p,q})\rightarrow C^{\infty}(\wedge^{p,q+1})
+ \alpha=\sum_{|I|=p}a_I(z)\,dz_I
 \]
-we call a $C^{\infty}$ form $\alpha\in C^{\alpha(\wedge^{p,q})}$holomorphic if
-\[
-\OP\alpha\equiv 0
-\]
+with holomorphic coefficients $a_I$; equivalently,
+$\overline\partial\alpha=0$. For $q>0$, a
+$\overline\partial$-closed $(p,q)$-form is a Dolbeault cocycle, not a
+``holomorphic $(p,q)$-form''.
 
-\execrise 
-Prove that$\alpha\in C^{\alpha}(\wedge^{p,q})$is holomorphic if and only if for all hlomorphic coordinate patches, $U,(x_{1},y_{1}\cdots, x_{m},y_{m})$, we can write
-
-\[
-\alpha=\sum_{|I|=p,|J|=q}a_{IJ}dz_{I}\wedge d\overline{z}_{J}
-\]
-where $a_{IJ}\in \C^{\infty}(U)$ is hlomorphic. 
-
-In particular we have $\ker \OP$ on $C^{\infty}(\wedge^{p,q})$ are by definition holomorphic $(p,q)$ forms. 
-
-\remark 
-Adam found the above statement is totally wrong. 
-
-\remark Professor consider the notion of holomorphic is not well defined considering Adam's criticism. 
 \section{Dolbeault complex}
-Recall, we have a sequence
+For each $p$, the Dolbeault complex is
 \[
-0\rightarrow C^{\infty}(M)\rightarrow^{\OP}C^{\alpha}(\wedge^{0,1})\rightarrow^{\OP}C^{\infty}(\wedge^{0,2})\rightarrow^{\OP}C^{\alpha}(\wedge^{0,3})\rightarrow^{\OP}
+0\longrightarrow A^{p,0}(M)
+ \xrightarrow{\overline\partial}A^{p,1}(M)
+ \xrightarrow{\overline\partial}\cdots
+ \xrightarrow{\overline\partial}A^{p,m}(M)\longrightarrow0,
 \]
-Since $\OP^{2}=0$, this sequence is a complex! The $k$-th Dolbeault cohomology of $M$ is 
+where $A^{p,q}(M)=C^\infty(M,\wedge^{p,q}T^*M)$. Its cohomology is
 \[
-\frac{\ker \overline{\partial}}{Im \OP}
+ H_{\overline\partial}^{p,q}(M)
+ =\frac{\ker(\overline\partial:A^{p,q}\to A^{p,q+1})}
+        {\operatorname{im}(\overline\partial:A^{p,q-1}\to A^{p,q})}.
 \]
-The holomorphic Euler characteristic of $M$ is
+The holomorphic Euler characteristic of the structure sheaf is
 \[
-\chi(M)=\sum^{m}_{k=0}(-1)^{k}\dim H^{k}_{DR}(M)
+ \chi(M,\mathcal O_M)
+ =\sum_{q=0}^m(-1)^q\dim H_{\overline\partial}^{0,q}(M).
 \]
+
 From our work of almost complex manifolds we know that
 
-\theorem If $M$ is a compact complex manifold, we have a formula
+\theorem If $M$ is a compact complex manifold, then
 \[
-\chi(M)=(\frac{i}{2m})^{m}\int Td(M)
+ \chi(M,\mathcal O_M)=\int_M\operatorname{Td}(T^{1,0}M).
 \]
-where
+For a Hermitian connection with curvature matrix $K$, our convention is
 \[
-Td(M)=\det(\frac{K}{Id-e^{-K}})
+ \operatorname{Td}(T^{1,0}M)
+ =\det\left(\frac{\frac{i}{2\pi}K}
+ {I-\exp(-\frac{i}{2\pi}K)}\right),
 \]
-where $K$ is the curvature form on $M$. 
+and the integral means the top-degree component.
 
 \proof By our theorem on Dirac complexes, the Dolbeault cohomology 
 \[
-H_{DR}^{k}(M)=\dim \ker(\OP+\OP^{*})
+H_{\overline\partial}^{0,k}(M)\cong
+ \ker\!\left(\overline\partial+\overline\partial^{\,*}\right)
+ \big|_{A^{0,k}(M)}
 \]
-on $C^{\alpha}(\wedge^{0,k})$. Here $\partial^{*}$ is the formal adjoint of $\partial$ with respect to any Riemannian metric. Pick any Hermitian metric on $M$, which means any Riemannian metric compatible with the $J$. We know that
+Here $\overline\partial^{\,*}$ is the formal adjoint of
+$\overline\partial$ with respect to the chosen Hermitian metric. We know that
 
 \[
 \sqrt{2}(\OP+\OP^{*})
@@ -10581,10 +10511,14 @@ which is twisted.
 
 We thus have
 \[
-\chi(M)=Ind D^{+}_{d}=(\frac{i}{2\pi})^{m}\int Td(M)
+\chi(M,\mathcal O_M)=\operatorname{Ind}D_d^+
+ =\int_M\operatorname{Td}(T^{1,0}M)
 \]
 
-This is the Riemann-Roch-Hirezubech theorem. This the direct consequence of our work before, the left hand side is not defined, and the right hand side is defined, etc. So the Euler characteristic being the alternating sum equals the above expression. 
+This is the Hirzebruch--Riemann--Roch theorem for the structure
+sheaf. Hodge theory identifies Dolbeault cohomology with harmonic forms,
+and the index theorem evaluates the resulting Dolbeault--Dirac index by
+the Todd class.
 
 \remark Adam asked if this would simplify under the assumption that it is Kahler, professor answered it would not really simply anything except now we can choose the curvature form to be the Levi-Civita connection. 
 
