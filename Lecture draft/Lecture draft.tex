@@ -2079,14 +2079,14 @@ intersection. They therefore determine a single leading kernel on
 \begin{proof}
 Near a boundary point use b-normal coordinates
 \[
- (s,y)=(-\log x,y).
+ (u,y)=(-\log x,y).
 \]
 After parabolic rescaling about the diagonal, the coefficients of
 \(\mathcal D^2\)
 freeze at the base point. The temporal model is therefore the Gaussian
 heat kernel of the constant-coefficient operator on
 \({}^bT_pX\). If the base point tends to the boundary, the same frozen
-operator splits into the normal line in \(s\) and the tangential operator
+operator splits into the normal line in \(u\) and the tangential operator
 on \(T_yY\). This is exactly the small-time restriction of the
 translation-invariant normal heat kernel. Thus both models restrict to
 \[
@@ -2094,6 +2094,206 @@ translation-invariant normal heat kernel. Thus both models restrict to
 \]
 times parallel transport at the corner of the two faces.
 \end{proof}
+
+\subsection{The semiclassical construction in square-root time}
+
+Put
+\[
+ s=\sqrt t.
+\]
+The parabolic blow-up in the variable \(t\) is the ordinary radial blow-up
+in the square-root-time smooth structure:
+\[
+ \widetilde X_{b,h}^2
+ =
+ \left[
+ X_b^2\times[0,\infty)_s;
+ \Delta_b\times\{0\}
+ \right].
+\]
+Thus the semiclassical parameter \(s\downarrow0\) and the heat-space
+description are two coordinate versions of the same construction.  This
+observation is useful because it turns the heat equation into a pair of
+explicit model equations.
+
+Let \(n=\dim X\).  Near the temporal front face, use the rescaled
+difference variable
+\[
+ V=\frac{z-z'}s\in{}^bT_zX.
+\]
+After the density factor is removed, a heat kernel has a formal expansion
+of the form
+\[
+ K(s;z,z')
+ \sim
+ s^{-n}\sum_{j\geq0}s^j k_j(z,V).
+\]
+Its leading temporal symbol is
+\begin{equation}\label{eq:semiclassical-temporal-symbol}
+ k_0(z,V)
+ =
+ (4\pi)^{-n/2}e^{-|V|_z^2/4}\operatorname{Id}_{E_z}.
+\end{equation}
+Indeed, if \(\Delta_V=-\sum_i\partial_{V_i}^2\) is the positive Euclidean
+Laplacian, then the scalar factor \(G(V)\) in
+\eqref{eq:semiclassical-temporal-symbol} is the uniquely normalized
+Schwartz solution of
+\[
+ \left[
+ \Delta_V-\frac12\bigl(V\mathbin{\cdot}\partial_V+n\bigr)
+ \right]G=0,
+ \qquad
+ \int_{{}^bT_zX}G(V)\,dV=1.
+\]
+For the coefficient \(s^{-n+j}k_j\), the corresponding normal operator is
+\[
+ T_j
+ =
+ \Delta_V-\frac12\bigl(V\mathbin{\cdot}\partial_V+n-j\bigr).
+\]
+The equations \(T_jk_j=r_j\) are the usual heat transport equations in
+semiclassical notation.
+
+The second model is obtained by restricting to the boundary face and
+Fourier transforming in the translation variable of the cylinder.  For
+the product operator
+\[
+ \mathcal D
+ =c\!\left(\frac{dx}{x}\right)(x\partial_x+\mathcal A),
+\]
+the indicial families satisfy
+\begin{equation}\label{eq:semiclassical-boundary-model}
+ I(\mathcal D,\lambda)
+ =c\!\left(\frac{dx}{x}\right)(i\lambda+\mathcal A),
+ \qquad
+ I(\mathcal D^2,\lambda)=\lambda^2+\mathcal A^2.
+\end{equation}
+Consequently the boundary heat model is
+\begin{equation}\label{eq:boundary-heat-family}
+ I(e^{-t\mathcal D^2},\lambda)
+ =e^{-t(\lambda^2+\mathcal A^2)}
+ =e^{-t\lambda^2}e^{-t\mathcal A^2}.
+\end{equation}
+After inverse Fourier transform, this is the one-dimensional Gaussian in
+the cylindrical variable multiplied by the tangential heat kernel.  A
+different Mellin convention replaces \(i\lambda\) by its signed variant;
+the invariant statement is
+\(I(\mathcal D^2,\lambda)=\lambda^2+\mathcal A^2\) on the real Fourier
+line.
+
+\begin{proposition}[Formal semiclassical heat-parametrix recursion]
+Let \(\mathcal D^2\) be a product-type generalized b-Laplacian, and assume
+the heat-space restriction and extension theorem for polyhomogeneous
+kernels.  Starting with the compatible leading models above, for every
+\(N\) one can choose a heat parametrix whose error vanishes to order \(N\)
+at both model faces.  The compatible formal expansions can be
+Borel-summed to a parametrix \(H_0\) whose error vanishes to infinite order
+at every temporal face.
+\end{proposition}
+
+\begin{proof}
+Assume that the lower-order jets have already been removed, and denote the
+first remaining temporal and boundary error coefficients by
+\(R_{\mathrm{tf}}\) and \(R_{\mathrm{bf}}(\lambda)\).  At the temporal
+model, the correction with zero initial value is given by the Euclidean
+Duhamel operator
+\[
+ Q_{\mathrm{tf}}(t)
+ =-
+ \int_0^t
+ e^{-(t-r)\Delta_{{}^bT_zX}}R_{\mathrm{tf}}(r)\,dr.
+\]
+Thus
+\[
+ (\partial_t+\Delta_{{}^bT_zX})Q_{\mathrm{tf}}
+ =-R_{\mathrm{tf}}.
+\]
+Expanding this identity in powers of \(s\) gives precisely the transport
+equations \(T_jk_j=r_j\) displayed above.
+
+At the boundary model, put
+\(B(\lambda)=\lambda^2+\mathcal A^2\).  The corresponding correction is
+\[
+ Q_{\mathrm{bf}}(\lambda,t)
+ =-
+ \int_0^t
+ e^{-(t-r)B(\lambda)}R_{\mathrm{bf}}(\lambda,r)\,dr,
+ \qquad
+ (\partial_t+B(\lambda))Q_{\mathrm{bf}}
+ =-R_{\mathrm{bf}}.
+\]
+The two Duhamel constructions commute with restriction to the common
+corner because the model operators agree there.  Hence the two new jets
+can be chosen compatibly.  Alternating the corrections raises the order of
+vanishing at each face without changing the jets already fixed at the
+other face: the extension theorem realizes a new face correction with
+zero lower-order jets at the other face.
+
+Induction gives compatible jets to arbitrary order.  The Borel extension
+lemma on manifolds with corners realizes those jets by a single kernel.
+At this point the error is residual and vanishes to infinite order at the
+temporal faces.  This last passage uses the heat-calculus extension,
+composition, and push-forward results; it is the nonformal geometric
+input in the recursion.
+\end{proof}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+ >=Latex,
+ thick,
+ model/.style={draw,rounded corners,fill=blue!5,align=center,
+               minimum height=1.05cm,text width=3.5cm},
+ corner/.style={draw,rounded corners,fill=orange!10,align=center,
+                minimum height=.95cm,text width=3.1cm},
+ flowstep/.style={draw,rounded corners,fill=gray!8,align=center,
+                  minimum height=.95cm,text width=3.6cm}
+]
+ \node[model] (tf) at (-4.5,1.8)
+   {temporal model\\
+    \(G(V)=(4\pi)^{-n/2}e^{-|V|^2/4}\)};
+ \node[corner] (corner) at (0,1.8)
+   {compatible jets at the\\common corner};
+ \node[model] (bf) at (4.5,1.8)
+   {boundary model\\
+    \(e^{-t(\lambda^2+\mathcal A^2)}\)};
+ \node[flowstep,below=7mm of corner] (recursion)
+   {transport and normal recursion};
+ \node[flowstep,below=7mm of recursion] (borel)
+   {Borel summation of compatible jets};
+ \node[flowstep,right=12mm of borel] (volterra)
+   {residual error \(R\)\\and Volterra correction};
+ \draw[->] (tf.east)--(corner.west);
+ \draw[->] (bf.west)--(corner.east);
+ \draw[->] (corner)--(recursion);
+ \draw[->] (recursion)--(borel);
+ \draw[->] (borel)--node[above,align=center]
+   {\(H_0\)}(volterra);
+ \coordinate (lower-mid) at ($(borel.south)!0.5!(volterra.south)$);
+ \node[below=7mm of lower-mid,align=center]
+   {\(H=H_0-H_0*R+H_0*R*R-\cdots\)};
+\end{tikzpicture}
+\caption[Semiclassical construction of the b-heat kernel]{The temporal
+Gaussian and the boundary indicial heat family supply compatible model
+data.  Formal corrections determine all face jets, Borel summation gives a
+global parametrix, and the Volterra inverse removes the residual error.}
+\end{figure}
+
+For a positive elliptic b-operator of order \(m\), the same bookkeeping
+uses \(s=t^{1/m}\).  The APS problem involves \(\mathcal D^2\), so \(m=2\)
+and \(s=\sqrt t\).
+
+\begin{question}
+Does the semiclassical construction by itself prove the APS index formula?
+\end{question}
+
+\begin{answer}
+No.  It constructs the heat kernel and controls its asymptotic structure.
+The index formula still requires the local Clifford-supertrace
+calculation, the b-trace defect formula, regularity of the eta function at
+the origin, and the large-time identification with the Fredholm index.
+Those inputs are stated separately below.
+\end{answer}
 
 Matching the leading Gaussian is necessary but not sufficient: every
 coefficient in the two polyhomogeneous index families must agree at the
@@ -2113,25 +2313,63 @@ uses the heat-space composition and push-forward theorems at every face.
 The factorial Volterra estimate below completes the final residual
 correction; it does not construct the compatible index families by itself.
 
-The quoted compatibility theorem permits one to extend the two prescribed normal
-operators to a global initial parametrix. Successive transport equations
-remove the Taylor coefficients of the error at the temporal face;
-successive normal-operator inversions remove its coefficients at the
-boundary face. Because the corrections agree at the corner, alternating
-between the two faces improves the error without spoiling work already
-done at the other face. Borel summation produces a kernel whose heat error
-vanishes to infinite order at every temporal boundary.
+The preceding semiclassical recursion describes the formal part of this
+theorem.  The quoted heat-space results justify the global extension and
+the closure of the polyhomogeneous class under all the compositions used
+in that recursion.
 
 \begin{figure}[htbp]
 \centering
-\begin{minipage}[c]{.62\textwidth}
- \centering
- \includegraphics[width=\linewidth]{drawing105.png}
-\end{minipage}\hfill
-\begin{minipage}[c]{.25\textwidth}
- \centering
- \includegraphics[width=\linewidth]{drawing106.png}
-\end{minipage}
+\begin{tikzpicture}[>=Latex,thick,x=.78cm,y=.78cm]
+ \begin{scope}
+ \node[font=\bfseries] at (3.2,3.55) {collar and compact interior};
+  \draw[fill=blue!4]
+    (.2,1.25) rectangle (3.35,2.65);
+  \draw[fill=gray!8]
+    (3.35,1.25)
+    .. controls (4.35,.75) and (6.35,.75) .. (6.45,1.95)
+    .. controls (6.5,3.05) and (4.45,3.05) .. (3.35,2.65)
+    -- cycle;
+  \fill[orange!12,opacity=.65] (2.55,1.05) rectangle (3.75,2.85);
+  \draw[fill=white] (4.65,1.95) ellipse (.65 and .34);
+  \draw[dashed,blue!70!black] (2.55,1.05)--(2.55,2.85);
+  \draw[dashed,red!70!black] (3.75,1.05)--(3.75,2.85);
+  \node[orange!70!black] at (3.15,2.98) {overlap};
+  \node at (1.35,1.95) {cylindrical end};
+  \node at (5.25,2.35) {compact part};
+  \draw[->] (.2,.35)--(6.55,.35) node[right] {\(u\)};
+  \draw[blue!70!black,line width=1.1pt]
+    (.3,.78)--(2.45,.78)
+    .. controls (2.8,.78) and (3.1,.18) .. (3.45,.18)
+    --(6.4,.18);
+  \draw[red!70!black,line width=1.1pt]
+    (.3,.18)--(2.55,.18)
+    .. controls (2.9,.18) and (3.2,.78) .. (3.55,.78)
+    --(6.4,.78);
+  \node[blue!70!black,anchor=east] at (.15,.78) {\(\chi_{\rm cyl}\)};
+  \node[red!70!black,anchor=east] at (.15,.18) {\(\chi_{\rm int}\)};
+ \end{scope}
+ \begin{scope}[xshift=8.3cm]
+  \node[font=\bfseries] at (1.75,3.55) {lifted support};
+  \draw (0,1.15)--(0,3.15)--(3.25,3.15)--(3.25,0)--(1.15,0);
+  \fill[blue!12]
+    (0,1.65)
+    arc[start angle=180,end angle=235,radius=1.65]
+    --(.49,.21)
+    arc[start angle=235,end angle=180,radius=1.15]
+    --cycle;
+  \draw[blue!70!black,line width=1.2pt]
+    (0,1.15) arc[start angle=180,end angle=270,radius=1.15];
+  \draw[blue!60!black]
+    (0,1.65) arc[start angle=180,end angle=235,radius=1.65];
+  \node[blue!70!black] at (1.28,1.42) {support};
+  \node[blue!70!black] at (.6,.58) {\(\mathrm{ff}\)};
+  \node[rotate=90] at (-.42,2.25) {left face};
+  \node at (2.35,-.28) {right face};
+  \draw[->,blue!70!black] (2.35,2.25)--(1.12,.32);
+  \node[align=center] at (2.38,2.52) {zero near\\the right face};
+ \end{scope}
+\end{tikzpicture}
 \caption[Cutoffs and support in the b-heat construction]{Left: compatible
 cutoffs separate the compact interior from the product cylinder while
 retaining an overlap on which the two model kernels can be compared.
