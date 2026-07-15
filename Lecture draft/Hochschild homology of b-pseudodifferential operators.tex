@@ -192,19 +192,28 @@ then from Poisson homology to Laurent de Rham cohomology.}
 
 \section{Continuous chains and the two filtrations}
 
-The topology is part of the theorem. We use the topologically filtered
-algebra \(\cA_L(\Gb;E)\) and its completed tensor products exactly as
-defined by Benameur--Nistor \cite[Section~1]{BNfamilies}. Their
-topological-filtration proposition applies to
-\(\cO(X)(\Psi^\infty(\Gb;E)/\Psi^{-\infty}(\Gb;E))\). Thus the continuous
-Hochschild chains are
+The topology is part of the theorem.  For a topologically filtered algebra
+\(A\), Benameur--Nistor do \emph{not} take the completed projective tensor
+power of the whole locally convex space: multiplication need not be jointly
+continuous for that topology.  In their notation the degree-\(k\) chain
+space is
+\begin{equation}\label{eq:BN-chains}
+ H_k(A)
+ =\varinjlim_{N}
+   \bigl(F^{N}_{N,N}A\bigr)^{\widehat\otimes_\pi(k+1)}.
+\end{equation}
+Here \(F^{N}_{N,N}A\) is the diagonal cofinal family of filtration pieces
+from \cite[Definition~1]{BNfamilies}; equivalently, one first takes the
+projective completion in the decreasing symbol-order direction and only
+then enlarges the support and Laurent bounds by an inductive limit.  We set
 \[
  C_k^{\mathrm{cont}}(\cA_{b,L})
- =\cA_{b,L}^{\widehat\otimes(k+1)}
+ :=H_k(\cA_{b,L}).
 \]
-in that category, with the induced completed order filtration. We do not
-replace this published completion by an independently chosen LF topology;
-equivalence of such choices would itself require proof.
+Whenever a tensor product below carries no decoration it denotes an
+elementary tensor in the dense filtered subcomplex of
+\eqref{eq:BN-chains}, not an ordinary completed tensor power of the whole
+algebra.
 
 For a chain \(a_0\otimes\cdots\otimes a_k\), the Hochschild boundary is
 \begin{align*}
@@ -217,13 +226,14 @@ Multiplication is continuous on fixed filtration pieces, so \(b\) extends to
 the completed complex and satisfies \(b^2=0\).
 
 Laurent order and symbol order play different roles. The first is built
-into \(\cO(X)\); symbol order produces the spectral sequence. Set
+into \(\cO(X)\); symbol order produces the spectral sequence.  On every
+fixed piece in \eqref{eq:BN-chains}, filter elementary tensors by
 \[
- \mathcal F_pC_k
- =\overline{\operatorname{span}}
- \{a_0\otimes\cdots\otimes a_k:
-   \operatorname{ord}(a_0)+\cdots+\operatorname{ord}(a_k)\leq p\}.
+ \operatorname{ord}(a_0)+\cdots+\operatorname{ord}(a_k)\leq p,
 \]
+take the projective closure there, and then pass through the same
+projective/inductive limits.  Denote the resulting subspace by
+\(\mathcal F_pC_k\).
 Then \(b(\mathcal F_pC_k)\subseteq\mathcal F_pC_{k-1}\). Exhaustivity,
 completeness, and the convergence hypotheses are those verified in the
 Benameur--Nistor topologically filtered theorem. Borel quantization explains
@@ -289,8 +299,17 @@ Laurent coefficients:
  \xrightarrow{\;a\;}
  \cO(X)\otimes_{C^\infty(X)}\Gamma(TX).
 \]
-It induces an isomorphism of Laurent Poisson algebras on the dual bundles
-and hence
+After dualizing, this is not a smooth vector-bundle isomorphism at the
+boundary.  It is an isomorphism only after Laurent localization:
+\[
+ \cO(X)\otimes C^\infty({}^bT^*X)
+ \cong
+ \cO(X)\otimes C^\infty(T^*X)
+\]
+as fiberwise-polynomial Poisson algebras, extended by completion to the
+homogeneous Laurent symbol complexes.  Consequently the anchor lemmas of
+\cite{BNfamilies} give a chain-level isomorphism of the corresponding
+homogeneous Laurent de Rham complexes and hence
 \[
  H_L^*(\Sbstar\times S^1_\sigma)
  \cong H_L^*(S^*X\times S^1_\sigma).
@@ -299,13 +318,14 @@ and hence
 
 \begin{proof}
 Locally the anchor sends \(x\partial_x\) to the ordinary vector field
-\(x\partial_x\) and fixes \(\partial_{y_j}\). Its inverse uses the Laurent
-coefficient \(x^{-1}\):
+\(x\partial_x\) and fixes \(\partial_{y_j}\). Its localized inverse uses
+the Laurent coefficient \(x^{-1}\):
 \(\partial_x\mapsto x^{-1}(x\partial_x)\). The map preserves brackets,
-so the dual map preserves the linear Poisson structures. Passing to
-positive radial quotients and adjoining the formal order circle gives the
-cohomology isomorphism. This is the one-fibre specialization of the anchor
-lemma in \cite{BNfamilies}.
+so its localized dual preserves the linear Poisson brackets.  Taking the
+degree-zero homogeneous subcomplex and adjoining the order-circle
+generator therefore gives the stated cohomology isomorphism.  This is the
+one-fibre specialization of the anchor lemmas in \cite{BNfamilies}; no
+isomorphism \({}^bT^*X\cong T^*X\) of smooth bundles is being asserted.
 \end{proof}
 
 \section{The associated graded algebra}
@@ -572,7 +592,14 @@ Laurent Poincar\'e lemma identifies its homotopy kernel with
  \Omega^*(M)\oplus\Omega^{*-1}(\partial M).
 \]
 
-If \(\beta\) is closed of degree \(j-1\), a collar extension gives the
+If \(\beta\) is closed of degree \(j-1\), let
+\(p:[0,\varepsilon)_x\times\partial M\to\partial M\) be the collar
+projection. Choose \(\chi\) with support in this collar and choose
+\(\widetilde\beta=p^*\beta\) on an open set containing
+\(\operatorname{supp}d(\chi\log x)\). Extend it arbitrarily beyond that
+set. Then \(d\widetilde\beta=0\) everywhere that
+\(d(\chi\log x)\) is nonzero, so the representative below is closed. This
+collar construction gives the
 cohomological splitting
 \[
  \beta\longmapsto
@@ -655,10 +682,12 @@ gives
 \]
 The remaining input is the collapse theorem for Laurent complete symbols.
 
-\begin{theorem}[Benameur--Nistor collapse theorem]
-For the order-filtered continuous Hochschild complex of a Laurent
-complete-symbol algebra associated with a b-groupoid, the spectral sequence
-converges and degenerates at \(E^2\).
+\begin{theorem}[Benameur--Nistor collapse theorem; quoted]
+Let \(G\) satisfy the anchor and local-triviality hypotheses of
+\cite[equations~(13)--(14)]{BNfamilies}.  For its Benameur--Nistor
+topologically filtered Laurent complete-symbol algebra, the order spectral
+sequence converges and degenerates at \(E^2\).  These hypotheses hold for
+the canonical b-groupoid \(\Gb\) used in this manuscript.
 \end{theorem}
 
 This is the global input from \cite{BNsymbols,BNfamilies}. It is stronger than
@@ -738,10 +767,13 @@ summands in \eqref{eq:expanded}.
 \begin{discussion}
 \textbf{Why is convergence not automatic?}
 For a merely algebraic union of symbol orders, an infinite correction can
-escape the complex and an \(E^\infty\)-class need not lift to a chain. Here
-Borel summation supplies that lift, while the strict Laurent inductive limit
-keeps every individual chain at finite pole order. These two statements are
-the concrete content of completeness in this computation.
+escape the complex and an \(E^\infty\)-class need not lift to a chain.
+Borel summation and the strict Laurent inductive limit are ingredients in
+the topologically filtered axioms: the former realizes asymptotic symbols
+and the latter keeps every individual chain at finite pole order.  They do
+not by themselves prove convergence.  Convergence to Hochschild homology is
+the quoted Benameur--Nistor spectral-sequence theorem, including its uniform
+vanishing-range verification.
 \end{discussion}
 
 \section{Checks and consequences}
@@ -760,24 +792,35 @@ Brylinski--Getzler computation \cite{BG}.
 
 \subsection{Degree zero and residue traces}
 
-For continuous homology one uses the Hausdorff quotient
+For the completed chain complex \eqref{eq:BN-chains}, degree-zero
+Hochschild homology is
 \[
  \HH_0^{\mathrm{cont}}(\cA)
- =\cA/\overline{[\cA,\cA]},
+ =\cA/\operatorname{im}(b:C_1^{\mathrm{cont}}\to\cA).
 \]
-or else explicitly retains the possibly non-Hausdorff quotient topology.
-Continuous traces vanish on the closure and therefore factor through the
-Hausdorff group. Theorem~\ref{thm:main} gives
+We abbreviate the image by \([\cA,\cA]_{\mathrm{cont}}\); it need not be
+closed.  Its Hausdorffization is the different quotient
 \[
- \HH_0^{\mathrm{cont}}(\cA_{b,L})
- \cong H_L^{2n}(Y\times S^1_\sigma).
+ \HH_0^{\mathrm{cont}}(\cA)_{\mathrm H}
+ =\cA/\overline{[\cA,\cA]_{\mathrm{cont}}}.
 \]
+Theorem~\ref{thm:main} computes the former group (and its filtered
+associated graded); it does not prove that the commutator image is closed.
+Continuous traces factor through the Hausdorffization.
+
+For the canonical b-groupoid, the continuous-trace theorem of
+\cite{BNfamilies} identifies those traces with the top Laurent residue
+classes.  If \(n\geq2\), \(X\) is connected, and \(\partial X\) is
+connected, the boundary cosphere \(Z\) is connected and carries its
+canonical contact/boundary orientation, so
+\(H^{2n-2}(Z)\cong\C\).  The trace theorem, not an unproved closedness
+claim, therefore shows that the space of continuous traces is
+one-dimensional.
+
 If \(n\geq2\), \(X\) is connected, and \(\partial X\) is connected, then
-\(Y\) has nonempty boundary and \(Z\to\partial X\) has connected sphere
-fiber. Dimension considerations reduce the right side to
-\(H^{2n-2}(Z)\cong\C\). Thus the Laurent complete-symbol algebra has one
-residue trace up to scale. With several boundary components, one obtains a
-boundary-face residue for each connected component of \(Z\).
+the resulting trace is the b-residue trace up to scale. With several
+boundary components, the same theorem gives one boundary-face residue for
+each connected component of \(Z\).
 
 \subsection{A product cylinder}
 

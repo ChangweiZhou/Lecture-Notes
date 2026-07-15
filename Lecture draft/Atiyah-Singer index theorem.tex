@@ -201,11 +201,34 @@ proves metric compatibility.  Thus the connection defined by the formula
 has both required properties.
 \end{proof}
 
+In local coordinates \(x^1,\ldots,x^n\), write
+\(\nabla_{\partial_i}\partial_j=\Gamma^k_{ij}\partial_k\).  Substitution
+in the Koszul formula gives
+\[
+ \Gamma^k_{ij}
+ =\frac12g^{k\ell}
+ \bigl(\partial_i g_{j\ell}+\partial_j g_{i\ell}
+       -\partial_\ell g_{ij}\bigr).
+\]
+This both recovers the coordinate calculation in the original lectures and
+shows why geodesic normal coordinates satisfy
+\(g_{ij}(p)=\delta_{ij}\) and \(\Gamma^k_{ij}(p)=0\).
+
 The Riemann curvature tensor is
 \[
  R(X,Y)Z
  =
  \nabla_X\nabla_YZ-\nabla_Y\nabla_XZ-\nabla_{[X,Y]}Z.
+\]
+In the same convention,
+\[
+ R(\partial_i,\partial_j)\partial_k
+ =R^\ell{}_{kij}\partial_\ell,
+ \qquad
+ R^\ell{}_{kij}
+ =\partial_i\Gamma^\ell_{jk}-\partial_j\Gamma^\ell_{ik}
+  +\Gamma^m_{jk}\Gamma^\ell_{im}
+  -\Gamma^m_{ik}\Gamma^\ell_{jm}.
 \]
 
 \begin{figure}[htbp]
@@ -447,6 +470,69 @@ If metrics and a density are fixed, the formal adjoint satisfies
  \sigma_m(P^*)(x,\xi)=\sigma_m(P)(x,\xi)^*.
 \]
 
+\subsection*{Formal adjoints and the Hodge star}
+
+The formal-adjoint discussion in the original lectures is used repeatedly
+later, so we record it rather than hiding it in the symbol formula.  Fix
+Hermitian metrics on \(E,F\) and a positive smooth density on \(M\).
+There is a unique differential operator
+\[
+ P^*:C^\infty(M;F)\longrightarrow C^\infty(M;E)
+\]
+such that
+\[
+ \langle Pu,v\rangle_{L^2}=\langle u,P^*v\rangle_{L^2}
+\]
+for all smooth sections.  In a coordinate chart, repeated integration by
+parts moves each \(\partial^\alpha\) from \(u\) to the product of the
+coefficient, density, and \(v\).  A partition of unity patches the result;
+uniqueness follows from nondegeneracy of the \(L^2\)-pairing.  Moving all
+\(m\) derivatives produces complex conjugation and the factor
+\((-1)^m\); with the convention
+\(\sigma_m(P)(x,\xi)=\sum a_\alpha(i\xi)^\alpha\), these combine exactly
+to give the displayed adjoint-symbol identity.
+
+If \(M\) is oriented, the Hodge star is the complex-linear map
+\[
+ *:\Lambda^kT^*M_\mathbb C\longrightarrow
+   \Lambda^{n-k}T^*M_\mathbb C
+\]
+characterized by
+\[
+ \alpha\wedge *\overline\beta
+ =\langle\alpha,\beta\rangle\,d\operatorname{vol}.
+\]
+It satisfies \(*^2=(-1)^{k(n-k)}\) on \(k\)-forms and
+\[
+ d^*=(-1)^{n(k+1)+1}*d*
+ \quad\text{on }\Omega^{k}(M).
+\]
+Consequently
+\[
+ \sigma_1(d)(x,\xi)=i\,\varepsilon(\xi),
+ \qquad
+ \sigma_1(d^*)(x,\xi)=-i\,\iota_{\xi^\sharp},
+\]
+and the de Rham operator has symbol
+\[
+ \sigma_1(d+d^*)(x,\xi)
+ =i\bigl(\varepsilon(\xi)-\iota_{\xi^\sharp}\bigr),
+ \qquad
+ \sigma_1(d+d^*)^2=|\xi|^2I.
+\]
+
+\begin{question}
+Which parts of this construction require the metric and orientation?
+\end{question}
+
+\begin{answer}
+The exterior derivative needs neither.  The metric and density define the
+formal adjoint; orientation identifies the density with a volume form and
+thereby defines the Hodge star.  The Laplacian and harmonic representatives
+therefore depend on the chosen metric, whereas their cohomology classes and
+the resulting Euler characteristic do not.
+\end{answer}
+
 \begin{definition}
 The operator \(P\) is elliptic if \(\sigma_m(P)(x,\xi)\) is invertible for
 every \(\xi\neq0\).
@@ -640,6 +726,45 @@ kernel smooth. The cokernel is the orthogonal complement of the range,
 which is \(\ker P^*\).
 \end{proof}
 
+\begin{theorem}[H\"ormander--Fedosov trace formula]
+Let \(Q\in\Psi^{-m}(M;F,E)\) be any parametrix for \(P\) and put
+\[
+ R_E=I-QP,\qquad R_F=I-PQ.
+\]
+Then both remainders are smoothing and
+\[
+ \operatorname{ind}P=\Tr(R_E)-\Tr(R_F).
+\]
+\end{theorem}
+
+\begin{proof}
+Let \(\Pi_E\) and \(\Pi_F\) be the orthogonal projections onto
+\(\ker P\) and \(\ker P^*\).  They have finite rank and smooth kernels.
+The generalized inverse \(G:(\ker P^*)^\perp\to(\ker P)^\perp\), extended
+by zero on \(\ker P^*\), satisfies
+\[
+ GP=I-\Pi_E,\qquad PG=I-\Pi_F.
+\]
+The parametrix construction, followed by these finite-rank corrections,
+shows that \(G-Q\) is smoothing.  Put \(K=G-Q\).  Then
+\[
+ R_E=\Pi_E+KP,
+ \qquad
+ R_F=\Pi_F+PK.
+\]
+On a closed manifold, a smoothing operator is trace class and its
+composition with a differential or pseudodifferential operator is again
+smoothing.  Kernel composition and Fubini's theorem give
+\(\Tr(KP)=\Tr(PK)\).  Therefore
+\[
+ \Tr(R_E)-\Tr(R_F)
+ =\Tr(\Pi_E)-\Tr(\Pi_F)
+ =\dim\ker P-\dim\ker P^*.
+\]
+This is the analytic trace formula used implicitly in the original
+heat-kernel discussion.
+\end{proof}
+
 \begin{question}
 Where are compactness of \(M\) and ellipticity used in Fredholmness?
 \end{question}
@@ -726,7 +851,11 @@ The symmetric nonnegative operator defined by the quadratic form
  q_j(u)=\lVert D_ju\rVert^2+\lVert D_{j-1}^*u\rVert^2,
  \qquad u\in H^1(E^j),
 \]
-has a Friedrichs extension.  Elliptic regularity identifies its operator
+has a Friedrichs extension.  The first-order elliptic estimate for
+\(D_j\oplus D_{j-1}^*\) makes
+\(q_j(u)+\lVert u\rVert^2\) equivalent to the \(H^1\)-norm; in particular
+the form is closed and its form domain really is \(H^1(E^j)\).
+Elliptic regularity identifies its operator
 domain with \(H^2(E^j)\), so this is the unique self-adjoint closure of the
 smooth Laplacian.  For every \(c>0\), the energy identity makes
 \(\Delta_j+c\) injective.  Fredholmness and self-adjointness identify its
@@ -1107,11 +1236,14 @@ A complete proof uses three standard results, each in its family version:
 the Bott operator above represents the Thom class and has index one; the
 analytic index is multiplicative for the graded external product; and
 quantization is compatible with tubular-neighborhood excision. A
-connection globalizes the fibrewise Bott operator, and anticommutation of
-the two odd summands makes the square split into base and normal parts.
-Changing the connection or tubular neighborhood produces a Fredholm
-homotopy. Excision then extends the tubular model to \(N\), since the
-symbol is invertible on the complement. These are the analytic
+connection globalizes the fibrewise Bott operator.  In the exact product
+model the two odd summands anticommute, so the square splits into base and
+normal parts.  For a general connection, differentiating the vertical Bott
+operator produces lower-order mixed terms; the usual rescaling argument
+shows that they do not change the Fredholm class.  Changing the connection
+or tubular neighborhood likewise produces a Fredholm homotopy. Excision
+then extends the tubular model to \(N\), since the symbol is invertible on
+the complement. These are the analytic
 push-forward theorem of Atiyah--Singer and the Atiyah--Bott--Shapiro Thom
 construction; full proofs are given in \cite{ASI,ABS}. Subject to these
 three quoted inputs, the displayed product-index calculation proves the
@@ -1292,9 +1424,11 @@ For every pair of nonnegative integers \(a,b\), the error
 satisfies, after solving sufficiently many transport equations,
 \[
  \lVert\partial_t^aR_N(t)\rVert_{C^b(M\times M)}
- \leq C_{a,b,N}t^{N-n/2-a}.
+ \leq C_{a,b,N}t^{N-n/2-a-b/2}.
 \]
-For \(N\) large relative to the requested seminorms, the Volterra series
+Each spatial derivative can cost a factor \(t^{-1/2}\); the stronger
+estimate without \(b/2\) would be false for a fixed truncation.  For \(N\)
+large relative to the requested seminorms, the Volterra series
 \[
  K
  =
@@ -1308,6 +1442,16 @@ converges in the Fr\'echet topology of smooth kernels on
 \]
 It solves the heat equation with the correct initial value and therefore
 equals the heat kernel.
+
+The algebraic cancellation uses the distributional identity \(H_N(0)=I\).
+For any residual kernel \(S\), differentiation of the upper convolution
+limit gives
+\[
+ (\partial_t+L)(H_N*S)=S+R_N*S.
+\]
+Consequently successive terms in the Volterra series cancel pairwise.
+This boundary term is essential; without it the series would be only a
+formal Neumann expression.
 
 For completeness, the Volterra series converges because its \(k\)-fold
 term is integrated over an ordered simplex. If
@@ -1593,28 +1737,28 @@ On \(\mathbb R^2\cong\mathbb C\), with \(z=x+iy\), set
  \qquad
  \bar\partial^*=-\frac12(\partial_x-i\partial_y).
 \]
-Then
+Using the orthonormal frame \(d\bar z/\sqrt2\) for \((0,1)\)-forms, the
+Dolbeault--Dirac operator has the scalar matrix
 \[
  \mathcal D_{\bar\partial}
- =\sqrt2
+ =2
  \begin{pmatrix}
  0&\bar\partial^*\\
  \bar\partial&0
  \end{pmatrix}
 \]
-has principal symbol
-\[
+and principal symbol
+ \[
  \sigma_1(\mathcal D_{\bar\partial})(\xi)
- =\frac{i}{\sqrt2}
+ =i
  \begin{pmatrix}
  0&-(\xi_x-i\xi_y)\\
  \xi_x+i\xi_y&0
  \end{pmatrix},
 \]
-whose square is \(|\xi|^2/2\) times the identity with these choices of
-scalar components.  After a harmless normalization, this is the
-two-dimensional spin\(^{c}\) Dirac symbol.  This example explains why the
-Dolbeault operator later has the same elliptic symbol as a Dirac operator.
+whose square is \(|\xi|^2\) times the identity. This is the
+two-dimensional spin\(^{c}\) Dirac symbol and explains why the Dolbeault
+operator later has the same elliptic symbol as a Dirac operator.
 \end{example}
 
 If \(M\) is spin, its spinor bundle \(S=S^+\oplus S^-\) carries the spin
@@ -1713,7 +1857,16 @@ The relative trace is characterized locally by
  \operatorname{ch}(E/S)=\operatorname{ch}(W).
 \]
 This prescription is independent of the local spinor factorization and
-therefore defines a global differential form.
+therefore defines a global differential form. More explicitly, the
+endomorphisms commuting with the Clifford action form the commutant bundle
+\(\operatorname{End}_{\Cl}(E)\). On a local factorization
+\(E\cong S\otimes W\), this bundle is
+\(I_S\otimes\operatorname{End}(W)\), and
+\(\operatorname{tr}_{E/S}(I_S\otimes T)=\operatorname{tr}_W(T)\).
+Changes of spinor factorization act by conjugation on the commutant, so the
+trace patches. Since \(F^{E/S}\) lies in this commutant and satisfies its
+own Bianchi identity, Chern--Weil transgression proves that the relative
+Chern character is closed and connection-independent in cohomology.
 
 The local index density is
 \[
@@ -1802,6 +1955,23 @@ graded, the model operator is
  \right)^2
  +F^{E/S}_p.
 \]
+Here the curvature two-forms act by exterior multiplication in the
+associated graded Clifford algebra, while \(F^{E/S}_p\) acts on the
+Clifford commutant. It is useful to separate the raw curvature in this
+differential operator from the normalized Chern--Weil variables
+\[
+ \Omega^{TM}=\frac{R^{TM}}{2\pi i},
+ \qquad
+ \Omega^{E/S}=\frac{F^{E/S}}{2\pi i}.
+\]
+With the convention of this manuscript,
+\[
+ \Ahat(TM)=\det{}^{1/2}
+ \left(\frac{\Omega^{TM}/2}{\sinh(\Omega^{TM}/2)}\right),
+ \qquad
+ \operatorname{ch}(E/S)=\operatorname{tr}_{E/S}e^{-\Omega^{E/S}},
+\]
+because \(iF/(2\pi)=-F/(2\pi i)\).
 The scalar-curvature term in the Lichnerowicz formula has lower Getzler
 degree and disappears; its effect is already encoded in the oscillator
 through \(R^{TM}_p\). If \(\delta_\varepsilon u(x)=u(\varepsilon x)\) and
@@ -1841,28 +2011,35 @@ endomorphism. For the oscillator part, Mehler's formula at the origin is
 This identity is an equality of formal exterior-power series; it can be
 verified block by block from the one-dimensional Gaussian oscillator.
 Because \(F^{E/S}_p\) commutes with the Clifford action, it commutes with
-the oscillator and contributes the factor \(e^{-tF^{E/S}_p}\).
+the oscillator and contributes the raw factor \(e^{-tF^{E/S}_p}\).
 
-Finally apply the top Clifford-degree supertrace. In each oriented
-two-plane block, the Clifford normalization converts the oscillator factor
-to
+The symbol-supertrace normalization is the remaining step. Blockwise
+Fourier inversion contributes the powers of \(2\pi\), and the top
+Clifford supertrace changes the raw curvature variables to the normalized
+variables above. The precise identity is
 \[
- \frac{R/(4\pi i)}{\sinh(R/(4\pi i))},
+ \sigma_{[n]}\operatorname{str}K_{\mathcal H_p}(1;0,0)
+ =
+ \left[
+ \det{}^{1/2}\!\left(
+   \frac{\Omega^{TM}/2}{\sinh(\Omega^{TM}/2)}
+ \right)
+ \operatorname{tr}_{E/S}e^{-\Omega^{E/S}}
+ \right]_{[n]}.
 \]
-while the relative trace converts the constant-curvature exponential to
-\(\operatorname{tr}_{E/S}\exp(iF^{E/S}/2\pi)\). Multiplying the blocks and
-taking degree \(n\) gives
+Thus multiplying the curvature blocks and taking degree \(n\) gives
 \[
  \left[
  \Ahat(TM,\nabla^{TM})
  \operatorname{ch}(E/S,\nabla^E)
  \right]_{[n]}(p).
 \]
-The block diagonalization, the branch of the determinant square root, and
-the Clifford-supertrace normalization are the standard Mehler calculation
-in \cite[Chapter~4]{BGV}; the formulas above record the conventions used
-here. Thus this lemma imports Mehler's formula, but makes explicit how its
-two factors become \(\Ahat\) and the relative Chern character.
+The block diagonalization, the branch of the determinant square root, the
+Fourier factors, and the last symbol-supertrace identity are the standard
+Mehler calculation in \cite[Chapter~4]{BGV}; they are quoted here rather
+than concealed in an equality between raw and normalized curvatures. The
+formulas record exactly how its two factors become \(\Ahat\) and the
+relative Chern character.
 \end{proof}
 
 The determinant factor is \(\Ahat(TM)\), and the relative trace of the
@@ -2036,6 +2213,35 @@ induced metric as
 \[
  g=ds^2+f(s)^2d\theta^2.
 \]
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,thick,scale=.95]
+ \draw[dashed,gray!70] (0,-2.45)--(0,2.45)
+   node[above] {axis of revolution};
+ \foreach \y/\rx/\ry in {-1.8/.55/.10,-1.15/1.15/.20,-.45/1.50/.27,
+                           .35/1.55/.28,1.10/1.22/.21,1.80/.58/.10}
+   \draw[blue!45] (0,\y) ellipse[x radius=\rx,y radius=\ry];
+ \draw[blue!65!black]
+   plot[smooth] coordinates {(.25,-2.15) (.55,-1.8) (1.15,-1.15)
+     (1.50,-.45) (1.55,.35) (1.22,1.10) (.58,1.80) (.25,2.15)};
+ \draw[blue!65!black]
+   plot[smooth] coordinates {(-.25,-2.15) (-.55,-1.8) (-1.15,-1.15)
+     (-1.50,-.45) (-1.55,.35) (-1.22,1.10) (-.58,1.80) (-.25,2.15)};
+ \draw[red!75!black,very thick]
+   plot[smooth] coordinates {(.25,-2.15) (.55,-1.8) (1.15,-1.15)
+     (1.50,-.45) (1.55,.35) (1.22,1.10) (.58,1.80) (.25,2.15)};
+ \node[red!75!black,right] at (1.38,1.18) {meridian \(s\)};
+ \draw[<->,green!45!black] (0,.58)--(1.50,.58)
+   node[midway,above] {\(f(s)\)};
+ \draw[->,orange!80!black] (-.88,.17)
+   arc[start angle=220,end angle=320,x radius=1.15,y radius=.28];
+ \node[orange!80!black] at (0,-.04) {parallel coordinate \(\theta\)};
+\end{tikzpicture}
+\caption[Coordinates on a surface of revolution]{The arclength coordinate
+\(s\) follows a meridian, while \(\theta\) runs around a parallel of radius
+\(f(s)\). These orthogonal directions give
+\(g=ds^2+f(s)^2d\theta^2\).}
+\end{figure}
 For the oriented orthonormal coframe
 \(\vartheta^1=ds\), \(\vartheta^2=f(s)d\theta\), Cartan's first structure
 equation
@@ -2120,25 +2326,38 @@ For a closed oriented \(4k\)-manifold,
 \end{theorem}
 
 \begin{proof}
-Apply the local index theorem to the signature Clifford module. Under the
-splitting principle, its relative Chern character multiplies the
-\(\Ahat\)-factor into
-\[
- \prod_j\frac{x_j}{\tanh x_j},
-\]
-which is the Hirzebruch \(L\)-form. Concretely, restrict the exterior
-algebra representation to an oriented curvature two-plane and diagonalize
-its creation and annihilation operators. The two number-operator
-eigenlines diagonalize both curvature and chirality; taking their
-chirality-weighted traces and dividing by the spinor trace gives the block
-factor
-\[
- \frac{x/\tanh x}{(x/2)/\sinh(x/2)}.
-\]
-This elementary two-plane character identity, with the same curvature
-normalization, is recorded in \cite[Chapter~4]{BGV}.
-Multiplication over the blocks gives the displayed product. The analytic
-index is the signature by the preceding proposition.
+Apply the local index theorem to the Clifford module
+\((\Lambda^*T^*M_\mathbb C,c,\tau)\).  The relative trace here is the one
+defined by the \emph{signature} grading \(\tau\); it must not be replaced
+by the ordinary Chern character of the exterior algebra or by the
+even/odd grading used for Gauss--Bonnet.
+
+Let \(\pm x_1,\ldots,\pm x_{2k}\) be the formal normalized curvature roots
+of \(T_\mathbb C M\).  Diagonalize the creation and annihilation operators
+in each oriented curvature two-plane and take the \(\tau\)-supertrace on
+their tensor product.  The signature-module character identity is
+\begin{equation}\label{eq:signature-character}
+ \left[
+ \Ahat(TM)\operatorname{ch}_{\tau}
+   (\Lambda^*T^*M_\mathbb C/S)
+ \right]_{[4k]}
+ =
+ \left[
+ \prod_{j=1}^{2k}\frac{x_j}{\tanh x_j}
+ \right]_{[4k]}.
+\end{equation}
+The equality asserted is the top-degree identity needed by the index
+theorem; lower-degree normalizations depend on the ambient dimension and
+grading convention.  In a two-plane calculation, the curvature action is
+diagonal on the vacuum and occupied states, while \(\tau\) supplies the
+phase pairing complementary degrees.  Multiplying those eigenvalue traces
+and the factor \((x_j/2)/\sinh(x_j/2)\) from \(\Ahat\) gives the right-hand
+side of \eqref{eq:signature-character}.  The complete Clifford-character
+calculation, including the phase, is the standard signature example in
+\cite[Chapter~4]{BGV}.
+
+The product on the right is the Hirzebruch \(L\)-form by definition, and
+the analytic index is the signature by the preceding proposition.
 \end{proof}
 
 In dimension four,
@@ -2294,6 +2513,18 @@ Its fundamental form
  \omega(X,Y)=g(JX,Y)
 \]
 is a nondegenerate real two-form. Compatible metrics always exist.
+
+\begin{question}
+Does defining an almost complex structure require a metric?
+\end{question}
+
+\begin{answer}
+No.  The datum is only the bundle endomorphism \(J\) with \(J^2=-I\), and
+it already determines the type decomposition and canonical orientation.
+A metric is introduced afterward.  Averaging an arbitrary metric with its
+\(J\)-transform produces a compatible one, as the next proposition shows;
+there is no canonical choice in general.
+\end{answer}
 
 \begin{proposition}
 Every almost complex structure admits a compatible Riemannian metric.
@@ -2726,11 +2957,11 @@ The argument principle on a compact Riemann surface gives
 \(\deg(f)=0\).  Consequently degree descends from divisors to divisor
 classes.
 
-The line bundle \(\mathcal O(D)\) is characterized locally as follows.  On
-a coordinate disk about \(p\), with coordinate \(z(p)=0\), a meromorphic
-section of \(\mathcal O(D)\) is allowed a pole of order at most \(n_p\) if
-\(n_p>0\), and is required to vanish to order at least \(-n_p\) if
-\(n_p<0\).  Equivalently,
+The line bundle \(\mathcal O(D)\) is characterized locally as follows.
+After trivializing by its distinguished meromorphic section, a
+\emph{holomorphic} section is represented by a meromorphic function that is
+allowed a pole of order at most \(n_p\) if \(n_p>0\), and is required to
+vanish to order at least \(-n_p\) if \(n_p<0\).  Equivalently,
 \[
  H^0(X,\mathcal O(D))
  =\{f\text{ meromorphic}:(f)+D\geq0\}\cup\{0\}.
@@ -2770,20 +3001,31 @@ for every nonzero meromorphic section \(s\).
 \end{proposition}
 
 \begin{proof}
-Choose a Hermitian metric and remove small disjoint disks around the zeros
-and poles of \(s\).  On their complement, \(s\) trivializes \(L\).  If
-\(\nabla s=A\otimes s\), then \(F^\nabla=dA\) there.  Stokes' theorem and
-the local form \(s=z^me\) give
+Choose disjoint coordinate disks around the zeros and poles of \(s\), and
+use \(s\) as a nonvanishing holomorphic frame on their complement.  On a
+disk about \(p\), choose a nonvanishing holomorphic frame \(e_p\) and write
 \[
- \frac{i}{2\pi}\int_XF^\nabla
- =\sum_p\frac{1}{2\pi i}\int_{|z|=\varepsilon}d\log z^{m_p}
+ s=f_pe_p,
+ \qquad
+ f_p=z^{m_p}g_p,
+ \qquad g_p(0)\ne0.
+\]
+The first Chern number is the sum of the winding numbers of these clutching
+functions.  With the complex boundary orientation,
+\[
+ \int_Xc_1(L)
+ =\sum_p\frac{1}{2\pi i}
+   \int_{|z|=\varepsilon}d\log f_p
  =\sum_pm_p.
 \]
-Chern--Weil theory identifies the left side with \(\int_Xc_1(L)\).
+The factor \(g_p\) has winding number zero.  Thus the Chern number equals
+the divisor degree, independently of the chosen meromorphic section.
 \end{proof}
 
 In particular, the divisor of a meromorphic one-form represents the
-canonical bundle \(K_X\); its degree is \(2g-2\).
+canonical bundle \(K_X\). Since
+\(c_1(K_X)=-c_1(T^{1,0}X)\), Gauss--Bonnet gives
+\(\deg K_X=-(2-2g)=2g-2\).
 
 The degree of \(L\) is therefore
 \[

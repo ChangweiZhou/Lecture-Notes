@@ -217,40 +217,54 @@ infinity, through the normal operator.
 Let $X$ be a compact even-dimensional Riemannian manifold with boundary
 $Y$. Assume that the metric and all bundle data are of product type on a
 collar $[0,1)_u\times Y$. Let $E=E^+\oplus E^-$ be a graded Hermitian
-Clifford module and let
+Clifford module. Write the chiral operator as
 \[
- D=\begin{pmatrix}0&D^-\\D^+&0\end{pmatrix}
+ P=D^+:C^\infty(X;E^+)\longrightarrow C^\infty(X;E^-)
 \]
-be its Dirac operator. On the collar we use the convention
+and the total odd self-adjoint operator as
 \[
- D=c(du)(\partial_u+A),
+ \mathcal D=\begin{pmatrix}0&P^*\\P&0\end{pmatrix}.
 \]
-where $A$ is the self-adjoint tangential Dirac operator and
-$c(du)A=-Ac(du)$.
+On the collar we use the convention
+\[
+ P=c(du)(\partial_u+A^+),
+ \qquad
+ \mathcal D=c(du)(\partial_u+\mathcal A),
+\]
+where \(A^+\) is self-adjoint on \(E^+|_Y\) and
+\[
+ \mathcal A=\begin{pmatrix}A^+&0\\0&A^-\end{pmatrix},
+ \qquad
+ A^-=-c(du)A^+c(du)^{-1}.
+\]
+Thus \(c(du)\) carries the \(\lambda\)-eigenspace of \(A^+\) to the
+\(-\lambda\)-eigenspace of \(A^-\). The eta invariant in the APS formula
+is always that of \(A^+\), not that of the total block operator
+\(\mathcal A\), whose two spectra cancel.
 
 \subsection{Closed manifolds}
 
 When $\partial X=\varnothing$, the heat operators are smoothing and
 trace class. Define
 \[
- Q_t=D^-\int_0^t e^{-sD^+D^-}\,ds.
+ Q_t=P^*\int_0^t e^{-sPP^*}\,ds.
 \]
 Functional calculus and the intertwining relation
-$D^-e^{-sD^+D^-}=e^{-sD^-D^+}D^-$ give
+$P^*e^{-sPP^*}=e^{-sP^*P}P^*$ give
 \[
- D^+Q_t=I-e^{-tD^+D^-},
+ PQ_t=I-e^{-tPP^*},
  \qquad
- Q_tD^+=I-e^{-tD^-D^+}.
+ Q_tP=I-e^{-tP^*P}.
 \]
 Fedosov's trace formula therefore yields the McKean--Singer identity
 \[
- \operatorname{ind}D^+
- =\Tr(e^{-tD^-D^+})-\Tr(e^{-tD^+D^-})
- =\operatorname{Str}(e^{-tD^2})
+ \operatorname{ind}P
+ =\Tr(e^{-tP^*P})-\Tr(e^{-tPP^*})
+ =\operatorname{Str}(e^{-t\mathcal D^2})
 \]
 for every $t>0$. The local heat expansion then gives
 \[
- \operatorname{ind}D^+
+ \operatorname{ind}P
  =\int_X
  \left[
  \widehat A(TX,\nabla^{TX})
@@ -260,8 +274,9 @@ for every $t>0$. The local heat expansion then gives
 
 \subsection{The cylindrical end}
 
-Attach $(-\infty,0]\times Y$ to $X$ and extend $D$ by its product
-formula. The resulting complete manifold is denoted $X_\infty$. The
+Attach $(-\infty,0]\times Y$ to $X$ and extend (P) and
+\(\mathcal D\) by their product formulas. The resulting complete manifold
+is denoted $X_\infty$. The
 operator
 \[
  D^+:
@@ -269,11 +284,11 @@ operator
  \longrightarrow
  L^2(X_\infty,E^-)
 \]
-is Fredholm precisely when $A$ is invertible. Expand a section in an
-eigenbasis of \(A\). On the mode with eigenvalue \(\lambda\), the operator
+is Fredholm precisely when $A^+$ is invertible. Expand a section in an
+eigenbasis of \(A^+\). On the mode with eigenvalue \(\lambda\), the operator
 on the end reduces to \(\partial_u+\lambda\). A spectral gap gives uniform
 exponential estimates.
-If \(0\in\operatorname{spec}(A)\), translates of a fixed cutoff in a zero
+If \(0\in\operatorname{spec}(A^+)\), translates of a fixed cutoff in a zero
 mode form a Weyl sequence at zero.
 
 \begin{figure}[htbp]
@@ -284,30 +299,30 @@ mode form a Weyl sequence at zero.
 along the attached cylinder becomes dilation toward \(x=0\).}
 \end{figure}
 
-Although $D^+$ is Fredholm when $A$ is invertible, the two heat
+Although $D^+$ is Fredholm when $A^+$ is invertible, the two heat
 operators are not separately trace class: their kernels are
 translation invariant to leading order on the infinite cylinder. Their
 graded difference is handled by the $b$-trace introduced below.
 
 For $\Re s$ large, define the eta function
 \[
- \eta_A(s)=\sum_{\lambda\in\operatorname{spec}(A)\setminus\{0\}}
+ \eta_{A^+}(s)=\sum_{\lambda\in\operatorname{spec}(A^+)\setminus\{0\}}
    \operatorname{sgn}(\lambda)|\lambda|^{-s}.
 \]
 Its Mellin representation is
 \[
- \eta_A(s)=\frac{1}{\Gamma\!\left(\frac{s+1}{2}\right)}
- \int_0^\infty t^{(s-1)/2}\Tr(Ae^{-tA^2})\,dt.
+ \eta_{A^+}(s)=\frac{1}{\Gamma\!\left(\frac{s+1}{2}\right)}
+ \int_0^\infty t^{(s-1)/2}\Tr(A^+e^{-t(A^+)^2})\,dt.
 \]
 The right side extends meromorphically and is regular at $s=0$. With
-$h=\dim\ker A$, the Atiyah--Patodi--Singer formula is
+$h=\dim\ker A^+$, the Atiyah--Patodi--Singer formula is
 \[
  \operatorname{ind}D_{\mathrm{APS}}^+
  =\int_X
   \left[\widehat A(TX)\operatorname{ch}(E/S)\right]_{[n]}
-  -\frac{\eta_A(0)+h}{2}.
+  -\frac{\eta_{A^+}(0)+h}{2}.
 \]
-When $A$ is invertible, $h=0$, and this equals the $L^2$ index on
+When $A^+$ is invertible, $h=0$, and this equals the $L^2$ index on
 $X_\infty$.
 
 \begin{question}
@@ -319,9 +334,9 @@ noncompact?
 The cylinder does not remove the analytic difficulty; it puts that
 difficulty into a translation-invariant form. On the compact manifold
 with boundary, the APS condition is the nonlocal projection determined by
-the spectrum of \(A\). On the cylinder, the same condition is encoded by
-square integrability. Indeed, on an \(A\)-eigenvector with eigenvalue
-\(\lambda\), the equation \((\partial_u+A)u=0\) becomes an elementary ODE,
+the spectrum of \(A^+\). On the cylinder, the same condition is encoded by
+square integrability. Indeed, on an \(A^+\)-eigenvector with eigenvalue
+\(\lambda\), the equation \((\partial_u+A^+)u=0\) becomes an elementary ODE,
 and exactly one spectral half gives decaying solutions on the outward end.
 Thus the APS projection and the \(L^2\) condition select the same boundary
 data. The remaining translation-invariant part is what the normal operator
@@ -1333,16 +1348,16 @@ imply this expansion.
 
 \section{The Dirac case}
 
-For
+For the chiral operator
 \[
- D=c\!\left(\frac{dx}{x}\right)(x\partial_x+A_{\partial}),
+ P=D^+=c\!\left(\frac{dx}{x}\right)(x\partial_x+A^+),
 \]
 the b-principal symbol is Clifford multiplication and is invertible away
-from the zero section. Thus \(D\) is b-elliptic. Its indicial family is
+from the zero section. Thus \(P\) is b-elliptic. Its indicial family is
 invertible on the unweighted line if and only if
-\(A_{\partial}\) is invertible.
+\(A^+\) is invertible.
 
-If \(A_{\partial}\) has kernel, one may choose a small nonzero weight
+If \(A^+\) has kernel, one may choose a small nonzero weight
 \(\delta\) whose Mellin line avoids the boundary spectrum. The resulting
 weighted realization is Fredholm, but its index depends on the side from
 which the zero indicial roots are crossed. When the contour crosses an
@@ -1353,8 +1368,8 @@ crossing.
 This integer jump is distinct from the half-kernel term in the APS
 formula. The latter belongs to the reduced eta invariant
 \[
- \bar\eta(A_{\partial})
- =\frac{\eta(A_{\partial})+\dim\ker A_{\partial}}2
+ \bar\eta(A^+)
+ =\frac{\eta(A^+)+\dim\ker A^+}2
 \]
 and reflects the strict/non-strict choice at the zero eigenspace. It is not
 a weighted-index jump.
@@ -1393,28 +1408,28 @@ Let
 \[
  \gamma:H^1(X;E^+)\longrightarrow H^{1/2}(Y;E^+|_Y)
 \]
-be the trace map. Since \(A\) is self-adjoint and elliptic on the closed
+be the trace map. Since \(A^+\) is self-adjoint and elliptic on the closed
 manifold \(Y\), it has discrete real spectrum, and its spectral projections
 are order-zero pseudodifferential operators. Define
 \[
- \Pi_{\geq0}(A)=\sum_{\lambda\geq0}\Pi_\lambda
+ \Pi_{\geq0}(A^+)=\sum_{\lambda\geq0}\Pi_\lambda
 \]
 and
 \[
 \mathcal D_{\mathrm{APS}}(D^+)
  =\left\{u\in H^1(X;E^+):
-          \Pi_{\geq0}(A)\gamma u=0\right\}.
+          \Pi_{\geq0}(A^+)\gamma u=0\right\}.
 \]
 Thus the boundary value is allowed to lie only in the negative spectral
-subspace of \(A\). Since
-\(\Pi_{\geq0}(A):H^{1/2}(Y)\to H^{1/2}(Y)\) and the trace map are bounded,
+subspace of \(A^+\). Since
+\(\Pi_{\geq0}(A^+):H^{1/2}(Y)\to H^{1/2}(Y)\) and the trace map are bounded,
 this domain is the kernel of a bounded map from \(H^1(X;E^+)\) to
 \(H^{1/2}(Y;E^+|_Y)\). It is therefore closed in the \(H^1\) graph norm.
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[>=Latex,thick]
- \draw[->] (-4.3,0)--(4.3,0) node[right] {\(\operatorname{spec}(A)\)};
+ \draw[->] (-4.3,0)--(4.3,0) node[right] {\(\operatorname{spec}(A^+)\)};
  \foreach \x in {-3.4,-2.6,-1.5,-.7,.8,1.7,2.8,3.5}
    \fill (\x,0) circle (2pt);
  \fill (0,0) circle (2.5pt);
@@ -1437,7 +1452,7 @@ coordinate \(r\),
  \langle D^+u,v\rangle_X-\langle u,D^-v\rangle_X
  =-\langle c(dr)\gamma u,\gamma v\rangle_Y.
 \]
-Put \(A^+=A\) and let \(A^-=-c(dr)A^+c(dr)^{-1}\) be the tangential operator on
+Recall that \(A^-=-c(dr)A^+c(dr)^{-1}\) is the tangential operator on
 \(E^-|_Y\). Because Clifford multiplication sends the \(\lambda\)-space
 of \(A^+\) to the \(-\lambda\)-space of \(A^-\), Green's formula gives
 the explicit adjoint domain
@@ -1457,7 +1472,7 @@ The operator
  \mathcal D_{\mathrm{APS}}(D^+)
  \longrightarrow L^2(X;E^-)
 \]
-is Fredholm. If \(A\) is invertible, restriction to \(X\) and extension
+is Fredholm. If \(A^+\) is invertible, restriction to \(X\) and extension
 along the cylinder identify its kernel and cokernel with those of the
 \(L^2\) realization on \(X_\infty\). Consequently
 \[
@@ -1467,7 +1482,7 @@ along the cylinder identify its kernel and cokernel with those of the
 \end{theorem}
 
 \begin{proof}
-Choose an orthonormal eigenbasis \(A\phi_\lambda=\lambda\phi_\lambda\)
+Choose an orthonormal eigenbasis \(A^+\phi_\lambda=\lambda\phi_\lambda\)
 and expand on the collar,
 \[
  u(r,y)=\sum_\lambda u_\lambda(r)\phi_\lambda(y).
@@ -1486,9 +1501,9 @@ For \(\lambda\geq0\), the APS condition sets \(f(0)=0\).  For
 collar estimate below.  Here one uses
 \[
  \lVert w\rVert_{H^1(Y)}^2
- \asymp \lVert Aw\rVert_{L^2(Y)}^2+\lVert w\rVert_{L^2(Y)}^2,
+ \asymp \lVert A^+w\rVert_{L^2(Y)}^2+\lVert w\rVert_{L^2(Y)}^2,
 \]
-the elliptic graph-norm equivalence for \(A\); the finitely many
+the elliptic graph-norm equivalence for \(A^+\); the finitely many
 eigenvalues in a fixed bounded interval are absorbed by the \(L^2\)-term.
 Thus
 \[
@@ -1527,7 +1542,7 @@ contradicting orthogonality. The sharper bound makes the range closed.
 Repeating the argument for the adjoint gives finite-dimensional cokernel.
 Thus the APS realization is Fredholm.
 
-Assume now that \(A\) is invertible and write the outward cylinder
+Assume now that \(A^+\) is invertible and write the outward cylinder
 coordinate as \(t=-r\geq0\).  A solution in the \(\lambda\)-eigenspace is
 \[
  u_\lambda(t)=e^{\lambda t}u_\lambda(0).
@@ -1626,53 +1641,101 @@ The first defect projection is the orthogonal projection onto
 \(\dim\ker P-\dim\ker P^*=\operatorname{ind}P\).
 \end{proof}
 
-For the product Dirac operator, the unbounded joint elliptic data are
+For the chiral product operator \(P=D^+\), the unbounded joint elliptic
+data are
 \[
- \left({}^b\sigma_1(D),\,
- I(D,\lambda)=
- c\!\left(\frac{dx}{x}\right)(i\lambda+A)\right).
+ \left({}^b\sigma_1(P),\,
+ I(P,\lambda)=
+ c\!\left(\frac{dx}{x}\right)(i\lambda+A^+)\right).
 \]
 Composing on the right with the inverse of a fixed positive elliptic
 family of order one normalizes this to an order-zero element of
 \(\Sigma_b\) without changing invertibility or the index class.
-Equivalently, one may use the bounded transform of \(D\), whose indicial
+Equivalently, one may use the bounded transform of \(P\), whose indicial
 family includes the corresponding factor of order minus one.
-If \(A\) is invertible, this pair is fully elliptic. If \(A\) has kernel,
+If \(A^+\) is invertible, this pair is fully elliptic. If \(A^+\) has kernel,
 changing only the displayed boundary family does not yet define an
-operator on the cylinder. Choose a positive even Schwartz function \(\rho\) with
-\(\rho(0)=1\), put \(\Pi_0=\Pi_{\ker A}\), and use surjectivity of the
-residual normal map to construct a global b-smoothing operator \(T_b\)
+operator on the cylinder. Put
+\[
+ V=\ker A^+,
+ \qquad T=-I_V,
+ \qquad \Pi_0^+=\Pi_V.
+\]
+The involution \(T=-I_V\) is Loya's ideal boundary condition corresponding
+to the APS convention \(\Pi_{\geq0}(A^+)\gamma u=0\): it moves every zero
+mode to the positive side. Choose a nonnegative even Schwartz function
+\(\rho\) with \(\rho(0)=1\). Surjectivity of the residual normal map
+supplies global lifts of the suspended family below; choose the
+Loya--Melrose--Piazza lift that realizes the ideal boundary condition.
+Thus there is a global chiral b-smoothing operator
+\(T_b^+:E^+\to E^-\)
 with
 \[
- I(T_b,\lambda)
+ I(T_b^+,\lambda)
  =c\!\left(\frac{dx}{x}\right)
-   \varepsilon\rho(\lambda)\Pi_0.
+   \varepsilon\rho(\lambda)\Pi_0^+.
 \]
 For sufficiently small \(\varepsilon>0\),
-\(i\lambda+A+\varepsilon\rho(\lambda)\Pi_0\) is invertible for every real
-\(\lambda\): on \(\ker A\) it is \(i\lambda+\varepsilon\rho(\lambda)\),
-and the nonzero spectrum retains its gap. Hence \(D+T_b\) is fully
-elliptic. The perturbation is smoothing in the b-calculus, but it is not a
+\(i\lambda+A^++\varepsilon\rho(\lambda)\Pi_0^+\) is invertible for every
+real \(\lambda\): on \(V\) it is the scalar
+\(i\lambda+\varepsilon\rho(\lambda)\), which cannot vanish, and on
+\(V^\perp\) the nonzero spectrum retains its gap. Hence
+\[
+ P_T=P+T_b^+
+\]
+is fully elliptic. The associated total self-adjoint operator used in the
+heat proof is
+\[
+ \mathcal D_T=
+ \begin{pmatrix}0&P_T^*\\P_T&0\end{pmatrix}.
+\]
+The perturbation is smoothing in the b-calculus, but it is not a
 finite-rank or compact operator on the infinite cylinder.
 
-The APS comparison theorem identifies the perturbed \(L^2\) realization
-with the APS realization determined by the same positive zero-mode
-trivialization: their kernels, adjoint kernels, and indices agree
-\cite{Melrose,MelrosePiazza}. Thus the precise stable joint-symbol class is
+For this chosen lift, the ideal-boundary comparison theorem identifies the
+perturbed \(L^2\) realization with the APS realization determined by
+\(T=-I_V\): their kernels, adjoint kernels, and indices agree
+\cite{Loya,MelrosePiazza}. A different lift with the same normal family
+has the same index, but need not have canonically identical kernel spaces.
+Thus the precise stable joint-symbol class is
 \[
- [j(D+T_b)]\in K_1(\Sigma_b).
+ [j(P_T)]\in K_1(\Sigma_b).
 \]
-Equivalently, one may use the associated mapping-cone relative symbol
-group. This replaces the informal group
-\(K_{\mathrm{APS}}^0({}^bT^*X)\); the choice of \(T_b\) records the
-spectral section at zero.
+
+For the geometric push-forward it is safer to retain the relative symbol
+group rather than claim a Thom map on every element of \(K_1(\Sigma_b)\).
+Let \(\mathfrak S_b\) be the stabilized continuous b-cosphere-symbol
+algebra, let \(\mathfrak S_\partial\) be its boundary restriction, and let
+\(r:\mathfrak S_b\to\mathfrak S_\partial\) be restriction. Its mapping
+cone is
+\[
+ C_r=\{(a,f)\in\mathfrak S_b\oplus
+ C_0([0,1),\mathfrak S_\partial): f(0)=r(a)\}.
+\]
+Write
+\[
+ K^0_{\mathrm{APS}}({}^bT^*X):=K_0(C_r).
+\]
+The invertible indicial family of \(P_T\) is a boundary trivialization of
+its b-symbol and hence determines
+\(\alpha_{\mathrm{APS}}(P_T)\in K^0_{\mathrm{APS}}({}^bT^*X)\).
+The comparison theorem for the joint-symbol pullback algebra supplies a
+map
+\[
+ \kappa:K^0_{\mathrm{APS}}({}^bT^*X)\longrightarrow K_1(\Sigma_b),
+ \qquad
+ \kappa(\alpha_{\mathrm{APS}}(P_T))=[j(P_T)].
+\]
+This mapping-cone/joint-symbol comparison is a quoted part of the relative
+index theorem \cite{MelrosePiazza}; it is not inferred from the formal
+parametrix.
 
 A neat embedding
 \[
  i:(X,\partial X)\hookrightarrow
  (\mathbb R_+^N,\mathbb R^{N-1})
 \]
-defines a Thom push-forward of these relative joint-symbol classes. Normal deformation
+defines a Thom push-forward of these relative symbol classes. Normal deformation
 and collar doubling identify the target with the Bott group
 \[
  K_c^0(\mathbb R^{2N})\cong\mathbb Z.
@@ -1680,30 +1743,30 @@ and collar doubling identify the target with the Bott group
 Call the resulting integer
 \(\operatorname{t\text{-}ind}_{\mathrm{APS}}\).
 
-\begin{theorem}[K-theoretic APS index theorem]
+\begin{theorem}[K-theoretic APS index theorem; quoted]
 For a product-type graded Dirac operator,
 \[
  \operatorname{ind}(D^+_{\mathrm{APS}})
  =
  \operatorname{t\text{-}ind}_{\mathrm{APS}}
- [j(D+T_b)].
+ \bigl(\alpha_{\mathrm{APS}}(P_T)\bigr).
 \]
 \end{theorem}
 
 The theorem asserts that the following diagram commutes; the left vertical
-map is the connecting-map index of the joint symbol.
+map is the connecting-map index after comparison with the joint symbol.
 \[
 \begin{tikzcd}[column sep=huge,row sep=large]
- K_1(\Sigma_b)
+ K^0_{\mathrm{APS}}({}^bT^*X)
  \arrow[r,"i_!"]
- \arrow[d,"{\operatorname{a\text{-}ind}_{\mathrm{APS}}}"']
+ \arrow[d,"{\partial\circ\kappa}"']
  &K_c^0(\mathbb R^{2N})
  \arrow[d,"\mathrm{Bott}"]\\
  \mathbb Z\arrow[r,equal]&\mathbb Z
 \end{tikzcd}
 \]
 
-\begin{proof}[Proof architecture; relative push-forward theorem quoted]
+\begin{proof}[Proof architecture]
 The proof follows the closed push-forward argument. In a tubular
 neighborhood, the Thom class is represented analytically by the
 fibrewise Bott operator
@@ -1735,7 +1798,7 @@ topological push-forward equal that integer. This proves the formula.
 This theorem proves the equality of two \emph{integer} indices. Ordinary
 \(K\)-theory does not by itself determine the real number
 \[
- \bar\eta(A)=\frac{\eta(A)+\dim\ker A}{2}.
+ \bar\eta(A^+)=\frac{\eta(A^+)+\dim\ker A^+}{2}.
 \]
 That number is a secondary, differential refinement of the boundary
 \(K\)-class: it can vary continuously with the metric and connection even
@@ -1747,11 +1810,11 @@ formula
  =
  \int_X
  \left[\widehat A(TX)\operatorname{ch}(E/S)\right]_{[n]}
- -\bar\eta(A).
+ -\bar\eta(A^+).
 \]
 Equivalently,
 \[
- \bar\eta(A)\equiv
+ \bar\eta(A^+)\equiv
  \int_X
  \left[\widehat A(TX)\operatorname{ch}(E/S)\right]_{[n]}
  \pmod{\mathbb Z}.
@@ -1762,13 +1825,13 @@ proof explains integrality and homotopy invariance, while the heat proof
 identifies the precise spectral correction.
 
 \begin{question}
-Why can \(\bar\eta(A)\) vary while the \(K\)-theoretic APS index is
+Why can \(\bar\eta(A^+)\) vary while the \(K\)-theoretic APS index is
 constant?
 \end{question}
 
 \begin{answer}
 As the geometric data vary without a zero eigenvalue crossing, the local
-integral and \(\bar\eta(A)\) vary by the same amount, so their difference
+integral and \(\bar\eta(A^+)\) vary by the same amount, so their difference
 remains the fixed integer index. At a crossing, the spectral projection
 changes by a finite-dimensional space; spectral flow changes the
 \(K\)-theoretic boundary trivialization and accounts for the integer jump.
@@ -1865,7 +1928,9 @@ supertrace.
 \end{theorem}
 
 \begin{proof}
-For \(\operatorname{Re}z>0\), cyclicity of the ordinary trace gives
+For \(\operatorname{Re}z>0\), the stated side-face orders make
+\(x^zAB\) and \(x^zBA\) trace class, so cyclicity of the ordinary trace is
+legitimate and gives
 \[
  \Tr(x^z[A,B])=\Tr([x^z,A]B).
 \]
@@ -1873,14 +1938,21 @@ Set
 \[
  C_z=z^{-1}x^{-z}[x^z,A].
 \]
-This family extends to \(z=0\), and its indicial family there is
+The full b-commutator theorem says that \(C_z\) extends holomorphically to
+\(z=0\) in the full calculus, and its indicial family there is
 \[
  I(C_0,\lambda)=i\,\partial_\lambda I(A,\lambda).
 \]
-The trace of \(x^zC_zB\) has a simple pole at zero. Its residue is the
-Fourier integral of \(I(C_0,\lambda)I(B,\lambda)\), divided by \(2\pi\).
+The diagonal finite-part theorem says that the trace of \(x^zC_zB\) has a
+simple pole at zero and identifies its residue with the Fourier integral of
+\(I(C_0,\lambda)I(B,\lambda)\), divided by \(2\pi\).
 Since \([x^z,A]B=z x^zC_zB\), that residue is the constant term of the
 original trace. Finally \(i/(2\pi)=-1/(2\pi i)\).
+
+Holomorphic extension of \(C_z\) and the diagonal residue identification
+are the two analytic inputs in Melrose's b-trace theorem
+\cite[Chapter~5]{Melrose}; neither follows from the displayed algebraic
+commutator identity alone.
 \end{proof}
 
 This identity is independent of the defining function: changing \(x\)
@@ -1894,34 +1966,41 @@ Let
 \[
  E=E^+\oplus E^-
 \]
-be a graded Hermitian Clifford module with compatible connection. Its Dirac
-operator is odd,
+be a graded Hermitian Clifford module with compatible connection. Its total
+Dirac operator is odd,
 \[
- D=
+ \mathcal D=
  \begin{pmatrix}
- 0&D^-\\
- D^+&0
+ 0&P^*\\
+ P&0
  \end{pmatrix},
+ \qquad P=D^+,
 \]
 and near \(\partial X\) it has the form
 \[
- D=c(du)(\partial_u+A),
+ \mathcal D=c(du)(\partial_u+\mathcal A),
+ \qquad
+ P=c(du)(\partial_u+A^+),
 \]
-where \(u\) is the inward normal coordinate and \(A\) is the self-adjoint
-tangential Dirac operator.
+where \(u\) is the inward normal coordinate,
+\(\mathcal A=\operatorname{diag}(A^+,A^-)\), and \(A^+\) is the
+self-adjoint tangential operator on \(E^+|_Y\).
 
 Extend the collar coordinate \(u\) to negative values on the attached
 outward cylinder, put \(t=-u\geq0\), and set \(x=e^{-t}=e^u\). Then
 \(du=dx/x\) and \(\partial_u=x\partial_x\), so the product formula becomes
 \[
- D=c\!\left(\frac{dx}{x}\right)(x\partial_x+A),
+ \mathcal D=c\!\left(\frac{dx}{x}\right)(x\partial_x+\mathcal A),
+ \qquad
+ P=c\!\left(\frac{dx}{x}\right)(x\partial_x+A^+),
 \]
-with the same \(A\) as above. This convention fixes the sign of the APS
-correction to be \(-(\eta_A(0)+\dim\ker A)/2\).
+with the same tangential operators as above. This convention fixes the sign
+of the APS correction to be
+\(-(\eta_{A^+}(0)+\dim\ker A^+)/2\).
 
 The Weitzenböck formula is
 \[
- D^2=\nabla^*\nabla+\mathcal R,
+ \mathcal D^2=\nabla^*\nabla+\mathcal R,
 \]
 where \(\mathcal R\) is the curvature endomorphism. For the spin Dirac
 operator twisted by \(W\),
@@ -1993,7 +2072,8 @@ Near a boundary point use b-normal coordinates
 \[
  (s,y)=(-\log x,y).
 \]
-After parabolic rescaling about the diagonal, the coefficients of \(D^2\)
+After parabolic rescaling about the diagonal, the coefficients of
+\(\mathcal D^2\)
 freeze at the base point. The temporal model is therefore the Gaussian
 heat kernel of the constant-coefficient operator on
 \({}^bT_pX\). If the base point tends to the boundary, the same frozen
@@ -2054,9 +2134,10 @@ compatible.}
 
 Starting with the Gaussian model, solve the transport equations
 successively along the temporal front face. Borel summation gives a
-parametrix \(H_0(t)\) satisfying
+parametrix \(H_0(t)\) satisfying the distributional initial condition
+\(H_0(0)=I\) and
 \[
- (\partial_t+D^2)H_0(t)=R(t),
+ (\partial_t+\mathcal D^2)H_0(t)=R(t),
 \]
 where \(R\) vanishes to infinite order at \(t=0\). The Volterra series
 \[
@@ -2069,10 +2150,19 @@ positive times. Here
 \[
  (K_1*K_2)(t)=\int_0^tK_1(t-s)K_2(s)\,ds.
 \]
-Thus \(H(t)=e^{-tD^2}\).
+The decisive boundary term in differentiating a Volterra convolution is
+\begin{equation}\label{eq:Volterra-boundary}
+ (\partial_t+\mathcal D^2)(H_0*S)
+ =S+R*S.
+\end{equation}
+Indeed, differentiating the upper integration limit contributes
+\(H_0(0)S(t)=S(t)\); the remaining terms give \(R*S\).  Applying
+\eqref{eq:Volterra-boundary} term by term makes the geometric cancellation
+in the displayed series explicit. Thus \(H(t)=e^{-t\mathcal D^2}\).
 
-Convergence comes from the volume of the ordered time simplex. If
-\(\|R(t)\|\leq C\) for \(0\leq t\leq t_0\), then
+Convergence comes from the volume of the ordered time simplex. On each
+residual heat-calculus seminorm, \(H_0\) and \(R\) are uniformly bounded
+for \(0<t\leq t_0\). If \(\|R(t)\|\leq C\), then
 \[
  R^{*k}(t)
  =
@@ -2084,10 +2174,12 @@ and the simplex has volume \(t^{k-1}/(k-1)!\). Hence
  \|R^{*k}(t)\|
  \leq \frac{C^k t^{k-1}}{(k-1)!}.
 \]
-The factorial proves absolute convergence. The same estimate after
-applying \(b\)-derivatives proves convergence in the residual heat
-calculus. Since \(R\) vanishes to infinite order at \(t=0\), so does every
-correction term, and the initial value remains the identity.
+The factorial proves absolute convergence; multiplication by the fixed
+bounded left factor \(H_0\) gives the same conclusion for every term of the
+heat series. The estimate after applying \(b\)-derivatives proves
+convergence in the residual heat calculus. Since \(R\) vanishes to infinite
+order at \(t=0\), so does every correction term, and the initial value
+remains the identity.
 
 The construction also proves Duhamel's formula. If \(L_r\) is a smooth
 family of nonnegative self-adjoint elliptic operators with common domain
@@ -2138,7 +2230,7 @@ model calculation.
 On a manifold with cylindrical end, diagonal integration is interpreted as
 a b-integral. The heat-space expansion shows
 \[
- \lim_{t\downarrow0}{}^b\Str(e^{-tD^2})
+ \lim_{t\downarrow0}{}^b\Str(e^{-t\mathcal D^2})
  =
  \int_X
  \left[
@@ -2147,31 +2239,34 @@ a b-integral. The heat-space expansion shows
  \right]_{[n]}.
 \]
 Because the data are of product type, no additional local boundary density
-appears.
+appears.  This assertion is a corollary of the quoted b-heat/Getzler
+theorem: the temporal-front-face supertrace is the interior Getzler model,
+while the boundary-front-face model has zero independent constant term.
+It does not follow from matching only the leading Gaussian.
 
 \section{The eta invariant}
 
 For \(\operatorname{Re}s\) large, define
 \[
- \eta_A(s)
+ \eta_{A^+}(s)
  =
- \sum_{\lambda\in\operatorname{Spec}(A)\setminus\{0\}}
+ \sum_{\lambda\in\operatorname{Spec}(A^+)\setminus\{0\}}
  \operatorname{sign}(\lambda)|\lambda|^{-s}.
 \]
 The Mellin representation is
 \[
- \eta_A(s)
+ \eta_{A^+}(s)
  =
  \frac1{\Gamma((s+1)/2)}
  \int_0^\infty
- t^{(s-1)/2}\Tr(Ae^{-tA^2})\,dt.
+ t^{(s-1)/2}\Tr(A^+e^{-t(A^+)^2})\,dt.
 \]
 The large-time integral is entire after omission of the zero eigenspace.
 The heat expansion gives a meromorphic continuation of the small-time
 integral.
 
 \begin{theorem}
-The eta function of a self-adjoint elliptic differential operator of
+The eta function of a self-adjoint elliptic differential operator \(B\) of
 positive order on a closed manifold is regular at \(s=0\).
 \end{theorem}
 
@@ -2180,16 +2275,16 @@ Split the Mellin integral at \(t=1\). On the orthogonal complement of the
 kernel, the large-time integrand is exponentially decreasing, so that
 part is entire. For an operator of order \(r\) on a \(d\)-manifold, the
 pseudodifferential heat calculus gives a polyhomogeneous expansion of
-\(\Tr(Ae^{-tA^2})\) as \(t\downarrow0\). Termwise Mellin integration gives
+\(\Tr(Be^{-tB^2})\) as \(t\downarrow0\). Termwise Mellin integration gives
 the meromorphic continuation.
 
 The standard Wodzicki--Guillemin residue theorem identifies the possible residue at zero with a constant multiple of the
 noncommutative residue of the order-zero operator
 \[
- \operatorname{sgn}(A)=A|A|^{-1}
+ \operatorname{sgn}(B)=B|B|^{-1}
 \]
-on \(\ker A^\perp\). Modulo a finite-rank operator,
-\(\operatorname{sgn}(A)=2\Pi_+-I\), where \(\Pi_+\) is the positive spectral
+on \(\ker B^\perp\). Modulo a finite-rank operator,
+\(\operatorname{sgn}(B)=2\Pi_+-I\), where \(\Pi_+\) is the positive spectral
 projection. The same theorem says that the noncommutative residue vanishes on the identity, on
 finite-rank operators, and on pseudodifferential projections. The possible
 residue is therefore zero. For a Dirac-type operator the same cancellation
@@ -2202,40 +2297,45 @@ setting.
 For a Dirac-type operator, regularity is also visible from the parity of the
 Clifford heat coefficients. Write
 \[
- \eta(A)=\eta_A(0),\qquad h(A)=\dim\ker A.
+ \eta(A^+)=\eta_{A^+}(0),\qquad h(A^+)=\dim\ker A^+.
 \]
 
 \section{Heat proof of the APS index theorem}
 
-Assume first that \(A\) is invertible. Set
+Assume first that \(A^+\) is invertible. Set
 \[
- F(t)={}^b\Str(e^{-tD^2}).
+ F(t)={}^b\Str(e^{-t\mathcal D^2})
+ ={}^b\Tr(e^{-tP^*P})-{}^b\Tr(e^{-tPP^*}).
 \]
-Since \(D\) commutes with \(e^{-tD^2}\),
+Since \(\mathcal D\) commutes with \(e^{-t\mathcal D^2}\),
 \[
  F'(t)
  =
  -\frac12\,{}^b\Str
- \left([D,De^{-tD^2}]_{\mathrm s}\right).
+ \left([\mathcal D,\mathcal D e^{-t\mathcal D^2}]_{\mathrm s}\right).
 \]
 Apply the graded b-trace defect formula and use
 \[
- I(D,\lambda)
+ I(\mathcal D,\lambda)
  =
- c\!\left(\frac{dx}{x}\right)(i\lambda+A).
+ c\!\left(\frac{dx}{x}\right)(i\lambda+\mathcal A).
 \]
 Moreover,
 \[
- I(De^{-tD^2},\lambda)
+ I(\mathcal D e^{-t\mathcal D^2},\lambda)
  =
- c\!\left(\frac{dx}{x}\right)(i\lambda+A)
- e^{-t(\lambda^2+A^2)},
-\qquad
- \partial_\lambda I(D,\lambda)=i\,c\!\left(\frac{dx}{x}\right).
+ c\!\left(\frac{dx}{x}\right)(i\lambda+\mathcal A)
+ e^{-t(\lambda^2+\mathcal A^2)},
+ \qquad
+ \partial_\lambda I(\mathcal D,\lambda)
+ =i\,c\!\left(\frac{dx}{x}\right).
 \]
 The Clifford relation \(c(dx/x)^2=-I\), together with the graded matrix
-trace, leaves the term containing \(A\); the term odd in \(\lambda\)
-integrates to zero. Finally,
+trace, transports the \(E^-\)-block through \(c(dx/x)\) and combines it
+with the \(E^+\)-block. Writing \(c=c(dx/x)\), the relation
+\(cA^+=-A^-c\) shows that the surviving contribution is the ordinary trace of
+\(A^+e^{-t(A^+)^2}\) on \(E^+|_Y\); the term odd in \(\lambda\) integrates
+to zero. Finally,
 \[
  \int_{\mathbb R}e^{-t\lambda^2}\,d\lambda
  =\sqrt{\frac{\pi}{t}}.
@@ -2245,11 +2345,13 @@ gives
 \[
  F'(t)
  =
- -\frac1{2\sqrt{\pi t}}\Tr(Ae^{-tA^2}).
+ -\frac1{2\sqrt{\pi t}}\Tr(A^+e^{-t(A^+)^2}).
 \]
 This is the only place where the b-supertrace varies with \(t\).
 
-The full heat kernel and the spectral gap at the boundary imply
+The fully elliptic large-time heat theorem and the spectral gap at the
+boundary imply that the b-heat kernel converges to the finite-rank
+\(L^2\)-kernel projections (whose b-traces are ordinary traces), hence
 \[
  \lim_{t\to\infty}F(t)=\operatorname{ind}(D^+_{\mathrm{APS}}).
 \]
@@ -2271,7 +2373,7 @@ Integrating the trace-defect identity and using the Mellin formula at
  \left[
  \widehat A(TX)\operatorname{ch}(E/S)
  \right]_{[n]}
- -\frac12\eta(A).
+ -\frac12\eta(A^+).
 \]
 
 Indeed,
@@ -2279,44 +2381,55 @@ Indeed,
  F(\infty)-F(0)
  =
  -\frac1{2\sqrt\pi}
- \int_0^\infty t^{-1/2}\Tr(Ae^{-tA^2})\,dt
- =-\frac12\eta_A(0).
+ \int_0^\infty t^{-1/2}\Tr(A^+e^{-t(A^+)^2})\,dt
+ =-\frac12\eta_{A^+}(0).
 \]
 At the lower endpoint, this means: first insert \(t^{s/2}\) for
 \(\operatorname{Re}s\) large, use the Mellin identity, and then continue
 to \(s=0\).
 
-If \(A\) has kernel, a constant shift of its zero modes along the entire
+If \(A^+\) has kernel, a constant shift of its zero modes along the entire
 cylinder is not a finite-rank perturbation of the cylindrical operator.
-Use instead the global b-smoothing perturbation \(T_b\) constructed in the
-K-theoretic section. The b-heat theorem applies to the fully elliptic
-operator \(D+T_b\), and smoothing does not change the interior local index
+Use instead the global chiral b-smoothing perturbation \(T_b^+\) constructed
+in the K-theoretic section. The b-heat theorem applies to
+\(\mathcal D_T\), and smoothing does not change the interior local index
 density.
 
-The perturbation comparison theorem for the positive zero-mode spectral
-section states
+\begin{theorem}[Ideal-boundary perturbation comparison; quoted]
+Let \(V=\ker A^+\), choose the involution \(T=-I_V\), and let \(T_b^+\)
+be a global b-smoothing realization with suspended normal family
 \[
- \operatorname{ind}_b(D+T_b)=\operatorname{ind}D^+_{\mathrm{APS}},
- \qquad
- \eta(A;T_b)=\eta(A)+h(A).
+ I(T_b^+,\lambda)
+ =c(dx/x)\varepsilon\rho(\lambda)\Pi_V.
 \]
-Here \(\eta(A;T_b)\) is the generalized boundary eta term produced by the
-indicial family of \(D+T_b\). The second equality is normalized by the
-finite-dimensional boundary model
-\(A+\varepsilon\Pi_0\): every zero eigenvalue is moved to the positive
-side, while the nonzero spectrum is unchanged. Homotopy of admissible
-global b-smoothing realizations preserves this value; see
-\cite{Melrose,MelrosePiazza}. Applying the preceding trace-defect argument
-to \(D+T_b\) therefore gives the correction
-\(-(\eta(A)+h(A))/2\). This is the analytic comparison step that cannot be
-replaced by perturbing the boundary family alone.
+Then \(P_T=P+T_b^+\) and \(D^+_{\mathrm{APS}}\) have naturally identified
+kernels and adjoint kernels. Moreover the generalized boundary correction
+in the b-trace-defect formula for \(\mathcal D_T\) is
+\[
+ \eta(A^+)-\operatorname{sign}(T)
+ =\eta(A^+)+\dim V.
+\]
+\end{theorem}
+
+This is Loya's ideal-boundary comparison theorem, equivalently the
+Melrose--Piazza spectral-section comparison \cite{Loya,MelrosePiazza}.
+The sign is now explicit:
+\(\operatorname{sign}(-I_V)=-\dim V\).  Analytically, the suspended family
+is homotoped through invertibles to the direct sum of the nonzero family
+\(i\lambda+A^+\) and the finite-dimensional positive zero-mode model
+\(i\lambda+\varepsilon\); the first contributes \(\eta(A^+)\) and the
+second contributes \(\dim V\).  Applying the preceding trace-defect
+calculation to \(\mathcal D_T\) therefore gives
+\(-\bigl(\eta(A^+)+\dim V\bigr)/2\). This comparison step cannot be
+replaced by perturbing the boundary family without constructing a global
+b-operator.
 
 \begin{theorem}[Atiyah--Patodi--Singer]
 Let \(D^+\) be a product-type graded Dirac operator on an
 even-dimensional compact manifold with boundary. With APS boundary
 condition
 \[
- \Pi_{\geq0}(A)(u|_{\partial X})=0,
+ \Pi_{\geq0}(A^+)(u|_{\partial X})=0,
 \]
 one has
 \[
@@ -2328,7 +2441,7 @@ one has
  \widehat A(TX)\operatorname{ch}(E/S)
  \right]_{[n]}
  -
- \frac{\eta_A(0)+\dim\ker A}{2}.
+ \frac{\eta_{A^+}(0)+\dim\ker A^+}{2}.
  }
 \]
 \end{theorem}
@@ -2342,10 +2455,10 @@ Why can the boundary correction not be another local curvature integral?
 
 \begin{answer}
 The derivative \(F'(t)\) is the full spectral trace
-\(\Tr(Ae^{-tA^2})\), not the integral of one fixed heat coefficient.
-Integrating it from zero to infinity uses every eigenvalue of \(A\).
+\(\Tr(A^+e^{-t(A^+)^2})\), not the integral of one fixed heat coefficient.
+Integrating it from zero to infinity uses every eigenvalue of \(A^+\).
 Small-time asymptotics control the meromorphic continuation, but the value
-\(\eta_A(0)\) also contains large-time information and therefore depends on
+\(\eta_{A^+}(0)\) also contains large-time information and therefore depends on
 the global spectral asymmetry. This is exactly the information lost when a
 local index density is integrated on a manifold with boundary.
 \end{answer}
@@ -2355,6 +2468,10 @@ local index density is integrated on a manifold with boundary.
 \bibitem{APS}
 M.~F. Atiyah, V.~K. Patodi, and I.~M. Singer,
 \emph{Spectral asymmetry and Riemannian geometry I}.
+
+\bibitem{Loya}
+P.~Loya,
+\emph{Dirac operators, boundary value problems, and the b-calculus}.
 
 \bibitem{Melrose}
 R.~B. Melrose,
