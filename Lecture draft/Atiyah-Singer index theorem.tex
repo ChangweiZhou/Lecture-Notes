@@ -176,9 +176,29 @@ It is determined by the Koszul formula
 Metric compatibility expresses \(Xg(Y,Z)\), \(Yg(Z,X)\), and
 \(Zg(X,Y)\) through covariant derivatives. Add the first two expressions,
 subtract the third, and use zero torsion to obtain the displayed formula.
-It proves uniqueness. Conversely, the formula defines \(\nabla_XY\);
-direct substitution verifies the connection rules, metric compatibility,
-and zero torsion.
+It proves uniqueness.
+
+For existence, denote the right-hand side of the Koszul formula by
+\(K(X,Y,Z)\).  The derivatives of a function multiplying \(Z\) cancel,
+so \(K(X,Y,fZ)=fK(X,Y,Z)\).  Nondegeneracy of \(g\) therefore defines a
+unique vector field \(\nabla_XY\) by
+\(2g(\nabla_XY,Z)=K(X,Y,Z)\).  Expanding the same formula gives
+\[
+ K(fX,Y,Z)=fK(X,Y,Z),
+ \qquad
+ K(X,fY,Z)=fK(X,Y,Z)+2X(f)g(Y,Z).
+\]
+Hence \(\nabla_{fX}Y=f\nabla_XY\) and
+\(\nabla_X(fY)=X(f)Y+f\nabla_XY\), so this is a connection.  Finally,
+\[
+ K(X,Y,Z)-K(Y,X,Z)=2g([X,Y],Z)
+\]
+proves that its torsion vanishes, while
+\[
+ K(X,Y,Z)+K(X,Z,Y)=2Xg(Y,Z)
+\]
+proves metric compatibility.  Thus the connection defined by the formula
+has both required properties.
 \end{proof}
 
 The Riemann curvature tensor is
@@ -247,7 +267,10 @@ when \(f\) is homogeneous of degree \(k\).
 \end{proposition}
 
 \begin{proof}
-Write \(\nabla^t=d+\omega_t\) in a local frame and
+The difference of two connections is tensorial; consequently
+\(\alpha_t:=\dot\nabla^t\) is a globally defined element of
+\(\Omega^1(M;\operatorname{End}E)\).  In a local frame
+\(\nabla^t=d+\omega_t\), it is represented by
 \(\alpha_t=\dot\omega_t\). Since
 \[
  F_t=d\omega_t+\omega_t\wedge\omega_t,
@@ -315,6 +338,31 @@ and
 These power-series expressions are interpreted through invariant
 polynomials. Their cohomology classes are denoted
 \(\operatorname{ch}(E)\), \(\Ahat(E)\), and \(L(E)\).
+
+The determinant notation is shorthand for traces of power series.  If
+\(f(z)=1+O(z)\), then
+\[
+ \det f(F)=\exp\bigl(\Tr\log f(F)\bigr),
+ \qquad
+ \det{}^{1/2}f(F)
+ =\exp\!\left(\frac12\Tr\log f(F)\right).
+\]
+Although these are written as infinite series, only finitely many terms can
+contribute in any fixed differential-form degree.  Conjugating the curvature
+does not change its traces, so every coefficient is an invariant polynomial
+and Chern--Weil theory applies.
+
+\begin{question}
+Why do traces and determinants appear in the index density?
+\end{question}
+
+\begin{answer}
+Curvature is an endomorphism-valued two-form, whereas the index density must
+be an ordinary scalar form.  The trace turns powers of curvature into scalar
+forms and is additive under direct sum.  Exponentiating traces packages the
+multiplicative characteristic sequences, such as \(\Ahat\) and \(L\), that
+arise from independent curvature two-plane blocks in the heat model.
+\end{answer}
 
 For a complex bundle with Chern roots \(x_j\), the Todd form is
 \[
@@ -496,14 +544,25 @@ Therefore set
  \partial_\xi^\alpha q_{-m-k}\,D_x^\alpha p_{m-\ell}
  \right)p_m^{-1}.
 \]
-This removes the next homogeneous error. A partition of unity patches the
-construction, since discrepancies on overlaps have one lower order.
-Borel's lemma produces a classical symbol \(q\sim\sum_jq_{-m-j}\); the
-quantized operator \(Q\) satisfies \(QP=I-R_L\) with \(R_L\) smoothing.
-The same construction on the other side gives a right parametrix.
-Equivalently, ellipticity forces the symbol of \(PQ-I\) to vanish to every
-order once \(QP-I\) does. A smoothing correction then gives one operator
-with both displayed identities.
+This removes the next homogeneous error.  To globalize, choose coordinate
+charts and bundle trivializations, quantize the local asymptotic inverses,
+and insert a partition of unity on both sides of each local operator.  The
+principal parts agree on overlaps because they are determined intrinsically
+by \(p_m^{-1}\); hence the first patched error has order \(-1\).  Repeating
+the same correction in the global symbol sequence removes successively all
+homogeneous errors.  Borel summation then gives a left parametrix
+\(Q_L\) and, by the analogous right recursion, a right parametrix \(Q_R\):
+\[
+ Q_LP=I-R_L,\qquad PQ_R=I-R_R,qquad R_L,R_R\in\Psi^{-\infty}.
+\]
+The single operator
+\[
+ Q=Q_L+Q_R-Q_RPQ_L
+\]
+is two-sided modulo smoothing: substituting the two identities shows that
+both \(QP-I\) and \(PQ-I\) contain a smoothing factor.  This is the
+standard globalization and asymptotic-completeness argument of the
+classical pseudodifferential calculus.
 \end{proof}
 
 \begin{figure}[htbp]
@@ -534,8 +593,9 @@ A smoothing operator maps every Sobolev space continuously into every
 higher Sobolev space and is compact as an operator \(H^s\to H^s\).
 
 \begin{theorem}[Elliptic regularity]
-If \(P\) is elliptic and \(Pu\in H^{s-m}\), then \(u\in H^s\). More
-precisely,
+If \(P\) is elliptic, \(u\in\mathcal D'(M;E)\), and
+\(Pu\in H^{s-m}(M;F)\), then \(u\in H^s(M;E)\). More precisely, for
+\(u\in H^s\),
 \[
  \lVert u\rVert_{H^s}
  \leq C\bigl(\lVert Pu\rVert_{H^{s-m}}+\lVert u\rVert_{H^{s-1}}\bigr).
@@ -543,9 +603,23 @@ precisely,
 \end{theorem}
 
 \begin{proof}
-From \(u=QPu+R_Lu\), the first term lies in \(H^s\), while the second is
-smooth. The estimate follows from boundedness of \(Q\), compactness of the
-lower-order inclusion, and the standard contradiction argument.
+Every distribution on a compact manifold belongs to \(H^{-N}\) for some
+\(N\).  The parametrix identity, valid on distributions,
+\[
+ u=QPu+R_Lu,
+\]
+places the first term in \(H^s\) and the second in \(C^\infty\), proving
+regularity directly.  For the estimate, use the mapping properties
+\(Q:H^{s-m}\to H^s\) and
+\(R_L:H^{s-1}\to H^s\):
+\[
+ \lVert u\rVert_{H^s}
+ \leq \lVert QPu\rVert_{H^s}+\lVert R_Lu\rVert_{H^s}
+ \leq C\bigl(\lVert Pu\rVert_{H^{s-m}}
+                    +\lVert u\rVert_{H^{s-1}}\bigr).
+\]
+This also records the lower-order term needed when the estimate is used in
+a compactness argument.
 \end{proof}
 
 \begin{corollary}
@@ -589,10 +663,80 @@ deformations, and unchanged by lower-order perturbations.
 
 \section{Hodge theory}
 
-Let \((E^\bullet,D_\bullet)\) be an elliptic complex. Define
+The original lectures reached Hodge theory twice: first from an elliptic
+parametrix and later by integrating the heat parametrix.  Both viewpoints
+are useful.  The first proves closed range and finite-dimensionality; the
+second identifies the Green operator geometrically.
+
+Let \((E^\bullet,D_\bullet)\) be an elliptic complex, so
+\(D_jD_{j-1}=0\), and put
 \[
+ \Delta_j=D_{j-1}D_{j-1}^*+D_j^*D_j,
+ \qquad
  \mathcal H^j=\ker\Delta_j.
 \]
+
+\begin{lemma}[Energy identity]
+For every smooth section \(u\in\Gamma(E^j)\),
+\[
+ \langle\Delta_ju,u\rangle
+ =\lVert D_{j-1}^*u\rVert^2+\lVert D_ju\rVert^2.
+\]
+Consequently
+\[
+ \mathcal H^j=\ker D_j\cap\ker D_{j-1}^*.
+\]
+\end{lemma}
+
+\begin{proof}
+Move one factor in each summand of \(\Delta_j\) across the inner
+product.  Both terms are nonnegative, so their sum vanishes precisely
+when both operators annihilate \(u\).
+\end{proof}
+
+The analytic input is the following estimate.  It is the point at which
+ellipticity and compactness of the manifold enter the proof.
+
+\begin{proposition}[Elliptic estimate and compact resolvent]
+For every \(s\in\mathbb R\) there is a constant \(C_s\) such that
+\[
+ \lVert u\rVert_{H^{s+2}}
+ \leq C_s\bigl(\lVert\Delta_ju\rVert_{H^s}
+                    +\lVert u\rVert_{H^s}\bigr).
+\]
+The closure of \(\Delta_j\) initially defined on smooth sections is the
+self-adjoint operator with domain \(H^2(E^j)\).  It has compact resolvent.
+Hence its spectrum is a discrete sequence
+\[
+ 0\leq\lambda_0\leq\lambda_1\leq\cdots\longrightarrow\infty
+\]
+with finite multiplicities and a smooth orthonormal eigenbasis.
+\end{proposition}
+
+\begin{proof}
+Choose a pseudodifferential parametrix \(Q\) of order \(-2\) with
+\(Q\Delta_j=I-R\), where \(R\) is smoothing.  Mapping properties of
+\(Q\) and \(R\) give
+\[
+ \lVert u\rVert_{H^{s+2}}
+ \leq C\lVert\Delta_ju\rVert_{H^s}+C'\lVert u\rVert_{H^s}.
+\]
+The symmetric nonnegative operator defined by the quadratic form
+\[
+ q_j(u)=\lVert D_ju\rVert^2+\lVert D_{j-1}^*u\rVert^2,
+ \qquad u\in H^1(E^j),
+\]
+has a Friedrichs extension.  Elliptic regularity identifies its operator
+domain with \(H^2(E^j)\), so this is the unique self-adjoint closure of the
+smooth Laplacian.  For every \(c>0\), the energy identity makes
+\(\Delta_j+c\) injective.  Fredholmness and self-adjointness identify its
+cokernel with its kernel, hence it is bijective and its inverse maps
+\(L^2\) boundedly to \(H^2\).
+The inclusion \(H^2\hookrightarrow L^2\) is compact by Rellich's lemma,
+so \((\Delta_j+c)^{-1}\) is compact and self-adjoint on \(L^2\).  The
+spectral theorem for compact self-adjoint operators gives the asserted
+eigenbasis; elliptic regularity makes every eigenvector smooth.
+\end{proof}
 
 \begin{theorem}[Hodge decomposition]
 For every \(j\),
@@ -601,49 +745,94 @@ For every \(j\),
  =
  \mathcal H^j
  \mathbin{\widehat\oplus}
- \overline{\operatorname{im}D_{j-1}}
+ \operatorname{im}D_{j-1}
  \mathbin{\widehat\oplus}
- \overline{\operatorname{im}D_j^*}.
+ \operatorname{im}D_j^*.
 \]
-For an elliptic complex on a compact manifold, both ranges are closed,
-\(\mathcal H^j\) is finite-dimensional and smooth, and
+Here the operators are taken between their natural Sobolev domains; both
+ranges are closed.  On smooth sections the decomposition restricts to
+\[
+ \Gamma(E^j)
+ =\mathcal H^j\oplus D_{j-1}\Gamma(E^{j-1})
+                  \oplus D_j^*\Gamma(E^{j+1}).
+\]
+Moreover \(\mathcal H^j\) is finite-dimensional and
 \[
  H^j(D)\cong\mathcal H^j.
 \]
 \end{theorem}
 
 \begin{proof}
-The three spaces are mutually orthogonal. The elliptic operator
-\(\Delta_j\) is self-adjoint and Fredholm, hence
+Let \(H_j\) be orthogonal projection onto the zero eigenspace.  On the
+orthogonal complement define the Green operator by the convergent
+spectral series
 \[
- L^2(E^j)=\ker\Delta_j\oplus\operatorname{im}\Delta_j.
+ G_ju=\sum_{\lambda_\nu>0}
+       \lambda_\nu^{-1}\langle u,e_\nu\rangle e_\nu,
+ \qquad G_jH_j=H_jG_j=0.
 \]
-If \(G_j\) is the inverse of \(\Delta_j\) on
-\(\mathcal H^j{}^\perp\), extended by zero on \(\mathcal H^j\), then
+The first positive eigenvalue is separated from zero, so \(G_j\) is
+bounded on \(L^2\), and
 \[
- \Delta_jG_j=G_j\Delta_j=I-H_j,
+ \Delta_jG_j=G_j\Delta_j=I-H_j.
 \]
-where \(H_j\) is orthogonal projection onto \(\mathcal H^j\). The complex
-relations imply
+The elliptic estimate applied repeatedly shows that \(G_j\) maps smooth
+sections to smooth sections.
+
+On smooth sections the complex identities give
 \[
  D_j\Delta_j=\Delta_{j+1}D_j,
-\qquad
+ \qquad
  D_{j-1}^*\Delta_j=\Delta_{j-1}D_{j-1}^*.
 \]
-Functional calculus therefore gives the corresponding commutation
-relations with \(G\). Expanding \(\Delta_jG_j=I-H_j\) yields
+Every eigenvector is smooth.  Thus, if \(\Delta_je_\nu=\lambda_\nu e_\nu\),
+then \(D_je_\nu\) is either zero or a smooth \(\lambda_\nu\)-eigenvector
+of \(\Delta_{j+1}\), and similarly for \(D_{j-1}^*\).  Applying the
+spectral definition of \(G\) on the finite linear span of the eigenvectors
+therefore gives
+\[
+ D_jG_j=G_{j+1}D_j,
+ \qquad
+ D_{j-1}^*G_j=G_{j-1}D_{j-1}^*.
+\]
+These identities extend to their natural graph domains because that span
+is a core for all the operators involved.  Moreover
+\(G_j:L^2\to H^2\) is bounded by the elliptic estimate.
+
+Expanding \(I-H_j=\Delta_jG_j\) now yields the explicit decomposition
 \[
  u=H_ju+D_{j-1}D_{j-1}^*G_ju+D_j^*D_jG_ju.
 \]
-Thus every \(u\) is a sum of a harmonic, an exact, and a coexact term.
-These three terms are orthogonal: for example,
+All three displayed operators are bounded on \(L^2\): the Green operator
+gains two derivatives and each remaining factor has total order two.  The
+three terms are mutually orthogonal.  For example,
 \[
  \langle D_{j-1}v,D_j^*w\rangle
  =\langle D_jD_{j-1}v,w\rangle=0.
 \]
-The displayed bounded projections onto the three summands show that both
-ranges are closed. Elliptic regularity makes \(\mathcal H^j\)
-finite-dimensional and smooth.
+Put
+\[
+ P_{\mathrm{ex}}=D_{j-1}D_{j-1}^*G_j,
+ \qquad
+ P_{\mathrm{coex}}=D_j^*D_jG_j.
+\]
+The decomposition just proved is orthogonal, and
+\(P_{\mathrm{ex}}u\) is exact while \(P_{\mathrm{coex}}u\) is coexact.
+Applying the decomposition to either of these two terms shows
+\[
+ P_{\mathrm{ex}}^2=P_{\mathrm{ex}},\qquad
+ P_{\mathrm{coex}}^2=P_{\mathrm{coex}},\qquad
+ P_{\mathrm{ex}}P_{\mathrm{coex}}=0.
+\]
+Their ranges are exactly the Sobolev ranges in the theorem.  Indeed,
+\(P_{\mathrm{ex}}u=D_{j-1}(D_{j-1}^*G_ju)\) lies in
+\(D_{j-1}H^1\); conversely, for \(v=D_{j-1}w\), first with \(w\) smooth
+and then by \(H^1\)-approximation, orthogonality and
+\(I=H_j+P_{\mathrm{ex}}+P_{\mathrm{coex}}\) give
+\(P_{\mathrm{ex}}v=v\).  The coexact case is identical.  Ranges of
+bounded projections are closed.  Compact resolvent makes
+\(\mathcal H^j\) finite-dimensional, and elliptic regularity makes it
+smooth.
 
 If \(D_ju=0\), pair \(u\) with its coexact summand:
 \[
@@ -651,8 +840,55 @@ If \(D_ju=0\), pair \(u\) with its coexact summand:
 \]
 Orthogonality therefore forces that summand to vanish, so \(u\) is
 cohomologous to \(H_ju\). A harmonic exact form is zero, proving
-uniqueness.
+uniqueness.  Finally, if \(u\) is smooth, then \(G_ju\) is smooth by
+elliptic regularity, so every term in the decomposition is smooth.  This
+proves the smooth statement as well as the \(L^2\) statement.
 \end{proof}
+
+\subsection{The heat-kernel proof and the Green operator}
+
+The second proof in the original lectures starts from the heat operator.
+For \(t>0\), spectral calculus gives
+\[
+ e^{-t\Delta_j}u
+ =\sum_\nu e^{-t\lambda_\nu}\langle u,e_\nu\rangle e_\nu.
+\]
+It is smoothing, solves
+\[
+ (\partial_t+\Delta_j)e^{-t\Delta_j}=0,
+ \qquad
+ \lim_{t\downarrow0}e^{-t\Delta_j}u=u,
+\]
+and converges in operator norm to \(H_j\) as \(t\to\infty\).  Therefore
+\[
+ G_j=\int_0^\infty(e^{-t\Delta_j}-H_j)\,dt.
+\]
+The integral converges in operator norm because the nonzero spectrum is
+bounded below by the first positive eigenvalue.  Integrating the heat
+equation gives
+\[
+ \Delta_jG_j
+ =-\int_0^\infty\partial_t(e^{-t\Delta_j}-H_j)\,dt
+ =I-H_j.
+\]
+Thus the heat-parametrix construction in the next chapter does more than
+produce a fundamental solution: after integration in time it produces
+the same Green operator used in Hodge decomposition.
+
+\begin{question}
+Does the heat-kernel proof assume Hodge decomposition when it uses the
+projection \(H_j\)?
+\end{question}
+
+\begin{answer}
+No.  Compact resolvent is obtained from the elliptic estimate and Rellich
+compactness, independently of Hodge decomposition.  The spectral theorem
+then defines the finite-dimensional zero-eigenspace and its orthogonal
+projection.  Integrating the heat semigroup constructs \(G_j\), and the
+identity \(I-H_j=\Delta_jG_j\) yields Hodge decomposition.  One may instead
+construct a heat parametrix first and use analytic Fredholm theory; the
+logical input is the same compactness statement.
+\end{answer}
 
 For the de Rham complex,
 \[
@@ -662,6 +898,28 @@ For the de Rham complex,
  \Delta=dd^*+d^*d.
 \]
 Thus every de Rham cohomology class has a unique harmonic representative.
+
+\begin{corollary}[Poincar\'e duality]
+If \(M\) is closed and oriented of dimension \(n\), then the pairing
+\[
+ H^k_{\mathrm{dR}}(M)\times H^{n-k}_{\mathrm{dR}}(M)
+ \longrightarrow\mathbb R,
+ \qquad
+ ([\alpha],[\beta])\longmapsto\int_M\alpha\wedge\beta
+\]
+is nondegenerate.
+\end{corollary}
+
+\begin{proof}
+Choose the harmonic representative \(\alpha\) of a nonzero class.
+The Hodge star commutes with the Laplacian, so \(*\alpha\) is harmonic and
+represents a class in degree \(n-k\).  Then
+\[
+ \int_M\alpha\wedge *\alpha=\lVert\alpha\rVert_{L^2}^2>0.
+\]
+Hence no nonzero class lies in the left radical; symmetry gives the same
+conclusion for the right radical.
+\end{proof}
 
 Grade forms by parity and set
 \[
@@ -780,16 +1038,16 @@ of an invertible bundle map adds an invertible operator and hence index
 zero. These are precisely the relations used to define
 \(K_c^0(T^*M)\).
 
-\begin{lemma}[Compatibility with push-forward]
+\begin{theorem}[Analytic push-forward; Atiyah--Singer]
 Let \(i:M\hookrightarrow N\) be an embedding of closed manifolds. For
 every \(\alpha\in K_c^0(T^*M)\),
 \[
  \operatorname{a\text{-}ind}(i_!\alpha)
  =\operatorname{a\text{-}ind}(\alpha).
 \]
-\end{lemma}
+\end{theorem}
 
-\begin{proof}
+\begin{proof}[Proof architecture and imported inputs]
 Choose a tubular neighborhood with normal bundle \(\nu\). The normal
 bundle of \(T^*M\) in \(T^*N\) is \(\pi^*(\nu\oplus\nu)\), with complex
 structure
@@ -845,12 +1103,19 @@ the Fredholm product formula gives
  =\operatorname{ind}(P_a)\operatorname{ind}(B_\nu)
  =\operatorname{ind}(P_a).
 \]
-A connection patches the fibrewise construction over \(M\). Changing the
-connection or the tubular neighborhood changes only lower-order terms
-through a Fredholm homotopy. Finally, extension from the tubular
-neighborhood is excision: the symbol is invertible off that neighborhood,
-so the complementary part contributes index zero. These steps give the
-claimed equality.
+A complete proof uses three standard results, each in its family version:
+the Bott operator above represents the Thom class and has index one; the
+analytic index is multiplicative for the graded external product; and
+quantization is compatible with tubular-neighborhood excision. A
+connection globalizes the fibrewise Bott operator, and anticommutation of
+the two odd summands makes the square split into base and normal parts.
+Changing the connection or tubular neighborhood produces a Fredholm
+homotopy. Excision then extends the tubular model to \(N\), since the
+symbol is invertible on the complement. These are the analytic
+push-forward theorem of Atiyah--Singer and the Atiyah--Bott--Shapiro Thom
+construction; full proofs are given in \cite{ASI,ABS}. Subject to these
+three quoted inputs, the displayed product-index calculation proves the
+claim.
 \end{proof}
 
 We can now finish the proof of the index theorem. Choose an embedding
@@ -933,7 +1198,10 @@ and the semigroup identity
 \]
 
 \begin{proposition}[Duhamel formula]
-For a differentiable family \(L_r\) of such operators,
+Let \(L_r\) be a differentiable family of nonnegative self-adjoint
+Laplace-type operators with common domain \(H^2(E)\), and suppose
+\(r\mapsto L_r\) is differentiable as a map
+\(H^2(E)\to L^2(E)\). Then
 \[
  \frac{d}{dr}e^{-tL_r}
  =
@@ -1017,18 +1285,24 @@ The integral is smooth at \(x=y\), and induction gives smooth \(u_j\) on a
 normal neighborhood of the diagonal.
 
 Multiply by a cutoff supported in a normal neighborhood of the diagonal.
-The error
+For every pair of nonnegative integers \(a,b\), the error
 \[
  R_N=(\partial_t+L)H_N
 \]
-is \(O(t^{N-n/2})\), with corresponding estimates after differentiation.
-For \(N\) large, the Volterra series
+satisfies, after solving sufficiently many transport equations,
+\[
+ \lVert\partial_t^aR_N(t)\rVert_{C^b(M\times M)}
+ \leq C_{a,b,N}t^{N-n/2-a}.
+\]
+For \(N\) large relative to the requested seminorms, the Volterra series
 \[
  K
  =
  H_N-H_N*R_N+H_N*R_N*R_N-\cdots
 \]
-converges, where
+converges in the Fr\'echet topology of smooth kernels on
+\((0,T]\times M\times M\), with its natural weighted seminorms at
+\(t=0\), where
 \[
  (A*B)(t)=\int_0^tA(t-s)B(s)\,\dd s.
 \]
@@ -1312,6 +1586,37 @@ Its grading by even and odd degree gives
  \ind D_{\mathrm{dR}}^+=\chi(M).
 \]
 
+\begin{example}[The Cauchy--Riemann operator as a Dirac operator]
+On \(\mathbb R^2\cong\mathbb C\), with \(z=x+iy\), set
+\[
+ \bar\partial=\frac12(\partial_x+i\partial_y),
+ \qquad
+ \bar\partial^*=-\frac12(\partial_x-i\partial_y).
+\]
+Then
+\[
+ \mathcal D_{\bar\partial}
+ =\sqrt2
+ \begin{pmatrix}
+ 0&\bar\partial^*\\
+ \bar\partial&0
+ \end{pmatrix}
+\]
+has principal symbol
+\[
+ \sigma_1(\mathcal D_{\bar\partial})(\xi)
+ =\frac{i}{\sqrt2}
+ \begin{pmatrix}
+ 0&-(\xi_x-i\xi_y)\\
+ \xi_x+i\xi_y&0
+ \end{pmatrix},
+\]
+whose square is \(|\xi|^2/2\) times the identity with these choices of
+scalar components.  After a harmless normalization, this is the
+two-dimensional spin\(^{c}\) Dirac symbol.  This example explains why the
+Dolbeault operator later has the same elliptic symbol as a Dirac operator.
+\end{example}
+
 If \(M\) is spin, its spinor bundle \(S=S^+\oplus S^-\) carries the spin
 connection and spin Dirac operator
 \[
@@ -1352,14 +1657,18 @@ It vanishes on supercommutators.
 
 \begin{lemma}[Clifford cancellation]
 Let \(\dim V=n\) be even and let \(S\) be the spin representation. The
-supertrace of a Clifford monomial of degree less than \(n\) is zero. On the
-top Clifford degree, the supertrace is the oriented volume functional,
-with the normalization fixed by the chirality operator.
+supertrace of an element of reduced Clifford degree less than \(n\) is
+zero. Equivalently, the supertrace vanishes below degree \(n\) in the
+associated graded Clifford algebra. On the top Clifford degree, it is the
+oriented volume functional, with normalization fixed by the chirality
+operator.
 \end{lemma}
 
 \begin{proof}
-Odd Clifford monomials are odd endomorphisms and therefore have zero
-supertrace. Let \(T=c(e^{i_1})\cdots c(e^{i_{2r}})\) have even degree
+Use the Clifford relations first to reduce every word to a linear
+combination of products of distinct generators. Odd reduced monomials are
+odd endomorphisms and therefore have zero supertrace. Let
+\(T=c(e^{i_1})\cdots c(e^{i_{2r}})\) have distinct indices and even degree
 \(2r<n\), and choose \(e^j\) not among its factors. Then \(c(e^j)\)
 commutes with \(T\) but anticommutes with the chirality operator
 \(\Gamma\). Since \(\operatorname{str}(T)=\operatorname{tr}(\Gamma T)\),
@@ -1491,7 +1800,7 @@ graded, the model operator is
  -\sum_i\left(
  \partial_i-\frac14\sum_j\mathcal R_{ij}x^j
  \right)^2
-F^{E/S}_p.
+ +F^{E/S}_p.
 \]
 The scalar-curvature term in the Lichnerowicz formula has lower Getzler
 degree and disappears; its effect is already encoded in the oscillator
@@ -1504,7 +1813,7 @@ Clifford degree \(k\) is multiplied by \(\varepsilon^{-k}\), then
 coefficientwise on compact sets. Duhamel's formula and Gaussian estimates
 then show convergence of the rescaled heat kernels, with all derivatives.
 
-\begin{lemma}[Model heat kernel]
+\begin{lemma}[Model heat kernel; standard Mehler calculation]
 The heat kernel of the rescaled harmonic oscillator is given by Mehler's
 formula. After Clifford supertrace and the Chern--Weil normalization, its
 diagonal value at the origin is
@@ -1516,7 +1825,7 @@ diagonal value at the origin is
 \]
 \end{lemma}
 
-\begin{proof}
+\begin{proof}[Normalization check]
 Put the skew-symmetric curvature matrix into \(2\times2\) blocks. The model
 operator splits into commuting two-dimensional oscillators and a constant
 endomorphism. For the oscillator part, Mehler's formula at the origin is
@@ -1549,6 +1858,11 @@ taking degree \(n\) gives
  \operatorname{ch}(E/S,\nabla^E)
  \right]_{[n]}(p).
 \]
+The block diagonalization, the branch of the determinant square root, and
+the Clifford-supertrace normalization are the standard Mehler calculation
+in \cite[Chapter~4]{BGV}; the formulas above record the conventions used
+here. Thus this lemma imports Mehler's formula, but makes explicit how its
+two factors become \(\Ahat\) and the relative Chern character.
 \end{proof}
 
 The determinant factor is \(\Ahat(TM)\), and the relative trace of the
@@ -1571,13 +1885,20 @@ kernel of \(D^2\), then
 \]
 \end{theorem}
 
-\begin{proof}
-The heat parametrix gives a complete local expansion. Clifford
-cancellation shows that coefficients of Getzler degree below \(n\) have
-zero supertrace. After parabolic rescaling, the only surviving coefficient
-is the heat kernel of the curvature model. The model lemma and the
-Clifford top-degree supertrace identify it with the displayed Chern--Weil
-form.
+\begin{proof}[Proof from the rescaled heat-kernel theorem]
+We use the standard rescaled heat-kernel theorem: in synchronous gauge,
+the Getzler-rescaled kernel of \(D^2\) converges with all derivatives on
+compact sets to the kernel of \(\mathcal H_p\), and the rescaled remainder
+has uniform Gaussian bounds. This is the analytic core of the local index
+theorem; complete constructions are given in \cite[Chapters~4--5]{BGV}
+and \cite{Gilkey}. The ordinary heat parametrix by itself does not imply
+this uniform rescaled statement.
+
+Given that theorem, Clifford cancellation shows that coefficients of
+Getzler degree below \(n\) have zero supertrace. After parabolic rescaling,
+the only surviving coefficient is the heat kernel of the curvature model.
+The model lemma and the Clifford top-degree supertrace identify it with the
+displayed Chern--Weil form.
 
 For the remainder, choose enough terms in the heat parametrix that its
 error is \(O(t^N)\) in every required \(C^k\)-seminorm. Under
@@ -1708,6 +2029,41 @@ where \(K\) is Gaussian curvature. Hence
 \]
 the classical Gauss--Bonnet formula.
 
+\begin{example}[Surface of revolution]
+This corrects the coordinate calculation discussed in the original
+manuscript.  Parametrize the generating curve by arclength and write the
+induced metric as
+\[
+ g=ds^2+f(s)^2d\theta^2.
+\]
+For the oriented orthonormal coframe
+\(\vartheta^1=ds\), \(\vartheta^2=f(s)d\theta\), Cartan's first structure
+equation
+\[
+ d\vartheta^i+\omega^i{}_j\wedge\vartheta^j=0
+\]
+gives
+\[
+ \omega^1{}_2=-f'(s)d\theta,
+ \qquad
+ \omega^2{}_1=f'(s)d\theta.
+\]
+Since the structure group is \(SO(2)\), the quadratic term in the curvature
+equation vanishes and
+\[
+ \Omega^1{}_2=d\omega^1{}_2
+ =-f''(s)ds\wedge d\theta
+ =-\frac{f''(s)}{f(s)}\vartheta^1\wedge\vartheta^2.
+\]
+Thus
+\[
+ K(s)=-\frac{f''(s)}{f(s)}.
+\]
+This computation is frame-independent because a change of oriented
+orthonormal frame changes \(\omega^1{}_2\) by an exact one-form and leaves
+\(d\omega^1{}_2\) unchanged.
+\end{example}
+
 \section{The signature operator}
 
 Let \(\dim M=4k\). On complex-valued \(p\)-forms define the chirality
@@ -1737,9 +2093,13 @@ the signature of the cup-product form on \(H^{2k}(M;\R)\).
 \end{proposition}
 
 \begin{proof}
-The kernel of \(D_{\mathrm{dR}}\) is the space of harmonic forms. Harmonic
-forms outside middle degree occur in Hodge-dual pairs and contribute
-equally to the two chirality eigenspaces. In middle degree, \(\tau=*\).
+The kernel of \(D_{\mathrm{dR}}\) is the space of harmonic forms. For
+\(p<2k\), the involution \(\tau\) exchanges
+\(\mathcal H^p\) and \(\mathcal H^{4k-p}\). On their direct sum it has
+matrix \(\bigl(\begin{smallmatrix}0&U^{-1}\\ U&0\end{smallmatrix}\bigr)\)
+for an isomorphism \(U\), so its \(+1\) and \(-1\) eigenspaces have equal
+dimension. In middle degree the phase \(i^{p(p-1)+2k}\) equals one when
+\(p=2k\), so \(\tau=*\).
 The positive and negative eigenspaces of \(*\) have dimensions equal to
 the positive and negative indices of
 \[
@@ -1766,11 +2126,17 @@ splitting principle, its relative Chern character multiplies the
 \[
  \prod_j\frac{x_j}{\tanh x_j},
 \]
-which is the Hirzebruch \(L\)-form. Concretely, on each oriented
-two-plane block the graded trace of the chirality action gives the ratio
+which is the Hirzebruch \(L\)-form. Concretely, restrict the exterior
+algebra representation to an oriented curvature two-plane and diagonalize
+its creation and annihilation operators. The two number-operator
+eigenlines diagonalize both curvature and chirality; taking their
+chirality-weighted traces and dividing by the spinor trace gives the block
+factor
 \[
  \frac{x/\tanh x}{(x/2)/\sinh(x/2)}.
 \]
+This elementary two-plane character identity, with the same curvature
+normalization, is recorded in \cite[Chapter~4]{BGV}.
 Multiplication over the blocks gives the displayed product. The analytic
 index is the signature by the preceding proposition.
 \end{proof}
@@ -2019,16 +2385,42 @@ Consequently,
 \end{theorem}
 
 \begin{proof}
-At a fixed point choose a unitary frame whose connection coefficients
-vanish. There \(L\) is a sum of products of holomorphic and
-antiholomorphic exterior multiplications, while \(\Lambda\) is the
-corresponding sum of contractions. The relation
+Fix \(p\in M\), choose a unitary K\"ahler-normal coframe
+\(\{\zeta^j\}\), and apply both sides to an arbitrary test form \(\alpha\).
+At \(p\), the connection coefficients vanish and \(\nabla\omega=0\), so
+\[
+ \partial\alpha=\sum_j\varepsilon(\zeta^j)\nabla_{Z_j}\alpha,
+ \qquad
+ \bar\partial\alpha=\sum_j\varepsilon(\bar\zeta^j)
+                              \nabla_{\bar Z_j}\alpha,
+\]
+whereas
+\[
+ \partial^*\alpha=-\sum_j\iota_{Z_j}\nabla_{\bar Z_j}\alpha,
+ \qquad
+ \bar\partial^*\alpha=-\sum_j\iota_{\bar Z_j}\nabla_{Z_j}\alpha.
+\]
+The algebraic relation
 \[
  \iota_v\varepsilon(\alpha)
  +\varepsilon(\alpha)\iota_v=\alpha(v)
 \]
-gives the two commutator identities term by term. Both sides are
-tensorial, so the pointwise calculation is global.
+gives
+\[
+ [\Lambda,\varepsilon(\zeta^j)]=-i\iota_{\bar Z_j},
+ \qquad
+ [\Lambda,\varepsilon(\bar\zeta^j)]=i\iota_{Z_j}.
+\]
+Since \(\nabla\Lambda=0\), substitution in the preceding first-order
+formulas yields
+\[
+ [\Lambda,\partial]\alpha=i\bar\partial^*\alpha,
+ \qquad
+ [\Lambda,\bar\partial]\alpha=-i\partial^*\alpha.
+\]
+The point and test form were arbitrary, so these are equalities of
+first-order differential operators; no tensoriality assertion about those
+operators is needed.
 
 The graded Jacobi identity and
 \(\partial\bar\partial+\bar\partial\partial=0\) give
@@ -2318,7 +2710,82 @@ sheaf cohomology.
 \section{Riemann surfaces}
 
 Let \(X\) be a compact connected Riemann surface of genus \(g\), and let
-\(L\to X\) be a holomorphic line bundle. Its degree is
+\(L\to X\) be a holomorphic line bundle.
+
+\subsection{Divisors, meromorphic sections, and degree}
+
+A divisor is a finite formal sum
+\[
+ D=\sum_{p\in X}n_p[p],\qquad n_p\in\mathbb Z,
+\]
+and \(\deg D=\sum_pn_p\).  If \(f\) is meromorphic, its principal divisor is
+\[
+ (f)=\sum_p\operatorname{ord}_p(f)[p].
+\]
+The argument principle on a compact Riemann surface gives
+\(\deg(f)=0\).  Consequently degree descends from divisors to divisor
+classes.
+
+The line bundle \(\mathcal O(D)\) is characterized locally as follows.  On
+a coordinate disk about \(p\), with coordinate \(z(p)=0\), a meromorphic
+section of \(\mathcal O(D)\) is allowed a pole of order at most \(n_p\) if
+\(n_p>0\), and is required to vanish to order at least \(-n_p\) if
+\(n_p<0\).  Equivalently,
+\[
+ H^0(X,\mathcal O(D))
+ =\{f\text{ meromorphic}:(f)+D\geq0\}\cup\{0\}.
+\]
+
+\begin{proposition}[Divisor--line-bundle correspondence]
+Every divisor determines a holomorphic line bundle \(\mathcal O(D)\) with a
+distinguished meromorphic section \(s_D\) satisfying \((s_D)=D\).
+Conversely, a nonzero meromorphic section \(s\) of a holomorphic line
+bundle \(L\) determines a divisor \((s)\) and an isomorphism
+\[
+ L\cong\mathcal O((s)).
+\]
+Two divisors define isomorphic line bundles precisely when they differ by
+a principal divisor.
+\end{proposition}
+
+\begin{proof}
+Choose disks \(U_p\) around the support of \(D\) and a complementary open
+set \(U_0\).  On \(U_p\cap U_0\), use the transition function
+\(z_p^{-n_p}\).  These functions form a holomorphic cocycle and define
+\(\mathcal O(D)\); the local functions \(z_p^{n_p}\) and \(1\) patch to a
+meromorphic section with divisor \(D\).  Conversely, local expressions
+\(s=f_ie_i\) in holomorphic frames have orders that agree on overlaps,
+because the transition functions are nowhere zero.  Dividing the local
+frame by the corresponding power of a coordinate identifies \(L\) with
+\(\mathcal O((s))\).  Replacing \(s\) by \(fs\) changes its divisor by
+\((f)\), and the same local construction proves the last assertion.
+\end{proof}
+
+\begin{proposition}
+For a holomorphic line bundle on a compact Riemann surface,
+\[
+ \deg L=\deg(s)=\int_Xc_1(L)
+\]
+for every nonzero meromorphic section \(s\).
+\end{proposition}
+
+\begin{proof}
+Choose a Hermitian metric and remove small disjoint disks around the zeros
+and poles of \(s\).  On their complement, \(s\) trivializes \(L\).  If
+\(\nabla s=A\otimes s\), then \(F^\nabla=dA\) there.  Stokes' theorem and
+the local form \(s=z^me\) give
+\[
+ \frac{i}{2\pi}\int_XF^\nabla
+ =\sum_p\frac{1}{2\pi i}\int_{|z|=\varepsilon}d\log z^{m_p}
+ =\sum_pm_p.
+\]
+Chern--Weil theory identifies the left side with \(\int_Xc_1(L)\).
+\end{proof}
+
+In particular, the divisor of a meromorphic one-form represents the
+canonical bundle \(K_X\); its degree is \(2g-2\).
+
+The degree of \(L\) is therefore
 \[
  \deg L=\int_Xc_1(L).
 \]
@@ -2364,15 +2831,34 @@ holomorphic, then
 by Stokes' theorem.
 
 Dolbeault theory identifies \(H^1(X,L)\) with harmonic \(L\)-valued
-\((0,1)\)-forms. The Hermitian Hodge star, followed by fibrewise duality,
-identifies this harmonic space anti-linearly with holomorphic sections of
-\(K_X\otimes L^{-1}\). To see holomorphicity, use
-\(\bar\partial_E\alpha=0\) and \(\bar\partial_E^*\alpha=0\); under the star,
-the second equation becomes the \(\bar\partial\)-equation for the dual
-section. Under this identification, the \(L^2\) inner product is the
-displayed integral pairing. A nonzero harmonic \(\alpha\) pairs with its
-star-dual to give \(\|\alpha\|_{L^2}^2>0\), and conversely. The pairing is
-therefore nondegenerate in both factors, proving the duality.
+\((0,1)\)-forms. Define the conjugate-linear Hermitian star
+\[
+ \bar *_{L}:\Omega^{0,1}(L)
+ \longrightarrow\Omega^{1,0}(L^*)
+ =\Gamma(K_X\otimes L^{-1})
+\]
+by
+\[
+ \beta\wedge\bar *_{L}\alpha
+ =\langle\beta,\alpha\rangle\,d\operatorname{vol}
+ \qquad(\beta,\alpha\in\Omega^{0,1}(L)),
+\]
+with the chosen complex orientation. Its formal-adjoint identity is
+\[
+ \bar\partial_{K_X\otimes L^{-1}}(\bar *_{L}\alpha)
+ =-\bar *_{L}(\bar\partial_L^*\alpha).
+\]
+Thus a harmonic \(\alpha\) determines the holomorphic section
+\(s_\alpha=\bar *_{L}\alpha\). Conversely,
+\(\bar *_{L}^{-1}\) sends a holomorphic section to a top-degree
+\(\bar\partial\)-closed form annihilated by \(\bar\partial_L^*\), hence to
+a harmonic form. Finally,
+\[
+ \int_X\alpha\wedge s_\alpha=\lVert\alpha\rVert_{L^2}^2.
+\]
+Every nonzero harmonic class therefore has a nonzero pairing, and the
+inverse construction proves nondegeneracy in the other factor. This proves
+the perfect pairing and the stated duality.
 \end{proof}
 
 Combining Serre duality with the index formula gives the classical

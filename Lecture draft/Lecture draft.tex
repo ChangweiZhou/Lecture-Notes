@@ -5,6 +5,8 @@
 \usepackage{mathpazo}
 \usepackage[margin=1in]{geometry}
 \usepackage{microtype}
+\usepackage{graphicx}
+\graphicspath{{Lecture draft/}}
 \usepackage{tikz-cd}
 \usetikzlibrary{arrows.meta,calc,decorations.pathreplacing,positioning,patterns}
 \usepackage[hidelinks]{hyperref}
@@ -52,6 +54,31 @@
 \clearpage
 \pagenumbering{arabic}
 \setcounter{page}{1}
+
+The argument is organized by dependency.  We first isolate the failure of
+closed-manifold Fredholm theory on a cylinder.  We then construct the
+b-double space, b-symbolic calculus, normal operator, weighted spaces, and
+full parametrix.  Only after those tools are available do we return to the
+APS spectral realization and the two index proofs.
+
+\begin{figure}[htbp]
+\centering
+\[
+\begin{tikzcd}[column sep=normal,row sep=large]
+ \text{closed theory}
+ \arrow[r]
+ &\text{cylinder obstruction}
+ \arrow[r]
+ &\text{b-geometry}\arrow[d]\\
+ \text{APS index}
+ &\text{full parametrix}\arrow[l]
+ &\text{symbol + normal family}\arrow[l]
+\end{tikzcd}
+\]
+\caption[Logical order of the APS argument]{The principal symbol controls interior frequency; the normal
+operator controls escape along the cylinder.  Their joint inverse produces
+the Fredholm parametrix used by the APS realization and the index proofs.}
+\end{figure}
 
 \section{Elliptic Fredholm theory on closed manifolds}
 
@@ -244,31 +271,17 @@ operator
 \]
 is Fredholm precisely when $A$ is invertible. Expand a section in an
 eigenbasis of \(A\). On the mode with eigenvalue \(\lambda\), the operator
-on the end reduces to \(\partial_x+\lambda\). A spectral gap gives uniform
+on the end reduces to \(\partial_u+\lambda\). A spectral gap gives uniform
 exponential estimates.
 If \(0\in\operatorname{spec}(A)\), translates of a fixed cutoff in a zero
 mode form a Weyl sequence at zero.
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[>=Latex,thick]
- \draw[rounded corners=7pt,fill=gray!10] (0,0) rectangle (3.0,1.7);
- \node at (1.5,.85) {\(X\)};
- \draw[fill=blue!8] (3.0,.2) rectangle (7.2,1.5);
- \foreach \x in {3.6,4.4,5.2,6.0,6.8}
-   \draw[gray!60] (\x,.2) -- (\x,1.5);
- \draw[->] (7.35,.85) -- (8.55,.85);
- \node[above] at (7.95,.85) {compactify};
- \node[below] at (5.1,.15) {\([0,\infty)_t\times Y\)};
- \draw[->,blue!70!black] (4.0,2.2) -- (6.8,2.2)
-   node[midway,above] {\(x=e^{-t}\)};
- \draw[fill=blue!20] (9.0,.2) rectangle (12.0,1.5);
- \draw[very thick,blue!70!black] (9.0,.2) -- (9.0,1.5);
- \node at (10.5,.85) {\(\overline X\)};
- \node[above] at (9.0,1.5) {\(x=0\)};
-\end{tikzpicture}
+\includegraphics[width=.78\textwidth]{drawing38.png}
 \caption[Cylinder compactification]{The infinite cylinder becomes a boundary hypersurface under
-\(x=e^{-t}\). Translation in \(t\) becomes dilation in \(x\).}
+\(x=e^{-t}\).  The original compact piece is on the right; translation
+along the attached cylinder becomes dilation toward \(x=0\).}
 \end{figure}
 
 Although $D^+$ is Fredholm when $A$ is invertible, the two heat
@@ -308,201 +321,13 @@ difficulty into a translation-invariant form. On the compact manifold
 with boundary, the APS condition is the nonlocal projection determined by
 the spectrum of \(A\). On the cylinder, the same condition is encoded by
 square integrability. Indeed, on an \(A\)-eigenvector with eigenvalue
-\(\lambda\), the equation \((\partial_x+A)u=0\) becomes an elementary ODE,
+\(\lambda\), the equation \((\partial_u+A)u=0\) becomes an elementary ODE,
 and exactly one spectral half gives decaying solutions on the outward end.
 Thus the APS projection and the \(L^2\) condition select the same boundary
 data. The remaining translation-invariant part is what the normal operator
 and the \(b\)-trace measure.
 \end{answer}
 
-\section{The APS boundary problem}
-
-Let
-\[
- \gamma:H^1(X;E^+)\longrightarrow H^{1/2}(Y;E^+|_Y)
-\]
-be the trace map. Since \(A\) is self-adjoint and elliptic on the closed
-manifold \(Y\), its spectral projections are order-zero
-pseudodifferential operators. Define
-\[
- \Pi_{\geq0}(A)
- =
- \sum_{\lambda\geq0}\Pi_\lambda
-\]
-and the APS domain
-\[
- \mathcal D_{\mathrm{APS}}(D^+)
- =
- \left\{
- u\in H^1(X;E^+):
- \Pi_{\geq0}(A)\gamma u=0
- \right\}.
-\]
-Thus the boundary value is allowed to lie only in the negative spectral
-subspace of \(A\).
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[>=Latex,thick]
- \draw[->] (-4.3,0)--(4.3,0) node[right] {\(\operatorname{spec}(A)\)};
- \foreach \x in {-3.4,-2.6,-1.5,-.7,.8,1.7,2.8,3.5}
-   \fill (\x,0) circle (2pt);
- \fill (0,0) circle (2.5pt);
- \draw[decorate,decoration={brace,amplitude=6pt},blue!70!black]
-   (-3.8,.35)--(-.2,.35)
-   node[midway,above=7pt] {allowed boundary data};
- \draw[decorate,decoration={brace,amplitude=6pt,mirror},red!70!black]
-   (.2,-.35)--(3.8,-.35)
-   node[midway,below=7pt] {removed by \(\Pi_{\geq0}\)};
- \node[red!70!black,above] at (0,.35) {zero modes};
-\end{tikzpicture}
-\caption[APS spectral boundary projection]{The APS condition is nonlocal: it uses the global spectral
-decomposition of the tangential operator rather than pointwise boundary
-values.}
-\end{figure}
-
-Green's formula fixes the complementary adjoint condition. With the
-collar convention above,
-\[
- \langle D^+u,v\rangle_X-\langle u,D^-v\rangle_X
- =
- -\langle c(du)\gamma u,\gamma v\rangle_Y.
-\]
-Since \(c(du)\) interchanges the positive and negative spectral subspaces,
-the adjoint of \(D^+_{\mathrm{APS}}\) is \(D^-\) with the complementary
-strict projection. This distinction at zero is responsible for the
-\(\dim\ker A\) term in the index formula.
-
-\begin{theorem}[Fredholmness of the APS realization]
-The operator
-\[
- D^+_{\mathrm{APS}}:
- \mathcal D_{\mathrm{APS}}(D^+)
- \longrightarrow L^2(X;E^-)
-\]
-is Fredholm. If \(A\) is invertible, its kernel and cokernel agree with
-those of the \(L^2\) realization on \(X_\infty\); in particular,
-\[
- \operatorname{ind}D^+_{\mathrm{APS}}
- =\operatorname{ind}_{L^2}D^+_{X_\infty}.
-\]
-\end{theorem}
-
-\begin{proof}
-On the collar, expand
-\[
- u(u,y)=\sum_\lambda u_\lambda(u)\phi_\lambda(y),
- \qquad A\phi_\lambda=\lambda\phi_\lambda.
-\]
-The principal part of \(D^+\) is the direct sum of the one-dimensional
-operators \(\partial_u+\lambda\). The APS condition sets
-\(u_\lambda(0)=0\) for \(\lambda\geq0\). Integration by parts in each
-mode gives the uniform collar estimate
-\[
- \|u\|_{H^1([0,\varepsilon)\times Y)}
- \leq C\left(
- \|D^+u\|_{L^2}
- +\|u\|_{L^2}
- +\|u\|_{H^1(\{u>\varepsilon/2\})}
- \right).
-\]
-An interior elliptic estimate absorbs the last term and yields
-\[
- \|u\|_{H^1(X)}
- \leq C\bigl(\|D^+u\|_{L^2(X)}+\|u\|_{L^2(X)}\bigr)
-\]
-on the APS domain. The same estimate holds for the adjoint boundary
-problem. Since \(H^1(X)\hookrightarrow L^2(X)\) is compact, the standard
-compactness argument gives finite-dimensional kernels and closed range;
-the adjoint estimate gives finite-dimensional cokernel. Hence the
-realization is Fredholm.
-
-Assume now that \(A\) is invertible and write the outward cylinder
-coordinate as \(t=-u\geq0\). A boundary eigenmode extends as a solution of
-the product equation by
-\[
- u_\lambda(t)=e^{\lambda t}u_\lambda(0).
-\]
-This extension is square integrable exactly when \(\lambda<0\), precisely
-the modes allowed by the APS condition. Restriction and extension
-therefore identify the kernels. Applying the same argument to the adjoint
-identifies the cokernels, proving equality of indices.
-\end{proof}
-
-\begin{question}
-Why is an elliptic differential operator on a manifold with boundary not
-automatically Fredholm?
-\end{question}
-
-\begin{answer}
-The interior principal symbol controls high-frequency behavior away from
-the boundary but does not select boundary data. For example, the
-\(\bar\partial\)-operator on a disk has the infinite-dimensional space of
-holomorphic functions in its kernel if no boundary condition is imposed.
-An elliptic boundary condition removes half of the Cauchy data. The APS
-condition makes that choice spectrally; the b-calculus makes the same
-choice through decay on the attached cylinder.
-\end{answer}
-
-\section{Regularized b-integrals and b-traces}
-
-Put $\rho=e^u$ on the cylindrical end \(u\in(-\infty,0]\). Then \(\rho\)
-is a boundary
-defining function for the compactification and
-$dx=d\rho/\rho$. Suppose that a smooth function has an expansion
-\[
- f(\rho,y)=f_0(y)+O(\rho^\epsilon),\qquad \epsilon>0,
-\]
-with the same estimate after applying any number of $b$-derivatives.
-For $\Re z>0$, set
-\[
- F_f(z)=\int_X \rho^z f\,d\mu_b.
-\]
-The contribution of $f_0$ is
-\[
- \int_0^1\rho^{z-1}\,d\rho\int_Y f_0\,d\mu_Y
- =\frac1z\int_Yf_0\,d\mu_Y.
-\]
-The remainder is holomorphic for $\Re z>-\epsilon$. Hence
-\[
- F_f(z)=\frac{1}{z}\int_Yf_0\,d\mu_Y+G_f(z),
-\]
-where $G_f$ is holomorphic near zero.
-
-\begin{definition}
-The $b$-integral of $f$ is the finite part
-\[
- {}^b\!\int_X f\,d\mu_b:=\operatorname*{FP}_{z=0}F_f(z)=G_f(0).
-\]
-\end{definition}
-
-The definition depends on the chosen boundary defining function, but
-the trace-defect formula below changes compatibly, and the final index
-is invariant.
-
-Let $K$ be a smoothing $b$-operator whose diagonal has an expansion of
-the preceding form.
-
-\begin{definition}
-The $b$-trace is
-\[
- {}^b\Tr(K):={}^b\!\int_X\operatorname{tr}_E K(p,p)\,d\mu_b(p).
-\]
-For a graded bundle, the analogous definition uses the fibrewise
-supertrace.
-\end{definition}
-
-Unlike the ordinary trace, the $b$-trace need not vanish on commutators.
-Its defect is a boundary term determined by the indicial family. The
-precise formula and its application to the heat kernel appear below.
-
-\begin{discussion}
-This finite part is not an arbitrary subtraction. If the cylinder is cut
-at \(u=-T\), then the diagonal integral has the form \(cT+C+o(1)\). The
-\(b\)-integral is the constant term \(C\). The coefficient \(c\) depends
-only on the translation-invariant kernel at infinity, so the same boundary
-model that obstructs trace class also controls the trace defect.
-\end{discussion}
 \section{Real blow-up and the b-double space}
 
 A smooth $n$-manifold with corners is locally modelled on
@@ -564,38 +389,13 @@ Near the interior of the front face one may instead use
 \]
 so that $\Delta_b=\{z=0,\;Y=0\}$.
 
-\begin{figure}[htbp]
+\begin{figure}[!ht]
 \centering
-\begin{tikzpicture}[>=Latex,thick,scale=.9]
- \begin{scope}
-  \draw[->] (0,0)--(3.6,0) node[right] {\(x\)};
-  \draw[->] (0,0)--(0,3.6) node[above] {\(x'\)};
-  \draw[blue!70!black,very thick] (0,0)--(3.2,3.2)
-    node[above right] {\(\Delta\)};
-  \fill[red!70!black] (0,0) circle (2.5pt);
-  \node[below left] at (0,0) {\(\partial X\times\partial X\)};
-  \node at (1.7,-.65) {\(X^2\)};
- \end{scope}
- \draw[->,line width=1pt] (4.0,1.7)--(5.2,1.7)
-   node[midway,above] {blow up};
- \begin{scope}[xshift=6cm]
-  \draw[fill=gray!8] (0,3.5)--(0,1)
-    arc[start angle=180,end angle=270,radius=1]--(3.5,0)--(3.5,3.5)--cycle;
-  \draw[very thick] (0,3.5)--(0,1);
-  \draw[very thick] (1,0)--(3.5,0);
-  \draw[very thick,red!70!black]
-    (0,1) arc[start angle=180,end angle=270,radius=1];
-  \draw[blue!70!black,very thick] (.293,.293)--(3.25,3.25);
-  \node[left] at (0,2.2) {\(\mathrm{lb}\)};
-  \node[below] at (2.2,0) {\(\mathrm{rb}\)};
-  \node[below left,red!70!black] at (.35,.35) {\(\mathrm{ff}\)};
-  \node[above right,blue!70!black] at (2.2,2.2) {\(\Delta_b\)};
-  \node at (1.7,-.65) {\(X_b^2\)};
- \end{scope}
-\end{tikzpicture}
+\includegraphics[width=.48\textwidth]{drawing5.png}
 \caption[Blow-up of the boundary corner]{Blowing up the boundary corner replaces one point of approach by
-the front face of limiting normal ratios; the diagonal lifts
-transversely.}
+the quarter-sphere of inward normal directions.  Projective coordinates
+on this front face retain the limiting ratio \(x/x'\); the lifted diagonal
+meets it transversely.}
 \end{figure}
 
 \begin{question}
@@ -641,6 +441,28 @@ front face away from $\Delta_b$, and vanishes to order $\epsilon$ at
 $\mathrm{lb}$ and $\mathrm{rb}$. This model explains why the
 $b$-calculus resolves the simultaneous limit $x,x'\to0$ while retaining
 the translation-invariant variable $\log(x/x')$.
+
+\begin{figure}[htbp]
+\centering
+\begin{minipage}[c]{.29\textwidth}
+ \centering
+ \includegraphics[width=\linewidth]{drawing15.png}
+\end{minipage}\hfill
+\begin{minipage}[c]{.29\textwidth}
+ \centering
+ \includegraphics[width=\linewidth]{drawing16.png}
+\end{minipage}\hfill
+\begin{minipage}[c]{.29\textwidth}
+ \centering
+ \includegraphics[width=\linewidth]{drawing18.png}
+\end{minipage}
+\caption[Projective and Mellin pictures of the one-dimensional model]{
+Left: the projective variable separates the regions \(z<0\), \(z=0\),
+and \(z>0\), where \(z=\log(x/x')\).  Center and right: the poles
+\(\lambda=\pm i\epsilon\) determine which residue is enclosed when the
+Fourier--Mellin contour is closed.  The two residues give the two branches
+of \(e^{-\epsilon|z|}/(2\epsilon)\).}
+\end{figure}
 
 \subsection{General and iterated blow-ups}
 
@@ -759,22 +581,11 @@ product density $a\,|dt\,dy|$.
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[>=Latex,thick]
- \fill[blue!5] (0,0) rectangle (8,2.8);
- \draw[very thick,blue!70!black] (0,0)--(0,2.8)
-   node[midway,left] {\(\partial X\)};
- \foreach \x/\len in {6.8/1.0,5.2/.75,3.6/.5,2.0/.28,.7/.1}
-   \draw[->,red!70!black] (\x,1.35)--++(\len,0);
- \draw[->,blue!70!black] (.15,.7)--(.15,2.15)
-   node[above] {\(\partial_y\)};
- \node[red!70!black] at (5.4,.75)
-   {\(x\partial_x\) shrinks under the anchor};
- \node at (4,2.35)
-   {\({}^bTX\) remains a rank-\(n\) bundle};
-\end{tikzpicture}
+\includegraphics[width=.63\textwidth]{drawing40.png}
 \caption[The b-tangent anchor at the boundary]{A b-vector field is tangent to the boundary. The normal generator
-\(x\partial_x\) is nonzero in \({}^bTX\), although its image in \(TX\)
-vanishes at \(x=0\).}
+\(x\partial_x\) becomes the translation generator \(\partial_s\) for
+\(s=-\log x\).  It is nonzero in \({}^bTX\), although its anchor image
+in \(TX\) vanishes at \(x=0\).}
 \end{figure}
 
 \section{b-differential operators and their symbols}
@@ -876,9 +687,10 @@ second defining function has the form \(\widetilde\rho_j=a_j\rho_j\), where
 preserves \(\mathcal A^0(X)\).
 
 Conormality records uniform control under vector fields tangent to every
-boundary face. It is weaker than smoothness: powers and logarithms of
-boundary defining functions are conormal whenever they remain bounded with
-the prescribed weight.
+boundary face. It is weaker than smoothness. Powers of defining functions
+belong to the corresponding weighted conormal classes. In contrast,
+\(\log\rho_j\notin\mathcal A^0(X)\) because it is unbounded; logarithms
+belong only to broader logarithmic or suitably weighted conormal classes.
 
 \begin{definition}
 For \(\epsilon>0\), write
@@ -956,24 +768,10 @@ to infinite order at the boundary.
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[thick,scale=.9]
- \draw[fill=gray!7] (0,3.6)--(0,1)
-   arc[start angle=180,end angle=270,radius=1]--(5.5,0)--(5.5,5.5)--cycle;
- \draw[very thick] (0,3.6)--(0,1);
- \draw[very thick] (1,0)--(5.5,0);
- \draw[very thick,red!70!black]
-   (0,1) arc[start angle=180,end angle=270,radius=1];
- \draw[blue!15,line width=13pt,opacity=.8] (.293,.293)--(5.1,5.1);
- \draw[blue!70!black,very thick] (.293,.293)--(5.1,5.1);
- \node[rotate=45,blue!70!black,above] at (2.75,2.75)
-   {conormal singularity};
- \node[red!70!black] at (.3,1.35) {\(\mathrm{ff}\)};
- \node[left] at (0,2.4) {\(\mathrm{lb}\)};
- \node[below] at (3.2,0) {\(\mathrm{rb}\)};
- \node[blue!70!black,below left] at (5.05,5.05) {\(\Delta_b\)};
-\end{tikzpicture}
+\includegraphics[width=.54\textwidth]{drawing70.png}
 \caption[Conormal kernel on the b-double space]{A small-calculus kernel is conormal to the lifted diagonal,
-extends to the front face, and vanishes rapidly at the two side faces.}
+represented by the sheet meeting the front face in the original diagram.
+It extends to \(\mathrm{ff}\) and vanishes rapidly at the two side faces.}
 \end{figure}
 
 The principal symbol is a homogeneous bundle map on
@@ -1017,6 +815,7 @@ Their roles in composition are displayed by
 The left and right arrows pull back the two kernels; the middle arrow
 integrates out the shared variable.
 
+\begin{theorem}[Small b-composition]
 If \(A\in\Psi_b^m(X;E,F)\) and
 \(B\in\Psi_b^{m'}(X;G,E)\), then
 \[
@@ -1039,8 +838,18 @@ The leading oscillatory amplitudes multiply, so
  =
  {}^b\sigma_m(A)\,{}^b\sigma_{m'}(B).
 \]
+\end{theorem}
 
-To see the order \(m+m'\) directly, work near the lifted diagonal and
+\begin{proof}[Proof architecture; triple-space theorem quoted]
+The displayed push-forward formula follows from construction of the
+b-triple space. Its proof requires that the three projections be
+b-fibrations, clean pull-back and product of the lifted conormal
+distributions, and the push-forward theorem with the full index-family
+integrability conditions. These are the composition theorem of the
+b-calculus \cite{Melrose}; they are not consequences of ordinary Fubini
+alone.
+
+To see the operator order once that theorem is available, work near the lifted diagonal and
 write the two kernels as oscillatory integrals. Their product has amplitude
 of order \(m+m'\). Stationary phase in the intermediate variable identifies
 the two covectors and produces the usual symbol product. Away from the
@@ -1049,6 +858,7 @@ smooth. At every boundary face, the exponent contributed by the product is
 the sum of the pulled-back exponents minus the fibre-density exponent. The
 infinite-order side-face vanishing in the small calculus places that sum
 strictly above the integrability threshold.
+\end{proof}
 
 The residual part of the full calculus allows polyhomogeneous expansions at
 the boundary faces. In the positive-weight case used below, products remain
@@ -1151,8 +961,22 @@ transform of \(N(A)\) in the translation variable, with
 \]
 \end{definition}
 
-Changing \(x\) conjugates the indicial family by a smooth nonvanishing
-factor, so its invertibility is intrinsic. Multiplicativity gives
+For a general small-calculus operator this is a suspended
+pseudodifferential family on the real \(\lambda\)-axis. It is not
+automatically an entire polynomial family: holomorphic continuation to a
+strip or sector requires the support and side-face estimates supplied by
+the relevant full calculus. Differential operators are the important
+exception above, for which the family is polynomial in \(\lambda\).
+
+If \(x'=e^\phi x\), then
+\[
+ I_{x'}(A,\lambda)
+ =e^{-i\lambda\phi_0}I_x(A,\lambda)e^{i\lambda\phi_0},
+ \qquad \phi_0=\phi|_{\partial X}.
+\]
+Thus the change is a \(\lambda\)-dependent conjugation by boundary
+multiplication operators, not a scalar unless \(\phi_0\) is constant.
+Invertibility is nevertheless intrinsic. Multiplicativity gives
 \[
  I(AB,\lambda)=I(A,\lambda)I(B,\lambda).
 \]
@@ -1236,6 +1060,9 @@ A b-elliptic operator \(P\) is fully elliptic at weight \(\delta\) if
  I(P,\lambda)\text{ is invertible whenever }
  \operatorname{Im}\lambda=-\delta.
 \]
+For a pseudodifferential operator, this includes the uniform suspended
+parameter estimates for \(I(P,\lambda)^{-1}\) on that line; pointwise
+invertibility without those estimates is not a mapping theorem.
 \end{definition}
 
 For several boundary hypersurfaces, impose the corresponding condition at
@@ -1243,10 +1070,16 @@ each face with a multiweight. Below, \(X\) has one boundary hypersurface.
 
 \section{Meromorphic inversion of the indicial family}
 
-Suppose \(P\) is b-elliptic. Its indicial family is elliptic on the closed
-manifold \(\partial X\). A parameter-dependent parametrix shows that
-\(I(P,\lambda)\) is invertible for \(\lambda\) in suitable sectors with
-large modulus. The analytic Fredholm theorem then applies.
+In this section first suppose
+\(P\in\operatorname{Diff}_b^m(X;E,F)\) is b-elliptic. Its indicial family
+is a polynomial holomorphic family of elliptic operators on the closed
+manifold \(\partial X\). Parameter ellipticity gives Fredholm index zero
+and invertibility in suitable sectors for large modulus. Hence the family
+is invertible somewhere and the analytic Fredholm theorem applies. For a
+general \(b\)-pseudodifferential operator, every conclusion below remains
+valid only under the corresponding assumptions: a holomorphic suspended
+family, parameter ellipticity, index zero, and invertibility at one
+parameter.
 
 \begin{theorem}[Analytic Fredholm theorem]
 Let \(T(\lambda)\) be a holomorphic family of Fredholm operators of index
@@ -1313,22 +1146,11 @@ direction in which the weight is moved.
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[>=Latex,thick]
- \draw[->] (-4,0)--(4.3,0) node[below right] {\(\operatorname{Re}\lambda\)};
- \draw[->] (0,-2.4)--(0,2.5) node[above] {\(\operatorname{Im}\lambda\)};
- \foreach \p in {(-2.5,.9),(-1.1,-.4),(.8,.55),(2.4,-1.15),(3.0,1.45)}
-   \fill[red!75!black] \p circle (2.7pt);
- \draw[blue!70!black,very thick] (-3.8,-1.65)--(3.8,-1.65);
- \node[blue!70!black,above] at (3.45,-1.65) {\(\Gamma_{\delta_0}\)};
- \draw[blue!40,dashed,very thick] (-3.8,.05)--(3.8,.05);
- \node[blue!50,above] at (3.45,.05) {\(\Gamma_{\delta_1}\)};
- \draw[->,blue!70!black] (-3.2,-1.45)--(-3.2,-.15);
- \node[align=left] at (2.25,-2.05) {admissible line};
- \node[red!75!black,align=left] at (-1.2,1.75)
-   {indicial roots};
-\end{tikzpicture}
+\includegraphics[width=.74\textwidth]{drawing96.png}
 \caption[Mellin contours and indicial roots]{Changing the weight moves the Mellin contour. The index is
-constant between indicial roots and jumps when the contour crosses one.}
+constant while the contour remains in a pole-free strip and jumps by the
+algebraic multiplicities of the enclosed indicial roots when a pole is
+crossed.}
 \end{figure}
 
 \section{The full b-calculus and the Fredholm parametrix}
@@ -1336,6 +1158,27 @@ constant between indicial roots and jumps when the contour crosses one.}
 The symbolic parametrix constructed in the small calculus has smooth
 remainders, but their normal operators need not vanish. Full ellipticity
 allows one to remove this boundary error.
+
+\begin{theorem}[Full b-parametrix; quoted]
+Let \(P\) be b-elliptic and fully elliptic at the admissible weight
+\(\delta\), including the uniform parameter estimates in the preceding
+definition. Then the full b-calculus contains a two-sided parametrix
+\(Q\) such that
+\[
+ PQ=I-R_R,\qquad QP=I-R_L.
+\]
+The remainders are residual, have zero normal operators, gain arbitrarily
+many b-derivatives, and have strictly positive side-face orders after
+conjugation by \(x^\delta\). Their complete polyhomogeneous index families
+are obtained from the poles of \(I(P,\lambda)^{-1}\).
+\end{theorem}
+
+This is the full parametrix theorem of the b-calculus
+\cite[Chapters~4--5]{Melrose}. Its proof uses the extended union and
+composition of complete index families, rapid parameter estimates for
+inverse Mellin transformation, and Borel summation at every boundary
+face. The following calculation records its mechanism without replacing
+those theorems.
 
 Let \(Q_0\in\Psi_b^{-m}\) be a symbolic parametrix for \(P\):
 \[
@@ -1354,7 +1197,7 @@ with polyhomogeneous expansions at the boundary faces. Its exponents are
 governed by the poles of \(I(P,\lambda)^{-1}\). This is the reason the
 full b-calculus, rather than only the small calculus, is needed.
 
-Here are the details of this correction. Choose a horizontal line
+For the leading front-face correction, choose a horizontal line
 \(\Gamma_\delta=\{\operatorname{Im}\lambda=-\delta\}\) avoiding the boundary
 spectrum. With cutoffs \(\chi(x)\chi(x')\), the inverse Mellin formula
 \[
@@ -1379,31 +1222,23 @@ where \(\lambda_0\) is an indicial root and \(j\) is one less than the
 order of the corresponding pole. These are precisely the
 polyhomogeneous terms allowed in the full calculus.
 
-The construction is performed on both sides. Any mismatch between the two
-corrections is residual and has zero normal operator. A Neumann iteration
+At the level of complete index families, the construction is performed on
+both sides. Any mismatch between the two corrections is residual and has
+zero normal operator. A Neumann iteration
 in the residual ideal removes its successive boundary coefficients; Borel
 summation removes all of them at once. An interior symbolic correction then
-restores infinite-order vanishing at the lifted diagonal. This yields the
-two-sided parametrix below.
+restores infinite-order vanishing at the lifted diagonal. The quoted
+full-calculus theorem justifies these iterations and yields the two-sided
+parametrix below.
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[>=Latex,thick]
- \node (q0) at (0,1.8) {\(Q_0\)};
- \node (r0) at (3.2,1.8) {\(R_0\)};
- \node (cff) at (6.4,1.8) {\(C_{\mathrm{ff}}\)};
- \node (q1) at (6.4,0) {\(Q_0+C_{\mathrm{ff}}\)};
- \node (r1) at (3.2,0) {\(N(R_1)=0\)};
- \node (q) at (0,0) {\(Q\)};
- \draw[->] (q0)--(r0) node[midway,above] {symbolic inversion};
- \draw[->] (r0)--(cff) node[midway,above] {invert \(I(P,\lambda)\)};
- \draw[->] (cff)--(q1) node[midway,right] {inverse Mellin};
- \draw[->] (q1)--(r1) node[midway,above] {remove boundary error};
- \draw[->] (r1)--(q) node[midway,below] {residual iteration};
-\end{tikzpicture}
+\includegraphics[width=.43\textwidth]{drawing99.png}
 \caption[Construction of the full b-parametrix]{The full parametrix alternates interior symbol inversion with
-indicial correction at the front face; the remaining residual error is
-then iterated away.}
+indicial correction at the front face.  The face labels in the original
+diagram record the resulting orders at \(\mathrm{lb}\), \(\mathrm{ff}\),
+and \(\mathrm{rb}\); positivity at the side faces is what makes the final
+residual error compact.}
 \end{figure}
 
 Iterating at the interior diagonal and at the boundary faces gives
@@ -1436,7 +1271,8 @@ More explicitly, let \(\chi_T\) equal one on \(t\leq T\) and vanish on
  \xrightarrow{\,\chi_T\,}H_b^s
 \]
 for any \(N>0\); the second arrow is compact by Rellich on the truncated
-cylinder. The full-calculus estimates and \(N(R)=0\) give
+cylinder. The full-calculus residual mapping theorem, using both
+\(N(R)=0\) and the strictly positive side-face orders stated above, gives
 \[
  \|(1-\chi_T)R\|+\|R(1-\chi_T)\|\longrightarrow0.
 \]
@@ -1470,12 +1306,14 @@ with compact remainders. Atkinson's theorem therefore implies that \(P\)
 is Fredholm.
 \end{proof}
 
-\begin{corollary}[Elliptic regularity]
+\begin{corollary}[Elliptic and polyhomogeneous regularity]
 If \(Pu=f\), where \(u\in x^\delta H_b^{s_0}\) and
-\(f\in x^\delta H_b^{s-m}\), then \(u\in x^\delta H_b^s\). In particular,
-null-solutions are smooth in
-the interior and polyhomogeneous at the boundary, with exponents drawn from
-the indicial spectrum.
+\(f\in x^\delta H_b^{s-m}\), then \(u\in x^\delta H_b^s\). If, in
+addition, the coefficients of \(P\) and \(f\) are polyhomogeneous with
+compatible index families, then \(u\) is polyhomogeneous. Its exponents
+are generated by those index families and the indicial roots; higher-order
+poles produce logarithms. In particular, a null-solution of a
+polyhomogeneous fully elliptic operator has such an expansion.
 \end{corollary}
 
 \begin{proof}
@@ -1484,10 +1322,13 @@ Apply the parametrix:
  u=Qf+R_Lu.
 \]
 The first term gains \(m\) derivatives, and the residual term gains
-arbitrarily many. Iteration gives the stated regularity. Mellin inversion
-and contour shifting yield the boundary expansion; residues at indicial
-poles produce powers of \(x\) and, at higher-order poles, logarithmic
-terms.
+arbitrarily many. Iteration gives the Sobolev regularity. The additional
+polyhomogeneous statement is the full-calculus regularity theorem: Mellin
+inversion and contour shifting apply because the coefficients,
+right-hand side, and parametrix have compatible complete index families.
+Residues at indicial poles then produce powers of \(x\) and, at
+higher-order poles, logarithmic terms. Sobolev iteration alone would not
+imply this expansion.
 \end{proof}
 
 \section{The Dirac case}
@@ -1504,9 +1345,19 @@ invertible on the unweighted line if and only if
 If \(A_{\partial}\) has kernel, one may choose a small nonzero weight
 \(\delta\) whose Mellin line avoids the boundary spectrum. The resulting
 weighted realization is Fredholm, but its index depends on the side from
-which the zero indicial roots are crossed. The APS projection selects the
-corresponding spectral subspace; the correction at zero is
-\(\frac12\dim\ker A_{\partial}\) in the index formula.
+which the zero indicial roots are crossed. When the contour crosses an
+indicial root, the weighted Fredholm index jumps by the full algebraic
+multiplicity of that root, with sign determined by the direction of the
+crossing.
+
+This integer jump is distinct from the half-kernel term in the APS
+formula. The latter belongs to the reduced eta invariant
+\[
+ \bar\eta(A_{\partial})
+ =\frac{\eta(A_{\partial})+\dim\ker A_{\partial}}2
+\]
+and reflects the strict/non-strict choice at the zero eigenspace. It is not
+a weighted-index jump.
 
 \begin{figure}[htbp]
 \centering
@@ -1531,6 +1382,177 @@ data into decaying and growing modes. The APS projection makes this split
 at \(\lambda=0\).}
 \end{figure}
 
+\section{The APS boundary realization}
+
+The preceding b-Fredholm theorem explains the cylindrical realization.
+We now return to the compact manifold with boundary and prove that its
+spectral boundary condition selects exactly the same modes.  Placing this
+section here avoids using the indicial family before it has been defined.
+
+Let
+\[
+ \gamma:H^1(X;E^+)\longrightarrow H^{1/2}(Y;E^+|_Y)
+\]
+be the trace map. Since \(A\) is self-adjoint and elliptic on the closed
+manifold \(Y\), it has discrete real spectrum, and its spectral projections
+are order-zero pseudodifferential operators. Define
+\[
+ \Pi_{\geq0}(A)=\sum_{\lambda\geq0}\Pi_\lambda
+\]
+and
+\[
+\mathcal D_{\mathrm{APS}}(D^+)
+ =\left\{u\in H^1(X;E^+):
+          \Pi_{\geq0}(A)\gamma u=0\right\}.
+\]
+Thus the boundary value is allowed to lie only in the negative spectral
+subspace of \(A\). Since
+\(\Pi_{\geq0}(A):H^{1/2}(Y)\to H^{1/2}(Y)\) and the trace map are bounded,
+this domain is the kernel of a bounded map from \(H^1(X;E^+)\) to
+\(H^{1/2}(Y;E^+|_Y)\). It is therefore closed in the \(H^1\) graph norm.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,thick]
+ \draw[->] (-4.3,0)--(4.3,0) node[right] {\(\operatorname{spec}(A)\)};
+ \foreach \x in {-3.4,-2.6,-1.5,-.7,.8,1.7,2.8,3.5}
+   \fill (\x,0) circle (2pt);
+ \fill (0,0) circle (2.5pt);
+ \draw[decorate,decoration={brace,amplitude=6pt},blue!70!black]
+   (-3.8,.35)--(-.2,.35)
+   node[midway,above=7pt] {allowed boundary data};
+ \draw[decorate,decoration={brace,amplitude=6pt,mirror},red!70!black]
+   (.2,-.35)--(3.8,-.35)
+   node[midway,below=7pt] {removed by \(\Pi_{\geq0}\)};
+ \node[red!70!black,above] at (0,.35) {zero modes};
+\end{tikzpicture}
+\caption[APS spectral boundary projection]{The APS condition is nonlocal: it uses the global spectral
+decomposition of the tangential operator rather than pointwise boundary
+values.}
+\end{figure}
+
+Green's formula determines the adjoint domain.  With inward collar
+coordinate \(r\),
+\[
+ \langle D^+u,v\rangle_X-\langle u,D^-v\rangle_X
+ =-\langle c(dr)\gamma u,\gamma v\rangle_Y.
+\]
+Put \(A^+=A\) and let \(A^-=-c(dr)A^+c(dr)^{-1}\) be the tangential operator on
+\(E^-|_Y\). Because Clifford multiplication sends the \(\lambda\)-space
+of \(A^+\) to the \(-\lambda\)-space of \(A^-\), Green's formula gives
+the explicit adjoint domain
+\[
+ \mathcal D((D^+_{\mathrm{APS}})^*)
+ =\{v\in H^1(X;E^-):\Pi_{>0}(A^-)\gamma v=0\}.
+\]
+Indeed, this condition makes \(\gamma v\) orthogonal to
+\(c(dr)\gamma u\) for every allowed negative boundary value of \(u\),
+and maximality follows from surjectivity of the trace map. The strict
+projection at zero is the source of the kernel-dimension correction.
+
+\begin{theorem}[Fredholmness of the APS realization]
+The operator
+\[
+ D^+_{\mathrm{APS}}:
+ \mathcal D_{\mathrm{APS}}(D^+)
+ \longrightarrow L^2(X;E^-)
+\]
+is Fredholm. If \(A\) is invertible, restriction to \(X\) and extension
+along the cylinder identify its kernel and cokernel with those of the
+\(L^2\) realization on \(X_\infty\). Consequently
+\[
+ \operatorname{ind}D^+_{\mathrm{APS}}
+ =\operatorname{ind}_{L^2}D^+_{X_\infty}.
+\]
+\end{theorem}
+
+\begin{proof}
+Choose an orthonormal eigenbasis \(A\phi_\lambda=\lambda\phi_\lambda\)
+and expand on the collar,
+\[
+ u(r,y)=\sum_\lambda u_\lambda(r)\phi_\lambda(y).
+\]
+The product operator is the direct sum of the one-dimensional operators
+\(\partial_r+\lambda\).  For a scalar function \(f\), integration by
+parts gives
+\[
+ \int_0^\varepsilon|f'+\lambda f|^2dr
+ =\int_0^\varepsilon(|f'|^2+\lambda^2|f|^2)dr
+   +\lambda|f(\varepsilon)|^2-\lambda|f(0)|^2.
+\]
+For \(\lambda\geq0\), the APS condition sets \(f(0)=0\).  For
+\(\lambda<0\), the last term has the favorable sign.  A cutoff at
+\(r=\varepsilon\), followed by summation over \(\lambda\), yields the
+collar estimate below.  Here one uses
+\[
+ \lVert w\rVert_{H^1(Y)}^2
+ \asymp \lVert Aw\rVert_{L^2(Y)}^2+\lVert w\rVert_{L^2(Y)}^2,
+\]
+the elliptic graph-norm equivalence for \(A\); the finitely many
+eigenvalues in a fixed bounded interval are absorbed by the \(L^2\)-term.
+Thus
+\[
+ \lVert u\rVert_{H^1([0,\varepsilon)\times Y)}
+ \leq C\left(
+ \lVert D^+u\rVert_{L^2}
+ +\lVert u\rVert_{L^2}
+ +\lVert u\rVert_{H^1(\{r>\varepsilon/2\})}
+ \right).
+\]
+Choose a partition of unity with one function supported in the collar and
+one in the interior. The commutators with these cutoffs are order zero.
+The ordinary interior elliptic estimate controls the interior function,
+and its compact lower-order remainder is absorbed into the \(L^2\)-term.
+This gives
+\[
+ \lVert u\rVert_{H^1(X)}
+ \leq C\bigl(\lVert D^+u\rVert_{L^2(X)}
+              +\lVert u\rVert_{L^2(X)}\bigr).
+\]
+The same estimate holds for the adjoint problem just displayed. Rellich
+compactness first makes each kernel finite-dimensional: the unit ball of a
+kernel is precompact in \(L^2\), and the estimate upgrades \(L^2\)
+convergence to \(H^1\) convergence.
+
+For closed range, the estimate implies the sharper bound
+\[
+ \lVert u\rVert_{H^1}\leq C\lVert D^+u\rVert_{L^2},
+ \qquad u\perp\ker D^+_{\mathrm{APS}}.
+\]
+Otherwise there would be \(u_j\perp\ker D^+_{\mathrm{APS}}\) with
+\(\lVert u_j\rVert_{H^1}=1\) and \(D^+u_j\to0\). Rellich gives an
+\(L^2\)-convergent subsequence; applying the original estimate to
+differences makes it \(H^1\)-convergent to a unit vector in the kernel,
+contradicting orthogonality. The sharper bound makes the range closed.
+Repeating the argument for the adjoint gives finite-dimensional cokernel.
+Thus the APS realization is Fredholm.
+
+Assume now that \(A\) is invertible and write the outward cylinder
+coordinate as \(t=-r\geq0\).  A solution in the \(\lambda\)-eigenspace is
+\[
+ u_\lambda(t)=e^{\lambda t}u_\lambda(0).
+\]
+It is square integrable exactly for \(\lambda<0\), precisely the boundary
+data allowed by the APS projection.  Restriction and extension identify
+the kernels.  The complementary projection gives the same identification
+for the adjoints, hence for the cokernels.
+\end{proof}
+
+\begin{question}
+Why is an elliptic differential operator on a manifold with boundary not
+automatically Fredholm?
+\end{question}
+
+\begin{answer}
+The interior principal symbol controls high-frequency behavior away from
+the boundary but does not select boundary data.  For example,
+\(\bar\partial\) on a disk has the infinite-dimensional space of
+holomorphic functions in its kernel if no boundary condition is imposed.
+An elliptic boundary condition removes half of the Cauchy data.  The APS
+condition makes that choice spectrally; the b-calculus encodes the same
+choice as decay on the attached cylinder.
+\end{answer}
+
 \section{The K-theoretic proof architecture}
 
 The closed index theorem has two layers: an elliptic symbol defines a
@@ -1540,8 +1562,11 @@ interior symbol alone is insufficient. One must also record an invertible
 model at the cylindrical end. The b-calculus packages exactly these two
 pieces \cite{Melrose,MelrosePiazza}.
 
-Let \(\mathcal A_b\) be the operator-norm closure of the stabilized
-order-zero b-calculus, and let \(\Sigma_b\) be its joint symbol algebra.
+Fix the full order-zero b-calculus on \(L_b^2(X)\), stabilize by compact
+matrices, and let \(\mathcal A_b\) be its operator-norm closure. Let
+\(\Sigma_b\) be the norm closure of compatible pairs in the product of
+the continuous b-cosphere symbols and the order-zero suspended normal
+algebra.
 An element of \(\Sigma_b\) is a compatible pair
 \[
  (a,q)=
@@ -1549,15 +1574,25 @@ An element of \(\Sigma_b\) is a compatible pair
 \]
 where \(a\) is the b-principal symbol and \(q\) is the suspended indicial
 family. Compatibility means that the principal symbol of \(q\) is the
-restriction of \(a\) to the boundary. The full symbol sequence is
+restriction of \(a\) to the boundary.
+
+\begin{theorem}[Joint symbol extension; quoted]
+With these closures, the joint symbol map is surjective and the sequence
 \[
  0\longrightarrow\mathcal K
  \longrightarrow\mathcal A_b
  \xrightarrow{\,j\,}\Sigma_b
- \longrightarrow0.
+ \longrightarrow0
 \]
-Indeed, a b-operator with zero principal symbol and zero normal operator is
-compact; the parametrix construction proves exactness at the other terms.
+is exact.
+\end{theorem}
+
+This is a C*-closure theorem, including surjectivity of the compatibility
+map and identification of its kernel; it does not follow from the formal
+parametrix alone. We use the standard result of Melrose and
+Melrose--Nistor \cite{Melrose,MNCstar}. A b-operator with vanishing principal
+and normal symbols lies in the compact kernel, while the theorem supplies
+the converse and the closure assertions.
 
 If \(P\) is fully elliptic, \(j(P)\) is invertible. After stabilization it
 defines a class \([j(P)]\in K_1(\Sigma_b)\). The six-term exact sequence
@@ -1603,29 +1638,41 @@ family of order one normalizes this to an order-zero element of
 Equivalently, one may use the bounded transform of \(D\), whose indicial
 family includes the corresponding factor of order minus one.
 If \(A\) is invertible, this pair is fully elliptic. If \(A\) has kernel,
-replace it in the indicial family by
+changing only the displayed boundary family does not yet define an
+operator on the cylinder. Choose a positive even Schwartz function \(\rho\) with
+\(\rho(0)=1\), put \(\Pi_0=\Pi_{\ker A}\), and use surjectivity of the
+residual normal map to construct a global b-smoothing operator \(T_b\)
+with
 \[
- A_\varepsilon=A+\varepsilon\Pi_0,\qquad \varepsilon>0,
+ I(T_b,\lambda)
+ =c\!\left(\frac{dx}{x}\right)
+   \varepsilon\rho(\lambda)\Pi_0.
 \]
-where \(\Pi_0\) projects onto \(\ker A\). This smoothing perturbation is
-finite rank, and the perturbed family is invertible. It chooses the same
-side of the zero modes as the APS
-projection \(\Pi_{\geq0}(A)\). Thus the APS condition is not extra data
-unrelated to the symbol: it is the boundary trivialization needed to make
-the joint symbol a \(K\)-class.
+For sufficiently small \(\varepsilon>0\),
+\(i\lambda+A+\varepsilon\rho(\lambda)\Pi_0\) is invertible for every real
+\(\lambda\): on \(\ker A\) it is \(i\lambda+\varepsilon\rho(\lambda)\),
+and the nonzero spectrum retains its gap. Hence \(D+T_b\) is fully
+elliptic. The perturbation is smoothing in the b-calculus, but it is not a
+finite-rank or compact operator on the infinite cylinder.
 
-Denote the resulting stable class by
+The APS comparison theorem identifies the perturbed \(L^2\) realization
+with the APS realization determined by the same positive zero-mode
+trivialization: their kernels, adjoint kernels, and indices agree
+\cite{Melrose,MelrosePiazza}. Thus the precise stable joint-symbol class is
 \[
- [\sigma_{\mathrm{APS}}(D^+)]
- \in K_{\mathrm{APS}}^0({}^bT^*X).
+ [j(D+T_b)]\in K_1(\Sigma_b).
 \]
-This notation means stable homotopy classes of b-symbols equipped with
-their invertible boundary trivializations. A neat embedding
+Equivalently, one may use the associated mapping-cone relative symbol
+group. This replaces the informal group
+\(K_{\mathrm{APS}}^0({}^bT^*X)\); the choice of \(T_b\) records the
+spectral section at zero.
+
+A neat embedding
 \[
  i:(X,\partial X)\hookrightarrow
  (\mathbb R_+^N,\mathbb R^{N-1})
 \]
-defines a Thom push-forward of these relative classes. Normal deformation
+defines a Thom push-forward of these relative joint-symbol classes. Normal deformation
 and collar doubling identify the target with the Bott group
 \[
  K_c^0(\mathbb R^{2N})\cong\mathbb Z.
@@ -1639,7 +1686,7 @@ For a product-type graded Dirac operator,
  \operatorname{ind}(D^+_{\mathrm{APS}})
  =
  \operatorname{t\text{-}ind}_{\mathrm{APS}}
- [\sigma_{\mathrm{APS}}(D^+)].
+ [j(D+T_b)].
 \]
 \end{theorem}
 
@@ -1647,7 +1694,7 @@ The theorem asserts that the following diagram commutes; the left vertical
 map is the connecting-map index of the joint symbol.
 \[
 \begin{tikzcd}[column sep=huge,row sep=large]
- K_{\mathrm{APS}}^0({}^bT^*X)
+ K_1(\Sigma_b)
  \arrow[r,"i_!"]
  \arrow[d,"{\operatorname{a\text{-}ind}_{\mathrm{APS}}}"']
  &K_c^0(\mathbb R^{2N})
@@ -1656,7 +1703,7 @@ map is the connecting-map index of the joint symbol.
 \end{tikzcd}
 \]
 
-\begin{proof}
+\begin{proof}[Proof architecture; relative push-forward theorem quoted]
 The proof follows the closed push-forward argument. In a tubular
 neighborhood, the Thom class is represented analytically by the
 fibrewise Bott operator
@@ -1672,6 +1719,12 @@ the index. On the boundary collar the normal Bott factor is product type,
 so it carries the chosen indicial trivialization to the pushed-forward
 operator without changing which zero modes are selected. Excision removes
 the complement of the tubular neighborhood.
+
+The existence and homotopy invariance of this relative Thom map, its
+compatibility with the joint-symbol extension, and the collar-doubling
+excision step are the K-theoretic APS push-forward theorem of Melrose and
+Melrose--Piazza \cite{Melrose,MelrosePiazza}. They are substantial inputs,
+not consequences of the displayed Bott formula alone.
 
 After the neat embedding and collar doubling, the class is an integer
 multiple of the Bott generator. The Bott operator has index one, so both
@@ -1725,6 +1778,53 @@ the continuous real-valued refinement between jumps.
 
 \section{The b-trace defect}
 
+We postpone regularization until this point because the b-density,
+front-face restriction, and indicial family are now available.  Put
+\(x=e^{-t}\) on the cylindrical end.  If
+\[
+ f(x,y)=f_0(y)+O(x^\varepsilon)
+\]
+with the same estimate after b-differentiation, then for
+\(\operatorname{Re}z>0\)
+\[
+ \int_Xx^zf\,d\mu_b
+ =\frac1z\int_{\partial X}f_0\,d\mu_{\partial X}+G_f(z),
+\]
+where \(G_f\) is holomorphic for \(\operatorname{Re}z>-\varepsilon\).
+Indeed, the leading term contributes
+\(\int_0^1x^{z-1}dx=z^{-1}\), and the remainder is integrable in the
+larger half-plane.
+
+\begin{definition}
+The b-integral is the finite part
+\[
+ {}^b\!\int_Xf\,d\mu_b
+ :=\operatorname*{FP}_{z=0}\int_Xx^zf\,d\mu_b=G_f(0).
+\]
+Equivalently, if the cylinder is truncated at \(t=T\), then
+\[
+ \int_{\{t\leq T\}}f\,d\mu_b=cT+C+o(1),
+ \qquad
+ {}^b\!\int_Xf\,d\mu_b=C.
+\]
+\end{definition}
+
+More generally, if the diagonal is a polyhomogeneous b-density
+\[
+ \omega\sim
+ \sum_{(z,k)\in\mathcal E}x^z(\log x)^k\omega_{z,k}(y)\frac{dx}{x},
+\]
+with a discrete index set \(\mathcal E\) satisfying the usual finiteness
+conditions, then \(\int x^w\omega\) is meromorphic in \(w\). The
+b-integral is its finite part at \(w=0\). The one-term definition above is
+the special case needed for the trace-defect calculation; the density and
+the full diagonal index family must be specified in the general case.
+
+The constant \(c\) is determined by the translation-invariant normal
+operator.  Thus the same boundary model that obstructs trace class also
+determines the regularization.  The finite part depends on the defining
+function, but the change is compensated by the trace-defect term below.
+
 Let \(A\) be a residual b-operator whose lifted kernel has a full expansion
 at the front face and sufficient decay at the side faces. Its b-trace is the
 finite part of the diagonal integral,
@@ -1746,7 +1846,10 @@ Use the Fourier convention fixed for the indicial family:
 \]
 
 \begin{theorem}[b-trace defect formula]
-If the products below are defined and residual, then
+Let \(A,B\) lie in the full b-calculus so that \(AB\) and \(BA\) are
+residual with the side-face decay required for the b-trace, and suppose
+\(\partial_\lambda I(A,\lambda)I(B,\lambda)\) is trace class on
+\(\partial X\) and integrable in \(\lambda\). Then
 \[
  {}^b\Tr([A,B])
  =
@@ -1873,8 +1976,10 @@ model.}
 
 At the temporal front face, the model equation is the Euclidean heat
 equation on each b-tangent fibre. At the boundary front face, the model is
-the heat equation for the normal operator on the cylinder. Full ellipticity
-makes the large-cylinder model invertible in the required weighted space.
+the heat equation for the normal operator on the cylinder. This local heat
+construction does not require full ellipticity. Full ellipticity and the
+boundary spectral gap enter later, when the large-time limit is identified
+with a Fredholm index.
 
 \begin{proposition}[Compatibility of the heat models]
 The Euclidean model at the temporal front face and the cylindrical normal
@@ -1886,13 +1991,13 @@ intersection. They therefore determine a single leading kernel on
 \begin{proof}
 Near a boundary point use b-normal coordinates
 \[
- (t,y)=(-\log x,y).
+ (s,y)=(-\log x,y).
 \]
 After parabolic rescaling about the diagonal, the coefficients of \(D^2\)
 freeze at the base point. The temporal model is therefore the Gaussian
 heat kernel of the constant-coefficient operator on
 \({}^bT_pX\). If the base point tends to the boundary, the same frozen
-operator splits into the normal line in \(t\) and the tangential operator
+operator splits into the normal line in \(s\) and the tangential operator
 on \(T_yY\). This is exactly the small-time restriction of the
 translation-invariant normal heat kernel. Thus both models restrict to
 \[
@@ -1901,7 +2006,25 @@ translation-invariant normal heat kernel. Thus both models restrict to
 times parallel transport at the corner of the two faces.
 \end{proof}
 
-The compatibility permits one to extend the two prescribed normal
+Matching the leading Gaussian is necessary but not sufficient: every
+coefficient in the two polyhomogeneous index families must agree at the
+corner.
+
+\begin{theorem}[b-heat kernel theorem; quoted]
+For a product-type generalized b-Laplacian, the temporal and boundary
+model problems have compatible complete index families on
+\(X_{b,h}^2\). There is a heat parametrix with the prescribed normal
+operators whose error is residual and vanishes to infinite order at all
+temporal faces. Its Volterra correction is the heat kernel and remains in
+the b-heat calculus.
+\end{theorem}
+
+This is the b-heat theorem of \cite[Chapters~6--7]{Melrose}. Its proof
+uses the heat-space composition and push-forward theorems at every face.
+The factorial Volterra estimate below completes the final residual
+correction; it does not construct the compatible index families by itself.
+
+The quoted compatibility theorem permits one to extend the two prescribed normal
 operators to a global initial parametrix. Successive transport equations
 remove the Taylor coefficients of the error at the temporal face;
 successive normal-operator inversions remove its coefficients at the
@@ -1909,6 +2032,25 @@ boundary face. Because the corrections agree at the corner, alternating
 between the two faces improves the error without spoiling work already
 done at the other face. Borel summation produces a kernel whose heat error
 vanishes to infinite order at every temporal boundary.
+
+\begin{figure}[htbp]
+\centering
+\begin{minipage}[c]{.62\textwidth}
+ \centering
+ \includegraphics[width=\linewidth]{drawing105.png}
+\end{minipage}\hfill
+\begin{minipage}[c]{.25\textwidth}
+ \centering
+ \includegraphics[width=\linewidth]{drawing106.png}
+\end{minipage}
+\caption[Cutoffs and support in the b-heat construction]{Left: compatible
+cutoffs separate the compact interior from the product cylinder while
+retaining an overlap on which the two model kernels can be compared.
+Right: after lifting to the b-double space, the boundary correction is
+supported near the front face and away from the opposite side face.  This
+support control makes the alternating temporal and boundary corrections
+compatible.}
+\end{figure}
 
 Starting with the Gaussian model, solve the transport equations
 successively along the temporal front face. Borel summation gives a
@@ -1929,8 +2071,7 @@ positive times. Here
 \]
 Thus \(H(t)=e^{-tD^2}\).
 
-The convergence uses the ordered time simplex, a point that is easy to
-lose in a formal Neumann-series argument. If
+Convergence comes from the volume of the ordered time simplex. If
 \(\|R(t)\|\leq C\) for \(0\leq t\leq t_0\), then
 \[
  R^{*k}(t)
@@ -1949,7 +2090,8 @@ calculus. Since \(R\) vanishes to infinite order at \(t=0\), so does every
 correction term, and the initial value remains the identity.
 
 The construction also proves Duhamel's formula. If \(L_r\) is a smooth
-family of nonnegative self-adjoint elliptic operators, then
+family of nonnegative self-adjoint elliptic operators with common domain
+and is differentiable in the graph topology, then
 \[
  \frac{d}{dr}e^{-tL_r}
  =
@@ -1985,6 +2127,13 @@ For a graded Dirac operator,
 For the spin Dirac operator twisted by \(W\), the second factor is
 \(\operatorname{ch}(W,\nabla^W)\).
 \end{theorem}
+
+The rescaled heat-kernel convergence and Clifford-supertrace
+normalization in this theorem are the standard local index theorem, used
+here as an analytic input (see \cite{Melrose} and the closed-manifold
+references cited there). The heat-space construction above supplies the
+boundary-compatible kernel but does not, by itself, prove the Getzler
+model calculation.
 
 On a manifold with cylindrical end, diagonal integration is interpreted as
 a b-integral. The heat-space expansion shows
@@ -2026,7 +2175,7 @@ The eta function of a self-adjoint elliptic differential operator of
 positive order on a closed manifold is regular at \(s=0\).
 \end{theorem}
 
-\begin{proof}
+\begin{proof}[Proof using the residue theorem for projections]
 Split the Mellin integral at \(t=1\). On the orthogonal complement of the
 kernel, the large-time integrand is exponentially decreasing, so that
 part is entire. For an operator of order \(r\) on a \(d\)-manifold, the
@@ -2034,17 +2183,20 @@ pseudodifferential heat calculus gives a polyhomogeneous expansion of
 \(\Tr(Ae^{-tA^2})\) as \(t\downarrow0\). Termwise Mellin integration gives
 the meromorphic continuation.
 
-The possible residue at zero is a constant multiple of the
+The standard Wodzicki--Guillemin residue theorem identifies the possible residue at zero with a constant multiple of the
 noncommutative residue of the order-zero operator
 \[
  \operatorname{sgn}(A)=A|A|^{-1}
 \]
 on \(\ker A^\perp\). Modulo a finite-rank operator,
 \(\operatorname{sgn}(A)=2\Pi_+-I\), where \(\Pi_+\) is the positive spectral
-projection. The noncommutative residue vanishes on the identity, on
+projection. The same theorem says that the noncommutative residue vanishes on the identity, on
 finite-rank operators, and on pseudodifferential projections. The possible
 residue is therefore zero. For a Dirac-type operator the same cancellation
 is visible directly in the parity of its local Clifford heat coefficients.
+These residue facts are quoted analytic inputs, not consequences of the
+preceding Mellin manipulation; see \cite{Melrose} for their use in the APS
+setting.
 \end{proof}
 
 For a Dirac-type operator, regularity is also visible from the parity of the
@@ -2134,20 +2286,30 @@ At the lower endpoint, this means: first insert \(t^{s/2}\) for
 \(\operatorname{Re}s\) large, use the Mellin identity, and then continue
 to \(s=0\).
 
-If \(A\) has kernel, perturb it by a finite-rank operator on
-\(\ker A\), or equivalently use the APS spectral projection and pass to the
-limit. The zero modes contribute \(h(A)/2\).
+If \(A\) has kernel, a constant shift of its zero modes along the entire
+cylinder is not a finite-rank perturbation of the cylindrical operator.
+Use instead the global b-smoothing perturbation \(T_b\) constructed in the
+K-theoretic section. The b-heat theorem applies to the fully elliptic
+operator \(D+T_b\), and smoothing does not change the interior local index
+density.
 
-To determine the contribution and its sign, put
-\(A_\varepsilon=A+\varepsilon\Pi_0\), where \(\Pi_0\) projects onto
-\(\ker A\) and \(\varepsilon>0\). Then
+The perturbation comparison theorem for the positive zero-mode spectral
+section states
 \[
- \eta(A_\varepsilon)=\eta(A)+h(A).
+ \operatorname{ind}_b(D+T_b)=\operatorname{ind}D^+_{\mathrm{APS}},
+ \qquad
+ \eta(A;T_b)=\eta(A)+h(A).
 \]
-The decaying-mode condition on the perturbed cylinder converges to
-\(\Pi_{\geq0}(A)(u|_{\partial X})=0\). The Fredholm index is constant for
-\(\varepsilon>0\), so passage to the limit gives
-\(-(\eta(A)+h(A))/2\).
+Here \(\eta(A;T_b)\) is the generalized boundary eta term produced by the
+indicial family of \(D+T_b\). The second equality is normalized by the
+finite-dimensional boundary model
+\(A+\varepsilon\Pi_0\): every zero eigenvalue is moved to the positive
+side, while the nonzero spectrum is unchanged. Homotopy of admissible
+global b-smoothing realizations preserves this value; see
+\cite{Melrose,MelrosePiazza}. Applying the preceding trace-defect argument
+to \(D+T_b\) therefore gives the correction
+\(-(\eta(A)+h(A))/2\). This is the analytic comparison step that cannot be
+replaced by perturbing the boundary family alone.
 
 \begin{theorem}[Atiyah--Patodi--Singer]
 Let \(D^+\) be a product-type graded Dirac operator on an
@@ -2197,6 +2359,12 @@ M.~F. Atiyah, V.~K. Patodi, and I.~M. Singer,
 \bibitem{Melrose}
 R.~B. Melrose,
 \emph{The Atiyah--Patodi--Singer Index Theorem}.
+
+\bibitem{MNCstar}
+R.~B. Melrose and V.~Nistor,
+\emph{C*-algebras of b-pseudodifferential operators and an
+\(\mathbb R^k\)-equivariant index theorem},
+arXiv:funct-an/9610003.
 
 \bibitem{MelrosePiazza}
 R.~B. Melrose and P.~Piazza,
