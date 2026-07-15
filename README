@@ -12,7 +12,9 @@ Four proof-focused manuscripts are maintained:
 - `Lecture draft/Hochschild homology of b-pseudodifferential operators.tex`:
   the continuous Hochschild homology of the Laurent complete-symbol algebra
   of the b-calculus, including the filtration, Poisson differential, Laurent
-  de Rham model, face decomposition, and residual-operator caveat.
+  de Rham model, face decomposition, residual-operator caveat, and carefully
+  scoped alternative reconstructions by Čech--de Rham descent and
+  Rees--Fedosov Hochschild-chain formality.
 - `Lecture draft/Boutet-de-Monvel-Hochschild-homology.tex`: the order
   spectral sequence for the complete Boutet de Monvel symbol algebra, its
   relative-cohomology second page, the FGLS residue calculation of

@@ -79,7 +79,14 @@ completion. With completed continuous Hochschild chains,
 The circle \(S^1_\sigma\) records symbol order and \(H_L^*\) is Laurent de
 Rham cohomology at the boundary. The displayed vector-space isomorphism is
 noncanonical; the filtration and its associated graded are natural. We
-separate this result from the Hochschild homology of an unreduced operator
+also give two alternative reconstructions: a \v Cech--de Rham descent proof
+of the filtered calculation and a Rees--Fedosov reconstruction based on
+Lie-algebroid Hochschild-chain formality. In the second route the
+formal-to-classical comparison is made at every finite symbol order, while
+convergence for the actual continuous algebra remains the quoted
+Benameur--Nistor input. The Rees parameter is not confused with an
+additional geometric circle. We separate this result from the
+Hochschild homology of an unreduced operator
 algebra, which depends on the chosen residual ideal and completion.
 \end{abstract}
 
@@ -673,7 +680,7 @@ exactly this ambiguity. Iterated collar extensions provide a noncanonical
 splitting. This proves \eqref{eq:corners} rather than merely suggesting it
 from the one-boundary case.
 
-\section{Collapse and assembly of the computation}
+\section{Collapse and assembly of the computation}\label{sec:collapse}
 
 Combining HKR, the Poisson differential, symplectic duality, and homogeneity
 gives
@@ -775,6 +782,370 @@ not by themselves prove convergence.  Convergence to Hochschild homology is
 the quoted Benameur--Nistor spectral-sequence theorem, including its uniform
 vanishing-range verification.
 \end{discussion}
+
+\section{A \v Cech--de Rham reconstruction}\label{sec:cech}
+
+This section gives a second organization of the proof.  It replaces the
+global HKR assertion by a local calculation followed by descent.  It still
+uses the Benameur--Nistor convergence-and-collapse theorem; \v Cech descent
+alone computes the \(E^2\)-page, not the abutment.
+
+Choose a finite good cover \(\mathcal U=\{U_i\}\) of
+\(Y=\Sbstar\).  Near \(Z=\partial Y\), take product sets
+\([0,\varepsilon)_x\times V_i\), and require every nonempty intersection to
+be contractible and collar adapted.  Write
+\(\widetilde U_I=U_I\times\mathbb R_+\) for the corresponding conic open set
+in \(\Tbstar\setminus0\).
+
+Let \(\mathcal C_q\) be the sheaf whose sections over \(U\) are the
+Benameur--Nistor completed degree-\(q\) chains of Laurent complete symbols
+microlocally supported in \(\widetilde U\).  Thus one sheafifies on each
+diagonal piece \(F^N_{N,N}\) first, takes its completed projective tensor
+power, and only then takes the strict inductive limit in \(N\).  This order of
+operations is the sheaf version of \eqref{eq:BN-chains}.
+
+Form the double complex
+\begin{equation}\label{eq:cech-double}
+ K^{p,q}=\check C^p(\mathcal U,\mathcal C_q),
+ \qquad
+ D=\delta_{\check C}+(-1)^p b.
+\end{equation}
+The total degree is \(q-p\), since \(b\) lowers Hochschild degree and the
+\v Cech differential raises \(p\).
+
+\begin{lemma}[Strict descent for completed chains]\label{lem:cech-descent}
+The augmentation
+\[
+ C_\bullet^{\mathrm{cont}}(\cA_{b,L})
+ \longrightarrow \operatorname{Tot}K^{\bullet,\bullet}
+\]
+is a filtration-preserving quasi-isomorphism.  It remains a
+quasi-isomorphism after taking any fixed order quotient.
+\end{lemma}
+
+\begin{proof}
+Fix a diagonal filtration piece and a Hochschild degree.  Local complete
+symbols of bounded upper order are nuclear Fr\'echet spaces, and the same is
+true of their completed projective tensor powers.  A smooth partition of
+unity \(\{\rho_i\}\) subordinate to \(\mathcal U\), lifted homogeneously to
+the conic sets, gives the usual contracting homotopy of the augmented
+\v Cech row: multiply the first tensor factor by \(\rho_i\), restrict, and
+sum in the new index.  The homotopy is continuous and does not increase
+total symbol order or Laurent pole order.
+
+This row homotopy need not commute with the Hochschild boundary; that is not
+required.  It proves strict exactness of every augmented \v Cech row.
+Because the homotopy is defined uniformly on the diagonal pieces, it passes
+through their projective completions and strict inductive limit.  The
+spectral sequence obtained by taking \v Cech cohomology first is therefore
+concentrated in degree zero and proves the assertion.  The same argument
+works after quotienting by any lower-order piece.
+\end{proof}
+
+Filter \eqref{eq:cech-double} by total symbol order.  On the associated
+graded, multiplication is commutative.  The local HKR map and the local
+Koszul homotopy identify the first page with
+\begin{equation}\label{eq:cech-E1}
+ \check C^p\bigl(\mathcal U,
+ \Omega_L^q(\Tbstar\setminus0)_{\mathrm{hom}}\bigr).
+\end{equation}
+These maps commute with restriction.  The first order-lowering part of the
+symbol product gives \(i^{-1}\delta_b\), exactly as in
+\eqref{eq:poisson-boundary}.  Hence the next differential on
+\eqref{eq:cech-E1} is the Poisson differential.
+
+For a closed manifold these are exactly the local filtered steps in the
+Brylinski--Getzler calculation \cite{BG}: complete symbols pass to
+homogeneous functions, HKR gives forms, and the first quantum correction is
+the Poisson boundary.  The present descent proof adds the Laurent
+normal-weight contraction, the residue complex at \(Z\), and the strict
+topologically filtered completion required at the boundary.
+
+\begin{proposition}[\v Cech computation of the second page]
+The total filtered complex \eqref{eq:cech-double} has
+\[
+ E^2_k\cong H_L^{2n-k}(Y\times S^1_\sigma;\C).
+\]
+This identification is independent of the good cover and the partition of
+unity.
+\end{proposition}
+
+\begin{proof}
+Symplectic duality \eqref{eq:symplectic-duality} converts the Poisson
+differential in \eqref{eq:cech-E1} to the Laurent de Rham differential with
+complementary degree.  The sheaves of Laurent forms with a fixed finite pole
+bound are fine.  Their union is still \v Cech acyclic for the finite cover,
+because multiplication by the partition of unity preserves every pole
+bound.  Thus the \v Cech direction contributes no positive-degree
+cohomology and the hypercohomology is the cohomology of global Laurent
+forms.
+
+The Euler homotopy removes nonzero fiber weights.  At weight zero a form is
+\(\alpha_0+(dr/r)\wedge\alpha_1\), so
+\eqref{eq:order-circle} identifies the remaining complex with Laurent forms
+on \(Y\times S^1_\sigma\).  Refining the cover gives a common refinement, and
+the two refinement maps are homotopic on the augmented \v Cech resolution.
+This proves independence of all auxiliary choices.
+\end{proof}
+
+The boundary term can also be read directly in the descent complex.  One
+must not write the generally false short exact sequence
+\(0\to\Omega^*(Y)\to\Omega_L^*(Y)\to\Omega^{*-1}(Z)\to0\): a Laurent form
+with zero residue can still have higher poles.  Instead let
+\(\mathcal K^*=\ker(\operatorname{Res}_Z)\).  The nonzero normal-weight
+contraction in the proof of Proposition~\ref{prop:face} gives a
+quasi-isomorphism
+\[
+ \Omega^*(Y)\longrightarrow\mathcal K^*.
+\]
+The exact sequence
+\[
+0\longrightarrow\mathcal K^*
+ \longrightarrow\Omega_L^*(Y)
+ \xrightarrow{\operatorname{Res}_Z}
+ \bigl(\Omega^{*-1}(Z),-d_Z\bigr)\longrightarrow0
+\]
+therefore yields the derived decomposition
+\begin{equation}\label{eq:cech-residue-derived}
+ R\Gamma(Y;\Omega_L^*)
+ \simeq R\Gamma(Y;\Omega^*)
+ \oplus R\Gamma(Z;\Omega^{*-1}),
+\end{equation}
+after choosing a collar splitting.  This is precisely the interior/boundary
+decomposition used in \eqref{eq:expanded}; it also shows why the splitting,
+unlike the residue filtration, is not canonical.
+
+Finally apply the quoted theorem in Section~\ref{sec:collapse} to the order
+filtration on
+\eqref{eq:cech-double}.  Lemma~\ref{lem:cech-descent} identifies its abutment
+with \(\HH_*^{\mathrm{cont}}(\cA_{b,L})\), while the proposition identifies
+its second page.  Benameur--Nistor degeneration gives
+\(E^2=E^\infty\), completing the \v Cech--de Rham proof of
+Theorem~\ref{thm:main}.  Thus descent replaces the globalization part of the
+original proof, but it does not manufacture convergence or kill higher
+differentials by itself.
+
+\section{A Rees--Fedosov reconstruction}\label{sec:rees}
+
+The third route makes the deformation behind symbol composition explicit.
+It has two logically separate parts: a formal Lie-algebroid formality
+theorem and a finite-order Rees comparison with classical symbols.  Passage
+to the completed continuous complex remains the convergence input quoted in
+Section~\ref{sec:collapse}.
+
+This is also the deformation-theoretic refinement of the
+Brylinski--Getzler filtration: their principal-symbol and Poisson
+differentials are the first two coefficients of the Rees star product below
+\cite{BG}.
+
+\subsection{The Rees deformation}
+
+The algebraic Rees algebra of the order filtration is
+\[
+ \mathcal R_F(\cA_{b,L})
+ =\bigoplus_{m\in\mathbb Z}t^mF_m\cA_{b,L}
+ \subset \cA_{b,L}[t,t^{-1}].
+\]
+It records both specialization to the associated graded and the return to
+complete symbols at \(t=1\).  Since
+\([F_m,F_{m'}]\subset F_{m+m'-1}\), its commutator is divisible by the
+Rees parameter in an associated-graded chart.  Equivalently, for a symbol
+of fixed upper order
+\(a\sim a_m+a_{m-1}+a_{m-2}+\cdots\), factor off the bookkeeping degree
+\(t^m\) and encode the descending expansion by
+\begin{equation}\label{eq:formal-Rees}
+ a_m+\hbar a_{m-1}+\hbar^2a_{m-2}+\cdots .
+\end{equation}
+The power \(t^m\) records the absolute order.  After it is factored off in a
+fixed sector, we write the same Rees parameter as \(\hbar\); its successive
+powers record loss of order.  Thus \eqref{eq:formal-Rees} is an
+\(\hbar\)-adic chart on one upper-order sector, not a global
+\(\mathbb C[[\hbar]]\)-module structure on the union of all orders.
+
+On Laurent functions on \(M=\Tbstar\setminus0\), full symbol composition in
+this chart becomes
+\begin{equation}\label{eq:Rees-star}
+ a\star c=\sum_{j\geq0}\hbar^j C_j(a,c),
+ \qquad C_0(a,c)=ac,
+\end{equation}
+where \(C_j\) is b-bidifferential and lowers the unscaled symbol order by
+\(j\).  Its antisymmetric first term is
+\[
+ C_1(a,c)-C_1(c,a)=i^{-1}\{a,c\}_b,
+\]
+so \([a,c]_\star=(\hbar/i)\{a,c\}_b+O(\hbar^2)\).
+
+The space \(M\) has the symplectic Lie algebroid \({}^bTM\) with symplectic
+form \(\omega_b\).  Choose a torsion-free b-symplectic connection and use
+the homogeneous cotangent Fedosov construction, so that positive fiber
+dilation acts equivariantly.  The Fedosov Weyl bundle has a flat differential
+of the form
+\[
+ D_F=-\delta+\nabla+\frac{i}{\hbar}\operatorname{ad}(r_F),
+ \qquad D_F^2=0.
+\]
+Flat sections, transported to Laurent functions by the Fedosov--Taylor map,
+give a star product equivalent to \eqref{eq:Rees-star}.  Symplectic
+Lie-algebroid Fedosov quantization, including logarithmic symplectic
+structures and corners, is developed by Nest--Tsygan
+\cite{NestTsygan}.  Equivalent star products induce isomorphic Hochschild
+complexes, so the choice of connection does not affect the answer.
+
+\subsection{Hochschild-chain formality}
+
+Calaque--Dolgushev--Halbout prove Tsygan formality for Hochschild chains in
+the Lie-algebroid setting by combining Fedosov resolutions with the
+Kontsevich--Shoikhet local maps \cite{CDH}; Dolgushev's smooth-manifold
+theorem is the corresponding untwisted prototype \cite{Dolgushev}.  Twisting
+their module quasi-isomorphism by the Maurer--Cartan element defining
+\eqref{eq:Rees-star} gives
+\begin{equation}\label{eq:chain-formality}
+ \left(C_\bullet(\mathcal O_L(M)((\hbar)),\star),b_\star\right)
+ \simeq
+ \left(\Omega_L^\bullet(M)((\hbar)),
+ \mathcal L_{\pi_\hbar}\right),
+\end{equation}
+where \(\pi_\hbar=\hbar\pi_b+O(\hbar^2)\) is the formal Poisson tensor and
+\(\mathcal L_{\pi_\hbar}=[\iota_{\pi_\hbar},d]\).
+
+The formal tensor \(\pi_\hbar\) is symplectic over \(\C((\hbar))\); let
+\(\omega_\hbar\) be its inverse.  The formal symplectic star operator
+\(*_{\omega_\hbar}\) satisfies the same Darboux calculation as
+\eqref{eq:symplectic-duality} and converts
+\(\mathcal L_{\pi_\hbar}\) to \(d\), up to an invertible scalar and the
+degree sign.  Therefore
+\begin{equation}\label{eq:formal-HH}
+ \HH_k^{\mathbb C((\hbar))}
+ \bigl(\mathcal O_L(M)((\hbar)),\star\bigr)
+ \cong H_L^{2n-k}(M;\C)((\hbar)).
+\end{equation}
+The formality maps are b-polydifferential.  Hence they preserve finite
+Laurent pole order: locally \(x\partial_x(x^{-\ell})=-\ell x^{-\ell}\), and
+tangential b-derivatives do not create a larger pole.
+
+Equation~\eqref{eq:formal-HH} concerns the extended formal star algebra,
+before restriction to classical homogeneous expansions and before Borel
+realization.  It must not be read as the complete-symbol answer.  In
+particular, \(H_L^*(M)\) itself has no order-circle factor: that factor
+appears only after the homogeneous order complex is formed.
+
+\begin{remark}[Where the order circle does, and does not, come from]
+The complex in \eqref{eq:chain-formality} is relative to the base field
+\(\C((\hbar))\).  Thus \(d\hbar=0\), and it is incorrect to insert an
+additional class \(d\hbar/\hbar\) into \eqref{eq:formal-HH}.  The single
+class giving \(S^1_\sigma\) is the radial zero-weight class \(dr/r\) in
+Section~5.
+
+One can instead compute absolute Hochschild homology over \(\C\) for the
+Laurent extension of a Rees algebra.  Then a class \(d\log t\) can appear.
+The Rees grading ties the exponent of \(t\) to fiber homogeneity, so on the
+diagonal order complex \(d\log t\) and \(-d\log r\) describe the same order
+direction.  After specialization at \(t=1\), only the radial class remains.
+Either convention yields one order circle, never two.
+\end{remark}
+
+\subsection{From formal series to classical complete symbols}
+
+Formal formality does not by itself compute the continuous homology of
+\(\cA_{b,L}\).  What follows directly from the classical symbol calculus is
+a comparison at every finite depth of the order filtration.
+
+\begin{proposition}[Finite-order Rees comparison]
+\label{prop:Borel-formality}
+After fixing a homogeneous classical symbol map, for every
+\(m\in\mathbb Z\) and \(N\geq0\), the first \(N+1\) symbol components give a
+continuous isomorphism
+\begin{equation}\label{eq:finite-Rees}
+ F_m\cA_{b,L}/F_{m-N-1}\cA_{b,L}
+ \cong
+ \bigoplus_{j=0}^{N}\mathcal O_L(M)_{m-j}.
+\end{equation}
+Under \eqref{eq:finite-Rees}, operator composition is the star product
+\eqref{eq:Rees-star} modulo \(\hbar^{N+1}\).  These isomorphisms are
+compatible with truncation, completed projective tensor powers on each
+diagonal piece, and the Hochschild boundary.  Consequently the Rees and
+classical order spectral sequences have the same \(E^1\)-page and the same
+Poisson differential \(d^1\).
+\end{proposition}
+
+\begin{proof}
+There are three points to check.
+
+\emph{Algebraic realization.}
+Taylor expansion in symbol order gives \eqref{eq:finite-Rees}; no infinite
+summation is needed at finite \(N\).  The b-symbol composition formula shows
+coefficient by coefficient that the two products agree modulo
+\(\hbar^{N+1}\).  Its first antisymmetric correction is the b-Poisson
+bracket, proving the assertion about \(d^1\).
+
+\emph{Topology.}
+For a fixed Laurent bound, both sides of \eqref{eq:finite-Rees} are finite
+direct sums of nuclear Fr\'echet spaces.  Truncation and the coefficient maps
+are continuous.  Taking completed projective tensor powers first and the
+strict inductive limit over diagonal pieces afterward is exactly the order
+of operations in \eqref{eq:BN-chains}; hence the comparison extends to the
+finite quotients of the continuous Hochschild complex.
+
+\emph{Inverse limit.}
+The b-symbol Borel lemma realizes every compatible formal homogeneous
+sequence by a classical polyhomogeneous symbol, uniquely modulo smoothing.
+It therefore identifies the projective limit of the algebraic truncations
+with complete symbols.  This asymptotic completeness does not, by itself,
+prove that Hochschild homology commutes with the projective/inductive limits;
+that separate convergence assertion is exactly the topologically filtered
+theorem quoted in Section~\ref{sec:collapse}.
+\end{proof}
+
+Formality now explains the local differential beyond its first Poisson
+term, while Proposition~\ref{prop:Borel-formality} identifies the finite
+classical jets to which that calculation applies.  On the homogeneous
+Poisson complex, the Euler contraction makes every nonzero weight acyclic.
+The zero-weight splitting is
+\[
+ \Omega_L^j(Y)\oplus\frac{dr}{r}\wedge\Omega_L^{j-1}(Y),
+\]
+whose cohomology is \(H_L^j(Y\times S^1_\sigma)\).  We have proved:
+
+\begin{theorem}[Rees--Fedosov reconstruction]
+The Rees deformation and Lie-algebroid Hochschild-chain formality compute
+the second page of the classical order spectral sequence as
+\[
+ E^2_k
+ \cong H_L^{2n-k}(Y\times S^1_\sigma;\C),
+\]
+and the Benameur--Nistor convergence-and-collapse theorem then gives the
+associated-graded and noncanonical vector-space statements of
+Theorem~\ref{thm:main}.
+\end{theorem}
+
+The formal chain map organizes all local higher corrections, but it does
+not license specialization of formal Hochschild homology to continuous
+Hochschild homology.  The finite-order comparison is elementary symbol
+calculus; convergence and collapse for the completed classical algebra are
+still the published global input.  This is the precise scope of the second
+route.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzcd}[column sep=large,row sep=large]
+ C_\bullet^{\mathrm{cont}}(\cA_{b,L})
+ \arrow[r,"\text{\v Cech descent}"]
+ \arrow[d,dashed,"\text{finite Rees jets}"']
+ &\operatorname{Tot}\check C^\bullet(\mathcal U,\mathcal C_\bullet)
+ \arrow[r,"\mathrm{HKR}+\delta_b"]
+ &\Omega_L^{2n-\bullet}(M)_{0}\\
+ C_\bullet(\mathcal O_L(M)((\hbar)),\star)
+ \arrow[r,"\text{Fedosov formality}"']
+ &\bigl(\Omega_L^\bullet(M)((\hbar)),
+ \mathcal L_{\pi_\hbar}\bigr)
+ \arrow[ur,"*_{\omega_\hbar}"']
+\end{tikzcd}
+\caption[Two alternative Hochschild calculations]{The \v Cech route
+globalizes the filtered HKR--Poisson calculation and then uses the published
+collapse theorem.  The Rees route organizes the local deformation by
+chain-level formality; finite Rees jets compare it with classical symbols,
+and the same published theorem controls the completed limit.}
+\end{figure}
 
 \section{Checks and consequences}
 
@@ -941,6 +1312,19 @@ J.-L. Brylinski and E. Getzler,
 noncommutative residue},
 K-Theory \textbf{1} (1987), 385--403.
 
+\bibitem{CDH}
+D. Calaque, V. Dolgushev, and G. Halbout,
+\emph{Formality theorems for Hochschild chains in the Lie algebroid
+setting},
+J. Reine Angew. Math. \textbf{612} (2007), 81--127;
+arXiv:math/0504372.
+
+\bibitem{Dolgushev}
+V. Dolgushev,
+\emph{A formality theorem for Hochschild chains},
+Adv. Math. \textbf{200} (2006), 51--101;
+arXiv:math/0402248.
+
 \bibitem{LMlocalization}
 B. Liu and X. Ma,
 \emph{Differential K-theory and localization formula for eta-invariants},
@@ -956,6 +1340,13 @@ Research Notes in Mathematics 4, A K Peters, 1993.
 R. B. Melrose and V. Nistor,
 \emph{Homology of pseudodifferential operators I: manifolds with boundary},
 arXiv:funct-an/9606005.
+
+\bibitem{NestTsygan}
+R. Nest and B. Tsygan,
+\emph{Deformations of symplectic Lie algebroids, deformations of holomorphic
+symplectic structures, and index theorems},
+Asian J. Math. \textbf{5} (2001), 599--635;
+arXiv:math/9906020.
 
 \bibitem{MazzeoMelrose}
 R. Mazzeo and R. B. Melrose,
