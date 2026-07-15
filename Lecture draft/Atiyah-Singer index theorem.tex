@@ -71,6 +71,16 @@
 Throughout, \(M\) is a smooth compact manifold without boundary unless
 stated otherwise. All vector bundles are finite-dimensional and smooth.
 
+\begin{discussion}[Scope of the proofs]
+These notes are proof-oriented, but three decisive results are imported with
+explicit citations.  The proof of the general Atiyah--Singer theorem uses the
+analytic push-forward theorem.  The local Dirac proof uses the rescaled
+heat-kernel convergence theorem and the blockwise scalar Mehler formula.  The
+arguments below prove the remaining reductions and identify exactly where
+each imported theorem enters; they do not present those three inputs as
+elementary consequences of the surrounding calculations.
+\end{discussion}
+
 \section{Connections and curvature}
 
 \begin{definition}
@@ -1144,39 +1154,86 @@ has index one. This is the standard \(K\)-theoretic proof architecture of
 Atiyah and Singer \cite{ASI,ABS}.
 
 First define the analytic index directly on compactly supported
-\(K\)-theory. A class in \(K_c^0(T^*M)\) is represented, after
-stabilization, by
+\(K\)-theory.  The representative and quantization steps are contained in
+the following lemma; in particular, no radial deformation of an arbitrary
+bundle map is being assumed.
+
+\begin{lemma}[Elliptic representatives and quantization]
+After stabilization, every class \(\alpha\in K_c^0(T^*M)\) has a
+representative
+\[
+ \alpha=[\pi^*E,\pi^*F,\sigma]
+\]
+in which \(\sigma(x,\xi)\) is smooth on \(T^*M\setminus0\), homogeneous of
+degree zero, and invertible for every \(\xi\ne0\).  It is the principal
+symbol of a classical operator \(P_\sigma\in\Psi^0(M;E,F)\).  If two such
+operators have the same principal symbol, then their difference is compact
+on \(L^2\), so their Fredholm indices agree.
+\end{lemma}
+
+\begin{proof}
+Let \(B^*M\) and \(S^*M\) be the closed unit ball and unit sphere bundles.
+Radial compactification gives
+\[
+ K_c^0(T^*M)\cong K^0(B^*M,S^*M).
+\]
+A relative class is represented by a triple
+\((\widetilde E,\widetilde F,u)\), where \(\widetilde E\) and
+\(\widetilde F\) are bundles on \(B^*M\) and
+\(u:\widetilde E|_{S^*M}\to\widetilde F|_{S^*M}\) is an isomorphism.
+Because \(B^*M\) deformation retracts onto its zero section, stable bundle
+isomorphisms identify \(\widetilde E\) and \(\widetilde F\) with
+\(\pi^*E\) and \(\pi^*F\).  Define on the punctured cotangent bundle
+\[
+ \sigma(x,\xi)=u\!\left(x,\frac{\xi}{|\xi|}\right).
+\]
+It is smooth, homogeneous of degree zero, invertible at every nonzero
+covector, and represents the original relative class because its restriction
+to \(S^*M\) is \(u\).
+
+Choose \(\chi\in C^\infty([0,\infty))\) equal to zero near the origin and
+one for \(|\xi|\geq1\).  Then \(\chi(|\xi|)\sigma(x,\xi)\), extended by
+zero near the zero section, is a smooth classical order-zero symbol with
+principal symbol \(\sigma\).  Classical quantization gives
+\(P_\sigma\in\Psi^0(M;E,F)\), and the parametrix theorem makes it Fredholm.
+If \(P_\sigma\) and \(Q_\sigma\) have the same principal symbol, then
+\[
+ P_\sigma-Q_\sigma\in\Psi^{-1}(M;E,F).
+\]
+This difference maps \(L^2\) continuously to \(H^1\), and the inclusion
+\(H^1\hookrightarrow L^2\) is compact by Rellich's lemma.  Thus it is a
+compact perturbation and does not change the index.
+\end{proof}
+
+Set
 
 \[
- \alpha=[\pi^*E,\pi^*F,a],
+ \operatorname{a\text{-}ind}(\alpha)=\ind P_\sigma.
 \]
 
-where \(a:\pi^*E\to\pi^*F\) is invertible outside a compact set. Radial
-deformation makes \(a\) homogeneous for large covectors, and symbol
-quantization produces an elliptic pseudodifferential operator
-\(P_a:E\to F\) with principal symbol \(a\). Set
+The lemma handles the choice of quantization.  A homotopy of relative
+symbols can be quantized, using one fixed collection of coordinate charts
+and cutoffs, to a norm-continuous family of Fredholm operators on \(L^2\);
+its index is constant.  Direct sum gives additivity.  For a stabilized
+summand whose boundary isomorphism extends over \(B^*M\), radial contraction
+of the extension homotopes its boundary symbol to the pullback of an
+invertible bundle map on \(M\).  Quantizing that last map gives an invertible
+operator of index zero.
+These are exactly the relations defining \(K^0(B^*M,S^*M)\), so
+\(\operatorname{a\text{-}ind}\) is a well-defined homomorphism.
 
-\[
- \operatorname{a\text{-}ind}(\alpha)=\ind P_a.
-\]
-
-This integer is well defined. A homotopy of symbols quantizes to a
-continuous family of Fredholm operators between fixed Sobolev spaces, so
-its index is constant. Direct sum gives additivity, and adding the symbol
-of an invertible bundle map adds an invertible operator and hence index
-zero. These are precisely the relations used to define
-\(K_c^0(T^*M)\).
-
-\begin{theorem}[Analytic push-forward; Atiyah--Singer]
+\begin{theorem}[Analytic push-forward; major imported theorem]
 Let \(i:M\hookrightarrow N\) be an embedding of closed manifolds. For
 every \(\alpha\in K_c^0(T^*M)\),
 \[
  \operatorname{a\text{-}ind}(i_!\alpha)
  =\operatorname{a\text{-}ind}(\alpha).
 \]
+This is the analytic push-forward theorem of Atiyah--Singer
+\cite{ASI}; it is an input to the proof below.
 \end{theorem}
 
-\begin{proof}[Proof architecture and imported inputs]
+\begin{discussion}[What the analytic push-forward theorem supplies]
 Choose a tubular neighborhood with normal bundle \(\nu\). The normal
 bundle of \(T^*M\) in \(T^*N\) is \(\pi^*(\nu\oplus\nu)\), with complex
 structure
@@ -1212,43 +1269,43 @@ kernel is zero. In particular, \(B_V\) is Fredholm and
  \operatorname{ind}B_V=1.
 \]
 
-Write \(P_a\) as the odd self-adjoint operator
+Write \(P_\sigma\) as the odd self-adjoint operator
 \[
- \mathcal P_a=
- \begin{pmatrix}0&P_a^*\\ P_a&0\end{pmatrix}
+ \mathcal P_\sigma=
+ \begin{pmatrix}0&P_\sigma^*\\ P_\sigma&0\end{pmatrix}
  \quad\text{on }E\oplus F.
 \]
 Let \(\Gamma_{E\oplus F}\) act by \(+1\) on \(E\) and by \(-1\) on
-\(F\). Over the tubular neighborhood, the graded product
+\(F\).  In an exact product neighborhood with one fixed Euclidean normal
+fibre \(V\), the graded product
 \[
- \mathcal P_a\widehat\otimes 1
- +\Gamma_{E\oplus F}\widehat\otimes B_\nu
+ \mathcal P_\sigma\widehat\otimes 1
+ +\Gamma_{E\oplus F}\widehat\otimes B_V
 \]
-has symbol \(\alpha\) multiplied by the Thom class. Its kernel is the
-kernel of \(\mathcal P_a\) tensored with the Gaussian vacuum; equivalently,
-the Fredholm product formula gives
+has symbol \(\alpha\) multiplied by the Bott class.  The two odd summands
+anticommute, so the square splits.  Only in this product model is its kernel
+literally the kernel of \(\mathcal P_\sigma\) tensored with the Gaussian
+vacuum.  Consequently the Fredholm product formula gives
 \[
- \operatorname{ind}(P_a\mathbin{\#}B_\nu)
- =\operatorname{ind}(P_a)\operatorname{ind}(B_\nu)
- =\operatorname{ind}(P_a).
+ \operatorname{ind}(P_\sigma\mathbin{\#}B_V)
+ =\operatorname{ind}(P_\sigma)\operatorname{ind}(B_V)
+ =\operatorname{ind}(P_\sigma).
 \]
-A complete proof uses three standard results, each in its family version:
-the Bott operator above represents the Thom class and has index one; the
-analytic index is multiplicative for the graded external product; and
-quantization is compatible with tubular-neighborhood excision. A
-connection globalizes the fibrewise Bott operator.  In the exact product
-model the two odd summands anticommute, so the square splits into base and
-normal parts.  For a general connection, differentiating the vertical Bott
-operator produces lower-order mixed terms; the usual rescaling argument
-shows that they do not change the Fredholm class.  Changing the connection
-or tubular neighborhood likewise produces a Fredholm homotopy. Excision
-then extends the tubular model to \(N\), since the symbol is invertible on
-the complement. These are the analytic
-push-forward theorem of Atiyah--Singer and the Atiyah--Bott--Shapiro Thom
-construction; full proofs are given in \cite{ASI,ABS}. Subject to these
-three quoted inputs, the displayed product-index calculation proves the
-claim.
-\end{proof}
+
+For a nontrivial normal bundle there is no single global fibre \(V\) and no
+fixed Gaussian vector with which the kernel can be tensorized.  A metric
+and connection construct a family of vertical Bott operators \(B_\nu\).
+Horizontal differentiation of that family and curvature of the connection
+produce mixed lower-order terms, so its square does not split literally.
+The family Bott theorem identifies its family index with the Thom unit;
+multiplicativity of the analytic index and tubular-neighborhood excision
+then give the displayed push-forward equality.  A rescaling/Fredholm
+homotopy controls the mixed terms and proves independence of the connection
+and tubular neighborhood.  These globalization, multiplicativity, and
+excision assertions are the content of the imported analytic push-forward
+theorem, not consequences of the elementary product calculation.  See
+\cite{ASI,ABS} for the full family argument.
+\end{discussion}
 
 We can now finish the proof of the index theorem. Choose an embedding
 \(i:M\hookrightarrow\mathbb R^N\). Bott periodicity gives
@@ -1259,7 +1316,7 @@ We can now finish the proof of the index theorem. Choose an embedding
 \]
 Let \(\beta_N\) be the Bott generator, normalized by
 \(\operatorname{a\text{-}ind}(\beta_N)=1\). If
-\(i_!\alpha=k\beta_N\), then the push-forward lemma gives
+\(i_!\alpha=k\beta_N\), then the analytic push-forward theorem gives
 \[
  \operatorname{a\text{-}ind}(\alpha)
  =\operatorname{a\text{-}ind}(i_!\alpha)
@@ -1271,7 +1328,8 @@ By definition the topological index of \(\alpha\) is the same integer
  \operatorname{a\text{-}ind}=\operatorname{t\text{-}ind}
  \quad\text{on }K_c^0(T^*M),
 \]
-which proves the Atiyah--Singer theorem for every elliptic operator.
+which proves the Atiyah--Singer theorem for every elliptic operator once the
+quoted analytic push-forward theorem is accepted.
 Applying the compactly supported Chern character and the Thom identity
 turns this equality into the cohomological formula. For a Dirac symbol,
 the characteristic classes simplify to the
@@ -1282,11 +1340,11 @@ Where is the difficult geometry hidden in this short proof?
 \end{question}
 
 \begin{answer}
-It is concentrated in the push-forward lemma. Quantization converts
+It is concentrated in the imported push-forward theorem. Quantization converts
 symbol homotopy into Fredholm homotopy; the Thom class becomes the
 fibrewise Bott operator; and excision identifies a tubular neighborhood
-with its normal model. Once those compatibilities and
-\(\operatorname{ind}B_V=1\) are proved, the final reduction to
+with its normal model. Once those quoted compatibilities are supplied and
+\(\operatorname{ind}B_V=1\) is computed, the final reduction to
 \(K_c^0(\mathbb R^{2N})\cong\mathbb Z\) is formal.
 \end{answer}
 
@@ -1842,6 +1900,46 @@ the Dirac heat supertrace vanish.
 
 \section{Relative curvature}
 
+Let \(\dim M=2m\), let \(\Gamma_E\) be the given module grading, and let
+\(\Gamma_{\Cl}\) be the chirality operator obtained from the oriented
+complex Clifford volume element.  Both anticommute with multiplication by
+one-forms, so \(\Gamma_E\Gamma_{\Cl}\) lies in the Clifford commutant.
+
+\begin{lemma}[Intrinsic relative trace]
+For every even \(A\in\operatorname{End}_{\Cl}(E)\), set
+\[
+ \operatorname{tr}_{E/S}(A)
+ =2^{-m}\operatorname{tr}_E
+   \bigl(\Gamma_E\Gamma_{\Cl}A\bigr).
+\]
+This definition is intrinsic.  Under a local graded Morita factorization
+\(E\cong S\widehat\otimes W\), it becomes
+\[
+ \operatorname{tr}_{E/S}(I_S\otimes T)=\operatorname{str}_W(T).
+\]
+Consequently it is independent of the choice of local spinor factorization.
+\end{lemma}
+
+\begin{proof}
+In the displayed factorization,
+\[
+ \Gamma_E=\Gamma_S\otimes\Gamma_W,
+ \qquad
+ \Gamma_{\Cl}=\Gamma_S\otimes I_W.
+\]
+Hence \(\Gamma_E\Gamma_{\Cl}=I_S\otimes\Gamma_W\), and
+\[
+ 2^{-m}\operatorname{tr}_{S\otimes W}
+ \bigl(I_S\otimes\Gamma_WT\bigr)
+ =\operatorname{tr}_W(\Gamma_WT)
+ =\operatorname{str}_W(T),
+\]
+because \(\dim_\mathbb C S=2^m\).  The expression on the left uses only the
+global Clifford action, orientation, and module grading.  Thus all local
+Morita factorizations give the same functional, which proves the patching
+claim rather than assuming it.
+\end{proof}
+
 For a graded Clifford module \(E\), define the relative Chern character
 form by
 \[
@@ -1850,23 +1948,11 @@ form by
  \operatorname{tr}_{E/S}
  \exp\!\left(\frac{iF^{E/S}}{2\pi}\right).
 \]
-The relative trace is characterized locally by
-\[
- E\cong S\otimes W
- \quad\Longrightarrow\quad
- \operatorname{ch}(E/S)=\operatorname{ch}(W).
-\]
-This prescription is independent of the local spinor factorization and
-therefore defines a global differential form. More explicitly, the
-endomorphisms commuting with the Clifford action form the commutant bundle
-\(\operatorname{End}_{\Cl}(E)\). On a local factorization
-\(E\cong S\otimes W\), this bundle is
-\(I_S\otimes\operatorname{End}(W)\), and
-\(\operatorname{tr}_{E/S}(I_S\otimes T)=\operatorname{tr}_W(T)\).
-Changes of spinor factorization act by conjugation on the commutant, so the
-trace patches. Since \(F^{E/S}\) lies in this commutant and satisfies its
-own Bianchi identity, Chern--Weil transgression proves that the relative
-Chern character is closed and connection-independent in cohomology.
+Locally this is the graded Chern character of \(W\); when \(W\) is
+ungraded, it is the ordinary \(\operatorname{ch}(W)\).  Since
+\(F^{E/S}\) lies in the Clifford commutant and satisfies its own Bianchi
+identity, Chern--Weil transgression proves that this form is closed and that
+its cohomology class is independent of the Clifford connection.
 
 The local index density is
 \[
@@ -1974,19 +2060,55 @@ With the convention of this manuscript,
 because \(iF/(2\pi)=-F/(2\pi i)\).
 The scalar-curvature term in the Lichnerowicz formula has lower Getzler
 degree and disappears; its effect is already encoded in the oscillator
-through \(R^{TM}_p\). If \(\delta_\varepsilon u(x)=u(\varepsilon x)\) and
-Clifford degree \(k\) is multiplied by \(\varepsilon^{-k}\), then
+through \(R^{TM}_p\).  Define
+\(\delta_\varepsilon u(x)=u(\varepsilon x)\).  Direct calculation gives
 \[
- \varepsilon^2\delta_\varepsilon^{-1}D^2\delta_\varepsilon
- =\mathcal H_p+O(\varepsilon)
+ \delta_\varepsilon\partial_i\delta_\varepsilon^{-1}
+ =\varepsilon^{-1}\partial_i,
+ \qquad
+ \delta_\varepsilon x^i\delta_\varepsilon^{-1}
+ =\varepsilon x^i.
 \]
-coefficientwise on compact sets. Duhamel's formula and Gaussian estimates
-then show convergence of the rescaled heat kernels, with all derivatives.
+Let \(\mathcal C_\varepsilon\) denote the Rees rescaling of the Clifford
+filtration: after applying the Clifford symbol map, its exterior-degree
+\(k\) component is multiplied by \(\varepsilon^{-k}\).  This is a
+rescaling on the Rees family, not an automorphism of one fixed Clifford
+algebra.  With both rescalings displayed, the correct operator formula is
+\begin{equation}\label{eq:getzler-dilation}
+ \mathcal C_\varepsilon\!\left(
+  \varepsilon^2\delta_\varepsilon D^2
+  \delta_\varepsilon^{-1}
+ \right)
+ =\mathcal H_p+O(\varepsilon)
+\end{equation}
+in the associated graded, coefficientwise on compact sets.  Indeed, a
+linear spin-connection term has the form \(xR_{ij}c(e^i)c(e^j)\): coordinate
+dilation contributes \(\varepsilon\), Clifford degree two contributes
+\(\varepsilon^{-2}\), and it therefore has the same
+\(\varepsilon^{-1}\) scale as \(\partial_i\) before the outer factor
+\(\varepsilon^2\) is applied to the square.  The term
+\(c(F^{E/S})\) has Clifford degree two and likewise survives as
+\(F^{E/S}_p\).  Every term of lower Getzler order gains a positive power of
+\(\varepsilon\).  The reversed conjugation
+\(\varepsilon^2\delta_\varepsilon^{-1}D^2\delta_\varepsilon\) would scale
+the second-order part by \(\varepsilon^4\) and is therefore incorrect.
 
-\begin{lemma}[Model heat kernel; standard Mehler calculation]
-The heat kernel of the rescaled harmonic oscillator is given by Mehler's
-formula. After Clifford supertrace and the Chern--Weil normalization, its
-diagonal value at the origin is
+\begin{lemma}[Normalized model heat kernel; Mehler formula imported]
+Let \(n=2m\), and use the curvature and chirality conventions fixed above.
+The scalar Mehler formula for the model operator gives, in the exterior
+associated graded,
+\begin{equation}\label{eq:model-mehler}
+ K_{\mathcal H_p}(t;0,0)
+ =
+ (4\pi t)^{-m}
+ \det\nolimits^{1/2}
+ \left(
+  \frac{tR^{TM}_p/2}{\sinh(tR^{TM}_p/2)}
+ \right)
+ e^{-tF^{E/S}_p}.
+\end{equation}
+The square root is the formal branch with constant term one.  After the top
+Clifford supertrace, its degree-\(n\) diagonal value is
 \[
  \left[
  \Ahat(TM,\nabla^{TM})
@@ -1995,51 +2117,68 @@ diagonal value at the origin is
 \]
 \end{lemma}
 
-\begin{proof}[Normalization check]
-Put the skew-symmetric curvature matrix into \(2\times2\) blocks. The model
-operator splits into commuting two-dimensional oscillators and a constant
-endomorphism. For the oscillator part, Mehler's formula at the origin is
+\begin{proof}[Normalization calculation]
+Formally put the skew-symmetric curvature matrix into oriented
+\(2\times2\) blocks.  If \(r\) denotes the formal curvature root of one
+block, its oscillator heat kernel at the origin contributes
 \[
- K_{\mathrm{osc}}(t;0,0)
- =
- (4\pi t)^{-n/2}
- \det\nolimits^{1/2}
- \left(
- \frac{t\mathcal R/2}{\sinh(t\mathcal R/2)}
- \right).
+ (4\pi t)^{-1}\frac{tr/2}{\sinh(tr/2)}.
 \]
-This identity is an equality of formal exterior-power series; it can be
-verified block by block from the one-dimensional Gaussian oscillator.
-Because \(F^{E/S}_p\) commutes with the Clifford action, it commutes with
-the oscillator and contributes the raw factor \(e^{-tF^{E/S}_p}\).
+Multiplying the \(m\) block formulas gives the determinant and the factor
+\((4\pi t)^{-m}\) in \eqref{eq:model-mehler}.  Because
+\(F^{E/S}_p\) commutes with the Clifford action, it commutes with every
+oscillator block and contributes \(e^{-tF^{E/S}_p}\).  This blockwise
+Mehler identity, including its Fourier normalization, is the analytic
+formula imported from \cite[Chapter~4]{BGV}.
 
-The symbol-supertrace normalization is the remaining step. Blockwise
-Fourier inversion contributes the powers of \(2\pi\), and the top
-Clifford supertrace changes the raw curvature variables to the normalized
-variables above. The precise identity is
+It remains to check the Clifford and Chern--Weil constants.  In an oriented
+orthonormal basis, set
 \[
- \sigma_{[n]}\operatorname{str}K_{\mathcal H_p}(1;0,0)
- =
- \left[
+ C=c(e^1)\cdots c(e^{2m}),
+ \qquad
+ \Gamma_{\Cl}=i^mC.
+\]
+Since \(C^2=(-1)^m\) and \(\dim_\mathbb C S=2^m\),
+\begin{equation}\label{eq:top-clifford-supertrace}
+ \operatorname{str}_S(C)
+ =\operatorname{tr}_S(\Gamma_{\Cl}C)
+ =2^m(-i)^m.
+\end{equation}
+Lower Clifford degrees have zero supertrace.  Every exterior-degree
+\(2m\) term on the right of \eqref{eq:model-mehler} contains exactly \(m\)
+curvature two-forms and hence carries \(t^m\).  The powers of \(t\) cancel,
+and the remaining scalar factor is
+\[
+ (4\pi)^{-m}2^m(-i)^m
+ =\left(\frac{1}{2\pi i}\right)^m.
+\]
+Thus the top supertrace replaces each raw curvature two-form \(R\) by its
+normalized value \(R/(2\pi i)\).  With
+\[
+ \Omega^{TM}=\frac{R^{TM}}{2\pi i},
+ \qquad
+ \Omega^{E/S}=\frac{F^{E/S}}{2\pi i},
+\]
+the raw factor \(e^{-tF^{E/S}}\) becomes
+\(e^{-\Omega^{E/S}}=e^{iF^{E/S}/2\pi}\), and the oscillator determinant
+becomes
+\[
  \det{}^{1/2}\!\left(
    \frac{\Omega^{TM}/2}{\sinh(\Omega^{TM}/2)}
- \right)
- \operatorname{tr}_{E/S}e^{-\Omega^{E/S}}
- \right]_{[n]}.
+ \right).
 \]
-Thus multiplying the curvature blocks and taking degree \(n\) gives
+Taking the relative trace on the commutant and extracting total exterior
+degree \(n\) therefore gives
 \[
  \left[
  \Ahat(TM,\nabla^{TM})
  \operatorname{ch}(E/S,\nabla^E)
  \right]_{[n]}(p).
 \]
-The block diagonalization, the branch of the determinant square root, the
-Fourier factors, and the last symbol-supertrace identity are the standard
-Mehler calculation in \cite[Chapter~4]{BGV}; they are quoted here rather
-than concealed in an equality between raw and normalized curvatures. The
-formulas record exactly how its two factors become \(\Ahat\) and the
-relative Chern character.
+This accounts explicitly for the top Clifford-supertrace constant, the
+powers of \(t\) and \(4\pi\), the factors of \(i\) and \(2\pi\), and the
+extraction of exterior degree \(n\).  The only imported part of this lemma
+is the blockwise scalar Mehler formula \eqref{eq:model-mehler} itself.
 \end{proof}
 
 The determinant factor is \(\Ahat(TM)\), and the relative trace of the
@@ -2701,18 +2840,41 @@ covector \(\xi\), Clifford multiplication is
  \varepsilon(\xi^{0,1})
  -\iota_{(\xi^\sharp)^{0,1}}
  \right),
-\qquad c(\xi)^2=-|\xi|^2.
+ \qquad c(\xi)^2=-|\xi|^2.
 \]
-Choose a Hermitian connection preserving \(J\) and \(g\). It induces a
-Clifford connection on \(S\), hence a Dirac operator
+The compatible metric reduces the oriented frame bundle to \(U(m)\) and
+thereby determines the canonical spin\(^{c}\) structure, whose determinant
+line is
+\[
+ K_M^{-1}=\det T^{1,0}M.
+\]
+Choose a unitary connection \(A\) on \(K_M^{-1}\).  The Levi--Civita
+connection together with \(A\) lifts to a spin\(^{c}\) connection
+\(\nabla^{S,A}\) on \(S\).  By construction it satisfies
+\[
+ [\nabla_X^{S,A},c(\xi)]
+ =c(\nabla_X^{LC}\xi),
+\]
+so it is a genuine Clifford connection and defines a Dirac operator
 \[
  D_J:C^\infty(S^+)\longrightarrow C^\infty(S^-).
 \]
-Its principal symbol is \(i\,c(\xi)\), so \(D_J\) is elliptic. The
+An arbitrary Hermitian connection preserving \(J\) and \(g\) need not have
+this Clifford compatibility, because it need not induce the Levi--Civita
+connection on covectors.  The spin\(^{c}\) construction is the required
+replacement.
+
+The principal symbol of \(D_J\) is \(i\,c(\xi)\), so it is elliptic.  The
 operator \(\sqrt2(\bar\partial+\bar\partial^*)\) has the same principal
-symbol and differs from \(D_J\) by a zero-order torsion term. Therefore
-the two operators have the same index even when \(\bar\partial\) is not a
-differential.
+symbol: the symbols of \(\bar\partial\) and \(\bar\partial^*\) are exterior
+multiplication and contraction by \(\xi^{0,1}\).  Two first-order operators
+with the same principal symbol differ by a bundle endomorphism; here that
+zero-order term records the intrinsic torsion of the almost-Hermitian
+structure and the choice of \(A\).  As maps \(H^1(S^+)\to L^2(S^-)\), their
+difference factors through the compact inclusion \(H^1\hookrightarrow L^2\).
+They therefore have the same index even when \(\bar\partial^2\ne0\).  In the
+Kähler case, choosing the Chern connection on \(K_M^{-1}\) gives
+\(D_J=\sqrt2(\bar\partial+\bar\partial^*)\).
 
 \begin{theorem}[Almost-complex Riemann--Roch]
 Let \(M^{2m}\) be compact almost complex and let \(E\) be a complex vector
