@@ -1,0 +1,634 @@
+\documentclass[11pt,oneside,reqno]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathpazo}
+\usepackage[margin=1in]{geometry}
+\usepackage{microtype}
+\usepackage{tikz-cd}
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+  pdftitle={Hochschild Homology in the Boutet de Monvel Calculus},
+  pdfauthor={Changwei Zhou}
+}
+
+\DeclareMathOperator{\HH}{HH}
+\DeclareMathOperator{\gr}{gr}
+\DeclareMathOperator{\Res}{Res}
+\DeclareMathOperator{\tr}{tr}
+\newcommand{\C}{\mathbb C}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\cB}{\mathcal B}
+\newcommand{\cJ}{\mathcal J}
+\newcommand{\Bcs}{\mathfrak B_{\mathrm{cs}}}
+\newcommand{\Splus}{\mathcal S_+}
+\allowdisplaybreaks
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem*{discussion}{Discussion}
+
+\title{Hochschild Homology in the\\
+Boutet de Monvel Calculus}
+\author{Changwei Zhou}
+\date{}
+
+\begin{document}
+\hypersetup{pageanchor=false}
+\maketitle
+\thispagestyle{empty}
+\clearpage
+\hypersetup{pageanchor=true}
+\pagenumbering{roman}
+\tableofcontents
+\clearpage
+\listoffigures
+\clearpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\begin{abstract}
+Let \(X\) be a compact connected \(n\)-manifold with boundary, \(n>1\).
+We study the integer-order, type-zero Boutet de Monvel algebra modulo its
+residual ideal, with a specified topologically filtered Hochschild complex.
+The order spectral sequence has second page
+\[
+ E^2_k\cong
+ H^{2n-k}(S^*X\times S^1_\sigma,
+ S^*X|_{\partial X}\times S^1_\sigma;\C).
+\]
+The boundary term comes from the smooth Wiener--Hopf ideal and is essential:
+discarding it gives the wrong trace space. A strong convergence and
+\(E^2\)-collapse theorem would turn the displayed formula into the full
+continuous Hochschild homology. We state that implication precisely, but do
+not attribute it to the groupoid theorem of Benameur--Nistor, which does not
+cover the full Boutet de Monvel matrix calculus. Independently of collapse,
+the theorem of Fedosov--Golse--Leichtnam--Schrohe computes the Hausdorff
+degree-zero group: it is one-dimensional and is detected by the boundary
+noncommutative residue. Thus the manuscript separates the calculated page
+from the one remaining global homological input.
+\end{abstract}
+
+\section{Scope and main statements}
+
+The expression \emph{Hochschild homology of the Boutet de Monvel calculus}
+does not specify an algebra. The answer changes if one keeps smoothing
+operators, uses only order zero, admits arbitrary type, or changes the
+locally convex completion. We use the classical integer-order algebra of
+type zero, normalize its four entries with fixed order-reduction operators,
+and divide by its full residual
+ideal. This is the boundary analogue of the complete-symbol algebra on a
+closed manifold.
+
+Set
+\[
+ Y=S^*X=(T^*X\setminus0)/\mathbb R_+,
+ \qquad Z=Y|_{\partial X}.
+\]
+Then \(Y\) is a compact manifold with boundary \(Z\). The circle
+\(S^1_\sigma\) records integral symbol order; it is not an extra geometric
+circle in \(T^*X\).
+
+\begin{theorem}[The computed page]\label{thm:E2}
+For the topologically filtered complete-symbol algebra defined in
+Section~\ref{sec:algebra}, the order spectral sequence has
+\begin{equation}\label{eq:E2-main}
+ \boxed{
+ E^2_k\cong
+ H^{2n-k}(Y\times S^1_\sigma,Z\times S^1_\sigma;\C).}
+\end{equation}
+Equivalently,
+\[
+ E^2_k\cong H^{2n-k}(Y,Z;\C)
+ \oplus H^{2n-k-1}(Y,Z;\C).
+\]
+\end{theorem}
+
+\begin{theorem}[Conditional full calculation]\label{thm:conditional}
+Assume that the order spectral sequence is strongly convergent and collapses:
+\begin{equation}\label{eq:collapse}
+ E^2(\Bcs)=E^\infty(\Bcs)
+ \quad\text{and}\quad
+ E^\infty(\Bcs)\Longrightarrow\HH_*^{\mathrm{cont}}(\Bcs).
+\end{equation}
+Then the associated graded of the induced homology filtration is canonically
+given by the right side of \eqref{eq:E2-main}. After choosing linear
+splittings,
+\[
+ \HH_k^{\mathrm{cont}}(\Bcs)
+ \cong
+ H^{2n-k}(Y\times S^1_\sigma,Z\times S^1_\sigma;\C)
+\]
+noncanonically as vector spaces. In particular, it vanishes for \(k>2n\).
+\end{theorem}
+
+\begin{theorem}[Unconditional degree zero]\label{thm:HH0}
+For connected \(X\), \(n>1\), the Hausdorffized continuous degree-zero
+homology is
+\[
+ \overline{\HH}^{\mathrm{cont}}_0(\Bcs)
+ :=\Bcs/\overline{[\Bcs,\Bcs]}
+ \cong\C.
+\]
+It is detected by the Fedosov--Golse--Leichtnam--Schrohe residue. This
+statement does not require \eqref{eq:collapse}. Without a separate
+closed-range theorem, the closure on the commutator space must be retained.
+\end{theorem}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzcd}[column sep=large,row sep=large]
+ \Bcs \arrow[r,"\text{order filtration}"]
+ & E^1 \arrow[r,"\text{Poisson boundary}"]
+ & E^2 \arrow[d,"\text{convergence + collapse?}"]\\
+ \HH_*^{\mathrm{cont}}(\Bcs)
+ &H^{2n-*}(Y\!\times\!S^1_\sigma,Z\!\times\!S^1_\sigma)
+  \arrow[l,dashed,"\text{assembly}"']
+ &E^\infty\arrow[l,equals]
+\end{tikzcd}
+\caption[Proved and conditional parts of the calculation]{The symbol and
+Poisson steps compute \(E^2\). Passing from \(E^2\) to the full homology
+requires the separately stated convergence-and-collapse input.}
+\end{figure}
+
+\section{The algebra and topology}\label{sec:algebra}
+
+Let \(E\to X\) and \(F\to\partial X\) be complex vector bundles. An operator
+in Boutet de Monvel's calculus has the matrix form
+\begin{equation}\label{eq:BdM-matrix}
+ A=\begin{pmatrix}
+       P_++G & K\\
+       T     & S
+    \end{pmatrix}:
+ C^\infty(X;E)\oplus C^\infty(\partial X;F)
+ \longrightarrow
+ C^\infty(X;E)\oplus C^\infty(\partial X;F).
+\end{equation}
+Here \(P\) is a classical pseudodifferential operator on the double of
+\(X\), its symbol satisfies the transmission condition, and
+\(P_+=r^+Pe^+\). The other entries are, respectively, a singular Green,
+potential, trace, and boundary pseudodifferential operator. We use type zero,
+which is closed under composition and contains parametrices after the usual
+order reductions \cite{Boutet,Grubb}.
+
+The four blocks have shifted natural orders. Choose elliptic scalar order
+reductions on \(X\) and \(\partial X\). Conjugating by their diagonal matrix
+puts all blocks into one integer filtration. Different choices give
+filtration-preserving Morita equivalences. Denote the resulting algebra by
+\[
+ \cB^{\mathbb Z}_0(X;E,F)=\bigcup_{m\in\Z}\cB^m_0(X;E,F).
+\]
+Its residual ideal \(\cB^{-\infty}\) consists of matrices whose entries have
+smooth kernels in the appropriate interior, boundary, trace, and potential
+spaces. Define
+\begin{equation}\label{eq:Bcs}
+ \Bcs(X;E,F)=
+ \cB^{\mathbb Z}_0(X;E,F)/\cB^{-\infty}(X;E,F).
+\end{equation}
+Keeping \(\cB^{-\infty}\) produces a different extension problem and an
+additional ordinary operator trace.
+
+We use the topologically filtered chain space of Benameur--Nistor
+\cite[Definition~1]{BenameurNistorFamilies}. Write
+\(F^N_{N,N}\Bcs\) for their diagonal cofinal family: one first completes a
+finite symbol-order window in the decreasing order direction and only then
+lets the upper-order bound tend to infinity. In Hochschild degree \(q\), set
+\begin{equation}\label{eq:chains}
+ C_q^{\mathrm{tf}}(\Bcs)
+ =\varinjlim_N
+ \bigl(F^N_{N,N}\Bcs\bigr)^{\widehat\otimes_\pi(q+1)}.
+\end{equation}
+This notation packages the projective limits defining each completed
+filtration piece; it is not the tensor power of one order quotient.
+Multiplication is continuous on fixed pieces and sends a diagonal piece into
+a later diagonal piece, so the Hochschild boundary extends to
+\eqref{eq:chains}. We denote its homology by
+\(\HH_*^{\mathrm{cont}}(\Bcs)\).
+
+\begin{discussion}
+The topology in \eqref{eq:chains} is part of the problem. Taking one
+projective tensor power of the entire LF union need not make symbol
+composition jointly continuous. Formula \eqref{eq:chains} keeps each chain at
+finite upper order while allowing a complete classical asymptotic tail.
+\end{discussion}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzcd}[row sep=large,column sep=large]
+ C^\infty(X;E)\arrow[r,"P_++G"]
+ &C^\infty(X;E)
+ &C^\infty(\partial X;F)\arrow[r,"K"]
+ &C^\infty(X;E)\\
+ C^\infty(X;E)\arrow[r,"T"]
+ &C^\infty(\partial X;F)
+ &C^\infty(\partial X;F)\arrow[r,"S"]
+ &C^\infty(\partial X;F)
+\end{tikzcd}
+\caption[Interior and boundary blocks]{The diagonal blocks act in the
+interior and on the boundary; the trace and potential blocks couple the two
+spaces. The singular Green correction belongs to the interior block.}
+\end{figure}
+
+\section{The boundary symbol and the Wiener--Hopf ideal}
+
+There are two compatible full symbol systems. The interior symbol is the
+transmission symbol of \(P\) on \(T^*X\setminus0\). The boundary symbol is an
+operator-valued classical symbol on \(T^*\partial X\setminus0\), acting on
+\[
+ \Splus\otimes E|_{\partial X}\oplus F,
+ \qquad \Splus=\mathcal S(\overline{\mathbb R}_+).
+\]
+In product coordinates its leading term is
+\begin{equation}\label{eq:boundary-symbol}
+ a_\partial(x',\xi')=
+ \begin{pmatrix}
+ p_+(x',0,\xi',D_n)+g(x',\xi')&k(x',\xi')\\
+ t(x',\xi')&s(x',\xi')
+ \end{pmatrix}.
+\end{equation}
+The Toeplitz part is determined by the boundary restriction of the interior
+symbol; \(g,k,t,s\) are independent boundary data.
+
+Let \(\mathcal K^\infty(\Splus)\) be the algebra of Schwartz-kernel compact
+operators. The smooth Wiener--Hopf fiber algebra has the linking ideal
+\begin{equation}\label{eq:linking}
+ \cJ^\infty=
+ \begin{pmatrix}
+  \mathcal K^\infty(\Splus)&\Splus\\
+  \Splus'&\C
+ \end{pmatrix}.
+\end{equation}
+
+\begin{lemma}[Smooth Morita reduction]\label{lem:morita}
+The algebra \(\cJ^\infty\) is nuclear and \(H\)-unital, and
+\[
+ \HH_0^{\mathrm{cont}}(\cJ^\infty)\cong\C,
+ \qquad
+ \HH_q^{\mathrm{cont}}(\cJ^\infty)=0\quad(q>0).
+\]
+The degree-zero map is the full linking trace
+\[
+ \begin{pmatrix}K&u\\v&c\end{pmatrix}\longmapsto
+ \operatorname{Tr}(K)+c.
+\]
+\end{lemma}
+
+\begin{proof}
+Choose a rank-one projection \(e\) with Schwartz range. The corner
+\(e\cJ^\infty e\) is \(\C e\), and \(e\) is full. Schwartz nuclearity makes
+the completed finite-rank factorization strict, while the standard
+matrix-unit homotopy contracts the reduced bar complex. Thus
+\(\cJ^\infty\) is smoothly Morita equivalent to \(\C\). The same argument
+supplies the \(H\)-unitality required by continuous Hochschild excision
+\cite{MeyerExcision}.
+\end{proof}
+
+The quotient of the Wiener--Hopf algebra by \(\cJ^\infty\) remembers the
+scalar normal symbol. The transmission condition identifies it with the
+restriction of the interior homogeneous symbol at \(Z\). Therefore the
+order-graded Boutet de Monvel symbol algebra is a smooth pullback, not a
+direct sum.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzcd}[column sep=large,row sep=large]
+ \gr\Bcs\arrow[r]\arrow[d]
+ &C^\infty_{\mathrm{hom}}(T^*X\setminus0)
+   \arrow[d,"i^*"]\\
+ C^\infty_{\mathrm{hom}}
+ (T^*\partial X\setminus0;\mathcal W^\infty)
+ \arrow[r,"\text{normal quotient}"']
+ &C^\infty_{\mathrm{hom}}
+ (T^*X|_{\partial X}\setminus0)
+\end{tikzcd}
+\caption[Pullback structure of the graded boundary symbol]{The interior and
+boundary symbols meet through the normal quotient. Hochschild excision turns
+this pullback into a relative, rather than direct-sum, form complex.}
+\end{figure}
+
+\section{The first page}
+
+Filter a chain by the sum of the upper orders of its factors. Classical
+composition preserves the filtration. The leading product is the pointwise
+pullback product above. This constructs the order exact couple and its
+spectral sequence.
+
+Use the mapping-cone model
+\begin{equation}\label{eq:relative-cone}
+ \Omega^j(Y,Z)=\Omega^j(Y)\oplus\Omega^{j-1}(Z),
+ \qquad
+ D(\alpha,\beta)=(d\alpha,i^*\alpha-d\beta).
+\end{equation}
+Its cohomology is \(H^j(Y,Z;\C)\). The second component is a boundary
+transgression, not an independent boundary class.
+
+\begin{proposition}[Boundary HKR identification]\label{prop:HKR}
+Continuous Hochschild excision for \eqref{eq:linking}, followed by the HKR
+map on the scalar quotient, identifies the first page with the homogeneous
+mapping-cone complex for
+\[
+ (T^*X\setminus0,T^*X|_{\partial X}\setminus0).
+\]
+This identification is independent of collars and order reductions.
+\end{proposition}
+
+\begin{proof}
+Work first in a product collar and trivialize \(E\) and \(F\). The pullback
+of symbol algebras gives a short exact diagram whose boundary kernel is the
+Schwartz linking ideal. Lemma~\ref{lem:morita} and continuous excision replace
+that ideal by one scalar boundary complex. HKR identifies the scalar
+interior and normal quotients with homogeneous differential forms. The
+connecting map is restriction of the interior form to the boundary normal
+symbol. Thus the resulting total complex is \eqref{eq:relative-cone}, before
+radial reduction.
+
+On overlaps, collar changes act by smooth Wiener--Hopf conjugations plus
+lower-order terms. Inner conjugations are chain homotopic to the identity,
+and lower-order terms do not alter this page. The local complexes are fine
+sheaves over \(X\), so their local quasi-isomorphisms globalize. Order
+reductions change the model by a full smooth Morita corner.
+\end{proof}
+
+\section{The Poisson differential}
+
+For interior symbols \(a\) and \(b\),
+\[
+ \sigma_{m+m'-1}([A,B])=\frac1i\{a,b\}.
+\]
+Inserting this one-order-lower term in the Hochschild boundary and applying
+HKR gives the Brylinski differential
+\[
+ \delta=[\iota_\pi,d].
+\]
+On the boundary, the regularized normal trace is not cyclic. Its commutator
+defect is the restriction of the interior Poisson term. This produces the
+second component \(i^*\alpha-d\beta\) in \eqref{eq:relative-cone}; it is also
+the mechanism coupling the interior and boundary cochains in the boundary
+index cocycle \cite{FGLS,BoltachevSavin}.
+
+Let \(\omega\) be the canonical symplectic form on \(T^*X\setminus0\) and
+\(\mu=\omega^n/n!\). Symplectic duality
+\[
+ *_\omega\alpha=\iota_{\pi^\sharp\alpha}\mu
+\]
+satisfies
+\[
+ *_\omega\delta=(-1)^{j+1}d*_\omega
+ \quad\text{on \(j\)-forms}.
+\]
+Stokes' formula supplies the boundary transgression, so this identity extends
+to the mapping cone. Hence the homology of the first differential is relative
+de Rham cohomology with complementary degree.
+
+Choose a positive fiber norm \(r\). For the Euler field
+\(\mathcal E=r\partial_r\), Cartan's formula gives
+\[
+ d\iota_{\mathcal E}+\iota_{\mathcal E}d=\mathcal L_{\mathcal E}.
+\]
+Thus every nonzero weight is contracted by
+\(w^{-1}\iota_{\mathcal E}\). A weight-zero relative form splits uniquely as
+\[
+ (\alpha_0,\beta_0)+\frac{dr}{r}\wedge(\alpha_1,\beta_1).
+\]
+Replacing \(dr/r\) by the positive generator of \(H^1(S^1_\sigma)\) yields
+\[
+ H^j_{\mathrm{hom}=0}\cong
+ H^j(Y\times S^1_\sigma,Z\times S^1_\sigma).
+\]
+This proves Theorem~\ref{thm:E2}.
+
+\section{The remaining convergence-and-collapse problem}
+
+Benameur and Nistor compute complete symbols on differential groupoids and
+prove convergence and collapse under explicit anchor and local-triviality
+hypotheses \cite{BenameurNistorSymbols,BenameurNistorFamilies}. Their theorem
+applies to the b-groupoid algebra in the companion manuscript. It does not
+automatically apply to the matrix algebra \eqref{eq:BdM-matrix}.
+
+The distinction is structural. Aastrup--Melo--Monthubert--Schrohe ask whether
+the full Boutet de Monvel algebra is a groupoid pseudodifferential algebra and
+construct a groupoid model for an important ideal, not an identification of
+the whole calculus \cite{AMMS}. The boundary symbol contains Toeplitz, Green,
+trace, and potential blocks; its pullback is not the scalar symbol algebra of
+a Lie algebroid.
+
+Completeness on each fixed upper-order piece constructs the spectral
+sequence, but does not itself prove strong convergence after the strict
+inductive limit. The unbounded order direction may carry a derived-limit
+obstruction unless one proves a uniform regularity bound. Likewise, computing
+the Poisson differential does not rule out higher differentials.
+
+A proof of \eqref{eq:collapse} must:
+\begin{enumerate}
+ \item prove strict continuous excision uniformly in symbol order and a
+       regular convergence bound;
+ \item show that the Wiener--Hopf Morita homotopies preserve the complete
+       order filtration;
+ \item construct permanent cycles for all relative \(E^2\)-classes in a
+       collar model;
+ \item globalize those cycles without losing asymptotic completeness; and
+ \item rule out all higher differentials.
+\end{enumerate}
+These tasks fit the Benameur--Nistor strategy, but none follows from Borel
+summation alone. Once \eqref{eq:collapse} is proved, strong convergence
+identifies \(E^\infty\) with the associated graded of homology and linear
+splittings give Theorem~\ref{thm:conditional}.
+
+\section{Degree zero and the boundary residue}
+
+For a locally convex algebra,
+\[
+ \HH_0^{\mathrm{cont}}(A)
+ =A/\operatorname{im}\bigl(b:C_1^{\mathrm{cont}}(A)\to A\bigr).
+\]
+Its Hausdorffization is \(A/\overline{[A,A]}\); its continuous dual is the
+space of continuous traces.
+
+For \(A\) as in \eqref{eq:BdM-matrix}, write \(p_{-n}\) for the degree
+\(-n\) interior symbol, \((\tr_n g)_{1-n}\) for the degree \(1-n\) normal
+trace of the Green symbol, and \(s_{1-n}\) for the corresponding boundary
+symbol. With the standard cosphere densities, the
+Fedosov--Golse--Leichtnam--Schrohe residue is
+\begin{align}\label{eq:FGLS}
+ \Res_{\mathrm{BdM}}(A)
+ ={}&(2\pi)^{-n}\int_X\int_{S_x^*X}
+       \tr_E p_{-n}(x,\xi)\,dS(\xi)\,dx\notag\\
+ &+(2\pi)^{1-n}\int_{\partial X}\int_{S_{x'}^*\partial X}
+ \left[
+  \tr_E(\tr_n g)_{1-n}(x',\xi')
+  +\tr_Fs_{1-n}(x',\xi')
+ \right]dS(\xi')\,dx'.
+\end{align}
+It is coordinate invariant and vanishes on commutators
+\cite{FGLS,Schrohe,GS}. The interior and boundary integrals are not
+separately traces; their commutator defects cancel.
+
+Under the connectedness and dimension hypotheses above, the FGLS trace
+theorem says that every continuous trace on the complete-symbol algebra is a
+multiple of \eqref{eq:FGLS}. The residue is nonzero. Since the continuous
+dual separates points of a Hausdorff locally convex quotient,
+\(\Bcs/\overline{[\Bcs,\Bcs]}\) is one-dimensional. This proves
+Theorem~\ref{thm:HH0}.
+
+The top relative group gives the same count:
+\[
+ H^{2n}(Y\times S^1_\sigma,Z\times S^1_\sigma)
+ \cong H^{2n-1}(Y,Z)\cong\C.
+\]
+This is a consistency check, not a proof that the unclosed commutator range
+is closed.
+
+\section{Cyclic-cocycle check}
+
+The boundary index cocycle independently confirms the mapping-cone geometry.
+In the model of Boltachev--Savin, an interior cochain
+\(\varphi_{\mathrm{int}}\) and a boundary regularized-trace cochain
+\(\varphi_\partial\) satisfy
+\[
+ b\varphi_{\mathrm{int}}=0,\qquad
+ b\varphi_\partial+cB\varphi_{\mathrm{int}}=0,\qquad
+ B\varphi_\partial=0
+\]
+for the normalization constant \(c\) fixed by the normal Fourier convention
+\cite{BoltachevSavin}. The middle identity is the cyclic counterpart of
+\[
+ D(\alpha,\beta)=(d\alpha,i^*\alpha-d\beta).
+\]
+Thus the boundary cochain transgresses the restricted interior class.
+Treating it as an unrelated direct summand would incorrectly predict two
+degree-zero residue traces.
+
+\section{Checks and variants}
+
+\subsection{Closed manifolds}
+
+If \(\partial X=\varnothing\), then \(Z=\varnothing\) and
+\[
+ E^2_k\cong H^{2n-k}(S^*X\times S^1_\sigma;\C),
+\]
+the Brylinski--Getzler complete-symbol calculation. In that setting the
+standard collapse theorem is available.
+
+\subsection{Boundary components}
+
+The pair \((Y,Z)\) includes every boundary component. For connected \(X\)
+and \(n>1\), \(H^{2n-1}(Y,Z)\cong\C\), so the residue is one trace, not one
+trace per boundary component. Lower relative groups retain the boundary
+topology.
+
+\subsection{Coefficient bundles}
+
+Stabilization by \(E\) and \(F\) does not change the filtered calculation.
+Locally this is matrix Morita invariance; globally the symbol modules form a
+full equivalence bimodule. The matrix traces in \eqref{eq:FGLS} implement the
+same Morita map.
+
+\subsection{Unreduced and order-zero algebras}
+
+The unreduced algebra belongs to the extension
+\[
+ 0\longrightarrow\cB^{-\infty}
+ \longrightarrow\cB^{\mathbb Z}_0
+ \longrightarrow\Bcs\longrightarrow0.
+\]
+Its homology needs continuous excision and the homology of the chosen
+residual ideal. The ordinary kernel trace lives in that ideal and is absent
+from \(\Bcs\).
+
+The \(C^*\)-closure of the order-zero calculus is the right setting for
+operator \(K\)-theory, but it is not \eqref{eq:Bcs}. The work of
+Melo--Nest--Schick--Schrohe and Melo--Schrohe--Schick describes its
+\(K\)-theoretic symbol extension, not the Hochschild complex
+\eqref{eq:chains} \cite{MNSS,MSS}.
+
+\section{Conclusion}
+
+The order calculation gives relative cohomology of the cosphere pair, with
+the symbol-order circle, at \(E^2\). The boundary noncommutative residue
+verifies the top-degree prediction and computes Hausdorff degree zero without
+any collapse assumption. The sole remaining input for the all-degree formula
+is the explicitly stated Boutet de Monvel convergence-and-collapse theorem.
+This is narrower and more accurate than claiming that the existing groupoid
+complete-symbol theorem already covers the boundary matrix calculus.
+
+\begin{thebibliography}{99}
+
+\bibitem{AMMS}
+J.~Aastrup, S.~T. Melo, B.~Monthubert, and E.~Schrohe,
+\emph{Boutet de Monvel's calculus and groupoids I},
+J. Noncommut. Geom. \textbf{4} (2010), 313--329.
+
+\bibitem{BenameurNistorSymbols}
+M.-T. Benameur and V.~Nistor,
+\emph{Homology of complete symbols and non-commutative geometry},
+K-Theory \textbf{29} (2003), 201--223.
+
+\bibitem{BenameurNistorFamilies}
+M.-T. Benameur and V.~Nistor,
+\emph{Homology of algebras of families of pseudodifferential operators},
+J. Funct. Anal. \textbf{205} (2003), 1--36.
+
+\bibitem{BoltachevSavin}
+A.~V. Boltachev and A.~Yu. Savin,
+\emph{Equivariant cyclic cocycles on the Boutet de Monvel symbol algebra},
+arXiv:2201.09987.
+
+\bibitem{Boutet}
+L.~Boutet de Monvel,
+\emph{Boundary problems for pseudo-differential operators},
+Acta Math. \textbf{126} (1971), 11--51.
+
+\bibitem{FGLS}
+B.~V. Fedosov, F.~Golse, E.~Leichtnam, and E.~Schrohe,
+\emph{The noncommutative residue for manifolds with boundary},
+J. Funct. Anal. \textbf{142} (1996), 1--31.
+
+\bibitem{Grubb}
+G.~Grubb,
+\emph{Functional Calculus of Pseudodifferential Boundary Problems},
+second edition, Progress in Mathematics 65, Birkhauser, 1996.
+
+\bibitem{GS}
+G.~Grubb and E.~Schrohe,
+\emph{Trace expansions and the noncommutative residue for manifolds with
+boundary},
+J. Reine Angew. Math. \textbf{536} (2001), 167--207.
+
+\bibitem{MeyerExcision}
+R.~Meyer,
+\emph{Excision in Hochschild and cyclic homology without continuous linear
+sections},
+J. Homotopy Relat. Struct. \textbf{5} (2010), 269--303.
+
+\bibitem{MNSS}
+S.~T. Melo, R.~Nest, T.~Schick, and E.~Schrohe,
+\emph{\(K\)-theory of Boutet de Monvel's algebra},
+J. Reine Angew. Math. \textbf{561} (2003), 145--175.
+
+\bibitem{MSS}
+S.~T. Melo, E.~Schrohe, and T.~Schick,
+\emph{\(C^*\)-algebra approach to the index theory of boundary value
+problems},
+J. Funct. Anal. \textbf{263} (2012), 3679--3714.
+
+\bibitem{Schrohe}
+E.~Schrohe,
+\emph{Noncommutative residues, Dixmier's trace, and heat trace expansions on
+manifolds with boundary},
+in \emph{Geometric Aspects of Partial Differential Equations},
+Contemp. Math. 242, American Mathematical Society, 1999, 161--186.
+
+\end{thebibliography}
+
+\end{document}

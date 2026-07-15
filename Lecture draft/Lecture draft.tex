@@ -1108,7 +1108,7 @@ Fix \(\lambda_*\). Choose closed complements
 \[
  X=\ker T(\lambda_*)\oplus X_1,
  \qquad
- Y=\operatorname{ran}T(\lambda_*)\oplus C,
+ Y=C\oplus\operatorname{ran}T(\lambda_*),
 \]
 where \(C\) is finite-dimensional. Since the index is zero,
 \(\dim C=\dim\ker T(\lambda_*)\). Relative to these decompositions, write
@@ -1137,11 +1137,20 @@ so this inverse is meromorphic. Its negative Laurent coefficients have
 range contained in a finite-dimensional space obtained from \(C\) and
 \(\ker T(\lambda_*)\).
 
-It remains to exclude \(\det S\equiv0\) on every overlapping
-neighborhood. That would make \(T(\lambda)\) noninvertible throughout the
-connected domain, contrary to invertibility at \(\lambda_0\). Analytic
-continuation therefore makes the local meromorphic inverses agree and
-produces the claimed global meromorphic inverse.
+Join \(\lambda_0\) to \(\lambda_*\) by a path and cover the path by finitely
+many such block neighborhoods \(U_0,\ldots,U_N\), with connected nonempty
+successive overlaps and \(\lambda_0\in U_0\).  On \(U_0\), the determinant
+is not identically zero because \(T(\lambda_0)\) is invertible.  Inductively,
+suppose a meromorphic inverse has been constructed on \(U_j\).  Its poles
+are discrete, so \(U_j\cap U_{j+1}\) contains a point where \(T\) is
+invertible.  The Schur determinant on \(U_{j+1}\) is therefore not
+identically zero, and Cramer's rule constructs the next local meromorphic
+inverse.  The two inverses agree on the nonempty open subset of the overlap
+where \(T\) is invertible, hence on the whole overlap by the identity
+theorem.  This continues the inverse to \(U_N\).  Continuations along two
+paths agree by the same overlap argument (equivalently, by uniqueness in the
+meromorphic sheaf), so the local inverses assemble to one meromorphic inverse
+on the domain.
 \end{proof}
 
 Applied to \(I(P,\lambda)\), this theorem yields a discrete set

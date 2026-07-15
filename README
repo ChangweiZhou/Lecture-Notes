@@ -1,6 +1,6 @@
 # Lecture Notes
 
-Three proof-focused manuscripts are maintained:
+Four proof-focused manuscripts are maintained:
 
 - `Lecture draft/Lecture draft.tex`: the b-calculus, Fredholm theory on
   closed manifolds and cylindrical ends, the APS spectral boundary problem,
@@ -13,12 +13,18 @@ Three proof-focused manuscripts are maintained:
   the continuous Hochschild homology of the Laurent complete-symbol algebra
   of the b-calculus, including the filtration, Poisson differential, Laurent
   de Rham model, face decomposition, and residual-operator caveat.
+- `Lecture draft/Boutet-de-Monvel-Hochschild-homology.tex`: the order
+  spectral sequence for the complete Boutet de Monvel symbol algebra, its
+  relative-cohomology second page, the FGLS residue calculation of
+  Hausdorff degree zero, and an explicit statement of the remaining
+  convergence-and-collapse problem.
 
 Compiled releases, with stable contents and figure lists, are available here:
 
 - [Heat Kernels and Index Theory](<output/pdf/Atiyah-Singer index theorem.pdf>)
 - [Notes on the b-Calculus and the APS Index Theorem](<output/pdf/Lecture draft.pdf>)
 - [Hochschild Homology of the b-Pseudodifferential Symbol Algebra](<output/pdf/Hochschild homology of b-pseudodifferential operators.pdf>)
+- [Hochschild Homology in the Boutet de Monvel Calculus](<output/pdf/Boutet-de-Monvel-Hochschild-homology.pdf>)
 
 The July 2026 revision is a line-by-line mathematical edit of the original
 lecture transcriptions. Relevant classroom discussion is retained as concise
@@ -41,4 +47,4 @@ make
 
 The build uses `latexmk` with pdfLaTeX until references, tables of contents,
 and lists of figures stabilize. Intermediate files go to `tmp/pdfs/`; the
-three release PDFs in `output/pdf/` are intentionally tracked.
+four release PDFs in `output/pdf/` are intentionally tracked.
