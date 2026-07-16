@@ -3,7 +3,11 @@
 *.fdb_latexmk
 *.fls
 *.log
+*.lof
 *.out
 *.pdf
 *.synctex.gz
 *.toc
+
+# Release PDFs are deliberately versioned.
+!output/pdf/*.pdf
