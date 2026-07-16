@@ -1,30 +1,45 @@
 # Lecture Notes
 
-Two proof-focused manuscripts are maintained:
+Three proof-focused manuscripts are maintained:
 
 - `Lecture draft/Lecture draft.tex`: the b-calculus, Fredholm theory on
-  cylindrical ends, and K-theoretic and heat-kernel proofs of the
-  Atiyah--Patodi--Singer theorem.
+  closed manifolds and cylindrical ends, the APS spectral boundary problem,
+  and K-theoretic and heat-kernel proofs of the Atiyah--Patodi--Singer theorem.
 - `Lecture draft/Atiyah-Singer index theorem.tex`: elliptic operators,
   K-theoretic push-forward, heat kernels, Clifford modules, the local index
-  theorem, Gauss--Bonnet, the signature theorem, and Riemann--Roch.
+  theorem, Gauss--Bonnet, the signature theorem, almost Hermitian and almost
+  Kähler geometry, the almost Dolbeault operator, and Riemann--Roch.
+- `Lecture draft/Hochschild homology of b-pseudodifferential operators.tex`:
+  the continuous Hochschild homology of the Laurent complete-symbol algebra
+  of the b-calculus, including the filtration, Poisson differential, Laurent
+  de Rham model, face decomposition, residual-operator caveat, and carefully
+  scoped alternative reconstructions by Čech--de Rham descent and
+  Rees--Fedosov Hochschild-chain formality.
+Compiled releases, with stable contents and figure lists, are available here:
+
+- [Heat Kernels and Index Theory](<output/pdf/Atiyah-Singer index theorem.pdf>)
+- [Notes on the b-Calculus and the APS Index Theorem](<output/pdf/Lecture draft.pdf>)
+- [Hochschild Homology of the b-Pseudodifferential Symbol Algebra](<output/pdf/Hochschild homology of b-pseudodifferential operators.pdf>)
 
 The July 2026 revision is a line-by-line mathematical edit of the original
 lecture transcriptions. Relevant classroom discussion is retained as concise
 Discussion and Question/Answer interludes; speaker attributions, unresolved
 chatter, duplicated chapters, generated files, and unrelated archive material
 are omitted. Definitions precede use, theorem hypotheses are explicit, and
-proof gaps are filled or identified as standard input. Reproducible TikZ
-diagrams replace the useful hand-drawn figures.
+proof gaps are filled or identified as standard input. The original diagrams
+were audited against the surrounding arguments. The strongest original
+blow-up, cylindrical, conormal, Mellin, parametrix, and heat-cutoff figures are
+retained; new vector diagrams supplement them for symbolic, spectral, and
+proof-dependency arguments where no comparable original figure existed.
 
 ## Build
 
-From `Lecture draft/`:
+From the repository root:
 
 ```sh
-latexmk -pdf -interaction=nonstopmode -halt-on-error "Lecture draft.tex"
-latexmk -pdf -interaction=nonstopmode -halt-on-error "Atiyah-Singer index theorem.tex"
+make
 ```
 
-Both manuscripts build with pdfLaTeX. Build products are intentionally
-untracked.
+The build uses `latexmk` with pdfLaTeX until references, tables of contents,
+and lists of figures stabilize. Intermediate files go to `tmp/pdfs/`; the
+three release PDFs in `output/pdf/` are intentionally tracked.
