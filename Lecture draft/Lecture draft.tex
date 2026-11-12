@@ -5,10 +5,8 @@
 \usepackage{mathpazo}
 \usepackage[margin=1in]{geometry}
 \usepackage{microtype}
-\usepackage{graphicx}
-\graphicspath{{Lecture draft/}}
 \usepackage{tikz-cd}
-\usetikzlibrary{arrows.meta,calc,decorations.pathreplacing,positioning,patterns}
+\usetikzlibrary{arrows.meta,calc,decorations.pathreplacing,decorations.markings,positioning,patterns}
 \usepackage[hidelinks]{hyperref}
 \hypersetup{
   pdftitle={Notes on the b-Calculus and the APS Index Theorem},
@@ -383,12 +381,68 @@ a contradiction. Thus \(\{w_R\}\) is a Weyl sequence at zero and
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=.78\textwidth]{drawing38.png}
-\caption[Cylinder compactification]{The attached cylinder, drawn going
-off to the left, becomes a boundary hypersurface under \(x=e^{u}\); the
-end \(u\to-\infty\) is \(x=0\).  The original compact piece \(M_0\) is on
-the right; translation along the cylinder becomes dilation toward
-\(x=0\).}
+\begin{tikzpicture}[>=Latex,thick,font=\small,
+ cpiece/.pic={
+  \draw[fill=gray!8]
+    (0,.75) .. controls (1.2,.75) and (1.5,1.2) .. (2.6,1.15)
+    .. controls (3.9,1.08) and (3.9,-1.08) .. (2.6,-1.15)
+    .. controls (1.5,-1.2) and (1.2,-.75) .. (0,-.75);
+  \draw[fill=white] (1.55,.1) .. controls (1.95,-.38) and (2.6,-.38) .. (3.0,.1)
+    .. controls (2.6,.3) and (1.95,.3) .. cycle;
+  \draw (1.55,.1) .. controls (1.42,.16) .. (1.4,.24);
+  \draw (3.0,.1) .. controls (3.13,.16) .. (3.15,.24);
+  \node at (2.3,.75) {\(X\)};
+ },
+ xsec/.style={blue!70!black}]
+ % ---------- top: the complete manifold X_infty ----------
+ \begin{scope}[yshift=3.6cm]
+  \fill[blue!4] (-6.3,-.75) rectangle (0,.75);
+  \draw (-5.6,.75)--(0,.75) (-5.6,-.75)--(0,-.75);
+  \draw[dashed] (-6.4,.75)--(-5.6,.75) (-6.4,-.75)--(-5.6,-.75);
+  \pic {cpiece};
+  \foreach \k/\p in {0/0,-1/-1.35,-2/-2.7,-3/-4.05,-4/-5.4}{
+    \draw[xsec] (\p,.75) arc[start angle=90,end angle=270,
+      x radius=.2,y radius=.75];
+    \draw[xsec,densely dashed,thin] (\p,-.75) arc[start angle=-90,
+      end angle=90,x radius=.2,y radius=.75];
+    \node[font=\footnotesize,below] at (\p,-.78) {\(u=\k\)};
+  }
+  \node[above] at (-1.3,.75) {\((-\infty,0]_u\times Y\)};
+  \draw[->,thin] (-4.0,1.0)--(-5.8,1.0) node[left,font=\footnotesize]
+    {\(u\to-\infty\)};
+  \node[anchor=west] at (3.9,0) {\(X_\infty\)};
+ \end{scope}
+ % ---------- arrow between rows ----------
+ \draw[->] (-4.55,2.45)--(-4.55,1.65) node[midway,right] {\(x=e^{u}\)};
+ % ---------- bottom: the compactification ----------
+ \fill[blue!4] (-6,-.75) rectangle (0,.75);
+ \draw (-6,.75)--(0,.75) (-6,-.75)--(0,-.75);
+ \pic {cpiece};
+ % cross-sections u=0,-1,-2,-3,-4 drawn at -6+6x, x=e^u
+ \foreach \p in {0,-3.793,-5.188,-5.701,-5.890}{
+   \draw[xsec] (\p,.75) arc[start angle=90,end angle=270,
+     x radius=.2,y radius=.75];
+   \draw[xsec,densely dashed,thin] (\p,-.75) arc[start angle=-90,
+     end angle=90,x radius=.2,y radius=.75];
+ }
+ \draw[red!70!black,very thick,fill=red!8] (-6,0) ellipse (.2 and .75);
+ \node[font=\footnotesize,below] at (0,-.78) {\(x=1\)};
+ \node[font=\footnotesize,below] at (-3.793,-.78) {\(x=e^{-1}\)};
+ \node[font=\footnotesize,below] at (-5.188,-.78) {\(x=e^{-2}\)};
+ \node[red!70!black,anchor=east,align=right] at (-6.3,0)
+   {\(\{x=0\}\)\\\(\cong Y\)};
+ \node[above] at (-1.9,.75) {collar \([0,1)_x\times Y\)};
+ \node[anchor=west] at (3.9,0) {\(\overline{X}_\infty\)};
+\end{tikzpicture}
+\caption[Cylinder compactification]{Top: the complete manifold
+\(X_\infty\), with the cylinder \((-\infty,0]_u\times Y\) attached to the
+compact manifold \(X\) and running off to the left; the cross-sections
+\(u=0,-1,\dots,-4\) are equally spaced.  Bottom: under \(x=e^{u}\) the same
+cross-sections accumulate at \(x=0\), and in the compactification
+\(\overline{X}_\infty\) (diffeomorphic to \(X\)) the end \(u\to-\infty\)
+becomes the boundary hypersurface \(\{x=0\}\cong Y\).  Translation
+\(u\mapsto u-c\) along the cylinder becomes the dilation \(x\mapsto
+e^{-c}x\) toward \(x=0\).}
 \end{figure}
 
 Although $D^+$ is Fredholm when $A^+$ is invertible, the two heat
@@ -506,15 +560,53 @@ so that $\Delta_b=\{z=0,\;Y=0\}$.
 
 \begin{figure}[!ht]
 \centering
-\includegraphics[width=.48\textwidth]{drawing5.png}
-\caption[Blow-up of the boundary corner]{Blowing up the boundary corner
-replaces one point of approach by the quarter-circle of inward normal
-directions.  The axes labelled \(x\) and \(y\) in the drawing are the two
-boundary defining functions \(x\) and \(x'\) of the text; \(r\) and
-\(\theta\) are polar coordinates about the corner, so the front face is
-\(\{r=0\}\), parametrized by \(\theta\).  Projective coordinates on this
-front face retain the limiting ratio \(x/x'\); the lifted diagonal
-\(\Delta_b\) meets it transversely.}
+\begin{tikzpicture}[>=Latex,thick,font=\small]
+ \begin{scope}
+  \fill[gray!8] (0,0) rectangle (3.2,3.2);
+  \draw[->] (0,0)--(3.5,0) node[right] {\(x\)};
+  \draw[->] (0,0)--(0,3.5) node[above] {\(x'\)};
+  \draw[blue!70!black,very thick] (0,0)--(3.0,3.0)
+    node[above right,inner sep=1pt] {\(\Delta\)};
+  \fill[red!70!black] (0,0) circle (2.5pt);
+  \node[red!70!black,below left,inner sep=1pt] at (0,0) {\((0,0)\)};
+  \node at (1.6,-.85) {\([0,\infty)^2_{x,x'}\)};
+ \end{scope}
+ \draw[->] (4.1,1.6)--(5.3,1.6) node[midway,above,font=\footnotesize] {blow up};
+ \begin{scope}[xshift=6.6cm]
+  \fill[gray!8] (0,1.1) arc[start angle=90,end angle=0,radius=1.1]
+    --(3.2,0)--(3.2,3.2)--(0,3.2)--cycle;
+  \draw (0,1.1)--(0,3.2) (1.1,0)--(3.2,0);
+  \draw[->,gray] (3.2,0)--(3.5,0) node[right,black] {\(x\)};
+  \draw[->,gray] (0,3.2)--(0,3.5) node[above,black] {\(x'\)};
+  \draw[red!70!black,line width=1.4pt]
+    (0,1.1) arc[start angle=90,end angle=0,radius=1.1];
+  \draw[blue!70!black,very thick] ({1.1*cos(45)},{1.1*sin(45)})--(3.0,3.0)
+    node[above right,inner sep=1pt] {\(\Delta_b\)};
+  \fill[blue!70!black] ({1.1*cos(45)},{1.1*sin(45)}) circle (1.8pt);
+  % polar coordinate decorations
+  \draw[->,thin] (1.75,.42) arc[start angle=13.5,end angle=38,radius=1.8]
+    node[pos=.45,right,font=\footnotesize] {\(\theta\)};
+  \draw[->,thin] ({1.35*cos(70)},{1.35*sin(70)})--({2.25*cos(70)},{2.25*sin(70)})
+    node[above,font=\footnotesize] {\(r\)};
+  \node[red!70!black] at (.3,.3) {\(\mathrm{ff}\)};
+  \node[anchor=east] at (-.05,2.15) {\(\mathrm{lb}\)};
+  \node[anchor=north] at (2.15,-.05) {\(\mathrm{rb}\)};
+  \node at (1.6,-.85) {\(\bigl[[0,\infty)^2;\{(0,0)\}\bigr]\)};
+ \end{scope}
+\end{tikzpicture}
+\caption[Blow-up of the boundary corner]{Left: the quadrant
+\([0,\infty)^2_{x,x'}\) of the two boundary defining functions, with the
+diagonal \(\Delta=\{x=x'\}\) and the corner \(\{x=x'=0\}\).  Right: the blow-up
+\([[0,\infty)^2;\{(0,0)\}]\), written in polar coordinates
+\(x=r\cos\theta\), \(x'=r\sin\theta\).  The corner is replaced by the front
+face \(\mathrm{ff}=\{r=0\}\), the quarter-circle of inward directions
+\(\theta\in[0,\pi/2]\); it records the limiting ratio
+\(x/x'=\cot\theta\).  The side faces \(\mathrm{lb}\) and \(\mathrm{rb}\) are
+the lifts of \(\{x=0\}\) and \(\{x'=0\}\) (the ends \(\theta=\pi/2\) and
+\(\theta=0\) of \(\mathrm{ff}\)), and the lifted diagonal
+\(\Delta_b\) meets \(\mathrm{ff}\) transversally at the interior point
+\(\theta=\pi/4\).}
+\label{fig:blowup-corner}
 \end{figure}
 
 \begin{question}
@@ -564,30 +656,71 @@ the translation-invariant variable $\log(x/x')$.
 
 \begin{figure}[htbp]
 \centering
-\begin{minipage}[c]{.29\textwidth}
- \centering
- \includegraphics[width=\linewidth]{drawing15.png}
-\end{minipage}\hfill
-\begin{minipage}[c]{.29\textwidth}
- \centering
- \includegraphics[width=\linewidth]{drawing16.png}
-\end{minipage}\hfill
-\begin{minipage}[c]{.29\textwidth}
- \centering
- \includegraphics[width=\linewidth]{drawing18.png}
-\end{minipage}
+\begin{tikzpicture}[>=Latex,thick,font=\small]
+ % ---------- (a) the (x,x') quadrant ----------
+ \begin{scope}
+  \draw[->] (0,0)--(2.9,0) node[right] {\(x\)};
+  \draw[->] (0,0)--(0,2.9) node[above] {\(x'\)};
+  \foreach \a in {18,31,59,72}
+    \draw[gray!60,thin] (0,0)--(\a:2.55);
+  \draw[blue!70!black,very thick] (0,0)--(45:2.75)
+    node[above right,inner sep=1pt] {\(z=0\)};
+  \node[fill=white,inner sep=1pt] at (.62,1.5) {\(z<0\)};
+  \node[fill=white,inner sep=1pt] at (1.5,.62) {\(z>0\)};
+  \draw[->,red!70!black,thin] (84:2.3) arc[start angle=84,end angle=6,
+    radius=2.3];
+  \node[red!70!black,font=\footnotesize,anchor=west] at (24:2.35)
+    {\(z\) increases};
+  \node at (1.3,-.8) {(a) \(z=\log(x/x')\)};
+ \end{scope}
+ % ---------- (b) poles and the real contour ----------
+ \begin{scope}[xshift=6.2cm,yshift=1.4cm]
+  \draw[->,gray] (-1.75,0)--(1.75,0) node[right,black] {\(\operatorname{Re}\lambda\)};
+  \draw[->,gray] (0,-1.6)--(0,1.75) node[above,black] {\(\operatorname{Im}\lambda\)};
+  \draw[blue!70!black,very thick,
+    postaction={decorate},decoration={markings,
+    mark=at position .7 with {\arrow{Latex}}}] (-1.65,0)--(1.65,0);
+  \foreach \y/\l in {.85/{i\epsilon},-.85/{-i\epsilon}}{
+    \draw[red!70!black,line width=1.1pt] (-.09,\y-.09)--(.09,\y+.09)
+      (-.09,\y+.09)--(.09,\y-.09);
+    \node[red!70!black,right] at (.1,\y) {\(\l\)};
+  }
+  \node[blue!70!black,below,font=\footnotesize] at (-1.2,0) {\(\lambda\in\mathbb R\)};
+  \node at (0,-2.2) {(b) poles of \(I(P,\lambda)^{-1}\)};
+ \end{scope}
+ % ---------- (c) closing the contour ----------
+ \begin{scope}[xshift=10.9cm,yshift=1.4cm]
+  \draw[->,gray] (-1.75,0)--(1.75,0) node[right,black] {\(\operatorname{Re}\lambda\)};
+  \draw[->,gray] (0,-1.6)--(0,1.75) node[above,black] {\(\operatorname{Im}\lambda\)};
+  \draw[blue!70!black,very thick,postaction={decorate},
+    decoration={markings,mark=at position .25 with {\arrow{Latex}},
+    mark=at position .7 with {\arrow{Latex}}}]
+    (-1.35,.04)--(1.35,.04) arc[start angle=0,end angle=180,radius=1.35];
+  \draw[red!70!black,very thick,dashed,postaction={decorate},
+    decoration={markings,mark=at position .7 with {\arrow{Latex}}}]
+    (1.35,-.04) arc[start angle=0,end angle=-180,radius=1.35];
+  \foreach \y/\l in {.65/{i\epsilon},-.65/{-i\epsilon}}{
+    \draw[line width=1.1pt] (-.09,\y-.09)--(.09,\y+.09)
+      (-.09,\y+.09)--(.09,\y-.09);
+    \node[right,font=\footnotesize] at (.1,\y) {\(\l\)};
+  }
+  \node[blue!70!black,font=\footnotesize] at (-1.4,1.3) {\(z>0\)};
+  \node[red!70!black,font=\footnotesize] at (-1.4,-1.3) {\(z<0\)};
+  \node at (0,-2.2) {(c) closing the contour};
+ \end{scope}
+\end{tikzpicture}
 \caption[Projective and Mellin pictures of the one-dimensional model]{
-Left: in the \((x,x')\) quadrant the projective variable separates the
-regions \(z<0\), \(z=0\), and \(z>0\), where \(z=\log(x/x')=u-u'\).
-Center and right: the drawings write \(\tau\) for the real Fourier--Mellin
-variable \(\lambda\) of the indicial family, so
-\(I(P,\tau)^{-1}=(\tau^2+\epsilon^2)^{-1}\) has poles at
-\(\tau=\pm i\epsilon\).  In
-\(\frac1{2\pi}\int e^{i\tau z}(\tau^2+\epsilon^2)^{-1}d\tau\) the contour
-is closed in the upper half-plane for \(z>0\), enclosing \(\tau=i\epsilon\),
-and in the lower half-plane for \(z<0\), enclosing \(\tau=-i\epsilon\).
-The two residues give the two branches of
-\(e^{-\epsilon|z|}/(2\epsilon)\).}
+(a) In the \((x,x')\) quadrant the variable \(z=\log(x/x')=u-u'\) is
+constant on rays through the corner (grey); the diagonal \(z=0\) separates
+\(\{z<0\}=\{x<x'\}\) from \(\{z>0\}=\{x>x'\}\), and \(z\) increases from
+\(-\infty\) on \(\{x=0\}\) to \(+\infty\) on \(\{x'=0\}\).  (b) The indicial
+family \(I(P,\lambda)=\lambda^2+\epsilon^2\) has inverse with poles at
+\(\lambda=\pm i\epsilon\), off the real integration line.  (c) In
+\(\frac1{2\pi}\int_{\mathbb R}e^{i\lambda z}(\lambda^2+\epsilon^2)^{-1}d\lambda\) the
+contour is closed in the upper half-plane for \(z>0\) (solid), enclosing
+\(\lambda=i\epsilon\), and in the lower half-plane for \(z<0\) (dashed,
+negatively oriented), enclosing \(\lambda=-i\epsilon\).  The two residues
+give the two branches of \(e^{-\epsilon|z|}/(2\epsilon)\).}
 \end{figure}
 
 \subsection{General and iterated blow-ups}
@@ -716,15 +849,68 @@ product density $a\,|du\,dy|$.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=.63\textwidth]{drawing40.png}
-\caption[The b-tangent anchor at the boundary]{The boundary collar drawn
-as a cylindrical end attached to the compact part \(M_0\).  On the
-cross-section, the arrow labelled \(X\) points along the cylinder, the
-normal direction, and the arrow labelled \(Y\) is tangent to the boundary
-(these are directions, not the manifold \(X\) and its boundary \(Y\)).  In
-\({}^bTX\) the normal direction is spanned by \(x\partial_x=\partial_u\),
-which is nonzero there although its anchor image in \(TX\) vanishes at
-\(x=0\).}
+\begin{tikzpicture}[>=Latex,thick,font=\small]
+ % ---------- left: the cylindrical end ----------
+ \begin{scope}
+  \fill[blue!4] (-4.6,-.9) rectangle (0,.9);
+  \draw (-4.0,.9)--(0,.9) (-4.0,-.9)--(0,-.9);
+  \draw[dashed] (-4.6,.9)--(-4.0,.9) (-4.6,-.9)--(-4.0,-.9);
+  \draw[fill=gray!8]
+    (0,.9) .. controls (.9,.9) and (1.1,1.15) .. (1.6,1.1)
+    .. controls (2.5,1.0) and (2.5,-1.0) .. (1.6,-1.1)
+    .. controls (1.1,-1.15) and (.9,-.9) .. (0,-.9);
+  \node at (1.45,0) {\(X\)};
+  \foreach \p in {-3.4,-1.9,-.4}{
+    \draw[blue!70!black,thin] (\p,.9) arc[start angle=90,end angle=270,
+      x radius=.25,y radius=.9];
+    \draw[blue!70!black,thin,densely dashed] (\p,-.9) arc[start angle=-90,
+      end angle=90,x radius=.25,y radius=.9];
+    \coordinate (q) at ($(\p,0)+(180:.25)$);
+    \fill (q) circle (1.4pt);
+    \draw[->,red!70!black] (q)--++(.85,0);
+    \draw[->,blue!70!black] (q)--++(0,.6);
+  }
+  \node[red!70!black,below,font=\footnotesize] at (-2.85,-.02) {\(\partial_u\)};
+  \node[blue!70!black,left,font=\footnotesize] at (-2.12,.45) {\(\partial_y\)};
+  \node[font=\footnotesize] at (-2.0,-1.3) {\(u\to-\infty\) to the left};
+  \node at (-2.0,-1.85) {cylindrical end \((-\infty,0]_u\times Y\)};
+ \end{scope}
+ % ---------- right: the compactified collar ----------
+ \begin{scope}[xshift=4.0cm,yshift=-.9cm,>={Latex[length=4pt]}]
+  \fill[blue!4] (0,0) rectangle (4.9,1.9);
+  \draw[->] (0,0)--(5.3,0) node[right] {\(x\)};
+  \draw[->] (0,0)--(0,2.3) node[above] {\(y\)};
+  \draw[red!70!black,line width=1.4pt] (0,0)--(0,1.9);
+  \node[red!70!black,font=\footnotesize,anchor=east] at (-.05,1.0)
+    {\(\{x=0\}\)};
+  \foreach \t/\l in {1/{0.2},2/{0.4},3/{0.6},4/{0.8}}{
+    \draw[thin] (\t*1.05,0)--(\t*1.05,-.08) node[below,font=\footnotesize]
+      {\(\l\)};
+    \foreach \y in {.45,1.25}{
+      \fill (\t*1.05,\y) circle (1.2pt);
+      \draw[->,red!70!black] (\t*1.05,\y)--++(.2*\t,0);
+      \draw[->,blue!70!black] (\t*1.05,\y)--++(0,.45);
+    }
+  }
+  \foreach \y in {.45,1.25}{
+    \fill[red!70!black] (0,\y) circle (1.6pt);
+    \draw[->,blue!70!black] (0,\y)--++(0,.45);
+  }
+  \node[red!70!black,font=\footnotesize,anchor=west] at (5.05,.45) {\(x\partial_x\)};
+  \node[blue!70!black,font=\footnotesize,anchor=west] at (4.25,1.55) {\(\partial_y\)};
+  \node at (2.45,-.95) {collar \([0,1)_x\times Y\), vectors in \(TX\)};
+ \end{scope}
+\end{tikzpicture}
+\caption[The b-tangent anchor at the boundary]{The b-frame
+\(x\partial_x=\partial_u\), \(\partial_y\) of \({}^bTX\) near the boundary.
+Left: on the cylindrical end attached to the compact manifold \(X\) the frame
+is translation invariant, of the same length on every cross-section.
+Right: in the compactified collar with coordinates \((x,y)\), the anchor
+image of \(x\partial_x\) in \(TX\) has length proportional to \(x\) and
+vanishes on \(\{x=0\}\), while \(\partial_y\) stays tangent to the boundary
+and nonzero.  The section \(x\partial_x\) of \({}^bTX\) is nevertheless
+nonvanishing up to \(x=0\), so the anchor \({}^bTX\to TX\) drops rank
+exactly at the boundary.}
 \end{figure}
 
 \section{b-differential operators and their symbols}
@@ -908,13 +1094,66 @@ to infinite order at the boundary.
 
 \begin{figure}[!htb]
 \centering
-\includegraphics[width=.46\textwidth]{drawing70.png}
-\caption[Conormal kernel on the b-double space]{Top: before blow-up,
-the corner of the double space with the diagonal direction marked.
-Bottom: after blow-up, the corner is replaced by the front face, drawn as
-a half-cylinder running along the diagonal direction.  A small-calculus
-kernel is conormal to the lifted diagonal, extends smoothly up to
-\(\mathrm{ff}\), and vanishes to infinite order at the two side faces.}
+\begin{tikzpicture}[>=Latex,thick,font=\small,
+  x={(1cm,0cm)},y={(0cm,1cm)},z={(.55cm,.4cm)}]
+ \def\W{2.3}\def\L{1.4}\def\r{.8}
+ % ---------- before blow-up ----------
+ \begin{scope}
+  \fill[gray!12] (0,0,-\L)--(0,\W,-\L)--(0,\W,\L)--(0,0,\L)--cycle;
+  \fill[gray!6] (0,0,-\L)--(\W,0,-\L)--(\W,0,\L)--(0,0,\L)--cycle;
+  \draw[thin,gray] (0,\W,-\L)--(0,\W,\L) (\W,0,-\L)--(\W,0,\L)
+    (0,\W,-\L)--(0,0,-\L)--(\W,0,-\L);
+  \draw[red!70!black,line width=1.4pt] (0,0,-\L)--(0,0,\L);
+  \draw[->,thin] (0,0,\L)--(0,0,\L+.6) node[right]
+    {\(Y\)};
+  \draw[->,thin] (\W,0,-\L)--(\W+.4,0,-\L) node[right] {\(x\)};
+  \draw[->,thin] (0,\W,-\L)--(0,\W+.4,-\L) node[above] {\(x'\)};
+  \draw[blue!70!black,very thick] (0,0,0)--(1.9,1.9,0)
+    node[above right,inner sep=1pt] {\(\Delta\)};
+  \fill[blue!70!black] (0,0,0) circle (1.6pt);
+  \node[red!70!black,anchor=east,font=\footnotesize] at (-.18,.2,-.9)
+    {\(\{x=x'=0\}\)};
+  \node at (1.15,-1.15,0) {before blow-up};
+ \end{scope}
+ \draw[->] (3.7,1.0)--(4.8,1.0) node[midway,above,font=\footnotesize]
+   {blow up};
+ % ---------- after blow-up ----------
+ \begin{scope}[xshift=6.6cm]
+  \fill[gray!12] (0,\r,-\L)--(0,\W,-\L)--(0,\W,\L)--(0,\r,\L)--cycle;
+  \fill[gray!6] (\r,0,-\L)--(\W,0,-\L)--(\W,0,\L)--(\r,0,\L)--cycle;
+  \draw[thin,gray] (0,\W,-\L)--(0,\W,\L) (\W,0,-\L)--(\W,0,\L)
+    (0,\W,-\L)--(0,\r,-\L) (\r,0,-\L)--(\W,0,-\L);
+  % front face: quarter cylinder over the Y direction
+  \fill[red!10] plot[domain=0:90,samples=19] ({\r*cos(\x)},{\r*sin(\x)},-\L)
+    -- plot[domain=90:0,samples=19] ({\r*cos(\x)},{\r*sin(\x)},\L) -- cycle;
+  \draw[red!70!black] plot[domain=0:90,samples=19] ({\r*cos(\x)},{\r*sin(\x)},-\L);
+  \draw[red!70!black] plot[domain=0:90,samples=19] ({\r*cos(\x)},{\r*sin(\x)},\L);
+  \draw[red!70!black] (0,\r,-\L)--(0,\r,\L) (\r,0,-\L)--(\r,0,\L);
+  \draw[red!70!black,thin,densely dashed]
+    plot[domain=0:90,samples=19] ({\r*cos(\x)},{\r*sin(\x)},0);
+  \draw[->,thin,gray] (\W,0,-\L)--(\W+.4,0,-\L) node[right,black] {\(x\)};
+  \draw[->,thin,gray] (0,\W,-\L)--(0,\W+.4,-\L) node[above,black] {\(x'\)};
+  \draw[blue!70!black,very thick] ({\r*cos(45)},{\r*sin(45)},0)--(1.9,1.9,0)
+    node[above right,inner sep=1pt] {\(\Delta_b\)};
+  \fill[blue!70!black] ({\r*cos(45)},{\r*sin(45)},0) circle (1.6pt);
+  \node[red!70!black] at (.2,.2,-\L) {\(\mathrm{ff}\)};
+  \node at (0,1.75,.4) {\(\mathrm{lb}\)};
+  \node at (1.75,0,.5) {\(\mathrm{rb}\)};
+  \node at (1.15,-1.15,0) {after blow-up};
+ \end{scope}
+\end{tikzpicture}
+\caption[Conormal kernel on the b-double space]{Schematic of the corner of
+the double space in the coordinates \((x,x',Y)\), \(Y=y-y'\), at a fixed
+\(y\).  Left: before blow-up, the corner \(\{x=x'=0\}=\partial X\times
+\partial X\) is the edge along \(Y\), and the diagonal \(\Delta=\{x=x',\,
+Y=0\}\) runs into it.  Right: after blow-up the edge is replaced by the
+front face \(\mathrm{ff}\), a quarter-cylinder over the \(Y\)-direction
+whose arcs are the quarter-circles of Figure~\ref{fig:blowup-corner}; the
+side faces are \(\mathrm{lb}=\{x=0\}\) and \(\mathrm{rb}=\{x'=0\}\) lifted.
+The lifted diagonal \(\Delta_b\) meets \(\mathrm{ff}\) transversally, in the
+middle of the arc \(Y=0\) (dashed).  A small-calculus kernel is conormal to
+\(\Delta_b\), extends smoothly up to \(\mathrm{ff}\), and vanishes to
+infinite order at \(\mathrm{lb}\) and \(\mathrm{rb}\).}
 \end{figure}
 
 The principal symbol is a homogeneous bundle map on
@@ -1320,11 +1559,53 @@ direction in which the weight is moved.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=.74\textwidth]{drawing96.png}
-\caption[Mellin contours and indicial roots]{Changing the weight moves the Mellin contour. The index is
-constant while the contour remains in a pole-free strip and jumps by the
-algebraic multiplicities of the enclosed indicial roots when a pole is
-crossed.}
+\begin{tikzpicture}[>=Latex,thick,font=\small,yscale=1.15]
+ \def\A{3.6}\def\C{1.9}\def\al{.45}
+ % no roots for |Re lambda| > a_1 within the strip
+ \fill[gray!10] (-5.1,-\C) rectangle (-\A,\C) (\A,-\C) rectangle (5.1,\C);
+ % root-free band |Im lambda| < alpha
+ \fill[gray!22] (-\A,-\al) rectangle (\A,\al);
+ \draw[gray,thin,dashed] (-5.1,\C)--(5.1,\C) (-5.1,-\C)--(5.1,-\C);
+ \draw[gray,thin,dashed] (-\A,-\C-.15)--(-\A,\C+.15) (\A,-\C-.15)--(\A,\C+.15);
+ \draw[->,gray] (-5.3,0)--(5.4,0) node[above right,black,inner sep=1pt]
+   {\(\operatorname{Re}\lambda\)};
+ \draw[->,gray] (0,-\C-.35)--(0,\C+.45) node[above,black] {\(\operatorname{Im}\lambda\)};
+ % indicial roots
+ \foreach \p in {(-2.9,1.35),(-2.1,.85),(-1.2,1.55),(-.55,.75),(.6,1.2),
+   (1.5,1.6),(2.2,.8),(3.0,1.3),(-3.1,-1.5),(-1.6,-1.6),(-.4,-1.65),
+   (.9,-1.55),(2.6,-1.45),(1.7,-1.75)}
+   \fill[black!75] \p circle (2.2pt);
+ \foreach \p in {(-2.4,-1.0),(-.9,-.85),(1.3,-1.1),(2.9,-.75)}
+   \fill[red!70!black] \p circle (2.6pt);
+ % admissible Mellin lines
+ \draw[blue!70!black,very thick,postaction={decorate},decoration={markings,
+   mark=at position .8 with {\arrow{Latex}}}] (-5.1,-.2)--(5.1,-.2);
+ \node[blue!70!black,anchor=west,font=\footnotesize] at (5.15,-.2)
+   {\(\operatorname{Im}\lambda=-\delta\)};
+ \draw[red!70!black,very thick,postaction={decorate},decoration={markings,
+   mark=at position .8 with {\arrow{Latex}}}] (-5.1,-1.3)--(5.1,-1.3);
+ \node[red!70!black,anchor=west,font=\footnotesize] at (5.15,-1.3)
+   {\(\operatorname{Im}\lambda=-\delta'\)};
+ % labels
+ \node[font=\footnotesize,below] at (-\A,-\C-.15) {\(-a_1\)};
+ \node[font=\footnotesize,below] at (\A,-\C-.15) {\(a_1\)};
+ \node[font=\footnotesize,anchor=east] at (-5.15,\C) {\(\operatorname{Im}\lambda=C\)};
+ \node[font=\footnotesize,anchor=east] at (-5.15,-\C) {\(\operatorname{Im}\lambda=-C\)};
+ \node[font=\footnotesize,anchor=south west,inner sep=1pt] at (-3.5,.04)
+   {\(|\operatorname{Im}\lambda|<\alpha\)};
+\end{tikzpicture}
+\caption[Mellin contours and indicial roots]{Indicial roots (dots) of a
+b-elliptic \(P\) in the strip \(|\operatorname{Im}\lambda|\leq C\); since
+\(I(P,\lambda)\) is invertible for \(|\operatorname{Re}\lambda|\) large in
+the strip, they lie in \(|\operatorname{Re}\lambda|<a_1\) (light grey
+regions are root-free).  In this example no root lies in the dark band
+\(|\operatorname{Im}\lambda|<\alpha\).  The weight \(x^\delta\) corresponds to
+the Mellin line \(\operatorname{Im}\lambda=-\delta\), which is admissible
+for every \(|\delta|<\alpha\) (blue); along such weights the index is
+constant.  Moving the weight to \(\delta'\) (red line, also admissible)
+crosses the roots with \(-\delta'<\operatorname{Im}\lambda<-\delta\) (red
+dots), and the index jumps by the sum of their algebraic multiplicities,
+with sign fixed by the direction of the move.}
 \end{figure}
 
 \section{The full b-calculus and the Fredholm parametrix}
@@ -1410,15 +1691,36 @@ parametrix below.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=.34\textwidth]{drawing99.png}
-\caption[Construction of the full b-parametrix]{The corner of
-\(X_b^2\) with the left face (vertical), the front face (arc), and the
-right face (horizontal).  The labels record the orders of the remainder
-of the full parametrix at \(\mathrm{lb}\), \(\mathrm{ff}\), and
-\(\mathrm{rb}\), as powers of defining functions of these faces: the
-front-face order comes from the indicial correction, and the side-face
-orders, positive after conjugation by the weight, are what make the
-final residual error compact.}
+\begin{tikzpicture}[>=Latex,thick,font=\small]
+ \def\R{1.3}
+ \fill[gray!8] (0,\R) arc[start angle=90,end angle=0,radius=\R]
+   --(4,0)--(4,4)--(0,4)--cycle;
+ \draw[blue!70!black,line width=1.3pt] (0,\R)--(0,4);
+ \draw[blue!70!black,line width=1.3pt] (\R,0)--(4,0);
+ \draw[red!70!black,line width=1.4pt] (0,\R) arc[start angle=90,end angle=0,
+   radius=\R];
+ \draw[->,gray,thin] (4,0)--(4.35,0) node[right,black] {\(x\)};
+ \draw[->,gray,thin] (0,4)--(0,4.35) node[above,black] {\(x'\)};
+ \node[blue!70!black,anchor=east] at (-.08,2.65)
+   {\(\mathrm{lb}\colon\ O(\rho_{\mathrm{lb}}^{\alpha+\delta})\)};
+ \node[blue!70!black,anchor=north] at (2.65,-.08)
+   {\(\mathrm{rb}\colon\ O(\rho_{\mathrm{rb}}^{\alpha+\delta})\)};
+ \node[red!70!black,anchor=north east,align=right] at ({\R*cos(45)-.05},{\R*sin(45)-.05})
+   {\(\mathrm{ff}\colon\)\\\(O(\rho_{\mathrm{ff}}^{\alpha_0})\)};
+ \node at (2.4,2.4) {\(X_b^2\)};
+\end{tikzpicture}
+\caption[Construction of the full b-parametrix]{The corner of \(X_b^2\),
+with the left face \(\mathrm{lb}\) (the lift of \(\{x=0\}\), vertical), the
+front face \(\mathrm{ff}\) (arc), and the right face \(\mathrm{rb}\) (the
+lift of \(\{x'=0\}\), horizontal).  The labels record the orders of
+vanishing of the remainder of the full parametrix as powers of boundary
+defining functions \(\rho_{\mathrm{lb}}\), \(\rho_{\mathrm{ff}}\),
+\(\rho_{\mathrm{rb}}\) (for instance \(\rho_{\mathrm{lb}}=x/x'\) and
+\(\rho_{\mathrm{rb}}=x'/x\) near the front face).  The front-face order
+\(\alpha_0>0\) comes from the indicial correction, which makes the normal
+operator of the remainder vanish; the side-face orders \(\alpha+\delta>0\),
+positive after conjugation by the weight, are what make the final residual
+error compact.}
 \end{figure}
 
 Iterating at the interior diagonal and at the boundary faces gives
