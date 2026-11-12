@@ -1198,7 +1198,7 @@ refers to the larger submanifold $Y$.
 \begin{tikzpicture}[>=Stealth]
 \fill[gray!15] (-2.6,-0.6)--(2.2,-0.6)--(3.4,0.6)--(-1.4,0.6)--cycle;
 \draw (-2.6,-0.6)--(2.2,-0.6)--(3.4,0.6)--(-1.4,0.6)--cycle;
-\draw[very thick] (-2.0,0)--(2.8,0);
+\draw[line width=1.8pt] (-2.0,0)--(2.8,0);
 \draw[->] (-1.4,-1.6)--(-1.4,1.6) node[above,font=\footnotesize]{$y$ (normal to $Y$)};
 \draw[->] (-0.8,-0.3)--(0.0,0.5);
 \node[font=\footnotesize] at (0.3,0.75) {$z$ (in $Y$, normal to $Z$)};
@@ -2182,6 +2182,17 @@ parametrix. Conversely, if $Q$ exists then by multiplicativity
 $\sigma(Q)\sigma(A)=\Id$ and $\beta(Q)\beta(A)=\Id$, and similarly on the other side,
 since smoothing operators have vanishing symbols.
 \end{proof}
+
+\begin{discussion}
+  The construction is the usual one, done on two faces at once. For an ordinary
+  elliptic operator one inverts the principal symbol and removes the error, of
+  order $-1$, by a Neumann series. Here one inverts both symbols, which is
+  possible exactly when $A$ is fully elliptic. The error then vanishes at both
+  faces, so it gains one order in each index ($\Psipt{-1,-1}$), and the Neumann
+  series converges modulo $\bigcap_j\Psipt{-j,-j}$, which consists of smoothing
+  operators. Inverting only the principal symbol would leave an error in
+  $\Psipt{0,-1}$, which is not compact on $L^2$.
+\end{discussion}
 
 \begin{corollary}\label{product:cor:fredholm}
 A fully elliptic $A\in\Psipt{m,m'}(M;E,F)$ is Fredholm as a map
