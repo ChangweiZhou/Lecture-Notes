@@ -1,1 +1,464 @@
-% solutions for 07-boundary (in progress)
+% Solutions for chapter 07-boundary
+\providecommand{\dCmI}{\dot{\mathcal{C}}^{-\infty}}
+\providecommand{\Hdot}[1]{\dot{H}^{#1}}
+\providecommand{\Xt}{\tilde{X}}
+\providecommand{\PiC}{\Pi_{\mathcal{C}}}
+\providecommand{\Cau}{\mathfrak{C}}
+
+\section{Solutions for \cref{ch:boundary}: Elliptic boundary problems}\label{solutions:boundary}
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{boundary:ex:collar-noncompact}}
+Idea: the flow of an inward vector field $V$ with $V\rho=1$ still produces a collar, but
+its width has to be allowed to depend on the boundary point; rescaling the flow time by
+$\epsilon(p)$ gives a collar of uniform width $1$.
+
+\emph{Step 1: the vector field and its flow.} Let $\rho_0$ be any boundary defining
+function (they exist, \cref{boundary:sec:manifolds}) and fix a Riemannian metric on $X$.
+The set $W_0=\{d\rho_0\neq0\}$ is an open neighbourhood of $\pa X$. Choose $\phi\in\CI(X)$
+with $0\le\phi\le1$, $\supp\phi\subset W_0$ and $\phi=1$ on an open neighbourhood $W$ of
+$\pa X$, and put $V=\phi\,\nabla\rho_0/|\nabla\rho_0|^2$. Then $V$ is smooth on $X$,
+$V\rho_0=1$ on $W$, and $V$ is inward pointing at $\pa X$. For $p\in\pa X$, an integral
+curve $\gamma_p$ of $V$ with $\gamma_p(0)=p$ exists on some interval $[0,\delta)$ and is
+unique: in a boundary chart $O\subset\R^{n,1}$ around $p$ extend $V$ to a smooth vector
+field $\tilde V$ on an open set $O'\subset\R^n$; the integral curve of $\tilde V$ through
+$p$ satisfies $\frac d{dt}\rho_0(\gamma(t))=1$ as long as it stays in $W$ (with $\rho_0$
+extended as well, $\tilde V\tilde\rho_0=1$ near $p$ by continuity, after shrinking), so
+it enters $X^\circ$ immediately and stays there; uniqueness of integral curves of
+$\tilde V$ gives uniqueness. As long as $\gamma_p([0,t])\subset W$ we have
+\begin{equation*}
+\rho_0(\gamma_p(t))=t .
+\end{equation*}
+Let $\mathcal O\subset[0,\infty)\times\pa X$ be the set of $(t,p)$ such that $\gamma_p$
+is defined on $[0,t]$ with $\gamma_p([0,t])\subset W$, and $\psi(t,p)=\gamma_p(t)$.
+Smooth dependence on initial data for $\tilde V$ in boundary charts, combined with the
+flow $\Phi_s$ of $V$ on the manifold without boundary $X^\circ$ (via
+$\psi(t,p)=\Phi_{t-s}(\psi(s,p))$ for small $s>0$), shows that $\mathcal O$ is open in
+$[0,\infty)\times\pa X$, contains $\{0\}\times\pa X$, and that $\psi$ is smooth on
+$\mathcal O$.
+
+\emph{Step 2: $\psi$ is an injective local diffeomorphism.} At $(0,p)$, $d\psi$ maps
+$\pa_t$ to $V(p)$, transversal to $\pa X$, and is the identity on $T_p\pa X$, so it is an
+isomorphism; by the inverse function theorem in a boundary chart (applied to the flow of
+$\tilde V$), $\psi$ maps a neighbourhood of $(0,p)$ in $[0,\infty)\times\pa X$
+diffeomorphically onto a neighbourhood of $p$ in $X$ (boundary points go to boundary
+points since $\rho_0\circ\psi=t$). At $(t,p)$ with $t>0$ choose $0<s<t$ small; then
+$\psi(t',p')=\Phi_{t'-s}(\psi(s,p'))$ near $(t,p)$, and since $d\Phi_\tau$ maps $V$ to $V$
+and $d\psi(s,p)(\pa_t)=V$, we get $d\psi(t,p)=d\Phi_{t-s}\circ d\psi(s,p)$, an isomorphism.
+Injectivity: if $\psi(t,p)=\psi(t',p')$ then $t=\rho_0(\psi(t,p))=t'$, and the curves
+$\gamma_p,\gamma_{p'}$ agree at time $t$, hence, by uniqueness of integral curves
+(run backwards), on $[0,t]$, so $p=p'$.
+
+\emph{Step 3: choice of $\epsilon$.} Let $f\in\CI(X)$ be a proper function
+($f\ge0$, $f^{-1}([0,c])$ compact for all $c$; such functions exist on any paracompact
+manifold, e.g.\ $f=\sum_jj\chi_j$ for a partition of unity $\chi_j$ with compact
+supports). The set $\mathcal O'=\{(t,p)\in\mathcal O;\ |f(\psi(s,p))-f(p)|<1\ \forall
+s\in[0,t]\}$ is still open and contains $\{0\}\times\pa X$. Each $p\in\pa X$ has an open
+neighbourhood $U_p\subset\pa X$ and $\delta_p\in(0,1]$ with $[0,\delta_p)\times U_p
+\subset\mathcal O'$ (compactness of $[0,\delta]\times\{p\}$ and openness). Choose a locally
+finite partition of unity $(\chi_i)$ on $\pa X$ with $\supp\chi_i\subset U_{p_i}$ and set
+$\epsilon=\frac12\sum_i\chi_i\delta_{p_i}\in\CI(\pa X;(0,1])$. For $p\in\pa X$,
+$\epsilon(p)\le\frac12\max\{\delta_{p_i};\ p\in\supp\chi_i\}<\delta_{p_j}$ for some $j$
+with $p\in U_{p_j}$, so
+\begin{equation*}
+\Omega_\epsilon=\{(t,p);\ 0\le t<\epsilon(p)\}\subset\mathcal O' .
+\end{equation*}
+By Step 2, $\psi:\Omega_\epsilon\to X$ is an injective local diffeomorphism from an open
+subset of $[0,\infty)\times\pa X$, so its image $C=\psi(\Omega_\epsilon)$ is open and
+$\psi:\Omega_\epsilon\to C$ is a diffeomorphism. Composing with the diffeomorphism
+$[0,1)\times\pa X\ni(s,p)\mapsto(s\epsilon(p),p)\in\Omega_\epsilon$ we get a
+diffeomorphism $\Psi(s,p)=\psi(s\epsilon(p),p)$ from $[0,1)\times\pa X$ onto $C$, whose
+inverse has first component $\rho'=\rho_0/(\epsilon\circ\pi)$, where $\pi:C\to\pa X$ is
+the second component of $\Psi^{-1}$.
+
+\emph{Step 4: a global boundary defining function.} The set
+$A=\Psi([0,\frac12]\times\pa X)$ is closed in $X$. Indeed, let $q_k=\Psi(s_k,p_k)\to q$
+with $s_k\le\frac12$. By the choice of $\mathcal O'$, $f(p_k)\le f(q_k)+1$ is bounded, so
+the $p_k$ lie in the compact set $\pa X\cap f^{-1}([0,c])$; passing to a subsequence,
+$(s_k,p_k)\to(s,p)\in[0,\frac12]\times\pa X$ and $q=\Psi(s,p)\in A$. Let
+$\chi\in\CI([0,\infty))$ be non-decreasing with $\chi(s)=4s$ for $s\le\frac14$ and
+$\chi(s)=2$ for $s\ge\frac12$, and define $\rho=\chi(\rho')$ on $C$ and $\rho=2$ on
+$X\setminus A$. The two definitions agree on the overlap $C\setminus A$ (where
+$\rho'>\frac12$), and $C\cup(X\setminus A)=X$, so $\rho\in\CI(X)$. It is positive on
+$X^\circ$, vanishes exactly on $\pa X$, and equals $4\rho'$ on
+$C_1=\Psi([0,\frac14)\times\pa X)$, where $d\rho'\ne0$ at $\pa X$. So $\rho$ is a boundary
+defining function, $C_1$ is an open neighbourhood of $\pa X$, and
+\begin{equation*}
+C_1\ni q\longmapsto(\rho(q),\pi(q))=\big(4\rho'(q),\pi(q)\big)\in[0,1)\times\pi(C_1)=
+[0,1)\times\pa X
+\end{equation*}
+is a diffeomorphism (it is $\Psi^{-1}$ followed by $(s,p)\mapsto(4s,p)$), with first
+component $\rho$. This proves the first statement.
+
+\emph{Doubling.} The construction of $\Xt$ in \cref{boundary:sec:manifolds} uses only
+such a collar (with $\epsilon=1$). Charts of $\Xt$ are: charts of $X^\circ$ on either copy,
+and near the common boundary the maps $(-1,1)\times\pa X\ni(s,p)\mapsto\Psi(s,p)$ in the
+first copy for $s\ge0$ and in the second copy for $s\le0$, composed with charts of $\pa X$.
+The transition maps are smooth because $\Psi$ is a diffeomorphism. $\Xt$ is Hausdorff: two
+points not on $\pa X$ are separated by open sets of $X^\circ$ in the copies (or by the two
+copies of $X^\circ$), and a point $p\in\pa X$ and a point $q$ of the first copy are
+separated by disjoint neighbourhoods $U\ni p$, $U'\ni q$ in $X$ (take $\Psi((-\delta,\delta)
+\times U_0)$ for $p$, with $\Psi([0,\delta)\times U_0)\subset U$). It is paracompact,
+being the union of two closed paracompact subsets. Finally $x=\rho$ on the first copy and
+$x=-\rho$ on the second is smooth on $\Xt$ (in the collar chart it is the coordinate
+$s$), $X=\{x\ge0\}$, and $\CI(X)=\CI(\Xt)|_X$ by \cref{boundary:prop:extension} applied in
+the collar charts. Bundles are doubled by identifying $E|_C$ with the pull-back of
+$E|_{\pa X}$ by parallel transport, for any connection, along the curves
+$s\mapsto\Psi(s,p)$. So the doubling construction works for every manifold with boundary.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{boundary:ex:sobolev-intrinsic}}
+Idea: one inclusion is trivial since differential operators extend to $\Xt$; for the other
+we localize and extend across the boundary by a reflection which preserves $H^k$.
+
+Recall the standard fact on $\R^n$: for $k\in\N_0$, $v\in H^k(\R^n)$ if and only if
+$D^\alpha v\in L^2(\R^n)$ for $|\alpha|\le k$, with $\norm{v}_{H^k}^2\simeq\sum_{|\alpha|
+\le k}\norm{D^\alpha v}^2_{L^2}$, because $c\ang\zeta^{2k}\le\sum_{|\alpha|\le k}
+|\zeta^\alpha|^2\le C\ang\zeta^{2k}$.
+
+\emph{The inclusion $\subset$, and one norm inequality.} Let $u\in H^k(X)$, $u=R_X\tilde u$
+with $\tilde u\in H^k(\Xt)$, and $P\in\Diff k(X)$. Extend the coefficients of $P$ in a
+collar and cut off to get $\tilde P\in\Diff k(\Xt)$ with $\tilde P|_X=P$. For
+$\varphi\in\dCI(X;\Omega)$ we have $\tilde P^t\varphi=P^t\varphi$ (supported in $X$), so
+$(R_X\tilde P\tilde u)(\varphi)=\tilde u(P^t\varphi)=(PR_X\tilde u)(\varphi)$, i.e.\
+$Pu=R_X\tilde P\tilde u\in R_XL^2(\Xt)=L^2(X)$, and $\norm{Pu}_{L^2(X)}\le
+\norm{\tilde P\tilde u}_{L^2(\Xt)}\le C_P\norm{\tilde u}_{H^k(\Xt)}$. Taking the infimum
+over $\tilde u$, $\norm{Pu}_{L^2}\le C_P\norm u_{H^k(X)}$. (Here $L^2(X)=H^0(X)$, and the
+quotient norm on $H^0(X)$ is the $L^2(X)$ norm, the infimum being attained by the extension
+by zero.)
+
+\emph{The reflection.} In $\R^n_+=\{x>0\}$ write $\norm v_{k,+}^2=\sum_{|\alpha|\le k}
+\norm{D^\alpha v}^2_{L^2(\R^n_+)}$, derivatives in the open half-space. Since the nodes
+$-2^j$, $0\le j\le k-1$, are distinct, the Vandermonde system $\sum_{j=0}^{k-1}a_j(-2^j)^l=1$,
+$0\le l\le k-1$, has a unique solution. For $v$ defined on $\R^n_+$ let $Ev=v$ on $x>0$
+and $Ev(x,y)=\sum_ja_jv(-2^jx,y)$ on $x<0$. If $v\in\CI(\overline{\R^n_+})$ has compact
+support, then for $l\le k-1$, $\pa_x^lEv(x,y)=\sum_ja_j(-2^j)^l(\pa_x^lv)(-2^jx,y)\to
+\pa_x^lv(0,y)$ as $x\uparrow0$, and tangential derivatives commute with $E$. Hence all
+derivatives of order $\le k-1$ of $Ev$ are continuous across $x=0$ and $Ev$ is piecewise
+smooth; an integration by parts in $x$ (no boundary terms appear because the derivatives of
+order $\le k-1$ are continuous) shows that the distributional derivatives of order $\le k$
+of $Ev$ are the piecewise ones. By the change of variables $x'=-2^jx$,
+$\norm{(D^\alpha v)(-2^j\cdot,\cdot)}_{L^2(\{x<0\})}=2^{-j/2}\norm{D^\alpha v}_{L^2(\R^n_+)}$,
+so
+\begin{equation*}
+\norm{Ev}_{H^k(\R^n)}\le C\norm v_{k,+},\qquad C=C\Big(1+\sum_j|a_j|2^{jk}\Big).
+\end{equation*}
+
+\emph{Approximation.} Let $v\in L^2(\R^n_+)$ have support in a compact subset of
+$\overline{\R^n_+}$ with $\norm v_{k,+}<\infty$. For $t>0$ let $v_t(x,y)=v(x+t,y)$, defined
+on $x>-t$, and let $w_t=\rho_{t/2}*v_t$ with $\rho_\delta$ a mollifier supported in the ball
+of radius $\delta$; $w_t$ is smooth on $x>-t/2$, so $w_t|_{\overline{\R^n_+}}\in\CI$ with
+compact support, and $D^\alpha w_t=\rho_{t/2}*(D^\alpha v)_t$ on $x>0$. With $g$ the
+extension by zero of $D^\alpha v$ to $\R^n$, on $x>0$ we have $D^\alpha w_t=\rho_{t/2}*g_t$,
+where $g_t=g(\cdot+te_1)$, hence
+\begin{equation*}
+\norm{D^\alpha w_t-D^\alpha v}_{L^2(\R^n_+)}\le\norm{\rho_{t/2}*(g_t-g)}+
+\norm{\rho_{t/2}*g-g}+\norm{g_t-g}\le2\norm{g_t-g}_{L^2}+\norm{\rho_{t/2}*g-g}_{L^2}\to0 .
+\end{equation*}
+So $\norm{w_t-v}_{k,+}\to0$. Then $Ew_t$ is Cauchy in $H^k(\R^n)$, converges to some
+$V\in H^k(\R^n)$, and $V|_{\R^n_+}=\lim w_t=v$ in $L^2(\R^n_+)$. Thus $v$ is the
+restriction of $V$, with $\norm V_{H^k}\le C\norm v_{k,+}$.
+
+\emph{The inclusion $\supset$.} Let $u\in L^2(X)$ with $P_ju\in L^2(X)$ for a finite
+generating set $P_j$ of $\Diff k(X)$ (then $Pu\in L^2$ for every $P\in\Diff k(X)$, as
+$P=\sum_jc_jP_j$ with $c_j\in\CI(X)$, and $\norm{Pu}\le\sum_j\sup|c_j|\norm{P_ju}$). Take a
+finite partition of unity $\phi_0+\sum_{i\ge1}\phi_i=1$ on $X$ with $\supp\phi_0\subset X^\circ$
+and $\supp\phi_i$ in boundary charts $\R^{n,1}\supset O_i$, and $\psi_i\in\CIc$ of the
+charts equal to one near $\supp\phi_i$. In a chart, $\psi_iD^\alpha\phi_i\in\Diff k(X)$ for
+$|\alpha|\le k$, so $D^\alpha(\phi_iu)\in L^2$ with norm $\le C\sum_j\norm{P_ju}$; here
+derivatives are computed in $\CmI(X)$, which by \cref{boundary:prop:extendible} is the same
+as in the open half-space. For $i\ge1$ the previous step gives an extension
+$V_i\in H^k(\R^n)$ of $\phi_iu$ with compact support (multiply by a cut-off if
+necessary), and for $i=0$, $\phi_0u$ itself is in $H^k$ with compact support in $X^\circ$.
+Transplanting to $\Xt$ with the charts (Sobolev spaces are local and invariant), $\tilde u=
+\sum_iV_i\in H^k(\Xt)$ satisfies $R_X\tilde u=u$, and
+\begin{equation*}
+\norm u_{H^k(X)}\le\norm{\tilde u}_{H^k(\Xt)}\le C\sum_j\norm{P_ju}_{L^2(X)} .
+\end{equation*}
+Together with the first step this proves $H^k(X)=\{u\in L^2(X);\ Pu\in L^2(X)\ \forall
+P\in\Diff k(X)\}$ and the equivalence of $\norm u_{H^k(X)}$ with $\sum_j\norm{P_ju}_{L^2}$.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{boundary:ex:calderon-bvp}}
+Idea: $R_Df$ has boundary values in the null space of $\PiC$, because $D^{-1}(f_c)$
+continues smoothly across $H$ as a solution on $M_-$.
+
+\emph{Claim: $\PiC b_+R_Df=0$ for $f\in\CI(M_+;V_2)$.} Let $w=D^{-1}(f_c)\in\CmI(M;V_1)$. As in
+the proof of \cref{boundary:lem:RD}, choose by \cref{boundary:lem:formal}(i)
+$u'\in\CI(M_+;V_1)$ with $b_+u'=0$ and $h=Du'-f\in\dCI(M_+;V_2)$; then $D(u'_c)=f_c+h_c$
+by \cref{boundary:cor:jump1} (since $b_+u'=0$), with $h_c\in\CI(M;V_2)$, so
+\begin{equation*}
+w=u'_c-D^{-1}(h_c),\qquad D^{-1}(h_c)\in\CI(M;V_1).
+\end{equation*}
+Hence $w|_{M_\pm^\circ}$ extends smoothly to $M_\pm$, with $b_+w=b_+u'-b(D^{-1}h_c)=
+-b(D^{-1}h_c)=b_-w$, since $u'_c=0$ on $M_-$. (Equivalently, by \eqref{boundary:eq:jump-two},
+$f_c=Dw=f_c+0+\frac1i\sigma(dx)(b_+w-b_-w)\delta(x)$, and $\sigma(dx)$ is invertible.)
+Moreover $Dw=f_c=0$ in $M_-^\circ$, so $w|_{M_-}\in\mathcal{N}_-$ and, by
+\cref{boundary:thm:calderon-dividing}, $b_-w\in(\Id-\PiC)\CI(H;V)$, i.e.\ $\PiC b_-w=0$.
+Since $R_Df=w|_{M_+}$, $\PiC b_+R_Df=\PiC b_-w=0$.
+
+\emph{Existence.} Let $u=R_Df+I_D\PiC v$. By \cref{boundary:lem:RD}, $R_Df\in\CI(M_+;V_1)$
+and $DR_Df=f$; $I_D\PiC v\in\mathcal{N}_+$, so it is smooth with $DI_D\PiC v=0$ and
+$b_+I_D\PiC v=\PiC v$. Hence $Du=f$ and $\PiC b_+u=\PiC b_+R_Df+\PiC\PiC v=\PiC v$.
+
+\emph{Uniqueness.} If $u_1,u_2$ are two solutions, $u=u_1-u_2\in\CI(M_+;V_1)$ satisfies
+$Du=0$, so $u\in\mathcal{N}_+$ and $b_+u\in\PiC\CI(H;V)$, whence $b_+u=\PiC b_+u=0$; by
+\cref{boundary:lem:unique}, $u=0$.
+
+\emph{The remark.} For the solution, $(\Id-\PiC)b_+u=(\Id-\PiC)b_+R_Df+(\Id-\PiC)\PiC v=
+b_+R_Df-\PiC b_+R_Df=b_+R_Df$, which depends only on $f$. So the condition $b_+u=\PiC v$
+can be satisfied only if $b_+R_Df=0$; the correct boundary condition prescribes only the
+component $\PiC b_+u$.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{boundary:ex:orthogonal-calderon}}
+Idea: $T$ is a self-adjoint ``correction'' that intertwines $\Pi$ and $\Pi^*$; dividing by it
+symmetrizes $\Pi$ without changing its range.
+
+(a) $T^*=\Pi^*+\Pi-\Id=T$. Using $\Pi^2=\Pi$ and $(\Pi^*)^2=\Pi^*$,
+\begin{equation*}
+T^2=\Pi+\Pi\Pi^*-\Pi+\Pi^*\Pi+\Pi^*-\Pi^*-\Pi-\Pi^*+\Id=\Id+\Pi\Pi^*+\Pi^*\Pi-\Pi-\Pi^*,
+\end{equation*}
+and $(\Pi-\Pi^*)(\Pi-\Pi^*)^*=(\Pi-\Pi^*)(\Pi^*-\Pi)=\Pi\Pi^*-\Pi-\Pi^*+\Pi^*\Pi$, which
+gives the formula. Hence $\inner{T^2u}u=\norm u^2+\norm{(\Pi-\Pi^*)^*u}^2\ge\norm u^2$. So
+$\norm u^2\le\norm{T^2u}\norm u$, $T^2$ is injective with closed range, and its range is
+dense because $\Nul(T^2)^*=\Nul T^2=0$; thus $T^2$ is invertible, and so is $T$, with
+$T^{-1}=T(T^2)^{-1}=(T^2)^{-1}T$. Next,
+\begin{equation*}
+\Pi T=\Pi+\Pi\Pi^*-\Pi=\Pi\Pi^*,\quad T\Pi^*=\Pi\Pi^*+\Pi^*-\Pi^*=\Pi\Pi^*,\quad
+T\Pi=\Pi+\Pi^*\Pi-\Pi=\Pi^*\Pi,\quad\Pi^*T=\Pi^*\Pi .
+\end{equation*}
+
+(b) From $\Pi T=T\Pi^*$ we get $T^{-1}\Pi=\Pi^*T^{-1}$, and from $T\Pi=\Pi^*T$ we get
+$\Pi T^{-1}=T^{-1}\Pi^*$. Hence $\Pi_o^*=T^{-1}\Pi^*=\Pi T^{-1}=\Pi_o$, and
+\begin{equation*}
+\Pi_o\Pi=\Pi T^{-1}\Pi=\Pi\Pi^*T^{-1}=(\Pi T)T^{-1}=\Pi,\qquad
+\Pi_o^2=(\Pi_o\Pi)T^{-1}=\Pi T^{-1}=\Pi_o .
+\end{equation*}
+So $\Pi_o$ is a self-adjoint projection, i.e.\ an orthogonal projection; its range is
+contained in $\Ran\Pi$ (as $\Pi_o=\Pi T^{-1}$) and contains it (as $\Pi=\Pi_o\Pi$). Thus
+$\Pi_o$ is the orthogonal projection onto the closed subspace $\Ran\Pi=\Nul(\Id-\Pi)$.
+
+(c) The adjoint (with respect to $L^2(Y;V)$) of $\Pi\in\Psido0(Y;V)$ is in $\Psido0$ with
+$\sigma_0(\Pi^*)=\sigma_0(\Pi)^*$ (\cref{manifolds:prop:principal-symbol}(b)), so $T\in
+\Psido0(Y;V)$ with symbol $t=p+p^*-1$, $p=\sigma_0(\Pi)$. Since $p^2=p$, the computation of
+(a) applies pointwise: $t^2=1+(p-p^*)(p-p^*)^*\ge1$, so $t$ is invertible and $T$ is
+elliptic. By (a), $T$ is invertible on $L^2$, so $\Nul T=\Nul T^*=0$, and by
+\cref{manifolds:prop:generalized-inverse} its generalized inverse $G\in\Psido0(Y;V)$
+satisfies $GT=TG=\Id$; thus $T^{-1}=G\in\Psido0$, classical if $\Pi$ is (by
+\cref{manifolds:thm:parametrix}, $G$ differs from a classical parametrix by a smoothing
+operator). Hence $\Pi_o=\Pi T^{-1}\in\Psido0(Y;V)$, classical if $\Pi$ is.
+
+Now let $\Pi=\PiC$ be a Calder\'on projector. By \eqref{boundary:eq:calderon-symbol} its
+symbol $p$ is an orthogonal projection, $p^*=p$, so $t=2p-1$, $t^{-1}=t$ and
+\begin{equation*}
+\sigma_0(\Pi_o)=pt^{-1}=p(2p-1)=p ;
+\end{equation*}
+thus $\Pi_o-\PiC\in\Psido{-1}$ and $\Pi_o$ has the symbol \eqref{boundary:eq:calderon-symbol}.
+The identities $\Pi_o\PiC=\PiC$ and $\PiC\Pi_o=\Pi_o$ (the latter since $\PiC$ is the
+identity on its range, which contains $\Ran\Pi_o$) hold on $L^2$, hence on every $H^s$
+and on $\CI$, by density and continuity of pseudodifferential operators. Therefore
+$\Pi_oH^{-\frac12}=\PiC H^{-\frac12}=\tilde b(\mathcal N^0)$ and $\Pi_o\CI=\PiC\CI=\Cau$,
+which is (i). The proof of (iii) in \cref{boundary:thm:calderon} uses only that the
+projection has range $\tilde b(\mathcal N^0)$ on $H^{-\frac12}$ and the exact representation
+\eqref{boundary:eq:exact-repr}, so (iii) holds for $\Pi_o$ with the Poisson operator
+$(\tilde I_D+S)\Pi_o$; and (iv) does not involve the projection at all.
+
+Property (ii) is a different matter. From $T=2\Id-(\Id-\PiC)-(\Id-\PiC^*)$ one computes
+\begin{equation*}
+\Pi_o-\PiC=\PiC(\Id-T)T^{-1}=\PiC(\Id-\PiC^*)T^{-1}=\PiC(\PiC-\PiC^*)T^{-1}.
+\end{equation*}
+If $\PiC-\PiC^*\in\Psido{-\infty}$ then $\Pi_o-\PiC$ is smoothing, so $\Pi_o-P=
+(\Pi_o-\PiC)+(\PiC-P)\in\Psido{-\infty}$ and $\Pi_o$ is a Calder\'on projector in the full
+sense of \cref{boundary:thm:calderon}. Conversely, if $\Pi_o-P$ is smoothing then so is
+$\Pi_o-\PiC$, and $\PiC-\PiC^*=(\PiC-\Pi_o)-(\PiC-\Pi_o)^*$ is smoothing. The condition
+does not depend on the choice of $\PiC$, since two Calder\'on projectors differ by a
+smoothing operator. The symbol calculus only gives $\PiC-\PiC^*\in\Psido{-1}$
+(\cref{boundary:sec:calderon-dividing}); so in general the self-adjoint projection onto the
+Cauchy data is guaranteed to satisfy (i), (iii), (iv) and to have the right principal symbol,
+but it agrees with $P$ modulo smoothing operators only when $\PiC$ is self-adjoint modulo
+smoothing operators. (This is the case in \cref{boundary:ex:disc}, where the Szeg\H{o}
+projector is a self-adjoint Calder\'on projector.)
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{boundary:ex:disc}}
+Idea: everything is explicit in Fourier series on the boundary circle.
+
+(a) We have $V_1=V_2=\C$ with the standard Hermitian structure and
+$\sigma(\xi,\eta)=\xi+i\eta$ for $\zeta=\xi\,dx+\eta\,dy$, so
+$\sigma(\zeta)^*\sigma(\zeta)=|\xi+i\eta|^2=|\zeta|^2$ and the ranks agree: $D$ is a
+generalized Dirac operator. Its formal adjoint (Euclidean density) is
+$D^*=D_x-iD_y=-2i\pa_z$. For \eqref{boundary:eq:UC}, let $u\in\dCI(X)$ with $Du=0$. Then $u$
+is holomorphic in the open disc and vanishes to infinite order at $|z|=1$, so its extension
+$\tilde u$ by zero to $\C$ is smooth, and $\pa_{\bar z}\tilde u$ is continuous and vanishes
+off the circle, hence everywhere. Thus $\tilde u$ is entire and vanishes on $|z|>1$, so
+$\tilde u=0$ by the identity theorem. For $f\in\dCI(X)$ with $D^*f=0$ apply the same
+argument to $\bar f$, which satisfies $\pa_{\bar z}\bar f=\overline{\pa_zf}=0$.
+
+(b) $\mathcal N^\infty=\{u\in\CI(X);\ \pa_{\bar z}u=0\}$, so by \cref{index:prop:hardy}
+the restriction to the boundary is an isomorphism of $\mathcal{N}^\infty$ onto the Hardy
+space, i.e.\ $\Cau=\{v=\sum_kv_ke^{ik\theta}\in\CI(\pa X);\ v_k=0\ \text{for}\ k<0\}$, and
+$\Cau=S\,\CI(\pa X)$. By \cref{index:thm:szego}, $S\in\Psido0(\pa X)$ is classical, and
+$S^2=S$.
+
+To see that $S$ is a Calder\'on projector, let $\PiC$ be the Calder\'on projector of
+\cref{boundary:thm:calderon} (whose hypotheses hold by (a)). Both $S$ and $\PiC$ are
+projections in $\Psido0(\pa X)$ with $S\CI=\PiC\CI=\Cau$; since each is the identity on
+its range, $\PiC S=S$ and $S\PiC=\PiC$ on $\CI$, hence (by continuity and density) on every
+$H^s$. Consequently $S H^{-\frac12}=\PiC H^{-\frac12}=\tilde b(\mathcal{N}^0)$ (as
+$\Ran S\subset\Ran\PiC$ by $\PiC S=S$, and conversely by $S\PiC=\PiC$), and
+\begin{equation*}
+S-\PiC=S(\Id-\PiC)=-\PiC(\Id-S),\quad\text{so}\quad S-\PiC=S(S-\PiC)(\Id-S).
+\end{equation*}
+\emph{Claim: if $A\in\Psido0(\Sphere^1)$ then $SA(\Id-S)$ is smoothing.} Let
+$e_k=(2\pi)^{-1/2}e^{ik\theta}$, an orthonormal basis of $L^2(\Sphere^1)$, and
+$a_{jk}=\inner{Ae_k}{e_j}$. With $D_\theta=-i\pa_\theta\in\Psido1(\Sphere^1)$, which has
+scalar principal symbol, $\operatorname{ad}_{D_\theta}^N(A)\in\Psido0$ for all $N$ by
+\cref{manifolds:prop:symbol-calculus}(c), hence is bounded on $L^2$
+(\cref{manifolds:thm:sobolev-bounded}); since $D_\theta e_k=ke_k$ and $D_\theta$ is
+symmetric, $(j-k)^Na_{jk}=\inner{\operatorname{ad}^N_{D_\theta}(A)e_k}{e_j}$, so
+$|a_{jk}|\le C_N\ang{j-k}^{-N}$ for all $N$. The matrix of $SA(\Id-S)$ has entries $a_{jk}$
+for $j\ge0>k$ and $0$ otherwise; for $j\ge0>k$, $|j-k|=|j|+|k|$, so these entries are
+$O((1+|j|+|k|)^{-N})$ for all $N$. Hence the kernel $\frac1{2\pi}\sum_{j\ge0>k}a_{jk}
+e^{ij\theta}e^{-ik\theta'}$ converges in $\CI(\Sphere^1\times\Sphere^1)$, and $SA(\Id-S)$
+is smoothing.
+
+Applying the claim with $A=S-\PiC$ gives $S-\PiC\in\Psido{-\infty}$. Thus $S$ is a
+classical projection with $SH^{-\frac12}=\tilde b(\mathcal N^0)$, $S\CI=\Cau$ and
+$S-P=(S-\PiC)+(\PiC-P)\in\Psido{-\infty}$; (iii) holds with the Poisson operator
+$(\tilde I_D+S_{\mathrm{repr}})S$ (here $S_{\mathrm{repr}}$ is the operator of
+\cref{boundary:prop:exact-repr}), by the proof of \cref{boundary:thm:calderon}, which uses
+only these properties; and (iv) does not depend on the projector. So $S$ is a Calder\'on
+projector (and it is self-adjoint).
+
+(c) At the boundary point $e^{i\theta_0}$, with $x=1-r$, $y=\theta$, we have $dx=-dr$,
+$|dx|=1$, $\nu=-dr$, and $T^*\pa X$ is spanned by $d\theta$, orthogonal to $dr$, with
+$|\eta\,d\theta|=|\eta|$ at $r=1$. In Euclidean coordinates $z=x_1+ix_2$ (to avoid a clash
+with the collar variable), $\sigma(\zeta)=\zeta_1+i\zeta_2$ for $\zeta=\zeta_1dx_1+\zeta_2
+dx_2$. At $r=1$, $\theta=\theta_0$: $dr=\cos\theta_0dx_1+\sin\theta_0dx_2$ and $d\theta=
+-\sin\theta_0dx_1+\cos\theta_0dx_2$, so
+\begin{equation*}
+\sigma(\nu)=-e^{i\theta_0},\qquad\sigma(\eta\,d\theta)=\eta(-\sin\theta_0+i\cos\theta_0)=
+i\eta e^{i\theta_0}.
+\end{equation*}
+Hence \eqref{boundary:eq:calderon-symbol} gives
+\begin{equation*}
+\sigma_0(\PiC)(\theta_0,\eta)=\frac12\Big(1+\frac{i\cdot i\eta e^{i\theta_0}}{-e^{i\theta_0}
+|\eta|}\Big)=\frac12\Big(1+\frac\eta{|\eta|}\Big),
+\end{equation*}
+which is $1$ for $\eta>0$ and $0$ for $\eta<0$. This is $\sigma_0(S)$ by
+\cref{index:thm:szego} (the Fourier variable $k$ corresponding to $\eta$), in agreement with
+(b), where we showed $S-\PiC\in\Psido{-\infty}$. (Compare the example after
+\cref{boundary:thm:calderon-dividing}, where the half-plane $\{x>0\}$ lies to the
+\emph{right} of the boundary and the sign is reversed.)
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{boundary:ex:disc-index}}
+Idea: $\Pi_N$ is a conjugate of the Szeg\H{o} projector, and the index counts the Fourier
+modes between $0$ and $N$.
+
+\emph{$\Pi_N$ is pseudodifferential.} Let $m_N$ be multiplication by $e^{iN\theta}$. Then
+$\Pi_N=m_NSm_{-N}$: indeed $m_NSm_{-N}e^{ik\theta}=e^{iN\theta}S e^{i(k-N)\theta}$, which
+is $e^{ik\theta}$ if $k\ge N$ and $0$ otherwise. As a product of classical operators in
+$\Psido0(\pa X)$ (multiplication operators are differential operators of order $0$),
+$\Pi_N$ is classical, $\Pi_N^2=\Pi_N$, and $\sigma_0(\Pi_N)=e^{iN\theta}\sigma_0(S)e^{-iN
+\theta}=\sigma_0(S)$, which is $1$ for $\eta>0$ and $0$ for $\eta<0$.
+
+\emph{The symbolic condition.} By \cref{boundary:ex:disc}(c), $p=\sigma_0(\PiC)=\pi=
+\sigma_0(\Pi_N)$ (both are $1$ for $\eta>0$, $0$ for $\eta<0$). For $\eta>0$,
+$\pi:\Ran p=\C\to\Ran\pi=\C$ is the identity; for $\eta<0$ both ranges are $0$. So
+\eqref{boundary:eq:symbolic} holds, and by \cref{boundary:thm:symbolic} $D_{\Pi_N}$ is
+Fredholm with $\ind D_{\Pi_N}=\ind T_{\Pi_N}$, $T_{\Pi_N}:\Cau\to\Pi_N\CI(\pa X)$.
+
+\emph{The index.} In Fourier coefficients, $\Cau$ consists of the rapidly decreasing
+sequences supported in $k\ge0$, $\Pi_N\CI$ of those supported in $k\ge N$, and
+$T_{\Pi_N}$ is restriction of the sequence to $k\ge N$.
+If $N\ge0$: $\Nul T_{\Pi_N}=\{v\in\Cau;\ v_k=0\ \forall k\ge N\}$, of dimension $N$, and
+$T_{\Pi_N}$ is surjective; index $N$. If $N<0$: $T_{\Pi_N}$ is injective, and its range
+consists of the sequences supported in $k\ge0$, of codimension $|N|$ in $\Pi_N\CI$ (the
+modes $N\le k<0$); index $N$. So $\ind D_{\Pi_N}=N$ in all cases.
+
+\emph{Null space and cokernel.} By \cref{boundary:thm:fredholm-bc} and
+\cref{index:prop:hardy}, $\Nul D_{\Pi_N}$ consists of the holomorphic $u=\sum_{k\ge0}
+u_kz^k$, smooth on $X$, with $u_k=0$ for $k\ge N$. For $N>0$ this is the space of
+polynomials in $z$ of degree $<N$, of dimension $N$, and $D_{\Pi_N}$ is surjective. For
+$N\le0$ the null space is $0$. For $N<0$ the cokernel has dimension $|N|$, and it can be
+described explicitly. If $u\in\CI(X)$ and $\Pi_N(bu)=0$, i.e.\ the Fourier coefficients
+$\hat u_k$ of $bu$ vanish for $k\ge N$, then for $m\ge0$, by Stokes' formula
+$\int_X\pa_{\bar z}F\,dx_1dx_2=\frac1{2i}\oint_{|z|=1}F\,dz$,
+\begin{equation*}
+\int_X(Du)z^m\,dx_1dx_2=-2i\int_X\pa_{\bar z}(uz^m)\,dx_1dx_2=-\oint u\,z^m\,dz=
+-i\int_0^{2\pi}u(e^{i\theta})e^{i(m+1)\theta}d\theta=-2\pi i\,\hat u_{-m-1}.
+\end{equation*}
+For $0\le m\le|N|-1$ we have $-m-1\ge N$, so the right side vanishes. Thus the range of
+$D_{\Pi_N}$ is contained in $\{f\in\CI(X);\ \inner f{\bar z^m}_X=0,\ 0\le m<|N|\}$. These
+$|N|$ linear conditions are independent (the functionals are independent on
+$\operatorname{span}\{\bar z^{m'}\}$, as $\inner{\bar z^{m'}}{\bar z^m}_X=\pi\delta_{mm'}/
+(m+1)$), so this subspace has codimension $|N|$, which is the codimension of the range;
+hence they are equal. So for $N<0$
+\begin{equation*}
+\Ran D_{\Pi_N}=\{f;\ f\perp\bar z^m,\ 0\le m<|N|\},\qquad
+\CI(X)=\Ran D_{\Pi_N}\oplus\operatorname{span}\{1,\bar z,\dots,\bar z^{|N|-1}\},
+\end{equation*}
+the cokernel being represented by antiholomorphic polynomials, i.e.\ elements of
+$\Nul D^*$.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{boundary:ex:local-bc}}
+Idea: the two components decouple; the boundary condition couples holomorphic and
+antiholomorphic boundary values, which only share the constants.
+
+(a) $\sigma(\zeta)=\operatorname{diag}(\zeta_1+i\zeta_2,\zeta_1-i\zeta_2)$, so
+$\sigma^*\sigma=|\zeta|^2\Id$, and both bundles are $\C^2$: $D$ is of Dirac type.
+\eqref{boundary:eq:UC} holds componentwise by \cref{boundary:ex:disc}(a) (for the second
+component $D_{x_1}-iD_{x_2}=-2i\pa_z$, apply the argument there to the complex conjugate;
+$D^*=\operatorname{diag}(D_{x_1}-iD_{x_2},D_{x_1}+iD_{x_2})$ is treated in the same way).
+Solutions are pairs $(u_1,u_2)$ with $u_1$ holomorphic and $u_2$ antiholomorphic (i.e.\
+$\bar u_2$ holomorphic), smooth on $X$; by \cref{index:prop:hardy},
+\begin{equation*}
+\Cau=\{(v_1,v_2);\ \hat v_{1,k}=0\ \text{for}\ k<0,\ \hat v_{2,k}=0\ \text{for}\ k>0\}.
+\end{equation*}
+At $e^{i\theta_0}$, as in \cref{boundary:ex:disc}(c), $\sigma_2(dr)=\cos\theta_0-i
+\sin\theta_0=e^{-i\theta_0}$ and $\sigma_2(d\theta)=-\sin\theta_0-i\cos\theta_0=-ie^{-i
+\theta_0}$ for the second component, so $i\sigma_2(\nu)^{-1}\sigma_2(\eta d\theta)/|\eta|=
+i(-e^{i\theta_0})(-i\eta e^{-i\theta_0})/|\eta|=-\eta/|\eta|$. With the first component
+from \cref{boundary:ex:disc}(c),
+\begin{equation*}
+\sigma_0(\PiC)(\theta,\eta)=\begin{pmatrix}\frac12(1+\frac\eta{|\eta|})&0\\0&\frac12(1-\frac\eta
+{|\eta|})\end{pmatrix},
+\end{equation*}
+the projection onto $\C e_1$ for $\eta>0$ and onto $\C e_2$ for $\eta<0$. (A Calder\'on
+projector is $\operatorname{diag}(S,S')$, $S'v=\sum_{k\le0}\hat v_ke^{ik\theta}$;
+$S'=(\Id-S)+\pi_0$, $\pi_0$ the projection onto constants, which is smoothing, and the
+argument of \cref{boundary:ex:disc}(b) applies componentwise.)
+
+(b) Let $\Pi=\frac12\begin{pmatrix}1&-1\\-1&1\end{pmatrix}$, the orthogonal projection of
+$\C^2$ onto $\C(1,-1)$, a constant bundle projection. Then $\Pi(v_1,v_2)=\frac12(v_1-v_2)
+(1,-1)$ vanishes if and only if $v_1=v_2$, so $u_1|_{\pa X}=u_2|_{\pa X}$ is $\Pi(bu)=0$.
+Its symbol is $\pi=\Pi$, with $\Nul\pi=\C(1,1)$. For $\eta>0$, $\Ran p=\C e_1$ and
+$\C^2=\C e_1\oplus\C(1,1)$; for $\eta<0$, $\Ran p=\C e_2$ and $\C^2=\C e_2\oplus\C(1,1)$.
+So \eqref{boundary:eq:symbolic} holds (in its second form). Note that $\operatorname{rank}
+V=2=2\operatorname{rank}\pi$, as required by \cref{boundary:rem:bc-examples}(2).
+
+(c) \emph{Null space.} Let $Du=0$, $u_1|_{\pa X}=u_2|_{\pa X}$. Write $u_1=\sum_{k\ge0}a_k
+z^k$, $u_2=\sum_{k\ge0}b_k\bar z^k$ (rapidly decreasing coefficients). On the boundary
+$\sum_{k\ge0}a_ke^{ik\theta}=\sum_{k\ge0}b_ke^{-ik\theta}$; comparing Fourier coefficients,
+$a_k=b_k=0$ for $k>0$ and $a_0=b_0$. So $\Nul D_\Pi=\{(c,c);\ c\in\C\}$.
+
+\emph{Surjectivity.} Let $f=(f_1,f_2)\in\CI(X;\C^2)$. By \cref{boundary:thm:right-inverse}
+(the hypotheses hold by (a)) there is $u^0\in\CI(X;\C^2)$ with $Du^0=f$. Let
+$g=(u^0_2-u^0_1)|_{\pa X}=\sum_kg_ke^{ik\theta}$, with $(g_k)$ rapidly decreasing, and set
+\begin{equation*}
+h_1=\sum_{k\ge0}g_kz^k,\qquad h_2=-\sum_{k<0}g_k\bar z^{|k|}.
+\end{equation*}
+These series converge in $\CI(X)$, $h_1$ is holomorphic and $h_2$ antiholomorphic, and on
+the boundary $h_1-h_2=\sum_{k\ge0}g_ke^{ik\theta}+\sum_{k<0}g_ke^{ik\theta}=g$. Then
+$u=u^0+(h_1,h_2)$ satisfies $Du=f$ and $u_1-u_2=u^0_1-u^0_2+g=0$ on $\pa X$. So $D_\Pi$
+is surjective and $\ind D_\Pi=1-0=1$.
+
+\emph{Comparison with \cref{boundary:thm:fredholm-bc}.} On $\Cau$, $T_\Pi(v_1,v_2)=
+\frac12(v_1-v_2)(1,-1)$. Its null space is $\{v_1=v_2\}\cap\Cau$: $v_1$ has only modes
+$k\ge0$, $v_2$ only $k\le0$, so $v_1=v_2$ is a constant, and $\Nul T_\Pi\cong\C$,
+corresponding to $(c,c)$. Its range is $\{\frac12w(1,-1);\ w=v_1-v_2\}$, and every
+$w\in\CI(\pa X)$ is of the form $v_1-v_2$ (split $w$ into modes $k\ge0$ and $k<0$), so
+$T_\Pi$ is onto $\Pi\CI$. Thus $\ind T_\Pi=1=\ind D_\Pi$, as the theorem asserts.

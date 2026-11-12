@@ -1,1 +1,1252 @@
-% solutions for 02-euclidean (in progress)
+% Solutions for chapters/02-euclidean.tex
+\providecommand{\Amp}[2]{\mathcal{A}^{#1}_{#2}}% amplitudes of order #1 and weight #2
+
+\section{Solutions for \cref{ch:euclidean}: Pseudodifferential operators on Euclidean space}\label{solutions:euclidean}
+
+Throughout, the notation is that of \cref{ch:euclidean}. We write
+$\norm a_{N,m}$ for the symbol norms of \cref{euclidean:def:symbols} and use freely
+that $\norm a_{N,m'}\le\norm a_{N,m}$ for $m\le m'$.
+
+% ----------------------------------------------------------------------
+\subsection*{\Cref{euclidean:ex:japanese}}
+
+The function $\ang\xi^m=(1+\abs\xi^2)^{m/2}$ is smooth on $\R^n$, being the composite of
+the polynomial $1+\abs\xi^2\ge1$ with $t\mapsto t^{m/2}$, which is smooth on
+$(0,\infty)$. Regarded as a function on $\R^p\times\R^n$ it does not depend on $z$, so
+$D^\alpha_zD^\beta_\xi\ang\xi^m=0$ for $\alpha\ne0$, and only the estimates with
+$\alpha=0$ have to be checked.
+
+We claim that for every $\beta\in\N_0^n$
+\begin{equation*}
+  D^\beta_\xi\ang\xi^m=\ang\xi^{m-2\abs\beta}P_\beta(\xi),
+\end{equation*}
+where $P_\beta$ is a polynomial of degree at most $\abs\beta$. For $\beta=0$ take
+$P_0=1$. For any $s\in\R$ and any polynomial $P$,
+\begin{equation*}
+  D_{\xi_j}\bigl(\ang\xi^sP\bigr)
+  =-i\,\tfrac s2\,\ang\xi^{s-2}\,2\xi_j\,P+\ang\xi^sD_{\xi_j}P
+  =\ang\xi^{s-2}\bigl(-is\xi_jP+\ang\xi^2D_{\xi_j}P\bigr).
+\end{equation*}
+If $\deg P\le k$ then $\xi_jP$ and $\ang\xi^2D_{\xi_j}P=(1+\abs\xi^2)D_{\xi_j}P$ have
+degree at most $k+1$. Applying this with $s=m-2\abs\beta$ and $P=P_\beta$ gives the claim
+for $\beta+e_j$, with
+$P_{\beta+e_j}=-i(m-2\abs\beta)\xi_jP_\beta+\ang\xi^2D_{\xi_j}P_\beta$.
+
+Write $P_\beta=\sum_{\abs\gamma\le\abs\beta}c_{\beta\gamma}\xi^\gamma$. Since
+$\abs{\xi^\gamma}\le\ang\xi^{\abs\gamma}\le\ang\xi^{\abs\beta}$ for
+$\abs\gamma\le\abs\beta$, we get $\abs{P_\beta(\xi)}\le C_\beta\ang\xi^{\abs\beta}$ with
+$C_\beta=\sum_\gamma\abs{c_{\beta\gamma}}$, and therefore
+\begin{equation*}
+  \abs{D^\alpha_zD^\beta_\xi\ang\xi^m}\le C_\beta\ang\xi^{m-2\abs\beta+\abs\beta}
+  =C_\beta\ang\xi^{m-\abs\beta}
+\end{equation*}
+on $\R^p\times\R^n$, for all $\alpha,\beta$ (the left side is $0$ if $\alpha\ne0$). So
+$\ang\xi^m\in S^m(\R^p;\R^n)$, for every $m\in\R$ and every $p$.
+
+For the product, \cref{euclidean:lem:symbol-basic}(ii) gives
+$S^m\cdot S^{m'}\subset S^{m+m'}$. Conversely let $c\in S^{m+m'}(\R^p;\R^n)$. By what we
+have just shown and \cref{euclidean:lem:symbol-basic}(ii),
+$\ang\xi^{-m}c\in S^{-m}\cdot S^{m+m'}\subset S^{m'}$, and
+\begin{equation*}
+  c=\ang\xi^m\cdot\bigl(\ang\xi^{-m}c\bigr)\in S^m\cdot S^{m'}.
+\end{equation*}
+Hence $S^m(\R^p;\R^n)\cdot S^{m'}(\R^p;\R^n)=S^{m+m'}(\R^p;\R^n)$.
+
+% ----------------------------------------------------------------------
+\subsection*{\Cref{euclidean:ex:winding}}
+
+\emph{Correction.} As originally stated, the exercise had the factor $\frac1{2\pi}$ in
+front of the integral. That expression is $i$ times an integer, so it is not an integer
+unless it vanishes: for $a(\xi)=\xi_1+i\xi_2$ the integrand is
+$\frac{ire^{i\theta}}{re^{i\theta}}=i$ and the expression equals $i$. The correct
+normalization is $\frac1{2\pi i}$, and the statement has been corrected accordingly. We
+prove the corrected statement.
+
+\emph{Idea:} the integral is the winding number of the closed curve
+$\theta\mapsto a(re^{i\theta})$ about $0$; it is an integer that depends continuously on
+$r$, hence is constant. If $a$ could be modified near $0$ to a nowhere vanishing $b$,
+the winding number of $b$ would be constant all the way down to $r=0$, where it is $0$.
+
+Here $a(re^{i\theta})$ means $a(r\cos\theta,r\sin\theta)$. Since $a$ is elliptic of
+order $1$ there are $\eps>0$ and $C$ with $\abs{a(\xi)}\ge\eps\ang\xi$ for $\abs\xi\ge C$.
+Fix $r>C$ and put $g(\theta)=a(re^{i\theta})$. This is a smooth, $2\pi$-periodic,
+nowhere vanishing function of $\theta\in\R$, so $g'/g$ is continuous and
+\begin{equation*}
+  W(r)=\frac1{2\pi i}\int_0^{2\pi}\frac{g'(\theta)}{g(\theta)}\,d\theta
+\end{equation*}
+exists. To see that it is an integer, let
+$h(\theta)=\int_0^\theta g'(t)/g(t)\,dt$. Then
+$\frac d{d\theta}\bigl(g(\theta)e^{-h(\theta)}\bigr)=(g'-gh')e^{-h}=0$, so
+$g(\theta)=g(0)e^{h(\theta)}$. Since $g(2\pi)=g(0)\ne0$, $e^{h(2\pi)}=1$, so
+$h(2\pi)=2\pi iW(r)\in2\pi i\Z$, i.e.\ $W(r)\in\Z$.
+
+The integrand
+$F(r,\theta)=\frac{\pa_\theta a(re^{i\theta})}{a(re^{i\theta})}$ is continuous on
+$(C,\infty)\times[0,2\pi]$, since $a$ is smooth and does not vanish for $\abs\xi>C$. Hence
+$W$ is continuous on $(C,\infty)$ (uniform continuity of $F$ on
+$[r_1,r_2]\times[0,2\pi]$). A continuous integer-valued function on the interval
+$(C,\infty)$ is constant. So $W(r)$ is independent of $r>C$.
+
+Now let $a(\xi)=\xi_1+i\xi_2$ for all $\xi\in\R^2$. This is a polynomial of degree $1$,
+hence in $S^1(\R^2)$, and $\abs{a(\xi)}=\abs\xi\ge\ang\xi/\sqrt2$ for $\abs\xi\ge1$, so it
+is elliptic. Here $g(\theta)=re^{i\theta}$, $g'/g=i$, and $W_a(r)=1$ for all $r>0$.
+
+Suppose $b\in S^1(\R^2)$ satisfies $b(\xi)\ne0$ for all $\xi\in\R^2$ and $b(\xi)=a(\xi)$
+for $\abs\xi>r_0$. Define, for $r\ge0$,
+\begin{equation*}
+  W_b(r)=\frac1{2\pi i}\int_0^{2\pi}\frac{\pa_\theta\, b(re^{i\theta})}{b(re^{i\theta})}\,d\theta,
+  \qquad \pa_\theta\,b(re^{i\theta})=r\bigl(-\sin\theta\,\pa_{\xi_1}b+\cos\theta\,\pa_{\xi_2}b\bigr)(re^{i\theta}).
+\end{equation*}
+The integrand is continuous on $[0,\infty)\times[0,2\pi]$, because $b$ is smooth and
+never zero. By the argument above, $W_b(r)\in\Z$ for $r>0$, and $W_b$ is continuous on
+$[0,\infty)$, hence constant there. At $r=0$ the integrand vanishes, so $W_b\equiv0$. But
+for $r>r_0$, $b(re^{i\theta})=re^{i\theta}$ and $W_b(r)=1$. This contradiction shows that
+no such $b$ exists, for any $r_0$.
+
+% ----------------------------------------------------------------------
+\subsection*{\Cref{euclidean:ex:interpolation}}
+
+\emph{Idea:} on an interval, a bound on $f$ together with a bound on a high derivative
+$f^{(N)}$ gives a bound on $f'$ which is close to the bound on $f$ when $N$ is large.
+Applied on balls of radius $1$ in $z$ and of radius $\ang\xi/2$ in $\xi$, this shows that
+each derivative of $a$ loses only an arbitrarily small power of $\ang\xi$ relative to the
+improved bound on $a$. The hint's inequality is the case $N=2$ of the inequality below;
+using large $N$ avoids an iteration that would only converge in the limit.
+
+\emph{Step 1: a one-variable inequality.}
+Let $N\ge2$ and let $V=(k^i)_{0\le k,i\le N-1}$ be the Vandermonde matrix of the
+distinct nodes $0,1,\dots,N-1$; it is invertible. Let $\norm{V^{-1}}$ denote its norm as
+an operator on $\C^N$ with the maximum norm. We claim: if $I\subset\R$ is a compact
+interval of length $\delta$, $f\in\mathcal C^N(I;\C)$, $M_0=\sup_I\abs f$,
+$M_N=\sup_I\abs{f^{(N)}}$ and $0<h\le\delta/(2N)$, then
+\begin{equation}\label{soleuclidean:eq:landau}
+  \sup_I\abs{f'}\le C_N\,h^{-1}\bigl(M_0+h^NM_N\bigr),\qquad
+  C_N=\norm{V^{-1}}\Bigl(1+\frac{N^N}{N!}\Bigr).
+\end{equation}
+Let $t\in I$. One of the intervals $[t,t+\delta/2]$, $[t-\delta/2,t]$ lies in $I$;
+replacing $f(s)$ by $f(-s)$ if necessary we may assume it is the first. The points
+$t+kh$, $0\le k\le N-1$, lie in $[t,t+\delta/2]$. Taylor's formula with integral
+remainder gives
+\begin{equation*}
+  f(t+kh)=\sum_{i=0}^{N-1}k^i\,y_i+R_k,\qquad y_i=\frac{h^if^{(i)}(t)}{i!},\qquad
+  \abs{R_k}\le\frac{(kh)^N}{N!}M_N\le\frac{N^N}{N!}h^NM_N .
+\end{equation*}
+Thus $y=V^{-1}\bigl(f(t+kh)-R_k\bigr)_{k}$, so
+$\abs{y_1}\le\norm{V^{-1}}\bigl(M_0+\frac{N^N}{N!}h^NM_N\bigr)$, which is
+\eqref{soleuclidean:eq:landau} at $t$, since $y_1=hf'(t)$.
+
+\emph{Step 2: one derivative.} Let $\mu,\nu\in\R$, let $b\in S^\mu(\R^p;\R^n)$ satisfy
+$\abs{b(z,\xi)}\le C\ang\xi^{\nu}$, and let $\eta>0$. We claim that for each
+$l$
+\begin{equation}\label{soleuclidean:eq:one-step}
+  \abs{\pa_{z_l}b}\le C'\ang\xi^{\nu+\eta},\qquad
+  \abs{\pa_{\xi_l}b}\le C'\ang\xi^{\nu+\eta-1}.
+\end{equation}
+If $\nu\ge\mu$ this follows from the symbol estimates of $b$, as
+$\ang\xi^\mu\le\ang\xi^{\nu+\eta}$. Assume $\nu<\mu$ and choose an integer $N\ge2$ with
+$(\mu-\nu)/N\le\eta$.
+
+For the $z$-derivative fix $(z,\xi)$ and apply \eqref{soleuclidean:eq:landau} to
+$f(t)=b(z+te_l,\xi)$ on $I=[-1,1]$, so $\delta=2$. Here $M_0\le C\ang\xi^\nu$ and
+$M_N\le C\ang\xi^\mu$. Take $h=N^{-1}\ang\xi^{-(\mu-\nu)/N}\le1/N=\delta/(2N)$. Then
+$h^NM_N\le CN^{-N}\ang\xi^{\nu}$ and
+\begin{equation*}
+  \abs{\pa_{z_l}b(z,\xi)}=\abs{f'(0)}\le C_NN\ang\xi^{(\mu-\nu)/N}\cdot C(1+N^{-N})\ang\xi^\nu
+  \le C'\ang\xi^{\nu+\eta}.
+\end{equation*}
+For the $\xi$-derivative apply \eqref{soleuclidean:eq:landau} to $f(t)=b(z,\xi+te_l)$ on
+$I=[-\ang\xi/2,\ang\xi/2]$, so $\delta=\ang\xi$. For $t\in I$ we have
+$\frac12\ang\xi\le\ang{\xi+te_l}\le\frac32\ang\xi$; indeed $\ang\cdot$ is the Euclidean
+norm of $(1,\cdot)$, so $\abs{\ang{\xi+te_l}-\ang\xi}\le\abs t\le\ang\xi/2$. Hence
+$M_0\le C2^{\abs\nu}\ang\xi^\nu$ and $M_N\le C2^{\abs{\mu-N}}\ang\xi^{\mu-N}$. Take
+$h=(2N)^{-1}\ang\xi^{1-(\mu-\nu)/N}\le\ang\xi/(2N)$. Then
+$h^N\ang\xi^{\mu-N}=(2N)^{-N}\ang\xi^{\nu}$, and
+\begin{equation*}
+  \abs{\pa_{\xi_l}b(z,\xi)}\le C\,2N\ang\xi^{-1+(\mu-\nu)/N}\ang\xi^{\nu}
+  \le C'\ang\xi^{\nu+\eta-1}.
+\end{equation*}
+
+\emph{Step 3: conclusion.} Let $a\in S^m$ with $\abs a\le C\ang\xi^{m'}$, let $\eps>0$,
+and fix $\alpha,\beta$ with $k=\abs\alpha+\abs\beta\ge1$. Put $\eta=\eps/k$. Write
+$D^\alpha_zD^\beta_\xi$ as a product of $k$ first order derivatives
+$D_{w_1}\cdots D_{w_k}$, each $w_i$ one of the variables $z_l$ or $\xi_l$, and let
+$b_i=D_{w_i}\cdots D_{w_1}a$ ($b_0=a$). If $b_{i}$ involves $\beta_i$ derivatives in $\xi$
+then $b_{i}\in S^{m-\abs{\beta_i}}$ by \cref{euclidean:lem:symbol-basic}(iii), and by
+induction on $i$, using \eqref{soleuclidean:eq:one-step} with
+$\mu=m-\abs{\beta_{i}}$, we get
+$\abs{b_i}\le C_i\ang\xi^{m'+i\eta-\abs{\beta_i}}$. For $i=k$ this is
+\begin{equation*}
+  \abs{D^\alpha_zD^\beta_\xi a}\le C\ang\xi^{m'+\eps-\abs\beta}.
+\end{equation*}
+Together with $\abs a\le C\ang\xi^{m'}\le C\ang\xi^{m'+\eps}$ this shows
+$a\in S^{m'+\eps}(\R^p;\R^n)$.
+
+% ----------------------------------------------------------------------
+\subsection*{\Cref{euclidean:ex:cone-support}}
+
+\emph{$c_\phi\in S^0$.} Let $g(z,\xi)=\phi(z,\xi/\abs\xi)$, a smooth function on
+$\R^p\times(\R^n\setminus0)$, homogeneous of degree $0$ in $\xi$. Since $1-\psi$
+vanishes on the open ball $\abs\xi<1$, the function $c_\phi=g\cdot(1-\psi)$ is smooth on
+all of $\R^p\times\R^n$ and vanishes for $\abs\xi<1$. Differentiating
+$g(z,t\xi)=g(z,\xi)$ shows that $D^\alpha_zD^\beta_\xi g$ is homogeneous of degree
+$-\abs\beta$, so
+\begin{equation*}
+  \abs{D^\alpha_zD^\beta_\xi g(z,\xi)}=\abs\xi^{-\abs\beta}
+  \abs{(D^\alpha_zD^\beta_\xi g)(z,\xi/\abs\xi)}\le C_{\alpha\beta}\abs\xi^{-\abs\beta},
+\end{equation*}
+where $C_{\alpha\beta}$ is the maximum of the continuous function
+$\abs{D^\alpha_zD^\beta_\xi g}$ on the compact set $K\times\Sphere^{n-1}$, $K$ the
+projection of $\supp\phi$ to $\R^p$; outside $K\times(\R^n\setminus0)$, $g$ vanishes. For
+$\abs\xi\ge1$, $\abs\xi^{-1}\le\sqrt2\ang\xi^{-1}$. The function $1-\psi$ is in
+$S^0(\R^n)$: it is bounded and its derivatives of positive order have compact support.
+By Leibniz' formula, on $\abs\xi\ge1$,
+$\abs{D^\alpha_zD^\beta_\xi c_\phi}\le C\ang\xi^{-\abs\beta}$, and $c_\phi=0$ on
+$\abs\xi<1$. So $c_\phi\in S^0(\R^p;\R^n)$.
+
+\emph{Products.} Let $(\bar z,\bar\xi)\notin\operatorname{cone\,supp}(a)$, and choose
+$\phi$ with $\phi(\bar z,\bar\xi/\abs{\bar\xi})\ne0$ and $c_\phi a\in S^{-\infty}$. Then
+\begin{equation*}
+  c_\phi(ab)=(c_\phi a)\,b\in S^{-\infty}\cdot S^{m'}\subset\bigcap_MS^{-M+m'}=S^{-\infty},
+\end{equation*}
+by \cref{euclidean:lem:symbol-basic}(ii). Hence
+$(\bar z,\bar\xi)\notin\operatorname{cone\,supp}(ab)$. Exchanging $a$ and $b$, the
+complement of $\operatorname{cone\,supp}(ab)$ contains the complements of both cone
+supports, which is the asserted inclusion.
+
+\emph{Empty cone support does not imply residual.} Let $p=n=1$, $\chi\in\CIc(\R)$
+supported in $1\le\abs t\le2$, $\chi\ne0$, and $a(z,\xi)=\chi(\xi w(z))$ with
+$w(z)=(1+z^2)^{-1}$. On $\supp a$ we have $1+z^2\le\abs\xi\le2(1+z^2)$, so $\abs\xi\ge1$
+and $w\le2/\abs\xi$.
+
+We first show $a\in S^0(\R;\R)$. The function $w$ is a symbol of order $-2$ in $z$
+(\cref{euclidean:ex:japanese} with $m=-2$), so $\abs{w^{(k)}}\le C_k\ang z^{-2-k}\le C_kw$,
+and similarly $\abs{\pa^k_z(w^\beta)}\le C_{k\beta}w^\beta$ (as $w^\beta=\ang z^{-2\beta}$). In
+particular $w'/w=-2z/(1+z^2)$ has all derivatives bounded. By induction on $\alpha$,
+\begin{equation*}
+  \pa^\alpha_z\bigl[\chi^{(\beta)}(\xi w)\bigr]=\sum_{j=0}^{\alpha}p_{\alpha j}(z)\,(\xi w)^j\chi^{(\beta+j)}(\xi w)
+\end{equation*}
+with $p_{\alpha j}$ smooth with bounded derivatives: this holds for $\alpha=0$ with
+$p_{00}=1$, and since $\xi w'=(\xi w)(w'/w)$,
+\begin{equation*}
+  \pa_z\bigl[p(\xi w)^j\chi^{(\beta+j)}(\xi w)\bigr]
+  =p'(\xi w)^j\chi^{(\beta+j)}+jp\,\tfrac{w'}w(\xi w)^j\chi^{(\beta+j)}
+  +p\,\tfrac{w'}w(\xi w)^{j+1}\chi^{(\beta+j+1)}.
+\end{equation*}
+Since $\abs{\xi w}\le2$ wherever $\chi^{(k)}(\xi w)\ne0$, each $\pa^\alpha_z[\chi^{(\beta)}(\xi w)]$
+is bounded. Now $\pa^\beta_\xi a=w^\beta\chi^{(\beta)}(\xi w)$, so by Leibniz' formula
+\begin{equation*}
+  \abs{\pa^\alpha_z\pa^\beta_\xi a}\le\sum_{\gamma\le\alpha}\binom\alpha\gamma
+  \abs{\pa^{\alpha-\gamma}_z(w^\beta)}\,\abs{\pa^\gamma_z[\chi^{(\beta)}(\xi w)]}
+  \le Cw^\beta\le C2^\beta\abs\xi^{-\beta}\le C'\ang\xi^{-\beta}
+\end{equation*}
+on $\supp a$ (where $\abs\xi\ge1$), and the left side vanishes elsewhere. Thus
+$a\in S^0(\R;\R)$.
+
+Next, $\operatorname{cone\,supp}(a)=\emptyset$. Let $(\bar z,\bar\xi)\in\R\times(\R\setminus0)$.
+Choose $\phi_1\in\CIc(\R)$ with $\phi_1(\bar z)=1$, $\supp\phi_1\subset[-R,R]$, and
+$\phi_2\in\CIc(\R)$ with $\phi_2(\pm1)=1$; put $\phi(z,\theta)=\phi_1(z)\phi_2(\theta)$.
+Then $\phi(\bar z,\bar\xi/\abs{\bar\xi})=1$ and $c_\phi a\in S^0$ by the first part and
+\cref{euclidean:lem:symbol-basic}(ii). On $\supp\phi_1$, $a(z,\xi)=0$ for
+$\abs\xi>2(1+R^2)$. So $c_\phi a$ has all derivatives bounded and vanishes for
+$\abs\xi>2(1+R^2)$, hence lies in $S^{-\infty}$ by
+\cref{euclidean:lem:symbol-basic}(v).
+
+Finally $a\notin S^{-\infty}$, indeed $a\notin S^{-\eps}$ for any $\eps>0$: choose $t_0$
+with $\chi(t_0)\ne0$; then $a(z,t_0(1+z^2))=\chi(t_0)$ for all $z$, while
+$\abs{t_0}(1+z^2)\to\infty$ as $z\to\infty$. So the answer is \emph{no}.
+
+\emph{What is true.} The failure comes from non-compactness in $z$. If $a\in S^m$,
+$\operatorname{cone\,supp}(a)=\emptyset$ and $a(z,\xi)=0$ for $z\notin K$, $K$ compact,
+then $a\in S^{-\infty}$. Indeed, for each point of $K\times\Sphere^{n-1}$ there is $\phi$
+as in the definition, non-zero at that point. By compactness finitely many
+$\phi_1,\dots,\phi_k$ suffice, and $\Phi=\sum_i\abs{\phi_i}^2>0$ on an open set
+$W\supset K\times\Sphere^{n-1}$. By compactness of $\Sphere^{n-1}$ there is an open
+$V\supset K$ with $\overline V$ compact and $\overline V\times\Sphere^{n-1}\subset W$;
+choose $\chi_K\in\CIc(V)$ equal to $1$ on $K$ and $\kappa\in\CIc((\frac12,2))$ with
+$\kappa(1)=1$, and let $\theta_i(z,\xi)=\kappa(\abs\xi)\chi_K(z)\overline{\phi_i(z,\xi)}/\Phi(z,\xi)$
+(zero where $\chi_K\kappa=0$), an element of $\CIc(\R^p\times\R^n)$. On
+$\R^p\times\Sphere^{n-1}$, $\sum_i\theta_i\phi_i=\chi_K$, so
+\begin{equation*}
+  \sum_ic_{\theta_i}\,(c_{\phi_i}a)=\chi_K(z)(1-\psi)^2a=(1-\psi)^2a\in S^{-\infty},
+\end{equation*}
+as $c_{\theta_i}\in S^0$. Since $a-(1-\psi)^2a=(2\psi-\psi^2)a$ has all derivatives
+bounded and compact support in $\xi$, it is residual by
+\cref{euclidean:lem:symbol-basic}(v), and so $a\in S^{-\infty}$.
+
+% ----------------------------------------------------------------------
+\subsection*{\Cref{euclidean:ex:off-diagonal}}
+
+\emph{Idea:} multiplying the kernel by $(x-y)^\gamma$ lowers the order of the amplitude by
+$\abs\gamma$; away from the diagonal we may divide by $\abs{x-y}^{2L}$.
+
+Let $A\in\Psido m(\R^n)$. By \cref{euclidean:cor:reduction}(i), $A=\Op(a)$ with
+$a=\sigma_L(A)\in S^m(\R^n;\R^n)\subset\Amp m0(\R^n)$, and $K=K_A=I(a)$. By
+\cref{euclidean:lem:kernel-identities}, for all $\alpha,\beta,\gamma\in\N_0^n$,
+\begin{equation*}
+  (x-y)^\gamma D^\alpha_xD^\beta_yK=I(b_{\alpha\beta\gamma}),\qquad
+  b_{\alpha\beta\gamma}=(-D_\xi)^\gamma(\xi+D_x)^\alpha(D_y-\xi)^\beta a
+  \in\Amp{m+\abs\alpha+\abs\beta-\abs\gamma}0(\R^n),
+\end{equation*}
+using the elementary facts listed after \cref{euclidean:lem:amplitude-char}. If
+$m+\abs\alpha+\abs\beta-\abs\gamma<-n$, then by \cref{euclidean:prop:osc-int}(i)
+$I(b_{\alpha\beta\gamma})$ is the continuous function
+$\int e^{i(x-y)\cdot\xi}b_{\alpha\beta\gamma}\,\dbar\xi$, which is bounded by
+$\sup_{x,y}\int\abs{b_{\alpha\beta\gamma}}\,\dbar\xi<\infty$.
+
+Fix $\alpha,\beta$ and an integer $L$ with $2L>m+n+\abs\alpha+\abs\beta$. Since
+$\abs{x-y}^{2L}=\sum_{\abs\gamma=L}\frac{L!}{\gamma!}(x-y)^{2\gamma}$,
+\begin{equation*}
+  \abs{x-y}^{2L}D^\alpha_xD^\beta_yK=F_{\alpha\beta L},\qquad
+  F_{\alpha\beta L}=\sum_{\abs\gamma=L}\frac{L!}{\gamma!}I(b_{\alpha\beta(2\gamma)}),
+\end{equation*}
+as distributions on $\R^{2n}$, and $F_{\alpha\beta L}$ is a bounded continuous function.
+On the open set $W_0=\{x\ne y\}$ the function $\abs{x-y}^{-2L}$ is smooth, so,
+restricting to $W_0$, $D^\alpha_xD^\beta_yK=\abs{x-y}^{-2L}F_{\alpha\beta L}$ there.
+Thus every distributional derivative of $K|_{W_0}$ is a continuous function, and hence
+$K|_{W_0}\in\CI(W_0)$ (a distribution whose distributional derivatives of all orders are
+continuous is a smooth function, as used in the proof of
+\cref{euclidean:prop:action-S}). This proves smoothness off the diagonal.
+
+For the decay, on $\{\abs{x-y}\ge1\}$ we have $\ang{x-y}^2\le2\abs{x-y}^2$, hence
+\begin{equation*}
+  \abs{D^\alpha_xD^\beta_yK(x,y)}\le\abs{x-y}^{-2L}\sup\abs{F_{\alpha\beta L}}
+  \le2^L\sup\abs{F_{\alpha\beta L}}\,\ang{x-y}^{-2L}.
+\end{equation*}
+Since $L$ can be taken arbitrarily large, every derivative of $K$ is
+$O(\ang{x-y}^{-N})$ for every $N$ as $\abs{x-y}\to\infty$, uniformly in the remaining
+variables. The same argument on $\{\abs{x-y}\ge\delta\}$, where
+$\ang{x-y}^2\le(1+\delta^{-2})\abs{x-y}^2$, gives these bounds there for every $\delta>0$.
+
+% ----------------------------------------------------------------------
+\subsection*{\Cref{euclidean:ex:weyl}}
+
+\emph{Idea:} the Weyl quantization is the quantization of an amplitude, so the adjoint
+and reduction formulas apply directly; the bijectivity follows by inverting the
+reduction formula asymptotically and treating the residual part through the kernel.
+
+\emph{$\Op_W(a)\in\Psido m$.} Let $c(x,y,\xi)=a(\frac{x+y}2,\xi)$. By the chain rule,
+$D^\alpha_xD^\beta_yD^\gamma_\xi c=2^{-\abs\alpha-\abs\beta}(D^{\alpha+\beta}_zD^\gamma_\xi a)(\frac{x+y}2,\xi)$,
+which is bounded by $C\ang\xi^{m-\abs\gamma}$. Hence $c\in\Amp m0(\R^n)$ and
+$\Op_W(a)=\Op(c)\in\Psido m(\R^n)$.
+
+\emph{Adjoint.} By \cref{euclidean:prop:adjoint}, $\Op(c)^*=\Op(c^*)$ with
+$c^*(x,y,\xi)=\overline{c(y,x,\xi)}=\overline{a(\frac{y+x}2,\xi)}=\bar a(\frac{x+y}2,\xi)$,
+i.e.\ $\Op_W(a)^*=\Op_W(\bar a)$.
+
+\emph{Left symbol.} By \cref{euclidean:thm:reduction},
+\begin{equation*}
+  \sigma_L(\Op_W(a))\sim\sum_\alpha\frac{i^{\abs\alpha}}{\alpha!}D^\alpha_\xi D^\alpha_y
+  \Bigl[a\bigl(\tfrac{x+y}2,\xi\bigr)\Bigr]_{y=x}
+  =\sum_\alpha\frac{(i/2)^{\abs\alpha}}{\alpha!}D^\alpha_\xi D^\alpha_xa(x,\xi),
+\end{equation*}
+since $D^\alpha_y[a(\frac{x+y}2,\xi)]=2^{-\abs\alpha}(D^\alpha_za)(\frac{x+y}2,\xi)$. In
+particular, if $a\in S^\mu$ then $\sigma_L(\Op_W(a))-a\in S^{\mu-1}$.
+
+\emph{Injectivity.} Suppose $\Op_W(a)=0$ with $a\in S^m$. If $a\in S^\mu$ for some $\mu$,
+then $a=a-\sigma_L(\Op_W(a))\in S^{\mu-1}$; by induction $a\in S^{-\infty}$. Then
+$c\in\Amp{-\infty}0$, and by \cref{euclidean:prop:osc-int}(i) the kernel of
+$\Op_W(a)$ is the continuous function
+$K(x,y)=g\bigl(\frac{x+y}2,x-y\bigr)$, where
+$g(w,v)=\int e^{iv\cdot\xi}a(w,\xi)\,\dbar\xi$. Since
+$(x,y)\mapsto(\frac{x+y}2,x-y)$ is a bijection of $\R^{2n}$, $K=0$ forces $g=0$. For fixed
+$w$, $a(w,\cdot)\in\cS(\R^n)$ (all $\xi^\kappa D^\beta_\xi a$ are bounded), and $g(w,\cdot)$
+is its inverse Fourier transform, so $a(w,\cdot)=0$ by Fourier inversion. Hence $a=0$.
+
+\emph{Residual operators.} Let $E\in\Psido{-\infty}(\R^n)$ with kernel $K$. We show
+$E=\Op_W(e')$ for some $e'\in S^{-\infty}(\R^n;\R^n)$. By
+\cref{euclidean:prop:residual}, $K$ is smooth with
+$\abs{D^\alpha_xD^\beta_yK}\le C_{\alpha\beta N}\ang{x-y}^{-N}$. Put
+$g(w,v)=K(w+\frac v2,w-\frac v2)$. By the chain rule every derivative
+$D^\alpha_wD^\beta_vg$ is a finite combination of derivatives of $K$ evaluated at
+$(w+\frac v2,w-\frac v2)$, where $x-y=v$, so
+$\sup_{w,v}\abs{v^\gamma D^\alpha_wD^\beta_vg}<\infty$ for all $\alpha,\beta,\gamma$. Exactly
+as in the proof of (b)$\Rightarrow$(c) in \cref{euclidean:prop:residual} (with $w$ in place
+of $x$ and $v$ in place of $z$), $e'(w,\xi)=\int e^{-iv\cdot\xi}g(w,v)\,dv$ lies in
+$S^{-\infty}(\R^n;\R^n)$, and by Fourier inversion and \cref{euclidean:prop:osc-int}(i) the
+kernel of $\Op_W(e')$ is $\int e^{i(x-y)\cdot\xi}e'(\frac{x+y}2,\xi)\,\dbar\xi
+=g(\frac{x+y}2,x-y)=K(x,y)$. Thus $E=\Op_W(e')$.
+
+\emph{Surjectivity.} Let $A\in\Psido m(\R^n)$, $b=\sigma_L(A)\in S^m$. By
+\cref{euclidean:prop:borel} choose $a_0\in S^m$ with
+$a_0\sim\sum_\alpha\frac{(-i/2)^{\abs\alpha}}{\alpha!}D^\alpha_\xi D^\alpha_xb$ (the terms with
+$\abs\alpha=j$ grouped, of order $m-j$). Fix $N$. Write
+$a_0=\sum_{\abs\alpha<N}\frac{(-i/2)^{\abs\alpha}}{\alpha!}D^\alpha_\xi D^\alpha_xb+r_N$ with
+$r_N\in S^{m-N}$. Since $\Op_W(r_N)\in\Psido{m-N}$, $\sigma_L(\Op_W(r_N))\in S^{m-N}$ by
+\cref{euclidean:cor:reduction}(ii). For each $\alpha$, applying the left symbol formula to
+$D^\alpha_\xi D^\alpha_xb\in S^{m-\abs\alpha}$,
+\begin{equation*}
+  \sigma_L\bigl(\Op_W(D^\alpha_\xi D^\alpha_xb)\bigr)-\sum_{\abs\beta<N-\abs\alpha}
+  \frac{(i/2)^{\abs\beta}}{\beta!}D^{\alpha+\beta}_\xi D^{\alpha+\beta}_xb\in S^{m-N}.
+\end{equation*}
+Adding up, with $\gamma=\alpha+\beta$,
+\begin{equation*}
+  \sigma_L(\Op_W(a_0))-\sum_{\abs\gamma<N}\Bigl(\sum_{\alpha+\beta=\gamma}
+  \frac{(-i/2)^{\abs\alpha}(i/2)^{\abs\beta}}{\alpha!\,\beta!}\Bigr)D^\gamma_\xi D^\gamma_xb\in S^{m-N}.
+\end{equation*}
+By the multinomial theorem the inner sum is
+$\frac1{\gamma!}\prod_l\bigl(-\frac i2+\frac i2\bigr)^{\gamma_l}$, which is $1$ for
+$\gamma=0$ and $0$ otherwise. Hence $\sigma_L(\Op_W(a_0))-b\in S^{m-N}$ for every $N$,
+i.e.\ $A-\Op_W(a_0)=\Op(b-\sigma_L(\Op_W(a_0)))\in\Psido{-\infty}$. By the previous step
+$A-\Op_W(a_0)=\Op_W(e')$ with $e'\in S^{-\infty}$, so $A=\Op_W(a_0+e')$ with
+$a_0+e'\in S^m$. Thus $\Op_W:S^m(\R^n;\R^n)\to\Psido m(\R^n)$ is a bijection.
+
+As a check, for $n=1$ and $a=x\xi$ the formula gives
+$\sigma_L(\Op_W(a))=x\xi+\frac i2D_\xi D_x(x\xi)=x\xi-\frac i2$, and indeed
+$\frac12(xD+Dx)=xD+\frac12[D,x]=xD-\frac i2$.
+
+% ----------------------------------------------------------------------
+\subsection*{\Cref{euclidean:ex:ph-smooth}}
+
+\emph{Idea:} in the variable $r=1/\abs\xi$ a function homogeneous of degree $m-j$ becomes
+$r^{-m}\cdot r^j\times$(a function of the direction), so after multiplication by $r^m$
+the expansion $\sum_ja_{m-j}$ becomes a Taylor expansion in $r$ at $r=0$; the symbol
+estimates of the remainders are exactly the bounds on the Taylor remainders.
+
+We take $m\in\R$; for complex $m$ the same proof works with $\abs{r^m}=r^{\Re m}$, $m$
+replaced by $\Re m$ in all estimates. \emph{Convention:} for a function $G$ on
+$\R^p\times\Sphere^{n-1}\times[0,1]$ put $G^\sharp(z,\omega,r)=G(z,\omega/\abs\omega,r)$ on
+$\R^p\times\mathcal O\times[0,1]$, $\mathcal O=\{\frac14<\abs\omega<4\}\subset\R^n$; ``$G$ is
+smooth with all derivatives bounded'' means that $G^\sharp$ is $\CI$, with one-sided
+derivatives at $r=0,1$, and all its derivatives are bounded. This agrees with the
+definition by charts on the sphere, since $\omega\mapsto\omega/\abs\omega$ is a smooth
+submersion $\mathcal O\to\Sphere^{n-1}$ with bounded derivatives, and $G$ is the restriction of
+$G^\sharp$ to $\abs\omega=1$.
+
+Let $F(z,\theta,r)=r^ma(z,\theta/r)$. Then $F^\sharp(z,\omega,r)=r^ma(z,\Psi(\omega,r))$
+with $\Psi(\omega,r)=\omega/(\abs\omega r)$; note $\abs{\Psi(\omega,r)}=1/r\ge1$.
+
+\emph{Step 1.} Let $b\in S^\mu(\R^p;\R^n)$ and $B(z,\omega,r)=b(z,\Psi(\omega,r))$ on
+$\R^p\times\mathcal O\times(0,1]$. We claim
+\begin{equation}\label{soleuclidean:eq:polar-est}
+  \abs{\pa^\alpha_z\pa^\gamma_\omega\pa^j_rB}\le C\,r^{-\mu-j}.
+\end{equation}
+We show by induction that $\pa^\alpha_z\pa^\gamma_\omega\pa^j_rB$ is $r^{-j}$ times a finite
+sum of terms $c(\omega)(\xi^\kappa\pa^\nu_\xi\pa^\alpha_zb)(z,\Psi)$ with
+$\abs\kappa\le\abs\nu$ and $c\in\CI(\mathcal O)$ bounded with all derivatives. This is
+clear for $\gamma=0$, $j=0$. Since $\Psi\cdot\omega/\abs\omega=1/r$ we have
+$r^{-1}=\sum_i\frac{\omega_i}{\abs\omega}\Psi_i$. Also
+$\pa_{\omega_k}\Psi_l=r^{-1}e_{kl}(\omega)$ with $e_{kl}=\pa_{\omega_k}(\omega_l/\abs\omega)$, and
+$\pa_r\Psi=-r^{-1}\Psi$. Hence for a smooth $h$,
+\begin{equation*}
+  \pa_{\omega_k}[h(\Psi)]=\sum_{l,i}e_{kl}(\omega)\frac{\omega_i}{\abs\omega}
+  (\xi_i\pa_{\xi_l}h)(\Psi),\qquad
+  \pa_r[h(\Psi)]=-r^{-1}\sum_l(\xi_l\pa_{\xi_l}h)(\Psi),
+\end{equation*}
+and $\xi_i\pa_{\xi_l}(\xi^\kappa\pa^\nu_\xi f)$ is a sum of terms $\xi^{\kappa'}\pa^{\nu'}_\xi f$
+with $\abs{\kappa'}\le\abs{\nu'}$; the derivative of the prefactor $r^{-j}$ is
+$-jr^{-j-1}$, and $\omega$-derivatives of the coefficients $c$ are again bounded. This
+proves the structure. Each term is bounded by
+$C\ang\xi^{\mu+\abs\kappa-\abs\nu}\le C\ang\xi^\mu$ at $\xi=\Psi$, where
+$r^{-1}\le\ang\xi\le\sqrt2r^{-1}$, so by $C'r^{-\mu}$; this gives
+\eqref{soleuclidean:eq:polar-est}.
+
+\emph{Step 2: polyhomogeneous $\Rightarrow$ smooth.} Let $a\sim\sum_ja_{m-j}$ as in
+\cref{euclidean:def:polyhomogeneous}. Every symbol satisfies
+\eqref{euclidean:eq:uniform-regular}. Put $h_j^\sharp(z,\omega)=a_{m-j}(z,\omega/\abs\omega)$;
+by \eqref{euclidean:eq:uniform-regular} for $a_{m-j}$ it is smooth with bounded
+derivatives on $\R^p\times\mathcal O$. By homogeneity (with $t=1/r\ge1$),
+$a_{m-j}(z,\Psi(\omega,r))=r^{-m+j}h_j^\sharp(z,\omega)$, so for every $N$
+\begin{equation*}
+  F^\sharp(z,\omega,r)=\sum_{j<N}r^jh_j^\sharp(z,\omega)+E_N,\qquad
+  E_N=r^mR_N(z,\Psi(\omega,r)),\quad R_N=a-\sum_{j<N}a_{m-j}\in S^{m-N}.
+\end{equation*}
+By \eqref{soleuclidean:eq:polar-est} with $\mu=m-N$ and Leibniz' formula
+($\pa_r^ir^m=m(m-1)\cdots(m-i+1)r^{m-i}$),
+$\abs{\pa^\alpha_z\pa^\gamma_\omega\pa^j_rE_N}\le Cr^{N-j}$ on $\R^p\times\mathcal O\times(0,1]$.
+Given $k$, take $N=k+1$: all derivatives of $E_N$ of order at most $k$ are bounded and
+tend to $0$ uniformly as $r\to0$. A function on $(0,1]$ which is $\mathcal C^1$ and whose
+derivative has a continuous extension to $[0,1]$ extends to a $\mathcal C^1$ function on
+$[0,1]$ (mean value theorem); applying this repeatedly, $E_N$ extends to a
+$\mathcal C^k$ function on $\R^p\times\mathcal O\times[0,1]$, with bounded derivatives of
+order $\le k$, all vanishing at $r=0$. Hence $F^\sharp$ is $\mathcal C^k$ up to $r=0$ with
+bounded derivatives of order at most $k$; as $k$ is arbitrary, $F$ extends to a smooth
+function with all derivatives bounded. Moreover $\pa^j_rF^\sharp(z,\omega,0)=j!\,h_j^\sharp(z,\omega)$.
+
+\emph{Step 3: smooth $\Rightarrow$ polyhomogeneous.} Suppose $a$ satisfies
+\eqref{euclidean:eq:uniform-regular} and $F$ extends as stated. Put
+$h_j^\sharp=\frac1{j!}\pa^j_rF^\sharp(\cdot,\cdot,0)$, smooth with bounded derivatives on
+$\R^p\times\mathcal O$ and homogeneous of degree $0$ in $\omega$; extend it to
+$\R^p\times(\R^n\setminus0)$ by homogeneity. Choose $\rho\in\CI(\R^n)$ vanishing for
+$\abs\xi\le\frac12$ and equal to $1$ for $\abs\xi\ge1$, and set
+$a_{m-j}(z,\xi)=\rho(\xi)\abs\xi^{m-j}h_j^\sharp(z,\xi)$. This is smooth, homogeneous of
+degree $m-j$ in $\abs\xi\ge1$, and satisfies \eqref{euclidean:eq:uniform-regular}, so
+$a_{m-j}\in S^{m-j}$ by the discussion before \cref{euclidean:def:polyhomogeneous}. By
+Taylor's formula in $r$, for $N\ge1$,
+\begin{equation*}
+  F^\sharp(z,\omega,r)-\sum_{j<N}r^jh^\sharp_j(z,\omega)=r^NG_N(z,\omega,r),\quad
+  G_N=\frac1{(N-1)!}\int_0^1(1-\tau)^{N-1}\pa^N_rF^\sharp(z,\omega,\tau r)\,d\tau,
+\end{equation*}
+and $G_N$ is smooth with all derivatives bounded (differentiate under the integral); put
+$G_0=F^\sharp$. For $\abs\xi\ge1$ take $\omega=\xi/\abs\xi$, $r=1/\abs\xi$, so that
+$\Psi(\omega,r)=\xi$; then $a(z,\xi)=\abs\xi^mF^\sharp(z,\omega,r)$ and
+$a_{m-j}(z,\xi)=\abs\xi^{m-j}h_j^\sharp(z,\omega)$, whence
+\begin{equation*}
+  R_N(z,\xi)=a-\sum_{j<N}a_{m-j}=\abs\xi^{m-N}G_N\bigl(z,u(\xi)\bigr),\qquad
+  u(\xi)=\bigl(\xi/\abs\xi,1/\abs\xi\bigr),\quad\abs\xi\ge1.
+\end{equation*}
+The components of $u$ are homogeneous of degree $0$ or $-1$, so
+$\abs{\pa^\beta u_i}\le C_\beta\abs\xi^{-\abs\beta}$ for $\abs\xi\ge1$. By the chain rule,
+$\pa^\alpha_z\pa^\beta_\xi[G_N(z,u(\xi))]$ is a finite sum of products of a bounded
+derivative of $G_N$ with factors $\pa^{\beta_1}u_{i_1}\cdots\pa^{\beta_k}u_{i_k}$,
+$\beta_1+\dots+\beta_k=\beta$, hence is $O(\abs\xi^{-\abs\beta})$. With Leibniz' formula
+and $\abs{\pa^\beta\abs\xi^{m-N}}\le C\abs\xi^{m-N-\abs\beta}$ we obtain
+$\abs{\pa^\alpha_z\pa^\beta_\xi R_N}\le C\abs\xi^{m-N-\abs\beta}\le C'\ang\xi^{m-N-\abs\beta}$
+for $\abs\xi\ge1$. For $\abs\xi\le1$ all derivatives of $R_N$ are bounded by
+\eqref{euclidean:eq:uniform-regular} for $a$ and the $a_{m-j}$. Hence
+$R_N\in S^{m-N}$ for all $N$; $N=0$ gives $a\in S^m$, and $a\sim\sum_ja_{m-j}$, so
+$a\in\Symph m(\R^p;\R^n)$.
+
+\emph{Taylor series.} Steps 2 and 3 show: the Taylor coefficients of $F$ at $r=0$ are the
+homogeneous terms restricted to the unit sphere,
+\begin{equation*}
+  \frac1{j!}\pa^j_rF(z,\theta,0)=a_{m-j}(z,\theta),\qquad\abs\theta=1,
+\end{equation*}
+so that $F(z,\theta,r)\sim\sum_jr^ja_{m-j}(z,\theta)$ as $r\to0$. The Taylor series need not
+converge, and if it does, its sum need not be $F$; the difference is a residual symbol.
+
+% ----------------------------------------------------------------------
+\subsection*{\Cref{euclidean:ex:ph-complete}}
+
+\emph{Idea:} two choices of cut-off change the normalized terms only on the annulus
+$\frac12\le\abs\xi\le1$, and there, by homogeneity, the terms are controlled by their
+values on $1\le\abs\xi\le2$, which do not depend on the cut-off.
+
+Let $\rho,\rho'$ be two admissible cut-offs, and denote by $a_{(m-j)}$ and $a'_{(m-j)}$ the
+normalized terms of $a\in\Symph m$ formed with $\rho$ and $\rho'$. Let
+$h_j(z,\xi)=\abs\xi^{m-j}a_{m-j}(z,\xi/\abs\xi)$, the homogeneous extension to
+$\xi\ne0$. Then
+\begin{equation*}
+  d_j=a_{(m-j)}-a'_{(m-j)}=(\rho-\rho')h_j,
+\end{equation*}
+and $\rho-\rho'$ is smooth and supported in $\frac12\le\abs\xi\le1$. We compare the three
+families of norms in \cref{euclidean:def:ph-topology}.
+
+(1) The norms $\norm a_{N,\Re m}$ do not involve the cut-off.
+
+(2) On $1\le\abs\xi\le2$, $\rho=\rho'=1$, so $a_{(m-j)}=a'_{(m-j)}$ there, and the second
+family of norms is the same for both choices.
+
+(3) For the third family,
+\begin{equation*}
+  \Bigl\|a-\sum_{j\le k}a'_{(m-j)}\Bigr\|_{N,\Re m-k-1}\le
+  \Bigl\|a-\sum_{j\le k}a_{(m-j)}\Bigr\|_{N,\Re m-k-1}+\sum_{j\le k}\norm{d_j}_{N,\Re m-k-1}.
+\end{equation*}
+We estimate $\norm{d_j}_{N,\mu}$ for any $\mu\in\R$. On
+$\frac12\le\abs\xi\le1$, $1\le\ang\xi\le\sqrt2$, so
+$\norm{d_j}_{N,\mu}\le2^{(\abs\mu+N)/2}\max_{\abs\alpha+\abs\beta\le N}\sup\abs{D^\alpha_zD^\beta_\xi d_j}$.
+For $\frac12\le\abs\xi\le1$, homogeneity gives $h_j(z,\xi)=2^{-(m-j)}h_j(z,2\xi)$, and
+$2\xi$ lies in $1\le\abs{2\xi}\le2$, where $h_j=a_{(m-j)}$. Hence
+\begin{equation*}
+  \abs{D^\alpha_zD^\beta_\xi h_j(z,\xi)}=2^{-\Re m+j+\abs\beta}
+  \abs{(D^\alpha_zD^\beta_\xi a_{(m-j)})(z,2\xi)},
+\end{equation*}
+and by Leibniz' formula
+\begin{equation*}
+  \norm{d_j}_{N,\mu}\le C_{N,\mu,j}\max_{\abs\alpha+\abs\beta\le N}\
+  \sup_{z\in\R^p,\ 1\le\abs\xi\le2}\abs{D^\alpha_zD^\beta_\xi a_{(m-j)}(z,\xi)},
+\end{equation*}
+with $C_{N,\mu,j}$ depending only on $N,\mu,j,m$ and on finitely many derivatives of
+$\rho-\rho'$. So each norm of the $\rho'$-family is bounded by a finite combination of
+norms of the $\rho$-family; by symmetry the converse holds. The identity map is therefore
+continuous in both directions, and the topology does not depend on the cut-off.
+
+% ----------------------------------------------------------------------
+\subsection*{\Cref{euclidean:ex:ph-not-dense}}
+
+\emph{$a\in S^m$.} Let $L(\xi)=\log\ang\xi$. Then $\pa_{\xi_j}L=\xi_j\ang\xi^{-2}\in S^{-1}(\R^n)$ by
+\cref{euclidean:ex:japanese} and \cref{euclidean:lem:symbol-basic}(ii). We claim that for
+$f\in\CI(\R)$ with all derivatives bounded, $f(L)\in S^0(\R^n)$. By induction on
+$\abs\beta\ge1$,
+\begin{equation*}
+  D^\beta_\xi[f(L)]=\sum_{k=1}^{\abs\beta}f^{(k)}(L)\,g_{\beta,k},\qquad g_{\beta,k}\in S^{-\abs\beta}(\R^n):
+\end{equation*}
+for $\abs\beta=1$ this is $D_{\xi_j}f(L)=f'(L)D_{\xi_j}L$, and
+$D_{\xi_j}[f^{(k)}(L)g]=f^{(k+1)}(L)(D_{\xi_j}L)g+f^{(k)}(L)D_{\xi_j}g$ with
+$(D_{\xi_j}L)g,D_{\xi_j}g\in S^{-\abs\beta-1}$. Hence
+$\abs{D^\beta f(L)}\le C_\beta\ang\xi^{-\abs\beta}$. With $f=\cos$,
+$\cos(\log\ang\xi)\in S^0$, and $a=\ang\xi^m\cos(\log\ang\xi)\in S^m$ by
+\cref{euclidean:lem:symbol-basic}(i),(ii).
+
+\emph{$a$ is not in the closure of $\Symph m$.} We show that
+$\norm{a-b}_{0,m}=\sup\ang\xi^{-m}\abs{a-b}\ge\frac12$ for every $b\in\Symph m(\R^n)$;
+since $\norm\cdot_{0,m}$ is one of the norms of $S^m$, $a$ is not in the closure. Let
+$b\sim\sum_jb_{m-j}$. Since $b-b_m\in S^{m-1}$, for every $\theta\in\Sphere^{n-1}$ (which
+exists as $n\ge1$)
+\begin{equation*}
+  \ang{r\theta}^{-m}b(r\theta)=\Bigl(\frac r{\ang r}\Bigr)^mb_m(\theta)+O(r^{-1})
+  \longrightarrow b_m(\theta)\qquad(r\to\infty).
+\end{equation*}
+On the other hand $\ang{r\theta}^{-m}a(r\theta)=\cos(\log\ang r)$ equals $1$ at the
+points $r_k$ with $\log\ang{r_k}=2\pi k$ and $-1$ at the points $r'_k$ with
+$\log\ang{r'_k}=(2k+1)\pi$, $k\in\N$, and $r_k,r'_k\to\infty$. If
+$\norm{a-b}_{0,m}<\frac12$, letting $r\to\infty$ along $r_k$ and along $r'_k$ gives
+$\abs{1-b_m(\theta)}\le\frac12$ and $\abs{-1-b_m(\theta)}\le\frac12$, hence
+$2\le1$, a contradiction. Thus $\Symph m$ is not dense in $S^m$.
+
+\emph{Density for the topology of $S^{m'}$, $m'>m$.} Let $a\in S^m(\R^p;\R^n)$. By
+\cref{euclidean:lem:density}, $a_\eps=\chi(\eps\xi)a\in S^{-\infty}(\R^p;\R^n)$ and
+$a_\eps\to a$ in $S^{m'}$ as $\eps\to0$. Since
+$S^{-\infty}\subset\Symph m$ (take all homogeneous terms equal to $0$),
+$\Symph m(\R^p;\R^n)$ is dense in $S^m(\R^p;\R^n)$ for the topology of $S^{m'}$.
+
+% ----------------------------------------------------------------------
+\subsection*{\Cref{euclidean:ex:hol-asymptotic}}
+
+\emph{Idea:} run Borel's construction with $\eps_j$ chosen uniformly on the $j$-th set of
+an exhaustion. The cut-off does not change the homogeneous terms, so the polyhomogeneous
+norms of the tail reduce to ordinary symbol norms, which are small. Holomorphy then passes
+to the locally uniform limit.
+
+We use two general facts.
+
+\begin{lemma}\label{soleuclidean:lem:hol-limit}
+  Let $E$ be a Fr\'echet space, $V\subset\C$ open, and $u_k:V\to E$ holomorphic maps
+  converging to $u$ uniformly on compact subsets of $V$ \textup{(}in every continuous
+  seminorm of $E$\textup{)}. Then $u$ is holomorphic.
+\end{lemma}
+\begin{proof}
+  Let $v:V\to E$ be holomorphic, $p$ a continuous seminorm on $E$, and
+  $\{\abs{s-s_0}\le2r\}\subset V$. For $\abs{s-s_0}<r$ and $0<\abs h,\abs{h'}<r/2$ let
+  $Q_hv(s)=h^{-1}(v(s+h)-v(s))$. For $\lambda\in E'$ with $\abs{\lambda}\le p$, the scalar
+  function $\lambda\circ v$ is holomorphic, and Cauchy's integral formula over
+  $\abs{t-s_0}=2r$ gives
+  \begin{equation*}
+    \lambda\bigl(Q_hv(s)-Q_{h'}v(s)\bigr)=\frac{h-h'}{2\pi i}\oint
+    \frac{\lambda(v(t))\,dt}{(t-s-h)(t-s-h')(t-s)},
+  \end{equation*}
+  so $\abs{\lambda(Q_hv(s)-Q_{h'}v(s))}\le16r^{-2}\abs{h-h'}\sup_{\abs{t-s_0}=2r}p(v(t))$. By
+  the Hahn--Banach theorem, $p(x)=\sup\{\abs{\lambda(x)};\lambda\in E',\abs\lambda\le p\}$,
+  so the same bound holds for $p(Q_hv(s)-Q_{h'}v(s))$. Apply this to $v=u_k$ and let
+  $k\to\infty$ (for fixed $h,h'$, $Q_hu_k(s)\to Q_hu(s)$ in $E$):
+  $p(Q_hu(s)-Q_{h'}u(s))\le16r^{-2}\abs{h-h'}\sup_{\abs{t-s_0}=2r}p(u(t))$. Thus
+  $(Q_hu(s))$ is Cauchy as $h\to0$ in every seminorm, and converges since $E$ is
+  complete.
+\end{proof}
+
+\begin{lemma}\label{soleuclidean:lem:ph-hol-criterion}
+  Let $\mu\in\C$, $V\subset\C$ open and $c:V\to\Symph\mu(\R^p;\R^n)$. If the maps
+  $s\mapsto c(s)\in S^{\Re\mu}$, $s\mapsto c(s)_{(\mu-j)}\in S^{\Re\mu-j}$ and
+  $s\mapsto c(s)-\sum_{j\le k}c(s)_{(\mu-j)}\in S^{\Re\mu-k-1}$ are holomorphic for all
+  $j,k$, then $c$ is holomorphic into $\Symph\mu(\R^p;\R^n)$.
+\end{lemma}
+\begin{proof}
+  The normalized terms depend linearly on $c$, so the difference quotients satisfy
+  $(Q_hc)_{(\mu-j)}=Q_h(c_{(\mu-j)})$. Each norm of \cref{euclidean:def:ph-topology} is a
+  norm of $S^{\Re\mu}$, $S^{\Re\mu-k-1}$, or (for the second family) is bounded by a norm
+  $\norm\cdot_{N,\Re\mu-j}$ of $S^{\Re\mu-j}$, applied to one of the three maps. Hence the
+  difference quotients of $c$ are Cauchy in every norm of $\Symph\mu$ as $h\to0$, and
+  converge because $\Symph\mu$ is complete (\cref{euclidean:lem:ph-frechet}(ii)).
+\end{proof}
+
+Now fix $\phi\in\CI(\R^n)$ with $\phi=0$ for $\abs\xi\le1$, $\phi=1$ for $\abs\xi\ge2$,
+and write $\phi=1-\chi$ with $\chi\in\CIc(\R^n)$. As in the proof of
+\cref{euclidean:prop:borel} there are constants $C_N$ with
+\begin{equation}\label{soleuclidean:eq:borel-gain}
+  \norm{\phi(\eps\xi)b}_{N,\nu+1}\le C_N\,\eps\,\norm b_{N,\nu}\qquad
+  (b\in S^\nu,\ \nu\in\R,\ 0<\eps\le1).
+\end{equation}
+
+\emph{The cut-off is continuous on $\Symph{-j}$.} Let $0<\eps\le1$ and
+$b\in\Symph{-j}$, $b\sim\sum_lb_{-j-l}$. The function $\chi(\eps\xi)b$ has all derivatives
+bounded and vanishes for $\abs\xi\ge2/\eps$, so it is residual and
+$\norm{\chi(\eps\xi)b}_{N,\nu}\le C_{N,\nu,\eps}\norm b_{N,-j}$ for all $N$, $\nu$. Hence
+$\phi(\eps\xi)b=b-\chi(\eps\xi)b\in\Symph{-j}$ has the same normalized terms as $b$, and
+every norm of \cref{euclidean:def:ph-topology} of $\phi(\eps\xi)b$ is bounded by the same
+norm of $b$ plus $C\norm b_{N,-j}$. So $b\mapsto\phi(\eps\xi)b$ is a continuous linear map
+of $\Symph{-j}$, and $b\mapsto\chi(\eps\xi)b$ is continuous from $\Symph{-j}$ to
+$S^{-\infty}$; by \cref{euclidean:lem:product-rule}, $s\mapsto\phi(\eps\xi)a_j(s)$ is
+holomorphic into $\Symph{-j}$ and $s\mapsto\chi(\eps\xi)a_j(s)$ into $S^{-\infty}$. Note
+also that $S^{-\infty}\hookrightarrow\Symph{-M}$ is continuous for every $M$ (all normalized
+terms vanish, and the norms are symbol norms).
+
+\emph{Choice of $\eps_j$.} Let $K_1\subset K_2\subset\cdots$ be compact subsets of $U$ with
+$K_l\subset\operatorname{int}K_{l+1}$ and $\bigcup_lK_l=U$. A holomorphic map is continuous,
+so $B_{N,j}=\sup_{s\in K_j}\norm{a_j(s)}_{N,-j}<\infty$. Choose $\eps_j\in(0,1]$
+decreasing to $0$ with $C_N\eps_jB_{N,j}\le2^{-j}$ for all $N\le j$. Put
+$b_j(s)=\phi(\eps_j\xi)a_j(s)$. By \eqref{soleuclidean:eq:borel-gain},
+\begin{equation}\label{soleuclidean:eq:tail}
+  \norm{b_j(s)}_{N,-j+1}\le2^{-j}\qquad(s\in K_j,\ N\le j).
+\end{equation}
+
+\emph{Convergence of the tails in $\Symph{-M}$.} Fix $M\in\N_0$. For $j\ge M$,
+$b_j(s)\in\Symph{-j}\subset\Symph{-M}$ (\cref{euclidean:lem:ph-complex}(iii)); as an element of
+$\Symph{-M}$ its normalized term of degree $-M-l$ is $a_j(s)_{(-M-l)}$ if $j\le M+l$ and
+$0$ if $j>M+l$. Consider the norms of $\Symph{-M}$ applied to $b_j(s)$:
+\begin{itemize}
+\item $\norm{b_j(s)}_{N,-M}\le\norm{b_j(s)}_{N,-j+1}\le2^{-j}$ for $j\ge\max(M+1,N)$, $s\in K_j$;
+\item the normalized term of degree $-M-l$ vanishes unless $j\le M+l$, so for each such
+  norm only finitely many $j$ contribute;
+\item for $j\ge\max(M+k+2,N)$ the terms of degree $-M-l$, $l\le k$, vanish, and the
+  remainder norm is
+  $\norm{b_j(s)}_{N,-M-k-1}\le\norm{b_j(s)}_{N,-j+1}\le2^{-j}$ for $s\in K_j$.
+\end{itemize}
+Let $K\subset U$ be compact; then $K\subset K_J$ for some $J$, hence $K\subset K_j$ for
+$j\ge J$. Thus for every norm $q$ of $\Symph{-M}$ we have $q(b_j(s))\le2^{-j}$ for
+$s\in K$ and all large $j$. Hence the partial sums of $\sum_{j\ge M}b_j(s)$ are uniformly
+Cauchy on $K$ in every norm, and converge uniformly on compact sets to a map
+$T_M:U\to\Symph{-M}$ ($\Symph{-M}$ is complete). The partial sums are holomorphic into
+$\Symph{-M}$ (finite sums of holomorphic maps composed with the continuous inclusions
+$\Symph{-j}\hookrightarrow\Symph{-M}$, \cref{euclidean:lem:ph-frechet}(iii)), so $T_M$ is
+holomorphic by \cref{soleuclidean:lem:hol-limit}.
+
+\emph{Conclusion.} Let $a=T_0=\sum_{j\ge0}b_j$, holomorphic into $\Symph0$. Since
+$\Symph{-M}\hookrightarrow\Symph0$ is continuous, $T_M(s)$ is also the limit in $\Symph0$ of
+$\sum_{M\le j<J}b_j(s)$, so
+\begin{equation*}
+  a(s)-\sum_{j<M}a_j(s)=-\sum_{j<M}\chi(\eps_j\xi)a_j(s)+T_M(s).
+\end{equation*}
+The first sum is holomorphic into $S^{-\infty}\hookrightarrow\Symph{-M}$, and $T_M$ is
+holomorphic into $\Symph{-M}$. Hence $a-\sum_{j<M}a_j$ is holomorphic from $U$ into
+$\Symph{-M}(\R^p;\R^n)$ for every $M$.
+
+% ----------------------------------------------------------------------
+\subsection*{\Cref{euclidean:ex:hol-adjoint}}
+
+\emph{Idea:} as in \cref{euclidean:prop:hol-composition}, expand the adjoint formula to
+finite order; the finitely many explicit terms are holomorphic in the polyhomogeneous
+topology, and the remainder is holomorphic in a space of arbitrarily low order. The map
+$t\mapsto A(t)^*$ is anti-holomorphic, and the substitution $t=\bar s$ makes it
+holomorphic.
+
+\emph{Step 1: the adjoint remainder.} For $m\in\R$ and $N\in\N_0$ let
+\begin{equation*}
+  r^*_N(p)=\sigma_L\bigl(\Op(p)^*\bigr)-\sum_{\abs\alpha<N}\frac{i^{\abs\alpha}}{\alpha!}
+  D^\alpha_\xi D^\alpha_x\bar p,\qquad p\in S^m(\R^n;\R^n).
+\end{equation*}
+By \eqref{euclidean:eq:adjoint-symbol}, $r^*_N$ takes values in $S^{m-N}$. It is
+conjugate-linear and continuous into $S^m$, by \cref{euclidean:prop:continuity} (continuity
+of the adjoint) and \cref{euclidean:lem:symbol-basic}(iii). By
+\cref{euclidean:lem:auto-continuity}(i), applied to $p\mapsto\overline{r^*_N(p)}$ (which is
+linear) with $G=S^m$, $r^*_N:S^m\to S^{m-N}$ is continuous.
+
+\emph{Step 2: holomorphy of the conjugated data.} Write
+$\sigma_L(A(t))=p(t)=\ang\xi^{f(t)}b(t)$ with $b:U\to\Symph0$ holomorphic. Put
+$b^*(s)=\overline{b(\bar s)}$ for $s\in U^*$. Complex conjugation is a continuous
+conjugate-linear map of $\Symph0$ (\cref{euclidean:lem:ph-frechet}(iii)), so
+\begin{equation*}
+  \frac{b^*(s+h)-b^*(s)}h=\overline{\Bigl(\frac{b(\bar s+\bar h)-b(\bar s)}{\bar h}\Bigr)}
+  \longrightarrow\overline{b'(\bar s)}\quad(h\to0),
+\end{equation*}
+and $b^*:U^*\to\Symph0$ is holomorphic. Likewise $f^*$ is holomorphic on $U^*$. Since
+$\overline{\ang\xi^w}=\ang\xi^{\bar w}$, we have
+$\overline{p(\bar s)}=\ang\xi^{f^*(s)}b^*(s)$.
+
+\emph{Step 3: expansion.} Let
+$c(s)=\ang\xi^{-f^*(s)}\sigma_L(A(\bar s)^*)$, $s\in U^*$. By Leibniz' formula and
+\cref{euclidean:lem:japanese-holomorphic}(ii), for each $N$,
+\begin{gather*}
+  c(s)=\sum_{\abs\alpha<N}c_\alpha(s)+\ang\xi^{-f^*(s)}\,r^*_N\bigl(p(\bar s)\bigr),\\
+  c_\alpha(s)=\frac{i^{\abs\alpha}}{\alpha!}\sum_{\nu\le\alpha}\binom\alpha\nu
+  \Bigl(\sum_{k\le\abs\nu}f^*(s)^kq_{\nu,k}\Bigr)D^{\alpha-\nu}_\xi D^\alpha_xb^*(s).
+\end{gather*}
+By \cref{euclidean:lem:ph-frechet}(iii) and \cref{euclidean:lem:product-rule}, each $c_\alpha$
+is holomorphic from $U^*$ into $\Symph{-\abs\alpha}(\R^n;\R^n)$.
+
+\emph{Step 4: the remainder.} Fix $s_0\in U^*$, $t_0=\bar s_0$, and $\eps=\frac18$. By
+\cref{euclidean:lem:japanese-holomorphic}(i) there is a disc $V\ni t_0$ on which
+$t\mapsto\ang\xi^{f(t)}$ is holomorphic into $S^{\mu}$, $\mu=\Re f(t_0)+\eps$, and a disc
+$V'\ni s_0$ on which $s\mapsto\ang\xi^{-f^*(s)}$ is holomorphic into
+$S^{-\Re f(t_0)+\eps}$ (note $\Re f^*(s_0)=\Re f(t_0)$). As in the proof of
+\cref{euclidean:prop:hol-composition}, $p$ is holomorphic from $V$ into $S^\mu$. Since
+$r^*_N$ is continuous and conjugate-linear, on $V^*=\{\bar t;t\in V\}$
+\begin{equation*}
+  \frac{r^*_N(p(\overline{s+h}))-r^*_N(p(\bar s))}{h}
+  =r^*_N\Bigl(\frac{p(\bar s+\bar h)-p(\bar s)}{\bar h}\Bigr)\longrightarrow r^*_N(p'(\bar s)),
+\end{equation*}
+so $s\mapsto r^*_N(p(\bar s))$ is holomorphic into $S^{\mu-N}$. With
+\cref{euclidean:lem:product-rule}, the remainder term is holomorphic on $V^*\cap V'$ into
+$S^{-N+2\eps}\subset S^{-N+\frac14}$.
+
+\emph{Step 5: conclusion.} For $s\in V^*\cap V'$,
+$c(s)-\sum_{\abs\alpha<N}c_\alpha(s)\in S^{-N+\frac14}$ for every $N$, so
+$c(s)\sim\sum_l\sum_{\abs\alpha=l}c_\alpha(s)$; by \cref{euclidean:lem:ph-complex}(i) and
+\cref{euclidean:lem:asymptotic-manip}(iii), $c(s)\in\Symph0$ with normalized terms
+$c(s)_{(-j)}=\sum_{\abs\alpha\le j}c_\alpha(s)_{(-j)}$. We verify the hypotheses of
+\cref{soleuclidean:lem:ph-hol-criterion} on $V^*\cap V'$:
+\begin{itemize}
+\item $c=c_0+\ang\xi^{-f^*}r^*_1(p(\bar s))$ is holomorphic into $S^0$, since $c_0$ is
+  holomorphic into $\Symph0\hookrightarrow S^0$ and the second term into $S^{-3/4}\subset S^0$;
+\item $c_{(-j)}=\sum_{\abs\alpha\le j}(c_\alpha)_{(-j)}$ is holomorphic into $S^{-j}$ by
+  \cref{euclidean:lem:ph-frechet}(i);
+\item with $N=k+2$,
+  \begin{equation*}
+    c-\sum_{j\le k}c_{(-j)}=\ang\xi^{-f^*}r^*_N(p(\bar s))
+    +\sum_{\abs\alpha\le k}\Bigl(c_\alpha-\sum_{j=\abs\alpha}^k(c_\alpha)_{(-j)}\Bigr)
+    +\sum_{\abs\alpha=k+1}c_\alpha,
+  \end{equation*}
+  where the first term is holomorphic into $S^{-k-7/4}$, the second into $S^{-k-1}$ by the
+  definition of the topology of $\Symph{-\abs\alpha}$, and the third into
+  $\Symph{-k-1}\hookrightarrow S^{-k-1}$.
+\end{itemize}
+Hence $c$ is holomorphic near every $s_0$, i.e.\ $c:U^*\to\Symph0(\R^n;\R^n)$ is
+holomorphic, and
+$A(\bar s)^*=\Op\bigl(\ang\xi^{f^*(s)}c(s)\bigr)$ shows that
+$(A(\bar s)^*)_{s\in U^*}\in\Psido{f^*}_{\mathrm{hol}}(\R^n)$.
+
+% ----------------------------------------------------------------------
+\subsection*{\Cref{euclidean:ex:smooth-parametrix}}
+
+\emph{Idea:} build the symbol $\psi/a(t)$ on compact sets of parameters, glue with a
+partition of unity in $t$, and run the Neumann series argument of
+\cref{euclidean:lem:neumann} with a parameter-dependent Borel lemma. All operations used
+(products, adjoints, remainders) are continuous, so they preserve smooth dependence.
+
+A family $G(t)$ in $\Psido{-\infty}(\R^n)$ is called smooth if
+$t\mapsto\sigma_L(G(t))\in S^{-\infty}(\R^n;\R^n)$ is smooth. Since the topology of
+$S^{-\infty}$ is given by all the norms of all the $S^{-M}$, and limits in the spaces
+$S^{-M}$ are compatible (the inclusions are continuous and injective), a map is smooth into
+$S^{-\infty}$ if and only if it is smooth into $S^{-M}$ for every $M$. Write
+$a(t)=\sigma_L(A(t))$.
+
+\emph{Step 1: symbol of an approximate inverse.} Let $K\subset U$ be compact, with
+$\eps_K,C_K$ as in the hypothesis, and $\Omega_K=\operatorname{int}K\times\R^n\subset\R^{k+n}$.
+By \cref{euclidean:lem:smooth-symbols}, $a$ satisfies the symbol estimates of order $m$ in
+the base variables $(t,x)\in\Omega_K$, i.e.\ $a\in S^m(\Omega_K;\R^n)$ in the sense of
+\cref{euclidean:rem:symbols-open}, and $\abs a\ge\eps_K\ang\xi^m$ on
+$\Omega_K\times\{\abs\xi>C_K\}$. The proof of \cref{euclidean:lem:powers} uses only the
+symbol estimates of $a$ and the lower bound on the set in question, so it applies without
+change to $a\in S^m(\Omega_K;\R^n)$ and the open set $\Omega_K\times\{\abs\xi>C_K\}$. Choose
+$\psi_K\in\CI(\R^n)$ with $\psi_K=0$ for $\abs\xi\le C_K+1$ and $\psi_K=1$ for
+$\abs\xi\ge C_K+2$, and let $b_K=\psi_K/a$ (zero where $\psi_K=0$). As in the proof of
+\cref{euclidean:lem:elliptic-symbol}, $b_K\in S^{-m}(\Omega_K;\R^n)$, and
+$ab_K-1=\psi_K-1$.
+
+The sets $\operatorname{int}K$, $K$ compact, cover $U$. Choose a locally finite smooth
+partition of unity $(g_i)$ on $U$ with $\supp g_i\subset\operatorname{int}K_i$, $K_i$
+compact, and put
+\begin{equation*}
+  b_0(t,x,\xi)=\sum_ig_i(t)\,b_{K_i}(t,x,\xi).
+\end{equation*}
+On a compact $L\subset U$ only finitely many $g_i$ are non-zero, and each term satisfies
+\eqref{euclidean:eq:smooth-symbol-est} of order $-m$ on $L$. By
+\cref{euclidean:lem:smooth-symbols}, $b_0\in\CI(U;S^{-m}(\R^n;\R^n))$. Moreover
+\begin{equation*}
+  a(t)b_0(t)-1=\sum_ig_i(t)\bigl(\psi_{K_i}(\xi)-1\bigr);
+\end{equation*}
+on $L$ this is a finite sum of smooth functions of $(t,\xi)$ vanishing for $\abs\xi$
+large, so it satisfies \eqref{euclidean:eq:smooth-symbol-est} for every order, and
+$ab_0-1$ is a smooth family in $S^{-\infty}$.
+
+\emph{Step 2: a parameter-dependent Borel lemma.} Let $\mu\in\R$ and
+$c_j\in\CI(U;S^{\mu-j}(\R^n;\R^n))$, $j\in\N_0$. We claim there is
+$c\in\CI(U;S^\mu)$ with $c-\sum_{j<N}c_j\in\CI(U;S^{\mu-N})$ for all $N$. With $\phi$,
+$\chi=1-\phi$ and $C_N$ as in \eqref{soleuclidean:eq:borel-gain}, and an exhaustion
+$K_1\subset K_2\subset\cdots$ of $U$ as in the previous solution, choose $\eps_j\in(0,1]$
+decreasing to $0$ with
+\begin{equation*}
+  C_N\eps_j\sup_{t\in K_j}\norm{\pa^\gamma_tc_j(t)}_{N,\mu-j}\le2^{-j}\qquad
+  (N\le j,\ \abs\gamma\le j),
+\end{equation*}
+which is possible since the suprema are finite by \cref{euclidean:lem:smooth-symbols}. Let
+$c=\sum_j\phi(\eps_j\xi)c_j$. On $\{\abs\xi\le R\}$ only finitely many terms are non-zero,
+so $c$ is smooth in $(t,x,\xi)$ and may be differentiated termwise, and
+$\pa^\gamma_t(\phi(\eps_j\xi)c_j)=\phi(\eps_j\xi)\pa^\gamma_tc_j$. Fix $M$, a compact
+$K\subset U$ (so $K\subset K_j$ for $j\ge J$) and $\gamma,\alpha,\beta$; let
+$N=\abs\alpha+\abs\beta$. For $j\ge\max(M+1,N,\abs\gamma,J)$, by
+\eqref{soleuclidean:eq:borel-gain},
+\begin{equation*}
+  \sup_{t\in K}\ang\xi^{-(\mu-M)+\abs\beta}\abs{D^\alpha_xD^\beta_\xi\pa^\gamma_t(\phi(\eps_j\xi)c_j)}
+  \le\sup_{t\in K}\norm{\phi(\eps_j\xi)\pa^\gamma_tc_j(t)}_{N,\mu-j+1}\le2^{-j},
+\end{equation*}
+and each of the finitely many remaining terms with $j\ge M$ satisfies
+\eqref{euclidean:eq:smooth-symbol-est} of order $\mu-j\le\mu-M$. Hence
+$\sum_{j\ge M}\phi(\eps_j\xi)c_j$ satisfies \eqref{euclidean:eq:smooth-symbol-est} of order
+$\mu-M$, and is in $\CI(U;S^{\mu-M})$ by \cref{euclidean:lem:smooth-symbols}. Finally
+$c-\sum_{j<M}c_j=-\sum_{j<M}\chi(\eps_j\xi)c_j+\sum_{j\ge M}\phi(\eps_j\xi)c_j$, and the
+first sum is a smooth family in $S^{-\infty}$ (it vanishes for $\abs\xi\ge2/\eps_{M-1}$ and
+has locally uniformly bounded derivatives).
+
+\emph{Step 3: the Neumann series.} Let $B_1(t)=\Op(b_0(t))$, a smooth family in
+$\Psido{-m}$. By \cref{euclidean:prop:smooth-families}(ii), $E(t)=A(t)B_1(t)-\Id$ is a
+smooth family in $\Psido0$ ($\Id$ being a constant family), and by
+\cref{euclidean:cor:remainder-continuous} with $N=1$,
+\begin{equation*}
+  \sigma_L(E(t))=\bigl(a(t)b_0(t)-1\bigr)+r_1\bigl(a(t),b_0(t)\bigr),
+\end{equation*}
+where $r_1:S^m\times S^{-m}\to S^{-1}$ is continuous bilinear; by
+\cref{euclidean:lem:product-rule} and Step~1, $E$ is a smooth family in $\Psido{-1}$. By
+\cref{euclidean:prop:continuity} and \cref{euclidean:lem:product-rule}, $(-E(t))^j$ is a
+smooth family in $\Psido{-j}$. By Step~2 there is a smooth family $F(t)$ in $\Psido{-1}$
+with $\sigma_L(F)-\sum_{j=1}^N\sigma_L((-E)^j)\in\CI(U;S^{-N-1})$ for every $N$. As in the
+proof of \cref{euclidean:lem:neumann},
+\begin{equation*}
+  (\Id+E)(\Id+F)-\Id=-(-E)^{N+1}+(\Id+E)\Bigl(F-\sum_{j=1}^N(-E)^j\Bigr),
+\end{equation*}
+which is a smooth family in $\Psido{-N-1}$ for every $N$ (again by
+\cref{euclidean:prop:continuity} and \cref{euclidean:lem:product-rule}), hence a smooth
+family in $\Psido{-\infty}$. Put $B(t)=B_1(t)(\Id+F(t))$, a smooth family in $\Psido{-m}$;
+then $G(t)=A(t)B(t)-\Id=(\Id+E)(\Id+F)-\Id$ is a smooth family in $\Psido{-\infty}$.
+
+The same construction with $B_1A$ in place of $AB_1$ (now
+$\sigma_L(B_1A-\Id)=(b_0a-1)+r_1(b_0,a)$) gives a smooth family $B'(t)$ in $\Psido{-m}$
+with $G'(t)=B'(t)A(t)-\Id$ a smooth family in $\Psido{-\infty}$. As in the proof of
+\cref{euclidean:lem:left-parametrix}, $B'(AB)=(B'A)B$ gives $B-B'=B'G-G'B$, a smooth family
+in $\Psido{-\infty}$ (products of a smooth family in $\Psido{-m}$ with a smooth family in
+$\Psido{-\infty}$ are smooth into every $\Psido{-M}$, by \cref{euclidean:prop:continuity}).
+Hence
+\begin{equation*}
+  B(t)A(t)-\Id=(B-B')A+G'=(B'G-G'B)A+G'
+\end{equation*}
+is a smooth family in $\Psido{-\infty}$ as well.
+
+% ----------------------------------------------------------------------
+\subsection*{\Cref{euclidean:ex:rho-delta}}
+
+\emph{Idea:} every argument of \cref{euclidean:sec:symbols,euclidean:sec:reduction} is a
+bookkeeping of orders. A $\xi$-derivative now gains only $\rho$, and an $x$- or
+$y$-derivative loses $\delta$. The proofs survive as long as $\delta<1$ (for the
+oscillatory integrals) and $\rho>\delta$ (for Borel's lemma and the Taylor remainder).
+
+We use the norms
+$\norm a_{N,m;\rho,\delta}=\max_{\abs\alpha+\abs\beta\le N}\sup\ang\xi^{-m+\rho\abs\beta-\delta\abs\alpha}
+\abs{D^\alpha_zD^\beta_\xi a}$. Exactly as in \cref{euclidean:lem:symbol-basic}(iv),
+$S^m_{\rho,\delta}(\R^p;\R^n)$ is a Fr\'echet space. Since $\rho\le1$ and $\delta\ge0$,
+$\ang\xi^{m-\abs\beta}\le\ang\xi^{m-\rho\abs\beta+\delta\abs\alpha}$, so
+$S^m=S^m_{1,0}\subset S^m_{\rho,\delta}$ continuously; and
+$\bigcap_mS^m_{\rho,\delta}=S^{-\infty}$, since in both cases every derivative is
+$O(\ang\xi^{-N})$ for all $N$.
+
+\emph{Products and derivatives.} By Leibniz' formula, for $a\in S^m_{\rho,\delta}$,
+$b\in S^{m'}_{\rho,\delta}$,
+\begin{equation*}
+  \abs{D^\alpha_zD^\beta_\xi(ab)}\le\sum_{\mu\le\alpha,\gamma\le\beta}\binom\alpha\mu\binom\beta\gamma
+  C\ang\xi^{m-\rho\abs\gamma+\delta\abs\mu}\ang\xi^{m'-\rho\abs{\beta-\gamma}+\delta\abs{\alpha-\mu}}
+  =C'\ang\xi^{m+m'-\rho\abs\beta+\delta\abs\alpha},
+\end{equation*}
+so $ab\in S^{m+m'}_{\rho,\delta}$ (with
+$\norm{ab}_{N,m+m';\rho,\delta}\le C_N\norm a_{N,m;\rho,\delta}\norm b_{N,m';\rho,\delta}$). And
+$D^{\alpha'}_zD^{\beta'}_\xi(D^\beta_\xi D^\alpha_za)=D^{\alpha+\alpha'}_zD^{\beta+\beta'}_\xi a$ is
+bounded by
+$C\ang\xi^{(m-\rho\abs\beta+\delta\abs\alpha)-\rho\abs{\beta'}+\delta\abs{\alpha'}}$, so
+$D^\beta_\xi D^\alpha_z$ maps $S^m_{\rho,\delta}$ continuously into
+$S^{m-\rho\abs\beta+\delta\abs\alpha}_{\rho,\delta}$.
+
+\emph{Asymptotic sums.} Let $m_j=m-j(\rho-\delta)$, which decreases to $-\infty$ because
+$\rho>\delta$, and $a_j\in S^{m_j}_{\rho,\delta}$. With $\phi$ as in the proof of
+\cref{euclidean:prop:borel}, $\phi(\eps\xi)$ is bounded in $S^0=S^0_{1,0}\subset
+S^0_{\rho,\delta}$ for $0<\eps\le1$, so
+$\norm{\phi(\eps\xi)a_j}_{N,m_j;\rho,\delta}\le C_{N,j}$ uniformly in $\eps$. Since
+$\phi(\eps\xi)a_j$ vanishes where $\ang\xi^{-1}>\eps$, raising the order by $\rho-\delta>0$
+gains $\eps^{\rho-\delta}$:
+$\norm{\phi(\eps\xi)a_j}_{N,m_j+\rho-\delta;\rho,\delta}\le C_{N,j}\eps^{\rho-\delta}$.
+Choose $\eps_j\in(0,1]$ decreasing to $0$ with $C_{N,j}\eps_j^{\rho-\delta}\le2^{-j}$ for
+$N\le j$, and let $a=\sum_j\phi(\eps_j\xi)a_j$, a locally finite sum. For fixed $M$ and
+$j\ge M+1$ we have $m_j+\rho-\delta=m_{j-1}\le m_M$, so
+$\norm{\phi(\eps_j\xi)a_j}_{N,m_M;\rho,\delta}\le2^{-j}$ for $j\ge N$. The series
+$\sum_{j\ge M}\phi(\eps_j\xi)a_j$ therefore converges in the Fr\'echet space
+$S^{m_M}_{\rho,\delta}$, and
+\begin{equation*}
+  a-\sum_{j<M}a_j=\sum_{j<M}(\phi(\eps_j\xi)-1)a_j+\sum_{j\ge M}\phi(\eps_j\xi)a_j
+  \in S^{-\infty}+S^{m_M}_{\rho,\delta}\subset S^{m_M}_{\rho,\delta},
+\end{equation*}
+the first sum being smooth with bounded derivatives and compactly supported in $\xi$. The
+asymptotic sum is unique modulo $S^{-\infty}$, as in \cref{euclidean:prop:borel}.
+
+\emph{The reduction theorem.} Define amplitudes $\Amp m{w;\rho,\delta}(\R^n)$ by
+$\abs{D^\alpha_xD^\beta_yD^\gamma_\xi a}\le C\ang{x-y}^w\ang\xi^{m-\rho\abs\gamma+\delta(\abs\alpha+\abs\beta)}$.
+The statement to be proved is: for $a\in\Amp m{w;\rho,\delta}$ there is a unique
+$\sigma_L\in S^m_{\rho,\delta}(\R^n;\R^n)$ with $\Op(a)=\Op(\sigma_L)$, and
+\begin{equation*}
+  \sigma_L\sim\sum_\alpha\frac{i^{\abs\alpha}}{\alpha!}D^\alpha_\xi D^\alpha_ya\big|_{y=x},
+\end{equation*}
+the terms with $\abs\alpha=j$ lying in $S^{m-j(\rho-\delta)}_{\rho,\delta}$. We go through
+the ingredients of the proof of \cref{euclidean:thm:reduction}, saying which use $\rho=1$,
+$\delta=0$.
+
+\begin{enumerate}[label=(\arabic*)]
+\item \emph{Oscillatory integral (\cref{euclidean:prop:osc-int}).} Each $x$-derivative of
+  $a$ now costs $\ang\xi^\delta$, so $(1+\Delta_x)^q[a\phi]$ is bounded by
+  $C\ang\xi^{m+2q\delta}\ang{(x,y)}^{\abs w}\sum_{\abs\nu\le2q}\abs{D^\nu\phi}$, and the
+  integrand of \eqref{euclidean:eq:I-def} by $C\ang\xi^{m-2q(1-\delta)}(\dots)$. The
+  condition $m-2q<-n$ must be replaced by $m-2q(1-\delta)<-n$, which can be met because
+  $\delta<1$. The rest of the proof (independence of $q$, parts (i)--(iii)) is unchanged;
+  in (ii) one uses that $\chi(\eps\xi)$ is bounded in $S^0\subset S^0_{\rho,\delta}$, so the
+  analogue of \cref{euclidean:lem:density} holds with the same proof. The same change
+  applies to \eqref{euclidean:eq:Op-formula} in \cref{euclidean:prop:action-S}.
+\item \emph{Kernel identities (\cref{euclidean:lem:kernel-identities}) and
+  \cref{euclidean:prop:action-S}.} These are unchanged, except for orders: $\xi_ja$ has
+  order $m+1$, $D_{x_j}a$ and $D_{y_j}a$ have order $m+\delta\le m+1$, and $D_{\xi_j}a$ has
+  order $m-\rho$. Only finiteness of orders is used.
+\item \emph{Taylor expansion (\cref{euclidean:lem:taylor}).} This is the step where
+  $\rho=1$, $\delta=0$ were used in an essential way. The term
+  $\frac{i^{\abs\alpha}}{\alpha!}D^\alpha_\xi D^\alpha_ya|_{y=x}$ has order
+  $m-\rho\abs\alpha+\delta\abs\alpha=m-\abs\alpha(\rho-\delta)$, not $m-\abs\alpha$
+  (restriction to $y=x$ keeps the type, since $D_x[c(x,x,\xi)]=((D_x+D_y)c)(x,x,\xi)$). In
+  the remainder
+  $r_\alpha=\frac N{\alpha!}\int_0^1(1-t)^{N-1}(\pa^\alpha_ya)(x,x+t(y-x),\xi)\,dt$, the $N$
+  derivatives in $y$ cost $\ang\xi^{\delta N}$, and every further $x$- or $y$-derivative
+  costs $\ang\xi^\delta$, so $r_\alpha\in\Amp{m+\delta N}{w_+;\rho,\delta}$. The identity
+  $I((y-x)^\alpha r_\alpha)=I(D^\alpha_\xi r_\alpha)$ then gains only $\rho N$, so the
+  remainder operator is $\Op(D^\alpha_\xi r_\alpha)$ with
+  $D^\alpha_\xi r_\alpha\in\Amp{m-N(\rho-\delta)}{w_+;\rho,\delta}$. Its order tends to
+  $-\infty$ with $N$ precisely because $\rho>\delta$.
+\item \emph{Borel's lemma.} It is needed for the orders $m-j(\rho-\delta)$, and was
+  proved above; it uses $\rho>\delta$ in the gain $\eps^{\rho-\delta}$, which for $(1,0)$
+  is the gain $\eps$ of \eqref{euclidean:eq:borel-gain}.
+\item \emph{Residual operators (\cref{euclidean:prop:residual}).} An operator $\Op(a)$
+  with $a\in\Amp{m-N(\rho-\delta)}{w_N;\rho,\delta}$ for every $N$ is residual: in the
+  proof of (a)$\Rightarrow$(b), $(-D_\xi)^\gamma(\xi+D_x)^\alpha(D_y-\xi)^\beta a_M$ now has
+  order at most $-M+\abs\alpha+\abs\beta-\rho\abs\gamma\le-M+\abs\alpha+\abs\beta$, which is
+  $<-n$ for $M$ large, and the argument is otherwise unchanged. The implication
+  (b)$\Rightarrow$(c) and the uniqueness argument do not involve the type at all.
+\end{enumerate}
+With these modifications the proof of \cref{euclidean:thm:reduction} goes through: if
+$b\in S^m_{\rho,\delta}$ is an asymptotic sum of the Taylor terms, then
+$\Op(a)-\Op(b)$ has amplitudes of order $m-N(\rho-\delta)$ for all $N$, so equals
+$\Op(c)$ with $c\in S^{-\infty}$, and $\sigma_L=b+c$. (For invariance under changes of
+variables one needs in addition $\rho+\delta\ge1$; see \cite[Section~18.1]{Hormander-III}.
+This is not used here.)
+
+% ----------------------------------------------------------------------
+\subsection*{\Cref{euclidean:ex:not-compact}}
+
+\emph{Idea:} translation preserves all Sobolev norms but moves mass off to infinity.
+
+Let $f\in\CIc(\R^n)$, $f\ne0$, with $\supp f\subset\{\abs x\le R\}$; normalize so that
+$\norm f_{H^s}=1$ ($f\in\cS\subset H^s$). Let $f_j(x)=f(x-3jRe_1)$, $j\in\N$. Since
+$\widehat{f_j}(\xi)=e^{-3ijR\xi_1}\hat f(\xi)$,
+$\norm{f_j}_{H^s}^2=\int\ang\xi^{2s}\abs{\hat f}^2\,\dbar\xi=1$. The supports of the $f_j$
+are pairwise disjoint, so for $j\ne k$
+\begin{equation*}
+  \norm{f_j-f_k}_{L^2}^2=\norm{f_j}_{L^2}^2+\norm{f_k}_{L^2}^2=2\norm f_{L^2}^2>0.
+\end{equation*}
+No subsequence is Cauchy in $L^2(\R^n)$, so none converges. Hence the unit ball of
+$H^s(\R^n)$ is not precompact in $L^2(\R^n)$.
+
+% ----------------------------------------------------------------------
+\subsection*{\Cref{euclidean:ex:rellich}}
+
+\emph{Idea:} compact support makes the Fourier transforms uniformly Lipschitz, so they
+converge uniformly on compact sets along a subsequence; the $H^N$ bound controls high
+frequencies uniformly.
+
+Let $u_k\in H^N(\R^n)$, $\norm{u_k}_{H^N}\le1$, $u_k=0$ in $\abs x>R$; we find a
+subsequence convergent in $L^2$. Since $N>0$, $\norm{u_k}_{L^2}\le\norm{u_k}_{H^N}\le1$.
+Let $\phi\in\CIc(\R^n)$ with $\phi=1$ on $\abs x\le R$; then $u_k=\phi u_k$ almost
+everywhere. As $\phi u_k\in L^1\cap L^2$, its Fourier transform is the continuous
+function (by Fubini, $\hat u_k(\psi)=u_k(\hat\psi)=\int\psi(\xi)\int e^{-ix\cdot\xi}u_k(x)\,dx\,d\xi$)
+\begin{equation*}
+  \hat u_k(\xi)=\int e^{-ix\cdot\xi}\phi(x)u_k(x)\,dx .
+\end{equation*}
+By Cauchy--Schwarz, $\abs{\hat u_k(\xi)}\le\norm\phi_{L^2}$ and, using
+$\abs{e^{-ix\cdot\xi}-e^{-ix\cdot\eta}}\le\abs x\abs{\xi-\eta}$,
+\begin{equation*}
+  \abs{\hat u_k(\xi)-\hat u_k(\eta)}\le\norm{\abs x\phi}_{L^2}\abs{\xi-\eta}.
+\end{equation*}
+(This is the equicontinuity in the hint; the convolution formula
+$\hat u=(2\pi)^{-n}\hat\phi*\hat u$ leads to the same bound.) The family $(\hat u_k)$ is
+uniformly bounded and equicontinuous on $\R^n$. By the Arzel\`a--Ascoli theorem on the
+balls $\{\abs\xi\le l\}$, $l\in\N$, and a diagonal argument, there is a subsequence, still
+denoted $(u_k)$, such that $\hat u_k$ converges uniformly on every compact set.
+
+We show that $(u_k)$ is Cauchy in $L^2$. Let $\eta>0$. By Plancherel,
+\begin{equation*}
+  \norm{u_k-u_l}_{L^2}^2=\int_{\abs\xi\le\varrho}\abs{\hat u_k-\hat u_l}^2\,\dbar\xi
+  +\int_{\abs\xi>\varrho}\abs{\hat u_k-\hat u_l}^2\,\dbar\xi .
+\end{equation*}
+The second integral is at most
+$\ang\varrho^{-2N}\int\ang\xi^{2N}\abs{\hat u_k-\hat u_l}^2\,\dbar\xi
+=\ang\varrho^{-2N}\norm{u_k-u_l}_{H^N}^2\le4\ang\varrho^{-2N}$, which is $<\eta/2$ for
+$\varrho$ large, as $N>0$. For this $\varrho$ the first integral tends to $0$ as
+$k,l\to\infty$ by uniform convergence on $\abs\xi\le\varrho$. Hence
+$\norm{u_k-u_l}^2<\eta$ for $k,l$ large, and $(u_k)$ converges in $L^2(\R^n)$. This proves
+the compactness of the inclusion, for every real $N>0$.
+
+% ----------------------------------------------------------------------
+\subsection*{\Cref{euclidean:ex:weighted-compact}}
+
+\emph{Idea:} the weight makes $f_j$ uniformly small outside large balls; inside a ball,
+\cref{euclidean:ex:rellich} applies; a diagonal argument combines the two.
+
+Let $\norm{\ang x^\eps f_j}_{H^\eps}\le1$. Since $H^\eps\subset L^2$ with
+$\norm\cdot_{L^2}\le\norm\cdot_{H^\eps}$, we have $\norm{\ang x^\eps f_j}_{L^2}\le1$, and
+$f_j=\ang x^{-\eps}(\ang x^\eps f_j)\in L^2$. Choose $\phi\in\CIc(\R^n)$ with
+$0\le\phi\le1$, $\phi=1$ on $\abs x\le1$ and $\supp\phi\subset\{\abs x\le2\}$, and let
+$\phi_k(x)=\phi(x/k)$, $k\in\N$.
+
+\emph{Tails.} $1-\phi_k$ vanishes on $\abs x<k$, and for $\abs x\ge k$,
+$\ang x^{-\eps}\le\ang k^{-\eps}$. Hence
+\begin{equation*}
+  \norm{(1-\phi_k)f_j}_{L^2}\le\sup_{\abs x\ge k}\ang x^{-\eps}\,\norm{\ang x^\eps f_j}_{L^2}
+  \le\ang k^{-\eps}.
+\end{equation*}
+
+\emph{Compactly supported parts.} Fix $k$. The function
+$\psi_k=\phi_k\ang x^{-\eps}$ is in $\CIc(\R^n)\subset\CIb(\R^n)$, so multiplication by it
+is in $\Psido0(\R^n)$ (\cref{euclidean:ex:diff-ops}) and is bounded on $H^\eps$ by
+\cref{euclidean:thm:sobolev}. Hence $\phi_kf_j=\psi_k(\ang x^\eps f_j)$ satisfies
+$\norm{\phi_kf_j}_{H^\eps}\le C_k$ and vanishes in $\abs x>2k$. By
+\cref{euclidean:ex:rellich} (with $N=\eps$, $R=2k$, after dividing by $C_k$), every
+subsequence of $(\phi_kf_j)_j$ has a further subsequence convergent in $L^2$.
+
+\emph{Diagonalization.} Choose infinite sets $\N\supset J_1\supset J_2\supset\cdots$ such
+that $(\phi_kf_j)_{j\in J_k}$ converges in $L^2$, and let $j_l$ be the $l$-th element of
+$J_l$. For each $k$, $(j_l)_{l\ge k}$ is a subsequence of $J_k$, so $(\phi_kf_{j_l})_l$
+converges in $L^2$. Given $\eta>0$ choose $k$ with $2\ang k^{-\eps}<\eta/2$; then
+\begin{equation*}
+  \norm{f_{j_l}-f_{j_{l'}}}_{L^2}\le\norm{\phi_k(f_{j_l}-f_{j_{l'}})}_{L^2}+2\ang k^{-\eps}<\eta
+\end{equation*}
+for $l,l'$ large. Thus $(f_{j_l})$ is Cauchy, hence convergent in $L^2(\R^n)$, and the
+inclusion $\ang x^{-\eps}H^\eps(\R^n)\hookrightarrow L^2(\R^n)$ is compact.
+
+% ----------------------------------------------------------------------
+\subsection*{\Cref{euclidean:ex:affine}}
+
+\emph{Idea:} the affine substitution $x'=Tx$, $y'=Ty$, $\xi=(L^t)^{-1}\eta$ preserves the
+phase $(x'-y')\cdot\xi=(x-y)\cdot\eta$ and has total Jacobian $1$; it therefore transforms
+any amplitude by composition. This handles left and right symbols simultaneously.
+
+\emph{The transformed amplitude.} For $c\in\Amp mw(\R^n)$ let
+\begin{equation*}
+  c_T(x,y,\eta)=c\bigl(Tx,Ty,(L^t)^{-1}\eta\bigr).
+\end{equation*}
+Put $M=(L^t)^{-1}$. Since $\abs{M\eta}\le\norm M\abs\eta$ and $\abs\eta\le\norm{M^{-1}}\abs{M\eta}$,
+$\ang{M\eta}$ and $\ang\eta$ are comparable, and likewise $\ang{T x-Ty}=\ang{L(x-y)}$ and
+$\ang{x-y}$; this holds for negative powers as well. By the chain rule,
+$D^\alpha_xD^\beta_yD^\gamma_\eta c_T$ is a linear combination, with coefficients
+polynomial in the entries of $L$ and $M$, of derivatives
+$(D^{\alpha'}_{x'}D^{\beta'}_{y'}D^{\gamma'}_\xi c)(Tx,Ty,M\eta)$ with $\abs{\gamma'}=\abs\gamma$.
+Hence $c_T\in\Amp mw(\R^n)$.
+
+\emph{Residual amplitudes.} Let $c\in\Amp{-\infty}w$, $f\in\cS(\R^n)$ and
+$g=f\circ T^{-1}$. By \cref{euclidean:prop:action-S} (the case $m<-n$), the integral
+$\Op(c)g(x')=\int e^{i(x'-y')\cdot\xi}c(x',y',\xi)g(y')\,dy'\,\dbar\xi$ converges
+absolutely. Put $x'=Tx$, substitute $y'=Ty$ ($dy'=\abs{\det L}\,dy$) and $\xi=M\eta$
+($\dbar\xi=\abs{\det L}^{-1}\dbar\eta$). As $(Tx-Ty)\cdot M\eta=L(x-y)\cdot(L^t)^{-1}\eta=(x-y)\cdot\eta$,
+\begin{equation*}
+  \bigl(T^*\Op(c)(T^*)^{-1}f\bigr)(x)=\Op(c)g(Tx)
+  =\int e^{i(x-y)\cdot\eta}c_T(x,y,\eta)f(y)\,dy\,\dbar\eta=\Op(c_T)f(x).
+\end{equation*}
+
+\emph{General amplitudes.} Let $c\in\Amp mw$, and with $\chi$ as in
+\cref{euclidean:lem:density} let $c_\eps=\chi(\eps\xi)c$. Then
+$(c_\eps)_T=\chi(\eps M\eta)c_T$. The function $\chi_M=\chi\circ M$ is in $\CIc(\R^n)$
+and $D^\beta[\chi_M(\eps\eta)]=\eps^{\abs\beta}(D^\beta\chi_M)(\eps\eta)$ is supported where
+$1\le\abs{M\eps\eta}\le2$, i.e.\ where $c_1\le\eps\abs\eta\le c_2$ with
+$c_1=\norm{M}^{-1}$, $c_2=2\norm{M^{-1}}$. There $\ang\eta\le(1+c_2)/\eps$, so
+$\abs{D^\beta[\chi_M(\eps\eta)]}\le C_\beta\ang\eta^{-\abs\beta}$ uniformly in
+$\eps\in(0,1]$: the family $\chi_M(\eps\eta)$ is bounded in $S^0(\R^n)$. Hence
+$(c_\eps)_T$ is bounded in $\Amp mw$; and $c_T-(c_\eps)_T$ vanishes for
+$\abs\eta<c_1/\eps$, so, as in the proof of \cref{euclidean:lem:density},
+$(c_\eps)_T\to c_T$ in $\Amp{m'}w$ for every $m'>m$. By
+\cref{euclidean:prop:osc-int}(ii) and \eqref{euclidean:eq:Op-def},
+$\Op((c_\eps)_T)f\to\Op(c_T)f$ and $\Op(c_\eps)g\to\Op(c)g$ in $\cSp(\R^n)$. The pull-back
+$T^*$ acts on $\cSp$ by $(T^*u)(v)=\abs{\det L}^{-1}u(v\circ T^{-1})$, which extends
+$u\mapsto u\circ T$ on functions and is weakly continuous. Applying $T^*$ to the second
+limit and using the residual case,
+\begin{equation*}
+  T^*\Op(c)(T^*)^{-1}f=\lim_{\eps\to0}T^*\Op(c_\eps)g=\lim_{\eps\to0}\Op((c_\eps)_T)f=\Op(c_T)f .
+\end{equation*}
+Thus, for every amplitude, $\Op(c)_T=\Op(c_T)$.
+
+\emph{Left and right symbols.} If $A=\Op(a)$ with $a=\sigma_L(A)$, i.e.\ $c(x,y,\xi)=a(x,\xi)$,
+then $c_T(x,y,\eta)=a(Tx,M\eta)$ does not depend on $y$, so $A_T=\Op(a(Tx,M\eta))$ and by
+uniqueness of the left symbol (\cref{euclidean:thm:reduction})
+$\sigma_L(A_T)(x,\xi)=\sigma_L(A)(Tx,(L^t)^{-1}\xi)$, which is
+\eqref{euclidean:eq:affine-symbol}. If instead $A=\Op_R(b)$ with $b=\sigma_R(A)$, the right
+symbol of the proof of \cref{euclidean:thm:composition}, i.e.\ $c(x,y,\xi)=b(y,\xi)$, then
+$c_T(x,y,\eta)=b(Ty,M\eta)$ and $A_T=\Op_R(b(Ty,M\eta))$. Since
+$\Op_R:S^m\to\Psido m$ is a bijection with inverse $\sigma_R$ (see after
+\eqref{euclidean:eq:left-right}),
+\begin{equation*}
+  \sigma_R(A_T)(y,\xi)=\sigma_R(A)\bigl(Ty,(L^t)^{-1}\xi\bigr).
+\end{equation*}
+
+\emph{The hint.} One can also argue as suggested. For $f,h\in\cS$, substituting
+$x=T^{-1}y$ twice,
+\begin{equation*}
+  \inner{A_Tf}h=\abs{\det L}^{-1}\inner{A(f\circ T^{-1})}{h\circ T^{-1}}
+  =\abs{\det L}^{-1}\inner{f\circ T^{-1}}{A^*(h\circ T^{-1})}=\inner f{(A^*)_Th},
+\end{equation*}
+so $(A_T)^*=(A^*)_T$ by the uniqueness in \cref{euclidean:prop:adjoint}. Then
+$\sigma_R(A_T)=\overline{\sigma_L((A_T)^*)}=\overline{\sigma_L((A^*)_T)}$, and
+\eqref{euclidean:eq:affine-symbol} applied to $A^*$ gives the same formula.
+
+% ----------------------------------------------------------------------
+\subsection*{\Cref{euclidean:ex:density-L2}}
+
+\emph{Idea:} approximate in turn by simple functions, by indicators of finite unions of
+cubes, and by smooth bumps; only the definition of the integral and the regularity of
+Lebesgue measure are used. (The proof of Plancherel's theorem in \cref{ch:distributions}
+quotes this fact, so we must not use Fourier analysis here.)
+
+Since $\CIc(\R^n)\subset\cS(\R^n)\subset L^2(\R^n)$, it suffices to show that $\CIc$ is
+dense. Let $u\in L^2$ and $\eta>0$. All approximations below are in the $L^2$ norm, and we
+combine them with the triangle inequality.
+
+\emph{Step 1: simple functions.} Write $u=u_1-u_2+i(u_3-u_4)$ with
+$u_1=(\Re u)^+$, etc.; each $u_i\ge0$ lies in $L^2$. For $v\ge0$ in $L^2$ there are simple
+functions $0\le s_k\uparrow v$ pointwise. Then $\abs{v-s_k}^2\le v^2$ is integrable and
+tends to $0$ pointwise, so $\norm{v-s_k}_{L^2}\to0$ by dominated convergence. Writing
+$s_k=\sum_ic_i\mathbf 1_{E_i}$ with $c_i>0$ and $E_i$ disjoint,
+$c_i^2\abs{E_i}\le\int s_k^2\le\int v^2$, so each $E_i$ has finite measure. Thus finite
+linear combinations of indicators $\mathbf 1_E$ with $\abs E<\infty$ are dense.
+
+\emph{Step 2: cubes.} Let $\abs E<\infty$ and $\delta>0$. By outer regularity of Lebesgue
+measure there is an open $O\supset E$ with $\abs O<\abs E+\delta$. Every open subset of
+$\R^n$ is a countable disjoint union of half-open dyadic cubes $Q_k$; since
+$\sum_k\abs{Q_k}=\abs O<\infty$, there is $K$ with $\sum_{k>K}\abs{Q_k}<\delta$. Let
+$F=\bigcup_{k\le K}Q_k$. As $E\setminus F\subset O\setminus F$ and $F\setminus E\subset O\setminus E$,
+\begin{equation*}
+  \norm{\mathbf 1_E-\mathbf 1_F}_{L^2}^2=\abs{E\,\triangle\,F}\le\abs{O\setminus F}+\abs{O\setminus E}<2\delta.
+\end{equation*}
+
+\emph{Step 3: smoothing a cube.} Let $Q=\prod_l[a_l,b_l)$ and $0<\tau\le1$. Choose
+$\phi_l\in\CIc(\R)$ with $0\le\phi_l\le1$, $\phi_l=1$ on $[a_l,b_l]$ and
+$\supp\phi_l\subset(a_l-\tau,b_l+\tau)$, and let $\Phi(x)=\prod_l\phi_l(x_l)\in\CIc(\R^n)$.
+Then $0\le\Phi\le1$, $\Phi=1$ on $Q$, and $\Phi=0$ outside
+$Q_\tau=\prod_l(a_l-\tau,b_l+\tau)$, so
+\begin{equation*}
+  \norm{\Phi-\mathbf 1_Q}_{L^2}^2\le\abs{Q_\tau\setminus Q}
+  =\prod_l(b_l-a_l+2\tau)-\prod_l(b_l-a_l)\longrightarrow0\quad(\tau\to0).
+\end{equation*}
+Combining the three steps, there is $\Phi\in\CIc(\R^n)$, a finite linear combination of
+such products, with $\norm{u-\Phi}_{L^2}<\eta$. Hence $\CIc(\R^n)$, and a fortiori
+$\cS(\R^n)$, is dense in $L^2(\R^n)$.
+
+% ----------------------------------------------------------------------
+\subsection*{\Cref{euclidean:ex:S'-to-S}}
+
+We use the topology of $\cSp(\R^n)$ fixed in \cref{ch:distributions}, the weak topology
+(a basis of neighbourhoods of $0$ is given by the sets
+$\{u;\abs{u(\phi_j)}<\eps,\ j=1,\dots,p\}$). \emph{Idea:} for this topology continuity
+into $\cS$ is so strong that the operator has finite rank. A remark at the end treats the
+strong topology, where the result is still true but has more content.
+
+Let $T:\cSp(\R^n)\to\cS(\R^n)$ be linear and continuous. The sup norm $\norm\cdot_0$ is a
+continuous norm on $\cS(\R^n)$, so $\{v;\norm v_0<1\}$ is a neighbourhood of $0$ and its
+preimage under $T$ contains a weak neighbourhood
+$\{u;\abs{u(\phi_j)}<\eps,\ j=1,\dots,p\}$ with $\phi_j\in\cS(\R^n)$. If $u(\phi_j)=0$ for
+all $j$, then $tu$ lies in this neighbourhood for every $t>0$, so $\norm{Tu}_0<1/t$ for all
+$t$, and $Tu=0$. Thus $T$ vanishes on the joint null space of the functionals
+$\ev_j:u\mapsto u(\phi_j)$, and therefore factors through the linear map
+$\ev=(\ev_1,\dots,\ev_p):\cSp\to\C^p$: there is a linear map $\Lambda:\ev(\cSp)\to\cS$
+with $T=\Lambda\circ\ev$. Extend $\Lambda$ linearly to $\C^p$ and put
+$\psi_j=\Lambda(e_j)\in\cS(\R^n)$. Then
+\begin{equation*}
+  Tu=\sum_{j=1}^pu(\phi_j)\,\psi_j,\qquad u\in\cSp(\R^n).
+\end{equation*}
+For $\psi\in\cS(\R^n)$ this gives $T\psi(x)=\int K(x,y)\psi(y)\,dy$ with
+$K(x,y)=\sum_j\psi_j(x)\phi_j(y)$, and $K\in\cS(\R^{2n})$ since
+$\norm{\psi_j\boxtimes\phi_j}_k\le\norm{\psi_j}_k\norm{\phi_j}_k$ (\cref{ch:distributions}).
+As $T$ restricted to $\cS$ is a continuous map $\cS\to\cSp$, its Schwartz kernel is unique
+(\cref{distributions:thm:kernel}), so the Schwartz kernel of $T$ is
+$K\in\cS(\R^{2n})$.
+
+\emph{Remark (strong topology).} If $\cSp$ carries the strong topology, there are
+operators of infinite rank, e.g.\ $Tu=\sum_k2^{-k}c_k^{-1}u(\phi_k)\psi_k$ for suitable
+normalizing constants. The statement remains true, by the following argument. A
+continuous linear map from $\cSp$ with the strong topology is bounded on weakly bounded
+sets (these are strongly bounded, by the uniform boundedness principle for the Fr\'echet
+space $\cS$) and maps weakly convergent sequences to convergent sequences (weakly
+convergent sequences in $\cSp$ converge strongly, as $\cS$ is a Montel space). Put
+$K(x,y)=(T\delta_y)(x)$. Since $(\delta_{y+he_l}-\delta_y)/h\to(\phi\mapsto\pa_l\phi(y))$
+weakly, and so on, $y\mapsto T\delta_y$ is a smooth map into $\cS$, and $K$ is smooth with
+$\pa^\beta_yK(x,y)=T(\phi\mapsto\pa^\beta\phi(y))(x)$. The sets
+$\{y^\gamma(\phi\mapsto\pa^\beta\phi(y));y\in\R^n\}$ are weakly bounded
+($\abs{y^\gamma\pa^\beta\phi(y)}\le\norm\phi_{\abs\gamma+\abs\beta}$), so their images are
+bounded in $\cS$, which gives
+$\sup_{x,y}\abs{x^\alpha y^\gamma\pa^{\alpha'}_x\pa^\beta_yK}<\infty$, i.e.\
+$K\in\cS(\R^{2n})$. Finally, Riemann sums $\sum_{\abs k\le j^2}j^{-n}\psi(k/j)\delta_{k/j}$
+converge weakly to $\psi\in\cS$, and their images converge pointwise to
+$\int K(\cdot,y)\psi(y)\,dy$, so $K$ is the kernel of $T$.

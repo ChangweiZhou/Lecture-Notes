@@ -1,1 +1,785 @@
-% solutions for 06-determinants (in progress)
+% Solutions for chapter 06-determinants
+\providecommand{\Gs}[1]{\Gamma^{#1}}
+\providecommand{\Gph}[1]{\Gamma^{#1}_{\mathrm{ph}}}
+\providecommand{\Psiisoph}[1]{\Psi^{#1}_{\mathrm{iso,ph}}}
+\providecommand{\detFr}{\operatorname{det}_{\mathrm{Fr}}}
+\providecommand{\Giso}[1]{G^{#1}_{\mathrm{iso}}}
+\providecommand{\Hiso}[1]{H^{#1}_{\mathrm{iso}}}
+
+\section{Solutions for \cref{ch:determinants}: Traces, determinants and the index}\label{solutions:determinants}
+
+Throughout, $\Lambda_s=\Op(\ang{Z}^s)\in\Psiisoph{s}(\R^n)$ is the standard elliptic
+operator of order $s$ (its principal symbol is $1$, since $\ang{Z}^s=|Z|^s(1+|Z|^{-2})^{s/2}$),
+$G_s\in\Psiisoph{-s}$ is its generalized inverse and $P_s$ the orthogonal projection onto the
+finite-dimensional space $\Nul\Lambda_s\subset\cS$ (\ref{determinants:I:elliptic}), so that
+$G_s\Lambda_s=\Id-P_s$ on $\cSp$. All operators in the calculus act continuously on $\cS$ and on
+$\cSp$ \ref{determinants:I:bounded}, and identities between them proved on $\cS$ hold on $\cSp$
+by density. We write $H$ for the harmonic oscillator and $u_\alpha$ for the Hermite functions
+\ref{determinants:I:oscillator}.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{determinants:ex:sobolev}}
+\emph{Correction.} As printed, the general definition read
+$\{u;\ Au\in L^2\ \forall A\in\Psiisoph{-s}\}$; this is the space of order $-s$ (for $s=1$ every
+$u\in\Hs{-1}_{\mathrm{iso}}$ satisfies $Au\in L^2$ for all $A$ of order $-1$, while $u=\delta_0\notin
+L^2$ is such a $u$), and it is inconsistent with the integral definitions. The statement has been
+corrected to $A\in\Psiisoph{s}(\R^n)$, which is what we prove.
+
+Idea: everything follows from one lemma: a single elliptic operator of order $s$ tests
+membership in $\Hs{s}_{\mathrm{iso}}$.
+
+\emph{Lemma.} Let $s\in\R$ and let $P\in\Psiisoph{s}(\R^n)$ be elliptic. For $u\in\cSp$ the
+following are equivalent: (a) $Pu\in L^2$; (b) $Bu\in L^2$ for all $B\in\Psiisoph{s}$;
+(c) $Bu\in L^2$ for all $B\in\Psiiso{s}$.
+
+\emph{Proof.} (c)$\Rightarrow$(b)$\Rightarrow$(a) are trivial. Let $Q\in\Psiisoph{-s}$ be a
+parametrix of $P$ \ref{determinants:I:elliptic}, $QP=\Id-R$ with $R$ residual. For
+$B\in\Psiiso{s}$, $B=(BQ)P+BR$. Here $BQ\in\Psiiso{0}$ is bounded on $L^2$ and $BR$ is residual
+\ref{determinants:I:algebra}, hence maps $\cSp$ into $\cS\subset L^2$ \ref{determinants:I:bounded}.
+So (a) gives $Bu=(BQ)(Pu)+BRu\in L^2$. \qed
+
+In particular (c) shows that our $\Hs{s}_{\mathrm{iso}}$ coincides with the space $\Hiso{s}$ of
+\cref{isotropic:def:Hiso}; so it is a Hilbert space with the norm
+$\norm{u}_s^2=\norm{\Lambda_su}^2+\norm{P_su}^2$ (\cref{isotropic:prop:Hiso}(ii)), and
+$\Hs{0}_{\mathrm{iso}}=L^2$ (take $P=\Id$).
+
+\emph{Integer orders.} Write $\mathcal H^k$, $k\in\Z$, for the spaces defined in the exercise. For
+$k\in\N_0$ put $Q_k=\sum_{|\alpha|+|\beta|\le k}(x^\alpha D^\beta)^*x^\alpha D^\beta\in\Psiisoph{2k}$.
+Its principal symbol $\sum_{|\alpha|+|\beta|=k}x^{2\alpha}\xi^{2\beta}$ is positive on
+$\Sphere^{2n-1}$ (at a point with $Z_i\neq0$ the term $Z_i^{2k}$ occurs), so $Q_k$ is elliptic; let
+$G\in\Psiisoph{-2k}$ be a parametrix, $\Id-GQ_k=R$, $\Id-Q_kG=R'$ residual.
+
+(i) $\mathcal H^k=\Hs{k}_{\mathrm{iso}}$ for $k\ge0$. Let $u\in\mathcal H^k$. If $B\in\Psiiso{k}$, then
+\begin{equation*}
+  B=BGQ_k+BR=\sum_{|\alpha|+|\beta|\le k}\bigl(BG(x^\alpha D^\beta)^*\bigr)\,x^\alpha D^\beta+BR,
+\end{equation*}
+with $BG(x^\alpha D^\beta)^*\in\Psiiso{k-2k+|\alpha|+|\beta|}\subset\Psiiso{0}$ bounded. Hence
+$u\in\mathcal H^k$ implies $Bu\in L^2$ for all $B\in\Psiiso{k}$, i.e.\ $u\in\Hs{k}_{\mathrm{iso}}$.
+Conversely, if $u\in\Hs{k}_{\mathrm{iso}}$ then $u\in L^2$ and, for $|\alpha|+|\beta|\le k$,
+$x^\alpha D^\beta u=(x^\alpha D^\beta G_k)(\Lambda_ku)+x^\alpha D^\beta P_ku\in L^2$, because
+$x^\alpha D^\beta G_k\in\Psiiso{|\alpha|+|\beta|-k}\subset\Psiiso0$ and $P_ku\in\cS$.
+
+(ii) $\mathcal H^{-k}=\Hs{-k}_{\mathrm{iso}}$ for $k\ge0$. If $u=\sum x^\alpha D^\beta u_{\alpha\beta}$ with
+$u_{\alpha\beta}\in L^2$ and $B\in\Psiiso{-k}$, then
+$Bu=\sum(Bx^\alpha D^\beta)u_{\alpha\beta}\in L^2$, since $Bx^\alpha D^\beta\in\Psiiso{0}$. Conversely let
+$u\in\Hs{-k}_{\mathrm{iso}}$. Then
+\begin{equation*}
+  u=Q_kGu+R'u=\sum_{|\alpha|+|\beta|\le k}D^\beta x^\alpha\bigl(x^\alpha D^\beta Gu\bigr)+R'u .
+\end{equation*}
+Here $v_{\alpha\beta}=x^\alpha D^\beta G u\in L^2$ because $x^\alpha D^\beta G\in\Psiisoph{|\alpha|+|\beta|-2k}
+\subset\Psiiso{-k}$, and $R'u\in\cS\subset L^2$. By Leibniz' rule
+$D^\beta(x^\alpha v)=\sum_{\gamma\le\alpha,\gamma\le\beta}\binom\beta\gamma(D^\gamma x^\alpha)D^{\beta-\gamma}v$,
+and $D^\gamma x^\alpha$ is a constant times $x^{\alpha-\gamma}$; so $D^\beta x^\alpha v$ is a combination of
+terms $x^{\alpha'}D^{\beta'}v$ with $|\alpha'|+|\beta'|\le k$. Hence $u\in\mathcal H^{-k}$.
+
+(iii) \emph{Mapping.} Let $A\in\Psiisoph{p}$, $p\in\Z$, $k\in\Z$ and $u\in\mathcal H^k=\Hs{k}_{\mathrm{iso}}$. For
+every $B\in\Psiisoph{k-p}$ we have $BA\in\Psiisoph{k}$ \ref{determinants:I:algebra}, so $B(Au)\in L^2$,
+i.e.\ $Au\in\Hs{k-p}_{\mathrm{iso}}=\mathcal H^{k-p}$. This is the first claim; it is the case $s=k$,
+$M=p$ of (iv) below, which also gives boundedness.
+
+\emph{Real orders.} The definition with $s\in\R$ is consistent with the integral one by (i), (ii).
+The remaining claims:
+
+(iv) Let $A\in\Psiisoph{M}$. If $u\in\Hs{s}_{\mathrm{iso}}$ and $B\in\Psiisoph{s-M}$ then $BA\in\Psiisoph{s}$,
+so $BAu\in L^2$; thus $A:\Hs{s}_{\mathrm{iso}}\to\Hs{s-M}_{\mathrm{iso}}$. It is bounded: writing
+$u=G_s\Lambda_su+P_su$,
+\begin{equation*}
+  \norm{\Lambda_{s-M}Au}\le\norm{\Lambda_{s-M}AG_s}_{\Lin(L^2)}\norm{\Lambda_su}+\norm{\Lambda_{s-M}AP_s}_{\Lin(L^2)}\norm{P_su},
+\end{equation*}
+where $\Lambda_{s-M}AG_s\in\Psiisoph{0}$ and $\Lambda_{s-M}AP_s\in\Psiiso{-\infty}$ are bounded
+\ref{determinants:I:bounded}; and $\norm{P_{s-M}Au}$ is estimated in the same way with the residual
+operators $P_{s-M}AG_s$, $P_{s-M}AP_s$.
+
+(v) $\bigcap_s\Hs{s}_{\mathrm{iso}}=\cS$. Every operator in the calculus maps $\cS$ to $\cS\subset L^2$,
+so $\cS\subset\Hs{s}_{\mathrm{iso}}$ for all $s$. Conversely if $u$ lies in all $\Hs{k}_{\mathrm{iso}}$,
+$k\in\N$, then by (i) $x^\alpha D^\beta u\in L^2$ for all $\alpha,\beta$; by the Sobolev embedding
+$\sup|f|\le C\sum_{|\gamma|\le n+1}\norm{D^\gamma f}_{L^2}$ (proved below) applied to $f=x^\alpha D^\beta u$,
+all Schwartz seminorms of $u$ are finite, so $u\in\cS$.
+
+The embedding: $\sup|f|\le(2\pi)^{-n}\norm{\hat f}_{L^1}\le(2\pi)^{-n}\norm{\ang{\xi}^{-n-1}}_{L^2}
+\norm{\ang{\xi}^{n+1}\hat f}_{L^2}$ and $\ang\xi^{2(n+1)}\le C\sum_{|\gamma|\le n+1}\xi^{2\gamma}$.
+
+(vi) $\bigcup_s\Hs{s}_{\mathrm{iso}}=\cSp$. Let $u\in\cSp$. There are $C,k$ with
+$|\pair u\phi|\le C\sum_{|\alpha|+|\beta|\le k}\sup|x^\alpha D^\beta\phi|$ for $\phi\in\cS$. By the
+embedding and Leibniz' rule (moving $D^\gamma$ past $x^\alpha$ only lowers the degree),
+$|\pair u\phi|\le C'\sum_{|\alpha|+|\beta|\le K}\norm{x^\alpha D^\beta\phi}_{L^2}$, $K=k+n+1$. Let
+$J\phi=(x^\alpha D^\beta\phi)_{|\alpha|+|\beta|\le K}\in\mathcal V=\bigoplus_{|\alpha|+|\beta|\le K}L^2$.
+Since $J$ is injective, $\ell(J\phi)=\pair u\phi$ is a well-defined linear functional on $J(\cS)$,
+bounded for the norm of $\mathcal V$; extend it by continuity to the closure and by $0$ on the
+orthocomplement. By the Riesz theorem there are $g_{\alpha\beta}\in L^2$ with
+$\pair u\phi=\sum\int x^\alpha D^\beta\phi\,g_{\alpha\beta}\,dx$, that is
+$u=\sum_{\alpha\beta}(-D)^\beta(x^\alpha g_{\alpha\beta})$, which by Leibniz' rule as in (ii) is of the form
+$\sum_{|\alpha'|+|\beta'|\le K}x^{\alpha'}D^{\beta'}u_{\alpha'\beta'}$, $u_{\alpha'\beta'}\in L^2$. So
+$u\in\mathcal H^{-K}=\Hs{-K}_{\mathrm{iso}}$.
+
+(vii) Elliptic regularity. Let $A\in\Psiisoph{m}$ be elliptic with parametrix $B\in\Psiisoph{-m}$,
+$BA=\Id-R$. If $u\in\cSp$ and $Au\in\Hs{s}_{\mathrm{iso}}$, then $u=B(Au)+Ru$ with
+$B(Au)\in\Hs{s+m}_{\mathrm{iso}}$ by (iv) and $Ru\in\cS\subset\Hs{s+m}_{\mathrm{iso}}$ by (v). So
+$u\in\Hs{s+m}_{\mathrm{iso}}$.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{determinants:ex:compact-inclusion}}
+Idea: test $u\in\Hs{\eps}_{\mathrm{iso}}$ against the weights $\ang x^\eps$ and $\ang D^\eps$, which are
+not isotropic operators but become bounded after composition with an isotropic operator of order
+$-\eps$; then cut off in $x$ and in $\xi$.
+
+\emph{Step 1.} If $g\in\Gs{-\eps}(\R^{2n})$ then $\ang x^\eps\Op(g)$ is bounded on $L^2$. Indeed with
+the left quantization $\ang x^\eps\Op(g)=\Op(c)$, $c=\ang x^\eps g$. By Leibniz' rule, using
+$|\pa_x^{\alpha'}\ang x^\eps|\le C\ang x^\eps$, $\ang x\le\ang Z$ and $\ang\xi\le\ang Z$,
+\begin{equation*}
+  |\pa_x^\alpha\pa_\xi^\beta c|\le C\sum_{\alpha'\le\alpha}\ang x^\eps\ang Z^{-\eps-|\alpha-\alpha'|-|\beta|}
+  \le C'\ang\xi^{-|\beta|},
+\end{equation*}
+so $c$ is a symbol of order $0$ of the traditional calculus (\cref{euclidean:def:symbols}) and
+$\Op(c)$ is bounded on $L^2$ by \cref{euclidean:thm:L2}.
+
+\emph{Step 2.} If $G\in\Psiiso{-\eps}$ then $\ang D^\eps G$ is bounded on $L^2$. By
+\cref{isotropic:prop:fourier}, $G'=\cF G\cF^{-1}\in\Psiiso{-\eps}$, and
+$\cF\ang D^\eps\cF^{-1}$ is multiplication by $\ang{\cdot}^\eps$. Hence
+$\ang D^\eps G=\cF^{-1}\ang\cdot^\eps G'\cF$ is bounded by Step 1, since $(2\pi)^{-n/2}\cF$ is
+unitary.
+
+\emph{Step 3: the inclusion.} For $u\in\Hs{\eps}_{\mathrm{iso}}$, $u=G_\eps(\Lambda_\eps u)+P_\eps u$
+with $\Lambda_\eps u\in L^2$ and $P_\eps u\in\cS$. By Steps 1 and 2,
+\begin{equation}\label{soldeterminants:eq:weights}
+  \norm{\ang x^\eps u}+\norm{\ang D^\eps u}\le C\bigl(\norm{\Lambda_\eps u}+\norm{P_\eps u}\bigr)\le C'\norm u_\eps,
+\end{equation}
+where we used that $\ang x^\eps P_\eps$ and $\ang D^\eps P_\eps$ are finite rank operators with range
+in $\cS$, hence bounded. Thus $u\in\ang x^{-\eps}L^2\cap\Hs{\eps}$.
+
+\emph{Step 4: compactness.} Let $\chi\in\CIc(\R^n)$, $0\le\chi\le1$, $\chi=1$ on $|y|\le1$, and for
+$R\ge1$ let $K_R=\chi(x/R)\chi(D/R)$. Its kernel $\chi(x/R)R^n\check\chi(R(x-y))$ lies in
+$L^2(\R^{2n})$, so $K_R$ is Hilbert--Schmidt, hence compact on $L^2$. For
+$u\in\Hs{\eps}_{\mathrm{iso}}$, using $|\chi|\le1$ and Plancherel,
+\begin{align*}
+  \norm{u-K_Ru}&\le\norm{(1-\chi(x/R))u}+\norm{\chi(x/R)(1-\chi(D/R))u}\\
+  &\le\sup_x\frac{1-\chi(x/R)}{\ang x^\eps}\norm{\ang x^\eps u}+\sup_\xi\frac{1-\chi(\xi/R)}{\ang\xi^\eps}\norm{\ang D^\eps u}
+  \le C'R^{-\eps}\norm u_\eps
+\end{align*}
+by \eqref{soldeterminants:eq:weights}. So the inclusion $\iota:\Hs{\eps}_{\mathrm{iso}}\to L^2$ is the norm limit
+as $R\to\infty$ of the compact operators $K_R\circ\iota$, hence compact.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{determinants:ex:compact}}
+Let $A\in\Psiisoph{-\eps}(\R^n)$, $\eps>0$. By \cref{determinants:ex:sobolev}(iv) (with $M=-\eps$,
+$s=0$), $A$ is bounded from $L^2=\Hs{0}_{\mathrm{iso}}$ to $\Hs{\eps}_{\mathrm{iso}}$; explicitly
+$\norm{Au}_\eps\le(\norm{\Lambda_\eps A}+\norm{P_\eps A})\norm u$ with $\Lambda_\eps A\in\Psiisoph0$ and
+$P_\eps A$ residual, both bounded on $L^2$. By \cref{determinants:ex:compact-inclusion} the inclusion
+$\iota:\Hs{\eps}_{\mathrm{iso}}\to L^2$ is compact. Hence $A=\iota\circ A:L^2\to L^2$ is compact, as
+the composite of a bounded and a compact operator. (The same argument applies to $\Psiiso{-\eps}$,
+using \cref{isotropic:prop:Hiso}(v) for the mapping property.)
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{determinants:ex:finite-rank-inverse}}
+Idea: split off a finite rank part and invert the small remainder by a Neumann series.
+
+By \cref{determinants:lem:approx}, $\pi_NE\pi_N\to E$ in $\Psiiso{-\infty}$, hence in
+$\Lin(L^2)$ since $\norm\cdot_{\Lin(L^2)}\le C\norm\cdot_{(2n+1)}$. Choose $N$ with
+$\norm{E-\pi_NE\pi_N}_{\Lin(L^2)}<1$ and put $E_1=\pi_NE\pi_N$, $E_2=E-E_1$. Then $E_1$ is
+residual of finite rank (its range lies in $L_N\subset\cS$), $E_2\in\Psiiso{-\infty}$ and
+$\norm{E_2}<1$, so $\Id+E_2$ is invertible on $L^2$ by the Neumann series. By
+\cref{determinants:lem:residual-inverse} (whose proof uses only invertibility on $L^2$ and
+\cref{determinants:lem:trilinear}, not \ref{determinants:I:residual}), $(\Id+E_2)^{-1}=\Id+F$ with
+$F\in\Psiiso{-\infty}$. Then
+\begin{equation*}
+  (\Id+E)(\Id+F)=(\Id+E_2+E_1)(\Id+E_2)^{-1}=\Id+E_1(\Id+F)=\Id+G,\qquad G=E_1+E_1F .
+\end{equation*}
+$G$ is residual \ref{determinants:I:algebra} and $G\cdot\cS\subset G\cdot L^2\subset E_1\cdot L^2\subset L_N$
+is finite dimensional. Similarly $(\Id+F)(\Id+E)=\Id+(\Id+F)E_1$, a finite rank residual
+perturbation of $\Id$.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{determinants:ex:fredholm}}
+Let $B_0\in\Psiisoph{-m}$ be a parametrix, $AB_0=\Id+E$, $B_0A=\Id+E'$, $E,E'$ residual
+\ref{determinants:I:elliptic}.
+
+\emph{Right inverse up to finite rank.} By \cref{determinants:ex:finite-rank-inverse} there is a
+residual $F$ with $(\Id+E)(\Id+F)=\Id+G$, $G$ of finite rank. Then $B_R=B_0(\Id+F)\in\Psiisoph{-m}$
+(as $B_0F$ is residual) and $AB_R=\Id+G$.
+
+\emph{Left inverse.} Apply \cref{determinants:ex:finite-rank-inverse} to $E'^*$: $(\Id+E'^*)(\Id+F')=\Id+G'$,
+and take adjoints: $(\Id+F'^*)(\Id+E')=\Id+G'^*$. So $B_L=(\Id+F'^*)B_0\in\Psiisoph{-m}$ satisfies
+$B_LA=\Id+G'^*$, with $G'^*$ residual of finite rank.
+
+\emph{One parametrix.} Computing $B_LAB_R$ in two ways, $B_L+B_LG=B_R+G'^*B_R$, so
+$B_L-B_R=G'^*B_R-B_LG$. Hence
+\begin{equation*}
+  B_RA-\Id=B_LA-\Id-(B_L-B_R)A=G'^*-G'^*B_RA+B_LGA,
+\end{equation*}
+which is residual \ref{determinants:I:algebra} and of finite rank (the first two terms have range in
+$\Ran G'^*$, the last has rank at most that of $G$). So $B=B_R$ has $AB-\Id$ and $BA-\Id$ residual of
+finite rank. A finite rank residual operator has kernel $\sum_jf_j(x)\overline{g_j(y)}$ with
+$f_j,g_j\in\cS$, so it acts on $\cSp$ with range in $\operatorname{span}\{f_j\}$.
+
+\emph{Fredholm property.} By \cref{determinants:ex:sobolev}(iv), $A:\Hiso M\to\Hiso{M-m}$ and
+$B:\Hiso{M-m}\to\Hiso M$ are bounded, and $AB=\Id+G$ on $\Hiso{M-m}$, $BA=\Id+K$ on $\Hiso M$ with
+$K=BA-\Id$ of finite rank and bounded on every $\Hiso s$ (it is residual, so of every order). Then:
+\begin{itemize}
+\item $\Nul A\subset\Nul(BA)=\Nul(\Id+K)\subset\Ran K$, which is finite dimensional;
+\item $\Ran A\supset\Ran(AB)=\Ran(\Id+G)\supset\Nul G$, since $(\Id+G)u=u$ for $u\in\Nul G$. The
+  subspace $\Nul G$ is closed ($G$ is bounded) and has finite codimension ($\Hiso{M-m}/\Nul G\cong\Ran G$).
+  A subspace containing a closed subspace of finite codimension is closed and of finite codimension
+  (it is the preimage of a subspace of the finite-dimensional quotient).
+\end{itemize}
+Thus $A:\Hiso M\to\Hiso{M-m}$ is Fredholm.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{determinants:ex:oscillator}}
+\emph{Ellipticity.} $H=\sum_j(D_j^2+x_j^2)=\Op(|x|^2+|\xi|^2)$ and $|Z|^2$ is homogeneous of degree $2$,
+so $H\in\Psiisoph2$ with principal symbol $1$ on $\Sphere^{2n-1}$: $H$ is elliptic.
+
+\emph{Identities.} Since $[D_j,x_k]=-i\delta_{jk}$ and the $D$'s, resp.\ the $x$'s, commute,
+\begin{gather*}
+  C_jA_j=D_j^2+x_j^2+i[x_j,D_j]=D_j^2+x_j^2-1,\qquad A_jC_j=D_j^2+x_j^2+i[D_j,x_j]=D_j^2+x_j^2+1,\\
+  [A_l,C_j]=i[D_l,x_j]-i[x_l,D_j]=2\delta_{lj},\quad [C_l,C_j]=i[D_l,x_j]+i[x_l,D_j]=0,\quad
+  [A_l,A_j]=-i[D_l,x_j]-i[x_l,D_j]=0 .
+\end{gather*}
+Summing the first line gives $H=\sum C_jA_j+n=\sum A_jC_j-n$. Then
+$[A_j,H]=\sum_k([A_j,C_k]A_k+C_k[A_j,A_k])=2A_j$ and
+$[C_j,H]=\sum_k([C_j,C_k]A_k+C_k[C_j,A_k])=-2C_j$. Equivalently $HA_j=A_j(H-2)$, $HC_j=C_j(H+2)$.
+
+\emph{Regularity.} For $\lambda\in\C$, $H-\lambda\in\Psiisoph2$ has symbol $|Z|^2-\lambda$ with the same
+principal symbol, so it is elliptic, and $(H-\lambda)u=0\in\cS$ forces $u\in\cS$ by elliptic regularity
+\ref{determinants:I:elliptic}. So $E_\lambda\subset\cS$.
+
+\emph{Positivity.} For $u\in\cS$, since $C_j^*=A_j$,
+$(Hu,u)=\sum_j\norm{A_ju}^2+n\norm u^2$. Hence if $0\ne u\in E_\lambda$ then $\lambda\norm u^2=(Hu,u)$ shows
+$\lambda\in\R$, $\lambda\ge n$, with $\lambda=n$ if and only if $A_ju=0$ for all $j$.
+
+\emph{Ground state.} $A_ju=-i(\pa_j+x_j)u=-ie^{-|x|^2/2}\pa_j(e^{|x|^2/2}u)$. So $A_ju=0$ for all $j$
+iff $e^{|x|^2/2}u$ is constant, i.e.\ $E_n=\C e^{-|x|^2/2}$. Similarly
+$C_jv=-ie^{|x|^2/2}\pa_j(e^{-|x|^2/2}v)$, so $C_jv=0$ with $v\in\cS$ means $v=e^{x_j^2/2}w$ with $w$
+independent of $x_j$, which is in $L^2$ only if $w=0$: each $C_j$ is injective on $\cS$.
+
+\emph{Spectrum.} If $u\in E_\lambda$ then $A_ju\in E_{\lambda-2}$ and $C_ju\in E_{\lambda+2}$ by the
+commutation relations. Let $0\neq u\in E_\lambda$. Since nonzero eigenvectors have eigenvalue $\ge n$,
+$A^\alpha u=0$ once $\lambda-2|\alpha|<n$; let $k$ be maximal with $A^\alpha u\neq0$ for some $|\alpha|=k$.
+Then $v=A^\alpha u\in E_{\lambda-2k}$ satisfies $A_jv=0$ for all $j$, so $\lambda-2k=n$. Conversely
+$C^\alpha e^{-|x|^2/2}\in E_{n+2|\alpha|}$ is nonzero (injectivity of the $C_j$). Hence
+$E_\lambda\neq\{0\}\iff\lambda\in n+2\N_0$.
+
+\emph{Eigenspaces.} We have just seen that $C^\alpha e^{-|x|^2/2}\in E_{n+2k}$ for $|\alpha|=k$. We show by
+induction on $k$ that every $u\in E_{n+2k}$ is a combination of these. For $k=0$ this is the ground
+state statement. For $k\ge1$, $\sum_jC_jA_ju=(H-n)u=2ku$, so
+\begin{equation*}
+  u=\frac1{2k}\sum_{j=1}^nC_j(A_ju),\qquad A_ju\in E_{n+2k-2}.
+\end{equation*}
+By induction $A_ju=\sum_{|\beta|=k-1}c_{j\beta}C^\beta e^{-|x|^2/2}$, hence
+$u=\frac1{2k}\sum_{j,\beta}c_{j\beta}C^{\beta+e_j}e^{-|x|^2/2}$, as claimed (the $C_j$ commute).
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{determinants:ex:matrix-det}}
+Write $a_1,\dots,a_N$ for the columns of $A$ and $e_1,\dots,e_N$ for the standard basis.
+
+\emph{Alternating forms.} Let $f$ be linear in each column and vanish when two columns are equal.
+Expanding $0=f(\dots,a+b,\dots,a+b,\dots)$ shows that $f$ changes sign when two columns are
+interchanged, hence $f(e_{\sigma(1)},\dots,e_{\sigma(N)})=\sgn(\sigma)f(\Id)$ for permutations $\sigma$.
+Expanding $a_j=\sum_iA_{ij}e_i$ by multilinearity,
+\begin{equation*}
+  f(A)=\sum_{\phi:\{1..N\}\to\{1..N\}}\prod_jA_{\phi(j)j}\,f(e_{\phi(1)},\dots,e_{\phi(N)})
+  =f(\Id)\sum_\sigma\sgn(\sigma)\prod_jA_{\sigma(j)j},
+\end{equation*}
+since non-injective $\phi$ give repeated columns. Replacing $\sigma$ by $\sigma^{-1}$ (same sign),
+$\sum_\sigma\sgn\sigma\prod_jA_{\sigma(j)j}=\sum_\sigma\sgn\sigma\prod_iA_{i\sigma(i)}$. This proves
+uniqueness, and that every such $f$ is $f(\Id)\det$.
+
+\emph{Existence.} $\det A=\sum_\sigma\sgn\sigma\prod_iA_{i\sigma(i)}$ is linear in each column (each
+product contains exactly one entry from each column) and $\det\Id=1$. If columns $k\neq l$ are equal,
+let $\tau$ be the transposition of $k,l$; the map $\sigma\mapsto\tau\circ\sigma$ (which in the form
+$\prod_jA_{\sigma(j)j}$ just swaps the factors from columns $k$ and $l$) pairs terms with equal
+products and opposite signs, so $\det A=0$.
+
+\emph{Multiplicativity.} Fix $A$. The columns of $AB$ are $Ab_j$, so $B\mapsto\det(AB)$ is linear in
+each column of $B$ and vanishes if two columns of $B$ coincide. By the first step
+$\det(AB)=\det(A\cdot\Id)\det B=\det A\det B$.
+
+\emph{Invertibility.} If $A$ is invertible then $\det A\det A^{-1}=\det\Id=1$. If not, some column is a
+combination of the others, $a_k=\sum_{j\ne k}c_ja_j$, and multilinearity together with the alternating
+property gives $\det A=0$.
+
+\emph{Derivative.} In $\det(\Id+sA)=\sum_\sigma\sgn\sigma\prod_i(\delta_{i\sigma(i)}+sA_{i\sigma(i)})$, every
+$\sigma\neq\Id$ moves at least two indices, so its term is $O(s^2)$; the term $\sigma=\Id$ is
+$\prod_i(1+sA_{ii})=1+s\tr A+O(s^2)$. Hence $\det(\Id+M)=1+\tr M+O(|M|^2)$ as $M\to0$ ($\det$ is a
+polynomial whose linear part at $\Id$ is $\tr$), and
+$\frac d{ds}\det(\Id+sA)|_{s=0}=\tr A$.
+
+\emph{Jacobi's formula.} For a smooth curve $A_s$ in $\GL(N;\C)$,
+$A_{s+h}=A_s(\Id+hX+o(h))$ with $X=A_s^{-1}A_s'$, so
+$\det A_{s+h}=\det A_s(1+h\tr X+o(h))$ and $\frac d{ds}\det A_s=\det A_s\tr(A_s^{-1}A_s')$.
+
+\emph{Uniqueness among multiplicative polynomials.} Let $f$ be a polynomial in the entries with
+$f(AB)=f(A)f(B)$ and $\frac d{ds}f(\Id+sA)|_{s=0}=\tr A$. Then $f(\Id)^2=f(\Id)$; if $f(\Id)=0$ then
+$f=f\cdot f(\Id)\equiv0$, contradicting the derivative condition for $A=\Id$. So $f(\Id)=1$. For
+$X\in M(N;\C)$ put $g(t)=f(e^{tX})$. Then $g(t+h)=g(t)g(h)$ and, since $e^{hX}=\Id+hX+O(h^2)$ and $f$ is
+smooth, $g'(0)=df_{\Id}(X)=\tr X$; so $g'=g\tr X$, $g(0)=1$, and $f(e^X)=g(1)=e^{\tr X}$. The same holds
+for $\det$, which has the two properties. Thus $f=\det$ on $\exp(M(N;\C))$, which contains a
+neighbourhood of $\Id$ ($\exp$ has derivative $\Id$ at $0$). A polynomial vanishing on a non-empty open
+set vanishes identically, so $f=\det$.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{determinants:ex:closed}}
+\emph{Regularity.} Write $A=\Id+E(s,t)$. A smooth family in the sense of
+\cref{determinants:def:families} is a smooth map into $\Psiiso{-\infty}\cong\cS(\R^{2n})$, its
+derivatives being the derivatives of the kernel (the uniform bounds on the next derivative
+control the Taylor remainders in every seminorm). By \cref{determinants:lem:residual-inverse},
+$A^{-1}=\Id+F(s,t)$ with $F$ smooth, and differentiating $(\Id+F)(\Id+E)=\Id$ gives
+$\pa_sA^{-1}=-A^{-1}(\pa_sA)A^{-1}$. Composition is continuous on $\Psiiso{-\infty}$ (indeed on
+$\Psiiso0\times\Psiiso{-\infty}$), so $X=A^{-1}\pa_sA=(\Id+F)\pa_sE$ and $Y=A^{-1}\pa_tA$ are smooth
+residual families, and $\Tr$, being continuous and linear, commutes with $\pa_s,\pa_t$.
+
+\emph{Computation.} With $\alpha=\Tr X\,ds+\Tr Y\,dt$, $d\alpha=(\pa_s\Tr Y-\pa_t\Tr X)\,ds\wedge dt$ and
+\begin{align*}
+  \pa_sY-\pa_tX&=\bigl(-A^{-1}\pa_sA\,A^{-1}\pa_tA+A^{-1}\pa_s\pa_tA\bigr)-\bigl(-A^{-1}\pa_tA\,A^{-1}\pa_sA+A^{-1}\pa_t\pa_sA\bigr)\\
+  &=YX-XY=[A^{-1}\pa_tA,A^{-1}\pa_sA].
+\end{align*}
+Hence $d\alpha=\Tr([A^{-1}\pa_tA,A^{-1}\pa_sA])\,ds\wedge dt$, and this vanishes by
+\cref{determinants:lem:trace-property}, both entries of the commutator being residual.
+
+\emph{Closedness on $\Giso{-\infty}$.} The value of $d(\Tr(A^{-1}dA))$ at $g\in\Giso{-\infty}$ on
+tangent vectors $V,W\in\Psiiso{-\infty}$ is, by definition of the exterior derivative (with $V,W$
+extended as constant vector fields), $\pa_s\alpha(W)-\pa_t\alpha(V)$ at $0$ along the two-parameter
+family $A(s,t)=g+sV+tW$, which lies in the open set $\Giso{-\infty}$ for small $(s,t)$ and is
+smooth. That is exactly the coefficient computed above, so it vanishes for all $g,V,W$.
+
+\emph{Periods.} Let $\gamma:[0,1]\to\Giso{-\infty}$ be a closed path, $\gamma(0)=\gamma(1)=g$. By
+\cref{determinants:lem:connected} there is a path $\delta$ from $\Id$ to $g$; the concatenations
+$\delta$ and $\delta\ast\gamma$ (reparametrized to $[0,1]$) are paths from $\Id$ to $g$, and
+$\int_{\delta\ast\gamma}\alpha=\int_\delta\alpha+\int_\gamma\alpha$. By
+\cref{determinants:lem:path-limit} both $\exp\int_\delta\alpha$ and $\exp\int_{\delta\ast\gamma}\alpha$ equal
+$\lim_N\det(\Id+\pi_N(g-\Id)|_{L_N})$, so $\exp\int_\gamma\alpha=1$, i.e.\ $\int_\gamma\alpha\in2\pi i\Z$.
+
+All values occur: if $\Pi$ is the projection onto $\C u_0$, $\gamma(s)=\Id+(e^{2\pi is}-1)\Pi$ is a closed
+path in $\Giso{-\infty}$ with $\gamma^{-1}=\Id+(e^{-2\pi is}-1)\Pi$ and $\gamma^{-1}\gamma'=2\pi i\Pi$, so
+$\int_\gamma\alpha=2\pi i$. In particular $\alpha$ is closed but not exact: there is no continuous
+logarithm of $\detFr$ on $\Giso{-\infty}$.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{determinants:ex:bundles}}
+\emph{Independence of bases.} If bases of $V,W$ are changed by invertible matrices $P\in\GL(\dim V)$,
+$Q\in\GL(\dim W)$, the matrix $(A_{ij})$ of an operator becomes $Q^{-1}(A_{ij})P$, whose entries are
+linear combinations with constant coefficients of the $A_{ij}$. Since $\Psiisoph m(\R^n)$ is a vector
+space, the entries are again in $\Psiisoph m$. Hence $\Psiisoph m(\R^n;V,W)$ is basis independent;
+intrinsically it is $\Op(\Gph m(\R^{2n};\Hom(V,W)))$, the left quantization of $\Hom(V,W)$-valued
+symbols, and likewise for $\Psiiso m$, $\Psiiso{-\infty}$ (kernels in $\cS(\R^{2n};\Hom(V,W))$) and
+families.
+
+\emph{Extension of the results.} Every result of \cref{ch:isotropic} is either linear in the operator
+or built from compositions, adjoints and symbol manipulations; in bases these are matrix operations
+on scalar operators, and the proofs go through entrywise, provided products are kept in their order.
+Precisely:
+\begin{itemize}
+\item \emph{Algebra.} If $A\in\Psiiso m(V,W)$, $B\in\Psiiso{m'}(U,V)$, then $(AB)_{ik}=\sum_jA_{ij}B_{jk}$,
+  and the expansion $\sigma_L(AB)\sim\sum_\alpha\frac1{\alpha!}\pa_\xi^\alpha a\,D_x^\alpha b$ of
+  \cref{isotropic:thm:algebra} holds with matrix products (the scalar formula applied to each
+  $A_{ij}B_{jk}$, summed over $j$). With hermitian inner products on $V,W$, adjoints are
+  $(A^*)_{ij}=(A_{ji})^*$ in orthonormal bases, with $\sigma_L(A^*)\sim\sum\frac{i^{|\alpha|}}{\alpha!}D_\xi^\alpha D_x^\alpha a^*$.
+  Principal symbols are $\Hom(V,W)$-valued and multiplicative.
+\item \emph{Boundedness, compactness, residual operators.} A matrix of bounded (compact, residual)
+  operators is bounded (compact, residual), so \cref{isotropic:prop:L2,isotropic:prop:S'-S,isotropic:prop:compact,isotropic:lem:corner}
+  hold verbatim, with norms depending on the chosen inner products only up to equivalence.
+\item \emph{Ellipticity.} $A\in\Psiisoph m(V,W)$ is elliptic if its principal symbol is invertible on
+  $\Sphere^{2n-1}$, which forces $\dim V=\dim W$. The parametrix construction of
+  \cref{isotropic:thm:parametrix} uses only the inverse of the symbol and the composition formula;
+  for matrices one uses $a^{-1}$ (smooth on the set where $|a^{-1}|\le c^{-1}\ang w^{-m}$), exactly as
+  noted in its proof. The generalized inverse (\cref{isotropic:prop:gen-inverse}) and the
+  Fredholm theory of $\Id+A$ (\cref{isotropic:lem:index-const,isotropic:prop:Id+A}) use only
+  compactness, the mapping $\cSp\to\cS$ of residual operators, and finite-dimensional linear algebra,
+  all available. So null spaces lie in $\cS(\R^n;V)$, the index is defined, and
+  \cref{isotropic:cor:fredholm-L2} holds (the coherent state argument is already written for
+  $\C^N$).
+\item \emph{Sobolev spaces.} $\Hiso s(\R^n;V)=\Hiso s(\R^n)\otimes V$ (componentwise in any basis), with
+  the mapping properties of \cref{isotropic:prop:Hiso}.
+\item \emph{Traces.} $\Tr A=\int\tr A(x,x)\,dx$ is basis independent because $\tr$ is; it is defined for
+  $V=W$.
+\end{itemize}
+The only genuinely new point is non-commutativity of symbols: e.g.\ the principal symbol of $[A,B]$ is
+$[\sigma(A),\sigma(B)]$, which need not vanish, so commutators no longer drop an order.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{determinants:ex:necessity}}
+Idea: a Fredholm operator is bounded below modulo a finite rank projection; at a point where the
+principal symbol has a kernel, a sequence of wave packets moving to infinity in that direction
+violates this.
+
+\emph{Step 1: reduction.} For $t\in\R$ the operators $H(z)=\Op(\ang Z^z)\Id_N$ form an entire family of
+elliptic operators \ref{determinants:I:families}, so $\ind H(t)=\ind H(0)=\ind\Id=0$ by
+\cref{determinants:prop:index-trace}. By \cref{determinants:prop:invertible-perturbation} there is a
+finite rank residual $F_t$ such that $Q_t=H(t)+F_t\in\Psiisoph t$ is invertible with
+$Q_t^{-1}\in\Psiisoph{-t}$. By \cref{determinants:ex:sobolev}(iv) (componentwise),
+$Q_t:\Hiso r\to\Hiso{r-t}$ is an isomorphism for every $r$. Let
+\begin{equation*}
+  T=Q_{s-m}AQ_s^{-1}\in\Psiisoph0(\R^n;\C^N).
+\end{equation*}
+As a map $L^2=\Hiso0\to\Hiso s\to\Hiso{s-m}\to\Hiso0$ it is the composite of an isomorphism, a
+Fredholm operator and an isomorphism, so it is Fredholm on $L^2$. Principal symbols are
+multiplicative, and those of $Q_{s-m}$ and $Q_s^{-1}$ are invertible (they are elliptic, $Q_sQ_s^{-1}=\Id$),
+so $\sigma_0(T)=\sigma(Q_{s-m})\sigma_m(A)\sigma(Q_s^{-1})$ is invertible at a point of the sphere if and
+only if $\sigma_m(A)$ is. So it suffices to show that $T$ is elliptic.
+
+\emph{Step 2: the sequence.} Suppose $\sigma_0(T)(\theta)v=0$ with $\theta=(x_0,\xi_0)\in\Sphere^{2n-1}$,
+$v\in\C^N$, $|v|=1$. Let $\phi\in\cS(\R^n)$ with $\norm\phi=1$, and
+\begin{equation*}
+  u_k(x)=k^{-n/2}e^{ik^2x\cdot\xi_0}\phi(x/k-kx_0)\,v,\qquad k\in\N .
+\end{equation*}
+Then $u_k\in\cS$, $\norm{u_k}=1$, and $\sup|u_k|\le k^{-n/2}\sup|\phi|\to0$, so $(u_k,f)\to0$ for
+$f\in\cS$; as $\norm{u_k}=1$ and $\cS$ is dense, $u_k\rightharpoonup0$ weakly in $L^2$.
+
+Let $a=\sigma_L(T)$ and $w_k=k^2\theta$. In the notation of \eqref{isotropic:eq:phase-translation},
+$u_k=T_{w_k}U_k\phi\,v$, where $U_kf(x)=k^{-n/2}f(x/k)$ is unitary. A change of variables $y=ky'$,
+$\xi=\xi'/k$ in the oscillatory integral gives $U_k^{-1}\Op(b)U_k=\Op(b(kx,\xi/k))$. Hence
+\begin{equation*}
+  \norm{Tu_k-a(w_k)u_k}=\norm{\Op(c_k)(\phi v)},\qquad c_k(x,\xi)=a(k^2x_0+kx,k^2\xi_0+\xi/k)-a(k^2\theta).
+\end{equation*}
+We show $\Op(c_k)(\phi v)\to0$ in $L^2$. Since $a\in\Gs0$, $c_k$ is bounded and
+$|\pa_\xi^\beta c_k|=k^{-|\beta|}|(\pa_\xi^\beta a)(\cdots)|\le C_\beta$ uniformly in $k$. Integrating by
+parts, $x^\gamma\Op(c_k)\phi(x)=\int e^{ix\cdot\xi}(-D_\xi)^\gamma(c_k\hat\phi)\,\dbar\xi$, so
+$|\Op(c_k)\phi(x)|\le C\ang x^{-n-1}$ uniformly in $k$. For fixed $(x,\xi)$ and $k$ large, the segment
+from $k^2\theta$ to $k^2\theta+(kx,\xi/k)$ stays in $|Z|\ge k^2/2$, where $|\nabla a|\le C\ang Z^{-1}$, so
+$|c_k(x,\xi)|\le C(k|x|+|\xi|)k^{-2}\to0$; by dominated convergence in $\xi$,
+$\Op(c_k)\phi(x)\to0$ for each $x$, and then by dominated convergence in $x$,
+$\norm{\Op(c_k)(\phi v)}\to0$. Finally $a-a_0\in\Gs{-1}$ with $a_0$ homogeneous of degree $0$ for
+$|Z|\ge1$, so $a(k^2\theta)v=\sigma_0(T)(\theta)v+O(k^{-2})=O(k^{-2})$. Altogether $\norm{Tu_k}\to0$.
+
+\emph{Step 3: contradiction.} Let $\Pi$ be the orthogonal projection onto the finite-dimensional
+$\Nul T$. The restriction of $T$ to $(\Nul T)^\perp$ is a bounded bijection onto the closed subspace
+$\Ran T$, so by the open mapping theorem $\norm w\le C\norm{Tw}$ for $w\perp\Nul T$; with
+$w=u-\Pi u$,
+\begin{equation*}
+  \norm u\le C\norm{Tu}+\norm{\Pi u}\qquad(u\in L^2).
+\end{equation*}
+For $u=u_k$: $\norm{Tu_k}\to0$, and $\Pi u_k=\sum_j(u_k,e_j)e_j\to0$ ($e_j$ an orthonormal basis of
+$\Nul T$) because $u_k\rightharpoonup0$. This contradicts $\norm{u_k}=1$. Hence $\sigma_0(T)$ is invertible on
+$\Sphere^{2n-1}$, $T$ is elliptic, and so is $A$.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{determinants:ex:koszul}}
+(This is \cref{isotropic:ex:koszul}; we give a complete solution.) Write $\eps_j=dx^j\wedge\cdot$ on
+$\Lambda^*$ and $\iota_j=\eps_j^*$, contraction with $e_j$. Then $D=\sum_jA_j\otimes\eps_j$ (with $A_j$ acting on
+coefficients). We use: $\eps_j\eps_l=-\eps_l\eps_j$, $\iota_j\iota_l=-\iota_l\iota_j$, and
+\begin{equation}\label{soldeterminants:eq:car}
+  \eps_j\iota_l+\iota_l\eps_j=\delta_{jl},
+\end{equation}
+which is the antiderivation property of contraction,
+$\iota_l(dx^j\wedge\omega)=\delta_{lj}\omega-dx^j\wedge\iota_l\omega$. Moreover $\mathcal N=\sum_j\eps_j\iota_j$ is
+$k$ on $\Lambda^k$, since $\eps_j\iota_jdx^I=dx^I$ if $j\in I$ and $0$ otherwise.
+
+\emph{$D^2=0$ and $D^*$.} $D^2=\sum_{j,l}A_jA_l\otimes\eps_j\eps_l=0$, as $A_jA_l$ is symmetric and
+$\eps_j\eps_l$ antisymmetric in $(j,l)$. For $u,v\in\cS(\R^n;\Lambda^*)$,
+$(Du,v)=\sum_j(A_j\otimes\eps_ju,v)=\sum_j(u,C_j\otimes\iota_jv)$ because $A_j^*=C_j$ on $\cS$ and
+$\eps_j^*=\iota_j$ for the orthonormal basis $dx^I$; so $D^*=\sum_jC_j\otimes\iota_j$.
+
+\emph{Ellipticity.} The entries of $D+D^*$ are combinations of $A_j=\Op(\xi_j-ix_j)$ and
+$C_j=\Op(\xi_j+ix_j)$, so $D+D^*\in\Psiisoph1(\R^n;\Lambda^*)$ with principal symbol
+$\sigma=\sum_j(z_j\eps_j+\bar z_j\iota_j)$, $z_j=\xi_j-ix_j$. By \eqref{soldeterminants:eq:car} and the
+anticommutation relations, $\sigma^2=\sum_{j,l}z_j\bar z_l(\eps_j\iota_l+\iota_l\eps_j)=|Z|^2$, so $\sigma$ is
+invertible on the sphere and $D+D^*$ is elliptic.
+
+\emph{The square.} $(D+D^*)^2=DD^*+D^*D$ since $D^2=0$ and $(D^*)^2=\sum C_jC_l\otimes\iota_j\iota_l=0$.
+Using $A_jC_l=C_lA_j+2\delta_{jl}$,
+\begin{equation*}
+  DD^*+D^*D=\sum_{j,l}\bigl(A_jC_l\,\eps_j\iota_l+C_lA_j\,\iota_l\eps_j\bigr)
+  =\sum_{j,l}C_lA_j(\eps_j\iota_l+\iota_l\eps_j)+2\sum_j\eps_j\iota_j=\sum_jC_jA_j+2\mathcal N=H-n+2\mathcal N .
+\end{equation*}
+
+\emph{Null space.} If $(D+D^*)u=0$, $u\in\cSp(\R^n;\Lambda^*)$, then $(H-n+2\mathcal N)u=0$, i.e.\
+$Hu_I=(n-2k)u_I$ for each coefficient of degree $k$. By \cref{determinants:ex:oscillator} the eigenvalues
+of $H$ on $\cSp$ are $\ge n$, so $u_I=0$ for $k\ge1$, and $u=u_0\in E_n=\C e^{-|x|^2/2}$. Conversely
+$(D+D^*)e^{-|x|^2/2}=\sum_jA_je^{-|x|^2/2}dx^j=0$ ($\iota_j$ kills $\Lambda^0$, $A_j$ kills the ground state).
+
+\emph{Degree $0$.} On $\Lambda^0$, $D^*=0$, so $Du=0$ iff $(D+D^*)u=0$ iff $u\in\C e^{-|x|^2/2}$.
+
+\emph{Degree $k\ge1$.} Let $L=H-n+2\mathcal N$; on $\Lambda^k$ it is $H-(n-2k)$, and $n-2k\notin\Spec H$, so
+$L$ is elliptic with trivial null space on $\cSp$, and so is its adjoint (the same operator); by
+\ref{determinants:I:elliptic} it is a bijection of $\cSp(\R^n;\Lambda^k)$. From $A_jH=(H+2)A_j$ we get
+$DL=LD$: on $\Lambda^k$, $D(H-n+2k)=\sum_j(H+2-n+2k)A_j\eps_j=L D$. Hence also $L^{-1}D=DL^{-1}$. Now let
+$Du=0$, $u\in\cSp(\R^n;\Lambda^k)$, and $w=L^{-1}u$. Then $Dw=L^{-1}Du=0$ and
+\begin{equation*}
+  u=Lw=DD^*w+D^*Dw=D(D^*w),\qquad D^*w\in\cSp(\R^n;\Lambda^{k-1}).
+\end{equation*}
+Conversely $D(D\cSp)=0$. So $\{Du=0\}=D\cSp(\R^n;\Lambda^{k-1})$ for $k\ge1$.
+
+\emph{Index.} $D+D^*$ maps even forms to odd ones and conversely; $\Lambda^{\mathrm{even}}$ and
+$\Lambda^{\mathrm{odd}}$ both have dimension $2^{n-1}$. Let $P=(D+D^*)|_{\mathrm{even}}$, so
+$P^*=(D+D^*)|_{\mathrm{odd}}$. The principal symbols satisfy $\sigma_{P^*}\sigma_P=|Z|^2=\sigma_P\sigma_{P^*}$,
+so $P$ is elliptic. Its null space is the even part of $\Nul(D+D^*)$, namely $\C e^{-|x|^2/2}$; the null
+space of $P^*$ is the odd part, $\{0\}$. Hence $\ind P=1-0=1$ and $\ind P^*=0-1=-1$.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{determinants:ex:ess-supp}}
+Say that a symbol $b$ is \emph{trivial in} an open cone $\Gamma$ if
+$|D^\alpha b(Z)|\le C_{\alpha,k}\ang Z^{-k}$ on $\Gamma$ for all $\alpha,k$. Let $\operatorname{cs}(b)$ be the
+complement in $\R^{2n}\setminus0$ of the set of points having an open conic neighbourhood in which
+$b$ is trivial; so $\WFiso'(A)=\operatorname{cs}(\sigma_L(A))$.
+
+\emph{Closed and conic.} If $Z_0$ has such a neighbourhood $\Gamma$, so does every point of $\Gamma$, and
+$\Gamma$ is also a conic neighbourhood of $tZ_0$, $t>0$. So the complement of $\WFiso'(A)$ is open and
+conic.
+
+\emph{Lemma A.} Let $a,b\in\Gs m$ and suppose $a\sim\sum_\alpha c_\alpha D_x^\alpha D_\xi^\alpha b$ for constants
+$c_\alpha$, meaning $a-\sum_{|\alpha|<N}c_\alpha D_x^\alpha D_\xi^\alpha b\in\Gs{m-2N}$ for all $N$. Then
+$\operatorname{cs}(a)\subset\operatorname{cs}(b)$. Indeed if $b$ is trivial in $\Gamma$, so are all its
+derivatives, and on $\Gamma$, $|D^\beta a|\le C_N\ang Z^{-k}+C\ang Z^{m-2N-|\beta|}$ for every $N$.
+
+\emph{Right and Weyl symbols.} If $b_R$ is the right symbol of $A$ (which exists and is unique,
+\cref{isotropic:thm:algebra}(ii) and its proof), then $\sigma_L(A)\sim\sum\frac{i^{|\alpha|}}{\alpha!}D_\xi^\alpha
+D_x^\alpha b_R$ (\cref{isotropic:prop:reduction} with amplitude $b_R(y,\xi)$) and
+$b_R\sim\sum\frac{(-i)^{|\alpha|}}{\alpha!}D_\xi^\alpha D_x^\alpha\sigma_L(A)$ (proof of
+\cref{isotropic:thm:algebra}(ii)). Lemma A applied twice gives $\operatorname{cs}(b_R)=\operatorname{cs}(\sigma_L(A))$. For the
+Weyl symbol $a_W$, \cref{isotropic:prop:weyl} gives
+$\sigma_L(A)\sim\sum\frac{(i/2)^{|\alpha|}}{\alpha!}D_\xi^\alpha D_x^\alpha a_W$, and its proof gives $a_W-a'\in\cS$
+with $a'\sim\sum\frac{(-i/2)^{|\alpha|}}{\alpha!}D_\xi^\alpha D_x^\alpha\sigma_L(A)$. Since adding a Schwartz function
+does not change $\operatorname{cs}$, Lemma A gives $\operatorname{cs}(a_W)=\operatorname{cs}(a')\subset\operatorname{cs}(\sigma_L(A))\subset\operatorname{cs}(a_W)$.
+
+\emph{Sums.} If $Z_0\notin\WFiso'(A)\cup\WFiso'(B)$, take $\Gamma=\Gamma_A\cap\Gamma_B$; then $a+b$ is
+trivial in $\Gamma$.
+
+\emph{Products.} Let $A\in\Psiisoph m$, $B\in\Psiisoph{m'}$, and suppose $a$ is trivial in $\Gamma\ni Z_0$.
+In $\sigma_L(AB)-\sum_{|\alpha|<N}\frac1{\alpha!}\pa_\xi^\alpha a\,D_x^\alpha b\in\Gs{m+m'-2N}$ each term is trivial in
+$\Gamma$ (derivatives of $b$ grow at most like $\ang Z^{m'}$), so $\sigma_L(AB)$ is trivial in $\Gamma$ as in
+Lemma A. If instead $b$ is trivial in $\Gamma$, the same argument applies. Hence
+$\WFiso'(AB)\subset\WFiso'(A)\cap\WFiso'(B)$.
+
+\emph{Empty essential support.} If $A$ is residual then $a\in\cS$ is trivial everywhere. Conversely, if
+$\WFiso'(A)=\emptyset$, every $\theta\in\Sphere^{2n-1}$ has an open conic neighbourhood in which $a$ is
+trivial; finitely many cover $\R^{2n}\setminus0$, so $|D^\alpha a|\le C\ang Z^{-k}$ on $\R^{2n}\setminus0$,
+and at $0$ by continuity. So $a\in\cS$ and $A\in\Psiiso{-\infty}$.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{determinants:ex:partition}}
+Fix $\chi\in\CI(\R^{2n})$ with $\chi=0$ for $|Z|\le\frac12$ and $\chi=1$ for $|Z|\ge1$. For
+$\psi\in\CI(\Sphere^{2n-1})$, $q_\psi(Z)=\chi(Z)\psi(Z/|Z|)$ is homogeneous of degree $0$ in $|Z|\ge1$,
+hence lies in $\Gph0$ with principal symbol $\psi$. Moreover:
+\begin{equation}\label{soldeterminants:eq:cutoff}
+  \WFiso'(\Op(q_\psi))\subset\widetilde{\supp\psi},\qquad
+  \WFiso'(\Id-\Op(q_\psi))\subset\widetilde{\supp(1-\psi)},
+\end{equation}
+where $\tilde K$ is the cone over $K\subset\Sphere^{2n-1}$. Indeed $q_\psi$ vanishes in $|Z|\ge1$ on the open
+cone over $\Sphere^{2n-1}\setminus\supp\psi$; there it is trivial (on the bounded part $|Z|\le1$ all
+derivatives are bounded). Likewise $1-q_\psi=1-\psi(Z/|Z|)$ for $|Z|\ge1$.
+
+Now let $\psi_i$ be a smooth partition of unity on $\Sphere^{2n-1}$ subordinate to $\{U_i\}$, and
+$A_i=\Op(q_{\psi_i})\in\Psiisoph0$. By \eqref{soldeterminants:eq:cutoff},
+$\WFiso'(A_i)\subset\widetilde{\supp\psi_i}\subset\tilde U_i$. Since $\sum_iq_{\psi_i}=\chi$,
+$\Id-\sum_iA_i=\Op(1-\chi)$ with $1-\chi\in\CIc\subset\cS$, which is residual.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{determinants:ex:perturbation-sobolev}}
+By \cref{determinants:prop:invertible-perturbation} (with $s=1$) and its proof, $A+F\in\Psiisoph m$ has the
+two-sided inverse $R=B+G\in\Psiisoph{-m}$: $(A+F)R=\Id=R(A+F)$. These identities hold on $\cS$, hence
+on $\cSp$ by continuity and density. Since $A+F$ and $R$ are continuous on $\cS$ and on $\cSp$
+\ref{determinants:I:bounded}, $A+F$ is a topological isomorphism of $\cS$ and of $\cSp$. By
+\cref{determinants:ex:sobolev}(iv), $A+F:\Hiso s\to\Hiso{s-m}$ and $R:\Hiso{s-m}\to\Hiso s$ are bounded;
+being mutually inverse (as restrictions of the inverse maps on $\cSp$), $A+F$ is an isomorphism
+$\Hiso s\to\Hiso{s-m}$ for every $s$.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{determinants:ex:wf}}
+\emph{Closed cone.} $\Char_{\mathrm{iso}}(A)$ is the cone over the zero set of the continuous function
+$\sigma_0(A)$ on the sphere, a closed cone in $\R^{2n}\setminus0$; an intersection of closed cones is a
+closed cone.
+
+\emph{Empty wavefront set.} If $u\in\cS$, take $A=\Id$, $\Char_{\mathrm{iso}}(\Id)=\emptyset$. Conversely
+suppose $\WFiso(u)=\emptyset$. For each $\theta\in\Sphere^{2n-1}$ there is $A_\theta\in\Psiisoph0$ with
+$A_\theta u\in\cS$ and $\sigma_0(A_\theta)(\theta)\ne0$, hence $\sigma_0(A_\theta)\neq0$ on an open neighbourhood
+of $\theta$. By compactness finitely many, $A_1,\dots,A_J$, suffice. Then
+$P=\sum_jA_j^*A_j\in\Psiisoph0$ has principal symbol $\sum_j|\sigma_0(A_j)|^2>0$ on the sphere, so it is
+elliptic, and $Pu=\sum_jA_j^*(A_ju)\in\cS$. By elliptic regularity $u\in\cS$.
+
+\emph{$\WFiso(Bu)\subset\WFiso'(B)$.} Let $Z_0\notin\WFiso'(B)$, $\theta_0=Z_0/|Z_0|$, and let $\Gamma$ be an
+open conic neighbourhood of $Z_0$ disjoint from $\WFiso'(B)$ (which is closed). Choose
+$\psi\in\CI(\Sphere^{2n-1})$ with $\psi(\theta_0)=1$ and $\supp\psi\subset\Gamma$, and $Q=\Op(q_\psi)$ as in
+the solution of \cref{determinants:ex:partition}. Then $Z_0\notin\Char_{\mathrm{iso}}(Q)$ and, by
+\cref{determinants:ex:ess-supp} and \eqref{soldeterminants:eq:cutoff},
+$\WFiso'(QB)\subset\widetilde{\supp\psi}\cap\WFiso'(B)=\emptyset$, so $QB$ is residual and $QBu\in\cS$.
+Thus $Z_0\notin\WFiso(Bu)$.
+
+\emph{$\WFiso(Bu)\subset\WFiso(u)$.} Let $Z_0\notin\WFiso(u)$: there is $A\in\Psiisoph0$ with $Au\in\cS$ and
+$\sigma_0(A)\ne0$ on an open neighbourhood $V$ of $\theta_0$ in the sphere. Choose
+$\psi_2,\psi,\psi_1\in\CI(\Sphere^{2n-1};[0,1])$ with $\psi_2(\theta_0)=1$, $\psi=1$ near $\supp\psi_2$,
+$\psi_1=1$ near $\supp\psi$, and $\supp\psi_1\subset V$.
+
+First we localize $u$. The operator $P=A^*A+\Op(q_{1-\psi_1})\in\Psiisoph0$ has principal symbol
+$|\sigma_0(A)|^2+(1-\psi_1)>0$ (on $\supp\psi_1\subset V$ the first term is positive, elsewhere the second is
+$1$), so it has a parametrix $P'$, $P'P=\Id-R_0$ with $R_0$ residual. With $Q=\Op(q_\psi)$,
+\begin{equation*}
+  Qu=QP'A^*(Au)+QP'\Op(q_{1-\psi_1})u+QR_0u .
+\end{equation*}
+The first term is in $\cS$ since $Au\in\cS$; the last since $QR_0$ is residual; and
+$\WFiso'(QP'\Op(q_{1-\psi_1}))\subset\widetilde{\supp\psi}\cap\widetilde{\supp(1-\psi_1)}=\emptyset$
+(\cref{determinants:ex:ess-supp}, \eqref{soldeterminants:eq:cutoff}; $\supp(1-\psi_1)$ misses a neighbourhood of
+$\supp\psi$), so the middle operator is residual too. Hence $Qu\in\cS$.
+
+Now let $Q_2=\Op(q_{\psi_2})$. Then $Q_2Bu=Q_2B(Qu)+Q_2B(\Id-Q)u$. The first term is in $\cS$. By
+\cref{determinants:ex:ess-supp} and \eqref{soldeterminants:eq:cutoff},
+$\WFiso'(Q_2B(\Id-Q))\subset\widetilde{\supp\psi_2}\cap\widetilde{\supp(1-\psi)}=\emptyset$, since $\psi=1$
+on a neighbourhood of $\supp\psi_2$. So $Q_2Bu\in\cS$ and $\sigma_0(Q_2)(\theta_0)=1$, i.e.\
+$Z_0\notin\WFiso(Bu)$.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{determinants:ex:extend}}
+Idea: residual operators are dense in $\Psiiso m$ for the trace norm, and $\detFr$ is locally
+uniformly continuous in the trace norm; so it extends by continuity, and all identities pass to the
+limit. Fix $m<-2n$ and $m'\in(m,-2n)$. We use the following standard facts about the Schatten ideals
+$\mathcal L^1\subset\mathcal L^2$ (trace class and Hilbert--Schmidt operators) on $L^2(\R^n)$:
+$\mathcal L^1$ is a Banach space with $\norm X\le\norm X_1$ and
+$\norm{TXS}_1\le\norm T\norm X_1\norm S$ for bounded $T,S$; if $Y,Z\in\mathcal L^2$ then
+$\norm{YZ}_1\le\norm Y_2\norm Z_2$ and $\norm{TY}_2\le\norm T\norm Y_2$; an integral operator with
+kernel in $L^2(\R^{2n})$ is Hilbert--Schmidt with $\norm\cdot_2$ the $L^2$ norm of the kernel; the trace
+$\tr X=\sum_i(Xe_i,e_i)$ is independent of the orthonormal basis, linear, and
+$|\tr(TX)|\le\norm T\norm X_1$. For residual $X$, $\Tr X=\tr X$ (remark after
+\cref{determinants:lem:finite-trace}).
+
+\emph{(a) Continuity of $\Tr$.} For $a\in\Gs m$, $|\Tr\Op(a)|\le(2\pi)^{-n}\sup|\ang Z^{-m}a|\int\ang Z^m\,dZ$
+by \eqref{determinants:eq:trace-symbol}, a continuous seminorm since $m<-2n$.
+
+\emph{(b) Trace norm.} If $\mu<-n$ and $c\in\Gs\mu$, Plancherel in $\xi$ gives
+$\norm{\Op(c)}_2=(2\pi)^{-n/2}\norm c_{L^2(\R^{2n})}\le C\sup|\ang Z^{-\mu}c|$. Let $\mu=m'/2$, let
+$\Lambda=\Lambda_\mu$ with parametrix $G\in\Psiisoph{-\mu}$, $\Id-\Lambda G=R$ residual. For $X\in\Psiiso{m'}$,
+\begin{equation*}
+  X=\Lambda(GX)+H^{-n}(H^nRX),
+\end{equation*}
+with $\Lambda,GX\in\Psiiso\mu$, $H^{-n}\in\Psiisoph{-2n}$ (\cref{isotropic:prop:H-inverse}) and $H^nRX$ residual,
+all Hilbert--Schmidt. By continuity of composition \ref{determinants:I:algebra},
+\begin{equation}\label{soldeterminants:eq:trace-norm}
+  \norm X_1\le C\,p(X)\qquad(X\in\Psiiso{m'})
+\end{equation}
+for a continuous seminorm $p$ on $\Psiiso{m'}$. Moreover $\Tr=\tr$ on $\Psiiso m$: if $E=\Op(e)\in\Psiiso m$
+and $E_k=\Op(\chi(Z/k)e)$ ($\chi\in\CIc$ equal to $1$ near $0$), then $E_k$ is residual and $E_k\to E$ in
+$\Psiiso{m'}$ (proof of \cref{determinants:lem:trace-property}), so by (a) and
+\eqref{soldeterminants:eq:trace-norm} both $\Tr E_k\to\Tr E$ and $\tr E_k\to\tr E$. In particular
+\begin{equation}\label{soldeterminants:eq:approx}
+  \norm{E_k-E}_1\to0,
+\end{equation}
+so $\Psiiso{-\infty}$ is dense in $\Psiiso m$ for the trace norm.
+
+\emph{(c) Inverses.} Let $E\in\Psiiso m$ with $\Id+E$ invertible on $L^2$, $T=(\Id+E)^{-1}$. The symbol of
+$\Id+E$ tends to $1$ at infinity, so $\Id+E\in\Psiiso0$ is elliptic; let $B\in\Psiiso0$ be a parametrix
+(\cref{isotropic:thm:parametrix}), $B(\Id+E)=\Id+R_1$, $(\Id+E)B=\Id+R_2$, $R_i$ residual. Then
+$(\Id+R_1)T=B$ and $T(\Id+R_2)=B$, so
+\begin{equation*}
+  T=B-R_1T=B-R_1(B-TR_2)=B-R_1B+R_1TR_2\in\Psiiso0,
+\end{equation*}
+by \cref{determinants:lem:trilinear}. Hence $F=T-\Id=-ET\in\Psiiso m$, and $T=\Id+F$. Also: $\Id+E$ is
+Fredholm of index $0$ ($E$ is compact, \cref{isotropic:lem:index-const}), and by
+\cref{isotropic:prop:gen-inverse} $N_0=\Nul(\Id+E)$ and $N_1=\Nul(\Id+E^*)$ are subspaces of $\cS$ with
+$\Ran(\Id+E)=N_1^\perp$. With orthonormal bases $f_j$ of $N_0$, $g_j$ of $N_1$, the finite rank residual
+operator $F'u=\sum_j(u,f_j)g_j$ satisfies $F'=F'\Pi_0$ ($\Pi_0$ the projection onto $N_0$), and
+$\Id+E+F'$ is invertible: if $(\Id+E)u=-F'u\in N_1\cap N_1^\perp$ then $u\in N_0$ and $F'u=0$, so $u=0$;
+and an injective compact perturbation of $\Id$ is invertible.
+
+\emph{(d) Definition by approximation.} \emph{Claim:} if $E\in\Psiiso m$ and $X_k\in\Psiiso{-\infty}$ with
+$\norm{X_k-E}_1\to0$, then $\lim_k\detFr(\Id+X_k)$ exists, is independent of the sequence, and is
+non-zero if and only if $\Id+E$ is invertible.
+
+Suppose first $\Id+E$ invertible, $M=2\norm{(\Id+E)^{-1}}$. For $k,l\ge k_0$ we have
+$\norm{X_k-E},\norm{X_l-E}<1/M$, so for $s\in[0,1]$ the operators $\sigma(s)=\Id+X_k+s(X_l-X_k)$ are
+invertible with $\norm{\sigma(s)^{-1}}\le M$ (Neumann series). The segment $\sigma$ is a path in
+$\Giso{-\infty}$, so by \eqref{determinants:eq:det-variation}
+\begin{equation*}
+  \detFr(\Id+X_l)=\detFr(\Id+X_k)\exp\delta_{kl},\qquad
+  |\delta_{kl}|=\Bigl|\int_0^1\tr\bigl(\sigma(s)^{-1}(X_l-X_k)\bigr)ds\Bigr|\le M\norm{X_l-X_k}_1 .
+\end{equation*}
+Since $\delta_{kl}\to0$, $(\detFr(\Id+X_k))$ is Cauchy and bounded away from $0$, hence converges to a
+non-zero limit. If $\Id+E$ is not invertible, let $F'$ be as in (c), $G=\Id+E+F'$, $G_k=\Id+X_k+F'$
+(invertible for large $k$, with $G_k^{-1}\to G^{-1}$ in norm). Then $\Id+X_k=G_k(\Id+R_k)$ with
+$R_k=-G_k^{-1}F'=R_k\Pi_0$ residual, and by \cref{determinants:prop:det-basic}\ref{determinants:it:mult} and
+\cref{determinants:lem:reduction}, with $L=N_0$,
+\begin{equation*}
+  \detFr(\Id+X_k)=\detFr(G_k)\det\bigl(\Id_L+\Pi_0R_k|_L\bigr).
+\end{equation*}
+The first factor converges by the invertible case (applied to $E+F'$); the matrix entries of the
+second converge, and the limit $\det(\Id_L-\Pi_0G^{-1}F'|_L)$ vanishes, because $\Id-G^{-1}F'=G^{-1}(\Id+E)$
+is not injective, and by the triangular form in the proof of \cref{determinants:lem:reduction} (pure
+linear algebra, valid for any bounded $R=R\Pi_0$) $\Id+R$ is invertible iff $\det(\Id_L+\Pi_0R|_L)\neq0$.
+Independence of the sequence follows by interleaving two sequences.
+
+We define $\detFr(\Id+E)$ as this limit; for residual $E$ it is the old value (constant sequence),
+and by \eqref{soldeterminants:eq:approx} approximating sequences exist. A diagonal argument shows that
+$\detFr$ is \emph{continuous on $\Id+\Psiiso m$ for the trace norm}: if $E^{(j)}\to E$ in $\mathcal L^1$,
+choose residual $X_j$ with $\norm{X_j-E^{(j)}}_1<1/j$ and $|\detFr(\Id+X_j)-\detFr(\Id+E^{(j)})|<1/j$;
+then $X_j\to E$ in $\mathcal L^1$ and the claim gives $\detFr(\Id+E^{(j)})\to\detFr(\Id+E)$. By
+\eqref{soldeterminants:eq:trace-norm}, $\detFr$ is in particular continuous on $\Id+\Psiiso m$ for the topology of
+$\Psiiso m$ (indeed of $\Psiiso{m'}$).
+
+\emph{(e) Properties of \cref{determinants:prop:det-basic}.} All follow by approximation. (i) For
+$A=\Id+E$, $B=\Id+E'$ in $\Id+\Psiiso m$, $AB\in\Id+\Psiiso m$; with residual $X_k\to E$, $X'_k\to E'$ in
+$\mathcal L^1$, also $(\Id+X_k)(\Id+X_k')-\Id\to AB-\Id$ in $\mathcal L^1$, so
+$\detFr(AB)=\lim\detFr(\Id+X_k)\detFr(\Id+X_k')=\detFr(A)\detFr(B)$. (ii) is part of the claim in (d).
+(iv) If $A\in\Psiisoph{m''}$ is invertible then $A(B-\Id)A^{-1}\in\Psiiso m$, and $A(X_k-E)A^{-1}\to0$ in
+$\Psiiso{m'}$ by continuity of composition, hence in $\mathcal L^1$; so
+$\detFr(ABA^{-1})=\lim\detFr(\Id+AX_kA^{-1})=\lim\detFr(\Id+X_k)=\detFr(B)$. (iii) Here we need that
+$\exp E-\Id$ and $\log(\Id+E)$ lie in $\Psiiso m$; this is the lemma at the end of this solution. Given
+that, $\norm{X_k^j-E^j}_1\le jr^{j-1}\norm{X_k-E}_1$ with $r=\sup_k(\norm{X_k},\norm E)$ shows
+$\exp X_k-\Id\to\exp E-\Id$ in $\mathcal L^1$, so
+$\detFr(\exp E)=\lim\detFr(\exp X_k)=\lim\exp\Tr X_k=\exp\Tr E$; and if $\norm E<1$, then
+$\norm{X_k}\le r<1$ for large $k$, $\log(\Id+X_k)\to\log(\Id+E)$ in $\mathcal L^1$ (the series converge
+in $\mathcal L^1$), and $\detFr(\Id+E)=\exp\Tr\log(\Id+E)$.
+
+\emph{(f) Paths.} First, for $Y\in\Psiiso m$ with $\norm Y_1\le\frac12$,
+\begin{equation}\label{soldeterminants:eq:first-order}
+  \detFr(\Id+Y)=e^{\ell(Y)},\qquad \ell(Y)=\int_0^1\tr\bigl((\Id+tY)^{-1}Y\bigr)dt,\qquad |\ell(Y)-\tr Y|\le2\norm Y_1^2 .
+\end{equation}
+For residual $Y$ the first identity is \eqref{determinants:eq:det-variation} along the segment
+$t\mapsto\Id+tY$; both sides are continuous in $Y$ for the trace norm, so it extends. The estimate
+follows from $|\tr(((\Id+tY)^{-1}-\Id)Y)|\le\norm{(\Id+tY)^{-1}-\Id}\norm Y_1\le2\norm Y\norm Y_1$.
+
+Now let $\gamma(s)=\Id+E(s)$ be a path in $\Giso m=\{\Id+E;\ E\in\Psiiso m,\ \Id+E\text{ invertible}\}$,
+piecewise smooth into $\Psiiso m$, hence into $\mathcal L^1$ by \eqref{soldeterminants:eq:trace-norm}, with
+$\gamma^{-1}$ norm continuous. By (c), $\gamma^{-1}\gamma'\in\Psiiso m$, and
+$\tau(s)=\Tr(\gamma^{-1}\gamma')=\tr(\gamma^{-1}\gamma')$ is continuous on each interval of smoothness. Let
+$g(s)=\detFr(\gamma(s))$. By (e)(i), $g(s+h)=g(s)\detFr(\Id+Y_h)$ with
+$Y_h=\gamma(s)^{-1}(\gamma(s+h)-\gamma(s))$, and $\norm{Y_h-h\gamma(s)^{-1}\gamma'(s)}_1=o(h)$. By
+\eqref{soldeterminants:eq:first-order}, $\detFr(\Id+Y_h)=1+h\tau(s)+o(h)$, so $g'=\tau g$ (one-sided at break
+points), and $g$ is continuous. Hence $g(1)=g(0)\exp\int_0^1\tau$, that is
+\begin{equation*}
+  \detFr(\gamma(1))=\detFr(\gamma(0))\exp\int_\gamma\Tr(A^{-1}dA).
+\end{equation*}
+Paths from $\Id$ to any point of $\Giso m$ exist (the proof of \cref{determinants:lem:connected} only uses
+compactness of $E$). Thus the integral of $\Tr(A^{-1}dA)$ along paths in $\Giso m$ from $\Id$ is
+path independent modulo $2\pi i\Z$, and defining $\detFr$ by it, and as $0$ off $\Giso m$, gives the
+function of (d): the definition extends.
+
+\emph{(g) Properties of \cref{determinants:thm:det-entire}.} Continuity was shown in (d). The limit
+formula: $E=YZ$ with $Y,Z\in\mathcal L^2$ by (b), and $\norm{\pi_NY-Y}_2\to0$,
+$\norm{Z\pi_N-Z}_2=\norm{\pi_NZ^*-Z^*}_2\to0$ (dominated convergence in
+$\norm W_2^2=\sum_\alpha\norm{Wu_\alpha}^2$, as $\pi_N\to\Id$ strongly); hence
+$\norm{\pi_NE\pi_N-E}_1\le\norm{\pi_NY-Y}_2\norm Z_2+\norm Y_2\norm{Z\pi_N-Z}_2\to0$, and
+$\detFr(\Id+\pi_NE\pi_N)=\det(\Id+\pi_NE|_{L_N})$ (\cref{determinants:lem:reduction}) converges to
+$\detFr(\Id+E)$. Smooth families: let $E_y$ be smooth in $y$ with values in $\Psiiso m$ (symbol smooth
+into $\Gs m$); then $y\mapsto E_y$ is smooth into $\mathcal L^1$ and into $\Lin(L^2)$. Near a point where
+$\Id+E_y$ is invertible, (f) applied along coordinate lines gives
+$\pa_j\log\detFr(\Id+E_y)=\tr((\Id+E_y)^{-1}\pa_jE_y)$, a smooth function of $y$ (composite of the smooth
+maps $y\mapsto(\Id+E_y)^{-1}\in\Lin(L^2)$, $y\mapsto\pa_jE_y\in\mathcal L^1$ and the continuous bilinear
+map $(T,X)\mapsto\tr(TX)$); so $\detFr(\Id+E_y)$ is smooth. For a holomorphic family the same
+computation, via \eqref{soldeterminants:eq:first-order}, gives complex differentiability. Near a point $y_0$
+where $\Id+E_{y_0}$ is not invertible, take $F'$ for $E_{y_0}$ as in (c), $G_0=\Id+E_{y_0}+F'$ and
+$K(y)=(G_0+E_y-E_{y_0})^{-1}\in\Id+\Psiiso m$; as in the proof of \cref{determinants:thm:det-entire},
+\begin{equation*}
+  \detFr(\Id+E_y)=\detFr(K(y)^{-1})\det\bigl(\Id_L-\Pi_0K(y)F'|_L\bigr),
+\end{equation*}
+where the first factor is smooth (holomorphic) by the invertible case and the second is a polynomial
+in the entries $(K(y)F'e_j,e_i)$, smooth (holomorphic) since $y\mapsto K(y)$ is, in norm.
+
+\emph{Lemma (functional calculus).} Let $E\in\Psiiso m$ (any $m<0$) and $f(z)=\sum_{j\ge1}c_jz^j$ with radius
+of convergence $\rho>r(E)$, the spectral radius of $E$ on $L^2$. Then $f(E)=\sum_jc_jE^j$ (norm
+convergent) lies in $\Psiiso m$. This applies to $f=e^z-1$, and to $f=\log(1+z)$ when $\norm E<1$.
+
+\emph{Proof.} For $p\in\Z$, $E_p=H^pEH^{-p}\in\Psiiso m$ (\cref{isotropic:prop:H-inverse}) is compact, and
+$r(E_p)=r(E)$: a nonzero eigenvalue $\lambda$ of $E_p$ has an eigenvector $v\in L^2$, which lies in $\cS$
+by elliptic regularity for $\Id-E_p/\lambda\in\Psiiso0$, so $H^{-p}v\in\cS$ is an eigenvector of $E$, and
+symmetrically; and the spectral radius of a compact operator is the largest modulus of its
+eigenvalues. Hence $\sum|c_j|\norm{E_p^j}<\infty$ for every $p$ (Gelfand's formula). Choose
+$b\in\Gs m$ with $b\sim\sum_jc_j\sigma_L(E^j)$, $\sigma_L(E^j)\in\Gs{jm}$ (the proof of
+\cref{isotropic:lem:asymp-Gamma} works for any orders decreasing to $-\infty$), and let $R=f(E)-\Op(b)$.
+For each $N$, $f(E)=\sum_{j\le N}c_jE^j+E^{N+1}f_N(E)$ with $f_N(z)=\sum_{j>N}c_jz^{j-N-1}$, and
+$\sum_{j\le N}c_jE^j-\Op(b)\in\Psiiso{(N+1)m}$. For $M\in\N$ and $(N+1)|m|\ge4M$, on $\cS$,
+\begin{equation*}
+  H^MRH^M=\bigl(H^ME^{N+1}H^M\bigr)f_N(E_{-M})+H^M\Bigl(\sum_{j\le N}c_jE^j-\Op(b)\Bigr)H^M,
+\end{equation*}
+using $H^{-M}E^jH^M=E_{-M}^j$; both terms are bounded on $L^2$ (operators of order $\le0$, and a norm
+convergent series). Therefore, with the Hermite functions,
+$|(Ru_\beta,u_\alpha)|=(n+2|\alpha|)^{-M}(n+2|\beta|)^{-M}|(H^MRH^Mu_\beta,u_\alpha)|\le C_M(n+2|\alpha|)^{-M}(n+2|\beta|)^{-M}$
+for every $M$. By \cref{isotropic:prop:hermite-schwartz} on $\R^{2n}$ (as in
+\cref{isotropic:cor:finite-rank-dense}) the series $\sum(Ru_\beta,u_\alpha)u_\alpha(x)\overline{u_\beta(y)}$
+converges in $\cS(\R^{2n})$, and the residual operator it defines agrees with $R$ on every $u_\beta$, hence
+on $L^2$. So $R\in\Psiiso{-\infty}$ and $f(E)\in\Op(b)+\Psiiso{-\infty}\subset\Psiiso m$. \qed

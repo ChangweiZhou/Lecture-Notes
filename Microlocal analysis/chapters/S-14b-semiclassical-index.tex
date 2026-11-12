@@ -359,11 +359,13 @@ in pairs, and
   \Tr(P-Q)=\dim\Nul(A-\Id)-\dim\Nul(A+\Id)=\ind T .
 \end{equation*}
 By \cref{solsemiclassical-index:lem:d-trace}, $d(P,Q)=\Tr(P-Q)$, so
-$\ind(QP:\Ran P\to\Ran Q)=d(P,Q)$. (The route suggested in the exercise, deforming
-to $P=Q+\Pi$ with $\Pi$ of finite rank and $Q\Pi=0$, also works: both sides are
-invariant under such deformations, and in the model case $T$ is injective with
-cokernel... rather, $\Nul T=\Ran\Pi$ and $T$ is onto, while $d=[\Ran\Pi]$ by
-\ref{scindex:d-finite}; the trace computation above avoids the deformation.)
+$\ind(QP:\Ran P\to\Ran Q)=d(P,Q)$. (The route suggested in the exercise also works: both sides are invariant under
+smooth deformations of $P$ through compactly supported perturbations of $Q$ which
+are orthogonal projections, and in the model case $P=Q+\Pi$, $\Pi$ an orthogonal
+projection of finite rank with $Q\Pi=\Pi Q=0$, every $u\in\Ran P$ is $u=q+w$ with
+$q\in\Ran Q$, $w\in\Ran\Pi$, and $Tu=q$; so $T$ is onto with null space $\Ran\Pi$,
+and $\ind T=\operatorname{rank}\Pi=d(P,Q)$ by \ref{scindex:d-finite}. The trace
+computation above avoids the deformation.)
 
 %----------------------------------------------------------------------
 \subsection*{\Cref{scindex:ex:milnor-trace}}
@@ -551,8 +553,7 @@ $g\mapsto\hat g$ is a group homomorphism.
 $\Ginf$ is joined to one in a connected group $\GL(V)$ by \cref{bott:lem:stable}),
 the statement for a point is empty; the content is the statement with parameters,
 which we prove. Let $X$ be a compact manifold and $g:X\to\Ginf(Z;E)$ smooth, so
-$[g]\in K^{-1}(X)$ by \ref{scindex:K-Ginf} (if $\dim Z=0$ replace $Z$ by
-$Z\times\Sphere$ and $E$ by its pull-back, which does not affect the argument). Then
+$[g]\in K^{-1}(X)$ by \ref{scindex:K-Ginf} (if $\dim Z=0$, $\Ginf(Z;E)$ is a group $\GL(N,\C)$ and $[g]$ is its stable class; the argument below is unchanged). Then
 $\hat g$ is an element of $\Id+\Psido{-\infty}_{\mathcal S}$ for the fibration
 $\mathcal V\times X\to X$, invertible on every fibre, and its class is defined by
 \cref{scindex:def:class} through an isometric embedding $J:L^2(\mathcal V;\varpi^*E)\to
