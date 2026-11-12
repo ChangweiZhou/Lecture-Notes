@@ -2060,7 +2060,8 @@ i.e.\ diffeomorphisms which preserve the projection onto the $\tilde z$ variable
 
 \begin{lemma}\label{semiclassical:lem:adiabatic-invariance}
   Let $\Omega,\Omega'\subset\R^{n+\tilde n}$ be open and $\Phi:\Omega'\to\Omega$ a diffeomorphism of the
-  form $\Phi(w,\tilde w)=(\Gamma(w,\tilde w),\Theta(\tilde w))$. If $B\in\Psiad(\R^n;\R^{\tilde n})$ has
+  form $\Phi(w,\tilde w)=(\Gamma(w,\tilde w),\Theta(\tilde w))$, where $\Theta$ is a diffeomorphism from
+  the projection $\tilde\Omega'$ of $\Omega'$ to $\R^{\tilde n}$ onto an open subset of $\R^{\tilde n}$. If $B\in\Psiad(\R^n;\R^{\tilde n})$ has
   kernels supported in $K\times K$, $K\subset\Omega$ compact, then
   $B_\Phi=\Phi^*\circ B\circ(\Phi^{-1})^*\in\Psiad(\R^n;\R^{\tilde n})$, and
   $\sad(B_\Phi)(\tilde w,\tilde\omega)$ is the operator $\sad(B)(\Theta(\tilde w),(D\Theta(\tilde w)^T)^{-1}\tilde\omega)$
@@ -2072,8 +2073,9 @@ i.e.\ diffeomorphisms which preserve the projection onto the $\tilde z$ variable
   $\Theta(\tilde w)-\Theta(\tilde w')=M(\tilde w,\tilde w')(\tilde w-\tilde w')$ with
   $M=\int_0^1D\Theta(\tilde w'+s(\tilde w-\tilde w'))ds$, and put $\tilde W=(\tilde w-\tilde w')/\delta$. As in the
   proof of \cref{semiclassical:prop:invariance}, we split the kernel with a cutoff
-  $\rho(\tilde w-\tilde w')$. Where $\abs{\tilde w-\tilde w'}\ge r/2$ we have
-  $\abs{\Theta(\tilde w)-\Theta(\tilde w')}\ge d>0$, so the last argument of $B$ is at least $d/\delta$ in
+  $\rho(\tilde w-\tilde w')$. Where $\abs{\tilde w-\tilde w'}\ge r/2$ and both points lie in the
+  compact projection of $\Phi^{-1}(K)$, we have
+  $\abs{\Theta(\tilde w)-\Theta(\tilde w')}\ge d>0$, because $\Theta$ is injective, so the last argument of $B$ is at least $d/\delta$ in
   size, and this part of the kernel is smooth and $O(\delta^\infty)$ with all
   derivatives; it is of the form in \cref{semiclassical:def:adiabatic} with a
   function in $\delta^\infty\mathcal K_{\mathrm{ad}}$. Near the fibre diagonal the kernel is
@@ -2091,6 +2093,18 @@ i.e.\ diffeomorphisms which preserve the projection onto the $\tilde z$ variable
   $\tilde W$ gives the stated formula for the adiabatic symbol.
 \end{proof}
 
+The hypothesis on $\Theta$ cannot be dropped: that $\Phi$ is a diffeomorphism does not imply
+that $\Theta$ is injective. For instance, with $n=\tilde n=1$,
+$\Omega'=(-1,1)\times\bigl((-2,-1)\cup(1,2)\bigr)$ and
+$\Phi(w,\tilde w)=(w+4\operatorname{sgn}\tilde w,\tilde w^2)$, $\Phi$ is a diffeomorphism onto the two
+disjoint strips $(\pm4-1,\pm4+1)\times(1,4)$, but $\Theta(\tilde w)=\tilde w^2$ identifies $\tilde w$ and $-\tilde w$.
+An adiabatic kernel which is non-zero near the pair of points $(-4,9/4)$, $(4,9/4)$ (it is
+$\delta^{-1}$ times a function of $(\tilde z-\tilde z')/\delta=0$ there) pulls back to a kernel of size
+$\delta^{-1}$ at the pair $(0,-3/2)$, $(0,3/2)$, whose base points are distinct, so $B_\Phi$ is
+not adiabatic. For the coordinate changes between fibred charts of a fibration
+(\cref{semiclassical:rem:adiabatic-fibration}) $\Theta$ is the change of base coordinates,
+which is a diffeomorphism.
+
 \begin{remark}[Fibrations]\label{semiclassical:rem:adiabatic-fibration}
   Let $\phi:Y\to Z$ be a fibration of compact manifolds and $E$ a bundle over $Y$.
   Using \cref{semiclassical:lem:adiabatic-invariance} one defines the adiabatic
@@ -2099,7 +2113,9 @@ i.e.\ diffeomorphisms which preserve the projection onto the $\tilde z$ variable
   that $\phi(\supp\chi)\cap\phi(\supp\chi')=\emptyset$, then $\chi B\chi'$ has kernel smooth on
   $[0,1]\times Y^2$ and vanishing to infinite order at $\delta=0$; and for fibred
   coordinate charts $W,W'$ over the same coordinate chart of $Z$ (with local
-  coordinates $(z,\tilde z)$, $\tilde z$ the base coordinates), and
+  coordinates $(z,\tilde z)$, $\tilde z$ the base coordinates; the coordinate changes between
+  such charts are then of the form in \cref{semiclassical:lem:adiabatic-invariance}, with $\Theta$
+  a diffeomorphism of base coordinates), and
   $\chi\in\CIc(W)$, $\chi'\in\CIc(W')$, the kernel of $\chi B\chi'$ in these coordinates is of
   the form in \cref{semiclassical:def:adiabatic}. The adiabatic symbol then becomes
   a Schwartz function on $T^*Z$ with values in the smoothing operators on the
@@ -2113,7 +2129,9 @@ i.e.\ diffeomorphisms which preserve the projection onto the $\tilde z$ variable
   where $\pi:T^*Z\to Z$. As in \cref{semiclassical:rem:sl-cotangent}, $T^*Z$ should
   properly be replaced by ${}^{\mathrm{sl}}T^*Z$, identified with it by the choice of
   $\delta$. Geometrically, as for the semiclassical double space of
-  \cref{semiclassical:rem:double-space}, these kernels are the smooth functions on the
+  \cref{semiclassical:rem:double-space}, the normalized kernels $\delta^{\tilde n}K_{B_\delta}$ (in
+  local coordinates; invariantly, the kernels expressed in the rescaled density in the
+  base variables) are the smooth functions on the
   adiabatic double space $[[0,1]\times Y^2;\{0\}\times Y^2_\phi]$, with $Y^2_\phi$ the fibre
   product, which vanish to infinite order at the lift of $\{\delta=0\}$; the interior of
   the front face is $Y^2_\phi\times_ZTZ$ (\cref{blowup:rem:adiabatic}).
