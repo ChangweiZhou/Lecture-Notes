@@ -30,6 +30,19 @@ behaviour of wavefront sets under pairing, exterior products, restriction,
 projection, multiplication, pull-back and push-forward, culminating in the
 wavefront relation of an operator with a distributional kernel.
 
+The last part of the chapter is devoted to H\"ormander's theorem on the
+propagation of singularities. \Cref{microlocal:sec:wf-sobolev} refines the
+wavefront set to the wavefront sets $\WF_s(u)$ relative to the Sobolev spaces
+$H^s$, \cref{microlocal:sec:families} shows that the estimates of the calculus
+are uniform on bounded families of operators, and
+\cref{microlocal:sec:hamilton} introduces Hamilton vector fields and the null
+bicharacteristics of an operator with real homogeneous principal symbol. In
+\cref{microlocal:sec:propagation} we prove, by a positive commutator argument,
+that for such an operator $P$ the set $\WF(u)\setminus\WF(Pu)$ is a union of
+maximal null bicharacteristics (\cref{microlocal:thm:propagation}). This
+result is coordinate invariant and so holds on manifolds; it is used for the
+wave equation in \cref{ch:wave}.
+
 \subsection*{Conventions}
 We use freely the results of \cref{ch:distributions,ch:euclidean}. We write
 $u(\phi)$ for the (bilinear) pairing of a distribution with a test function
@@ -1975,6 +1988,1013 @@ describes how they propagate singularities.
 \end{remark}
 
 % ======================================================================
+\section{Sobolev wavefront sets}\label{microlocal:sec:wf-sobolev}
+
+The wavefront set records where, and in which directions, a distribution
+fails to be smooth. For operators of finite order, and in particular for the
+propagation theorem of \cref{microlocal:sec:propagation}, regularity has to
+be measured more finely, on the scale of Sobolev spaces. Recall from
+\cref{ch:euclidean} that $H^s(\R^n)=\{u\in\cSp(\R^n);\ \ang D^su\in L^2\}$ with
+$\norm u_{H^s}=\norm{\ang\xi^s\hat u}_{L^2}$ (norms of Fourier transforms
+taken with respect to $\dbar\xi$), that every $A\in\Psido m(\R^n)$ is bounded
+from $H^s$ to $H^{s-m}$, and we put $H^{-\infty}(\R^n)=\bigcup_sH^s(\R^n)$,
+$H^\infty(\R^n)=\bigcap_sH^s(\R^n)\subset\CI(\R^n)$. Every $u\in\CmIc(\R^n)$
+lies in $H^{-\infty}(\R^n)$: by \cref{microlocal:sec:fourier},
+$\abs{\hat u(\xi)}\le C\ang\xi^k$ for some $k$, so $u\in H^t$ for $t<-k-n/2$.
+
+\subsection*{The Sobolev pairing}
+For $v\in H^t(\R^n)$ and $w\in H^{-t}(\R^n)$ we set
+\begin{equation*}
+  \inner vw=\int\hat v(\xi)\,\overline{\hat w(\xi)}\,\dbar\xi .
+\end{equation*}
+Writing the integrand as $\ang\xi^t\hat v\cdot\ang\xi^{-t}\overline{\hat w}$,
+the Cauchy--Schwarz inequality gives
+$\abs{\inner vw}\le\norm v_{H^t}\norm w_{H^{-t}}$; for $t=0$ this is the
+$L^2$ inner product (Plancherel), and $\inner wv=\overline{\inner vw}$. If
+$T\in\Psido k(\R^n)$ then
+\begin{equation}\label{microlocal:eq:sobolev-adjoint}
+  \inner{Tv}w=\inner v{T^*w},\qquad v\in H^t(\R^n),\ w\in H^{k-t}(\R^n).
+\end{equation}
+Indeed both sides are continuous on $H^t\times H^{k-t}$, they agree on
+$\cS\times\cS$ by the definition of the adjoint, and $\cS(\R^n)$ is dense in
+every $H^t(\R^n)$, since $\ang D^t$ maps $\cS$ onto $\cS$ and is unitary from
+$H^t$ onto $L^2$. Finally, \emph{if $v\in H^{-\infty}(\R^n)$ and
+$\abs{\inner v\phi}\le C\norm\phi_{L^2}$ for all $\phi\in\cS(\R^n)$, then
+$v\in L^2(\R^n)$}: $\hat v$ is locally square integrable, and the estimate says
+that $\psi\mapsto\int\hat v\bar\psi\,\dbar\xi$ is bounded in the $L^2$ norm on
+$\CIc(\R^n)\subset\cF(\cS)$; by the Riesz representation theorem there is
+$f\in L^2$ with $\int(\hat v-f)\bar\psi\,\dbar\xi=0$ for all $\psi\in\CIc$, so
+$\hat v=f\in L^2$.
+
+\subsection{Distributions of compact support}
+
+\begin{definition}\label{microlocal:def:wf-s-compact}
+  For $u\in\CmIc(\R^n)$ and $s\in\R$, the \emph{wavefront set of order $s$} (or
+  $H^s$-wavefront set) of $u$ is
+  \begin{equation*}
+    \WF_s(u)=\bigcap\bigl\{\Char_0(A);\ A\in\Psido0(\R^n),\ Au\in H^s(\R^n)\bigr\}.
+  \end{equation*}
+\end{definition}
+
+Thus $z\notin\WF_s(u)$ if and only if some $A\in\Psido0(\R^n)$ which is
+elliptic at $z$ satisfies $Au\in H^s$; the analogy with
+\cref{microlocal:def:wf-compact} is evident, and the proofs below follow those
+of \cref{microlocal:sec:wf}, with the Sobolev boundedness of
+pseudodifferential operators added.
+
+\begin{lemma}\label{microlocal:lem:wf-s-cone}
+  Let $u\in\CmIc(\R^n)$ and $z\notin\WF_s(u)$. There is an open conic
+  neighbourhood $\Gamma$ of $z$ such that $Cu\in H^{s-m}(\R^n)$ for every
+  $C\in\Psido m(\R^n)$, $m\in\R$, with $\WFp(C)\subset\Gamma$.
+\end{lemma}
+\begin{proof}
+  Let $A\in\Psido0$ be elliptic at $z$ with $Au\in H^s$, and let $Q\in\Psido0$
+  be a microlocal parametrix for $A$ at $z$
+  (\cref{microlocal:prop:parametrix}), $QA=\Id+R$ with $z\notin\WFp(R)$. Let
+  $\Gamma$ be the complement of $\WFp(R)$ and $\psi\in\CIc(\R^n)$ equal to $1$
+  near $\supp u$. If $\WFp(C)\subset\Gamma$ then $Cu=CQ(Au)-CR\psi u$. Here
+  $CQ\in\Psido m$ maps $H^s$ to $H^{s-m}$, and $\WFp(CR)=\emptyset$, so
+  $CR\psi\in\Psido{-\infty}$ by \cref{microlocal:lem:localize}; it maps
+  $H^{-\infty}$ into $H^\infty$.
+\end{proof}
+
+\begin{proposition}\label{microlocal:prop:wf-s-compact}
+  Let $u,v\in\CmIc(\R^n)$ and $s,t\in\R$.
+  \begin{enumerate}[label=\textup{(\roman*)}]
+  \item $\WF_s(u)$ is a closed cone; $\WF_t(u)\subset\WF_s(u)$ if $t\le s$;
+    $\WF_s(u)\subset\WF(u)$; and $\WF_s(u+v)\subset\WF_s(u)\cup\WF_s(v)$.
+  \item If $A\in\Psido m(\R^n)$ and $\phi\in\CIc(\R^n)$ then
+    $\WF_{s-m}(\phi Au)\subset\WFp(A)\cap\WF_s(u)$.
+  \item $\WF_s(u)=\emptyset$ if and only if $u\in H^s(\R^n)$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  (i) $\WF_s(u)$ is an intersection of closed cones, and the monotonicity in
+  $s$ follows from $H^s\subset H^t$. If $z\notin\WF(u)$, let $A\in\Psido0$ be
+  elliptic at $z$ with $Au\in\CI$, and let $\psi,\psi'\in\CIc(\R^n)$ with $\psi=1$
+  near $\supp u$, $\psi'=1$ near $\supp\psi$. Then
+  $Au=\psi'Au+(1-\psi')A\psi u$, where the first term is in $\CIc$ and the
+  second in $\cS$ by \cref{microlocal:prop:kernel-singsupp} and
+  \cref{microlocal:lem:residual-compact}. So $Au\in\cS\subset H^s$ and
+  $z\notin\WF_s(u)$. For the sum, if $z$ is in neither set, take
+  $C=G_{z,\eps}$ (see \eqref{microlocal:eq:G-cutoff}) with
+  $\overline{\Gamma_\eps(z)}$ inside both of the cones given by
+  \cref{microlocal:lem:wf-s-cone}; $C$ is elliptic at $z$ and
+  $C(u+v)\in H^s$.
+
+  (ii) Let $\psi\in\CIc(\R^n)$ equal $1$ near $\supp u$. If $z\notin\WFp(A)$,
+  choose $\eps$ with $\overline{\Gamma_\eps(z)}\cap\WFp(A)=\emptyset$ and let
+  $C=G_{z,\eps}$; as in the proof of \cref{microlocal:prop:microlocal-compact},
+  $C\phi A\in\Psido{-\infty}$, so $C\phi Au\in H^\infty$ and
+  $z\notin\WF_{s-m}(\phi Au)$. If $z\notin\WF_s(u)$, let $\Gamma$ be as in
+  \cref{microlocal:lem:wf-s-cone}, choose $\eps$ with
+  $\overline{\Gamma_\eps(z)}\subset\Gamma$, and let $D=G_{z,\eps}$,
+  $C=G_{z,\eps/4}$. Then $Du\in H^s$ and
+  \begin{equation*}
+    C\phi Au=C\phi A(Du)+C\phi A(\Id-D)\psi u,
+  \end{equation*}
+  where $C\phi A\in\Psido m$ maps $H^s$ to $H^{s-m}$, and
+  $C\phi A(\Id-D)\psi\in\Psido{-\infty}$ because
+  $\WFp(C)\cap\WFp(\Id-D)=\emptyset$ (\cref{microlocal:lem:localize}). Since
+  $C$ is elliptic at $z$, $z\notin\WF_{s-m}(\phi Au)$.
+
+  (iii) If $u\in H^s$ take $A=\Id$. Conversely, suppose $\WF_s(u)=\emptyset$
+  and let $L$ be a compact neighbourhood of $\supp u$. For each point $(x,\omega)$
+  of $L\times\Sphere^{n-1}$ there is $A\in\Psido0$ with $Au\in H^s$ and
+  $\abs{\sigma_L(A)}\ge\eps$ on $\Gamma_\eps(x,\omega)\cap\{\abs\xi\ge1/\eps\}$, for
+  some $\eps>0$. Finitely many of these cones, with operators $A_j$ and
+  constants $\eps_j$, cover $L\times(\R^n\setminus0)$; let
+  $\eps_0=\min\eps_j$, $R_0=\max1/\eps_j$. Choose $\phi\in\CIc(\R^n)$ with
+  $0\le\phi\le1$, $\supp\phi$ in the interior of $L$ and $\phi=1$ near
+  $\supp u$, and let
+  \begin{equation*}
+    B=\sum_jA_j^*A_j+(1-\phi)\in\Psido0(\R^n).
+  \end{equation*}
+  Then $\sigma_L(B)=\sum_j\abs{\sigma_L(A_j)}^2+(1-\phi)+r$ with $r\in S^{-1}$,
+  and for $\abs\xi\ge R_0$ the sum of the first two terms is at least
+  $\min(\eps_0^2,1)$: if $x\in\supp\phi\subset L$ the point lies in one of the
+  cones, and otherwise $1-\phi(x)=1$. So $B$ is globally elliptic; let $Q$ be a
+  parametrix, $QB=\Id+E$ with $E\in\Psido{-\infty}$. Since $(1-\phi)u=0$,
+  $Bu=\sum_jA_j^*(A_ju)\in H^s$, and $u=QBu-Eu\in H^s$.
+\end{proof}
+
+\subsection{General tempered distributions}
+By \cref{microlocal:prop:wf-s-compact}(ii) with $A=\Id$,
+$\WF_s(\phi u)\subset\WF_s(u)$ for $\phi\in\CIc$ and $u\in\CmIc$, with
+equality if $\phi=1$ near $\supp u$. So the following definition is
+consistent with \cref{microlocal:def:wf-s-compact}.
+
+\begin{definition}\label{microlocal:def:wf-s}
+  For $u\in\cSp(\R^n)$ and $s\in\R$,
+  $\WF_s(u)=\bigcup_{\phi\in\CIc(\R^n)}\WF_s(\phi u)\subset\Tz{\R^n}$.
+\end{definition}
+
+Notice that one could not simply use the definition for compactly supported
+distributions here: $Au\in H^s(\R^n)$ also requires decay of $u$ at infinity,
+whereas $\WF_s(u)$ is meant to measure local regularity only.
+
+\begin{proposition}\label{microlocal:prop:wf-s}
+  Let $u,v\in\cSp(\R^n)$ and $s,t\in\R$.
+  \begin{enumerate}[label=\textup{(\roman*)}]
+  \item If $\phi\in\CIc(\R^n)$ and $\phi(\bar x)\ne0$ then
+    $\WF_s(u)\cap\pi^{-1}(\bar x)=\WF_s(\phi u)\cap\pi^{-1}(\bar x)$. The set
+    $\WF_s(u)$ is a closed cone,
+    $\WF_t(u)\subset\WF_s(u)\subset\WF(u)$ for $t\le s$, and
+    $\WF_s(u+v)\subset\WF_s(u)\cup\WF_s(v)$.
+  \item $\WF_s(u)=\emptyset$ if and only if $u\in H^s_{\mathrm{loc}}(\R^n)$,
+    i.e.\ $\phi u\in H^s(\R^n)$ for every $\phi\in\CIc(\R^n)$.
+  \item \emph{(Relative microlocality.)} If $A\in\Psido m(\R^n)$ then
+    $\WF_{s-m}(Au)\subset\WFp(A)\cap\WF_s(u)$. In particular
+    $\WF_{s-t}(\ang D^tu)=\WF_s(u)$.
+  \item \emph{(Elliptic regularity.)} If $A\in\Psido m(\R^n)$ then
+    $\WF_s(u)\subset\WF_{s-m}(Au)\cup\Char_m(A)$.
+  \item If $u\in H^{-\infty}(\R^n)$ and $G\in\Psido0(\R^n)$ is such that
+    $\sigma_L(G)(x,\xi)=0$ for $\abs x\ge R$, for some $R$, and
+    $\WFp(G)\cap\WF_s(u)=\emptyset$, then $Gu\in H^s(\R^n)$.
+  \item If $\Gamma\subset\Tz{\R^n}$ is an open cone with
+    $\Gamma\cap\WF_s(u)=\emptyset$ for every $s\in\R$, then
+    $\Gamma\cap\WF(u)=\emptyset$. Consequently $\WF(u)$ is the closure of
+    $\bigcup_s\WF_s(u)$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  (i) The localization statement is proved exactly as
+  \cref{microlocal:prop:wf-local}(i), using
+  \cref{microlocal:prop:wf-s-compact}(i),(ii) and the fact that a compactly
+  supported distribution vanishing near $\bar x$ has no $\WF_s$, indeed no $\WF$,
+  over $\bar x$. As in \cref{microlocal:prop:wf-local}(ii), it follows that
+  $\WF_s(u)$ is closed, and the remaining statements follow from the
+  corresponding ones in \cref{microlocal:prop:wf-s-compact}(i).
+
+  (ii) If $\phi u\in H^s$ for all $\phi$ then all $\WF_s(\phi u)$ are empty.
+  Conversely, if $\WF_s(u)=\emptyset$ and $\phi\in\CIc$, choose
+  $\psi\in\CIc$ equal to $1$ near $\supp\phi$; then
+  $\WF_s(\phi u)=\WF_s(\phi\psi u)\subset\WF_s(\psi u)=\emptyset$, so
+  $\phi u\in H^s$ by \cref{microlocal:prop:wf-s-compact}(iii).
+
+  (iii) Let $\phi\in\CIc(\R^n)$ and $\psi\in\CIc(\R^n)$ equal to $1$ near
+  $\supp\phi$. Then $\phi Au=\phi A(\psi u)+\phi A(1-\psi)u$, where
+  $\phi A(1-\psi)\in\Psido{-\infty}$ (\cref{microlocal:prop:kernel-singsupp}),
+  so the second term is smooth with compact support. By
+  \cref{microlocal:prop:wf-s-compact}(ii),
+  $\WF_{s-m}(\phi Au)\subset\WFp(A)\cap\WF_s(\psi u)\subset\WFp(A)\cap\WF_s(u)$;
+  take the union over $\phi$. The last statement follows by applying this to
+  $\ang D^t\in\Psido t$ and to its inverse $\ang D^{-t}$, whose essential
+  supports are all of $\Tz{\R^n}$.
+
+  (iv) If $z\notin\Char_m(A)$, let $B$ be a microlocal parametrix at $z$,
+  $BA=\Id+R$ with $z\notin\WFp(R)$. Then $u=B(Au)-Ru$, and by (i) and (iii),
+  $\WF_s(u)\subset\WF_{s}(BAu)\cup\WF_s(Ru)\subset\WF_{s-m}(Au)\cup\WFp(R)$.
+
+  (v) Let $\psi\in\CIc(\R^n)$ be $1$ on $\{\abs x\le R\}$, so that
+  $G=\psi G$ (as $\psi\sigma_L(G)=\sigma_L(G)$), and let $\psi'\in\CIc$ be $1$
+  near $\supp\psi$. Then $Gu=\psi G(\psi'u)+\psi G(1-\psi')u$. The operator
+  $\psi G(1-\psi')$ is in $\Psido{-\infty}$, so the second term is in
+  $H^\infty$ since $u\in H^{-\infty}$. By
+  \cref{microlocal:prop:wf-s-compact}(ii),
+  $\WF_s(\psi G\psi'u)\subset\WFp(G)\cap\WF_s(u)=\emptyset$, so the first term is
+  in $H^s$ by \cref{microlocal:prop:wf-s-compact}(iii).
+
+  (vi) Let $z=(\bar x,\bar\xi)\in\Gamma$, choose $\eps$ with
+  $\overline{\Gamma_\eps(z)}\subset\Gamma$, let $C=G_{z,\eps}$ and let
+  $\psi'\in\CIc$ equal $1$ near $\{\abs{x-\bar x}\le\eps\}$. Then
+  $\WFp(C)\subset\Gamma$, so by (iii)
+  $\WF_t(C\psi'u)\subset\WFp(C)\cap\WF_t(u)=\emptyset$ for all $t$; as
+  $C\psi'u$ has compact support ($C=\psi C$ for suitable $\psi\in\CIc$), it lies
+  in $H^\infty\subset\CI$ by \cref{microlocal:prop:wf-s-compact}(iii). Since $C$
+  is elliptic at $z$, $z\notin\WF(\psi'u)$, hence $z\notin\WF(u)$ by
+  \cref{microlocal:prop:wf-local}(i). For the last statement: the union is
+  contained in the closed set $\WF(u)$, and if $z\in\WF(u)$ then every open
+  conic neighbourhood of $z$ meets some $\WF_s(u)$, by what we have just shown.
+\end{proof}
+
+The inclusion $\bigcup_s\WF_s(u)\subset\WF(u)$ may be strict
+(\cref{microlocal:ex:wf-s-union}); this is why the passage from Sobolev
+regularity to smoothness in \cref{microlocal:sec:propagation} needs an argument
+which is uniform in $s$.
+
+% ======================================================================
+\section{Bounded families of operators}\label{microlocal:sec:families}
+
+The proof of the propagation theorem uses a regularization: one works with
+sequences of operators of order $-\infty$ which are bounded in $\Psido0$, and
+needs to know that the estimates of the calculus are uniform along such
+sequences. A sequence $(c_k)$ in $S^m(\R^n;\R^n)$ is \emph{bounded} if
+$\sup_k\norm{c_k}_{N,m}<\infty$ for every $N$, and a sequence $(C_k)$ in
+$\Psido m(\R^n)$ is \emph{bounded in $\Psido m$} if $(\sigma_L(C_k))$ is bounded
+in $S^m$. Recall that $S^m(\R^n;\R^n)$ is a Fréchet space: if $(c_k)$ is
+Cauchy for all the norms $\norm\cdot_{N,m}$ then all derivatives converge
+locally uniformly and the weighted estimates pass to the limit.
+
+\begin{lemma}[Continuity of the calculus]\label{microlocal:lem:continuity}
+  Let $m,m',s\in\R$ and $N\in\N_0$.
+  \begin{enumerate}[label=\textup{(\roman*)}]
+  \item The map $S^m(\R^n;\R^n)\ni c\mapsto\Op(c)\in\Lin(H^s,H^{s-m})$ is
+    continuous.
+  \item The maps
+    \begin{align*}
+      S^m\ni c&\longmapsto\sigma_L(\Op(c)^*)-\sum_{\abs\alpha<N}\frac1{\alpha!}
+      \pa^\alpha_\xi D^\alpha_x\bar c\in S^{m-N},\\
+      S^m\times S^{m'}\ni(c,d)&\longmapsto\sigma_L(\Op(c)\Op(d))-
+      \sum_{\abs\alpha<N}\frac1{\alpha!}\pa^\alpha_\xi c\,D^\alpha_xd\in S^{m+m'-N}
+    \end{align*}
+    (symbol spaces on $\R^n\times\R^n$) are continuous.
+  \end{enumerate}
+  Consequently, if $(C_k)$ is bounded in $\Psido m$ and $(D_k)$ in $\Psido{m'}$,
+  then $(C_k)$ is bounded in $\Lin(H^s,H^{s-m})$ for every $s$, $(C_k^*)$ is
+  bounded in $\Psido m$, $(C_kD_k)$ is bounded in $\Psido{m+m'}$, and the
+  remainders in the expansions of $\sigma_L(C_k^*)$ and $\sigma_L(C_kD_k)$ after
+  $N$ terms are bounded in $S^{m-N}$ and $S^{m+m'-N}$.
+\end{lemma}
+
+The expansions are those of the composition theorem of \cref{ch:euclidean},
+written with $i^{\abs\alpha}D^\alpha_\xi=\pa^\alpha_\xi$; the maps in (ii) are well
+defined by that theorem.
+
+\begin{proof}
+  We use the closed graph theorem for linear maps between Fréchet spaces, and
+  the fact that a bilinear map between Fréchet spaces which is continuous in
+  each variable separately is continuous (a consequence of the uniform
+  boundedness principle).
+
+  \emph{Step 1.} For $\phi,\psi\in\cS(\R^n)$ the linear form
+  $c\mapsto\inner{\Op(c)\phi}\psi$ is continuous on $S^m$. Indeed, by the limit
+  formula in \cref{ch:euclidean} and dominated convergence,
+  $\Op(c)\phi(x)=\int e^{ix\cdot\xi}c(x,\xi)\hat\phi(\xi)\,\dbar\xi$, so
+  $\abs{\inner{\Op(c)\phi}\psi}\le\norm c_{0,m}\norm\psi_{L^1}
+  \int\ang\xi^m\abs{\hat\phi}\,\dbar\xi$.
+
+  \emph{Step 2: (i).} Both spaces are Fréchet (the second Banach) and the map is
+  well defined by the Sobolev boundedness theorem. Suppose $c_k\to c$ in $S^m$
+  and $\Op(c_k)\to T$ in $\Lin(H^s,H^{s-m})$. For $\phi,\psi\in\cS$,
+  $\inner{\Op(c_k)\phi}\psi\to\inner{\Op(c)\phi}\psi$ by Step 1, and
+  $\inner{\Op(c_k)\phi}\psi\to\inner{T\phi}\psi$. Hence $T\phi=\Op(c)\phi$ for
+  $\phi\in\cS$, and by density $T=\Op(c)$. The graph is closed, so the map is
+  continuous.
+
+  \emph{Step 3: adjoints.} Let $\tau(c)=\sigma_L(\Op(c)^*)$, a linear map
+  $S^m\to S^m$. If $c_k\to c$ and $\tau(c_k)\to d$ in $S^m$, then for
+  $\phi,\psi\in\cS$, by Step 1,
+  \begin{equation*}
+    \inner{\Op(d)\phi}\psi=\lim\inner{\Op(\tau(c_k))\phi}\psi
+    =\lim\inner\phi{\Op(c_k)\psi}=\inner\phi{\Op(c)\psi}=\inner{\Op(\tau(c))\phi}\psi,
+  \end{equation*}
+  so $d=\tau(c)$ by uniqueness of the left symbol, and $\tau$ is continuous.
+  The remainder map $\rho_N:S^m\to S^{m-N}$ in (ii) is $\tau$ minus a finite sum
+  of continuous maps $S^m\to S^m$, so it is continuous into $S^m$. If $c_k\to c$
+  in $S^m$ and $\rho_N(c_k)\to r$ in $S^{m-N}$, then $\rho_N(c_k)\to\rho_N(c)$
+  and $\rho_N(c_k)\to r$ in $S^m$, so $r=\rho_N(c)$; by the closed graph theorem
+  $\rho_N$ is continuous into $S^{m-N}$.
+
+  \emph{Step 4: compositions.} Let $\beta(c,d)=\sigma_L(\Op(c)\Op(d))$. For fixed
+  $d$, if $c_k\to c$ and $\beta(c_k,d)\to e$ in $S^{m+m'}$, then for
+  $\phi,\psi\in\cS$, with $\phi'=\Op(d)\phi\in\cS$, Step 1 gives
+  $\inner{\Op(e)\phi}\psi=\lim\inner{\Op(c_k)\phi'}\psi=\inner{\Op(c)\Op(d)\phi}\psi$,
+  so $e=\beta(c,d)$. For fixed $c$, if $d_k\to d$ and $\beta(c,d_k)\to e$ then,
+  with $\psi'=\Op(c)^*\psi\in\cS$,
+  $\inner{\Op(e)\phi}\psi=\lim\inner{\Op(d_k)\phi}{\psi'}=\inner{\Op(c)\Op(d)\phi}\psi$.
+  So $\beta$ is separately continuous, hence continuous, and the argument at
+  the end of Step 3 applies to the remainders, which are therefore separately
+  continuous into $S^{m+m'-N}$, hence continuous.
+
+  The last statement holds because continuous linear maps between locally
+  convex spaces map bounded sets to bounded sets, and so do continuous bilinear
+  maps: for each norm $q$ on the target there are norms $p_1,p_2$ and $C$ with
+  $q(\beta(c,d))\le Cp_1(c)p_2(d)$. For the Sobolev bound apply (i) to
+  $\sigma_L(C_k)$.
+\end{proof}
+
+We also need a uniform version of the essential support. In the following,
+$K\subset\R^n\times\R^n$ is a closed set.
+
+\begin{definition}\label{microlocal:def:uniform-support}
+  A sequence $(C_k)$, bounded in $\Psido m(\R^n)$, is \emph{uniformly
+  supported in $K$} if for every $N\in\N$ there are symbols $c^{(N)}_k$ with
+  $\supp c^{(N)}_k\subset K$ such that $(\sigma_L(C_k)-c^{(N)}_k)$ is bounded in
+  $S^{-N}(\R^n;\R^n)$.
+\end{definition}
+
+For instance, if $(c_k)$ is bounded in $S^m$ and $\supp c_k\subset K$ for all
+$k$, then $(\Op(c_k))$ is uniformly supported in $K$.
+
+\begin{lemma}\label{microlocal:lem:uniform-support}
+  Let $(C_k)$ be bounded in $\Psido m(\R^n)$ and uniformly supported in $K$,
+  and let $(D_k)$ be bounded in $\Psido{m'}(\R^n)$.
+  \begin{enumerate}[label=\textup{(\roman*)}]
+  \item $(C_k^*)$, $(C_kD_k)$ and $(D_kC_k)$ are uniformly supported in $K$.
+  \item If $g\in S^0(\R^n;\R^n)$ equals $1$ on an open set containing $K$ and
+    $G=\Op(g)$, then $(C_k(\Id-G))$ and $((\Id-G^*)C_k)$ are bounded in
+    $\Psido{-N}(\R^n)$ for every $N$.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  (i) By \cref{microlocal:lem:continuity},
+  $\sigma_L(C_kD_k)=\sum_{\abs\alpha<N}\frac1{\alpha!}\pa^\alpha_\xi\sigma_L(C_k)\,
+  D^\alpha_x\sigma_L(D_k)+r_k$ with $(r_k)$ bounded in $S^{m+m'-N}$.
+  Substituting $\sigma_L(C_k)=c^{(N)}_k+(\sigma_L(C_k)-c^{(N)}_k)$, the terms
+  containing $c^{(N)}_k$ are supported in $K$, and the others are bounded in
+  $S^{m'-N}$. Since $N$ is arbitrary, $(C_kD_k)$ is uniformly supported in $K$.
+  The same argument applies to $D_kC_k$ and to $C_k^*$.
+
+  (ii) In the expansion of $\sigma_L(C_k(\Id-G))$ the terms containing
+  $c^{(N)}_k$ are $\frac1{\alpha!}\pa^\alpha_\xi c^{(N)}_k\,D^\alpha_x(1-g)$, which
+  vanish identically because $1-g$ vanishes on an open set containing
+  $\supp c^{(N)}_k$. The other terms and the remainder are bounded in
+  $S^{\max(m,0)-N}$. Since $(\Id-G^*)C_k=(C_k^*(\Id-G))^*$, the second statement
+  follows from (i), the first, and \cref{microlocal:lem:continuity}.
+\end{proof}
+
+\begin{lemma}\label{microlocal:lem:cutoff-one}
+  Let $C\subset\Tz{\R^n}$ be a closed cone with compact base (i.e.\
+  $C\cap\{\abs\xi=1\}$ is compact) and $\Gamma\supset C$ an open cone. There is
+  a real $g\in S^0(\R^n;\R^n)$, vanishing for $\abs x$ large, with
+  $\conesupp(g)\subset\Gamma$ and $g=1$ on an open set containing
+  $C\cap\{\abs\xi\ge1\}$.
+\end{lemma}
+\begin{proof}
+  The compact set $C_1=C\cap\{\abs\xi=1\}$ has positive distance from the
+  closed set $\{\abs\xi=1\}\setminus\Gamma$; let $3\eps$ be smaller than this
+  distance. Choose $\theta\in\CIc(\R^{2n})$ with $\theta=1$ on the
+  $\eps$-neighbourhood of $C_1$ and $\supp\theta$ in its $2\eps$-neighbourhood,
+  and set $g(x,\xi)=\theta(x,\xi/\abs\xi)\bigl(1-\chi(2\xi)\bigr)$, with $\chi$ as
+  in \eqref{microlocal:eq:gamma}. This is smooth, homogeneous of degree $0$ for
+  $\abs\xi\ge\frac12$ and vanishes for large $\abs x$, hence lies in $S^0$; it
+  equals $1$ on the open set of $(x,\xi)$ with $\abs\xi>\frac12$ and
+  $(x,\xi/\abs\xi)$ in the $\eps$-neighbourhood of $C_1$, and its cone support
+  lies in the cone over the closed $2\eps$-neighbourhood of $C_1$ in
+  $\{\abs\xi=1\}$, which is contained in $\Gamma$.
+\end{proof}
+
+\begin{lemma}[Uniform microlocal bounds]\label{microlocal:lem:uniform-bounds}
+  Let $\Gamma\subset\Tz{\R^n}$ be an open cone, $C\subset\Gamma$ a closed cone
+  with compact base, and $(C_k)$ a sequence bounded in $\Psido m(\R^n)$ and
+  uniformly supported in $K=C\cap\{\abs\xi\ge1\}$. Let $v,w\in H^{-\infty}(\R^n)$
+  and $s,t\in\R$.
+  \begin{enumerate}[label=\textup{(\roman*)}]
+  \item If $\Gamma\cap\WF_s(v)=\emptyset$ then $(C_kv)$ is bounded in
+    $H^{s-m}(\R^n)$.
+  \item If moreover $\Gamma\cap\WF_t(w)=\emptyset$ and $s+t\ge m$, then the
+    sequence $\inner{C_kv}w$ is bounded.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  Let $g$ be as in \cref{microlocal:lem:cutoff-one} and $G=\Op(g)$. By
+  \cref{microlocal:prop:wf-s}(v), $Gv\in H^s$ and $Gw\in H^t$. Let $v\in H^{-M}$,
+  $w\in H^{-M}$.
+
+  (i) $C_kv=C_kGv+C_k(\Id-G)v$. The first term is bounded in $H^{s-m}$ by
+  \cref{microlocal:lem:continuity}, and so is the second, by
+  \cref{microlocal:lem:uniform-support}(ii) with $N\ge M+s-m$.
+
+  (ii) By \eqref{microlocal:eq:sobolev-adjoint},
+  \begin{equation*}
+    \inner{C_kv}w=\inner{G^*C_kv}w+\inner{(\Id-G^*)C_kv}w
+    =\inner{C_kv}{Gw}+\inner{(\Id-G^*)C_kv}w .
+  \end{equation*}
+  The first term is bounded by $\norm{C_kv}_{H^{s-m}}\norm{Gw}_{H^{m-s}}$, which
+  is bounded by (i) since $t\ge m-s$. The second is bounded by
+  $\norm{(\Id-G^*)C_kv}_{H^M}\norm w_{H^{-M}}$, which is bounded by
+  \cref{microlocal:lem:uniform-support}(ii) and
+  \cref{microlocal:lem:continuity}.
+\end{proof}
+
+% ======================================================================
+\section{Hamilton vector fields and bicharacteristics}\label{microlocal:sec:hamilton}
+
+In the Hamiltonian formulation of classical mechanics the motion of a
+particle is governed by an energy function, the \emph{Hamiltonian},
+$h(x,\xi)$ of position $x$ and momentum $\xi$, through Hamilton's equations
+\begin{equation}\label{microlocal:eq:hamilton}
+  \frac{dx_j}{dt}=\frac{\pa h}{\pa\xi_j}(x,\xi),\qquad
+  \frac{d\xi_j}{dt}=-\frac{\pa h}{\pa x_j}(x,\xi),\qquad j=1,\dots,n.
+\end{equation}
+Thus the trajectory $(x(t),\xi(t))$ is an integral curve of the
+\emph{Hamilton vector field}
+\begin{equation*}
+  \Ham h=\sum_{j=1}^n\Bigl(\frac{\pa h}{\pa\xi_j}\frac\pa{\pa x_j}
+  -\frac{\pa h}{\pa x_j}\frac\pa{\pa\xi_j}\Bigr).
+\end{equation*}
+For two functions, $\Ham hg=\{h,g\}=-\{g,h\}=-\Ham gh$ is the Poisson bracket
+of \cref{ch:euclidean}, which appeared there in the commutator formula
+$\sigma_{m+m'-1}([A,B])=\frac1i\{\sigma_m(A),\sigma_{m'}(B)\}$. In particular
+$\Ham hh=0$: \emph{$h$ is constant along the integral curves of $\Ham h$}
+(conservation of energy). See \cref{microlocal:ex:jacobi} for the Jacobi
+identity.
+
+More invariantly, $\Ham h$ is determined by the symplectic form
+\begin{equation*}
+  \omega=\sum_jd\xi_j\wedge dx_j=d\alpha,\qquad\alpha=\sum_j\xi_j\,dx_j,
+\end{equation*}
+through the identity $\omega(\cdot,\Ham h)=dh$. Indeed for a tangent vector
+$v=(v_x,v_\xi)$, $\omega(v,\Ham h)=\sum_j\bigl(v_{\xi_j}\pa_{\xi_j}h+v_{x_j}\pa_{x_j}h\bigr)=dh(v)$,
+and $\omega$ is non-degenerate: $\omega(v,w)=v_\xi\cdot w_x-v_x\cdot w_\xi$
+vanishes for all $v$ only if $w=0$. The \emph{tautological one-form} $\alpha$
+is invariant under changes of coordinates, in the following sense.
+
+\begin{lemma}\label{microlocal:lem:symplectic}
+  Let $F:\Omega\to\Omega'$ be a diffeomorphism of open subsets of $\R^n$ and
+  $\chi_F(x,\xi)=(F(x),(DF(x)^t)^{-1}\xi)$ as in
+  \cref{microlocal:sec:coordinates}. Then $\chi_F^*\alpha=\alpha$,
+  $\chi_F^*\omega=\omega$, and for every smooth function $h$ on an open subset
+  of $\Omega'\times\R^n$,
+  \begin{equation*}
+    d\chi_F\bigl(\Ham{h\circ\chi_F}(z)\bigr)=\Ham h(\chi_F(z)).
+  \end{equation*}
+  Hence $\chi_F$ maps integral curves of $\Ham{h\circ\chi_F}$ to integral
+  curves of $\Ham h$.
+\end{lemma}
+\begin{proof}
+  Write $(y,\eta)=\chi_F(x,\xi)$, so $y=F(x)$ and $\xi=DF(x)^t\eta$. Then
+  $\sum_k\eta_k\,dy_k=\sum_{j,k}\eta_k\frac{\pa F_k}{\pa x_j}dx_j=\sum_j\xi_jdx_j$,
+  i.e.\ $\chi_F^*\alpha=\alpha$, and $\chi_F^*\omega=d\chi_F^*\alpha=\omega$. For
+  a tangent vector $v$ at $z$, with $w=d\chi_F(\Ham{h\circ\chi_F}(z))$,
+  \begin{equation*}
+    \omega(d\chi_Fv,w)=(\chi_F^*\omega)(v,\Ham{h\circ\chi_F})
+    =d(h\circ\chi_F)(v)=dh(d\chi_Fv).
+  \end{equation*}
+  Since $d\chi_F$ is onto, $\omega(\cdot,w)=dh$ at $\chi_F(z)$, so
+  $w=\Ham h(\chi_F(z))$ by non-degeneracy.
+\end{proof}
+
+Since $\chi_F$ is the cotangent map of $F$ (\cref{microlocal:sec:coordinates}),
+the lemma shows that $\alpha$, $\omega$ and Hamilton vector fields are well
+defined on the cotangent bundle of a manifold; see \cref{ch:manifolds}.
+
+\subsection{Homogeneity}
+Let $M_\lambda(x,\xi)=(x,\lambda\xi)$, $\lambda>0$, be the dilations of
+$\Tz{\R^n}$ and $\varrho=\sum_j\xi_j\pa_{\xi_j}$ the radial vector field, its
+infinitesimal generator; note that $dM_\lambda(\varrho(z))=\varrho(M_\lambda z)$
+and that $\omega(\cdot,\varrho)=-\alpha$. If $p\in\CI(\Tz{\R^n})$ is homogeneous
+of degree $m$, i.e.\ $p\circ M_\lambda=\lambda^mp$, then $\pa_\xi p$ and $\pa_xp$
+are homogeneous of degrees $m-1$ and $m$, so
+\begin{equation}\label{microlocal:eq:H-homogeneous}
+  dM_\lambda\bigl(\Ham p(z)\bigr)=\lambda^{1-m}\,\Ham p(M_\lambda z).
+\end{equation}
+In particular, \emph{if $m=1$ then $\Ham p$ is invariant under dilations and
+its flow commutes with them}: if $c(t)$ is an integral curve of $\Ham p$, so
+is $M_\lambda c(t)$. By $\omega(\cdot,\Ham p)=dp$ and
+$\omega(\cdot,\varrho)=-\alpha$, $\Ham p(z)$ is a multiple of $\varrho(z)$ if and
+only if $dp(z)$ is a multiple of $\alpha(z)$.
+
+\begin{lemma}\label{microlocal:lem:radial}
+  Let $p\in\CI(\Tz{\R^n})$ be homogeneous of degree $1$ and suppose
+  $\Ham p(z_1)=c\varrho(z_1)$ for some $c\in\R$. Then the integral curve of
+  $\Ham p$ through $z_1$ is $t\mapsto M_{e^{ct}}z_1$, $t\in\R$; it is contained in
+  the ray $\{M_\lambda z_1;\ \lambda>0\}$.
+\end{lemma}
+\begin{proof}
+  The curve $c_1(t)=M_{e^{ct}}z_1$ satisfies $c_1'(t)=c\varrho(c_1(t))$ and, by
+  \eqref{microlocal:eq:H-homogeneous},
+  $\Ham p(c_1(t))=dM_{e^{ct}}(c\varrho(z_1))=c\varrho(c_1(t))$. By uniqueness of
+  integral curves it is the integral curve through $z_1$.
+\end{proof}
+
+\subsection{Principal symbols and bicharacteristics}
+
+\begin{definition}\label{microlocal:def:real-principal}
+  An operator $P\in\Psido m(\R^n)$ has \emph{real homogeneous principal
+  symbol} if there is a real $p\in S^m(\R^n;\R^n)$ with
+  $p(x,\lambda\xi)=\lambda^mp(x,\xi)$ for $\abs\xi\ge1$, $\lambda\ge1$, such that
+  $\sigma_L(P)-p\in S^{m-1}(\R^n;\R^n)$. We then also write $p$ for its
+  unique extension to a smooth function on $\Tz{\R^n}$ homogeneous of degree
+  $m$, $p(x,\xi)=\abs\xi^mp(x,\xi/\abs\xi)$, and $\Ham p$ for its Hamilton
+  vector field on $\Tz{\R^n}$. The \emph{characteristic variety} is
+  $\Sigma(P)=\{z\in\Tz{\R^n};\ p(z)=0\}$, and a \emph{null bicharacteristic} of $P$
+  is an integral curve $\gamma:J\to\Sigma(P)$ of $\Ham p$, $J\subset\R$ an
+  interval.
+\end{definition}
+
+Then $\Sigma(P)=\Char_m(P)$: if $p(\bar x,\bar\xi)\ne0$ then, by continuity and
+homogeneity, $\abs p\ge c\abs\xi^m$ on a cone $\Gamma_\eps(\bar x,\bar\xi)$, and
+$\abs{\sigma_L(P)-p}\le C\ang\xi^{m-1}$, so $P$ is elliptic there; if
+$p(\bar x,\bar\xi)=0$ then $\sigma_L(P)(\bar x,t\bar\xi)=O(t^{m-1})$ as
+$t\to\infty$, so $P$ is not elliptic at $(\bar x,\bar\xi)$. Since $\Ham pp=0$,
+an integral curve of $\Ham p$ which meets $\Sigma(P)$ stays in $\Sigma(P)$. If
+$\gamma$ is a null bicharacteristic, so is $t\mapsto M_\lambda\gamma(\lambda^{m-1}t)$, by
+\eqref{microlocal:eq:H-homogeneous}. The principal symbol of a differential
+operator $\sum_{\abs\alpha\le m}a_\alpha(x)D^\alpha$ with real top order
+coefficients in $\CIb(\R^n)$ is of this type, with $p=\sum_{\abs\alpha=m}a_\alpha\xi^\alpha$.
+
+Note also that if $p$ is as above with $m=1$ and $a\in S^M(\R^n;\R^n)$
+vanishes for $\abs\xi\le1$, then $\Ham pa=\{p,a\}\in S^M$, since $\pa_\xi p\in
+S^0$ and $\pa_xp\in S^1$ there; this is the symbol-level version of the fact
+that commutators with first order operators preserve the order. Moreover the
+flow of $\Ham p$ is then complete on $\Tz{\R^n}$: along an integral curve
+$\abs{\dot x}\le C$ and $\abs{\dot\xi}\le C\abs\xi$, by the uniform symbol
+estimates, so on a bounded time interval $x$ stays bounded and $\abs\xi$ stays
+between two positive constants.
+
+The operator $P$ is said to be of \emph{real principal type} at
+$z\in\Sigma(P)$ if $dp(z)$ and $\alpha(z)$ are linearly independent; when $m=1$
+this means that $\Ham p(z)$ is not a multiple of $\varrho(z)$. By
+\cref{microlocal:lem:radial}, at the remaining points (including those where
+$dp=0$) the null bicharacteristic stays in a single ray; since wavefront sets
+are conic, the propagation theorem below then holds trivially.
+
+\subsection{A homogeneous flow box}
+Near a point where $\Ham p$ is not radial we can straighten out $\Ham p$ in
+a way compatible with dilations. For $z=(x,\xi)\in\Tz{\R^n}$ we write
+$\hat z=(x,\xi/\abs\xi)$.
+
+\begin{lemma}\label{microlocal:lem:flow-box}
+  Let $p\in\CI(\Tz{\R^n})$ be real and homogeneous of degree $1$, and let
+  $z_0\in\Tz{\R^n}$ with $\Ham p(z_0)\notin\R\varrho(z_0)$. There are
+  $\eps_0>0$, a conic hypersurface $S\subset\Tz{\R^n}$ containing $z_0$ and a
+  smooth map
+  \begin{equation*}
+    F:(-2\eps_0,2\eps_0)\times S\to\Tz{\R^n},
+  \end{equation*}
+  which is a diffeomorphism onto an open cone $W$, such that $F(0,w)=w$,
+  $\pa_tF(t,w)=\Ham p(F(t,w))$ and $F(t,M_\lambda w)=M_\lambda F(t,w)$.
+  Moreover, if $\gamma(t)=F(t,z_0)$, then for every compact interval
+  $I\subset(-2\eps_0,2\eps_0)$ and every open cone $U\supset\gamma(I)$ there is a
+  cone $O\subset S$, open in $S$ and containing $z_0$, whose closure $\bar O$ in
+  $\Tz{\R^n}$ is contained in $S$, has compact base, and satisfies
+  $F(I\times\bar O)\subset U$.
+\end{lemma}
+
+Thus on $W$ we have the smooth functions $\tau=\mathrm{pr}_1\circ F^{-1}$,
+homogeneous of degree $0$, the map $\pi_0=\mathrm{pr}_2\circ F^{-1}:W\to S$,
+commuting with dilations, and the function $\Theta=\abs{\xi}\circ\pi_0$,
+homogeneous of degree $1$ and positive, which satisfy
+\begin{equation}\label{microlocal:eq:flow-box}
+  \Ham p\tau=1,\qquad\Ham p(f\circ\pi_0)=0\ \text{for }f\in\CI(S),\qquad\Ham p\Theta=0,
+\end{equation}
+since along the integral curves $t\mapsto F(t,w)$ of $\Ham p$ the function
+$\tau$ is $t$ while $\pi_0$ is constant. The sets $F(I\times\bar O)$ are
+closed cones with compact base, contained in $W$.
+
+\begin{proof}
+  Since $\Ham p(z_0)$ and $\varrho(z_0)$ are linearly independent, there is a
+  linear form $\lambda$ on $\R^{2n}$ with $\lambda(\varrho(z_0))=0$ and
+  $\lambda(\Ham p(z_0))=1$. Let $z_0=(x_0,\xi_0)$ and
+  $\ell(x,\xi)=\lambda\bigl((x,\abs{\xi_0}\xi/\abs\xi)-z_0\bigr)$, a smooth function
+  on $\Tz{\R^n}$, homogeneous of degree $0$, with $\ell(z_0)=0$. The
+  differential at $\xi_0$ of $\xi\mapsto\abs{\xi_0}\xi/\abs\xi$ is
+  $v\mapsto v-\abs{\xi_0}^{-2}(\xi_0\cdot v)\xi_0$, so
+  $d\ell(z_0)(\Ham p)=\lambda(\Ham p(z_0))-c\lambda(\varrho(z_0))=1$ for some $c$.
+  As $\Ham p\ell$ is homogeneous of degree $0$, it is $>\frac12$ on an open cone
+  $V_0\ni z_0$, and $S_0=\{z\in V_0;\ \ell(z)=0\}$ is a conic hypersurface to
+  which $\Ham p$ is transversal.
+
+  Let $\Phi_t$ be the (local) flow of $\Ham p$. It commutes with dilations,
+  and its domain is open, so by compactness and homogeneity there are
+  $\eps_1>0$ and an open cone $V_1\ni z_0$ such that $\Phi_t(z)$ is defined for
+  $\abs t\le3\eps_1$, $z\in V_1$. Put $F(t,w)=\Phi_t(w)$ for $\abs t<3\eps_1$,
+  $w\in S_0\cap V_1$. Then $F(0,w)=w$, $\pa_tF=\Ham p\circ F$ and
+  $F(t,M_\lambda w)=M_\lambda F(t,w)$. Since $d\Phi_t(\Ham p(w))=\Ham p(\Phi_tw)$,
+  \begin{equation*}
+    dF_{(t,w)}(c,v)=d\Phi_t\bigl(c\Ham p(w)+v\bigr),\qquad v\in T_wS_0;
+  \end{equation*}
+  if this vanishes then $c\Ham p(w)+v=0$, and applying $d\ell$ (which kills
+  $v$) gives $c\,\Ham p\ell(w)=0$, so $c=0$ and $v=0$. Thus $dF$ is everywhere
+  injective, hence invertible, and $F$ is a local diffeomorphism.
+
+  We claim $F$ is injective on $(-2\eps_0,2\eps_0)\times S_r$ for some
+  $\eps_0\in(0,\eps_1]$ and $r>0$, where $S_r=\{w\in S_0\cap V_1;\
+  \abs{\hat w-\hat z_0}<r\}$. Otherwise there are $(t_k,w_k)\ne(t'_k,w'_k)$ with
+  $F(t_k,w_k)=F(t'_k,w'_k)$, $t_k,t'_k\to0$ and $\hat w_k,\hat w'_k\to\hat z_0$.
+  Applying the same dilation to $w_k$ and $w'_k$ we may assume $\abs{\xi(w_k)}=1$,
+  so $w_k\to\hat z_0$; then $w'_k=\Phi_{t_k-t'_k}(w_k)\to\hat z_0$ by continuity of
+  the flow. Both $(t_k,w_k)$ and $(t'_k,w'_k)$ tend to $(0,\hat z_0)$, near which
+  $F$ is injective, a contradiction. Taking $r$ smaller we may also assume
+  that $\{w\in S_0;\ \abs{\xi(w)}=1,\ \abs{w-\hat z_0}\le r\}$ is compact and
+  contained in $V_1$, since $S_0\cap\{\abs\xi=1\}$ is a submanifold, hence
+  locally closed. Let $S=S_r$ and
+  $W=F((-2\eps_0,2\eps_0)\times S)$; $F$ is an injective local diffeomorphism,
+  hence a diffeomorphism onto the open cone $W$.
+
+  Finally let $I$ and $U$ be given. The set
+  $F(I\times\{\hat z_0\})=\{M_{1/\abs{\xi_0}}\gamma(t);\ t\in I\}$ lies in $U$, $I$ is
+  compact and $F$ is continuous, so there is $r'\in(0,r)$ such that
+  $F(t,w)\in U$ for $t\in I$ and $w\in S$ with $\abs{\xi(w)}=1$,
+  $\abs{w-\hat z_0}\le r'$. Then $O=\{w\in S;\ \abs{\hat w-\hat z_0}<r'\}$ has
+  the required properties, by homogeneity.
+\end{proof}
+
+% ======================================================================
+\section{Propagation of singularities}\label{microlocal:sec:propagation}
+
+We can now state and prove H\"ormander's theorem: for an operator with
+real homogeneous principal symbol, singularities of solutions of $Pu=f$ which
+are not caused by singularities of $f$ propagate along null bicharacteristics.
+
+\begin{theorem}[Propagation of singularities]\label{microlocal:thm:propagation}
+  Let $P\in\Psido m(\R^n)$ have real homogeneous principal symbol $p$, and let
+  $u\in\cSp(\R^n)$, $s\in\R$.
+  \begin{enumerate}[label=\textup{(\roman*)}]
+  \item $\WF(u)\setminus\WF(Pu)\subset\Sigma(P)$ and
+    $\WF_s(u)\setminus\WF_{s-m}(Pu)\subset\Sigma(P)$.
+  \item If $\gamma:J\to\Sigma(P)$ is a null bicharacteristic with
+    $\gamma(J)\cap\WF_{s-m+1}(Pu)=\emptyset$, then either
+    $\gamma(J)\subset\WF_s(u)$ or $\gamma(J)\cap\WF_s(u)=\emptyset$.
+  \item If $\gamma:J\to\Sigma(P)$ is a null bicharacteristic with
+    $\gamma(J)\cap\WF(Pu)=\emptyset$, then either $\gamma(J)\subset\WF(u)$ or
+    $\gamma(J)\cap\WF(u)=\emptyset$.
+  \end{enumerate}
+\end{theorem}
+
+Note the loss of one derivative in (ii) compared with elliptic regularity
+(i): $Pu\in H^{s-m+1}$ microlocally along $\gamma$ only gives $u\in H^s$, not
+$u\in H^{s+1}$, and this is optimal (\cref{microlocal:ex:Dx1}). Since $p$ is
+constant along integral curves of $\Ham p$, the theorem can be rephrased as
+follows.
+
+\begin{corollary}\label{microlocal:cor:propagation}
+  Under the hypotheses of \cref{microlocal:thm:propagation}, the set
+  $\WF(u)\setminus\WF(Pu)$ is contained in $\Sigma(P)$ and is a union of
+  maximally extended null bicharacteristics of $P$ in
+  $\Sigma(P)\setminus\WF(Pu)$: if $z\in\WF(u)\setminus\WF(Pu)$ and $J$ is the
+  connected component containing $0$ of the open set of $t$ for which the
+  integral curve $\gamma$ of $\Ham p$ with $\gamma(0)=z$ is defined at $t$ and
+  $\gamma(t)\notin\WF(Pu)$, then $\gamma(J)\subset\WF(u)$. The same holds for
+  $\WF_s(u)\setminus\WF_{s-m+1}(Pu)$.
+\end{corollary}
+
+The heart of the matter is the following local statement for first order
+operators, proved by a positive commutator argument.
+
+\begin{proposition}\label{microlocal:prop:propagation-local}
+  Let $P\in\Psido1(\R^n)$ have real homogeneous principal symbol $p$, let
+  $z_0\in\Tz{\R^n}$ with $\Ham p(z_0)\notin\R\varrho(z_0)$, let $\gamma$ be the
+  integral curve of $\Ham p$ with $\gamma(0)=z_0$, and let $s\in\R$. There is
+  $\delta_0>0$ such that $\gamma$ is defined on $[-\delta_0,\delta_0]$ and the
+  following holds for $0<\delta\le\delta_0$ and $u\in H^{-\infty}(\R^n)$: if
+  \begin{equation}\label{microlocal:eq:prop-hyp}
+    \gamma([0,\delta])\cap\WF_s(Pu)=\emptyset,\qquad
+    \gamma((0,\delta])\cap\WF_s(u)=\emptyset,\qquad
+    z_0\notin\WF_{s-\frac12}(u),
+  \end{equation}
+  then $z_0\notin\WF_s(u)$. The same is true with $[0,\delta]$ and $(0,\delta]$
+  replaced by $[-\delta,0]$ and $[-\delta,0)$.
+\end{proposition}
+
+\begin{proof}
+  \emph{Step 1: reductions.} The operator $-P$ has real principal symbol $-p$,
+  $\Ham{-p}=-\Ham p$, and its integral curve through $z_0$ is $t\mapsto\gamma(-t)$;
+  since $\WF_s(-Pu)=\WF_s(Pu)$, the last statement follows from the first
+  applied to $-P$. Next, let $P'=\ang D^sP\ang D^{-s}\in\Psido1$ and
+  $u'=\ang D^su\in H^{-\infty}$. By the multiplicativity of principal symbols,
+  $\sigma_L(P')-p\in S^0$, so $P'$ has the same principal symbol $p$; moreover
+  $P'u'=\ang D^sPu$, and by \cref{microlocal:prop:wf-s}(iii)
+  $\WF_t(u')=\WF_{t+s}(u)$ and $\WF_t(P'u')=\WF_{t+s}(Pu)$ for all $t$. So the
+  statement for $(P,u,s)$ is the statement for $(P',u',0)$, and we may assume
+  $s=0$ (the $\delta_0$ found below for $P'$ then depends on $s$).
+
+  \emph{Step 2: geometry.} Since $\sigma_1(P^*)=\overline{\sigma_1(P)}=[p]$,
+  $P_I=\frac1{2i}(P-P^*)\in\Psido0$; it is self-adjoint, so
+  $\sigma_0(P_I)=\overline{\sigma_0(P_I)}$ and
+  $q=2\operatorname{Re}\sigma_L(P_I)\in S^0$ is a real symbol with
+  $2\sigma_L(P_I)-q\in S^{-1}$. Let $Q_0=\sup\abs q$. Apply
+  \cref{microlocal:lem:flow-box} to $p$ and $z_0$, obtaining $\eps_0$, $S$, $F$, $W$,
+  $\tau$, $\pi_0$, $\Theta$, with $\gamma(t)=F(t,z_0)$ for $\abs t<2\eps_0$, and set
+  \begin{equation*}
+    \delta_0=\min\bigl(\tfrac12\eps_0,\ (18(1+Q_0))^{-1/2}\bigr).
+  \end{equation*}
+  Fix $\delta\in(0,\delta_0]$ and $u$ satisfying \eqref{microlocal:eq:prop-hyp}
+  with $s=0$. The sets
+  \begin{equation*}
+    \Gamma_1=\Tz{\R^n}\setminus\bigl(\WF_{-\frac12}(u)\cup\WF_0(Pu)\bigr),\qquad
+    \Gamma_2=\Tz{\R^n}\setminus\bigl(\WF_0(u)\cup\WF_0(Pu)\bigr)
+  \end{equation*}
+  are open cones, $\gamma([0,\delta])\subset\Gamma_1$ (recall
+  $\WF_{-1/2}\subset\WF_0$) and $\gamma((0,\delta])\subset\Gamma_2$. Choose
+  $\delta'\in(0,\delta/2]$ with $\gamma([-\delta',0])\subset\Gamma_1$. Apply the last
+  part of \cref{microlocal:lem:flow-box} to $I_1=[-\delta',\delta]$, $U=\Gamma_1$,
+  to $I_2=[\delta/2,\delta]$, $U=\Gamma_2$, and to $I_3=[-2\delta',2\delta]$, $U=W$;
+  intersecting the resulting cones we get an open cone $O\ni z_0$ in $S$ with
+  closure $\bar O\subset S$ of compact base such that the closed cones with
+  compact base
+  \begin{equation*}
+    C_j=F(I_j\times\bar O),\qquad j=1,2,3,
+  \end{equation*}
+  satisfy $C_1\subset\Gamma_1$, $C_2\subset\Gamma_2$, $C_3\subset W$; note
+  $C_2\subset C_1\subset C_3$. Choose smooth functions $\theta,\theta_1$ on $S$,
+  homogeneous of degree $0$ with values in $[0,1]$, with $\theta(z_0)=1$,
+  $\theta_1=1$ on a neighbourhood of $\supp\theta$ and $\supp\theta_1\subset\bar O$
+  (for instance functions of $\hat w$), and set $g=\theta\circ\pi_0$,
+  $g_1=\theta_1\circ\pi_0$ on $W$. Then $\Ham pg=\Ham pg_1=0$. Finally let
+  $c_\Theta,C_\Theta>0$ be such that $c_\Theta\abs\xi\le\Theta\le C_\Theta\abs\xi$ on
+  $C_3$ (a positive function homogeneous of degree $0$ on a cone with compact
+  base is bounded above and below), and $R_1=2C_\Theta$, so that $\Theta\ge R_1$
+  implies $\abs\xi\ge2$ on $C_3$.
+
+  \emph{Step 3: the symbols.} We use the following functions of one variable:
+  $h(t)=e^{-1/(t+\delta')}$ for $t>-\delta'$ and $h(t)=0$ for $t\le-\delta'$, which
+  satisfies $h'=(t+\delta')^{-2}h$; $k_\pm(t)=(t+\delta')^{\pm1}e^{-1/(2(t+\delta'))}$ for
+  $t>-\delta'$, $k_\pm(t)=0$ for $t\le-\delta'$, which are smooth and satisfy
+  $k_+k_-=h$; $\chi_0\in\CI(\R)$ with $0\le\chi_0\le1$, $\chi_0=1$ on
+  $(-\infty,\delta/2]$, $\chi_0=0$ on $[\delta,\infty)$; $\vartheta\in\CIc((-2\delta',2\delta))$
+  with $\vartheta=1$ on $[-\delta',\delta]$; and $\mu\in\CIc((-2,2))$ with $0\le\mu\le1$,
+  $\mu=1$ on $[-1,1]$. On $W$ define
+  \begin{gather*}
+    a_0=g^2\chi_0(\tau)^2h(\tau),\quad f_0=g\chi_0(\tau)k_+(\tau),\quad
+    b_0=g\chi_0(\tau)k_-(\tau),\quad e_0=2g^2h(\tau)\chi_0(\tau)\chi_0'(\tau),\\
+    r=g_1\vartheta(\tau)(\tau+\delta')^2,\qquad
+    \nu_\ell=\bigl(1-\mu(\Theta/R_1)\bigr)\mu(\Theta/\ell)\ (\ell\in\N),\qquad
+    \nu_\infty=1-\mu(\Theta/R_1).
+  \end{gather*}
+  The functions $a_0,f_0,b_0$ are supported in $\tau^{-1}(I_1)\cap\supp g\subset C_1$,
+  $e_0$ in $\tau^{-1}(I_2)\cap\supp g\subset C_2$ (as $\chi_0'$ is supported in
+  $[\delta/2,\delta]$) and $r$ in $C_3$; extended by zero they are smooth on
+  $\Tz{\R^n}$ and homogeneous of degree $0$. Moreover
+  $0\le r\le(2\delta+\delta')^2\le9\delta^2$, so with $\zeta(\xi)=1-\chi(\xi)$ ($\chi$
+  as in \eqref{microlocal:eq:gamma}) the symbol $\tilde r=\zeta r\in S^0$
+  satisfies $\abs{q\tilde r}\le9\delta^2Q_0\le\frac12$. By the chain rule
+  $\rho_\pm=(1+q\tilde r)^{\pm1/2}\in S^0(\R^n;\R^n)$. For $\ell\in\N\cup\{\infty\}$
+  let
+  \begin{equation*}
+    a_\ell=\nu_\ell^2a_0,\qquad b_\ell=\nu_\ell\rho_+b_0,\qquad f_\ell=\nu_\ell\rho_-f_0,\qquad
+    e_\ell=\nu_\ell^2e_0,
+  \end{equation*}
+  extended by zero outside $W$. These are real and have the following
+  properties.
+
+  (a) \emph{Supports.} Since $\nu_\ell=0$ where $\Theta<R_1$, $a_\ell$, $b_\ell$,
+  $f_\ell$ are supported in $K_1=C_1\cap\{\abs\xi\ge2\}$ and $e_\ell$ in
+  $K_2=C_2\cap\{\abs\xi\ge2\}$; for $\ell<\infty$ they also vanish where
+  $\Theta>2\ell$, hence have compact support in $\R^{2n}$ and lie in $S^{-\infty}$.
+
+  (b) \emph{Uniform bounds.} The sequences $(a_\ell)$, $(b_\ell)$, $(f_\ell)$, $(e_\ell)$
+  are bounded in $S^0$, and $a_\ell\to a_\infty$, \dots, $e_\ell\to e_\infty$ in $S^\eps$
+  for every $\eps>0$. Indeed, if $\phi$ is smooth, homogeneous of degree $0$,
+  and supported in $C_3$, then $\zeta\phi\in S^0$ (its derivatives
+  $D^\alpha_xD^\beta_\xi$ are homogeneous of degree $-\abs\beta$ for $\abs\xi\ge1$ and
+  $\phi$ has compact base). For $\mu(\Theta/\ell)$, the chain rule writes
+  $D^\alpha_xD^\beta_\xi[\mu(\Theta/\ell)]$, $(\alpha,\beta)\ne0$, as a sum of terms
+  $\ell^{-j}\mu^{(j)}(\Theta/\ell)\prod_{i=1}^jD^{\alpha_i}_xD^{\beta_i}_\xi\Theta$ with $j\ge1$,
+  $\sum\alpha_i=\alpha$, $\sum\beta_i=\beta$. On $C_3$,
+  $\abs{D^{\alpha_i}_xD^{\beta_i}_\xi\Theta}\le C\abs\xi^{1-\abs{\beta_i}}$ by homogeneity, and on
+  the support of $\mu^{(j)}(\Theta/\ell)$ we have $c_\Theta\abs\xi\le\Theta\le2\ell$, so
+  $\ell^{-j}\le C\abs\xi^{-j}$; each term is therefore $O(\abs\xi^{-\abs\beta})$ uniformly
+  in $\ell$. The same holds for $\mu(\Theta/R_1)$, and Leibniz' formula gives
+  the boundedness. Finally $\nu_\ell-\nu_\infty=-\nu_\infty(1-\mu(\Theta/\ell))$, and
+  $(1-\mu(\Theta/\ell))\zeta\phi$ is bounded in $S^0$ and supported in
+  $\{\Theta\ge\ell\}\subset\{\abs\xi\ge\ell/C_\Theta\}$, so its $\norm\cdot_{N,\eps}$ norms are
+  $O(\ell^{-\eps})$.
+
+  (c) \emph{Factorization and the transport identity.} Where $b_0\ne0$ and
+  $\nu_\ell\ne0$ we have $g_1=1$, $\vartheta(\tau)=1$, $\zeta=1$, so
+  $\tilde r=(\tau+\delta')^2$. Hence $\rho_+\rho_-=1$ and $b_\ell f_\ell=\nu_\ell^2g^2\chi_0^2k_+k_-=a_\ell$.
+  By \eqref{microlocal:eq:flow-box}, $\Ham p$ annihilates $g$ and $\nu_\ell$ (a
+  function of $\Theta$) and $\Ham p\phi(\tau)=\phi'(\tau)$, so
+  \begin{equation*}
+    \Ham pa_\ell+qa_\ell=\nu_\ell^2g^2\chi_0^2h\bigl((\tau+\delta')^{-2}+q\bigr)+e_\ell
+    =\nu_\ell^2g^2\chi_0^2k_-^2\bigl(1+q(\tau+\delta')^2\bigr)+e_\ell,
+  \end{equation*}
+  that is,
+  \begin{equation}\label{microlocal:eq:transport-identity}
+    \Ham pa_\ell+qa_\ell=b_\ell^2+e_\ell,\qquad a_\ell=b_\ell f_\ell .
+  \end{equation}
+  Here $\Ham pa_\ell=\{p,a_\ell\}$ with $p\in S^1$ the symbol of
+  \cref{microlocal:def:real-principal}, since it equals its homogeneous
+  extension where $\abs\xi\ge1$.
+
+  (d) \emph{Ellipticity.} $b_\infty$ is elliptic at $z_0$: the function
+  $g\chi_0(\tau)k_-(\tau)$ is homogeneous of degree $0$ and equals
+  $k_-(0)=e^{-1/(2\delta')}/\delta'>0$ at $z_0$, so it is $\ge c_0>0$ on an open
+  cone $\Gamma_0\ni z_0$ contained in the open cone $F((-\delta',\delta)\times O)\subset C_3$; there $\rho_+\ge2^{-1/2}$ and
+  $\nu_\infty=1$ if $\abs\xi\ge2R_1/c_\Theta$, so $b_\infty\ge c_0/\sqrt2$ on
+  $\Gamma_0\cap\{\abs\xi\ge2R_1/c_\Theta\}$.
+
+  \emph{Step 4: the operators.} For a real symbol $c\in S^0$ let
+  $\Op_s(c)=\frac12(\Op(c)+\Op(c)^*)$, which is self-adjoint and has
+  $\sigma_L(\Op_s(c))-c\in S^{-1}$. Let
+  \begin{equation*}
+    A_\ell=\Op_s(a_\ell),\quad B_\ell=\Op_s(b_\ell),\quad F_\ell=\Op_s(f_\ell),\quad
+    E_\ell=\Op_s(e_\ell),\qquad B=B_\infty .
+  \end{equation*}
+  For $\ell<\infty$ these are in $\Psido{-\infty}(\R^n)$. By (a), (b),
+  \cref{microlocal:lem:continuity} and \cref{microlocal:lem:uniform-support},
+  the sequences $(A_\ell),(B_\ell),(F_\ell)$ are bounded in $\Psido0$ and
+  uniformly supported in $K_1$, and $(E_\ell)$ is uniformly supported in
+  $K_2\subset K_1$; moreover $\sigma_L(A_\ell)=a_\ell+a'_\ell$ with $(a'_\ell)$ bounded in
+  $S^{-1}$, and similarly for the others. Define
+  \begin{equation*}
+    R_\ell=\frac1i(A_\ell P-P^*A_\ell)-B_\ell^2-E_\ell,\qquad R'_\ell=A_\ell-B_\ell F_\ell .
+  \end{equation*}
+  By \cref{microlocal:lem:uniform-support}(i) both sequences are uniformly
+  supported in $K_1$; we claim they are bounded in $\Psido{-1}$. For $R'_\ell$
+  this follows from \cref{microlocal:lem:continuity}, since
+  $\sigma_L(B_\ell F_\ell)-b_\ell f_\ell$ is bounded in $S^{-1}$ and $a_\ell=b_\ell f_\ell$. For
+  $R_\ell$, since $P^*=P-2iP_I$,
+  \begin{equation*}
+    \frac1i(A_\ell P-P^*A_\ell)=i[P,A_\ell]+2P_IA_\ell .
+  \end{equation*}
+  Write $\sigma_L(P)=p+p'$ with $p'\in S^0$. By
+  \cref{microlocal:lem:continuity} with $N=2$, the terms with $\alpha=0$
+  cancelling,
+  \begin{equation*}
+    \sigma_L([P,A_\ell])=\sum_{j=1}^n\bigl(\pa_{\xi_j}\sigma_L(P)\,D_{x_j}\sigma_L(A_\ell)
+    -\pa_{\xi_j}\sigma_L(A_\ell)\,D_{x_j}\sigma_L(P)\bigr)+\text{(bounded in }S^{-1}).
+  \end{equation*}
+  The contributions of $p'$ and of $a'_\ell$ are bounded in $S^{-1}$ (e.g.\
+  $\pa_\xi a'_\ell\,D_xp$ is bounded in $S^{-2+1}$), and the remaining terms are
+  $-i\sum_j(\pa_{\xi_j}p\,\pa_{x_j}a_\ell-\pa_{\xi_j}a_\ell\,\pa_{x_j}p)=-i\Ham pa_\ell$.
+  Hence $\sigma_L(i[P,A_\ell])-\Ham pa_\ell$ is bounded in $S^{-1}$; similarly
+  $\sigma_L(2P_IA_\ell)-qa_\ell$, $\sigma_L(B_\ell^2)-b_\ell^2$ and $\sigma_L(E_\ell)-e_\ell$ are
+  bounded in $S^{-1}$. By \eqref{microlocal:eq:transport-identity},
+  $(\sigma_L(R_\ell))$ is bounded in $S^{-1}$.
+
+  \emph{Step 5: the estimate.} Let $\ell<\infty$ and $u\in H^{-M}$. All
+  operators in the identity
+  \begin{equation*}
+    \frac1i(A_\ell P-P^*A_\ell)=B_\ell^2+E_\ell+R_\ell
+  \end{equation*}
+  are in $\Psido{-\infty}$, so we may apply it to $u$ and pair with $u$. By
+  \eqref{microlocal:eq:sobolev-adjoint} and $A_\ell^*=A_\ell$,
+  $\inner{P^*A_\ell u}u=\inner{A_\ell u}{Pu}=\inner u{A_\ell Pu}=\overline{\inner{A_\ell Pu}u}$, and
+  $\inner{B_\ell^2u}u=\norm{B_\ell u}^2_{L^2}$. Hence
+  \begin{equation}\label{microlocal:eq:commutator-identity}
+    \norm{B_\ell u}_{L^2}^2=2\operatorname{Im}\inner{A_\ell Pu}u-\inner{E_\ell u}u-\inner{R_\ell u}u,
+  \end{equation}
+  and, using $A_\ell=B_\ell F_\ell+R'_\ell$ and $B_\ell^*=B_\ell$,
+  \begin{equation*}
+    \inner{A_\ell Pu}u=\inner{F_\ell Pu}{B_\ell u}+\inner{R'_\ell Pu}u .
+  \end{equation*}
+  We now apply \cref{microlocal:lem:uniform-bounds}, with $v=Pu$ and $w=u$,
+  both in $H^{-\infty}$. Since $K_1\subset C_1\cap\{\abs\xi\ge1\}$, $C_1\subset\Gamma_1$,
+  and $\Gamma_1$ does not meet $\WF_0(Pu)$ or $\WF_{-1/2}(u)$:
+  $\norm{F_\ell Pu}_{L^2}\le C$ (with $m=s=0$); $\abs{\inner{R'_\ell Pu}u}\le C$ (with
+  $m=-1$, $s=0$, $t=-\frac12$); and $\abs{\inner{R_\ell u}u}\le C$ (with $m=-1$,
+  $s=t=-\frac12$). Since $K_2\subset C_2\cap\{\abs\xi\ge1\}$, $C_2\subset\Gamma_2$ and
+  $\Gamma_2\cap\WF_0(u)=\emptyset$: $\abs{\inner{E_\ell u}u}\le C$ (with $m=s=t=0$). With
+  constants independent of $\ell$, \eqref{microlocal:eq:commutator-identity} gives
+  \begin{equation*}
+    \norm{B_\ell u}^2_{L^2}\le2C\norm{B_\ell u}_{L^2}+C',
+  \end{equation*}
+  so $\norm{B_\ell u}_{L^2}\le C+\sqrt{C^2+C'}$ for all $\ell$.
+
+  \emph{Step 6: the limit.} Let $\phi\in\cS(\R^n)$. By (b),
+  \cref{microlocal:lem:continuity} (applied in $S^\eps$, to $\Op$ and to the
+  adjoint map) gives $B_\ell\phi\to B\phi$ in $H^M$. Hence, by
+  \eqref{microlocal:eq:sobolev-adjoint},
+  \begin{equation*}
+    \inner{Bu}\phi=\inner u{B\phi}=\lim_{\ell\to\infty}\inner u{B_\ell\phi}
+    =\lim_{\ell\to\infty}\inner{B_\ell u}\phi,
+  \end{equation*}
+  and $\abs{\inner{Bu}\phi}\le\sup_\ell\norm{B_\ell u}_{L^2}\norm\phi_{L^2}$. So $Bu\in
+  L^2(\R^n)$, and $\WF_0(Bu)=\emptyset$. Since $\sigma_L(B)-b_\infty\in S^{-1}$, $B$ is
+  elliptic at $z_0$ by (d), and \cref{microlocal:prop:wf-s}(iv) gives
+  $z_0\notin\WF_0(u)$.
+\end{proof}
+
+\begin{remark}\label{microlocal:rem:commutator}
+  The idea of the proof is transparent if one ignores regularity issues.
+  For a self-adjoint $A$ of order $0$, $2\operatorname{Im}\inner{APu}u$ is the
+  expectation of $\frac1i(AP-P^*A)$, an operator of order $0$ whose principal
+  symbol is $\Ham pa+qa$. The symbol $a$ is chosen to increase along $\Ham p$
+  near $z_0$ and to be cut off further along the bicharacteristic, where $u$
+  is already known to be regular; then $\Ham pa+qa$ is a square $b^2$ near
+  $z_0$, up to an error $e$ supported where $u$ is regular, and the identity
+  bounds $\norm{Bu}$ in terms of $Pu$. The factor $h=e^{-1/(\tau+\delta')}$ grows so
+  fast ($h'/h=(\tau+\delta')^{-2}$) that it absorbs the term $qa$, which comes from
+  the non-self-adjoint part of $P$, on a short enough interval; the
+  factorization $a=bf$ is what allows the hypothesis on $Pu$ to be of order
+  $s$ rather than $s+\frac12$. Since $\norm{Bu}$ is not known to be finite, the
+  argument is applied to the regularized operators $A_\ell$; it is essential
+  that the regularizing factor $\mu(\Theta/\ell)$ is annihilated by $\Ham p$, so
+  that the identity \eqref{microlocal:eq:transport-identity} holds exactly,
+  uniformly in $\ell$.
+\end{remark}
+
+\begin{proof}[Proof of \cref{microlocal:thm:propagation}]
+  (i) is elliptic regularity (\cref{microlocal:thm:elliptic-regularity} and
+  \cref{microlocal:prop:wf-s}(iv)), since $\Char_m(P)=\Sigma(P)$.
+
+  \emph{Reduction to $m=1$.} Let $\lambda\in\CI(\R^n)$ be positive with
+  $\lambda(\xi)=\abs\xi^{1-m}$ for $\abs\xi\ge1$, and $\Lambda=\Op(\lambda)$; it is
+  invertible with inverse $\Op(1/\lambda)\in\Psido{m-1}$. The operator
+  $P_1=\Lambda P\in\Psido1$ has real homogeneous principal symbol
+  $p_1=\abs\xi^{1-m}p$ (by the composition formula,
+  $\sigma_L(\Lambda P)-\lambda\sigma_L(P)\in S^0$), and $\Sigma(P_1)=\Sigma(P)$. On
+  $\Sigma(P)$, $\Ham{p_1}=\abs\xi^{1-m}\Ham p+p\,\Ham{\abs\xi^{1-m}}=\abs\xi^{1-m}\Ham p$. By
+  \cref{microlocal:prop:wf-s}(iii) applied to $\Lambda$ and $\Lambda^{-1}$,
+  $\WF_t(P_1u)=\WF_{t+1-m}(Pu)$ for all $t$, and similarly
+  $\WF(P_1u)=\WF(Pu)$ by \cref{microlocal:thm:microlocality}. If
+  $\gamma:J\to\Sigma(P)$ is a null bicharacteristic of $P$, fix $t_*\in J$ and let
+  $\kappa(t)=\int_{t_*}^t\abs{\xi(\gamma(t'))}^{m-1}dt'$, a smooth increasing
+  diffeomorphism of $J$ onto an interval $J_1$; then
+  $\gamma_1=\gamma\circ\kappa^{-1}$ satisfies
+  $\gamma_1'=\abs{\xi(\gamma_1)}^{1-m}\Ham p(\gamma_1)=\Ham{p_1}(\gamma_1)$, so it is a null
+  bicharacteristic of $P_1$ with the same image. Thus (ii) and (iii) for $P$
+  follow from (ii) and (iii) for $P_1$, and we assume $m=1$ from now on.
+
+  \emph{Localization.} Let $I\subset J$ be a compact interval, $U'$ an open
+  set containing the projection of $\gamma(I)$ to $\R^n$, with compact closure,
+  and $\psi\in\CIc(\R^n)$ equal to $1$ on a neighbourhood of $\overline{U'}$. Then
+  $\tilde u=\psi u\in\CmIc\subset H^{-\infty}$ and $P\tilde u=\psi Pu+[P,\psi]u$. The
+  terms of order $<N$ in the expansion of $\sigma_L([P,\psi])$ all contain
+  derivatives of $\psi$, so $\sigma_L([P,\psi])$ is rapidly decreasing on
+  $U'\times\R^n$ and $\WFp([P,\psi])\cap\pi^{-1}(U')=\emptyset$. By
+  \cref{microlocal:prop:wf-s}(i),(iii), over $U'$ the sets $\WF_t(\tilde u)$,
+  $\WF_t(P\tilde u)$ coincide with $\WF_t(u)$, $\WF_t(Pu)$, for every $t$, and
+  likewise for $\WF$. So when dealing with $\gamma|_I$ we may replace $u$ by
+  $\tilde u\in H^{-\infty}$.
+
+  (ii) (with $m=1$). It suffices to show: if $\gamma(t_1)\notin\WF_s(u)$ for some
+  $t_1\in J$, then $\gamma(t_2)\notin\WF_s(u)$ for every $t_2\in J$. Fix $t_2$, say
+  $t_2>t_1$ (the other case is symmetric), let $I=[t_1,t_2]$, and localize as
+  above, so $u\in H^{s'}$ for some $s'$. If some point of $\gamma(I)$ is a radial
+  point, i.e.\ $\Ham p$ is a multiple of $\varrho$ there, then by
+  \cref{microlocal:lem:radial} $\gamma(I)$ lies in one ray; as $\WF_s(u)$ is
+  conic, $\gamma(t_2)\notin\WF_s(u)$. Otherwise choose $K\in\N$ with $s-K/2\le s'$
+  and put $s_k=s-(K-k)/2$. We show by induction on $k$ that
+  $\gamma(I)\cap\WF_{s_k}(u)=\emptyset$; for $k=0$ this holds since
+  $\WF_{s_0}(u)\subset\WF_{s'}(u)=\emptyset$. Suppose it holds for $k-1$, and let
+  $C=\{t\in I;\ \gamma(t)\in\WF_{s_k}(u)\}$, a closed set not containing $t_1$. If
+  $C\ne\emptyset$, let $t_0=\min C>t_1$, so $\gamma([t_1,t_0))\cap\WF_{s_k}(u)=\emptyset$.
+  Apply the backward form of \cref{microlocal:prop:propagation-local} at
+  $z_0=\gamma(t_0)$, to the curve $t\mapsto\gamma(t_0+t)$, with order $s_k$ and
+  $\delta=\min(\delta_0,t_0-t_1)$: $\gamma([t_0-\delta,t_0])$ does not meet
+  $\WF_{s_k}(Pu)\subset\WF_s(Pu)$, $\gamma([t_0-\delta,t_0))$ does not meet
+  $\WF_{s_k}(u)$, and $z_0\notin\WF_{s_k-1/2}(u)=\WF_{s_{k-1}}(u)$ by the induction
+  hypothesis. Hence $z_0\notin\WF_{s_k}(u)$, contradicting $t_0\in C$. So
+  $C=\emptyset$, which completes the induction; for $k=K$ we get
+  $\gamma(t_2)\notin\WF_s(u)$.
+
+  (iii) Suppose $\gamma(t_1)\notin\WF(u)$ and let $t_2\in J$; let $\Gamma_0$ be an
+  open cone containing $\gamma(t_1)$ and disjoint from $\WF(u)$, and let $I$ be
+  the closed interval between $0$ and $t_1-t_2$. The flow $\Phi_t$ of $\Ham p$
+  is continuous on its open domain, $\Phi_t(\gamma(t_2))=\gamma(t_2+t)$ for $t\in I$,
+  and the compact set $\gamma(t_2+I)$ does not meet the closed set $\WF(Pu)$. By
+  compactness of $I$ there is an open neighbourhood $V$ of $\gamma(t_2)$ such that
+  for $z\in V$, $\Phi_t(z)$ is defined and not in $\WF(Pu)$ for $t\in I$, and
+  $\Phi_{t_1-t_2}(z)\in\Gamma_0$. Let $z\in V$. If $z\notin\Sigma(P)$ then $z\notin\WF(u)$
+  by (i). If $z\in\Sigma(P)$ then $t\mapsto\Phi_t(z)$, $t\in I$, is a null
+  bicharacteristic which does not meet $\WF(Pu)\supset\WF_s(Pu)$ and whose
+  point $\Phi_{t_1-t_2}(z)\in\Gamma_0$ is not in $\WF_s(u)$, for every $s$; by (ii),
+  $z\notin\WF_s(u)$ for every $s$. Thus the open cone generated by $V$ does not
+  meet any $\WF_s(u)$, and by \cref{microlocal:prop:wf-s}(vi) it does not meet
+  $\WF(u)$. In particular $\gamma(t_2)\notin\WF(u)$.
+\end{proof}
+
+\begin{proof}[Proof of \cref{microlocal:cor:propagation}]
+  The first statement is (i). The set of $t$ in the statement is open since
+  the domain of the flow is open and $\WF(Pu)$ is closed, and $\gamma(J)\subset\Sigma(P)$
+  as $p$ is constant along $\gamma$. Since $z=\gamma(0)\in\WF(u)$, (iii) gives
+  $\gamma(J)\subset\WF(u)$. The Sobolev version follows in the same way from (ii).
+\end{proof}
+
+\begin{remark}[Invariance; manifolds]\label{microlocal:rem:propagation-invariance}
+  The statement of \cref{microlocal:thm:propagation}(iii) is invariant under
+  changes of coordinates. If $F:\Omega\to\Omega'$ is a diffeomorphism and $P$ has
+  kernel with compact support in $\Omega\times\Omega$, then $P_F$ has principal
+  symbol $p\circ\chi_F^{-1}$ (\cref{microlocal:thm:coordinates}), so by
+  \cref{microlocal:lem:symplectic} $\chi_F$ maps the null bicharacteristics of
+  $P$ to those of $P_F$, and by \cref{microlocal:thm:wf-diffeo} it maps
+  wavefront sets to wavefront sets. Consequently the theorem holds for a
+  properly supported $P\in\Psido m(X)$ with real homogeneous principal symbol
+  on a manifold $X$ (\cref{ch:manifolds}) and $u\in\CmI(X)$: given a null
+  bicharacteristic $\gamma:J\to\Sigma(P)\setminus\WF(Pu)$, the set of $t\in J$ with
+  $\gamma(t)\in\WF(u)$ is closed, and it is open because near each $t_1$ the
+  curve lies over a coordinate chart, in which, after multiplying $u$ by a
+  cut-off equal to $1$ near the projection of a piece of $\gamma$ and $P$ by
+  cut-offs on both sides, the theorem on $\R^n$ applies. See \cref{ch:wave}
+  for this argument in the case of the wave operator.
+\end{remark}
+
+% ======================================================================
 \section{Exercises}\label{microlocal:sec:exercises}
 
 \begin{exercise}\label{microlocal:ex:residual-S}
@@ -2113,6 +3133,65 @@ describes how they propagate singularities.
   formulas, and that the wavefront set bounds coincide.
 \end{exercise}
 
+\begin{exercise}\label{microlocal:ex:wf-s-union}
+  Show that the inclusion $\bigcup_s\WF_s(u)\subset\WF(u)$ of
+  \cref{microlocal:prop:wf-s}(vi) can be strict. (Hint: on $\R$, let
+  $\phi\in\CIc(\R)$ equal $1$ near $[0,1]$ and $v_k(x)=\phi(x)\abs{x-1/k}^{k+1/2}$,
+  which lies in $H^s$ exactly for $s<k+1$. Choose $\eps_k>0$ so small that
+  $u=\sum_k\eps_kv_k$ converges in $H^{k_0+1/2}(\R)$ for every $k_0$ when the sum
+  is restricted to $k\ge k_0$. Show that $u$ is in $H^s$ near $0$ for every $s$,
+  so that $(0,\pm1)\notin\WF_s(u)$ for all $s$, but that $1/k\in\singsupp u$ for
+  every $k$, so $0\in\singsupp u$.)
+\end{exercise}
+
+\begin{exercise}\label{microlocal:ex:Dx1}
+  Let $P=D_{x_1}$ on $\R^2$. Determine $\Sigma(P)$ and the null
+  bicharacteristics. Let $s\ge0$, let $w\in H^s(\R)$ have compact support and
+  satisfy $w\notin H^{s+\eps}(\R)$ for every $\eps>0$, let $\phi\in\CIc((-1,1))$ with
+  $\int\phi=1$, and let $u(x)=\Phi(x_1)w(x_2)$ with
+  $\Phi(x_1)=i\int_{-\infty}^{x_1}\phi$. Show that $Pu=\phi\otimes w\in H^s(\R^2)$, that
+  $u$ vanishes for $x_1<-1$, and that $u$ is not in $H^{s+\eps}_{\mathrm{loc}}$ on the
+  half-plane $\{x_1>1\}$, for any $\eps>0$. Deduce that some null bicharacteristic
+  meets $\WF_{s+\eps}(u)$ without being contained in it, although it does not
+  meet $\WF_s(Pu)=\emptyset$. Thus in \cref{microlocal:thm:propagation}(ii) the
+  order $s-m+1$ cannot be replaced by $s-m+1-\eps$: compared with elliptic
+  regularity, one derivative is lost.
+\end{exercise}
+
+\begin{exercise}\label{microlocal:ex:jacobi}
+  Check the Jacobi identity for the Poisson bracket,
+  \begin{equation*}
+    \{f,\{g,h\}\}+\{g,\{h,f\}\}+\{h,\{f,g\}\}=0,\qquad f,g,h\in\CI(\R^{2n}),
+  \end{equation*}
+  and deduce that $[\Ham f,\Ham g]=\Ham{\{f,g\}}$.
+\end{exercise}
+
+\begin{exercise}\label{microlocal:ex:closed-form}
+  The fact that $\omega(\cdot,\Ham h)=dh$ determines $\Ham h$ is equivalent to
+  the non-degeneracy of $\omega$: $\omega(v,w)=0$ for all $w$ implies $v=0$. Let
+  $\omega'$ be any non-degenerate $2$-form on an open set of $\R^{2n}$, define
+  $\Ham f'$ by $\omega'(\cdot,\Ham f')=df$ and $\{f,g\}'=\omega'(\Ham f',\Ham g')$. Show
+  that $\{f,g\}'=\Ham f'g$, and that the Jacobi identity holds for $\{\cdot,\cdot\}'$
+  if and only if $\omega'$ is closed. (Use the formula for $d\omega'$ evaluated on
+  three Hamilton vector fields.)
+\end{exercise}
+
+\begin{exercise}\label{microlocal:ex:conic-coordinates}
+  For $\bar\xi\in\R^n\setminus0$ choose $j$ with $\bar\xi_j\ne0$ and consider the
+  conic region
+  \begin{equation*}
+    \Bigl\{\xi;\ \xi_j/\bar\xi_j>0,\ \abs{\xi_k/\xi_j-\bar\xi_k/\bar\xi_j}<\eps\text{ for }k\ne j\Bigr\}
+  \end{equation*}
+  with coordinates $r=\abs{\xi_j}$, $t_k=\xi_k/\abs{\xi_j}$ ($k\ne j$). Check that
+  finitely many such regions cover $\R^n\setminus\{0\}$. If $a\in\CI(\R^n\times\R^n)$ has
+  compact support in $x$, show that $a\in S^M(\R^n;\R^n)$ if and only if, in each
+  of finitely many such regions covering $\{\abs\xi\ge1\}$, the function
+  $b(x,t,r)=a(x,\xi)$ satisfies
+  $\abs{D^\alpha_xD^\gamma_tD^k_rb}\le C_{\alpha\gamma k}r^{M-k}$ for $r\ge1$. (This is the
+  form in which homogeneity, and the fact that $\Ham p$ maps symbols to
+  symbols, are most easily checked.)
+\end{exercise}
+
 \section*{Notes}
 The definition of the wavefront set via pseudodifferential operators
 follows Melrose's notes, while the Fourier transform characterization of
@@ -2133,3 +3212,21 @@ through the pairing), and the pull-back by a general map is defined through
 restriction to a graph, with a limit formula showing consistency with all
 the special cases. The wavefront relation theorem includes the term
 $\WF_{\Omega_1}(K)$, which is needed in general.
+
+The propagation theorem of \cref{microlocal:sec:propagation} is due to
+H\"ormander (for operators of real principal type; it was developed further by
+Duistermaat and H\"ormander, \emph{Fourier integral operators II}, Acta
+Math.\ 128 (1972)); see also H\"ormander, \emph{The analysis of linear partial
+differential operators IV}, Chapter~26, where it is proved by reduction to
+$D_{x_1}$ with Fourier integral operators. The positive commutator proof given
+here follows the revised version of Melrose's notes, with some changes: the
+non-self-adjoint part of $P$ is absorbed by the rapidly growing weight
+$e^{-1/(\tau+\delta')}$ on a short bicharacteristic segment (instead of an
+integrating factor, which would require a homogeneous representative of the
+subprincipal term), the factorization $a=bf$ gives the sharp hypothesis
+$Pu\in H^{s-m+1}$ directly, and the uniformity of the calculus along the
+regularizing sequence is deduced from the closed graph theorem
+(\cref{microlocal:lem:continuity}; for the functional analysis see e.g.\
+Rudin, \emph{Functional analysis}, Theorems~2.15 and 2.17). The passage from
+Sobolev to $\CI$ regularity uses nearby bicharacteristics instead of a
+straightening of the whole family.

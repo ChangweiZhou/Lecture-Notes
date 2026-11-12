@@ -907,11 +907,12 @@ for the isotropic calculus by the results of \cref{ch:isotropic}:
   kernel converges in $\cS(\R^2)$). Moreover $\Ran\Pi_{k+1}=\Ran\Pi_k\oplus u_{k+1}\C^N$.
 \end{enumerate}
 The dictionary is therefore
-\begin{equation*}
+\begin{gather*}
   \Cp(\Sphere;\C^N)\leadsto\cS(\R;\C^N),\quad L^2_+(\Sphere;\C^N)\leadsto L^2(\R;\C^N),\quad
-  \PsiT{0}\leadsto\Psiisoph{0},\quad\PsiT{-\infty}\leadsto\Psiiso{-\infty},\quad
+  \PsiT{0}\leadsto\Psiisoph{0},\\
+  \PsiT{-\infty}\leadsto\Psiiso{-\infty},\quad
   P_k\leadsto\Pi_k,\quad e^{ij\theta}\leadsto u_j,
-\end{equation*}
+\end{gather*}
 with $T_a$ replaced by $\Op_\chi(a)$. Making these replacements in
 \cref{bott:lem:inverse,bott:lem:index-bundle,bott:prop:perturb} and in
 \cref{bott:prop:index-properties}(i)--(iv) we obtain, with the same proofs:
@@ -1053,7 +1054,7 @@ $\indiso(a)=\indiso(\Op_\chi(a))\in K^0(X)$. By \cref{bott:prop:iso-families}(ii
 \cref{bott:lem:stable} this defines a homomorphism $\indiso\colon K^{-2}(X)\to K^0(X)$,
 natural under pull-back.
 
-\begin{theorem}[Bott periodicity via the harmonic oscillator]\label{bott:thm:iso-bott}
+\begin{theorem}[Bott periodicity, isotropic form]\label{bott:thm:iso-bott}
   For every compact manifold $X$ the isotropic index map
   $\indiso\colon K^{-2}(X)\to K^0(X)$ is an isomorphism. Its inverse is
   \begin{equation}\label{bott:eq:iso-bott-map}
@@ -1620,6 +1621,562 @@ Spheres need one more form of the clutching construction.
 This justifies calling $\Ginf$ a classifying space for odd K-theory: its homotopy groups are
 those of the stable unitary group (Bott's original theorem).
 
+\section{Isotropic--semiclassical quantization maps}\label{bott:sec:quantization}
+
+The isotropic index map quantizes a loop of matrices, viewed as a function on the
+circle at infinity of $\R^2$, to a Fredholm operator. There is a second, `odd', way to
+pass from symbols to operators, which works on every $\R^{2n}$: a compactly supported
+map $g\colon\R^{2n}\to\GL(N,\C)$ (equal to $\Id$ outside a compact set) is quantized to
+an invertible perturbation of the identity by an isotropic smoothing operator on
+$\R^n$, after rescaling the symbol by a small parameter $\eps$. The same procedure
+applied to projections gives an even version. These maps are used in
+\cref{ch:semiclassical-index}; here we define them, show that they commute with
+clutching, and show that they realize Bott periodicity.
+
+\subsection{Weyl operators and semiclassical scaling}
+On $\R^{2n}$ we use the variables $w=(x,\xi)$ and dual variables $\zeta=(p,q)$, with
+$\pair\zeta w=p\cdot x+q\cdot\xi$, and the Fourier transform
+$\hat a(\zeta)=\int e^{-i\pair\zeta w}a(w)\,dw$. The \emph{Weyl operators}
+\begin{equation*}
+  \mathcal W(\zeta)u(x)=e^{ip\cdot x+ip\cdot q/2}\,u(x+q),\qquad\zeta=(p,q)\in\R^{2n},
+\end{equation*}
+are unitary on $L^2(\R^n)$, strongly continuous in $\zeta$, and by direct computation
+\begin{equation}\label{bott:eq:weyl-ops}
+  \mathcal W(\zeta)\mathcal W(\zeta')=e^{i\sigma(\zeta,\zeta')/2}\,\mathcal W(\zeta+\zeta'),\qquad
+  \sigma\bigl((p,q),(p',q')\bigr)=p'\cdot q-p\cdot q'.
+\end{equation}
+From the kernel of the Weyl quantization $\OpW$ of \cref{ch:isotropic} one finds
+$\OpW(e^{i\pair\zeta\cdot})=\mathcal W(\zeta)$: its kernel is
+$e^{ip\cdot(x+y)/2}\delta(x-y+q)$. Since $u,v\mapsto\pair{\OpW(a)u}{v}$ is the pairing of
+$a$ with a Schwartz function of $w$ (the kernel formula of the Weyl quantization), we
+may insert the Fourier inversion formula $a=(2\pi)^{-2n}\int\hat a(\zeta)e^{i\pair\zeta\cdot}d\zeta$
+and get, for $a\in\cS(\R^{2n})$,
+\begin{equation}\label{bott:eq:weyl-superposition}
+  \OpW(a)=(2\pi)^{-2n}\int\hat a(\zeta)\,\mathcal W(\zeta)\,d\zeta,\qquad
+  \norm{\OpW(a)}_{\Lin(L^2)}\le(2\pi)^{-2n}\norm{\hat a}_{L^1},
+\end{equation}
+the integral converging strongly. The same holds for matrix-valued symbols, with
+$\norm{\hat a}_{L^1}=\int\abs{\hat a(\zeta)}\,d\zeta$ and the operator norm on matrices.
+
+\begin{definition}\label{bott:def:sl-quantization}
+  For $0<\eps\le1$ and $a\in\cS(\R^{2n};M(N,\C))$ set
+  \begin{equation*}
+    q_\eps(a)=\OpW(a_\eps)\in\Psiiso{-\infty}(\R^n;\C^N),\qquad a_\eps(w)=a(\sqrt\eps\,w).
+  \end{equation*}
+\end{definition}
+
+Conjugating by the unitary dilation $u\mapsto\eps^{-n/4}u(\eps^{-1/2}\cdot)$ transforms
+$q_\eps(a)$ into the semiclassical Weyl quantization of $a$ with parameter $\eps$,
+$(2\pi\eps)^{-n}\int e^{i(x-y)\cdot\xi/\eps}a(\frac{x+y}2,\xi)u(y)\,dy\,d\xi$, so $q_\eps$ is
+the isotropic version of the semiclassical quantization of \cref{ch:semiclassical}.
+The dilations form a smooth path of unitaries joining this conjugation to the identity
+and preserving $\Psiiso{-\infty}$, so for the K-theoretic constructions below it makes
+no difference which of the two is used.
+
+\begin{lemma}\label{bott:lem:sl-product}
+  For $a,b\in\cS(\R^{2n};M(N,\C))$ and $0<\eps\le1$:
+  \begin{enumerate}[label=(\roman*)]
+  \item $q_\eps(a)^*=q_\eps(a^*)$ and $\norm{q_\eps(a)}\le(2\pi)^{-2n}\norm{\hat a}_{L^1}$;
+  \item $\norm{q_\eps(a)q_\eps(b)-q_\eps(ab)}\le\eps\,2^{-1}(2\pi)^{-4n}\,
+    \norm{\abs\zeta\hat a}_{L^1}\norm{\abs\zeta\hat b}_{L^1}$;
+  \item $q_\eps(a)\to a(0)$ strongly on $L^2(\R^n;\C^N)$ as $\eps\downarrow0$.
+  \end{enumerate}
+  If $a$ depends smoothly on parameters, with $a=0$ outside a compact subset of
+  $\R^{2n}\times X$, the bounds are locally uniform in the parameters and $q_\eps(a)$ is a
+  smooth function of $(\eps,x)\in(0,1]\times X$ with values in $\Psiiso{-\infty}(\R^n;\C^N)$.
+\end{lemma}
+\begin{proof}
+  The adjoint formula is that of the Weyl quantization. Since
+  $\widehat{a_\eps}(\zeta)=\eps^{-n}\hat a(\zeta/\sqrt\eps)$,
+  \eqref{bott:eq:weyl-superposition} gives
+  $q_\eps(a)=(2\pi)^{-2n}\int\hat a(\zeta)\mathcal W(\sqrt\eps\zeta)\,d\zeta$, which implies
+  the norm bound and, by dominated convergence and $\mathcal W(\sqrt\eps\zeta)u\to u$, (iii).
+  By \eqref{bott:eq:weyl-ops},
+  \begin{equation*}
+    q_\eps(a)q_\eps(b)=(2\pi)^{-4n}\iint\hat a(\zeta)\hat b(\zeta')\,
+    e^{i\eps\sigma(\zeta,\zeta')/2}\,\mathcal W\bigl(\sqrt\eps(\zeta+\zeta')\bigr)\,d\zeta\,d\zeta',
+  \end{equation*}
+  while $\widehat{ab}=(2\pi)^{-2n}\hat a*\hat b$ gives the same formula for $q_\eps(ab)$
+  without the factor $e^{i\eps\sigma/2}$. Since $\abs{e^{is}-1}\le\abs s$ and
+  $\abs{\sigma(\zeta,\zeta')}\le\abs\zeta\abs{\zeta'}$, (ii) follows. The last statement is
+  clear from the kernel of $\OpW(a_\eps)$, a Schwartz function depending smoothly on
+  $(\eps,x)$.
+\end{proof}
+
+\subsection{The odd quantization map}
+
+\begin{proposition}\label{bott:prop:odd-sl}
+  Let $X$ be a manifold and $g\in\CI(\R^{2n}\times X;\GL(N,\C))$ with $g=\Id$ outside a
+  compact set. There is $\eps_0>0$ such that for $0<\eps\le\eps_0$
+  \begin{equation*}
+    G_\eps(x)=\Id+q_\eps\bigl(g(\cdot,x)-\Id\bigr)\in\Gres(\R^n;\C^N)\quad\text{for all }x\in X;
+  \end{equation*}
+  $G_\eps$ is a smooth map, equal to $\Id$ outside a compact subset of $X$. Its class
+  $\Indsl{odd}[g]=[G_\eps]\in\Kc^{-1}(X)$ is independent of $\eps\in(0,\eps_0]$, depends only
+  on $[g]\in\Kc^{-1}(\R^{2n}\times X)$, and defines a homomorphism
+  \begin{equation*}
+    \Indsl{odd}\colon\Kc^{-1}(\R^{2n}\times X)\longrightarrow\Kc^{-1}(X),
+  \end{equation*}
+  natural under proper maps and under extension from open subsets of $X$.
+\end{proposition}
+\begin{proof}
+  Let $\alpha=g-\Id$ and $\beta=g^{-1}-\Id$, both compactly supported, with
+  $\alpha+\beta+\alpha\beta=0=\alpha+\beta+\beta\alpha$. Then
+  \begin{equation*}
+    \bigl(\Id+q_\eps(\alpha)\bigr)\bigl(\Id+q_\eps(\beta)\bigr)
+    =\Id+q_\eps(\alpha)q_\eps(\beta)-q_\eps(\alpha\beta)=\Id+O(\eps),
+  \end{equation*}
+  uniformly in $x$ by \cref{bott:lem:sl-product}(ii), and similarly in the other order. So
+  for small $\eps$, $G_\eps(x)$ has a left and a right inverse on $L^2$, i.e.\ is invertible,
+  and since it lies in $\Id+\Psiiso{-\infty}$ its inverse does too (\cref{ch:isotropic}), so
+  $G_\eps(x)\in\Gres(\R^n;\C^N)$, with $\norm{G_\eps^{-1}}$ uniformly bounded. Smoothness
+  and the support property follow from \cref{bott:lem:sl-product}. A homotopy $g_t$ as in
+  \cref{bott:def:Kc}, or the path $\eps\in(0,\eps_0]$, gives a homotopy of the $G_\eps$, and
+  stabilization of $g$ stabilizes $G_\eps$. For two maps $g,h$,
+  $G_\eps(g)G_\eps(h)-G_\eps(gh)=q_\eps(\alpha_g)q_\eps(\alpha_h)-q_\eps(\alpha_g\alpha_h)=O(\eps)$,
+  so for small $\eps$ the linear path between $G_\eps(g)G_\eps(h)$ and $G_\eps(gh)$ stays in
+  $\Gres$; thus $\Indsl{odd}$ is a homomorphism. Naturality is clear.
+\end{proof}
+
+\subsection{Projections}
+Even classes are conveniently represented by projections. By \emph{projection data} on
+a manifold $M$ we mean a smooth family of orthogonal projections
+$p\in\CI(M;M(N,\C))$ which is equal to a constant projection $p_\infty$ outside a
+compact set. It defines
+\begin{equation}\label{bott:eq:proj-class}
+  [p]-[p_\infty]=\bigl[(\Ran p,\ M\times\Ran p_\infty,\ p_\infty|_{\Ran p})\bigr]\in\Kc^0(M);
+\end{equation}
+$p_\infty|_{\Ran p}$ is the identity outside a compact set. For compact $M$ this is the
+difference of the classes of the bundles $\Ran p$ and $\Ran p_\infty$.
+
+\begin{lemma}\label{bott:lem:proj-model}
+  \begin{enumerate}[label=(\roman*)]
+  \item The class \eqref{bott:eq:proj-class} is unchanged under homotopies $p_t$ of
+    projection data with $p_t=p_\infty$ outside one compact set, under stabilization
+    $(p,p_\infty)\mapsto(p\oplus r,p_\infty\oplus r)$ by a constant projection $r$, and under
+    conjugation by a constant unitary. The same holds for smooth families of idempotents
+    (not necessarily self-adjoint).
+  \item If $M$ is compact, or is the total space of a real vector bundle over a compact
+    manifold (for instance $\R^k\times X$ or $T^*Z$ with $X$, $Z$ compact), every element of
+    $\Kc^0(M)$ is of the form \eqref{bott:eq:proj-class}.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  (i) For a homotopy, $\Ran p_t$ is a bundle over $[0,1]\times M$; parallel transport in
+  $t$ for the connection $p_t\,\partial_t$ (\cref{bott:lem:bundle-homotopy}) is an
+  isomorphism $\Ran p_0\to\Ran p_1$ which is the identity where $p_t$ does not depend on
+  $t$, hence outside a compact set, and relations (a), (b) of \cref{bott:def:Kc} apply.
+  Stabilization is (d) and conjugation is (a). For idempotents use the connection
+  $p_t\,\partial_t$ in the same way.
+
+  (ii) Let $(E_+,E_-,a)$ be a triple, $a$ invertible outside a compact set $K$. In the
+  second case bundles on $M$ are pulled back from the compact base
+  (\cref{bott:lem:bundle-homotopy}); in either case there is a bundle $F$ with
+  $E_-\oplus F\cong M\times\C^N$ and an embedding $E_+\oplus F\subset M\times\C^{N'}$
+  (\cref{bott:lem:bundles}). By (d) and (a) we may assume $E_-=\C^N$ and
+  $E_+\subset\C^{N'}$. Choose $\chi\in\CI(M;[0,\pi/2])$ with $\chi=0$ near $K$ and
+  $\chi=\pi/2$ outside a compact set, and let $p$ be the orthogonal projection onto
+  $\{(\cos\chi\,e,\sin\chi\,a(e));\ e\in E_+\}\subset\C^{N'}\oplus\C^N$, a bundle isomorphic
+  to $E_+$, and $p_\infty$ the projection onto $0\oplus\C^N$. Outside a compact set
+  $p=p_\infty$, and in terms of the isomorphism with $E_+$ the map $p_\infty|_{\Ran p}$ is
+  $e\mapsto\sin\chi\,a(e)$, which equals $a$ outside a compact set. By (a) and (b) the
+  class \eqref{bott:eq:proj-class} is that of $(E_+,\C^N,a)$.
+\end{proof}
+
+Conversely, two projection data define the same class if and only if they are related
+by the moves in (i) (\cite{Atiyah-K}, Ch.~II); we use this only to regard the even
+quantization map below as defined on $\Kc^0$.
+
+In the quantized setting the projections differ from a constant one by a smoothing
+operator. For such families the relative class is defined by finite rank
+approximation. Here $p_\infty\in M(N,\C)$ acts on $L^2(\R^n;\C^N)$ pointwise, and
+commutes with the Hermite projections $\Pi_k$ of $L^2(\R^n;\C^N)$ (onto the span of the
+$u_\alpha\otimes\C^N$, $\abs\alpha\le k$).
+
+\begin{lemma}\label{bott:lem:relative-class}
+  Let $X$ be a manifold and $Q\in\CI(X;p_\infty+\Psiiso{-\infty}(\R^n;\C^N))$ a family of
+  idempotents with $Q=p_\infty$ outside a compact subset of $X$. There is a well-defined
+  class $\delta(Q)\in\Kc^0(X)$ with the following properties.
+  \begin{enumerate}[label=(\roman*)]
+  \item If $V\subset\Ran\Pi_k$ is a $p_\infty$-invariant subspace such that $Q$ commutes
+    with the orthogonal projection $\Pi_V$ onto $V$ and $Q=p_\infty$ on $V^\perp$, then
+    $\delta(Q)$ is the class of the triple $(\Ran(Q\Pi_V),X\times\Ran(p_\infty\Pi_V),p_\infty)$.
+    In particular, for $X$ a point, $\delta(Q)=\rank(Q|_V)-\rank(p_\infty|_V)$.
+  \item $\delta(Q_0)=\delta(Q_1)$ if $Q_t$, $t\in[0,1]$, is a smooth family of such idempotents
+    with $Q_t=p_\infty$ outside one compact set; $\delta$ is additive under direct sums and
+    natural under proper maps.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  On the circle $\Gamma=\{\abs{\lambda-1}=\frac12\}$ the resolvent of an idempotent $Q$ is
+  $(\lambda-Q)^{-1}=\lambda^{-1}(\Id-Q)+(\lambda-1)^{-1}Q$, of norm at most
+  $2(1+2\norm Q)$. Hence if $T$ is an operator with $\norm{T-Q}<(4+8\norm Q)^{-1}$, then
+  $\Gamma$ lies in the resolvent set of $T$ and the Riesz projection
+  $\mathcal R(T)=(2\pi i)^{-1}\oint_\Gamma(\lambda-T)^{-1}d\lambda$ is an idempotent, equal to
+  $Q$ if $T=Q$. If moreover $T=p_\infty+R$ with $R\in\Psiiso{-\infty}$, two applications of
+  the resolvent identity give
+  \begin{equation*}
+    (\lambda-T)^{-1}=(\lambda-p_\infty)^{-1}+(\lambda-p_\infty)^{-1}R(\lambda-p_\infty)^{-1}
+    +(\lambda-p_\infty)^{-1}R(\lambda-T)^{-1}R(\lambda-p_\infty)^{-1},
+  \end{equation*}
+  and $(\lambda-p_\infty)^{-1}$ is a matrix, so by \ref{bott:I:corner} (in $n$ dimensions,
+  \cref{ch:isotropic}) $\mathcal R(T)-p_\infty\in\Psiiso{-\infty}$, depending smoothly on
+  parameters on which $R$ depends smoothly.
+
+  Now write $Q=p_\infty+R$, $R=0$ outside the compact set $C\subset X$. By
+  \cref{bott:rem:iso-model}, $\Pi_kR\Pi_k\to R$ uniformly on $C$, so for $k$ large the
+  operators $T_s=p_\infty+(1-s)R+s\Pi_kR\Pi_k$ are within the bound above of $Q$, and
+  $Q_s=\mathcal R(T_s)$ is a homotopy of idempotents of the stated kind from $Q$ to
+  $Q^{(k)}=\mathcal R(p_\infty+\Pi_kR\Pi_k)$. Since $p_\infty+\Pi_kR\Pi_k$ commutes with
+  $\Pi_k$ and equals $p_\infty$ on $\Ran(\Id-\Pi_k)$, so does $Q^{(k)}$, and we define
+  $\delta(Q)$ by the triple in (i) for $Q^{(k)}$ and $V=\Ran\Pi_k$. Here $\Ran(Q^{(k)}\Pi_k)$ is
+  a smooth subbundle of $X\times\Ran\Pi_k$ (\cref{bott:lem:bundles}) equal to
+  $\Ran(p_\infty\Pi_k)$ outside $C$, where $p_\infty$ restricts to the identity.
+
+  We first show: (*) if $Q_t$ is a smooth family as in (ii), and all $Q_t$ commute with
+  $\Pi_V$ and equal $p_\infty$ on $V^\perp$, then the triples of (i) for $Q_0$ and $Q_1$ are
+  equivalent. Indeed, transport along $t$ for the connection $Q_t\partial_t$ on the bundle
+  $\Ran(Q_t\Pi_V)$ over $[0,1]\times X$ is an isomorphism which is the identity outside a
+  compact set, and (a), (b) of \cref{bott:def:Kc} apply. Moreover, if $V\subset V'$ with
+  both $p_\infty$-invariant, then the triple for $V'$ is the triple for $V$ plus
+  $(\Ran(p_\infty\Pi_{V'\ominus V}),\Ran(p_\infty\Pi_{V'\ominus V}),\Id)$, a stabilization.
+
+  Independence of $k$: for $k'\ge k$ both $\Pi_kR\Pi_k$ and $\Pi_{k'}R\Pi_{k'}$ are close to
+  $R$, so the Riesz projections of the operators on the segment between
+  $p_\infty+\Pi_kR\Pi_k$ and $p_\infty+\Pi_{k'}R\Pi_{k'}$ form a family as in (*) with
+  $V=\Ran\Pi_{k'}$, joining $Q^{(k)}$ to $Q^{(k')}$. With the stabilization remark this
+  shows that $\delta(Q)$ does not depend on $k$. The same argument, with one $k$ chosen
+  uniformly on $[0,1]\times C$, gives (ii). For (i), $V\subset\Ran\Pi_k$, and $Q$ commutes
+  with $\Pi_k$ and equals $p_\infty$ on $\Ran\Pi_k\ominus V$; so $Q=Q^{(k)}$ and the triples
+  for $V$ and $\Ran\Pi_k$ differ by a stabilization. Additivity and naturality are clear.
+\end{proof}
+
+For $X$ a point, $\delta(Q)$ is the relative dimension of the two projections, i.e.\
+the index of $p_\infty\colon\Ran Q\to\Ran p_\infty$ when $Q$ is self-adjoint.
+
+\subsection{The even quantization map}
+
+\begin{proposition}\label{bott:prop:even-sl}
+  Let $X$ be a manifold and $p$ projection data on $\R^{2n}\times X$ with values in
+  $M(N,\C)$ and constant value $p_\infty$. There is $\eps_0>0$ such that for
+  $0<\eps\le\eps_0$ the self-adjoint operators
+  \begin{equation*}
+    P_\eps(x)=p_\infty+q_\eps\bigl(p(\cdot,x)-p_\infty\bigr)
+  \end{equation*}
+  satisfy $\norm{P_\eps^2-P_\eps}\le\frac18$; their spectral projections
+  $Q_\eps=\mathcal R(P_\eps)=\chi_{(1/2,\infty)}(P_\eps)$ form a family as in
+  \cref{bott:lem:relative-class}, and
+  \begin{equation*}
+    \Indsl{even}([p]-[p_\infty])=\delta(Q_\eps)\in\Kc^0(X)
+  \end{equation*}
+  is independent of $\eps\in(0,\eps_0]$ and invariant under the moves of
+  \cref{bott:lem:proj-model}(i). It is additive under direct sums and natural. Via
+  \cref{bott:lem:proj-model} it defines a homomorphism
+  $\Indsl{even}\colon\Kc^0(\R^{2n}\times X)\to\Kc^0(X)$.
+\end{proposition}
+\begin{proof}
+  With $r=p-p_\infty$, $p^2=p$ means $p_\infty r+rp_\infty+r^2=r$, so
+  $P_\eps^2-P_\eps=q_\eps(r)q_\eps(r)-q_\eps(r^2)=O(\eps)$ uniformly in $x$
+  (\cref{bott:lem:sl-product}). For a self-adjoint $P$ with $\norm{P^2-P}\le\frac18$ the
+  spectrum lies in $\{\abs{\lambda^2-\lambda}\le\frac18\}$, which does not meet
+  $\{\abs{\lambda-\frac12}\le\frac12\sqrt{1/2}\}$, so $\Gamma$ is in the resolvent set and
+  $\mathcal R(P)$ is the spectral projection of $(1/2,\infty)$. The proof of
+  \cref{bott:lem:relative-class} shows that $Q_\eps-p_\infty\in\Psiiso{-\infty}$ depends
+  smoothly on $(\eps,x)$, and $Q_\eps=p_\infty$ where $r(\cdot,x)=0$. Homotopies of $p$,
+  and the parameter $\eps$, give homotopies of $Q_\eps$, so (ii) of
+  \cref{bott:lem:relative-class} gives the invariance; stabilization and constant unitary
+  conjugation pass through the construction.
+\end{proof}
+
+\subsection{Clutching}
+Fix $\vartheta\in\CI(\R;[0,\pi/2])$ with
+$\vartheta=0$ on $(-\infty,-1]$ and $\vartheta=\pi/2$ on $[1,\infty)$. For an invertible
+element $g$ of a unital algebra and $\tau\in\R$ let
+\begin{equation*}
+  S(\tau,g)=\begin{pmatrix}\cos\tau&-\sin\tau\,g^{-1}\\\sin\tau\,g&\cos\tau\end{pmatrix},
+  \qquad S(\tau,g)^{-1}=S(-\tau,g),
+\end{equation*}
+and, with $\Pi_\infty=\diag(\Id,0)$,
+\begin{equation}\label{bott:eq:clutch-proj}
+  \Pi_g(t)=S(\vartheta(t),\Id)^{-1}S(\vartheta(t),g)\,\Pi_\infty\,S(\vartheta(t),g)^{-1}S(\vartheta(t),\Id),
+  \qquad t\in\R.
+\end{equation}
+This is an idempotent; since
+$S(\tau,g)\Pi_\infty S(\tau,g)^{-1}=\begin{pmatrix}\cos^2\tau&\cos\tau\sin\tau\,g^{-1}\\
+\cos\tau\sin\tau\,g&\sin^2\tau\end{pmatrix}$, its entries are affine functions of $g$ and
+$g^{-1}$ with coefficients depending on $t$, and a direct computation gives
+$\Pi_g(t)=\Pi_\infty$ for $\abs t\ge1$ and for $g=\Id$. If $g$ is unitary, $S(\tau,g)$ is
+unitary and $\Pi_g(t)$ is an orthogonal projection.
+
+\begin{lemma}\label{bott:lem:sl-clutching}
+  \begin{enumerate}[label=(\roman*)]
+  \item For a manifold $M$ and $g\in\CI(M;\mathrm U(N))$ equal to $\Id$ outside a compact set,
+    $\Pi_g$ is projection data on $\R\times M$, and $[\Pi_g]-[\Pi_\infty]$ is the class of
+    the triple $(\C^N,\C^N,\tilde g)$, $\tilde g(t,m)=\Id$ for $t\le-1$, $\tilde g(t,m)=g(m)$
+    for $t\ge1$. For compact $M$ the map
+    $\operatorname{clu}\colon K^{-1}(M)\to\Kc^0(\R\times M)$, $[g]\mapsto[\Pi_g]-[\Pi_\infty]$, is
+    the isomorphism of \cref{bott:lem:clutching} ($n=1$, base point $e=-1$).
+  \item For $G\in\CI(M;\Gres(\R^n;\C^N))$ equal to $\Id$ outside a compact set,
+    \eqref{bott:eq:clutch-proj} with $G$ in place of $g$ is a family of idempotents as in
+    \cref{bott:lem:relative-class} over $\R\times M$, and
+    $\operatorname{clu}[G]=\delta(\Pi_G)$ extends $\operatorname{clu}$ to the isotropic model
+    of $\Kc^{-1}(M)$.
+  \item Quantization commutes with clutching: for $g\in\CI(\R^{2n}\times M;\mathrm U(N))$
+    equal to $\Id$ outside a compact set,
+    \begin{equation*}
+      \Indsl{even}\bigl([\Pi_g]-[\Pi_\infty]\bigr)=\operatorname{clu}\bigl(\Indsl{odd}[g]\bigr)
+      \in\Kc^0(\R\times M),
+    \end{equation*}
+    where on the left $\Pi_g$ is regarded as projection data on $\R^{2n}\times(\R\times M)$.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  (i) The map $F(t)v=S(\vartheta,\Id)^{-1}S(\vartheta,g)(v,0)$ is a global isomorphism
+  $\C^N\to\Ran\Pi_g$, and $\Pi_\infty F(t)v$ is the first component of
+  $S(-\vartheta,\Id)(\cos\vartheta\,v,\sin\vartheta\,gv)$, i.e.\
+  $(\cos^2\vartheta+\sin^2\vartheta\,g)v$. This is $v$ for $t\le-1$ and $gv$ for $t\ge1$; by
+  (a), (b) of \cref{bott:def:Kc} the triple of \eqref{bott:eq:proj-class} is equivalent to
+  $(\C^N,\C^N,\tilde g)$, which is the image of $[g]$ under the inverse of the
+  isomorphism of \cref{bott:lem:clutching} (every class of $K^{-1}(M)$ has a unitary
+  representative, by the polar decomposition $g\mapsto g(g^*g)^{-1/2}$ and the homotopy
+  $g(g^*g)^{-s/2}$).
+
+  (ii) $\Pi_G-\Pi_\infty$ is affine in $G-\Id$ and $G^{-1}-\Id$, so smoothing. If $G$ takes
+  values in a subgroup $\GL(V)$ as in \cref{bott:rem:iso-model}, $\Pi_G$ is reduced by
+  $V\oplus V$ and \cref{bott:lem:relative-class}(i) identifies $\delta(\Pi_G)$ with the
+  class in (i); as every class has such a representative and $\delta$ is homotopy
+  invariant, $\delta(\Pi_G)$ depends only on $[G]$.
+
+  (iii) Write $\Pi_g=\Pi_\infty+L_t(g-\Id)+L'_t(g^{-1}-\Id)$, where $L_t$, $L'_t$ place their
+  argument, multiplied by functions of $t$, into blocks of a $2\times2$ matrix and then
+  conjugate by the constant (in $w$) matrix $S(\vartheta(t),\Id)$. The quantization $q_\eps$
+  acts in the variable $w\in\R^{2n}$ and commutes with $L_t$, $L'_t$. With
+  $\alpha=g-\Id$, $\beta=g^{-1}-\Id$ and $G_\eps=\Id+q_\eps(\alpha)$,
+  \begin{equation*}
+    P_\eps=\Pi_\infty+L_t(q_\eps(\alpha))+L'_t(q_\eps(\beta)),\qquad
+    \Pi_{G_\eps}=\Pi_\infty+L_t(q_\eps(\alpha))+L'_t(G_\eps^{-1}-\Id).
+  \end{equation*}
+  As in the proof of \cref{bott:prop:odd-sl},
+  $G_\eps^{-1}-\Id-q_\eps(\beta)=-G_\eps^{-1}\bigl(q_\eps(\alpha)q_\eps(\beta)-q_\eps(\alpha\beta)\bigr)=O(\eps)$,
+  so $\norm{P_\eps-\Pi_{G_\eps}}=O(\eps)$ uniformly. For small $\eps$ the Riesz projections
+  of the segment from $P_\eps$ to the idempotent $\Pi_{G_\eps}$ form a homotopy as in
+  \cref{bott:lem:relative-class}(ii) from $Q_\eps$ to $\Pi_{G_\eps}$. Hence
+  $\Indsl{even}([\Pi_g]-[\Pi_\infty])=\delta(Q_\eps)=\delta(\Pi_{G_\eps})=\operatorname{clu}[G_\eps]$.
+\end{proof}
+
+\subsection{Bott periodicity}
+We identify the phase plane $\R^2$ (for $n=1$) with $\C$ by $w=(x,\xi)\mapsto x+i\xi$, and
+write $z=(x+i\xi)/\abs w$ as in \cref{bott:sec:isotropic}. Let
+\begin{equation}\label{bott:eq:biso}
+  b_{\mathrm{iso}}=\bigl[(\C,\C,z)\bigr]\in\Kc^0(\R^2),\qquad
+  b_{\mathrm{iso}}\cdot[E]=\bigl[(\varpi^*E,\varpi^*E,z)\bigr]\in\Kc^0(\R^2\times X)
+\end{equation}
+for a bundle $E$ over $X$. Since $(\varpi^*E,\varpi^*E,z)\oplus(\varpi^*E,\varpi^*E,\bar z)$
+is equivalent to $0$ (by the rotation homotopy of \cref{bott:lem:rotation} joining
+$\diag(z,\bar z)$ to $\Id$), $b_{\mathrm{iso}}\cdot[E]$ is minus the image of $[E]$ under the
+isomorphism of \cref{bott:thm:bott}; so $[E]\mapsto b_{\mathrm{iso}}\cdot[E]$ extends to an
+isomorphism $K^0(X)\to\Kc^0(\R^2\times X)$. Note that $b_{\mathrm{iso}}$ is the clutching of the
+symbol $z$ of the operator $\ann$ of index one.
+
+\begin{proposition}\label{bott:prop:sl-bott-one}
+  Let $X$ be compact and $n=1$. For every vector bundle $E$ over $X$,
+  $\Indsl{even}(b_{\mathrm{iso}}\cdot[E])=[E]$. Consequently
+  $\Indsl{even}\colon\Kc^0(\R^2\times X)\to K^0(X)$ is the inverse of the isomorphism
+  $[E]\mapsto b_{\mathrm{iso}}\cdot[E]$.
+\end{proposition}
+\begin{proof}
+  \emph{Projection data for $b_{\mathrm{iso}}$.} Let $\varphi\in\CI([0,\infty);[0,\pi/2])$
+  with $\varphi=0$ on $[0,1]$ and $\varphi=\pi/2$ on $[2,\infty)$, and let $P_B(w)$ be the
+  orthogonal projection onto the line spanned by the unit vector
+  $v(w)=(\cos\varphi(\abs w),\sin\varphi(\abs w)\,z)\in\C^2$, smooth since $\varphi=0$ near
+  $0$; $P_B=p_\infty=\diag(0,1)$ for $\abs w\ge2$. The section $v$ trivializes $\Ran P_B$, and
+  $p_\infty v=(0,\sin\varphi\,z)$, which is $z$ times the basis vector of $\Ran p_\infty$ for
+  $\abs w\ge2$. So $[P_B]-[p_\infty]=b_{\mathrm{iso}}$. If $E=\Ran e$ for a smooth family of
+  orthogonal projections $e$ on $\C^L$, then $\tilde P=P_B\otimes e+p_\infty\otimes(\Id-e)$
+  represents $b_{\mathrm{iso}}\cdot[E]$, as one sees by splitting $\C^L=E\oplus E^\perp$.
+
+  \emph{Charge.} Let $H=D_x^2+x^2$ on $\R$. For $\zeta=(p,q)$ one computes
+  $[D_x,\mathcal W(\zeta)]=p\mathcal W(\zeta)$, $[x,\mathcal W(\zeta)]=-q\mathcal W(\zeta)$, and
+  from the kernels $\OpW(\xi e^{i\pair\zeta\cdot})=\frac12(D_x\mathcal W+\mathcal WD_x)$,
+  $\OpW(xe^{i\pair\zeta\cdot})=\frac12(x\mathcal W+\mathcal Wx)$. Hence
+  $[H,\mathcal W(\zeta)]=\OpW\bigl(2(p\xi-qx)e^{i\pair\zeta\cdot}\bigr)$, and by superposition
+  \begin{equation*}
+    [H,\OpW(c)]=\OpW(2i\,\partial_\theta c),\qquad\partial_\theta=x\partial_\xi-\xi\partial_x,\qquad
+    c\in\cS(\R^2).
+  \end{equation*}
+  If $c=f(\abs w)z^m$ (with $f$ vanishing near $0$ if $m\ne0$), then $2i\partial_\theta c=-2mc$, so
+  $H\OpW(c)=\OpW(c)(H-2m)$ and $\OpW(c)$ maps $u_k$ into $\C u_{k-m}$ ($u_j=0$ for $j<0$). The
+  entries of $P_B-p_\infty$ are of this form, with $m=0$ on the diagonal, $m=1$ in the
+  lower left and $m=-1$ in the upper right entry, and dilation does not change $m$.
+  Hence $P_\eps$, $p_\infty$ and therefore $Q_\eps$ are reduced by the subspaces
+  \begin{equation*}
+    B_0=\C\,u_0\otimes e_1,\qquad B_k=\operatorname{span}\{u_k\otimes e_1,u_{k-1}\otimes e_2\},\ k\ge1,
+  \end{equation*}
+  whose orthogonal sum is $L^2(\R;\C^2)$.
+
+  \emph{Counting.} For $\eps\le\eps_0$ the Riesz projection $Q_\eps$ depends continuously on
+  $\eps$ in norm, so $\rank(Q_\eps|_{B_k})$ is independent of $\eps$. By
+  \cref{bott:lem:sl-product}(iii), $P_\eps\to p_\infty+(P_B(0)-p_\infty)=\diag(1,0)$ strongly,
+  hence in norm on each $B_k$, so $Q_\eps|_{B_k}$ tends to the projection onto
+  $u_k\otimes e_1$, of rank one, for every $k\ge0$. On the other hand
+  $\rank(p_\infty|_{B_0})=0$ and $\rank(p_\infty|_{B_k})=1$ for $k\ge1$. Since $Q_\eps-p_\infty$
+  is compact, $\norm{(Q_\eps-p_\infty)|_{V_K^\perp}}<\frac12$ for $V_K=B_0\oplus\dots\oplus B_K$ and
+  $K$ large; the Riesz projections of $p_\infty+(Q_\eps-p_\infty)(\Pi_{V_K}+s(\Id-\Pi_{V_K}))$,
+  $s\in[0,1]$, join $Q_\eps$ to an idempotent which equals $Q_\eps$ on $V_K$ and $p_\infty$ on
+  $V_K^\perp$. As $V_K\subset\Ran\Pi_K$ is $p_\infty$-invariant,
+  \cref{bott:lem:relative-class} gives $\delta(Q_\eps)=(K+1)-K=1$.
+
+  \emph{Twisting.} $\tilde P_\eps=P_\eps\otimes e+p_\infty\otimes(\Id-e)$ commutes with
+  $\Id\otimes e$, so its Riesz projection is $Q_\eps\otimes e+p_\infty\otimes(\Id-e)$. Applying
+  the same homotopy in the first factor and \cref{bott:lem:relative-class}(i) with
+  $V=V_K\otimes\C^L$, $\delta$ is the class of the bundle
+  $\Ran(Q_\eps|_{V_K})\otimes E\oplus\Ran(p_\infty|_{V_K})\otimes E^\perp$ minus that of
+  $\Ran(p_\infty|_{V_K})\otimes\C^L$, that is $(K+1)[E]-K[E]=[E]$.
+
+  The last statement follows from \cref{bott:thm:bott}, by which every class of
+  $\Kc^0(\R^2\times X)$ is $b_{\mathrm{iso}}\cdot y$ for a unique $y\in K^0(X)$, and additivity.
+\end{proof}
+
+\begin{theorem}\label{bott:thm:sl-iso}
+  For every manifold $X$ and every $n\ge1$ the maps
+  \begin{equation*}
+    \Indsl{odd}\colon\Kc^{-1}(\R^{2n}\times X)\to\Kc^{-1}(X),\qquad
+    \Indsl{even}\colon\Kc^0(\R^{2n}\times X)\to\Kc^0(X)
+  \end{equation*}
+  are isomorphisms. The inverse of $\Indsl{even}$ is exterior multiplication (as in
+  \cref{ch:families}) by $b_{\mathrm{iso}}^{\boxtimes n}\in\Kc^0(\R^{2n})$, the coordinates of
+  $\R^{2n}$ being paired as $(x_j,\xi_j)$; the maps commute with clutching (\cref{bott:lem:sl-clutching}), and
+  quantizing in stages, $\R^{2n}=\R^{2n'}\times\R^{2n''}$, gives the same maps.
+\end{theorem}
+\begin{proof}[Sketch of proof]
+  For $n=1$ and compact $X$ the even statement is \cref{bott:prop:sl-bott-one}. The
+  extension to non-compact $X$ uses the index isomorphism with compact supports
+  (\cref{bott:ex:noncompact}) and the same computation, which is local in $X$. Given the
+  even statement for all $X$, \cref{bott:lem:sl-clutching}(iii) and the clutching
+  isomorphism $\Kc^{-1}(M)\cong\Kc^0(\R\times M)$ (\cref{bott:lem:clutching}, extended to
+  non-compact $M$ in the same way) give the odd statement. For the stages, the Weyl
+  quantization on $\R^{n'+n''}$ of a product $a'(w')a''(w'')$ is
+  $\OpW(a')\otimes\OpW(a'')$, and the estimates of \cref{bott:lem:sl-product} show that
+  quantizing first in $w''$ (with values in matrices) and then, after a finite rank
+  approximation of the result as in \cref{bott:lem:relative-class}, in $w'$, gives a
+  family homotopic to the one obtained by quantizing in $w$ at once. Iterating the case
+  $n=1$ gives the general case. Complete proofs of the topological ingredients are in
+  \cite{Atiyah-K}.
+\end{proof}
+
+\section{Complex and symplectic bundles; the Thom isomorphism}\label{bott:sec:thom}
+
+The quantization maps of \cref{bott:sec:quantization} were defined for the trivial
+bundle $\R^{2n}\times X$ with its constant symplectic form. In the index theorem they are
+needed for a bundle of symplectic vector spaces over $X$, such as $N\oplus N^*$ for a
+real vector bundle $N$, and in the classical formulation for complex vector bundles. We
+first recall that the two notions are equivalent up to homotopy.
+
+\begin{lemma}\label{bott:lem:complex-symplectic}
+  Let $V\to X$ be a real vector bundle of even rank. Hermitian forms are taken linear in
+  the first and antilinear in the second variable.
+  \begin{enumerate}[label=(\roman*)]
+  \item If $J$ is a complex structure on $V$ ($J^2=-\Id$) and $h$ is a Hermitian metric for
+    $J$, then $\omega=\Im h$ is a symplectic form on $V$, $\omega(Jv,Jw)=\omega(v,w)$, and
+    $h(v,w)=\omega(Jv,w)+i\,\omega(v,w)$.
+  \item If $\omega$ is a symplectic form on $V$ and $g$ is a Euclidean metric, define $J'$ by
+    $\omega(J'v,w)=g(v,w)$. Then $J'$ is $g$-skew-adjoint, $-J'^2$ is positive definite and
+    commutes with $J'$, and $J=(-J'^2)^{-1/2}J'$ is a complex structure with
+    $\omega(Jv,Jw)=\omega(v,w)$ for which $h(v,w)=\omega(Jv,w)+i\,\omega(v,w)$ is a Hermitian metric.
+  \end{enumerate}
+  Both constructions depend smoothly on parameters, and each followed by the other (with
+  $g=\Re h$ in (ii)) returns the structure one started with. Since the choices of $h$ and of
+  $g$ range over convex sets, homotopy classes of complex structures and of symplectic
+  structures on $V$ correspond bijectively; if the structures are constant outside a
+  compact set (in a trivialization), so is the correspondence.
+\end{lemma}
+\begin{proof}
+  (i) From $h(Jv,w)=ih(v,w)$ we get $\omega(Jv,w)=\Im(ih(v,w))=\Re h(v,w)$, which is symmetric
+  and positive definite; so $h=\omega(J\cdot,\cdot)+i\omega$. The form $\omega$ is real and
+  antisymmetric because $h(w,v)=\overline{h(v,w)}$, non-degenerate because
+  $\omega(Jv,v)=h(v,v)>0$ for $v\ne0$, and $J$-invariant because $h(Jv,Jw)=h(v,w)$.
+
+  (ii) $J'$ is invertible since $\omega$ and $g$ are non-degenerate. Using the definition twice,
+  $g(v,J'w)=\omega(J'v,J'w)=-\omega(J'w,J'v)=-g(w,J'v)=-g(J'v,w)$, so $J'$ is skew-adjoint and
+  $g(-J'^2v,v)=g(J'v,J'v)>0$. Let $A=(-J'^2)^{1/2}$, the positive square root, which commutes
+  with $J'$ and is self-adjoint; then $J=A^{-1}J'$ satisfies $J^2=A^{-2}J'^2=-\Id$, and
+  $\omega(Jv,w)=\omega(J'A^{-1}v,w)=g(A^{-1}v,w)$ is symmetric and positive definite. Replacing $w$
+  by $Jw$ and using the skew-adjointness of $J'$ one checks $\omega(Jv,Jw)=\omega(v,w)$, so $h$ is
+  Hermitian with $h(Jv,w)=ih(v,w)$. The square root of a positive definite matrix is a
+  smooth (indeed real analytic) function of the matrix, which gives smoothness in
+  parameters. If $(J,h)$ is given and $\omega=\Im h$, $g=\Re h$, then $\omega(J'v,w)=g(v,w)=\omega(Jv,w)$
+  forces $J'=J$, $A=\Id$; conversely $\Im h=\omega$ in (ii).
+\end{proof}
+
+On $\C$ with $h(v,w)=v\bar w$ and $v=x+i\xi$, $\omega(v,w)=\Im(v\bar w)$ is the form
+$d\xi\wedge dx$ used for the phase plane in \cref{ch:isotropic}; thus the complex structure
+compatible with the standard symplectic form of $\R^{2n}=\{(x,\xi)\}$ is the
+identification $(x,\xi)\mapsto x+i\xi$ used in \cref{bott:sec:quantization}.
+
+\subsection{The Bott class of a complex bundle}
+Let $V\to X$ be a complex vector bundle with Hermitian metric and $\varpi\colon V\to X$ the
+projection. On $\Lambda^*V$ let $\iota_v$ be the adjoint of exterior multiplication by
+$v$, so that $v\wedge\iota_v+\iota_v v\wedge=\abs v^2$. Then
+$c(v)=v\wedge\cdot-\iota_v$ maps $\Lambda^{\mathrm{ev}}V_x$ to $\Lambda^{\mathrm{odd}}V_x$ and
+$c(v)^*c(v)=\abs v^2$.
+
+\begin{definition}\label{bott:def:bott-class}
+  The \emph{Bott class} (or Thom class) of $V$ is
+  \begin{equation*}
+    \beta_V=\bigl[(\varpi^*\Lambda^{\mathrm{ev}}V,\ \varpi^*\Lambda^{\mathrm{odd}}V,\ c)\bigr]\in\Kc^0(V),
+  \end{equation*}
+  for compact $X$; for a bundle $E$ over $X$ we write
+  $\beta_V\cdot[E]=[(\varpi^*(\Lambda^{\mathrm{ev}}V\otimes E),\varpi^*(\Lambda^{\mathrm{odd}}V\otimes E),c\otimes\Id)]$.
+\end{definition}
+
+For $V=X\times\C$, $c(v)1=v$ and $\beta_V\cdot[E]=[(\varpi^*E,\varpi^*E,v)]=b_{\mathrm{iso}}\cdot[E]$,
+since $v$ and $v/\abs v$ are homotopic outside the zero section. For $V=V_1\oplus V_2$,
+$\Lambda V=\Lambda V_1\otimes\Lambda V_2$ as graded bundles and $c(v_1+v_2)$ is the graded
+(Clifford) combination of $c(v_1)$ and $c(v_2)$; so $\beta_{V_1\oplus V_2}$ is the product of
+$\varpi_1^*\beta_{V_1}$ and $\varpi_2^*\beta_{V_2}$ in the sense of \cref{ch:families}, and
+$\beta_{X\times\C^n}=b_{\mathrm{iso}}^{\boxtimes n}$. The class $\lambda_{\mathcal V}$ used in
+\cref{ch:families} for a real bundle $\mathcal V$ is $\beta_{\mathcal V\otimes\C}$.
+
+\begin{theorem}[Thom isomorphism]\label{bott:thm:thom}
+  Let $X$ be compact and $V\to X$ a Hermitian complex vector bundle of rank $n$. Then
+  \begin{equation*}
+    K^0(X)\ni[E]-[F]\longmapsto\beta_V\cdot[E]-\beta_V\cdot[F]\in\Kc^0(V)
+  \end{equation*}
+  is an isomorphism; denote its inverse by $\operatorname{Thom}_V\colon\Kc^0(V)\to K^0(X)$. If
+  $V=X\times\C^n$ with the standard structure, then
+  $\operatorname{Thom}_V=\Indsl{even}$, the even quantization map of
+  \cref{bott:prop:even-sl} for $\C^n=\R^{2n}$.
+\end{theorem}
+\begin{proof}[Proof and references]
+  For $V=X\times\C$ this is \cref{bott:prop:sl-bott-one} together with \cref{bott:thm:bott}.
+  For trivial $V$ of rank $n$ it follows from $\beta_V=b_{\mathrm{iso}}^{\boxtimes n}$ and
+  \cref{bott:thm:sl-iso}. For general $V$ choose a complement $V'$, $V\oplus V'\cong X\times\C^m$
+  (\cref{bott:lem:bundles}); multiplicativity of the Bott class and the trivial case,
+  applied over the total space of $V$ (a non-compact base, as in
+  \cref{bott:thm:sl-iso}), show that $\beta_V\cdot$ has a left and a right inverse. We do not
+  give the details, which are standard; see \cite{Atiyah-K}, \S2.7.
+\end{proof}
+
+\begin{remark}[Thom isomorphism by quantization]\label{bott:rem:thom-quantization}
+  For a symplectic bundle $(V,\omega)$ over $X$, $\operatorname{Thom}_V$ is again given by
+  fibrewise quantization. Choose a compatible complex structure and Hermitian metric
+  (\cref{bott:lem:complex-symplectic}). Unitary frames identify the fibres symplectically with
+  $\R^{2n}$, and two such frames differ by an element $U$ of the unitary group
+  $\mathrm U(n)\subset\mathrm{Sp}(2n,\R)$. By the symplectic invariance of the Weyl
+  quantization (\cref{ch:isotropic}), $\OpW(a\circ U)=M_U^{-1}\OpW(a)M_U$ for a unitary
+  operator $M_U$ determined up to a constant factor; since $\abs w^2\circ U=\abs w^2$, $M_U$
+  commutes with the harmonic oscillator and preserves its eigenspaces. Hence the
+  constructions of \cref{bott:lem:relative-class,bott:prop:even-sl}, carried out in local unitary
+  frames, are compatible on overlaps up to conjugation by such operators, which does not
+  change the finite rank bundles up to isomorphism. They define
+  $\operatorname{Ind}^{\mathrm{even}}_{\mathrm{sl},V}\colon\Kc^0(V)\to K^0(X)$ (and similarly an odd map
+  $\Kc^{-1}(V)\to K^{-1}(X)$), and $\operatorname{Ind}^{\mathrm{even}}_{\mathrm{sl},V}(\beta_V\cdot[E])=[E]$ by
+  the computation of \cref{bott:prop:sl-bott-one} in each factor; thus
+  $\operatorname{Ind}^{\mathrm{even}}_{\mathrm{sl},V}=\operatorname{Thom}_V$. To make the patching
+  canonical one uses the Fock space of each fibre, on which $\mathrm U(n)$ acts by a genuine
+  representation; we omit the details.
+\end{remark}
+
 \section{The analytic index map}\label{bott:sec:analytic-index}
 
 Let $Z$ be a compact manifold and $\varpi\colon T^*Z\to Z$. An elliptic operator
@@ -1709,7 +2266,53 @@ shown to coincide. This is taken up in \cref{ch:families}.
 \begin{exercise}
   Show that if $A\colon X\to\PsiT{0}(\Sphere;\C^N)$ is a smooth family of elliptic Toeplitz
   operators whose null spaces have constant dimension, then $\Nul A$ and $\Nul A^*$ are smooth
-  vector bundles and $\ind(A)=[\Nul A]-[\Nul A^*]$.
+  vector bundles and $\ind(A)=[\Nul A]-[\Nul A^*]$. (Use the generalized inverse to construct
+  local frames, then \cref{bott:lem:null-complement}.) Prove the same for isotropic families.
+\end{exercise}
+
+\begin{exercise}\label{bott:ex:unitary}
+  Let $\mathrm U^{-\infty}_{\mathrm{iso}}(\R^n)=\{\Id+A\in\Gres(\R^n);\ (\Id+A)^{-1}=\Id+A^*\}$.
+  Show that for $g=\Id+A\in\Gres(\R^n)$ the operator $(g^*g)^{-1/2}-\Id$ is smoothing
+  (write $g^*g=\Id+B$ with $B$ smoothing and self-adjoint, and use the Cauchy integral for
+  $\lambda^{-1/2}$ together with the resolvent identities, as in the proof of
+  \cref{bott:lem:relative-class}), and deduce that $g\mapsto g(g^*g)^{-s/2}$, $s\in[0,1]$, deforms
+  compactly supported maps into $\Gres$ to maps into $\mathrm U^{-\infty}_{\mathrm{iso}}$. Conclude
+  that $\Kc^{-1}(X)$ is the set of homotopy classes of compactly supported maps into
+  $\mathrm U^{-\infty}_{\mathrm{iso}}(\R^n)$.
+\end{exercise}
+
+\begin{exercise}\label{bott:ex:GL-connected}
+  Prove directly that $\GL(N,\C)$ is connected, by induction on $N$: an invertible $a$ is joined
+  to one with $ae_1=e_1$ by moving $ae_1$ to $e_1$ in $\C^N\setminus\{0\}$ while keeping the other
+  columns linearly independent of it. Show also that a loop $a$ in $\GL(N,\C)$ with
+  $\wind\det a=0$ is null-homotopic: approximate $a$ by a trigonometric polynomial, deform
+  it so that $e_1^*a(\theta)e_1$ never vanishes, and reduce to $\GL(N-1,\C)$. Compare with
+  \cref{bott:cor:reduced}, where the stable version is deduced from the index.
+\end{exercise}
+
+\begin{exercise}\label{bott:ex:radial-weyl}
+  Use the commutation relation $[H,\OpW(c)]=\OpW(2i\partial_\theta c)$ from the proof of
+  \cref{bott:prop:sl-bott-one} to show that for $f\in\cS(\R)$ the operator $\OpW(f(x^2+\xi^2))$
+  on $L^2(\R)$ is diagonal in the Hermite basis. Compute its eigenvalues for
+  $f(s)=e^{-s}$, and show that the projection onto $\C u_0$ has Weyl symbol
+  $2e^{-(x^2+\xi^2)}$.
+\end{exercise}
+
+\begin{exercise}\label{bott:ex:relative-dimension}
+  Let $Q$, $P$ be orthogonal projections on a Hilbert space with $Q-P$ compact. Show that
+  $P|_{\Ran Q}\colon\Ran Q\to\Ran P$ is Fredholm, that its index is unchanged under norm
+  continuous deformations of $Q$ with $Q-P$ compact, and that it equals
+  $\rank(Q|_V)-\rank(P|_V)$ whenever $V$ is a finite dimensional subspace reducing both $P$
+  and $Q$ with $Q=P$ on $V^\perp$. Deduce that $\delta(Q)$ in \cref{bott:lem:relative-class} is
+  this index when $X$ is a point.
+\end{exercise}
+
+\begin{exercise}\label{bott:ex:clutched-bundle}
+  For $a\in\CI(X;\GL(N,\C))$, $X$ compact, let $E_a$ be the bundle over $\Sphere\times X$ whose
+  smooth sections are the $s\in\CI(\R\times X;\C^N)$ with $s(t+2\pi,x)=a(x)s(t,x)$. Show that
+  $E_a$ is a smooth vector bundle, that $E_a\oplus E_{a^{-1}}$ is trivial, and that
+  $[E_a]-[\C^N]\in K^0(\Sphere\times X)$ is the image of $\operatorname{clu}[a]\in\Kc^0(\R\times X)$
+  (\cref{bott:lem:sl-clutching}) under extension from $(0,2\pi)\times X$, up to sign.
 \end{exercise}
 
 \section*{Notes}
@@ -1725,13 +2328,30 @@ of the range, corrected the sign of the Bott map (which, with $\ind U=-1$, sends
 $[E_+]-[E_-]$ to the class with $p_+z^{-1}$), corrected the second curve in the deformation of
 $\Id-P_0+P_0hP_0$ and normalized it at $1\in\Sphere$, and derived the homotopy groups of $\Ginf$
 from the index isomorphism for compact spheres together with the clutching construction, instead
-of from the (unproved) non-compact index isomorphism. The source also suggests, as an alternative
-to Toeplitz operators, the isotropic calculus on $\R$ of \cref{ch:isotropic}: there the
-`cosphere bundle' of $\R$ is the circle at infinity of $\R^2$, the annihilation operator
-$x+\partial_x$ of the harmonic oscillator is Fredholm of index $1$ (its null space is spanned by
-$e^{-x^2/2}$, that of its adjoint is trivial), with symbol $x+i\xi$ of degree one on the circle at
-infinity, and it plays the role of $L$; the arguments of this chapter carry over with
-$P_k$ replaced by the spectral projections of the harmonic oscillator.
+of from the (unproved) non-compact index isomorphism.
+
+\Cref{bott:sec:isotropic,bott:sec:quantization,bott:sec:thom} and
+\cref{bott:lem:circle-split} come from the K-theory chapter of the 2008 revision of the
+lectures (\emph{From microlocal to global analysis}), which starts from the residual
+isotropic group as the model for odd K-theory (\cref{bott:rem:iso-model}). There the injectivity
+of the isotropic index map is proved by Atiyah's rotation argument, which we only sketch
+(\cref{bott:rem:rotation-trick}); instead we combine the isotropic index with the linearization
+of loops, so that the only analytic input is the normalized annihilation operator
+(\cref{bott:lem:annihilation}). We orient the circle at infinity counterclockwise in the
+$(x,\xi)$-plane, so that $\ind A=+\wind\sigma_0(A)$; the source writes $-\wind$, with the
+opposite orientation. The semiclassical quantization maps are only stated in the source;
+we have defined them through the rescaled Weyl quantization, proved the basic estimate with
+the Weyl operators (\cref{bott:lem:sl-product}), given the relative class of projections
+(\cref{bott:lem:relative-class}), proved that quantization commutes with clutching using a
+simplified clutching projection \eqref{bott:eq:clutch-proj}, and computed the even map for $n=1$
+explicitly by means of the rotation invariance of the harmonic oscillator
+(\cref{bott:prop:sl-bott-one}); the general case and the Thom isomorphism for non-trivial
+bundles are only sketched, with reference to \cite{Atiyah-K}. The source's sections on Chern
+forms, the Chern character and the Todd class are incorporated in \cref{ch:families}; its
+sections on stabilization, delooping and looping sequences, $C^*$-algebras and the norm closure
+of $\Psido{0}$ are empty and have been omitted. The isotropic proof of Bott periodicity via the
+index of the harmonic oscillator is the approach of M.~F. Atiyah, \emph{Bott periodicity and the
+index of elliptic operators}, Quart. J. Math. Oxford \textbf{19} (1968), 113--140.
 
 The source conjectures that $\GT(\Sphere,Y;E)$ is actually contractible. Since it is an open subset
 of an affine Fr\'echet space (\cref{bott:lem:open}), it has the homotopy type of a CW complex by a

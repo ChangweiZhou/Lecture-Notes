@@ -821,6 +821,10 @@ the \emph{Thom homomorphism}
 \end{equation*}
 (The product is compactly supported because $\lambda_{\mathcal V}$ is supported
 in the zero section, i.e.\ over a compact set.)
+Since $T^*(\mathcal V/M)\cong\mathcal V\otimes\C$ is a complex (equivalently, by
+\cref{ch:bott}, symplectic) vector bundle, $\lambda_{\mathcal V}$ is its Bott class and, by the
+Thom isomorphism theorem of \cref{ch:bott}, $\tau$ is an isomorphism; we shall not need
+this.
 
 \subsection{The Bott element and the trivial fibration}
 Let $\Sphere=\R/2\pi\Z$, so that $I=(0,2\pi)\subset\Sphere$. Let $\Pi_>$ be the
@@ -1290,6 +1294,20 @@ $\int_\Sphere\mu=\int_0^{2\pi}\mu_1\,d\theta$; this commutes with $d$.
   operator.
 \end{remark}
 
+\begin{remark}\label{families:rem:iso-chern}
+  In \cref{ch:bott} the same index map is also realized by isotropic operators on
+  $\R$, whose symbols are functions on the circle at infinity of the phase plane,
+  traversed counterclockwise in the $(x,\xi)$-plane. The isotropic index of a loop
+  $a$ is the Toeplitz index of $a\circ\rho$, $\rho(\theta)=-\theta$, and $\rho$ reverses the
+  orientation of $\Sphere$, so
+  \begin{equation*}
+    \Ch\bigl(\ind_{\mathrm{iso}}[a]\bigr)=-\int_\Sphere\Chodd(a),
+  \end{equation*}
+  whose degree zero part is $-\frac{i}{2\pi}\int\tr(a^{-1}\partial_\theta a)\,d\theta=\wind(a)$, the
+  index formula for isotropic operators on $\R$; for the symbol $z=e^{i\theta}$ of the
+  normalized annihilation operator it gives $1$.
+\end{remark}
+
 \section{The relative Chern character}\label{families:sec:relative}
 
 The cohomological index formula involves the Chern character of the symbol,
@@ -1445,6 +1463,84 @@ homogeneous. This defines
 represented by the pair of \cref{families:thm:fedosov}, whose second entry
 lives on $S^*(M/B)$ and is built from $\sigma_0(A)^{-1}\nabla\sigma_0(A)$.
 
+\subsection{The odd Chern character as a suspension}
+The constants $c_k$ in \eqref{families:eq:Chodd} were fixed by the Toeplitz index. They are
+also forced by the even Chern character, through the clutching construction: the odd
+Chern character of $g$ is the fibre integral of the Chern character of the compactly
+supported class on $\R\times X$ obtained by clutching with $g$. We use the
+integral form of $\Chodd$.
+
+\begin{lemma}\label{families:lem:Chodd-integral}
+  For $g\in\CI(X;\GL(N,\C))$, with $\theta=g^{-1}dg$ and $c=i/2\pi$,
+  \begin{equation*}
+    \Chodd(g)=c\int_0^1\tr\Bigl(\theta\,\exp\bigl(c\,s(s-1)\,\theta^2\bigr)\Bigr)ds .
+  \end{equation*}
+\end{lemma}
+\begin{proof}
+  The term of degree $2k+1$ on the right is
+  $\frac{c^{k+1}}{k!}\int_0^1(s^2-s)^kds\,\tr(\theta^{2k+1})$, and
+  $\int_0^1(s^2-s)^kds=(-1)^k\int_0^1s^k(1-s)^kds=(-1)^k\frac{(k!)^2}{(2k+1)!}$. So the
+  coefficient is $c(-c)^k\frac{k!}{(2k+1)!}=\frac{i}{2\pi}\bigl(\frac{-i}{2\pi}\bigr)^k\frac{k!}{(2k+1)!}=c_k$.
+\end{proof}
+
+For compact $X$ and $g\in\CI(X;\GL(N,\C))$ let
+\begin{equation*}
+  \operatorname{clu}[g]=\bigl[(\C^N,\C^N,\tilde g)\bigr]\in\Kc(\R\times X),\qquad
+  \tilde g(t,x)=\Id\ (t\le-1),\quad\tilde g(t,x)=g(x)\ (t\ge1),
+\end{equation*}
+the clutching isomorphism $K^{-1}(X)\cong\Kc(\R\times X)$ of \cref{ch:bott}. We regard
+$\R\times X$ as the interior of a compact manifold with boundary by compactifying $\R$ to
+a closed interval, so that \cref{families:prop:relative-chern} applies, and for a
+compactly supported form $\mu=dt\wedge\mu_1+\mu_2$ on $\R\times X$ ($\mu_1$, $\mu_2$
+without $dt$) set $\int_\R\mu=\int_{\R}\mu_1\,dt$; this commutes with $d$, as does
+$\int_\Sphere$ in \cref{families:sec:toeplitz}.
+
+\begin{proposition}\label{families:prop:Chodd-clutching}
+  For compact $X$ and $g\in\CI(X;\GL(N,\C))$,
+  \begin{equation*}
+    \int_\R\Ch\bigl(\operatorname{clu}[g]\bigr)=\Chodd(g)\in\Hodd(X;\C).
+  \end{equation*}
+  In fact, for the trivial connections and a suitable cut-off, the representative
+  $\lambda_\rho$ of \eqref{families:eq:lambda-rho} satisfies $\int_\R\lambda_\rho=\Chodd(g)$ as
+  forms.
+\end{proposition}
+\begin{proof}
+  Take $\nabla_\pm=d$ on $E_\pm=\C^N$. Where $\tilde g$ is invertible,
+  $\gamma=\tilde g^{-1}d\tilde g$ is $0$ for $t\le-1$ and $\theta=g^{-1}dg$ for $t\ge1$. Choose
+  $\chi\in\CI(\R)$ with $\chi=0$ on $(-\infty,1]$, $\chi=1$ on $[2,\infty)$, and $\rho$ with
+  $\rho=1-\chi$ on $[0,\infty)$, $\rho=1$ on $[-1,0]$ and $\rho=0$ near $-\infty$; since
+  $\gamma=0$ for $t\le-1$, \eqref{families:eq:nabla-rho} is $\nabla^\rho=d+\chi(t)\theta$. Its
+  curvature is, using $d\theta=-\theta^2$,
+  \begin{equation*}
+    \omega=d(\chi\theta)+\chi^2\theta^2=d\chi\wedge\theta+(\chi^2-\chi)\theta^2 .
+  \end{equation*}
+  The two terms commute (the second is an even form) and $(d\chi\wedge\theta)^2=0$, so
+  $\tr e^{c\omega}=\tr e^{c(\chi^2-\chi)\theta^2}+c\,d\chi\wedge\tr\bigl(\theta e^{c(\chi^2-\chi)\theta^2}\bigr)$.
+  Hence $\lambda_\rho=\tr e^{c\omega}-N$ is supported in $1\le t\le2$, and
+  \begin{equation*}
+    \int_\R\lambda_\rho=c\int_\R\chi'(t)\tr\bigl(\theta e^{c(\chi^2-\chi)\theta^2}\bigr)dt
+    =c\int_0^1\tr\bigl(\theta e^{c(s^2-s)\theta^2}\bigr)ds=\Chodd(g)
+  \end{equation*}
+  by the substitution $s=\chi(t)$ and \cref{families:lem:Chodd-integral}.
+\end{proof}
+
+\begin{remark}\label{families:rem:Chodd-fedosov}
+  More generally, for a bundle isomorphism $a\colon F\to F'$ and connections on $F$, $F'$, the
+  form
+  \begin{equation*}
+    \Chodd(a;\nabla_F,\nabla_{F'})=c\int_0^1\tr\bigl(\gamma\,e^{c\Omega(s)}\bigr)ds,\qquad
+    \gamma=a^{-1}\nabla a,\quad\Omega(s)=(1-s)\omega_F+s\,a^{-1}\omega_{F'}a+s(s-1)\gamma^2,
+  \end{equation*}
+  reduces to \cref{families:lem:Chodd-integral} for trivial bundles and connections. It is
+  the Chern--Simons form of the path $\nabla_F+s\gamma$ from $\nabla_F$ to $a^{-1}\nabla_{F'}a$, so
+  $d\Chodd(a;\nabla_F,\nabla_{F'})=\Ch(\nabla_{F'})-\Ch(\nabla_F)$, and
+  \cref{families:thm:fedosov} says that the relative Chern character of $(E_+,E_-,a)$ is
+  represented by the pair $\bigl(\Ch(\nabla_+)-\Ch(\nabla_-),-\iota^*\Chodd(a;\nabla_+,\nabla_-)\bigr)$:
+  the boundary term is the odd Chern character of the symbol. The proof of
+  \cref{families:prop:Chodd-clutching} is the special case in which the second entry is moved
+  into the interior.
+\end{remark}
+
 \section{The cohomological form of the index theorem}\label{families:sec:cohomology}
 
 Orient the fibres $T^*_{b}(Z)$ of $\pi:T^*(M/B)\to B$, where $\pi$ is the
@@ -1522,6 +1618,31 @@ not proved here.
   For $B$ a point and $n=1$, $M=\Sphere$, the theorem reduces to
   $\ind(P_1)=1=-\int_{T^*\Sphere}\Ch(\sigma_0(P_1))$, which is
   \cref{families:ex:bott-chern}.
+\end{remark}
+
+\begin{remark}[The Todd class and the Thom isomorphism]\label{families:rem:todd-thom}
+  The class $\mathcal T$ can be described through the Thom isomorphism of \cref{ch:bott}.
+  Let $V\to M$ be a Hermitian complex vector bundle of rank $n$, $\varpi\colon V\to M$, with
+  Bott class $\beta_V\in\Kc(V)$ (for $V=\mathcal V\otimes\C$ this is $\lambda_{\mathcal V}$), and orient
+  the fibres as complex vector spaces. By \cref{ch:bott}, $x\mapsto\beta_V\cdot\varpi^*x$ is an
+  isomorphism $K^0(M)\to\Kc(V)$, with inverse $\operatorname{Thom}_V$. By \ref{families:C1}
+  and the projection formula $\varpi_*(\varpi^*\alpha\wedge\mu)=\alpha\wedge\varpi_*\mu$ for even $\alpha$,
+  \begin{equation*}
+    \varpi_*\Ch(\beta_V\cdot\varpi^*x)=\Ch(x)\wedge\varpi_*\Ch(\beta_V).
+  \end{equation*}
+  Restricted to a point, $\beta_V$ is the $n$-fold product of the class $b_1=\lambda_\R$ of
+  \cref{families:rem:bott-generator}, so by \ref{families:C1}, \ref{families:C3} the degree zero part of
+  $\varpi_*\Ch(\beta_V)$ is $(-1)^n$, and
+  $\mathcal T(V)=(-1)^n\bigl(\varpi_*\Ch(\beta_V)\bigr)^{-1}\in\Hev(M;\C)$ is defined. Thus
+  \begin{equation*}
+    \Ch\bigl(\operatorname{Thom}_V(y)\bigr)=(-1)^n\varpi_*\Ch(y)\wedge\mathcal T(V),\qquad y\in\Kc(V).
+  \end{equation*}
+  Since $\beta_{V\oplus W}=\beta_V\cdot\beta_W$ and $\beta$ is natural, $\mathcal T$ is a multiplicative
+  characteristic class with $\mathcal T(\C^n)=1$; if $V\oplus W$ is trivial of rank $m$, then
+  $\mathcal T(V)=(-1)^{\rank W}\varpi_*\Ch(\beta_W)$, which is the definition of the Todd class
+  as the fibre integral of the Chern character of the Bott element of a complement used in
+  the source. The identification of $\mathcal T(\mathcal V\otimes\C)$ with
+  $\Td(\mathcal V\otimes\C)$ is \ref{families:C4}.
 \end{remark}
 
 \section{Exercises}

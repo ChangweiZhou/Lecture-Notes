@@ -879,7 +879,7 @@ Combining with Step 2 proves the theorem.
 In this section we explain, with some steps only sketched, how the global
 behaviour of $T$ is governed by closed geodesics. The full theory requires Fourier
 integral operators \cite{Hormander-FIO} and the propagation theorem for operators of
-real principal type; for the strictly hyperbolic case see
+real principal type, which is proved in \cref{ch:microlocal}; for the strictly hyperbolic case see
 \cite[Chapter~XXIII]{Hormander-III}.
 
 Let $C_+\subset\Sigma(P)\times\Sigma(P)$ be the forward bicharacteristic relation:
@@ -908,30 +908,36 @@ Let $u\in\CmI(\R\times X)$. Then $\WF(u)\setminus\WF(Pu)\subset\Sigma(P)$, and i
 $\gamma\colon J\to\Sigma(P)\setminus\WF(Pu)$ is a null bicharacteristic on an interval $J$ with
 $\gamma(s_0)\in\WF(u)$ for some $s_0\in J$, then $\gamma(J)\subset\WF(u)$.
 \end{theorem}
-\begin{proof}[Sketch of proof]
-The first statement is microlocal elliptic regularity. Let $z=\gamma(s_0)\in\WF(u)\setminus\WF(Pu)$,
-$\bar t=t(z)$, and parametrise $\gamma$ by $t$ (\cref{wave:lem:bichar}). As $\WF(Pu)$ is closed,
-there is $\delta\in(0,t_0/2)$ such that $\gamma(t)\notin\WF(Pu)$ for $|t-\bar t|\le2\delta$. Let
-$t_1\in(\bar t-\delta,\bar t)$ and suppose $\gamma(t_1)\notin\WF(u)$; then, $\WF(u)$ being closed,
-$\gamma(t)\notin\WF(u)$ for $|t-t_1|\le\eps$. Choose $\chi\in\CI(\R)$ with $\chi=0$ for
-$t<t_1-\eps$, $\chi=1$ for $t>t_1+\eps$. Then $\chi u$ has support bounded below and
-$P(\chi u)=g=\chi Pu+[P,\chi]u$, so $\chi u=Eg$ by \cref{wave:thm:forward}. Since $\chi u=u$
-near $\bar t$ and only $g$ on $\{t>\bar t-2\delta\}$ influences $Eg$ near $\bar t$ modulo
-$\CI$ (smoothness of $E$ off $\WFp$, finite speed), the wavefront calculus for
-operators with kernel $E$ \cite[Section~8.2]{Hormander-I} and \cref{wave:lem:WF-E} give
-$z\in\WF(g)\cup C_+\circ\WF(g)$. Now $z\notin\WF(g)$, so some $\zeta'\in\WF(g)$ lies on the
-backward bicharacteristic segment of $z$ within time $2\delta$. It is not in $\WF(Pu)$,
-hence $\zeta'\in\WF([P,\chi]u)\subset\WF(u)\cap\{|t-t_1|\le\eps\}$, i.e.\ $\zeta'=\gamma(t)$ with
-$|t-t_1|\le\eps$, a contradiction. Therefore $\gamma(t)\in\WF(u)$ for $t\in(\bar t-\delta,\bar t]$;
-applying this to $u(-t,x)$ (which reverses time and is handled by the backward
-fundamental solution) also for $t\in[\bar t,\bar t+\delta)$. So the set of $s\in J$ with
-$\gamma(s)\in\WF(u)$ is open, and it is closed in $J$ since $\WF(u)$ is closed; $J$ being
-connected, it is all of $J$.
+\begin{proof}
+The first statement is microlocal elliptic regularity, since $\Sigma(P)$ is the
+characteristic set of $P$. The second follows from the propagation theorem for
+operators with real homogeneous principal symbol on Euclidean space proved in
+\cref{ch:microlocal}, applied in local coordinates. Let
+$A=\{s\in J;\ \gamma(s)\in\WF(u)\}$; it is non-empty, and closed in $J$ since $\WF(u)$
+is closed. Let $s_1\in A$. Choose a coordinate chart $\kappa\colon U\to U'\subset\R^{n+1}$ of
+$\R\times X$ containing the projection of $\gamma(s_1)$, and a compact interval $I\subset J$
+which is a neighbourhood of $s_1$ in $J$ and such that the projection of $\gamma(I)$ lies
+in an open set $V$ with $\overline V\subset U$ compact. Let $\phi,\psi\in\CIc(U)$ with
+$\phi=1$ near $\overline V$ and $\psi=1$ near $\supp\phi$. In the coordinates,
+$P=\sum_{|\alpha|\le2}a_\alpha(y)D_y^\alpha$ with smooth coefficients on $U'$, and
+$\tilde P=\sum_{|\alpha|\le2}\psi a_\alpha D_y^\alpha$ (with $\psi$ written in the coordinates)
+is a differential operator with coefficients in $\CIc(\R^{n+1})$, hence lies in
+$\Psido2(\R^{n+1})$ and has real homogeneous principal symbol $\psi p$. Let
+$\tilde u=\phi u$, a distribution with compact support in $U'$. Since $P$ is a
+differential operator and $\phi=\psi=1$ on $V$, $\tilde P\tilde u=Pu$ on $V$, so over $V$
+the wavefront sets of $\tilde u$ and $\tilde P\tilde u$ coincide with those of $u$ and $Pu$
+(the wavefront set is local, and invariantly defined on $T^*(\R\times X)$). Over $V$,
+$\psi p=p$, so the Hamilton vector field of $\psi p$ there is the coordinate expression of
+$\Ham{p}$, and $\gamma|_I$ is a null bicharacteristic of $\tilde P$ which does not meet
+$\WF(\tilde P\tilde u)$ and meets $\WF(\tilde u)$ at $\gamma(s_1)$. By the propagation theorem of
+\cref{ch:microlocal}, $\gamma(I)\subset\WF(\tilde u)$, i.e.\ $\gamma(I)\subset\WF(u)$. Hence $A$ is
+open in $J$, and since $J$ is connected, $A=J$.
 \end{proof}
 
-The same argument applies to $D_t^2-\Delta_X$ on $\R\times X\times Y$ (fundamental solution
-$E\otimes\Id_Y$) at points where $(\tau,\xi)\ne0$, for distributions whose wavefront set does
-not meet $\{\tau=0,\ \xi=0\}$; the bicharacteristics now leave the $(y,\eta)$ components fixed.
+The same argument applies to the differential operator $D_t^2-\Delta_X$ on $\R\times X\times Y$, whose
+principal symbol $\tau^2-|\xi|_g^2$ is real: its null bicharacteristics through points with
+$(\tau,\xi)\ne0$ are those of \cref{wave:lem:bichar}, with the $(y,\eta)$ components fixed, while
+points with $\tau=0$, $\xi=0$ are stationary (there $\Ham{p}=0$).
 
 \begin{proposition}\label{wave:prop:WF-kernel}
 For all $t\in\R$, $\WF(K_{\cos})\subset\Gamma$, with $\Gamma$ as in \cref{wave:cor:WF-short}.
