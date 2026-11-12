@@ -557,10 +557,32 @@ write $\sigma_\pm(\theta)=\sigma_0(P)(\theta,\pm1)$.
 
 \section{The families index}\label{bott:sec:families}
 
-Let $Z$ be a compact manifold (possibly with boundary) and
+We first record that inverses of smooth families are smooth. The same argument applies
+to the operators with values in smoothing operators of \cref{bott:sec:classifying}.
+
+\begin{lemma}\label{bott:lem:inverse}
+  Let $Z$ be a manifold and $A\in\CI(Z;\PsiT{0}(\Sphere;\C^N))$ a smooth family of
+  elliptic operators, each invertible on $\Cp(\Sphere;\C^N)$ (equivalently on
+  $L^2_+(\Sphere;\C^N)$). Then $A^{-1}\in\CI(Z;\PsiT{0}(\Sphere;\C^N))$.
+\end{lemma}
+\begin{proof}
+  The symbolic parametrix construction (\cref{ch:manifolds}) works with smooth
+  dependence on parameters: it uses only the multiplicativity of the symbol, the
+  inversion of the symbol and asymptotic summation. This gives a smooth family
+  $B$ with $BA=\Id-R$, $AB=\Id-R'$, where $R,R'\in\CI(Z;\PsiT{-\infty}(\Sphere;\C^N))$.
+  The inclusion of $\PsiT{0}$ into the bounded operators on $L^2_+$ is continuous, so
+  $z\mapsto A(z)$ is smooth in operator norm, and hence so is $V=A^{-1}$. From
+  $V=B+RV$ and $V=B+VR'$ we get $V=B+RB+RVR'$. The bilinear map $T\mapsto RTR'$ is
+  continuous from bounded operators to smoothing operators (its kernel is
+  $(w,w')\mapsto\inner{TR'(\cdot,w')}{\overline{R(w,\cdot)}}$ and all derivatives fall on
+  $R$ and $R'$), so $RVR'$, and hence $V$, is a smooth family in $\PsiT{0}$.
+\end{proof}
+
+Now let $Z$ be a compact manifold (possibly with boundary) and
 $A\in\CI(Z;\PsiT{0}(\Sphere;\C^N))$ a smooth family of elliptic Toeplitz operators.
-Since $A(z)$ is Fredholm, the range of $A(z)(\Id-P_k)=A(z)-A(z)P_k$ has finite
-codimension, equal to $(k+1)N-\ind A(z)$ if its null space is $\Ran P_k$.
+Since $A(z)$ is Fredholm, the range of $A(z)(\Id-P_k)=A(z)-A(z)P_k$ is closed and of
+finite codimension, equal to $(k+1)N-\ind A(z)$ if its null space is $\Ran P_k$; the
+same holds on $\Cp$ and on $L^2_+$.
 
 \begin{definition}\label{bott:def:index-data}
   An integer $k\ge0$ is \emph{admissible} for $A$ if $\Nul(A(z)(\Id-P_k))=\Ran P_k$ for
@@ -570,45 +592,52 @@ codimension, equal to $(k+1)N-\ind A(z)$ if its null space is $\Ran P_k$.
   frames given by smooth maps into $\Cp(\Sphere;\C^N)$.
 \end{definition}
 
+If $k$ is admissible then so is every $k'\ge k$, since $\Ran(\Id-P_{k'})\subset\Ran(\Id-P_k)$.
+
 \begin{lemma}\label{bott:lem:index-bundle}
   Let $A$ be a smooth elliptic family as above.
   \begin{enumerate}[label=(\roman*)]
-  \item There is $k_0$ such that every $k\ge k_0$ is admissible and has a complement.
-  \item If $k$ is admissible and $W,W'$ are complements for $(A,k)$, then $W\cong W'$.
-  \item If $k$ is admissible with complement $W_k$, then $k+1$ is admissible with
-    complement $W_k\oplus A(e^{i(k+1)\theta}\C^N)\cong W_k\oplus\C^N$.
+  \item There is $k_0$ such that every $k\ge k_0$ is admissible.
+  \item If $k$ is admissible, the orthocomplements $F_k(z)$ of the ranges of
+    $A'(z)=A(z)(\Id-P_k)$ in $L^2_+$ form a complement for $(A,k)$, and the orthogonal
+    projections onto $F_k(z)$ form a smooth family. Every complement $W$ for $(A,k)$ is
+    isomorphic to $F_k$.
+  \item If $k$ is admissible with complement $W$, then
+    $W\oplus A(e^{i(k+1)\theta}\C^N)\cong W\oplus\C^N$ is a complement for $(A,k+1)$.
   \end{enumerate}
   Consequently the class
   \begin{equation*}
     \ind(A)=[\Ran P_k]-[W]=[\C^{(k+1)N}]-[W]\in K^0(Z)
   \end{equation*}
-  is independent of the admissible $k$ and of the complement $W$.
+  is independent of the admissible $k$ and of the complement $W$ for $(A,k)$.
 \end{lemma}
 \begin{proof}
-  (i) Choose a smooth family of parametrices $B\in\CI(Z;\PsiT{0})$, so $BA=\Id-R$ and
-  $AB=\Id-R'$ with $R,R'\in\CI(Z;\PsiT{-\infty})$. Then
-  $BA(\Id-P_k)=(\Id-R(\Id-P_k))(\Id-P_k)$. By \ref{bott:B:shifts}, $R(\Id-P_k)\to0$ in
-  $\PsiT{-\infty}$, hence in $L^2$ operator norm, uniformly on $Z$; for $k\ge k_0$,
-  $(\Id-R(\Id-P_k))^{-1}=\Id-S_k$ with $S_k\in\CI(Z;\PsiT{-\infty})$ by \ref{bott:B:Ginf}.
-  With $A'=A(\Id-P_k)$ and $B'=(\Id-P_k)(\Id-S_k)B$ we get $B'A'=\Id-P_k$. Hence
-  $\Nul A'=\Ran P_k$, and $A'B'$ is an idempotent ($A'B'A'B'=A'(\Id-P_k)B'=A'B'$) with
-  range $\Ran A'$ (as $A'B'A'=A'$). So $\Pi=\Id-A'B'$ is a smooth family of
-  idempotents with null space $\Ran A'$. Moreover $A'B'=AB-(\text{smoothing})$, so
-  $\Pi\in\CI(Z;\PsiT{-\infty})$; a compact idempotent has finite rank, and its rank
-  $\Tr\Pi$ is locally constant. As in \cref{bott:lem:bundles}(ii), $W=\Ran\Pi$ is a smooth
-  bundle, and it is a complement.
+  (i) Choose a smooth family of parametrices $B$, so $BA=\Id-R$ with
+  $R\in\CI(Z;\PsiT{-\infty})$. Then $BA(\Id-P_k)=(\Id-R(\Id-P_k))(\Id-P_k)$. By
+  \ref{bott:B:shifts}, $R(\Id-P_k)\to0$ in $\PsiT{-\infty}$, hence in $L^2$ operator norm,
+  uniformly on $Z$, so for $k\ge k_0$ the operators $\Id-R(\Id-P_k)$ are invertible and
+  $(\Id-P_k)(\Id-R(\Id-P_k))^{-1}BA(\Id-P_k)=\Id-P_k$. Hence $\Nul A(\Id-P_k)=\Ran P_k$.
 
-  (ii) Let $\Pi$ be the projection onto $W$ along $\Ran A'$; it is a smooth family as
-  constructed in (i) (for any admissible $k$, $\Pi_{W}=\Id-$ the idempotent onto
-  $\Ran A'$ along $W$, and smoothness follows from that of local frames of $W$ and
-  of $A'$). Its restriction to $W'(z)$ is injective since $\Nul\Pi=\Ran A'$ meets $W'$
-  only in $0$, and $\dim W'=\dim W$, both being the codimension of $\Ran A'$. So
-  $\Pi|_{W'}\colon W'\to W$ is a smooth bundle isomorphism.
+  (ii) The family $C=A'^*A'+P_k$ is elliptic (its symbol is $\sigma_0(A)^*\sigma_0(A)$) and
+  injective: $\inner{Cu}{u}=\norm{A'u}^2+\norm{P_ku}^2=0$ forces $P_ku=0$ and $A'u=0$, so
+  $u\in\Ran(\Id-P_k)\cap\Ran P_k=\{0\}$. Being self-adjoint and Fredholm it is invertible,
+  and $C^{-1}$ is a smooth family by \cref{bott:lem:inverse}. Since $CP_k=P_k$ and
+  $C(\Id-P_k)=A'^*A'$, the family $G=C^{-1}A'^*$ satisfies $GA'=\Id-P_k$. Then $A'G$ is the
+  orthogonal projection onto $\Ran A'$ (it is idempotent, self-adjoint as
+  $A'G=A'C^{-1}A'^*$, and has range $\Ran A'$), so $\Pi=\Id-A'G$ is a smooth family of
+  orthogonal projections onto $F_k$. Its range consists of smooth functions (it is the null
+  space of the elliptic operator $A'^*$) and its rank $(k+1)N-\ind A(z)$ is locally
+  constant. If $v_1,\dots,v_r$ is a basis of $F_k(z_0)$, then $\Pi(z)v_1,\dots,\Pi(z)v_r$
+  are smooth maps into $\Cp$, linearly independent near $z_0$, so form a local frame:
+  $F_k$ is a smooth bundle. As $\Ran A'$ is closed and $A'(\Cp)=\Ran A'\cap\Cp$ (if
+  $A'v\in\Cp$ then $GA'v=(\Id-P_k)v\in\Cp$), $F_k$ is a complement. Finally, if $W$ is a
+  complement then $\Pi|_W\colon W\to F_k$ is a smooth bundle map; it is injective because
+  $\Nul\Pi\cap\Cp=A'(\Cp)$ meets $W$ only in $0$, and $\dim W=\dim F_k$, both being the
+  codimension of $A'(\Cp)$. So $W\cong F_k$.
 
-  (iii) Since $\Ran(\Id-P_{k+1})\subset\Ran(\Id-P_k)$, $k+1$ is admissible, and as $A$
-  is injective on $\Ran(\Id-P_k)$,
+  (iii) Since $A$ is injective on $\Ran(\Id-P_k)$,
   $A(\Id-P_k)\Cp=A(\Id-P_{k+1})\Cp\oplus A(e^{i(k+1)\theta}\C^N)$. Hence
-  $W_k\oplus A(e^{i(k+1)\theta}\C^N)$ is a complement for $(A,k+1)$, and
+  $W\oplus A(e^{i(k+1)\theta}\C^N)$ is a complement for $(A,k+1)$, and
   $v\mapsto A(e^{i(k+1)\theta}v)$ trivializes the second summand.
 
   For the consequence: given admissible $k\le k'$ with complements $W,W'$, (iii)
@@ -616,17 +645,16 @@ codimension, equal to $(k+1)N-\ind A(z)$ if its null space is $\Ran P_k$.
   $W'$ by (ii); since $\Ran P_{k'}=\Ran P_k\oplus\C^{(k'-k)N}$ the classes agree.
 \end{proof}
 
-In (ii) we used only that the idempotent onto a complement is smooth; this is clear
-for the complements actually used (those of (i) and the explicit ones of
-\cref{bott:lem:normal-op}), and we only ever apply the lemma to such complements.
-
 \begin{definition}\label{bott:def:families-index}
   The class $\ind(A)\in K^0(Z)$ of \cref{bott:lem:index-bundle} is the \emph{families
   index} of the elliptic family $A$.
 \end{definition}
 
-For $Z$ a point this is the numerical index:
-$(k+1)N-\dim W=\ind A$. The families index has the expected properties.
+For $Z$ a point this is the numerical index, since $(k+1)N-\dim W=\ind A$. In the
+notation of \cref{ch:index}, $F_k=\Nul((\Id-P_k)A^*)$, and \cref{bott:lem:index-bundle}
+shows that the bundle considered there represents, together with the trivial bundle
+$\Ran P_k$, a well-defined element of $K^0(Z)$. The families index has the expected
+properties.
 
 \begin{proposition}\label{bott:prop:index-properties}
   Let $A,A'$ be smooth elliptic families of Toeplitz operators over $Z$.
@@ -643,24 +671,24 @@ $(k+1)N-\dim W=\ind A$. The families index has the expected properties.
   \end{enumerate}
 \end{proposition}
 \begin{proof}
-  (i) Apply \cref{bott:lem:index-bundle}(i) to the family over $[0,1]\times Z$; the
-  restrictions of the complement $W$ to $t=0,1$ are complements for $A_0$, $A_1$ and are
-  isomorphic by \cref{bott:lem:bundle-homotopy}. Two families with homotopic symbols
-  are joined by an elliptic family: first the linear homotopy between $A$ and
-  $T_{\sigma_0(A)}$, which has constant symbol, then $T_{a_t}$ for a homotopy $a_t$ of
-  symbols. (ii) and (iii) are clear from the definition, using $P_k$ diagonally; a
-  complement for $(\Id,k)$ is $\Ran P_k$. (iv) If $A$ is invertible every $k$ is
-  admissible and $A(\Ran P_k)\cong\C^{(k+1)N}$ is a complement. Multiplication by
-  $b(z)$ and $c(z)$ commutes with $P_k$, so $(bAc)(\Id-P_k)$ has null space
-  $c^{-1}\Ran P_k=\Ran P_k$, range $b\Ran(A(\Id-P_k))$ and complement $bW\cong W$.
-  (v) By \cref{bott:lem:normal-op} every $k$ is admissible, with complement
-  $W_k\cong\C^{kM}\oplus\Ran(\pi_0+\pi_+)\oplus\Ran\pi_+$; since
-  $\C^M=\Ran\pi_-\oplus\Ran(\pi_0+\pi_+)$,
+  (i) Choose $k$ admissible for the family over $[0,1]\times Z$; the restrictions of its
+  complement $F_k$ to $t=0,1$ are complements for $A_0$, $A_1$ and are isomorphic by
+  \cref{bott:lem:bundle-homotopy}. Two families with homotopic symbols are joined by an
+  elliptic family: first the linear homotopy between $A$ and $T_{\sigma_0(A)}$, which has
+  constant symbol, then $T_{a_t}$ for a homotopy $a_t$ of symbols. (ii) and (iii) are clear
+  from the definition, using $P_k$ diagonally; a complement for $(\Id,k)$ is $\Ran P_k$.
+  (iv) If $A$ is invertible every $k$ is admissible and $A(\Ran P_k)\cong\C^{(k+1)N}$ is a
+  complement. Multiplication by $b(z)$ and $c(z)$ commutes with $P_k$, so
+  $(bAc)(\Id-P_k)$ has null space $c^{-1}\Ran P_k=\Ran P_k$, range $bA(\Id-P_k)\Cp$ and
+  complement $bW\cong W$. (v) By \cref{bott:lem:normal-op} every $k$ is admissible, with
+  complement $W_k\cong\C^{kM}\oplus\Ran(\pi_0+\pi_+)\oplus\Ran\pi_+$ (a smooth bundle by
+  \cref{bott:lem:bundles}(ii)); since $\C^M=\Ran\pi_-\oplus\Ran(\pi_0+\pi_+)$,
   $[\C^{(k+1)M}]-[W_k]=[\Ran\pi_-]-[\Ran\pi_+]$.
 \end{proof}
 
 The families index is the only obstruction to invertibility after perturbation; this
-refines the criterion of \cref{ch:index} (there phrased as triviality of a bundle).
+is the criterion of \cref{ch:index} (there phrased as triviality of the bundle $F_k$),
+up to stabilization.
 
 \begin{proposition}\label{bott:prop:perturb}
   Let $A$ be a smooth elliptic family of Toeplitz operators on $\C^N$ over compact $Z$.
@@ -674,37 +702,12 @@ refines the criterion of \cref{ch:index} (there phrased as triviality of a bundl
   $W$. If $\ind(A)=0$ then $W\oplus\C^J\cong\C^{(k+1)N+J}$ for some $J$. Choose $L$ with
   $(k+1)L\ge J$; then $\tilde A=A\oplus\Id_L$ has complement
   $\tilde W=W\oplus\C^{(k+1)L}\cong\C^{(k+1)(N+L)}=\Ran P_k$, so there is a smooth bundle
-  isomorphism $\Phi\colon\Ran P_k\to\tilde W$. Put $B=\Phi P_k-\tilde AP_k$; this is a
+  isomorphism $\Theta\colon\Ran P_k\to\tilde W$. Put $B=\Theta P_k-\tilde AP_k$; this is a
   smooth family of finite rank operators with smooth kernels, so $B\in\PsiT{-\infty}$,
-  and $\tilde A+B=\tilde A(\Id-P_k)+\Phi P_k$ maps $\Ran(\Id-P_k)$ injectively onto
+  and $\tilde A+B=\tilde A(\Id-P_k)+\Theta P_k$ maps $\Ran(\Id-P_k)$ injectively onto
   $\tilde A(\Id-P_k)\Cp$ and $\Ran P_k$ onto the complement $\tilde W$. So it is a
-  bijection of $\Cp$, hence (being elliptic) invertible with inverse in $\PsiT{0}$ by
-  \ref{bott:B:toeplitz}.
-\end{proof}
-
-We also need that inverses of smooth families are smooth, in a form that applies to
-the operators with values in smoothing operators of \cref{bott:sec:classifying}.
-
-\begin{lemma}\label{bott:lem:inverse}
-  Let $\mathcal A$ be either $\PsiT{0}(\Sphere;\C^N)$ or the algebra
-  $\Id+\PsiT{0,-\infty}(\Sphere,Y;E)$ of \cref{bott:def:PsiTY} below, and let
-  $A\in\CI(Z;\mathcal A)$ be a smooth family of elliptic elements, each invertible on
-  the corresponding $L^2$ space. Then $A^{-1}\in\CI(Z;\mathcal A)$.
-\end{lemma}
-\begin{proof}
-  The symbolic parametrix construction (\cref{ch:manifolds}) works with smooth
-  dependence on parameters, and also for operators with values in $\Psido{-\infty}(Y;E)$,
-  since it uses only the multiplicativity of the symbol, the inversion of the symbol
-  (which takes values in $\GL(N,\C)$, respectively $\Ginf(Y;E)$, where inversion is
-  smooth) and asymptotic summation. This gives $B\in\CI(Z;\mathcal A)$ with
-  $BA=\Id-R$, $AB=\Id-R'$ and $R,R'$ smooth families of smoothing operators
-  ($\PsiT{-\infty}(\Sphere;\C^N)$, respectively $\PsiT{-\infty}(\Sphere\times Y;E)$). The
-  inclusion of $\mathcal A$ into the bounded operators on $L^2$ is continuous, so
-  $z\mapsto A(z)$ is smooth in operator norm, and hence so is $V=A^{-1}$. From
-  $V=B+RV$ and $V=B+VR'$ we get $V=B+RB+RVR'$. The map $T\mapsto RTR'$ is continuous
-  from bounded operators to smoothing operators (its kernel is
-  $\inner{TR'(\cdot,w')}{\overline{R(w,\cdot)}}$ and derivatives fall on $R,R'$), so
-  $RVR'$, and hence $V$, is a smooth family in $\mathcal A$.
+  bijection of $\Cp$, hence invertible, and the inverses form a smooth family by
+  \cref{bott:lem:inverse}.
 \end{proof}
 
 \section{The index isomorphism and Bott periodicity, first form}\label{bott:sec:index-iso}
