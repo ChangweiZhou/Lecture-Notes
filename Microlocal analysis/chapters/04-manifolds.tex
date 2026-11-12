@@ -159,8 +159,8 @@ particular we have the tangent bundle $T_xX=(T^*_xX)^*$, the dual bundle $E'$,
 the bundles $E\otimes F$, $\Hom(E,F)=F\otimes E'$, $\End(E)=\Hom(E,E)$, and the
 exterior powers
 \begin{equation*}
-\Lambda^k_xX=\{u:T_xX\times\dots\times T_xX\to\C \text{ multilinear and
-antisymmetric in $k$ factors}\},\qquad \Lambda^1X=T^*X\otimes\C,
+\Lambda^k_xX=\{u:(T_xX)^k\to\C\ \text{multilinear and antisymmetric}\},
+\qquad \Lambda^1X=T^*X\otimes\C,
 \end{equation*}
 whose sections are the $k$-forms. If $E\to Y$ is a vector bundle and
 $G:X\to Y$ is smooth, the \emph{pull-back bundle} $G^*E=\bigcup_{x\in X}E_{G(x)}$
@@ -701,8 +701,10 @@ The local step can be seen directly from \cref{manifolds:lem:reduced}: writing
 the first factor in left-reduced and the second in right-reduced form, for
 $f\in\cS(\R^n)$,
 \begin{equation}\label{manifolds:eq:left-right-composition}
-ABf(x)=\int e^{ix\cdot\xi}a_L(x,\xi)\Big(\int e^{-iy\cdot\xi}b_R(y,\xi)f(y)\,dy\Big)\dbar\xi,\quad
+\begin{gathered}
+ABf(x)=\int e^{ix\cdot\xi}a_L(x,\xi)\Big(\int e^{-iy\cdot\xi}b_R(y,\xi)f(y)\,dy\Big)\dbar\xi,\\
 K_{AB}=\int e^{i(x-y)\cdot\xi}a_L(x,\xi)b_R(y,\xi)\,\dbar\xi .
+\end{gathered}
 \end{equation}
 The amplitude $a_L(x,\xi)b_R(y,\xi)$ satisfies the estimates of
 \ref{manifolds:E2} with order $m+m'$, so $AB\in\Psido{m+m'}(\R^n)$ with principal
@@ -862,9 +864,11 @@ from \cref{manifolds:thm:composition},
 \section{Ellipticity and parametrices}\label{manifolds:sec:elliptic}
 
 \begin{definition}\label{manifolds:def:elliptic}
-An operator $A\in\Psido m(X;E,F)$ is \emph{elliptic} if there exists
-$b\in S^{-m}(T^*X;\hom(F,E))$ such that, for a representative $a$ of
-$\sigma_m(A)$, $ba-\Id_E\in S^{-1}(T^*X;\hom(E))$ and $ab-\Id_F\in S^{-1}(T^*X;\hom(F))$.
+An operator $A\in\Psido m(X;E,F)$ is \emph{elliptic} if there is a symbol
+$b\in S^{-m}(T^*X;\hom(F,E))$ such that, for a representative $a$ of $\sigma_m(A)$,
+\begin{equation*}
+ba-\Id_E\in S^{-1}(T^*X;\hom(E)),\qquad ab-\Id_F\in S^{-1}(T^*X;\hom(F)).
+\end{equation*}
 \end{definition}
 
 \begin{lemma}\label{manifolds:lem:elliptic}
@@ -974,8 +978,9 @@ $\Phi_*(\chi\Lambda_{-s}\chi')\in\Psido{-s}(\R^n)$ by \ref{manifolds:E7}, which 
 $L^2\to\Hs s$ by \ref{manifolds:E6}, and $\|\Phi_*(\chi'f)\|_{L^2}\le C\|f\|_{L^2}$ since the
 Jacobian of $\Phi^{-1}$ is bounded on $\Phi(\supp\chi')$.
 
-(b) If the kernel is $k\in\CIc(\R^{2n})$ then $D^\alpha Tu(x)=u(D^\alpha_xk(x,\cdot))$ is
-bounded by $\|u\|_{\Hs t}\sup_x\|D_x^\alpha k(x,\cdot)\|_{\Hs{-t}}$ and $Tu$ has support in a
+(b) Let $T$ have kernel $k\in\CIc(\R^{2n})$. Then for each multi-index $\alpha$ the
+derivative $D^\alpha Tu(x)=u(D^\alpha_xk(x,\cdot))$ is bounded by the product
+$\|u\|_{\Hs t}\sup_x\|D_x^\alpha k(x,\cdot)\|_{\Hs{-t}}$ and $Tu$ has support in a
 fixed compact set.
 
 (c) Let $u_j\in\Hs s_K$, $\|u_j\|_{\Hs s}\le1$, and $\chi\in\CIc(\R^n)$ equal to one near $K$.
@@ -1314,8 +1319,10 @@ $B=-A+ATA$, which is smoothing by \cref{manifolds:lem:sandwich}.
 \begin{definition}\label{manifolds:def:G}
 For a compact manifold $X$ and a vector bundle $E$ over it,
 \begin{equation*}
-\Gsm(X;E)=\{A\in\Psido{-\infty}(X;E);\ \Id+A \text{ is invertible on } L^2(X;E)\}
-=\{A;\ (\Id+A)^{-1}=\Id+B,\ B\in\Psido{-\infty}(X;E)\},
+\begin{aligned}
+\Gsm(X;E)&=\{A\in\Psido{-\infty}(X;E);\ \Id+A \text{ is invertible on } L^2(X;E)\}\\
+&=\{A;\ (\Id+A)^{-1}=\Id+B,\ B\in\Psido{-\infty}(X;E)\},
+\end{aligned}
 \end{equation*}
 topologized as a subset of the Fr\'echet space
 $\Psido{-\infty}(X;E)=\CI(X^2;\Hom(E)\otimes\Omega_R)$, with the group law
@@ -1329,7 +1336,7 @@ invertible on $\CI(X;E)$, i.e.\ is injective there, since the index is zero.
 $\Gsm(X;E)$ is an open subset of $\Psido{-\infty}(X;E)$ and a topological group.
 \end{proposition}
 \begin{proof}
-If $A\in\Gsm$ and $\|B\|_{\Lin(L^2)}<\|(\Id+A)^{-1}\|^{-1}$ then
+Let $A\in\Gsm$ and $\delta=\|(\Id+A)^{-1}\|^{-1}$. If $\|B\|_{\Lin(L^2)}<\delta$ then
 $\Id+A+B=(\Id+A)(\Id+(\Id+A)^{-1}B)$ is invertible; by \eqref{manifolds:eq:HS-bound}
 this holds for $B$ in a neighbourhood of zero in $\Psido{-\infty}$, so $\Gsm$ is open.
 Composition, with kernel $k_A+k_B+\int k_A(x,y)k_B(y,z)\nu(y)$, is continuous; the inverse
@@ -1483,10 +1490,10 @@ approximations as in \cref{manifolds:lem:density};
 \end{proposition}
 \begin{proof}
 Continuity is clear. (a) By Fubini,
-\begin{equation*}
+\begin{multline*}
 \Tr(AB)=\int_X\int_X\tr\big(k_A(x,y)k_B(y,x)\big)\nu(y)\nu(x)
-=\int_X\int_X\tr\big(k_B(y,x)k_A(x,y)\big)\nu(x)\nu(y)=\Tr(BA),
-\end{equation*}
+\\=\int_X\int_X\tr\big(k_B(y,x)k_A(x,y)\big)\nu(x)\nu(y)=\Tr(BA),
+\end{multline*}
 using $\tr(ab)=\tr(ba)$ for $a\in\hom(E_y,F_x)$, $b\in\hom(F_x,E_y)$.
 
 (b) Let $s$ be an even integer with $s>n/2$ and $\Lambda_s$ as in
@@ -1509,11 +1516,16 @@ $\Tr(AB)=\Tr\big((A\Lambda_m)(\Lambda_m^{-1}B)\big)=\Tr(\Lambda_m^{-1}BA\Lambda_
 \begin{remark}\label{manifolds:rem:determinant}
 Using the trace one can define the Fredholm determinant: there is a unique entire
 function $\det(\Id+A)$ on $\Psido{-\infty}(X;E)$ such that
-$\det((\Id+A)(\Id+B))=\det(\Id+A)\det(\Id+B)$,
-$\frac{d}{ds}\det(\Id+sA)|_{s=0}=\Tr(A)$, and $A\in\Gsm(X;E)$ if and only if
+\begin{equation*}
+\det\big((\Id+A)(\Id+B)\big)=\det(\Id+A)\det(\Id+B),\qquad
+\tfrac{d}{ds}\det(\Id+sA)|_{s=0}=\Tr(A),
+\end{equation*}
+and $A\in\Gsm(X;E)$ if and only if
 $\det(\Id+A)\ne0$. It follows that $\Gsm(X;E)$ is dense in $\Psido{-\infty}(X;E)$. Since
 $\Gsm$ is connected, the determinant can be defined on $\Gsm$ by
-$\det(\Id+A)=\exp\big(\int_0^1\Tr\big((\Id+\gamma(t))^{-1}\tfrac{d\gamma}{dt}\big)dt\big)$
+\begin{equation*}
+\det(\Id+A)=\exp\Big(\int_0^1\Tr\big((\Id+\gamma(t))^{-1}\tfrac{d\gamma}{dt}\big)dt\Big)
+\end{equation*}
 for a smooth curve $\gamma$ in $\Gsm$ from $0$ to $A$; the main points are independence of
 the curve and the extension to all of $\Psido{-\infty}$. This is carried out in
 \cref{ch:index}; compare also \cref{ch:determinants}.
@@ -1521,7 +1533,10 @@ the curve and the extension to all of $\Psido{-\infty}$. This is carried out in
 
 \begin{proposition}\label{manifolds:prop:spectrum-smoothing}
 Let $A\in\Psido{-\infty}(X;E)$. The set
-$\Spec(A)\setminus\{0\}=\{z\in\C\setminus\{0\};\ z\Id-A \text{ is not invertible on } L^2\}$ is contained in
+\begin{equation*}
+\Spec(A)\setminus\{0\}=\{z\in\C\setminus\{0\};\ z\Id-A \text{ is not invertible on } L^2(X;E)\}
+\end{equation*}
+is contained in
 $\{|z|\le\|A\|\}$ and is discrete in $\C\setminus\{0\}$; each of its points is an eigenvalue,
 and the generalized eigenspace
 \begin{equation*}
@@ -1567,12 +1582,15 @@ adjoints; they form the adjoint complex, $P_{i-1}^*P_i^*=(P_iP_{i-1})^*=0$. Set
 For an elliptic complex \eqref{manifolds:eq:complex} on a compact manifold:
 \begin{enumerate}[label=\textup{(\alph*)}]
 \item each $\Delta_i$ is elliptic and formally self-adjoint, and its null space
-$\mathcal H^i=\{u\in\CI(X;E_i);\ P_iu=0,\ P_{i-1}^*u=0\}$ is finite-dimensional;
+\begin{equation*}
+\mathcal H^i=\{u\in\CI(X;E_i);\ P_iu=0,\ P_{i-1}^*u=0\}
+\end{equation*}
+is finite-dimensional;
 \item there is an $L^2$-orthogonal decomposition
 \begin{equation}\label{manifolds:eq:hodge-decomposition}
 \CI(X;E_i)=\mathcal H^i\oplus P_{i-1}\CI(X;E_{i-1})\oplus P_i^*\CI(X;E_{i+1});
 \end{equation}
-\item the ranges of the $P_i$ on smooth sections are closed, and
+\item the ranges of the $P_i$ on smooth sections are closed, and we have
 $\Nul(P_i)=\mathcal H^i\oplus P_{i-1}\CI(X;E_{i-1})$, so that the natural map
 $\mathcal H^i\to H^i$ is an isomorphism; in particular the cohomology of the complex is
 finite-dimensional.

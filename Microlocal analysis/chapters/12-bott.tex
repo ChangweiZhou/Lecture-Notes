@@ -1,0 +1,1386 @@
+\chapter{Linearization of symbols, K-theory and Bott periodicity}\label{ch:bott}
+\providecommand{\Ginf}{G^{-\infty}}
+\providecommand{\GinfT}{G^{-\infty}_{\mathcal{T}}}
+\providecommand{\GT}{G^{0}_{\mathcal{T}}}
+\providecommand{\PsiT}[1]{\Psi^{#1}_{\mathcal{T}}}
+\providecommand{\Cp}{\mathcal{C}^\infty_+}
+\providecommand{\Kc}{K_{\mathrm{c}}}
+\providecommand{\wind}{\operatorname{wind}}
+\providecommand{\Iso}{\operatorname{Iso}}
+\providecommand{\rank}{\operatorname{rank}}
+
+In \cref{ch:index} the index of an elliptic operator was shown to be a
+homotopy invariant, the group $\Ginf(Y;E)$ of invertible perturbations of the
+identity by smoothing operators was introduced as a model for odd K-theory, and
+the Toeplitz algebra on the circle was set up. This chapter combines these
+ingredients. The central technical result is a normal form, due to Atiyah, for
+loops of invertible matrices: after stabilization and deformation every
+(pointed) loop can be brought to the form
+$\pi_-e^{-i\theta}+\pi_0+\pi_+e^{i\theta}$ with commuting idempotents
+$\pi_\pm,\pi_0$. Applied to the symbols of Toeplitz operators this
+\emph{linearization} reduces index computations to an explicit model.
+As consequences we obtain:
+\begin{itemize}
+\item the index formula for Toeplitz and pseudodifferential operators on the circle;
+\item the families index of elliptic Toeplitz families, with values in $K^0$, and the
+  fact that it gives an isomorphism $K^{-2}(X)\cong K^0(X)$ (Bott periodicity in its
+  first form);
+\item the weak contractibility of the stabilized group $\GT$ of invertible Toeplitz
+  operators, hence a \emph{classifying sequence}
+  $\GinfT\to\GT\to\GT/\GinfT$ for K-theory;
+\item Bott periodicity in its usual form, $\Kc^0(\R^2\times X)\cong K^0(X)$, and the
+  homotopy groups of $\Ginf$: $\pi_k(\Ginf)=\Z$ for $k$ odd and $0$ for $k$ even;
+\item the analytic index map $\Kc^0(T^*Z)\to\Z$, the starting point of the index
+  theorem.
+\end{itemize}
+K-theory is defined from scratch in \cref{bott:sec:K}; we follow
+\cite{Atiyah-K} for the topological background. The use of Toeplitz operators
+(rather than the isotropic calculus of \cref{ch:isotropic}, see the Notes) follows
+the source lectures; compare also \cite{Pressley-Segal} for the relation between
+loop groups and Toeplitz operators.
+
+\section{Conventions and background}\label{bott:sec:background}
+
+Throughout, $X$ denotes a compact manifold, possibly with boundary (we need
+$[0,1]\times X$), and all maps and homotopies are smooth. The circle is
+$\Sphere=\R/2\pi\Z$ with variable $\theta$; we write $z=e^{i\theta}$, so that
+$\Sphere$ is also the unit circle in $\C$, and we use the point $1\in\Sphere$
+($\theta=0$) as base point. $M(N,\C)$ is the algebra of $N\times N$ matrices.
+For maps from a product we use the obvious notion of smoothness; a smooth map
+into a Fr\'echet space $F$ (such as $\Psido{0}(\Sphere)$ with its standard topology,
+see \cref{ch:conormal,ch:manifolds}) is one all of whose derivatives exist and
+are continuous.
+
+Two smooth homotopies $h,h'\colon[0,1]\times X\to W$ with $h_1=h'_0$ can be
+concatenated to a smooth homotopy after reparametrizing each of them by a smooth
+non-decreasing surjection $[0,1]\to[0,1]$ which is constant near $0$ and $1$.
+We use this tacitly whenever homotopies are composed.
+
+\subsection{Facts recalled from \cref{ch:index}}
+Let $Y$ be a compact manifold of positive dimension, $E\to Y$ a Hermitian vector
+bundle, and fix a smooth positive density on $Y$; write $L^2(Y;E)$ for the
+corresponding Hilbert space.
+\begin{enumerate}[label=(B\arabic*),leftmargin=*]
+\item\label{bott:B:Ginf} $\Psido{-\infty}(Y;E)$, the smoothing operators (kernels in
+  $\CI(Y^2;\Hom(E)\otimes\Omega_R)$), is a Fr\'echet algebra and
+  \begin{equation*}
+    \Ginf(Y;E)=\{\Id+A;\ A\in\Psido{-\infty}(Y;E),\ \Id+A \text{ invertible on } L^2(Y;E)\}.
+  \end{equation*}
+  The inverse of $\Id+A\in\Ginf(Y;E)$ is of the form $\Id+B$ with
+  $B\in\Psido{-\infty}(Y;E)$; $\Ginf(Y;E)$ is an open subset of
+  $\Id+\Psido{-\infty}(Y;E)$, a topological group with smooth multiplication and
+  inversion, and it is connected.
+\item\label{bott:B:finite} (Finite rank approximation.) Given a finite dimensional
+  subspace $V_0\subset\CI(Y;E)$ there is an increasing sequence of finite dimensional
+  subspaces $V_0\subset V_1\subset V_2\subset\dots\subset\CI(Y;E)$ (for instance
+  $V_0$ plus the span of the first $j$ eigensections of a Laplacian) whose orthogonal
+  projections $\Pi_j$ satisfy $\Pi_jA\Pi_j\to A$ in $\Psido{-\infty}(Y;E)$,
+  uniformly with all derivatives on smooth families $A$ parametrized by a compact
+  manifold. For a finite dimensional subspace $V$ with orthogonal projection $\Pi_V$
+  we identify $\GL(V)$, and so $\GL(N,\C)$ after choosing an orthonormal basis, with
+  the subgroup $\{\Id-\Pi_V+g\Pi_V;\ g\in\GL(V)\}\subset\Ginf(Y;E)$. Enlarging $V$ to
+  $V'\supset V$ corresponds to the stabilization $g\mapsto g\oplus\Id$.
+\item\label{bott:B:K1} $K^{-1}(X)=[X;\Ginf(Y;E)]$, the set of smooth homotopy classes of
+  smooth maps, is an abelian group under pointwise multiplication, independent of
+  the choice of $(Y,E)$.
+\item\label{bott:B:wind} For a smooth loop $b\colon\Sphere\to\Ginf(Y;E)$ the number
+  \begin{equation*}
+    \wind(b)=\frac1{2\pi i}\int_0^{2\pi}\Tr\Big(b^{-1}\frac{db}{d\theta}\Big)\,d\theta
+  \end{equation*}
+  is an integer, the winding number of the Fredholm determinant along $b$. For
+  $b$ with values in $\GL(N,\C)$ it is the winding number of $\det b$, since
+  $d\log\det b=\Tr(b^{-1}db)$. It is invariant under homotopy of loops.
+\item\label{bott:B:toeplitz} The Szeg\H{o} projector $S$, which removes the negative Fourier
+  modes, is a self-adjoint projection in $\Psido{0}(\Sphere)$ with principal symbol
+  equal to $1$ on $\Sphere_+=\{\xi>0\}$ and $0$ on $\Sphere_-=\{\xi<0\}$ in
+  $S^*\Sphere=\Sphere_+\sqcup\Sphere_-$. Its range on $\CI(\Sphere)$ is
+  $\Cp(\Sphere)$, the smooth functions with only non-negative Fourier modes,
+  and on $L^2$ it is $L^2_+(\Sphere)$. The Toeplitz algebra is
+  \begin{equation*}
+    \PsiT{0}(\Sphere;\C^N)=\{A\in\Psido{0}(\Sphere;\C^N);\ A=SAS\},
+  \end{equation*}
+  acting on $\Cp(\Sphere;\C^N)$; $\PsiT{-\infty}(\Sphere;\C^N)=S\Psido{-\infty}(\Sphere;\C^N)S$.
+  The (Toeplitz) symbol $\sigma_0(A)\in\CI(\Sphere;M(N,\C))$ is the restriction of
+  the principal symbol to $\Sphere_+\cong\Sphere$; it is multiplicative and for
+  $a\in\CI(\Sphere;M(N,\C))$ the operator $T_a=SaS$ (multiplication by $a$, then
+  projection) lies in $\PsiT{0}(\Sphere;\C^N)$ with $\sigma_0(T_a)=a$. A constant
+  matrix commutes with $S$, so $T_c=c$. $A$ is \emph{elliptic} if $\sigma_0(A)$ is
+  invertible; then $A$ has a parametrix in $\PsiT{0}$ modulo $\PsiT{-\infty}$, is
+  Fredholm on $\Cp(\Sphere;\C^N)$ and on $L^2_+(\Sphere;\C^N)$ with null spaces
+  in $\Cp$, and its index depends only on the homotopy class of $\sigma_0(A)$ in
+  $\CI(\Sphere;\GL(N,\C))$. If an elliptic $A$ is invertible, then
+  $A^{-1}\in\PsiT{0}(\Sphere;\C^N)$.
+\item\label{bott:B:shifts} The shifts $U=T_{z}$ and $L=T_{z^{-1}}$ act by
+  $U(e^{ik\theta})=e^{i(k+1)\theta}$, $L(e^{ik\theta})=e^{i(k-1)\theta}$ for $k\ge1$ and
+  $L(1)=0$. Thus $LU=\Id$, $UL=\Id-P_0$, $\ind U=-1$ and $\ind L=1$. Here, and below,
+  $P_k$ is the orthogonal projection onto the span of $e^{ij\theta}$, $0\le j\le k$
+  (acting componentwise on vector valued functions). For a smooth family $K$ of
+  elements of $\PsiT{-\infty}$ parametrized by a compact manifold, $KP_k\to K$ and
+  $P_kK\to K$ in $\PsiT{-\infty}$ uniformly as $k\to\infty$.
+\item\label{bott:B:lift} (Lifting homotopies.) If $A\colon[0,1]\times X\to
+  \PsiT{0}(\Sphere;\C^N)$ is a smooth family of elliptic operators and $A_0(x)$ is
+  invertible for all $x\in X$, then there is a smooth family
+  $B\colon[0,1]\times X\to\PsiT{-\infty}(\Sphere;\C^N)$ with $B_0=0$ such that
+  $A_t(x)+B_t(x)$ is invertible for all $(t,x)$.
+\end{enumerate}
+
+A smooth family of invertible elliptic Toeplitz operators has smoothly varying
+inverses; we prove this together with its analogue for operators with values in
+smoothing operators in \cref{bott:lem:inverse} below.
+
+\subsection{Elementary deformations of loops}
+
+A \emph{pointed loop} (over $X$) is a smooth map
+$a\colon X\times\Sphere\to\GL(N,\C)$ with $a(x,1)=\Id$ for all $x$; a pointed
+homotopy is a smooth family of pointed loops. Loops are \emph{stabilized} by
+$a\mapsto a\oplus\Id_{M-N}$, and $a,b$ are \emph{stably pointed homotopic},
+$a\sim b$, if $a\oplus\Id$ and $b\oplus\Id$ are pointed homotopic in some
+$\GL(M,\C)$. The following three lemmas are used constantly.
+
+\begin{lemma}\label{bott:lem:normalize}
+  Let $h\colon[0,1]\times X\times\Sphere\to\GL(N,\C)$ be smooth and set
+  $\hat h_t(x,\theta)=h_t(x,1)^{-1}h_t(x,\theta)$. Then $\hat h$ is a pointed
+  homotopy; $\hat h_t=h_t$ whenever $h_t$ is pointed, and $\hat h_t=\Id$ whenever
+  $h_t(x,\theta)$ is independent of $\theta$.
+\end{lemma}
+\begin{proof}
+  Immediate from the definition.
+\end{proof}
+
+\begin{lemma}[Rotation]\label{bott:lem:rotation}
+  For pointed loops $a,b$ with values in $\GL(N,\C)$, $\diag(ab,\Id_N)$ and
+  $\diag(a,b)$ are pointed homotopic in $\GL(2N,\C)$. Consequently
+  $ab\sim\diag(a,b)\sim ba$, $\diag(a_1\cdots a_r,\Id,\dots,\Id)\sim
+  \diag(a_1,\dots,a_r)$, and $a\,\diag(\cdot)$-block sums of pointed loops are
+  commutative up to $\sim$.
+\end{lemma}
+\begin{proof}
+  Let $R_\tau=\begin{pmatrix}\cos\tau\Id_N&-\sin\tau\Id_N\\\sin\tau\Id_N&\cos\tau\Id_N\end{pmatrix}$
+  and $h_\tau=\diag(a,\Id)R_\tau\diag(b,\Id)R_\tau^{-1}$, $\tau\in[0,\pi/2]$. Then
+  $h_0=\diag(ab,\Id)$, $h_{\pi/2}=\diag(a,\Id)\diag(\Id,b)=\diag(a,b)$, and
+  $h_\tau(x,1)=\Id$. The remaining statements follow by iteration and by applying
+  the same argument with the roles of the blocks exchanged (the constant
+  permutation matrix exchanging two blocks is joined to $\Id$ by $R_\tau$).
+\end{proof}
+
+\begin{lemma}[Conjugation]\label{bott:lem:conjugation}
+  Let $a$ be a pointed loop in $\GL(N,\C)$ and $c\colon X\to\GL(N,\C)$ smooth
+  (independent of $\theta$). Then $cac^{-1}\sim a$; if $c$ is constant then
+  $cac^{-1}$ and $a$ are pointed homotopic without stabilization.
+\end{lemma}
+\begin{proof}
+  If $c$ is constant, join it to $\Id$ by a path $c_t$ in the connected group
+  $\GL(N,\C)$; then $c_tac_t^{-1}$ is a pointed homotopy. In general,
+  $h_\tau=\diag(c,\Id)R_\tau\diag(c^{-1},\Id)R_\tau^{-1}$ is a $\theta$-independent
+  path from $\Id$ to $\diag(c,c^{-1})$, and
+  $h_\tau\diag(a,\Id)h_\tau^{-1}$ is a pointed homotopy from $\diag(a,\Id)$ to
+  $\diag(c,c^{-1})\diag(a,\Id)\diag(c^{-1},c)=\diag(cac^{-1},\Id)$.
+\end{proof}
+
+\section{Vector bundles and K-theory}\label{bott:sec:K}
+
+All vector bundles are smooth complex vector bundles of finite rank; $\C^N$ also
+denotes the trivial bundle. For bundles $E,F$ over the same base we write
+$E\cong F$ if there is a smooth bundle isomorphism, i.e.\ a smooth map of total spaces
+which is a linear isomorphism $E_x\to F_x$ on each fibre.
+
+\subsection{Bundles}
+\begin{lemma}\label{bott:lem:bundles}
+  Let $X$ be compact.
+  \begin{enumerate}[label=(\roman*)]
+  \item Every vector bundle $E$ over $X$ is isomorphic to the range of a smooth
+    family of orthogonal projections $p\colon X\to M(N,\C)$; in particular there
+    is a bundle $F$ with $E\oplus F\cong\C^N$.
+  \item If $\pi\colon X\to M(N,\C)$ is a smooth family of idempotents, $\pi^2=\pi$,
+    then $\Ran\pi=\{(x,v);\ v\in\Ran\pi(x)\}$ is a smooth vector bundle.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  (ii) The rank of $\pi(x)$ equals $\tr\pi(x)$, so is locally constant. If
+  $v_1,\dots,v_r$ is a basis of $\Ran\pi(x_0)$ then $\pi(x)v_1,\dots,\pi(x)v_r$ are
+  linearly independent for $x$ near $x_0$, hence a smooth local frame of $\Ran\pi$.
+
+  (i) Choose open sets $U_1,\dots,U_s$ covering $X$ over which $E$ has trivializations
+  $\tau_i\colon E|_{U_i}\to U_i\times\C^n$, and smooth $\psi_i\ge0$ with
+  $\supp\psi_i\subset U_i$ and $\sum_i\psi_i>0$. Then
+  $\iota(v)=(\psi_1(x)\tau_1(v),\dots,\psi_s(x)\tau_s(v))$, $v\in E_x$, is a smooth
+  fibrewise injective bundle map $E\to\C^{N}$, $N=sn$. The orthogonal projection
+  $p(x)$ onto $\iota(E_x)$ depends smoothly on $x$ (locally it is given by the
+  Gram--Schmidt process applied to a smooth frame), so $E\cong\Ran p$, and
+  $F=\Ran(\Id-p)$ is a complement.
+\end{proof}
+
+\begin{lemma}[Homotopy invariance of bundles]\label{bott:lem:bundle-homotopy}
+  Let $W$ be a manifold.
+  \begin{enumerate}[label=(\roman*)]
+  \item If $E$ is a vector bundle over $[0,1]\times W$, then
+    $E|_{\{0\}\times W}\cong E|_{\{1\}\times W}$ as bundles over $W$.
+  \item If $\varpi\colon V\to W$ is a real vector bundle (for instance $V=\R^n\times W$
+    or $V=T^*Z$) and $E$ is a vector bundle over the total space $V$, then
+    $E\cong\varpi^*(E|_{W})$, where $W$ is identified with the zero section.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  Choose a connection on $E$ (patching local trivial connections with a partition
+  of unity). In (i), parallel transport along the curves $t\mapsto(t,w)$ gives linear
+  isomorphisms $E_{(0,w)}\to E_{(1,w)}$ which depend smoothly on $w$ by smooth
+  dependence of solutions of linear ordinary differential equations on parameters.
+  In (ii), parallel transport along $t\mapsto t\zeta$, $t\in[0,1]$, from the zero
+  section to $\zeta\in V$ gives a smooth isomorphism $\varpi^*(E|_W)\to E$.
+\end{proof}
+
+\subsection{The group \texorpdfstring{$K^0$}{K0}}
+
+\begin{definition}\label{bott:def:K0}
+  For compact $X$, $K^0(X)$ is the set of equivalence classes of pairs $(E_+,E_-)$ of
+  vector bundles over $X$, where $(E_+,E_-)\sim(F_+,F_-)$ if there is a bundle $H$
+  with
+  \begin{equation*}
+    E_+\oplus F_-\oplus H\cong F_+\oplus E_-\oplus H.
+  \end{equation*}
+  The class of $(E_+,E_-)$ is written $[E_+]-[E_-]$, and $[E]=[E]-[0]$. Addition is
+  $([E_+]-[E_-])+([F_+]-[F_-])=[E_+\oplus F_+]-[E_-\oplus F_-]$.
+\end{definition}
+
+The relation is reflexive and symmetric; it is transitive because if
+$E_+\oplus F_-\oplus H\cong F_+\oplus E_-\oplus H$ and
+$F_+\oplus G_-\oplus H'\cong G_+\oplus F_-\oplus H'$ then
+$E_+\oplus G_-\oplus(F_+\oplus F_-\oplus H\oplus H')\cong
+G_+\oplus E_-\oplus(F_+\oplus F_-\oplus H\oplus H')$. Addition is well defined,
+associative and commutative; $[E]-[E]$ is the zero element and $[E_-]-[E_+]$ is the
+inverse of $[E_+]-[E_-]$. Thus $K^0(X)$ is an abelian group. By
+\cref{bott:lem:bundles} every element can be written $[E]-[\C^N]$ (add a complement
+of $E_-$ to both bundles), and $[E_+]-[E_-]=0$ if and only if
+$E_+\oplus\C^L\cong E_-\oplus\C^L$ for some $L$ (replace $H$ by $H\oplus H^\perp\cong\C^L$).
+A smooth map $f\colon X'\to X$ induces a homomorphism $f^*\colon K^0(X)\to K^0(X')$ by
+pull-back of bundles. By \cref{bott:lem:bundle-homotopy}, $K^0([0,1]\times X)\to K^0(X)$,
+restriction to $\{t\}\times X$, is independent of $t$. The difference of ranks at
+a point identifies $K^0(\mathrm{pt})=\Z$; the \emph{rank} of
+$[E_+]-[E_-]$ at $x$ is $\dim E_{+,x}-\dim E_{-,x}$. If $x_0\in X$ is a base point,
+$\tilde K^0(X)=\ker\big(K^0(X)\to K^0(\{x_0\})\big)$ is the \emph{reduced} group, and
+$K^0(X)=\Z\oplus\tilde K^0(X)$, the splitting being given by pull-back along
+$X\to\{x_0\}$.
+
+\subsection{Odd K-theory and pointed loops}
+
+Odd K-theory is $K^{-1}(X)=[X;\Ginf(Y;E)]$, see \ref{bott:B:K1}. The loops in
+$\Ginf$ give a second model of even K-theory.
+
+\begin{definition}\label{bott:def:K2}
+  For compact $X$, $K^{-2}(X)$ is the set of smooth homotopy classes of smooth maps
+  $f\colon X\times\Sphere\to\Ginf(Y;E)$ with $f(x,1)=\Id$ for all $x$, where
+  homotopies are required to satisfy the same condition. It is a group under
+  pointwise multiplication.
+\end{definition}
+
+Equivalently, $K^{-2}(X)$ is the set of homotopy classes of smooth maps from $X$
+into the pointed loop group
+\begin{equation*}
+  \Omega\Ginf(Y;E)=\{b\in\CI(\Sphere;\Ginf(Y;E));\ b(1)=\Id\}
+\end{equation*}
+(this is homotopy equivalent to the flat loop group $\Ginf_{(1)}(Y;E)$ of
+\cref{ch:index}, by the flattening argument used there). The number
+$\wind(f(x,\cdot))$ of \ref{bott:B:wind} is locally constant in $x$; we denote by
+$\Omega_0\Ginf(Y;E)$ the loops with $\wind=0$.
+
+\begin{lemma}\label{bott:lem:stable}
+  Let $X'\subset X$ be closed (e.g.\ $X'=X\times\{1\}\subset X\times\Sphere$).
+  \begin{enumerate}[label=(\roman*)]
+  \item Every smooth $f\colon X\to\Ginf(Y;E)$ with $f=\Id$ on $X'$ is homotopic,
+    through maps equal to $\Id$ on $X'$, to a map into a subgroup $\GL(V)\cong\GL(N,\C)$
+    as in \ref{bott:B:finite}.
+  \item If two such maps into $\GL(V)$ are homotopic in $\Ginf(Y;E)$ through maps
+    equal to $\Id$ on $X'$, they are homotopic through such maps in $\GL(V')$ for some
+    finite dimensional $V'\supset V$.
+  \end{enumerate}
+  In particular $K^{-2}(X)$ is the set of stable pointed homotopy classes of pointed
+  loops in the groups $\GL(N,\C)$; in it $[a]+[b]=[ab]=[\diag(a,b)]$, and
+  $K^{-2}(X)$ is abelian. The same holds for $K^{-1}(X)$, with free maps $X\to\GL(N,\C)$.
+\end{lemma}
+\begin{proof}
+  (i) Write $f=\Id+A$. With $\Pi_j$ as in \ref{bott:B:finite}, the maps
+  $f_t=\Id+(1-t)A+t\Pi_jA\Pi_j$ converge to $f$ uniformly on $[0,1]\times X$ as
+  $j\to\infty$; since $f(X)$ is compact and $\Ginf$ is open, $f_t\in\Ginf$ for $j$
+  large. Where $A=0$ also $f_t=\Id$, and $f_1=\Id-\Pi_j+(\Id+\Pi_jA\Pi_j)\Pi_j$ has
+  values in $\GL(V_j)$.
+  (ii) Apply (i) to the homotopy, a map on $[0,1]\times X$, with $V_0=V$ and closed
+  set $[0,1]\times X'\cup\{0,1\}\times X$; on $\{0,1\}\times X$ the operator
+  $A$ satisfies $A=\Pi_VA\Pi_V=\Pi_jA\Pi_j$, so the approximation does not change
+  the endpoints. The final statements follow, using \cref{bott:lem:rotation}.
+\end{proof}
+
+\section{Linearization of loops}\label{bott:sec:linearization}
+
+The following normal form is due to Atiyah \cite{Atiyah-K}.
+
+\begin{theorem}\label{bott:thm:linearization}
+  Let $a\colon X\times\Sphere\to\GL(N,\C)$ be a pointed loop, $X$ compact. Then for
+  some $M\ge N$ the stabilized loop $a\oplus\Id_{M-N}$ is pointed homotopic in
+  $\GL(M,\C)$ to a loop of the form
+  \begin{equation}\label{bott:eq:normal-form}
+    \pi_-(x)z^{-1}+\pi_0(x)+\pi_+(x)z,
+  \end{equation}
+  where $\pi_-,\pi_0,\pi_+\colon X\to M(M,\C)$ are smooth families of idempotents
+  which commute with each other and satisfy $\pi_-+\pi_0+\pi_+=\Id$.
+\end{theorem}
+
+Note that \eqref{bott:eq:normal-form} is invertible, with inverse
+$\pi_-z+\pi_0+\pi_+z^{-1}$, and is automatically pointed. We call it a loop in
+\emph{normal form}. The proof occupies the rest of this section and proceeds through
+Laurent polynomials, polynomials and linear loops.
+
+\begin{lemma}\label{bott:lem:laurent}
+  A pointed loop $a$ is pointed homotopic to a pointed Laurent polynomial
+  $\sum_{|j|\le q}a'_j(x)z^j$ with $a'_j\in\CI(X;M(N,\C))$.
+\end{lemma}
+\begin{proof}
+  The Fourier coefficients $a_j(x)=\frac1{2\pi}\int_0^{2\pi}e^{-ij\theta}a(x,\theta)\,d\theta$
+  satisfy $\sup_X|a_j|\le C_m(1+|j|)^{-m}$ for every $m$, by integration by parts
+  in $\theta$, so $a_{(q)}=\sum_{|j|\le q}a_jz^j\to a$ uniformly on $X\times\Sphere$.
+  Let $\delta=\min_{X\times\Sphere}\norm{a^{-1}}^{-1}>0$ and choose $q$ with
+  $\sup\norm{a_{(q)}-a}<\delta$. Then
+  $h_t=(1-t)a+ta_{(q)}=a\big(\Id+ta^{-1}(a_{(q)}-a)\big)$ is invertible for
+  $t\in[0,1]$, and by \cref{bott:lem:normalize} $\hat h_t$ is a pointed homotopy
+  from $a$ to $a_{(q)}(x,1)^{-1}a_{(q)}$, which is a pointed Laurent polynomial.
+\end{proof}
+
+So we may assume $a=z^{-q}b$ where $b(x,z)=\sum_{j=0}^{p}b_j(x)z^j$, $p=2q$, is a
+polynomial in $z$ which is invertible for $|z|=1$ and satisfies $b(x,1)=\Id$. Since
+$z^{-q}$ is a scalar, \cref{bott:lem:rotation} gives
+\begin{equation*}
+  \diag(a,\Id_N)=\diag(b\,z^{-q}\Id_N,\Id_N)\sim\diag(b,z^{-q}\Id_N),
+  \qquad
+  \diag(z^{-q}\Id_N,\Id_{(q-1)N})\sim z^{-1}\Id_{qN},
+\end{equation*}
+the second by writing $z^{-q}=z^{-1}\cdots z^{-1}$. It therefore suffices to deal
+with the polynomial loop $b$.
+
+\begin{lemma}\label{bott:lem:poly-linear}
+  Let $b=\sum_{j=0}^pb_jz^j$ be a pointed polynomial loop in $\GL(N,\C)$. Then
+  $\diag(b,\Id_{pN})$ is pointed homotopic in $\GL((p+1)N,\C)$ to a loop
+  $\Id+(z-1)A(x)$, with $A\in\CI(X;M((p+1)N,\C))$.
+\end{lemma}
+\begin{proof}
+  Set $c_j(x,z)=\sum_{l=j}^pb_l(x)z^{l-j}$ for $0\le j\le p$, so $c_0=b$, $c_p=b_p$
+  and $c_j-zc_{j+1}=b_j$. In $(p+1)\times(p+1)$ block form with $N\times N$ blocks
+  consider
+  \begin{equation*}
+    T(t)=\begin{pmatrix}b&tc_1&\cdots&tc_p\\0&\Id&&\\\vdots&&\ddots&\\0&&&\Id\end{pmatrix},\quad
+    \Lambda(s)=\begin{pmatrix}\Id&&&\\-sz&\Id&&\\&\ddots&\ddots&\\&&-sz&\Id\end{pmatrix},
+    \quad t,s\in[0,1].
+  \end{equation*}
+  $T(t)$ is block upper triangular with invertible diagonal blocks when $|z|=1$, and
+  $\Lambda(s)$ is block lower triangular with identity diagonal, so both are invertible.
+  The homotopy $T(t)$, $t\in[0,1]$, followed by $T(1)\Lambda(s)$, $s\in[0,1]$, starts
+  at $\diag(b,\Id)$ and ends at
+  \begin{equation*}
+    T(1)\Lambda(1)=\begin{pmatrix}b_0&b_1&\cdots&b_{p-1}&b_p\\-z&\Id&&&\\&-z&\Id&&\\&&\ddots&\ddots&\\&&&-z&\Id\end{pmatrix}
+    =B_0(x)+zB_1(x),
+  \end{equation*}
+  since the $(1,j)$ entry of the product is $c_j-zc_{j+1}=b_j$ for $j<p$ and $c_p=b_p$
+  for $j=p$. Applying \cref{bott:lem:normalize} gives a pointed homotopy (the initial
+  loop is pointed) ending at $(B_0+B_1)^{-1}(B_0+zB_1)=\Id+(z-1)A$ with
+  $A=(B_0+B_1)^{-1}B_1$.
+\end{proof}
+
+\begin{lemma}\label{bott:lem:linear}
+  Let $A\in\CI(X;M(M,\C))$. The loop $\ell(x,z)=\Id+(z-1)A(x)$ is invertible for all
+  $|z|=1$ if and only if no eigenvalue of any $A(x)$ lies on the line
+  $\{\Re\lambda=\frac12\}$. In that case $\ell$ is pointed homotopic, through loops
+  of the same form, to $(\Id-\pi)+z\pi$ where $\pi(x)$ is the spectral projection of
+  $A(x)$ onto the generalized eigenspaces with $\Re\lambda>\frac12$.
+\end{lemma}
+\begin{proof}
+  For $z\ne1$, $\ell(z)=(z-1)\big(A-w\big)$ with $w=(1-z)^{-1}$, and as $z=e^{i\theta}$
+  runs over $\Sphere\setminus\{1\}$,
+  \begin{equation*}
+    \frac1{1-e^{i\theta}}=\frac12+\frac i2\cot\frac\theta2
+  \end{equation*}
+  runs over the whole line $\Re w=\frac12$; at $z=1$, $\ell=\Id$. This proves the first
+  statement. Now the set $\{(x,\lambda);\ \det(\lambda-A(x))=0\}$ is compact and
+  disjoint from $X\times\{\Re\lambda=\frac12\}$, so there is $\delta>0$ such that all
+  eigenvalues satisfy $|\Re\lambda-\frac12|\ge\delta$. Let $\Gamma$ be the positively
+  oriented boundary of the rectangle
+  $\{\frac12+\frac\delta2\le\Re\lambda\le R,\ |\Im\lambda|\le R\}$ with
+  $R>1+\sup_X\norm{A}$. Then
+  \begin{equation*}
+    \pi(x)=\frac1{2\pi i}\int_\Gamma(\lambda-A(x))^{-1}\,d\lambda
+  \end{equation*}
+  is a smooth family of idempotents commuting with $A(x)$, with range the sum of the
+  generalized eigenspaces of $A(x)$ for eigenvalues with $\Re\lambda>\frac12$ and null
+  space the sum of the others (the Riesz projection). Set $A_t=(1-t)A+t\pi$. On
+  $\Ran\pi$, which is $A$-invariant, $A_t=(1-t)A+t$ has eigenvalues $(1-t)\lambda+t$
+  with $\Re\lambda>\frac12$, so real part $>\frac12$; on $\Nul\pi$, $A_t=(1-t)A$ has
+  eigenvalues $(1-t)\lambda$ with $\Re\lambda<\frac12$, so real part $<\frac12$. By the
+  first part $\Id+(z-1)A_t$ is a pointed homotopy, and it ends at
+  $\Id+(z-1)\pi=(\Id-\pi)+z\pi$.
+\end{proof}
+
+\begin{proof}[Proof of \cref{bott:thm:linearization}]
+  By \cref{bott:lem:laurent} and the reduction following it,
+  $a\oplus\Id\sim\diag(b,z^{-1}\Id_{qN})$ with $b$ a pointed polynomial loop of degree
+  at most $p=2q$. By \cref{bott:lem:poly-linear,bott:lem:linear},
+  $\diag(b,\Id_{pN})\sim(\Id-\pi)+z\pi$. Hence, with $M=(3q+1)N$,
+  $a\oplus\Id_{M-N}$ is pointed homotopic (after a constant permutation of blocks,
+  \cref{bott:lem:conjugation}) to \eqref{bott:eq:normal-form} with
+  $\pi_+=\pi\oplus0$, $\pi_0=(\Id-\pi)\oplus0$, $\pi_-=0\oplus\Id_{qN}$.
+\end{proof}
+
+\begin{remark}\label{bott:rem:linearization}
+  The proof gives more: $\pi_-$ may be taken constant. We shall not use this. In the
+  source a different argument was used for \cref{bott:lem:linear}, splitting the
+  linear loop by a contour integral of $p_+^{-1}\,dp_+/dz$; the spectral projection
+  above avoids the need to assume that the leading coefficient is invertible.
+\end{remark}
+
+The decisive point for K-theory is that a loop in normal form is trivial as soon as
+$\Ran\pi_-$ and $\Ran\pi_+$ are isomorphic.
+
+\begin{lemma}\label{bott:lem:normal-trivial}
+  Let $\pi_-,\pi_0,\pi_+$ be commuting smooth idempotents on $\C^M$ over $X$ with
+  sum $\Id$, and suppose there is a smooth bundle isomorphism
+  $F\colon\Ran\pi_-\to\Ran\pi_+$. Then $\pi_-z^{-1}+\pi_0+\pi_+z$ is pointed homotopic
+  to $\Id$ in $\GL(M,\C)$.
+\end{lemma}
+\begin{proof}
+  The fibres split as $\C^M=V_-\oplus V_0\oplus V_+$, $V_\bullet=\Ran\pi_\bullet$.
+  Regard $F\pi_-$ and $F^{-1}\pi_+$ as smooth maps into $M(M,\C)$ and set, for
+  $\tau\in[0,\pi/2]$,
+  \begin{equation*}
+    h_\tau=\pi_0+\cos\tau\,(z^{-1}\pi_-+z\pi_+)+\sin\tau\,(F^{-1}\pi_+-F\pi_-).
+  \end{equation*}
+  $h_\tau$ is the identity on $V_0$ and preserves $V_-\oplus V_+$; identifying $V_+$ with
+  $V_-$ by $F^{-1}$ it acts there as
+  $\begin{pmatrix}\cos\tau\,z^{-1}&\sin\tau\\-\sin\tau&\cos\tau\,z\end{pmatrix}\otimes\Id_{V_-}$,
+  which has determinant $1$. So $h_\tau$ is a loop in $\GL(M,\C)$, $h_0$ is the given
+  loop, and $h_{\pi/2}=\pi_0+F^{-1}\pi_+-F\pi_-$ is independent of $z$. By
+  \cref{bott:lem:normalize}, $\hat h_\tau$ is a pointed homotopy from $h_0$ to $\Id$.
+\end{proof}
+
+\section{The index of Toeplitz operators on the circle}\label{bott:sec:circle}
+
+For commuting smooth idempotents $\pi_-,\pi_0,\pi_+$ on $\C^M$ with sum $\Id$
+consider the family of Toeplitz operators on $\Cp(\Sphere;\C^M)$
+\begin{equation}\label{bott:eq:normal-op}
+  Q(x)=\pi_-(x)L+\pi_0(x)+\pi_+(x)U,\qquad
+  \sigma_0(Q)=\pi_-z^{-1}+\pi_0+\pi_+z.
+\end{equation}
+The matrices act pointwise and commute with $S$, $U$, $L$ and the $P_k$. For
+$c\in\C^M$ write $c^\bullet=\pi_\bullet c$.
+
+\begin{lemma}\label{bott:lem:normal-op}
+  For every $k\ge0$ the null space of $Q(x)(\Id-P_k)$ is $\Ran P_k$, and
+  \begin{equation*}
+    W_k(x)=\operatorname{span}\{e^{ij\theta}\C^M\}_{0\le j\le k-1}
+    \oplus e^{ik\theta}\Ran(\pi_0+\pi_+)(x)\oplus e^{i(k+1)\theta}\Ran\pi_+(x)
+  \end{equation*}
+  is a complement to the range of $Q(x)(\Id-P_k)$ in $\Cp(\Sphere;\C^M)$. In
+  particular $\Nul Q(x)=\Ran\pi_-(x)$ (constant functions),
+  $\Nul Q(x)^*=\Ran\pi_+(x)^*$ and $\ind Q(x)=\rank\pi_--\rank\pi_+$.
+\end{lemma}
+\begin{proof}
+  For $u=\sum_{j\ge k+1}c_je^{ij\theta}$ (rapidly decreasing coefficients),
+  \begin{equation*}
+    Q(\Id-P_k)u=\sum_{j\ge k+1}\big(c_j^-e^{i(j-1)\theta}+c_j^0e^{ij\theta}+c_j^+e^{i(j+1)\theta}\big)
+    =\sum_md_me^{im\theta}
+  \end{equation*}
+  with $d^-_m=c^-_{m+1}$, $d^0_m=c^0_m$, $d^+_m=c^+_{m-1}$. These relations determine $u$
+  from the image, so $Q(\Id-P_k)$ is injective on $\Ran(\Id-P_k)$, and its range
+  consists exactly of the $\sum d_me^{im\theta}\in\Cp$ with $d^-_m=0$ for $m<k$,
+  $d^0_m=0$ for $m<k+1$ and $d^+_m=0$ for $m<k+2$. The complement $W_k$ follows. For
+  $k=0$ and $u=c_0$ constant, $Qc_0=c_0^0+c_0^+e^{i\theta}$, so $\Nul Q=\Ran\pi_-$, and
+  $\dim W_0=\rank\pi_0+2\rank\pi_+$ minus the $M$ dimensions of $\Ran P_0$ gives the
+  index; the adjoint $Q^*=\pi_-^*U+\pi_0^*+\pi_+^*L$ has the same form with the
+  roles of $\pi_\pm^*$ exchanged.
+\end{proof}
+
+\begin{corollary}[Index formula for Toeplitz operators]\label{bott:cor:index-circle}
+  If $P\in\PsiT{0}(\Sphere;\C^N)$ is elliptic, then
+  \begin{equation}\label{bott:eq:index-circle}
+    \ind P=\dim\Nul P-\dim\Nul P^*=\frac{i}{2\pi}\int_0^{2\pi}\Tr\Big(\sigma_0(P)^{-1}\frac{d\sigma_0(P)}{d\theta}\Big)d\theta
+    =-\wind\sigma_0(P).
+  \end{equation}
+\end{corollary}
+\begin{proof}
+  The last two expressions agree by \ref{bott:B:wind}. Let $c=\sigma_0(P)(1)\in\GL(N,\C)$.
+  Then $c^{-1}P$ is elliptic with pointed symbol $c^{-1}\sigma_0(P)$; it has the same
+  index as $P$ since $c$ is an invertible operator, and the same winding number since
+  $\det c$ is constant. So we may assume $\sigma_0(P)$ pointed. Both sides of
+  \eqref{bott:eq:index-circle} depend only on the stable pointed homotopy class of the
+  symbol: the index by \ref{bott:B:toeplitz}, and because stabilizing $P$ by $\Id$ adds
+  nothing to either side; the winding number by \ref{bott:B:wind}. By
+  \cref{bott:thm:linearization} (with $X$ a point) we may thus assume
+  $\sigma_0(P)=\pi_-z^{-1}+\pi_0+\pi_+z$, and then $P$ may be replaced by $Q$ of
+  \eqref{bott:eq:normal-op}. Then $\ind Q=\rank\pi_--\rank\pi_+$ by
+  \cref{bott:lem:normal-op}, while $\det\sigma_0(Q)=z^{\rank\pi_+-\rank\pi_-}$ (the
+  idempotents are simultaneously triangularizable), so $\wind\sigma_0(Q)=\rank\pi_+-\rank\pi_-$.
+\end{proof}
+
+The same holds for pseudodifferential operators on the circle, except that now both
+halves $\Sphere_\pm$ of $S^*\Sphere$ contribute. For $P\in\Psido{0}(\Sphere;\C^N)$
+write $\sigma_\pm(\theta)=\sigma_0(P)(\theta,\pm1)$.
+
+\begin{proposition}\label{bott:prop:index-psido-circle}
+  If $P\in\Psido{0}(\Sphere;\C^N)$ is elliptic, then
+  \begin{equation*}
+    \ind P=\frac{i}{2\pi}\int_0^{2\pi}\Tr\big(\sigma_+^{-1}\partial_\theta\sigma_+\big)d\theta
+    -\frac{i}{2\pi}\int_0^{2\pi}\Tr\big(\sigma_-^{-1}\partial_\theta\sigma_-\big)d\theta
+    =\wind\sigma_--\wind\sigma_+ .
+  \end{equation*}
+  Equivalently $\ind P=\frac{i}{2\pi}\int_{S^*\Sphere}\Tr(\sigma_0(P)^{-1}d\sigma_0(P))$
+  with $\Sphere_+$ oriented by $d\theta$ and $\Sphere_-$ by $-d\theta$.
+\end{proposition}
+\begin{proof}
+  Let $S'=\Id-S$, the projection onto $\CI_-(\Sphere)$, the span of the negative
+  Fourier modes. By \ref{bott:B:toeplitz}, $SPS'$ and $S'PS$ have vanishing principal
+  symbol, so $P_t=P-t(SPS'+S'PS)$ is a family of elliptic operators with constant
+  principal symbol, and $\ind P=\ind P_1$. Now $P_1=SPS+S'PS'$ preserves the
+  decomposition $\CI(\Sphere;\C^N)=\Cp\oplus\CI_-$, so
+  $\ind P=\ind(SPS|_{\Cp})+\ind(S'PS'|_{\CI_-})$. The first is an elliptic Toeplitz
+  operator with symbol $\sigma_+$, of index $-\wind\sigma_+$ by
+  \cref{bott:cor:index-circle}. For the second, let $Ru(\theta)=e^{-i\theta}u(-\theta)$.
+  Then $R(e^{ik\theta})=e^{-i(k+1)\theta}$, so $R$ is an isomorphism of $\CI(\Sphere;\C^N)$
+  exchanging $\CI_-$ and $\Cp$, and $RS'R^{-1}=S$. Thus $R(S'PS')R^{-1}=STS$ with
+  $T=RPR^{-1}\in\Psido{0}(\Sphere;\C^N)$; as $R$ is the composite of the pull-back by
+  $\theta\mapsto-\theta$ and a multiplication, $\sigma_0(T)(\theta,\xi)=\sigma_0(P)(-\theta,-\xi)$.
+  So $S'PS'|_{\CI_-}$ is conjugate to the elliptic Toeplitz operator with symbol
+  $\sigma_-(-\theta)$, whose index is $-\wind(\sigma_-(-\cdot))=\wind\sigma_-$.
+\end{proof}
+
+\begin{remark}
+  The index of an elliptic \emph{differential} operator $P\in\Diff{m}(\Sphere;\C^N)$
+  vanishes. Indeed $\sigma_m(P)=p(\theta)\xi^m$ with $p$ invertible, and
+  $P(\Id+D_\theta^2)^{-m/2}\in\Psido{0}$ has the same index as $P$ (the second factor
+  is invertible) and symbol $\sigma_\pm=(\pm1)^mp$. Since $\wind((-1)^mp)=\wind p$,
+  the two terms in \cref{bott:prop:index-psido-circle} cancel.
+\end{remark}
+
+\section{The families index}\label{bott:sec:families}
+
+Let $Z$ be a compact manifold (possibly with boundary) and
+$A\in\CI(Z;\PsiT{0}(\Sphere;\C^N))$ a smooth family of elliptic Toeplitz operators.
+Since $A(z)$ is Fredholm, the range of $A(z)(\Id-P_k)=A(z)-A(z)P_k$ has finite
+codimension, equal to $(k+1)N-\ind A(z)$ if its null space is $\Ran P_k$.
+
+\begin{definition}\label{bott:def:index-data}
+  An integer $k\ge0$ is \emph{admissible} for $A$ if $\Nul(A(z)(\Id-P_k))=\Ran P_k$ for
+  all $z\in Z$. A \emph{complement} for $(A,k)$ is a smooth vector bundle $W$ over $Z$
+  whose fibres $W(z)\subset\Cp(\Sphere;\C^N)$ satisfy
+  $\Cp(\Sphere;\C^N)=A(z)(\Id-P_k)\Cp\oplus W(z)$; smoothness means that $W$ has local
+  frames given by smooth maps into $\Cp(\Sphere;\C^N)$.
+\end{definition}
+
+\begin{lemma}\label{bott:lem:index-bundle}
+  Let $A$ be a smooth elliptic family as above.
+  \begin{enumerate}[label=(\roman*)]
+  \item There is $k_0$ such that every $k\ge k_0$ is admissible and has a complement.
+  \item If $k$ is admissible and $W,W'$ are complements for $(A,k)$, then $W\cong W'$.
+  \item If $k$ is admissible with complement $W_k$, then $k+1$ is admissible with
+    complement $W_k\oplus A(e^{i(k+1)\theta}\C^N)\cong W_k\oplus\C^N$.
+  \end{enumerate}
+  Consequently the class
+  \begin{equation*}
+    \ind(A)=[\Ran P_k]-[W]=[\C^{(k+1)N}]-[W]\in K^0(Z)
+  \end{equation*}
+  is independent of the admissible $k$ and of the complement $W$.
+\end{lemma}
+\begin{proof}
+  (i) Choose a smooth family of parametrices $B\in\CI(Z;\PsiT{0})$, so $BA=\Id-R$ and
+  $AB=\Id-R'$ with $R,R'\in\CI(Z;\PsiT{-\infty})$. Then
+  $BA(\Id-P_k)=(\Id-R(\Id-P_k))(\Id-P_k)$. By \ref{bott:B:shifts}, $R(\Id-P_k)\to0$ in
+  $\PsiT{-\infty}$, hence in $L^2$ operator norm, uniformly on $Z$; for $k\ge k_0$,
+  $(\Id-R(\Id-P_k))^{-1}=\Id-S_k$ with $S_k\in\CI(Z;\PsiT{-\infty})$ by \ref{bott:B:Ginf}.
+  With $A'=A(\Id-P_k)$ and $B'=(\Id-P_k)(\Id-S_k)B$ we get $B'A'=\Id-P_k$. Hence
+  $\Nul A'=\Ran P_k$, and $A'B'$ is an idempotent ($A'B'A'B'=A'(\Id-P_k)B'=A'B'$) with
+  range $\Ran A'$ (as $A'B'A'=A'$). So $\Pi=\Id-A'B'$ is a smooth family of
+  idempotents with null space $\Ran A'$. Moreover $A'B'=AB-(\text{smoothing})$, so
+  $\Pi\in\CI(Z;\PsiT{-\infty})$; a compact idempotent has finite rank, and its rank
+  $\Tr\Pi$ is locally constant. As in \cref{bott:lem:bundles}(ii), $W=\Ran\Pi$ is a smooth
+  bundle, and it is a complement.
+
+  (ii) Let $\Pi$ be the projection onto $W$ along $\Ran A'$; it is a smooth family as
+  constructed in (i) (for any admissible $k$, $\Pi_{W}=\Id-$ the idempotent onto
+  $\Ran A'$ along $W$, and smoothness follows from that of local frames of $W$ and
+  of $A'$). Its restriction to $W'(z)$ is injective since $\Nul\Pi=\Ran A'$ meets $W'$
+  only in $0$, and $\dim W'=\dim W$, both being the codimension of $\Ran A'$. So
+  $\Pi|_{W'}\colon W'\to W$ is a smooth bundle isomorphism.
+
+  (iii) Since $\Ran(\Id-P_{k+1})\subset\Ran(\Id-P_k)$, $k+1$ is admissible, and as $A$
+  is injective on $\Ran(\Id-P_k)$,
+  $A(\Id-P_k)\Cp=A(\Id-P_{k+1})\Cp\oplus A(e^{i(k+1)\theta}\C^N)$. Hence
+  $W_k\oplus A(e^{i(k+1)\theta}\C^N)$ is a complement for $(A,k+1)$, and
+  $v\mapsto A(e^{i(k+1)\theta}v)$ trivializes the second summand.
+
+  For the consequence: given admissible $k\le k'$ with complements $W,W'$, (iii)
+  applied $k'-k$ times gives a complement $W\oplus\C^{(k'-k)N}$ for $k'$, isomorphic to
+  $W'$ by (ii); since $\Ran P_{k'}=\Ran P_k\oplus\C^{(k'-k)N}$ the classes agree.
+\end{proof}
+
+In (ii) we used only that the idempotent onto a complement is smooth; this is clear
+for the complements actually used (those of (i) and the explicit ones of
+\cref{bott:lem:normal-op}), and we only ever apply the lemma to such complements.
+
+\begin{definition}\label{bott:def:families-index}
+  The class $\ind(A)\in K^0(Z)$ of \cref{bott:lem:index-bundle} is the \emph{families
+  index} of the elliptic family $A$.
+\end{definition}
+
+For $Z$ a point this is the numerical index:
+$(k+1)N-\dim W=\ind A$. The families index has the expected properties.
+
+\begin{proposition}\label{bott:prop:index-properties}
+  Let $A,A'$ be smooth elliptic families of Toeplitz operators over $Z$.
+  \begin{enumerate}[label=(\roman*)]
+  \item (Homotopy) If $A_t$ is an elliptic family over $[0,1]\times Z$, then
+    $\ind(A_0)=\ind(A_1)$. In particular $\ind(A)$ depends only on the homotopy class
+    of $\sigma_0(A)$ in $\CI(Z\times\Sphere;\GL(N,\C))$.
+  \item (Additivity) $\ind(A\oplus A')=\ind(A)+\ind(A')$; $\ind(A\oplus\Id)=\ind(A)$.
+  \item (Naturality) $\ind(f^*A)=f^*\ind(A)$ for smooth $f\colon Z'\to Z$.
+  \item If each $A(z)$ is invertible then $\ind(A)=0$. If $b,c\colon Z\to\GL(N,\C)$
+    then $\ind(bAc)=\ind(A)$.
+  \item (Normal form) For $Q$ as in \eqref{bott:eq:normal-op},
+    $\ind(Q)=[\Ran\pi_-]-[\Ran\pi_+]$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  (i) Apply \cref{bott:lem:index-bundle}(i) to the family over $[0,1]\times Z$; the
+  restrictions of the complement $W$ to $t=0,1$ are complements for $A_0$, $A_1$ and are
+  isomorphic by \cref{bott:lem:bundle-homotopy}. Two families with homotopic symbols
+  are joined by an elliptic family: first the linear homotopy between $A$ and
+  $T_{\sigma_0(A)}$, which has constant symbol, then $T_{a_t}$ for a homotopy $a_t$ of
+  symbols. (ii) and (iii) are clear from the definition, using $P_k$ diagonally; a
+  complement for $(\Id,k)$ is $\Ran P_k$. (iv) If $A$ is invertible every $k$ is
+  admissible and $A(\Ran P_k)\cong\C^{(k+1)N}$ is a complement. Multiplication by
+  $b(z)$ and $c(z)$ commutes with $P_k$, so $(bAc)(\Id-P_k)$ has null space
+  $c^{-1}\Ran P_k=\Ran P_k$, range $b\Ran(A(\Id-P_k))$ and complement $bW\cong W$.
+  (v) By \cref{bott:lem:normal-op} every $k$ is admissible, with complement
+  $W_k\cong\C^{kM}\oplus\Ran(\pi_0+\pi_+)\oplus\Ran\pi_+$; since
+  $\C^M=\Ran\pi_-\oplus\Ran(\pi_0+\pi_+)$,
+  $[\C^{(k+1)M}]-[W_k]=[\Ran\pi_-]-[\Ran\pi_+]$.
+\end{proof}
+
+The families index is the only obstruction to invertibility after perturbation; this
+refines the criterion of \cref{ch:index} (there phrased as triviality of a bundle).
+
+\begin{proposition}\label{bott:prop:perturb}
+  Let $A$ be a smooth elliptic family of Toeplitz operators on $\C^N$ over compact $Z$.
+  Then $\ind(A)=0$ in $K^0(Z)$ if and only if for some $L$ there is a smooth family
+  $B\colon Z\to\PsiT{-\infty}(\Sphere;\C^{N+L})$ such that $A\oplus\Id_L+B$ is
+  invertible for all $z\in Z$.
+\end{proposition}
+\begin{proof}
+  If $A\oplus\Id_L+B$ is invertible, then $\ind(A)=\ind(A\oplus\Id_L+B)=0$ by
+  \cref{bott:prop:index-properties}. Conversely, let $k$ be admissible with complement
+  $W$. If $\ind(A)=0$ then $W\oplus\C^J\cong\C^{(k+1)N+J}$ for some $J$. Choose $L$ with
+  $(k+1)L\ge J$; then $\tilde A=A\oplus\Id_L$ has complement
+  $\tilde W=W\oplus\C^{(k+1)L}\cong\C^{(k+1)(N+L)}=\Ran P_k$, so there is a smooth bundle
+  isomorphism $\Phi\colon\Ran P_k\to\tilde W$. Put $B=\Phi P_k-\tilde AP_k$; this is a
+  smooth family of finite rank operators with smooth kernels, so $B\in\PsiT{-\infty}$,
+  and $\tilde A+B=\tilde A(\Id-P_k)+\Phi P_k$ maps $\Ran(\Id-P_k)$ injectively onto
+  $\tilde A(\Id-P_k)\Cp$ and $\Ran P_k$ onto the complement $\tilde W$. So it is a
+  bijection of $\Cp$, hence (being elliptic) invertible with inverse in $\PsiT{0}$ by
+  \ref{bott:B:toeplitz}.
+\end{proof}
+
+We also need that inverses of smooth families are smooth, in a form that applies to
+the operators with values in smoothing operators of \cref{bott:sec:classifying}.
+
+\begin{lemma}\label{bott:lem:inverse}
+  Let $\mathcal A$ be either $\PsiT{0}(\Sphere;\C^N)$ or the algebra
+  $\Id+\PsiT{0,-\infty}(\Sphere,Y;E)$ of \cref{bott:def:PsiTY} below, and let
+  $A\in\CI(Z;\mathcal A)$ be a smooth family of elliptic elements, each invertible on
+  the corresponding $L^2$ space. Then $A^{-1}\in\CI(Z;\mathcal A)$.
+\end{lemma}
+\begin{proof}
+  The symbolic parametrix construction (\cref{ch:manifolds}) works with smooth
+  dependence on parameters, and also for operators with values in $\Psido{-\infty}(Y;E)$,
+  since it uses only the multiplicativity of the symbol, the inversion of the symbol
+  (which takes values in $\GL(N,\C)$, respectively $\Ginf(Y;E)$, where inversion is
+  smooth) and asymptotic summation. This gives $B\in\CI(Z;\mathcal A)$ with
+  $BA=\Id-R$, $AB=\Id-R'$ and $R,R'$ smooth families of smoothing operators
+  ($\PsiT{-\infty}(\Sphere;\C^N)$, respectively $\PsiT{-\infty}(\Sphere\times Y;E)$). The
+  inclusion of $\mathcal A$ into the bounded operators on $L^2$ is continuous, so
+  $z\mapsto A(z)$ is smooth in operator norm, and hence so is $V=A^{-1}$. From
+  $V=B+RV$ and $V=B+VR'$ we get $V=B+RB+RVR'$. The map $T\mapsto RTR'$ is continuous
+  from bounded operators to smoothing operators (its kernel is
+  $\inner{TR'(\cdot,w')}{\overline{R(w,\cdot)}}$ and derivatives fall on $R,R'$), so
+  $RVR'$, and hence $V$, is a smooth family in $\mathcal A$.
+\end{proof}
+
+\section{The index isomorphism and Bott periodicity, first form}\label{bott:sec:index-iso}
+
+For a pointed loop $a\colon X\times\Sphere\to\GL(N,\C)$, $T_a(x)=Sa(x,\cdot)S$ is a
+smooth elliptic family of Toeplitz operators with symbol $a$; set
+\begin{equation*}
+  \ind(a)=\ind(T_a)\in K^0(X).
+\end{equation*}
+By \cref{bott:prop:index-properties}(i) any elliptic family with symbol $a$ has the same
+index. By \cref{bott:prop:index-properties}(i),(ii), $\ind(a)$ depends only on the stable
+pointed homotopy class of $a$, so by \cref{bott:lem:stable} it defines a map
+\begin{equation*}
+  \ind\colon K^{-2}(X)\longrightarrow K^0(X),
+\end{equation*}
+which is a homomorphism since $[a]+[b]=[\diag(a,b)]$ and $T_{\diag(a,b)}=T_a\oplus T_b$.
+For $X$ a point, $\ind(a)=-\wind(a)$ by \cref{bott:cor:index-circle}; in general the
+rank of $\ind(a)$ at $x$ is $-\wind a(x,\cdot)$.
+
+\begin{proposition}\label{bott:prop:injective}
+  If $a$ is a pointed loop over $X$ with $\ind(a)=0$ in $K^0(X)$, then $a$ is stably
+  pointed homotopic to $\Id$.
+\end{proposition}
+\begin{proof}
+  By \cref{bott:thm:linearization} and homotopy invariance we may assume
+  $a=\pi_-z^{-1}+\pi_0+\pi_+z$, and then $[\Ran\pi_-]-[\Ran\pi_+]=\ind(a)=0$ by
+  \cref{bott:prop:index-properties}(v), i.e.\ $\Ran\pi_-\oplus H\cong\Ran\pi_+\oplus H$ for
+  some bundle $H$. By \cref{bott:lem:bundles} we may take $H=\Ran q$ for a smooth family of
+  idempotents $q$ on some $\C^K$. The loop
+  \begin{equation*}
+    \beta_q=\diag\big(qz^{-1}+(\Id-q),\,(\Id-q)+qz\big)
+  \end{equation*}
+  on $\C^{2K}$ is in normal form with $\Ran\pi_-^{\beta}=\Ran q\oplus0\cong0\oplus\Ran q=\Ran\pi_+^\beta$,
+  so $\beta_q$ is pointed homotopic to $\Id$ by \cref{bott:lem:normal-trivial}. Hence
+  $a\sim\diag(a,\beta_q)$, and $\diag(a,\beta_q)$ is in normal form with idempotents
+  $\pi_-\oplus q\oplus0$, $\pi_0\oplus(\Id-q)\oplus(\Id-q)$, $\pi_+\oplus0\oplus q$, whose
+  ranges satisfy $\Ran\pi_-\oplus H\cong\Ran\pi_+\oplus H$. By
+  \cref{bott:lem:normal-trivial} again, $\diag(a,\beta_q)$ is pointed homotopic to $\Id$.
+\end{proof}
+
+\begin{theorem}[Bott periodicity, first form]\label{bott:thm:index-iso}
+  For every compact manifold $X$ the index map $\ind\colon K^{-2}(X)\to K^0(X)$ is an
+  isomorphism of abelian groups, natural with respect to pull-back. Its inverse, the
+  \emph{Bott map} $\beta$, is given as follows: if $E_\pm\cong\Ran p_\pm$ with
+  $p_\pm\colon X\to M(N_\pm,\C)$ smooth families of projections, then
+  \begin{equation}\label{bott:eq:bott-map}
+    \beta([E_+]-[E_-])=\big[\big(p_+z^{-1}+(\Id-p_+)\big)\oplus\big((\Id-p_-)+p_-z\big)\big].
+  \end{equation}
+\end{theorem}
+\begin{proof}
+  Injectivity is \cref{bott:prop:injective}, and naturality follows from
+  \cref{bott:prop:index-properties}(iii). The loop in \eqref{bott:eq:bott-map} is in normal
+  form with $\pi_-=p_+\oplus0$ and $\pi_+=0\oplus p_-$, so by
+  \cref{bott:prop:index-properties}(v) its index is $[\Ran p_+]-[\Ran p_-]=[E_+]-[E_-]$. As
+  every element of $K^0(X)$ is of the form $[E_+]-[E_-]$ and every bundle is the range
+  of a family of projections (\cref{bott:lem:bundles}), $\ind$ is surjective, and
+  $\beta$ is its inverse.
+\end{proof}
+
+Concretely, for the operator with symbol \eqref{bott:eq:bott-map}, namely
+$(p_+L+\Id-p_+)\oplus(\Id-p_-+p_-U)$, the null space is the bundle $E_+$ of constant
+sections and the null space of the adjoint is $E_-$. The Toeplitz operator $L$, of index
+$1=[\C]\in K^0(\mathrm{pt})$, is the \emph{Bott element}: $\beta[\C]=[z^{-1}]$.
+
+\begin{remark}
+  In the source the inverse was stated with the roles of $\pi_+$ and $\pi_-$ in
+  \eqref{bott:eq:normal-form} reversed; with the conventions above (for which
+  $\ind U=-1$) that map is $-\beta$.
+\end{remark}
+
+\begin{corollary}\label{bott:cor:reduced}
+  If $x_0\in X$ is a base point and $\tilde K^{-2}(X)$ denotes the kernel of restriction
+  $K^{-2}(X)\to K^{-2}(\{x_0\})$, then $\ind$ restricts to an isomorphism
+  $\tilde K^{-2}(X)\cong\tilde K^0(X)$. Moreover $K^{-2}(\mathrm{pt})\cong\Z$, i.e.\
+  pointed loops in $\Ginf(Y;E)$ (equivalently in $\GL(N,\C)$, stably) are classified up to
+  pointed homotopy by their winding number, and every winding number occurs.
+\end{corollary}
+\begin{proof}
+  Restriction and pull-back along $X\to\{x_0\}$ commute with $\ind$, and $\ind$ is an
+  isomorphism for $X$ and for $\{x_0\}$, so it maps the kernel of one restriction
+  bijectively onto the kernel of the other. The second statement is the case $X=\mathrm{pt}$,
+  where $\ind(a)=-\wind(a)$.
+\end{proof}
+
+\section{The stabilized Toeplitz group and the classifying sequence}\label{bott:sec:classifying}
+
+We now pass from matrices to operators with values in the smoothing operators on
+$Y$, to obtain groups which contain all the $\GL(N,\C)$ at once.
+
+\subsection{Toeplitz operators with values in smoothing operators}
+Let $Y$, $E$ be as in \cref{bott:sec:background}. On $\Psido{0}(\Sphere)$ we use the Fr\'echet
+topology of \cref{ch:conormal,ch:manifolds}: an element is a conormal distribution at the
+diagonal, i.e.\ the sum of a smooth kernel and, near the diagonal, the inverse Fourier
+transform of a classical symbol, and the seminorms are those of uniform convergence of
+all derivatives of these two pieces. Composition is continuous, and so is the inclusion
+into the bounded operators on $L^2$.
+
+\begin{definition}\label{bott:def:PsiTY}
+  $\PsiT{0,-\infty}(\Sphere,Y;E)$ is the space of smooth sections
+  $A\in\CI(Y^2;\PsiT{0}(\Sphere)\otimes\Hom(E)\otimes\Omega_R)$, i.e.\ smooth maps
+  $(y,y')\mapsto A(y,y')$ with values in Toeplitz operators tensored with
+  $\Hom(E_{y'},E_y)$ and a density in $y'$. It acts on $\CI(\Sphere\times Y;E)$, and on
+  $\Cp(\Sphere\times Y;E)=S\CI(\Sphere\times Y;E)$, by
+  $(Au)(\cdot,y)=\int_YA(y,y')u(\cdot,y')$, and is an algebra with
+  $(AB)(y,y')=\int_YA(y,y'')\circ B(y'',y')$. The symbol
+  \begin{equation*}
+    \sigma_0\colon\PsiT{0,-\infty}(\Sphere,Y;E)\longrightarrow\CI(\Sphere;\Psido{-\infty}(Y;E)),
+    \quad\sigma_0(A)(\theta)(y,y')=\sigma_0(A(y,y'))(\theta),
+  \end{equation*}
+  is multiplicative. The elements with $A(y,y')\in\PsiT{-\infty}(\Sphere)$ form the ideal
+  $\PsiT{-\infty}(\Sphere\times Y;E)=S\Psido{-\infty}(\Sphere\times Y;E)S$, the Toeplitz
+  smoothing operators on $\Sphere\times Y$.
+\end{definition}
+
+If $V\subset\CI(Y;E)$ has orthonormal basis $\phi_1,\dots,\phi_N$, then
+$(A_{lm})\mapsto\sum_{l,m}A_{lm}\,\phi_l(y)\phi_m(y')^*$ embeds $\PsiT{0}(\Sphere;\C^N)$ as a
+subalgebra (without unit); correspondingly an operator $A$ on $\Cp(\Sphere;\C^N)$ is
+identified with $(\Id-\Pi_V)+A$ on $\Cp(\Sphere\times Y;E)$. Different choices of $V$ give
+embeddings which are conjugate by unitaries joined to the identity, and enlarging $V$
+corresponds to stabilization $A\mapsto A\oplus\Id$.
+
+\begin{definition}\label{bott:def:GT}
+  The \emph{stabilized normalized Toeplitz group} is
+  \begin{multline*}
+    \GT(\Sphere,Y;E)=\{\Id+A;\ A\in\PsiT{0,-\infty}(\Sphere,Y;E),\ \sigma_0(A)(1)=0,\\
+    (\Id+A)^{-1}=\Id+B\text{ with }B\in\PsiT{0,-\infty}(\Sphere,Y;E)\},
+  \end{multline*}
+  and $\GinfT(\Sphere\times Y;E)$ is its subgroup of elements with
+  $A\in\PsiT{-\infty}(\Sphere\times Y;E)$. Similarly $\GT(\Sphere;\C^N)$ denotes the group
+  of invertible $A\in\PsiT{0}(\Sphere;\C^N)$ with $\sigma_0(A)(1)=\Id$, and
+  $\GinfT(\Sphere;\C^N)$ the subgroup with $A-\Id\in\PsiT{-\infty}$.
+\end{definition}
+
+Elements of $\GT$ are elliptic: $\Id+\sigma_0(A)(\theta)$ has inverse $\Id+\sigma_0(B)(\theta)$, so
+$\Id+\sigma_0(A)\in\Omega\Ginf(Y;E)$. The normalization $\sigma_0(A)(1)=0$ removes the
+evaluation map $\GT\to\Ginf(Y;E)$ at $1\in\Sphere$, which would otherwise carry odd
+K-theory. A map $f\colon X\to\GT(\Sphere,Y;E)$ is smooth if $f-\Id$ is smooth into the
+Fr\'echet space $\PsiT{0,-\infty}(\Sphere,Y;E)$; by \cref{bott:lem:inverse}, $f^{-1}$ is then
+smooth too, and products of smooth maps are smooth.
+
+\begin{lemma}\label{bott:lem:open}
+  Let $A\in\CI(X;\PsiT{0,-\infty}(\Sphere,Y;E))$ with $\Id+A(x)\in\GT$ for all $x$, $X$
+  compact. If $A'\in\CI(X;\PsiT{0,-\infty})$ satisfies $\sigma_0(A')(1)=0$ and is
+  sufficiently close to $A$ uniformly on $X$ (in a suitable seminorm), then
+  $\Id+A'(x)\in\GT$ for all $x$. The same holds for $\GT(\Sphere;\C^N)$ and for the groups
+  $\GinfT$.
+\end{lemma}
+\begin{proof}
+  The symbols $\Id+\sigma_0(A')(\theta)$ are uniformly close to the compact set of values of
+  $\Id+\sigma_0(A)$ in the open set $\Ginf(Y;E)$, so $\Id+A'$ is elliptic; the operators
+  are close in $L^2$ operator norm to invertible ones, so are invertible on
+  $L^2_+(\Sphere\times Y;E)$. By \cref{bott:lem:inverse} the inverses lie in the algebra.
+\end{proof}
+
+\subsection{Weak contractibility}
+
+\begin{proposition}\label{bott:prop:deform-smoothing}
+  Let $g\colon X\to\GT(\Sphere;\C^N)$ be smooth. Then for some $M\ge N$, $g\oplus\Id_{M-N}$ is
+  smoothly homotopic in $\GT(\Sphere;\C^M)$ to a map into $\GinfT(\Sphere;\C^M)$.
+\end{proposition}
+\begin{proof}
+  The symbol $a=\sigma_0(g)$ is a pointed loop, and $\ind(a)=\ind(g)=0$ since $g$ is
+  invertible (\cref{bott:prop:index-properties}(iv)). By \cref{bott:prop:injective} there is a
+  pointed homotopy $a_t$, $t\in[0,1]$, in some $\GL(M,\C)$ from $a\oplus\Id$ to $\Id$. The
+  family $A_t=g\oplus\Id+T_{a_t-a_0}$ is elliptic with symbol $a_t$, and $A_0=g\oplus\Id$
+  is invertible. By \ref{bott:B:lift} there is a smooth family $B_t$ of Toeplitz smoothing
+  operators with $B_0=0$ such that $A_t+B_t$ is invertible; its inverse is smooth by
+  \cref{bott:lem:inverse}, and its symbol $a_t$ is pointed. So $A_t+B_t$ is a homotopy
+  in $\GT(\Sphere;\C^M)$, and $A_1+B_1$ has symbol $\Id$, i.e.\ lies in $\GinfT$.
+\end{proof}
+
+\begin{theorem}\label{bott:thm:contractible}
+  The group $\GT(\Sphere,Y;E)$ is weakly contractible: every smooth map
+  $f\colon X\to\GT(\Sphere,Y;E)$ from a compact manifold is smoothly homotopic in
+  $\GT(\Sphere,Y;E)$ to the constant map $\Id$.
+\end{theorem}
+\begin{proof}
+  \emph{Step 1: reduction to matrices.} Write $f=\Id+A$. Let $\Pi_j$ be the projections of
+  \ref{bott:B:finite}. The expansion of the smooth map $(x,y,y')\mapsto A(x)(y,y')$ with values
+  in the Fr\'echet space $\PsiT{0}(\Sphere)$ (tensored with $\Hom(E)$) shows, exactly as
+  for smoothing operators, that $\Pi_jA\Pi_j\to A$ uniformly on $X$ in
+  $\PsiT{0,-\infty}$. Since $\sigma_0(\Pi_jA\Pi_j)(1)=\Pi_j\sigma_0(A)(1)\Pi_j=0$,
+  \cref{bott:lem:open} shows that $\Id+(1-t)A+t\Pi_jA\Pi_j$, $t\in[0,1]$, is a homotopy in
+  $\GT$ for $j$ large. Its end point is $(\Id-\Pi_j)+g$, with
+  $g\colon X\to\GT(\Sphere;\C^N)$, $N=\dim V_j$.
+
+  \emph{Step 2: reduction to smoothing operators.} By
+  \cref{bott:prop:deform-smoothing}, after enlarging $V_j$ (which does not change the
+  element of $\GT(\Sphere,Y;E)$), $g$ is homotopic in $\GT(\Sphere;\C^M)$ to a map
+  $g'=\Id+K$, $K\in\CI(X;\PsiT{-\infty}(\Sphere;\C^M))$.
+
+  \emph{Step 3: reduction to the zero Fourier mode.} By \ref{bott:B:shifts},
+  $P_kKP_k\to K$ uniformly, so by \cref{bott:lem:open} $\Id+(1-t)K+tP_kKP_k$ is a homotopy in
+  $\GinfT(\Sphere;\C^M)$ for $k$ large. Its end point acts on $\Ran P_k$, spanned by
+  $e^{ij\theta}e_l$, $0\le j\le k$, $1\le l\le M$, and is the identity on $\Ran(\Id-P_k)$.
+  Stabilize once more, to $\C^{(k+1)M}$ with orthonormal basis $e_{l,j}$,
+  $1\le l\le M$, $0\le j\le k$, where $e_{l,0}=e_l$. For $1\le j\le k$ the pairs
+  $(e^{ij\theta}e_{l,0},e_{l,j})$, the second being a constant function, are orthonormal
+  and span mutually orthogonal planes. Let $\mathcal R_\tau$ be the unitary rotating each
+  of these planes by the angle $\tau$ and fixing their orthocomplement. Then
+  $\mathcal R_\tau-\Id$ has finite rank and smooth kernel, so
+  $\mathcal R_\tau\in\GinfT(\Sphere;\C^{(k+1)M})$, and conjugation by $\mathcal R_\tau$,
+  $\tau\in[0,\pi/2]$, is a homotopy in $\GinfT$ ending at an operator of the form
+  \begin{equation*}
+    g''=\Id-P_0+P_0hP_0,\qquad h\colon X\to\GL((k+1)M,\C),
+  \end{equation*}
+  since $\mathcal R_{\pi/2}$ maps $\Ran P_k\otimes e_{\cdot,0}$ onto the constants $\Ran P_0$.
+
+  \emph{Step 4: rotating away the matrix.} For $h\in\GL(N',\C)$ consider on
+  $\Cp(\Sphere;\C^{N'})^{2}$ the two curves of Toeplitz operators, $c=\cos\tau$, $s=\sin\tau$,
+  \begin{equation*}
+    M_\tau=\begin{pmatrix}c(\Id-P_0)+P_0hP_0&s\,hU\\-s\,h^{-1}L&c\end{pmatrix},\quad
+    M'_\tau=\begin{pmatrix}c\,h(\Id-P_0)+P_0hP_0&s\,hU\\-s\,h^{-1}L&c\,h^{-1}\end{pmatrix},
+  \end{equation*}
+  $\tau\in[0,\pi/2]$; they agree at $\tau=\pi/2$, $M_0=\diag(g'',\Id)$ and $M'_0=\diag(h,h^{-1})$.
+  Both are invertible: on $(u_ke^{ik\theta},v_ke^{i(k-1)\theta})$, $k\ge1$, they act by the
+  matrices $\begin{pmatrix}c&sh\\-sh^{-1}&c\end{pmatrix}=\diag(h,1)R'_\tau\diag(h^{-1},1)$ and
+  $\diag(h,h^{-1})R'_\tau$, $R'_\tau=\begin{pmatrix}c&s\\-s&c\end{pmatrix}$, and they map
+  $(u_0,0)$ to $(hu_0,0)$. Let $C_\tau=\sigma_0(M_\tau)(1)$, a constant invertible matrix (it
+  commutes with $S$). Then $C_\tau^{-1}M_\tau$ followed by $C'^{-1}_\tau M'_\tau$ (run from
+  $\tau=\pi/2$ to $0$, $C'_\tau=\sigma_0(M'_\tau)(1)$) is a homotopy in $\GT(\Sphere;\C^{2N'})$,
+  smooth in $h=h(x)$, from $\diag(g'',\Id)$ to $\diag(h,h^{-1})^{-1}\diag(h,h^{-1})=\Id$.
+  (This is the deformation of \cref{ch:index}, normalized at $1\in\Sphere$.)
+
+  Composing the homotopies of Steps 1--4, all of which take place in $\GT(\Sphere,Y;E)$ via
+  the embeddings above, gives a homotopy from $f$ to $\Id$.
+\end{proof}
+
+\begin{remark}
+  Continuous maps from compact manifolds into $\GT$ can be approximated by smooth ones,
+  and nearby maps are homotopic (linear homotopy and \cref{bott:lem:open}), so all homotopy
+  groups of $\GT(\Sphere,Y;E)$ vanish. Whether $\GT$ is actually contractible is discussed in
+  the Notes.
+\end{remark}
+
+\subsection{The classifying sequence}
+
+To describe the quotient $\GT/\GinfT$ we use full symbols. On the circle, with the
+normal fibration of the diagonal given by $\theta-\theta'$, an operator
+$A\in\Psido{0}(\Sphere)$ has, modulo $\Psido{-\infty}$, a kernel given near the diagonal by
+the inverse Fourier transform of a classical symbol $a(\theta,\xi)$; its Taylor series at
+$\xi=+\infty$ in $\rho=1/\xi$ is the \emph{full symbol} at $\Sphere_+$,
+$\Phi(A)=\sum_{j\ge0}\rho^ja_j(\theta)$, with $a_0=\sigma_0(A)|_{\Sphere_+}$. For Toeplitz
+operators the full symbol at $\Sphere_-$ vanishes, so by Borel's lemma (asymptotic
+completeness, \cref{ch:conormal}) there is a short exact sequence
+\begin{equation*}
+  \PsiT{-\infty}(\Sphere)\longrightarrow\PsiT{0}(\Sphere)\xrightarrow{\ \Phi\ }\CI(\Sphere)[[\rho]],
+\end{equation*}
+and by the composition formula $\Phi(AB)=\Phi(A)*\Phi(B)$ for a bilinear product $*$ on
+formal series whose leading term is the pointwise product. Applying $\Phi$ to the kernels
+$A(y,y')$ gives, for $\PsiT{0,-\infty}(\Sphere,Y;E)$, the exact sequence
+\begin{equation}\label{bott:eq:full-symbol}
+  \PsiT{-\infty}(\Sphere\times Y;E)\longrightarrow\PsiT{0,-\infty}(\Sphere,Y;E)
+  \xrightarrow{\ \Phi\ }\CI(\Sphere;\Psido{-\infty}(Y;E))[[\rho]].
+\end{equation}
+
+\begin{lemma}\label{bott:lem:index-Y}
+  If $A\in\PsiT{0,-\infty}(\Sphere,Y;E)$ and $\Id+\sigma_0(A)$ is a loop in $\Ginf(Y;E)$, then
+  $\Id+A$ is Fredholm on $L^2_+(\Sphere\times Y;E)$ and $\ind(\Id+A)=-\wind(\Id+\sigma_0(A))$.
+  If this index vanishes there is $K\in\PsiT{-\infty}(\Sphere\times Y;E)$ of finite rank with
+  $\Id+A+K$ invertible; if moreover $\sigma_0(A)(1)=0$ then $\Id+A+K\in\GT(\Sphere,Y;E)$.
+\end{lemma}
+\begin{proof}
+  A parametrix (\cref{bott:lem:inverse}) inverts $\Id+A$ modulo compact operators, so it is
+  Fredholm, with null space and orthocomplement of the range (the null space of the
+  adjoint, which is of the same type) consisting of smooth sections. For the index, the
+  family $\Id+(1-t)A+t\Pi_jA\Pi_j$ consists of elliptic, hence Fredholm, operators for $j$
+  large and is continuous in norm, so the index is constant; the winding number of the
+  symbol is constant as well. At $t=1$ the operator is $\Id-\Pi_j$ plus an elliptic Toeplitz
+  operator on $\C^{\dim V_j}$, and \cref{bott:cor:index-circle} applies. If the index
+  vanishes, let $K$ map an orthonormal basis of the null space to one of the orthocomplement
+  of the range and vanish on the orthocomplement of the null space; it has finite rank and
+  smooth kernel, $\Id+A+K$ is bijective on $L^2_+$, and \cref{bott:lem:inverse} applies.
+\end{proof}
+
+\begin{theorem}[Classifying sequence]\label{bott:thm:classifying}
+  For $Y$, $E$ as above there is a short exact sequence of groups
+  \begin{equation}\label{bott:eq:classifying}
+    \GinfT(\Sphere\times Y;E)\longrightarrow\GT(\Sphere,Y;E)\xrightarrow{\ \Phi\ }\mathcal Q,
+  \end{equation}
+  where $\mathcal Q$ is the set of formal series $\sum_{j\ge0}\rho^jb_j$ with
+  $b_j\in\CI(\Sphere;\Psido{-\infty}(Y;E))$ and $\Id+b_0\in\Omega_0\Ginf(Y;E)$ (pointed loops of
+  winding number zero), with the group structure induced by $*$. Moreover, for every compact
+  manifold $X$:
+  \begin{enumerate}[label=(\roman*)]
+  \item $[X;\GinfT(\Sphere\times Y;E)]\cong K^{-1}(X)$;
+  \item $\GT(\Sphere,Y;E)$ is weakly contractible;
+  \item if $X$ is connected, $[X;\mathcal Q]\cong[X;\Omega_0\Ginf(Y;E)]\cong\tilde K^0(X)$,
+    where $\mathcal Q$ has the product topology of the coefficients.
+  \end{enumerate}
+  Thus $\GinfT$ classifies odd K-theory, $\GT$ is weakly contractible, and $\mathcal Q$
+  classifies reduced even K-theory.
+\end{theorem}
+\begin{proof}
+  By \eqref{bott:eq:full-symbol} the kernel of $\Phi$ on $\GT$ is $\GinfT(\Sphere\times Y;E)$
+  (an element of $\GT$ with $A$ smoothing has inverse $\Id+B$ with
+  $B=-A-AB\in\PsiT{-\infty}$). If $\Id+A\in\GT$, then $\Id+\sigma_0(A)$ is a pointed loop in
+  $\Ginf(Y;E)$, and its winding number is $-\ind(\Id+A)=0$ by \cref{bott:lem:index-Y}; so
+  $\Phi(\GT)\subset\mathcal Q$. Conversely, given $\sum\rho^jb_j\in\mathcal Q$, Borel's lemma
+  gives $A$ with $\Phi(A)=\sum\rho^jb_j$, and by \cref{bott:lem:index-Y} there is
+  $K\in\PsiT{-\infty}(\Sphere\times Y;E)$ with $\Id+A+K\in\GT$; since $\Phi(K)=0$, $\Phi$ is
+  surjective. This proves exactness, and $\Phi$ is a homomorphism for the product $*$.
+
+  (i) $\GinfT(\Sphere\times Y;E)$ is the group of invertible perturbations of the identity
+  by smoothing operators on the Hilbert space $L^2_+(\Sphere\times Y;E)$. The orthonormal
+  system $e^{il\theta}\phi_m$, $l\ge0$, with $\phi_m$ the eigensections of
+  \ref{bott:B:finite}, gives finite rank approximations exactly as in \ref{bott:B:finite}, so
+  the proof of \cref{bott:lem:stable} identifies $[X;\GinfT]$ with the stable homotopy
+  classes of maps $X\to\GL(N,\C)$, which is $K^{-1}(X)$.
+
+  (ii) is \cref{bott:thm:contractible}.
+
+  (iii) As a space, $\mathcal Q=\Omega_0\Ginf(Y;E)\times\prod_{j\ge1}\CI(\Sphere;\Psido{-\infty}(Y;E))$,
+  and the second factor is a vector space; scaling it by $t\in[0,1]$ shows that projection
+  onto $b_0$ induces a bijection $[X;\mathcal Q]\to[X;\Omega_0\Ginf]$. A smooth map
+  $X\to\Omega\Ginf$ is the same as a pointed map $X\times\Sphere\to\Ginf$; for connected $X$
+  its winding number is constant, and it is zero exactly when the rank of the index class
+  is zero. By \cref{bott:thm:index-iso} the maps into $\Omega_0\Ginf$ thus correspond to
+  $\{\xi\in K^0(X);\ \rank\xi=0\}=\tilde K^0(X)$.
+\end{proof}
+
+\begin{remark}
+  If \eqref{bott:eq:classifying} were known to be a fibration, the long exact sequence of
+  homotopy groups and (ii) would give $\pi_k(\mathcal Q)\cong\pi_{k-1}(\GinfT)$. This is
+  consistent with the results above: by (iii) and \cref{bott:cor:homotopy-groups} below,
+  $\pi_k(\mathcal Q)=\pi_k(\Omega_0\Ginf)=\pi_{k+1}(\Ginf)$, which by Bott periodicity equals
+  $\pi_{k-1}(\Ginf)=\pi_{k-1}(\GinfT)$.
+\end{remark}
+
+\section{Compactly supported K-theory and Bott periodicity}\label{bott:sec:Kc}
+
+\subsection{Definitions}
+Let $M$ be a manifold, not necessarily compact. We write $K\Subset M$ for a compact subset.
+
+\begin{definition}\label{bott:def:Kc}
+  \begin{enumerate}[label=(\roman*)]
+  \item $\Kc^{-1}(M)$ is the set of smooth maps $f\colon M\to\Ginf(Y;E)$ with $f=\Id$ on
+    $M\setminus K$ for some $K\Subset M$, modulo homotopies $f_t$ with $f_t=\Id$ on
+    $M\setminus K$ for one $K\Subset M$ and all $t$.
+  \item $\Kc^{-2}(M)$ is defined in the same way, using maps $f\colon M\times\Sphere\to\Ginf(Y;E)$
+    with $f=\Id$ on $(M\setminus K)\times\Sphere\cup M\times\{1\}$.
+  \item $\Kc^0(M)$ is the set of equivalence classes of triples $(E_+,E_-,a)$, where $E_\pm$
+    are vector bundles over $M$ and $a\colon E_+\to E_-$ is a smooth bundle isomorphism over
+    $M\setminus K$ for some $K\Subset M$. The equivalence relation is generated by:
+    \begin{enumerate}[label=(\alph*)]
+    \item $(E_+,E_-,a)\sim(E'_+,E'_-,\phi_-a\phi_+^{-1})$ for bundle isomorphisms
+      $\phi_\pm\colon E_\pm\to E'_\pm$ over $M$;
+    \item $(E_+,E_-,a)\sim(E_+,E_-,a')$ if $a=a'$ outside a compact set;
+    \item $(E_+,E_-,a_0)\sim(E_+,E_-,a_1)$ if $a_t$, $t\in[0,1]$, is a smooth family of
+      isomorphisms over $M\setminus K$ for one $K\Subset M$;
+    \item $(E_+,E_-,a)\sim(E_+\oplus H,E_-\oplus H,a\oplus\Id_H)$ for any bundle $H$.
+    \end{enumerate}
+    The sum is $[(E_+,E_-,a)]+[(F_+,F_-,b)]=[(E_+\oplus F_+,E_-\oplus F_-,a\oplus b)]$.
+  \end{enumerate}
+\end{definition}
+
+The groups $\Kc^{-1}$, $\Kc^{-2}$ are abelian groups by pointwise multiplication (as in
+\cref{bott:lem:stable}). $\Kc^0(M)$ is an abelian monoid with zero $[(0,0,\cdot)]$; a
+triple $(F,F,c)$ with $c$ an isomorphism over all of $M$ represents $0$ (use (a) with
+$\phi_-=c^{-1}$ and then (d)). It is a group: $(E_+\oplus E_-,E_-\oplus E_+,a\oplus a^{-1})$ is
+equivalent by (a), composing with the exchange of the summands of $E_-\oplus E_+$, to
+$(F,F,b)$ with $F=E_+\oplus E_-$ and $b=\begin{pmatrix}0&a^{-1}\\a&0\end{pmatrix}$, and
+$b_\tau=\begin{pmatrix}\cos\tau&\sin\tau\,a^{-1}\\\sin\tau\,a&-\cos\tau\end{pmatrix}$ satisfies
+$b_\tau^2=\Id$ and joins $b$ to the globally defined isomorphism $\diag(\Id,-\Id)$.
+
+For compact $M$ the conditions at infinity are void, and $\Kc^{-1}(M)=K^{-1}(M)$,
+$\Kc^{-2}(M)=K^{-2}(M)$; also $\Kc^0(M)=K^0(M)$, since $(E_+,E_-,a)$ may be taken with $a$
+defined on the empty set and then (a), (d) are exactly the relation of \cref{bott:def:K0}.
+
+\subsection{Flattening and suspension}
+\begin{lemma}[Flattening]\label{bott:lem:flatten}
+  Let $W_1\subset M_1$ and $W_2\subset M_2$ be points (or empty) in compact manifolds and
+  $W=W_1\times M_2\cup M_1\times W_2$. Every smooth $f\colon M_1\times M_2\to\Ginf$ with $f=\Id$
+  on $W$ is homotopic, through such maps, to one which is $\Id$ in a neighbourhood of $W$;
+  and two maps which are $\Id$ near $W$ and homotopic through maps equal to $\Id$ on $W$ are
+  homotopic through maps equal to $\Id$ near $W$.
+\end{lemma}
+\begin{proof}
+  In a coordinate ball centred at $W_1=\{w\}$, let $\psi_t(y)=((1-t)+t\chi(|y|))y$, where
+  $\chi\in\CI([0,\infty))$ vanishes on $[0,\delta]$ and equals $1$ on $[2\delta,\infty)$, and
+  extend $\psi_t$ by the identity. Then $\psi_t$ fixes $w$, $\psi_0=\Id$ and $\psi_1$ maps a
+  neighbourhood of $w$ to $w$. With the analogous map on $M_2$, $\Psi_t=\psi_t\times\psi_t$ maps
+  $W$ into $W$ for all $t$, and $f\circ\Psi_t$ is the required homotopy. For the second
+  statement apply $\Psi_1$ to the homotopy; $h\circ\Psi_t$ joins a map $h$ which is $\Id$
+  near $W$ to $h\circ\Psi_1$ through maps equal to $\Id$ near $W$, provided $\delta$ is
+  small (by compactness $\Psi_t$ maps a small neighbourhood of $W$ into the set where $h=\Id$).
+\end{proof}
+
+Applied with $M_1=\mathrm{pt}$ or with the stereographic identification
+$\Sphere^k\setminus\{e\}\cong\R^k$ this shows that the homotopy groups
+$\pi_k(\Ginf)=[\Sphere^k,e;\Ginf,\Id]$ (pointed smooth homotopy classes) satisfy
+$\pi_k(\Ginf)\cong\Kc^{-1}(\R^k)$. Similarly, identifying $\Sphere\setminus\{1\}$ with $\R$:
+
+\begin{lemma}\label{bott:lem:suspension}
+  For every manifold $M$, $\Kc^{-2}(M)\cong\Kc^{-1}(\R\times M)$.
+\end{lemma}
+\begin{proof}
+  By (the proof of) \cref{bott:lem:flatten} in the circle factor, representatives and
+  homotopies in $\Kc^{-2}(M)$ may be taken equal to $\Id$ near $M\times\{1\}$; restricted to
+  $M\times(\Sphere\setminus\{1\})\cong M\times\R$ they are exactly the representatives and
+  homotopies of $\Kc^{-1}(\R\times M)$, and conversely such maps extend by $\Id$.
+\end{proof}
+
+\subsection{Clutching}
+For $n\ge1$ let $\Sphere^{n-1}\subset\R^n$ be the unit sphere with base point $e$, and write
+$K^{-1}(\Sphere^{n-1}\times X,X)$ for the set of homotopy classes of maps
+$g\colon\Sphere^{n-1}\times X\to\Ginf(Y;E)$ with $g(e,x)=\Id$, through such maps. Thus
+$K^{-1}(\Sphere^0\times X,X)=K^{-1}(X)$ and $K^{-1}(\Sphere\times X,X)=K^{-2}(X)$.
+
+\begin{lemma}[Clutching]\label{bott:lem:clutching}
+  For compact $X$ and $n\ge1$ there is a natural isomorphism
+  \begin{equation*}
+    \Kc^0(\R^n\times X)\cong K^{-1}(\Sphere^{n-1}\times X,X),
+  \end{equation*}
+  whose inverse sends the class of a pointed $g$ with values in $\GL(N,\C)$ to the class of
+  $(\C^N,\C^N,\tilde g)$, $\tilde g(r\omega,x)=g(\omega,x)$ for $r\ge1$, $\omega\in\Sphere^{n-1}$.
+\end{lemma}
+\begin{proof}
+  Let $\varpi\colon\R^n\times X\to X$. By \cref{bott:lem:bundle-homotopy}(ii) every bundle on
+  $\R^n\times X$ is isomorphic to a pull-back, so by (a) every class is represented by
+  $(\varpi^*F_+,\varpi^*F_-,a)$ with $a$ an isomorphism on $\{|v|\ge R\}$. Choose a bundle $G$
+  and an isomorphism $\tau\colon F_-\oplus G\to\C^N$, and set
+  \begin{equation*}
+    g(\omega,x)=\tau\,(a_R\oplus\Id_G)(\omega,x)\,(a_R\oplus\Id_G)(e,x)^{-1}\tau^{-1},\qquad
+    a_R(\omega,x)=a(R\omega,x),
+  \end{equation*}
+  where $a_R(\omega,x)\colon F_{+,x}\to F_{-,x}$. This is a pointed map into $\GL(N,\C)$; let
+  $\Phi[(E_+,E_-,a)]$ be its class.
+
+  \emph{Well-definedness.} Changing $R$, or $a$ by a homotopy (c), changes $g$ by a pointed
+  homotopy, and (b) is covered by changing $R$. Under (d), or a change of $(G,\tau)$, $g$ is
+  changed by stabilization and conjugation by a map $X\to\GL$ independent of $\omega$, which
+  does not change the class by \cref{bott:lem:conjugation}. Under (a) with isomorphisms
+  $\phi_\pm$ of the pull-back bundles, $\phi_\pm(s R\omega,x)$, $s\in[0,1]$, joins
+  $\phi_\pm|_{\{|v|=R\}}$ to $\phi_\pm(0,x)$, which is independent of $\omega$; along this
+  homotopy $g$ is changed by a pointed homotopy, and at $s=0$ it is replaced by its conjugate
+  by $\tau(\phi_-(0,\cdot)\oplus\Id)\tau^{-1}$ and again the class does not change. $\Phi$ is
+  additive, since direct sums of triples give block sums of the $g$'s.
+
+  \emph{Surjectivity.} For pointed $g$ with values in $\GL(N,\C)$ (\cref{bott:lem:stable})
+  the triple $(\C^N,\C^N,\tilde g)$ of the statement is mapped to $[g]$ (with $G=0$, $\tau=\Id$,
+  $R=1$).
+
+  \emph{Injectivity.} Using (d) with $\varpi^*G$ and then (a) with $\tau$ we may assume
+  $F_-=\C^N$; since $a_R(e,x)\colon F_+\to\C^N$ is an isomorphism, (a) allows us to assume
+  $F_+=\C^N$ and $a_R(e,x)=\Id$. The homotopy
+  $a_s(r\omega,x)=a\big(((1-s)r+sR)\omega,x\big)$, $r\ge R$, shows that the triple is equivalent
+  to $(\C^N,\C^N,\tilde g)$ with $\tilde g(r\omega,x)=g(\omega,x)$ for $r\ge R$. If $[g]=0$, then
+  by \cref{bott:lem:stable} $g\oplus\Id$ is joined to $\Id$ by a pointed homotopy $g_t$ in some
+  $\GL(N',\C)$, and (d), (c) give
+  $(\C^N,\C^N,\tilde g)\sim(\C^{N'},\C^{N'},\tilde g_1)=(\C^{N'},\C^{N'},\Id)$, which represents
+  $0$.
+\end{proof}
+
+\subsection{Bott periodicity}
+\begin{theorem}[Bott periodicity]\label{bott:thm:bott}
+  For every compact manifold $X$ there is a natural isomorphism
+  \begin{equation*}
+    K^0(X)\longrightarrow\Kc^0(\R^2\times X).
+  \end{equation*}
+  Identifying $\R^2=\C$ with variable $w$, it maps $[E]$ to the class of
+  $(\varpi^*E,\varpi^*E,\bar w/|w|)$; that is, it is multiplication by the Bott class
+  $b=[(\C,\C,\bar w/|w|)]\in\Kc^0(\R^2)$.
+\end{theorem}
+\begin{proof}
+  The composite of the inverse of the index isomorphism (\cref{bott:thm:index-iso}) and of
+  the inverse of the clutching isomorphism (\cref{bott:lem:clutching}, $n=2$),
+  $K^0(X)\to K^{-2}(X)=K^{-1}(\Sphere\times X,X)\to\Kc^0(\R^2\times X)$, is an isomorphism. By
+  \eqref{bott:eq:bott-map}, if $E=\Ran p$, $p\colon X\to M(N,\C)$, then $\beta[E]$ is
+  represented by $pz^{-1}+(\Id-p)$, and the clutching construction gives
+  $(\C^N,\C^N,p\,\bar w/|w|+\Id-p)$ for $|w|\ge1$, since $z^{-1}=\bar w/|w|$ on the circle
+  $\omega=w/|w|$. Writing $\C^N=E\oplus\Ran(\Id-p)$ and using (d) this is equivalent to
+  $(\varpi^*E,\varpi^*E,\bar w/|w|)$.
+\end{proof}
+
+\begin{remark}
+  The source deduces periodicity from the chain
+  $\Kc^0(\R^2\times X)\cong\Kc^{-1}(\R\times X)\cong\Kc^{-2}(X)\cong\Kc^0(X)$, which uses the
+  clutching isomorphism for the non-compact manifold $\R\times X$ and the index isomorphism
+  for non-compact $X$ (\cref{bott:ex:noncompact}). For compact $X$ the clutching lemma with
+  $n=1$ gives $\Kc^0(\R\times X)\cong K^{-1}(X)$, and \cref{bott:lem:suspension} gives
+  $K^{-2}(X)\cong\Kc^{-1}(\R\times X)$, so the chain is
+  $\Kc^0(\R^2\times X)\cong K^{-2}(X)\cong\Kc^{-1}(\R\times X)$ and
+  $\Kc^0(\R\times X)\cong K^{-1}(X)$.
+\end{remark}
+
+\subsection{The homotopy groups of \texorpdfstring{$\Ginf$}{G}}
+Spheres need one more form of the clutching construction.
+
+\begin{lemma}\label{bott:lem:sphere-clutching}
+  For $m\ge1$, $\tilde K^0(\Sphere^m)\cong\pi_{m-1}(\Ginf(Y;E))$.
+\end{lemma}
+\begin{proof}
+  Let $U_\pm=\{\pm x_{m+1}>-\epsilon\}\subset\Sphere^m\subset\R^{m+1}$, so that $U_\pm$ are
+  diffeomorphic to $\R^m$ and $U_+\cap U_-$ retracts, by a map $r$, onto the equator
+  $\Sphere^{m-1}$, which carries the base point $e$. For pointed $g\colon\Sphere^{m-1}\to\GL(N,\C)$
+  let $E_g$ be the bundle obtained from $U_+\times\C^N$ and $U_-\times\C^N$ by identifying
+  $(y,v)_-$ with $(y,g(r(y))v)_+$ over $U_+\cap U_-$, and set $\Psi(g)=[E_g]-[\C^N]$, an
+  element of $\tilde K^0(\Sphere^m)$. A pointed homotopy $g_t$ defines a bundle over
+  $[0,1]\times\Sphere^m$, so $E_{g_0}\cong E_{g_1}$ by \cref{bott:lem:bundle-homotopy};
+  $E_{g\oplus\Id}=E_g\oplus\C$ and $E_{\diag(g,h)}=E_g\oplus E_h$. By \cref{bott:lem:stable}
+  and \cref{bott:lem:rotation}, $\Psi$ induces a homomorphism
+  $\pi_{m-1}(\Ginf)\to\tilde K^0(\Sphere^m)$.
+
+  It is surjective: an element of $\tilde K^0(\Sphere^m)$ has the form $[E]-[\C^N]$ with
+  $\rank E=N$ ($\Sphere^m$ is connected). $E$ is trivial over $U_\pm$
+  (\cref{bott:lem:bundle-homotopy}(ii)); for trivializations $\tau_\pm$ the transition map
+  $\tilde g=\tau_+\tau_-^{-1}$ on $U_+\cap U_-$ is homotopic to $\tilde g\circ r$ (deform along
+  the retraction), so $E\cong E_g$ with $g=\tilde g|_{\Sphere^{m-1}}$; replacing $\tau_-$ by
+  $g(e)\tau_-$ makes $g$ pointed.
+
+  It is injective: if $[E_g]=[\C^N]$, then $E_g\oplus\C^L\cong\C^{N+L}$, i.e.\ $E_{g'}$,
+  $g'=g\oplus\Id_L$, has a global trivialization. Its restrictions to $U_\pm$ are maps
+  $\tau_\pm\colon U_\pm\to\GL(N+L,\C)$ with $g'=\tau_-^{-1}\tau_+$ on the equator. As $U_\pm$ are
+  star-shaped in suitable coordinates, $\tau_\pm$ are homotopic to constants, so $g'$ is
+  homotopic to a constant, and then (as $\GL$ is connected) to $\Id$; normalizing by the value
+  at $e$ (\cref{bott:lem:normalize}) makes the homotopy pointed. So $[g]=0$.
+\end{proof}
+
+\begin{lemma}\label{bott:lem:smash}
+  For $m\ge0$, with base point $e\in\Sphere^m$, $\tilde K^{-2}(\Sphere^m)\cong\pi_{m+1}(\Ginf(Y;E))$.
+\end{lemma}
+\begin{proof}
+  An element of $\tilde K^{-2}(\Sphere^m)$ is represented by $f\colon\Sphere^m\times\Sphere\to\Ginf$
+  with $f=\Id$ on $\Sphere^m\times\{1\}$ and such that the loop $f(e,\cdot)$ is null-homotopic
+  through pointed loops $h_s$, $h_0=f(e,\cdot)$, $h_1=\Id$. Choose $\chi\in\CI(\Sphere^m)$ with
+  values in $[0,1]$ and $\chi(e)=1$. Then
+  $F_s(x,\theta)=f(x,\theta)f(e,\theta)^{-1}h_{s\chi(x)}(\theta)$ is a homotopy in $K^{-2}$
+  from $f$ to a map equal to $\Id$ on $W=\Sphere^m\times\{1\}\cup\{e\}\times\Sphere$. Similarly a
+  homotopy $H_t$ between two maps equal to $\Id$ on $W$ is replaced by
+  $H_t(x,\theta)H_t(e,\theta)^{-1}$, which is $\Id$ on $W$ and has the same ends. Hence
+  $\tilde K^{-2}(\Sphere^m)$ is the set of homotopy classes, relative to $W$, of maps equal to
+  $\Id$ on $W$. By \cref{bott:lem:flatten} these are the classes of maps which are $\Id$ near
+  $W$, and since $(\Sphere^m\setminus\{e\})\times(\Sphere\setminus\{1\})\cong\R^{m+1}$ this is
+  $\Kc^{-1}(\R^{m+1})\cong\pi_{m+1}(\Ginf)$. (For $m=0$, $\Sphere^0=\{e,-e\}$ and the statement
+  is $K^{-2}(\{-e\})=\pi_1(\Ginf)$.)
+\end{proof}
+
+\begin{corollary}\label{bott:cor:homotopy-groups}
+  For every compact $Y$ of positive dimension and every bundle $E$,
+  \begin{equation*}
+    \pi_k(\Ginf(Y;E))\cong\begin{cases}\Z&k\text{ odd},\\0&k\text{ even}.\end{cases}
+  \end{equation*}
+  The isomorphism $\pi_1(\Ginf)\cong\Z$ is given by the winding number. Consequently also
+  $K^{-1}(\Sphere^k)=[\Sphere^k;\Ginf]=\pi_k(\Ginf)$, and $\tilde K^0(\Sphere^k)$ is $\Z$ for
+  $k$ even and $0$ for $k$ odd, $k\ge1$.
+\end{corollary}
+\begin{proof}
+  $\pi_0(\Ginf)=0$ since $\Ginf$ is connected. For $m\ge0$,
+  $\pi_{m+1}(\Ginf)\cong\tilde K^{-2}(\Sphere^m)\cong\tilde K^0(\Sphere^m)$ by
+  \cref{bott:lem:smash,bott:cor:reduced}. For $m=0$, $\tilde K^0(\Sphere^0)=K^0(\mathrm{pt})=\Z$,
+  so $\pi_1(\Ginf)=\Z$, the isomorphism being minus the index, i.e.\ the winding number. For
+  $m\ge1$, $\tilde K^0(\Sphere^m)\cong\pi_{m-1}(\Ginf)$ by \cref{bott:lem:sphere-clutching}, so
+  $\pi_{m+1}(\Ginf)\cong\pi_{m-1}(\Ginf)$ and the result follows by induction. Free and pointed
+  homotopy classes of maps $\Sphere^k\to\Ginf$ agree, since $f\mapsto f(e)^{-1}f$ is a
+  homotopy inverse to the inclusion of pointed maps ($\Ginf$ is a connected group).
+\end{proof}
+
+This justifies calling $\Ginf$ a classifying space for odd K-theory: its homotopy groups are
+those of the stable unitary group (Bott's original theorem).
+
+\section{The analytic index map}\label{bott:sec:analytic-index}
+
+Let $Z$ be a compact manifold and $\varpi\colon T^*Z\to Z$. An elliptic operator
+$P\in\Psido{0}(Z;E_+,E_-)$ is Fredholm, and its index
+\begin{equation*}
+  \ind P=\dim\Nul P-\dim\big(\CI(Z;E_-)/P\CI(Z;E_+)\big)
+\end{equation*}
+is a homotopy invariant (\cref{ch:index}), hence depends only on $E_\pm$ and the homotopy class
+of $\sigma_0(P)\in\CI(S^*Z;\Iso(E_+,E_-))$. The principal symbol, extended homogeneously of degree
+$0$ to $T^*Z\setminus0$, defines a triple $(\varpi^*E_+,\varpi^*E_-,\sigma_0(P))$ and so a class in
+$\Kc^0(T^*Z)$.
+
+\begin{proposition}\label{bott:prop:analytic-index}
+  There is a unique homomorphism $\ind_a\colon\Kc^0(T^*Z)\to\Z$, the \emph{analytic index},
+  with $\ind P=\ind_a[(\varpi^*E_+,\varpi^*E_-,\sigma_0(P))]$ for every elliptic
+  $P\in\Psido{0}(Z;E_+,E_-)$.
+\end{proposition}
+\begin{proof}
+  Every class is of this form. By \cref{bott:lem:bundle-homotopy}(ii) and (a) a class is
+  represented by $(\varpi^*E_+,\varpi^*E_-,a)$ with $E_\pm$ bundles over $Z$ and $a$ an isomorphism
+  for $|\zeta|\ge R$ (with respect to some metric). The homotopy (c)
+  $a_s(\zeta)=a\big(((1-s)|\zeta|+sR)\zeta/|\zeta|\big)$, $|\zeta|\ge R$, ends at a map homogeneous
+  of degree $0$, i.e.\ at the symbol $\sigma$ of some elliptic $P\in\Psido{0}(Z;E_+,E_-)$. Define
+  $\ind_a$ of the class to be $\ind P$.
+
+  This does not depend on the choices: by homotopy invariance $\ind P$ depends only on the
+  homotopy class of $\sigma$, which takes care of $R$, of (b) and of (c). Under (d), $P$ is
+  replaced by $P\oplus\Id_H$, with the same index. Under (a), bundle isomorphisms $\phi_\pm$ of
+  $\varpi^*E_\pm$ are homotopic, through $\phi_\pm(t\zeta)$, to the pull-backs of their
+  restrictions $\phi^0_\pm$ to the zero section; so $\sigma$ is replaced by a symbol homotopic to
+  $\phi^0_-\sigma(\phi^0_+)^{-1}$, which is the symbol of $\phi^0_-P(\phi^0_+)^{-1}$, an operator with
+  the same index since $\phi_\pm^0$ are invertible. Additivity follows from
+  $\ind(P\oplus P')=\ind P+\ind P'$, and uniqueness from the fact that every class arises from an
+  elliptic operator.
+\end{proof}
+
+The problem posed by Gelfand around 1960 was to compute this map topologically. The answer of
+Atiyah and Singer is to define a second, \emph{topological}, index map by embedding $Z$ into a
+Euclidean space (or a sphere), constructing on the larger space an operator with the same index
+and with symbol derived from that of $P$, and using the fact, essentially Bott periodicity, that
+for suitable operators on Euclidean space the index map is an isomorphism; the two maps are then
+shown to coincide. This is taken up in \cref{ch:families}.
+
+\section{Exercises}
+
+\begin{exercise}\label{bott:ex:noncompact}
+  Show that the index isomorphism of \cref{bott:thm:index-iso} carries over to non-compact
+  manifolds: for every manifold $M$ there is an isomorphism $\Kc^{-2}(M)\cong\Kc^0(M)$.
+  (Hint: represent elements of $\Kc^{-2}(M)$ by loops equal to $\Id$ outside $K\times\Sphere$, choose
+  a compact manifold with boundary $M'\Subset M$ containing a neighbourhood of $K$, and apply the
+  families index over $M'$, observing that the index class comes with a canonical trivialization
+  over $M\setminus K$.)
+\end{exercise}
+
+\begin{exercise}
+  Show directly from the definition that the Toeplitz operator $T_{z^k}$ has index $-k$, and that
+  for a smooth family of projections $p$ on $\C^N$ over $X$ the family $pL+(\Id-p)$ has null bundle
+  $\Ran p$ (constant sections) and surjective... more precisely has range of finite codimension $0$,
+  so that $\ind(pL+\Id-p)=[\Ran p]$ in $K^0(X)$.
+\end{exercise}
+
+\begin{exercise}
+  Show that for pointed loops $a,b$ over $X$ the families index satisfies
+  $\ind(T_aT_b)=\ind(T_{ab})=\ind(a)+\ind(b)$. (Use \cref{bott:lem:rotation} and the fact that
+  $T_aT_b-T_{ab}$ has vanishing symbol.)
+\end{exercise}
+
+\begin{exercise}
+  Let $a(\theta)=\diag(e^{2i\theta},e^{-i\theta})$. Carry out the steps of the proof of
+  \cref{bott:thm:linearization} for $a$ and find the resulting normal form; check that its index
+  is $-1$ in accordance with \cref{bott:cor:index-circle}.
+\end{exercise}
+
+\begin{exercise}
+  Show that $\Kc^0(\R)=0$ and $\Kc^0(\R^2)\cong\Z$, generated by the Bott class
+  $[(\C,\C,\bar w/|w|)]$.
+\end{exercise}
+
+\begin{exercise}
+  Let $H\to\Sphere^2=\C\cup\{\infty\}$ be the line bundle obtained by clutching the trivial bundles
+  over the two hemispheres with the map $z\mapsto z$ on the equator (this is the tautological
+  bundle over $\mathbb{CP}^1$, up to conjugation). Show that $[H]-[\C]$ generates
+  $\tilde K^0(\Sphere^2)\cong\Z$, and that $([H]-[\C])^2=0$ is consistent with
+  $H\otimes H\oplus\C\cong H\oplus H$ (which you should prove using clutching functions and
+  \cref{bott:lem:rotation}).
+\end{exercise}
+
+\begin{exercise}
+  Show that if $A\colon X\to\PsiT{0}(\Sphere;\C^N)$ is a smooth family of elliptic Toeplitz
+  operators whose null spaces have constant dimension, then $\Nul A$ and $\Nul A^*$ are smooth
+  vector bundles and $\ind(A)=[\Nul A]-[\Nul A^*]$.
+\end{exercise}
+
+\section*{Notes}
+The linearization of loops (\cref{bott:sec:linearization}) is the heart of Atiyah's
+proof of Bott periodicity via clutching functions \cite{Atiyah-K}; the use of the families index
+of Toeplitz operators to invert the Bott map follows the source lectures and is closely related to
+the treatment of Bott periodicity through the Grassmannian of a polarized Hilbert space in
+\cite{Pressley-Segal}. Compared to the source we have replaced the residue argument for linear
+loops by the Riesz spectral projection (\cref{bott:lem:linear}), proved that a normal form loop is
+trivial when the ranges of $\pi_\pm$ are isomorphic in a single lemma
+(\cref{bott:lem:normal-trivial}), defined the families index through arbitrary smooth complements
+of the range, corrected the sign of the Bott map (which, with $\ind U=-1$, sends
+$[E_+]-[E_-]$ to the class with $p_+z^{-1}$), corrected the second curve in the deformation of
+$\Id-P_0+P_0hP_0$ and normalized it at $1\in\Sphere$, and derived the homotopy groups of $\Ginf$
+from the index isomorphism for compact spheres together with the clutching construction, instead
+of from the (unproved) non-compact index isomorphism. The source also suggests, as an alternative
+to Toeplitz operators, the isotropic calculus on $\R$ of \cref{ch:isotropic}: there the
+`cosphere bundle' of $\R$ is the circle at infinity of $\R^2$, the annihilation operator
+$x+\partial_x$ of the harmonic oscillator is Fredholm of index $1$ with symbol $x+i\xi$, of
+winding number one, and plays the role of $L$; the arguments of this chapter carry over with
+$P_k$ replaced by the spectral projections of the harmonic oscillator.
+
+The source conjectures that $\GT(\Sphere,Y;E)$ is actually contractible. Since it is an open subset
+of an affine Fr\'echet space (\cref{bott:lem:open}), it has the homotopy type of a CW complex by a
+theorem of R.~Palais (Homotopy theory of infinite dimensional manifolds, Topology 5 (1966)), and a
+weakly contractible CW complex is contractible by Whitehead's theorem; we have not checked the
+details of this argument in the present setting.
