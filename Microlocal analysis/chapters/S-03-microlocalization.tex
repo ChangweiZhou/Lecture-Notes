@@ -135,7 +135,10 @@ operator whose essential support avoids $\WF(v)$. It is used in
 
   \emph{The term with $c(D)$.} Let $\psi'\in\CIc(B(\bar x,r))$ equal $1$ on $B(\bar x,r/2)$. By
   \cref{microlocal:prop:ess}(ii),(iv),
-  $\WFp(Dc(D)\psi')\subset\WFp(D)\cap\conesupp(c)\cap(\supp\psi'\times\R^n)$, and
+  \begin{equation*}
+    \WFp(Dc(D)\psi')\subset\WFp(D)\cap\conesupp(c)\cap(\supp\psi'\times\R^n),
+  \end{equation*}
+  and
   $\conesupp(c)\subset\R^n\times\overline{V_2}$ because $c$ vanishes on the open cone
   $\R^n\times(\R^n\setminus\overline{V_2})$. By \eqref{solmicrolocal:eq:r} this set is empty, so
   $E=Dc(D)\psi'\psi'\in\Psido{-\infty}$ by \cref{microlocal:lem:localize}. For
@@ -179,10 +182,10 @@ $v_k(x)=\int e^{ix\cdot\xi}\phi(\xi/k)\hat u(\xi)\,\dbar\xi$ is smooth, with
 $D^\alpha v_k=\int e^{ix\cdot\xi}\xi^\alpha\phi(\xi/k)\hat u\,\dbar\xi$ bounded, by differentiation
 under the integral. Therefore $u_k=\phi(x/k)v_k\in\CIc(\R^n)\subset\cS(\R^n)$. By Plancherel
 (\cref{distributions:prop:plancherel}),
-\begin{equation*}
-  \norm{u-u_k}_{L^2}\le\norm{(1-\phi(x/k))u}_{L^2}+\sup\abs\phi\,\norm{u-v_k}_{L^2},\qquad
+\begin{gather*}
+  \norm{u-u_k}_{L^2}\le\norm{(1-\phi(x/k))u}_{L^2}+\sup\abs\phi\,\norm{u-v_k}_{L^2},\\
   \norm{u-v_k}_{L^2}=(2\pi)^{-n/2}\norm{(1-\phi(\xi/k))\hat u}_{L^2}.
-\end{equation*}
+\end{gather*}
 Both terms tend to $0$ by dominated convergence: $1-\phi(x/k)\to1-\phi(0)=0$ pointwise, and
 $\abs{1-\phi}\le1+\sup\abs\phi$. Hence $u_k\to u$ in $L^2$, and $\cS(\R^n)$ (even $\CIc(\R^n)$) is
 dense in $L^2(\R^n)$.
@@ -192,7 +195,10 @@ $A_k=\Op(a_k)$, $a_k(x,\xi)=\phi(x/k)\phi(\xi/k)$, by \eqref{euclidean:eq:left-q
 is in $\cS(\R^{2n})$, so $A_k\in\Psido{-\infty}$, and its kernel
 $\phi(x/k)k^n(\cF^{-1}\phi)(k(x-y))$ is in $\cS(\R^{2n})$, so $A_k$ maps even $\cSp(\R^n)$ into
 $\cS(\R^n)$. The family is bounded in $\Psido0$: if $\supp\phi\subset\{\abs\xi\le R\}$, then
-$D^\alpha_xD^\beta_\xi a_k=k^{-\abs\alpha-\abs\beta}(D^\alpha\phi)(x/k)(D^\beta\phi)(\xi/k)$ and
+\begin{equation*}
+  D^\alpha_xD^\beta_\xi a_k=k^{-\abs\alpha-\abs\beta}(D^\alpha\phi)(x/k)(D^\beta\phi)(\xi/k)
+\end{equation*}
+and
 $\ang\xi\le(1+R)k$ on the support, so $\abs{D^\alpha_xD^\beta_\xi a_k}\le C_{\alpha\beta}\ang\xi^{-\abs\beta}$
 uniformly in $k$. Moreover $a_k\to1$ pointwise. So the exercise exhibits the identity as a strong
 limit of a bounded family of smoothing operators; by \cref{microlocal:lem:continuity} the $A_k$
@@ -254,10 +260,10 @@ On the support of $a$ we have $1<\abs{\xi}/\ang x<2$, hence
 $f(x)h'(\xi/\ang x)$ with $h'\in\CIc(\{1<\abs\eta<2\})$ and $f\in\CI(\R^n)$ satisfying
 $\abs{D^\gamma f}\le C_\gamma\ang x^{-\abs\alpha-\abs\beta-\abs\gamma}$. This holds for
 $\alpha=\beta=0$. Since
-\begin{equation*}
-  \pa_{\xi_k}\bigl[f\,h'(\xi/\ang x)\bigr]=f\ang x^{-1}(\pa_kh')(\xi/\ang x),\qquad
+\begin{gather*}
+  \pa_{\xi_k}\bigl[f\,h'(\xi/\ang x)\bigr]=f\ang x^{-1}(\pa_kh')(\xi/\ang x),\\
   \pa_{x_i}\bigl[f\,h'(\xi/\ang x)\bigr]=(\pa_if)h'(\xi/\ang x)-f\frac{x_i}{\ang x^2}h''(\xi/\ang x),
-\end{equation*}
+\end{gather*}
 with $h''(\eta)=\eta\cdot\nabla h'(\eta)$, and since $\ang x^{-1}$ and $x_i\ang x^{-2}$ satisfy
 $\abs{D^\gamma g}\le C\ang x^{-1-\abs\gamma}$, the claim follows by induction (Leibniz). By
 \eqref{solmicrolocal:eq:x-xi},
@@ -398,8 +404,9 @@ $u\in\mathcal C^{-\infty}_{c,\Gamma}$, and $q_{A,R,k}(u_\iota-u)\to0$. The space
 
 \emph{Density of $\CIc(\R^n)$.} Clearly $\CIc\subset\mathcal C^{-\infty}_{c,\Gamma}$. Let
 $u\in\mathcal C^{-\infty}_{c,\Gamma}$ and $u_\eps=u*\rho_\eps\in\CIc$
-(\cref{solmicrolocal:lem:convolution}(i)). Let $L$ be a compact neighbourhood of $\supp u$ and
-$\abs{u(f)}\le C\sum_{\abs\beta\le k}\sup_L\abs{D^\beta f}$. By \cref{solmicrolocal:lem:convolution}(ii),
+(\cref{solmicrolocal:lem:convolution}(i)). Let $L$ be a compact neighbourhood of $\supp u$, with
+$\abs{u(f)}\le C\sum_{\abs\beta\le k}\sup_L\abs{D^\beta f}$ as in
+\eqref{microlocal:eq:finite-order}. By \cref{solmicrolocal:lem:convolution}(ii),
 for a bounded set $B$,
 \begin{equation*}
   p_B(u_\eps-u)=\sup_{f\in B}\abs{u(\check\rho_\eps*f-f)}
@@ -533,7 +540,7 @@ $\gamma=(\pi_1)_*\kappa\in\CmIc(\R^n)$ is defined for every $\kappa\in\CmIc(\R^{
 
 \emph{The wavefront set.} By \cref{microlocal:thm:products}(iv) with $u_1=K_A$, $u_2=\chi\boxtimes u$,
 \begin{multline*}
-  \WF(\kappa)\subset\{(x,y;0,\eta);\ (x,y)\in\supp K_A,\ (y,\eta)\in\WF(u)\}
+  \WF(\kappa)\subset\{(x,y;0,\eta);\ (x,y)\in\supp K_A,\ (y,\eta)\in\WF(u)\}\\
   \cup\{(x,x;\xi,-\xi);\ x\in\supp u,\ (x,\xi)\in\WFp(A)\}\\
   \cup\{(x,x;\xi,\eta-\xi);\ (x,\xi)\in\WFp(A),\ (x,\eta)\in\WF(u)\}.
 \end{multline*}
@@ -619,10 +626,10 @@ $T=(\Id-A)\phi-\phi(\Id-A)$ shows $\WFp(T)\subset\WFp(\Id-A)$, so
 $\WFp(T)\cap\WF(u_1)=\emptyset$ and $\WFp(T^t)\cap\WF(u_2)=\WFp(T)^-\cap\WF(u_2)=\emptyset$. By
 \cref{microlocal:lem:transpose} the difference vanishes. Using \cref{microlocal:thm:products}(iii),
 the first part, this identity and the symmetry of $P$,
-\begin{equation*}
-  (u_1u_2)(\phi)=((\phi u_1)u_2)(\psi)=P(\phi u_1,u_2)=P(u_1,\phi u_2)=P(\phi u_2,u_1)
-  =((\phi u_2)u_1)(\psi)=(u_2u_1)(\phi).
-\end{equation*}
+\begin{multline*}
+  (u_1u_2)(\phi)=((\phi u_1)u_2)(\psi)=P(\phi u_1,u_2)=P(u_1,\phi u_2)\\
+  =P(\phi u_2,u_1)=((\phi u_2)u_1)(\psi)=(u_2u_1)(\phi).
+\end{multline*}
 (The first equality: $((\phi u_1)u_2)(\psi)=(\phi(u_1u_2))(\psi)=(u_1u_2)(\phi\psi)=(u_1u_2)(\phi)$, since
 $\psi=1$ near $\supp(u_1u_2)$.) Hence $u_1u_2=u_2u_1$.
 
@@ -776,9 +783,10 @@ and the first sum vanishes because $\pa_i\pa_jh$ is symmetric in $(i,j)$. So $J$
 derivatives of $h$, and by cyclic invariance none of $f$ or $g$ either. Hence $J=0$.
 
 Consequently, for every $h$,
-\begin{equation*}
-  [\Ham f,\Ham g]h=\{f,\{g,h\}\}-\{g,\{f,h\}\}=\{f,\{g,h\}\}+\{g,\{h,f\}\}=-\{h,\{f,g\}\}=\{\{f,g\},h\}=\Ham{\{f,g\}}h,
-\end{equation*}
+\begin{multline*}
+  [\Ham f,\Ham g]h=\{f,\{g,h\}\}-\{g,\{f,h\}\}=\{f,\{g,h\}\}+\{g,\{h,f\}\}\\
+  =-\{h,\{f,g\}\}=\{\{f,g\},h\}=\Ham{\{f,g\}}h,
+\end{multline*}
 so $[\Ham f,\Ham g]=\Ham{\{f,g\}}$.
 
 \subsection*{\Cref{microlocal:ex:closed-form}}
@@ -799,10 +807,10 @@ two terms, while $\omega(V,\Ham h)=dh(V)=Vh$ gives
 $\omega([X,Y],Z)=\Ham f\Ham gh-\Ham g\Ham fh=\{f,\{g,h\}\}-\{g,\{f,h\}\}$, and similarly
 $\omega([X,Z],Y)=\{f,\{h,g\}\}-\{h,\{f,g\}\}$, $\omega([Y,Z],X)=\{g,\{h,f\}\}-\{h,\{g,f\}\}$. Adding up and using
 antisymmetry,
-\begin{equation*}
-  d\omega(\Ham f,\Ham g,\Ham h)=\{f,\{h,g\}\}-\{g,\{h,f\}\}+\{h,\{g,f\}\}
+\begin{multline*}
+  d\omega(\Ham f,\Ham g,\Ham h)=\{f,\{h,g\}\}-\{g,\{h,f\}\}+\{h,\{g,f\}\}\\
   =-\bigl(\{f,\{g,h\}\}+\{g,\{h,f\}\}+\{h,\{f,g\}\}\bigr).
-\end{equation*}
+\end{multline*}
 (We checked this identity also by a symbolic computation for a non-closed form on $\R^4$.) If
 $d\omega=0$ the Jacobi identity follows. Conversely, if the Jacobi identity holds for all $f,g,h$,
 then $d\omega(p)$ vanishes on all triples $(\Ham f(p),\Ham g(p),\Ham h(p))$. Every covector at $p$ is $df(p)$ for a

@@ -1,1 +1,337 @@
-% solutions for 08-conormal (in progress)
+% Solutions for chapter 08-conormal
+\providecommand{\osc}[1]{\mathcal{I}[#1]}
+
+\section{Solutions for \cref{ch:conormal}: Conormal distributions}\label{solutions:conormal}
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{conormal:ex:Vkl}}
+Idea: the vector fields $\xi_k\pa_{\xi_l}$ preserve $S^0$, and conversely $\pa_{\xi_l}$ is
+$|\xi|^{-1}$ times a combination of them with bounded coefficients.
+
+\emph{Necessity.} If $a\in S^0(\R^n)$ then $\pa_{\xi_l}a\in S^{-1}$ and $\xi_k\in S^1$, so
+$\xi_k\pa_{\xi_l}a\in S^0$ (\cref{conormal:sec:symbols}); by induction on $N$,
+$V_1\cdots V_Na\in S^0\subset L^\infty$ for every $N$, and $a\in\CI$ by definition.
+
+\emph{Sufficiency.} Let $a\in\CI(\R^n)$ with $V_1\cdots V_Na\in L^\infty$ for all choices.
+On $\{|\xi|\le1\}$ all derivatives of $a$ are bounded by compactness, and there
+$\ang\xi^{-|\beta|}\ge2^{-|\beta|/2}$; so it suffices to estimate $\pa^\beta a$ on
+$\{|\xi|\ge1\}$. There, by $\sum_k\xi_k^2=|\xi|^2$,
+\begin{equation*}
+\pa_{\xi_l}=\sum_k\frac{\xi_k}{|\xi|^2}\,\xi_k\pa_{\xi_l}.
+\end{equation*}
+We show by induction on $|\beta|$: on $\{|\xi|>\frac12\}$,
+\begin{equation*}
+\pa_\xi^\beta=\sum_Jc_{\beta,J}(\xi)\,V_J,
+\end{equation*}
+a finite sum over words $J=(j_1,\dots,j_q)$, $q\le|\beta|$, where $V_J$ is a product of $q$
+fields from $\{\xi_k\pa_{\xi_l}\}$ and $c_{\beta,J}$ is smooth on $\{|\xi|>\frac12\}$ and
+homogeneous of degree $-|\beta|$. For $\beta=0$ take $c=1$, $V_\emptyset=\Id$. If it holds
+for $\beta$, then
+\begin{equation*}
+\pa_{\xi_l}\pa_\xi^\beta=\sum_J\Big((\pa_{\xi_l}c_{\beta,J})V_J+\sum_kc_{\beta,J}\frac{\xi_k}
+{|\xi|^2}\,(\xi_k\pa_{\xi_l})V_J\Big),
+\end{equation*}
+and $\pa_{\xi_l}c_{\beta,J}$, $c_{\beta,J}\xi_k|\xi|^{-2}$ are homogeneous of degree
+$-|\beta|-1$, which completes the induction. A smooth function homogeneous of degree
+$-|\beta|$ on $\{|\xi|>\frac12\}$ is bounded there by $C|\xi|^{-|\beta|}$ (its sup on the unit
+sphere times $|\xi|^{-|\beta|}$), and $|\xi|^{-1}\le\sqrt2\ang\xi^{-1}$ for $|\xi|\ge1$. Hence
+\begin{equation*}
+|\pa^\beta_\xi a(\xi)|\le\sum_J|c_{\beta,J}(\xi)|\,\norm{V_Ja}_{L^\infty}\le C_\beta
+\ang\xi^{-|\beta|},\qquad|\xi|\ge1,
+\end{equation*}
+which with the estimate on $|\xi|\le1$ shows $a\in S^0(\R^n)$.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{conormal:ex:Ab}}
+Idea: by \cref{conormal:ex:Vkl} the case $m=0$ is $S^0=\mathcal A(\RC{\R^n})$; the general case
+follows by multiplying with powers of a boundary defining function.
+
+\emph{Vector fields.} By \cref{distributions:lem:vf}, the linear vector fields
+$\xi_k\pa_{\xi_l}$ extend smoothly to $\RC{\R^n}$, tangent to the boundary, so they lie in
+$\mathcal V_{\mathrm b}(\RC{\R^n})$; and near the boundary the radial field $-\sum_k\xi_k
+\pa_{\xi_k}$ and the rotation fields $\xi_k\pa_{\xi_l}-\xi_l\pa_{\xi_k}$ span
+$\mathcal V_{\mathrm b}$ over $\CI$ (of a collar $[0,1)\times\Sphere^{n-1}$). Hence, with
+$\chi\in\CI(\RC{\R^n})$ supported in that collar and equal to one near the boundary, every
+$V\in\mathcal V_{\mathrm b}(\RC{\R^n})$ can be written
+\begin{equation}\label{solconormal:eq:Vb}
+V=\sum_{k,l}c_{kl}\,\xi_k\pa_{\xi_l}+\sum_le_l\pa_{\xi_l},\qquad c_{kl}\in\CI(\RC{\R^n}),\
+e_l\in\CIc(\R^n),
+\end{equation}
+by writing $V=\chi V+(1-\chi)V$, the second piece being a vector field with compactly supported
+smooth coefficients on $\R^n$.
+
+\emph{The case $m=0$.} If $a\in\mathcal A(\RC{\R^n})$ then $a\in\CI(\R^n)$, and since each
+$\xi_k\pa_{\xi_l}\in\mathcal V_{\mathrm b}$, all $V_1\cdots V_Na$ with $V_j\in\{\xi_k
+\pa_{\xi_l}\}$ are bounded; so $a\in S^0$ by \cref{conormal:ex:Vkl}. Conversely let
+$a\in S^0$. Then $a\in\CI(\R^n)\cap L^\infty$. By \cref{conormal:lem:classical-basic}(ii),
+$\CI(\RC{\R^n})=\Symph0\subset S^0$, and $\CIc(\R^n)\subset S^0$; since $S^0$ is an algebra,
+$\xi_k\pa_{\xi_l}:S^0\to S^0$ and $\pa_{\xi_l}:S^0\to S^{-1}\subset S^0$, each $V$ of the form
+\eqref{solconormal:eq:Vb} maps $S^0$ into $S^0$. By induction $V_1\cdots V_Na\in S^0\subset
+L^\infty$, so $a\in\mathcal A(\RC{\R^n})$. Thus $S^0(\R^n)=\mathcal A(\RC{\R^n})$.
+
+\emph{General $m$.} Let $\rho$ be a boundary defining function; $\rho'=\ang\xi^{-1}$ is one
+too (\cref{distributions:def:RC}), so $\rho=f\rho'$ with $0<f\in\CI(\RC{\R^n})$, and
+$f^{\pm m}\in\CI(\RC{\R^n})$. Now $\CI(\RC{\R^n})\subset\mathcal A$ (the fields in
+$\mathcal V_{\mathrm b}$ are smooth on the compact space $\RC{\R^n}$, so iterated derivatives of a
+smooth function are bounded), and $\mathcal A$ is an algebra by Leibniz' rule; so
+$\rho^{-m}\mathcal A=\ang\xi^m f^{-m}\mathcal A=\ang\xi^m\mathcal A$. On the other hand
+$\ang\xi^{\pm m}\in S^{\pm m}$ and $S^{m_1}S^{m_2}\subset S^{m_1+m_2}$, so $S^m=\ang\xi^mS^0$.
+Therefore
+\begin{equation*}
+S^m(\R^n)=\ang\xi^mS^0(\R^n)=\ang\xi^m\mathcal A(\RC{\R^n})=\rho^{-m}\mathcal A(\RC{\R^n}).
+\end{equation*}
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{conormal:ex:blowup}}
+Idea: transport the structure of $[0,\infty)\times\Sphere^{n-1}$ by polar coordinates in a
+basis; \cref{conormal:lem:blowup} says the result does not depend on the basis.
+
+\emph{The statement as originally formulated is not correct}: the requirements that
+$[W,\{0\}]$ be diffeomorphic to $[0,\infty)\times\Sphere^{n-1}$, that $\beta$ be smooth and
+that $\GL(W)$ act smoothly do not determine the structure. For instance, if $\mathcal S$ is
+the structure constructed below and $\mathcal S'$ the one for which $(s,\omega)\mapsto
+L(s^3\omega)$ (for $s>0$; $(0,\omega)\mapsto[L\omega]$) is a diffeomorphism from
+$[0,\infty)\times\Sphere^{n-1}$, then in $\mathcal S'$ the map $\beta(s,\omega)=
+L(s^3\omega)$ is smooth and the lifted action $(s,\omega)\mapsto(s|G\omega|^{1/3},G\omega/
+|G\omega|)$ (in a basis, $G\in\GL(n,\R)$) is smooth, but the identity
+$(\mathcal S)\to(\mathcal S')$ is $(r,\omega)\mapsto(r^{1/3},\omega)$, which is not smooth
+at $r=0$. The statement has been corrected to the characterization by polar coordinates,
+which we now prove.
+
+\emph{Construction.} For a linear isomorphism $L:\R^n\to W$ define
+$\Phi_L:[0,\infty)\times\Sphere^{n-1}\to[W,\{0\}]$ by $\Phi_L(r,\omega)=L(r\omega)$ for $r>0$
+and $\Phi_L(0,\omega)=[L\omega]\in\Sphere W$. It is a bijection: on $W\setminus0$ the inverse
+is $w\mapsto(|L^{-1}w|,L^{-1}w/|L^{-1}w|)$, and on $\Sphere W$ it is $[w]\mapsto(0,L^{-1}w/
+|L^{-1}w|)$, which is well defined since $w\mapsto L^{-1}w/|L^{-1}w|$ is invariant under
+positive scaling. Give $[W,\{0\}]$ the topology and smooth structure making $\Phi_L$ a
+diffeomorphism; this is the only structure for which $\Phi_L$ is a diffeomorphism.
+
+\emph{Independence of $L$.} If $L'$ is another isomorphism, $G=L'^{-1}L\in\GL(n,\R)$, then
+$\Phi_{L'}^{-1}\circ\Phi_L=\tilde G$, the lift of \cref{conormal:lem:blowup}: for $r>0$,
+$L(r\omega)=L'(rG\omega)=L'\big(r|G\omega|\cdot G\omega/|G\omega|\big)$, and for $r=0$,
+$[L\omega]=[L'G\omega]=\Phi_{L'}(0,G\omega/|G\omega|)$. Since $\tilde G$ is smooth with smooth
+inverse $\widetilde{G^{-1}}$, the structures defined by $L$ and $L'$ coincide. This proves
+existence and uniqueness of the structure (for one, hence every, $L$).
+
+\emph{Blow-down and action.} $\beta\circ\Phi_L(r,\omega)=L(r\omega)$ is smooth on
+$[0,\infty)\times\Sphere^{n-1}$ (also at $r=0$, where it is $0$), so $\beta$ is smooth. For
+$T\in\GL(W)$ define $\tilde T$ on $[W,\{0\}]$ by $\tilde Tw=Tw$ on $W\setminus0$ and
+$\tilde T[w]=[Tw]$ on $\Sphere W$; then $\beta\circ\tilde T=T\circ\beta$, $\widetilde{TT'}=
+\tilde T\tilde T'$, and $\Phi_L^{-1}\circ\tilde T\circ\Phi_L=\tilde G$ with
+$G=L^{-1}TL$, i.e.\ $(r,\omega)\mapsto(r|G\omega|,G\omega/|G\omega|)$. This is smooth jointly in
+$(G,r,\omega)\in\GL(n,\R)\times[0,\infty)\times\Sphere^{n-1}$, since $|G\omega|>0$; so
+$\GL(W)\times[W,\{0\}]\to[W,\{0\}]$ is a smooth action lifting that on $W$. Finally
+$[W,\{0\}]$ is a manifold with boundary $\Phi_L(\{0\}\times\Sphere^{n-1})=\Sphere W$,
+diffeomorphic to $[0,\infty)\times\Sphere^{n-1}$.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{conormal:ex:valued}}
+Idea: everything is the scalar statement tensored with $U$, plus the invariant pairing of
+densities on $V$ and $V'$.
+
+\emph{The Fourier transform.} By \eqref{conormal:eq:invariant-FT} and the definition following
+it, $\cF:\Ic m(W,\{0\})\to S^{m-\frac n4}(W';\Omega W')$ is a linear isomorphism (with inverse
+$\cF^{-1}$), commuting with the action of $\GL(W)$ (on the right through $(G^{-1})^t$).
+Tensoring with $\Id_U$ gives an isomorphism
+\begin{equation*}
+\cF\otimes\Id_U:\Ic m(W,\{0\};U)=\Ic m(W,\{0\})\otimes U\longrightarrow
+S^{m-\frac n4}(W';\Omega W')\otimes U=S^{m-\frac n4}(W';U\otimes\Omega W').
+\end{equation*}
+The last equality is the definition of $U$-valued symbols: in a basis $(u_i)$ of $U$, a
+$U\otimes\Omega W'$-valued function $\sum_ia_iu_i\otimes|d\zeta|$ is a symbol of order $\mu$ iff
+each $a_i\in S^\mu$, and this does not depend on the basis because a change of basis is a
+constant invertible matrix acting on the coefficients, which preserves the estimates
+\eqref{conormal:eq:symbol-est}. Since $\cF\otimes\Id$ commutes with linear maps of $U$, the
+isomorphism is invariant under $\GL(W)\times\GL(U)$.
+
+\emph{Densities.} Let $V$ be a real vector space of dimension $n$ (the $U$ of the exercise's
+last clause). Define $\Omega V\otimes\Omega V'\to\R$ by
+\begin{equation*}
+\nu\otimes\mu\longmapsto\nu(e_1\wedge\dots\wedge e_n)\,\mu(e'_1\wedge\dots\wedge e'_n)
+\end{equation*}
+for a basis $(e_j)$ of $V$ with dual basis $(e'_j)$. If $f_j=\sum_iG_{ij}e_i$ is another
+basis, its dual basis is $f'=G^{-t}e'$, so $f_1\wedge\dots\wedge f_n=\det G\,e_1\wedge\dots\wedge
+e_n$ and $f'_1\wedge\dots\wedge f'_n=(\det G)^{-1}e'_1\wedge\dots\wedge e'_n$, and the product of
+the values changes by $|\det G||\det G|^{-1}=1$. So the pairing is independent of the basis,
+and it is non-degenerate (the value on $|e'|\otimes|e|$, the densities equal to $1$ on the
+given wedges, is $1$). Hence $\Omega V'\otimes\Omega V\cong\R$ canonically,
+$|dz|\otimes|d\zeta|\mapsto1$ for dual linear coordinates.
+
+\emph{The integral.} Take $U=\Omega W$ (complexified). For $u\in\Ic m(W,\{0\};\Omega W)$,
+$\cF u\in S^{m-\frac n4}(W';\Omega W\otimes\Omega W')=S^{m-\frac n4}(W')$ by the canonical
+trivialization, and we define $\int u=(\cF u)(0)$, which is invariantly defined since
+$\cF$ and the trivialization are. In linear coordinates $u=v|dz|$ with
+$v\in\Ic m(\R^n,\{0\})$, $\cF u=\hat v(\zeta)|d\zeta|\otimes|dz|\mapsto\hat v(\zeta)$, so
+$\int u=\hat v(0)=\int v\,dz$, the integral of \cref{conormal:lem:point-basic}(iv). Directly:
+for $G\in\GL(W)$, in coordinates $G^*u=(v\circ G)|\det G||dz|$ and
+$|\det G|\,\widehat{v\circ G}(0)=\hat v(G^{-t}0)=\hat v(0)$; so $\int G^*u=\int u$, i.e.\
+the integral is a linearly invariant map $\Ic m(W,\{0\};\Omega W)\to\C$.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{conormal:ex:homog}}
+\emph{Correction of the statement.} If the homogeneity relation is only required for
+$z\ne0$, as originally stated, then $u$ is not controlled at the origin and the order is not
+determined: $u=D^\alpha\delta_0$ is smooth (zero) outside $0$ and satisfies the relation on
+$z\ne0$ with $F=0$ for \emph{every} $h$, while $\chi u=D^\alpha\delta_0\in\Ic{\frac n4+
+|\alpha|}_{\mathrm{ph}}$ has order $\frac n4+|\alpha|$; and for $h=-n$, a distribution $u$
+equal to $|z|^{-n}$ on $z\ne0$ has Fourier transform $c\log|\zeta|+c'$ outside $0$, which is
+not a classical symbol. The statement has therefore been corrected to require the relation as
+distributions on $\R^n$. We prove: \emph{$\chi u\in\Ic{-h-\frac{3n}4}_{\mathrm{c},
+\mathrm{ph}}(\R^n,\{0\})$}; this is the order (it is not lower unless the homogeneous part
+$T$ below vanishes, in which case $\chi u$ is smooth). For $\delta_0$, $h=-n$ gives the order
+$\frac n4$, as it should.
+
+Idea: the relation says $(E-h)u$ is smooth, $E=z\cdot\pa_z$ the Euler field; solving this
+modulo smooth functions splits $u$ into a smooth part and a homogeneous (or log-homogeneous)
+part, whose Fourier transform is homogeneous of degree $-n-h$ outside $0$.
+
+\emph{Step 1: $(E-h)u\in\CI$.} Write $u_t$ for the pull-back by $z\mapsto tz$, $\pair{u_t}\phi=
+t^{-n}\pair u{\phi(\cdot/t)}$. Since $t\mapsto\phi(\cdot/t)$ is a smooth curve in $\CIc$,
+$t\mapsto u_t$ is differentiable in $\CmI$, and $\frac d{dt}u_t|_{t=1}=-nu-u\circ(z\cdot\pa_z)^t
+\cdots$; explicitly $\frac d{dt}\pair{u_t}\phi|_{t=1}=\pair u{-n\phi-z\cdot\pa\phi}=\pair{Eu}\phi$.
+Moreover $E(v_t)=(Ev)_t$, so $\frac d{dt}u_t=t^{-1}(Eu)_t$. Differentiating $u_t=t^hu+F(t,\cdot)$
+at $t=1$ gives
+\begin{equation*}
+(E-h)u=g,\qquad g=\pa_tF(1,\cdot)\in\CI(\R^n).
+\end{equation*}
+
+\emph{Step 2: removing the smooth right side.} Let $g\sim\sum_jg_j$ be the Taylor series of $g$
+at $0$, $g_j$ homogeneous polynomials of degree $j$; note $(E-h)p=(j-h)p$ for $p$ homogeneous
+of degree $j$. By Borel's lemma choose $w\in\CI(\R^n)$ with Taylor series
+$\sum_{j\ne h}g_j/(j-h)$ (the condition $j\ne h$ only matters if $h\in\N_0$). Then
+$r=g-g_{h}-(E-h)w$ is smooth and vanishes to infinite order at $0$, where we put $g_h=0$ if
+$h\notin\N_0$. Let
+\begin{equation*}
+v(z)=\int_0^1s^{-h-1}r(sz)\,ds .
+\end{equation*}
+For $z$ in a compact set $K$, $|\pa^\alpha_z[r(sz)]|=s^{|\alpha|}|(\pa^\alpha r)(sz)|\le
+C_{N,K}s^{N}$ for every $N$, as $\pa^\alpha r$ vanishes to infinite order at $0$; so $v\in\CI$,
+and $Ev(z)=\int_0^1s^{-h-1}s\frac d{ds}[r(sz)]\,ds=r(z)+h\,v(z)$ (integrate by parts; the
+boundary term at $s=0$ vanishes). So $(E-h)v=r$.
+Finally, if $h\in\N_0$ let $\Lambda=g_h(z)\log|z|\in L^1_{\mathrm{loc}}$ (and $\Lambda=0$
+otherwise). As $L^1_{\mathrm{loc}}$ functions, hence as distributions,
+$\Lambda_t=t^h\Lambda+t^h\log t\,g_h$, and differentiating at $t=1$ gives $(E-h)\Lambda=g_h$.
+Therefore $U'=u-w-v-\Lambda$ satisfies $(E-h)U'=0$ in $\CmI(\R^n)$, and
+$\frac d{dt}(t^{-h}U'_t)=t^{-h-1}((E-h)U')_t=0$, so $U'_t=t^hU'$: $U'$ is homogeneous of
+degree $h$, and smooth outside $0$ (as $u,w,v,\Lambda$ are).
+
+\emph{Step 3: Fourier transforms.} By the fact recalled before
+\cref{conormal:prop:homogeneous} (\cite[Theorem~7.1.18]{Hormander-I}), $U'\in\cSp$ and
+$\hat U'$ is homogeneous of degree $-n-h$ and smooth on $\R^n\setminus0$. For $\Lambda$
+(when $h\in\N_0$): let $L=\log|z|$. For $n\ge2$, $\pa_jL=z_j/|z|^2$ (the distributional
+derivative of the $W^{1,1}_{\mathrm{loc}}$ function $L$), and for $n=1$, $\pa L=\mathrm{p.v.}
+\frac1z$; in both cases $\pa_jL$ is homogeneous of degree $-1$ and smooth outside $0$, so
+$\widehat{\pa_jL}=i\zeta_j\hat L$ is smooth on $\R^n\setminus0$, and hence so is
+$\hat L=-i\sum_j\zeta_j\widehat{\pa_jL}/|\zeta|^2$ there. Then $\hat\Lambda=g_h(-D_\zeta)\hat L$
+is smooth on $\R^n\setminus0$, and Fourier transforming
+$\Lambda_t=t^h\Lambda+t^h\log t\,g_h$, where $\hat g_h$ is supported at $0$, gives
+$t^{-n}\hat\Lambda(\zeta/t)=t^h\hat\Lambda(\zeta)$ for $\zeta\ne0$: $\hat\Lambda$ is homogeneous
+of degree $-n-h$ outside $0$.
+
+So $T=U'+\Lambda\in\cSp$ has $\hat T$ smooth and homogeneous of degree $\mu=-n-h$ on
+$\R^n\setminus0$, and $u=T+(w+v)$ with $w+v$ smooth. Let $\psi\in\CIc(\R^n)$ equal one near
+$0$. Then $(1-\psi)\hat T\in\Symph\mu(\R^n)$ by \cref{conormal:lem:classical-basic}(iv), and
+$\psi\hat T$ has compact support, so $\cF^{-1}(\psi\hat T)$ is smooth. Hence, for
+$\chi\in\CIc(\R^n)$,
+\begin{equation*}
+\chi u=\chi\,\cF^{-1}\big((1-\psi)\hat T\big)+\chi\big(\cF^{-1}(\psi\hat T)+w+v\big)
+=\osc{\chi(z)(1-\psi(\zeta))\hat T(\zeta)}+f,\qquad f\in\CIc(\R^n),
+\end{equation*}
+with $\chi(z)(1-\psi(\zeta))\hat T(\zeta)\in\Symph\mu(\R^n;\R^n)$ (as in
+\cref{conormal:rem:point-local}). By \cref{conormal:def:local} with $k=n$, $M=m-\frac n4$,
+$\chi u\in\Ic m_{\mathrm c,\mathrm{ph}}(\R^n,\{0\})$ with $m=\mu+\frac n4=-h-\frac{3n}4$. Its
+principal symbol is $\chi(0)$ times the homogeneous function $\hat T|_{\R^n\setminus0}$, which
+is non-zero unless $T$ is a sum of derivatives of $\delta_0$ of order $-n-h$ (only possible if
+$-n-h\in\N_0$) or $0$.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{conormal:ex:supported}}
+Idea: a distribution supported on $Y=\{x=0\}$ is a finite sum of normal derivatives of
+$\delta(x)$ with distributional coefficients; conormality forces the coefficients to be
+smooth, and the full symbol is then a polynomial in $\xi$.
+
+Work in an adapted chart, $X\supset U\cong\Omega\subset\R^k_x\times\R^d_y$, $Y=\{x=0\}$, and
+let $\phi\in\CIc(\Omega)$; it suffices to treat $\phi u\in\Ic m_{\mathrm c}(\Omega,Y)$, which is
+supported in $Y$. By the structure theorem for distributions supported in a subspace
+\cite[Theorem~2.3.5]{Hormander-I}, there are $q\in\N_0$ and $u_\alpha\in\CmIc(\R^d)$ with
+\begin{equation*}
+\phi u=\sum_{|\alpha|\le q}u_\alpha(y)\otimes D_x^\alpha\delta(x).
+\end{equation*}
+On the other hand $\phi u=\osc a+f$ with $a\in S^M_{\mathrm c}(\R^d;\R^k)$, $M=m+\frac n4-
+\frac k2$, $f\in\CI$. Let $\chi\in\CIc(\R^k)$ equal one near $0$. Since $\phi u=\chi(x)\phi u$,
+$f-\chi f=(\chi-1)\osc a$, which is smooth, compactly supported in $y$ and rapidly decreasing
+in $x$ with all derivatives (\cref{conormal:lem:osc-ops}(iii)); so $\phi u=\osc a+g$ with
+$g\in\cS(\R^n)$. Take the partial Fourier transform in $x$: as distributions in $y$
+depending on the parameter $\xi$,
+\begin{equation*}
+\sum_{|\alpha|\le q}u_\alpha(y)\xi^\alpha=a(y,\xi)+\tilde g(y,\xi),
+\end{equation*}
+with $\tilde g$ smooth and Schwartz in $\xi$. The right side is a smooth function of
+$(y,\xi)$; taking finite differences in $\xi$ (or derivatives $\pa_\xi^\alpha$ at $\xi=0$)
+shows that each $u_\alpha$ is a smooth function, with compact support. Thus
+\begin{equation*}
+\phi u=P\,\delta(x),\qquad P=\sum_{|\alpha|\le q}u_\alpha(y)D_x^\alpha\in\Diff q,
+\end{equation*}
+and, with $u_\mu=\mu(y)^{-1}\delta(x)$ in adapted coordinates in which $\mu=\mu(y)|dx|$
+(\cref{conormal:ex:delta}), $\phi u=(P\circ\mu)u_\mu$, where $P\circ\mu\in\Diff q$ is $P$
+composed with multiplication by $\mu(y)$. So locally $u=P'u_\mu$ with $P'\in\Diff q(X)$.
+
+\emph{Orders.} By the above, $a\equiv\sum_{|\alpha|\le q}u_\alpha(y)\xi^\alpha$ modulo
+$S^{-\infty}$, a polynomial in $\xi$ of degree $q$ (take $q$ minimal, so some $u_\alpha$
+with $|\alpha|=q$ is non-zero). A polynomial $\sum_{|\alpha|\le q}c_\alpha(y)\xi^\alpha$ with
+top part not identically zero lies in $S^M$ if and only if $M\ge q$ (if $M<q$, then along a
+ray $\xi=s\bar\xi$ with $\sum_{|\alpha|=q}c_\alpha(\bar y)\bar\xi^\alpha\ne0$ it grows like
+$s^q$). By \cref{conormal:prop:local-basic}(iii), $u\in\Ic m$ if and only if its full symbol is
+in $S^{M}$, i.e.\ if and only if
+\begin{equation*}
+m\ge q+\frac k2-\frac n4=q+\frac{k-d}4 .
+\end{equation*}
+So the orders that occur are exactly: $u\ne0$ supported in $Y$ has a smallest order
+$m=q+\frac14(k-d)$ with $q\in\N_0$ (the order of $P$), and lies in $\Ic m$ for all larger $m$;
+there is no non-zero such $u$ in $\Ic m$ for $m<\frac14(k-d)$, since then the full symbol is a
+polynomial in $S^{M}$, $M<0$, hence zero. All these distributions are classical. (For $q=0$
+we recover the order $\frac14(k-d)$ of $u_\mu$ in \cref{conormal:ex:delta}.)
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{conormal:ex:WF-exact}}
+Idea: by the symbol calculus a pseudodifferential operator multiplies the full symbol by its
+own symbol on $N^*Y$; ellipticity of $\sigma_m(u)$ lets us divide.
+
+We work in an adapted chart, with $u=v|dz|^{1/2}$, and may (by the module property and
+pseudolocality, as below) take $v\in\Ic m_{\mathrm c,\mathrm{ph}}(\R^n,Y)$ with full symbol $a$,
+classical of order $M=m+\frac n4-\frac k2$, $a\sim\sum_j(1-\chi)a_{M-j}$, where
+$\sigma_m(u)=a_M|dy\,d\xi|^{1/2}$ on $N^*Y\setminus0$ and by hypothesis $a_M(y,\xi)\ne0$ for
+$\xi\ne0$.
+
+\emph{Second statement.} Let $A=\Op(b)\in\Psido0(\R^n)$, $b\in S^0(\R^n;\R^n)$, with $Av$
+smooth on an open set $O$, and let $\bar z=(0,\bar y)\in O$, $\bar\xi\ne0$. Choose
+$\psi\in\CIc(O)$ equal to one near $\bar z$ and $\phi\in\CIc(\{\psi=1\}^\circ)$ with
+$\phi(\bar z)=1$. Since $\WF((1-\psi)v)$ lies over $\supp(1-\psi)$ and $\WF(Aw)\subset\WF(w)$
+(\cref{ch:microlocal}), $A((1-\psi)v)$ is smooth near $\supp\phi$, so $\phi A(\psi v)=\phi Av
+-\phi A((1-\psi)v)$ is smooth. Now $\phi A=\Op(\phi b)$ with $\phi b$ compactly supported in
+$z$, and $\psi v\in\Ic m_{\mathrm c}$ has full symbol $\psi(0,y)a$, which equals $a$ near
+$\bar y$. By \cref{conormal:prop:psido-local} the full symbol of $\phi A(\psi v)$ is
+congruent to $\phi(0,y)b(0,y,\xi,0)\psi(0,y)a(y,\xi)$ modulo $S^{M-1}$, and by
+\cref{conormal:prop:local-basic}(iii) it lies in $S^{-\infty}$ since $\phi A(\psi v)$ is
+smooth. Hence
+\begin{equation*}
+\phi(0,y)b(0,y,\xi,0)a(y,\xi)\in S^{M-1}\quad\text{near }\bar y .
+\end{equation*}
+Since $a_M$ is homogeneous of degree $M$, non-vanishing and continuous on the unit sphere,
+there are a neighbourhood $V$ of $\bar y$ and $c>0$ with $|a(y,\xi)|\ge c|\xi|^M$ for
+$y\in V$, $|\xi|\ge R$; on this set $a^{-1}$ satisfies the estimates of $S^{-M}$ (derivatives
+of $a^{-1}$ are sums of products of derivatives of $a$ divided by powers of $a$). Multiplying
+by $a^{-1}$, $b(0,y,\xi,0)\in S^{-1}$ on $\{y\in V',\ |\xi|\ge R\}$ for $V'\Subset V$ with
+$\phi(0,\cdot)\ge\frac12$ on $V'$. Thus the principal symbol $\sigma_0(A)$, restricted to
+$N^*Y=\{(0,y;\xi,0)\}$ over $V'$, vanishes as an element of $S^{0}/S^{-1}$; for classical
+$A$ this means $\sigma_0(A)(0,y;\xi,0)=0$ for $y\in V'$, $\xi\ne0$. Since $\bar y$ was an
+arbitrary point of $Y\cap O$, $\sigma_0(A)$ vanishes on $N^*Y$ over $O$.
+
+\emph{First statement.} By \cref{conormal:thm:properties}(v), $\WF(u)\subset N^*Y\setminus0$.
+Conversely let $\bar\lambda=(0,\bar y;\bar\xi,0)\in N^*Y\setminus0$. If $\bar\lambda\notin
+\WF(u)$, there is $A\in\Psido0(\R^n)$ elliptic at $\bar\lambda$ with $Av$ smooth near
+$\bar z$ (\cref{ch:microlocal}); by the second statement $\sigma_0(A)$ vanishes on $N^*Y$ near
+$\bar\lambda$, contradicting ellipticity. (Alternatively: by \cref{conormal:prop:WF-local},
+$\bar\lambda\notin\WF(v)$ would force $a\in S^{-\infty}$ in a conic neighbourhood of
+$(\bar y,\bar\xi)$, while $|a(\bar y,s\bar\xi)|\ge cs^M$ for large $s$.) Hence
+$\WF(u)=N^*Y\setminus0$.
