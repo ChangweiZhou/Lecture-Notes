@@ -17,9 +17,10 @@ Four proof-focused manuscripts are maintained:
   Rees--Fedosov Hochschild-chain formality.
 - `Microlocal analysis/Microlocal analysis and index theory.tex` (with
   `preamble.tex`, `bibliography.tex` and `chapters/`): a single streamlined
-  edition merging two sets of lecture notes by R. B. Melrose, *Introduction to
+  edition merging three sets of lecture notes by R. B. Melrose, *Introduction to
   Microlocal Analysis* (MIT, 2003) and *Lectures on Pseudodifferential
-  Operators* (MIT 18.157, 2005--2006). Part I: distributions, the calculus on
+  Operators* (MIT 18.157, 2005--2006) and *From Microlocal to Global Analysis*
+  (MIT, 2008). Part I: distributions, the calculus on
   R^n, microlocalization, conormal distributions, operators on manifolds;
   Part II: isotropic and scattering calculi, traces and determinants;
   Part III: elliptic boundary problems, Hamilton--Jacobi theory, the wave
@@ -28,7 +29,9 @@ Four proof-focused manuscripts are maintained:
   index theorem, eta forms); Part V: Hochschild homology. Notation is unified,
   draft material and empty sections of the originals are removed, and proofs
   are completed; each chapter ends with exercises and a Notes section recording
-  the main corrections to the originals.
+  the main corrections to the originals. Appendices cover bounded operators on
+  Hilbert space, real blow-up and manifolds with corners (after Melrose's MSRI
+  notes *Real blow ups*, 2008), and worked solutions to all exercises.
 
 Compiled releases, with stable contents and figure lists, are available here:
 
