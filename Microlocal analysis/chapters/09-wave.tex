@@ -2,6 +2,7 @@
 \providecommand{\vol}{\operatorname{vol}}
 \providecommand{\inj}{\operatorname{inj}}
 \providecommand{\Lset}{\mathcal{L}}
+\usetikzlibrary{patterns}
 
 In this chapter the theory of conormal distributions (\cref{ch:conormal}) and
 the Hamilton--Jacobi and transport equations (\cref{ch:hj}) are applied to
@@ -17,7 +18,43 @@ $T(t)=\sum_j\cos(t\lambda_j)$; a Tauberian argument then yields Weyl's
 asymptotic formula for the eigenvalues of $\Delta$ with remainder
 $O(\lambda^{n-1})$. Finally we explain how the propagation of singularities
 leads to the Poisson relation: the singularities of $T$ lie at $0$ and at the
-lengths of closed geodesics.
+lengths of closed geodesics. \Cref{wave:fig:roadmap} summarizes the logic.
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}[
+      box/.style={draw,rounded corners,align=center,font=\footnotesize,inner sep=3pt},>=Stealth]
+    \node[box] (cauchy) at (0,0) {Cauchy problem by\\ eigenfunction expansion};
+    \node[box] (speed) at (0,-1.6) {finite propagation\\ speed};
+    \node[box] (param) at (4.6,-0.8) {short-time parametrix:\\ eikonal + transport};
+    \node[box] (trace) at (4.6,-2.6) {singularity of $T(t)$\\ at $t=0$};
+    \node[box] (weyl) at (9.6,-2.6) {Weyl's law\\ $N(\lambda)=C_W\lambda^n+O(\lambda^{n-1})$};
+    \node[box] (prop) at (9.6,-0.8) {propagation of\\ singularities};
+    \node[box] (poisson) at (9.6,-4.2) {Poisson relation};
+    \draw[->] (cauchy) -- (param);
+    \draw[->] (speed) -- (param);
+    \draw[->] (param) -- (trace);
+    \draw[->] (trace) -- node[below,font=\footnotesize]{Tauberian} (weyl);
+    \draw[->] (param) -- (prop);
+    \draw[->] (prop.east) to[bend left=40] (poisson.east);
+    \draw[->] (trace) -- (poisson);
+  \end{tikzpicture}
+  \caption{Logic of the chapter. The analysis of the wave kernel for short times
+  gives the leading singularity of the wave trace, and hence Weyl's law; propagation of
+  singularities controls the wave trace for all times.}
+  \label{wave:fig:roadmap}
+\end{figure}
+
+\begin{discussion}
+Why should the wave equation say anything about eigenvalues? The wave trace
+$T(t)=\sum_j\cos(t\lambda_j)$ is, up to a factor, the Fourier transform of the
+counting measure $\sum_j\delta_{\lambda_j}$. Large-$\lambda$ behaviour of the counting
+measure corresponds to the singularities of $T$ in $t$, and the strongest
+singularity sits at $t=0$. On the other hand, by finite propagation speed the wave
+kernel for small $|t|$ only depends on the geometry of $X$ near the diagonal, where
+it can be computed by a parametrix. Weyl's law comes from matching these two
+descriptions of $T$ near $t=0$.
+\end{discussion}
 
 \section{Setup}\label{wave:sec:setup}
 
@@ -254,6 +291,36 @@ $w\in\mathcal C^k(I;\Hs{s}(X\times Y))$ for all $k,s$. By the Sobolev
 embedding, $w\in\CI(I\times X\times Y)$.
 \end{proof}
 
+Before turning to singularities we show that waves travel at speed at most one.
+The proof is an energy estimate on a shrinking ball (\cref{wave:fig:cone}): the energy
+inside the ball $\{d(x_0,x)<R-t\}$ can only decrease with $t$, because energy can leave
+the ball through its moving boundary but, travelling at unit speed, cannot enter.
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}[>=Stealth,scale=1.0]
+    \fill[gray!15] (-1,0) -- (-2.6,1.6) -- (2.6,1.6) -- (1,0) -- cycle;
+    \fill[gray!15] (-1,0) -- (-2.6,-1.6) -- (2.6,-1.6) -- (1,0) -- cycle;
+    \draw[dashed] (-1,0) -- (-2.6,1.6) (1,0) -- (2.6,1.6);
+    \draw[dashed] (-1,0) -- (-2.6,-1.6) (1,0) -- (2.6,-1.6);
+    \draw[->] (-4.2,0) -- (5.6,0) node[right]{$x$};
+    \draw[->] (0,-1.8) -- (0,2.0) node[above]{$t$};
+    \draw[line width=2.2pt] (-1,0) -- (1,0);
+    \node[below] at (-0.5,0) {$K$};
+    \node at (0,1.25) {$K_{|t|}$};
+    \fill[pattern=north east lines] (2.6,0) -- (3.75,1.15) -- (4.9,0) -- cycle;
+    \draw (2.6,0) -- (3.75,1.15) -- (4.9,0);
+    \fill (3.75,0) circle (1.5pt) node[below]{$x_0$};
+    \draw[<->] (3.75,-0.55) -- node[below,font=\small]{$R$} (4.9,-0.55);
+    \node[right,font=\small,align=left] at (4.0,1.35) {$u=0$ on\\ $d(x_0,x)<R-t$};
+  \end{tikzpicture}
+  \caption{Finite propagation speed. If the Cauchy data vanish outside $K$, then $u(t)$
+  vanishes outside $K_{|t|}$, the region between the dashed lines of slope $\pm1$. The
+  proof shows that $u$ vanishes on each cone $\{d(x_0,x)<R-t\}$ (hatched) with base a
+  ball disjoint from $K$.}
+  \label{wave:fig:cone}
+\end{figure}
+
 \begin{theorem}[Finite propagation speed]\label{wave:thm:finite-speed}
 Let $K\subset X$ be closed, $K_r=\{x\in X;\ d(x,K)\le r\}$ for $r\ge0$, where $d$ is
 the Riemannian distance. If $u$ is the solution of \eqref{wave:eq:cauchy} with
@@ -368,6 +435,11 @@ $\CI(\R;\Hs{-M}(X\times X))$ for $M$ large, by \cref{wave:lem:apriori}.
 
 \subsection{Plane waves}
 
+To construct the wave kernel we must solve the Cauchy problem with the singular
+datum $\delta_y$. The method of \cref{ch:hj} produces solutions conormal to
+characteristic hypersurfaces, so we first write $\delta_y$ as a superposition of
+distributions conormal to hyperplanes.
+
 The initial datum $\delta_y$ is conormal to the point $\{y\}$, but the only
 characteristic submanifolds for $P$ are hypersurfaces: if $Z\subset\R\times X$
 has codimension $k$ and $N^*Z\subset\Sigma(P)\cup0$, then each fibre $N^*_zZ$ is a
@@ -422,6 +494,21 @@ $\omega$, with data conormal to the hyperplane $\{(x-y)\cdot\omega=0\}$, using t
 characteristic hypersurfaces through it, and then integrate over $\omega$. It is
 convenient to keep the radial variable as well: this amounts to an oscillatory
 integral whose phase solves the eikonal equation.
+
+\begin{question}
+Why are there two characteristic hypersurfaces through each hyperplane, and why do we
+need both?
+\end{question}
+\begin{answer}
+Over a conormal $\omega\,dx$ to the hyperplane the characteristic set contains the
+two points $\tau=\pm|\omega|_g$, giving two families of bicharacteristics and hence two
+characteristic hypersurfaces: a plane wave moving in the direction $\omega$ and one
+moving in the direction $-\omega$. The wave equation is of second order in $t$, so we
+must match two pieces of Cauchy data, $u(0)$ and $D_tu(0)$; a single travelling wave
+has its time derivative determined by its value, and only the sum of the two
+can match arbitrary data (\cref{wave:ex:initial-split}). In one dimension this is
+d'Alembert's formula $\cos(tD_x)\delta=\frac12(\delta(x-t)+\delta(x+t))$.
+\end{answer}
 
 \subsection{The eikonal equation}
 
@@ -611,7 +698,37 @@ minimising, so $d(x,y)=|t|$.
 By \cref{wave:lem:bichar}, $\Gamma$ is the union of the null bicharacteristics of
 $D_t^2-\Delta_x$ (acting in $(t,x)$, with $(y,\eta)$ fixed) through the points
 $(0,y,y;\pm|\eta|,\eta,-\eta)$, i.e.\ the flow-out of the wavefront set of the
-initial datum $\delta(x-y)$.
+initial datum $\delta(x-y)$. In words: the singularity of $\delta_y$ travels out
+along all unit speed geodesics from $y$, and at time $t$ it sits on the geodesic
+sphere of radius $|t|$ about $y$ (\cref{wave:fig:wavefront}).
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}[>=Stealth,scale=0.95]
+    \fill[gray!12] (-2.5,-0.7) rectangle (2.5,0.7);
+    \draw[->] (-2.8,0) -- (2.9,0) node[right]{$x$};
+    \draw[->] (0,-0.9) -- (0,5.4) node[above]{$t$};
+    \draw (-2.5,-0.9) -- (-2.5,5.2) (2.5,-0.9) -- (2.5,5.2);
+    \node[below,font=\small] at (-2.5,-0.9) {$y-\frac L2$};
+    \node[below,font=\small] at (2.5,-0.9) {$y+\frac L2$};
+    \node[below,font=\small] at (0,-0.9) {$y$};
+    \draw[very thick] (0,0) -- (2.5,2.5) (-2.5,2.5) -- (0,5);
+    \draw[very thick] (0,0) -- (-2.5,2.5) (2.5,2.5) -- (0,5);
+    \draw[very thick] (0,0) -- (-0.7,-0.7) (0,0) -- (0.7,-0.7);
+    \draw[dotted] (-2.5,5) -- (2.5,5);
+    \node[right,font=\small] at (2.6,5) {$t=L$: $x=y$ again};
+    \node[right,font=\small] at (2.6,2.5) {$t=\frac L2$};
+    \node[right,font=\small] at (2.6,0.35) {$|t|<t_0$};
+    \node[above left,font=\small] at (2.0,2.0) {$x=y+t$};
+  \end{tikzpicture}
+  \caption{The singular support of $K_{\cos}(t,\cdot,y)$ on the circle
+  $X=\R/L\Z$, drawn on a fundamental domain $|x-y|\le\frac L2$ whose ends are
+  identified. For small $|t|$ (shaded) it is the geodesic sphere $\{d(x,y)=|t|\}$, as
+  in \cref{wave:cor:WF-short}. For larger $t$ the singularity keeps moving along the
+  geodesics and returns to $x=y$ at $t=L$, the length of the closed geodesic; this is
+  why the wave trace is singular at $t=L$ (\cref{wave:sec:poisson}).}
+  \label{wave:fig:wavefront}
+\end{figure}
 
 \section{Operations on conormal distributions}\label{wave:sec:operations}
 
@@ -689,6 +806,11 @@ amplitude $\hat v(\rho)$ independent of $t$; this is the one-dimensional case of
 the statement that amplitudes may depend on the normal variable.
 
 \section{The trace of the wave group}\label{wave:sec:trace}
+
+We now integrate the parametrix over the diagonal. Only the restriction of the
+kernel to $\{x=y\}$ matters, and for small $|t|\ne0$ this restriction is smooth,
+because the singularities sit on $\{d(x,y)=|t|\}$; all the singularity of the trace
+near $t=0$ therefore comes from $t=0$ itself.
 
 For $\psi\in\cS(\R)$ let
 $C_\psi=\int\psi(t)\cos(t\Lambda)\,dt=\tilde\psi(\Lambda)$, where
@@ -801,12 +923,75 @@ $t\in L\Z$, the lengths of the closed geodesics (\cref{wave:sec:poisson}).
 
 \section{Weyl asymptotics}\label{wave:sec:weyl}
 
+\begin{discussion}
+Weyl's law has a simple heuristic. By the uncertainty principle each eigenfunction
+occupies a cell of volume $(2\pi)^n$ in phase space, and an eigenfunction with
+$\lambda_j\le\lambda$ ``lives'' in the region $\{(x,\xi);\ |\xi|_{g(x)}\le\lambda\}$ of
+$T^*X$. That region has volume $\omega_n\vol(X)\lambda^n$, so one expects
+$N(\lambda)\approx(2\pi)^{-n}\omega_n\vol(X)\lambda^n$. The proof below makes this
+precise with the trace formula of \cref{wave:thm:trace}, whose leading coefficient is
+exactly this phase-space volume, written as a density in $\lambda$.
+\end{discussion}
+
 \begin{theorem}[Weyl's law with remainder]\label{wave:thm:weyl}
 Let $X$ be a compact Riemannian manifold of dimension $n\ge2$. Then
 \begin{equation*}
 N(\lambda)=(2\pi)^{-n}\omega_n\vol(X)\lambda^n+O(\lambda^{n-1}),\qquad\lambda\to\infty .
 \end{equation*}
 \end{theorem}
+\Cref{wave:fig:weyl} compares $N(\lambda)$ with $C_W\lambda^n$ for the flat torus
+$\R^2/2\pi\Z^2$, where $N(\lambda)$ counts lattice points in a disc
+(\cref{wave:ex:torus}).
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}[>=Stealth]
+    \draw[->] (0,0) -- (9.5,0) node[right]{$\lambda$};
+    \draw[->] (0,0) -- (0,6.0) node[above]{$N(\lambda)$};
+    \foreach \l in {1,...,6}{\draw (1.5*\l,0.08) -- (1.5*\l,-0.08) node[below,font=\footnotesize]{$\l$};}
+    \foreach \n in {25,50,75,100}{\draw (0.08,0.05*\n) -- (-0.08,0.05*\n) node[left,font=\footnotesize]{$\n$};}
+    \draw[thick,dashed,domain=0:6,samples=60,smooth,variable=\l] plot ({1.5*\l},{0.05*pi*\l*\l});
+    \draw[thick] (0.000,0.000) -- (0.000,0.050) -- (1.500,0.050) -- (1.500,0.250) -- (2.121,0.250) -- (2.121,0.450) -- (3.000,0.450) -- (3.000,0.650) -- (3.354,0.650) -- (3.354,1.050) -- (4.243,1.050) -- (4.243,1.250) -- (4.500,1.250) -- (4.500,1.450) -- (4.743,1.450) -- (4.743,1.850) -- (5.408,1.850) -- (5.408,2.250) -- (6.000,2.250) -- (6.000,2.450) -- (6.185,2.450) -- (6.185,2.850) -- (6.364,2.850) -- (6.364,3.050) -- (6.708,3.050) -- (6.708,3.450) -- (7.500,3.450) -- (7.500,4.050) -- (7.649,4.050) -- (7.649,4.450) -- (8.078,4.450) -- (8.078,4.850) -- (8.485,4.850) -- (8.485,5.050) -- (8.746,5.050) -- (8.746,5.450) -- (9.000,5.450) -- (9.000,5.650);
+    \node[font=\small] at (5.2,4.3) {$C_W\lambda^2=\pi\lambda^2$};
+    \draw[->,thin] (5.6,4.05) -- (6.55,3.45);
+  \end{tikzpicture}
+  \caption{The counting function $N(\lambda)=\#\{k\in\Z^2;\ |k|\le\lambda\}$ of the flat
+  torus $\R^2/2\pi\Z^2$ (staircase) and the Weyl term $C_W\lambda^2=\pi\lambda^2$
+  (dashed). The jumps of $N$ are the multiplicities, here at most of order
+  $\lambda^{\epsilon}$; on the round sphere they are of order $\lambda^{n-1}$, which
+  is why the remainder $O(\lambda^{n-1})$ cannot be improved in general.}
+  \label{wave:fig:weyl}
+\end{figure}
+
+The proof has three steps. The trace formula controls a \emph{smoothed} spectral
+density $\rho*\mu$, where $\rho$ is a fixed positive bump. Positivity of $\rho$ gives
+an a priori bound on the number of eigenvalues in any window of fixed length
+(Step 1). Integrating $\rho*\mu$ gives a smoothed counting function with the correct
+asymptotics (Step 2), and the a priori bound shows that smoothing changes $N$ by at
+most $O(\lambda^{n-1})$ (Step 3). \Cref{wave:fig:tauberian} shows the smoothing.
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}[>=Stealth]
+    \draw[->] (0,0) -- (9.5,0) node[right]{$\lambda$};
+    \draw[->] (0,0) -- (0,5.3);
+    \foreach \l in {1,...,6}{\draw (1.5*\l,0.08) -- (1.5*\l,-0.08) node[below,font=\footnotesize]{$\l$};}
+    \foreach \x/\h in {0.000/0.200, 1.500/0.800, 2.121/0.800, 3.000/0.800, 3.354/1.600, 4.243/0.800, 4.500/0.800, 4.743/1.600, 5.408/1.600, 6.000/0.800, 6.185/1.600, 6.364/0.800, 6.708/1.600, 7.500/2.400, 7.649/1.600, 8.078/1.600, 8.485/0.800, 8.746/1.600, 9.000/0.800}
+      {\draw[gray,line width=1.2pt] (\x,0) -- (\x,\h);}
+    \draw[thick,dashed] (0,0) -- (9,4.524) node[right,font=\small]{$2\pi\lambda$};
+    \draw[very thick] plot[smooth] coordinates {(0.000,0.146) (0.150,0.152) (0.300,0.158) (0.450,0.172) (0.600,0.205) (0.750,0.265) (0.900,0.353) (1.050,0.466) (1.200,0.594) (1.350,0.721) (1.500,0.832) (1.650,0.918) (1.800,0.973) (1.950,1.003) (2.100,1.021) (2.250,1.046) (2.400,1.097) (2.550,1.187) (2.700,1.316) (2.850,1.466) (3.000,1.610) (3.150,1.718) (3.300,1.773) (3.450,1.781) (3.600,1.765) (3.750,1.765) (3.900,1.811) (4.050,1.916) (4.200,2.070) (4.350,2.239) (4.500,2.387) (4.650,2.487) (4.800,2.531) (4.950,2.533) (5.100,2.519) (5.250,2.521) (5.400,2.563) (5.550,2.659) (5.700,2.802) (5.850,2.972) (6.000,3.136) (6.150,3.261) (6.300,3.323) (6.450,3.323) (6.600,3.285) (6.750,3.253) (6.900,3.273) (7.050,3.371) (7.200,3.540) (7.350,3.744) (7.500,3.929) (7.650,4.050) (7.800,4.089) (7.950,4.062) (8.100,4.012) (8.250,3.988) (8.400,4.026) (8.550,4.136) (8.700,4.304) (8.850,4.495) (9.000,4.670)};
+    \node[font=\small] at (2.6,2.6) {$\rho*\mu$};
+    \draw[->,thin] (2.6,2.35) -- (3.1,1.8);
+  \end{tikzpicture}
+  \caption{The Tauberian step for the torus of \cref{wave:fig:weyl}. The spectral
+  measure $\mu=\sum_j\delta_{\lambda_j}$ (gray spikes, heights proportional to
+  multiplicities) is too irregular to have asymptotics, but its convolution with a
+  fixed positive bump $\rho$ of width about $\frac13$ (thick curve) follows the
+  smooth density $nC_W\lambda^{n-1}=2\pi\lambda$ (dashed) up to an error of lower
+  order.}
+  \label{wave:fig:tauberian}
+\end{figure}
+
 \begin{proof}
 Write $C_W=(2\pi)^{-n}\omega_n\vol(X)$.
 
@@ -874,10 +1059,33 @@ Combining with Step 2 proves the theorem.
 \end{enumerate}
 \end{remark}
 
+\begin{question}
+Why must the test function be chosen with $\hat\psi\ge0$?
+\end{question}
+\begin{answer}
+Because Step 1 bounds the number of eigenvalues in a window $[\lambda-a,\lambda+a]$ by
+$c_0^{-1}(\rho*\mu)(\lambda)$, which needs $\rho=\hat\psi/(2\pi)\ge0$ everywhere and
+$\rho\ge c_0>0$ on $[-a,a]$. With a kernel taking negative values, a large cluster of
+eigenvalues near $\lambda$ could be cancelled in $\rho*\mu$ by the contributions of
+eigenvalues elsewhere, and the trace formula would give no control on $N$. Since
+$\psi$ must also have small support (the parametrix is only valid for $|t|<t_0$),
+$\psi=\theta*\theta$ is the natural choice: compact support and $\hat\psi=\hat\theta^2\ge0$.
+\end{answer}
+
 \section{Propagation of singularities and the Poisson relation}\label{wave:sec:poisson}
 
 In this section we explain, with some steps only sketched, how the global
-behaviour of $T$ is governed by closed geodesics. The full theory requires Fourier
+behaviour of $T$ is governed by closed geodesics.
+
+\begin{discussion}
+The trace $T$ is obtained by restricting the wave kernel to the diagonal $x=y$ and
+integrating. A singularity of $K_{\cos}(t,\cdot,y)$ starting at $y$ travels along a
+geodesic, so it can be on the diagonal at time $t\ne0$ only if that geodesic returns
+to its starting point at time $|t|$ with the same direction, i.e.\ is closed of
+length dividing $|t|$ (\cref{wave:fig:wavefront}). After integration in $x$ only these
+returns can produce singularities of $T$. Propagation of singularities makes this
+argument rigorous for all times.
+\end{discussion} The full theory requires Fourier
 integral operators \cite{Hormander-FIO} and the propagation theorem for operators of
 real principal type, which is proved in \cref{ch:microlocal}; for the strictly hyperbolic case see
 \cite[Chapter~XXIII]{Hormander-III}.

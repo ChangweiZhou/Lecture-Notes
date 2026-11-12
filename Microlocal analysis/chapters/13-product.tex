@@ -50,7 +50,8 @@ otherwise stated, and all vector bundles are complex.
 A \emph{fibration} (of compact manifolds) is a smooth surjective map
 $\phi:M\longrightarrow B$ between compact manifolds which is a
 \emph{submersion}, i.e.\ $\phi_*:T_mM\longrightarrow T_{\phi(m)}B$ is surjective
-for every $m\in M$. The \emph{fibre} over $b\in B$ is $Z_b=\phi^{-1}(b)$. We
+for every $m\in M$. The \emph{fibre} over $b\in B$ is $Z_b=\phi^{-1}(b)$
+(\cref{product:fig:fibration}). We
 indicate a fibration by the diagram $Z\text{---}M\overset{\phi}{\longrightarrow}B$,
 where $Z$ is the typical fibre (see below).
 \end{definition}
@@ -161,7 +162,8 @@ $T\Diag_B$ spans $T(B\times B)$; so $\Phi$ is transversal to $\Diag_B$ and
 $\tilde M$ is an embedded submanifold of codimension $\dim B$, compact since it
 is closed. Its tangent space is $\{(v,w);\phi_*v=F_*w\}$; given $w\in
 T_{\tilde b}\tilde B$ we can solve $\phi_*v=F_*w$, so $\tilde\phi$ is a
-submersion, and it is clearly surjective.
+submersion, and it is surjective because $F$ is defined on all of $\tilde B$ and
+$\phi$ is surjective.
 \end{proof}
 
 \begin{proposition}[Composites and products]\label{product:prop:composite}
@@ -289,6 +291,17 @@ from sections of $E$ to sections of $F$, is
 The shift in order is such that the symbols have order $m$: $\dim M^2_\phi=2f+b$
 and $\Diag_M$ has codimension $f$ in $M^2_\phi$, so the symbol order is
 $m-\frac b4+\frac{2f+b}4-\frac f2=m$.
+
+\begin{discussion}
+  Why the fibre product? An operator acting on each fibre separately never moves
+  information from one fibre to another, so its Schwartz kernel on $M^2$ vanishes
+  unless the two points lie in the same fibre, i.e.\ it is supported in
+  $M^2_\phi$. On $M^2_\phi$ it is an ordinary pseudodifferential kernel in the
+  fibre variables, conormal to the diagonal. Viewed on $M^2$ it is a
+  $\delta$-function in the base directions $y-y'$ times such a kernel; this
+  picture is the starting point for the product-type calculus later in the
+  chapter.
+\end{discussion}
 
 \begin{lemma}\label{product:lem:local-families}
 Let $U\subset B$ be an open ball over which there is a trivialization
@@ -434,6 +447,19 @@ $K^0(B)$ generalizing the index of a single elliptic operator. The null spaces
 $\Nul(A_b)$ need not have constant dimension, so need not form a vector bundle;
 following \cite{Atiyah-Singer-IV} we first stabilize the family by a finite rank
 perturbation so that it becomes surjective.
+
+\begin{question}
+  Why not define the index bundle as $[\Nul A]-[\Nul A^*]$ directly?
+\end{question}
+\begin{answer}
+  Because $\dim\Nul A_b$ can jump. For the elliptic family
+  $A_b=D_\theta+b$ on the circle, $b\in[-\frac12,\frac12]$, the eigenvalues are
+  $k+b$, $k\in\Z$, so the null space is the constants at $b=0$ and zero
+  elsewhere; the same happens for $A_b^*=A_b$. Only the difference $\dim\Nul A_b-\dim\Nul A_b^*$ is stable. Adding $N$ fixed
+  sections makes every $\tilde A_b$ surjective, so the cokernel vanishes and the
+  null spaces have the constant dimension $N+\ind A_b$. This is the same idea as
+  cutting off Fourier modes in \cref{index:sec:families}.
+\end{answer}
 
 For each $b\in B$, $A_b$ is an elliptic operator on the compact manifold $Z_b$,
 so by \cref{ch:manifolds} it is Fredholm as a map
@@ -618,6 +644,22 @@ symbols are functions on the conormal space $W=N^*_pZ$, which contains the
 distinguished subspace $V=N^*_pY$, and the relevant compactification of $W$ is
 one which `remembers' $V$.
 
+\begin{question}
+  Why not use the radial compactification $\RC W$, as for ordinary symbols?
+\end{question}
+\begin{answer}
+  Because the symbols we need are not smooth on it. A fibrewise operator has a
+  symbol that depends only on the fibre covariable $\zeta\in U=W/V$, for instance
+  $a=\ang\zeta^\mu$. Near a point of $SV\subset\pa\RC W$ use the coordinates
+  $x=1/|\eta|$ and $v=\zeta/|\eta|$, in which $SV=\{x=0,\ v=0\}$. Then
+  $\ang w^{-\mu}a$ is $(x^2+|v|^2)^{\mu/2}$ times a smooth positive function, which
+  is not smooth in $(x,v)$ unless $\mu\in2\N_0$. It is, however, smooth in polar
+  coordinates around $\{x=v=0\}$. The relative compactification introduces
+  exactly these polar coordinates: it inserts a whole face $H_V$ over $SV$
+  (\cref{product:fig:relative,product:ex:blow-up}), and on the result such symbols
+  are smooth.
+\end{answer}
+
 Recall from \cref{ch:distributions} that the radial compactification of a real
 vector space $U$ with a Euclidean norm is the closed half-sphere
 \begin{equation*}
@@ -729,7 +771,7 @@ multiple of $|\zeta|/|\eta|$, giving (iii).
      plot ({1.6*\t/sqrt(1+\t*\t+\c*\c)},{1.6*\c/sqrt(1+\t*\t+\c*\c)});}
  \draw[blue!60] (-1.6,0)--(1.6,0);
  \foreach \c in {-1.5,-0.5,0.5,1.5}{
-   \draw[red!60,smooth,domain=-60:60,samples=120,variable=\t]
+   \draw[red!60,densely dashed,smooth,domain=-60:60,samples=120,variable=\t]
      plot ({1.6*\c/sqrt(1+\t*\t+\c*\c)},{1.6*\t/sqrt(1+\t*\t+\c*\c)});}
  \fill (0,1.6) circle (1.6pt) node[above]{$SV$};
  \fill (0,-1.6) circle (1.6pt) node[below]{$SV$};
@@ -744,7 +786,7 @@ multiple of $|\zeta|/|\eta|$, giving (iii).
      plot ({1.6*\x},{1.6*\c*sqrt(1-\x*\x)/sqrt(1+\c*\c*(1-\x*\x))});}
  \draw[blue!60] (-1.6,0)--(1.6,0);
  \foreach \c in {-1.5,-0.5,0.5,1.5}{
-   \draw[red!60] ({1.6*\c/sqrt(1+\c*\c)},-1.6)--({1.6*\c/sqrt(1+\c*\c)},1.6);}
+   \draw[red!60,densely dashed] ({1.6*\c/sqrt(1+\c*\c)},-1.6)--({1.6*\c/sqrt(1+\c*\c)},1.6);}
  \node[left] at (-1.6,0.9) {$H_W$};
  \node[right] at (1.6,0.9) {$H_W$};
  \node[above] at (0,1.6) {$H_V$};
@@ -753,9 +795,9 @@ multiple of $|\zeta|/|\eta|$, giving (iii).
 \end{scope}
 \end{tikzpicture}
 \caption{The relative compactification for $U=\R_\zeta$ (horizontal) and
-$V=\R_\eta$ (vertical). The lines $\eta=\text{const}$ (blue) all end at the two
+$V=\R_\eta$ (vertical). The lines $\eta=\text{const}$ (solid) all end at the two
 points $\zeta=\pm\infty$, $\eta/\ang\zeta=0$ of $H_W$; the lines
-$\zeta=\text{const}$ (red), which in $\RC W$ all end at the two points of $SV$,
+$\zeta=\text{const}$ (dashed), which in $\RC W$ all end at the two points of $SV$,
 end at distinct points of the front faces $H_V$. The blow-down map $\varpi$
 collapses each component of $H_V$ to a point of $SV$.}
 \label{product:fig:relative}
@@ -896,6 +938,17 @@ $S^{M,M'}$. Thus $\ang{\zeta,\eta}^\mu\in S^{\mu,\mu}_{\mathrm{ph}}$, while
 $\ang\zeta^\mu\in S^{0,\mu}_{\mathrm{ph}}$ is constant along $V$. Each
 $\pa_\zeta$-derivative improves the estimate by $\ang\zeta^{-1}$, each
 $\pa_\eta$-derivative by $\ang{\zeta,\eta}^{-1}$.
+
+\begin{discussion}
+  The two orders measure growth in two different regimes. Near the main face
+  $H_W$, $|\zeta|$ is large and $\eta$ is at most comparable to $\zeta$: this is
+  where an ordinary symbol of order $M'$ lives. Near the front face $H_V$, $\eta$
+  is much larger than $\zeta$: the symbol grows like $|\eta|^M$ and, for fixed
+  direction of $\eta$, is a symbol of order $M'-M$ in $\zeta$. The estimate
+  \eqref{product:eq:symbol-est} is the standard symbol estimate with these two
+  regimes separated: $\pa_\zeta$ gains only $\ang\zeta^{-1}$, not
+  $\ang{\zeta,\eta}^{-1}$.
+\end{discussion}
 
 \begin{lemma}[Peetre's inequality]\label{product:lem:peetre}
 For all $M,M'$ there is $C$ such that for all $w,\theta\in W$
@@ -1142,17 +1195,26 @@ refers to the larger submanifold $Y$.
 
 \begin{figure}[ht]
 \centering
-\begin{tikzpicture}
-\draw[thick] (-3,-1.2) rectangle (3,1.2);
-\draw[very thick,blue!70] (-3,0)--(3,0);
-\fill[red!70] (0.6,0) circle (2.5pt);
-\node at (2.6,0.9) {$X$};
-\node[above,blue!70] at (-2.2,0) {$Y$};
-\node[below,red!70] at (0.6,-0.05) {$Z$};
-\node[above] at (0.6,0.05) {\small$\delta(y)\otimes\Ic{m'}$};
+\begin{tikzpicture}[>=Stealth]
+\fill[gray!15] (-2.6,-0.6)--(2.2,-0.6)--(3.4,0.6)--(-1.4,0.6)--cycle;
+\draw (-2.6,-0.6)--(2.2,-0.6)--(3.4,0.6)--(-1.4,0.6)--cycle;
+\draw[very thick] (-2.0,0)--(2.8,0);
+\draw[->] (-1.4,-1.6)--(-1.4,1.6) node[above,font=\footnotesize]{$y$ (normal to $Y$)};
+\draw[->] (-0.8,-0.3)--(0.0,0.5);
+\node[font=\footnotesize] at (0.3,0.75) {$z$ (in $Y$, normal to $Z$)};
+\draw[->] (1.6,-0.25)--(2.4,-0.25) node[right,font=\footnotesize]{$w$};
+\node[font=\small] at (3.05,0.05) {$Z$};
+\node[font=\small] at (-2.25,-0.35) {$Y$};
+\node[font=\small] at (3.3,1.4) {$X$};
+\node[font=\footnotesize,align=left,anchor=west] at (4.2,0.6)
+  {away from $Z$: conormal to $Y$,\\ symbol in $\eta$ of order $M$};
+\node[font=\footnotesize,align=left,anchor=west] at (4.2,-0.5)
+  {at $Z$: product-type symbol\\ in $(\zeta,\eta)$ of orders $(M,M')$};
 \end{tikzpicture}
-\caption{The nested pair $Z\subset Y\subset X$. A product-type conormal
-distribution is conormal to $Y$ everywhere (for instance a $\delta$-function in
+\caption{The nested pair $Z\subset Y\subset X$ in adapted coordinates
+$(w,z,y)$: $Y=\{y=0\}$ (shaded) and $Z=\{z=y=0\}$ (thick line). The dual
+variables are $\zeta$ (to $z$) and $\eta$ (to $y$). A product-type conormal
+distribution is conormal to $Y$ away from $Z$ (for instance a $\delta$-function in
 the directions normal to $Y$) and has an additional conormal singularity along $Z$.
 For the fibrewise and product-type operators, $X=M^2$, $Y=M^2_\phi$ and
 $Z=\Diag_M$.}
@@ -1765,6 +1827,56 @@ $\sigma_V(a)(x,\cdot,\eta)$ of order $m'-m$, which is the local symbol of
 $\beta_{m,m'}(A)$.
 \end{proof}
 
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[>=Stealth]
+\fill[gray!8] (-1.8,-1.8) rectangle (1.8,1.8);
+\draw[line width=2.2pt] (-1.8,-1.8)--(-1.8,1.8);
+\draw[line width=2.2pt] (1.8,-1.8)--(1.8,1.8);
+\draw[line width=1pt,double,double distance=1.6pt] (-1.8,1.8)--(1.8,1.8);
+\draw[line width=1pt,double,double distance=1.6pt] (-1.8,-1.8)--(1.8,-1.8);
+\foreach \x/\y in {-1.8/-1.8,-1.8/1.8,1.8/-1.8,1.8/1.8}{\fill (\x,\y) circle (2.6pt);}
+\node[font=\small,align=center] at (0,0) {interior:\\ $T^*_xM$};
+\draw[->,gray] (-1.3,-2.35)--(1.3,-2.35)
+  node[right,font=\footnotesize,black]{$\zeta\in T^*_x(M/B)$};
+\draw[->,gray] (-2.35,-1.3)--(-2.35,1.3)
+  node[above,font=\footnotesize,black]{$\eta/\ang\zeta$, $\eta\in T^*_{\phi(x)}B$};
+\node[font=\footnotesize,align=left,anchor=west] at (2.3,0.4)
+  {$H_W$ (main face):\\ principal symbol $\sigma_{m,m'}(A)$,\\
+   a function on $[S^*M;\phi^*S^*B]$};
+\node[font=\footnotesize,align=left,anchor=west] at (2.3,2.15)
+  {$H_V$ (front face): base symbol $\beta_{m,m'}(A)(b,\hat\eta)$,\\
+   an operator on $Z_b$; local symbols in $\zeta\in\overline{T^*(M/B)}$};
+\node[font=\footnotesize,align=left,anchor=west] at (2.3,-1.4)
+  {corners $H_W\cap H_V$: compatibility\\ \eqref{product:eq:op-compatibility}};
+\draw[gray] (2.25,2.15)--(1.0,1.85);
+\draw[gray] (2.25,-1.4)--(1.85,-1.75);
+\end{tikzpicture}
+\caption{Which symbol lives where. The fibre of the relative compactification
+$\RelC{\phi^*T^*B}{T^*M}$ over $x\in M$ is a square
+$\overline{T^*_x(M/B)}\times\overline{\R^b}$ (\cref{product:fig:relative}). The
+principal symbol is the leading behaviour at the main face $H_W$ (sides, thick),
+where the fibre covariable $\zeta$ is large. The base symbol is the leading
+behaviour at the front face $H_V$ (top and bottom, double), where the base
+covariable $\eta$ is much larger than $\zeta$; for each direction $\hat\eta$ it is
+a whole pseudodifferential operator on the fibre. The two must agree at the
+corners. Full ellipticity (\cref{product:def:fully-elliptic}) asks for
+invertibility on both faces.}
+\label{product:fig:symbols}
+\end{figure}
+
+\begin{discussion}
+  Why is the base symbol an operator and not a function? On the front face the
+  fibre variable $\zeta$ is not sent to infinity: it stays a finite point of
+  $\overline{T^*(M/B)}$. So the leading behaviour in $\eta$ is a whole classical
+  symbol in $\zeta$, of order $m'-m$, not just its leading part. Together with the
+  part of the kernel away from the diagonal (which is conormal to $M^2_\phi$ and
+  also has a leading term in $\eta$) this is an operator on the fibre $Z_b$.
+  Composition in the calculus therefore composes base symbols as operators
+  (\cref{product:thm:composition}), and their invertibility is a global question
+  on each fibre, not a pointwise one.
+\end{discussion}
+
 Concretely, the surjectivity of the base symbol amounts to the following: if
 $P\in\mathcal B^{m,m'}_\phi$ has local symbols $p(z,y,\zeta,\hat\eta)$ (of order $m'-m$
 in $\zeta$) near the fibre diagonal, then
@@ -2011,6 +2123,19 @@ for every $(b,\eta)\in T^*B\setminus0$.
 By \eqref{product:eq:op-compatibility}, (a) implies that each $\beta(A)(b,\eta)$ is
 an elliptic operator of order $m'-m$ on $Z_b$; (b) then requires these elliptic
 operators to be invertible, which in particular forces their index to vanish.
+
+\begin{question}
+  Why is an invertible principal symbol not enough for the Fredholm property?
+\end{question}
+\begin{answer}
+  Take $M=Z\times B$ and the constant family $P_b=P_0$, where
+  $P_0\in\Psido0(Z;E_0,F_0)$ is elliptic with $\Nul P_0\ne0$, regarded as an
+  element of $\Psipt{0,0}(M;E,F)$. Its principal symbol is invertible, since
+  $P_0$ is elliptic. But if $P_0v=0$, then $u(z,y)=\chi(y)v(z)$ satisfies $Pu=0$
+  for every $\chi\in\CI(B)$, so the null space on $M$ is infinite dimensional.
+  The base symbol, here $P_0$ itself
+  (\cref{product:prop:subalgebras}(i)), detects this: it is not invertible.
+\end{answer}
 
 \begin{lemma}\label{product:lem:inverse-family}
 If $P(p)\in\Psido\mu(Z;E_0,F_0)$ is a smooth family of elliptic operators, depending

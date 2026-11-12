@@ -2,6 +2,15 @@
 \providecommand{\cA}{\mathcal{A}}
 \providecommand{\cB}{\mathcal{B}}
 
+In \cref{ch:determinants} we met the residue trace, a trace on the algebra
+of polyhomogeneous operators modulo smoothing operators, and we noted that
+it is essentially the only one. Why is there exactly one trace, and are
+there ``higher'' invariants of the same kind? Hochschild homology is the
+tool that answers such questions: its degree-zero part is dual to the space
+of traces, and its higher parts are the natural higher analogues. For
+symbol algebras it turns out to be computable, and the answer is purely
+topological.
+
 The algebra $\Psido{\Z}(X)$ of classical pseudodifferential operators of
 integral order on a compact manifold $X$, studied in \cref{ch:manifolds}, is
 a non-commutative deformation of a commutative algebra: modulo
@@ -30,7 +39,31 @@ resulting spectral sequence has $E_1$ term the homogeneous differential forms
 on $T^*X\setminus0$, its first differential is the Poisson (Koszul--Brylinski)
 differential, a symplectic Hodge star identifies $E_2$ with de Rham cohomology,
 and a homogeneity argument shows that the spectral sequence degenerates and
-converges.
+converges. \Cref{hochschild:fig:roadmap} summarizes the logic.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzcd}[column sep=3.5em,row sep=2.4em,cells={font=\small}]
+  \HH_\bullet(\C[x])\cong\Omega^\bullet_{\mathrm{pol}}
+    \arrow[r,"\text{Taylor, Borel}"]
+  & \HH_\bullet(\CI(X))\cong\Omega^\bullet(X)
+    \arrow[d,"\text{K\"unneth}"]\\
+  E^1_{p,\bullet}=\Omega^\bullet_{(p)}(Y),\ \ d^1=-i\delta
+    \arrow[d,"\text{symplectic }*"']
+  & \HH_\bullet(\cA_0)\cong\Omega^\bullet_{(\cdot)}(Y)
+    \arrow[l,"\text{filter by order}"']\\
+  E^2\cong H^{2n-\bullet}(S^*X)\oplus H^{2n-\bullet-1}(S^*X)
+    \arrow[r,"\text{degeneration}"]
+  & \HH_\bullet(\cA)
+\end{tikzcd}
+\caption[Roadmap of the computation of Hochschild homology]{Roadmap of the
+chapter, with $Y=T^*X\setminus0$. The first three entries are Hochschild
+homologies of commutative algebras (Koszul resolution, Connes' theorem,
+homogeneous symbols). The last three treat the non-commutative symbol algebra
+$\cA$ as a deformation of the commutative algebra $\cA_0$; the $E^2$ term is
+concentrated in the bidegrees with $p=k-n$.}
+\label{hochschild:fig:roadmap}
+\end{figure}
 
 Throughout, vector spaces are complex, $\otimes$ without decoration is the
 algebraic tensor product over $\C$, and $X$ is a smooth manifold of dimension
@@ -61,6 +94,41 @@ and set
   \label{hochschild:eq:b}
 \end{equation}
 with $b=b'=0$ on $C_0(\cA)=\cA$.
+
+\begin{discussion}
+It helps to picture a chain $a_0\otimes\dots\otimes a_k$ as $k+1$ beads on
+a necklace (\cref{hochschild:fig:faces}). The face map $d_i$ multiplies
+two neighbouring beads. The last face $d_k$ multiplies $a_k$ with $a_0$,
+closing the necklace; it is this cyclic face that distinguishes $b$ from
+$b'$. In the lowest degree, $b(a_0\otimes a_1)=a_0a_1-a_1a_0$, so the cyclic
+face is what makes Hochschild homology see commutators, and hence traces.
+\end{discussion}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex]
+  \def\R{1.6}
+  \foreach \i in {0,...,4}{
+    \pgfmathsetmacro{\ang}{90-72*\i}
+    \node[circle,draw,fill=gray!15,inner sep=1.5pt,minimum size=17pt] (a\i) at (\ang:\R) {\small $a_{\i}$};
+  }
+  \foreach \i/\j/\lab in {0/1/d_0,1/2/d_1,2/3/d_2,3/4/d_3}{
+    \draw[thick] (a\i) -- (a\j);
+    \pgfmathsetmacro{\mang}{90-72*\i-36}
+    \node at (\mang:{\R*0.62}) {\small $\lab$};
+  }
+  \draw[thick,densely dashed] (a4) -- (a0);
+  \pgfmathsetmacro{\mang}{90-72*4-36}
+  \node at (\mang:{\R*0.62}) {\small $d_4$};
+  \node[align=left,font=\small] at (4.6,0.3) {$d_i$: multiply the two\\ beads joined by the edge;\\ $d_4$ (dashed) closes the\\ necklace: $a_4a_0\otimes a_1\otimes a_2\otimes a_3$};
+\end{tikzpicture}
+\caption[Face maps of the Hochschild complex]{A Hochschild $4$-chain
+$a_0\otimes a_1\otimes a_2\otimes a_3\otimes a_4$ as a necklace. Each edge
+corresponds to a face map $d_i$. The bar differential $b'$ uses only the
+solid edges; the Hochschild differential $b$ also uses the dashed cyclic
+edge.}
+\label{hochschild:fig:faces}
+\end{figure}
 
 \begin{lemma}\label{hochschild:lem:simplicial}
 For $k\ge2$ and $0\le i<j\le k$ the face maps satisfy
@@ -207,6 +275,20 @@ Let $\Omega^k_{\mathrm{pol}}=\C[x]\otimes\Lambda^k(\C^n)$ be the space of
 $k$-forms on $\R^n$ with polynomial coefficients, $dx^j$ corresponding to the
 $j$-th basis vector $e_j$ of $\C^n$.
 
+\begin{discussion}
+For a commutative algebra of functions, a $k$-chain is a function of $k+1$
+points $z_0,\dots,z_k$, and every face map restricts it to a diagonal where
+two neighbouring points coincide. A cycle is therefore a function whose
+alternating sum of diagonal restrictions vanishes, and only the behaviour of
+chains infinitely near the full diagonal $z_0=\dots=z_k$ can survive in
+homology. Near the diagonal a function of $k+1$ points that vanishes when
+any two neighbours meet looks, to first order, like a $k$-linear expression
+in the differences $z_j-z_{j-1}$; the cycle condition makes it alternating.
+This is why Hochschild homology of a commutative algebra of functions
+consists of differential forms. The map $\varepsilon$ below extracts
+exactly this first-order part.
+\end{discussion}
+
 \subsection{The Hochschild--Kostant--Rosenberg map}
 For a function $u$ of $(z_0,\dots,z_k)$ set
 \begin{equation}
@@ -337,7 +419,21 @@ and $\HH_k(\C[r^{\pm1}])=0$ for $k\ge2$, the isomorphisms again being
 induced by $\varepsilon$.
 \end{remark}
 
-The original direct argument for \cref{hochschild:thm:polynomial} proceeds
+\begin{question}
+Why use the Koszul resolution at all, when the bar resolution already
+computes $\HH_\bullet(\cA)$?
+\end{question}
+\begin{answer}
+The bar resolution is enormous: $P_k=\cA^{\otimes(k+2)}$ in every degree,
+and the complex $C_\bullet(\cA)$ it produces has non-zero differential
+everywhere. The Koszul resolution has length $n$ and finite rank over
+$\cA^e$, and after tensoring with $\cA$ its differential vanishes
+identically, because $x_i-y_i$ acts as zero. So the homology can be read off
+with no computation; the comparison theorem transfers the answer back to the
+Hochschild complex.
+\end{answer}
+
+A more elementary argument for \cref{hochschild:thm:polynomial} proceeds
 instead by successively restricting to chains vanishing on diagonals. This
 reduction is very useful for smooth functions, where no finite free
 resolution is at hand, and we now describe it.
@@ -375,7 +471,15 @@ $\varphi(a_0;a_1,\dots,a_k)$ is a cycle with $\varepsilon$-image
 $a_0\,da_1\wedge\dots\wedge da_k$.
 \end{proof}
 
-The main result of this section is the corresponding injectivity.
+The main result of this section is the corresponding injectivity. Its proof
+has three steps. First, every class is represented by a \emph{normalized}
+chain, one that vanishes on all the diagonals $\{z_i=z_{i+1}\}$
+(\cref{hochschild:prop:normalized}). Second, a normalized cycle with
+$\varepsilon(u)=0$ is \emph{locally} a boundary: away from the full diagonal
+by a direct construction, and near it by Taylor expansion and the polynomial
+case (\cref{hochschild:lem:local}). Third, the boundaries form a module over
+$\CI(X^{k+1})$ (\cref{hochschild:lem:B-module}), so local solutions can be
+patched together with a partition of unity.
 
 \begin{theorem}[Connes]\label{hochschild:thm:Connes}
 For a compact manifold $X$, $\varepsilon$ induces an isomorphism
@@ -835,7 +939,8 @@ $h$-dependent chains at $h=0$.
 The complex $(\cB^{(\bullet)},b)$ is filtered by the subcomplexes
 $F_p\cB^{(k)}=\{u;\ u_m=0\text{ for }m>p\}$ of chains of order at most $p$;
 $b(F_p)\subset F_p$ since each $b_l$ lowers degrees by $l\ge0$. The filtration
-is exhaustive, $\bigcap_pF_p=0$, and complete: a series $\sum_je_j$ with
+is exhaustive ($\bigcup_pF_p\cB^{(k)}=\cB^{(k)}$), separated
+($\bigcap_pF_p=0$), and complete: a series $\sum_je_j$ with
 $e_j\in F_{p_j}$, $p_j\to-\infty$ and $\sup p_j<\infty$ converges in the sense
 that each component is a finite sum, and $b$ commutes with such sums.
 

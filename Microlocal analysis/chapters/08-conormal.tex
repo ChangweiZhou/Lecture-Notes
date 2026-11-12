@@ -4,6 +4,15 @@
 \providecommand{\Vt}{\mathcal{V}}
 \providecommand{\Ffib}{\mathcal{F}_{\mathrm{fib}}}
 
+After smooth functions, the simplest distributions are those whose
+singularities are as regular as possible: they sit on a smooth submanifold
+$Y$, point only in the directions normal to $Y$, and look the same at all
+small scales up to a power. In \cref{ch:microlocal} we met examples: the
+Heaviside function $H(x_1)$, the delta function and the kernel of a
+pseudodifferential operator, whose wavefront sets lie in the conormal bundle
+of a submanifold (\cref{microlocal:fig:wf-examples,microlocal:fig:kernel}).
+This chapter builds the class of all such distributions.
+
 The Dirac delta function, the Schwartz kernels of pseudodifferential operators
 and the travelling-wave solutions of hyperbolic equations are all examples of
 distributions that are smooth outside a submanifold $Y$ and have a very
@@ -30,6 +39,11 @@ local coordinates and globalized in \cref{ch:hj}.
 
 \section{Symbols}\label{conormal:sec:symbols}
 
+Conormal distributions will be Fourier transforms of symbols in the normal
+variables, so we first collect what we need about symbols, and in particular
+about classical symbols, which are smooth functions on the radial
+compactification.
+
 \subsection{Symbols with bounds}
 Recall from \cref{ch:euclidean} that for $m\in\R$, $S^m(\R^p;\R^k)$ is the
 space of $a\in\CI(\R^p\times\R^k)$ such that
@@ -42,7 +56,7 @@ case without parameters, $S^{-\infty}=\bigcap_m S^m$, and every sequence
 $a_j\in S^{m-j}$ has an asymptotic sum $a\sim\sum_j a_j$, unique modulo
 $S^{-\infty}$.  We shall also write $S^m_{\mathrm c}(\R^p;\R^k)$ for the
 subspace of symbols vanishing for $z$ outside a compact subset of $\R^p$.
-Clearly $\partial_{\xi_j}:S^m\to S^{m-1}$, $\xi_j:S^m\to S^{m+1}$, and
+Directly from \eqref{conormal:eq:symbol-est}, $\partial_{\xi_j}:S^m\to S^{m-1}$, $\xi_j:S^m\to S^{m+1}$, and
 $S^m\cdot S^{m'}\subset S^{m+m'}$.  Note that $S^{-\infty}(\R^k)=\cS(\R^k)$.
 
 The symbol spaces are invariant under linear changes of the variable: if
@@ -89,6 +103,18 @@ is independent of the choice; this is the space of \emph{classical} (or
 polyhomogeneous) symbols of order $m$.  (One may regard it as the space of
 sections of a trivial line bundle $N_{-m}$ over $\RC W$ of which $\rho^{-m}$ is
 a global trivializing section.)
+
+\begin{discussion}
+  Why compactify? A classical symbol has an expansion in homogeneous terms of
+  decreasing degree at infinity. After the substitution $r=\abs\xi^{-1}$ this
+  is simply a Taylor expansion in $r$ at $r=0$, the sphere at infinity
+  (\cref{conormal:fig:compactify}). So statements about expansions, such as
+  asymptotic summation and the principal part, become statements about smooth
+  functions on a manifold with boundary and their Taylor series at the
+  boundary. The one-point compactification would collapse the sphere at
+  infinity to a point and forget the direction $\xi/\abs\xi$, which is
+  exactly where the principal part lives.
+\end{discussion}
 
 \begin{lemma}\label{conormal:lem:classical-basic}
   For all $m,m'\in\R$:
@@ -208,6 +234,9 @@ classical versions by a subscript ``$\mathrm{ph}$''.
 
 \section{Conormal distributions at a point}\label{conormal:sec:point}
 
+The model is the delta function: $\hat\delta_0=1$ is the simplest symbol. We
+allow any symbol on the Fourier side.
+
 \begin{definition}\label{conormal:def:point}
   For $m\in\R$ set
   \begin{equation*}
@@ -227,6 +256,19 @@ $\hat\delta_0=1$, so
 \end{equation*}
 Since $S^{m-1}\subset S^m$, $\Ic{m-1}_\cS\subset\Ic{m}_\cS$, and
 $\bigcap_m\Ic{m}_\cS(\R^n,\{0\})=\cF^{-1}\cS(\R^n)=\cS(\R^n)$.
+
+\begin{question}
+  Why ask $\hat u$ to be a symbol, and not just polynomially bounded?
+\end{question}
+\begin{answer}
+  Every $u\in\CmIc(\R^n)$ has a polynomially bounded Fourier transform, so that
+  alone says nothing about the singularity. The extra information in the
+  symbol estimates is that each $\zeta$-derivative gains a power of
+  $\ang\zeta^{-1}$. Since $D_\zeta$ corresponds to multiplication by $-z$, this
+  says that $z^\alpha u$ becomes smoother as $\abs\alpha$ grows: the singularity
+  is concentrated at $z=0$ in a uniform, scale-invariant way. This is the
+  content of \cref{conormal:lem:point-basic}(i)--(iii) below.
+\end{answer}
 
 \begin{lemma}\label{conormal:lem:point-basic}
   Let $u\in\Ic{m}_\cS(\R^n,\{0\})$ (resp.\ the classical space).  Then
@@ -356,7 +398,47 @@ give a smooth surjective map
 a diffeomorphism of $(0,\infty)\times\Sphere^{n-1}$ onto $\R^n\setminus0$ which
 collapses $\{0\}\times\Sphere^{n-1}$ to $0$.  Each $U_j$ in
 \cref{conormal:prop:homogeneous} is of the form $r^{-n-\mu+j}$ times a smooth
-function on the sphere.
+function on the sphere.  Radial compactification adds a sphere at infinity;
+blowing up replaces the origin by a sphere (\cref{conormal:fig:compactify}).
+In both cases a homogeneous function becomes a power of the boundary defining
+function times a smooth function.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,scale=0.9]
+  \begin{scope}
+    \fill[gray!12] (0,0) circle (2);
+    \draw[very thick] (0,0) circle (2);
+    \foreach \a in {15,75,...,375} \draw[->] (0,0)--(\a:1.95);
+    \fill[gray!35] (40:1.55) arc (40:70:1.55)--(70:2) arc (70:40:2)--cycle;
+    \node[font=\footnotesize] at (55:2.45) {$r<\epsilon$};
+    \node[font=\footnotesize,anchor=west] at (-30:2.1) {$\Sphere W=\{r=0\}$};
+    \node[font=\footnotesize] at (0,-2.6) {(a) radial compactification $\RC W$};
+  \end{scope}
+  \begin{scope}[xshift=7.2cm]
+    \fill[gray!12] (0,0) circle (2);
+    \fill[white] (0,0) circle (0.7);
+    \draw[very thick] (0,0) circle (0.7);
+    \draw[dashed] (0,0) circle (2);
+    \foreach \a in {15,75,...,375} \draw[->] (\a:0.7)--(\a:1.9);
+    \node[font=\footnotesize,align=center] at (0,0) {$\{r=0\}$\\$=\Sphere^{n-1}$};
+    \node[font=\footnotesize] at (0,-2.6) {(b) blow-up $[W,\{0\}]$};
+    \draw[->] (2.3,0)--(3.3,0) node[midway,above,font=\footnotesize]{$\beta$};
+    \fill (3.8,0) circle (1.6pt) node[below,font=\footnotesize]{$0\in W$};
+  \end{scope}
+\end{tikzpicture}
+\caption[Radial compactification and blow-up]{(a) The radial
+compactification $\RC W$ adds the sphere at infinity $\Sphere W$, with
+boundary defining function $r=\abs\xi^{-1}$ near it. Rays become arcs ending at
+the boundary, and a neighbourhood of a boundary point (dark) is a conic
+region $\{\abs\xi>1/\epsilon\}$ around a direction. Classical symbols of order
+$m$ are $r^{-m}$ times smooth functions on $\RC W$. (b) The blow-up of the
+origin replaces $0$ by the sphere $\{r=0\}$ of directions, with
+$r=\abs z$; the blow-down map $\beta$ collapses it to $0$. The terms $U_j$ of
+\cref{conormal:prop:homogeneous} are powers of $r$ times smooth functions on
+$[W,\{0\}]$.}
+\label{conormal:fig:compactify}
+\end{figure}
 
 \begin{lemma}\label{conormal:lem:blowup}
   The action of $\GL(n,\R)$ on $\R^n$ lifts under $\beta$ to a smooth action on
@@ -376,6 +458,11 @@ boundary $\Sphere W$ with a blow-down map onto $W$, is well defined; see
 \cref{conormal:ex:blowup}.
 
 \section{The local model}\label{conormal:sec:local}
+
+For a submanifold $Y$ of positive dimension we take the Fourier transform only
+in the variables normal to $Y$, and let the symbol depend smoothly on the
+point of $Y$. Thus a conormal distribution is, roughly, a smooth family,
+parametrized by $Y$, of conormal distributions at a point.
 
 \subsection{Notation}
 Throughout the rest of the chapter $n$ is the dimension of the ambient space,
@@ -474,6 +561,18 @@ with compact support in $(x,y)$.  By \cref{conormal:lem:reduction} it can also b
 taken independent of $x$: $u=\osc{a}+f'$ with $a\in S^M_{\mathrm c}(\R^d;\R^k)$
 and $f'$ smooth (not compactly supported in general).  We call such an $a$ a
 \emph{full symbol} of $u$.
+
+\begin{discussion}
+  Two examples with $k=1$ fix the ideas. The delta function $\delta(x_1)$ has
+  full symbol $1$, so $M=0$ (see \cref{conormal:ex:delta}). The Heaviside
+  function satisfies $H(x_1)-\frac12=\frac12\sgn(x_1)$, and the inverse
+  Fourier transform in $x_1$ of $(1-\chi(\xi_1))/(i\xi_1)$, $\chi\in\CIc(\R)$
+  equal to one near $0$, differs from $\frac12\sgn(x_1)$ by a smooth function.
+  So, after a cut-off, $H(x_1)$ is conormal to $Y=\{x_1=0\}$ with full
+  symbol $(1-\chi(\xi_1))/(i\xi_1)$, of order $M=-1$: integrating once lowers
+  the order by one. In both cases the full symbol does not depend on $y$; in
+  general it may, smoothly.
+\end{discussion}
 
 \begin{proposition}\label{conormal:prop:local-basic}
   Let $\Omega\subset\R^n$ be open.  Then (and likewise for the classical spaces):
@@ -624,6 +723,38 @@ $(\bar z,\bar\zeta)\notin\WF(u)$ if and only if there is $A\in\Psido{0}(\R^n)$
 elliptic at $(\bar z,\bar\zeta)$ with $Au\in\CI$.  The conormal bundle of $Y$
 is $N^*Y=\{(0,y;\xi,0)\}\subset T^*\R^n$.
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,scale=0.9]
+  \begin{scope}
+    \draw[->] (-2.3,0)--(2.5,0) node[right]{$y$};
+    \draw[->] (0,-2)--(0,2.2) node[above]{$x$};
+    \draw[very thick] (-2.2,0)--(2.2,0) node[below left,font=\footnotesize]{$Y$};
+    \foreach \y in {-1.6,-0.8,0.8,1.6}{
+      \foreach \x in {0.5,1,1.5}{
+        \draw[->] (\y,\x)--(\y,\x+0.3*\x);
+        \draw[->] (\y,-\x)--(\y,-\x-0.3*\x);}}
+    \foreach \x in {-1.5,-0.5,0.5,1.5} \draw[->,gray] (-2.1,\x)--(-1.7,\x);
+    \node[font=\footnotesize] at (0,-2.6) {(a) $x\pa_x$ (black) and $\pa_y$ (gray)};
+  \end{scope}
+  \begin{scope}[xshift=6.5cm]
+    \draw[->] (-2.3,0)--(2.5,0) node[right]{$y$};
+    \draw[->] (0,-2)--(0,2.2) node[above]{$x$};
+    \draw[very thick] (-2.2,0)--(2.2,0) node[below left,font=\footnotesize]{$Y$};
+    \foreach \y in {-1.6,-0.8,0.8,1.6} \draw[<->,thick] (\y,-0.8)--(\y,0.8);
+    \node[font=\footnotesize] at (0,-2.6) {(b) $N^*Y=\{(0,y;\xi,0)\}$};
+  \end{scope}
+\end{tikzpicture}
+\caption[Vector fields tangent to $Y$ and the conormal bundle]{The local model
+with $k=d=1$. (a) Vector fields tangent to $Y=\{x=0\}$ are generated by
+$x_i\pa_{x_j}$ and $\pa_{y_l}$ (\cref{conormal:lem:generators}); they preserve
+each $\Ic{m}(\Omega,Y)$ (\cref{conormal:prop:local-basic}(i)), and repeated
+application of them characterizes conormality (\cref{conormal:sec:iterated}).
+(b) The conormal bundle, which contains the wavefront set of every conormal
+distribution (\cref{conormal:prop:WF-local}).}
+\label{conormal:fig:local}
+\end{figure}
+
 \begin{proposition}\label{conormal:prop:WF-local}
   If $u\in\Ic{m}(\Omega,Y)$ then $\WF(u)\subset N^*Y\setminus0$.  More
   precisely, if $u\in\Ic{m}_{\mathrm c}(\Omega,Y)$ has full symbol $a$, then
@@ -663,7 +794,8 @@ is $N^*Y=\{(0,y;\xi,0)\}\subset T^*\R^n$.
 
 \section{Invariance}\label{conormal:sec:invariance}
 
-We now show that the spaces $\Ic{m}_{\mathrm c}(\Omega,Y)$ are invariant under
+The definition of the local model uses linear coordinates and a Fourier
+transform, so it is not clear that it makes sense on a manifold. We now show that the spaces $\Ic{m}_{\mathrm c}(\Omega,Y)$ are invariant under
 diffeomorphisms preserving $Y$, and compute the effect on the full symbol
 modulo lower order terms.  Let $F:\Omega'\to\Omega$ be a diffeomorphism between
 open subsets of $\R^n$ with $F(\Omega'\cap Y)=\Omega\cap Y$.  Write
@@ -673,6 +805,24 @@ $F(x,y)=(F'(x,y),F''(x,y))$; then $F'(0,y)=0$, so $\pa_yF'(0,y)=0$, and
 \end{equation}
 define a diffeomorphism $g$ of $\Omega'\cap Y$ onto $\Omega\cap Y$ and the
 linear maps $A(y)$ induced by $F_*$ on the normal spaces.
+
+The proof of invariance splits $F$ into two pieces of very different
+nature:
+\begin{equation*}
+\begin{tikzcd}[column sep=small,row sep=normal,cells={nodes={font=\small}}]
+  & F=F_0\circ H\arrow[dl]\arrow[dr] & \\
+  \begin{array}{c}F_0(x,y)=(A(y)x,g(y))\\ \text{fibre-linear: exact formula}\\
+  \text{(\cref{conormal:lem:fibre-linear})}\end{array}\arrow[dr]
+  & & \begin{array}{c}H=\Id+O(\abs x^2)\text{ in }x,\ O(\abs x)\text{ in }y\\
+  \text{Moser homotopy: }H^*u-u\in\Ic{m-1}\\
+  \text{(\cref{conormal:prop:moser})}\end{array}\arrow[dl]\\
+  & \text{\cref{conormal:thm:invariance}: }F^*u\in\Ic{m},\ 
+  \text{symbol }\eqref{conormal:eq:symbol-transform} &
+\end{tikzcd}
+\end{equation*}
+The fibre-linear part acts on the symbol by a linear change of variables, and
+the remaining part, which is the identity to first order on $Y$, only changes
+lower order terms.
 
 \begin{lemma}\label{conormal:lem:fibre-linear}
   Let $V\subset\R^d$ be open, let $g$ be a diffeomorphism of $V$ onto $g(V)$
@@ -726,6 +876,18 @@ coefficients smooth in $s$, and families of orders $m-j$ have asymptotic sums.
   $u\in\Ic{m}_{\mathrm c}(\R^n,Y)$ with support in $O'$; similarly in the
   classical case.
 \end{proposition}
+\begin{discussion}
+  The method is Moser's homotopy trick. Join $H$ to the identity by the family
+  $H_s$. The derivative $\frac d{ds}H_s^*$ is $H_s^*$ composed with a vector field
+  $V_s$, and because $H$ agrees with the identity to first order on $Y$, $V_s$
+  has the special form \eqref{conormal:eq:V-form}, which lowers the conormal
+  order by one (\cref{conormal:lem:tangent-lower}). Instead of integrating
+  $\frac d{ds}H_s^*u$ directly, we solve the transport equation
+  $\pa_su(s)+V_su(s)\approx0$ with $u(1)=u$; then $H_s^*u(s)$ is almost constant
+  in $s$, and $H^*u\approx u(0)$, which differs from $u$ by terms of lower
+  order.
+\end{discussion}
+
 \begin{proof}
   Set $H_s(z)=z+s(H(z)-z)$, $s\in[0,1]$, so $H_0=\Id$, $H_1=H$ and
   $H_s(0,y)=(0,y)$.  At points of $Y$, $dH_s=\begin{psmallmatrix}\Id&0\\
@@ -803,6 +965,12 @@ coefficients smooth in $s$, and families of orders $m-j$ have asymptotic sums.
 \end{proof}
 
 \section{Conormality at the zero section of a vector bundle}\label{conormal:sec:bundle}
+
+The zero section of a vector bundle is the intermediate case between the local
+model and a general submanifold: the fibres carry a linear structure, so the
+Fourier transform in the fibres makes sense, but there are no global
+coordinates. By the tubular neighbourhood theorem every submanifold looks like
+this near $Y$ (\cref{conormal:sec:manifold}).
 
 Let $\pi:W\to Y$ be a real vector bundle of rank $k$ over a manifold $Y$ of
 dimension $d$, so $W$ has dimension $n=d+k$, and let $0_W\subset W$ be the zero
@@ -948,7 +1116,45 @@ property.
 
 \subsection{Normal fibrations}
 Alternatively, $\Ic{m}(X,Y)$ can be defined by transferring
-\cref{conormal:def:bundle} from the normal bundle to $X$.
+\cref{conormal:def:bundle} from the normal bundle to $X$
+(\cref{conormal:fig:tubular}).
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,scale=0.9]
+  \begin{scope}
+    \fill[gray!15] plot[smooth] coordinates {(-2.6,-0.2) (-1.3,0.95) (0,0.75) (1.3,1.25) (2.6,0.75)}
+       -- plot[smooth] coordinates {(2.6,-0.75) (1.3,-0.25) (0,-0.75) (-1.3,-0.55) (-2.6,-1.4)} -- cycle;
+    \draw[very thick] plot[smooth] coordinates {(-2.6,-0.8) (-1.3,0.2) (0,0) (1.3,0.5) (2.6,0)};
+    \foreach \p/\q in {(-1.95,-0.33)/(-1.55,-0.95),(-1.3,0.2)/(-1.3,-0.55),(-0.65,0.17)/(-0.6,-0.6),(0,0)/(0,-0.75),
+                       (0.65,0.2)/(0.62,-0.53),(1.3,0.5)/(1.3,-0.25),(1.95,0.33)/(1.97,-0.43)}
+      \draw[gray] \p--\q;
+    \foreach \p/\q in {(-1.95,-0.33)/(-2.25,0.25),(-1.3,0.2)/(-1.3,0.95),(-0.65,0.17)/(-0.7,0.92),(0,0)/(0,0.75),
+                       (0.65,0.2)/(0.68,1.0),(1.3,0.5)/(1.3,1.25),(1.95,0.33)/(1.93,1.08)}
+      \draw[gray] \p--\q;
+    \node[font=\footnotesize] at (2.75,0.2) {$Y$};
+    \node[font=\footnotesize] at (-2.3,1.2) {$D\subset X$};
+  \end{scope}
+  \draw[->] (3.2,0)--(4.4,0) node[midway,above,font=\footnotesize]{$f$};
+  \begin{scope}[xshift=7.4cm]
+    \fill[gray!15] (-2.6,-0.75) rectangle (2.6,0.75);
+    \draw[very thick] (-2.6,0)--(2.6,0);
+    \foreach \x in {-1.95,-1.3,...,1.95} \draw[gray] (\x,-0.75)--(\x,0.75);
+    \node[font=\footnotesize] at (3.05,0) {$0_{NY}$};
+    \node[font=\footnotesize] at (-2.1,1.05) {$D'\subset NY$};
+    \node[font=\footnotesize] at (1.62,-1.05) {$N_yY$};
+  \end{scope}
+\end{tikzpicture}
+\caption[A normal fibration]{A normal fibration
+(\cref{conormal:thm:tubular}) identifies a neighbourhood $D$ of $Y$ in $X$
+with a neighbourhood $D'$ of the zero section in the normal bundle; the
+gray curves on the left (for instance normal geodesics) go to the fibres
+$N_yY$. Since its differential along $Y$ induces the identity on $N_yY$, two
+choices differ by a map of the type in
+\cref{conormal:prop:bundle-invariance}, which preserves conormal
+distributions and their principal symbols.}
+\label{conormal:fig:tubular}
+\end{figure}
 
 \begin{theorem}[Tubular neighbourhood theorem]\label{conormal:thm:tubular}
   If $Y\subset X$ is a closed embedded submanifold, there are an open
@@ -989,6 +1195,18 @@ Alternatively, $\Ic{m}(X,Y)$ can be defined by transferring
 \end{proof}
 
 \subsection{The principal symbol}
+\begin{discussion}
+  Why should the principal symbol be a half-density? Under a change of
+  adapted coordinates the full symbol picks up the factor
+  $\abs{\det A(y)}^{-1}$ from the Fourier transform in the normal variables
+  (\cref{conormal:thm:invariance}). If $u$ itself is a half-density, the
+  Jacobian factor $\abs{\det F'}^{1/2}$ of $u$ combines with it to give
+  exactly the transformation law of a half-density on $N^*Y$ in the
+  coordinates $(y,\xi)$. With this convention the principal symbol is
+  intrinsic, with no choices of densities on $X$ or $Y$; this is also the
+  form needed for Lagrangian distributions in \cref{ch:hj}.
+\end{discussion}
+
 For $r\in\R$ let $S^r(N^*Y;\Omegah)$ be the space of smooth half-densities on
 $N^*Y$ which in each adapted chart are of the form $\beta(y,\xi)|dy\,d\xi|^{1/2}$
 with $\phi\beta\in S^{r-\frac k2}(\R^d;\R^k)$ for all $\phi\in\CIc$ of the chart.
@@ -1100,7 +1318,11 @@ equally for the classical spaces.
 
 We now show that conormal distributions are characterized by a regularity
 property which is manifestly invariant and does not involve the Fourier
-transform.  Let $\Vt(X,Y)$ denote the space of smooth vector fields on $X$
+transform.  The idea is that differentiating along $Y$, or applying
+$x_i\pa_{x_j}$, which is homogeneous of degree $0$ under dilations normal to $Y$,
+does not make a conormal singularity worse
+(\cref{conormal:fig:local}(a)), whereas a general derivative raises the order
+by one.  Let $\Vt(X,Y)$ denote the space of smooth vector fields on $X$
 tangent to $Y$; it is a Lie algebra and a $\CI(X)$-module.
 
 \begin{lemma}\label{conormal:lem:generators}
@@ -1253,6 +1475,20 @@ symbol estimates.
   global chain is $\Ic{-s-\frac n4}$, and $\Ic{-s-\frac n4}\subset\IH{s'}$ for
   $s'<s$ by the first inclusion.
 \end{proof}
+
+\begin{question}
+  Why do the two inclusions in \cref{conormal:thm:IH} not match exactly?
+\end{question}
+\begin{answer}
+  Sobolev spaces measure $L^2$ norms, symbol classes measure supremum norms,
+  and $L^2$ cannot see a borderline power exactly. Already for $\delta_0$, of
+  order $\frac n4$, we have $\delta_0\in H^s$ if and only if $s<-\frac n2$,
+  since $\ang\zeta^{s}\in L^2(\R^n)$ if and only if $s<-\frac n2$. So
+  $\delta_0\in\IH{s}$ for $s<-\frac n2=-\frac n4-\frac n4$ but not for
+  $s=-\frac n2$. Conversely the passage from weighted $L^2$ bounds to
+  pointwise bounds in \cref{conormal:lem:L2-sup} costs exactly $\frac k2$ in
+  the order. The net effect is an arbitrarily small loss.
+\end{answer}
 
 \begin{remark}
   \Cref{conormal:thm:IH} gives a second proof that $\Ic{*}(X,Y)$ is invariant

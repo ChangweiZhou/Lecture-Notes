@@ -711,6 +711,62 @@ $\Trbar=\Tr$ and $\eta(B)=\Chodd(B)$, while $b=\Id$ and $\gamma(b)=0$. Thus $\et
 \emph{extends the odd Chern character from the normal subgroup $G^{-\infty}_{\mathcal T}$
 to the whole group} $\GTeta$, at the expense of no longer being closed.
 
+\begin{discussion}
+  How far from closed is $\eta$? The odd Chern forms are closed because
+  $d(\alpha^{2k+1})=-\alpha^{2k+2}$ and $\Tr(\alpha^{2k+2})=\frac12\Tr[\alpha,\alpha^{2k+1}]
+  =0$. With $\Trbar$ in place of $\Tr$ the first identity still holds, but the
+  graded commutator no longer has trace zero: by the trace-defect formula its
+  regularized trace is a residue trace, an integral of symbols. So $d\eta$ is a
+  \emph{local} expression in the principal symbol $b$ of the family. Part of it is
+  exact, $-d\gamma(b)$, and the rest is the fibre integral of the odd Chern form of
+  $b$ over the circle (\cref{eta:thm:variation,eta:fig:variation}).
+\end{discussion}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[>=Latex,scale=1.0]
+  % cylinder X x S^1
+  \draw[thick] (0,0) ellipse (0.35 and 0.9);
+  \draw[thick] (4,0.9) arc (90:-90:0.35 and 0.9);
+  \draw[thick,dashed] (4,0.9) arc (90:270:0.35 and 0.9);
+  \draw[thick] (0,0.9)--(4,0.9); \draw[thick] (0,-0.9)--(4,-0.9);
+  \node at (2.6,-0.35) {\small$b=\sigma_0(\beta)$};
+  \node[above] at (2,0.95) {\small$X\times\Sphere$: $\Chodd(b)$};
+  \draw[->] (2,-1.15)--(2,-2.05) node[midway,right]{\small$\int_\Sphere$};
+  \draw[thick] (0,-2.4)--(4,-2.4);
+  \node[below] at (2,-2.45) {\small$X$: \ $-\int_\Sphere\Chodd(b)=d\bigl(\eta(\beta)+\gamma(b)\bigr)$};
+  \fill (1.1,-2.4) circle (1.4pt);
+  \draw[gray] (1.1,0.9)--(1.1,-0.9);
+  \node[right,align=left] at (5.0,0.3)
+    {\small over each $x\in X$: an invertible\\
+     \small Toeplitz operator $\beta(x)$ with\\
+     \small symbol the loop $b(x,\cdot)$, of\\
+     \small winding number $0$};
+  \draw[->,gray] (4.95,0.45)--(1.15,0.5);
+\end{tikzpicture}
+\caption[Variation of the eta form]{The variation formula
+\eqref{eta:eq:variation-total}. A family $\beta$ of invertible Toeplitz operators
+over $X$ has a symbol $b$ on $X\times\Sphere$. The odd Chern form of $b$, integrated
+over the circle, is exact on $X$, and the eta form of $\beta$, corrected by the
+local term $\gamma(b)$, is an explicit primitive. When $\beta$ is a smoothing
+perturbation of $\Pi$, the symbol is trivial and $\eta(\beta)$ is the closed odd
+Chern form of $\beta$.}
+\label{eta:fig:variation}
+\end{figure}
+
+\begin{question}
+  The regularized trace depends on the choice of the family $E(s)$. Does the eta
+  form?
+\end{question}
+\begin{answer}
+  Yes, but only mildly. By \cref{eta:lem:reg-dependence} a change of $E$ changes
+  $\Trbar$ by a residue trace, which is an integral of symbols. So the eta forms
+  defined with two admissible families differ by a form that is local in the
+  symbol of $B$. When $D(E,E')$ has order $-1$, \cref{eta:ex:change-eta} shows that
+  the change can be absorbed into the symbolic correction $\gamma$ without affecting
+  the index formula.
+\end{answer}
+
 \begin{theorem}\label{eta:thm:variation}
 For every smooth family $B\in\CI(X;\GTeta(\Sphere;\C^N))$ with symbol $b$,
 \begin{equation}\label{eta:eq:variation}
@@ -910,6 +966,36 @@ $\tau=0$ is $-\pa_\tau$, and $\iota_{-\pa_\tau}(\sigma\wedge d\tau\wedge d\theta
 (-1)^{2n}\sigma\wedge d\theta$ since $\sigma$ has degree $2n-1$.
 \end{proof}
 
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[>=Latex,scale=1.5]
+  \draw[->,gray] (-1.6,0)--(1.5,0) node[below,black]{\small$\xi$};
+  \draw[->,gray] (0,-1.4)--(0,1.5) node[above,black]{\small$\tau$};
+  \draw[line width=1.6pt] (8:1) arc (8:172:1);
+  \draw[line width=1.6pt,gray!50] (188:1) arc (188:352:1);
+  \fill (8:1) circle (1.2pt); \fill (172:1) circle (1.2pt);
+  \fill[gray!60] (-8:1) circle (1.2pt); \fill[gray!60] (188:1) circle (1.2pt);
+  \node at (60:1.3) {$S^*_+$};
+  \node[gray] at (-60:1.3) {$S^*_-$};
+  \node[align=left,right] at (1.25,1.0) {\small$a=\sigma(A)$ invertible;\\
+    \small contributes $\int_{S^*_+}\Td\wedge\Chodd(a)$};
+  \node[align=left,right] at (1.25,-0.9) {\small$\sigma(A)=0$ (Toeplitz):\\
+    \small no contribution};
+  \node[align=left,right] at (2.0,0.2) {\small $\partial S^*_+$ over $\xi=\pm1$:
+    base family $\beta(x)$;\\ \small contributes $\int_{S^*M}\Td\wedge(\eta(\beta)+\gamma(b))$};
+  \draw[->,gray] (1.98,0.2)--(1.06,0.15);
+\end{tikzpicture}
+\caption[Where the two terms of the index formula live]{The fibre of
+$S^*(M\times\Sphere)$ over a point of $M\times\Sphere$, for $n=1$, in the
+coordinates $(\xi,\tau)$. The blow-up along $\tau=0$ separates the two closed
+half-circles $S^*_\pm$. Each point $\tau=0$, $\xi=\pm1$, of $S^*M$ is doubled, and
+over it the base family $\beta(x)$ acts on the circle fibre. For a Toeplitz operator
+the symbol vanishes on $S^*_-$; the index formula \eqref{eta:eq:I} integrates the odd
+Chern form of the symbol over $S^*_+$, and the eta form of the base family over its
+boundary.}
+\label{eta:fig:halfsphere}
+\end{figure}
+
 We use the Atiyah--Singer theorem in the following form, with $\Td(M)$ a closed form
 representing the Todd class of $TM\otimes\C$ (by Stokes' theorem the right side does
 not depend on the choice of form).
@@ -957,6 +1043,40 @@ For every fully elliptic $A\in\PsiptT{0,0}(M\times\Sphere;\C^N)$,
 For $M$ a point (formally $n=0$) the formula reduces to \eqref{eta:eq:toeplitz-index},
 $S^*_+$ being the circle oriented by $d\theta$. The proof occupies the rest of this
 section. We write $\Delta(A)=\ind(A)-I(A)$.
+
+\begin{discussion}
+  The formula has the shape of the Atiyah--Patodi--Singer theorem: an interior
+  integral of a characteristic form, here over $S^*_+$, plus a boundary
+  correction, here over $\partial S^*_+=S^*M\times\Sphere$, given by an eta form
+  (\cref{eta:fig:halfsphere}). Neither term is an integer by itself. The variation
+  formula \cref{eta:thm:variation} says that when the symbols are deformed, the
+  change of the interior term is exactly cancelled by the change of the boundary
+  term; this is \cref{eta:prop:homotopy}. So both sides of the formula are
+  homotopy invariants, and the proof consists in deforming $A$ to an operator for
+  which the formula is already known.
+\end{discussion}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzcd}[column sep=2.6em,row sep=2.2em,cells={font=\small}]
+  A\arrow[r,"\text{Step 1}"]&
+  \beta=\Pi g\Pi\arrow[r,"\text{Step 2}"]&
+  \beta=\Pi h\Pi\arrow[r,"\text{Step 3}"]&
+  \beta=\Pi\arrow[r,"\text{Step 4}"]&
+  \Pi P\Pi\arrow[d,"\text{\cref{eta:lem:compression}}"]\\
+  &&&&\Delta(\Pi P\Pi)=0
+\end{tikzcd}
+\caption[Proof of the eta index formula]{Logic of the proof of
+\cref{eta:thm:index}. Step~1 makes the base family constant in $\theta$, using the
+weak contractibility of the Toeplitz group; Step~2 makes it pulled back from $M$;
+Step~3 removes it by composing with the inverse of a multiplication operator
+(\cref{eta:lem:multiplicative,eta:lem:base-multiplication}); Step~4 makes the
+symbol trivial near $\partial S^*_+$, so the operator is the compression of an
+ordinary operator $P$, for which $\ind(P)=I(\Pi P\Pi)$ is the Atiyah--Singer theorem on
+$M\times\Sphere$. Every step changes neither $\ind$ nor $I$
+(\cref{eta:prop:homotopy}).}
+\label{eta:fig:proof}
+\end{figure}
 
 \begin{proposition}\label{eta:prop:homotopy}
 If $(a_t,\beta_t)$, $t\in[0,1]$, is a smooth family of compatible pairs of fully
@@ -1063,8 +1183,8 @@ compressions converge in the $\CI$ topology and invertibility is an open conditi
 uniformly on the compact parameter space.
 
 \begin{proof}[Proof of \cref{eta:thm:index}] Let $A$ be fully elliptic with symbols
-$(a,\beta)$, $X=S^*M$. We show $\Delta(A)=0$ in four steps; each step replaces $A$ by
-an operator with the same $\Delta$.
+$(a,\beta)$, $X=S^*M$. We show $\Delta(A)=0$ in four steps (\cref{eta:fig:proof});
+each step replaces $A$ by an operator with the same $\Delta$.
 
 \emph{Homotopies with prescribed boundary values.} Choose a collar
 $\pa S^*_+\times[0,\epsilon)_r$ of the boundary of $S^*_+$ and $\phi\in\CI([0,\epsilon))$ with
