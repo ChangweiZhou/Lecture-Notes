@@ -351,8 +351,10 @@ and
 \end{equation*}
 Since $\lfloor\alpha\rfloor\in(\alpha-1,\alpha]$, $N(\lambda)-\frac L\pi\lambda\in(-1,1]$; thus
 $N(\lambda)=\frac L\pi\lambda+O(1)$. This agrees with the Weyl constant $C_W=(2\pi)^{-1}\omega_1\vol(X)=L/\pi$,
-and the remainder is even better than $O(\lambda^{n-1})=O(1)$ would require (cf.\
-\cref{wave:rem:weyl-sharp}(ii)).
+and the remainder is exactly of the size $O(\lambda^{n-1})=O(1)$ allowed by
+\cref{wave:thm:weyl}, and no better: at each threshold $\lambda=2\pi k/L$, $k\ge1$, we have
+$N(\lambda)=2k+1$ and $\frac L\pi\lambda=2k$, so the remainder equals $1$, and it is not
+$o(1)$ (cf.\ \cref{wave:rem:weyl-sharp}(ii)).
 
 Next, $T=\sum_j\cos(t\lambda_j)=1+2\sum_{k\ge1}\cos(2\pi kt/L)=\sum_{k\in\Z}e^{2\pi ikt/L}$. For
 $\psi\in\cS(\R)$, $T(\psi)=\sum_k\int\psi(t)e^{2\pi ikt/L}dt=\sum_k\hat\psi(-2\pi k/L)=\sum_k\hat\psi(2\pi k/L)$.
@@ -485,9 +487,20 @@ which is supported at $0$; so each $g_\omega(x\cdot\omega)$ is supported in the 
 \emph{$n$ even: no such decomposition.} For $n$ even the plane waves $f_n(x\cdot\omega)$ of
 \cref{wave:prop:radon} equal $c_n(x\cdot\omega)^{-n}\ne0$ off the hyperplanes, so that decomposition does not
 have this property; we show that no other does. Suppose
-$\delta=\int_{\Sphere^{n-1}}g_\omega(x\cdot\omega)\,d\omega$ with $\supp g_\omega\subset\{0\}$, i.e.\
-$g_\omega=\sum_{j\le J}a_j(\omega)\delta^{(j)}$ with $a_j\in L^1(\Sphere^{n-1})$ (every distribution supported at $0$
-has this form; integrability is what makes the superposition a distribution). For $\phi\in\cS(\R^n)$ and
+$\delta=\int_{\Sphere^{n-1}}g_\omega(x\cdot\omega)\,d\omega$ with $\supp g_\omega\subset\{0\}$ and
+$\omega\mapsto g_\omega$ weakly continuous. \emph{Uniform order.} For each fixed $\omega$, $g_\omega$ is a finite
+combination of derivatives of $\delta$, but the number of terms could a priori depend on $\omega$; we show it
+does not. For $\phi\in\CIc((-1,1))$ the function $\omega\mapsto\pair{g_\omega}{\phi}$ is continuous on the compact
+sphere, hence bounded; so the family $\{g_\omega\}$ of continuous linear functionals on the Fr\'echet space
+$\CIc([-1,1])$ (smooth functions supported in $[-1,1]$) is pointwise bounded, and by the Banach--Steinhaus
+theorem it is equicontinuous: there are $C$ and $J$ with
+$|\pair{g_\omega}{\phi}|\le C\sum_{j\le J}\sup|\phi^{(j)}|$ for all $\omega$ and all such $\phi$. Thus every
+$g_\omega$ has order $\le J$, and a distribution of order $\le J$ supported at $0$ is
+$\sum_{j\le J}a_j\delta^{(j)}$ (\cite[Theorem~2.3.4]{Hormander-I}). So
+$g_\omega=\sum_{j\le J}a_j(\omega)\delta^{(j)}$ with $J$ independent of $\omega$, and
+$a_j(\omega)=\pair{g_\omega}{(-1)^j\chi(s)s^j/j!}$, for $\chi\in\CIc((-1,1))$ equal to $1$ near $0$, is continuous,
+in particular in $L^1(\Sphere^{n-1})$. (Without some such regularity in $\omega$ the order could be unbounded
+and the superposition would not be defined.) For $\phi\in\cS(\R^n)$ and
 $\mathcal R_\omega\phi$ as in the proof of \cref{wave:prop:radon}, $\pair{\delta^{(j)}(x\cdot\omega)}{\phi}=(-1)^j(\mathcal R_\omega\phi)^{(j)}(0)
 =\frac1{2\pi}\int(-ir)^j\hat\phi(r\omega)\,dr$. So with the polynomial $p(\omega,r)=\sum_ja_j(\omega)(-ir)^j$,
 \begin{equation*}

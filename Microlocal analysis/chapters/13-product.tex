@@ -2385,7 +2385,8 @@ operators to be invertible, which in particular forces their index to vanish.
 \begin{lemma}\label{product:lem:inverse-family}
 If $P(p)\in\Psido\mu(Z;E_0,F_0)$ is a smooth family of elliptic operators, depending
 on parameters $p$ in a manifold, and each $P(p)$ is invertible on $\CI$, then
-$P(p)^{-1}\in\Psido{-\mu}(Z;F_0,E_0)$ is again a smooth family.
+$P(p)^{-1}\in\Psido{-\mu}(Z;F_0,E_0)$ is again a smooth family. If the $P(p)$ are
+classical, so are the $P(p)^{-1}$.
 \end{lemma}
 
 \begin{proof}
@@ -2395,7 +2396,8 @@ $P^{-1}=Q+RP^{-1}=Q+RQ+RP^{-1}R'$. The inverses $P(p)^{-1}:H^s\longrightarrow
 H^{s+\mu}$ depend smoothly on $p$ in norm, by \cref{product:lem:norm-continuity},
 for every $s$, and since $R'$ maps $H^{-N}$ to $H^N$ and $R$ maps $H^{-N}$ to
 $H^N$ smoothly in $p$ for all $N$, $RP^{-1}R'$ is a smooth family of smoothing
-operators.
+operators. If $P$ is classical, $Q$ may be taken classical
+(\cref{manifolds:thm:parametrix}), and then so is $P^{-1}=Q+RQ+RP^{-1}R'$.
 \end{proof}
 
 \begin{theorem}\label{product:thm:parametrix}
@@ -2528,11 +2530,11 @@ space of a fibration.
 
 \begin{proposition}\label{product:prop:tensor}
 Let $\phi:M\longrightarrow B$ be a fibration, with Hermitian metrics and a fibre
-density chosen. Let $P\in\Psido0(M/B;E_+,E_-)$ be an elliptic family such that each
+density chosen. Let $P\in\Psido0_{\mathrm{ph}}(M/B;E_+,E_-)$ be an elliptic family such that each
 $P_b$ is surjective and $\Nul(P)$ is a trivial line bundle, spanned by
 $e\in\CI(M;E_+)$ with $\norm{e|_{Z_b}}=1$, and let $\pi_\nu=e\otimes e^*\in
 \Psido{-\infty}(M/B;E_+)$ be the orthogonal projection onto $\Nul(P)$. Let
-$A\in\Psido0(B;F_+,F_-)$ be elliptic, and let $A_\nu\in\Psipt{0,-\infty}(M;E_+\otimes
+$A\in\Psido0_{\mathrm{ph}}(B;F_+,F_-)$ be elliptic, and let $A_\nu\in\Psipt{0,-\infty}(M;E_+\otimes
 F_+,E_+\otimes F_-)$ be the compression $A_\nu u=e\otimes A\big(\int_{Z_b}(u,e)_{E_+}\big)$
 of \cref{product:prop:subalgebras}(iii) (here and below $F_\pm$ also denotes
 $\phi^*F_\pm$). Set
@@ -2568,15 +2570,20 @@ For the index, let $(u,v)\in\Nul(P_A)$. Then $Pu=0$, so $u=e\otimes g$ with
 $g\in\CI(B;F_+)$; and $A_\nu u+P^*v=e\otimes Ag+P^*v=0$, where the first term lies in
 $\Nul(P)\otimes F_-$ and the second in its orthogonal complement, so $Ag=0$ and
 $P^*v=0$, i.e.\ $v=0$. Conversely $(e\otimes g,0)\in\Nul(P_A)$ if $Ag=0$, so
-$\Nul(P_A)\cong\Nul(A)$. The adjoint is
+$\Nul(P_A)\cong\Nul(A)$. For the adjoints on $M$ take the density
+$\nu\otimes\phi^*\mu_B$, where $\nu$ is the given fibre density and $\mu_B$ is the
+density on $B$ used to define $A^*$ (this is a legitimate choice, since the index
+does not depend on the density). Then
 $P_A^*=\begin{pmatrix}P^*&A_\nu^*\\0&P\end{pmatrix}$ with $A_\nu^*u=e\otimes
 A^*\int_{Z_b}(u,e)$, and the same argument gives $\Nul(P_A^*)\cong\Nul(A^*)$. Hence
 $\ind(P_A)=\ind(A)$.
 \end{proof}
 
 The operator $P_A$ can be regarded as a `Clifford' tensor product of $P$ and $A$.
-In \cref{product:prop:tensor} its full ellipticity is guaranteed by the fibre
-operator $P$, while its index comes from the base operator $A$. In
+In \cref{product:prop:tensor} its full ellipticity comes from the ellipticity
+of the fibre operator $P$ together with the invertibility of the principal symbol
+of the base operator $A$ (which makes the base symbol of $P_A$ invertible), while
+its index comes from $A$. In
 \cref{ch:families} $P_A$ is deformed, through fully elliptic product-type operators
 (so without changing the index, by \cref{product:cor:fredholm}), to an ordinary
 pseudodifferential operator on $M$ whose symbol, given a connection on $\phi$, is
@@ -2598,7 +2605,8 @@ Let $\phi:M\longrightarrow B$ be a fibration. Show that there is an embedding
 $e:M\longrightarrow\Sphere^N\times B$, with range in
 $(\Sphere^N\setminus\{p\})\times B$ for a fixed point $p$, such that
 $\pi_B\circ e=\phi$. \emph{Hint:} embed $M$ in a sphere avoiding one point
-(Whitney), and take $e$ to be the product of this embedding with $\phi$. Such an
+(by the elementary embedding theorem for compact manifolds, which is proved in
+the solution), and take $e$ to be the product of this embedding with $\phi$. Such an
 embedding identifies $M$ with a fibration over $B$ whose fibres are submanifolds
 of $\R^N$; it is used in the proof of the families index theorem.
 \end{exercise}
@@ -2649,12 +2657,12 @@ $[SN^*Z;S(N^*Y|_Z)]$, fibred over the cosphere bundle of $Z$ in $Y$.
 \end{exercise}
 
 \begin{exercise}\label{product:ex:base-lift}
-Let $p\in\Symph m(\R^b)$ and regard $a(\zeta,\eta)=p(\eta)$ as a function on
+Let $f>0$, $p\in\Symph m(\R^b)$, and regard $a(\zeta,\eta)=p(\eta)$ as a function on
 $\R^f\times\R^b$. Show that if $a\in S^{M,M'}_{\mathrm{ph}}(\R^{f+b},\{\zeta=0\})$ for
 some $M$, $M'$ then $p$ is a polynomial. \emph{Hint:} near the interior of $H_W$,
 $\rho_V$ is bounded below and $a=p(q/\rho_W)$; differentiate
 $\rho_W^{M'}p(q/\rho_W)$ in $q$ along the curves $q=\rho_Wv$. Deduce the statement in
-\cref{product:rem:base-lift}.
+\cref{product:rem:base-lift}. Why is $f>0$ needed?
 \end{exercise}
 
 \begin{exercise}\label{product:ex:adjoint}
@@ -2669,7 +2677,7 @@ as an element of $\Psipt{0,m'}(M;E,F)$. Show that $P$ is fully elliptic if and o
 invertible, and that then $P$ is invertible with inverse in
 $\Psido{-m'}(M/B;F,E)$. In particular, for $M=Z\times B$ with product metric, the
 fibre Laplacian $\Delta_Z+1$ is a fully elliptic element of $\Psipt{0,2}(M)$ which
-is not elliptic as an operator on $M$ if $\dim B>0$; while $\Delta_Z+\Delta_B$ and
+is not elliptic as a second-order operator on $M$ if $\dim B>0$; while $\Delta_Z+\Delta_B$ and
 $\Delta_M+1$ lie in $\Psipt{2,2}(M)$ and are fully elliptic. Compute their base
 symbols.
 \end{exercise}
@@ -2694,8 +2702,12 @@ characterization \eqref{product:eq:symbol-est} is a by-product. The order
 conventions of the original are not consistent between lectures; here the first
 order always refers to the larger submanifold (for operators, the base order at
 $M^2_\phi$) and the second to the smaller (the fibre order at the diagonal), so
-that $\Psido m(M)\subset\Psipt{m,m}(M)$, $\Psido{m'}(M/B)\subset\Psipt{0,m'}(M)$ and
-compressed base operators lie in $\Psipt{m,-\infty}(M)$. The base symbol of an
+that $\Psido m_{\mathrm{ph}}(M)\subset\Psipt{m,m}(M)$,
+$\Psido{m'}_{\mathrm{ph}}(M/B)\subset\Psipt{0,m'}(M)$ and
+compressed classical base operators lie in $\Psipt{m,-\infty}(M)$. Since
+product-type symbols are weighted smooth, the calculus is a classical one, and
+these inclusions, as well as the identification of the range of the base symbol,
+hold only for classical operators (\cref{product:rem:nonclassical}). The base symbol of an
 element of $\Psipt{m,m'}(M)$ has fibre order $m'-m$ (not $m'$). The original
 asserted that operators on the base lift to $\Psipt{m,0}(M)$; this is false unless
 they are differential operators (\cref{product:rem:base-lift}), and the original's

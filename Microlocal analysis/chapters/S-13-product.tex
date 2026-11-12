@@ -14,9 +14,20 @@ $w=(\zeta,\eta)$, $q=\eta/\ang\zeta$, $\dim U=k$, $\dim V=l$, as in the chapter.
 \emph{Idea: take the product of an embedding of $M$ into Euclidean space with
 $\phi$ itself.}
 
-By Whitney's theorem (for a compact manifold the elementary version suffices:
-finitely many charts and bump functions give an injective immersion into some
-$\R^N$) there is an embedding $\iota:M\to\R^N$. Let $p\in\Sphere^N$ and let
+First, $M$ embeds in some $\R^{N}$. For a compact manifold this is elementary (the
+easy case of Whitney's theorem): cover $M$ by finitely many charts
+$\kappa_i:U_i\to\R^n$, $i=1,\dots,K$, choose open $V_i\Subset U_i$ still covering
+$M$, and $\psi_i\in\CIc(U_i)$ with $\psi_i=1$ on $V_i$, and set
+\begin{equation*}
+\iota=(\psi_1\kappa_1,\dots,\psi_K\kappa_K,\psi_1,\dots,\psi_K):M\longrightarrow
+\R^{N},\qquad N=K(n+1),
+\end{equation*}
+where $\psi_i\kappa_i$ is extended by zero outside $U_i$. If $\iota(p)=\iota(q)$,
+choose $i$ with $p\in V_i$; then $\psi_i(q)=\psi_i(p)=1$, so $q\in U_i$ and
+$\kappa_i(q)=\psi_i\kappa_i(q)=\psi_i\kappa_i(p)=\kappa_i(p)$, whence $q=p$. At
+$p\in V_i$ the component $\psi_i\kappa_i$ equals $\kappa_i$ near $p$, so
+$d\iota_p$ is injective. Thus $\iota$ is an injective immersion, hence (by the
+argument below) an embedding $\iota:M\to\R^N$. Let $p\in\Sphere^N$ and let
 $s:\R^N\to\Sphere^N\setminus\{p\}$ be the inverse of stereographic projection from
 $p$; it is a diffeomorphism. Put
 \begin{equation*}
@@ -393,7 +404,7 @@ $B$. A different factorization multiplies $\nu_b$ by a positive constant, which 
 not change adjoints on $Z_b$, so the statement is meaningful.
 
 \emph{Step 0: localization.} For $g\in\CI(M)$, multiplication by $g$ lies in
-$\Psido0(M/B)\subset\Psipt{0,0}(M)$ with $\sigma(g)=g$ and $\beta(g)(b,\eta)=g|_{Z_b}$
+$\Psido0_{\mathrm{ph}}(M/B)\subset\Psipt{0,0}(M)$ with $\sigma(g)=g$ and $\beta(g)(b,\eta)=g|_{Z_b}$
 (\cref{product:prop:subalgebras}(i)); both symbols are multiplicative
 (\cref{product:thm:composition}). If $\chi,\chi'$ are real, then
 $(\chi A\chi')^*=\chi'A^*\chi$, so
@@ -428,11 +439,21 @@ $A_0=\Op(a)$ with $a\in S^{m,m'}_{\mathrm{ph}}$ compactly supported in $x$
 (\cref{product:prop:local-form}). The kernel of $A_0^\dagger$ is
 $\overline{K(x',x)}^t=\int e^{i(x-x')\cdot\xi}\bar a^t(x',\xi)\,\dbar\xi$. In the adapted
 coordinates $(w,\tilde x)=(x,x-x')$ this is the oscillatory integral of
-\cref{product:lem:amplitude} with amplitude $r(w,\tilde x,\xi)=\bar a^t(w-\tilde
-x,\xi)$, a classical product-type symbol with compact support in $(w,\tilde x)$. By
+\cref{product:lem:amplitude} with amplitude $\bar a^t(w-\tilde x,\xi)$. This
+amplitude has compact support in $x'=w-\tilde x$ only, not in $(w,\tilde x)$, so we
+insert both localizing cut-offs: the kernel of $A_0=\chi A\chi'$ is supported in
+$\supp\chi\times\supp\chi'$, so if $\psi\in\CIc$ of the chart equals $1$ on
+$\supp\chi\cup\supp\chi'$, the kernel of $A_0^\dagger$ is unchanged by
+multiplication by $\psi(x)\psi(x')$. Hence it is the oscillatory integral with
+amplitude
+\begin{equation*}
+r(w,\tilde x,\xi)=\psi(w)\psi(w-\tilde x)\,\bar a^t(w-\tilde x,\xi),
+\end{equation*}
+a classical product-type symbol with compact support in $(w,\tilde x)$. By
 \eqref{product:eq:amplitude-expansion} the left symbol of $A_0^\dagger$ is
-$\bar a^t(x,\xi)$ modulo $S^{m,m'-1}_{\mathrm{ph}}$ (all terms with $\gamma\ne0$ lie
-there). Hence $\sigma_{m,m'}(A_0^\dagger)(x,\xi)=\lim_{t\to\infty}t^{-m'}\bar
+$r(x,0,\xi)=\psi(x)^2\bar a^t(x,\xi)=\bar a^t(x,\xi)$ (as $a$ vanishes for
+$x\notin\supp\chi$) modulo $S^{m,m'-1}_{\mathrm{ph}}$ (all terms with $\gamma\ne0$
+lie there). Hence $\sigma_{m,m'}(A_0^\dagger)(x,\xi)=\lim_{t\to\infty}t^{-m'}\bar
 a^t(x,t\xi)=\sigma_{m,m'}(A_0)(x,\xi)^\dagger$.
 
 \emph{Step 3: the base symbol.} By \cref{product:prop:operator-valued},
@@ -500,12 +521,13 @@ $\dim B>0$ every $b$ occurs. Hence $P$ is fully elliptic if and only if each $P_
 invertible (on $\CI(Z_b)$, equivalently $H^{s+m'}\to H^s$, by elliptic regularity).
 
 If each $P_b$ is invertible, then over a trivializing set $U$, $P$ is a smooth family
-in $\Psido{m'}(Z;E_0,F_0)$ of invertible elliptic operators
+in $\Psido{m'}_{\mathrm{ph}}(Z;E_0,F_0)$ of invertible elliptic operators
 (\cref{product:lem:local-families}), so $b\mapsto P_b^{-1}$ is a smooth family in
-$\Psido{-m'}(Z;F_0,E_0)$ by \cref{product:lem:inverse-family}. Inverses are unique, so
-these local families agree on overlaps and define a fibrewise operator $Q$ with
-$Q_b=P_b^{-1}$. Membership in $\Psido{-m'}(M/B;F,E)$, a space of conormal
-distributions on $M^2_\phi$, is a local condition, so $Q\in\Psido{-m'}(M/B;F,E)$ by
+$\Psido{-m'}_{\mathrm{ph}}(Z;F_0,E_0)$ by \cref{product:lem:inverse-family}. Inverses
+are unique, so these local families agree on overlaps and define a fibrewise
+operator $Q$ with $Q_b=P_b^{-1}$. Membership in $\Psido{-m'}_{\mathrm{ph}}(M/B;F,E)$,
+a space of conormal distributions on $M^2_\phi$, is a local condition, so
+$Q\in\Psido{-m'}_{\mathrm{ph}}(M/B;F,E)$ by
 \cref{product:lem:local-families}. Since all operators act fibrewise
 (\cref{product:prop:families}(1),(4)), $(PQ)_b=P_bQ_b=\Id$ and $(QP)_b=\Id$, so
 $Q=P^{-1}$ on $\CI(M)$.
@@ -513,17 +535,19 @@ $Q=P^{-1}$ on $\CI(M)$.
 \emph{Examples.} Let $M=Z\times B$ with the product metric $g_Z+g_B$, and let
 $\Delta_Z$ be the (non-negative) Laplacian of $g_Z$ acting in the $Z$-variables. Then
 $\Delta_Z+1\in\Diff2$ is a fibrewise differential operator, hence in
-$\Psido2(M/B)\subset\Psipt{0,2}(M)$; it is elliptic with symbol $|\zeta|^2_{g_Z}$, and
+$\Psido2_{\mathrm{ph}}(M/B)\subset\Psipt{0,2}(M)$; it is elliptic with symbol $|\zeta|^2_{g_Z}$, and
 each $(\Delta_Z+1)_b=\Delta_Z+1$ is invertible, being self-adjoint and elliptic with
 $\inner{(\Delta_Z+1)u}u\ge\norm u^2$. So it is fully elliptic, with
 \begin{equation*}
 \sigma_{0,2}(\Delta_Z+1)=|\zeta|^2,\qquad\beta_{0,2}(\Delta_Z+1)(b,\eta)=\Delta_Z+1 .
 \end{equation*}
-As an operator on $M$ it is not elliptic when $\dim B>0$: its principal symbol in
-$\Diff2(M)$ is $|\zeta|^2$, which vanishes at the non-zero covectors $(0,\eta)$.
+As a second-order operator on $M$ it is not elliptic when $\dim B>0$: its principal
+symbol in $\Diff2(M)$ is $|\zeta|^2$, which vanishes at the non-zero covectors
+$(0,\eta)$. (The order must be specified: if $\dim Z=0$ then $\Delta_Z+1=\Id$, which
+is elliptic of order $0$ but not of order $2$.)
 
 For the product metric $\Delta_M=\Delta_Z+\Delta_B$. It and $\Delta_M+1$ are in
-$\Diff2(M)\subset\Psido2(M)\subset\Psipt{2,2}(M)$, with $\sigma_2=|\xi|^2=|\zeta|^2+
+$\Diff2(M)\subset\Psido2_{\mathrm{ph}}(M)\subset\Psipt{2,2}(M)$, with $\sigma_2=|\xi|^2=|\zeta|^2+
 |\eta|^2$. By \cref{product:prop:subalgebras}(ii),
 \begin{equation*}
 \sigma_{2,2}=|\zeta|^2+|\eta|^2,\qquad
@@ -534,7 +558,7 @@ $\Diff2(M)\subset\Psido2(M)\subset\Psipt{2,2}(M)$, with $\sigma_2=|\xi|^2=|\zeta
 $|\xi|^{-2}\sigma_{2,2}=1$ is invertible, and the base symbol is a non-zero multiple of
 the identity, so both operators are fully elliptic. (This is consistent with
 \cref{product:cor:fredholm}: $\Delta_M$ is Fredholm but not invertible, its null
-space being the constants; $\Delta_M+1$ is invertible.) The compatibility
+space being the locally constant functions; $\Delta_M+1$ is invertible.) The compatibility
 \eqref{product:eq:op-compatibility} is visible: $\lim t^{-2}(|\zeta|^2+t^2|\eta|^2)=
 |\eta|^2$.
 
