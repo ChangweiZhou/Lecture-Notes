@@ -1,0 +1,1653 @@
+\chapter{The index theorem via semiclassical and adiabatic limits}\label{ch:semiclassical-index}
+\chaptermark{The semiclassical index}
+\providecommand{\Kc}{K_{\mathrm{c}}}
+\providecommand{\inda}{\operatorname{ind}_{\mathrm{a}}}
+\providecommand{\indt}{\operatorname{ind}_{\mathrm{t}}}
+\providecommand{\Ginf}{G^{-\infty}}
+\providecommand{\Ch}{\operatorname{Ch}}
+\providecommand{\Td}{\operatorname{Td}}
+\providecommand{\Gs}[1]{\Gamma^{#1}}
+\providecommand{\Indsl}{\operatorname{Ind}_{\mathrm{sl}}}
+\providecommand{\indT}{\operatorname{ind}_{\mathcal T}}
+\providecommand{\Psisl}[1]{\Psi^{#1}_{\mathrm{sl}}}
+\providecommand{\Psiinf}{\Psi^{-\infty}_{\epsilon^\infty}}
+\providecommand{\sigsl}{\sigma_{\mathrm{sl}}}
+\providecommand{\Ope}{\operatorname{Op}_\epsilon}
+\providecommand{\Sc}{\mathcal{S}_{\mathrm c}}
+\providecommand{\Torus}{\mathbb{T}}
+\providecommand{\Hev}{H^{\mathrm{ev}}}
+
+In \cref{ch:families} the families index theorem of Atiyah and Singer was proved
+in K-theory by embedding a fibration $\phi:M\to B$ into a trivial fibration
+$\R^N\times B\to B$ and using three properties of the analytic index:
+multiplicativity for towers of fibrations, excision, and a normalization on the
+trivial fibration. One input, the index of the Thom class on a sphere bundle
+(statement (TH) there), was imported. This chapter gives a second proof, based on
+a different realization of the index map: the \emph{semiclassical index}.
+
+The idea is simple. A compactly supported K-class on $T^*(M/B)$ can be
+represented by data which are trivial outside a compact set; for idempotents,
+say, by a smooth family $e$ of idempotent matrices which is equal to a constant
+idempotent $p_0$ outside a compact subset of $T^*(M/B)$. Such a symbol can be
+quantized, with a small parameter $\epsilon>0$ (Planck's constant), to a
+family of idempotent operators on the fibres which differs from $p_0$ by a
+\emph{semiclassical family of smoothing operators}. A pair of idempotents
+differing by a smoothing operator has a relative index, an element of $K^0(B)$,
+and this is the semiclassical index $\Indsl$. As $\epsilon\downarrow0$ the
+Schwartz kernels concentrate at the fibre diagonal, so the construction is
+local: excision for $\Indsl$ is immediate. The main analytic result of the
+chapter (\cref{scindex:thm:analytic=sl}) is that $\Indsl$ \emph{coincides} with
+the analytic index of \cref{ch:product,ch:families}. The proof is short and
+algebraic: from an elliptic family and a parametrix one forms an explicit
+idempotent (\eqref{scindex:eq:milnor}) whose relative index is the index bundle;
+if the family and the parametrix are themselves semiclassical quantizations, this
+idempotent is a semiclassical quantization of the corresponding symbol-level
+idempotent.
+
+The second ingredient is the index of the Thom class. In the semiclassical
+picture this becomes a statement about the harmonic oscillator on the fibres of
+the normal bundle: after rescaling by $\epsilon^{1/2}$, the semiclassical
+quantization of the Thom symbol is the Koszul complex of the harmonic
+oscillator, whose null space is spanned by the Gaussian. Since the Gaussian is
+invariant under the orthogonal group, its span is a \emph{canonically trivial}
+line bundle; no equivariant index computation is needed
+(\cref{scindex:thm:thom}). As a consequence, statement (TH) of
+\cref{ch:families} is proved, and the semiclassical normalization on the trivial
+fibration follows as well.
+
+Putting these together (\cref{scindex:sec:AS}) gives the families index theorem
+in the following form: excision and the normalization are replaced by their
+(essentially trivial) semiclassical versions together with
+\cref{scindex:thm:analytic=sl}, and (TH) by \cref{scindex:thm:thom}; the only
+property of the analytic index from \cref{ch:families} which is still used is
+multiplicativity. In R.~Melrose's treatment, on which this chapter is based, the
+multiplicativity of the semiclassical index is also proved semiclassically, by an
+adiabatic limit; we describe that argument in
+\cref{scindex:sec:adiabatic}, without giving the full details of the
+underlying two-parameter calculus.
+
+The odd version of the semiclassical index, $\Kc^{-1}(T^*(M/B))\to K^{-1}(B)$,
+obtained by quantizing compactly supported perturbations of the identity, is the
+most elementary of these maps; we show in \cref{scindex:sec:odd} that the even
+index is the odd one applied to loops, followed by the Toeplitz index
+isomorphism of \cref{ch:bott}. Throughout, the K-groups of the base are realized,
+as in \cref{ch:index,ch:bott}, through the group $\Ginf$ of invertible
+perturbations of the identity by smoothing operators. The required passage from
+families of operators on the varying fibres $Z_b$ to maps into a fixed group
+$\Ginf(Y;F)$ is made in \cref{scindex:sec:smoothing} by an explicit isometric
+embedding of the fibres into a torus.
+
+\section{Setting and recollections}\label{scindex:sec:setting}
+
+\subsection{Fibrations}
+Throughout, $B$ is a compact manifold, possibly with boundary (we need
+$B\times[0,1]$ for homotopies). A \emph{fibration over $B$} in this chapter is a
+submersion $\phi:M\to B$ such that $M$ is an open subset of the total space of a
+fibration $\bar\phi:\bar M\to B$ of compact manifolds in the sense of
+\cref{ch:product}, with $\phi=\bar\phi|_M$. The fibres $Z_b=\phi^{-1}(b)$ may
+thus be non-compact. The cases we need are:
+\begin{itemize}
+\item fibrations of compact manifolds ($M=\bar M$);
+\item open subsets $U\subset\bar M$;
+\item the total space $\mathcal V$ of a real vector bundle $\varpi:\mathcal V\to
+  M$ over the total space of a fibration of compact manifolds, fibred over $B$
+  by $\phi\circ\varpi$; it is an open subset of the sphere bundle
+  $S(\mathcal V\oplus\R)$, via inverse stereographic projection;
+\item the trivial fibrations $\R^N\times B$ and $I^N\times B$, $I=(0,2\pi)$,
+  inside $\Torus^N\times B$, $\Torus=\R/2\pi\Z$;
+\item the degenerate fibration $B\to B$, $\phi=\Id$, whose fibres are points.
+\end{itemize}
+We write $M^2_\phi=M\times_BM$ for the fibre product, $\Diag\subset M^2_\phi$ for
+the (fibre) diagonal, $T^*(M/B)$ for the vertical cotangent bundle and
+$\varpi:T^*(M/B)\to M$ for its projection. A Hermitian bundle $E\to M$ and a
+smooth positive fibre density $\nu$ are always fixed; they define the Hilbert
+spaces $L^2(Z_b;E_b)$. We write $\Psido{-\infty}_{\mathrm c}(M/B;E)$ for the
+smoothing families with compactly supported kernels,
+$\CIc(M^2_\phi;\Hom(E)\otimes\Omega_R)$, where $\Omega_R$ is the fibre density
+bundle lifted from the right factor (\cref{ch:product}); for $M$ compact this is
+$\Psido{-\infty}(M/B;E)$.
+
+\begin{remark}[Adjoining a trivial bundle]\label{scindex:rem:adjoin}
+  We shall often need operators on $L^2(Z_b;E_b)\oplus\C^L$, for instance after
+  stabilizing an elliptic family by finitely many sections as in
+  \cref{ch:families}. These are covered by the formalism: $M\sqcup B\to B$ is a
+  fibration whose fibres are $Z_b\sqcup\{b\}$, and $\C^L$ is the space of sections
+  of the trivial bundle of rank $L$ over the point fibre $\{b\}$. Smoothing
+  families on $M\sqcup B$ are block matrices whose off-diagonal entries are given
+  by finitely many smooth sections of $E$ and $E^*\otimes\Omega$, and whose
+  lower right entry is a smooth map $B\to M(L,\C)$. Pseudodifferential families
+  on $(M\sqcup B)/B$ of order $m$ are matrices $\bigl(\begin{smallmatrix}P&S\\
+  T&c\end{smallmatrix}\bigr)$ with $P\in\Psido m(M/B;E)$ and $S$, $T$, $c$ as
+  just described; they compose as matrices and the smoothing families form an
+  ideal. We use this without further comment.
+\end{remark}
+
+\subsection{K-theory}
+We use the conventions of \cref{ch:bott,ch:families}. For a manifold $X$,
+$\Kc(X)=\Kc^0(X)$ is the group of equivalence classes of triples
+$(E_+,E_-,a)$, with $a:E_+\to E_-$ an isomorphism outside a compact set, under
+bundle isomorphisms, change of $a$ on compact sets, homotopies and
+stabilization. If $X$ is the total space of a vector bundle over $M$, bundles
+over $X$ are pulled back from $M$ (\cref{ch:bott}), so every class is
+represented by a triple $(\varpi^*E_+,\varpi^*E_-,a)$ with $E_\pm$ bundles over
+$M$ and $a\in\CI(X;\Hom(\varpi^*E_+,\varpi^*E_-))$ defined everywhere and
+invertible outside a compact set; we usually drop $\varpi^*$. We also use:
+\begin{enumerate}[label=(K\arabic*),leftmargin=*]
+\item\label{scindex:K-Ginf} For a compact manifold $Y$ of positive dimension
+  (not necessarily connected) and a Hermitian bundle $F\to Y$,
+  $\Ginf(Y;F)\subset\Id+\Psido{-\infty}(Y;F)$ is the group of invertible
+  perturbations of the identity by smoothing operators, and for compact $X$
+  \begin{equation*}
+    K^{-1}(X)=[X;\Ginf(Y;F)],\qquad K^{-2}(X)=[X\times\Sphere,X\times\{1\};
+    \Ginf(Y;F),\Id],
+  \end{equation*}
+  smooth homotopy classes of smooth maps, respectively of pointed maps. By the
+  finite rank approximation of \cref{ch:bott}, every class is represented by a
+  map into a subgroup $\GL(V)=\{\Id-\Pi_V+g\Pi_V\}$, $V\subset\CI(Y;F)$
+  finite dimensional, and two such maps define the same class if and only if
+  they are stably homotopic as maps into $\GL(N,\C)$ (after choosing orthonormal
+  bases). In this sense the groups do not depend on $(Y,F)$.
+\item\label{scindex:K-toeplitz} (Bott periodicity, first form; \cref{ch:bott}.)
+  The Toeplitz families index is a natural isomorphism
+  $\indT:K^{-2}(X)\to K^0(X)$ for compact $X$. If $p:X\to M(N,\C)$ is a smooth
+  family of projections then
+  \begin{equation}\label{scindex:eq:bott-map}
+    \indT\bigl[pz^{-1}+(\Id-p)\bigr]=[\Ran p],\qquad
+    \indT\bigl[pz+(\Id-p)\bigr]=-[\Ran p],
+  \end{equation}
+  where $z=e^{i\theta}$ is the variable on $\Sphere$.
+\item\label{scindex:K-families} From \cref{ch:families}: the exterior product
+  $\boxtimes$ and the product $x\cdot y$ for bundles over the same base, defined by
+  the Clifford product of symbols; the extension maps $j_*$ for open embeddings;
+  the Thom class $\lambda_{\mathcal V}\in\Kc(T^*(\mathcal V/M))$ of a real vector
+  bundle, represented on $\Lambda W$, $W=\varpi^*(\mathcal V\otimes\C)$, by
+  Clifford multiplication $c(w)=w\wedge\cdot-\iota_w$, $w=v+i\eta$; the Thom
+  homomorphism $\tau(x)=\lambda_{\mathcal V}\cdot\varpi^*x$; the Bott element
+  $b_1\in\Kc(T^*I)$, the maps $\beta_N(y)=b_1\boxtimes\dots\boxtimes
+  b_1\boxtimes y$, the identification $\lambda_\R=b_1$ under $I\cong\R$ and
+  hence $\lambda_{\R^N}=b_1^{\boxtimes N}$; and the topological index
+  $\indt=\beta_N^{-1}\circ j_*\circ\Theta_*\circ\tau$ defined by an embedding
+  $M\hookrightarrow\R^N\times B$ with tubular neighbourhood
+  $\Theta:\mathcal V\cong\Omega\subset I^N\times B$.
+\item\label{scindex:K-inda} The analytic index $\inda:\Kc(T^*(M/B))\to K^0(B)$
+  for a fibration of compact manifolds (\cref{ch:product,ch:families}):
+  if $A\in\Psido0(M/B;E_+,E_-)$ is elliptic, $S:\C^L\to\CI(M;E_-)$ is given by
+  $L$ sections such that $A\oplus S$ is surjective on every fibre, then the null
+  spaces of $A\oplus S$ form a smooth bundle $\mathcal N(A,S)$ over $B$ and
+  $\inda[\sigma_0(A)]=[\mathcal N(A,S)]-[\C^L]$.
+\end{enumerate}
+
+\subsection{The semiclassical calculus}
+We recall from \cref{ch:semiclassical} the semiclassical families of smoothing
+and of pseudodifferential operators, in the version for families on the fibres
+of a fibration. As for the families of \cref{ch:product}, all the definitions are
+local in $B$, and the statements for families follow from those on a single
+manifold with smooth dependence on parameters. For $q\in\CI([0,1]_\epsilon;
+\Sym m(\R^n;\R^n))$ the semiclassical (left) quantization is
+\begin{equation}\label{scindex:eq:Ope}
+  \Ope(q)u(z)=(2\pi\epsilon)^{-n}\int e^{i(z-z')\cdot\zeta/\epsilon}
+  q(\epsilon,z,\zeta)u(z')\,dz'd\zeta
+  =\int e^{i(z-z')\cdot\xi}q(\epsilon,z,\epsilon\xi)u(z')\,dz'\,\dbar\xi,
+\end{equation}
+$\epsilon\in(0,1]$. Its kernel is $\epsilon^{-n}\check q(\epsilon,z,(z-z')/
+\epsilon)$, where $\check q$ is the inverse Fourier transform in the last
+variable. If $q$ is Schwartz in $\zeta$ the kernel concentrates, as
+$\epsilon\downarrow0$, in an $\epsilon$-neighbourhood of the diagonal.
+
+\begin{enumerate}[label=(S\arabic*),leftmargin=*]
+\item\label{scindex:S-smoothing} (Semiclassical smoothing families.) For a
+  fibration $\phi:M\to B$ and $E\to M$, $\Psisl{-\infty}(M/B;E)$ is the space of
+  families $A=A(\epsilon)$, $\epsilon\in(0,1]$, of elements of
+  $\Psido{-\infty}_{\mathrm c}(M/B;E)$ whose kernels are supported in
+  $(0,1]\times K\times_BK$ for some compact $K\subset M$, and which are
+  semiclassical: away from $\Diag$ the kernel lies in
+  $\epsilon^\infty\CI([0,1]\times M^2_\phi)$, and in local coordinates $(y,z)$,
+  $y$ in the base and $z$ in the fibre, near $\Diag$ it is
+  $\epsilon^{-n}K(\epsilon,y,z,(z-z')/\epsilon)$ (times the coordinate density)
+  with $K\in\CI([0,1]\times\R^{\dim B}\times\R^n;\cS(\R^n))$, $n=\dim Z$. The
+  subspace of families whose kernels are smooth on $[0,1]\times M^2_\phi$ and
+  vanish to infinite order at $\epsilon=0$ is denoted $\Psiinf(M/B;E)$.
+\item\label{scindex:S-symbol} (The semiclassical symbol.) There is a surjective
+  linear map
+  \begin{equation*}
+    \sigsl:\Psisl{-\infty}(M/B;E)\longrightarrow\Sc(T^*(M/B);\End E),
+  \end{equation*}
+  locally $\sigsl(A)(y,z,\zeta)=\hat K(0,y,z,\zeta)$, onto the smooth sections
+  which are Schwartz in the fibres of $T^*(M/B)$ and supported over a compact
+  subset of $M$. It is multiplicative, $\sigsl(AB)=\sigsl(A)\sigsl(B)$, and
+  $\sigsl(A^*)=\sigsl(A)^*$. Its null space is
+  $\epsilon\Psisl{-\infty}(M/B;E)$, and
+  $\bigcap_k\epsilon^k\Psisl{-\infty}=\Psiinf$. Every sequence
+  $A_k\in\epsilon^k\Psisl{-\infty}$, with kernels supported in a fixed compact
+  set, has an asymptotic sum $A\in\Psisl{-\infty}$,
+  $A-\sum_{k<K}A_k\in\epsilon^K\Psisl{-\infty}$ for all $K$. A smooth bundle
+  map $e\in\CI(M;\End E)$, regarded as a multiplication operator, satisfies
+  $eA,Ae\in\Psisl{-\infty}$ with symbols $e\sigsl(A)$, $\sigsl(A)e$. If
+  $\sigsl(A)$ is supported in $\varpi^{-1}(K)$, $K\subset M$ compact, then $A$
+  may be chosen (modifying it by an element of $\Psiinf$) with kernel supported
+  in any given neighbourhood of $\Diag\cap K\times_BK$. All of this holds with
+  smooth dependence on additional parameters.
+\item\label{scindex:S-invariance} (Naturality.) A diffeomorphism $F:M\to M'$ of
+  fibrations over $B$, covered by a unitary bundle isomorphism $E\to E'$,
+  conjugates $\Psisl{-\infty}(M/B;E)$ to $\Psisl{-\infty}(M'/B;E')$ (acting on
+  half-densities, or with the obvious density factors), and the symbol
+  transforms by the induced bundle isomorphism $T^*(M/B)\to T^*(M'/B)$.
+\item\label{scindex:S-order0} (Order zero; compact fibres.) For a fibration of
+  compact manifolds, $\Psisl0(M/B;E_+,E_-)$ consists of families which are,
+  locally, $\Ope(q)$ with $q\in\CI([0,1];\Symph0)$ a classical symbol of order
+  $0$, plus elements of $\Psisl{-\infty}$; $\Psisl{-k}$ is defined in the same
+  way with symbols of order $-k$. Then $\Psisl{-\infty}=\bigcap_k\Psisl{-k}$,
+  $\Psisl{0}$ is an algebra containing $\Psisl{-\infty}$ as an ideal, and for
+  fixed $\epsilon>0$, $A(\epsilon)\in\Psido0(M/B)$. There are two
+  multiplicative symbols: $\sigsl(A)\in\Symph0(T^*(M/B);\Hom(E_+,E_-))$, locally
+  $q(0,\cdot)$, and the family of principal symbols
+  $\sigma_0(A(\epsilon))$, $\epsilon\in[0,1]$; locally
+  $\sigma_0(\Ope(q))$ is the homogeneous leading part of $q(\epsilon,\cdot)$ in
+  $\zeta$ (by homogeneity of degree $0$ the rescaling $\zeta=\epsilon\xi$ does
+  not change it). They are compatible: $\sigma_0$ at $\epsilon=0$ is the
+  boundary value of $\sigsl(A)$ at infinity. If $\sigma_0(A(\epsilon))=0$ for
+  all $\epsilon$ then $A\in\Psisl{-1}$; if $A\in\Psisl{-k}$ and $\sigsl(A)=0$
+  then $A\in\epsilon\Psisl{-k}$. If $T_k\in\epsilon^k\Psisl{-k}$ then there is
+  $T\in\Psisl0$ with $T-\sum_{k<K}T_k\in\epsilon^K\Psisl{-K}$ for all $K$, and
+  $\bigcap_K\epsilon^K\Psisl{-K}=\Psiinf$. Every $a\in\Symph0(T^*(M/B);
+  \Hom(E_+,E_-))$ is $\sigsl(A)$ for some $A$, which may be taken independent
+  of $\epsilon$ in the sense that its local symbols are.
+\item\label{scindex:S-euclid} (Euclidean estimates.) On $\R^k$, for symbols
+  $p,q\in\Sym0(\R^k;\R^k)$ (bounded with all derivatives in the base variable),
+  $\sup_{0<\epsilon\le1}\norm{\Ope(p)}_{L^2}\le C$, with $C$ depending on finitely
+  many seminorms of $p$, and
+  \begin{equation*}
+    \norm{\Ope(p)\Ope(q)-\Ope(pq)}_{L^2}\le C\epsilon,\quad 0<\epsilon\le1.
+  \end{equation*}
+  Moreover the composition has the expansion $\Ope(p)\Ope(q)=\Ope(p\#_\epsilon q)$,
+  $p\#_\epsilon q\sim\sum_\alpha\frac{\epsilon^{\abs\alpha}}{\alpha!}
+  \pa_\zeta^\alpha p\,D_z^\alpha q$, which is \emph{exact} (a finite sum) if $q$ is
+  a polynomial in $z$, or if $p$ is a polynomial in $\zeta$; in these cases it
+  holds for polynomial symbols of any order.
+\end{enumerate}
+
+We add two elementary consequences, with proofs.
+
+\begin{lemma}\label{scindex:lem:uniform}
+  If $A\in\Psisl{-\infty}(M/B;E)$ then $\sup_{\epsilon,b}\norm{A_b(\epsilon)}
+  _{L^2}<\infty$, and if $A\in\Psiinf(M/B;E)$ then $\sup_b\norm{A_b(\epsilon)}
+  =O(\epsilon^\infty)$.
+\end{lemma}
+\begin{proof}
+  The second statement is clear, since the kernels are smooth with compact
+  support and all their sup norms are $O(\epsilon^\infty)$. For the first,
+  by a partition of unity we may assume the kernel is
+  $\epsilon^{-n}K(\epsilon,y,z,(z-z')/\epsilon)$ with compact support in $z$.
+  Since $\sup_{\epsilon,y,z}\abs{K(\epsilon,y,z,Z)}\le C\ang Z^{-n-1}$,
+  \begin{equation*}
+    \sup_z\int\epsilon^{-n}\abs{K(\epsilon,y,z,(z-z')/\epsilon)}dz'
+    \le C\int\ang Z^{-n-1}dZ,
+  \end{equation*}
+  and the same holds with the roles of $z$ and $z'$ exchanged. Schur's test
+  gives the bound.
+\end{proof}
+
+\begin{lemma}[Invertibility]\label{scindex:lem:invertible}
+  Let $A\in\Psisl{-\infty}(M/B;E)$, possibly depending smoothly on parameters
+  in a compact manifold $P$, and suppose that $\Id+\sigsl(A)$ is invertible at
+  every point. Then there is $\epsilon_0>0$ such that $\Id+A_b(\epsilon)$ is
+  invertible on $L^2(Z_b;E_b)$ for all $b\in B$, all parameters and all
+  $\epsilon\in(0,\epsilon_0]$, and $(\Id+A)^{-1}=\Id+A'$ with
+  $A'\in\Psisl{-\infty}(M/B;E)$ (restricted to $\epsilon\le\epsilon_0$),
+  depending smoothly on the parameters. If $P$ is a complex manifold and $A$
+  depends holomorphically on the parameters, so does $A'$.
+\end{lemma}
+\begin{proof}
+  The symbol $a'=(\Id+\sigsl(A))^{-1}-\Id$ is again Schwartz and supported over a
+  compact set. Choose $A'_0$ with $\sigsl(A'_0)=a'$. Then
+  $(\Id+A)(\Id+A'_0)=\Id+\epsilon R_1$, $R_1\in\Psisl{-\infty}$. Inductively, if
+  $(\Id+A)(\Id+A'_{(k)})=\Id+\epsilon^kR_k$, set
+  $A'_{(k+1)}=A'_{(k)}-\epsilon^kQ_k$ with $\sigsl(Q_k)=(\Id+\sigsl(A))^{-1}
+  \sigsl(R_k)$; then the error is $O(\epsilon^{k+1})$. Taking an asymptotic sum
+  gives $A''$ with $(\Id+A)(\Id+A'')=\Id+R$, $R\in\Psiinf$, and similarly a
+  left inverse modulo $\Psiinf$. By \cref{scindex:lem:uniform},
+  $\norm R=O(\epsilon^\infty)$, so for small $\epsilon$, $\Id+R$ is invertible
+  and
+  \begin{equation*}
+    (\Id+R)^{-1}=\Id-R+R(\Id+R)^{-1}R.
+  \end{equation*}
+  The last term has kernel $(w,w')\mapsto\inner{(\Id+R)^{-1}R(\cdot,w')}
+  {R^*(w,\cdot)}$, which is smooth, with all derivatives (in $w$, $w'$,
+  $\epsilon$ and the parameters) $O(\epsilon^\infty)$, because derivatives of
+  $(\Id+R)^{-1}$ are products of $(\Id+R)^{-1}$ with derivatives of $R$. So
+  $(\Id+R)^{-1}\in\Id+\Psiinf$, $\Id+A$ has a right inverse in
+  $\Id+\Psisl{-\infty}$, and in the same way a left inverse; they coincide.
+  Holomorphy is preserved at each step (the asymptotic sum may be taken with
+  coefficients holomorphic in the parameters, and inversion is holomorphic).
+\end{proof}
+
+\begin{remark}[The semiclassical cotangent bundle]\label{scindex:rem:slT}
+  The symbol $\sigsl(A)$ depends on the parameter $\epsilon$, not only on the
+  family of operators: under a reparametrization $\epsilon'=\epsilon T(\epsilon)$
+  with $T>0$ smooth, the symbol is composed with the fibre dilation by $T(0)$.
+  Invariantly, $\sigsl(A)$ is a function on a bundle ${}^{\mathrm{sl}}T^*(M/B)$
+  which is isomorphic, but not canonically, to $T^*(M/B)$; a covector of
+  ${}^{\mathrm{sl}}T^*$ at $z$ is the class of $df/\epsilon$ for a function $f$
+  with $f(z)=0$. Once $\epsilon$ is fixed, as it is throughout this chapter, the
+  identification is fixed. Since the dilations are homotopic to the identity,
+  none of the K-theoretic statements below depends on this choice.
+\end{remark}
+
+\section{Smoothing families and the K-theory of the base}\label{scindex:sec:smoothing}
+
+Let $\phi:M\to B$ be a fibration over the compact manifold $B$ and $E\to M$ a
+Hermitian bundle. Set
+\begin{equation*}
+  \begin{aligned}
+  \Ginf_{\mathrm c}(M/B;E)=\bigl\{g=\Id+A;\ &A\in\Psido{-\infty}_{\mathrm c}(M/B;E),\\
+  &\Id+A_b\text{ invertible on }L^2(Z_b;E_b)\text{ for every }b\in B\bigr\}.
+  \end{aligned}
+\end{equation*}
+If $g=\Id+A\in\Ginf_{\mathrm c}$, then $g_b^{-1}=\Id+A'_b$ with $A'$ again in
+$\Psido{-\infty}_{\mathrm c}(M/B;E)$: indeed $A'=-A+A(\Id+A)^{-1}A$, and as in the
+proof of \cref{scindex:lem:invertible} the last term has a smooth kernel
+depending smoothly on $b$, with support in that of $A$. Thus $\Ginf_{\mathrm c}
+(M/B;E)$ is a group, the group of smooth sections of a bundle of groups over $B$
+with fibre $\Ginf_{\mathrm c}(Z_b;E_b)$. We assign to each of its elements a class
+in $K^{-1}(B)$. (Melrose does this by showing that the Hilbert bundle with fibres
+$L^2(Z_b;E_b)$ has a smooth orthonormal frame; see \cref{scindex:ex:frame}. The
+following embedding is more elementary.)
+
+\subsection{Admissible embeddings}
+\begin{definition}\label{scindex:def:admissible}
+  Let $K\subset M$ be compact and $W\supset K$ open. An \emph{admissible
+  embedding} of $(M/B,E)$ over $W$ is a family of linear isometries
+  \begin{equation*}
+    J_b:L^2(W_b;E_b)\longrightarrow L^2(Y;F),\quad W_b=W\cap Z_b,
+  \end{equation*}
+  where $Y$ is a compact manifold and $F\to Y$ a Hermitian bundle, such that
+  $J_b$ maps $\CIc(W_b;E_b)$ into $\CI(Y;F)$ and, for every
+  $A\in\Psido{-\infty}_{\mathrm c}(M/B;E)$ with kernel supported in
+  $K\times_BK$, the map $b\mapsto J_bA_bJ_b^*$ is a smooth map
+  $B\to\Psido{-\infty}(Y;F)$ (depending continuously on $A$).
+\end{definition}
+
+\begin{lemma}\label{scindex:lem:embedding}
+  For every compact $K\subset M$ there is an admissible embedding of $(M/B,E)$
+  over some $W\supset K$, with $Y=\Torus^N$ and $F=\C^R$ for some $N$, $R$.
+\end{lemma}
+\begin{proof}
+  Let $\bar M\supset M$ be the compact fibration of which $M$ is an open
+  subset. As in \cref{ch:families}, choose an embedding $\iota:\bar M\to\R^N$ such
+  that $(\iota,\bar\phi)$ embeds $\bar M$ into $\R^N\times B$, with image in
+  $(0,2\pi)^N\times B$, and let $\mathcal V_m=d\iota(T_m(\bar M/B))^\perp$. For
+  some $\delta>0$ the map $\Theta(m,v)=\iota(m)+v$ is, for each $b$, a
+  diffeomorphism from $\{(m,v);\ m\in\bar Z_b,\ v\in\mathcal V_m,\ \abs v<\delta\}$
+  onto an open set $\Omega_b\subset(0,2\pi)^N\subset\Torus^N$, depending smoothly
+  on $b$; let $p_b:\Omega_b\to\bar Z_b$ be the corresponding projection. Choose
+  $h\in\CIc([0,\delta))$ real, not identically zero near $0$, and define
+  $\gamma'(y)=h(\abs v)$ for $y=\Theta(m,v)$, extended by $0$. By the
+  coarea formula
+  \begin{equation*}
+    \int_{\Omega_b}\abs{\gamma'(y)}^2\abs{u(p_b(y))}^2dy=\int_{\bar Z_b}
+    f(m)\abs{u(m)}^2\nu(m)
+  \end{equation*}
+  for a smooth positive function $f$ on $\bar M$ (the integral of
+  $\abs{\gamma'}^2$ over $p_b^{-1}(m)$, with respect to the measure induced by
+  $dy$ and $\nu$). Set $\gamma=\gamma'\cdot(f\circ p)^{-1/2}$. Next let
+  $W\supset K$ be open with compact closure in $M$, and $W'\supset\bar W$ open
+  with compact closure; as in the proof of \cref{ch:bott}'s lemma on bundles,
+  a finite cover of $\bar W'$ by trivializing open sets and a partition of
+  unity give a fibrewise injective bundle map $E|_{W'}\to\C^R$, which after
+  Gram--Schmidt we may take isometric, $\kappa:E|_{W'}\to\C^R$. Define
+  \begin{equation*}
+    (J_bu)(y)=\gamma(y)\,\kappa\bigl(u(p_b(y))\bigr)\ \text{ if }p_b(y)\in W,
+    \qquad(J_bu)(y)=0\ \text{ otherwise}.
+  \end{equation*}
+  By construction $\norm{J_bu}=\norm u$. If $u\in\CIc(W_b)$ then $J_bu$ is
+  smooth with compact support in $\Omega_b$. For $A$ with kernel $A(m,m')$
+  supported in $K\times_BK$, $J_bA_bJ_b^*$ has the kernel
+  \begin{equation*}
+    \gamma(y)\,\kappa\,A_b(p_b(y),p_b(y'))\,\kappa^*\,\gamma(y')\,j_b(y'),
+  \end{equation*}
+  where $j_b$ is the smooth positive Jacobian factor relating $\nu$, $dy$ and the
+  measures on the fibres of $p_b$; it is smooth in $(b,y,y')$ with
+  compact support in $\Omega_b\times\Omega_b$.
+\end{proof}
+
+For a non-compact vector bundle fibre we shall also need kernels which are
+Schwartz, rather than compactly supported, along the fibres.
+
+\begin{remark}\label{scindex:rem:schwartz}
+  Let $\varpi:\mathcal V\to M$ be a real vector bundle with a metric over a
+  fibration of compact manifolds $M\to B$. Let $\Psido{-\infty}_{\mathcal S}
+  (\mathcal V/B;E)$ denote the families whose kernels are smooth on
+  $\mathcal V\times_B\mathcal V$ and Schwartz in the fibre variables, uniformly
+  with all derivatives (i.e.\ they extend smoothly, vanishing to infinite order at
+  the boundary, to the fibrewise radial compactification; see
+  \cref{ch:distributions}). Composing the construction above with the fibre
+  compression $v\mapsto v(1+\abs v^2)^{-1/2}$, which identifies $\mathcal V$ with
+  the open unit ball bundle, and using a function $\gamma$ which is Gaussian in
+  the original variable, one obtains isometries $J_b:L^2(\mathcal V_b)\to
+  L^2(\Torus^N;\C^R)$ with the properties of \cref{scindex:def:admissible} for
+  all elements of $\Psido{-\infty}_{\mathcal S}$; the Jacobian factors grow at
+  most polynomially in $\abs v$ and are absorbed by the rapid decay. Everything
+  below applies to such families without change.
+\end{remark}
+
+\subsection{The class of a section}
+\begin{definition}\label{scindex:def:class}
+  Let $g=\Id+A\in\Ginf_{\mathrm c}(M/B;E)$, with $A$ supported in $K\times_BK$,
+  and let $J$ be an admissible embedding over $W\supset K$. Then
+  \begin{equation*}
+    \rho_J(g)(b)=\Id+J_bA_bJ_b^*\in\Ginf(Y;F),
+  \end{equation*}
+  and we set $[g]=[\rho_J(g)]\in[B;\Ginf(Y;F)]=K^{-1}(B)$.
+\end{definition}
+Indeed $\rho_J(g)(b)$ is invertible: with respect to $L^2(Y;F)=\Ran J_b\oplus
+(\Ran J_b)^\perp$ it is $J_bg_bJ_b^*\oplus\Id$, where $g_b$ acts on $L^2(W_b)$ (it
+preserves this space and its complement, being the identity on
+$L^2(Z_b\setminus K)$), and its inverse is $\Id+J_bA'_bJ_b^*$. Note that
+$J^*J=\Id$ implies $\rho_J(gh)=\rho_J(g)\rho_J(h)$.
+
+\begin{lemma}\label{scindex:lem:class}
+  \begin{enumerate}[label=(\roman*)]
+  \item If $I:L^2(Y;F)\to L^2(Y';F')$ is an isometry which maps $\CI(Y;F)$ into
+    $\CI(Y';F')$ and $\Psido{-\infty}(Y;F)$ continuously into
+    $\Psido{-\infty}(Y';F')$ by $T\mapsto ITI^*$, then the map
+    $h\mapsto IhI^*+\Id-II^*$ induces the canonical identification
+    $[B;\Ginf(Y;F)]\cong[B;\Ginf(Y';F')]$ of \ref{scindex:K-Ginf}.
+  \item The class $[g]\in K^{-1}(B)$ does not depend on $K$, $W$ or $J$.
+  \item $[gh]=[g]+[h]$; smoothly homotopic sections define the same class; and if
+    $U\subset M$ is open and $g\in\Ginf_{\mathrm c}(U/B;E)$, then the class of $g$
+    is the same as that of its extension (by the identity) to an element of
+    $\Ginf_{\mathrm c}(M/B;E)$.
+  \item If $\Phi:E\to E'$ is a unitary isomorphism covering a diffeomorphism of
+    fibrations over $B$ (in particular $\Phi$ may be a unitary bundle map on
+    $M$), then $[\Phi g\Phi^{-1}]=[g]$.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  (i) By \ref{scindex:K-Ginf} a class is represented by $h$ with values in a
+  subgroup $\GL(V)$, $V\subset\CI(Y;F)$ finite dimensional. Then $IhI^*+\Id-II^*$
+  takes values in $\GL(IV)$, $IV\subset\CI(Y';F')$, and in the orthonormal bases
+  $\{e_j\}$ of $V$ and $\{Ie_j\}$ of $IV$ the two maps are given by the same
+  matrices. This is the identification of \ref{scindex:K-Ginf}.
+
+  (ii) Enlarging $K$ does not change $\rho_J(g)$. If $J$, $J'$ are admissible over
+  $W$, $W'$, both restrict to admissible embeddings over $W\cap W'\supset K$,
+  and for $A$ supported in $K\times_BK$ the restriction does not change
+  $JAJ^*$. So we may assume $W=W'$. Consider $Y\sqcup Y'$ with the bundle
+  $F\sqcup F'$, so $L^2(Y\sqcup Y')=L^2(Y)\oplus L^2(Y')$, and
+  \begin{equation*}
+    R_{t,b}=(\cos t\,J_b,\ \sin t\,J'_b):L^2(W_b;E_b)\longrightarrow L^2(Y;F)\oplus
+    L^2(Y';F'),\quad t\in[0,\tfrac\pi2].
+  \end{equation*}
+  Since the ranges of $(J_b,0)$ and $(0,J'_b)$ are orthogonal, $R_t^*R_t=
+  \cos^2t\,J^*J+\sin^2t\,J'^*J'=\Id$, so each $R_t$ is admissible, and
+  $\rho_{R_t}(g)$ is a homotopy in $\Ginf(Y\sqcup Y')$ from
+  $\rho_J(g)\oplus\Id$ to $\Id\oplus\rho_{J'}(g)$. By (i), applied to the
+  inclusions of $L^2(Y)$ and $L^2(Y')$ as summands, these represent $[\rho_J(g)]$
+  and $[\rho_{J'}(g)]$.
+
+  (iii) The first statement follows from $\rho_J(gh)=\rho_J(g)\rho_J(h)$. A
+  homotopy is a section over $B\times[0,1]$, and one admissible embedding
+  (\cref{scindex:lem:embedding} over $B\times[0,1]$) serves for all $t$. An
+  admissible embedding of $M$ over $W\subset U$ is one of $U$.
+
+  (iv) If $J$ is an admissible embedding for $(M'/B,E')$ over $W'$, then $J\Phi$
+  is one for $(M/B,E)$ over the preimage of $W'$, and since $\Phi$ is unitary,
+  $J(\Phi A\Phi^{-1})J^*=(J\Phi)A(J\Phi)^*$. Thus $\rho_J(\Phi g\Phi^{-1})=
+  \rho_{J\Phi}(g)$, and (ii) applies.
+\end{proof}
+
+Applying this to the fibration $M\times\Sphere\to B\times\Sphere$, a smooth
+\emph{pointed loop} $g:\Sphere\to\Ginf_{\mathrm c}(M/B;E)$, i.e.\ an element of
+$\Ginf_{\mathrm c}((M\times\Sphere)/(B\times\Sphere);E)$ equal to $\Id$ over
+$B\times\{1\}$, has a class $[g]\in K^{-2}(B)$ (take $J$ independent of $z$).
+
+\subsection{The relative index of idempotents}
+Let $p_0\in\CI(M;\End E)$ be a smooth family of idempotents ($p_0^2=p_0$), acting
+as a multiplication operator.
+
+\begin{definition}\label{scindex:def:d}
+  A \emph{compactly supported idempotent perturbation} of $p_0$ is a smooth family
+  $e=p_0+Q$, $Q\in\Psido{-\infty}_{\mathrm c}(M/B;E)$ (or, in the situation of
+  \cref{scindex:rem:schwartz}, $Q\in\Psido{-\infty}_{\mathcal S}$), with
+  $e_b^2=e_b$ for all $b$. Its \emph{relative index} is
+  \begin{equation*}
+    d(e,p_0)=\indT[g_{e,p_0}]\in K^0(B),\qquad
+    g_{e,p_0}(z)=\bigl(ez^{-1}+\Id-e\bigr)\bigl(p_0z+\Id-p_0\bigr),\ z\in\Sphere.
+  \end{equation*}
+\end{definition}
+
+For an idempotent $f$, $z\mapsto fz^{-1}+\Id-f$ is a loop of invertible operators
+with inverse $fz+\Id-f$. Expanding, with $e=p_0+Q$, and using $p_0(\Id-p_0)=0$,
+\begin{equation}\label{scindex:eq:loop-expansion}
+  g_{e,p_0}(z)=\Id+Q(2p_0-\Id)+z^{-1}Q(\Id-p_0)-zQp_0,
+\end{equation}
+so $g_{e,p_0}$ is a pointed loop in $\Ginf_{\mathrm c}(M/B;E)$, and $d(e,p_0)$ is
+defined. (The construction is that of the Bott map \eqref{scindex:eq:bott-map},
+applied to $e$, followed by subtraction of the same construction for $p_0$; the
+two infinite rank contributions cancel.)
+
+\begin{proposition}\label{scindex:prop:d}
+  \begin{enumerate}[label=(d\arabic*)]
+  \item\label{scindex:d-homotopy} If $e_t$, $t\in[0,1]$, is a smooth family of
+    compactly supported idempotent perturbations of $p_0$ (supports in a fixed
+    compact set), then $d(e_0,p_0)=d(e_1,p_0)$.
+  \item\label{scindex:d-sum} $d(e\oplus e',p_0\oplus p_0')=d(e,p_0)+d(e',p'_0)$,
+    and $d(p_0,p_0)=0$.
+  \item\label{scindex:d-conj} If $\Phi$ is as in \cref{scindex:lem:class}(iv) and
+    commutes with $p_0$ (resp.\ carries $p_0$ to $p_0'$), then
+    $d(\Phi e\Phi^{-1},p'_0)=d(e,p_0)$. This also holds for $\Phi$ a smooth family of
+    invertible (not necessarily unitary) bundle maps on $M$.
+  \item\label{scindex:d-finite} If $\Pi\in\Psido{-\infty}_{\mathrm c}(M/B;E)$ is
+    a smooth family of finite rank idempotents with $p_0\Pi=\Pi p_0=0$, then the
+    ranges of $\Pi_b$ form a smooth vector bundle $\Ran\Pi$ over $B$ and
+    $d(p_0+\Pi,p_0)=[\Ran\Pi]$. If instead $p_0\Pi=\Pi p_0=\Pi$ then
+    $d(p_0-\Pi,p_0)=-[\Ran\Pi]$.
+  \item\label{scindex:d-module} If $F\to B$ is a vector bundle, lifted to $M$,
+    then $d(e\otimes\Id_F,p_0\otimes\Id_F)=d(e,p_0)\cdot[F]$.
+  \item\label{scindex:d-excision} If $U\subset M$ is open and $e-p_0$ is supported
+    in $K\times_BK$, $K\subset U$ compact, then $d(e,p_0)$ is the same whether
+    computed on $U$ or on $M$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  \ref{scindex:d-homotopy}, \ref{scindex:d-sum} and \ref{scindex:d-excision}
+  follow from \cref{scindex:lem:class}(iii), using that $\indT$ is a homomorphism,
+  that block sums of loops represent sums in $K^{-2}(B)$, and that
+  $g_{p_0,p_0}=\Id$. For \ref{scindex:d-conj}, $g_{\Phi e\Phi^{-1},p'_0}=\Phi
+  g_{e,p_0}\Phi^{-1}$; if $\Phi$ is not unitary, the polar decomposition
+  $\Phi_s=\Phi(\Phi^*\Phi)^{-s/2}$, $s\in[0,1]$, joins it to a unitary through
+  invertible bundle maps, each of which commutes with $p_0$ if $\Phi$ and
+  $\Phi^*$ do; in general conjugation by $\Phi_s$ is a homotopy of loops in
+  $\Ginf_{\mathrm c}$, and we use \cref{scindex:lem:class}(iii),(iv).
+
+  \ref{scindex:d-finite}. The rank of $\Pi_b$ is $\Tr\Pi_b$, which is locally
+  constant, and if $v_1,\dots,v_r$ span $\Ran\Pi_{b_0}$ then
+  $\Pi_bv_1,\dots,\Pi_bv_r$ are smooth local frames near $b_0$; so $\Ran\Pi$ is a
+  smooth bundle, of smooth sections. If $p_0\Pi=\Pi p_0=0$ then $p_0$ and $\Pi$
+  are commuting idempotents with product zero, so
+  $(p_0+\Pi)z^{-1}+\Id-p_0-\Pi=(p_0z^{-1}+\Id-p_0)(\Pi z^{-1}+\Id-\Pi)$, the
+  factors commuting, and therefore $g_{p_0+\Pi,p_0}=\Pi z^{-1}+\Id-\Pi$. It
+  remains to show that the class of this loop is the Bott class of the bundle
+  $N=\Ran\Pi$, so that \eqref{scindex:eq:bott-map} applies. Transport by an
+  admissible embedding $J$; then $J\Pi J^*$ is a smooth family of finite rank
+  idempotents in $\Psido{-\infty}(Y;F)$ with range $JN\cong N$, and we write
+  $\Pi$ for it. Let $P_N$ be the orthogonal projection onto $N$ (given locally by
+  orthonormal frames, so a smooth family of finite rank smoothing operators). Since
+  $\Pi P_N=P_N$ and $P_N\Pi=\Pi$, $\Pi_s=P_N+(1-s)P_N\Pi(\Id-P_N)$ is an
+  idempotent with range $N$ for $s\in[0,1]$; this deforms $\Pi$ to $P_N$. By the
+  finite rank approximation of \cref{ch:bott} there is a finite dimensional
+  $V\subset\CI(Y;F)$ with orthogonal projection $P_V$ such that
+  $\norm{P_N-P_VP_NP_V}\le\frac12$, hence $\norm{(\Id-P_V)P_N}\le\frac12$, for
+  all $b$. Then $T_s=\Id-s(\Id-P_V)$ is injective on $N_b$, so
+  $N_s=T_sN$ is a smooth bundle isomorphic to $N$, and the orthogonal
+  projections $P_{N_s}$ deform $P_N$ to the projection onto $N_1=P_VN\subset V$.
+  The loop $P_{N_1}z^{-1}+\Id-P_{N_1}$ lies in $\GL(V)$, where it is the loop
+  $pz^{-1}+\Id-p$ of \eqref{scindex:eq:bott-map} with $\Ran p=N_1\cong N$. Hence
+  $d(p_0+\Pi,p_0)=[N]$. If $p_0\Pi=\Pi p_0=\Pi$, then similarly
+  $(p_0-\Pi)z^{-1}+\Id-p_0+\Pi=(p_0z^{-1}+\Id-p_0)(\Pi z+\Id-\Pi)$, so
+  $g_{p_0-\Pi,p_0}=\Pi z+\Id-\Pi$, and the second formula in
+  \eqref{scindex:eq:bott-map} gives $-[\Ran\Pi]$.
+
+  \ref{scindex:d-module}. Write $F=\Ran q$ for a family of projections
+  $q:B\to M(r,\C)$. By \ref{scindex:d-sum} and \ref{scindex:d-conj},
+  $d(e\otimes\Id_F,p_0\otimes\Id_F)$ is the Toeplitz index of the loop
+  $h=g\otimes q+\Id\otimes(\Id-q)$ on $L^2\otimes\C^r$, $g=g_{e,p_0}$. By
+  \ref{scindex:K-Ginf} we may assume that $g$ takes values in $\GL(n,\C)$, and
+  then $h$ takes values in $\GL(nr,\C)$. Let $T_g$ be the Toeplitz family of $g$,
+  $k$ admissible for it with complement $W$ (in the sense of \cref{ch:bott}).
+  Since $q$ is constant on the circle it commutes with the Szeg\H{o} projector
+  and with $P_k$, so $T_h=T_g\otimes q+\Id\otimes(\Id-q)$, $k$ is admissible for
+  $T_h$, and $W\otimes F\oplus\Ran P_k\otimes\Ran(\Id-q)$ is a complement. Hence
+  $\indT(h)=[\Ran P_k\otimes\C^r]-[W\otimes F]-[\Ran P_k\otimes\Ran(\Id-q)]
+  =([\Ran P_k]-[W])[F]=\indT(g)[F]$.
+\end{proof}
+
+\begin{remark}\label{scindex:rem:relative-projections}
+  If $e=P$, $p_0=Q$ are orthogonal projections, then $QP:\Ran P\to\Ran Q$ is a
+  Fredholm family (it differs from the identity of $\Ran Q$ by a compact operator
+  after identifying $\Ran P$ with $\Ran Q$), and $d(P,Q)$ is its index bundle, the
+  \emph{relative index} of the pair. This is Melrose's description of the even
+  semiclassical index (``the formal difference of the pair $P\ominus\pi_\infty$'');
+  we do not need it, but see \cref{scindex:ex:relative}.
+\end{remark}
+
+\section{The semiclassical index}\label{scindex:sec:sl-index}
+
+\subsection{An idempotent attached to an invertible-at-infinity map}
+The following purely algebraic construction is used twice: for symbols, to
+represent a compactly supported K-class by idempotents which are trivial outside
+a compact set, and for operators, to express the index bundle of an elliptic
+family as a relative index.
+
+\begin{lemma}\label{scindex:lem:milnor}
+  Let $A:H_+\to H_-$ and $B:H_-\to H_+$ be linear maps (between vector spaces,
+  modules, or elements of a matrix algebra), and set $R_+=\Id-BA$,
+  $R_-=\Id-AB$. Then
+  \begin{equation*}
+    W=\begin{pmatrix}A+R_-A&-R_-\\R_+&B\end{pmatrix}:H_+\oplus H_-\to H_-\oplus
+    H_+,
+  \end{equation*}
+  \begin{equation*}
+    W'=\begin{pmatrix}B&R_+\\-R_-&A+R_-A\end{pmatrix}:H_-\oplus H_+\to H_+\oplus
+    H_-
+  \end{equation*}
+  are inverse to each other, and
+  \begin{equation}\label{scindex:eq:milnor}
+    e_{A,B}=W\begin{pmatrix}\Id&0\\0&0\end{pmatrix}W'=
+    \begin{pmatrix}\Id-R_-^2&(\Id+R_-)AR_+\\R_+B&R_+^2\end{pmatrix}
+  \end{equation}
+  is an idempotent on $H_-\oplus H_+$. With $p_0=\bigl(\begin{smallmatrix}\Id&0\\0&0
+  \end{smallmatrix}\bigr)$ (the projection onto $H_-$), $e_{A,B}-p_0$ is a
+  matrix of polynomials in $A$, $B$, $R_\pm$ each term of which contains a factor
+  $R_+$ or $R_-$. If $B=A^{-1}$ then $e_{A,B}=p_0$.
+\end{lemma}
+\begin{proof}
+  Direct multiplication, using $AR_+=R_-A$ and $R_+B=BR_-$. For instance the
+  upper left entry of $W'W$ is
+  \begin{equation*}
+    B(A+R_-A)+R_+^2=BA+R_+BA+R_+^2=BA+R_+=\Id,
+  \end{equation*}
+  and the lower left entry is
+  \begin{equation*}
+    -R_-(A+R_-A)+(A+R_-A)R_+=-R_-^2A+R_-AR_+=0;
+  \end{equation*}
+  the other
+  entries, and those of $WW'$, are checked in the same way. Then
+  \begin{equation*}
+    e_{A,B}^2=W\diag(\Id,0)W'W\diag(\Id,0)W'=e_{A,B},
+  \end{equation*}
+  and \eqref{scindex:eq:milnor} follows
+  from $(A+R_-A)B=(\Id+R_-)(\Id-R_-)$.
+\end{proof}
+
+The idempotent $e_{A,B}$ is the image of the class of $A$ under the boundary map
+in algebraic K-theory, in the explicit form due to Milnor. For an invertible
+$A$ it is trivial; in general it measures the failure of $B$ to be an inverse.
+
+\subsection{Quantization of idempotents}
+Let $\phi:M\to B$ be a fibration, $E\to M$, and $p_0\in\CI(M;\End E)$ an
+idempotent.
+
+\begin{proposition}\label{scindex:prop:quantize}
+  Let $e\in\CI(T^*(M/B);\End E)$ be a family of idempotents such that $e-p_0\in
+  \Sc(T^*(M/B);\End E)$. Then there are $\epsilon_0>0$ and $\mathfrak E=p_0+Q$,
+  $Q\in\Psisl{-\infty}(M/B;E)$, with $\sigsl(Q)=e-p_0$ and $\mathfrak E(\epsilon)^2
+  =\mathfrak E(\epsilon)$ for $0<\epsilon\le\epsilon_0$; we call $\mathfrak E$ a
+  \emph{semiclassical quantization} of $e$. If $\mathfrak E'$ is another one, then
+  for $\epsilon$ small $\mathfrak E(\epsilon)$ and $\mathfrak E'(\epsilon)$ are
+  joined by a smooth family of compactly supported idempotent perturbations of
+  $p_0$. The same holds with smooth dependence on parameters; in particular a
+  smooth homotopy $e_t$, with $e_t-p_0$ supported in a fixed compact set, has
+  quantizations $\mathfrak E_t$ depending smoothly on $t$.
+\end{proposition}
+\begin{proof}
+  Choose $Q_0\in\Psisl{-\infty}$ with $\sigsl(Q_0)=e-p_0$ and set $P=p_0+Q_0$. Then
+  $P^2-P=p_0Q_0+Q_0p_0+Q_0^2-Q_0\in\Psisl{-\infty}$ has symbol
+  $(p_0+q)^2-(p_0+q)=e^2-e=0$, $q=e-p_0$, so $P^2-P=\epsilon E$ with
+  $E\in\Psisl{-\infty}$. For $s$ on the circle $\Gamma=\{\abs{s-1}=\frac12\}$,
+  $\abs{s(s-1)}\ge\frac14$ and
+  \begin{equation*}
+    (s-P)(s-1+P)=s(s-1)-(P^2-P)=s(s-1)\Bigl(\Id-\frac{\epsilon E}{s(s-1)}\Bigr).
+  \end{equation*}
+  The last factor is $\Id$ plus an element of $\Psisl{-\infty}$, depending
+  holomorphically on $s$ near $\Gamma$, with symbol $0$; by
+  \cref{scindex:lem:invertible} it is invertible for small $\epsilon$, with
+  inverse $\Id+\epsilon E'_s$, $E'_s\in\Psisl{-\infty}$ holomorphic in $s$. Since
+  $s-P$ and $s-1+P$ commute, $s\notin\Spec(P)$ and
+  \begin{equation*}
+    (s-P)^{-1}=\frac{s-1+P}{s(s-1)}\bigl(\Id+\epsilon E'_s\bigr),\quad s\in\Gamma.
+  \end{equation*}
+  Let $\mathfrak E=\frac1{2\pi i}\oint_\Gamma(s-P)^{-1}ds$ be the Riesz idempotent
+  of $P$ for the part of the spectrum inside $\Gamma$; that it is an idempotent is
+  the standard consequence of the resolvent identity. The residue of
+  $(s-1+P)/(s(s-1))$ at $s=1$, the only pole inside $\Gamma$, is $P$, so
+  \begin{equation*}
+    \mathfrak E=P+\frac{\epsilon}{2\pi i}\oint_\Gamma\frac{s-1+P}{s(s-1)}
+    E'_s\,ds\in p_0+Q_0+\epsilon\Psisl{-\infty},
+  \end{equation*}
+  which has the required properties (the kernels of $E'_s$ are supported in the
+  same compact set as those of $E$).
+
+  If $\mathfrak E'$ is a second quantization, then $P_t=(1-t)\mathfrak E+t
+  \mathfrak E'$ is of the same form as $P$ above, uniformly in $t\in[0,1]$, so
+  for small $\epsilon$ its Riesz idempotents $\mathfrak E_t$ are defined and
+  depend smoothly on $t$; $\mathfrak E_0=\mathfrak E$ and $\mathfrak E_1=
+  \mathfrak E'$, since the Riesz idempotent of an idempotent is itself. Parameters
+  are handled in the same way.
+\end{proof}
+
+\subsection{Definition of the semiclassical index}
+Let $x\in\Kc(T^*(M/B))$ be represented by a triple $(E_+,E_-,a)$, where $E_\pm$ are
+bundles over $M$ and $a$ is a smooth section of $\Hom(E_+,E_-)$ over $T^*(M/B)$,
+invertible outside a compact set $K_a$. Choose a smooth section $b$ of
+$\Hom(E_-,E_+)$ such that
+\begin{equation}\label{scindex:eq:b}
+  r_+=\Id-ba\quad\text{and}\quad r_-=\Id-ab\quad\text{have compact support};
+\end{equation}
+for example $b=(1-\chi)a^{-1}$ with $\chi\in\CIc(T^*(M/B))$ equal to $1$ near
+$K_a$. On $E=E_-\oplus E_+$ let $p_0$ be the projection onto $E_-$ and
+$e_{a,b}$ the idempotent \eqref{scindex:eq:milnor}, formed pointwise. Then
+$e_{a,b}-p_0$ is compactly supported.
+
+\begin{definition}\label{scindex:def:Indsl}
+  The \emph{semiclassical index} of $x$ is
+  \begin{equation*}
+    \Indsl(x)=d\bigl(\mathfrak E(\epsilon),p_0\bigr)\in K^0(B),
+  \end{equation*}
+  where $\mathfrak E$ is a semiclassical quantization of $e_{a,b}$ and
+  $\epsilon>0$ is sufficiently small.
+\end{definition}
+
+\begin{theorem}\label{scindex:thm:Indsl}
+  $\Indsl$ is a well-defined homomorphism $\Kc(T^*(M/B))\to K^0(B)$, and it has
+  the following properties.
+  \begin{enumerate}[label=(\roman*)]
+  \item (Excision) If $U\subset M$ is open (a fibration over $B$) and
+    $j:T^*(U/B)\hookrightarrow T^*(M/B)$ is the inclusion, then
+    $\Indsl^{M/B}\circ j_*=\Indsl^{U/B}$.
+  \item (Naturality) If $F:M\to M'$ is a diffeomorphism of fibrations over $B$,
+    then $\Indsl^{M'/B}\circ F_*=\Indsl^{M/B}$. If $f:B'\to B$ is smooth,
+    then $\Indsl(f^*x)=f^*\Indsl(x)$ for the pulled back fibration.
+  \item (Degenerate fibration) For $\phi=\Id:B\to B$, the map
+    $\Indsl$ on $\Kc(T^*(B/B))=K^0(B)$ is the identity.
+  \item (Module property) $\Indsl(x\cdot\phi^*y)=\Indsl(x)\,y$ for $y\in K^0(B)$,
+    where $\phi^*y$ is pulled back to $T^*(M/B)$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  \emph{Independence of the choices.} By \cref{scindex:prop:quantize} and
+  \ref{scindex:d-homotopy}, $d(\mathfrak E(\epsilon),p_0)$ does not depend on the
+  quantization or on $\epsilon\le\epsilon_0$. If $b_0$, $b_1$ both satisfy
+  \eqref{scindex:eq:b}, so does $b_t=(1-t)b_0+tb_1$, with supports in a fixed
+  compact set; the quantizations of $e_{a,b_t}$ (\cref{scindex:prop:quantize}
+  with parameter $t$) give a homotopy, so $\Indsl$ does not depend on $b$.
+
+  \emph{Independence of the representative.} The equivalence relation on triples
+  is generated by the following moves, which we check in turn. (b) Changing $a$
+  on a compact set: if $a'=a$ outside a compact set, then $a_t=(1-t)a+ta'$ is
+  invertible outside a fixed compact set, and the same $b$ satisfies
+  \eqref{scindex:eq:b} for all $t$. (c) A homotopy $a_t$, invertible outside a
+  fixed compact set: take $b_t=(1-\chi)a_t^{-1}$ with $\chi$ fixed. (a) Bundle
+  isomorphisms $\phi_\pm$ of the lifted bundles: the dilation $\phi_\pm(t\zeta)$,
+  $t\in[0,1]$, joins them to the lifts of their restrictions $\phi^0_\pm$ to the
+  zero section, and along it the triple changes by a homotopy (c). For bundle
+  isomorphisms $\phi_\pm^0$ over $M$, put $\Phi=\diag(\phi^0_-,\phi^0_+)$; then
+  $e_{\phi^0_-a(\phi^0_+)^{-1},\phi^0_+b(\phi^0_-)^{-1}}=\Phi e_{a,b}\Phi^{-1}$,
+  $\Phi\mathfrak E\Phi^{-1}$ is a quantization of it, $\Phi$ commutes with $p_0$,
+  and \ref{scindex:d-conj} applies. (The same argument shows that the choice of
+  the bundles $E_\pm$ over $M$ in a triple on $T^*(M/B)$ is immaterial.)
+  (d) Stabilization by $(H,H,\Id)$: with $b=\Id$ on $H$, the extra block of
+  $e_{a,b}$ is $p_0$, so by \ref{scindex:d-sum} nothing changes. Direct sums of
+  triples give direct sums of idempotents, so $\Indsl$ is additive.
+
+  (i) As in Step 1 of the proof of the excision theorem in \cref{ch:families},
+  $x\in\Kc(T^*(U/B))$ has a representative $(E_+,E_-,a)$ with $E_\pm$ bundles over
+  $U$, an isomorphism $\tau:E_+\to E_-$ over $U\setminus C$, $C\subset U$ compact,
+  with both bundles trivialized there and $\tau=\Id$ in these trivializations, and
+  $a=\tau$ over $U\setminus C$; $j_*x$ is represented by the extended bundles
+  $\tilde E_\pm$ over $M$ and the extension $\tilde a$ of $a$ by $\Id$. The set
+  where $a$ is not invertible is compact in $T^*(U/B)$; choose $\chi\in
+  \CIc(T^*(U/B))$ equal to $1$ near it and $b=(1-\chi)\tilde a^{-1}$. Then
+  $e_{\tilde a,b}=p_0$ outside $\supp\chi$. By \ref{scindex:S-symbol} a
+  quantization on $U/B$ can be chosen with kernels supported in $K\times_BK$,
+  $K\subset U$ compact; extended by $p_0$ it is a quantization on $M/B$. Now
+  \ref{scindex:d-excision} gives the claim.
+
+  (ii) The first statement follows from \ref{scindex:S-invariance} and
+  \cref{scindex:lem:class}(iv): the push-forward of a quantization is a
+  quantization of the push-forward symbol, and the loops are conjugated by a
+  unitary. For the second, pull back the quantization and use the naturality of
+  $\indT$.
+
+  (iii) The fibres are points, $T^*(B/B)=B$, $\Psisl{-\infty}(B/B;E)$ consists
+  of families of bundle maps, and the quantization of a symbol is the symbol
+  itself. Since $B$ is compact, any $a$ and $b$ satisfy \eqref{scindex:eq:b};
+  take $a=0$, $b=0$, so $r_\pm=\Id$ and $e_{0,0}=\diag(0,\Id_{E_+})$. By
+  \ref{scindex:d-sum} and \ref{scindex:d-finite} (with $\Pi=\Id_{E_-}$ in the
+  first block and $\Pi=\Id_{E_+}$ in the second),
+  \begin{equation*}
+    \Indsl([E_+]-[E_-])=d(0,\Id_{E_-})+d(\Id_{E_+},0)=-[E_-]+[E_+].
+  \end{equation*}
+
+  (iv) By additivity it suffices to take $y=[F]$, $F$ a bundle over $B$. The
+  product $x\cdot\phi^*[F]$ is represented by $(E_+\otimes F,E_-\otimes F,
+  a\otimes\Id_F)$ (the Clifford product with the triple $(F,0,0)$), so we may take
+  $b\otimes\Id_F$, $e_{a,b}\otimes\Id_F$ and the quantization $\mathfrak E\otimes
+  \Id_F$, which is in the calculus since $F$ is constant on the fibres. Now
+  apply \ref{scindex:d-module}.
+\end{proof}
+
+\begin{remark}\label{scindex:rem:excision-trivial}
+  Excision, which required some care for the analytic index in \cref{ch:families},
+  is immediate here because nothing outside the support of the symbol enters the
+  construction: for $\epsilon$ small the operators are $p_0$ plus families with
+  kernels in an arbitrarily small neighbourhood of the fibre diagonal over the
+  support. Note also that the fibres need not be compact.
+\end{remark}
+
+\section{The odd semiclassical index}\label{scindex:sec:odd}
+
+In Melrose's presentation the basic object is the odd index, defined by quantizing
+compactly supported perturbations of the identity. Recall from \cref{ch:bott}
+that $\Kc^{-1}(X)$ is the group of homotopy classes of smooth maps
+$a:X\to\GL(N,\C)$ (stably in $N$) with $a=\Id$ outside a compact set, through
+such maps, and $\Kc^{-2}(X)$ the analogous group of pointed loops.
+
+\begin{proposition}\label{scindex:prop:odd}
+  Let $a\in\CI(T^*(M/B);\GL(N,\C))$ with $a-\Id$ compactly supported, and let
+  $Q\in\Psisl{-\infty}(M/B;\C^N)$ have $\sigsl(Q)=a-\Id$. For $\epsilon$ small,
+  $\Id+Q(\epsilon)\in\Ginf_{\mathrm c}(M/B;\C^N)$, and its class
+  \begin{equation*}
+    \Indsl^{1}[a]=[\Id+Q(\epsilon)]\in K^{-1}(B)
+  \end{equation*}
+  depends only on $[a]\in\Kc^{-1}(T^*(M/B))$. This defines a homomorphism
+  \begin{equation*}
+    \Indsl^1:\Kc^{-1}(T^*(M/B))\to K^{-1}(B)
+  \end{equation*}
+  with the excision and naturality
+  properties of \cref{scindex:thm:Indsl}. Applied to pointed loops (the fibration
+  $M\times\Sphere\to B\times\Sphere$) it gives
+  $\Indsl^{2}:\Kc^{-2}(T^*(M/B))\to K^{-2}(B)$.
+\end{proposition}
+\begin{proof}
+  Invertibility for small $\epsilon$ is \cref{scindex:lem:invertible}. If $Q'$ is
+  another choice, then $Q'-Q=\epsilon R$ with $R\in\Psisl{-\infty}$, and
+  $\Id+Q+t\epsilon R=(\Id+Q)(\Id+t\epsilon(\Id+Q)^{-1}R)$ is invertible for
+  $t\in[0,1]$ and $\epsilon$ small, by \cref{scindex:lem:uniform}; by
+  \cref{scindex:lem:class} the class is unchanged. Homotopies of $a$ are
+  quantized with a parameter, stabilization $a\oplus\Id$ adds an identity block,
+  and $\Indsl^1[ab]=\Indsl^1[a]+\Indsl^1[b]$ because a quantization of $ab$ is
+  $(\Id+Q_a)(\Id+Q_b)-\Id$. Excision and naturality are proved as for the even
+  index.
+\end{proof}
+
+The even index is the odd one applied to loops. For $x=[(E_+,E_-,a)]$ as above,
+the symbol-level loop
+\begin{equation}\label{scindex:eq:symbol-loop}
+  \ell_x(z)=\bigl(e_{a,b}z^{-1}+\Id-e_{a,b}\bigr)\bigl(p_0z+\Id-p_0\bigr)
+\end{equation}
+is a pointed loop of invertible maps which is the identity outside a compact set,
+by the symbol-level version of \eqref{scindex:eq:loop-expansion}. (After
+embedding $E$ in a trivial bundle and extending by $\Id$ it defines a class in
+$\Kc^{-2}(T^*(M/B))$; this is the inverse of the Toeplitz index for compactly
+supported classes.)
+
+\begin{proposition}\label{scindex:prop:even-odd}
+  $\Indsl(x)=\indT\bigl(\Indsl^2[\ell_x]\bigr)$.
+\end{proposition}
+\begin{proof}
+  If $\mathfrak E=p_0+Q$ is a quantization of $e_{a,b}$, then by
+  \eqref{scindex:eq:loop-expansion} $g_{\mathfrak E,p_0}-\Id\in\Psisl{-\infty}$
+  with symbol $\ell_x-\Id$, so it is a valid quantization in
+  \cref{scindex:prop:odd}. Hence $[g_{\mathfrak E,p_0}]=\Indsl^2[\ell_x]$, and
+  $\Indsl(x)=\indT[g_{\mathfrak E,p_0}]$ by definition.
+\end{proof}
+
+\begin{remark}\label{scindex:rem:suspension}
+  Melrose proves the compatibility of the odd and even semiclassical index maps
+  with Bott periodicity (his Proposition~12.7, the commutativity of a square with
+  vertical maps given by isotropic quantization) by introducing a joint
+  isotropic--semiclassical calculus. With the definitions adopted here the even
+  index is \emph{defined} through loops, and \cref{scindex:prop:even-odd} replaces
+  that square; the isotropic quantization enters only in
+  \cref{scindex:sec:thom}.
+\end{remark}
+
+\section{The analytic and semiclassical indices agree}\label{scindex:sec:analytic}
+
+In this section $\phi:M\to B$ is a fibration of compact manifolds. We first
+express the analytic index bundle as a relative index of idempotents, using
+\cref{scindex:lem:milnor} at the operator level.
+
+\begin{proposition}\label{scindex:prop:index-relative}
+  Let $A\in\Psido0(M/B;E_+,E_-)$ be elliptic and let $B\in\Psido0(M/B;E_-,E_+)$
+  satisfy $R_+=\Id-BA\in\Psido{-\infty}(M/B;E_+)$ and $R_-=\Id-AB\in
+  \Psido{-\infty}(M/B;E_-)$. Then $e_{A,B}$ of \eqref{scindex:eq:milnor} is a
+  compactly supported idempotent perturbation of $p_0$ on $E_-\oplus E_+$, and
+  \begin{equation*}
+    d(e_{A,B},p_0)=\inda\bigl([\sigma_0(A)]\bigr).
+  \end{equation*}
+  The same holds for the operators of \cref{scindex:rem:adjoin}, i.e.\ with
+  $\C^L$ adjoined to $E_+$ or $E_-$.
+\end{proposition}
+\begin{proof}
+  The entries of $e_{A,B}-p_0$ are products of elements of $\Psido0(M/B)$ with at
+  least one factor $R_\pm$, so they are smoothing families; $e_{A,B}$ is an
+  idempotent by \cref{scindex:lem:milnor}. Write $I(A,B)=d(e_{A,B},p_0)$.
+
+  \emph{Step 1: $I$ depends only on $A$, and is homotopy invariant.} If $B'$ is a
+  second such parametrix, then $B_t=(1-t)B+tB'$ has $\Id-B_tA=(1-t)R_++tR'_+$
+  and similarly on the other side, so $e_{A,B_t}$ is a smooth family of compactly
+  supported idempotent perturbations and \ref{scindex:d-homotopy} applies. If
+  $(A_t,B_t)$ is a smooth family of such pairs, the same argument applies. We
+  write $I(A)$.
+
+  \emph{Step 2: stabilization.} Let $S:\C^L\to\CI(M;E_-)$ be given by $L$ smooth
+  sections, such that $A\oplus S:L^2(Z_b;E_+)\oplus\C^L\to L^2(Z_b;E_-)$ is
+  surjective for every $b$. Consider the operators $A_t=(A,tS)$ from $E_+\oplus\C^L$
+  to $E_-$, in the sense of \cref{scindex:rem:adjoin}, with the fixed
+  $B'=\bigl(\begin{smallmatrix}B\\0\end{smallmatrix}\bigr)$. Then
+  \begin{equation*}
+    \Id-B'A_t=\begin{pmatrix}R_+&-tBS\\0&\Id_{\C^L}\end{pmatrix},\qquad
+    \Id-A_tB'=R_-,
+  \end{equation*}
+  both smoothing in the extended sense, so $I(A_0)=I(A_1)$. For $t=0$, $A_0$ is
+  the direct sum of $A$ and the zero map $\C^L\to\{0\}$, and $B'$ is the direct
+  sum of $B$ and $0$; for the second summand $R_+=\Id_{\C^L}$, $R_-=0$ and the
+  idempotent is $\Id_{\C^L}$, with $p_0=0$ there. By \ref{scindex:d-sum},
+  \ref{scindex:d-conj} (to reorder the summands) and \ref{scindex:d-finite},
+  \begin{equation*}
+    I(A,S)=I(A_1)=I(A_0)=I(A)+[\C^L].
+  \end{equation*}
+
+  \emph{Step 3: the surjective case.} Write $A'=(A,S)$ and let
+  $\mathcal N=\mathcal N(A,S)$ be the null bundle, a smooth bundle of rank $r$
+  whose fibres consist of smooth sections (\ref{scindex:K-inda}); the orthogonal
+  projections $\Pi_{\mathcal N}$ onto its fibres form a smooth family of finite
+  rank smoothing operators, being given locally by orthonormal frames. The
+  family $C=A'^*A'+\Pi_{\mathcal N}$ is elliptic in the extended sense, and
+  injective, since $\inner{Cu}{u}=\norm{A'u}^2+\norm{\Pi_{\mathcal N}u}^2$; being
+  self-adjoint and Fredholm of index $0$, it is invertible. Its inverse is a smooth
+  family in the extended calculus: in a local trivialization $C$ is norm-smooth
+  (\cref{ch:product}), hence so is $V=C^{-1}$, and if $Q$ is a parametrix with
+  $QC=\Id-R$, $CQ=\Id-R'$, then $V=Q+RQ+RVR'$, where $RVR'$ has a smooth kernel
+  depending smoothly on $b$ (as in \cref{ch:bott}). Put $G=C^{-1}A'^*$. Since
+  $C\Pi_{\mathcal N}=\Pi_{\mathcal N}$ we have $C^{-1}\Pi_{\mathcal N}=
+  \Pi_{\mathcal N}=\Pi_{\mathcal N}C^{-1}$, hence
+  \begin{equation*}
+    GA'=C^{-1}(C-\Pi_{\mathcal N})=\Id-\Pi_{\mathcal N},\qquad
+    A'GA'=A'(\Id-\Pi_{\mathcal N})=A',
+  \end{equation*}
+  and, $A'$ being surjective, $A'G=\Id$. So $G$ is a parametrix of $A'$ with
+  $R_+=\Pi_{\mathcal N}$, $R_-=0$. Since $A'\Pi_{\mathcal N}=0$ and
+  $\Pi_{\mathcal N}G=\Pi_{\mathcal N}C^{-1}A'^*=(A'\Pi_{\mathcal N})^*=0$,
+  \eqref{scindex:eq:milnor} gives
+  \begin{equation*}
+    e_{A',G}=\begin{pmatrix}\Id&0\\0&\Pi_{\mathcal N}\end{pmatrix}=p_0+
+    \Pi,\qquad\Pi=\diag(0,\Pi_{\mathcal N}),
+  \end{equation*}
+  with $p_0\Pi=\Pi p_0=0$. By \ref{scindex:d-finite}, $I(A,S)=[\mathcal N]$.
+
+  Combining the steps, $I(A)=[\mathcal N(A,S)]-[\C^L]=\inda[\sigma_0(A)]$.
+\end{proof}
+
+\begin{remark}\label{scindex:rem:index-trace}
+  For $B$ a point, the rank of $d(e_{A,B},p_0)$ is $\Tr(e_{A,B}-p_0)=
+  \Tr(R_+^2)-\Tr(R_-^2)$, which is the formula $\ind A=\Tr(R_+^k)-\Tr(R_-^k)$ of
+  \cref{ch:index} for $k=2$. Indeed, $\Tr$ of the relative index of two
+  idempotents differing by a trace class operator is the difference of their
+  ranks.
+\end{remark}
+
+Next we need parametrices in the semiclassical calculus.
+
+\begin{lemma}\label{scindex:lem:sl-parametrix}
+  Let $a\in\Symph0(T^*(M/B);\Hom(E_+,E_-))$ be invertible outside a compact set,
+  and $b\in\Symph0(T^*(M/B);\Hom(E_-,E_+))$ satisfy \eqref{scindex:eq:b}. Let
+  $A\in\Psisl0(M/B;E_+,E_-)$ be a quantization of $a$ with symbols independent of
+  $\epsilon$, as in \ref{scindex:S-order0}. Then there is
+  $B\in\Psisl0(M/B;E_-,E_+)$ with $\sigsl(B)=b$ and
+  \begin{equation*}
+    \Id-BA\in\Psisl{-\infty}(M/B;E_+),\qquad\Id-AB\in\Psisl{-\infty}(M/B;E_-).
+  \end{equation*}
+\end{lemma}
+\begin{proof}
+  Since $ba=\Id$ near infinity, the boundary values of $a$ and $b$ are inverse
+  to each other. Let $B_0$ be a quantization of $b$ with symbols independent of
+  $\epsilon$; by \ref{scindex:S-order0}, $\sigma_0(B_0(\epsilon))=
+  \sigma_0(A(\epsilon))^{-1}$ for all $\epsilon\in[0,1]$. Then
+  $R=\Id-B_0A\in\Psisl0$ has vanishing principal symbols, so $R\in\Psisl{-1}$,
+  and $\sigsl(R)=r_+$ is compactly supported. Choose $R_1\in\Psisl{-\infty}$ with
+  $\sigsl(R_1)=r_+$. Then $R-R_1\in\Psisl{-1}$ has vanishing semiclassical symbol,
+  so $R-R_1=\epsilon T$ with $T\in\Psisl{-1}$. Let $F\in\Psisl0$ be an asymptotic
+  sum of $\sum_{k\ge0}\epsilon^kT^k$. Then $F(\Id-\epsilon T)-\Id\in
+  \bigcap_K\epsilon^K\Psisl{-K}=\Psiinf$, $\sigsl(F)=\Id$, and with $B_1=FB_0$,
+  \begin{equation*}
+    \Id-B_1A=\Id-F(\Id-R_1-\epsilon T)=\bigl(\Id-F(\Id-\epsilon T)\bigr)+FR_1
+    \in\Psisl{-\infty}.
+  \end{equation*}
+  In the same way there is $B_2$ with $\sigsl(B_2)=b$ and $\Id-AB_2\in
+  \Psisl{-\infty}$. Then $B_1-B_2=B_1(\Id-AB_2)-(\Id-B_1A)B_2\in\Psisl{-\infty}$,
+  so $B=B_1$ satisfies $\Id-AB=(\Id-AB_2)-A(B_1-B_2)\in\Psisl{-\infty}$.
+\end{proof}
+
+\begin{theorem}\label{scindex:thm:analytic=sl}
+  For every fibration of compact manifolds $\phi:M\to B$,
+  \begin{equation*}
+    \Indsl=\inda:\Kc(T^*(M/B))\longrightarrow K^0(B).
+  \end{equation*}
+\end{theorem}
+\begin{proof}
+  Let $x\in\Kc(T^*(M/B))$. As in \cref{ch:bott,ch:families} we may represent $x$
+  by $(E_+,E_-,a)$ with $E_\pm$ bundles over $M$ and $a$ homogeneous of degree $0$
+  and invertible for $\abs\zeta\ge1$ (for some metric), extended smoothly to
+  $T^*(M/B)$; then $a\in\Symph0$. Let $b=(1-\chi(\abs\zeta))a^{-1}$ with
+  $\chi\in\CIc([0,\infty))$ equal to $1$ on $[0,1]$; it is a classical symbol of
+  order $0$ satisfying \eqref{scindex:eq:b}. Choose $A\in\Psisl0(M/B;E_+,E_-)$
+  quantizing $a$ with symbols independent of $\epsilon$, and $B$ as in \cref{scindex:lem:sl-parametrix}.
+
+  For each fixed $\epsilon\in(0,1]$, $A(\epsilon)$ is an elliptic family in
+  $\Psido0(M/B;E_+,E_-)$ with $\sigma_0(A(\epsilon))=a|_{\abs\zeta\ge1}$, so
+  $[\sigma_0(A(\epsilon))]=x$, and $B(\epsilon)$ is a parametrix modulo smoothing
+  families. By \cref{scindex:prop:index-relative},
+  \begin{equation*}
+    d\bigl(e_{A(\epsilon),B(\epsilon)},p_0\bigr)=\inda(x)\quad\text{for every
+    }\epsilon\in(0,1].
+  \end{equation*}
+  On the other hand, $e_{A,B}-p_0$ is a matrix of products of elements of
+  $\Psisl0$, each containing a factor $R_\pm\in\Psisl{-\infty}$, so
+  $e_{A,B}-p_0\in\Psisl{-\infty}(M/B;E_-\oplus E_+)$; by multiplicativity of
+  $\sigsl$ its symbol is $e_{a,b}-p_0$, where $e_{a,b}$ is formed from
+  $a,b,r_\pm=\sigsl(R_\pm)$; and $e_{A,B}$ is an idempotent for every $\epsilon$.
+  So $e_{A,B}$ is a semiclassical quantization of $e_{a,b}$ in the sense of
+  \cref{scindex:prop:quantize}, and by definition $\Indsl(x)=
+  d(e_{A(\epsilon),B(\epsilon)},p_0)$ for small $\epsilon$.
+\end{proof}
+
+\begin{corollary}[Excision for the analytic index]\label{scindex:cor:excision}
+  In the situation of the excision theorem of \cref{ch:families} (two fibrations
+  of compact manifolds $M_1$, $M_2$ over $B$ containing a common open subset $U$),
+  $\inda\circ(i_1)_*=\inda\circ(i_2)_*$ on $\Kc(T^*(U/B))$.
+\end{corollary}
+\begin{proof}
+  By \cref{scindex:thm:analytic=sl} and \cref{scindex:thm:Indsl}(i),(ii),
+  $\inda\circ(i_j)_*=\Indsl^{M_j/B}\circ(i_j)_*=\Indsl^{U/B}$ for $j=1,2$.
+\end{proof}
+
+\begin{remark}\label{scindex:rem:compare-melrose-12.1}
+  Melrose's proof of \cref{scindex:thm:analytic=sl} (his Theorem~12.1) is
+  organized around a common generalization of the two index maps: triples
+  $(\pi^+,\pi^-,a)$ of families of projections on the radially compactified
+  cotangent bundle with an isomorphism $a$ of their ranges at infinity, quantized
+  as Toeplitz-type operators $\Pi^-A'\Pi^+$ with $\Pi^-$ a semiclassical
+  quantization of $\pi^-$. The analytic index corresponds to constant $\pi^\pm$,
+  the semiclassical index to $a=\Id$, and the equality follows from homotopy
+  invariance of the general index and the fact that both kinds of data are
+  retracts of the general one. The idempotent $e_{A,B}$ plays the role of these
+  triples here, and reduces the argument to the multiplicativity of the
+  semiclassical symbol.
+\end{remark}
+
+\section{The Thom class and the harmonic oscillator}\label{scindex:sec:thom}
+
+Let $\varpi:\mathcal V\to M$ be a real vector bundle of rank $k$ with a metric,
+over a fibration of compact manifolds $M\to B$ (or over $M$ itself, which is the
+case $B=M$). The fibration $\mathcal V\to M$ has non-compact fibres; it is an
+open subset of the sphere bundle $\tilde M=S(\mathcal V\oplus\R)$ via inverse
+stereographic projection $k_{\mathcal V}$, so its semiclassical index is defined.
+
+\begin{theorem}\label{scindex:thm:thom}
+  The Thom class has semiclassical index one:
+  \begin{equation*}
+    \Indsl^{\mathcal V/M}(\lambda_{\mathcal V})=1=[\C]\in K^0(M).
+  \end{equation*}
+\end{theorem}
+
+The proof occupies the rest of this subsection. We first describe the model on a
+single fibre, then compare the semiclassical quantization with the harmonic
+oscillator.
+
+\subsection{The model}
+On $\R^k$, with variables $X=(w,\xi)\in\R^{2k}$, let $\Lambda=\Lambda\C^k=
+\Lambda^{\mathrm{ev}}\oplus\Lambda^{\mathrm{odd}}$ with its standard Hermitian
+structure, $\{e_j\}$ the standard basis, $e_j\wedge$ exterior multiplication and
+$\iota_j$ its adjoint. Let
+\begin{equation*}
+  c(X)=\sum_j(w_j+i\xi_j)\,e_j\wedge-\sum_j(w_j-i\xi_j)\,\iota_j
+  :\Lambda^{\mathrm{ev}}\longrightarrow\Lambda^{\mathrm{odd}},
+\end{equation*}
+which is Clifford multiplication $c(u)=u\wedge\cdot-\iota_u$ by $u=w+i\xi$ as in
+\cref{ch:families}; $c(X)^*=-c(X)$ and $c(X)^*c(X)=\abs X^2$. The group $O(k)$
+acts on $\R^{2k}$ by $g(w,\xi)=(gw,g\xi)$ (the cotangent lift of its action on
+$\R^k$) and on $\Lambda$ by $\Lambda g$, and $c(gX)=\Lambda g\,c(X)\,
+(\Lambda g)^{-1}$.
+
+Let $C_j=D_{w_j}+iw_j$, $A_j=D_{w_j}-iw_j$ be the creation and annihilation
+operators of \cref{ch:isotropic}, and $D=\sum_jA_j\,e_j\wedge$ the Koszul
+operator, $D^*=\sum_jC_j\iota_j$. The left symbol of $A_j$ is
+$\xi_j-iw_j=-i(w_j+i\xi_j)$ and that of $C_j$ is $\xi_j+iw_j=i(w_j-i\xi_j)$; since
+$c$ is a sum of terms each of which is linear in $w$ or in $\xi$, its quantization
+involves no ordering ambiguity, and
+\begin{equation}\label{scindex:eq:koszul}
+  \operatorname{Op}_1(c)=i(D+D^*)\big|_{\Lambda^{\mathrm{ev}}}=:i\mathcal D.
+\end{equation}
+Using $[A_j,C_l]=2\delta_{jl}$, $H=\sum_jC_jA_j+k$ and $e_j\wedge\iota_l+\iota_l
+e_j\wedge=\delta_{jl}$,
+\begin{equation*}
+  (D+D^*)^2=DD^*+D^*D=\sum_{j,l}C_lA_j(e_j\wedge\iota_l+\iota_le_j\wedge)
+  +2\sum_je_j\wedge\iota_j=H-k+2\deg
+\end{equation*}
+on $\Lambda$, since $D^2=0$. By \cref{ch:isotropic}, $H\ge k$ with
+$\Nul(H-k)=\C u_0$, $u_0=\pi^{-k/4}e^{-\abs w^2/2}$. Hence
+$\Nul(\mathcal D)=\Nul(D+D^*)=\C u_0\subset\Lambda^0$, and on
+$\Lambda^{\mathrm{odd}}$, $\mathcal D\mathcal D^*=H-k+2\deg\ge2$ is invertible,
+with inverse in $\Psiiso{-2}(\R^k;\Lambda^{\mathrm{odd}})$
+(\cref{ch:isotropic}). Put $G_0=\mathcal D^*(\mathcal D\mathcal D^*)^{-1}\in
+\Psiiso{-1}$. Then
+\begin{equation}\label{scindex:eq:G0}
+  \mathcal DG_0=\Id,\qquad G_0\mathcal D=\Id-\Pi_0,
+\end{equation}
+where $\Pi_0$ is the orthogonal projection onto $\C u_0$ ($G_0\mathcal D$ is the
+self-adjoint idempotent with range $\Ran\mathcal D^*=(\Nul\mathcal D)^\perp$).
+All these operators commute with the action $(g\cdot u)(w)=\Lambda g\,u(g^{-1}w)$
+of $O(k)$, and $u_0$ is invariant.
+
+Now let
+\begin{equation*}
+  a=c,\qquad b=-(1-\chi(\abs X))\frac{c(X)}{\abs X^2},\qquad
+  r_\pm=\chi(\abs X)\Id,
+\end{equation*}
+with $\chi\in\CIc([0,\infty))$ equal to $1$ near $[0,1]$. Since $c^{-1}=c^*/\abs X^2
+=-c/\abs X^2$, $b$ satisfies \eqref{scindex:eq:b} with these $r_\pm$, it is a
+symbol of order $-1$, and $e_{a,b}$ is an $O(k)$-equivariant family of
+idempotents on $\Lambda^{\mathrm{odd}}\oplus\Lambda^{\mathrm{ev}}$ equal to $p_0$
+(the projection onto $\Lambda^{\mathrm{odd}}$) for $\abs X$ large.
+
+\subsection{Transport to the bundle}
+Let $P\to M$ be the orthonormal frame bundle of $\mathcal V$, so that a point
+$f\in P_m$ is an isometry $f:\R^k\to\mathcal V_m$, inducing $\Lambda\C^k\cong
+\Lambda W_m$ and $L^2(\R^k;\Lambda)\cong L^2(\mathcal V_m;\Lambda W_m)$. An
+$O(k)$-equivariant operator $T$ on $L^2(\R^k;\Lambda)$ defines operators
+$T_m=f_*Tf_*^{-1}$ on $L^2(\mathcal V_m;\Lambda W_m)$, independent of $f\in P_m$, and
+using smooth local sections of $P$ one sees that $(T_m)_{m\in M}$ is a smooth
+family whenever the kernel of $T$ is smooth (or Schwartz). The cotangent lift of $f$
+identifies $\R^{2k}$ with $T^*_{(m,\cdot)}(\mathcal V_m)=\mathcal V_m\oplus
+\mathcal V_m^*$, and under this identification $e_{a,b}$ becomes the idempotent
+formed, as in \cref{scindex:def:Indsl}, from the triple $(\Lambda^{\mathrm{ev}}W,
+\Lambda^{\mathrm{odd}}W,c)$ representing $\lambda_{\mathcal V}$.
+
+Let $Q_0$ be the operator with kernel $\epsilon^{-k}\check q(w,(w-w')/\epsilon)
+\psi(\abs{w'})$, $q=e_{a,b}-p_0$, where $\psi\in\CIc([0,\infty))$ is $1$ on a
+large interval; it is $O(k)$-equivariant, and $\Ope(q)-Q_0$ has a kernel which is
+$O(\epsilon^\infty)$ in $\cS$. Running the construction of
+\cref{scindex:prop:quantize} with this $Q_0$ gives an $O(k)$-equivariant
+semiclassical quantization $\mathfrak F=p_0+Q$ of $e_{a,b}$ on $\R^k$ (the Riesz
+integral preserves equivariance). Transported, $\mathfrak F_m$ is a semiclassical
+quantization of the idempotent of $\lambda_{\mathcal V}$, by
+\ref{scindex:S-invariance}. Hence
+\begin{equation}\label{scindex:eq:thom-F}
+  \Indsl^{\mathcal V/M}(\lambda_{\mathcal V})=d(\mathfrak F_{\mathcal V},p_0),
+\end{equation}
+where the subscript denotes the transported family.
+
+\subsection{Comparison with the harmonic oscillator}
+Let $U_\epsilon u(w)=\epsilon^{k/4}u(\epsilon^{1/2}w)$, a unitary operator on
+$L^2(\R^k;\Lambda)$ commuting with $O(k)$. Changing variables in
+\eqref{scindex:eq:Ope},
+\begin{equation}\label{scindex:eq:dilation}
+  U_\epsilon\Ope(q)U_\epsilon^{-1}=\operatorname{Op}_1(q_\epsilon),\qquad
+  q_\epsilon(w,\xi)=q(\epsilon^{1/2}w,\epsilon^{1/2}\xi).
+\end{equation}
+In particular $U_\epsilon\Ope(c)U_\epsilon^{-1}=\epsilon^{1/2}\operatorname{Op}_1(c)
+=i\epsilon^{1/2}\mathcal D$ by \eqref{scindex:eq:koszul}: the semiclassical
+quantization of the Thom symbol is, up to a unitary rescaling and a factor, the
+Koszul complex of the harmonic oscillator. Conjugation by $U_\epsilon$ maps
+$\Psiiso{m}(\R^k)$ to itself, and an operator has a Schwartz kernel if and only if
+its conjugate does. We write $\Psiiso{-\infty}$ for the operators with Schwartz
+kernels, an ideal in $\bigcup_m\Psiiso m$ (\cref{ch:isotropic}).
+
+\begin{lemma}\label{scindex:lem:thom-parametrix}
+  Let $A=\Ope(c)$ and $B_0=\Ope(b)$. For $\epsilon$ small there is
+  $B\in U_\epsilon^{-1}\Psiiso{-1}U_\epsilon$, $O(k)$-equivariant, with
+  $R_+=\Id-BA$ and $R_-=\Id-AB$ in $\Psiiso{-\infty}$ and
+  \begin{equation*}
+    \norm{e_{A,B}-p_0-\Ope(e_{a,b}-p_0)}_{L^2}\le C\epsilon.
+  \end{equation*}
+\end{lemma}
+\begin{proof}
+  Since $c$ is linear in $\xi$ and in $w$, the expansions of
+  \ref{scindex:S-euclid} are exact:
+  \begin{equation*}
+    B_0A=\Ope\Bigl(ba+\epsilon\sum_j\pa_{\xi_j}b\,D_{w_j}c\Bigr)
+    =\Id-\Ope(r_+)+\epsilon\Ope(s),\qquad s=-i\sum_j\pa_{\xi_j}b\,c(e_j),
+  \end{equation*}
+  where $c(e_j)=e_j\wedge-\iota_j$ is constant, and similarly
+  $AB_0=\Id-\Ope(r_-)+\epsilon\Ope(s')$ with $s'=\sum_j\pa_{\xi_j}c\,D_{w_j}b$.
+  Both $s,s'$ are symbols of order $-2$ in $X$, so they lie in $\Sym0(\R^k;\R^k)$
+  and $T_1=\epsilon\Ope(s)$ has norm $\le C\epsilon$ by \ref{scindex:S-euclid}.
+  For small $\epsilon$, $\Id+T_1$ is invertible on $L^2$; after conjugation by
+  $U_\epsilon$ it is an elliptic element of $\Psiiso0$ (its symbol is
+  $1+\epsilon s_\epsilon$, with $s_\epsilon\in\Gs{-2}$), so its inverse is in
+  $\Psiiso0$ (an elliptic isotropic operator invertible on $L^2$ has trivial null
+  spaces on $\cSp$, since these lie in $\cS$, and its generalized inverse in
+  \cref{ch:isotropic} is then an inverse). Set $B=(\Id+T_1)^{-1}B_0$. Then
+  \begin{equation*}
+    R_+=\Id-BA=(\Id+T_1)^{-1}\Ope(r_+)\in\Psiiso{-\infty},\qquad
+    \norm{R_+-\Ope(r_+)}+\norm{B-B_0}\le C\epsilon.
+  \end{equation*}
+  Next, $R_-A=AR_+\in\Psiiso{-\infty}$, and $A$ has the exact right inverse
+  $G=U_\epsilon^{-1}(i\epsilon^{1/2})^{-1}G_0U_\epsilon$ by \eqref{scindex:eq:G0},
+  so $R_-=R_-AG=AR_+G\in\Psiiso{-\infty}$. For the norm, write
+  \begin{equation*}
+    R_-=\Ope(r_-)-\epsilon\Ope(s')+AT_1(\Id+T_1)^{-1}B_0 .
+  \end{equation*}
+  Here $AT_1=\epsilon\Ope(c\,\#_\epsilon s)$ and $c\#_\epsilon s=cs+\epsilon
+  \sum_j\pa_{\xi_j}c\,D_{w_j}s$ (exact, $c$ being linear in $\xi$) is a symbol of
+  order $-1$, so $\norm{AT_1}\le C\epsilon$ and $\norm{R_--\Ope(r_-)}\le C\epsilon$.
+
+  Finally, the entries of $e_{A,B}-p_0$ are $-R_-^2$, $(\Id+R_-)AR_+$, $R_+B$ and
+  $R_+^2$; all of them are in $\Psiiso{-\infty}$, since $R_\pm$ are. By the
+  estimates just proved and \ref{scindex:S-euclid}, $R_-^2$, $R_+B$ and $R_+^2$
+  are within $C\epsilon$ of $\Ope(r_-^2)$, $\Ope(r_+b)$, $\Ope(r_+^2)$. For the
+  remaining entry, $AR_+=A\Ope(r_+)-AT_1(\Id+T_1)^{-1}\Ope(r_+)$ and
+  $A\Ope(r_+)=\Ope(cr_++\epsilon\sum_j\pa_{\xi_j}c\,D_{w_j}r_+)$ exactly, with
+  $r_+$ compactly supported; so $AR_+$ is within $C\epsilon$ of $\Ope(cr_+)$, and
+  $(\Id+R_-)AR_+$ within $C\epsilon$ of $\Ope((1+r_-)cr_+)$. These symbols are the
+  entries of $e_{a,b}-p_0$. Equivariance holds at each step.
+\end{proof}
+
+\begin{proof}[Proof of \cref{scindex:thm:thom}]
+  By \cref{scindex:prop:quantize} and \cref{scindex:lem:uniform},
+  $\norm{\mathfrak F-p_0-\Ope(e_{a,b}-p_0)}\le C\epsilon$, so with $e=e_{A,B}$ from
+  \cref{scindex:lem:thom-parametrix}, $\norm{e-\mathfrak F}\le C\epsilon$. Both
+  $e-p_0$ and $\mathfrak F-p_0$ have Schwartz kernels. For $t\in[0,1]$ put
+  $e_t=(1-t)e+t\mathfrak F$; a short computation gives
+  \begin{equation*}
+    e_t^2-e_t=-t(1-t)(e-\mathfrak F)^2,
+  \end{equation*}
+  which has norm $\le C\epsilon^2$ and a Schwartz kernel. As in the proof of
+  \cref{scindex:prop:quantize}, for small $\epsilon$ the Riesz idempotents
+  $\mathfrak e_t=\frac1{2\pi i}\oint_{\abs{s-1}=1/2}(s-e_t)^{-1}ds$ are defined,
+  $\mathfrak e_0=e$, $\mathfrak e_1=\mathfrak F$, and
+  \begin{equation*}
+    (s-e_t)^{-1}=\frac{s-1+e_t}{s(s-1)}\Bigl(\Id-\frac{e_t^2-e_t}{s(s-1)}
+    \Bigr)^{-1}.
+  \end{equation*}
+  The inverse on the right is $\Id$ plus an operator with Schwartz kernel
+  (\cref{ch:isotropic}: if $K$ has a Schwartz kernel and $\Id+K$ is invertible,
+  $(\Id+K)^{-1}=\Id-K+K(\Id+K)^{-1}K$, and the last term again has a Schwartz kernel,
+  depending smoothly on parameters). Hence $\mathfrak e_t-p_0$ has a Schwartz
+  kernel depending smoothly on $t$, and $\mathfrak e_t$ is $O(k)$-equivariant.
+  Transporting to $\mathcal V$ and using \cref{scindex:rem:schwartz} and
+  \ref{scindex:d-homotopy},
+  \begin{equation*}
+    d(\mathfrak F_{\mathcal V},p_0)=d(e_{\mathcal V},p_0),\qquad e=e_{A,B}.
+  \end{equation*}
+  Now $G$ (the exact right inverse of $A$ above) satisfies $\Id-GA=\Pi$, the
+  orthogonal projection onto $\C U_\epsilon^{-1}u_0$, and $\Id-AG=0$. The
+  linear path $B_t=(1-t)B+tG$ has $\Id-B_tA=(1-t)R_++t\Pi$ and $\Id-AB_t=
+  (1-t)R_-$, both with Schwartz kernels, so as in Step~1 of the proof of
+  \cref{scindex:prop:index-relative}, $d(e_{\mathcal V},p_0)=
+  d((e_{A,G})_{\mathcal V},p_0)$. Since $A\Pi=0$ and $\Pi G=0$ (as
+  $\Pi\mathcal D^*=0$), \eqref{scindex:eq:milnor} gives $e_{A,G}=p_0+
+  \diag(0,\Pi)$. The transported family $\Pi_{\mathcal V}$ is the projection onto
+  the span of the section $m\mapsto(U_\epsilon^{-1}u_0)_m$, which is well defined
+  because $u_0$ is $O(k)$-invariant and nowhere zero; so $\Ran\Pi_{\mathcal V}$ is
+  the trivial line bundle and, by \ref{scindex:d-finite}, $d((e_{A,G})_{\mathcal V},
+  p_0)=[\C]$. With \eqref{scindex:eq:thom-F} this proves the theorem.
+\end{proof}
+
+\begin{remark}\label{scindex:rem:why-trivial}
+  The analogous statement for the analytic index, (TH) of \cref{ch:families}, is
+  traditionally proved by computing the index of the Bott operator on the sphere
+  $\Sphere^k$ as a representation of $O(k)$ and then twisting by the frame bundle.
+  Here the corresponding representation is visible directly: it is the span of the
+  Gaussian ground state, on which $O(k)$ acts trivially. This is Melrose's
+  observation that ``the bundle of ground states of the harmonic oscillators is
+  canonically trivial''. The analysis needed is the comparison
+  \cref{scindex:lem:thom-parametrix} between semiclassical quantization at scale
+  $\epsilon$ and isotropic quantization after rescaling by $\epsilon^{1/2}$.
+\end{remark}
+
+\begin{corollary}[The index of the Thom class]\label{scindex:cor:TH}
+  Let $\tilde M=S(\mathcal V\oplus\R)\to M$ and $k_{\mathcal V}:\mathcal V
+  \hookrightarrow\tilde M$ be as in statement (TH) of \cref{ch:families}. Then
+  \begin{equation*}
+    \inda^{\tilde M/M}\bigl((k_{\mathcal V})_*\lambda_{\mathcal V}\bigr)=1\in
+    K^0(M).
+  \end{equation*}
+  Thus (TH) holds, and the proof of the families index theorem given in
+  \cref{ch:families} is complete.
+\end{corollary}
+\begin{proof}
+  By \cref{scindex:thm:analytic=sl} for the fibration $\tilde M\to M$ of compact
+  manifolds, excision (\cref{scindex:thm:Indsl}(i)) and \cref{scindex:thm:thom},
+  $\inda((k_{\mathcal V})_*\lambda_{\mathcal V})=\Indsl^{\tilde M/M}
+  ((k_{\mathcal V})_*\lambda_{\mathcal V})=\Indsl^{\mathcal V/M}
+  (\lambda_{\mathcal V})=1$.
+\end{proof}
+
+\begin{corollary}[Semiclassical normalization]\label{scindex:cor:normalization}
+  For every $N\ge0$ and every compact $B$,
+  \begin{equation*}
+    \Indsl^{(I^N\times B)/B}\circ\beta_N=\Id_{K^0(B)},\qquad\text{hence}\qquad
+    \inda\circ(k_N)_*\circ\beta_N=\Id_{K^0(B)},
+  \end{equation*}
+  where $k_N:T^*I^N\times B\hookrightarrow T^*(\Torus^N\times B/B)$.
+\end{corollary}
+\begin{proof}
+  Apply \cref{scindex:thm:thom} to the trivial bundle $\mathcal V=\R^N\times B$
+  over $M=B$ (the degenerate fibration $B\to B$): $\Indsl^{(\R^N\times B)/B}
+  (\lambda_{\R^N})=1$. By the module property \cref{scindex:thm:Indsl}(iv),
+  $\Indsl(\lambda_{\R^N}\cdot y)=y$ for $y\in K^0(B)$, and $\lambda_{\R^N}\cdot y=
+  \lambda_{\R^N}\boxtimes y$. Under a diffeomorphism $I\cong\R$,
+  $\lambda_{\R^N}=b_1^{\boxtimes N}$ (\ref{scindex:K-families}), so by naturality
+  $\Indsl^{(I^N\times B)/B}(\beta_N(y))=y$. The second statement follows by
+  excision ($I^N\times B\subset\Torus^N\times B$) and
+  \cref{scindex:thm:analytic=sl}.
+\end{proof}
+The second identity is the normalization proposition of \cref{ch:families}, which
+was proved there by the multiplicativity of the analytic index on the torus; here
+it is obtained from the harmonic oscillator alone.
+
+\section{The families index theorem}\label{scindex:sec:AS}
+
+We now give the second proof of the K-theoretic form of the families index
+theorem of \cref{ch:families}. Recall the data defining $\indt$
+(\ref{scindex:K-families}): an embedding $M\hookrightarrow\R^N\times B$ over
+$B$ with normal bundle $\mathcal V\to M$, a tubular neighbourhood
+$\Theta:\mathcal V\cong\Omega\subset I^N\times B$, the Thom homomorphism $\tau$,
+the extension $j_*$ from $\Omega$ to $I^N\times B$, and the Bott isomorphism
+$\beta_N$.
+
+\begin{theorem}[Atiyah--Singer]\label{scindex:thm:AS}
+  For every fibration of compact manifolds $\phi:M\to B$,
+  \begin{equation*}
+    \inda=\Indsl=\indt:\Kc(T^*(M/B))\longrightarrow K^0(B).
+  \end{equation*}
+  Moreover $\Indsl^{(I^N\times B)/B}=\beta_N^{-1}$ and, for the fibration
+  $\mathcal V\to B$,
+  \begin{equation}\label{scindex:eq:thom-sl}
+    \Indsl^{\mathcal V/B}\circ\tau=\Indsl^{M/B}.
+  \end{equation}
+\end{theorem}
+\begin{proof}
+  The first equality is \cref{scindex:thm:analytic=sl}.
+
+  \emph{The trivial fibration.} By \cref{scindex:cor:normalization},
+  $\Indsl^{(I^N\times B)/B}\circ\beta_N=\Id$, and $\beta_N$ is an isomorphism by
+  Bott periodicity (\cref{ch:bott,ch:families}); hence $\Indsl^{(I^N\times B)/B}
+  =\beta_N^{-1}$.
+
+  \emph{The Thom step \eqref{scindex:eq:thom-sl}.} Let $\tilde M=S(\mathcal
+  V\oplus\R)\xrightarrow{\tilde\phi}M$ and $\hat k:T^*(\mathcal V/B)
+  \hookrightarrow T^*(\tilde M/B)$ the open embedding induced by $k_{\mathcal V}$.
+  The class $b=(k_{\mathcal V})_*\lambda_{\mathcal V}\in\Kc(T^*(\tilde M/M))$ has
+  $\inda(b)=1$ by \cref{scindex:cor:TH}. By the multiplicativity theorem of
+  \cref{ch:families} and the naturality of products under open embeddings proved
+  there (with a splitting of $T^*(\tilde M/B)$ extending the one used to define
+  $\tau$),
+  \begin{equation*}
+    \inda^{M/B}(x)=\inda^{\tilde M/B}\bigl(b\cdot\tilde\phi^*x\bigr)
+    =\inda^{\tilde M/B}\bigl(\hat k_*\tau(x)\bigr).
+  \end{equation*}
+  By \cref{scindex:thm:analytic=sl} for $\tilde M\to B$ and $M\to B$, and excision
+  for $\Indsl$, the outer terms are $\Indsl^{M/B}(x)$ and
+  $\Indsl^{\mathcal V/B}(\tau(x))$.
+
+  \emph{Conclusion.} By naturality and excision for $\Indsl$
+  (\cref{scindex:thm:Indsl}),
+  \begin{equation*}
+    \Indsl^{\mathcal V/B}(\tau x)=\Indsl^{\Omega/B}(\Theta_*\tau x)=
+    \Indsl^{(I^N\times B)/B}(j_*\Theta_*\tau x)=\beta_N^{-1}(j_*\Theta_*\tau x)
+    =\indt(x).
+  \end{equation*}
+  Together with \eqref{scindex:eq:thom-sl} this gives $\Indsl=\indt$.
+\end{proof}
+
+\begin{remark}[Comparison of the two proofs]\label{scindex:rem:compare}
+  Both proofs pass through the same diagram, the embedding of $M$ into
+  $I^N\times B$ followed by the Thom homomorphism. In \cref{ch:families} the
+  analytic index was carried along it using (1) multiplicativity, proved with the
+  product-type calculus of \cref{ch:product}, (2) excision, proved by a direct
+  comparison of stabilized null spaces, (3) the normalization on the torus,
+  proved by multiplicativity, and (4) the index of the Thom class, (TH), which was
+  imported. Here (2) and (3) are replaced by excision for $\Indsl$ (which is
+  trivial) together with \cref{scindex:thm:analytic=sl}, and by
+  \cref{scindex:cor:normalization}; and (4) is proved
+  (\cref{scindex:cor:TH}). Only (1) is still taken from \cref{ch:families}. In
+  Melrose's treatment (1) is replaced as well, by multiplicativity of the
+  semiclassical index under iterated fibrations, proved by an adiabatic limit; we
+  explain this in the next section. With it, \eqref{scindex:eq:thom-sl} is
+  proved directly and the proof becomes entirely semiclassical:
+  $\inda=\Indsl^{M/B}=\Indsl^{\mathcal V/B}\circ\tau=\beta_N^{-1}\circ j_*\circ
+  \Theta_*\circ\tau$.
+\end{remark}
+
+\section{Multiplicativity and the adiabatic limit}\label{scindex:sec:adiabatic}
+
+This section describes, without complete proofs, how the remaining ingredient,
+\eqref{scindex:eq:thom-sl}, and more generally the multiplicativity of the
+semiclassical index, can be obtained by semiclassical methods.
+
+\subsection{Iterated fibrations}
+Consider a tower $\tilde M\xrightarrow{\tilde\phi}M\xrightarrow{\phi}B$ of
+fibrations, $\psi=\phi\circ\tilde\phi$. A class $\tilde x\in\Kc(T^*(\tilde M/B))$
+can be quantized in two steps. First, in the fibres of $\tilde\phi$ only: this
+requires the fibres of $\tilde\phi$ to carry, as parameters, the covectors in
+$T^*(M/B)$, i.e.\ one considers the pulled back fibration
+$\tilde\phi^*:{}^{\mathrm{sl}}T^*(M/B)\times_M\tilde M\to{}^{\mathrm{sl}}T^*(M/B)$,
+and quantizes $\tilde x$ semiclassically along its fibres. This gives a class
+$\Indsl^{\tilde\phi^*}(\tilde x)\in\Kc(T^*(M/B))$ (compactly supported in the
+parameters). Second, one applies $\Indsl^{M/B}$. Melrose's multiplicativity
+theorem (his Proposition~12.15) states that
+\begin{equation}\label{scindex:eq:mult-sl}
+  \Indsl^{\psi}=\Indsl^{\phi}\circ\Indsl^{\tilde\phi^*}.
+\end{equation}
+For the tower $\mathcal V\to M\to B$ and $\tilde x=\lambda_{\mathcal V}\cdot
+\varpi^*x$ the inner index is $\Indsl^{\mathcal V/M}(\lambda_{\mathcal V})\cdot x=x$
+by \cref{scindex:thm:thom} and the module property (applied with parameters in
+$T^*(M/B)$), so \eqref{scindex:eq:mult-sl} contains \eqref{scindex:eq:thom-sl}.
+
+\subsection{The adiabatic calculus}
+To compare the two quantizations one uses two parameters: $\epsilon$, the
+semiclassical parameter in the directions of $M/B$, and $\delta$, an adiabatic
+parameter in the fibres of $\tilde\phi$. For a single fibration
+$Y\to Z$ with fibre $\tilde Z$ (the case $B=\mathrm{pt}$), an \emph{adiabatic
+family} is a family $A(\delta)$ of smoothing operators on $Y$ whose kernels vanish
+to infinite order as $\delta\downarrow0$ away from the fibre diagonal
+$Y\times_ZY$ and near it have the form
+\begin{equation*}
+  \delta^{-m}A'\Bigl(\delta,z,\frac{z-z'}\delta,\tilde z,\tilde z'\Bigr),\quad
+  m=\dim Z,
+\end{equation*}
+in local product coordinates, with $A'$ smooth, compactly supported in $z$ and
+Schwartz in $(z-z')/\delta$, and smooth in the fibre variables $\tilde z$,
+$\tilde z'$. They form an algebra with a multiplicative symbol sequence
+\begin{equation*}
+  \delta\Psi^{-\infty}_{\mathrm{ad}}(Y;E)\hookrightarrow\Psi^{-\infty}_{\mathrm{ad}}
+  (Y;E)\xrightarrow{\ \sigma_{\mathrm{ad}}\ }\cS\bigl({}^{\mathrm{sl}}T^*Z;
+  \Psido{-\infty}(\pi^*Y/{}^{\mathrm{sl}}T^*Z;E)\bigr),
+\end{equation*}
+the adiabatic symbol being a Schwartz family, parametrized by the semiclassical
+cotangent bundle of the base, of smoothing operators on the fibres $\tilde Z$.
+If $a$ is an invertible-at-infinity adiabatic symbol, its adiabatic
+quantizations are invertible for small $\delta$, and this defines an index
+$\Kc^{-1}(T^*Z)\to K^{-1}(\mathrm{pt})$ with \emph{operator-valued} symbols; by
+deforming $a$ to finite rank (\cref{scindex:ex:frame}) one sees that it agrees with
+the semiclassical index (Melrose's Proposition~12.14). Combining the two
+parameters gives the adiabatic--semiclassical algebra, whose kernels are of the
+form $\delta^{-n-k}A(\delta,\epsilon,(\tilde z-\tilde z')/\epsilon,z,
+(z-z')/(\epsilon\delta))$ near the fibre diagonal, with two symbol maps (at
+$\epsilon=0$ and at $\delta=0$) and a joint symbol; the relevant cotangent
+bundle ${}^{\mathrm{sl\,ad}}T^*\tilde M$ is spanned by $df/\epsilon$ and
+$dg/(\epsilon\delta)$, $f\in\CI(\tilde M)$, $g\in\CI(Z)$, and restricts to
+${}^{\mathrm{sl}}T^*\tilde M$, to the adiabatic cotangent bundle and to $T^*\tilde M$
+on the three faces. The multiplicativity \eqref{scindex:eq:mult-sl} is then the
+statement that a family in this algebra quantizing $\tilde x$ restricts, at the
+two faces, to the two composite quantizations, and that the index is constant
+along the family.
+
+For the Thom tower the same idea can be made concrete in the language of this
+chapter. Let $A$ be a semiclassical quantization of the symbol of $x$ on $M/B$,
+lifted to $\mathcal V$ by a connection, and let $\mathcal D_\epsilon$ be the
+transported, rescaled Koszul operator of \cref{scindex:sec:thom} on the fibres of
+$\mathcal V$, whose null space is spanned by the transported Gaussian at scale
+$\epsilon^{1/2}$ and which is surjective. This is the hypothesis (H) of the
+multiplicativity section of \cref{ch:families}, and the Clifford tensor product
+$\mathcal D_\epsilon\otimes A$ formed there has relative index equal to that of
+$A$, by the same linear algebra. The remaining step is to show that the
+idempotent of \cref{scindex:lem:milnor} built from $\mathcal D_\epsilon\otimes A$
+is homotopic, through compactly supported (or Schwartz) idempotent perturbations
+of $p_0$, to a semiclassical quantization on $\mathcal V/B$ of the idempotent of
+$\lambda_{\mathcal V}\cdot\varpi^*x$. In the analytic proof this step required the
+product-type calculus; here it requires the estimate that the commutators of the
+lifted operators with $\mathcal D_\epsilon$ are $O(\epsilon^{1/2})$ relative to
+$\mathcal D_\epsilon$, which is what the joint semiclassical--isotropic
+calculus provides. We do not develop that calculus here.
+
+\section{The Chern character of the index bundle}\label{scindex:sec:chern}
+
+Since $\inda=\Indsl=\indt$, the cohomological form of the index theorem,
+\begin{equation*}
+  \Ch(\inda x)=(-1)^n\pi_*\bigl(\Ch(x)\wedge\pi_0^*\Td(T(M/B)\otimes\C)\bigr),
+\end{equation*}
+follows from the K-theoretic form exactly as in \cref{ch:families}, with the same
+inputs and the same conventions (multiplicativity of $\Ch$ for products,
+compatibility with extension and pull-back, the integral of the Chern character of
+$b_1$, and the Riemann--Roch identity for the Thom class). We add two remarks on
+the semiclassical point of view.
+
+\begin{remark}[The odd form]\label{scindex:rem:odd-chern}
+  Melrose states the result for the odd index: for $a\in\Kc^{-1}(T^*(M/B))$,
+  $\Ch_{\mathrm{odd}}(\Indsl^1(a))$ is the fibre integral of
+  $\Ch_{\mathrm{odd}}(a)$ against the Todd class of the fibration. The two forms
+  are equivalent. Indeed, by \cref{scindex:prop:even-odd}, $\Indsl(x)=
+  \indT(\Indsl^2[\ell_x])$, and \cref{ch:families} shows that the Chern character
+  of a Toeplitz index is the integral over the circle of the odd Chern character
+  of the loop; the same computation, now with compact supports, identifies the
+  integral over the circle of the odd Chern character of $\ell_x$ with the Chern
+  character of $x$ (we do not carry this out). The signs depend on the orientation
+  conventions, which are fixed in \cref{ch:families}.
+\end{remark}
+
+\begin{remark}[The Todd class]\label{scindex:rem:todd}
+  The derivation shows that $\Ch(\inda x)$ is the fibre integral of
+  $\Ch(x)$ against a class $\mathcal T\in\Hev(M)$ obtained by integrating
+  $\Ch(\lambda_{\mathcal V})$ over the fibres of $T^*(\mathcal V/M)$, where
+  $\mathcal V$ is the normal bundle of an embedding. That $\mathcal T$ does not
+  depend on the embedding follows from \cref{scindex:thm:AS} (for $B$ a point and
+  suitable $x$) or directly: the class is stable under adding trivial bundles,
+  since $\Ch(\lambda_{\R})$ integrates to a constant, and any two normal bundles
+  are stably isomorphic, being stable inverses of $T(M/B)$. Its identification with
+  the Todd class of $T(M/B)\otimes\C$ is the Riemann--Roch computation of Atiyah and
+  Hirzebruch recalled in \cref{ch:families}.
+\end{remark}
+
+\begin{remark}[Dirac families and spectral sections]\label{scindex:rem:dirac}
+  For families of Dirac operators the index formula can be refined to the level
+  of differential forms, through the heat kernel and Bismut's superconnection;
+  see \cite{Bismut-Cheeger} and \cref{ch:eta}, where eta forms appear in the
+  index theorem for families with boundary. In that setting one also needs
+  \emph{spectral sections} (smooth families of projections which differ from the
+  positive spectral projections of a self-adjoint family by smoothing operators;
+  \cite{Melrose-APS}): such a family exists if and only if the odd index of the
+  boundary family vanishes in $K^{1}$ of the base, an obstruction which is the
+  odd counterpart of the even index studied here. These topics are not pursued
+  in this chapter.
+\end{remark}
+
+\section{Exercises}
+
+\begin{exercise}[Strong contractibility of the unitary group]\label{scindex:ex:strong}
+  Let $H=L^2([0,1])$ and $\mathrm U(H)$ its unitary group. For $U\in\mathrm U(H)$
+  and $t\in(0,1]$ let $\kappa_t:L^2([0,t])\to L^2([0,1])$,
+  $(\kappa_tv)(x)=t^{1/2}v(tx)$, and define $U_t=\kappa_t^{-1}U\kappa_t\oplus
+  \Id_{L^2([t,1])}$, $U_0=\Id$. Show that each $U_t$ is unitary, that
+  $\norm{U_tv-v}\le2\norm{v}_{L^2([0,t])}$, that $(UV)_t=U_tV_t$, and that
+  $(U,t,v)\mapsto U_tv$ is continuous on $\mathrm U(H)\times[0,1]\times H$ when
+  $\mathrm U(H)$ has the strong topology. Conclude that $\mathrm U(H)$ is
+  contractible in the strong topology. (By Kuiper's theorem it is even
+  contractible in the norm topology; this is not needed.)
+\end{exercise}
+
+\begin{exercise}[Smooth orthonormal frames]\label{scindex:ex:frame}
+  Let $\phi:M\to B$ be a fibration of compact manifolds and $E\to M$ Hermitian.
+  (a) Using an admissible embedding $J$ (\cref{scindex:lem:embedding}) and
+  \cref{ch:bott}'s finite rank approximation on $\Torus^N$, construct smooth
+  families of finite rank orthogonal projections $\pi_k\in\Psido{-\infty}(M/B;E)$
+  with $\norm{\pi_kA\pi_k-A}\to0$ uniformly on $B$ for every
+  $A\in\Psido{-\infty}(M/B;E)$. (Hint: compress $J^*P_VJ$ and use the Riesz
+  projection near $1$ of $J^*P_VJ$ for $V$ large.)
+  (b) Alternatively, following Melrose, use \cref{scindex:ex:strong} and the fact
+  that a fibre bundle with contractible fibre over a compact manifold has a
+  section to find continuous sections $e'_i$ of the Hilbert bundle forming an
+  orthonormal basis in each fibre; approximate them by smooth sections $e''_i$ with
+  $\sup_b\norm{e'_i-e''_i}\le2^{-i-4}$, and show that the operator
+  $T_bu=\sum_i\inner{u}{e'_i(b)}e''_i(b)$ satisfies $\norm{T_b-\Id}\le\frac14$, so
+  that Gram--Schmidt applied to the $e''_i$ gives a smooth orthonormal basis.
+\end{exercise}
+
+\begin{exercise}\label{scindex:ex:relative}
+  Let $P$, $Q$ be orthogonal projections on a Hilbert space with $P-Q$ compact.
+  Show that $QP:\Ran P\to\Ran Q$ is Fredholm, and that for a pair of smooth
+  families as in \cref{scindex:def:d} (with $B$ a point) its index equals
+  $d(P,Q)$. (Reduce, by a homotopy and finite rank approximation, to the case
+  $P=Q+\Pi$ with $\Pi$ of finite rank and $Q\Pi=0$.)
+\end{exercise}
+
+\begin{exercise}\label{scindex:ex:milnor-trace}
+  In \cref{scindex:lem:milnor}, show that if $R_\pm$ are trace class then
+  $\Tr(e_{A,B}-p_0)=\Tr(R_+^2)-\Tr(R_-^2)$, and that $\Tr(R_+^2)-\Tr(R_-^2)=
+  \Tr(R_+)-\Tr(R_-)$ (use $AR_+=R_-A$ and $\Tr[A,BR_-]=0$ when the
+  commutator is a commutator of a bounded and a trace class operator). Deduce
+  \cref{scindex:prop:index-relative} for $B$ a point from the trace formula of
+  \cref{ch:index}.
+\end{exercise}
+
+\begin{exercise}\label{scindex:ex:oscillatory}
+  Let $A\in\Psisl{-\infty}(\R^n)$, $u\in\CIc(\R^n)$ and $f\in\CI(\R^n)$
+  real-valued. Show that
+  \begin{equation*}
+    e^{-if/\epsilon}A(\epsilon)\bigl(e^{if/\epsilon}u\bigr)\longrightarrow
+    \sigsl(A)(z,df(z))\,u(z)\quad\text{in }\CI(\R^n)\text{ as }\epsilon\downarrow0,
+  \end{equation*}
+  and use this to show that $\sigsl$ is invariant under changes of coordinates,
+  in the sense of \ref{scindex:S-invariance}. Discuss what happens if
+  $\epsilon$ is replaced by $2\epsilon$ (\cref{scindex:rem:slT}).
+\end{exercise}
+
+\begin{exercise}\label{scindex:ex:ground-state}
+  Let $\mathcal V\to Z$ be a real vector bundle with a metric over a compact
+  manifold, and $\gamma\in\cS(\mathcal V)$ the fibrewise normalized Gaussian.
+  Show that $A\mapsto\Gamma A\Gamma^*$, $\Gamma u=\gamma\cdot\varpi^*u$, embeds
+  $\Psido{-\infty}(Z;E)$ as a subalgebra of the operators on $\mathcal V$ with
+  Schwartz kernels (Melrose's Proposition~12.3), that it maps $\Ginf(Z;E)$ into
+  $\Id+\Psido{-\infty}_{\mathcal S}$, and that it preserves the classes in
+  $K^{-1}(\mathrm{pt})$ of \cref{scindex:def:class}.
+\end{exercise}
+
+\begin{exercise}\label{scindex:ex:circle}
+  For $M=\Torus$, $B=\mathrm{pt}$, compute $\Indsl$ of the class of the symbol of
+  the operator $P_1=e^{-i\theta}\Pi_>+(\Id-\Pi_>)$ of \cref{ch:families} directly:
+  show that a symbol representing $[\sigma_0(P_1)]$ can be chosen equal to $1$ for
+  $\xi<-1$ and to $e^{-i\theta}$ for $\xi>1$, construct $e_{a,b}$, and show that
+  the relative index of its quantization is $1$ by deforming it to the case
+  $\epsilon=1$, where the quantization is a Fourier multiplier composed with
+  multiplication operators.
+\end{exercise}
+
+\section*{Notes}
+This chapter is based on Chapter~12 of R.~Melrose's notes \emph{From microlocal
+to global analysis} (2008), which outlines a proof of the Atiyah--Singer index
+theorem through semiclassical and adiabatic limits; many steps there are only
+sketched, and several sections are empty. We have reorganized the material
+around a definition of the even semiclassical index as a relative index of
+idempotents, computed by the Toeplitz index of a loop
+(\cref{scindex:def:d,scindex:def:Indsl}); with it, the comparison with the analytic
+index (\cref{scindex:thm:analytic=sl}) reduces to Milnor's explicit form of the
+index idempotent (\cref{scindex:lem:milnor}) and the multiplicativity of the
+semiclassical symbol, in place of the combined `Toeplitz' calculus sketched in the
+source. The passage from families of operators on the fibres to classes in
+$K^{-1}(B)$ is made through an explicit isometric embedding of the fibres
+(\cref{scindex:lem:embedding}) instead of Melrose's smooth orthonormal frames,
+whose construction (via strong contractibility of the unitary group and the
+existence of sections of bundles with contractible fibres) is left to
+\cref{scindex:ex:strong,scindex:ex:frame}. The index of the Thom class
+(\cref{scindex:thm:thom}) is computed from the harmonic oscillator, as suggested
+by the source; this also completes the proof in \cref{ch:families}. The
+multiplicativity of the semiclassical index under iterated fibrations, via the
+adiabatic calculus, is only outlined (\cref{scindex:sec:adiabatic}); the final
+proof uses instead the analytic multiplicativity of \cref{ch:families}. The
+source's sections on Dirac families and spectral sections are empty and are
+replaced by \cref{scindex:rem:dirac}.
+
+The semiclassical approach to index theory has many antecedents; the use of the
+harmonic oscillator to produce the Thom isomorphism goes back to the proof of Bott
+periodicity by M.~F. Atiyah, \emph{Bott periodicity and the index of elliptic
+operators}, Quart. J. Math. \textbf{19} (1968), 113--140, and the K-theoretic
+setting is that of \cite{Atiyah-K,Atiyah-Singer-IV}. For the semiclassical
+calculus see the references in \cref{ch:semiclassical}; for the isotropic calculus
+and the harmonic oscillator, \cite{Shubin}. The idempotent \eqref{scindex:eq:milnor}
+is the standard formula for the index map in algebraic K-theory, from J.~Milnor,
+\emph{Introduction to algebraic K-theory}, Ann. of Math. Studies \textbf{72} (1971).
