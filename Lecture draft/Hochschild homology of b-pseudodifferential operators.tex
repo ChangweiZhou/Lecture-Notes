@@ -90,7 +90,10 @@ decomposition and a crossed-product argument. We identify the connecting
 map to the residual ideal with the b-trace defect formula and evaluate the
 index functional on residual perturbations of the identity, where it
 reduces to a Wiener--Hopf winding number and to \(-\tfrac12\) times the
-b-eta invariant. The computation for the Laurent symbol algebra
+b-eta invariant. For fully elliptic operators of positive order we prove
+the general index formula, with b-zeta and b-eta invariants, following
+Loya's thesis in codimension one, and we correct the sign of its boundary
+term. The computation for the Laurent symbol algebra
 \(\Asb\), which is the b-groupoid case of the Benameur--Nistor theorem,
 is retained as Part~\ref{part:symbols}. Each step is labelled as proved,
 quoted, or sketched; see Section~\ref{subsec:status}.
@@ -333,6 +336,19 @@ and~\ref{lem:invertible}).
 \item The Wiener--Hopf index formula for residual perturbations of the
 identity (Theorem~\ref{thm:WH}), and the nonvanishing of the index
 functional. Part (ix) uses in addition (i), (Q0), (Q1) and (C3).
+\item The general index formula for fully elliptic operators of positive
+order (Theorem~\ref{thm:indexgeneral}), with its ingredients: the reduction
+lemma (Lemma~\ref{lem:reduction}), the b-trace defect formula on the
+class \(\mathcal K_\delta\) (Theorem~\ref{thm:defectK}), the resolvent and
+complex powers (Propositions~\ref{prop:resolvent} and~\ref{prop:cp}), the
+b-zeta function and its heat form (Theorem~\ref{thm:bzeta}), and the
+b-eta function (Lemma~\ref{lem:etaH}). The arguments are those of
+\cite[Chs.~2--8]{LoyaThesis}, specialized to codimension one, which is used
+as a source of proofs and not as an input. These results use (Q0) and (C3)
+only, including the (C3) items marked there for Section~\ref{sec:zeta}. The
+sign of the boundary term differs from the printed form of
+\cite[Thm.~8.6]{LoyaThesis}; see Remark~\ref{rem:thesis-sign} and the explicit
+check in Example~\ref{ex:signcheck}.
 \end{itemize}
 
 \emph{Quoted inputs.}
@@ -359,7 +375,14 @@ expansion and asymptotic summation of conormal kernels at a face meeting the
 conormal set transversally; the suspended calculus on strips; the identity
 \(\Tr(PQ)=\Tr(QP)\) when \(\operatorname{ord}P+\operatorname{ord}Q<-\dim H\);
 mapping properties on weighted b-Sobolev spaces and the
-Calder\'on--Fedosov formula; and Lefschetz duality.
+Calder\'on--Fedosov formula; and Lefschetz duality. For
+Section~\ref{sec:zeta} it also includes: the parameter-dependent symbol
+calculus of Seeley \cite{SeeleyCP,Shubin} in b-coordinates, with
+parameter-uniform remainder estimates (used in Lemma~\ref{lem:seeley}); the
+parameter-dependent suspended parametrix (Lemma~\ref{lem:indres});
+interpolation and elliptic regularity for the powers of \(P_0\); and the
+Hilbert--Schmidt property of the inclusions
+\(x^bH^N_b\hookrightarrow x^{b'}H^{N'}_b\) for \(b>b'\) and \(N-N'>n/2\).
 \end{enumerate}
 
 \emph{Hypothesis.}
@@ -374,7 +397,9 @@ For \(\Asb\), (C) is part of the Benameur--Nistor theorem
 (Theorem~\ref{thm:BN-conv}); for \(\Isb\) and \(\Adsb\) it is a hypothesis.
 \end{enumerate}
 
-\emph{Sketched.}
+\emph{Sketched.} The general index formula, item (S3) of earlier
+versions, is now proved in Section~\ref{sec:zeta}. Two sketched items
+remain.
 \begin{enumerate}
 \item[(S1)] The continuous HKR theorem for the algebra \(\cE\) of entire
 functions that are Schwartz on strips. We prove the division lemma and the
@@ -390,14 +415,6 @@ requires the exact constants and the cancellation of the equatorial
 logarithmic divergences. The surjectivity of these maps is proved; their
 description, the explicit kernels in (vii)--(viii), and the equality
 \(\operatorname{rank}\partial^{\mathcal A}_2=N-1\) depend on (S2).
-\item[(S3)] The general index formula for fully elliptic operators of
-nonzero order (Proposition~\ref{prop:indexgeneral}). The closed-manifold
-arguments \cite{MelroseMicro} need a holomorphic family \(Q(z)\) of order
-\(-z\) with \(Q(0)=1\), and the meromorphy of \(\Tr(x^wAQ(z))\) in two
-variables, including the double poles at the corner where the diagonal
-meets the front face. In the b-setting \(Q(z)\) must have indicial families
-that are entire and invertible on all of \(\C\); we have not carried this
-out.
 \end{enumerate}
 
 Dependencies: (i) uses (C3). (ii) and (iii) use (Q0)--(Q2), (C3) and
@@ -406,7 +423,10 @@ from (ii), and (C) from (iv)--(vi). The surjectivity of the connecting
 maps is proved (Propositions~\ref{prop:n1}, \ref{prop:dict}
 and~\ref{prop:connA}). The explicit kernels in (vii)--(viii), and the
 exact rank of \(\partial^{\mathcal A}_2\), use (S2) in addition. (ix) uses
-(i), (Q0), (Q1) and (C3), together with Theorem~\ref{thm:WH}.
+(i), (Q0), (Q1) and (C3), together with Theorem~\ref{thm:WH}. The general
+index formula (Theorem~\ref{thm:indexgeneral}) uses (Q0) and (C3) only. It
+does not use (Q1), (Q2), (C), (S1) or (S2), and it is not needed for
+(i)--(ix).
 
 \subsection{Organization}
 Part~\ref{part:symbols} keeps the computation for the symbol algebra
@@ -414,7 +434,8 @@ Part~\ref{part:symbols} keeps the computation for the symbol algebra
 treats the b-calculus conventions, the structure of the boundary algebras,
 the Hochschild tools, and the ideals \(\Ib\), \(\Idb\) and
 \(x^{-\Z}\Psi_b^{-\infty}\). Part~\ref{part:assembly} assembles the
-remaining algebras and treats the index functional.
+remaining algebras and treats the index functional. Its last section proves
+the general index formula for fully elliptic operators of positive order.
 
 
 \part{The Laurent symbol algebra}\label{part:symbols}
@@ -3489,34 +3510,875 @@ For the operator of Example~\ref{ex:WH}, Proposition~\ref{prop:fedosov}
 gives \(\Tr\partial[B\otimes A]=-\operatorname{Ind}(A)=1\).
 \end{proof}
 
-\begin{proposition}[General index formula; sketch (S3)]\label{prop:indexgeneral}
-Let \(A\in\Psi_b^m(X)\) satisfy the hypotheses of
-Lemma~\ref{lem:invertible}, with inverse \(B\) modulo \(\Ib\). Choose a
-positive elliptic \(Q\in\Psi_b^1(X)\), dilation invariant near
-\(\partial X\). Suppose that \(\Tr(x^wCQ^{-\tau})\) is meromorphic near
-\((0,0)\) with at most simple poles in each variable, with \(Q^{-\tau}\) taken
-from the full b-calculus. Then
-\(\operatorname{Ind}A=\operatorname{FP}_{\tau=0}\operatorname{FP}_{w=0}
-\Tr(x^w[A,B]Q^{-\tau})\) splits into a residue term \(\operatorname{AS}(A)\)
-in the symbols of \(A\) and \(B\), and a boundary term. If \(A\) is
-dilation invariant near \(\partial X\), the boundary term is
+For operators of positive order, the residual perturbations of
+Theorem~\ref{thm:WH} are replaced by general fully elliptic operators.
+Their index is computed in Section~\ref{sec:zeta}
+(Theorem~\ref{thm:indexgeneral}): it is the difference of the b-zeta values
+of \(A^*A\) and \(AA^*\) at \(0\), minus half the sum of the b-eta invariants
+\eqref{eq:etab-general} of the indicial families. In order zero the interior
+term is absent, and the formula reduces to Theorem~\ref{thm:WH}
+(Remark~\ref{rem:WHconsistency}).
+
+\section{Complex powers, b-zeta functions and the index}\label{sec:zeta}
+
+This section proves the index formula for fully elliptic operators of
+positive order. The arguments are those of Loya's thesis
+\cite[Chs.~2--8]{LoyaThesis}, which treats manifolds with corners. We
+specialize them to a manifold with boundary, where they become much
+simpler, and write them in the conventions of Section~\ref{sec:bconv}. We
+also replace the thesis's tempered-symbol calculus (its Chapters~3--5) by
+a shorter route. The resolvent is decomposed into an explicit symbolic part,
+an explicit model part at the front faces, and a remainder that is
+controlled only through weighted mapping properties (Definition~\ref{def:K}).
+This is all that the b-trace needs. The index identity itself is proved at
+the level of operators (Proposition~\ref{prop:MS}), and the heat form of the
+formula is then obtained by Mellin inversion. Throughout, \(n=\dim X\),
+\(m\geq1\) is an integer, and \({}^b\Tr\) is the finite part at \(w=0\) of
+\(\Tr(x^w\,\cdot\,)\), as in Section~\ref{sec:btrace}.
+
+\subsection{The reduction lemma}\label{subsec:reduction}
+
+We call \(A\in\Psi_b^m(X)\) \emph{fully elliptic} if it is b-elliptic and
+\(I_H(A,\lambda)\) is invertible for every \(\lambda\in\C\) and every \(H\).
+By Lemma~\ref{lem:invertible}, this means that \([A]\) is invertible in
+\(\Ab\). We write \(A^*\) for the formal adjoint with respect to \(\mu_b\).
+The kernel of \(A^*\) is \(\overline{K_A(p',p)}\). At \(\mathrm{ff}_H\) this
+replaces \(s\) by \(1/s\) and exchanges \(y\) and \(y'\), so
+\eqref{eq:indicial} gives
+\begin{equation}\label{eq:Iadjoint}
+ I_H(A^*,\lambda)=I_H(A,\bar\lambda)^* .
+\end{equation}
+
+\begin{lemma}[Reduction]\label{lem:reduction}
+Let \(A\in\Psi_b^m(X)\), \(m\geq1\), be fully elliptic, and write
+\(a_H=I_H(A,\cdot)\).
+\begin{enumerate}
+\item[(i)] There is \(B\in\Psi_b^{-m}(X)\) with \(AB-1,\ BA-1\in\Ib\). The
+adjoint \(A^*\) is fully elliptic, and \(B^*A^*-1,\ A^*B^*-1\in\Ib\).
+\item[(ii)] For all \(\delta,s\in\mathbb R\), the operator
+\(A:x^\delta H^s_b\to x^\delta H^{s-m}_b\) is Fredholm. Its kernel is
+\(N_A=\ker A\cap\dot C^\infty(X)\), and its range is the annihilator of
+\(N_{A^*}=\ker A^*\cap\dot C^\infty(X)\) under the pairing
+\(\int u\bar v\,\mu_b\). Hence its index is
+\(\operatorname{Ind}A=\dim N_A-\dim N_{A^*}\), independent of \(\delta\) and
+\(s\). This is also the index of \(A\) on \(\dot C^\infty(X)\), and it equals
+\(\Tr(AB-BA)\) (Proposition~\ref{prop:fedosov}).
+\item[(iii)] As an unbounded operator on \(L^2_b\) with domain \(H^m_b\),
+\(A\) is closed with adjoint \(A^*\) (domain \(H^m_b\)), and its Fredholm
+index is \(\operatorname{Ind}A\).
+\item[(iv)] \(P=A^*A\) and \(P'=AA^*\) lie in \(\Psi_b^{2m}(X)\), are
+b-elliptic with principal symbol \(|\sigma_m(A)|^2\), and are self-adjoint
+on \(L^2_b\) with domain \(H^{2m}_b\). Moreover \(\ker P=N_A\) and
+\(\ker P'=N_{A^*}\). For real \(\lambda\),
 \[
- \frac{i}{2\pi}\sum_H\overline{\int}\Tr_H\bigl(I_H(A)^{-1}\partial_\lambda
- I_H(A)\bigr)\,d\lambda=-\frac12\sum_H\eta_b(I_H(A)),
+ I_H(P,\lambda)=a_H(\lambda)^*a_H(\lambda),\qquad
+ I_H(P',\lambda)=a_H(\lambda)a_H(\lambda)^*,
 \]
-the regularized form of Theorem~\ref{thm:WH}.
+and both are \(\geq c\,(\Delta_H+1+\lambda^2)^m\) for some \(c>0\). The
+orthogonal projections \(\pi,\pi'\) onto \(N_A,N_{A^*}\) lie in \(\Ib\), and
+\(P_0=P+\pi\) and \(P'_0=P'+\pi'\) are \(\geq c_0\) for some \(c_0>0\).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) Let \(B_0\in\Psi_b^{-m}\) be a small-calculus parametrix, so
+\(AB_0=1-R_0\) with \(R_0\in\Psi_b^{-\infty}\). The proof of
+Lemma~\ref{lem:invertible} inverts \(T(A)\) in
+\(\bigoplus_HB'_H[[x;\alpha]\), with nonnegative powers only and constant
+term \(a_H^{-1}\in B'_H\) (Lemma~\ref{lem:autoinv}). Since \(B_H\) is an ideal
+in \(B'_H\), the series \(T(A)^{-1}T(R_0)\) lies in
+\(\bigoplus_HB_H[[x;\alpha]\) and has nonnegative powers only. By
+Proposition~\ref{prop:structure} it is \(T(B_1)\) for some
+\(B_1\in\Psi_b^{-\infty}\). Put \(B=B_0+B_1\). Then \(AB-1\in\Psi_b^{-\infty}\),
+and \(T(AB-1)=-T(R_0)+T(A)T(B_1)=0\) by Proposition~\ref{prop:structureA}.
+Hence \(AB-1\in\Ib\). A left inverse modulo \(\Ib\) is built in the same way,
+and it differs from \(B\) by an element of \(\Ib\). Full ellipticity of \(A^*\)
+follows from \eqref{eq:Iadjoint}. The last claims follow by taking adjoints,
+since \((\Ib)^*=\Ib\).
+
+(ii) The operator \(B\) is bounded \(x^\delta H^{s-m}_b\to x^\delta H^s_b\)
+(C3). The operators \(AB-1\) and \(BA-1\) have kernels in
+\(\dot C^\infty(X^2)\). They therefore map \(x^\delta H^s_b\) continuously
+into \(x^{\delta+1}H^{s+1}_b\), whose inclusion into \(x^\delta H^s_b\) is
+compact. By Atkinson's theorem, \(A\) is Fredholm. If \(Au=0\), then
+\(u=(1-BA)u\in\dot C^\infty\). The annihilator of the range in the dual
+space \(x^{-\delta}H^{m-s}_b\) consists of the solutions of \(A^*v=0\). For
+these, \(v=(1-B^*A^*)v\in\dot C^\infty\) by (i). Both spaces are thus
+independent of \((\delta,s)\). If \(f\in\dot C^\infty\) annihilates
+\(N_{A^*}\), then \(f=Au\) with \(u\in L^2_b\), and
+\(u=Bf+(1-BA)u\in\dot C^\infty\). So the cokernel of
+\(A:\dot C^\infty\to\dot C^\infty\) is also dual to \(N_{A^*}\). The trace
+formula is the Calder\'on--Fedosov formula, as in
+Proposition~\ref{prop:fedosov}.
+
+(iii) If \(u_j\to u\) in \(L^2_b\) and \(Au_j\to f\), then
+\(u=Bf+(1-BA)u\in H^m_b\) and \(Au=f\). If \(v\in L^2_b\) and \(A^*v\in L^2_b\)
+weakly, then \(v=B^*A^*v+(1-B^*A^*)v\in H^m_b\). For a closed Fredholm
+operator, the index is \(\dim\ker A-\dim\ker A^*\), which equals
+\(\operatorname{Ind}A\) by (ii).
+
+(iv) The composite of the Fredholm maps \(A:H^{2m}_b\to H^m_b\) and
+\(A^*:H^m_b\to L^2_b\) is Fredholm. The operator \(P\) is symmetric, and
+\((BB^*)P-1=B(B^*A^*-1)A+(BA-1)\in\Ib\). If \(v,Pv\in L^2_b\), then
+\(v=BB^*Pv-(BB^*P-1)v\in H^{2m}_b\), so \(P\) is self-adjoint. Since
+\(\langle Pu,u\rangle=\|Au\|^2\), we get \(\ker P=N_A\). The indicial
+identities follow from \eqref{eq:Iadjoint} and the multiplicativity of
+\(I_H\). By Lemma~\ref{lem:autoinv}, \(a_H^{-1}\) is a suspended family of
+order \(-m\), so \(\|(\Delta_H+1+\lambda^2)^{m/2}a_H(\lambda)^{-1}\|\leq C\)
+on \(\mathbb R\) (C3). This gives the lower bound for \(a_H^*a_H\), and the
+same argument with \((a_H^*)^{-1}=(a_H^{-1})^*\) gives it for
+\(a_Ha_H^*\). An orthonormal basis \(\{\varphi_i\}\) of \(N_A\) lies in
+\(\dot C^\infty\), so the kernel \(\sum\varphi_i(p)\overline{\varphi_i(p')}\)
+of \(\pi\) lies in \(\dot C^\infty(X^2)\). Finally, \(P\) is Fredholm and
+self-adjoint, so \(0\) is isolated in its spectrum. Hence \(P_0\geq c_0>0\).
+The same arguments apply to \(P'\).
+\end{proof}
+
+\subsection{Weighted model operators and the b-trace}\label{subsec:Kclass}
+
+The resolvent of \(P\) is not in the small calculus: \(I_H(P,\lambda)-\mu\)
+is invertible only on a strip. The following classes contain everything
+we need.
+
+\begin{definition}\label{def:K}
+Fix \(\varepsilon_0>0\) and \(0<\delta\leq\varepsilon_0/4\). Let
+\(\chi_H\in C^\infty(X)\) be supported in the collar of \(H\) and equal to
+\(1\) near \(H\).
+\begin{enumerate}
+\item[(a)] \(\mathcal R^{-K}_\delta\), for \(K\geq0\), is the space of
+operators that are bounded \(x^aH^s_b\to x^{a'}H^{s+K}_b\) whenever
+\(|a|\leq2\delta\), \(a'=\min(a+\delta,2\delta)\), and \(|s|\leq K\).
+\item[(b)] \(\mathcal M^{-k}_H\), for \(k\in\mathbb R\), is the space of
+dilation-invariant operators \(M=\mathfrak m(xD_x)\) on
+\(M_H=[0,\infty)\times H\). Their indicial families \(\mathfrak m\) are
+holomorphic on \(|\operatorname{Im}\lambda|<\varepsilon_0\) and suspended
+of order \(-k\) uniformly on \(|\operatorname{Im}\lambda|\leq3\delta\).
+\item[(c)] \(\mathcal K^{-k}_\delta\) is the space of operators \(F\) such
+that, for every \(K\geq0\),
+\[
+ F=S_K+\sum_H\chi_HM_{K,H}\chi_H+R_K,\qquad S_K\in\Psi_b^{-k}(X),\
+ M_{K,H}\in\mathcal M^{-k}_H,\ R_K\in\mathcal R^{-K}_\delta .
+\]
+Here \(\Psi_b^{s}\), \(s\in\C\), denotes classical b-operators of complex
+order, as in \cite{SeeleyCP}, and \(-k=\operatorname{Re}s\). Holomorphic
+families are defined by asking that the three pieces be holomorphic. We
+set \(N_H(F)=N_H(S_K)+M_{K,H}\) and \(I_H(F,\lambda)=I_H(S_K,\lambda)
++\mathfrak m_{K,H}(\lambda)\), for \(|\operatorname{Im}\lambda|<\varepsilon_0\).
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}\label{lem:Kclass}
+Let \(F\in\mathcal K^{-k}_\delta\) and \(A\in\Psi_b^{m'}(X)\).
+\begin{enumerate}
+\item[(i)] \(F\) is bounded \(x^aH^s_b\to x^aH^{s+k}_b\) for
+\(|a|\leq2\delta\). Moreover \(N_H(F)\) is determined by \(F\), and so is
+independent of \(K\).
+\item[(ii)] \(AF\) and \(FA\) lie in \(\mathcal K^{-k+m'}_\delta\), with
+\(N_H(AF)=N_H(A)N_H(F)\) and \(N_H(FA)=N_H(F)N_H(A)\). The same holds for
+holomorphic families.
+\item[(iii)] If \(R\in\mathcal R^{-K}_\delta\) and \(K\geq|k|\), then \(FR\)
+and \(RF\) lie in \(\mathcal R^{-(K-|k|)}_\delta\).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) For \(S_K\) this is (C3). For \(M\in\mathcal M_H^{-k}\) it follows from
+Mellin--Plancherel on the line \(\operatorname{Im}\lambda=-a\), which
+corresponds to the weight \(x^a\) (see \eqref{eq:indicial}). For \(R_K\) it
+holds by definition. For \(u\in C_c^\infty((0,\infty)\times H)\), let
+\(\tau_Tu(x,y)=u(e^Tx,y)\). This is unitary on \(L^2_b\), and
+\(\tau_T^{-1}F\tau_Tu\to N_H(F)u\) as \(T\to\infty\). For \(S_K\) this follows
+from the Taylor expansion at \(\mathrm{ff}_H\). For \(\chi_HM\chi_H\) the
+identity is exact once \(T\) is large. For \(R_K\),
+\(\|R_K\tau_Tu\|\leq C\|x^\delta\tau_Tu\|\leq Ce^{-\delta T}\).
+
+(ii) We have \(AS_K\in\Psi_b^{-k+m'}\) by (Q0). Next,
+\[
+ A\chi_HM\chi_H=\chi_H\bigl(N_H(A)M\bigr)\chi_H+[A,\chi_H]M\chi_H
+ +\chi_H\bigl(A-\tilde\chi_HN_H(A)\tilde\chi_H\bigr)M\chi_H,
+\]
+where \(\tilde\chi_H\) equals \(1\) on the support of \(\chi_H\). The first
+term is a cut-off model operator with indicial family
+\(I_H(A,\lambda)\mathfrak m(\lambda)\). The kernel of \([A,\chi_H]\),
+\((\chi_H(x')-\chi_H(x))K_A\), vanishes near \(\mathrm{ff}\) and to infinite
+order at \(\mathrm{lb}\cup\mathrm{rb}\). It therefore maps \(x^aH^s_b\) to
+\(x^{b}H^{s-m'}_b\) for all \(a,b\). By the Taylor expansion at
+\(\mathrm{ff}_H\) (C3), \(A-\tilde\chi_HN_H(A)\tilde\chi_H\) equals \(xT_1+T_2\)
+near \(H\), with \(T_1\in\Psi_b^{m'}\) and \(T_2\) of the type of
+\([A,\chi_H]\). Both terms therefore lie in \(\mathcal R^{-K}_\delta\) for
+\(K\leq k-m'\). Finally, \(AR_K\in\mathcal R^{-(K-m')}_\delta\), and \(K\)
+is arbitrary. The case of \(FA\) is symmetric. (iii) follows from (i).
+\end{proof}
+
+\begin{lemma}[Trace and residue]\label{lem:Ktrace}
+Let \(F\in\mathcal K^{-k}_\delta\) with \(k>n\).
+\begin{enumerate}
+\item[(i)] For \(0<\operatorname{Re}w\leq2\delta\), the operator \(x^wF\) is
+trace class on \(L^2_b\), and \(\Tr(x^wF)=\int_Xx^wK_F(p,p)\,\mu_b\). The
+restriction of \(K_F\) to the diagonal is continuous on \(X\). Near \(H\),
+\(K_F(p,p)=f_{0,H}(y)+O(x^{\delta/2})\), where
+\[
+ f_{0,H}(y)=\frac1{2\pi}\int_{\mathbb R}I_H(F,\lambda)(y,y)\,d\lambda .
+\]
+\item[(ii)] \(\Tr(x^wF)\) extends meromorphically to
+\(\operatorname{Re}w>-\delta/2\). It has at most a simple pole at \(w=0\),
+with residue
+\(\sum_H\frac1{2\pi}\int_{\mathbb R}\Tr_HI_H(F,\lambda)\,d\lambda\). The
+same holds for holomorphic families \(F(w)\), with residue computed from
+\(F(0)\).
+\item[(iii)] Define \({}^b\Tr(F)=\operatorname{FP}_{w=0}\Tr(x^wF)\). It is
+linear. It equals \(\Tr F\) if every \(N_H(F)\) vanishes, and in particular
+on \(\Ib\). On \(x^{-\Z}\Psi_b^{-\infty}\cap\mathcal K^{-k}_\delta\) it is the
+b-trace of Section~\ref{sec:btrace}.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+For \(b>b'\) and \(N-N'>n/2\), the inclusion
+\(x^{b}H^N_b\hookrightarrow x^{b'}H^{N'}_b\) is Hilbert--Schmidt. This is
+(C3). In the collar it is the statement that
+\(e^{-(b-b')|u|}\langle D\rangle^{-(N-N')}\) is Hilbert--Schmidt on
+\(\mathbb R_u\times H\). By Lemma~\ref{lem:Kclass}(i), \(x^wF\) maps
+\(x^{-\operatorname{Re}w/2}H^{-k/2}_b\) to \(x^{\operatorname{Re}w/2}H^{k/2}_b\).
+So on \(L^2_b\) it is a product of a Hilbert--Schmidt map, a bounded map, and
+another Hilbert--Schmidt map. It is therefore trace class, and its trace is
+the integral of its continuous kernel over the diagonal.
+
+We compute the diagonal piece by piece, taking \(K>2n\). The diagonal value
+of \(S_K\) is smooth up to \(\partial X\). At \(H\) it equals the value of
+its normal operator at \(s=1\), up to \(O(x)\), by the Taylor expansion at
+\(\mathrm{ff}_H\). The diagonal value of \(\chi_HM\chi_H\) is exactly
+\(\chi_H(x)^2\kappa_M(1,y,y)\). For \(R_K\), compose with the
+Hilbert--Schmidt inclusion
+\(x^{-\delta/4}H^{-K/4}_b\hookrightarrow x^{-\delta/2}H^{-K/2}_b\). The
+composite is Hilbert--Schmidt into \(x^{\delta/2}H^{K/2}_b\). Its kernel
+therefore lies in the Hilbert tensor product of
+\(x^{\delta/2}H^{K/2}_b\) and \(x'^{\delta/4}H^{K/4}_b\), and so it is
+continuous with \(|K_{R_K}(p,p')|\leq Cx(p)^{\delta/2}x(p')^{\delta/4}\).
+Hence \(N_H(F)(1,y,y)=f_{0,H}(y)\) by \eqref{eq:diagvalue}, which proves (i).
+
+For (ii), proceed as in Lemma~\ref{lem:residue}. The collar contributes
+\(\int_0^\varepsilon x^{w-1}dx\int_Hf_{0,H}\nu_\partial\), plus a term that is
+holomorphic for \(\operatorname{Re}w>-\delta/2\).
+
+For (iii): if every \(N_H(F)\) vanishes, then \(f_{0,H}=0\), and
+\(\Tr(x^wF)\) is holomorphic near \(0\) with value \(\Tr F\).
+\end{proof}
+
+The defect formula of Theorem~\ref{thm:defect} extends to this class. The
+following statement and Theorem~\ref{thm:defect} together cover all the
+cases used in these notes.
+
+\begin{theorem}[b-trace defect]\label{thm:defectK}
+Let \(A\in\Psi_b^{m'}(X)\) and \(F\in\mathcal K^{-k}_\delta\) with
+\(k>2(n+m'+1)\). Then \(\Tr(x^w[A,F])\) is holomorphic near \(w=0\), and
+\[
+ {}^b\Tr([A,F])=\sum_H\frac{i}{2\pi}\int_{\mathbb R}
+ \Tr_H\bigl(\partial_\lambda I_H(A,\lambda)\,I_H(F,\lambda)\bigr)\,d\lambda .
+\]
+For \(A,F\in\Psi_b^{-\infty}\) this is the formula of
+Theorem~\ref{thm:defect}.
+\end{theorem}
+
+\begin{proof}
+By Lemmas~\ref{lem:Kclass} and~\ref{lem:Ktrace}, for
+\(0<\operatorname{Re}w\leq2\delta\) the operators \(x^wAF\), \(x^wFA\) and
+\(Ax^wF\) are trace class. Moreover \(\Tr(x^wFA)=\Tr(Ax^wF)\). Indeed, composing
+\(x^wF\) with a Hilbert--Schmidt inclusion as in the proof of
+Lemma~\ref{lem:Ktrace} shows that its kernel lies in the Hilbert tensor
+product of \(x^{r}H^{k/2}_b\) and \(x'^{r/2}H^{k/2-n/2-1}_b\), where
+\(r=\operatorname{Re}w/2\). Since \(k/2-n/2-1>n/2+m'\), both traces are
+continuous functions of the kernel for this topology. They agree on the
+dense set of finite sums \(\varphi\otimes\psi\) with
+\(\varphi,\psi\in\dot C^\infty\), by the definition of the transpose. As in Theorem~\ref{thm:defect},
+\(\Tr(x^w[A,F])=w\Tr(x^wC(w)F)\), where \(C(w)=(A-x^{-w}Ax^w)/w\) is an
+entire family in \(\Psi_b^{m'}\) with \(C(0)=D(A)\) (Lemma~\ref{lem:conj}). By
+Lemma~\ref{lem:Kclass}, \(C(w)F\) is a holomorphic family in
+\(\mathcal K^{-k+m'}_\delta\) with
+\(I_H(C(0)F,\lambda)=i\partial_\lambda I_H(A,\lambda)I_H(F,\lambda)\).
+Lemma~\ref{lem:Ktrace}(ii) now gives the claim.
+\end{proof}
+
+\begin{remark}[Comparison with the thesis]\label{rem:defect-thesis}
+Loya writes \(N_M(A)(\tau)=(x^{-i\tau}Ax^{i\tau})|_M\), the Mellin transform
+\(\int s^{-i\tau}\,\cdot\,ds/s\) of the kernel at the front face
+\cite[Sect.~2.4]{LoyaThesis}. This is \(I_H(A,\tau)\) in our notation, with
+\(\tau=\lambda\). His Theorem~6.6 reads
+\({}^b\Tr[A,B]=-\frac1{2\pi}\sum_H\int{}^b\Tr(D_\tau N_H(A)N_H(B))\,d\tau\).
+The symbol \(D_\tau\) is not defined explicitly there, but his proof
+requires \(N(-\log s\cdot A)=D_\tau N(A)\), and so \(D_\tau=-i\partial_\tau\).
+With this, his formula is Theorem~\ref{thm:defectK}. He works with
+b-half-densities. The map \(u\mapsto u\,\mu_b^{1/2}\) is unitary from
+\(L^2_b\) onto \(L^2_b(X;\Omega_b^{1/2})\), so his traces, b-traces and
+indices are ours.
+\end{remark}
+
+\subsection{The resolvent}\label{subsec:resolvent}
+
+From now on, \(A\) is fully elliptic of order \(m\geq1\), and \(P\) is one
+of \(A^*A\), \(AA^*\), with the notation of Lemma~\ref{lem:reduction}(iv).
+Write \(p_H(\lambda)=I_H(P,\lambda)\). Fix \(\theta\in(0,\pi/4]\), and
+fix \(\rho>0\) smaller than half of \(c_0\) and half of the constant \(c\) of
+Lemma~\ref{lem:reduction}(iv). Put
+\[
+ \Lambda=\{\mu\neq0:|\arg\mu|\geq\theta\}\cup\{|\mu|\leq\rho\}.
+\]
+Let \(\Gamma\) be the boundary of \(\C\setminus\Lambda\), oriented
+counterclockwise around \([c_0,\infty)\). It consists of the rays
+\(re^{\pm i\theta}\), \(r\geq\rho\), and the arc
+\(\rho e^{i\varphi}\), \(|\varphi|\leq\theta\).
+
+\begin{lemma}[Indicial resolvent]\label{lem:indres}
+There are \(\varepsilon_0,C>0\) such that, for
+\(|\operatorname{Im}\lambda|\leq\varepsilon_0\) and \(\mu\in\Lambda\), the
+operator \(p_H(\lambda)-\mu\) is invertible. Moreover
+\(\|(p_H(\lambda)-\mu)^{-1}\|\leq C(1+|\mu|)^{-1}\), and
+\((p_H(\lambda)-\mu)^{-1}\) is holomorphic in \((\lambda,\mu)\) and
+suspended of order \(-2m\), uniformly in \(\mu\).
+\end{lemma}
+
+\begin{proof}
+Let \(L(\lambda)=(\Delta_H+1+(\operatorname{Re}\lambda)^2)^m\). By
+Lemma~\ref{lem:reduction}(iv), for real \(\lambda\) the operator
+\(p_H(\lambda)\) is self-adjoint and \(\geq cL\). For \(t\geq c\) and \(\mu\in\Lambda\) we have
+\(|t-\mu|\geq c'(t+|\mu|)\). By the spectral theorem,
+\(\|p_H^{s}(p_H-\mu)^{-1}\|\leq C(1+|\mu|)^{s-1}\) for \(0\leq s\leq1\). Since
+\(p_H^{-1}\) is suspended of order \(-2m\) (Lemma~\ref{lem:autoinv}),
+\(\|Lp_H^{-1}\|\leq C\), and by interpolation \(\|L^sp_H^{-s}\|\leq C\).
+For \(\lambda\in\mathbb R\) and \(|\sigma|\leq1\), the difference
+\(E=p_H(\lambda+i\sigma)-p_H(\lambda)\) is \(\sigma\) times a suspended
+family of order \(2m-1\) (C3). Hence
+\[
+ \|E(p_H(\lambda)-\mu)^{-1}\|\leq C|\sigma|\,\|L^{(2m-1)/2m}(p_H-\mu)^{-1}\|
+ \leq C'|\sigma| .
+\] For \(|\sigma|\leq\varepsilon_0=1/(2C')\), the factorization
+\(p_H(\lambda+i\sigma)-\mu=(1+E(p_H(\lambda)-\mu)^{-1})(p_H(\lambda)-\mu)\)
+and a Neumann series give the claims. The suspended estimates follow from
+the parameter-dependent suspended parametrix (C3).
+\end{proof}
+
+Fix \(\varepsilon_0\) as in Lemma~\ref{lem:indres} and
+\(\delta\leq\varepsilon_0/4\), and use Definition~\ref{def:K} with these
+constants.
+
+\begin{lemma}[Weighted resolvent]\label{lem:weightedres}
+Shrinking \(\delta\) if necessary, for \(|a|\leq3\delta\) and
+\(\mu\in\Lambda\) the operator
+\(P_0-\mu:x^aH^{s+2m}_b\to x^aH^s_b\) is invertible. Moreover
+\(\|(P_0-\mu)^{-1}\|_{x^aL^2_b}\leq C(1+|\mu|)^{-1}\), and the norm from
+\(x^aH^s_b\) to \(x^aH^{s+2m}_b\) is bounded uniformly in \(\mu\).
+\end{lemma}
+
+\begin{proof}
+For \(a=0\) this is the spectral theorem, since \(P_0\geq c_0\), together
+with elliptic regularity. In general, \(x^{-a}(P_0-\mu)x^a=P_0-\mu+E_a\). By
+Lemma~\ref{lem:conj}, \(E_a\) is the sum of a b-operator with kernel
+\((s^{-a}-1)K_P\), which vanishes on \(\Delta_b\), and an element of \(\Ib\).
+So \(E_a\) is \(a\) times a family that is bounded in \(\Psi_b^{2m-1}+\Ib\)
+for \(|a|\leq1\). By interpolation,
+\(\|E_a(P_0-\mu)^{-1}\|\leq C|a|\,\|P_0^{(2m-1)/2m}(P_0-\mu)^{-1}\|
+\leq C'|a|\). For \(3\delta C'\leq1/2\), a Neumann series inverts
+\(x^{-a}(P_0-\mu)x^a\) on \(L^2_b\) for all \(\mu\in\Lambda\) at once, with
+twice the norm. The Sobolev statement follows from elliptic regularity.
+\end{proof}
+
+Next comes the symbolic part, which is Seeley's construction
+\cite{SeeleyCP} carried out in b-coordinates. Near \(H\) use coordinates
+\((x,y)\), and b-covariables \(\zeta=(\xi,\eta)\), with \(\xi\) dual to
+\(\log x\). Write the b-symbol of \(P\) as
+\(p\sim\sum_{k\geq0}p_{2m-k}\), where \(p_{2m-k}\) is homogeneous of degree
+\(2m-k\) for \(|\zeta|\geq1\) and smooth up to \(x=0\). Choose a smooth
+\(\tilde p_{2m}\) that equals \(p_{2m}\) for \(|\zeta|\geq1\) and satisfies
+\(\tilde p_{2m}\geq c_2>2\rho\) everywhere. This is possible after
+shrinking \(\rho\). Put \(D^b=(xD_x,D_y)\), and define, for \(j\geq1\),
+\begin{equation}\label{eq:seeley}
+ q_{-2m}=(\tilde p_{2m}-\mu)^{-1},\qquad
+ q_{-2m-j}=-q_{-2m}\sum_{\substack{k+l+|\alpha|=j\\ l<j}}\frac1{\alpha!}
+ \,\partial_\zeta^\alpha p'_{2m-k}\,(D^b)^\alpha q_{-2m-l},
+\end{equation}
+where \(p'_{2m}=\tilde p_{2m}\) and \(p'_{2m-k}=p_{2m-k}\) for \(k\geq1\).
+
+\begin{lemma}[Seeley symbols]\label{lem:seeley}
+For \(j\geq1\),
+\(q_{-2m-j}=\sum_{l=2}^{2j+1}c_{j,l}(x,y,\zeta)(\tilde p_{2m}-\mu)^{-l}\).
+Here the \(c_{j,l}\) are independent of \(\mu\), smooth up to \(x=0\), and
+homogeneous of degree \(2m(l-1)-j\) for \(|\zeta|\geq1\). For
+\(\mu\in\Lambda\),
+\[
+ |\partial_{x,y}^\beta\partial_\zeta^\alpha q_{-2m-j}|\leq
+ C_{\alpha\beta j}\langle\zeta\rangle^{-j-|\alpha|}
+ (\langle\zeta\rangle^{2m}+|\mu|)^{-1},
+\]
+uniformly up to \(x=0\). Let \(Q_J(\mu)=\operatorname{Op}_b(q^{(J)}(\mu))\),
+with \(q^{(J)}=\sum_{j<J}q_{-2m-j}\), be a b-quantization (small calculus,
+kernel supported near \(\Delta_b\)). Then
+\(r_J(\mu)=1-(P_0-\mu)Q_J(\mu)\) is a holomorphic family in
+\(\Psi_b^{-J}(X)\). Its \(\Psi_b^{-J}\)-seminorms are bounded, and its
+\(\Psi_b^{-J+2m}\)-seminorms are \(O((1+|\mu|)^{-1})\). The same holds for
+the left parametrix \(\tilde Q_J(\mu)\), with
+\(\tilde r_J(\mu)=1-\tilde Q_J(\mu)(P_0-\mu)\).
+\end{lemma}
+
+\begin{proof}
+The structure of \(q_{-2m-j}\) follows by induction from \eqref{eq:seeley}.
+Each derivative of \((\tilde p_{2m}-\mu)^{-l}\) raises \(l\) by one and
+contributes a homogeneous factor of the matching degree. For
+\(\mu\in\Lambda\) we have
+\(|\tilde p_{2m}-\mu|\geq c(\langle\zeta\rangle^{2m}+|\mu|)\), which gives the
+estimates. The recursion is the b-composition formula, which is the usual
+formula in the coordinates \((\log x,y)\). So the symbol of
+\((P-\mu)Q_J\) is \(1\) up to a finite sum of terms bounded by
+\(\langle\zeta\rangle^{-J}\langle\zeta\rangle^{2m}(\langle\zeta\rangle^{2m}
++|\mu|)^{-1}\), together with the term \((p_{2m}-\tilde p_{2m})q\), which has
+compact \(\zeta\)-support. The remainder of the composition formula
+satisfies the same parameter-dependent bounds. This is the
+parameter-dependent symbol calculus (C3). Finally, \(\pi Q_J\in\Ib\) is
+\(O((1+|\mu|)^{-1})\).
+\end{proof}
+
+\begin{proposition}[Resolvent]\label{prop:resolvent}
+For every \(J>2m\) and \(\mu\in\Lambda\),
+\[
+ (P_0-\mu)^{-1}=Q_J(\mu)+\sum_H\chi_HM_{J,H}(\mu)\chi_H+R_J(\mu),
+\]
+where:
+\begin{enumerate}
+\item[(a)] \(M_{J,H}(\mu)\in\mathcal M_H^{-(J-2m)}\) has indicial family
+\(\mathfrak m_{J,H}(\mu,\lambda)=(p_H(\lambda)-\mu)^{-1}I_H(r_J(\mu),\lambda)\),
+with seminorms \(O((1+|\mu|)^{-2})\);
+\item[(b)] \(R_J(\mu)\in\mathcal R^{-(J-2m)}_\delta\), with norms
+\(O((1+|\mu|)^{-2})\);
+\item[(c)] everything is holomorphic in \(\mu\) in the interior of
+\(\Lambda\) and continuous up to \(\Gamma\).
+\end{enumerate}
+In particular \((P_0-\mu)^{-1}\in\mathcal K^{-2m}_\delta\), and
+\(I_H((P_0-\mu)^{-1},\lambda)=(p_H(\lambda)-\mu)^{-1}\).
 \end{proposition}
 
-\begin{proof}[Sketch]
-Write \(\Tr([A,B]x^wQ^{-\tau})\) as the sum of the trace defects of \(x^w\)
-and of \(Q^{-\tau}\), as in the proof of Theorem~\ref{thm:defect}. The
-\(x^w\)-defect gives \(\widehat\Tr_\partial(D(A)B)\), regularized by
-\(Q^{-\tau}\). For dilation-invariant \(A\) only the constant terms
-contribute, and the computation of Theorem~\ref{thm:WH} goes through with
-\(\overline{\Tr}\) in place of \(\Tr\). The \(Q^{-\tau}\)-defect is a residue
-term. The analytic input, meromorphy of the double zeta function with
-complex powers from the full calculus, is not proved here.
+\begin{proof}
+Put \(Q=Q_J+\sum_H\chi_HM_{J,H}\chi_H\). Since \(N_H(\pi)=0\) and
+\((p_H-\mu)I_H(Q_J)=1-I_H(r_J)\), Lemma~\ref{lem:indres} gives
+\[
+ I_H(Q_J,\lambda)+\mathfrak m_{J,H}(\lambda)=(p_H(\lambda)-\mu)^{-1}.
+\]
+Let \(r=1-(P_0-\mu)Q\). Then
+\[
+ r=\Bigl(r_J-\sum_H\chi_HN_H(r_J)\chi_H\Bigr)
+ -\sum_H\Bigl([P,\chi_H]+\chi_H\bigl(P-N_H(P)\bigr)+\pi\chi_H\Bigr)
+ M_{J,H}\chi_H,
+\]
+where \(\chi_H\) is inserted on both sides of \(N_H(P)\) as in
+Lemma~\ref{lem:Kclass}. Each term gains a factor \(x\) at
+\(\mathrm{ff}\) or is supported away from it, as in the proof of
+Lemma~\ref{lem:Kclass}(ii). Hence \(r\in\mathcal R^{-(J-2m)}_\delta\), with
+norms \(O((1+|\mu|)^{-1})\) by Lemma~\ref{lem:seeley} and (a). The left
+parametrix \(\tilde Q\) and its error \(\tilde r\) are built in the same
+way. Write \(G=(P_0-\mu)^{-1}\). Then \(G=\tilde Q+\tilde rG\) and
+\(G=Q+Gr\), so
+\[
+ G=Q+\tilde Q\,r+\tilde r\,G\,r .
+\]
+Put \(R_J=\tilde Qr+\tilde rGr\). By Lemma~\ref{lem:Kclass}(iii) and
+Lemma~\ref{lem:weightedres}, \(R_J\in\mathcal R^{-(J-2m)}_\delta\). The
+operator norms of \(\tilde Q\) on weighted Sobolev spaces are
+\(O((1+|\mu|)^{-1})\), by the symbol estimates of Lemma~\ref{lem:seeley}
+and by (a). This gives the bound in (b). Holomorphy is clear from the
+construction.
 \end{proof}
+
+\subsection{Complex powers and heat operators}\label{subsec:cp}
+
+For \(\operatorname{Re}z>0\), set
+\(P_0^{-z}=\frac{i}{2\pi}\int_\Gamma\mu^{-z}(P_0-\mu)^{-1}\,d\mu\), with the
+principal branch. By the spectral theorem this agrees with the functional
+calculus, and \(e^{-tP_0}=\frac{i}{2\pi}\int_\Gamma e^{-t\mu}(P_0-\mu)^{-1}
+\,d\mu\) for \(t>0\). From \eqref{eq:seeley} and Lemma~\ref{lem:seeley},
+\[
+ \frac{i}{2\pi}\int_\Gamma\mu^{-z}q_{-2m-j}\,d\mu=\sigma_{-2mz-j}(z),\qquad
+ \sigma_{-2mz}(z)=\tilde p_{2m}^{-z},\quad
+ \sigma_{-2mz-j}(z)=\sum_{l=2}^{2j+1}c_{j,l}\binom{-z}{l-1}
+ \tilde p_{2m}^{-z-l+1}.
+\]
+Indeed, \((\tilde p-\mu)^{-l}=\frac1{(l-1)!}\partial_{\tilde p}^{l-1}
+(\tilde p-\mu)^{-1}\). These symbols are entire in \(z\) and homogeneous of
+degree \(-2mz-j\) for \(|\zeta|\geq1\). Moreover \(\sigma_{-j}(0)=0\) for
+\(j\geq1\), and \(\sigma_0(0)=1\).
+
+\begin{proposition}[Complex powers]\label{prop:cp}
+For every \(J>2m+1\), the formula
+\[
+ P_0^{-z}=\operatorname{Op}_b\Bigl(\sum_{j<J}\sigma_{-2mz-j}(z)\Bigr)
+ +\sum_H\chi_HM^{(z)}_{J,H}\chi_H+R^{(z)}_J,
+\]
+\[
+ M^{(z)}_{J,H}=\frac{i}{2\pi}\int_\Gamma\mu^{-z}M_{J,H}(\mu)\,d\mu,\qquad
+ R^{(z)}_J=\frac{i}{2\pi}\int_\Gamma\mu^{-z}R_J(\mu)\,d\mu,
+\]
+holds for \(\operatorname{Re}z>0\). The right-hand side is a holomorphic
+family in \(\mathcal K^{-2m\operatorname{Re}z}_\delta\) on
+\(\operatorname{Re}z>-1\), which defines \(P_0^{-z}\) there, with
+\(P_0^{0}=1\). Its indicial family is
+\(I_H(P_0^{-z},\lambda)=p_H(\lambda)^{-z}\) for real \(\lambda\), and every
+seminorm of the pieces is \(O((1+|\operatorname{Im}z|)^Ne^{\theta|
+\operatorname{Im}z|})\) on vertical strips. The same holds for
+\(e^{-tP_0}\) and \(P_0^{-1}e^{-tP_0}\), \(t>0\), with \(\mu^{-z}\) replaced by
+\(e^{-t\mu}\) and \(\mu^{-1}e^{-t\mu}\). These lie in
+\(\bigcap_k\mathcal K^{-k}_\delta\), with indicial families
+\(e^{-tp_H}\) and \(p_H^{-1}e^{-tp_H}\).
+\end{proposition}
+
+\begin{proof}
+Integrate Proposition~\ref{prop:resolvent} against \(\mu^{-z}\). The terms
+with \(j\geq1\), and the pieces \(M_{J,H}\) and \(R_J\), are
+\(O(|\mu|^{-2})\), so their integrals converge for \(\operatorname{Re}z>-1\)
+and are holomorphic there. The term \(j=0\) gives \(\tilde p_{2m}^{-z}\),
+which is entire. On \(\Gamma\),
+\(|\mu^{-z}|\leq|\mu|^{-\operatorname{Re}z}e^{\theta|\operatorname{Im}z|}\),
+and \(\binom{-z}{l-1}\) is a polynomial, while \(\tilde p_{2m}>0\). This gives
+the growth bound. At \(z=0\), the integrands of the \(M\), \(R\) and
+\(j\geq1\) terms are \(O(|\mu|^{-2})\) and holomorphic in the interior of
+\(\Lambda\). Pushing \(\Gamma\) to infinity inside \(\Lambda\) shows that
+these terms vanish, so \(P_0^0=\operatorname{Op}_b(1)=1\). The indicial
+family is
+\(\frac{i}{2\pi}\int_\Gamma\mu^{-z}(p_H(\lambda)-\mu)^{-1}\,d\mu=
+p_H(\lambda)^{-z}\), by Proposition~\ref{prop:resolvent} and the spectral
+theorem on \(L^2(H)\). For \(e^{-t\mu}\) the same argument applies, and the
+symbols \(\frac{i}{2\pi}\int e^{-t\mu}q_{-2m-j}\,d\mu=\sum_lc_{j,l}
+\frac{t^{l-1}}{(l-1)!}e^{-t\tilde p_{2m}}\) (with \(l=1\) for \(j=0\)) are
+smoothing for \(t>0\). Since \(J\) is arbitrary, the operators lie in every
+\(\mathcal K^{-k}_\delta\).
+\end{proof}
+
+The continuation to all of \(\C\), with \(P_0^{-z}=P_0^kP_0^{-z-k}\), is
+\cite[Cor.~5.7]{LoyaThesis}. We need only \(\operatorname{Re}z>-1\).
+
+\subsection{The b-zeta function}\label{subsec:bzeta}
+
+\begin{lemma}[Mellin transforms {\cite[Lemma~5.10]{LoyaThesis}}]\label{lem:mellin}
+Let \(u\) be continuous on \((0,\infty)\) and \(O(e^{-ct})\) as
+\(t\to\infty\). Suppose that, as \(t\downarrow0\),
+\[
+ u(t)=\sum_{i\leq I}\sum_{q=0,1}u_{i,q}t^{e_i}(\log t)^q+u_{0}+O(t^{\gamma}),
+\]
+with \(\gamma>0\) and \(e_i\neq0\). Then
+\(v(z)=\frac1{\Gamma(z)}\int_0^\infty t^{z-1}u(t)\,dt\) extends from
+\(\operatorname{Re}z\gg0\) to a meromorphic function on
+\(\operatorname{Re}z>-\gamma\). It is holomorphic at \(z=0\), with
+\(v(0)=u_0\).
+\end{lemma}
+
+\begin{proof}
+The integral over \([1,\infty)\) is entire. Over \([0,1]\), the term
+\(t^{e}(\log t)^q\) gives \((-1)^qq!\,(z+e)^{-q-1}\), the constant gives
+\(1/z\), and the remainder is holomorphic for \(\operatorname{Re}z>-\gamma\).
+Since \(1/\Gamma(z)=z+O(z^2)\), only the constant survives at \(z=0\).
+\end{proof}
+
+\begin{theorem}[b-zeta function {\cite[Def.~8.1, Thm.~8.2]{LoyaThesis}}]
+\label{thm:bzeta}
+The b-zeta function \(\zeta_P(z)={}^b\Tr(P_0^{-z})\), defined for
+\(\operatorname{Re}z>n/2m\), extends meromorphically to
+\(\operatorname{Re}z>-1\). Its only poles there are simple poles at the
+points \((n-j)/2m\neq0\), \(j\in\mathbb N_0\), and it is holomorphic at
+\(z=0\). Moreover, as \(t\downarrow0\),
+\[
+ {}^b\Tr(e^{-tP})=\sum_{0<(n-j)/2m}\Gamma\bigl(\tfrac{n-j}{2m}\bigr)
+ \operatorname{Res}_{z=\frac{n-j}{2m}}\zeta_P\cdot t^{-\frac{n-j}{2m}}
+ +\zeta_P(0)+O(t^{\gamma})
+\]
+for some \(\gamma>0\). In particular there is no \(\log t\) term at
+\(t^0\), and \(\zeta_P(0)\) is the constant term of \({}^b\Tr(e^{-tP})\).
+\end{theorem}
+
+\begin{proof}
+By Proposition~\ref{prop:cp} and Lemma~\ref{lem:Ktrace}, \({}^b\Tr\) of
+\(\chi_HM^{(z)}_{J,H}\chi_H+R^{(z)}_J\) is holomorphic on
+\(\operatorname{Re}z>-1\), once \(J>2m+n+1\). For the symbolic terms, the
+diagonal value of \(\operatorname{Op}_b(\sigma_{-2mz-j}(z))\) at \((x,y)\) is
+\((2\pi)^{-n}\int\sigma_{-2mz-j}(z;x,y,\zeta)\,d\zeta\). The integral over
+\(|\zeta|\leq1\) is entire. By homogeneity, the integral over
+\(|\zeta|\geq1\) is
+\[
+ \frac1{2mz+j-n}\int_{S^{n-1}}\sigma_{-2mz-j}(z;x,y,\omega)\,d\omega .
+\]
+Both are smooth up to \(x=0\), and the b-integral of a function that is
+smooth up to \(\partial X\) is holomorphic in parameters. This gives
+meromorphy with simple poles at \(2mz=n-j\). At \(z=0\), the only candidate
+is \(j=n\), with residue proportional to \(\int_{S^{n-1}}\sigma_{-n}(0)=0\).
+
+For the heat expansion, note first that
+\(\Gamma(z)\zeta_P(z)=\int_0^\infty t^{z-1}u(t)\,dt\) for
+\(\operatorname{Re}z>n/2m\), where \(u(t)={}^b\Tr(e^{-tP_0})\). This follows
+by Fubini applied piecewise to the decompositions of
+Proposition~\ref{prop:cp}, because the Mellin transform of
+\(e^{-t\mu}\) is \(\Gamma(z)\mu^{-z}\). Next,
+\(|\zeta_P(z)|\leq C(1+|\operatorname{Im}z|)^Ne^{\theta|\operatorname{Im}z|}\)
+on vertical strips away from the poles, by Proposition~\ref{prop:cp} and the
+explicit symbols. Since \(\theta<\pi/2\), Stirling's formula makes
+\(\Gamma\zeta_P\) integrable on vertical lines. Mellin inversion gives
+\(u(t)=\frac1{2\pi i}\int_{\operatorname{Re}z=c}\Gamma(z)\zeta_P(z)t^{-z}\,dz\).
+Move the line to \(\operatorname{Re}z=-\gamma\), with
+\(0<\gamma<1/2m\). The residues are those listed, plus \(\zeta_P(0)\) from
+the pole of \(\Gamma\) at \(0\), and the new integral is \(O(t^\gamma)\).
+Finally, \(e^{-tP}=e^{-tP_0}+(1-e^{-t})\pi\), and \({}^b\Tr\pi=\Tr\pi\) by
+Lemma~\ref{lem:Ktrace}(iii). The extra term \((1-e^{-t})\dim\ker P\) has no
+constant term.
+\end{proof}
+
+\subsection{The b-eta function and the index theorem}\label{subsec:indexthm}
+
+For each \(H\), write \(a=a_H\), and define for
+\(\operatorname{Re}z>(n-1)/2m\) and \(t>0\)
+\begin{equation}\label{eq:etaH}
+ \eta_H(z)=\frac1{\pi i}\int_{\mathbb R}\Tr_H\bigl(\partial_\lambda a\,
+ a^{-1}(aa^*)^{-z}\bigr)\,d\lambda,\qquad
+ \eta_H(t)=\frac1{\pi i}\int_{\mathbb R}\Tr_H\bigl(\partial_\lambda a\,
+ a^{-1}e^{-taa^*}\bigr)\,d\lambda .
+\end{equation}
+The integrals converge absolutely: \(\partial_\lambda a\,a^{-1}\) is
+suspended of order \(-1\), and \((aa^*)^{-z}\) of order \(-2m\operatorname{Re}z\).
+Put \(\eta(z)=\sum_H\eta_H(z)\) and \(\eta(t)=\sum_H\eta_H(t)\). Let
+\(h(t)={}^b\Tr(e^{-tA^*A})-{}^b\Tr(e^{-tAA^*})\) and
+\(h_0(t)={}^b\Tr(e^{-tP_0})-{}^b\Tr(e^{-tP'_0})\), with
+\(P=A^*A\) and \(P'=AA^*\).
+
+\begin{proposition}[McKean--Singer--Melrose identity]\label{prop:MS}
+For \(t>0\) and \(\operatorname{Re}z>n/2m\),
+\[
+ e^{-t}\operatorname{Ind}A=h_0(t)-\tfrac12\eta(t),\qquad
+ \operatorname{Ind}A=h(t)-\tfrac12\eta(t),
+\]
+\[
+ \operatorname{Ind}A=\zeta_{A^*A}(z)-\zeta_{AA^*}(z)-\tfrac12\eta(z).
+\]
+These are \cite[Lemma~7.3, Lemma~8.3 and (89)]{LoyaThesis}, with the sign
+of the boundary term corrected as explained in Remark~\ref{rem:thesis-sign}.
+\end{proposition}
+
+\begin{proof}
+Let \(f\) be one of \(\mu^{-z-1}\), \(\mu^{-1}e^{-t\mu}\). Polar decomposition
+gives \(g(AA^*)A=Ag(A^*A)\) on \((\ker A)^\perp\) for bounded Borel \(g\). Using
+\(\pi'A=0\), this yields
+\[
+ P_0f(P_0)=\pi\,f(1)+A^*f(P'_0)A,\qquad
+ P'_0f(P'_0)=\pi'f(1)+AA^*f(P'_0).
+\]
+Put \(G=A^*f(P'_0)\). By Proposition~\ref{prop:cp} and
+Lemma~\ref{lem:Kclass}, \(G\in\mathcal K^{-k}_\delta\) with
+\(k=2m\operatorname{Re}z+m\) for \(f=\mu^{-z-1}\), and with every \(k\) for
+\(f=\mu^{-1}e^{-t\mu}\). For real \(\lambda\)
+\[
+ I_H(G,\lambda)=a^*f(aa^*)=a^{-1}(aa^*)f(aa^*).
+\]
+Since \(f(1)=1\) for \(f=\mu^{-z-1}\) and \(f(1)=e^{-t}\) for
+\(f=\mu^{-1}e^{-t\mu}\), Lemma~\ref{lem:Ktrace}(iii) and
+Theorem~\ref{thm:defectK} give
+\begin{align*}
+ {}^b\Tr(P_0f(P_0))-{}^b\Tr(P'_0f(P'_0))&=f(1)\operatorname{Ind}A
+ -{}^b\Tr[A,G]\\
+ &=f(1)\operatorname{Ind}A-\frac{i}{2\pi}\sum_H\int_{\mathbb R}
+ \Tr_H\bigl(\partial_\lambda a\,a^{-1}(aa^*)f(aa^*)\bigr)\,d\lambda .
+\end{align*}
+Since \(-\frac{i}{2\pi}=\frac12\cdot\frac1{\pi i}\), this is the first
+identity, and also the third for \(\operatorname{Re}z\) so large that
+\(k>2(n+m+1)\). Both sides of the third identity are holomorphic for
+\(\operatorname{Re}z>n/2m\) (Theorem~\ref{thm:bzeta} and \eqref{eq:etaH}), so
+it holds there by analytic continuation. The second follows from \(h_0(t)=h(t)+(e^{-t}-1)
+\operatorname{Ind}A\), because \(e^{-tP_0}=e^{-tP}+(e^{-t}-1)\pi\).
+\end{proof}
+
+\begin{lemma}[b-eta function {\cite[Lemma~8.4]{LoyaThesis}}]\label{lem:etaH}
+Each \(\eta_H(z)\) extends meromorphically to \(\operatorname{Re}z>-1\), with
+at most a simple pole at \(z=0\). The sum \(\eta(z)\) is holomorphic at
+\(z=0\), so the residues at \(0\) add up to zero. Moreover
+\(\eta(0)\) is the constant term of \(\eta(t)\) as \(t\downarrow0\), and
+\(\eta(t)\) has no \(\log t\) term at \(t^0\).
+\end{lemma}
+
+\begin{proof}
+Let \(F(z)=D(A)A^*(P'_0)^{-z-1}\). By Proposition~\ref{prop:cp} and
+Lemma~\ref{lem:Kclass}, this is a holomorphic family in
+\(\mathcal K^{-1-2m\operatorname{Re}z}_\delta\). For real \(\lambda\), its
+indicial family is \(i\partial_\lambda a\,a^{-1}(aa^*)^{-z}\). Hence, for
+\(\operatorname{Re}z>(n-1)/2m\), Lemma~\ref{lem:Ktrace}(i) gives
+\(\eta_H(z)=-2\int_Hf_{0,H}(z,y)\,\nu_\partial\), where \(f_{0,H}(z,\cdot)\)
+is the value at \(H\) of the diagonal of \(F(z)\). Write \(F(z)\) as in
+Definition~\ref{def:K}, using Proposition~\ref{prop:cp} and the composition
+formula. The symbolic part has symbol
+\(\sum_j\tau_{-1-2mz-j}(z)\), homogeneous of degree \(-1-2mz-j\) for
+\(|\zeta|\geq1\). As in Theorem~\ref{thm:bzeta}, its diagonal at \(x=0\) is
+meromorphic with simple poles at \(2mz=n-1-j\). This includes a possible
+pole at \(z=0\) from \(j=n-1\). The remaining pieces are holomorphic. The
+sum \(\eta(z)\) equals \(2(\zeta_{A^*A}(z)-\zeta_{AA^*}(z)-\operatorname{Ind}A)\)
+by Proposition~\ref{prop:MS}, and this is holomorphic at \(0\) by
+Theorem~\ref{thm:bzeta}. Finally,
+\(\eta(t)=2(h_0(t)-e^{-t}\operatorname{Ind}A)\), and Theorem~\ref{thm:bzeta}
+gives its expansion. Its constant term is
+\(2(\zeta_{A^*A}(0)-\zeta_{AA^*}(0)-\operatorname{Ind}A)=\eta(0)\). The same
+conclusion follows from Lemma~\ref{lem:mellin}, since
+\(\frac1{\Gamma(z)}\int_0^\infty t^{z-1}\eta(t)\,dt=\eta(z)\) for
+\(\operatorname{Re}z\gg0\) by Fubini.
+\end{proof}
+
+For a family \(a=I_H(A,\cdot)\) as above, define
+\begin{equation}\label{eq:etab-general}
+ \eta_b(a)=\operatorname{FP}_{z=0}\frac1{\pi i}\int_{\mathbb R}
+ \Tr_H\bigl(\partial_\lambda a\,a^{-1}(aa^*)^{-z}\bigr)\,d\lambda .
+\end{equation}
+If \(a=1+k\) with \(k\in B_H\), as in Theorem~\ref{thm:WH}, the integrand is
+trace class and integrable for every \(z\), and is entire in \(z\). So
+\eqref{eq:etab-general} agrees with the definition used in
+Theorem~\ref{thm:WH}.
+
+\begin{theorem}[General index formula]\label{thm:indexgeneral}
+Let \(A\in\Psi_b^m(X)\), \(m\geq1\), be fully elliptic, and let
+\(\operatorname{Ind}A\) be its index (Lemma~\ref{lem:reduction}): on any
+\(x^\delta H^s_b\), on \(L^2_b\), or on \(\dot C^\infty(X)\), equal to
+\(\Tr(AB-BA)\). Then
+\[
+ \operatorname{Ind}A=\zeta_{A^*A}(0)-\zeta_{AA^*}(0)
+ -\frac12\sum_H\eta_b\bigl(I_H(A)\bigr).
+\]
+Here \(\zeta_P(0)\) is the value at \(0\) of the b-zeta function of
+Theorem~\ref{thm:bzeta}, which is the constant term of \({}^b\Tr(e^{-tP})\)
+as \(t\downarrow0\). The b-eta invariants are those of
+\eqref{eq:etab-general}, and their sum is the constant term of \(\eta(t)\).
+\end{theorem}
+
+\begin{proof}
+Take the value at \(z=0\) in Proposition~\ref{prop:MS}, using
+Theorem~\ref{thm:bzeta} and Lemma~\ref{lem:etaH}. The finite parts of the
+\(\eta_H\) add up to the value of \(\eta\) at \(0\), because the residues
+cancel.
+\end{proof}
+
+This is the codimension-one case of \cite[Thm.~8.6]{LoyaThesis}, which
+extends Piazza's formula \cite{Piazza} to manifolds with corners. Here are
+the hypotheses there. \(X\) is a compact manifold with corners;
+\(A\in\Psi^m_{b,os}(X,\Omega_b^{1/2})\), where ``os'' means one-step
+polyhomogeneous, that is, classical; \(m>0\) is real; and
+\(A:H^m_b\to L^2_b\) is Fredholm. By \cite[Cor.~2.6]{LoyaThesis}, the last
+condition holds exactly when \(A\) is elliptic and every \(N_H(A)(\tau)\),
+\(\tau\in\mathbb R\), is invertible. A fully elliptic \(A\) satisfies all of
+these, by Lemma~\ref{lem:reduction}. Full ellipticity is used above only in
+Lemma~\ref{lem:reduction}: to put \(\pi,\pi'\) in \(\Ib\), to get the lower
+bound in (iv), and to get the parametrix \(B\) and the identification of
+the index with \(\Tr(AB-BA)\).
+
+\begin{remark}[Conventions and a sign in the thesis]\label{rem:thesis-sign}
+In the notation of Remark~\ref{rem:defect-thesis}, \(N_H(A)(\tau)=a(\tau)\),
+\(D_\tau=-i\partial_\tau\), and \(N_H(AA^*)(\tau)=a(\tau)a(\tau)^*\) for real
+\(\tau\). The thesis defines the b-eta function of a face \(M\) by
+\cite[(82)]{LoyaThesis}:
+\[
+ {}^b\eta_M(t)=\frac2{2\pi}\int_t^\infty\int_{\mathbb R}
+ {}^b\Tr\bigl(D_\tau N(A)N(A^*)N(e^{-sAA^*})\bigr)\,d\tau\,ds .
+\]
+Since \(N(A^*)e^{-saa^*}=-a^{-1}\partial_se^{-saa^*}\) and
+\(e^{-saa^*}\to0\) as \(s\to\infty\), the inner \(s\)-integral is
+\(+D_\tau a\,a^{-1}e^{-taa^*}\). The last line of the computation preceding
+\cite[Lemma~7.3]{LoyaThesis} has exactly this sign. So (82) equals our
+\(\eta_H(t)\). The second expression \cite[(83)]{LoyaThesis},
+\(-\frac2{2\pi}\int{}^b\Tr(D_\tau N(A)N(A)^{-1}N(e^{-tAA^*}))\,d\tau\), has the
+opposite sign, and so equals \(-\eta_H(t)\). The thesis carries (83) into
+Lemma~7.4, Lemma~8.3, \((89)\) and the displayed formula for
+\({}^b\eta_M(z)\) in Theorem~8.6. In our notation that formula is
+\(-\eta_H(z)\), which would give
+\(\operatorname{Ind}A=\zeta-\zeta+\frac12\eta\). This is wrong. The correct
+statement is Theorem~\ref{thm:indexgeneral}, as the explicit check in
+Example~\ref{ex:signcheck} confirms. The results that use (82) directly,
+namely \cite[Lemma~7.9, Thms.~7.10, 8.7, Cor.~8.8]{LoyaThesis}, have the
+correct sign: they reduce to the Atiyah--Patodi--Singer formula. Two
+smaller slips occur in \cite[Cor.~5.12, Thm.~8.2]{LoyaThesis}. The residue
+at a pole \(z_k=(n-k)/m\) coming from \(t^{-z_k}\) is
+\(\int\gamma_k/\Gamma(z_k)\), not \(\int\gamma_k/\Gamma(-z_k)\). The logarithmic
+terms give poles at \(z_k\in-\mathbb N\), not at \(z_k\in\mathbb N\). Both
+follow from \cite[Lemma~5.10]{LoyaThesis}, which is stated correctly.
+Finally, \cite[Lemma~8.4]{LoyaThesis} asserts holomorphy at \(0\) only for
+the sum over faces, and the individual \({}^b\eta_M(z)\) may have poles
+there. This is why \eqref{eq:etab-general} uses a finite part.
+\end{remark}
+
+\begin{example}[Sign check]\label{ex:signcheck}
+Let \(X=[0,1]\), with the b-structure at both ends, and let
+\(u=\log(x/(1-x))\), so that \(\mu_b=du\). Put
+\(A=\partial_u+\tanh u\), a b-differential operator. It is Fredholm on
+\(L^2_b\), but not fully elliptic: \(a_0(-i)=0\) below. So this example
+checks the sign of the identity of Proposition~\ref{prop:MS} in the
+generality of the thesis. For this \(A\), the conclusions of
+Lemma~\ref{lem:reduction}(iv) still hold, except that \(\pi,\pi'\) lie only
+in \(\mathcal R^{-K}_\delta\) for every \(K\) (the kernel of \(A\) is
+\(O(x)\)). With this change, the proofs of Propositions~\ref{prop:resolvent},
+\ref{prop:cp} and~\ref{prop:MS} go through unchanged. The kernel of \(A\) is
+spanned by \(1/\cosh u\in L^2\), and \(\ker A^*\), spanned by \(\cosh u\),
+is trivial in \(L^2\). Hence \(\operatorname{Ind}A=1\).
+
+Near \(x=0\) we have \(\partial_u=x(1-x)\partial_x\), and \(\tanh u\to-1\), so
+\(a_0(\lambda)=i\lambda-1\) by \eqref{eq:IxDx}. Near \(x=1\), with
+\(x'=1-x\), we have \(\partial_u\to-x'\partial_{x'}\), and so
+\(a_1(\lambda)=-i\lambda+1\). For \(a(\lambda)=\pm i\lambda+c\), \(c\) real,
+\[
+ \frac1{\pi i}\int_{\mathbb R}\frac{\pm i}{\pm i\lambda+c}
+ (\lambda^2+c^2)^{-z}\,d\lambda
+ =\pm\frac{c}{|c|^{1+2z}}\,
+ \frac{\Gamma(z+\frac12)}{\sqrt\pi\,\Gamma(z+1)} ,
+\]
+since the odd part integrates to zero. So \(\eta_b(i\lambda-1)=-1\) and
+\(\eta_b(-i\lambda+1)=-1\), and the boundary term is
+\(-\frac12(-1-1)=+1\). The interior term vanishes. Indeed,
+\(A^*A=-\partial_u^2+1-2\operatorname{sech}^2u\) and \(AA^*=-\partial_u^2+1\)
+have the same normal operators. So
+\(h(t)=\Tr(e^{-tA^*A}-e^{-tAA^*})\), which has the small-time expansion
+\((4\pi t)^{-1/2}e^{-t}\sum_{k\geq1}c_kt^k\), with \(c_1=-\int(-2
+\operatorname{sech}^2u)\,du=4\). This expansion has no constant term. Hence
+\(\operatorname{Ind}A=0+1=1\), as it should be. The printed form of
+\cite[Thm.~8.6]{LoyaThesis} would give \(-1\). The order-zero case gives the
+same sign: see Remark~\ref{rem:WHconsistency}.
+\end{example}
+
+\begin{remark}[Order zero and Theorem~\ref{thm:WH}]\label{rem:WHconsistency}
+This remark is a consistency check, and we only indicate the argument.
+For \(A=1+K\) as in Theorem~\ref{thm:WH}, \(P_0-1\in\Psi_b^{-\infty}+\Ib\).
+The operator \(P_0\) is bounded with spectrum in a compact subset of
+\((0,\infty)\), so a compact contour may be used, and
+\[
+ P_0^{-z}-1=-\frac{i}{2\pi}\oint\mu^{-z}(1-\mu)^{-1}(P_0-1)(P_0-\mu)^{-1}\,
+ d\mu
+\]
+is an entire family of residual operators. Since \(K\) is residual, the
+trace-class conditions in the defect formula hold automatically. The
+proof of Proposition~\ref{prop:MS} then gives
+\[
+ {}^b\Tr(P_0^{-z}-1)-{}^b\Tr(P_0'^{-z}-1)=\operatorname{Ind}A
+ -\frac{i}{2\pi}\sum_H\int_{\mathbb R}\Tr_H\bigl(\partial_\lambda a\,a^{-1}
+ (aa^*)^{-z}\bigr)\,d\lambda .
+\]
+Here \({}^b\Tr[A,G]={}^b\Tr[K,G]\), and \(K\) is residual. At \(z=0\) the
+left side vanishes, which is Theorem~\ref{thm:WH} with the same sign. In
+order zero there is no interior term.
+\end{remark}
+
+\begin{remark}[Residue form; not proved here]\label{rem:residue-form}
+On closed manifolds, \(\zeta_{A^*A}(0)-\zeta_{AA^*}(0)\) can be rewritten as
+a Wodzicki residue built from the symbols of \(A\) and a parametrix, the
+``Atiyah--Singer term'' \(\operatorname{AS}(A)\). The earlier sketch of this
+section stated the b-analogue. It requires the meromorphy of
+\(\Tr(x^w[A,B]Q^{-\tau})\) in two variables, and we have not proved it.
+Theorem~\ref{thm:indexgeneral} is stated, and proved, with the zeta values.
+\end{remark}
+
+\begin{remark}[Relation to the companion notes]\label{rem:companion-heat}
+The companion notes \cite{Notes} quote the b-heat kernel theorem only for
+product-type generalized b-Laplacians, through the parabolic heat
+calculus. The operators \(e^{-tA^*A}\) used here have \(A\)
+pseudodifferential and are not of product type, so they lie outside that
+theorem. We do not use a heat calculus. The heat operators are contour
+integrals of the resolvent (Proposition~\ref{prop:cp}), and their small-time
+behaviour on the diagonal is read off from the b-zeta function by Mellin
+inversion (Theorem~\ref{thm:bzeta}). The b-trace defect formula of
+\cite{Notes} is the case of Theorem~\ref{thm:defectK} with both operators
+in the full calculus.
+\end{remark}
 
 \begin{remark}
 Moroianu and Nistor relate index and homology for manifolds with boundary
@@ -3558,6 +4420,11 @@ I. C. Gohberg and M. G. Krein,
 on the difference of arguments},
 Amer. Math. Soc. Transl. (2) \textbf{14} (1960), 217--287.
 
+\bibitem{LoyaThesis}
+P. Loya,
+\emph{On the b-pseudodifferential calculus on manifolds with corners},
+Ph.D. thesis, Massachusetts Institute of Technology, 1998.
+
 \bibitem{Loday}
 J.-L. Loday,
 \emph{Cyclic Homology},
@@ -3576,6 +4443,22 @@ Invent. Math. \textbf{99} (1990), 411--424.
 \bibitem{Notes}
 \emph{Notes on the b-Calculus and the APS Index Theorem}, based on lectures
 by P. Loya, notes taken by C. Zhou (companion notes).
+
+\bibitem{Piazza}
+P. Piazza,
+\emph{On the index of elliptic operators on manifolds with boundary},
+J. Funct. Anal. \textbf{117} (1993), 308--359.
+
+\bibitem{SeeleyCP}
+R. T. Seeley,
+\emph{Complex powers of an elliptic operator},
+in \emph{Singular Integrals}, Proc. Sympos. Pure Math. 10, Amer. Math. Soc.,
+1967, 288--307.
+
+\bibitem{Shubin}
+M. A. Shubin,
+\emph{Pseudodifferential Operators and Spectral Theory}, 2nd ed.,
+Springer, 2001.
 
 \bibitem{Seeley}
 R. T. Seeley,
