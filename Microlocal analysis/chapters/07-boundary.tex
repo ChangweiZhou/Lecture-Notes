@@ -1148,3 +1148,197 @@ An operator with closed range and either finite-dimensional null space or
 finite-codimensional range is called \emph{semi-Fredholm}. The existence of a left or
 right parametrix modulo compact operators is necessary and sufficient for these two
 kinds of semi-Fredholmness.
+
+\section{Manifolds with boundary: a right inverse}\label{boundary:sec:right-inverse}
+
+\noindent\textbf{Standing hypotheses (boundary case).} From now on $X$ is a compact
+Riemannian manifold with boundary, $V_1,V_2$ are Hermitian bundles over $X$, and
+$D\in\Diff{1}(X;V_1,V_2)$ is a generalized Dirac operator. We embed $X$ in its double
+$\Xt$, a compact manifold without boundary, with $x\in\CI(\Xt)$ a function such that
+$X=\{x\ge0\}$ and $dx\ne0$ on $\pa X=\{x=0\}$, and extend the metric, the Hermitian
+bundles and $D$ (by extending coefficients across $\pa X$ in a collar and cutting
+off) to $\tilde D\in\Diff{1}(\Xt;\tilde V_1,\tilde V_2)$. Since ellipticity is an open
+condition, $\tilde D$ is elliptic on an open neighbourhood $U$ of $X$; it is of Dirac
+type on $X$, but need not be elsewhere. By the parametrix construction of
+\cref{ch:manifolds} (which is local), there is $\tilde Q\in\Psido{-1}(\Xt;\tilde V_2,
+\tilde V_1)$ and $\chi\in\CI(\Xt)$ with $\supp\chi\subset U$, $\chi=1$ near $X$, such
+that
+\begin{equation*}
+E_R=\chi(\tilde D\tilde Q-\Id),\quad E_L=(\tilde Q\tilde D-\Id)\chi\quad\text{are
+smoothing.}
+\end{equation*}
+We also use a smooth positive density on $X$ (the Riemannian one) and the
+corresponding $L^2$ spaces. Finally we assume \emph{unique continuation}:
+\begin{equation}\tag{UC}\label{boundary:eq:UC}
+\text{if}\ u\in\dCI(X;V_1),\ Du=0\ \text{then}\ u=0;\quad\text{if}\ f\in\dCI(X;V_2),\
+D^*f=0\ \text{then}\ f=0.
+\end{equation}
+
+\begin{remark}
+\eqref{boundary:eq:UC} fails if $X$ has a component without boundary on which $D$
+or $D^*$ has null space. When every component of $X$ meets $\pa X$ it holds for
+operators of Dirac type: since $D^*D$ and $DD^*$ have scalar principal symbol
+$|\zeta|^2$, this follows from the unique continuation theorem of Aronszajn for such
+second-order operators, applied after extending the Dirac structure a little across
+the boundary near a boundary point; see the Notes. We simply assume it.
+\end{remark}
+
+For $f\in L^2(X;V_2)$ set
+\begin{equation*}
+Q'f=R_X\tilde Q(f_c)\in H^1(X;V_1),
+\end{equation*}
+where $f_c\in L^2(\Xt;\tilde V_2)$ is the extension by zero; $Q':L^2(X;V_2)\to
+H^1(X;V_1)$ is bounded.
+
+\begin{lemma}\label{boundary:lem:Qprime}
+$Q'$ maps $\CI(X;V_2)$ into $\CI(X;V_1)$, and $DQ'=\Id+E'$ where $E'f=R_XE_R(f_c)$
+has kernel in $\CI(X\times X;\Hom(V_2))$.
+\end{lemma}
+\begin{proof}
+The second statement holds since $\chi=1$ on $X$: $DQ'f=R_X\tilde D\tilde Qf_c=
+f+R_XE_Rf_c$. For the first, as in \cref{boundary:lem:RD}, choose by
+\cref{boundary:lem:formal} $u'\in\CI(X;V_1)$ with $bu'=0$ and $h=Du'-f\in\dCI(X;V_2)$.
+By the jump formula $\tilde D(u'_c)=f_c+h_c$ with $h_c$ smooth, so
+$u'_c+E_Lu'_c=\tilde Q\tilde D(u'_c)=\tilde Qf_c+\tilde Qh_c$, and $Q'f=u'+R_X(E_Lu'_c
+-\tilde Qh_c)\in\CI(X;V_1)$.
+\end{proof}
+
+By \cref{boundary:prop:smoothing-biideal}, $E'$ lies in the bi-ideal of smoothing
+operators on $L^2(X;V_2)$, so $Q'$ is a right parametrix for $D:H^1(X;V_1)\to
+L^2(X;V_2)$ and \cref{boundary:prop:right-param} shows that this map has closed range
+of finite codimension.
+
+\begin{proposition}\label{boundary:prop:surjective}
+$D:\CI(X;V_1)\to\CI(X;V_2)$ is surjective if and only if there is no non-trivial
+$f\in\dCI(X;V_2)$ with $D^*f=0$. In that case $D:H^1(X;V_1)\to L^2(X;V_2)$ is
+surjective as well.
+\end{proposition}
+\begin{proof}
+If $f\in\dCI(X;V_2)$ and $D^*f=0$ then, integrating by parts (no boundary term
+arises as $f$ vanishes at $\pa X$), $\inner{Du}{f}=\inner{u}{D^*f}=0$ for all $u\in
+\CI(X;V_1)$, so $D$ is not surjective unless $f=0$.
+
+Conversely, assume there is no such $f$, and let $f\in L^2(X;V_2)$ be orthogonal to
+$D(H^1(X;V_1))$. For $\varphi\in\CIc(U;\tilde V_1)$, $\inner{\tilde D\varphi}{f_c}=
+\inner{D(\varphi|_X)}{f}=0$, so $\tilde D^*f_c=0$ on $U$. By elliptic regularity $f_c$
+is smooth on $U$; as it vanishes outside $X$, $f\in\dCI(X;V_2)$ and $D^*f=0$, so
+$f=0$. Thus $D:H^1\to L^2$ is surjective.
+
+For the smooth statement, apply \cref{boundary:prop:right-param}: there are a
+smoothing $J$ and a finite-rank smoothing self-adjoint projection $\pi'_R$, with
+range in $\CI(X;V_2)$, such that $DQ''=\Id-\pi'_R$, $Q''=Q'(\Id+J)$. Since $J$ maps
+$L^2$ into $\CI$, $Q''$ maps $\CI(X;V_2)$ into $\CI(X;V_1)$, so the image $W$ of
+$\CI(X;V_1)$ under $D$ contains $(\Id-\pi'_R)\CI(X;V_2)$. Hence $f\in W$ if and only if
+$\pi'_Rf\in W\cap\Ran\pi'_R$. If $W\ne\CI(X;V_2)$, choose a non-zero linear functional
+$\lambda$ on the finite-dimensional space $\Ran\pi'_R$ vanishing on $W\cap\Ran\pi'_R$;
+then $\ell=\lambda\circ\pi'_R$ is $L^2$-continuous, vanishes on $W$, but not on
+$\Ran\pi'_R\subset\CI$. But $W$ is dense in $D(H^1)=L^2$, since $\CI$ is dense in
+$H^1$, so $\ell=0$, a contradiction.
+\end{proof}
+
+\begin{theorem}\label{boundary:thm:right-inverse}
+Under the standing hypotheses (including \eqref{boundary:eq:UC}) $D$ has a right inverse
+\begin{equation*}
+Q:\CI(X;V_2)\to\CI(X;V_1),\quad DQ=\Id,\quad Q=Q'+E'',
+\end{equation*}
+with $E''$ smoothing; $Q$ extends to a bounded map $L^2(X;V_2)\to H^1(X;V_1)$ and is a
+right inverse there too.
+\end{theorem}
+\begin{proof}
+With $Q''$ and $\pi'_R=\sum_je_j\inner{\cdot}{e_j}$ ($e_j\in\CI$ orthonormal) as in the
+previous proof, choose by \cref{boundary:prop:surjective} $v_j\in\CI(X;V_1)$ with
+$Dv_j=e_j$, and set $Q=Q''+\sum_jv_j\inner{\cdot}{e_j}$. Then $DQ=\Id-\pi'_R+\pi'_R=
+\Id$. $Q-Q'=Q'J+\sum_jv_j\inner\cdot{e_j}$ has smooth kernel, since $Q'$ is continuous
+on $\CI(X)$ (closed graph theorem) and $J$ has smooth kernel.
+\end{proof}
+
+\section{The boundary map on solutions}\label{boundary:sec:boundary-map}
+
+For $s\in\R$ let
+\begin{equation*}
+\mathcal{N}^s=\{u\in H^s(X;V_1);\ Du=0\ \text{in}\ X^\circ\},\qquad
+\mathcal{N}^\infty=\{u\in\CI(X;V_1);\ Du=0\}=\bigcap_s\mathcal{N}^s.
+\end{equation*}
+By \cref{boundary:lem:formal}(ii) and \eqref{boundary:eq:UC}, $b:\mathcal{N}^\infty\to
+\CI(\pa X;V_1)$ is injective; its range
+\begin{equation*}
+\Cau=b(\mathcal{N}^\infty)\subset\CI(\pa X;V_1)
+\end{equation*}
+is the space of \emph{Cauchy data}. To show that it is the range of a
+pseudodifferential projection we extend $b$ to $L^2$ solutions. Let
+\begin{equation*}
+\mathcal{D}=\{u\in L^2(X;V_1);\ Du\in L^2(X;V_2)\}
+\end{equation*}
+with the graph norm, where $Du$ is computed in $\CmI(X;V_2)$.
+
+\begin{lemma}\label{boundary:lem:beta}
+For $u\in\mathcal{D}$ there is a unique $\beta(u)\in H^{-\frac12}(\pa X;V_1)$ such that
+\begin{equation}\label{boundary:eq:beta}
+\tilde D(u_c)=(Du)_c+\frac1i\sigma(dx)\beta(u)\,\delta(x),
+\end{equation}
+and $\beta:\mathcal{D}\to H^{-\frac12}(\pa X;V_1)$ is continuous with $\beta(u)=bu$ for
+$u\in\CI(X;V_1)$. In particular $\tilde b=\beta|_{\mathcal{N}^0}:\mathcal{N}^0\to
+H^{-\frac12}(\pa X;V_1)$ is a continuous injective extension of $b$.
+\end{lemma}
+\begin{proof}
+$T=\tilde D(u_c)-(Du)_c\in H^{-1}(\Xt;\tilde V_2)$ depends continuously on $u\in
+\mathcal{D}$ and is supported in $\pa X$: it vanishes outside $X$ and equals $Du-Du=0$
+in $X^\circ$. By \cref{boundary:lem:layers}, $T=w\,\delta(x)$ with $w\in
+H^{-\frac12}$ depending continuously on $T$; set $\beta(u)=i\sigma(dx)^{-1}w$. For
+smooth $u$ this is $bu$ by \cref{boundary:cor:jump1}. If $u\in\mathcal{N}^0$ and
+$\tilde b u=0$, then $\tilde D(u_c)=0$ on $U$, so $u_c$ is smooth by elliptic
+regularity, whence $u\in\dCI(X;V_1)$, $Du=0$, and $u=0$ by \eqref{boundary:eq:UC}.
+\end{proof}
+
+For $v\in H^{-\frac12}(\pa X;V_1)$ the layer $T_v=\frac1i\sigma(dx)v\,\delta(x)$ lies
+in $H^{-1}(\Xt;\tilde V_2)$, and we set
+\begin{equation*}
+\tilde I_Dv=R_X\tilde Q(T_v)\in L^2(X;V_1).
+\end{equation*}
+Since $R_XT_v=0$ and $\chi=1$ on $X$,
+\begin{equation}\label{boundary:eq:Rprime}
+D\tilde I_Dv=R_X\tilde D\tilde QT_v=R_XE_RT_v=:R'v,
+\end{equation}
+where $R'$ has smooth kernel on $X\times\pa X$, and so extends to a continuous map
+$\CmI(\pa X;V_1)\to\CI(X;V_2)$. In particular $\tilde I_D:H^{-\frac12}(\pa X;V_1)\to
+\mathcal{D}$ is continuous. Applying \cref{boundary:thm:layer} to $\tilde D$ on $\Xt$,
+with $M_+=X$ and $Q=\tilde Q$, we obtain the classical operator
+\begin{equation}\label{boundary:eq:P}
+P=Q_+\circ\frac1i\sigma(dx)\in\Psido{0}(\pa X;V_1),\quad Pv=b\,\tilde I_Dv\ \ (v\in
+\CI(\pa X;V_1)),
+\end{equation}
+with $\tilde I_Dv\in\CI(X;V_1)$ for smooth $v$, and $\sigma_0(P)$ given by the right
+side of \eqref{boundary:eq:calderon-symbol} (the computation in the proof of
+\cref{boundary:thm:calderon-dividing} only uses the Dirac identities at $\pa X$).
+
+\begin{lemma}\label{boundary:lem:repr}
+\begin{enumerate}[label=(\roman*)]
+\item $\beta(\tilde I_Dv)=Pv$ for all $v\in H^{-\frac12}(\pa X;V_1)$.
+\item (Representation formula) For $u\in\mathcal{D}$,
+\begin{equation*}
+u=Q'(Du)+\tilde I_D\beta(u)+Gu,\qquad Gu=-R_XE_L(u_c),
+\end{equation*}
+where $G$ has smooth kernel on $X\times X$; in particular $u=\tilde I_D\tilde b u+Gu$
+for $u\in\mathcal{N}^0$.
+\item There is $C$ such that $\norm{u}_{L^2}\le C\norm{\tilde bu}_{H^{-\frac12}}$ for
+$u\in\mathcal{N}^0$. Hence $\overline{\Cau}:=\tilde b(\mathcal{N}^0)$ is closed in
+$H^{-\frac12}(\pa X;V_1)$ and $\tilde b:\mathcal{N}^0\to\overline{\Cau}$ is an
+isomorphism.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(i) holds for smooth $v$ by \eqref{boundary:eq:P}, and both sides are continuous on
+$H^{-\frac12}$. (ii) By \eqref{boundary:eq:beta}, $\tilde D(u_c)=(Du)_c+T_{\beta(u)}$;
+applying $\tilde Q$ and using $\tilde Q\tilde D(u_c)=u_c+E_Lu_c$ gives the formula on
+restricting to $X$. (iii) If not, there are $u_k\in\mathcal{N}^0$ with $\norm{u_k}=1$
+and $\tilde bu_k\to0$. As $G$ is compact on $L^2$ we may assume $Gu_k$ converges; then
+$u_k=\tilde I_D\tilde bu_k+Gu_k$ converges in $L^2$ to some $u$, which lies in the
+closed subspace $\mathcal{N}^0$, has norm $1$ and satisfies $\tilde bu=0$ by
+continuity of $\tilde b$ (on $\mathcal N^0$ the graph norm is the $L^2$ norm),
+contradicting injectivity. The estimate gives closedness of the range and continuity
+of the inverse.
+\end{proof}
+
+Thus $\tilde I_D$ is a left parametrix for $\tilde b$, in the sense that $\tilde I_D
+\tilde b=\Id+G$ on $\mathcal{N}^0$ (where $\tilde I_D$ maps into $L^2(X;V_1)\supset
+\mathcal{N}^0$).
