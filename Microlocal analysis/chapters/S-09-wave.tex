@@ -1,1 +1,509 @@
-% solutions for 09-wave (in progress)
+% Solutions for chapter 09-wave
+\providecommand{\vol}{\operatorname{vol}}
+\providecommand{\inj}{\operatorname{inj}}
+\providecommand{\Lset}{\mathcal{L}}
+\providecommand{\osc}[1]{\mathcal{I}[#1]}
+
+\section{Solutions for \cref{ch:wave}: The wave equation and Weyl asymptotics}\label{solutions:wave}
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{wave:ex:darboux}}
+Idea: split off a hyperbolic plane $\mathrm{span}(v_1,w_1)$ and induct on $\dim E$.
+
+For a subspace $W\subset E$ let $W^\omega=\{e\in E;\ \omega(e,w)=0\ \forall w\in W\}$. Since
+$\omega$ is non-degenerate, $e\mapsto\omega(e,\cdot)$ is an isomorphism $E\to E^*$; composing
+with the surjective restriction $E^*\to W^*$ gives a surjection $E\to W^*$ with kernel
+$W^\omega$, so
+\begin{equation*}
+  \dim W^\omega=\dim E-\dim W .
+\end{equation*}
+
+We prove by induction on $\dim E$: \emph{$\dim E=2n$ is even and there is a basis
+$v_1,\dots,v_n,w_1,\dots,w_n$ with $\omega(v_i,w_j)=\delta_{ij}$,
+$\omega(v_i,v_j)=\omega(w_i,w_j)=0$.} If $E=0$ there is nothing to prove. Let $E\ne0$ and
+choose $v_1\ne0$. By non-degeneracy there is $w$ with $\omega(v_1,w)\ne0$; put
+$w_1=w/\omega(v_1,w)$, so $\omega(v_1,w_1)=1$. Since $\omega(v_1,v_1)=0$ by antisymmetry,
+$w_1$ is not a multiple of $v_1$, so $W=\mathrm{span}(v_1,w_1)$ has dimension $2$, and
+$\omega|_W$ has matrix $\left(\begin{smallmatrix}0&1\\-1&0\end{smallmatrix}\right)$ in this basis,
+hence is non-degenerate.
+
+\emph{$W^\omega$ is a complement of $W$.} If $e\in W\cap W^\omega$ then $\omega(e,W)=0$ with
+$e\in W$, so $e=0$ by non-degeneracy of $\omega|_W$. Since
+$\dim W+\dim W^\omega=\dim E$, $E=W\oplus W^\omega$.
+
+\emph{$\omega$ is non-degenerate on $W^\omega$.} If $u\in W^\omega$ and $\omega(u,W^\omega)=0$,
+then also $\omega(u,W)=0$ (as $u\in W^\omega$), hence $\omega(u,E)=0$ and $u=0$.
+
+By induction $\dim W^\omega=\dim E-2$ is even, $=2(n-1)$, and $W^\omega$ has a basis
+$v_2,\dots,v_n,w_2,\dots,w_n$ with the stated relations. Together with $v_1,w_1$ this is a
+basis of $E$ (as $E=W\oplus W^\omega$), $\dim E=2n$, and the relations hold for all
+indices because $\omega(W,W^\omega)=0$.
+
+Let $v_j^*,w_j^*$ be the dual basis. With
+$(\alpha\wedge\beta)(a,b)=\alpha(a)\beta(b)-\alpha(b)\beta(a)$, the bilinear form
+$\sum_jv_j^*\wedge w_j^*$ takes the values $\delta_{ij}$ on $(v_i,w_j)$ and $0$ on $(v_i,v_j)$ and
+$(w_i,w_j)$, exactly like $\omega$; two bilinear forms that agree on all pairs of basis
+vectors are equal, so $\omega=\sum_jv_j^*\wedge w_j^*$.
+
+Finally, on $\R^{2n}$ with coordinates $(x,\xi)$ let $e_{x_j},e_{\xi_j}$ be the standard basis
+and define $L$ by $L(v_j)=e_{\xi_j}$, $L(w_j)=e_{x_j}$. Then $L^*(d\xi_j)$ takes the value
+$\delta_{ij}$ on $v_i$ and $0$ on $w_i$, i.e.\ $L^*(d\xi_j)=v_j^*$, and likewise
+$L^*(dx_j)=w_j^*$. Hence $L^*\omega_0=\sum_jL^*d\xi_j\wedge L^*dx_j=\sum_jv_j^*\wedge w_j^*=\omega$.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{wave:ex:lagrangian}}
+Idea: start from a basis $v_1,\dots,v_n$ of $V$, find a dual family $w_j'$, and correct it
+by elements of $V$ to make it isotropic.
+
+Let $V$ be Lagrangian. Then $V\subset V^\omega$ (as $\omega|_V=0$) and $\dim V^\omega=2n-n=n$ by
+the formula in the previous solution, so $V^\omega=V$. Choose a basis $v_1,\dots,v_n$ of $V$.
+The map $E\to V^*$, $e\mapsto\omega(\cdot,e)|_V$, has kernel $V^\omega=V$, hence rank $n=\dim V^*$:
+it is surjective. So there are $w_1',\dots,w_n'\in E$ with $\omega(v_i,w_j')=\delta_{ij}$. Let
+$c_{ij}=\omega(w_i',w_j')$, an antisymmetric matrix, and put
+\begin{equation*}
+  w_j=w_j'+\tfrac12\sum_kc_{kj}v_k .
+\end{equation*}
+Since $\omega(v_i,v_k)=0$, still $\omega(v_i,w_j)=\delta_{ij}$, and
+\begin{equation*}
+  \omega(w_i,w_j)=c_{ij}+\tfrac12\sum_kc_{kj}\,\omega(w_i',v_k)+\tfrac12\sum_kc_{ki}\,\omega(v_k,w_j')
+  =c_{ij}-\tfrac12c_{ij}+\tfrac12c_{ji}=0 .
+\end{equation*}
+The vectors $v_1,\dots,v_n,w_1,\dots,w_n$ are linearly independent: if
+$\sum_i(\alpha_iv_i+\beta_iw_i)=0$, applying $\omega(v_k,\cdot)$ gives $\beta_k=0$, and then
+$\alpha=0$. So they form a basis with the relations of \cref{wave:ex:darboux}, hence
+$\omega=\sum_jv_j^*\wedge w_j^*$ as shown there, and the map $L$ constructed there sends
+$V=\mathrm{span}(v_j)$ onto $\mathrm{span}(e_{\xi_j})=\{x=0\}$.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{wave:ex:poisson}}
+Idea: express everything through $\omega(H_f,H_g)$ and evaluate $d\omega$ on three Hamilton
+vector fields.
+
+Use $\iota_{H_f}\omega=-df$; this is the book's convention, since for
+$\omega_0=\sum d\xi_j\wedge dx_j$ and $H_f=\sum(\pa_{\xi_j}f\pa_{x_j}-\pa_{x_j}f\pa_{\xi_j})$ one has
+$\iota_{H_f}\omega_0=\sum(-\pa_{x_j}f\,dx_j-\pa_{\xi_j}f\,d\xi_j)=-df$. Then $H_f$ is well defined
+(non-degeneracy) and linear in $f$, and
+\begin{equation*}
+  \{f,g\}=H_fg=dg(H_f)=-\omega(H_g,H_f)=\omega(H_f,H_g),\qquad\text{and also}\quad
+  \omega(H_h,Z)=-Zh
+\end{equation*}
+for any vector field $Z$. So the bracket is bilinear and antisymmetric. For the Jacobi identity
+use the invariant formula for the exterior derivative of a $2$-form,
+\begin{multline*}
+  d\omega(X,Y,Z)=X\omega(Y,Z)-Y\omega(X,Z)+Z\omega(X,Y)\\
+  -\omega([X,Y],Z)+\omega([X,Z],Y)-\omega([Y,Z],X),
+\end{multline*}
+with $X=H_f$, $Y=H_g$, $Z=H_h$. Write $A=\{f,\{g,h\}\}$, $B=\{g,\{h,f\}\}$, $C=\{h,\{f,g\}\}$.
+The first three terms are $A-\{g,\{f,h\}\}+C=A+B+C$. Using $\omega(W,H_k)=Wk$ for a vector field
+$W$ and the antisymmetry of the bracket,
+\begin{gather*}
+  \omega([X,Y],Z)=[H_f,H_g]h=\{f,\{g,h\}\}-\{g,\{f,h\}\}=A+B,\\
+  \omega([X,Z],Y)=[H_f,H_h]g=\{f,\{h,g\}\}-\{h,\{f,g\}\}=-A-C,\qquad
+  \omega([Y,Z],X)=[H_g,H_h]f=B+C .
+\end{gather*}
+Hence $d\omega(H_f,H_g,H_h)=(A+B+C)-(A+B)+(-A-C)-(B+C)=-(A+B+C)$. Since $d\omega=0$, the
+Jacobi identity $A+B+C=0$ holds, and $(\CI(S),\{\cdot,\cdot\})$ is a Lie algebra.
+
+Conversely, for a non-degenerate $2$-form the Jacobi identity forces $d\omega=0$: the computation
+shows $d\omega(H_f,H_g,H_h)=0$ for all $f,g,h$; at each point $p$ the differentials $df(p)$ of
+smooth functions (cut-off local coordinates) span $T^*_pS$, so the vectors $H_f(p)$ span $T_pS$,
+and the tensor $d\omega_p$ vanishes. This is the equivalence in the hint.
+
+Finally, for every $h$,
+\begin{equation*}
+  [H_f,H_g]h=\{f,\{g,h\}\}-\{g,\{f,h\}\}=A+B=-C=\{\{f,g\},h\}=H_{\{f,g\}}h,
+\end{equation*}
+and a vector field is determined by its action on functions, so $[H_f,H_g]=H_{\{f,g\}}$. With the
+opposite convention $\iota_{H_f}\omega=df$, both $H_f$ and $\{f,g\}$ change sign; then
+$[H_f,H_g]$ is unchanged and so is $H_{\{f,g\}}$ (two sign changes), so all statements persist.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{wave:ex:initial-split}}
+Idea: look for $u_\pm=\osc{c_\pm}$ with phase $\rho h_\pm$ and amplitudes solving the transport
+equations with $\rho$ as a parameter; the two Cauchy conditions form, order by order, a
+$2\times2$ system for $c_{+}(0)\pm c_{-}(0)$ which is triangular in the order.
+
+\emph{Setting.} We work in a chart $W\Subset U$ as in \cref{wave:lem:eikonal}, with $y\in W$ and
+$\omega\in\Sphere^{n-1}$ fixed, and put
+\begin{equation*}
+  h_\pm(t,x)=\varphi_\pm(t,x,\omega)-y\cdot\omega,\qquad s=(x-y)\cdot\omega,\qquad H_\pm=\{h_\pm=0\},
+\end{equation*}
+on $\Omega=(-t_0,t_0)\times W$. By \eqref{wave:eq:eikonal}, $\pa_th_\pm=\pm q(x,d_xh_\pm)$,
+$h_\pm(0,x)=s$, $d_xh_\pm\neq0$; in particular $(\pa_th_\pm)^2=|d_xh_\pm|_g^2$ and
+$\pa_th_\pm(0,x)=\pm q(x,\omega)$. Choose linear coordinates $z\in\R^{n-1}$ such that $x\mapsto(s,z)$
+is a linear isomorphism. The map $(t,x)\mapsto(t,h_\pm(t,x),z(x))$ has Jacobian determinant
+$\det(d_xh_\pm;dz)$, which at $t=0$ equals $\det(ds;dz)\ne0$; it is injective at $t=0$, hence a
+diffeomorphism on $\Omega_1=(-t_1,t_1)\times W'$ onto its image for $W'\Subset W$ and $t_1$ small
+(otherwise there would be pairs of distinct points with equal images converging to $t=0$,
+contradicting local injectivity there). Shrinking $t_1$ further we may assume that the integral
+curves of the vector fields $V_\pm$ below through points of $\Omega_1$ reach $\{t=0\}$ inside
+$W$. In these coordinates $(t,s_\pm=h_\pm,z)$, a distribution conormal to $H_\pm$ is, by
+\cref{conormal:def:local} with $k=1$ in dimension $n+1$, locally of the form $\osc{c}+\CI$,
+\begin{equation*}
+  \osc{c}=\frac1{2\pi}\int_\R e^{i\rho h_\pm(t,x)}c(t,x,\rho)\,d\rho,\qquad c\in\Sym{M},\qquad
+  M=m'+\tfrac{n+1}4-\tfrac12,
+\end{equation*}
+the amplitude being allowed to depend on all variables; by \cref{conormal:lem:reduction} it can
+be taken independent of $s_\pm$, and such a reduced amplitude (a full symbol) is unique modulo
+$\Sym{-\infty}$ by \cref{conormal:prop:local-basic}(iii). Similarly, after multiplication by a
+cut-off near $\bar W'$ (which changes nothing on $W'$),
+\begin{equation*}
+  v_0=\osc{a}+\CI,\quad v_1=\osc{a'}+\CI\ \text{ on }W',\qquad a\in\Sym{M_0},\ a'\in\Sym{M_0+1},\quad
+  M_0=m+\tfrac n4-\tfrac12,
+\end{equation*}
+with $a,a'$ independent of $s$ (here $\osc{\cdot}$ uses the phase $s\rho$). Modifying amplitudes
+on a compact set of $\rho$ changes $\osc{\cdot}$ by a smooth function, so we may and do assume
+that all amplitudes vanish for $|\rho|\le1$. By the full symbol of $u_\pm$ at $t=0$ we mean the
+full symbol of the restriction $u_\pm|_{t=0}\in\Ic{m}(W',H_0)$ in the coordinates $(s,z)$.
+
+\emph{The transport operator.} By \eqref{wave:eq:P-on-exp} with the phase $\rho h_\pm$ ($\rho$ a
+real parameter), the eikonal term vanishes and, since $L_\phi$ is linear in $\phi$,
+\begin{equation*}
+  P\big(e^{i\rho h_\pm}c\big)=e^{i\rho h_\pm}\big(-i\rho L_\pm c+Pc\big),\qquad L_\pm=L_{h_\pm}=V_\pm+\gamma_\pm,
+\end{equation*}
+with $V_\pm=2(\pa_th_\pm\pa_t-\sum g^{ij}\pa_ih_\pm\pa_j)$ and $\gamma_\pm=\pa_t^2h_\pm+\Delta h_\pm$.
+Differentiating under the oscillatory integral (\cref{conormal:lem:osc-ops}(i)),
+$P\osc{c}=\osc{-i\rho L_\pm c+Pc}$. The $\pa_t$-coefficient of $V_\pm$ is $\pm2q(x,d_xh_\pm)\ne0$, and
+$L_\pm$ does not involve $\rho$. Hence for $f\in\Sym{\mu}$ and $c^0(x,\rho)\in\Sym{\mu}$ the problem
+$L_\pm c=f$, $c(0,\cdot)=c^0$ has a unique solution on $\Omega_1$, given by integration of a linear
+ODE along the integral curves of $V_\pm$ (which do not depend on $\rho$):
+$c(t,x,\rho)=e^{-k}c^0(X_0,\rho)+\int_0^t(\dots)f\,d\sigma$ with smooth coefficients in $(t,x)$
+and $X_0=X_0(t,x)$ the foot of the curve. Derivatives in $\rho$ commute with this formula and
+derivatives in $(t,x)$ only produce smooth bounded factors, so $c\in\Sym{\mu}$ on compact subsets;
+and $c$ vanishes for $|\rho|\le1$ if $c^0$ and $f$ do.
+
+\emph{Existence.} We seek $c_\pm\sim\sum_{k\ge0}c_{\pm,k}$, $c_{\pm,k}\in\Sym{M_0-k}$, with
+\begin{equation}\label{solwave:eq:transport}
+  L_\pm c_{\pm,0}=0,\qquad L_\pm c_{\pm,k}=-i\rho^{-1}Pc_{\pm,k-1}\quad(k\ge1).
+\end{equation}
+The conditions at $t=0$ are, writing $q_\omega(x)=q(x,\omega)>0$ and using
+$h_\pm(0)=s$, $\pa_th_\pm(0)=\pm q_\omega$, $D_t\osc{c}=\osc{\rho\,\pa_th_\pm c+D_tc}$:
+\begin{equation*}
+  u_+(0)+u_-(0)=\osc{c_+(0)+c_-(0)},\qquad
+  D_t(u_++u_-)(0)=\osc{\rho q_\omega\,(c_+(0)-c_-(0))+D_tc_+(0)+D_tc_-(0)} .
+\end{equation*}
+So it suffices to arrange, with equality of amplitudes modulo $\Sym{-\infty}$,
+\begin{equation}\label{solwave:eq:split}
+  c_+(0)+c_-(0)\equiv a,\qquad \rho q_\omega(c_+(0)-c_-(0))+D_tc_+(0)+D_tc_-(0)\equiv a' .
+\end{equation}
+Sorting by order this is the triangular system
+\begin{gather*}
+  c_{+,0}(0)+c_{-,0}(0)=a,\qquad \rho q_\omega\big(c_{+,0}(0)-c_{-,0}(0)\big)=a',\\
+  c_{+,k}(0)+c_{-,k}(0)=0,\qquad \rho q_\omega\big(c_{+,k}(0)-c_{-,k}(0)\big)=-\big(D_tc_{+,k-1}+D_tc_{-,k-1}\big)(0)\quad(k\ge1),
+\end{gather*}
+whose unique solution is
+\begin{equation*}
+  c_{\pm,0}(0)=\frac12\Big(a\pm\frac{a'}{\rho q_\omega}\Big),\qquad
+  c_{\pm,k}(0)=\mp\frac1{2\rho q_\omega}\big(D_tc_{+,k-1}+D_tc_{-,k-1}\big)(0).
+\end{equation*}
+Inductively: $c_{\pm,k}(0)\in\Sym{M_0-k}$ is determined by $c_{\pm,k-1}$ (for all $t$), and then
+$c_{\pm,k}\in\Sym{M_0-k}$ is determined on $\Omega_1$ by \eqref{solwave:eq:transport}, whose right
+side has order $M_0-k$. Let $c_\pm\sim\sum_kc_{\pm,k}$ be an asymptotic sum and $u_\pm=\osc{c_\pm}$;
+then $u_\pm$ is conormal to $H_\pm$ of order $m'=M_0-\frac{n+1}4+\frac12=m-\frac14$ (consistent
+with \cref{wave:prop:restriction}). For each $K$, by \eqref{solwave:eq:transport},
+$-i\rho L_\pm\sum_{k<K}c_{\pm,k}+P\sum_{k<K}c_{\pm,k}=Pc_{\pm,K-1}\in\Sym{M_0-K+1}$, and the
+remainder $c_\pm-\sum_{k<K}c_{\pm,k}\in\Sym{M_0-K}$ contributes order $M_0-K+1$; hence
+$Pu_\pm=\osc{r_\pm}$ with $r_\pm\in\Sym{-\infty}$, i.e.\ $Pu_\pm\in\CI(\Omega_1)$. Summing the
+initial equations for $k<K$ gives $\sum_\pm\sum_{k<K}c_{\pm,k}(0)=a$ and
+$\rho q_\omega\sum_{k<K}(c_{+,k}-c_{-,k})(0)+\sum_\pm\sum_{k<K}D_tc_{\pm,k}(0)=a'+\sum_\pm D_tc_{\pm,K-1}(0)$,
+so \eqref{solwave:eq:split} holds modulo $\Sym{M_0-K+1}$ for every $K$, i.e.\ modulo $\Sym{-\infty}$.
+Thus $u_++u_-=v_0$ and $D_t(u_++u_-)=v_1$ at $t=0$, modulo $\CI(W')$. By
+\cref{conormal:lem:reduction} the full symbol of $u_\pm(0)$ is
+$\frac12\big(a\pm a'/(\rho q_\omega)\big)|_{s=0}$ modulo $\Sym{M_0-1}$.
+
+\emph{Uniqueness.} Let $u_\pm'$ be another pair with the same properties, and $w_\pm=u_\pm-u'_\pm$.
+Then $w_\pm$ is conormal to $H_\pm$, $Pw_\pm\in\CI$, and $w_+(0)+w_-(0)$, $D_t(w_++w_-)(0)$ are smooth.
+We show $w_\pm\in\CI$ near $t=0$; in particular $u_\pm(0)-u'_\pm(0)\in\CI$, so the full symbols of
+$u_\pm$ at $t=0$ are uniquely determined modulo $\Sym{-\infty}$ (\cref{conormal:prop:local-basic}(iii)).
+Write $w_\pm=\osc{e_\pm}$ with $e_\pm=e_\pm(t,z,\rho)$ independent of $s_\pm$ (reduced amplitude), and
+suppose $e_\pm\in\Sym{\nu}$. We show $e_\pm\in\Sym{\nu-1}$; by induction then $e_\pm\in\Sym{-\infty}$.
+
+(a) \emph{Initial values.} At $t=0$ the coordinates $(s_\pm,z)$ are $(s,z)$, so $w_\pm(0)=\osc{e_\pm(0)}$
+has full symbol $e_\pm(0,z,\rho)$, and the smoothness of $w_+(0)+w_-(0)$ gives
+$e_+(0)+e_-(0)\in\Sym{-\infty}$. Next $D_tw_\pm(0)=\osc{\pm\rho q_\omega e_\pm(0)+(D_te_\pm)(0)}$, whose
+reduction (\cref{conormal:lem:reduction}) is $\pm\rho q_\omega|_{s=0}\,e_\pm(0)$ modulo $\Sym{\nu}$; so
+smoothness of $D_t(w_++w_-)(0)$ gives $\rho q_\omega|_{s=0}(e_+(0)-e_-(0))\in\Sym{\nu}$, i.e.\
+$e_+(0)-e_-(0)\in\Sym{\nu-1}$. Hence $e_\pm(0)\in\Sym{\nu-1}$.
+
+(b) \emph{Propagation.} $Pw_\pm=\osc{-i\rho L_\pm e_\pm+Pe_\pm}$, whose reduction is $-i\rho(L_\pm e_\pm)|_{s_\pm=0}$
+modulo $\Sym{\nu}$; since $Pw_\pm$ is smooth, $(L_\pm e_\pm)|_{s_\pm=0}\in\Sym{\nu-1}$. Now
+$V_\pm h_\pm=2((\pa_th_\pm)^2-|d_xh_\pm|_g^2)=0$, so in the coordinates $(t,s_\pm,z)$ the field $V_\pm$ has
+no $\pa_{s_\pm}$-component: $V_\pm=\alpha\pa_t+\beta\cdot\pa_z$ with $\alpha=V_\pm t=\pm2q(x,d_xh_\pm)\ne0$.
+As $e_\pm$ does not depend on $s_\pm$, $(L_\pm e_\pm)|_{s_\pm=0}=(\alpha\pa_t+\beta\cdot\pa_z+\gamma_\pm)e_\pm$
+with coefficients restricted to $s_\pm=0$, a first order operator in $(t,z)$ independent of $\rho$ and
+transversal to $t=0$. Solving this ODE along its integral curves as above, $e_\pm(0)\in\Sym{\nu-1}$ and
+$(L_\pm e_\pm)|_{s_\pm=0}\in\Sym{\nu-1}$ give $e_\pm\in\Sym{\nu-1}$ (near $t=0$).
+
+So the conormal solutions are unique modulo $\CI$ near $t=0$, and in particular their full symbols at
+$t=0$, computed in the existence part, are uniquely determined.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{wave:ex:volterra}}
+Idea: each convolution gains a factor $t$ and a factorial; for flat $F$ all $t$-derivatives
+fall on the first factor.
+
+\emph{Associativity and operators.} For continuous kernels $A,B$ on $[0,t_1]\times X\times X$ set
+$(\mathcal V_A\phi)(t,x)=\int_0^t\int_XA(t-s,x,z)\phi(s,z)\dvol(z)\,ds$ on $\Cz([0,t_1]\times X)$. By
+Fubini and the substitution $s=r+\sigma$,
+\begin{equation*}
+  \mathcal V_A\mathcal V_B\phi(t)=\int_0^t\Big(\int_r^tA(t-s)\circ_XB(s-r)\,ds\Big)\phi(r)\,dr
+  =\mathcal V_{A\circ B}\phi(t),
+\end{equation*}
+($\circ_X$ the composition of kernels on $X$), and the same computation shows
+$(A\circ B)\circ C=A\circ(B\circ C)$: both equal the integral of
+$A(t-s-r)B(r)C(s)$ over $\{r,s\ge0,\ r+s\le t\}$. So $F^{(k)}$ is the $k$-fold product of $F$ in any
+bracketing, $F\circ F^{(k)}=F^{(k)}\circ F=F^{(k+1)}$, and ``$\Id+F$'' means $\Id+\mathcal V_F$.
+Each $F^{(k)}$ is continuous (parameter integrals of uniformly continuous functions over compact sets).
+
+\emph{The estimate.} More generally, if $|G_i|\le M_i$, then
+\begin{equation}\label{solwave:eq:volterra}
+  |(G_1\circ\dots\circ G_k)(t,x,y)|\le M_1\cdots M_k\vol(X)^{k-1}\frac{t^{k-1}}{(k-1)!}.
+\end{equation}
+For $k=1$ this is the hypothesis; if it holds for $k-1$ factors, then
+\begin{equation*}
+  |G_1\circ\dots\circ G_k(t)|\le\int_0^t\int_XM_1\cdots M_{k-1}\vol(X)^{k-2}\frac{(t-s)^{k-2}}{(k-2)!}M_k\dvol(z)\,ds
+  =M_1\cdots M_k\vol(X)^{k-1}\frac{t^{k-1}}{(k-1)!}.
+\end{equation*}
+With all $G_i=F$ this is the claimed bound for $F^{(k)}$.
+
+\emph{The inverse.} By the bound, $\sum_{k\ge1}(-1)^kF^{(k)}$ converges uniformly on
+$[0,t_1]\times X\times X$ (dominated by $M\sum_k(M\vol(X)t_1)^{k-1}/(k-1)!$), so $\tilde F$ is
+continuous, and $\circ$ may be applied termwise. Then
+\begin{equation*}
+  F+\tilde F+F\circ\tilde F=F+\sum_{k\ge1}(-1)^kF^{(k)}+\sum_{k\ge1}(-1)^kF^{(k+1)}=F-F=0,
+\end{equation*}
+and likewise $F+\tilde F+\tilde F\circ F=0$. In terms of operators,
+$(\Id+\mathcal V_F)(\Id+\mathcal V_{\tilde F})=\Id+\mathcal V_{F+\tilde F+F\circ\tilde F}=\Id$ and
+similarly in the other order, so $\Id+\tilde F$ is the inverse of $\Id+F$.
+
+\emph{Flatness.} Let $F\in\CI([0,t_1]\times X\times X)$ with all derivatives vanishing at $t=0$.
+If $G$ is continuous, then
+$\pa_t(F\circ G)(t)=\int_XF(0,x,z)G(t,z,y)\dvol(z)+((\pa_tF)\circ G)(t)=((\pa_tF)\circ G)(t)$, while
+$x$-derivatives fall on $F$ and $y$-derivatives on $G$. Writing $F^{(k)}=F\circ F^{(k-2)}\circ F$
+($k\ge2$, with $F^{(0)}$ omitted), we get
+\begin{equation*}
+  \pa_t^j\pa_x^\alpha\pa_y^\beta F^{(k)}=(\pa_t^j\pa_x^\alpha F)\circ F^{(k-2)}\circ(\pa_y^\beta F)
+\end{equation*}
+(derivatives in local coordinates, using a partition of unity). Let $M$ bound $|F|$,
+$|\pa_t^j\pa_x^\alpha F|$ and $|\pa_y^\beta F|$. By \eqref{solwave:eq:volterra} the differentiated
+series converges uniformly, so $\tilde F\in\CI([0,t_1]\times X\times X)$. Moreover, since $F$ is flat,
+$|\pa_t^j\pa_x^\alpha F(t)|\le C_Nt^N$ for every $N$, and with $G_k=F^{(k-2)}\circ\pa_y^\beta F$,
+$|G_k|\le M^{k-1}\vol(X)^{k-2}t_1^{k-2}/(k-2)!$,
+\begin{equation*}
+  |\pa_t^j\pa_x^\alpha\pa_y^\beta F^{(k)}(t)|\le\int_0^tC_N(t-s)^N\vol(X)\sup|G_k|\,ds
+  \le C_N\vol(X)\,t^{N+1}\frac{M^{k-1}\vol(X)^{k-2}t_1^{k-2}}{(k-2)!}.
+\end{equation*}
+Summing over $k\ge2$ and adding the term $k=1$, $|\pa_t^j\pa_x^\alpha\pa_y^\beta\tilde F(t)|\le C'_Nt^N$
+for all $N$: $\tilde F$ vanishes to infinite order at $t=0$, and its extension by $0$ to $t<0$ is smooth.
+
+\emph{A forward fundamental solution.} Let $S$ be the parametrix for $K_{\sin}$ of
+\cref{wave:thm:parametrix} on $(-t_0,t_0)\times X\times X$. As shown in its proof (without using the
+spectral theorem), $R=PS$, $S(0)$ and $\pa_tS(0)-K_{\Id}$ are smooth. Put
+$S'=S-S(0)-t(\pa_tS(0)-K_{\Id})$; then $S'(0)=0$, $\pa_tS'(0)=K_{\Id}$ and $PS'\in\CI$. Write the
+Taylor series $PS'\sim\sum_jt^jf_j(x,y)$ and define $w_0=w_1=0$,
+$w_{j+2}=(f_j-\Delta_xw_j)/((j+1)(j+2))$; by Borel's lemma choose $w\in\CI$ with Taylor series
+$\sum_jt^jw_j$. Since the coefficient of $t^j$ in $Pw$ is $-(j+2)(j+1)w_{j+2}-\Delta_xw_j=-f_j$,
+$S''=S'+w$ satisfies
+\begin{equation*}
+  S''(0)=0,\qquad\pa_tS''(0)=K_{\Id},\qquad R''=PS''\in\CI\text{ flat at }t=0 .
+\end{equation*}
+For a function $f$ of $t$ with values in distributions, $P(H(t)f)=-f(0)\delta'(t)-\pa_tf(0)\delta(t)+H(t)Pf$
+(from $\pa_t^2(Hf)=f(0)\delta'+\pa_tf(0)\delta+H\pa_t^2f$). Hence the local parametrix
+$E'=-H(t)S''$ satisfies, for $0\le t<t_0$,
+\begin{equation*}
+  PE'=\delta(t)K_{\Id}+F,\qquad F=-H(t)R'',
+\end{equation*}
+with $F$ smooth, supported in $t\ge0$ and flat at $t=0$. Fix $t_1<t_0$ and let $\tilde F$ be as above;
+put $E_1=E'+E'\circ\tilde F$, where $E'\circ\tilde F=\int_0^tE'(t-s)\circ_X\tilde F(s)\,ds$ is well
+defined because $E'$ is a continuous function of $t$ with values in $\CmI(X\times X)$ and $\tilde F$
+is smooth. Since $P$ acts in $(t,x)$ and the $t$-convolution of functions supported in $t\ge0$ can be
+differentiated on either factor, $P(E'\circ\tilde F)=(PE')\circ\tilde F=\tilde F+F\circ\tilde F$, so
+\begin{equation*}
+  PE_1=\delta(t)K_{\Id}+F+\tilde F+F\circ\tilde F=\delta(t)K_{\Id}\qquad\text{for }t<t_1,
+\end{equation*}
+and $E_1=0$ for $t<0$. As an operator, $E_1\phi(t)=\int E_1(t-t',\cdot,\cdot)\phi(t')\,dt'$ satisfies
+$PE_1\phi=\phi$ for $\phi$ supported in an interval of length $<t_1$, near that interval; this is the
+construction of \cref{wave:rem:volterra} on the time strip $\{0\le t-t'<t_1\}$.
+
+Moreover $E_1=E$ there: $D=E-E_1$ satisfies $(D_t^2-\Delta_x)D=0$ for $0<t<t_1$, and both kernels have
+the same jump at $t=0$ ($E(0^+)=E_1(0^+)=0$, $\pa_tE(0^+)=\pa_tE_1(0^+)=-K_{\Id}$, since
+$E=-H(t)K_{\sin}$ and $E'\circ\tilde F$ vanishes to second order at $t=0$). Extended by $0$ to $t<0$,
+$D\in\mathcal C^2((-1,t_1);\Hs{-M}(X\times X))$ for large $M$ solves the homogeneous equation with
+zero data, so $D=0$ by \cref{wave:prop:param} (with $Y=X$). For larger times the kernel is obtained
+from the strip by the group law of \cref{wave:thm:cauchy}: for $t,s\ge0$,
+$K_{\sin}(t+s)=K_{\sin}(t)\circ_X\pa_sK_{\sin}(s)+\pa_tK_{\sin}(t)\circ_XK_{\sin}(s)$ (the identity
+$\frac{\sin((t+s)\lambda)}\lambda=\frac{\sin t\lambda}\lambda\cos s\lambda+\cos t\lambda\frac{\sin s\lambda}\lambda$),
+so $E(t)=-K_{\sin}(t)$ for all $t\ge0$ results from the strip by finitely many compositions; on a
+non-compact manifold as in \cref{wave:rem:volterra} the same two steps apply once uniqueness for the
+Cauchy problem is known from energy estimates.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{wave:ex:circle}}
+Idea: everything is explicit in Fourier series; the wave trace is a Dirac comb by Poisson summation.
+
+On $X=\R/L\Z$ (so $\vol(X)=L$, $\Delta=-\pa_x^2$) the functions $L^{-1/2}e^{2\pi ikx/L}$, $k\in\Z$, form
+an orthonormal basis of eigenfunctions with $\Delta e^{2\pi ikx/L}=(2\pi k/L)^2e^{2\pi ikx/L}$; a real
+orthonormal basis is $L^{-1/2}$, $(2/L)^{1/2}\cos(2\pi kx/L)$, $(2/L)^{1/2}\sin(2\pi kx/L)$, $k\ge1$.
+So the $\lambda_j$ are $0$ (once) and $2\pi k/L$, $k\ge1$ (twice each), i.e.\ $\lambda=2\pi|k|/L$, $k\in\Z$,
+and
+\begin{equation*}
+  N(\lambda)=\#\{k\in\Z;\ |k|\le L\lambda/2\pi\}=2\Big\lfloor\frac{L\lambda}{2\pi}\Big\rfloor+1 .
+\end{equation*}
+Since $\lfloor\alpha\rfloor\in(\alpha-1,\alpha]$, $N(\lambda)-\frac L\pi\lambda\in(-1,1]$; thus
+$N(\lambda)=\frac L\pi\lambda+O(1)$. This agrees with the Weyl constant $C_W=(2\pi)^{-1}\omega_1\vol(X)=L/\pi$,
+and the remainder is even better than $O(\lambda^{n-1})=O(1)$ would require (cf.\
+\cref{wave:rem:weyl-sharp}(ii)).
+
+Next, $T=\sum_j\cos(t\lambda_j)=1+2\sum_{k\ge1}\cos(2\pi kt/L)=\sum_{k\in\Z}e^{2\pi ikt/L}$. For
+$\psi\in\cS(\R)$, $T(\psi)=\sum_k\int\psi(t)e^{2\pi ikt/L}dt=\sum_k\hat\psi(-2\pi k/L)=\sum_k\hat\psi(2\pi k/L)$.
+The Poisson summation formula: for $g\in\cS(\R)$ the $L$-periodic smooth function
+$G(t)=\sum_mg(t+mL)$ has Fourier coefficients $\frac1L\int_0^LG(t)e^{-2\pi ikt/L}dt=\frac1L\hat g(2\pi k/L)$,
+which are rapidly decreasing, so its Fourier series converges to $G$ and at $t=0$ gives
+$\sum_mg(mL)=\frac1L\sum_k\hat g(2\pi k/L)$. With $g=\psi$,
+\begin{equation*}
+  T(\psi)=L\sum_{m\in\Z}\psi(mL),\qquad\text{i.e.}\qquad T=L\sum_{m\in\Z}\delta(t-mL).
+\end{equation*}
+So $\singsupp T=L\Z$. The closed unit speed geodesics of $\R/L\Z$ are $s\mapsto x\pm s$, whose
+lengths are the multiples $mL$, $m\ge1$, so $\Lset=L\N$ and $\singsupp T=\{0\}\cup\Lset\cup(-\Lset)$:
+the inclusion of \cref{wave:thm:poisson} is an equality here. Also, for $\supp\psi\subset(-L,L)$,
+$\psi T=L\psi(0)\delta$ and $\widehat{\psi T}=L\psi(0)$, in accordance with \cref{wave:thm:trace} and
+\cref{wave:rem:circle}; for $n=1$ the expansion \eqref{wave:eq:trace-leading} has no lower order terms.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{wave:ex:torus}}
+Idea: the exponentials $e^{ik\cdot x}$ diagonalize $\Delta$, so $N(\lambda)$ counts lattice points.
+
+On $X=\R^n/2\pi\Z^n$ with the flat metric, $\Delta=-\sum_j\pa_{x_j}^2$ and
+$\Delta e^{ik\cdot x}=|k|^2e^{ik\cdot x}$ for $k\in\Z^n$. The functions $(2\pi)^{-n/2}e^{ik\cdot x}$, $k\in\Z^n$,
+form an orthonormal basis of $L^2(X)$ (multiple Fourier series). Real orthonormal eigenfunctions are
+obtained by replacing, for each pair $\{k,-k\}$ with $k\neq0$, the two exponentials by
+$\pi^{-n/2}2^{-(n-1)/2}\cos(k\cdot x)$ and the same with $\sin$; the eigenvalue $|k|^2$ is shared. If
+$\Delta u=\mu u$, then the Fourier coefficients satisfy $(|k|^2-\mu)\hat u(k)=0$, so the eigenvalues of $\Delta$
+are exactly the numbers $|k|^2$, the multiplicity of $\mu$ being $\#\{k;\ |k|^2=\mu\}$. Hence
+\begin{equation*}
+  N(\lambda)=\#\{k\in\Z^n;\ |k|\le\lambda\}.
+\end{equation*}
+Since $\vol(X)=(2\pi)^n$, the Weyl constant is $C_W=(2\pi)^{-n}\omega_n(2\pi)^n=\omega_n$, and
+\cref{wave:thm:weyl} (for $n\ge2$) gives
+$\#\{k\in\Z^n;\ |k|\le\lambda\}=\omega_n\lambda^n+O(\lambda^{n-1})$ as $\lambda\to\infty$ (and trivially for
+bounded $\lambda\ge1$). This is the classical lattice point estimate (which also follows by comparing the
+union of unit cubes centred at the lattice points with the balls of radii $\lambda\pm\sqrt n/2$).
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{wave:ex:sphere}}
+Idea: $N$ jumps by $2K+1\approx2\lambda$ at $\lambda=\sqrt{K(K+1)}$; for $T$, write
+$\sqrt{k(k+1)}=(k+\frac12)-\epsilon_k$ and compare with the explicit series for the frequencies $k+\frac12$.
+
+\emph{Weyl constant.} $\vol(\Sphere^2)=4\pi$ and $\omega_2=\pi$, so $C_W=(2\pi)^{-2}\pi\cdot4\pi=1$.
+
+\emph{Oscillation of the remainder.} The eigenvalue $k(k+1)$ of $\Delta$ corresponds to
+$\lambda_j=\sqrt{k(k+1)}$, with multiplicity $2k+1$, and $\sum_{k=0}^K(2k+1)=(K+1)^2$. If
+$K(K+1)\le\lambda^2<(K+1)(K+2)$ then $N(\lambda)=(K+1)^2$. Take first $\lambda=\sqrt{K(K+1)}$: then
+$N(\lambda)-\lambda^2=K+1>\lambda\ge\frac12\lambda$. Take next $\lambda=\sqrt{(K+1)(K+2)-1}$, $K\ge2$; it lies
+in the above range, and
+\begin{equation*}
+  N(\lambda)-\lambda^2=(K+1)^2-(K+1)(K+2)+1=-K\le-\tfrac12\lambda,
+\end{equation*}
+because $\lambda^2=K^2+3K+1\le4K^2$ for $K\ge2$ ($3K^2-3K-1>0$). Both sequences tend to infinity, so
+$|N(\lambda)-C_W\lambda^2|\ge\frac12\lambda$ for arbitrarily large $\lambda$, and the remainder in
+\cref{wave:thm:weyl} is not $o(\lambda^{n-1})=o(\lambda)$ here.
+
+\emph{The wave trace.} With $\nu=\nu_k=k+\frac12$ we have $2k+1=2\nu$ and
+$\sqrt{k(k+1)}=\sqrt{\nu^2-\frac14}=\nu-\epsilon_k$, where
+$\epsilon_k=\frac{1/4}{\nu+\sqrt{\nu^2-1/4}}\in(0,\frac1{4\nu}]$ and $2\nu\epsilon_k=\frac14+O(\nu^{-2})$. So,
+as a tempered distribution (the series converges in $\cSp$ by \cref{wave:lem:apriori}),
+\begin{equation*}
+  T(t)=\sum_{k\ge0}2\nu\cos\big(t\sqrt{k(k+1)}\big)
+  =\sum_{k\ge0}2\nu\big(\cos(t\nu)\cos(t\epsilon_k)+\sin(t\nu)\sin(t\epsilon_k)\big)
+  =2\Sigma'(t)+\frac t4\Sigma(t)+R(t),
+\end{equation*}
+where $\Sigma(t)=\sum_{k\ge0}\sin(\nu_kt)$ (so that $\sum_k2\nu\cos(\nu t)=2\Sigma'$) and
+\begin{equation*}
+  R(t)=\sum_{k\ge0}\Big(b_k(t)\cos(\nu t)+c_k(t)\sin(\nu t)\Big),\quad
+  b_k=2\nu(\cos(t\epsilon_k)-1),\quad c_k=2\nu\sin(t\epsilon_k)-\frac t4 .
+\end{equation*}
+\emph{The series $\Sigma$.} Since $2\sin\frac t2\sin(\nu_kt)=\cos(kt)-\cos((k+1)t)$,
+$2\sin\frac t2\sum_{k=0}^K\sin(\nu_kt)=1-\cos((K+1)t)\to1$ in $\cSp$, so $2\sin(\frac t2)\Sigma=1$. Hence
+$\Sigma=\frac1{2\sin(t/2)}$ on $\R\setminus2\pi\Z$; in particular $\Sigma$ is unbounded on
+$(2\pi m,2\pi m+\eps)$ for every $m\in\Z$ and every $\eps>0$.
+
+\emph{The remainder $R$ is mildly regular.} On a compact $t$-interval, $|\pa_t^jb_k|\le C_j\nu\epsilon_k^2\le C_j'\nu^{-1}$
+and, using $2\nu\epsilon_k-\frac14=O(\nu^{-2})$ and $\nu\epsilon_k^2=O(\nu^{-1})$, also $|\pa_t^jc_k|\le C_j''\nu^{-1}$.
+For $\chi\in\CIc(\R)$ the Fourier transform of $\chi b_ke^{\pm i\nu t}$ is bounded by
+$C_N\nu^{-1}\ang{\sigma\mp\nu}^{-N}$, and $\sum_k\nu_k^{-1}\ang{\sigma\mp\nu_k}^{-N}\le C\ang{\sigma}^{-1}$ (split into
+$|\nu_k-|\sigma||\le\frac12|\sigma|$, where $\nu_k^{-1}\le C\ang\sigma^{-1}$, and the rest, where
+$\ang{\sigma\mp\nu_k}\ge c\ang\sigma$). Hence $|\widehat{\chi R}(\sigma)|\le C\ang\sigma^{-1}$ and $\chi R\in\Hs{1/4}(\R)$.
+
+\emph{Singularities.} Suppose $T$ were smooth near $2\pi m$. Then near $2\pi m$,
+$\Sigma'+\frac t8\Sigma=\frac12(T-R)\in\Hs{1/4}_{\mathrm{loc}}$, i.e.\ $(e^{t^2/16}\Sigma)'\in\Hs{1/4}_{\mathrm{loc}}$, so
+$e^{t^2/16}\Sigma\in\Hs{5/4}_{\mathrm{loc}}\subset\Cz$ there, contradicting the unboundedness of $\Sigma$.
+Hence $2\pi\Z\subset\singsupp T$. Conversely, the closed geodesics of the round $\Sphere^2$ are the great
+circles traversed $m\ge1$ times, so $\Lset=2\pi\N$, and \cref{wave:thm:poisson} gives
+$\singsupp T\subset2\pi\Z$. Therefore
+\begin{equation*}
+  T(t)=\sum_{k\ge0}(2k+1)\cos\big(t\sqrt{k(k+1)}\big),\qquad \singsupp T=2\pi\Z,
+\end{equation*}
+and near each $2\pi m$ the leading singularity is that of $2\Sigma'$, where
+$\Sigma(2\pi m+s)=(-1)^m\Sigma(s)$ and $\Sigma=\frac1{2\sin(t/2)}$ off $2\pi\Z$. (At $t=0$, $2\Sigma'$ agrees
+with \cref{wave:thm:trace}: $\widehat{\psi T}(\lambda)\sim2\pi\psi(0)|\lambda|$, the coefficient
+$\frac{n\omega_n}{2(2\pi)^{n-1}}\vol(X)$ being $2\pi$.) The equally spaced singularities, all of the
+strength of the singularity at $t=0$, reflect the clustering of the spectrum responsible for the large
+jumps of $N$.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{wave:ex:fn}}
+Idea: $f_n$ is the inverse Fourier transform of a homogeneous function; for $n$ even reduce to the
+transform of $|r|$. For the last part, compare Fourier transforms on rays.
+
+\emph{Homogeneity.} By definition $\pair{f_n}{\phi}=\frac1{2\pi}\int_\R|r|^{n-1}\hat\phi(-r)\,dr$ for $\phi\in\cS(\R)$.
+For $t>0$, $\phi_t(s)=\phi(s/t)$ has $\hat\phi_t(r)=t\hat\phi(tr)$, so
+$\pair{f_n}{\phi_t}=\frac t{2\pi}\int|r|^{n-1}\hat\phi(-tr)\,dr=t^{1-n}\pair{f_n}{\phi}$. This is homogeneity of
+degree $-n$ (on $\R$ a function $u$ homogeneous of degree $\mu$ satisfies
+$\int u(s)\phi(s/t)\,ds=t^{\mu+1}\int u\phi$).
+
+\emph{$n$ odd.} Then $|r|^{n-1}=r^{n-1}$, and since $\frac1{2\pi}\int e^{isr}dr=\delta$ and
+$D_se^{isr}=re^{isr}$, $f_n=D_s^{n-1}\delta$.
+
+\emph{$n$ even.} Let $\cF u(\xi)=\int e^{-ix\xi}u(x)\,dx$. From $\cF(\mathrm{pv}\frac1x)=-i\pi\sgn\xi$ and
+$\cF\cF u(x)=2\pi u(-x)$ we get $\cF(\sgn)=-2i\,\mathrm{pv}\frac1\xi$ and hence
+$\frac1{2\pi}\int e^{isr}\sgn r\,dr=\frac i\pi\mathrm{pv}\frac1s$. Since $|r|=r\sgn r$,
+\begin{equation*}
+  f_2=D_s\Big(\frac i\pi\mathrm{pv}\frac1s\Big)=\frac1\pi\pa_s\,\mathrm{pv}\frac1s=-\frac1{\pi s^2}\quad(s\ne0),
+\end{equation*}
+and as $|r|^{n-1}=r^{n-2}|r|$, $f_n=D_s^{n-2}f_2$. With $\pa_s^js^{-2}=(-1)^j(j+1)!\,s^{-2-j}$,
+\begin{equation*}
+  f_n(s)=-\frac1\pi(-i)^{n-2}(-1)^{n-2}(n-1)!\,s^{-n}=c_ns^{-n},\qquad
+  c_n=\frac{(-1)^{n/2}(n-1)!}{\pi}\neq0\qquad(s\ne0).
+\end{equation*}
+(For instance $c_2=-1/\pi$, $c_4=6/\pi$; we checked these values numerically by pairing with
+$s^ne^{-s^2}$.) In particular $\supp f_n=\R$ for $n$ even.
+
+\emph{$n$ odd: a decomposition into hyperplane distributions.} By \cref{wave:prop:radon},
+$\delta=\int_{\Sphere^{n-1}}g_\omega(x\cdot\omega)\,d\omega$ with $g_\omega=\frac{1}{2(2\pi)^{n-1}}f_n=\frac{1}{2(2\pi)^{n-1}}D_s^{n-1}\delta$,
+which is supported at $0$; so each $g_\omega(x\cdot\omega)$ is supported in the hyperplane $\{x\cdot\omega=0\}$.
+
+\emph{$n$ even: no such decomposition.} For $n$ even the plane waves $f_n(x\cdot\omega)$ of
+\cref{wave:prop:radon} equal $c_n(x\cdot\omega)^{-n}\ne0$ off the hyperplanes, so that decomposition does not
+have this property; we show that no other does. Suppose
+$\delta=\int_{\Sphere^{n-1}}g_\omega(x\cdot\omega)\,d\omega$ with $\supp g_\omega\subset\{0\}$, i.e.\
+$g_\omega=\sum_{j\le J}a_j(\omega)\delta^{(j)}$ with $a_j\in L^1(\Sphere^{n-1})$ (every distribution supported at $0$
+has this form; integrability is what makes the superposition a distribution). For $\phi\in\cS(\R^n)$ and
+$\mathcal R_\omega\phi$ as in the proof of \cref{wave:prop:radon}, $\pair{\delta^{(j)}(x\cdot\omega)}{\phi}=(-1)^j(\mathcal R_\omega\phi)^{(j)}(0)
+=\frac1{2\pi}\int(-ir)^j\hat\phi(r\omega)\,dr$. So with the polynomial $p(\omega,r)=\sum_ja_j(\omega)(-ir)^j$,
+\begin{equation*}
+  \phi(0)=\frac1{2\pi}\int_{\Sphere^{n-1}}\int_\R p(\omega,r)\hat\phi(r\omega)\,dr\,d\omega
+  =\frac1{2\pi}\int_{\Sphere^{n-1}}\int_0^\infty Q(\omega,r)\hat\phi(r\omega)\,dr\,d\omega,
+\end{equation*}
+$Q(\omega,r)=p(\omega,r)+p(-\omega,-r)$ (substitute $(\omega,r)\mapsto(-\omega,-r)$ on $r<0$). On the other hand
+$\phi(0)=(2\pi)^{-n}\int_{\Sphere^{n-1}}\int_0^\infty r^{n-1}\hat\phi(r\omega)\,dr\,d\omega$. As $\hat\phi$ ranges over all of
+$\CIc(\R^n\setminus0)$, the locally integrable function $\frac1{2\pi}Q(\omega,r)-(2\pi)^{-n}r^{n-1}$ on
+$\Sphere^{n-1}\times(0,\infty)$ vanishes almost everywhere. Hence for $\omega$ in a set $\Omega_0$ of full measure,
+which we may assume symmetric ($\Omega_0=-\Omega_0$), the polynomial $Q(\omega,\cdot)$ equals $(2\pi)^{1-n}r^{n-1}$
+for a.e.\ $r>0$, hence for all $r$. But $Q(-\omega,r)=Q(\omega,-r)$, so for $\omega\in\Omega_0$,
+$(2\pi)^{1-n}r^{n-1}=Q(-\omega,r)=Q(\omega,-r)=(2\pi)^{1-n}(-r)^{n-1}=-(2\pi)^{1-n}r^{n-1}$ since $n-1$ is odd,
+a contradiction. (For $n$ odd the same computation is consistent, $Q$ being even in $(\omega,r)$.) So for $n$
+even $\delta$ is not a superposition of distributions supported on the hyperplanes $\{x\cdot\omega=0\}$. It is,
+however, a superposition of distributions $f_n(s)\delta(x\cdot\omega-s)$ supported on \emph{all} hyperplanes
+$\{x\cdot\omega=s\}$, since $f_n(x\cdot\omega)=\int f_n(s)\delta(x\cdot\omega-s)\,ds$; this is why the statement of the
+exercise refers to the hyperplanes through $0$. (This is the distributional form of Huygens' principle: in
+odd dimensions $\ge3$ the wave kernel is supported on the light cone, in even dimensions it is not.)

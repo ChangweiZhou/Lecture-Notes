@@ -1569,13 +1569,16 @@ symbol estimates.
 \begin{exercise}\label{conormal:ex:blowup}
   Let $W$ be a real vector space of dimension $n$.  Define the sphere of $W$ as
   $\Sphere W=(W\setminus0)/\R^+$.  Show that $[W,\{0\}]=(W\setminus0)\sqcup\Sphere W$
-  has a unique structure of manifold with boundary, diffeomorphic to
-  $[0,\infty)\times\Sphere^{n-1}$, such that the blow-down map $\beta:[W,\{0\}]\to
+  has a unique structure of manifold with boundary for which, for one (hence every)
+  linear isomorphism $L:\R^n\to W$, the polar coordinate map $(r,\omega)\mapsto
+  L(r\omega)$ for $r>0$, $(0,\omega)\mapsto[L\omega]$, is a diffeomorphism
+  $[0,\infty)\times\Sphere^{n-1}\to[W,\{0\}]$; show that the blow-down map $\beta:[W,\{0\}]\to
   W$ (the identity on $W\setminus0$, mapping $\Sphere W$ to $0$) is smooth and the
   action of $\GL(W)$ lifts to a smooth action (use \cref{conormal:lem:blowup}).
+  (These two properties alone do not determine the structure.)
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}\label{conormal:ex:valued}
   Let $U$ be a finite-dimensional complex vector space and set
   $\Ic{m}(W,\{0\};U)=\Ic{m}(W,\{0\})\otimes U$.  Show that the Fourier transform
   gives an isomorphism $\Ic{m}(W,\{0\};U)\to S^{m-\frac n4}(W';U\otimes\Omega W')$
@@ -1585,20 +1588,21 @@ symbol estimates.
   $\Ic{m}(W,\{0\};\Omega W)\to\C$.
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}\label{conormal:ex:homog}
   Let $u\in\CmI(\R^n)$ be smooth outside $0$ and homogeneous modulo $\CI$ of
-  degree $h$: $u(tz)=t^hu(z)+F(t,z)$ for $t>0$, $z\ne0$, with
+  degree $h$: $u(tz)=t^hu(z)+F(t,z)$ for $t>0$, as distributions in $z\in\R^n$
+  ($u(t\,\cdot)$ being the pull-back of $u$ by the dilation), with
   $F\in\CI((0,\infty)\times\R^n)$.  Show that $\chi u$ is a classical conormal
   distribution at $0$ for $\chi\in\CIc(\R^n)$, and determine its order.
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}\label{conormal:ex:supported}
   Show that every $u\in\Ic{m}(X,Y)$ with $\supp u\subset Y$ is of the form $Pu_\mu$
   for some $P\in\Diff{q}(X)$, with $u_\mu$ as in \cref{conormal:ex:delta}, at
   least locally.  Which orders $m$ can occur?
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}\label{conormal:ex:WF-exact}
   Let $u\in\Ic{m}(X,Y;\Omegah)$ be classical, with principal symbol nonvanishing
   on $N^*Y\setminus0$.  Show that $\WF(u)=N^*Y\setminus0$, and that if
   $A\in\Psido{0}(\R^n)$ satisfies $Au\in\CI$ then the principal symbol of $A$

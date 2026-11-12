@@ -1,1 +1,579 @@
-% solutions for 13-product (in progress)
+\providecommand{\RelC}[2]{{}^{#1}\overline{#2}}
+\providecommand{\Psipt}[1]{\Psi^{#1}_{\phi\text{-}\mathrm{pt}}}
+\providecommand{\Dfm}{\operatorname{Dfm}}
+\providecommand{\fib}{\mathrm{fib}}
+\providecommand{\Sigmapt}[1]{\Sigma^{#1}_{\phi}}
+
+\section{Solutions for \cref{ch:product}: Fibrations and product-type operators}\label{solutions:ch:product}
+
+Throughout, $\phi:M\to B$ is a fibration with typical fibre $Z$, $f=\dim Z$,
+$b=\dim B$, and in the sections on the relative compactification $W=U\oplus V$,
+$w=(\zeta,\eta)$, $q=\eta/\ang\zeta$, $\dim U=k$, $\dim V=l$, as in the chapter.
+
+\subsection*{\Cref{product:ex:embedding}}
+\emph{Idea: take the product of an embedding of $M$ into Euclidean space with
+$\phi$ itself.}
+
+By Whitney's theorem (for a compact manifold the elementary version suffices:
+finitely many charts and bump functions give an injective immersion into some
+$\R^N$) there is an embedding $\iota:M\to\R^N$. Let $p\in\Sphere^N$ and let
+$s:\R^N\to\Sphere^N\setminus\{p\}$ be the inverse of stereographic projection from
+$p$; it is a diffeomorphism. Put
+\begin{equation*}
+e=(s\circ\iota,\phi):M\longrightarrow(\Sphere^N\setminus\{p\})\times B
+\subset\Sphere^N\times B .
+\end{equation*}
+Clearly $\pi_B\circ e=\phi$. The map $e$ is injective, since already its first
+component is. It is an immersion: $de_m(v)=(d(s\circ\iota)_m v,d\phi_m v)$, and
+$d(s\circ\iota)_m=ds_{\iota(m)}\circ d\iota_m$ is injective. An injective
+immersion of a compact manifold is an embedding: $e$ is a continuous injection of
+a compact space into a Hausdorff space, hence a homeomorphism onto its (compact,
+hence closed) image. This proves the claim.
+
+Composing with $s^{-1}\times\Id_B$, the image $e(M)$ becomes a closed submanifold
+of $\R^N\times B$, and the fibre over $b$ is $\iota(Z_b)\times\{b\}$, a submanifold
+of $\R^N\times\{b\}$; this is the sense in which $M$ becomes a fibration over $B$
+by submanifolds of $\R^N$ (compare \cref{families:lem:embedding}).
+
+\subsection*{\Cref{product:ex:intersection}}
+\emph{Idea: the kernel is smooth off the diagonal and supported in a submanifold of
+positive codimension, hence supported on the diagonal; a pseudodifferential
+operator with such a kernel is differential, and commuting with functions on the
+base removes all derivatives in the base directions.}
+
+Recall the conventions: $\Psido m(M;E,F)$ is defined with general (not necessarily
+classical) symbols, \cref{manifolds:def:psido}, and a \emph{fibrewise differential
+operator} of order $k$ is a $P\in\Diff k(M;E,F)$ which in every fibred chart
+$(z,y)$, $\phi(z,y)=y$, and local trivializations has the form
+$P=\sum_{|\alpha|\le k}p_\alpha(z,y)D_z^\alpha$.
+
+\emph{Step 1: the kernel lives on the diagonal.} Let $A$ lie in the intersection.
+As an element of $\Psido m(M/B;E,F)$ its kernel is supported in $M^2_\phi$ (see the
+remark after \cref{product:lem:local-families}); as an element of $\Psido m(M;E,F)$
+its kernel $K_A$ is smooth on $M^2\setminus\Diag_M$ (\cref{manifolds:thm:local}).
+Let $(p,p')\notin\Diag_M$ and let $O$ be a neighbourhood of $(p,p')$ disjoint from
+$\Diag_M$, on which $K_A$ is a smooth function. This function vanishes on the open
+set $O\setminus M^2_\phi$, which is dense in $O$ because $M^2_\phi$ is a closed
+submanifold of codimension $b>0$ and so has empty interior. By continuity
+$K_A=0$ on $O$. Hence $\supp K_A\subset\Diag_M$.
+
+\emph{Step 2: $A$ is a differential operator of order at most $m$.} Let $\Omega$ be a
+coordinate chart over which $E$, $F$ are trivial, $\chi,\chi'\in\CIc(\Omega)$ with
+$\chi'=1$ near $\supp\chi$. Since $\supp K_A\subset\Diag$, the kernel of
+$\chi A(1-\chi')$ vanishes, so $\chi A=\chi A\chi'=\Op(a)$ with
+$a\in S^m$ (\cref{manifolds:thm:local}), where
+$\check a(x,\nu):=\chi(x)K_A(x,x-\nu)\chi'(x-\nu)$ is the inverse Fourier transform
+of $a$ in $\xi$. This distribution is supported in $\{\nu=0\}$. For fixed $x$, the
+tempered distribution $\check a(x,\cdot)$ is supported in $\{0\}$ too: if
+$\varphi\in\CIc(\R^n\setminus0)$ then $g(x)=\int a(x,\xi)\check\varphi(\xi)\,d\xi$ is
+continuous and $\int g\psi\,dx=\pair{\check a}{\psi\otimes\varphi}=0$ for all
+$\psi\in\CIc$, so $g\equiv0$. A distribution supported at the origin is a finite
+combination of derivatives of $\delta$, so $a(x,\cdot)$ is a polynomial; since
+$|a(x,\xi)|\le C\ang\xi^m$ its degree is at most $m$ (and it vanishes if $m<0$).
+Thus $a(x,\xi)=\sum_{|\alpha|\le m}a_\alpha(x)\xi^\alpha$ with
+$a_\alpha=\pa_\xi^\alpha a(\cdot,0)/\alpha!$ smooth, and $\chi A$ is a differential
+operator of order $\le m$. Summing over a partition of unity, $A\in\Diff{\lfloor
+m\rfloor}(M;E,F)$, and $A=0$ if $m<0$.
+
+\emph{Step 3: no base derivatives.} By \cref{product:prop:families}(1),
+$A(\phi^*\chi\,u)=\phi^*\chi\,Au$ for $\chi\in\CI(B)$. In fibred coordinates near a
+point over $y_0\in B$ write $A=\sum_{\alpha,\beta}a_{\alpha\beta}(z,y)D_z^\alpha
+D_y^\beta$, and choose $\chi\in\CIc(B)$ equal to $y_j$ near $y_0$. Near the fibre
+over $y_0$,
+\begin{equation*}
+0=[A,y_j]=\sum_{\alpha,\beta}a_{\alpha\beta}[D_y^\beta,y_j]D_z^\alpha
+=-i\sum_{\alpha,\beta}\beta_j\,a_{\alpha\beta}\,D_z^\alpha D_y^{\beta-e_j}.
+\end{equation*}
+A differential operator determines its coefficients (apply it to
+$e^{i(z\cdot\zeta+y\cdot\eta)}$), so $\beta_ja_{\alpha\beta}=0$ for all $j$, i.e.\
+$a_{\alpha\beta}=0$ for $\beta\neq0$. Hence $A$ is a fibrewise differential operator
+of order at most $m$.
+
+\emph{Step 4: the converse.} A fibrewise differential operator $P$ of order $k\le m$
+lies in $\Diff k(M)\subset\Psido k(M)\subset\Psido m(M)$
+(\cref{manifolds:eq:diffop} and \ref{manifolds:E1}). Over a trivializing ball $U$
+it is the family $y\mapsto P_y=\sum p_\alpha(\cdot,y)D_z^\alpha\in\Diff k(Z;E_0,F_0)$,
+which is smooth into $\Psido k(Z;E_0,F_0)$ because the coefficients depend smoothly
+on $y$ in $\CI$ and the map from coefficients to operators is continuous and
+linear; by \cref{product:lem:local-families}, $P\in\Psido k(M/B)\subset\Psido
+m(M/B)$. So the intersection is exactly the space of fibrewise differential
+operators of order at most $m$, and it is $\{0\}$ for $m<0$.
+
+\emph{Remark.} If one works with classical operators throughout, the same proof
+applies; the only change is that a polynomial of exact degree $k$ is a classical
+symbol of order $m$ if and only if $m-k\in\N_0$ (comparing powers of $t$ in
+$a(x,t\xi)$ with the homogeneous expansion). The intersection of the classical
+spaces then consists of the fibrewise differential operators of the orders $k$
+with $m-k\in\N_0$, and it is $\{0\}$ for $m\notin\N_0$.
+
+\subsection*{\Cref{product:ex:degenerate}}
+\emph{Idea: the radial compactification of the zero vector space is a point, and
+one of the two factors in \cref{product:def:relative} collapses.}
+
+By the half-sphere description, $\RC{\{0\}}=\{t\ge0,\ t^2=1\}=\{1\}$ is a point, with
+empty boundary, and the defining function $\ang0^{-1}=1$. With this convention
+\cref{product:def:relative} makes sense also when $k=0$ or $l=0$.
+
+\emph{$V=\{0\}$.} Then $U=W$, $\eta$ is absent, $\iota_V(\zeta)=\zeta$ and
+$\RelC{\{0\}}W=\RC W\times\{\text{pt}\}=\RC W$. The front face
+$H_V=\RC U\times\pa\RC{\{0\}}$ is empty, $H_W=\pa\RC W$, $\rho_V=\ang\zeta/\ang\zeta=1$
+and $\rho_W=\ang\zeta^{-1}$, the usual boundary defining function of $\RC W$. Hence
+\begin{equation*}
+S^{M,M'}_{\mathrm{ph}}(W,\{0\})=\{\rho_W^{-M'}b;\ b\in\CI(\RC W)\}=\Symph{M'}(W),
+\end{equation*}
+independently of $M$. Likewise the estimates \eqref{product:eq:symbol-est} become
+$|\pa_\zeta^\alpha a|\le C\ang\zeta^{M'-|\alpha|}$, so $S^{M,M'}(W,\{0\})=S^{M'}(W)$.
+
+\emph{$V=W$.} Then $U=\{0\}$, $\zeta$ is absent, $\ang\zeta=1$, $\iota_V(\eta)=\eta$
+and $\RelC WW=\{\text{pt}\}\times\RC W=\RC W$. Now $H_W=\pa\RC{\{0\}}\times\RC V$ is
+empty, $H_V=\pa\RC W$, $\rho_W=1$ and $\rho_V=\ang\eta^{-1}$. Hence
+$S^{M,M'}_{\mathrm{ph}}(W,W)=\rho_V^{-M}\CI(\RC W)=\Symph M(W)$, and the estimates
+become $|\pa_\eta^\beta a|\le C\ang\eta^{M-|\beta|}$, so $S^{M,M'}(W,W)=S^M(W)$,
+independently of $M'$.
+
+Both answers are consistent with \cref{product:prop:blow-down} and
+\cref{product:ex:blow-up}: in the first case $SV=\emptyset$, in the second $SV=\pa\RC
+W$ is a whole boundary hypersurface, and in neither case does blowing up $SV$ change
+$\RC W$. They also agree with \cref{product:prop:symbols}(v),(vi).
+
+\subsection*{\Cref{product:ex:vector-fields}}
+\emph{Idea: compute in the coordinates $(\zeta,q)$ of the product
+$\RC U\times\RC V$, using that $\pa_\zeta$, $\zeta\pa_\zeta$ are smooth and tangent
+to the boundary on $\RC U$.}
+
+\emph{Step 1: vector fields on a radial compactification.} Near $\pa\RC U$ use the
+coordinates $x=1/|\zeta|$ and $\omega=\zeta/|\zeta|\in SU$, so $\zeta=\omega/x$.
+Since $\pa_{\zeta_k}x=-x^2\omega_k$ and $\pa_{\zeta_k}\omega_l=x(\delta_{kl}-\omega_k\omega_l)$,
+\begin{equation*}
+\pa_{\zeta_k}=-x^2\omega_k\pa_x+x\,T_k,\qquad
+\zeta_j\pa_{\zeta_k}=-x\,\omega_j\omega_k\pa_x+\omega_jT_k,
+\end{equation*}
+where $T_k=\sum_l(\delta_{kl}-\omega_k\omega_l)\pa_{\omega_l}$ is the smooth vector
+field on $SU$ given by the tangential projection of $e_k$. Both fields are smooth up
+to $x=0$ and their $\pa_x$-components vanish there, so they are smooth on $\RC U$
+and tangent to $\pa\RC U$. Also $\ang\zeta^{-1}=x(1+x^2)^{-1/2}$ and
+$\zeta_j/\ang\zeta=\omega_j(1+x^2)^{-1/2}$ are smooth on $\RC U$. The same holds on
+$\RC V$ for $\pa_{q_i}$, $q_i\pa_{q_{i'}}$, $\ang q^{-1}$, $q_i/\ang q$. On the
+product $\RC U\times\RC V$, a field from one factor is tangent to the boundary
+hypersurfaces coming from the other factor, so all the fields
+$\pa_{\zeta_j}|_q$, $\zeta_j\pa_{\zeta_{j'}}|_q$, $\pa_{q_i}$, $q_i\pa_{q_{i'}}$ are
+smooth on $\RelC VW$ and tangent to $H_W$ and $H_V$; so is any combination of them
+with coefficients in $\CI(\RelC VW)$.
+
+\emph{Step 2: change of variables.} Since $q=\eta/\ang\zeta$ and
+$\pa_{\zeta_j}(\ang\zeta^{-1})=-\zeta_j\ang\zeta^{-3}$, the chain rule gives, with
+$\pa_{\zeta_j}$ on the left taken at fixed $\eta$ and on the right at fixed $q$,
+\begin{equation*}
+\pa_{\zeta_j}=\pa_{\zeta_j}-\frac{\zeta_j}{\ang\zeta^2}\sum_iq_i\pa_{q_i},\qquad
+\pa_{\eta_i}=\frac1{\ang\zeta}\pa_{q_i}.
+\end{equation*}
+Therefore
+\begin{align*}
+\pa_{\eta_i}&=\ang\zeta^{-1}\pa_{q_i},&
+\zeta_j\pa_{\eta_i}&=\frac{\zeta_j}{\ang\zeta}\pa_{q_i},&
+\eta_i\pa_{\eta_{i'}}&=q_i\pa_{q_{i'}},\\
+\pa_{\zeta_j}&=\pa_{\zeta_j}-\frac{1}{\ang\zeta}\frac{\zeta_j}{\ang\zeta}
+\sum_iq_i\pa_{q_i},&
+\zeta_j\pa_{\zeta_{j'}}&=\zeta_j\pa_{\zeta_{j'}}-\frac{\zeta_j}{\ang\zeta}
+\frac{\zeta_{j'}}{\ang\zeta}\sum_iq_i\pa_{q_i}.
+\end{align*}
+By Step 1 every right-hand side is smooth on $\RelC VW$ and tangent to its boundary.
+
+\emph{Step 3: $\eta_i\pa_{\zeta_j}$ does not lift.} The function $\rho_W=\ang\zeta^{-1}$
+is smooth on $\RelC VW$, but
+\begin{equation*}
+\eta_i\pa_{\zeta_j}\rho_W=-\frac{\eta_i\zeta_j}{\ang\zeta^3}=-q_i\,\frac{\zeta_j}{\ang\zeta^{2}} .
+\end{equation*}
+Fix $\zeta$ with $\zeta_j\neq0$ and let $q=te_i$, $t\to\infty$; this sequence
+converges to a point of the interior of $H_V$, and the right side is unbounded. A
+smooth vector field on the compact manifold $\RelC VW$ maps smooth functions to
+bounded functions, so $\eta_i\pa_{\zeta_j}$ does not extend smoothly (here
+$k,l>0$).
+
+\emph{Relation with \cref{product:prop:relative-invariance}.} The affine group of
+$W$ preserving the direction $V$ is $\{w\mapsto Lw+c;\ L\in\GL(W,V),\ c\in W\}$. Its
+Lie algebra consists of the vector fields $w\mapsto Xw+c$ with $X(V)\subset V$, i.e.\
+$X(\zeta,\eta)=(A\zeta,C\zeta+D\eta)$. As vector fields on $W$ these are
+\begin{equation*}
+\sum_jc_j\pa_{\zeta_j}+\sum_ic'_i\pa_{\eta_i}+\sum_{j,j'}A_{jj'}\zeta_{j'}\pa_{\zeta_j}
++\sum_{i,j}C_{ij}\zeta_j\pa_{\eta_i}+\sum_{i,i'}D_{ii'}\eta_{i'}\pa_{\eta_i},
+\end{equation*}
+the span of the first list. The field $\eta_i\pa_{\zeta_j}$ generates the linear
+flow $(\zeta,\eta)\mapsto(\zeta+t\eta_ie_j,\eta)$, which does not preserve $V$.
+This explains the result: by \cref{product:prop:relative-invariance} each
+one-parameter subgroup $\Phi_t$ of the affine group preserving $V$ acts smoothly on
+$\RelC VW$, jointly in $t$, preserving $H_W$ and $H_V$; the generator
+$\frac{d}{dt}\big|_{t=0}\Phi_t^*$ is then a smooth vector field tangent to both
+faces, which gives a second proof of Step 2.
+
+\subsection*{\Cref{product:ex:blow-up}}
+\emph{Idea: in the coordinates of the exercise, the polar coordinates around $SV$
+are exactly the half-sphere coordinates of $\RC U$ times the boundary coordinates of
+$\RC V$.}
+
+Near $SV$ the functions $x=1/|\eta|$, $v=\zeta/|\eta|$, $\theta=\eta/|\eta|$ are
+coordinates on $\RC W$ in which $\RC W=\{x\ge0\}$ and $SV=\{x=0,v=0\}$ (they are
+smooth functions of $1/|w|$ and $w/|w|$ where the $V$-component of $w/|w|$ is
+non-zero, and conversely). Now compute on $W$, where $\eta\ne0$:
+\begin{equation*}
+R=(x^2+|v|^2)^{1/2}=\frac{\ang\zeta}{|\eta|}=\frac1{|q|},\qquad
+\frac{(x,v)}{R}=\Big(\frac1{\ang\zeta},\frac\zeta{\ang\zeta}\Big),\qquad
+\theta=\frac{q}{|q|}.
+\end{equation*}
+The middle entry is the image of $\zeta$ under the half-sphere embedding
+$U\to\RC U=\{(t,u');t\ge0,\ t^2+|u'|^2=1\}=\Sphere^k_+$, which extends to the identity
+of $\RC U$; and $(1/|q|,q/|q|)$ are the boundary coordinates of $\RC V$, which
+identify the collar $\{|q|>1\}\cup SV$ of $\pa\RC V$ diffeomorphically with
+$[0,1)\times SV$. Hence the map of the exercise is the product
+\begin{equation*}
+\RC U\times\big(\{|q|>1\}\cup SV\big)\longrightarrow\Sphere^k_+\times[0,1)\times SV,
+\qquad (\zeta,q)\longmapsto\Big(\frac{(1,\zeta)}{\ang\zeta},\frac1{|q|},\frac q{|q|}\Big),
+\end{equation*}
+of two diffeomorphisms, so it is a diffeomorphism of a neighbourhood of $H_V$ onto a
+neighbourhood of $\{R=0\}\times\Sphere^k_+\times\Sphere^{l-1}$ (with
+$SV\cong\Sphere^{l-1}$), carrying $H_V=\RC U\times SV$ to $\{R=0\}$. In the
+coordinates of \cref{product:prop:relative-coords}(ii) it reads
+$(\zeta,1/|\eta|,\theta)\mapsto(\ang\zeta/|\eta|,(1,\zeta)/\ang\zeta,\theta)$, and in
+those of (iii), with $r=1/|\zeta|$, $s=|\zeta|/|\eta|$, $\omega=\zeta/|\zeta|$, it reads
+$R=s(1+r^2)^{1/2}$, $(x,v)/R=(r,\omega)(1+r^2)^{-1/2}$; both are visibly smooth with
+smooth inverses.
+
+Moreover, composing with the polar-coordinate map $\beta(R,(s',\nu),\theta)=
+(x,v,\theta)=(Rs',R\nu,\theta)$ gives $x=1/|\eta|$, $v=\zeta/|\eta|$, i.e.\ the
+blow-down map $\varpi$ of \cref{product:prop:blow-down}. Away from $H_V$, $\varpi$ is
+a bijection of $\RelC VW\setminus H_V$ onto $\RC W\setminus SV$
+(\cref{product:prop:blow-down}(i)) and a local diffeomorphism: in the interior it is
+the identity, and near interior points of $H_W$ the functions $1/|\zeta|$,
+$\zeta/|\zeta|$, $\eta/|\zeta|$ are coordinates both on $\RelC VW$
+(\cref{product:prop:relative-coords}(i)) and on $\RC W$ near $SW\setminus SV$ (by
+the argument above with the roles of $\zeta$ and $\eta$ exchanged), and $\varpi$ is
+the identity in them.
+
+By definition, the blow-up $[\RC W;SV]$ is obtained from $\RC W$ by replacing $SV$
+with its inward-pointing spherical normal bundle, the smooth structure near the new
+face $\{R=0\}$ (the front face) being given by polar coordinates
+$(R,(x,v)/R,\theta)$ around $\{x=v=0\}$, and the blow-down map being $\beta$ there
+and the identity elsewhere. We have shown that $\varpi$ is, near $H_V$, $\beta$
+composed with a diffeomorphism onto a neighbourhood of the front face, and is a
+diffeomorphism $\RelC VW\setminus H_V\to\RC W\setminus SV$. Hence $\varpi$ lifts to
+a diffeomorphism $\RelC VW\cong[\RC W;SV]$ commuting with the blow-down maps, under
+which $H_V$ is the front face and $H_W$ (where $s'=1/\ang\zeta=0$) is the lift of
+$\pa\RC W$.
+
+\subsection*{\Cref{product:ex:faces}}
+\emph{Idea: read off the action of $\GL(W,V)$ on each face from
+\eqref{product:eq:lift-L}; on $H_V$ it only involves the induced maps on $W/V$ and
+$V$, on $H_W$ the off-diagonal part acts by translations in the fibres.}
+
+\emph{Naturality.} By \cref{product:prop:relative-invariance} any two choices of the
+complement $U$ and of the norms produce compactifications related by the extension
+of an element $L\in\GL(W,V)$, $L(\zeta,\eta)=(A\zeta,C\zeta+D\eta)$, lifted as in
+\eqref{product:eq:lift-L}. Here $A$ is the map induced by $L$ on $W/V\cong U$ and
+$D=L|_V$, while $C$ depends on the splitting. An identification of a face with a space
+built from $W/V$ and $V$ is natural if it intertwines the lifted action of every
+$L\in\GL(W,V)$ with the action of $(A,D)$ on that space.
+
+\emph{The front face.} Points of $H_V$ are $(\zeta,\theta)$ with $\zeta\in\RC U$ and
+$\theta=\lim q/|q|\in SV$. Put $q=r\theta$ in \eqref{product:eq:lift-L} and let
+$r\to\infty$: the second component $g(\zeta)(rD\theta+C\zeta/\ang\zeta)$, with
+$g>0$, has direction tending to $D\theta/|D\theta|$, uniformly for $\zeta$ in $\RC U$,
+since $C\zeta/\ang\zeta$ is bounded. Thus the lifted action on $H_V$ is
+\begin{equation*}
+(\zeta,\theta)\longmapsto\big(A\zeta,\ D\theta/|D\theta|\big),
+\end{equation*}
+the product of the action of $A$ on $\overline{W/V}$ (\cref{product:lem:affine}) and
+of $D$ on $SV=(V\setminus0)/\R_+$. It does not involve $C$. Hence the identification
+$H_V=\overline{W/V}\times SV$ of \eqref{product:eq:HV} is equivariant, i.e.\ natural.
+
+\emph{The main face.} Points of $H_W$ are $(\omega,q)$, $\omega=\lim\zeta/|\zeta|\in SU$,
+$q\in\RC V$. Put $\zeta=r\omega$ and let $r\to\infty$: $A\zeta/|A\zeta|\to
+A\omega/|A\omega|$, $g(r\omega)\to|A\omega|^{-1}$ and $C\zeta/\ang\zeta\to C\omega$.
+So the action on $H_W$ is
+\begin{equation*}
+(\omega,q)\longmapsto\big(A\omega/|A\omega|,\ |A\omega|^{-1}(Dq+C\omega)\big).
+\end{equation*}
+The projection $(\omega,q)\mapsto\omega$ intertwines this with the action of $A$ on
+$S(W/V)$, so the fibration $H_W\to S(W/V)$ of \eqref{product:eq:HW} is natural, and
+on the fibres $L$ acts by invertible affine maps of $V$ (extended to $\RC V$). But
+there is no natural product structure: suppose $F:H_W\to S(W/V)\times\RC V$ were a
+diffeomorphism commuting with the projections to $S(W/V)$ and intertwining the action
+with that of $(A,D)$. For $L=\Id+C\circ\mathrm{pr}_U$ (so $A=\Id$, $D=\Id$) the
+target action is trivial, so $F(\omega,q+C\omega)=F(\omega,q)$ for all
+$C\in\Hom(U,V)$; since $C\omega$ can be any vector of $V$, $F$ would be constant on
+the interior of each fibre, contradicting injectivity ($l>0$). So $H_W$ is only
+naturally a fibration, whose fibre over $\omega$ is the radial compactification of
+the affine space $\{w\in W;\ [w]=\omega\}$ modelled on $V$ (after a choice of norm on
+$W/V$ to normalize $\omega$).
+
+\emph{The nested pair.} Let $Z\subset Y\subset X$, $p\in Z$, $W=N^*_pZ$, $V=N^*_pY$.
+Restriction of covectors $T^*_pX\to T^*_pY$ maps $N^*_pZ$, the annihilator of
+$T_pZ$, onto the annihilator of $T_pZ$ in $T^*_pY$, with kernel $N^*_pY$; so
+$W/V=N^*_p(Z\subset Y)$, the conormal space of $Z$ in $Y$. By
+\cref{product:ex:blow-up}, $\RelC VW=[\RC W;SV]$ and $H_W=\{s'=0\}$. In the
+coordinates used there, $H_W$ near the front face consists of the points
+$(R,(0,\nu),\theta)$ with $|\nu|=1$, and $SW$ near $SV$ has coordinates $(v,\theta)$
+with $SV=\{v=0\}$; on $H_W$, $\varpi$ gives $v=R\nu$, so $(R,\nu,\theta)=(|v|,v/|v|,
+\theta)$ are exactly the polar coordinates of the blow-up $[SW;SV]$. Away from the
+corner $\varpi|_{H_W}$ is a diffeomorphism onto $SW\setminus SV$. Hence
+$H_W=[SW;SV]=[SN^*_pZ;SN^*_pY]$ with $\varpi|_{H_W}$ as blow-down map; the
+projection to $S(W/V)$ is, near the corner, $\nu=v/|v|=\zeta/|\zeta|$. All these
+identifications commute with the action of $\GL(W,V)$ (the blow-up of $SV$ is
+functorial for diffeomorphisms preserving $SV$, and $\varpi$ is equivariant), so by
+\cref{product:rem:relative-bundle} they hold fibrewise over $Z$: $H_W$ is naturally
+$[SN^*Z;S(N^*Y|_Z)]$, fibred over the sphere bundle of $N^*Z/N^*Y|_Z$, the conormal
+sphere bundle of $Z$ in $Y$.
+
+\subsection*{\Cref{product:ex:base-lift}}
+\emph{Idea: near interior points of $H_W$ the weighted function $\rho_W^{M'}a$ is
+smooth in $(\rho_W,q)$ including $q=0$; along the rays $q=\rho_Wv$ its
+$q$-derivatives are $\rho_W^{M'-|\alpha|}\pa^\alpha p(v)$, which stay bounded only if
+$\pa^\alpha p=0$ for $|\alpha|>M'$.}
+
+Write $a=\rho_V^{-M}\rho_W^{-M'}b$ with $b\in\CI(\RelC VW)$. On $\RC U\times V$
+(which contains the interior of $H_W$) $\rho_V=\ang q^{-1}$ is smooth and positive, so
+$G:=\rho_W^{M'}a=\ang q^Mb$ is smooth there. Near $\pa\RC U$ we may use the
+coordinates $(r,\omega)=(\rho_W,\zeta/|\zeta|)$ ($\rho_W$ is a smooth function of
+$1/|\zeta|$ with non-vanishing derivative), together with $q\in V$. Since
+$\eta=\ang\zeta q=q/r$,
+\begin{equation*}
+G(r,\omega,q)=r^{M'}p(q/r),\qquad r>0,
+\end{equation*}
+and $G$ extends smoothly to $[0,r_0)\times SU\times V$. For any multi-index $\alpha$
+and $r>0$, $\pa_q^\alpha G(r,\omega,q)=r^{M'-|\alpha|}(\pa^\alpha p)(q/r)$. Fix
+$v\in\R^b$ and $\omega$, and evaluate at $q=rv$:
+\begin{equation*}
+\pa_q^\alpha G(r,\omega,rv)=r^{M'-|\alpha|}\,\pa^\alpha p(v).
+\end{equation*}
+As $r\to0$, $(r,\omega,rv)\to(0,\omega,0)$, so the left side converges to the finite
+number $\pa^\alpha_qG(0,\omega,0)$. If $|\alpha|>M'$ then $r^{M'-|\alpha|}\to\infty$, so
+$\pa^\alpha p(v)=0$. Hence all derivatives of $p$ of order $>M'$ vanish, and $p$ is a
+polynomial of degree at most $M'$.
+
+\emph{The statement of \cref{product:rem:base-lift}.} Let $M=Z\times B$,
+$P\in\Psido m(B)$, and suppose $\Id_Z\otimes P\in\Psipt{\mu,\mu'}(M)$ for some
+$\mu,\mu'$. Its kernel is $\delta(z-z')K_P(y,y')$.
+
+(a) \emph{Off the diagonal of $B$.} By \cref{product:prop:model-properties}(iii) (or
+\cref{product:prop:local-form}) the kernel of a product-type operator is smooth off
+$M^2_\phi=\{y=y'\}$. If $K_P\neq0$ near some $(y_1,y_2)$, $y_1\neq y_2$, choose
+$\psi\in\CIc$ supported there with $\pair{K_P}\psi\neq0$; integrating the smooth
+kernel against $\psi(y,y')$ would give a smooth function of $(z,z')$, whereas it equals
+$\pair{K_P}\psi\,\delta(z-z')$. So $K_P$ is supported on $\Diag_B$.
+
+(b) \emph{Near the diagonal.} In fibred coordinates $(z,y)$ take
+$\chi=\chi_1(z)\chi_2(y)$, $\chi'=\chi'_1(z)\chi'_2(y)$ with $\chi'_1=1$ near
+$\supp\chi_1$. The kernel of $\chi(\Id\otimes P)\chi'$ is
+$\chi_1(z)\delta(z-z')\chi_2(y)K_P(y,y')\chi'_2(y')$, whose left symbol is
+$a(z,y,\zeta,\eta)=\chi_1(z)p(y,\eta)$, where $p$ is the left symbol of
+$\chi_2P\chi'_2$ in $S^m$ (classical if $P$ is). By \cref{product:prop:local-form},
+$a\in S^{\mu,\mu'}_{\mathrm{ph}}$; restricting to a fixed $(z,y)$ with $\chi_1(z)=1$
+gives $p(y,\cdot)\in S^{\mu,\mu'}_{\mathrm{ph}}(\R^{f+b},\{\zeta=0\})$, so by the first
+part $p(y,\cdot)$ is a polynomial of degree at most $\mu'$, for every $y$. As in
+Step 2 of \cref{product:ex:intersection}, $\chi_2P\chi'_2$ is then a differential
+operator.
+
+By (a) and (b) and a partition of unity, $P$ is a differential operator. Conversely,
+if $P$ is a differential operator of order $k\le m$ then $\Id_Z\otimes P\in\Diff
+k(M)\subset\Psido m(M)\subset\Psipt{m,m}(M)$ by \cref{product:prop:subalgebras}(ii).
+This is the statement of the remark. (Note that (a) alone already excludes
+non-local $P$; (b) shows that even the part of the kernel near the diagonal fails to
+be of product type unless $P$ is differential, which is the point made in the remark.)
+
+\subsection*{\Cref{product:ex:adjoint}}
+\emph{Idea: localize, reduce to fixed reference metrics, compute the principal
+symbol from the amplitude formula for adjoint kernels, and the base symbol from the
+operator-valued left-reduction formula, in which all terms but the first lose base
+order.}
+
+By \cref{product:prop:mapping}, $A^*\in\Psipt{m,m'}(M;F,E)$, so both symbols of
+$A^*$ are defined. The adjoint is taken for Hermitian metrics $h_E$, $h_F$ and a
+positive density $\mu$ on $M$; on $Z_b$ we use the restricted metrics and a fibre
+density $\nu_b$ with $\mu=\nu\otimes\phi^*\mu_B$ for some positive density $\mu_B$ on
+$B$. A different factorization multiplies $\nu_b$ by a positive constant, which does
+not change adjoints on $Z_b$, so the statement is meaningful.
+
+\emph{Step 0: localization.} For $g\in\CI(M)$, multiplication by $g$ lies in
+$\Psido0(M/B)\subset\Psipt{0,0}(M)$ with $\sigma(g)=g$ and $\beta(g)(b,\eta)=g|_{Z_b}$
+(\cref{product:prop:subalgebras}(i)); both symbols are multiplicative
+(\cref{product:thm:composition}). If $\chi,\chi'$ are real, then
+$(\chi A\chi')^*=\chi'A^*\chi$, so
+$\sigma(\chi'A^*\chi)=\chi\chi'\sigma(A^*)$ and $\sigma(\chi A\chi')^*=\chi\chi'
+\sigma(A)^*$, and similarly for $\beta$ with $\chi=\phi^*\chi_B$. Choosing $\chi$,
+$\chi'$ equal to $1$ near a given point (of $M$ for $\sigma$, of $B$ for $\beta$), it
+suffices to prove the identities for $A_0=\chi A\chi'$, with $\chi,\chi'$ supported in
+a fibred chart (for $\sigma$), respectively for $A_0=\phi^*\chi A\phi^*\chi'$ with
+$\chi,\chi'\in\CIc(O)$, $O$ a trivializing coordinate ball in $B$ (for $\beta$).
+
+\emph{Step 1: reference structures.} Over $\phi^{-1}(O)\cong Z\times O$ with
+$E\cong\pi_Z^*E_0$, $F\cong\pi_Z^*F_0$, fix metrics $h_0$ on $E_0$, $F_0$ and a density
+$\nu_0$ on $Z$, and write $h_E(u,v)=h_0(G_Eu,v)$, $h_F(u,v)=h_0(G_Fu,v)$ with $G_E$, $G_F$
+positive and $h_0$-self-adjoint, and $\mu=J\,\nu_0|dy|$, $J>0$. Denoting by $\dagger$
+the adjoint for $h_0$ and $\nu_0|dy|$, for operators with kernels supported in
+$\phi^{-1}(O)^2$
+\begin{equation*}
+\inner{A_0u}v_{h,\mu}=\inner{A_0u}{JG_Fv}_0=\inner u{A_0^\dagger JG_Fv}_0
+=\inner u{(JG_E)^{-1}A_0^\dagger JG_Fv}_{h,\mu},
+\end{equation*}
+so $A_0^*=(JG_E)^{-1}A_0^\dagger(JG_F)$. The same computation on $Z_b$ (fibre density
+$J(\cdot,b)\nu_0$, a valid choice of $\nu_b$) shows that the adjoint of an operator $T$
+on $Z_b$ is $(JG_E)^{-1}T^{\dagger_0}(JG_F)$, $\dagger_0$ the adjoint for $h_0$,
+$\nu_0$; and pointwise, $s^{*}=G_E^{-1}s^{\dagger_0}G_F$ (the scalar $J$ cancels). By
+multiplicativity of the symbols, it therefore suffices to prove
+$\sigma(A_0^\dagger)=\sigma(A_0)^{\dagger_0}$ and
+$\beta(A_0^\dagger)=\beta(A_0)^{\dagger_0}$, i.e.\ to treat the reference structures.
+We drop the subscript $0$.
+
+\emph{Step 2: the principal symbol.} In a fibred chart with coordinate density,
+$A_0=\Op(a)$ with $a\in S^{m,m'}_{\mathrm{ph}}$ compactly supported in $x$
+(\cref{product:prop:local-form}). The kernel of $A_0^\dagger$ is
+$\overline{K(x',x)}^t=\int e^{i(x-x')\cdot\xi}\bar a^t(x',\xi)\,\dbar\xi$. In the adapted
+coordinates $(w,\tilde x)=(x,x-x')$ this is the oscillatory integral of
+\cref{product:lem:amplitude} with amplitude $r(w,\tilde x,\xi)=\bar a^t(w-\tilde
+x,\xi)$, a classical product-type symbol with compact support in $(w,\tilde x)$. By
+\eqref{product:eq:amplitude-expansion} the left symbol of $A_0^\dagger$ is
+$\bar a^t(x,\xi)$ modulo $S^{m,m'-1}_{\mathrm{ph}}$ (all terms with $\gamma\ne0$ lie
+there). Hence $\sigma_{m,m'}(A_0^\dagger)(x,\xi)=\lim_{t\to\infty}t^{-m'}\bar
+a^t(x,t\xi)=\sigma_{m,m'}(A_0)(x,\xi)^\dagger$.
+
+\emph{Step 3: the base symbol.} By \cref{product:prop:operator-valued},
+$A_0=\Op_y(k)$ with $k\in S^{m,m'}_{\mathrm{ph}}(O;Z)$ compactly supported in $y$, and
+$A_0^\dagger=\Op_y(k')$ with $k'\in S^{m,m'}_{\mathrm{ph}}(O;Z)$. Put
+$c(y,\eta)=k(y,\eta)^\dagger$, the adjoint on $L^2(Z,\nu_0)$. The kernel of
+$A_0^\dagger$ is $\int e^{i(y-y')\cdot\eta}c(y',\eta)\,\dbar\eta$, so by the formula in
+the proof of \cref{product:prop:operator-valued},
+\begin{equation*}
+k'(y,\eta)=\iint e^{-iu\cdot\theta}c(y+u,\eta+\theta)\,du\,\dbar\theta
+\end{equation*}
+(oscillatory integral of functions with values in $\Psido\mu(Z)$, $\mu$ large). By
+\cref{product:lem:fibre-bounds}(i) and continuity of $T\mapsto T^\dagger$ on each
+$\Psido\mu(Z)$, for every seminorm $\norm\cdot$ of $\Psido{\mu}(Z)$ with
+$\mu\ge m'-m+|m|+N$,
+\begin{equation*}
+\norm{\pa_y^\gamma\pa_\eta^\beta c(y,\eta)}\le C\ang\eta^{m-|\beta|},\qquad|\beta|\le N .
+\end{equation*}
+Taylor's formula in $\theta$ and the identity $\iint e^{-iu\theta}\theta^\alpha
+g(y+u)\,du\,\dbar\theta=D_y^\alpha g(y)$ (integrate by parts in $u$) give
+\begin{gather*}
+k'=\sum_{|\alpha|<N}\frac1{\alpha!}\pa_\eta^\alpha D_y^\alpha c+R_N,\\
+R_N=\sum_{|\alpha|=N}\frac N{\alpha!}\iint e^{-iu\theta}\int_0^1(1-s)^{N-1}
+\pa_\eta^\alpha D_y^\alpha c(y+u,\eta+s\theta)\,ds\,du\,\dbar\theta .
+\end{gather*}
+Since $c$ has compact support in $y$, integration by parts in $u$ gives a factor
+$\ang\theta^{-2L}$, and Peetre's inequality $\ang{\eta+s\theta}^{m-N}\le
+C\ang\eta^{m-N}\ang\theta^{|m-N|}$ then gives $\norm{R_N(y,\eta)}\le C\ang\eta^{m-N}$.
+Consequently, for $\eta\ne0$ and $t\to\infty$: $t^{-m}R_N(y,t\eta)\to0$, and
+$t^{-m}\pa_\eta^\alpha D_y^\alpha c(y,t\eta)=O(t^{-|\alpha|})\to0$ for
+$1\le|\alpha|<N$, while
+\begin{equation*}
+t^{-m}c(y,t\eta)=\big(t^{-m}k(y,t\eta)\big)^\dagger\to\beta(k)(y,\eta)^\dagger
+\end{equation*}
+by
+\cref{product:lem:fibre-bounds}(ii) and continuity of $\dagger$. All limits are in
+$\Psido\mu(Z)$. On the other hand $t^{-m}k'(y,t\eta)\to\beta(A_0^\dagger)(y,\eta)$ by
+\cref{product:thm:symbols}(ii), in a space of lower order, hence in $\Psido\mu(Z)$.
+Comparing, $\beta(A_0^\dagger)(y,\eta)=\beta(A_0)(y,\eta)^\dagger$.
+
+With Steps 0 and 1 this gives $\sigma_{m,m'}(A^*)=\sigma_{m,m'}(A)^*$ and
+$\beta_{m,m'}(A^*)(b,\eta)=\beta_{m,m'}(A)(b,\eta)^*$, the adjoint on $Z_b$ for the
+induced metrics and fibre density.
+
+\subsection*{\Cref{product:ex:fibre-invertible}}
+\emph{Idea: for a fibrewise family the principal symbol is pulled back from
+$S^*(M/B)$ and the base symbol is the family itself, independent of $\eta$.}
+
+The hypothesis $\dim B>0$ (added to the statement) is needed: if $\dim B=0$ then
+$T^*B\setminus0=\emptyset$, condition (b) of \cref{product:def:fully-elliptic} is
+vacuous, and every elliptic $P$ is fully elliptic, invertible or not.
+
+By \cref{product:prop:subalgebras}(i), $\sigma_{0,m'}(P)=\gamma^*\sigma_{m'}(P)$ and
+$\beta_{0,m'}(P)(b,\eta)=P_b$. The normalized symbol of
+\cref{product:def:fully-elliptic}(a) is $|\zeta|^{-m'}\sigma_{m'}(P)(x,\zeta)=
+\sigma_{m'}(P)(x,\zeta/|\zeta|)$, $\zeta=\gamma(\xi)$; it is the pull-back of the
+restriction of $\sigma_{m'}(P)$ to $S^*(M/B)$ under the smooth fibration
+$[S^*M;\phi^*S^*B]=H_W\to S^*(M/B)$ of \eqref{product:eq:HW}, so it is invertible
+everywhere, boundary included, exactly when $P$ is elliptic, which is assumed.
+Condition (b) asks that $P_b$ be invertible for every $(b,\eta)$ with $\eta\ne0$; since
+$\dim B>0$ every $b$ occurs. Hence $P$ is fully elliptic if and only if each $P_b$ is
+invertible (on $\CI(Z_b)$, equivalently $H^{s+m'}\to H^s$, by elliptic regularity).
+
+If each $P_b$ is invertible, then over a trivializing set $U$, $P$ is a smooth family
+in $\Psido{m'}(Z;E_0,F_0)$ of invertible elliptic operators
+(\cref{product:lem:local-families}), so $b\mapsto P_b^{-1}$ is a smooth family in
+$\Psido{-m'}(Z;F_0,E_0)$ by \cref{product:lem:inverse-family}. Inverses are unique, so
+these local families agree on overlaps and define a fibrewise operator $Q$ with
+$Q_b=P_b^{-1}$. Membership in
+$\Psido{-m'}(M/B;F,E)=\Ic{-m'-b/4}(M^2_\phi,\Diag_M;\cdots)$ is a local condition,
+so $Q\in\Psido{-m'}(M/B;F,E)$ by
+\cref{product:lem:local-families}. Since all operators act fibrewise
+(\cref{product:prop:families}(1),(4)), $(PQ)_b=P_bQ_b=\Id$ and $(QP)_b=\Id$, so
+$Q=P^{-1}$ on $\CI(M)$.
+
+\emph{Examples.} Let $M=Z\times B$ with the product metric $g_Z+g_B$, and let
+$\Delta_Z$ be the (non-negative) Laplacian of $g_Z$ acting in the $Z$-variables. Then
+$\Delta_Z+1\in\Diff2$ is a fibrewise differential operator, hence in
+$\Psido2(M/B)\subset\Psipt{0,2}(M)$; it is elliptic with symbol $|\zeta|^2_{g_Z}$, and
+each $(\Delta_Z+1)_b=\Delta_Z+1$ is invertible, being self-adjoint and elliptic with
+$\inner{(\Delta_Z+1)u}u\ge\norm u^2$. So it is fully elliptic, with
+\begin{equation*}
+\sigma_{0,2}(\Delta_Z+1)=|\zeta|^2,\qquad\beta_{0,2}(\Delta_Z+1)(b,\eta)=\Delta_Z+1 .
+\end{equation*}
+As an operator on $M$ it is not elliptic when $\dim B>0$: its principal symbol in
+$\Diff2(M)$ is $|\zeta|^2$, which vanishes at the non-zero covectors $(0,\eta)$.
+
+For the product metric $\Delta_M=\Delta_Z+\Delta_B$. It and $\Delta_M+1$ are in
+$\Diff2(M)\subset\Psido2(M)\subset\Psipt{2,2}(M)$, with $\sigma_2=|\xi|^2=|\zeta|^2+
+|\eta|^2$. By \cref{product:prop:subalgebras}(ii),
+\begin{equation*}
+\sigma_{2,2}=|\zeta|^2+|\eta|^2,\qquad
+\beta_{2,2}(\Delta_Z+\Delta_B)(b,\eta)=\beta_{2,2}(\Delta_M+1)(b,\eta)=|\eta|^2_{g_B(b)}\,\Id
+\end{equation*}
+(multiplication by $\sigma_2(x,\phi^*\eta)=|\eta|^2$; the term $1\in\Psipt{0,0}\subset
+\Psipt{1,2}$ does not contribute). The normalized principal symbol
+$|\xi|^{-2}\sigma_{2,2}=1$ is invertible, and the base symbol is a non-zero multiple of
+the identity, so both operators are fully elliptic. (This is consistent with
+\cref{product:cor:fredholm}: $\Delta_M$ is Fredholm but not invertible, its null
+space being the constants; $\Delta_M+1$ is invertible.) The compatibility
+\eqref{product:eq:op-compatibility} is visible: $\lim t^{-2}(|\zeta|^2+t^2|\eta|^2)=
+|\eta|^2$.
+
+\subsection*{\Cref{product:ex:index-pt}}
+\emph{Idea: the rank of the null bundle of a stabilization is $N+\ind(A_b)$; for the
+adjoint, perturb $A\oplus\Id$ by a smoothing family so that the null spaces have
+constant dimension, and use \cref{product:thm:index-bundle}(iii).}
+
+\emph{Restriction to a point.} The restriction $i_b^*:K^0(B)\to K^0(\{b\})=\Z$ maps
+$[E]-[F]$ to $\dim E_b-\dim F_b$. Let $\tilde A$ be a stabilization with $N$ sections
+(\cref{product:lem:stabilization}). By \cref{product:prop:null-bundle},
+$\Nul(\tilde A)$ has rank $N+\ind(A_b)$ at $b$, so
+$i_b^*\ind_a(A)=N+\ind(A_b)-N=\ind(A_b)$.
+
+\emph{The adjoint, $m=0$.} Normalize the fibre density to have total mass $1$ on each
+fibre, and let $\Pi_0w=\int_{Z_b}w\,\nu$ be the projection of $\CI(Z_b;\C^N)$ onto the
+constants; it is a smoothing family. With $S c=\sum_jc_js_j$ the stabilizing map,
+define $A'\in\Psido0(M/B;E\oplus\C^N,F\oplus\C^N)$ by
+\begin{equation*}
+A'(u,w)=\big(Au+S\Pi_0w,\ (\Id-\Pi_0)w\big).
+\end{equation*}
+Then $A'-(A\oplus\Id)=(u,w)\mapsto(S\Pi_0w,-\Pi_0w)$ is a smoothing family. On each
+fibre: $A'_b(u,w)=0$ forces $w=c$ constant and $A_bu+S_bc=0$, so
+$\Nul(A'_b)\cong\Nul(\tilde A_b)$, of dimension $N+\ind(A_b)$; and the range of $A'_b$
+is $\CI(Z_b;F_b)\oplus\Ran(\Id-\Pi_0)$, because $\tilde A_b$ is surjective and $w$ splits
+into its constant and mean-zero parts, so $\Nul(A'^*_b)=\{0\}\oplus\{\text{constants}\}$
+has dimension $N$. Both dimensions are locally constant, so on each component of $B$
+\cref{product:thm:index-bundle}(iii) applies to $A'$ and to $A'^*$ (whose null space has
+constant dimension $N$), giving
+\begin{equation*}
+\ind_a(A')=[\Nul A']-[\Nul A'^*],\qquad\ind_a(A'^*)=[\Nul A'^*]-[\Nul A'^{**}]=-\ind_a(A').
+\end{equation*}
+Finally, $t\mapsto A\oplus\Id+t(A'-A\oplus\Id)$ and its adjoint
+$t\mapsto A^*\oplus\Id+t(A'-A\oplus\Id)^*$ are smooth families of elliptic elements of
+$\Psido0$ (they differ from elliptic families by smoothing families), so by
+\cref{product:thm:index-bundle}(ii),(iv), and since $\ind_a(\Id_{\C^N})=0$ (the
+identity is surjective with zero null space, so no stabilization is needed),
+\begin{equation*}
+\ind_a(A)=\ind_a(A\oplus\Id)=\ind_a(A'),\qquad\ind_a(A^*)=\ind_a(A^*\oplus\Id)=\ind_a(A'^*).
+\end{equation*}
+Hence $\ind_a(A^*)=-\ind_a(A)$. The assumption $m=0$ is used only to have $A\oplus\Id$
+of a single order; for general $m$ replace $\Id_{\C^N}$ by an invertible elliptic
+family of order $m$, such as $(\Delta_{Z}+1)^{m/2}$ for a family of fibre metrics, and
+the same proof applies.

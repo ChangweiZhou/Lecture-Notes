@@ -1,1 +1,336 @@
-% solutions for 11-index (in progress)
+\providecommand{\Ginf}{G^{-\infty}}
+\providecommand{\Gloop}{G^{-\infty}_{(1)}}
+\providecommand{\PsiT}[1]{\Psi^{#1}_{\mathcal T}}
+\providecommand{\Hardy}{\mathcal{C}^\infty_{+}}
+\providecommand{\Hardym}{\mathcal{C}^\infty_{-}}
+\providecommand{\wind}{\operatorname{wind}}
+\providecommand{\Iso}{\operatorname{Iso}}
+
+\section{Solutions for \cref{ch:index}: Homotopy invariance of the index and Toeplitz operators}\label{solutions:index}
+
+\subsection*{\Cref{index:ex:multiplicative}}
+\emph{Idea:} write both error terms of the parametrix $B_2B_1$ in terms of the
+errors of $B_1$ and $B_2$, and move the non-smoothing factors around the trace
+with \cref{index:lem:trace-commute}.
+
+Let $B_1\in\Psido{-m_1}(X;G,F)$ and $B_2\in\Psido{-m_2}(X;F,E)$ be parametrices of
+$A_1$ and $A_2$, with
+\begin{equation*}
+  R_1=\Id_F-B_1A_1,\quad R_1'=\Id_G-A_1B_1,\quad R_2=\Id_E-B_2A_2,\quad
+  R_2'=\Id_F-A_2B_2,
+\end{equation*}
+all smoothing. The composite $A_1A_2\in\Psido{m_1+m_2}(X;E,G)$ has principal symbol
+$\sigma_{m_1}(A_1)\sigma_{m_2}(A_2)$, which is invertible on $S^*X$, so it is
+elliptic, and $B_2B_1\in\Psido{-m_1-m_2}(X;G,E)$. Using $B_1A_1=\Id-R_1$ and
+$A_2B_2=\Id-R_2'$,
+\begin{align*}
+  \Id_E-B_2B_1A_1A_2&=\Id_E-B_2(\Id_F-R_1)A_2=R_2+B_2R_1A_2,\\
+  \Id_G-A_1A_2B_2B_1&=\Id_G-A_1(\Id_F-R_2')B_1=R_1'+A_1R_2'B_1 .
+\end{align*}
+By fact (ii) of \cref{index:sec:trace}, $B_2R_1A_2$ and $A_1R_2'B_1$ are smoothing,
+so $B_2B_1$ is a parametrix of $A_1A_2$ and \cref{index:thm:trace-formula} gives
+\begin{equation*}
+  \ind(A_1A_2)=\Tr(R_2)+\Tr(B_2R_1A_2)-\Tr(R_1')-\Tr(A_1R_2'B_1).
+\end{equation*}
+Apply \cref{index:lem:trace-commute} to $B_2\in\Psido{-m_2}(X;F,E)$ and the smoothing
+operator $R_1A_2\in\Psido{-\infty}(X;E,F)$:
+\begin{equation*}
+  \Tr(B_2R_1A_2)=\Tr(R_1A_2B_2)=\Tr\bigl(R_1(\Id-R_2')\bigr)=\Tr(R_1)-\Tr(R_1R_2').
+\end{equation*}
+Likewise, with $A_1\in\Psido{m_1}(X;F,G)$ and $R_2'B_1\in\Psido{-\infty}(X;G,F)$,
+\begin{equation*}
+  \Tr(A_1R_2'B_1)=\Tr(R_2'B_1A_1)=\Tr\bigl(R_2'(\Id-R_1)\bigr)=\Tr(R_2')-\Tr(R_2'R_1).
+\end{equation*}
+Finally $\Tr(R_1R_2')=\Tr(R_2'R_1)$ by fact (v), both factors being smoothing.
+Substituting,
+\begin{equation*}
+  \ind(A_1A_2)=\bigl(\Tr R_2-\Tr R_2'\bigr)+\bigl(\Tr R_1-\Tr R_1'\bigr)
+  =\ind(A_2)+\ind(A_1),
+\end{equation*}
+the last step being \cref{index:thm:trace-formula} for $A_2$ with $B_2$ and for $A_1$
+with $B_1$.
+
+\subsection*{\Cref{index:ex:adjoint}}
+Fix Hermitian metrics on $E,F$ and a smooth positive density on $X$, and let
+$A\in\Psido m(X;E,F)$ be elliptic. Its formal adjoint $A^*\in\Psido m(X;F,E)$ has
+principal symbol $\sigma_m(A)^*$ (fact (ii)), which is invertible wherever
+$\sigma_m(A)$ is; so $A^*$ is elliptic. The formal adjoint is an involution:
+$(A^*)^*=A$, since both sides satisfy $\inner{(A^*)^*u}{v}=\inner{u}{A^*v}=\inner{Au}{v}$
+for all smooth $u,v$, and $\CI$ is dense in $L^2$. By
+\cref{index:prop:generalized-inverse}, applied to $A$ and to $A^*$,
+\begin{equation*}
+  \ind(A)=\dim\Nul(A)-\dim\Nul(A^*),\qquad
+  \ind(A^*)=\dim\Nul(A^*)-\dim\Nul\bigl((A^*)^*\bigr)=-\ind(A).
+\end{equation*}
+If $E=F$ and $A$ is self-adjoint with respect to some choice of metric and density,
+i.e.\ $A^*=A$, this gives $\ind(A)=-\ind(A)$, so $\ind(A)=0$. (The index
+$\dim\Nul A-\dim\CI(X;F)/A\CI(X;E)$ does not involve the metrics, so it does not matter
+which choice makes $A$ self-adjoint.)
+
+\subsection*{\Cref{index:ex:same-symbol-family}}
+By \cref{index:lem:family-parametrix}(a), with $Z=X'$, there is a smooth family
+$B\in\CI(X';\Psido{-m}(X;F,E))$ such that
+\begin{equation*}
+  R(x)=\Id-B(x)A(x),\qquad R'(x)=\Id-A(x)B(x)
+\end{equation*}
+are smooth families of smoothing operators, i.e.\ $R$ and $R'$ have kernels in
+$\CI(X'\times X^2)$. For each $x$, $B(x)$ is a parametrix of the elliptic operator
+$A(x)$, so by \cref{index:thm:trace-formula}
+\begin{equation*}
+  \ind A(x)=\Tr R(x)-\Tr R'(x).
+\end{equation*}
+A kernel in $\CI(X'\times X^2)$ defines a continuous map $X'\to\CI(X^2)$ (all
+derivatives are uniformly continuous on compact sets), and $\Tr$ is a continuous
+linear functional on $\Psido{-\infty}$ (fact (v)). Hence $x\mapsto\ind A(x)$ is a
+continuous function on $X'$ with values in $\Z$. It is therefore locally constant,
+and since $X'$ is connected it is constant. (In fact $\Tr R(x)$ and $\Tr R'(x)$ are
+smooth in $x$; their difference is a smooth integer-valued function, so its
+differential vanishes.)
+
+\subsection*{\Cref{index:ex:det-properties}}
+\emph{Idea:} split off the generalized eigenspace of $\lambda$ by a finite rank
+smoothing projection commuting with $a$; on it the determinant is a polynomial,
+and on the complement it does not vanish at $-1/\lambda$.
+
+Write $f(z)=\det(\Id+za)$ for the extended determinant of
+\cref{index:thm:det-extension}. Taking $a=0$ and $b=a$ in that theorem, $f$ is entire,
+and $f(z)=0$ exactly when $\Id+za$ is not invertible. We use also that the extended
+determinant is multiplicative:
+\begin{equation}\label{solindex:eq:mult}
+  \det\bigl((\Id+b)(\Id+c)\bigr)=\det(\Id+b)\det(\Id+c),\qquad b,c\in\Psido{-\infty}(Y;E).
+\end{equation}
+Indeed this holds when $\Id+b,\Id+c\in\Ginf$ (\cref{index:thm:det}); such pairs are
+dense in $\Psido{-\infty}\times\Psido{-\infty}$ because $\Ginf$ is dense
+(\cref{index:thm:det-extension}), and both sides are continuous in $(b,c)$ since
+$(b,c)\mapsto b+c+bc$ is continuous.
+
+\emph{Zeros.} $f(0)=1$. For $z\ne0$, $\Id+za=-z(\mu-a)$ with $\mu=-1/z$. The operator
+$a$ is compact on $L^2$ (it maps $L^2$ continuously into $\CI$ and $\CI\hookrightarrow
+L^2$ is compact by Rellich, as in the proof of \cref{index:prop:generalized-inverse}).
+By \cref{hilbert:thm:riesz}, $\mu-a$ is invertible if and only if $\mu$ is not an
+eigenvalue. Eigenvectors are smooth: $au=\mu u$ gives $u=\mu^{-1}au\in\CI$. So the
+zeros of $f$ are exactly the points $z=-1/\lambda$ with $\lambda\ne0$ an eigenvalue
+of $a$.
+
+\emph{The splitting.} Fix an eigenvalue $\lambda\ne0$ and let
+$W=\bigcup_j\Nul((\lambda-a)^j)$. By \cref{hilbert:thm:riesz} there is $j_0$ with
+$W=\Nul(T)$, $T=(\lambda-a)^{j_0}$, and $\Nul(T^2)=\Nul(T)$; $d=\dim W$ is by
+definition the algebraic multiplicity of $\lambda$. Expanding,
+$T=\lambda^{j_0}+a\,q(a)$ for a polynomial $q$, so $T$ is $\lambda^{j_0}$ times the
+identity plus a compact operator, hence Fredholm of index zero
+(\cref{hilbert:thm:stability}), and $u\in W$ implies
+$u=-\lambda^{-j_0}aq(a)u\in\CI(Y;E)$. Put $W'=\Ran T$, a closed $a$-invariant
+subspace. If $v=Tu\in W\cap W'$ then $T^2u=0$, so $u\in\Nul T$ and $v=0$. As
+$\operatorname{codim}W'=\dim\Nul T^*=\dim\Nul T=d$ (index zero), we get
+$L^2=W\oplus W'$. On $W'$ the operator $\lambda-a$ is injective (its null space lies
+in $W$) and surjective, since $W'=T(W\oplus W')=T(W')=(\lambda-a)\bigl((\lambda-a)^{j_0-1}W'\bigr)$
+and $(\lambda-a)^{j_0-1}W'\subset W'$; so it is invertible on $W'$.
+
+Let $P$ be the projection onto $W$ along $W'$. It is bounded, of finite rank, and
+commutes with $a$. Its range $W$ lies in $\CI$, and so does the range of $P^*$, which
+is $(W')^\perp=\Nul(T^*)=\Nul((\bar\lambda-a^*)^{j_0})$; this is contained in $\CI$
+by the same argument, $a^*$ being smoothing. A finite rank operator $P$ with
+$\Ran P$ and $\Ran P^*$ in $\CI$ is smoothing: if $w_1,\dots,w_d$ is an orthonormal
+basis of $\Ran P$ then $Pu=\sum_i\inner{u}{P^*w_i}w_i$, whose kernel
+$\sum_iw_i(x)\overline{(P^*w_i)(y)}\nu(y)$ is smooth. Since $aP=Pa$ and
+$P(\Id-P)=0$,
+\begin{equation*}
+  (\Id+zaP)\bigl(\Id+za(\Id-P)\bigr)=\Id+za+z^2aPa(\Id-P)=\Id+za ,
+\end{equation*}
+so by \eqref{solindex:eq:mult}
+\begin{equation*}
+  f(z)=\det(\Id+zaP)\,g(z),\qquad g(z)=\det\bigl(\Id+za(\Id-P)\bigr).
+\end{equation*}
+
+\emph{The two factors.} The operator $zaP$ has range in $W$. When $\Id+zaP$ is
+invertible, \cref{index:thm:det} gives $\det(\Id+zaP)=\det\bigl((\Id+za)|_W\bigr)$.
+On $W$ the operator $a-\lambda$ is nilpotent, so in a basis of $W$ in which $a|_W$ is
+upper triangular all diagonal entries are $\lambda$ and
+$\det((\Id+za)|_W)=(1+z\lambda)^d$. As $\Id+zaP$ acts as $(\Id+za)|_W$ on $W$ and as
+the identity on $W'$, it is invertible except at $z=-1/\lambda$; both
+$\det(\Id+zaP)$ and $(1+z\lambda)^d$ are continuous in $z$, so they agree everywhere:
+\begin{equation*}
+  \det(\Id+zaP)=(1+z\lambda)^d=\lambda^d(z-z_0)^d,\qquad z_0=-1/\lambda .
+\end{equation*}
+The function $g$ is entire by \cref{index:thm:det-extension}. At $z_0$ the operator
+$\Id+z_0a(\Id-P)$ is the identity on $W$ and equals $\Id-\lambda^{-1}a=\lambda^{-1}(\lambda-a)$
+on $W'$, which is invertible there. So $\Id+z_0a(\Id-P)$ is invertible and
+$g(z_0)\ne0$. Hence $f(z)=\lambda^d(z-z_0)^dg(z)$ has a zero of order exactly $d$ at
+$z_0=-1/\lambda$.
+
+\subsection*{\Cref{index:ex:U1-circle}}
+The projection $\pi_0$ onto the constants has kernel $(2\pi)^{-1}$ with respect to
+$d\theta'$, so it is a rank one smoothing operator, and $\Tr\pi_0=1$ by
+\cref{index:lem:proj-trace}. The operator $f(e^{is})=\Id+(e^{is}-1)\pi_0$ acts as
+$e^{is}$ on the constants and as the identity on their orthocomplement, so it is
+invertible with inverse $\Id+(e^{-is}-1)\pi_0$; it is smooth in $s$, so $f$ is a
+smooth map $\Sphere^1\to\Ginf(\Sphere^1)$. Using $\pi_0^2=\pi_0$,
+\begin{equation*}
+  f^{-1}df=\bigl(\Id+(e^{-is}-1)\pi_0\bigr)ie^{is}\pi_0\,ds
+  =ie^{is}\bigl(1+e^{-is}-1\bigr)\pi_0\,ds=i\pi_0\,ds .
+\end{equation*}
+Hence $f^*u_1=\Tr(f^{-1}df)=i\,ds$ and
+\begin{equation*}
+  \int_{\Sphere^1}f^*u_1=\int_0^{2\pi}i\,ds=2\pi i .
+\end{equation*}
+For the determinant, $f(e^{is})-\Id$ has range in the constants, so by
+\cref{index:thm:det} $\det f(e^{is})$ is the determinant of the restriction to the
+constants, i.e.\ $\det f(e^{is})=e^{is}$. (Directly from \eqref{index:eq:det}, with the
+path $t\mapsto\Id+(e^{its}-1)\pi_0$, $t\in[0,1]$, one gets
+$\exp\int_0^1\Tr(is\pi_0)\,dt=e^{is}$.) The winding number of $\det f$ is $1$, as it
+must be: $\int f^*u_1=2\pi i\wind(\det f)$.
+
+Identify $H^1_{\mathrm{dR}}(\Sphere^1;\C)$ with $\C$ by $[\omega]\mapsto\int_{\Sphere^1}\omega$
+(de~Rham's theorem for the circle). Then $U_1:K^{-1}(\Sphere^1)\to\C$ is a group
+homomorphism (\cref{index:prop:odd-chern}). Its image is contained in $2\pi i\Z$ by
+\cref{index:prop:integrality}, since every smooth $g:\Sphere^1\to\Ginf$ is a closed
+curve. It contains $U_1[f]=2\pi i$, hence the subgroup $2\pi i\Z$ it generates
+($U_1[f^k]=2\pi ik$ for $k\in\Z$). So the image is exactly $2\pi i\Z$.
+
+\subsection*{\Cref{index:ex:even-vanish}}
+Let $A\in\Ginf$, $b_1,\dots,b_{2k}\in T_A\Ginf=\Psido{-\infty}$ and $c_j=A^{-1}b_j$,
+which are smoothing. The antisymmetrized expression is
+\begin{equation*}
+  S=\sum_{\sigma\in\Sigma_{2k}}\sgn(\sigma)\,\Tr\bigl(c_{\sigma(1)}c_{\sigma(2)}\cdots
+  c_{\sigma(2k)}\bigr).
+\end{equation*}
+Let $\tau\in\Sigma_{2k}$ be the cyclic permutation $\tau(j)=j+1$ for $j<2k$,
+$\tau(2k)=1$. It is a cycle of even length $2k$, so $\sgn\tau=-1$. For every $\sigma$,
+\begin{equation*}
+  \Tr\bigl(c_{\sigma\tau(1)}\cdots c_{\sigma\tau(2k)}\bigr)
+  =\Tr\bigl(c_{\sigma(2)}\cdots c_{\sigma(2k)}c_{\sigma(1)}\bigr)
+  =\Tr\bigl(c_{\sigma(1)}c_{\sigma(2)}\cdots c_{\sigma(2k)}\bigr),
+\end{equation*}
+by $\Tr(xy)=\Tr(yx)$ with $x=c_{\sigma(1)}$, $y=c_{\sigma(2)}\cdots c_{\sigma(2k)}$
+(fact (v)). Since $\sigma\mapsto\sigma\tau$ is a bijection of $\Sigma_{2k}$,
+\begin{equation*}
+  S=\sum_\sigma\sgn(\sigma\tau)\Tr\bigl(c_{\sigma\tau(1)}\cdots c_{\sigma\tau(2k)}\bigr)
+  =-\sum_\sigma\sgn(\sigma)\Tr\bigl(c_{\sigma(1)}\cdots c_{\sigma(2k)}\bigr)=-S ,
+\end{equation*}
+so $S=0$. Thus $\Tr((A^{-1}dA)^{2k})$ vanishes identically on $\Ginf$, for every
+$k\ge1$. (For odd length $2k-1$ the cycle is even and the same computation gives no
+information, which is why the odd forms survive.)
+
+For right invariance let $B\in\Ginf$ and $R_B(A)=AB$. The differential of $R_B$ maps
+$b\in T_A\Ginf$ to $bB\in T_{AB}\Ginf$, so
+\begin{equation*}
+  (R_B^*\theta)_A(b)=(AB)^{-1}bB=B^{-1}(A^{-1}b)B,\qquad \theta=A^{-1}dA,
+\end{equation*}
+i.e.\ $R_B^*(A^{-1}dA)=B^{-1}(A^{-1}dA)B$. Therefore
+\begin{equation*}
+  (R_B^*u_{2k-1})(b_1,\dots,b_{2k-1})=\sum_\sigma\sgn(\sigma)\Tr\bigl(B^{-1}c_{\sigma(1)}
+  BB^{-1}c_{\sigma(2)}B\cdots B^{-1}c_{\sigma(2k-1)}B\bigr)
+  =\sum_\sigma\sgn(\sigma)\Tr\bigl(B^{-1}c_{\sigma(1)}\cdots c_{\sigma(2k-1)}B\bigr).
+\end{equation*}
+For a smoothing operator $T$ and $B\in\Ginf\subset\Psido0$,
+$\Tr(B^{-1}(TB))=\Tr(TBB^{-1})=\Tr(T)$ by \cref{index:lem:trace-commute}. Hence
+$R_B^*u_{2k-1}=u_{2k-1}$. Together with the left invariance shown before
+\eqref{index:eq:chern-forms} this is the bi-invariance of
+\cref{index:lem:closed}(d).
+
+\subsection*{\Cref{index:ex:commutator}}
+\emph{Idea:} on Fourier modes $[S,f]$ only connects modes of opposite sign, and the
+Fourier coefficients of $f$ decay rapidly in the distance between such modes.
+
+Write $e_k=e^{ik\theta}$, $f=\sum_mf_me_m$ with $(f_m)$ rapidly decreasing, and
+$H(k)=1$ for $k\ge0$, $H(k)=0$ for $k<0$, so that $Se_k=H(k)e_k$. Then
+\begin{equation*}
+  [S,f]e_k=Sfe_k-fSe_k=\sum_mf_m\bigl(H(k+m)-H(k)\bigr)e_{k+m}
+  =\sum_jc_{jk}e_j,\qquad c_{jk}=f_{j-k}\bigl(H(j)-H(k)\bigr).
+\end{equation*}
+If $c_{jk}\ne0$ then $j$ and $k$ have opposite signs (one is $\ge0$, the other
+$<0$), so $\abs{j-k}=\abs j+\abs k$ and
+\begin{equation*}
+  \abs{c_{jk}}\le\abs{f_{j-k}}\le C_N(1+\abs j+\abs k)^{-N}\quad\text{for every }N .
+\end{equation*}
+The kernel of $[S,f]$ with respect to $d\theta'$ is
+$K(\theta,\theta')=(2\pi)^{-1}\sum_{j,k}c_{jk}e^{ij\theta}e^{-ik\theta'}$. Each
+$\partial_\theta^p\partial_{\theta'}^q$ of a term is bounded by
+$\abs j^p\abs k^q\abs{c_{jk}}$, which is summable, so the series converges uniformly
+with all derivatives and $K\in\CI(\Sphere^1\times\Sphere^1)$. Thus
+$[S,f]\in\Psido{-\infty}(\Sphere^1)$.
+
+This is the computation behind the hint. By \cref{index:thm:szego} the amplitude of $S$
+near the diagonal is $\chi(\xi)$, and in the composition formula for
+$\Op(\chi)\circ f$ the terms beyond the first are multiples of
+$\partial_\xi^k\chi\,D_\theta^kf$, $k\ge1$, which have compact support in $\xi$ and
+so are of order $-\infty$; the first term $\chi f$ cancels against $f\circ\Op(\chi)$.
+The Fourier computation above makes this precise without having to justify the
+asymptotic expansion on the circle.
+
+For matrix valued $a,b$ the operator $S$ acts componentwise, so $[S,b]$ has entries
+$[S,b_{lm}]$ and is smoothing. Since $(\Id-S)S=0$,
+\begin{equation*}
+  (\Id-S)bS=(\Id-S)(bS-Sb)=(\Id-S)[b,S],
+\end{equation*}
+and therefore
+\begin{equation*}
+  T_aT_b-T_{ab}=SaSbS-SabS=-Sa(\Id-S)bS=-Sa(\Id-S)[b,S]S .
+\end{equation*}
+This is a smoothing operator composed on both sides with operators in $\Psido0$, hence
+smoothing (fact (ii) of \cref{index:sec:trace}); it is of the form $S(\cdot)S$, so it
+lies in $\PsiT{-\infty}=S\Psido{-\infty}S$.
+
+If $b$ is a trigonometric polynomial, $b_m=0$ for $\abs m>d$, then $c_{jk}\ne0$
+requires $\abs j+\abs k=\abs{j-k}\le d$, so only finitely many entries are non-zero
+and $[b,S]$ has finite rank (for matrix valued $b$, entrywise). Then
+$T_aT_b-T_{ab}=-Sa(\Id-S)[b,S]S$ has finite rank. (Only $b$ needs to be a
+trigonometric polynomial.)
+
+\subsection*{\Cref{index:ex:valuations}}
+Give $\Hardy(\Sphere^1)$ the topology of $\CI(\Sphere^1)$. For
+$z\in\overline{\mathbb D}$ let $p_z(f)=u_f(z)$, where $u_f=\sum_{k\ge0}f_kz^k$ is the
+holomorphic extension of \cref{index:prop:hardy} (for $\abs z=1$, $p_z(f)=f(z)$).
+
+\emph{Each $p_z$ is a continuous valuation.} It is linear and $p_z(1)=1$. For
+$f,g\in\Hardy$, $u_fu_g$ is smooth on $\overline{\mathbb D}$, holomorphic in
+$\mathbb D$, with boundary value $fg$; by uniqueness in \cref{index:prop:hardy},
+$u_{fg}=u_fu_g$, so $p_z(fg)=p_z(f)p_z(g)$. Continuity: by Cauchy--Schwarz and
+Parseval,
+\begin{equation*}
+  \abs{p_z(f)}\le\sum_{k\ge0}\abs{f_k}\le\abs{f_0}+\Bigl(\sum_{k\ge1}k^{-2}\Bigr)^{1/2}
+  \Bigl(\sum_kk^2\abs{f_k}^2\Bigr)^{1/2}\le\sup\abs f+\tfrac{\pi}{\sqrt6}\sup\abs{f'} .
+\end{equation*}
+
+\emph{Every continuous valuation is some $p_z$.} Let $p$ be one and $\zeta=p(e_1)$,
+$e_k=e^{ik\theta}$. Multiplicativity and $p(1)=1$ give $p(e_k)=\zeta^k$ for $k\ge0$.
+Continuity means $\abs{p(f)}\le C\sum_{j\le m}\sup\abs{\partial_\theta^jf}$ for some $C,m$;
+for $f=e_k$ this gives $\abs\zeta^k\le C(m+1)(1+k)^m$ for all $k$, which forces
+$\abs\zeta\le1$. For $f\in\Hardy$ the Fourier series $\sum_{k\ge0}f_ke_k$ converges to
+$f$ in the $\CI$ topology (the coefficients are rapidly decreasing), so by continuity
+and linearity
+\begin{equation*}
+  p(f)=\sum_{k\ge0}f_k\zeta^k=u_f(\zeta)=p_\zeta(f).
+\end{equation*}
+Finally $p_z(e_1)=z$, so distinct points give distinct valuations. The valuations of
+$\Hardy(\Sphere^1)$ are therefore in bijection with $\overline{\mathbb D}$: the interior
+points come from the holomorphic extension, and only the boundary points correspond to
+points of the circle.
+
+\subsection*{\Cref{index:ex:toeplitz-product}}
+Let $a,b\in\CI(\Sphere^1;\GL(N,\C))$. Then $T_aT_b\in\PsiT0$ (the Toeplitz operators form
+an algebra) and, the symbol being multiplicative, its symbol on $S^*_+\Sphere^1$ is $ab$,
+which is invertible; so $T_aT_b$ is elliptic. By \cref{index:ex:commutator},
+$T_aT_b-T_{ab}\in\PsiT{-\infty}$, so $A_t=(1-t)T_{ab}+tT_aT_b$, $t\in[0,1]$, is a smooth
+family of elliptic elements of $\PsiT0$ (constant symbol $ab$). By
+\cref{index:prop:toeplitz-fredholm} and \cref{index:thm:toeplitz-index},
+\begin{equation*}
+  \ind_{\mathcal T}(T_aT_b)=\ind_{\mathcal T}(T_{ab})=-\wind\det(ab)
+  =-\wind(\det a\det b)=-\wind\det a-\wind\det b,
+\end{equation*}
+since $\frac1{2\pi i}\int d\log(gh)=\frac1{2\pi i}\int d\log g+\frac1{2\pi i}\int d\log h$
+for loops $g,h$ in $\C^*$. The right side is $\ind_{\mathcal T}(T_a)+\ind_{\mathcal T}(T_b)$.
+
+\emph{Check against \cref{index:ex:multiplicative}.} Let $P_a=T_a+\Id-S$ and
+$P_b=T_b+\Id-S$, elliptic elements of $\Psido0(\Sphere^1;\C^N)$ with
+$\ind P_a=\ind_{\mathcal T}T_a$, $\ind P_b=\ind_{\mathcal T}T_b$
+(\cref{index:prop:toeplitz-fredholm}). Since $T_a(\Id-S)=SaS(\Id-S)=0$,
+$(\Id-S)T_b=0$ and $(\Id-S)^2=\Id-S$,
+\begin{equation*}
+  P_aP_b=T_aT_b+T_a(\Id-S)+(\Id-S)T_b+(\Id-S)^2=T_aT_b+\Id-S .
+\end{equation*}
+By \cref{index:prop:toeplitz-fredholm} applied to the elliptic Toeplitz operator
+$T_aT_b$, $\ind(P_aP_b)=\ind_{\mathcal T}(T_aT_b)$, and by \cref{index:ex:multiplicative}
+$\ind(P_aP_b)=\ind P_a+\ind P_b$. So
+$\ind_{\mathcal T}(T_aT_b)=\ind_{\mathcal T}(T_a)+\ind_{\mathcal T}(T_b)$ again, this time
+without using the index formula; the two computations agree.
