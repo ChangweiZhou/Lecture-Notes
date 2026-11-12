@@ -976,14 +976,13 @@ $\sigma_L(AB)=e^{iD_\eta\cdot D_y}\sigma_L(A)(x,\eta)\sigma_L(B)(y,\xi)\big|_{y=
   \eqref{euclidean:eq:S'-action}.
 \end{proof}
 
-The same computation, with the roles of the two expansions interchanged,
-shows that left and right symbols are related by
+Applying \cref{euclidean:thm:reduction} to the amplitude $b(y,\xi)$ shows
+that left and right symbols are related by
 \begin{equation}\label{euclidean:eq:left-right}
   \sigma_L\bigl(\Op_R(b)\bigr)\sim\sum_\alpha\frac{i^{\abs\alpha}}{\alpha!}
   D^\alpha_\xi D^\alpha_xb,
 \end{equation}
-which is just \cref{euclidean:thm:reduction} for the amplitude $b(y,\xi)$;
-formally $\sigma_L=e^{iD_x\cdot D_\xi}\sigma_R$ and, by
+so that formally $\sigma_L=e^{iD_x\cdot D_\xi}\sigma_R$ and, by
 \eqref{euclidean:eq:right-left}, $\sigma_R=e^{-iD_x\cdot D_\xi}\sigma_L$.
 The map $\Op_R:S^m(\R^n;\R^n)\to\Psido m(\R^n)$ is a bijection with inverse
 $\sigma_R$; see \cref{euclidean:ex:weyl} for a ``centrist'' alternative.
@@ -1673,11 +1672,11 @@ $\Psido\infty_{\mathrm{ph}}(\R^n)$. As an illustration:
   construct one in $\Psido{-m}_{\mathrm{ph}}$. Let $a_m$ be the leading term
   of $\sigma_L(A)$. By \cref{euclidean:thm:elliptic}(d),
   $\abs{\sigma_L(A)}\ge\eps\ang\xi^m$ for $\abs\xi\ge R$, hence
-  $\abs{a_m}\ge\frac\eps2\ang\xi^m$ for $\abs\xi\ge R'$; by homogeneity
-  $\abs{a_m(x,\theta)}=R'^{-m}\abs{a_m(x,R'\theta)}\ge\frac\eps2$ for
-  $\abs\theta=1$, so $\abs{a_m}\ge\frac\eps2\abs\xi^m$ in $\abs\xi\ge1$. As
-  $\nabla_\xi a_m$ is bounded on $\abs\xi\le2$, there is $\delta\in(0,\frac12)$
-  with $\abs{a_m}\ge\frac\eps4$ on $\abs\xi\ge1-\delta$. Choose $\rho\in\CI(\R^n)$
+  $\abs{a_m}\ge\frac\eps2\ang\xi^m$ for $\abs\xi\ge R'\ge1$; by homogeneity
+  $\abs{a_m(x,\theta)}=R'^{-m}\abs{a_m(x,R'\theta)}\ge\frac\eps2(\ang{R'}/R')^m\ge c>0$
+  for $\abs\theta=1$, so $\abs{a_m}\ge c\abs\xi^m$ in $\abs\xi\ge1$. As
+  $\nabla_\xi a_m$ is bounded on $\abs\xi\le2$, uniformly in $x$, there is
+  $\delta\in(0,\frac12)$ with $\abs{a_m}\ge\frac c2$ on $\abs\xi\ge1-\delta$. Choose $\rho\in\CI(\R^n)$
   vanishing in $\abs\xi\le1-\delta$ and equal to $1$ in $\abs\xi\ge1$, and set
   $b=\rho/a_m$. By \cref{euclidean:lem:powers} (applied on
   $\{\abs\xi>1-\delta\}$) $b\in S^{-m}$, and $b$ is homogeneous of degree $-m$ in
