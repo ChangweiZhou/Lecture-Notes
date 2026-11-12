@@ -1415,12 +1415,22 @@ normalizations: with $E(s)$ of order $+s$ the residue trace is minus the Wodzick
 the trace-defect formula reads $\Trbar_E([A,B])=\TrR(BD_EA)$ with
 $D_EA=\frac{d}{ds}[E(s),A]|_{s=0}$, and the constants of the odd Chern character are
 determined by the Toeplitz index (\cref{eta:prop:toeplitz-chern}). The variation formula
-for the eta forms, \cref{eta:thm:variation}, has been corrected; it contains a symbolic
-term $\gamma$ which must also appear in the index formula (\cref{eta:rem:gamma}), and with
-these normalizations the eta form enters with coefficient $+1$ rather than $-\frac12$.
-The original proof of the index formula reduced to the Atiyah--Singer theorem on $M$ by
-composing with the inverse of a bundle isomorphism; in the Toeplitz algebra such an
-inverse need not exist (\cref{eta:rem:finite-rank}), and we have instead given a proof
+for the eta forms, \cref{eta:thm:variation}, has the structure of the original one (eta
+form plus a symbolic term $\gamma$), with the constants now determined. In the original
+proof that the right side of the index formula is homotopy invariant, the $t$-derivative of
+the symbolic term $\gamma(b_t)$ was dropped when the variation formula was pulled back to
+$X\times[0,1]$; in fact $\gamma$ must appear in the index formula (\cref{eta:rem:gamma}: along
+that homotopy the index and the Chern term are constant while $\int\gamma$ is not). The
+original coefficient $-\frac12$ of the eta term (the original explicitly left its constants
+unchecked) is also not a matter of normalization: the eta form restricts to the odd Chern
+form on finite-rank perturbations of $\Pi$, so the reduction to the Atiyah--Singer theorem on
+$M$, which the original also uses (\cref{eta:rem:finite-rank}), forces the coefficient $\pm1$,
+the sign depending only on the orientation of $S^*M$; with the Liouville orientation it is
+$+1$. The original proof of the index formula reduced to the Atiyah--Singer theorem on $M$ by
+composing with the inverse of a bundle isomorphism $L$; in the Toeplitz algebra the
+compression $\Pi L^{-1}\Pi$ need not be invertible, nor can it in general be made
+invertible by a smooth family of smoothing perturbations, since the Toeplitz family with symbol $L$ can have non-zero index bundle over $M$
+(\cref{eta:rem:finite-rank}), and we have instead given a proof
 based on the weak contractibility of the Toeplitz group and the Atiyah--Singer theorem on
 $M\times\Sphere$. The non-Toeplitz case is deduced by a unitary doubling. In the product-type
 cohomology the compatibility condition has been changed to $d\tau=\psi_*\iota^*u$ (push-forward
