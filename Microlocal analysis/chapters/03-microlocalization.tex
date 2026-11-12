@@ -1202,32 +1202,32 @@ function with $\abs{\hat u(\xi)}\le C\ang\xi^k$; for $\phi\in\cS(\R^n)$,
 Conversely, a continuous polynomially bounded function is the Fourier
 transform of a unique element of $\cSp(\R^n)$.
 
-For $v\in\CmIc(\R^n)$ let
+For $v\in\CmIc(\R^n)$ let the \emph{frequency set} of $v$ be
 \begin{equation*}
-  \Sigma(v)=\{\xi\in\R^n\setminus0;\ (x,\xi)\in\WF(v)\text{ for some }x\}.
+  \Sigma_{\mathrm{fr}}(v)=\{\xi\in\R^n\setminus0;\ (x,\xi)\in\WF(v)\text{ for some }x\}.
 \end{equation*}
 Since $\WF(v)$ is closed, conic and lies over the compact set $\supp v$,
-$\WF(v)\cap(\R^n\times\Sphere^{n-1})$ is compact, so $\Sigma(v)$ is a closed
-cone in $\R^n\setminus0$, and $\WF(v)\subset\supp v\times\Sigma(v)$.
+$\WF(v)\cap(\R^n\times\Sphere^{n-1})$ is compact, so $\Sigma_{\mathrm{fr}}(v)$ is a closed
+cone in $\R^n\setminus0$, and $\WF(v)\subset\supp v\times\Sigma_{\mathrm{fr}}(v)$.
 
 \begin{lemma}\label{microlocal:lem:fourier-global}
   Let $v\in\CmIc(\R^n)$.
   \begin{enumerate}[label=\textup{(\roman*)}]
   \item If $\Gamma\subset\R^n\setminus0$ is a closed cone with
-    $\Gamma\cap\Sigma(v)=\emptyset$, then $\hat v$ is rapidly decreasing on
+    $\Gamma\cap\Sigma_{\mathrm{fr}}(v)=\emptyset$, then $\hat v$ is rapidly decreasing on
     $\Gamma$.
   \item If $\hat v$ is rapidly decreasing on an open cone $V$ then
     $\WF(v)\cap(\R^n\times V)=\emptyset$.
   \item If $\bar x\in\R^n$ and $V$ is an open cone containing
     $\{\xi;\ (\bar x,\xi)\in\WF(v)\}$, there is $r>0$ such that
-    $\Sigma(\phi v)\subset V$ for all $\phi\in\CIc(\R^n)$ supported in
+    $\Sigma_{\mathrm{fr}}(\phi v)\subset V$ for all $\phi\in\CIc(\R^n)$ supported in
     $\{\abs{x-\bar x}<r\}$.
   \end{enumerate}
 \end{lemma}
 \begin{proof}
   (i) By compactness there is an open cone $\Gamma'\supset\Gamma$ with
-  $\overline{\Gamma'}\cap\Sigma(v)=\emptyset$ (the distance between
-  $\Gamma\cap\Sphere^{n-1}$ and the compact set $\Sigma(v)\cap\Sphere^{n-1}$ is
+  $\overline{\Gamma'}\cap\Sigma_{\mathrm{fr}}(v)=\emptyset$ (the distance between
+  $\Gamma\cap\Sphere^{n-1}$ and the compact set $\Sigma_{\mathrm{fr}}(v)\cap\Sphere^{n-1}$ is
   positive). Choose $g\in S^0(\R^n)$, a function of $\xi$ only, with $g=1$ on
   $\Gamma\cap\{\abs\xi\ge1\}$ and $\supp g\subset\Gamma'$; for instance $g=
   h(\xi/\abs\xi)(1-\chi(\xi))$ with $h\in\CI(\Sphere^{n-1})$. Then
@@ -1279,7 +1279,7 @@ cone in $\R^n\setminus0$, and $\WF(v)\subset\supp v\times\Sigma(v)$.
   x,\bar\xi)\notin\WF(u)$ by \cref{microlocal:prop:wf-local}(i).
 
   For the last statement, $\WF(\phi u)\subset\WF(u)\cap(K\times\R^n)$, so
-  $\Sigma(\phi u)\cap\Gamma=\emptyset$ and
+  $\Sigma_{\mathrm{fr}}(\phi u)\cap\Gamma=\emptyset$ and
   \cref{microlocal:lem:fourier-global}(i) applies. Finally, if $(\bar
   x,\bar\xi)\notin\WF(u)$, closedness of $\WF(u)$ and a compactness argument
   as in \cref{microlocal:lem:fourier-global}(iii) give $r,\eps>0$ with
@@ -1293,7 +1293,7 @@ cone in $\R^n\setminus0$, and $\WF(v)\subset\supp v\times\Sigma(v)$.
   $\WF(\delta)=\{0\}\times(\R^n\setminus0)$: indeed
   $\widehat{\phi\delta}=\phi(0)$ is not rapidly decreasing in any direction if
   $\phi(0)\ne0$. More generally, if $u\in\CmIc(\R^n)$ is not smooth then
-  $\Sigma(u)\ne\emptyset$, since otherwise $\hat u\in\cS$ by
+  $\Sigma_{\mathrm{fr}}(u)\ne\emptyset$, since otherwise $\hat u\in\cS$ by
   \cref{microlocal:lem:fourier-global}(i).
 \end{example}
 
@@ -1452,7 +1452,7 @@ essential supports of the operators.
 
   \emph{Inclusion $\subset$.} By \eqref{microlocal:eq:kernel-ft}, $\hat w$ is
   rapidly decreasing on every closed cone $\{\abs\xi\le c\abs\zeta\}$, so
-  $\Sigma(w)\subset\{\zeta=0\}$ by \cref{microlocal:lem:fourier-global}(ii).
+  $\Sigma_{\mathrm{fr}}(w)\subset\{\zeta=0\}$ by \cref{microlocal:lem:fourier-global}(ii).
   Since $w$ is smooth for $z\ne0$, $\WF(w)\subset\{(x,0;0,\xi)\}$, and
   \eqref{microlocal:eq:kernel-L} gives $\WF(k)\subset\{(x,x;\xi,-\xi)\}$.
 
@@ -1474,7 +1474,7 @@ essential supports of the operators.
   x}<r$, $\xi\in V_\theta(\bar\xi)$. Take $\supp\phi\subset\{\abs{x-\bar
   x}<r\}$ and $\phi=1$ near $\bar x$. Then, by
   \eqref{microlocal:eq:kernel-L} and the first part,
-  $\Sigma(w)\subset\{(0,\xi);\ \xi\notin V_\theta(\bar\xi)\}$, which is
+  $\Sigma_{\mathrm{fr}}(w)\subset\{(0,\xi);\ \xi\notin V_\theta(\bar\xi)\}$, which is
   disjoint from the closed cone
   $C=\{(\zeta,\xi)\ne0;\ \abs\zeta\le\abs\xi,\ \xi\in
   \overline{V_{\theta/2}(\bar\xi)}\}$. By
@@ -1773,8 +1773,8 @@ $\iota^*w=\cF^{-1}g_w\in\cSp(\R^p)$.
   $\phi\boxtimes\rho_\eps$ vanishes near $\supp w$ for small $\eps$.
 
   (iv) By \cref{microlocal:lem:fourier-global}(ii),
-  $\Sigma(w)$ does not meet the interior of $C_\delta$, which contains
-  $C_{\delta/2}$; as $\Sigma(\phi w)\subset\Sigma(w)$,
+  $\Sigma_{\mathrm{fr}}(w)$ does not meet the interior of $C_\delta$, which contains
+  $C_{\delta/2}$; as $\Sigma_{\mathrm{fr}}(\phi w)\subset\Sigma_{\mathrm{fr}}(w)$,
   \cref{microlocal:lem:fourier-global}(i) shows $\phi w\in\mathcal
   R_{\delta/2}$. The identity follows from (i), since
   $(\phi w)(f\boxtimes\rho_\eps)=w(\phi f\boxtimes\rho_\eps)$.
@@ -1803,7 +1803,7 @@ $\iota^*w=\cF^{-1}g_w\in\cSp(\R^p)$.
   intersection is contained in $\WF(u)\cap N^*Y=\emptyset$. Hence
   $Z_\delta=\emptyset$ for some $\delta>0$; take $r=\delta$. If $\supp
   \chi\subset\{\abs y<r\}$ then $\WF(\chi u)\subset\WF(u)\cap\{\abs y<r\}$, so
-  $\Sigma(\chi u)\cap C_\delta=\emptyset$ and $\chi u\in\mathcal R_\delta$ by
+  $\Sigma_{\mathrm{fr}}(\chi u)\cap C_\delta=\emptyset$ and $\chi u\in\mathcal R_\delta$ by
   \cref{microlocal:lem:fourier-global}(i). If $\chi,\chi'$ are two choices,
   $(\chi-\chi')u\in\mathcal R_\delta$ vanishes near $Y$, so
   $\iota^*(\chi u)=\iota^*(\chi'u)$ by \cref{microlocal:lem:restriction}(iii).
@@ -1826,7 +1826,7 @@ $\iota^*w=\cF^{-1}g_w\in\cSp(\R^p)$.
   cone lies in the open cone $\R^{p+k}\setminus(C'_\theta\cup\{0\})$, and by
   \cref{microlocal:lem:fourier-global}(iii) there are $\phi\in\CIc(\R^p)$,
   $\phi(\bar x)\ne0$, and $\chi(y)$ as above (with small supports) such that
-  $\Sigma(\phi\chi u)\cap C'_\theta=\emptyset$. Then
+  $\Sigma_{\mathrm{fr}}(\phi\chi u)\cap C'_\theta=\emptyset$. Then
   $\widehat{\phi\chi u}$ is rapidly decreasing on $C'_\theta$; in particular
   $\phi\chi u\in\mathcal R_\theta$, and for $\xi\in V_\theta(\bar\xi)$, where
   $(\xi,\eta)\in C'_\theta$ for all $\eta$,
@@ -1904,7 +1904,7 @@ Moreover $(\pi_1)_*$ maps $\CIc(\R^{p+k})$ to $\CIc(\R^p)$, and
   $(\bar x,y,\bar\xi/\abs{\bar\xi},0)$ of the closed set $\WF(u)$, a
   contradiction. Now let $\phi\in\CIc(\R^p)$ be supported in $\{\abs{x-\bar
   x}<r\}$ with $\phi(\bar x)\ne0$. Then
-  $\Sigma((\pi_1^*\phi)u)\cap C''_\theta=\emptyset$, so by
+  $\Sigma_{\mathrm{fr}}((\pi_1^*\phi)u)\cap C''_\theta=\emptyset$, so by
   \cref{microlocal:lem:fourier-global}(i) and
   \eqref{microlocal:eq:projection-ft},
   $\widehat{\phi(\pi_1)_*u}(\xi)=\widehat{(\pi_1^*\phi)u}(\xi,0)$ is rapidly
@@ -2012,7 +2012,7 @@ Note that $\xi_1+\xi_2\ne0$ in the last set, by the hypothesis.
 \end{answer}
 
 \begin{remark}\label{microlocal:rem:product-fourier}
-  If the stronger condition $\Sigma(u_1)\cap(-\Sigma(u_2))=\emptyset$ holds,
+  If the stronger condition $\Sigma_{\mathrm{fr}}(u_1)\cap(-\Sigma_{\mathrm{fr}}(u_2))=\emptyset$ holds,
   for example if $u_1$ and $u_2$ have small supports near a point $\bar x$ at
   which the hypothesis of the theorem holds
   (\cref{microlocal:lem:fourier-global}(iii)), then the familiar formula
@@ -2021,12 +2021,12 @@ Note that $\xi_1+\xi_2\ne0$ in the last set, by the hypothesis.
   \end{equation*}
   holds, with an absolutely convergent integral. Indeed
   $\hat w(\xi,\eta)=\hat u_1(\xi-\eta)\hat u_2(\eta)$, and $w\in\mathcal
-  R_\delta$ for small $\delta$: choose open cones $V_i\supset\Sigma(u_i)$ with
+  R_\delta$ for small $\delta$: choose open cones $V_i\supset\Sigma_{\mathrm{fr}}(u_i)$ with
   $\overline{V_1}\cap(-\overline{V_2})=\emptyset$; if $\abs\xi\le\delta\abs\eta$
   then either $\eta\notin V_2$, where $\hat u_2(\eta)$ is rapidly decreasing
   and $\abs{\hat u_1(\xi-\eta)}\le C\ang\eta^M$, or $\eta\in V_2$, and then
   $\xi-\eta$, whose direction differs from that of $-\eta$ by at most
-  $2\delta$, lies in a closed cone disjoint from $\Sigma(u_1)$ if $\delta$ is
+  $2\delta$, lies in a closed cone disjoint from $\Sigma_{\mathrm{fr}}(u_1)$ if $\delta$ is
   small, so $\hat u_1(\xi-\eta)$ is rapidly decreasing in $\ang\eta$. The
   formula is then the definition of $\iota^*w$.
 \end{remark}
