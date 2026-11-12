@@ -1030,8 +1030,18 @@ So \ref{manifolds:E3} gives the multiplicativity. The statement for adjoints was
 proved in \cref{manifolds:prop:adjoint}.
 
 (c) is immediate from \eqref{manifolds:eq:diffop}, and (d) follows from (a),
-since the quantization of a classical symbol is classical.
+since the quantization of a classical symbol is classical, together with the local
+statement \cref{euclidean:prop:ph-symbol} (exactness with kernel
+$\Psido{m-1}_{\mathrm{ph}}$). Two homogeneous functions of degree $m$ which differ by an element
+of $S^{m-1}$ coincide, which gives the uniqueness of the homogeneous representative.
 \end{proof}
+
+Conversely, an operator $A\in\Psido m(X;E,F)$ has a principal symbol with a homogeneous
+representative if and only if $A\in\Psido m_{\mathrm{ph}}(X;E,F)+\Psido{m-1}(X;E,F)$: if
+$\sigma_m(A)$ is represented by a homogeneous $a$, then $A-q(\tilde a)\in\Psido{m-1}$, where
+$\tilde a\in S^m_{\mathrm{ph}}$ agrees with $a$ for $\abs\xi\ge1$. Throughout, any statement which
+assigns a homogeneous principal symbol to an operator refers to the classical calculus
+(or to this slightly larger class).
 
 \begin{figure}[ht]
 \centering
