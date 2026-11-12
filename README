@@ -1,6 +1,6 @@
 # Lecture Notes
 
-Three proof-focused manuscripts are maintained:
+Four proof-focused manuscripts are maintained:
 
 - `Lecture draft/Lecture draft.tex`: the b-calculus, Fredholm theory on
   closed manifolds and cylindrical ends, the APS spectral boundary problem,
@@ -15,7 +15,24 @@ Three proof-focused manuscripts are maintained:
   de Rham model, face decomposition, residual-operator caveat, and carefully
   scoped alternative reconstructions by Čech--de Rham descent and
   Rees--Fedosov Hochschild-chain formality.
+- `Microlocal analysis/Microlocal analysis and index theory.tex` (with
+  `preamble.tex`, `bibliography.tex` and `chapters/`): a single streamlined
+  edition merging two sets of lecture notes by R. B. Melrose, *Introduction to
+  Microlocal Analysis* (MIT, 2003) and *Lectures on Pseudodifferential
+  Operators* (MIT 18.157, 2005--2006). Part I: distributions, the calculus on
+  R^n, microlocalization, conormal distributions, operators on manifolds;
+  Part II: isotropic and scattering calculi, traces and determinants;
+  Part III: elliptic boundary problems, Hamilton--Jacobi theory, the wave
+  equation and Weyl asymptotics; Part IV: index theory (homotopy invariance,
+  Toeplitz operators, Bott periodicity, product-type operators, the families
+  index theorem, eta forms); Part V: Hochschild homology. Notation is unified,
+  draft material and empty sections of the originals are removed, and proofs
+  are completed; each chapter ends with exercises and a Notes section recording
+  the main corrections to the originals.
+
 Compiled releases, with stable contents and figure lists, are available here:
+
+- [Microlocal Analysis and Index Theory](<output/pdf/Microlocal analysis and index theory.pdf>)
 
 - [Heat Kernels and Index Theory](<output/pdf/Atiyah-Singer index theorem.pdf>)
 - [Notes on the b-Calculus and the APS Index Theorem](<output/pdf/Lecture draft.pdf>)
@@ -42,4 +59,4 @@ make
 
 The build uses `latexmk` with pdfLaTeX until references, tables of contents,
 and lists of figures stabilize. Intermediate files go to `tmp/pdfs/`; the
-three release PDFs in `output/pdf/` are intentionally tracked.
+four release PDFs in `output/pdf/` are intentionally tracked.

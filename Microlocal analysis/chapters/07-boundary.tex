@@ -841,9 +841,9 @@ pseudodifferential operator $Q_+\in\Psido{0}(H;V_2,V_1)$;
 \begin{proof}
 Since $\singsupp Q(w\,\delta(x))\subset\supp w\subset H$, only points of $H$ need
 attention, and by a partition of unity we may assume $w$ is supported in a coordinate
-patch. Choose coordinates $(x,y)$ on $W=(-1,1)\times O$ around the patch, with $x$ the
-given function, trivializing $V_1,V_2$, and with $W\subset\{\chi=1\}$ if we shrink to
-$x>-1/2$ (only $x\ge0$ matters). Let $\phi,\psi\in\CIc(W)$ with $\psi=1$ on
+patch. Choose coordinates $(x,y)$ on an open set $W=(-\epsilon,\epsilon)\times O\subset
+\{\chi=1\}$ containing the patch, with $x$ the given function, trivializing $V_1,V_2$
+(away from $H$ the analysis is not needed, by pseudolocality). Let $\phi,\psi\in\CIc(W)$ with $\psi=1$ on
 $\supp\phi$ and near $\supp w\times\{0\}$, and $\phi=1$ on a neighbourhood of a given
 compact $L_0\subset W$. By \cref{ch:manifolds}, in these coordinates $\phi Q\psi=
 \Op(q)+R$ with $q\in S^{-1}(\R^n;\R^n)$ and $R$ with smooth compactly supported kernel,
@@ -919,3 +919,232 @@ smoothness of $Q(w\delta(x))$ up to $H$ from $M_-$, with boundary value
 $Q_-\in\Psido{0}(H;V_2,V_1)$, $\sigma_0(Q_-)=(-i|\eta|\sigma(\nu)^*+\sigma(\eta)^*)/
 (2|dx||\eta|)$, obtained from the residue at $\xi_-$.
 \end{remark}
+
+\section{The Calder\'on projector for a dividing hypersurface}\label{boundary:sec:calderon-dividing}
+
+We return to the standing hypotheses of \cref{boundary:sec:dividing}. By
+\cref{boundary:thm:layer} and \cref{boundary:rem:other-side} with $Q=D^{-1}$, for
+$w\in\CI(H;V_2)$ the distribution $D^{-1}(w\delta(x))$ is smooth up to $H$ from both
+sides, which completes the proof of \cref{boundary:prop:layer-iso}, and the boundary
+values
+\begin{equation*}
+Q_\pm w=\lim_{\pm x\downarrow0}D^{-1}(w\,\delta(x))
+\end{equation*}
+define $Q_\pm\in\Psido{0}(H;V_2,V_1)$. Applying \eqref{boundary:eq:jump-solutions} to
+$u=D^{-1}(w\delta(x))\in\mathcal{N}_H$ gives $\frac1i\sigma(dx)(Q_+-Q_-)w=w$, i.e.
+\begin{equation}\label{boundary:eq:Qjump}
+Q_+-Q_-=i\,\sigma(dx)^{-1}.
+\end{equation}
+
+\begin{proof}[Proof of \cref{boundary:thm:calderon-dividing}]
+Define
+\begin{equation}\label{boundary:eq:PiC-def}
+\PiC v=Q_+\Big(\frac1i\sigma(dx)v\Big)=b_+D^{-1}\Big(\frac1i\sigma(dx)v\,\delta(x)\Big),
+\quad v\in\CI(H;V),
+\end{equation}
+so $\PiC\in\Psido{0}(H;V)$ is classical, and by \eqref{boundary:eq:Qjump}
+$\Id-\PiC=-Q_-\frac1i\sigma(dx)$.
+
+If $u\in\mathcal{N}_+$ then $u_c\in\mathcal{N}_H$ (zero on $M_-$) and by
+\eqref{boundary:eq:jump-solutions} $Du_c=\frac1i\sigma(dx)(b_+u)\delta(x)$, so
+$u_c=D^{-1}(\frac1i\sigma(dx)(b_+u)\delta(x))$ and, taking boundary values from
+$M_+$,
+\begin{equation}\label{boundary:eq:PiC-on-data}
+\PiC\,b_+u=b_+u,\quad u\in\mathcal{N}_+.
+\end{equation}
+Conversely for any $v\in\CI(H;V)$, $u=D^{-1}(\frac1i\sigma(dx)v\delta(x))|_{M_+}$
+lies in $\mathcal{N}_+$ and $b_+u=\PiC v$. Hence $\Ran\PiC=b_+(\mathcal{N}_+)$, and
+by \eqref{boundary:eq:PiC-on-data} $\PiC^2v=\PiC v$. Together with
+\cref{boundary:lem:unique}, $b_+:\mathcal{N}_+\to\PiC\CI(H;V)$ is an isomorphism.
+
+Similarly, for $u\in\mathcal{N}_-$, $Du_c=-\frac1i\sigma(dx)(b_-u)\delta(x)$, so
+$b_-u=-Q_-\frac1i\sigma(dx)b_-u=(\Id-\PiC)b_-u$; and for any $v$, $-D^{-1}(\frac1i
+\sigma(dx)v\delta(x))|_{M_-}\in\mathcal{N}_-$ has boundary value $(\Id-\PiC)v$. Hence
+$b_-:\mathcal{N}_-\to(\Id-\PiC)\CI(H;V)$ is an isomorphism.
+
+Uniqueness: a projection on $\CI(H;V)$ is determined by its range and null space,
+and these are forced to be $b_+(\mathcal{N}_+)$ and $b_-(\mathcal{N}_-)$; a
+pseudodifferential operator is determined by its action on $\CI$.
+
+Finally, by \cref{boundary:thm:layer}(iii), $\sigma_0(\PiC)=\sigma_0(Q_+)\frac1i|dx|
+\sigma(\nu)=\frac12\big(\sigma(\nu)^*\sigma(\nu)+\sigma(\eta)^*\sigma(\nu)/(i|\eta|)
+\big)$. By \eqref{boundary:eq:dirac} $\sigma(\nu)^*\sigma(\nu)=\Id$, and by
+\eqref{boundary:eq:clifford}, since $g(\eta,\nu)=0$,
+$\sigma(\eta)^*\sigma(\nu)=-\sigma(\nu)^*\sigma(\eta)=-\sigma(\nu)^{-1}\sigma(\eta)$,
+which gives \eqref{boundary:eq:calderon-symbol}. With $A=i\sigma(\nu)^{-1}\sigma(\eta)/
+|\eta|=i\sigma(\nu)^*\sigma(\eta)/|\eta|$, the second Clifford relation gives
+$\sigma(\eta)\sigma(\nu)^*=-\sigma(\nu)\sigma(\eta)^*$, so $A^2=-\sigma(\nu)^*\sigma(\eta)
+\sigma(\nu)^*\sigma(\eta)/|\eta|^2=\sigma(\nu)^*\sigma(\nu)\sigma(\eta)^*\sigma(\eta)/
+|\eta|^2=\Id$, and $A^*=-i\sigma(\eta)^*\sigma(\nu)/|\eta|=A$.
+\end{proof}
+
+\begin{example}
+For $D=D_x+iD_y$ (\cref{boundary:ex:dirac}) we have $\sigma(\nu)=1$, $\sigma(\eta)=
+i\eta$, so $\sigma_0(\PiC)=\frac12(1-\eta/|\eta|)$, the projection onto negative
+frequencies. This is as it should be: $Du=0$ means $u$ is holomorphic in $x+iy$, and
+$e^{\eta(x+iy)}$ is bounded in $x>0$ precisely when $\eta<0$.
+\end{example}
+
+\subsection*{The Poisson operator and a right inverse}
+The proof shows that
+\begin{equation*}
+I_D:\PiC\CI(H;V)\to\mathcal{N}_+,\quad I_Dv=D^{-1}\Big(\frac1i\sigma(dx)v\,\delta(x)
+\Big)\Big|_{M_+},
+\end{equation*}
+is the inverse of $b_+$: $u=I_Dv$ is the unique solution of $Du=0$ in $M_+^\circ$,
+$u\in\CI(M_+;V_1)$, $b_+u=v$. This is the \emph{Poisson operator} for the Calder\'on
+boundary condition. As well as $I_D$ we have a natural right inverse for $D$ on $M_+$.
+
+\begin{lemma}\label{boundary:lem:RD}
+If $f\in\CI(M_+;V_2)$ then $R_Df=D^{-1}(f_c)|_{M_+}\in\CI(M_+;V_1)$, and $D\circ
+R_D=\Id$ on $\CI(M_+;V_2)$.
+\end{lemma}
+\begin{proof}
+Certainly $D(D^{-1}f_c)=f_c$, so $DR_Df=f$ in $M_+^\circ$; the point is the
+regularity. By \cref{boundary:lem:formal}(i) there is $u'\in\CI(M_+;V_1)$ with
+$b_+u'=0$ and $h=Du'-f\in\dCI(M_+;V_2)$. By the jump formula $D(u'_c)=(Du')_c=f_c+h_c$,
+where $h_c\in\CI(M;V_2)$. Hence $D^{-1}f_c=u'_c-D^{-1}h_c$ and $R_Df=u'-(D^{-1}h_c)
+|_{M_+}\in\CI(M_+;V_1)$.
+\end{proof}
+
+$R_D$ is not a two-sided inverse: $D$ has the large null space $\mathcal{N}_+=I_D\big(
+\PiC\CI(H;V)\big)$ on $M_+$. Combining the two operators solves the boundary problem
+with Calder\'on boundary condition, see \cref{boundary:ex:calderon-bvp}.
+
+\section{Smoothing operators and generalized inverses}\label{boundary:sec:smoothing}
+
+On a manifold with boundary there is no invertible extension of $D$ at hand, and we
+must work with parametrices; to correct their errors we use some abstract functional
+analysis. Let $\mathcal H$ be a separable Hilbert space, $\Lin=\Lin(\mathcal H)$,
+$\Kpt=\Kpt(\mathcal H)$ the compact operators and $\Fin=\Fin(\mathcal H)$ the
+finite-rank operators, so $\Kpt$ is the norm closure of $\Fin$.
+
+\begin{definition}\label{boundary:def:biideal}
+A subspace $\cJ\subset\Lin$ with a Fr\'echet topology given by norms
+$\norm{\cdot}_k$, $k\in\N_0$, is a \emph{bi-ideal} if:
+\begin{enumerate}[label=(\alph*)]
+\item\label{boundary:it:alg} $\cJ$ is a subalgebra and for each $k$ there are $k'$ and
+$C_k$ with $\norm{AB}_k\le C_k\norm{A}_{k'}\norm{B}_{k'}$, $A,B\in\cJ$;
+\item\label{boundary:it:star} $\norm{A}_{\Lin}\le C\norm{A}_0$ and $A^*\in\cJ$ with
+$\norm{A^*}_k\le C_k\norm{A}_{k'}$ for $A\in\cJ$;
+\item\label{boundary:it:dense} $\Fin\cap\cJ$ is dense in $\cJ$;
+\item\label{boundary:it:corner} if $A_1,A_2\in\cJ$ and $B\in\Lin$ then $A_1BA_2\in\cJ$,
+with $\norm{A_1BA_2}_k\le C_k\norm{A_1}_{k'}\norm{B}_\Lin\norm{A_2}_{k'}$.
+\end{enumerate}
+\end{definition}
+
+By \ref{boundary:it:star} and \ref{boundary:it:dense}, $\cJ\subset\Kpt$. Note that
+$\cJ$ need not be an ideal in $\Lin$; \ref{boundary:it:corner} replaces this.
+
+\begin{proposition}\label{boundary:prop:smoothing-biideal}
+Let $X$ be a compact manifold, with or without boundary, with a smooth positive
+density, and $E$ a Hermitian bundle. The operators on $\mathcal{H}=L^2(X;E)$ with
+kernels in $\CI(X\times X;\Hom(E))$, $Au(z)=\int_XA(z,z')u(z')$, with the norms
+$\norm{A}_k=\norm{A(\cdot,\cdot)}_{\mathcal{C}^k(X\times X)}$ (defined using a fixed
+finite atlas), form a bi-ideal.
+\end{proposition}
+\begin{proof}
+The kernel of $AB$ is $\int_XA(z,z'')B(z'',z')dz''$, whose $\mathcal{C}^k$ norm is
+bounded by $\operatorname{vol}(X)\norm{A}_k\norm{B}_k$; the kernel of $A^*$ is
+$A(z',z)^*$; and $\norm{A}_\Lin\le\norm{A(\cdot,\cdot)}_{L^2(X\times X)}\le C\norm{A}_0$.
+For \ref{boundary:it:corner}, the kernel of $A_1BA_2$ is $\inner{BA_2(\cdot,z')}{A_1(z,
+\cdot)^*}_{L^2}$, and derivatives in $z,z'$ fall on $A_1$, $A_2$, giving the estimate.
+For \ref{boundary:it:dense}, embed $X$ in its double, extend the kernel to a smooth
+kernel on $\Xt\times\Xt$, and by a partition of unity reduce to a kernel in
+$\CIc(\R^n\times\R^n)$; regarding it as a smooth function on a large torus, its Fourier
+partial sums $\sum c_{jk}e^{ij\cdot z}e^{ik\cdot z'}$ converge in $\CI$, and after
+multiplying by $\chi(z)\chi(z')$, $\chi=1$ on the support, they give finite sums of
+products $\varphi(z)\psi(z')$, i.e.\ finite-rank operators in $\cJ$.
+\end{proof}
+
+The elements of this bi-ideal are the \emph{smoothing operators}; they have the
+following characterization (in the boundaryless case $\dCmI=\CmI$).
+
+\begin{proposition}\label{boundary:prop:smoothing-char}
+A linear operator $A:\dCI(X;E)\to\CmI(X;F)$ has kernel in $\CI(X\times X;\Hom(E,F)
+\otimes\Omega_R)$ if and only if it extends to a continuous map $\dCmI(X;E)\to
+\CI(X;F)$, i.e.\ to continuous maps $\Hdot{-m}(X;E)\to\CI(X;F)$ for all $m$.
+\end{proposition}
+\begin{proof}
+If $A$ has smooth kernel, $Au(z)=u(A(z,\cdot))$ makes sense for supported
+distributions $u$ (the test functions being smooth up to the boundary) and is smooth
+and continuous in $u$. Conversely, for $z'\in X$ and $e\in E_{z'}$, $\delta_{z'}e\in
+\Hdot{-m}(X;E)$ when $m>n/2$, and $z'\mapsto\delta_{z'}$ is $\mathcal{C}^k$ into
+$\Hdot{-m}$ for $m>n/2+k$ (as seen from the Fourier transform $e^{-iz'\cdot\zeta}$ in
+local coordinates). Thus $A(z,z')e=(A\delta_{z'}e)(z)$ is $\mathcal{C}^k$ in $z'$
+with values in $\CI(X;F)$ for every $k$, hence smooth on $X\times X$. For
+$u\in\dCI(X;E)$, $u=\int u(z')\delta_{z'}dz'$ as a Riemann integral in $\Hdot{-m}$,
+so by continuity $Au=\int A(\cdot,z')u(z')dz'$.
+\end{proof}
+
+\begin{proposition}\label{boundary:prop:gen-inverse}
+If $\cJ$ is a bi-ideal and $A\in\cJ$, then $\Id+A$ has a generalized inverse $\Id+B$,
+$B\in\cJ$:
+\begin{equation*}
+(\Id+B)(\Id+A)=\Id-\pi_L,\quad(\Id+A)(\Id+B)=\Id-\pi_R,
+\end{equation*}
+where $\pi_L,\pi_R\in\cJ\cap\Fin$ are the orthogonal projections onto $\Nul(\Id+A)$ and
+onto $\Ran(\Id+A)^\perp=\Nul(\Id+A^*)$.
+\end{proposition}
+\begin{proof}
+As $A$ is compact, $\Id+A$ is Fredholm. If $u\in\Nul(\Id+A)$ then $u=-Au$, so
+$\pi_L=-A\pi_L$, and taking adjoints $\pi_L=-\pi_LA^*$; hence $\pi_L=A\pi_LA^*\in\cJ$
+by \ref{boundary:it:corner}. Similarly $\pi_R=A^*\pi_RA\in\cJ$. Let $G\in\Lin$ be
+the inverse of $\Id+A:\Nul(\Id+A)^\perp\to\Ran(\Id+A)$, extended by $0$ on
+$\Ran(\Id+A)^\perp$; then $G(\Id+A)=\Id-\pi_L$ and $(\Id+A)G=\Id-\pi_R$. Setting
+$B=G-\Id$, these identities give $B=-\pi_L-A-BA$ and $B=-\pi_R-A-AB$; substituting
+the second into the first,
+\begin{equation*}
+B=-\pi_L-A+\pi_RA+A^2+ABA,
+\end{equation*}
+and each term lies in $\cJ$ by \ref{boundary:it:alg} and \ref{boundary:it:corner}.
+\end{proof}
+
+Now let $\mathcal{H}_1,\mathcal{H}_2$ be Hilbert spaces, $\cJ_i\subset\Lin(\mathcal
+H_i)$ bi-ideals and $A\in\Lin(\mathcal H_1,\mathcal H_2)$. A \emph{left parametrix}
+for $A$ modulo $\cJ_1$ is $B_L\in\Lin(\mathcal H_2,\mathcal H_1)$ with $B_LA=\Id+J_L$,
+$J_L\in\cJ_1$; a \emph{right parametrix} modulo $\cJ_2$ is $B_R$ with $AB_R=\Id+J_R$,
+$J_R\in\cJ_2$.
+
+\begin{proposition}\label{boundary:prop:left-param}
+If $A$ has a left parametrix $B_L$ modulo $\cJ_1$, then $A$ has closed range and
+finite-dimensional null space, the orthogonal projection $\pi_L$ onto $\Nul A$ lies in
+$\cJ_1\cap\Fin$, and there are $J\in\cJ_1$, $\pi'_L\in\cJ_1\cap\Fin$ a self-adjoint
+projection with $\pi_L\le\pi'_L$, and $G\in\Lin(\mathcal{H}_2,\mathcal{H}_1)$ such that
+\begin{equation*}
+B'_L=(\Id+J)B_L\ \text{satisfies}\ B'_LA=\Id-\pi'_L,\quad\text{and}\quad
+B''_L=B'_L+(\pi'_L-\pi_L)G\ \text{satisfies}\ B''_LA=\Id-\pi_L,
+\end{equation*}
+with $\pi'_L-\pi_L\in\cJ_1\cap\Fin$.
+\end{proposition}
+\begin{proof}
+By \cref{boundary:prop:gen-inverse} there is $J\in\cJ_1$ with $(\Id+J)(\Id+J_L)=
+\Id-\pi'_L$, which gives $B'_L$. Then $\Nul A\subset\Ran\pi'_L$ is finite dimensional
+and $\pi_L=\pi'_L\pi_L\pi'_L\in\cJ_1$. On the closed subspace $\Ran(\Id-\pi'_L)$,
+$u=B'_LAu$, so $\norm{u}\le\norm{B'_L}\norm{Au}$ and $A(\Ran(\Id-\pi'_L))$ is closed;
+adding the finite-dimensional space $A(\Ran\pi'_L)$, $\Ran A$ is closed. Let $G$ be
+the generalized inverse of $A$ ($GA=\Id-\pi_L$, $G=0$ on $(\Ran A)^\perp$). Since
+$\pi'_L\pi_L=\pi_L$, $B''_LA=\Id-\pi'_L+(\pi'_L-\pi_L)(\Id-\pi_L)=\Id-\pi_L$, and
+$\pi'_L-\pi_L=\pi'_L(\Id-\pi_L)\pi'_L\in\cJ_1$.
+\end{proof}
+
+\begin{proposition}\label{boundary:prop:right-param}
+If $A$ has a right parametrix $B_R$ modulo $\cJ_2$, then $A$ has closed range of finite
+codimension, the orthogonal projection $\pi_R$ onto $(\Ran A)^\perp$ lies in
+$\cJ_2\cap\Fin$, and there are $J\in\cJ_2$ and a self-adjoint projection $\pi'_R\in
+\cJ_2\cap\Fin$ with $\pi_R\le\pi'_R$ such that $B'_R=B_R(\Id+J)$ satisfies
+$AB'_R=\Id-\pi'_R$; moreover $B''_R=B'_R+G(\pi'_R-\pi_R)$, $G$ the generalized inverse
+of $A$, satisfies $AB''_R=\Id-\pi_R$.
+\end{proposition}
+\begin{proof}
+Choose $J$ by \cref{boundary:prop:gen-inverse} with $(\Id+J_R)(\Id+J)=\Id-\pi'_R$.
+Then $\Ran A\supset\Ran(\Id-\pi'_R)$, a closed subspace of finite codimension, so
+$\Ran A$ is closed of finite codimension, $(\Ran A)^\perp\subset\Ran\pi'_R$ and
+$\pi_R=\pi'_R\pi_R\pi'_R\in\cJ_2$. Finally $AG=\Id-\pi_R$ and $\pi_R\pi'_R=\pi_R$ give
+$AB''_R=\Id-\pi'_R+(\Id-\pi_R)(\pi'_R-\pi_R)=\Id-\pi_R$.
+\end{proof}
+
+An operator with closed range and either finite-dimensional null space or
+finite-codimensional range is called \emph{semi-Fredholm}. The existence of a left or
+right parametrix modulo compact operators is necessary and sufficient for these two
+kinds of semi-Fredholmness.
