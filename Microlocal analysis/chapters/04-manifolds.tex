@@ -68,7 +68,9 @@ is a homeomorphism onto an open subset of $\R^n$ and every $f\in\mathcal F$
 satisfies $f|_{\Omega}=g\circ\kappa$ for some $g\in\CI(\kappa(\Omega))$. The map
 $\kappa$ is then called a \emph{coordinate system} (or chart) near $\bar x$.
 Two $\CI$ structures $\mathcal F_1$, $\mathcal F_2$ are \emph{compatible} if
-$\mathcal F_1\cup\mathcal F_2$ is also a $\CI$ structure.
+$\mathcal F_1\cup\mathcal F_2$ is also a $\CI$ structure and every coordinate system
+for $\mathcal F_1$, and every coordinate system for $\mathcal F_2$, is also a
+coordinate system for $\mathcal F_1\cup\mathcal F_2$.
 \end{definition}
 
 Compatibility is an equivalence relation, and each equivalence class contains a
@@ -2861,8 +2863,8 @@ theorem for Toeplitz operators of Baum and Douglas.
 
 \begin{exercise}\label{manifolds:ex:compatible}
 Show that compatibility, as defined in \cref{manifolds:def:structure}, is an
-equivalence relation on $\CI$ structures. Conclude that there is a unique maximal
-$\CI$ structure containing any given $\CI$ structure.
+equivalence relation on $\CI$ structures. Conclude that each $\CI$ structure is
+contained in a unique maximal $\CI$ structure compatible with it.
 \end{exercise}
 
 \begin{exercise}\label{manifolds:ex:maximal}
@@ -2875,7 +2877,8 @@ structure is an algebra.
 
 \begin{exercise}[Partitions of unity]\label{manifolds:ex:partition}
 Show that any $\CI$ manifold admits partitions of unity. That is, if $O_a$, $a\in\mathcal A$,
-is an open cover of $X$, then there exist $\rho_{a,i}\in\CI(X)$, $a\in\mathcal A$, $i\in\N$, with
+is an open cover of $X$, then there exist $\rho_{a,i}\in\CI(X)$, $a\in\mathcal A$, $i\in I$
+for some index set $I$ (which may be taken to be $\N$ if $X$ is second countable), with
 $0\le\rho_{a,i}\le1$, each $\rho_{a,i}$ vanishing outside a compact subset $K_{a,i}\subset O_a$,
 such that each point has a neighbourhood meeting only finitely many of the $K_{a,i}$,
 and $\sum_{a,i}\rho_{a,i}=1$.
