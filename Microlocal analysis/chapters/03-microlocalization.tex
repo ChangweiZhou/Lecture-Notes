@@ -1,0 +1,2135 @@
+\chapter{Microlocalization}\label{ch:microlocal}
+\providecommand{\Tz}[1]{T^*#1\setminus0}% cotangent space minus the zero section
+\providecommand{\conesupp}{\operatorname{cone\,supp}}% cone support of a symbol
+\providecommand{\Ell}{\operatorname{Ell}}% elliptic set
+
+The pseudodifferential operators of \cref{ch:euclidean} are not local: the
+support of $Au$ is in general not contained in the support of $u$. They are,
+however, \emph{pseudolocal}: they do not create new singularities. This
+chapter refines that statement in two directions. First, singularities of a
+distribution are not only located at points of $\R^n$ but also have
+directions: the \emph{wavefront set} $\WF(u)$ is a closed conic subset of
+$\Tz{\R^n}=\R^n\times(\R^n\setminus0)$ which projects onto the singular
+support. Secondly, an operator $A\in\Psido m(\R^n)$ has an \emph{essential
+support} $\WFp(A)\subset\Tz{\R^n}$, the set where its symbol is not rapidly
+decreasing, and $A$ is \emph{microlocal}:
+$\WF(Au)\subset\WFp(A)\cap\WF(u)$. Conversely, where $A$ is elliptic it has
+a microlocal parametrix, so $\WF(u)\subset\WF(Au)\cup\Char_m(A)$.
+
+\Cref{microlocal:sec:supports,microlocal:sec:pseudolocal} deal with supports
+and singular supports, \cref{microlocal:sec:ess,microlocal:sec:char,microlocal:sec:parametrix}
+with the essential support, ellipticity at a point and microlocal
+parametrices, and \cref{microlocal:sec:coordinates} with the invariance of
+the calculus under changes of coordinates; this is what makes it possible to
+transfer everything to manifolds in \cref{ch:manifolds}. The wavefront set
+is introduced in \cref{microlocal:sec:wf} and characterized in terms of the
+Fourier transform in \cref{microlocal:sec:fourier}. The remaining sections
+develop the calculus of wavefront sets: invariance under diffeomorphisms,
+the wavefront set of the kernel of a pseudodifferential operator, and the
+behaviour of wavefront sets under pairing, exterior products, restriction,
+projection, multiplication, pull-back and push-forward, culminating in the
+wavefront relation of an operator with a distributional kernel.
+
+\subsection*{Conventions}
+We use freely the results of \cref{ch:distributions,ch:euclidean}. We write
+$u(\phi)$ for the (bilinear) pairing of a distribution with a test function
+and $\hat u=\cF u$ for the Fourier transform. A function $f$ on a set
+$U\subset\R^p\times\R^n$ is \emph{rapidly decreasing on $U$} if
+$\sup_{(x,\xi)\in U}\ang\xi^N\abs{f(x,\xi)}<\infty$ for every $N$; similarly
+for functions of $\xi$ alone. For $\bar\xi\in\R^n\setminus0$, $\bar x\in\R^p$
+and $\eps>0$ we use the open cones
+\begin{equation*}
+  V_\eps(\bar\xi)=\Bigl\{\xi\in\R^n\setminus0;\
+  \Bigl|\frac\xi{\abs\xi}-\frac{\bar\xi}{\abs{\bar\xi}}\Bigr|<\eps\Bigr\},\qquad
+  \Gamma_\eps(\bar x,\bar\xi)=\{x;\abs{x-\bar x}<\eps\}\times V_\eps(\bar\xi).
+\end{equation*}
+A set $W\subset\R^p\times(\R^n\setminus0)$ is \emph{conic} if
+$(x,\xi)\in W\Rightarrow(x,t\xi)\in W$ for all $t>0$. Every conic
+neighbourhood of $(\bar x,\bar\xi)$ contains some $\Gamma_\eps(\bar x,\bar\xi)$.
+For a conic set $W$ we put $W^-=\{(x,-\xi);(x,\xi)\in W\}$. We shall often use
+the elementary inequality
+\begin{equation}\label{microlocal:eq:angle}
+  \abs{se-tf}\ge\tfrac12\abs{e-f}\,(s+t),\qquad s,t\ge0,\ \abs e=\abs f=1,
+\end{equation}
+which follows from
+$\abs{se-tf}^2=(s-t)^2+st\abs{e-f}^2\ge\frac12\abs{e-f}^2(s^2+t^2)$ (note
+$\abs{e-f}\le2$), and the inequality
+$\bigl|\frac v{\abs v}-\frac w{\abs w}\bigr|\le\frac{2\abs{v-w}}{\abs w}$ for
+$v,w\ne0$.
+
+From \cref{ch:euclidean} we recall in particular: every $A\in\Psido m(\R^n)$
+is $A=\Op(\sigma_L(A))=\Op_R(\sigma_R(A))$ with unique left and right
+symbols in $S^m(\R^n;\R^n)$; if $A=\Op(a)$ for an amplitude
+$a\in S^m(\R^{2n};\R^n)$ (an amplitude of weight $0$), then its kernel is the
+oscillatory integral $K_A=I(a)=\int e^{i(x-y)\cdot\xi}a(x,y,\xi)\,\dbar\xi$
+and
+\begin{equation}\label{microlocal:eq:reduction}
+  \sigma_L(A)(x,\xi)\sim\sum_\alpha\frac{i^{\abs\alpha}}{\alpha!}
+  D^\alpha_\xi D^\alpha_ya(x,y,\xi)\big|_{y=x};
+\end{equation}
+$\Op(a)\Op_R(b)=\Op\bigl(a(x,\xi)b(y,\xi)\bigr)$ for symbols $a$, $b$;
+$\Psido{-\infty}(\R^n)$ consists of the operators whose kernels are smooth
+and satisfy $\abs{D^\alpha_xD^\beta_yK(x,y)}\le C_{\alpha\beta N}\ang{x-y}^{-N}$
+for all $\alpha,\beta,N$; such operators map $\cSp(\R^n)$ into $\CI(\R^n)$,
+with $Eu(x)=u(K_E(x,\cdot))$; every $A\in\Psido m(\R^n)$ acts continuously
+on $\cS(\R^n)$ and on $\cSp(\R^n)$, the latter by
+$(Au)(\phi)=u(A^t\phi)$; and an operator $A\in\Psido m(\R^n)$ which is
+\emph{(globally) elliptic}, in the sense that
+$\abs{\sigma_L(A)(x,\xi)}\ge\eps\ang\xi^m$ for $\abs\xi\ge R$ and some
+$\eps,R>0$, has a parametrix $B\in\Psido{-m}(\R^n)$ with
+$AB-\Id,\ BA-\Id\in\Psido{-\infty}(\R^n)$.
+
+% ======================================================================
+\section{Supports and singular supports}\label{microlocal:sec:supports}
+
+Recall from \cref{ch:distributions} that the support $\supp u$ of
+$u\in\cSp(\R^n)$ is the complement of the largest open set on which $u$
+vanishes; equivalently, $\bar x\notin\supp u$ if and only if there exists
+$\phi\in\CIc(\R^n)$ with $\phi(\bar x)\ne0$ and $\phi u=0$. We write
+\begin{equation*}
+  \CmIc(\R^n)=\{u\in\cSp(\R^n);\ \supp u\text{ compact}\}.
+\end{equation*}
+An element $u\in\CmIc(\R^n)$ acts on all of $\CI(\R^n)$ by
+$u(\phi)=u(\psi\phi)$, where $\psi\in\CIc(\R^n)$ equals $1$ near $\supp u$;
+this does not depend on $\psi$. Since $u$ is tempered,
+$\abs{u(\phi)}\le C\norm{\psi\phi}_k$, so $u$ has \emph{finite order}: for a
+compact neighbourhood $L$ of $\supp u$,
+\begin{equation}\label{microlocal:eq:finite-order}
+  \abs{u(\phi)}\le C\sum_{\abs\beta\le k}\sup_{L}\abs{D^\beta\phi},
+  \qquad\phi\in\CI(\R^n).
+\end{equation}
+
+\subsection{The calculus of supports}
+If $A:\cS(\R^n)\to\cSp(\R^n)$ is continuous and linear, its Schwartz kernel
+$K_A\in\cSp(\R^{2n})$ has a support, and we set $\supp(A)=\supp(K_A)$. A
+subset $G\subset\R^n\times\R^n$ defines a \emph{relation}, that is a map on
+subsets,
+\begin{equation*}
+  G\circ S=\{x\in\R^n;\ \exists\,y\in S\text{ with }(x,y)\in G\},
+  \qquad S\subset\R^n.
+\end{equation*}
+In terms of the projections $\pi_L(x,y)=x$, $\pi_R(x,y)=y$,
+\begin{equation*}
+  \begin{tikzcd}[column sep=small]
+    & \R^{2n}\arrow[dl,"\pi_L"']\arrow[dr,"\pi_R"] & \\
+    \R^n & & \R^n
+  \end{tikzcd}
+  \qquad
+  G\circ S=\pi_L\bigl(\pi_R^{-1}(S)\cap G\bigr).
+\end{equation*}
+If $S$ is compact and $G$ is closed then $G\circ S$ is closed: the restriction
+of $\pi_L$ to the closed set $\pi_R^{-1}(S)\cap G$ is proper (the preimage of
+a compact set $K$ is a closed subset of $K\times S$), and proper continuous
+maps into $\R^n$ are closed.
+
+\begin{proposition}[Calculus of supports]\label{microlocal:prop:supports}
+  If $A:\cS(\R^n)\to\cSp(\R^n)$ is continuous and linear then
+  \begin{equation*}
+    \supp(A\phi)\subset\supp(A)\circ\supp(\phi)\quad\text{for all }\phi\in\CIc(\R^n).
+  \end{equation*}
+\end{proposition}
+\begin{proof}
+  Since $\supp(A)\circ\supp(\phi)$ is closed, a point $\bar x$ outside it has
+  a neighbourhood disjoint from it; choose $\psi\in\CIc(\R^n)$ supported in
+  this neighbourhood with $\psi(\bar x)\ne0$. If $(x,y)\in\supp(A)$ with
+  $y\in\supp\phi$ then $x\in\supp(A)\circ\supp(\phi)$, so $x\notin\supp\psi$.
+  Thus $\supp(A)\cap(\supp\psi\times\supp\phi)=\emptyset$. For every
+  $\chi\in\cS(\R^n)$ the function $(\chi\psi)\boxtimes\phi$ vanishes near
+  $\supp K_A$, hence
+  $(\psi A\phi)(\chi)=K_A\bigl((\chi\psi)\boxtimes\phi\bigr)=0$. So
+  $\psi A\phi=0$ and $\bar x\notin\supp(A\phi)$.
+\end{proof}
+
+For instance, the kernel of a differential operator is supported in the
+diagonal $\Diag=\{(x,x)\}$, so differential operators are \emph{local}:
+$\supp(P\phi)\subset\supp\phi$. A pseudodifferential operator, on the
+other hand, generally has $\supp(A)=\R^{2n}$; the kernel of $\ang D^{-2}$ on
+$\R$, for example, is $\frac12e^{-\abs{x-y}}$.
+
+\subsection{Singular support}
+
+\begin{definition}\label{microlocal:def:singsupp}
+  The \emph{singular support} of $u\in\cSp(\R^n)$ is the set $\singsupp u$
+  of points $\bar x$ such that there is no $\phi\in\CIc(\R^n)$ with
+  $\phi(\bar x)\ne0$ and $\phi u\in\CI(\R^n)$.
+\end{definition}
+
+If $\phi u\in\CI$ and $\phi(\bar x)\ne0$ then $\phi\ne0$ on a ball $B$
+around $\bar x$, and for every $\psi\in\CIc(B)$,
+$\psi u=(\psi/\phi)\phi u\in\CI$. Hence the complement of $\singsupp u$ is
+open, $\singsupp u$ is closed, and $\bar x\notin\singsupp u$ if and only if
+$\phi u\in\CIc(\R^n)$ for some $\phi\in\CIc(\R^n)$ with $\phi=1$ near $\bar
+x$. Directly from the definitions,
+\begin{equation*}
+  \singsupp u\subset\supp u,\qquad
+  \singsupp u=\emptyset\iff u\in\CI(\R^n),
+\end{equation*}
+the second because $u$ is smooth if it is smooth near each point.
+
+% ======================================================================
+\section{Pseudolocality}\label{microlocal:sec:pseudolocal}
+
+The first observation is that the kernel of a pseudodifferential operator is
+smooth, and rapidly decreasing, away from the diagonal.
+
+\begin{lemma}\label{microlocal:lem:off-diagonal}
+  Let $a\in S^m(\R^{2n};\R^n)$ be an amplitude and let $\rho\in\CI(\R^n)$
+  have all derivatives bounded and vanish near $0$. Then
+  $\rho(x-y)I(a)(x,y)$ is the kernel of an element of
+  $\Psido{-\infty}(\R^n)$: it is smooth and
+  \begin{equation*}
+    \abs{D^\beta_xD^\gamma_y\bigl(\rho(x-y)I(a)\bigr)}
+    \le C_{\beta\gamma N}\ang{x-y}^{-N}\quad\text{for all }\beta,\gamma,N.
+  \end{equation*}
+\end{lemma}
+\begin{proof}
+  By the kernel identities of \cref{ch:euclidean},
+  \begin{equation}\label{microlocal:eq:kernel-ids}
+    D^\beta_xD^\gamma_y\bigl[(x-y)^\alpha I(a)\bigr]
+    =I\bigl((\xi+D_x)^\beta(D_y-\xi)^\gamma(-D_\xi)^\alpha a\bigr),
+  \end{equation}
+  and the amplitude on the right has order $m+\abs\beta+\abs\gamma-\abs\alpha$.
+  If this is less than $-n$ the oscillatory integral converges absolutely
+  and uniformly, so for $\abs\alpha=N>m+n+k$ the function
+  $k_\alpha=(x-y)^\alpha I(a)$ is of class $\mathcal C^k$ with all
+  derivatives of order at most $k$ bounded.
+
+  Suppose $\rho(z)=0$ for $\abs z<\delta$. Using
+  $\abs z^{2N}=\sum_{\abs\alpha=N}\frac{N!}{\alpha!}z^{2\alpha}$ we can write
+  \begin{equation*}
+    \rho(z)=\sum_{\abs\alpha=N}\frac{N!}{\alpha!}h_\alpha(z)z^\alpha,\qquad
+    h_\alpha(z)=\frac{\rho(z)z^\alpha}{\abs z^{2N}},
+  \end{equation*}
+  where $h_\alpha\in\CI(\R^n)$ and, since $z^\alpha\abs z^{-2N}$ is
+  homogeneous of degree $-N$ on $\abs z\ge\delta$,
+  $\abs{D^\mu h_\alpha(z)}\le C_\mu\ang z^{-N}$. Then
+  $\rho(x-y)I(a)=\sum_{\abs\alpha=N}\frac{N!}{\alpha!}h_\alpha(x-y)k_\alpha$ as
+  distributions, and by Leibniz' formula this is a $\mathcal C^k$ function
+  whose derivatives of order at most $k$ are bounded by $C\ang{x-y}^{-N}$.
+  Since $k$ and $N>m+n+k$ are arbitrary, the lemma follows.
+\end{proof}
+
+\begin{proposition}\label{microlocal:prop:kernel-singsupp}
+  If $A\in\Psido m(\R^n)$ then $\singsupp(K_A)\subset\Diag$. Moreover, if
+  $\phi,\psi\in\CIb(\R^n)$ have supports at positive distance from each
+  other, then $\phi A\psi\in\Psido{-\infty}(\R^n)$.
+\end{proposition}
+\begin{proof}
+  Write $K_A=I(a)$ with $a=\sigma_L(A)(x,\xi)$. If $\bar x\ne\bar y$, choose
+  $\rho$ as in \cref{microlocal:lem:off-diagonal} with $\rho=1$ near
+  $\bar x-\bar y$; then $K_A=\rho(x-y)K_A$ near $(\bar x,\bar y)$, which is
+  smooth. For the second statement, if $\abs{x-y}\ge\delta>0$ whenever
+  $x\in\supp\phi$, $y\in\supp\psi$, choose $\rho$ with $\rho(z)=1$ for
+  $\abs z\ge\delta$ and $\rho(z)=0$ for $\abs z\le\delta/2$. The kernel of
+  $\phi A\psi$ is
+  $\phi(x)\psi(y)K_A=\phi(x)\psi(y)\rho(x-y)K_A$, and multiplication by
+  $\phi(x)\psi(y)$, a function with bounded derivatives, preserves the
+  estimates of \cref{microlocal:lem:off-diagonal}.
+\end{proof}
+
+We also note how residual operators act on distributions of compact
+support.
+
+\begin{lemma}\label{microlocal:lem:residual-compact}
+  If $E\in\Psido{-\infty}(\R^n)$ and $u\in\CmIc(\R^n)$ then $Eu\in\cS(\R^n)$.
+\end{lemma}
+\begin{proof}
+  $Eu(x)=u(K_E(x,\cdot))$, and differentiating under $u$,
+  $x^\alpha D^\gamma Eu(x)=u\bigl(x^\alpha D^\gamma_xK_E(x,\cdot)\bigr)$. By
+  \eqref{microlocal:eq:finite-order} this is bounded by
+  $C\sup_{y\in L,\abs\beta\le k}\abs{x^\alpha D^\gamma_xD^\beta_yK_E(x,y)}$,
+  which is finite since $\ang x\le C_L\ang{x-y}$ for $y$ in the compact set
+  $L$ and $\abs{D^\gamma_xD^\beta_yK_E}\le C_N\ang{x-y}^{-N}$.
+\end{proof}
+
+\begin{definition}
+  A continuous linear operator $A:\cSp(\R^n)\to\cSp(\R^n)$ is
+  \emph{pseudolocal} if $\singsupp(Au)\subset\singsupp(u)$ for all
+  $u\in\cSp(\R^n)$.
+\end{definition}
+
+\begin{proposition}\label{microlocal:prop:pseudolocal}
+  Pseudodifferential operators are pseudolocal.
+\end{proposition}
+\begin{proof}
+  Let $A\in\Psido m(\R^n)$, $u\in\cSp(\R^n)$ and $\bar x\notin\singsupp u$.
+  Choose $\phi\in\CIc(\R^n)$ with $\phi=1$ on a neighbourhood $U$ of $\bar x$
+  and $\phi u\in\CIc(\R^n)$, and $\psi\in\CIc(U)$ with $\psi=1$ near $\bar x$.
+  Then
+  \begin{equation*}
+    \psi Au=\psi A(\phi u)+\psi A(1-\phi)u.
+  \end{equation*}
+  The first term is in $\cS(\R^n)$, since $A$ preserves $\cS$. Since
+  $\supp\psi$ is a compact subset of the open set $U$ and $1-\phi=0$ on $U$,
+  the supports of $\psi$ and $1-\phi$ are at positive distance, so
+  $\psi A(1-\phi)\in\Psido{-\infty}(\R^n)$ by
+  \cref{microlocal:prop:kernel-singsupp}, and the second term is smooth.
+  Hence $\psi Au\in\CI$ and $\bar x\notin\singsupp(Au)$.
+\end{proof}
+
+% ======================================================================
+\section{Cone support and essential support}\label{microlocal:sec:ess}
+
+\begin{definition}\label{microlocal:def:conesupp}
+  The \emph{cone support} of $a\in S^m(\R^p;\R^n)$ is the set
+  $\conesupp(a)\subset\R^p\times(\R^n\setminus0)$ of points $(\bar x,\bar\xi)$
+  such that $a$ is \emph{not} rapidly decreasing on any set
+  $\Gamma_\eps(\bar x,\bar\xi)$, $\eps>0$.
+\end{definition}
+
+The complement of $\conesupp(a)$ is open and conic, so $\conesupp(a)$ is a
+closed conic subset of $\R^p\times(\R^n\setminus0)$. Only the behaviour of
+$a$ for large $\abs\xi$ matters: changing $a$ on a set where $\abs\xi$ is
+bounded does not change the cone support. A priori the definition only
+involves $a$ itself, but in fact all derivatives decay as well.
+
+\begin{lemma}\label{microlocal:lem:conesupp-derivatives}
+  Let $a\in S^m(\R^p;\R^n)$ be rapidly decreasing on $\Gamma_\eps(\bar
+  x,\bar\xi)$. Then for every $\eps'<\eps$ and all $\alpha,\beta$,
+  $D^\alpha_xD^\beta_\xi a$ is rapidly decreasing on $\Gamma_{\eps'}(\bar
+  x,\bar\xi)$. In particular
+  $\conesupp(D^\alpha_xD^\beta_\xi a)\subset\conesupp(a)$.
+\end{lemma}
+\begin{proof}
+  Since $D_{x_j}a\in S^m$ and $D_{\xi_j}a\in S^{m-1}$, by induction (with
+  finitely many intermediate values of $\eps$ between $\eps'$ and $\eps$) it
+  suffices to show that $\pa_{x_j}a$ and $\pa_{\xi_j}a$ are rapidly
+  decreasing on $\Gamma_{\eps''}=\Gamma_{\eps''}(\bar x,\bar\xi)$ for any
+  $\eps''<\eps$. Fix $M\ge\abs m$; we show that both derivatives are
+  $O(\ang\xi^{(m-M)/2})$ on $\Gamma_{\eps''}$, which suffices as $M$ is
+  arbitrary. Since all derivatives of $a$ are $O(\ang\xi^m)$ we may restrict
+  to $\abs\xi\ge R$, for an $R$ to be chosen.
+
+  Let $(x,\xi)\in\Gamma_{\eps''}$ and $0<t\le\eps-\eps''$. Then
+  $(x+se_j,\xi)\in\Gamma_\eps$ for $\abs s\le t$, and Taylor's formula gives
+  \begin{equation*}
+    \abs{t\,\pa_{x_j}a(x,\xi)}\le\abs{a(x+te_j,\xi)}+\abs{a(x,\xi)}
+    +\tfrac12t^2\sup_{\abs s\le t}\abs{\pa^2_{x_j}a(x+se_j,\xi)}
+    \le 2C_M\ang\xi^{-M}+Ct^2\ang\xi^m.
+  \end{equation*}
+  Taking $t=(\eps-\eps'')\ang\xi^{-(M+m)/2}$ gives
+  $\abs{\pa_{x_j}a(x,\xi)}\le C'\ang\xi^{(m-M)/2}$.
+
+  For the $\xi$-derivative let $0<t\le1$ and $\abs s\le t$. Then
+  $\bigl|\frac{\xi+se_j}{\abs{\xi+se_j}}-\frac\xi{\abs\xi}\bigr|\le\frac2{\abs\xi}$,
+  so $(x,\xi+se_j)\in\Gamma_\eps$ if $\abs\xi\ge R=2/(\eps-\eps'')+1$; also
+  $\ang{\xi+se_j}\ge\frac12\ang\xi$. As before
+  \begin{equation*}
+    \abs{t\,\pa_{\xi_j}a(x,\xi)}\le C\ang\xi^{-M}+Ct^2\ang\xi^{m},
+  \end{equation*}
+  and $t=\ang\xi^{-(M+m)/2}$ gives $\abs{\pa_{\xi_j}a}\le C'\ang\xi^{(m-M)/2}$.
+\end{proof}
+
+\begin{corollary}\label{microlocal:cor:conesupp-compact}
+  Let $a\in S^m(\R^p;\R^n)$ and let $K\subset\R^p$ be compact with
+  $\conesupp(a)\cap(K\times(\R^n\setminus0))=\emptyset$. Then $\phi a\in
+  S^{-\infty}(\R^p;\R^n)$ for every $\phi\in\CIc(\R^p)$ with $\supp\phi\subset
+  K$. In particular, if $a$ has compact support in $x$ and
+  $\conesupp(a)=\emptyset$, then $a\in S^{-\infty}(\R^p;\R^n)$.
+\end{corollary}
+\begin{proof}
+  Each point of the compact set $K\times\Sphere^{n-1}$ has a neighbourhood
+  $\Gamma_{\eps}(\bar x,\bar\xi)$ on which $a$ is rapidly decreasing, hence
+  (by \cref{microlocal:lem:conesupp-derivatives}) with all derivatives on
+  $\Gamma_{\eps/2}(\bar x,\bar\xi)$. Finitely many of the latter cover
+  $K\times(\R^n\setminus0)$, so every $D^\alpha_xD^\beta_\xi a$ is rapidly
+  decreasing on $K\times\R^n$, and by Leibniz' formula $\phi a\in
+  S^{-\infty}$.
+\end{proof}
+
+\begin{remark}\label{microlocal:rem:conesupp-global}
+  The compactness in $x$ cannot be dropped: a symbol may have empty cone
+  support without being in $S^{-\infty}$, because the definition only
+  controls it locally uniformly in $x$; see \cref{microlocal:ex:empty-wf}.
+\end{remark}
+
+\begin{definition}\label{microlocal:def:ess}
+  The \emph{essential support} (or \emph{operator wavefront set}) of
+  $A\in\Psido m(\R^n)$ is the closed conic set
+  \begin{equation*}
+    \WFp(A)=\conesupp\bigl(\sigma_L(A)\bigr)\subset\Tz{\R^n}.
+  \end{equation*}
+\end{definition}
+
+The essential support can be computed from any amplitude.
+
+\begin{lemma}\label{microlocal:lem:ess-amplitude}
+  If $A=\Op(a)$ with $a\in S^m(\R^{2n};\R^n)$ then
+  \begin{equation*}
+    \WFp(A)\subset\{(x,\xi);\ (x,x,\xi)\in\conesupp(a)\}.
+  \end{equation*}
+\end{lemma}
+\begin{proof}
+  Suppose $(\bar x,\bar x,\bar\xi)\notin\conesupp(a)$, so $a$ is rapidly
+  decreasing on $\{\abs{x-\bar x}<\eps,\abs{y-\bar x}<\eps,\xi\in
+  V_\eps(\bar\xi)\}$ for some $\eps>0$. By
+  \cref{microlocal:lem:conesupp-derivatives} (applied with $(x,y)$ as base
+  variables) all derivatives of $a$ are rapidly decreasing on the
+  corresponding set with $\eps/2$ in place of $\eps$, so each term
+  $D^\alpha_\xi D^\alpha_ya(x,y,\xi)|_{y=x}$ in \eqref{microlocal:eq:reduction}
+  is rapidly decreasing on $\Gamma_{\eps/2}(\bar x,\bar\xi)$. By
+  \eqref{microlocal:eq:reduction},
+  $\sigma_L(A)-\sum_{\abs\alpha<N}\frac{i^{\abs\alpha}}{\alpha!}D^\alpha_\xi
+  D^\alpha_ya|_{y=x}\in S^{m-N}$, so
+  $\abs{\sigma_L(A)}\le C_N\ang\xi^{m-N}$ on $\Gamma_{\eps/2}(\bar
+  x,\bar\xi)$ for every $N$, that is $(\bar x,\bar\xi)\notin\WFp(A)$.
+\end{proof}
+
+\begin{proposition}\label{microlocal:prop:ess}
+  For $A\in\Psido m(\R^n)$ and $B\in\Psido{m'}(\R^n)$:
+  \begin{enumerate}[label=\textup{(\roman*)}]
+  \item $\WFp(A)=\conesupp(\sigma_R(A))$;
+  \item $\WFp(A+B)\subset\WFp(A)\cup\WFp(B)$ (if $m=m'$) and
+    $\WFp(AB)\subset\WFp(A)\cap\WFp(B)$;
+  \item $\WFp(A^*)=\WFp(A)$ and $\WFp(A^t)=\WFp(A)^-$;
+  \item $\WFp(\Id)=\Tz{\R^n}$, $\WFp(E)=\emptyset$ for
+    $E\in\Psido{-\infty}(\R^n)$, and for multiplication by $\phi\in\CIb(\R^n)$,
+    $\WFp(\phi)=\supp\phi\times(\R^n\setminus0)$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  (i) $A=\Op(b(y,\xi))$ with $b=\sigma_R(A)$, and $(x,x,\xi)\in\conesupp(b(y,\xi))$
+  if and only if $(x,\xi)\in\conesupp(b)$, so $\WFp(A)\subset\conesupp(\sigma_R(A))$
+  by \cref{microlocal:lem:ess-amplitude}. Conversely
+  $\sigma_R(A)\sim\sum_\beta\frac{(-i)^{\abs\beta}}{\beta!}D^\beta_\xi
+  D^\beta_x\sigma_L(A)$, and the argument in the proof of
+  \cref{microlocal:lem:ess-amplitude} shows
+  $\conesupp(\sigma_R(A))\subset\conesupp(\sigma_L(A))$.
+
+  (ii) The first statement is clear. For the second, let $a=\sigma_L(A)$ and
+  $b=\sigma_R(B)$, so that $AB=\Op(a(x,\xi)b(y,\xi))$. If $(\bar
+  x,\bar\xi)\notin\WFp(A)$ then $a(x,\xi)b(y,\xi)$ is rapidly decreasing on
+  $\{\abs{x-\bar x}<\eps,\xi\in V_\eps(\bar\xi)\}$ for some $\eps$, since $b$
+  is polynomially bounded; if $(\bar x,\bar\xi)\notin\WFp(B)=\conesupp(b)$,
+  the same holds with the roles of $x$ and $y$ exchanged. In either case
+  $(\bar x,\bar x,\bar\xi)\notin\conesupp(a(x,\xi)b(y,\xi))$, and
+  \cref{microlocal:lem:ess-amplitude} applies.
+
+  (iii) The adjoint of $\Op(a)$, $a=\sigma_L(A)$, is $\Op(\overline{a(y,\xi)})$,
+  and its transpose is $\Op(a(y,-\xi))$ (the kernel of $A^t$ is
+  $K_A(y,x)=\int e^{i(x-y)\cdot\xi}a(y,-\xi)\,\dbar\xi$). By
+  \cref{microlocal:lem:ess-amplitude}, $\WFp(A^*)\subset\WFp(A)$ and
+  $\WFp(A^t)\subset\WFp(A)^-$; applying this to $A^*$ and $A^t$ gives
+  equality.
+
+  (iv) is immediate from the definition, since $\sigma_L(\Id)=1$,
+  $\sigma_L(E)\in S^{-\infty}$ and $\sigma_L(\phi)=\phi(x)$.
+\end{proof}
+
+\begin{lemma}\label{microlocal:lem:localize}
+  Let $A\in\Psido m(\R^n)$ and $\phi\in\CIc(\R^n)$ with
+  $\WFp(A)\cap(\supp\phi\times(\R^n\setminus0))=\emptyset$. Then $\phi A$ and
+  $A\phi$ lie in $\Psido{-\infty}(\R^n)$. In particular, if $\WFp(A)=\emptyset$
+  then $\phi A,A\phi\in\Psido{-\infty}(\R^n)$ for all $\phi\in\CIc(\R^n)$.
+\end{lemma}
+\begin{proof}
+  $\sigma_L(\phi A)=\phi\sigma_L(A)\in S^{-\infty}$ by
+  \cref{microlocal:cor:conesupp-compact}. Similarly
+  $A\phi=\Op\bigl(\sigma_R(A)(y,\xi)\phi(y)\bigr)=\Op_R(\phi\sigma_R(A))$ and
+  $\phi\sigma_R(A)\in S^{-\infty}$, by
+  \cref{microlocal:prop:ess}(i) and \cref{microlocal:cor:conesupp-compact}.
+\end{proof}
+
+Note that $\WFp(A)=\emptyset$ does \emph{not} imply
+$A\in\Psido{-\infty}(\R^n)$ (\cref{microlocal:rem:conesupp-global}); this is
+why compactly supported cut-offs appear in many arguments below.
+
+\subsection{Microlocal cut-offs}
+We shall constantly use operators which are ``microlocally the identity''
+near a given closed cone and vanish microlocally away from it. Fix
+$\chi\in\CIc(\R^n)$ with $0\le\chi\le1$, $\chi(t)=1$ for $\abs t\le\frac12$ and
+$\chi(t)=0$ for $\abs t\ge1$. For $z=(\bar x,\bar\xi)\in\Tz{\R^n}$ and
+$0<\eps<1$ set
+\begin{equation}\label{microlocal:eq:gamma}
+  \gamma_{z,\eps}(x,\xi)=\chi\Bigl(\frac{x-\bar x}\eps\Bigr)
+  \chi\Bigl(\frac1\eps\Bigl(\frac\xi{\abs\xi}-\frac{\bar\xi}{\abs{\bar\xi}}\Bigr)\Bigr)
+  \bigl(1-\chi(\eps\xi)\bigr).
+\end{equation}
+The last factor vanishes for $\abs\xi\le1/(2\eps)$, and functions which are
+smooth and homogeneous of degree $0$ in $\abs\xi\ge c>0$ are symbols of
+order $0$ there, so $\gamma_{z,\eps}\in S^0(\R^n;\R^n)$. It takes values in
+$[0,1]$, is supported in $\overline{\Gamma_\eps(z)}$ and equals $1$ on
+$\Gamma_{\eps/2}(z)\cap\{\abs\xi\ge1/\eps\}$. Hence
+$G_{z,\eps}=\Op(\gamma_{z,\eps})\in\Psido0(\R^n)$ satisfies
+\begin{equation}\label{microlocal:eq:G-cutoff}
+  \WFp(G_{z,\eps})\subset\overline{\Gamma_\eps(z)},\qquad
+  \WFp(\Id-G_{z,\eps})\cap\Gamma_{\eps/2}(z)=\emptyset,\qquad
+  G_{z,\eps}=\psi G_{z,\eps}
+\end{equation}
+for any $\psi\in\CIc(\R^n)$ equal to $1$ on $\{\abs{x-\bar x}\le\eps\}$.
+
+\begin{lemma}[Microlocal cut-off]\label{microlocal:lem:cutoff}
+  Let $W_1,W_2\subset\Tz{\R^n}$ be disjoint closed conic sets with $\pi(W_1)$
+  bounded, where $\pi(x,\xi)=x$. Then there is $a\in S^0(\R^n;\R^n)$,
+  real-valued with compact support in $x$, such that $C=\Op(a)$ satisfies
+  \begin{equation*}
+    \WFp(C)\cap W_2=\emptyset,\qquad\WFp(\Id-C)\cap W_1=\emptyset .
+  \end{equation*}
+\end{lemma}
+\begin{proof}
+  The set $W_1\cap(\R^n\times\Sphere^{n-1})$ is compact. For each of its
+  points $z$ there is $\eps_z>0$ with $\overline{\Gamma_{2\eps_z}(z)}\cap
+  W_2=\emptyset$, since $W_2$ is closed and conic. Choose finitely many
+  $z_1,\dots,z_N$ such that the cones $\Gamma_{\eps_j/2}(z_j)$,
+  $\eps_j=2\eps_{z_j}$, cover $W_1$, and put
+  $g=\sum_j\gamma_{z_j,\eps_j}\in S^0$. Then $g\ge0$, $g\ge1$ on
+  $\bigcup_j\Gamma_{\eps_j/2}(z_j)\cap\{\abs\xi\ge R\}$ with
+  $R=\max_j1/\eps_j$, and $\supp g\subset\bigcup_j\overline{\Gamma_{\eps_j}(z_j)}$.
+  Let $\Phi\in\CI(\R)$ with $\Phi(t)=0$ for $t\le0$ and $\Phi(t)=1$ for
+  $t\ge1$, and set $a=\Phi\circ g$. By the chain rule $a\in S^0$, and
+  $a$ has compact support in $x$. Since $a$ vanishes outside
+  $\bigcup_j\overline{\Gamma_{\eps_j}(z_j)}$, which is a closed cone disjoint
+  from $W_2$, $\WFp(C)\cap W_2=\emptyset$. Since $1-a$ vanishes on the open
+  cone $\bigcup_j\Gamma_{\eps_j/2}(z_j)$ for $\abs\xi\ge R$, and this cone
+  contains $W_1$, $\WFp(\Id-C)\cap W_1=\emptyset$.
+\end{proof}
+
+% ======================================================================
+\section{The characteristic variety}\label{microlocal:sec:char}
+
+\begin{definition}\label{microlocal:def:elliptic}
+  $A\in\Psido m(\R^n)$ is \emph{elliptic at} $(\bar x,\bar\xi)\in\Tz{\R^n}$
+  if there is $\eps>0$ such that
+  \begin{equation*}
+    \abs{\sigma_L(A)(x,\xi)}\ge\eps\abs\xi^m\quad\text{on }
+    \Gamma_\eps(\bar x,\bar\xi)\cap\{\abs\xi\ge1/\eps\}.
+  \end{equation*}
+  The set of such points is the \emph{elliptic set} $\Ell_m(A)$; its
+  complement $\Char_m(A)=\Tz{\R^n}\setminus\Ell_m(A)$ is the
+  \emph{characteristic variety} of $A$.
+\end{definition}
+
+If $a'-\sigma_L(A)\in S^{m-1}$ then $\abs{a'-\sigma_L(A)}\le
+C\ang\xi^{m-1}\le\frac\eps2\abs\xi^m$ for $\abs\xi$ large, so the condition
+holds for $a'$ with $\eps/2$ in place of $\eps$ (after shrinking the cone).
+Thus ellipticity at a point depends only on the principal symbol
+$\sigma_m(A)$; in particular $\sigma_R(A)$ may be used instead of
+$\sigma_L(A)$. Clearly $\Ell_m(A)$ is open and conic, so $\Char_m(A)$ is a
+closed conic subset of $\Tz{\R^n}$. If $A$ is elliptic at $z$ then
+$\sigma_L(A)$ is not rapidly decreasing near $z$, so
+\begin{equation*}
+  \Ell_m(A)\subset\WFp(A).
+\end{equation*}
+For example, multiplication by $\phi\in\CIb(\R^n)$ is elliptic (of order
+$0$) at $(\bar x,\bar\xi)$ if and only if $\phi(\bar x)\ne0$, and
+$G_{z,\eps}$ in \eqref{microlocal:eq:G-cutoff} is elliptic at $z$. The
+operator $A$ is globally elliptic in the sense of \cref{ch:euclidean} if
+and only if the estimate in \cref{microlocal:def:elliptic} holds uniformly,
+with one $\eps$ for all $(\bar x,\bar\xi)$.
+
+\begin{proposition}\label{microlocal:prop:char-product}
+  For $A\in\Psido m(\R^n)$ and $B\in\Psido{m'}(\R^n)$,
+  \begin{equation*}
+    \Char_{m+m'}(AB)=\Char_m(A)\cup\Char_{m'}(B).
+  \end{equation*}
+\end{proposition}
+\begin{proof}
+  We may use the representatives $a=\sigma_L(A)$, $b=\sigma_L(B)$ and $ab$ of
+  the principal symbols, since $\sigma_L(AB)-ab\in S^{m+m'-1}$. If $A$ and
+  $B$ are elliptic at $z$ then $\abs{ab}\ge\eps^2\abs\xi^{m+m'}$ on a suitable
+  $\Gamma_\eps(z)\cap\{\abs\xi\ge1/\eps\}$, so $AB$ is elliptic at $z$.
+  Conversely if $\abs{ab}\ge\eps\abs\xi^{m+m'}$ there, then since
+  $\abs b\le C\ang\xi^{m'}\le 2^{\abs{m'}}C\abs\xi^{m'}$ for $\abs\xi\ge1$,
+  we get $\abs a\ge\eps'\abs\xi^m$, so $A$ is elliptic at $z$, and similarly
+  $B$ is.
+\end{proof}
+
+% ======================================================================
+\section{Microlocal parametrices}\label{microlocal:sec:parametrix}
+
+The essential support allows us to refine the notion of a parametrix of an
+elliptic operator to that of a parametrix at a point.
+
+\begin{proposition}\label{microlocal:prop:parametrix}
+  If $A\in\Psido m(\R^n)$ and $z\notin\Char_m(A)$, there exists a
+  \emph{microlocal parametrix} for $A$ at $z$: an operator
+  $B\in\Psido{-m}(\R^n)$ with
+  \begin{equation*}
+    z\notin\WFp(AB-\Id)\quad\text{and}\quad z\notin\WFp(BA-\Id).
+  \end{equation*}
+  Moreover there is then an open conic neighbourhood $\Gamma$ of $z$ with
+  $\Gamma\cap\bigl(\WFp(AB-\Id)\cup\WFp(BA-\Id)\bigr)=\emptyset$.
+\end{proposition}
+\begin{proof}
+  The last statement holds for any $B$ with the first property, as essential
+  supports are closed. Let $a=\sigma_L(A)$ and choose $\eps\in(0,\frac12)$
+  and $c_0>0$ such that $\abs a\ge c_0\abs\xi^m$ on
+  $\Gamma_{2\eps}(z)\cap\{\abs\xi\ge1/(2\eps)\}$. Let $\gamma=\gamma_{z,\eps}$
+  and $L=\Op(\gamma)$. Then $z\notin\WFp(\Id-L)$ by
+  \eqref{microlocal:eq:G-cutoff}, and $\supp\gamma\subset
+  \overline{\Gamma_\eps(z)}\cap\{\abs\xi\ge1/(2\eps)\}$, so that
+  $\abs a\ge c_0\abs\xi^m$ on $\supp\gamma$.
+
+  Let $\Lambda=\Op(\ang\xi^{2m})\in\Psido{2m}(\R^n)$ and consider
+  \begin{equation*}
+    J=(\Id-L)\Lambda+A^*A\in\Psido{2m}(\R^n).
+  \end{equation*}
+  Its principal symbol is represented by
+  $(1-\gamma)\ang\xi^{2m}+\abs a^2$. Since $0\le\gamma\le1$, at a point
+  with $\abs\xi\ge R$ either $\gamma\le\frac12$, and then this is at least
+  $\frac12\ang\xi^{2m}$, or $\gamma>\frac12$, and then the point is in
+  $\supp\gamma$ and the expression is at least
+  $c_0^2\abs\xi^{2m}\ge c\ang\xi^{2m}$. Since $\sigma_L(J)$ differs from this
+  representative by a symbol of order $2m-1$, $J$ is globally elliptic and
+  has a parametrix $H\in\Psido{-2m}(\R^n)$, $HJ-\Id=E_1\in\Psido{-\infty}$.
+  Set $B_1=HA^*\in\Psido{-m}(\R^n)$. Then
+  \begin{equation*}
+    B_1A-\Id=H\bigl(J-(\Id-L)\Lambda\bigr)-\Id=E_1-H(\Id-L)\Lambda,
+  \end{equation*}
+  and $\WFp(H(\Id-L)\Lambda)\subset\WFp(\Id-L)\not\ni z$ by
+  \cref{microlocal:prop:ess}. So $z\notin\WFp(B_1A-\Id)$: $B_1$ is a left
+  microlocal parametrix.
+
+  In the same way $J'=(\Id-L)\Lambda+AA^*$ is globally elliptic; if $H'$ is
+  a parametrix, $JH'-\Id=E_2\in\Psido{-\infty}$, then $B_2=A^*H'$ satisfies
+  $AB_2-\Id=E_2-(\Id-L)\Lambda H'$, so $z\notin\WFp(AB_2-\Id)$. Write
+  $R_1=B_1A-\Id$ and $R_2=AB_2-\Id$. Then
+  \begin{equation*}
+    B_2=(B_1A-R_1)B_2=B_1(\Id+R_2)-R_1B_2=B_1+B_1R_2-R_1B_2,
+  \end{equation*}
+  so $z\notin\WFp(B_2-B_1)$, and $AB_1-\Id=R_2+A(B_1-B_2)$ shows
+  $z\notin\WFp(AB_1-\Id)$. Thus $B=B_1$ is a two-sided microlocal parametrix.
+\end{proof}
+
+The same argument shows that a microlocal parametrix at $z$ is unique up to
+an operator whose essential support does not contain $z$
+(\cref{microlocal:ex:uniqueness}).
+
+% ======================================================================
+\section{Coordinate invariance}\label{microlocal:sec:coordinates}
+
+For an open set $\Omega\subset\R^n$ let $\CIc(\Omega)$ be the smooth functions
+with compact support in $\Omega$ and
+\begin{equation*}
+  \CmIc(\Omega)=\{u\in\cSp(\R^n);\ \supp u\text{ is a compact subset of }\Omega\}.
+\end{equation*}
+An element $u\in\CmIc(\Omega)$ acts on $\CI(\Omega)$ by $u(\phi)=u(\psi\phi)$,
+$\psi\in\CIc(\Omega)$ equal to $1$ near $\supp u$.
+
+Let $F:\Omega\to\Omega'$ be a diffeomorphism between open subsets of $\R^n$,
+with inverse $G$, and let $F^*\phi=\phi\circ F$, so
+$F^*:\CIc(\Omega')\to\CIc(\Omega)$. If $u\in\CIc(\Omega')$ and
+$\phi\in\CIc(\Omega)$, the change of variables $y=F(x)$ gives
+\begin{equation}\label{microlocal:eq:pullback-change}
+  \int u(F(x))\phi(x)\,dx=\int u(y)\,\phi(G(y))\,\abs{\det DG(y)}\,dy .
+\end{equation}
+
+\begin{lemma}\label{microlocal:lem:diffeo-pullback}
+  For $u\in\CmIc(\Omega')$ the formula
+  \begin{equation*}
+    (F^*u)(\phi)=u\bigl(\abs{\det DG}\,G^*\phi\bigr),\qquad\phi\in\cS(\R^n),
+  \end{equation*}
+  (where $G^*\phi=\phi\circ G\in\CI(\Omega')$) defines $F^*u\in\CmIc(\Omega)$
+  with $\supp F^*u=G(\supp u)$. It extends $F^*$ on $\CIc(\Omega')$, is
+  continuous in the sense that $F^*u_j\to F^*u$ weakly if $u_j\to u$ weakly
+  and the supports of the $u_j$ lie in a fixed compact subset of $\Omega'$,
+  and satisfies $(F_1\circ F_2)^*=F_2^*F_1^*$; in particular
+  $G^*F^*=\Id$.
+\end{lemma}
+\begin{proof}
+  $u$ acts on $\CI(\Omega')$, and $\phi\mapsto\abs{\det DG}G^*\phi$ is
+  continuous from $\cS(\R^n)$ to $\CI(\Omega')$, so $F^*u\in\cSp(\R^n)$. If
+  $\phi$ vanishes near $G(\supp u)$ then $\abs{\det DG}G^*\phi$ vanishes near
+  $\supp u$, so $\supp F^*u\subset G(\supp u)$, and equality follows from
+  $G^*F^*u=u$. The consistency with smooth functions is
+  \eqref{microlocal:eq:pullback-change}, continuity is clear, and the
+  composition law follows from the chain rule for Jacobians.
+\end{proof}
+
+If $u\in\CmIc(\Omega')$ and $\rho_\eps(x)=\eps^{-n}\rho(x/\eps)$ with
+$\rho\in\CIc(\R^n)$, $\int\rho=1$, then $\rho_\eps*u\in\CIc(\Omega')$ for small
+$\eps$, with supports in a fixed compact set, and $\rho_\eps*u\to u$ weakly.
+So $\CIc(\Omega')$ is weakly dense in $\CmIc(\Omega')$ in this strong sense
+(see also \cref{microlocal:ex:density}), and $F^*$ is the unique such
+continuous extension.
+
+Now let $A:\cS(\R^n)\to\cSp(\R^n)$ have kernel with compact support in
+$\Omega\times\Omega$. By \cref{microlocal:prop:supports}, $A$ maps
+$\CIc(\Omega)$, indeed $\cS(\R^n)$, into $\CmIc(\Omega)$, and we define
+\begin{equation}\label{microlocal:eq:AF}
+  A_F=G^*\circ A\circ F^*:\CIc(\Omega')\to\CmIc(\Omega').
+\end{equation}
+By \eqref{microlocal:eq:pullback-change} its kernel is
+\begin{equation*}
+  K_{A_F}(x',y')=K_A(G(x'),G(y'))\,\abs{\det DG(y')},
+\end{equation*}
+that is, $K_{A_F}=\abs{\det DG(y')}\,(G\times G)^*K_A$, where $(G\times G)^*$
+is the pull-back of \cref{microlocal:lem:diffeo-pullback} for the
+diffeomorphism $G\times G:\Omega'\times\Omega'\to\Omega\times\Omega$; it has compact support in $\Omega'\times\Omega'$, and we extend it
+by zero to $\R^{2n}$, so $A_F:\cS(\R^n)\to\cSp(\R^n)$. The diffeomorphism
+$F$ induces the map
+\begin{equation*}
+  \chi_F:\Omega\times\R^n\to\Omega'\times\R^n,\qquad
+  \chi_F(x,\xi)=\bigl(F(x),(DF(x)^t)^{-1}\xi\bigr),
+\end{equation*}
+which is a diffeomorphism, linear and invertible on each fibre. (In the
+language of \cref{ch:manifolds}, $\chi_F$ is the inverse of the cotangent map
+$F^*:T^*_{F(x)}\Omega'\to T^*_x\Omega$, $\eta\mapsto DF(x)^t\eta$.)
+
+\begin{theorem}[Coordinate invariance]\label{microlocal:thm:coordinates}
+  Let $F:\Omega\to\Omega'$ be a diffeomorphism of open subsets of $\R^n$ and
+  $A\in\Psido m(\R^n)$ an operator whose kernel has compact support in
+  $\Omega\times\Omega$. Then $A_F\in\Psido m(\R^n)$, its kernel has compact
+  support in $\Omega'\times\Omega'$, and
+  \begin{gather*}
+    \sigma_m(A_F)\circ\chi_F=\sigma_m(A),\qquad
+    \WFp(A_F)=\chi_F\bigl(\WFp(A)\bigr),\\
+    \Char_m(A_F)\cap\pi^{-1}(\Omega')=\chi_F\bigl(\Char_m(A)\cap\pi^{-1}(\Omega)\bigr),
+  \end{gather*}
+  where $\pi(x,\xi)=x$ and the first identity is understood as
+  $\sigma_L(A_F)(F(x),(DF(x)^t)^{-1}\xi)-\sigma_L(A)(x,\xi)\in S^{m-1}$ for
+  $x$ in a neighbourhood of the support, both symbols vanishing for $x$
+  outside compact subsets of $\Omega$, $\Omega'$ respectively.
+\end{theorem}
+\begin{proof}
+  Let $K\subset\Omega$ be compact with $\supp K_A\subset K\times K$, and let
+  $\psi\in\CIc(\Omega)$ equal $1$ near $K$. Then $\psi A=A$, so
+  $a=\sigma_L(A)$ satisfies $a=\psi a$ by uniqueness of the left symbol, and
+  $A=\psi A\psi=\Op(b_0)$ with $b_0(x,y,\xi)=\psi(x)\psi(y)a(x,\xi)$.
+  Similarly $\sigma_L(A_F)$ is supported in $F(K)\times\R^n$.
+
+  Let $L=\supp\psi$. Choose $\delta'>0$ so small that the closed
+  $2\delta'$-neighbourhood of $F(L)$ lies in $\Omega'$ and that, whenever
+  $\operatorname{dist}(x',F(L))\le\delta'$ and $\abs{x'-y'}\le\delta'$, the matrix
+  \begin{equation*}
+    T(x',y')=\int_0^1DG\bigl(y'+t(x'-y')\bigr)\,dt
+  \end{equation*}
+  is invertible with $\abs{\det T}\ge c>0$ and $\norm{T^{-1}}\le C$; this is
+  possible since $T(x',x')=DG(x')$ and $F(L)$ is compact. Then
+  $G(x')-G(y')=T(x',y')(x'-y')$. By uniform continuity of $F$ on a compact
+  neighbourhood of $L$, choose $\delta>0$ such that $x,y\in L$,
+  $\abs{x-y}\le2\delta$ imply $\abs{F(x)-F(y)}<\delta'$.
+
+  Let $\mu\in\CIc(\R^n)$ equal $1$ on $\abs z\le\delta$ and vanish for
+  $\abs z\ge2\delta$, and split $A=A_1+A_2$ with
+  $K_{A_1}=\mu(x-y)K_A$, $K_{A_2}=(1-\mu(x-y))K_A$. By
+  \cref{microlocal:lem:off-diagonal}, $A_2\in\Psido{-\infty}(\R^n)$, so
+  $K_{A_2}$ is smooth, and it has compact support in $\Omega\times\Omega$.
+  Hence $K_{(A_2)_F}$ is smooth with compact support in $\Omega'\times\Omega'$,
+  in particular it satisfies the estimates characterizing
+  $\Psido{-\infty}(\R^n)$, and $(A_2)_F\in\Psido{-\infty}(\R^n)$.
+
+  The kernel of $A_1$ is $I(b)$ with
+  $b(x,y,\xi)=\mu(x-y)\psi(x)\psi(y)a(x,\xi)\in S^m(\R^{2n};\R^n)$, which
+  vanishes unless $x,y\in L$ and $\abs{x-y}\le2\delta$. If $b\in
+  S^{-\infty}$ the integral converges absolutely and the substitution
+  $\xi=S(x',y')\eta$, $S=(T^t)^{-1}$, gives
+  \begin{equation}\label{microlocal:eq:AF-kernel}
+  \begin{gathered}
+    K_{(A_1)_F}(x',y')=\int e^{i(x'-y')\cdot\eta}c(x',y',\eta)\,\dbar\eta,\\
+    c(x',y',\eta)=b\bigl(G(x'),G(y'),S(x',y')\eta\bigr)
+    \frac{\abs{\det DG(y')}}{\abs{\det T(x',y')}},
+  \end{gathered}
+  \end{equation}
+  where $c$ is extended by zero outside the compact set
+  $\{(x',y');\ G(x'),G(y')\in L,\ \abs{G(x')-G(y')}\le2\delta\}$; on this set
+  $\abs{x'-y'}<\delta'$, so $c$ is smooth. For general $b$ we apply this to
+  $\chi(\eps\xi)b$ and let $\eps\to0$: both sides of
+  \eqref{microlocal:eq:AF-kernel} converge in $\cSp(\R^{2n})$, by the
+  continuity of $I$ on amplitudes and of the pull-back on compactly supported
+  distributions. Thus $(A_1)_F=\Op(c)$, provided we show $c\in
+  S^m(\R^{2n};\R^n)$.
+
+  Write $f(x',y')$ for the smooth factor in $c$. By the chain rule,
+  $D^\alpha_{x'}D^\beta_{y'}D^\gamma_\eta\bigl[b(G(x'),G(y'),S\eta)\bigr]$ is
+  a finite sum of terms
+  \begin{equation*}
+    M(x',y')\,\eta^\nu\,
+    \bigl(D^{\alpha'}_xD^{\beta'}_yD^\mu_\xi b\bigr)\bigl(G(x'),G(y'),S\eta\bigr),
+    \qquad\abs\nu\le\abs\mu-\abs\gamma,
+  \end{equation*}
+  with smooth coefficients $M$: each $\eta$-derivative produces one
+  $\xi$-derivative of $b$ and no power of $\eta$, while an $x'$- or
+  $y'$-derivative falling on $S(x',y')\eta$ produces one $\xi$-derivative and
+  at most one factor of $\eta$. On the support, $\ang{S\eta}$ is comparable
+  to $\ang\eta$, so each term is bounded by
+  $C\ang\eta^{\abs\nu}\ang\eta^{m-\abs\mu}\le C\ang\eta^{m-\abs\gamma}$. With
+  Leibniz' formula for the factor $f$, this shows $c\in S^m(\R^{2n};\R^n)$.
+
+  Thus $A_F=(A_1)_F+(A_2)_F\in\Psido m(\R^n)$. By
+  \cref{ch:euclidean}, $\sigma_m(A_F)$ is represented by
+  $c(x',x',\eta)$. Since $T(x',x')=DG(x')$,
+  \begin{equation*}
+    c(x',x',\eta)=\mu(0)\psi(G(x'))^2a\bigl(G(x'),(DG(x')^t)^{-1}\eta\bigr)
+    =a\bigl(x,DF(x)^t\eta\bigr),\quad x=G(x'),
+  \end{equation*}
+  using $DG(x')^{-1}=DF(x)$ and $\psi a=a$. With $(x',\eta)=\chi_F(x,\xi)$ this
+  is $a(x,\xi)$, proving the statement about principal symbols. The same
+  chain rule estimates show that composition with $\chi_F^{-1}$ maps symbols
+  of order $m-1$ supported over $L$ to symbols of order $m-1$, so the class
+  is well defined.
+
+  For the essential support we use \cref{microlocal:lem:ess-amplitude}. Let
+  $(\bar x',\bar\eta)\in\Omega'\times(\R^n\setminus0)$ with
+  $\chi_F^{-1}(\bar x',\bar\eta)=(\bar x,\bar\xi)\notin\WFp(A)$, so $a$, and
+  hence $b(x,y,\xi)$ for $y$ arbitrary, is rapidly decreasing for
+  $(x,\xi)\in\Gamma_\eps(\bar x,\bar\xi)$. Since $S(\bar x',\bar x')\bar\eta=\bar\xi$
+  and $S$, $G$ are continuous, for $(x',y')$ close to $(\bar x',\bar x')$ and
+  $\eta\in V_{\eps'}(\bar\eta)$ with $\eps'$ small we have
+  $(G(x'),S(x',y')\eta)\in\Gamma_\eps(\bar x,\bar\xi)$; as
+  $\ang{S\eta}\ge c\ang\eta$, $c$ is rapidly decreasing there. Hence $(\bar
+  x',\bar x',\bar\eta)\notin\conesupp(c)$ and $(\bar x',\bar\eta)\notin\WFp(A_F)$.
+  Points over $\R^n\setminus F(K)$ are not in $\WFp(A_F)$, since
+  $\sigma_L(A_F)$ vanishes there. Thus $\WFp(A_F)\subset\chi_F(\WFp(A))$.
+  Since $A=(A_F)_G$, the reverse inclusion follows by symmetry. The
+  statement about characteristic varieties follows from that about principal
+  symbols, since $\chi_F$ is homogeneous of degree one in the fibres and
+  satisfies $c^{-1}\abs\xi\le\abs{(DF(x)^t)^{-1}\xi}\le c\abs\xi$ locally
+  uniformly in $x$; so it maps the sets $\Gamma_\eps(z)\cap\{\abs\xi\ge
+  1/\eps\}$ into and onto sets of the same type.
+\end{proof}
+
+This invariance shows that the principal symbol, essential support and
+characteristic variety of a pseudodifferential operator are invariantly
+defined on the cotangent bundle; this is the basis of the extension of the
+calculus to manifolds in \cref{ch:manifolds}. It also gives us the freedom to
+choose local coordinates adapted to a particular problem.
+
+% ======================================================================
+\section{The wavefront set}\label{microlocal:sec:wf}
+
+We first define the wavefront set for distributions of compact support and
+then localize.
+
+\begin{definition}\label{microlocal:def:wf-compact}
+  For $u\in\CmIc(\R^n)$,
+  \begin{equation*}
+    \WF(u)=\bigcap\bigl\{\Char_0(A);\ A\in\Psido0(\R^n),\ Au\in\CI(\R^n)\bigr\}.
+  \end{equation*}
+\end{definition}
+
+Thus $z\notin\WF(u)$ if and only if there is $A\in\Psido0(\R^n)$, elliptic at
+$z$, with $Au\in\CI(\R^n)$. As an intersection of closed conic sets,
+$\WF(u)\subset\Tz{\R^n}$ is closed and conic. The wavefront set refines the
+singular support. Let $\pi:\Tz{\R^n}\to\R^n$ be the projection.
+
+\begin{proposition}\label{microlocal:prop:wf-singsupp}
+  For $u\in\CmIc(\R^n)$, $\pi(\WF(u))=\singsupp(u)$.
+\end{proposition}
+\begin{proof}
+  If $\bar x\notin\singsupp u$ there is $\phi\in\CIc(\R^n)$ with
+  $\phi(\bar x)\ne0$ and $\phi u\in\CI$. As a multiplication operator
+  $\phi\in\Psido0(\R^n)$ is elliptic at $(\bar x,\bar\xi)$ for every
+  $\bar\xi\ne0$, so $(\bar x,\bar\xi)\notin\WF(u)$. Thus
+  $\pi(\WF(u))\subset\singsupp(u)$.
+
+  Conversely suppose $(\bar x,\omega)\notin\WF(u)$ for every
+  $\omega\in\Sphere^{n-1}$. For each $\omega$ there is $A_\omega\in\Psido0$
+  with $A_\omega u\in\CI$ and $\abs{\sigma_L(A_\omega)}\ge\eps_\omega$ on
+  $\Gamma_{\eps_\omega}(\bar x,\omega)\cap\{\abs\xi\ge1/\eps_\omega\}$. By
+  compactness of the sphere there are finitely many $\omega_j$ such that the
+  $V_{\eps_j}(\omega_j)$, $\eps_j=\eps_{\omega_j}$, cover $\R^n\setminus0$. Let
+  $A_j=A_{\omega_j}$, $\eps_0=\min_j\eps_j$, $R_0=\max_j1/\eps_j$ and
+  \begin{equation*}
+    B=\sum_jA_j^*A_j\in\Psido0(\R^n).
+  \end{equation*}
+  Since $A_ju\in\CI\cap\cSp$ and $A_j^*$ is pseudolocal
+  (\cref{microlocal:prop:pseudolocal}), $Bu\in\CI(\R^n)$. Moreover
+  $\sigma_L(B)=\sum_j\abs{\sigma_L(A_j)}^2+r$ with $r\in S^{-1}$, and
+  $\sum_j\abs{\sigma_L(A_j)}^2\ge\eps_0^2$ when $\abs{x-\bar x}<\eps_0$ and
+  $\abs\xi\ge R_0$. Let $\phi\in\CIc(\R^n)$, $0\le\phi\le1$, with support in
+  $\{\abs{x-\bar x}<\eps_0\}$ and $\phi=1$ near $\bar x$. Then
+  $\sigma_L(B+(1-\phi))=\sum_j\abs{\sigma_L(A_j)}^2+(1-\phi)+r$ and, for
+  $\abs\xi\ge R_0$, the sum of the first two terms is at least
+  $\min(\eps_0^2,1)$ (consider separately $\abs{x-\bar x}<\eps_0$ and
+  $\abs{x-\bar x}\ge\eps_0$). As $\abs r\le C\ang\xi^{-1}$, the operator
+  $B+(1-\phi)$ is globally elliptic, so has a parametrix
+  $Q\in\Psido0(\R^n)$:
+  \begin{equation*}
+    \Id=QB+Q(1-\phi)-E,\qquad E\in\Psido{-\infty}(\R^n).
+  \end{equation*}
+  Let $\psi\in\CIc(\R^n)$ with $\psi(\bar x)\ne0$ and $\supp\psi$ contained in
+  the interior of $\{\phi=1\}$. Then
+  $\psi u=\psi QBu+\psi Q(1-\phi)u-\psi Eu$. The first term is smooth by
+  pseudolocality, the second because $\psi Q(1-\phi)\in\Psido{-\infty}$ by
+  \cref{microlocal:prop:kernel-singsupp}, and the third because
+  $E\in\Psido{-\infty}$. Hence $\bar x\notin\singsupp u$.
+\end{proof}
+
+\begin{lemma}\label{microlocal:lem:wf-cone}
+  Let $u\in\CmIc(\R^n)$ and $z\notin\WF(u)$. Then there is an open conic
+  neighbourhood $\Gamma$ of $z$ such that $Cu\in\CI(\R^n)$ for every
+  $C\in\Psido{m}(\R^n)$, $m\in\R$, with $\WFp(C)\subset\Gamma$.
+\end{lemma}
+\begin{proof}
+  Let $A\in\Psido0$ be elliptic at $z$ with $Au\in\CI$ and let $Q$ be a
+  microlocal parametrix for $A$ at $z$
+  (\cref{microlocal:prop:parametrix}), so $QA=\Id+R$ with $z\notin\WFp(R)$.
+  Let $\Gamma$ be the complement of $\WFp(R)$, an open conic neighbourhood of
+  $z$, and let $\psi\in\CIc(\R^n)$ equal $1$ near $\supp u$. If
+  $\WFp(C)\subset\Gamma$ then
+  \begin{equation*}
+    Cu=CQ(Au)-CR\psi u.
+  \end{equation*}
+  The first term is smooth by pseudolocality. Since
+  $\WFp(CR)\subset\WFp(C)\cap\WFp(R)=\emptyset$,
+  $CR\psi\in\Psido{-\infty}$ by \cref{microlocal:lem:localize}, so the second
+  term is smooth too.
+\end{proof}
+
+In particular, $\WF(u+v)\subset\WF(u)\cup\WF(v)$ for $u,v\in\CmIc(\R^n)$:
+if $z$ is in neither set, take $C=G_{z,\eps}$ with $\overline{\Gamma_\eps(z)}$
+inside both of the cones given by the lemma.
+
+\begin{proposition}\label{microlocal:prop:microlocal-compact}
+  If $u\in\CmIc(\R^n)$, $A\in\Psido m(\R^n)$ and $\phi\in\CIc(\R^n)$ then
+  \begin{equation*}
+    \WF(\phi Au)\subset\WFp(A)\cap\WF(u).
+  \end{equation*}
+\end{proposition}
+\begin{proof}
+  Let $\psi\in\CIc(\R^n)$ equal $1$ near $\supp u$.
+
+  Suppose first $z\notin\WFp(A)$. Since $\WFp(A)$ is closed and conic, there
+  is $\eps>0$ with $\overline{\Gamma_\eps(z)}\cap\WFp(A)=\emptyset$; let
+  $C=G_{z,\eps}$, which is elliptic at $z$. Then
+  $\WFp(C\phi A)\subset\WFp(C)\cap\WFp(A)=\emptyset$, and $C\phi A=\psi'C\phi
+  A$ for a suitable $\psi'\in\CIc$ by \eqref{microlocal:eq:G-cutoff}, so
+  $C\phi A\in\Psido{-\infty}$ by \cref{microlocal:lem:localize}. Hence
+  $C(\phi Au)\in\CI$ and $z\notin\WF(\phi Au)$.
+
+  Suppose next $z\notin\WF(u)$ and let $\Gamma$ be as in
+  \cref{microlocal:lem:wf-cone}. Choose $\eps$ with
+  $\overline{\Gamma_\eps(z)}\subset\Gamma$ and let $D=G_{z,\eps}$, so
+  $\WFp(D)\subset\Gamma$ and $Du\in\CI$; and let $C=G_{z,\eps/4}$, which is
+  elliptic at $z$ with $\WFp(C)\subset\overline{\Gamma_{\eps/4}(z)}$, a set
+  disjoint from $\WFp(\Id-D)$ by \eqref{microlocal:eq:G-cutoff}. Then
+  \begin{equation*}
+    C\phi Au=C\phi A(Du)+C\phi A(\Id-D)\psi u.
+  \end{equation*}
+  The first term is smooth by pseudolocality, as $Du\in\CI\cap\cSp$. In
+  the second term,
+  $\WFp(C\phi A(\Id-D))\subset\WFp(C)\cap\WFp(\Id-D)=\emptyset$, so
+  $C\phi A(\Id-D)\psi\in\Psido{-\infty}$ by \cref{microlocal:lem:localize}.
+  Hence $C(\phi Au)\in\CI$ and $z\notin\WF(\phi Au)$.
+\end{proof}
+
+Taking $A=\Id$ we see that $\WF(\phi u)\subset\WF(u)$ for $\phi\in\CIc$ and
+$u\in\CmIc$, and $\WF(\phi u)=\WF(u)$ if $\phi=1$ near $\supp u$. This makes
+the following extension consistent.
+
+\begin{definition}\label{microlocal:def:wf}
+  For $u\in\cSp(\R^n)$,
+  \begin{equation*}
+    \WF(u)=\bigcup_{\phi\in\CIc(\R^n)}\WF(\phi u)\subset\Tz{\R^n}.
+  \end{equation*}
+\end{definition}
+
+\begin{proposition}\label{microlocal:prop:wf-local}
+  Let $u,v\in\cSp(\R^n)$.
+  \begin{enumerate}[label=\textup{(\roman*)}]
+  \item If $\phi\in\CIc(\R^n)$ and $\phi(\bar x)\ne0$ then
+    $\WF(u)\cap\pi^{-1}(\bar x)=\WF(\phi u)\cap\pi^{-1}(\bar x)$.
+  \item $\WF(u)$ is closed and conic, and $\pi(\WF(u))=\singsupp(u)$.
+  \item $\WF(u+v)\subset\WF(u)\cup\WF(v)$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  (i) One inclusion is the definition. Conversely let $z=(\bar x,\bar\xi)\notin
+  \WF(\phi u)$ and $\psi\in\CIc(\R^n)$. Choose $\phi'\in\CIc$ supported in
+  $\{\phi\ne0\}$ with $\phi'=1$ near $\bar x$, and write
+  $\psi u=\theta(\phi u)+\psi(1-\phi')u$ with
+  $\theta=\psi\phi'/\phi\in\CIc$. Then $z\notin\WF(\theta\phi u)$ by
+  \cref{microlocal:prop:microlocal-compact}, while $\psi(1-\phi')u$ vanishes
+  near $\bar x$, so its wavefront set does not meet $\pi^{-1}(\bar x)$ by
+  \cref{microlocal:prop:wf-singsupp}. Hence $z\notin\WF(\psi u)$.
+
+  (ii) By (i), $\WF(u)\cap\pi^{-1}(U)=\WF(\phi u)\cap\pi^{-1}(U)$ on the open
+  set $U=\{\phi\ne0\}$, so $\WF(u)$ is closed, being locally closed; it is
+  clearly conic. Also $\bar x\notin\singsupp u$ if and only if
+  $\bar x\notin\singsupp(\phi u)$ for some (any) $\phi$ as in (i), so the
+  second statement follows from \cref{microlocal:prop:wf-singsupp}.
+
+  (iii) follows from (i) and the corresponding statement for $\CmIc(\R^n)$.
+\end{proof}
+
+\begin{theorem}[Microlocality]\label{microlocal:thm:microlocality}
+  If $A\in\Psido m(\R^n)$ and $u\in\cSp(\R^n)$ then
+  \begin{equation*}
+    \WF(Au)\subset\WFp(A)\cap\WF(u).
+  \end{equation*}
+\end{theorem}
+\begin{proof}
+  Let $\phi\in\CIc(\R^n)$ and choose $\psi\in\CIc(\R^n)$ equal to $1$ near
+  $\supp\phi$. Then $\phi Au=\phi A(\psi u)+\phi A(1-\psi)u$, and the
+  second term is smooth by \cref{microlocal:prop:kernel-singsupp}. By
+  \cref{microlocal:prop:microlocal-compact},
+  $\WF(\phi Au)\subset\WFp(A)\cap\WF(\psi u)\subset\WFp(A)\cap\WF(u)$. Taking
+  the union over $\phi$ gives the result.
+\end{proof}
+
+Combined with microlocal parametrices this gives the basic regularity
+result.
+
+\begin{theorem}[Microlocal elliptic regularity]\label{microlocal:thm:elliptic-regularity}
+  If $A\in\Psido m(\R^n)$ and $u\in\cSp(\R^n)$ then
+  \begin{equation*}
+    \WF(u)\subset\WF(Au)\cup\Char_m(A).
+  \end{equation*}
+\end{theorem}
+\begin{proof}
+  Let $z\notin\Char_m(A)$ and let $B$ be a microlocal parametrix at $z$, so
+  $BA=\Id+R$ with $z\notin\WFp(R)$. Then $u=B(Au)-Ru$, and by
+  \cref{microlocal:thm:microlocality} and
+  \cref{microlocal:prop:wf-local}(iii),
+  $\WF(u)\subset\WF(Au)\cup\WFp(R)$, which does not contain $z$ if
+  $z\notin\WF(Au)$.
+\end{proof}
+
+In particular, if $A$ is elliptic at every point (that is,
+$\Char_m(A)=\emptyset$), then $\WF(u)=\WF(Au)$. For instance $\WF(u)$
+is unchanged by the Fourier multipliers $\ang D^s$.
+
+% ======================================================================
+\section{The wavefront set and the Fourier transform}\label{microlocal:sec:fourier}
+
+We now give the more classical characterization of the wavefront set, in
+terms of the Fourier transform. We use the following standard facts about
+$u\in\CmIc(\R^n)$, which follow from \eqref{microlocal:eq:finite-order} and
+the Fourier inversion formula by approximating the integrals below by
+Riemann sums in $\cS(\R^n)$: $\hat u(\xi)=u(e^{-ix\cdot\xi})$ is a smooth
+function with $\abs{\hat u(\xi)}\le C\ang\xi^k$; for $\phi\in\cS(\R^n)$,
+\begin{equation}\label{microlocal:eq:parseval}
+  u(\phi)=\int\hat u(\xi)\,\hat\phi(-\xi)\,\dbar\xi,\qquad
+  \widehat{\phi u}(\xi)=\int\hat\phi(\xi-\eta)\,\hat u(\eta)\,\dbar\eta .
+\end{equation}
+Conversely, a continuous polynomially bounded function is the Fourier
+transform of a unique element of $\cSp(\R^n)$.
+
+For $v\in\CmIc(\R^n)$ let
+\begin{equation*}
+  \Sigma(v)=\{\xi\in\R^n\setminus0;\ (x,\xi)\in\WF(v)\text{ for some }x\}.
+\end{equation*}
+Since $\WF(v)$ is closed, conic and lies over the compact set $\supp v$,
+$\WF(v)\cap(\R^n\times\Sphere^{n-1})$ is compact, so $\Sigma(v)$ is a closed
+cone in $\R^n\setminus0$, and $\WF(v)\subset\supp v\times\Sigma(v)$.
+
+\begin{lemma}\label{microlocal:lem:fourier-global}
+  Let $v\in\CmIc(\R^n)$.
+  \begin{enumerate}[label=\textup{(\roman*)}]
+  \item If $\Gamma\subset\R^n\setminus0$ is a closed cone with
+    $\Gamma\cap\Sigma(v)=\emptyset$, then $\hat v$ is rapidly decreasing on
+    $\Gamma$.
+  \item If $\hat v$ is rapidly decreasing on an open cone $V$ then
+    $\WF(v)\cap(\R^n\times V)=\emptyset$.
+  \item If $\bar x\in\R^n$ and $V$ is an open cone containing
+    $\{\xi;\ (\bar x,\xi)\in\WF(v)\}$, there is $r>0$ such that
+    $\Sigma(\phi v)\subset V$ for all $\phi\in\CIc(\R^n)$ supported in
+    $\{\abs{x-\bar x}<r\}$.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  (i) By compactness there is an open cone $\Gamma'\supset\Gamma$ with
+  $\overline{\Gamma'}\cap\Sigma(v)=\emptyset$ (the distance between
+  $\Gamma\cap\Sphere^{n-1}$ and the compact set $\Sigma(v)\cap\Sphere^{n-1}$ is
+  positive). Choose $g\in S^0(\R^n)$, a function of $\xi$ only, with $g=1$ on
+  $\Gamma\cap\{\abs\xi\ge1\}$ and $\supp g\subset\Gamma'$; for instance $g=
+  h(\xi/\abs\xi)(1-\chi(\xi))$ with $h\in\CI(\Sphere^{n-1})$. Then
+  $g(D)=\Op(g)$ has $\WFp(g(D))\subset\R^n\times\overline{\Gamma'}$, which is
+  disjoint from $\WF(v)$, so $g(D)v\in\CI$ by
+  \cref{microlocal:thm:microlocality}. Let $\psi_1,\psi_2\in\CIc(\R^n)$ with
+  $\psi_1=1$ near $\supp v$ and $\psi_2=1$ near $\supp\psi_1$. Then
+  \begin{equation*}
+    g(D)v=\psi_2g(D)v+(1-\psi_2)g(D)\psi_1v,
+  \end{equation*}
+  where the first term is in $\CIc$ and the second is in $\cS$ by
+  \cref{microlocal:prop:kernel-singsupp} and
+  \cref{microlocal:lem:residual-compact}. Thus $g\hat v=\widehat{g(D)v}\in\cS$,
+  and $\hat v$ is rapidly decreasing on $\Gamma$.
+
+  (ii) Let $z=(\bar x,\bar\xi)$ with $\bar\xi\in V$, and choose $\eps>0$ with
+  $\overline{V_\eps(\bar\xi)}\subset V$ and $g\in S^0(\R^n)$ a function of
+  $\xi$ with $g=1$ on $V_{\eps/2}(\bar\xi)\cap\{\abs\xi\ge1\}$, supported in
+  $V_\eps(\bar\xi)$. Then $g(D)$ is elliptic at $z$, and
+  $\widehat{g(D)v}=g\hat v$ is rapidly decreasing, hence integrable together
+  with $\xi^\alpha g\hat v$ for all $\alpha$, so $g(D)v\in\CI$ by Fourier
+  inversion. Thus $z\notin\WF(v)$.
+
+  (iii) Otherwise there are $x_j\to\bar x$ and unit vectors $\xi_j\notin V$
+  with $(x_j,\xi_j)\in\WF(v)$; a subsequence has $\xi_j\to\xi$, and
+  $(\bar x,\xi)\in\WF(v)$ by closedness, $\xi\notin V$ since the complement of
+  $V$ is closed, a contradiction. Since $\WF(\phi v)\subset\WF(v)\cap
+  (\supp\phi\times\R^n)$, the claim follows.
+\end{proof}
+
+\begin{proposition}[Fourier characterization]\label{microlocal:prop:fourier-char}
+  Let $u\in\cSp(\R^n)$ and $(\bar x,\bar\xi)\in\Tz{\R^n}$. Then
+  $(\bar x,\bar\xi)\notin\WF(u)$ if and only if there exist
+  $\phi\in\CIc(\R^n)$ with $\phi(\bar x)\ne0$ and $\eps>0$ such that
+  $\widehat{\phi u}$ is rapidly decreasing on $V_\eps(\bar\xi)$:
+  \begin{equation*}
+    \abs{\widehat{\phi u}(\xi)}\le C_N\ang\xi^{-N}\quad\text{for }
+    \xi\in V_\eps(\bar\xi),\ N\in\N.
+  \end{equation*}
+  More precisely, if $K\subset\R^n$ is compact, $\Gamma\subset\R^n\setminus0$
+  is a closed cone and $\WF(u)\cap(K\times\Gamma)=\emptyset$, then
+  $\widehat{\phi u}$ is rapidly decreasing on $\Gamma$ for every
+  $\phi\in\CIc(\R^n)$ with $\supp\phi\subset K$.
+\end{proposition}
+\begin{proof}
+  If $\widehat{\phi u}$ is rapidly decreasing on $V_\eps(\bar\xi)$ then
+  $(\bar x,\bar\xi)\notin\WF(\phi u)$ by
+  \cref{microlocal:lem:fourier-global}(ii), and so $(\bar
+  x,\bar\xi)\notin\WF(u)$ by \cref{microlocal:prop:wf-local}(i).
+
+  For the last statement, $\WF(\phi u)\subset\WF(u)\cap(K\times\R^n)$, so
+  $\Sigma(\phi u)\cap\Gamma=\emptyset$ and
+  \cref{microlocal:lem:fourier-global}(i) applies. Finally, if $(\bar
+  x,\bar\xi)\notin\WF(u)$, closedness of $\WF(u)$ and a compactness argument
+  as in \cref{microlocal:lem:fourier-global}(iii) give $r,\eps>0$ with
+  $\WF(u)\cap(K\times\overline{V_\eps(\bar\xi)})=\emptyset$ for
+  $K=\{\abs{x-\bar x}\le r\}$, and any $\phi$ supported in $K$ with
+  $\phi(\bar x)\ne0$ will do.
+\end{proof}
+
+\begin{example}\label{microlocal:ex:delta}
+  Since $\hat\delta=1$ and $\singsupp\delta=\{0\}$,
+  $\WF(\delta)=\{0\}\times(\R^n\setminus0)$: indeed
+  $\widehat{\phi\delta}=\phi(0)$ is not rapidly decreasing in any direction if
+  $\phi(0)\ne0$. More generally, if $u\in\CmIc(\R^n)$ is not smooth then
+  $\Sigma(u)\ne\emptyset$, since otherwise $\hat u\in\cS$ by
+  \cref{microlocal:lem:fourier-global}(i).
+\end{example}
+
+\begin{corollary}\label{microlocal:cor:wf-conj}
+  For $u\in\cSp(\R^n)$, $\WF(\bar u)=\WF(u)^-$.
+\end{corollary}
+\begin{proof}
+  $\widehat{\phi\bar u}(\xi)=\overline{\widehat{\bar\phi u}(-\xi)}$, so this
+  follows from \cref{microlocal:prop:fourier-char} applied with $\bar\phi$.
+\end{proof}
+
+% ======================================================================
+\section{Invariance under diffeomorphisms}\label{microlocal:sec:diffeo}
+
+For a diffeomorphism $F:\Omega\to\Omega'$ between open subsets of $\R^n$ we
+use the map $\chi_F(x,\xi)=(F(x),(DF(x)^t)^{-1}\xi)$ of
+\cref{microlocal:sec:coordinates}. Its inverse is
+\begin{equation*}
+  \chi_F^{-1}(y,\eta)=\bigl(G(y),DF(G(y))^t\eta\bigr),\qquad G=F^{-1},
+\end{equation*}
+the cotangent map $\eta\mapsto DF(x)^t\eta$, $x=G(y)$, which we denote by
+$F^*$ when applied to subsets: for $W\subset\Tz{\Omega'}$,
+\begin{equation*}
+  F^*W=\{(x,DF(x)^t\eta);\ (F(x),\eta)\in W\}.
+\end{equation*}
+
+\begin{theorem}\label{microlocal:thm:wf-diffeo}
+  If $F:\Omega\to\Omega'$ is a diffeomorphism between open subsets of $\R^n$
+  and $u\in\CmIc(\Omega')$, then
+  \begin{equation*}
+    \WF(F^*u)=F^*\WF(u)=\{(x,DF(x)^t\eta);\ (F(x),\eta)\in\WF(u)\}.
+  \end{equation*}
+\end{theorem}
+\begin{proof}
+  Let $(x,\xi)\in\Tz\Omega$ with $w=\chi_F(x,\xi)\notin\WF(u)$; we show
+  $(x,\xi)\notin\WF(F^*u)$. Let $\Gamma$ be an open conic neighbourhood of $w$
+  as in \cref{microlocal:lem:wf-cone}, choose $\eps>0$ with
+  $\overline{\Gamma_\eps(w)}\subset\Gamma$ and $\{\abs{y-F(x)}\le\eps\}\subset
+  \Omega'$, and let $\theta\in\CIc(\Omega')$ equal $1$ on
+  $\{\abs{y-F(x)}\le\eps\}$. The operator
+  $B=\theta G_{w,\eps}\theta\in\Psido0(\R^n)$ has kernel with compact support
+  in $\Omega'\times\Omega'$, $\WFp(B)\subset\overline{\Gamma_\eps(w)}\subset\Gamma$
+  and is elliptic at $w$. So $Bu\in\CIc(\Omega')$.
+
+  By \cref{microlocal:thm:coordinates}, applied to the diffeomorphism
+  $G:\Omega'\to\Omega$, the operator $\tilde B=B_G=F^*BG^*$ is in
+  $\Psido0(\R^n)$ and is elliptic at $\chi_G(w)=(x,\xi)$. Both
+  $\tilde B$ (as an element of $\Psido0(\R^n)$ acting on $\cSp$) and
+  $F^*\circ B\circ G^*$ are weakly continuous on $\CmIc(\Omega)$ and agree on
+  $\CIc(\Omega)$, so by density they agree on $\CmIc(\Omega)$. Hence
+  $\tilde B(F^*u)=F^*BG^*F^*u=F^*(Bu)\in\CI$, and $(x,\xi)\notin\WF(F^*u)$.
+
+  We have shown $\WF(F^*u)\subset\chi_F^{-1}(\WF(u))=F^*\WF(u)$. Applying
+  this to $G$ and $F^*u$, and using $G^*F^*u=u$, gives the reverse
+  inclusion.
+\end{proof}
+
+If $L$ is an invertible linear map of $\R^n$ and $u\in\cSp(\R^n)$, then by
+localization (\cref{microlocal:prop:wf-local}) the theorem also applies to
+$L^*u$: $\WF(L^*u)=\{(x,L^t\eta);\ (Lx,\eta)\in\WF(u)\}$.
+
+% ======================================================================
+\section{The wavefront set of a kernel}\label{microlocal:sec:kernel}
+
+The kernels of pseudodifferential operators form an interesting class of
+distributions. Their wavefront sets are determined by, and determine, the
+essential supports of the operators.
+
+\begin{proposition}\label{microlocal:prop:wf-kernel}
+  If $A\in\Psido m(\R^n)$ then
+  \begin{equation*}
+    \WF(K_A)=\{(x,x,\xi,-\xi)\in\Tz{\R^{2n}};\ (x,\xi)\in\WFp(A)\}.
+  \end{equation*}
+\end{proposition}
+\begin{proof}
+  By \cref{microlocal:prop:kernel-singsupp} and
+  \cref{microlocal:prop:wf-local}(ii), $\WF(K_A)$ lies over the diagonal.
+  Fix $\bar x\in\R^n$, let $\mu\in\CIc(\R^n)$ equal $1$ near $0$ and let
+  $A_\mu$ have kernel $\mu(x-y)K_A$; by \cref{microlocal:lem:off-diagonal},
+  $A-A_\mu\in\Psido{-\infty}$, so $a_\mu=\sigma_L(A_\mu)$ differs from
+  $a=\sigma_L(A)$ by an element of $S^{-\infty}$. For $\phi\in\CIc(\R^n)$
+  with $\phi(\bar x)\ne0$ consider
+  \begin{equation*}
+    k(x,y)=\phi(x)\mu(x-y)K_A(x,y)\in\CmIc(\R^{2n}),\qquad
+    w=L^*k,\quad L(x,z)=(x,x-z),
+  \end{equation*}
+  so $w(x,z)=\phi(x)\mu(z)K_A(x,x-z)$, and $k=K_A$ near $(\bar x,\bar x)$.
+  Since $K_{A_\mu}=\int e^{i(x-y)\cdot\xi}a_\mu(x,\xi)\,\dbar\xi$, the
+  distribution $L^*K_{A_\mu}$ is the inverse Fourier transform of
+  $a_\mu(x,\xi)$ in $\xi$, and so
+  \begin{equation*}
+    \hat w(\zeta,\xi)=\int e^{-ix\cdot\zeta}\phi(x)a_\mu(x,\xi)\,dx,
+  \end{equation*}
+  the Fourier transform being taken in $(x,z)\mapsto(\zeta,\xi)$. Since
+  $\phi a_\mu$ is a symbol with compact support in $x$, integration by parts
+  in $x$ gives
+  \begin{equation}\label{microlocal:eq:kernel-ft}
+    \abs{\hat w(\zeta,\xi)}\le C_N\ang\zeta^{-N}\ang\xi^m\quad\text{for all }N.
+  \end{equation}
+  Points of the wavefront set and the covectors transform under $L$ by
+  \cref{microlocal:thm:wf-diffeo}: since $DL^t(\xi,\eta)=(\xi+\eta,-\eta)$,
+  \begin{equation}\label{microlocal:eq:kernel-L}
+    (x,0;\zeta,\eta')\in\WF(w)\iff
+    (x,x;\zeta+\eta',-\eta')\in\WF(k).
+  \end{equation}
+
+  \emph{Inclusion $\subset$.} By \eqref{microlocal:eq:kernel-ft}, $\hat w$ is
+  rapidly decreasing on every closed cone $\{\abs\xi\le c\abs\zeta\}$, so
+  $\Sigma(w)\subset\{\zeta=0\}$ by \cref{microlocal:lem:fourier-global}(ii).
+  Since $w$ is smooth for $z\ne0$, $\WF(w)\subset\{(x,0;0,\xi)\}$, and
+  \eqref{microlocal:eq:kernel-L} gives $\WF(k)\subset\{(x,x;\xi,-\xi)\}$.
+
+  Now suppose $(\bar x,\bar\xi)\notin\WFp(A)$. Then $a_\mu$ and all its
+  derivatives are rapidly decreasing on $\Gamma_\eps(\bar x,\bar\xi)$ for some
+  $\eps$ (\cref{microlocal:lem:conesupp-derivatives}); take
+  $\supp\phi\subset\{\abs{x-\bar x}<\eps\}$. Then integration by parts gives
+  $\abs{\hat w(\zeta,\xi)}\le C_N\ang\zeta^{-N}\ang\xi^{-N}$ for
+  $\xi\in V_\eps(\bar\xi)$, which with \eqref{microlocal:eq:kernel-ft} shows
+  that $\hat w$ is rapidly decreasing on the cone
+  $\{(\zeta,\xi);\ \xi\in V_\eps(\bar\xi),\ \abs\zeta<\abs\xi\}$, a conic
+  neighbourhood of $(0,\bar\xi)$. Hence $(\bar x,0;0,\bar\xi)\notin\WF(w)$,
+  and by \eqref{microlocal:eq:kernel-L},
+  $(\bar x,\bar x;\bar\xi,-\bar\xi)\notin\WF(k)$, so not in $\WF(K_A)$.
+
+  \emph{Inclusion $\supset$.} Suppose
+  $(\bar x,\bar x,\bar\xi,-\bar\xi)\notin\WF(K_A)$. By closedness there are
+  $r,\theta>0$ such that $(x,x,\xi,-\xi)\notin\WF(K_A)$ for $\abs{x-\bar
+  x}<r$, $\xi\in V_\theta(\bar\xi)$. Take $\supp\phi\subset\{\abs{x-\bar
+  x}<r\}$ and $\phi=1$ near $\bar x$. Then, by
+  \eqref{microlocal:eq:kernel-L} and the first part,
+  $\Sigma(w)\subset\{(0,\xi);\ \xi\notin V_\theta(\bar\xi)\}$, which is
+  disjoint from the closed cone
+  $C=\{(\zeta,\xi)\ne0;\ \abs\zeta\le\abs\xi,\ \xi\in
+  \overline{V_{\theta/2}(\bar\xi)}\}$. By
+  \cref{microlocal:lem:fourier-global}(i), $\hat w$ is rapidly decreasing on
+  $C$. By Fourier inversion in $\zeta$, for $\xi\in V_{\theta/2}(\bar\xi)$,
+  \begin{equation*}
+    \abs{\phi(x)a_\mu(x,\xi)}\le\int_{\abs\zeta\le\abs\xi}\abs{\hat w(\zeta,\xi)}\,\dbar\zeta
+    +\int_{\abs\zeta>\abs\xi}\abs{\hat w(\zeta,\xi)}\,\dbar\zeta
+    \le C_N\ang\xi^{n-N}+C_N\ang\xi^{m+n-N},
+  \end{equation*}
+  using \eqref{microlocal:eq:kernel-ft} in the second integral. So $a_\mu$,
+  and hence $a$, is rapidly decreasing on $\Gamma_{r'}(\bar x,\bar\xi)$ for
+  small $r'$, that is $(\bar x,\bar\xi)\notin\WFp(A)$.
+\end{proof}
+
+In particular $\WFp(A)$ and $\WF(K_A)$ determine each other, and
+$\WFp(A)=\emptyset$ if and only if $K_A\in\CI(\R^{2n})$.
+
+% ======================================================================
+\section{The calculus of wavefront sets: pairing}\label{microlocal:sec:pairing}
+
+We now wish to understand, in terms of wavefront sets, three fundamental
+operations on distributions: pull-back $F^*u$ by a smooth map, push-forward
+$F_*u$, and multiplication $u_1u_2$. None of them is defined on all
+distributions. To analyse them we first discuss some more elementary
+operations:
+\begin{align*}
+  &\text{pairing:}&&(u,v)\longmapsto\int u(x)v(x)\,dx,\\
+  &\text{exterior product:}&&(u,v)\longmapsto(u\boxtimes v)(x,y)=u(x)v(y),\\
+  &\text{restriction:}&&u(x,y)\longmapsto u(x,0),\\
+  &\text{projection:}&&u(x,y)\longmapsto\int u(x,y)\,dy,\\
+  &\text{invariance:}&&u\longmapsto F^*u,\ F\text{ a diffeomorphism}.
+\end{align*}
+The last was treated in \cref{microlocal:sec:diffeo}. Restriction and
+diffeomorphisms are special cases of pull-back and projection is a special
+case of push-forward; conversely, we shall express the three fundamental
+operations in terms of the elementary ones. Throughout, all distributions
+have compact support; by the local nature of the wavefront set this is not
+a serious restriction.
+
+The pairing $\int u_1u_2\,dx$ of two distributions is the first example of an
+operation which requires a condition on wavefront sets. We give Melrose's
+operator-theoretic definition; in \cref{microlocal:sec:products} it is
+recovered as the integral of the product (\cref{microlocal:ex:pairing-product}).
+We need a transposition identity.
+
+\begin{lemma}\label{microlocal:lem:transpose}
+  Let $D\in\Psido m(\R^n)$ and $u,v\in\CmIc(\R^n)$ with
+  $\WFp(D)\cap\WF(u)=\emptyset$ and $\WFp(D^t)\cap\WF(v)=\emptyset$. Then
+  $Du$ and $D^tv$ are smooth and, for any $\psi\in\CIc(\R^n)$ equal to $1$
+  near $\supp u\cup\supp v$,
+  \begin{equation*}
+    v(\psi Du)=u(\psi D^tv).
+  \end{equation*}
+\end{lemma}
+\begin{proof}
+  Smoothness follows from \cref{microlocal:thm:microlocality}. Both sides
+  are independent of the choice of $\psi$. Let $\psi_1\in\CIc(\R^n)$ equal $1$
+  near $\supp u\cup\supp v$ and let $\psi=\psi_2$ equal $1$ near
+  $\supp\psi_1$. The closed conic sets
+  $W_1=\WFp(D)\cap(\supp\psi_1\times\R^n)$ and $W_2=\WF(u)$ are disjoint and
+  $\pi(W_1)$ is bounded, so \cref{microlocal:lem:cutoff} gives
+  $B\in\Psido0(\R^n)$ with $\WFp(B)\cap\WF(u)=\emptyset$ and
+  $\WFp(\Id-B)\cap W_1=\emptyset$. Write $u=u_s+u_r$ with
+  $u_s=\psi_1Bu$ and $u_r=\psi_1(\Id-B)u$. By microlocality $Bu$ is smooth, so
+  $u_s\in\CIc(\R^n)$, and since $D^tv$ is smooth, the definition of $D$ on
+  $\cSp$ gives
+  \begin{equation*}
+    v(\psi Du_s)=v(Du_s)=(D^tv)(u_s)=\int(D^tv)u_s\,dx=u_s(\psi D^tv).
+  \end{equation*}
+  For $u_r$, let $E=\psi_2D\psi_1(\Id-B)\psi_1$. Since
+  $\WFp(D\psi_1)\subset W_1$, $\WFp(E)\subset W_1\cap\WFp(\Id-B)=\emptyset$, and
+  by \cref{microlocal:lem:localize} $E\in\Psido{-\infty}(\R^n)$ with kernel
+  $K_E\in\CIc(\R^{2n})$. As $u=\psi_1u$, $\psi_2Du_r=Eu$, while
+  \begin{equation*}
+    u_r(\psi_2D^tv)=u\bigl((\Id-B^t)\psi_1\psi_2D^tv\bigr)
+    =u\bigl(\psi_1(\Id-B^t)\psi_1D^t\psi_2v\bigr)=u(E^tv),
+  \end{equation*}
+  using $u=\psi_1u$, $v=\psi_2v$ and $\psi_1\psi_2=\psi_1$. Finally
+  $v(Eu)=u(E^tv)$ for $E$ with kernel in $\CIc(\R^{2n})$: both sides equal
+  $(v\boxtimes u)(K_E)$, since $Eu(x)=u(K_E(x,\cdot))$,
+  $E^tv(y)=v(K_E(\cdot,y))$, and the identity
+  $v_x(u_y(\Phi(x,y)))=u_y(v_x(\Phi(x,y)))$ holds for $\Phi=\phi\boxtimes\phi'$,
+  hence by continuity and density for all $\Phi\in\cS(\R^{2n})$. Adding the
+  two identities proves the lemma.
+\end{proof}
+
+\begin{proposition}[Pairing]\label{microlocal:prop:pairing}
+  Let $u_1,u_2\in\CmIc(\R^n)$ satisfy
+  \begin{equation}\label{microlocal:eq:pairing-cond}
+    (x,\xi)\in\WF(u_1)\Longrightarrow(x,-\xi)\notin\WF(u_2),
+    \quad\text{i.e.}\quad\WF(u_1)\cap\WF(u_2)^-=\emptyset.
+  \end{equation}
+  Then there exists $A\in\Psido0(\R^n)$ with
+  \begin{equation}\label{microlocal:eq:pairing-A}
+    \WFp(A)\cap\WF(u_1)=\emptyset,\qquad\WFp(\Id-A)\cap\WF(u_2)^-=\emptyset,
+  \end{equation}
+  and for any such $A$ and any $\psi\in\CIc(\R^n)$ equal to $1$ near $\supp
+  u_1\cup\supp u_2$ the number
+  \begin{equation*}
+    P(u_1,u_2)=u_2(\psi Au_1)+u_1\bigl(\psi(\Id-A)^tu_2\bigr)
+  \end{equation*}
+  is independent of $A$ and $\psi$. The pairing $P$ is bilinear, symmetric,
+  and $P(u_1,u_2)=u_2(u_1)=\int u_1u_2\,dx$ if $u_1\in\CIc(\R^n)$ (and similarly
+  if $u_2\in\CIc$).
+\end{proposition}
+\begin{proof}
+  Existence of $A$ follows from \cref{microlocal:lem:cutoff} with
+  $W_1=\WF(u_2)^-$, $W_2=\WF(u_1)$. By microlocality and
+  $\WFp((\Id-A)^t)=\WFp(\Id-A)^-$ (\cref{microlocal:prop:ess}), $Au_1$ and
+  $(\Id-A)^tu_2$ are smooth, so $P(u_1,u_2)$ is defined; it is clearly
+  independent of $\psi$. If $A'$ is another choice, $D=A-A'$ satisfies
+  $\WFp(D)\cap\WF(u_1)=\emptyset$, and since $D=(\Id-A')-(\Id-A)$ also
+  $\WFp(D)\cap\WF(u_2)^-=\emptyset$, that is
+  $\WFp(D^t)\cap\WF(u_2)=\emptyset$. The difference of the two expressions is
+  $u_2(\psi Du_1)-u_1(\psi D^tu_2)$, which vanishes by
+  \cref{microlocal:lem:transpose}.
+
+  For linearity in the first argument, suppose $(u_1,u_2)$ and $(u_1',u_2)$
+  both satisfy \eqref{microlocal:eq:pairing-cond}. Then
+  $(\WF(u_1)\cup\WF(u_1'))\cap\WF(u_2)^-=\emptyset$, and an $A$ obtained from
+  \cref{microlocal:lem:cutoff} with $W_2=\WF(u_1)\cup\WF(u_1')$ satisfies
+  \eqref{microlocal:eq:pairing-A} for the three pairs $(u_1,u_2)$,
+  $(u_1',u_2)$ and $(u_1+u_1',u_2)$, since
+  $\WF(u_1+u_1')\subset\WF(u_1)\cup\WF(u_1')$; with this $A$ the expressions are
+  visibly additive. Linearity in the second argument is the same. For symmetry note that $A'=\Id-A^t$
+  satisfies \eqref{microlocal:eq:pairing-A} for the pair $(u_2,u_1)$, and the
+  corresponding expression is $u_1(\psi(\Id-A^t)u_2)+u_2(\psi Au_1)$. If
+  $u_1\in\CIc$ we may take $A=\Id$, and if $u_2\in\CIc$, $A=0$.
+\end{proof}
+
+The \emph{sesquilinear} pairing $\pair{u_1}{u_2}=\int u_1\overline{u_2}\,dx$
+is then defined as $P(u_1,\overline{u_2})$. Since
+$\WF(\overline{u_2})=\WF(u_2)^-$ (\cref{microlocal:cor:wf-conj}), the
+condition becomes simply $\WF(u_1)\cap\WF(u_2)=\emptyset$, and
+$\pair{u_1}{u_2}=\pair{Au_1}{u_2}+\pair{u_1}{(\Id-A^*)u_2}$ for any $A$ with
+$\WFp(A)\cap\WF(u_1)=\emptyset=\WFp(\Id-A)\cap\WF(u_2)$.
+
+% ======================================================================
+\section{Exterior products, restriction and projection}\label{microlocal:sec:elementary}
+
+\subsection{Exterior product}
+The exterior product $u_1\boxtimes u_2$ of $u_1\in\CmIc(\R^p)$ and
+$u_2\in\CmIc(\R^k)$ is always defined (\cref{ch:distributions}); it lies in
+$\CmIc(\R^{p+k})$, $(u_1\boxtimes u_2)(\Phi)=u_1(u_2(\Phi(x,\cdot)))$, and
+its Fourier transform is
+\begin{equation*}
+  \widehat{u_1\boxtimes u_2}(\xi,\eta)=\hat u_1(\xi)\,\hat u_2(\eta).
+\end{equation*}
+
+\begin{proposition}\label{microlocal:prop:exterior}
+  For $u_1\in\CmIc(\R^p)$ and $u_2\in\CmIc(\R^k)$,
+  \begin{multline*}
+    \WF(u_1\boxtimes u_2)\subset\bigl(\WF(u_1)\times\WF(u_2)\bigr)
+    \cup\{(x,y,0,\eta);\ x\in\supp u_1,\ (y,\eta)\in\WF(u_2)\}\\
+    \cup\{(x,y,\xi,0);\ (x,\xi)\in\WF(u_1),\ y\in\supp u_2\},
+  \end{multline*}
+  where $\WF(u_1)\times\WF(u_2)$ means
+  $\{(x,y,\xi,\eta);(x,\xi)\in\WF(u_1),(y,\eta)\in\WF(u_2)\}$.
+\end{proposition}
+\begin{proof}
+  Let $(\bar x,\bar y,\bar\xi,\bar\eta)$ be outside the right side. We localize
+  with $\phi_1(x)\phi_2(y)$, $\phi_1(\bar x)\ne0\ne\phi_2(\bar y)$, using
+  $\phi_1\phi_2(u_1\boxtimes u_2)=(\phi_1u_1)\boxtimes(\phi_2u_2)$, whose Fourier
+  transform is $\widehat{\phi_1u_1}(\xi)\widehat{\phi_2u_2}(\eta)$. If
+  $\bar x\notin\supp u_1$ or $\bar y\notin\supp u_2$ we can make this zero.
+  Otherwise one of the following holds.
+
+  (a) $\bar\xi\ne0$ and $(\bar x,\bar\xi)\notin\WF(u_1)$. Choose $\phi_1$ by
+  \cref{microlocal:prop:fourier-char} with $\widehat{\phi_1u_1}$ rapidly
+  decreasing on $V_\eps(\bar\xi)$. On the conic neighbourhood
+  $\{(\xi,\eta);\ \xi\in V_\eps(\bar\xi),\ \abs\eta<C\abs\xi\}$ of
+  $(\bar\xi,\bar\eta)$, where $C>\abs{\bar\eta}/\abs{\bar\xi}$, we have
+  $\ang{(\xi,\eta)}\le(1+C)\ang\xi$ and
+  $\abs{\widehat{\phi_2u_2}(\eta)}\le C'\ang\xi^M$, so the product is rapidly
+  decreasing.
+
+  (b) $\bar\eta\ne0$ and $(\bar y,\bar\eta)\notin\WF(u_2)$: the same with the
+  factors exchanged.
+
+  These cases exhaust the possibilities: if both $\bar\xi\ne0$ and
+  $\bar\eta\ne0$, the point is not in $\WF(u_1)\times\WF(u_2)$, so (a) or (b)
+  holds; if $\bar\xi=0$ then $\bar\eta\ne0$ and, $\bar x$ being in $\supp
+  u_1$, $(\bar y,\bar\eta)\notin\WF(u_2)$, so (b) holds; similarly if
+  $\bar\eta=0$.
+\end{proof}
+
+\subsection{Restriction}
+Write $\R^{p+k}\ni(x,y)$, let $Y=\{y=0\}$ and $\iota:\R^p\to\R^{p+k}$,
+$\iota(x)=(x,0)$. We want to define $\iota^*u=u\restriction Y$. No reasonable
+such map exists on all distributions (think of $\delta(y)$), but it does under
+a condition on the wavefront set: $\WF(u)$ should not meet the \emph{conormal
+bundle}
+\begin{equation*}
+  N^*Y=\{(x,0;0,\eta);\ x\in\R^p,\ \eta\in\R^k\setminus0\}.
+\end{equation*}
+For $\delta>0$ consider the closed cone
+$C_\delta=\{(\xi,\eta)\in\R^{p+k}\setminus0;\ \abs\xi\le\delta\abs\eta\}$ and
+let $\mathcal R_\delta$ be the set of $w\in\CmIc(\R^{p+k})$ with $\hat w$
+rapidly decreasing on $C_\delta$. If $w\in\mathcal R_\delta$ then, since
+$\abs{\hat w}\le C\ang{(\xi,\eta)}^M$,
+\begin{equation}\label{microlocal:eq:restriction-int}
+  \int\abs{\hat w(\xi,\eta)}\,d\eta\le
+  \int_{\abs\eta\le\abs\xi/\delta}C\ang{(\xi,\eta)}^M\,d\eta
+  +\int_{\abs\eta>\abs\xi/\delta}C_N\ang\eta^{-N}\,d\eta\le C'\ang\xi^{M+k},
+\end{equation}
+locally uniformly in $\xi$, so
+\begin{equation*}
+  g_w(\xi)=\int\hat w(\xi,\eta)\,\dbar\eta\qquad
+  (\dbar\eta=(2\pi)^{-k}d\eta)
+\end{equation*}
+is continuous and polynomially bounded, and we define
+$\iota^*w=\cF^{-1}g_w\in\cSp(\R^p)$.
+
+\begin{lemma}\label{microlocal:lem:restriction}
+  Let $w\in\mathcal R_\delta$, $\rho\in\CIc(\R^k)$ with $\int\rho=1$, and
+  $\rho_\eps(y)=\eps^{-k}\rho(y/\eps)$.
+  \begin{enumerate}[label=\textup{(\roman*)}]
+  \item For $\phi\in\cS(\R^p)$,
+    $\iota^*w(\phi)=\lim_{\eps\to0}w(\phi\boxtimes\rho_\eps)$.
+  \item If $w\in\CIc(\R^{p+k})$ then $\iota^*w=w(\cdot,0)$.
+  \item $\supp\iota^*w\subset\{x;\ (x,0)\in\supp w\}$; in particular
+    $\iota^*w\in\CmIc(\R^p)$, and $\iota^*w=0$ if $\supp w\cap Y=\emptyset$.
+  \item For $\phi\in\CIc(\R^p)$, $\phi(x)w\in\mathcal R_{\delta/2}$ and
+    $\iota^*(\phi w)=\phi\,\iota^*w$.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  (i) By \eqref{microlocal:eq:parseval} in $\R^{p+k}$,
+  $w(\phi\boxtimes\rho_\eps)=\iint\hat w(\xi,\eta)\hat\phi(-\xi)
+  \hat\rho(-\eps\eta)\,\dbar\xi\,\dbar\eta$. As $\eps\to0$,
+  $\hat\rho(-\eps\eta)\to\hat\rho(0)=1$ with $\abs{\hat\rho}\le\norm\rho_{L^1}$,
+  and $\abs{\hat w(\xi,\eta)\hat\phi(-\xi)}$ is integrable by
+  \eqref{microlocal:eq:restriction-int}; by dominated convergence the limit is
+  $\int g_w(\xi)\hat\phi(-\xi)\,\dbar\xi=\iota^*w(\phi)$.
+
+  (ii) is clear from (i), and (iii) follows from (i) too: if
+  $(\bar x,0)\notin\supp w$ and $\phi$ is supported near $\bar x$, then
+  $\phi\boxtimes\rho_\eps$ vanishes near $\supp w$ for small $\eps$.
+
+  (iv) By \cref{microlocal:lem:fourier-global}(ii),
+  $\Sigma(w)$ does not meet the interior of $C_\delta$, which contains
+  $C_{\delta/2}$; as $\Sigma(\phi w)\subset\Sigma(w)$,
+  \cref{microlocal:lem:fourier-global}(i) shows $\phi w\in\mathcal
+  R_{\delta/2}$. The identity follows from (i), since
+  $(\phi w)(f\boxtimes\rho_\eps)=w(\phi f\boxtimes\rho_\eps)$.
+\end{proof}
+
+\begin{theorem}[Restriction]\label{microlocal:thm:restriction}
+  Let $u\in\CmIc(\R^{p+k})$ satisfy $\WF(u)\cap N^*Y=\emptyset$. There are
+  $r,\delta>0$ such that $\chi u\in\mathcal R_\delta$ for every
+  $\chi=\chi(y)\in\CIc(\R^k)$ supported in $\{\abs y<r\}$, and
+  \begin{equation*}
+    \iota^*u=\iota^*(\chi u)\in\CmIc(\R^p),\qquad\chi=1\text{ near }0,
+  \end{equation*}
+  is independent of the choice of $\chi$. The map $u\mapsto\iota^*u$ is
+  linear, coincides with $u\mapsto u(\cdot,0)$ on $\CIc(\R^{p+k})$, satisfies
+  $\iota^*u(\phi)=\lim_{\eps\to0}u(\phi\boxtimes\rho_\eps)$,
+  $\iota^*(\phi u)=\phi\,\iota^*u$ for $\phi\in\CIc(\R^p)$, and
+  \begin{equation*}
+    \WF(\iota^*u)\subset\iota^*\WF(u)=
+    \{(x,\xi)\in\Tz{\R^p};\ (x,0,\xi,\eta)\in\WF(u)\text{ for some }\eta\in\R^k\}.
+  \end{equation*}
+\end{theorem}
+\begin{proof}
+  The compact sets
+  $Z_\delta=\WF(u)\cap\{\abs y\le\delta\}\cap(\R^{p+k}\times C_\delta)\cap
+  \{\abs{(\xi,\eta)}=1\}$ decrease as $\delta\downarrow0$, and their
+  intersection is contained in $\WF(u)\cap N^*Y=\emptyset$. Hence
+  $Z_\delta=\emptyset$ for some $\delta>0$; take $r=\delta$. If $\supp
+  \chi\subset\{\abs y<r\}$ then $\WF(\chi u)\subset\WF(u)\cap\{\abs y<r\}$, so
+  $\Sigma(\chi u)\cap C_\delta=\emptyset$ and $\chi u\in\mathcal R_\delta$ by
+  \cref{microlocal:lem:fourier-global}(i). If $\chi,\chi'$ are two choices,
+  $(\chi-\chi')u\in\mathcal R_\delta$ vanishes near $Y$, so
+  $\iota^*(\chi u)=\iota^*(\chi'u)$ by \cref{microlocal:lem:restriction}(iii).
+  Linearity is clear, and the other properties, except the last, follow from
+  \cref{microlocal:lem:restriction}, since $\chi(y)\rho_\eps(y)=\rho_\eps(y)$
+  for small $\eps$. If $u\in\mathcal R_{\delta'}$ for some $\delta'>0$ then
+  $\iota^*u$ as defined before \cref{microlocal:lem:restriction} agrees with
+  $\iota^*(\chi u)$, by the limit formula.
+
+  For the wavefront set, let $(\bar x,\bar\xi)\in\Tz{\R^p}$ with $(\bar
+  x,0,\bar\xi,\eta)\notin\WF(u)$ for all $\eta$. For $\theta\in(0,1)$ let
+  \begin{equation*}
+    C'_\theta=C_\theta\cup\{(\xi,\eta);\ \xi\in\overline{V_\theta(\bar\xi)}\},
+  \end{equation*}
+  a closed cone in $\R^{p+k}\setminus0$. As $\theta\downarrow0$ the compact
+  sets $C'_\theta\cap\Sphere^{p+k-1}$ decrease to the set of unit vectors
+  $(\xi,\eta)$ with $\xi=0$ or $\xi\in\R_+\bar\xi$, which is disjoint from the
+  closed cone $\{(\xi,\eta);\ (\bar x,0,\xi,\eta)\in\WF(u)\}$ by hypothesis
+  and since $\WF(u)\cap N^*Y=\emptyset$. Hence for some $\theta$ the latter
+  cone lies in the open cone $\R^{p+k}\setminus(C'_\theta\cup\{0\})$, and by
+  \cref{microlocal:lem:fourier-global}(iii) there are $\phi\in\CIc(\R^p)$,
+  $\phi(\bar x)\ne0$, and $\chi(y)$ as above (with small supports) such that
+  $\Sigma(\phi\chi u)\cap C'_\theta=\emptyset$. Then
+  $\widehat{\phi\chi u}$ is rapidly decreasing on $C'_\theta$; in particular
+  $\phi\chi u\in\mathcal R_\theta$, and for $\xi\in V_\theta(\bar\xi)$, where
+  $(\xi,\eta)\in C'_\theta$ for all $\eta$,
+  \begin{equation*}
+    \abs{\widehat{\phi\,\iota^*u}(\xi)}=\Bigl|\int\widehat{\phi\chi u}(\xi,\eta)\,
+    \dbar\eta\Bigr|\le C_N\int\ang{(\xi,\eta)}^{-N-k-1}\,d\eta\le C'_N\ang\xi^{-N}.
+  \end{equation*}
+  Here we used $\phi\iota^*u=\iota^*(\phi\chi u)$, by the independence of
+  $\chi$ and \cref{microlocal:lem:restriction}(iv). By
+  \cref{microlocal:prop:fourier-char}, $(\bar x,\bar\xi)\notin\WF(\iota^*u)$.
+\end{proof}
+
+One can picture this as follows: of $\WF(u)$ only the part over $Y$
+survives, and the covector $(\xi,\eta)$ is projected to its component $\xi$
+along $Y$; the hypothesis guarantees that no non-zero covector is projected
+to zero.
+
+\subsection{Projection}
+Let $\pi_1:\R^{p+k}\to\R^p$, $\pi_1(x,y)=x$. For $u\in\CmIc(\R^{p+k})$ define
+the push-forward, or ``integral over the fibres'', $(\pi_1)_*u\in\CmIc(\R^p)$
+by
+\begin{equation*}
+  \Bigl(\int u(x,y)\,dy\Bigr)(\phi)=(\pi_1)_*u(\phi)=u(\pi_1^*\phi),\qquad
+  \pi_1^*\phi(x,y)=\phi(x),
+\end{equation*}
+which makes sense because $u$ acts on $\CI(\R^{p+k})$. Thus projection is
+dual to pull-back of functions. By duality,
+$\supp(\pi_1)_*u\subset\pi_1(\supp u)$, since $\supp\pi_1^*\phi=\pi_1^{-1}(\supp\phi)$.
+Moreover $(\pi_1)_*$ maps $\CIc(\R^{p+k})$ to $\CIc(\R^p)$, and
+\begin{equation}\label{microlocal:eq:projection-ft}
+  \widehat{(\pi_1)_*u}(\xi)=u(e^{-ix\cdot\xi})=\hat u(\xi,0),\qquad
+  \phi\,(\pi_1)_*u=(\pi_1)_*\bigl((\pi_1^*\phi)u\bigr).
+\end{equation}
+
+\begin{proposition}[Projection]\label{microlocal:prop:projection}
+  For $u\in\CmIc(\R^{p+k})$,
+  \begin{equation*}
+    \WF\bigl((\pi_1)_*u\bigr)\subset\{(x,\xi)\in\Tz{\R^p};\
+    (x,y,\xi,0)\in\WF(u)\text{ for some }y\in\R^k\}.
+  \end{equation*}
+\end{proposition}
+\begin{proof}
+  Let $(\bar x,\bar\xi)$ be outside the right side. We claim there are
+  $r,\theta>0$ such that $\WF(u)$ does not meet
+  $\{\abs{x-\bar x}<r\}\times\R^k\times C''_\theta$, where
+  $C''_\theta=\{(\xi,\eta);\ \xi\in\overline{V_\theta(\bar\xi)},\
+  \abs\eta\le\theta\abs\xi\}$. Otherwise there are
+  $(x_j,y_j,\xi_j,\eta_j)\in\WF(u)$ with $\abs{(\xi_j,\eta_j)}=1$,
+  $x_j\to\bar x$ and $(\xi_j,\eta_j)\in C''_{1/j}$; since $y_j$ lies in the
+  compact set $\pi_2(\supp u)$, a subsequence converges to a point
+  $(\bar x,y,\bar\xi/\abs{\bar\xi},0)$ of the closed set $\WF(u)$, a
+  contradiction. Now let $\phi\in\CIc(\R^p)$ be supported in $\{\abs{x-\bar
+  x}<r\}$ with $\phi(\bar x)\ne0$. Then
+  $\Sigma((\pi_1^*\phi)u)\cap C''_\theta=\emptyset$, so by
+  \cref{microlocal:lem:fourier-global}(i) and
+  \eqref{microlocal:eq:projection-ft},
+  $\widehat{\phi(\pi_1)_*u}(\xi)=\widehat{(\pi_1^*\phi)u}(\xi,0)$ is rapidly
+  decreasing on $V_\theta(\bar\xi)$. By \cref{microlocal:prop:fourier-char},
+  $(\bar x,\bar\xi)\notin\WF((\pi_1)_*u)$.
+\end{proof}
+
+\begin{corollary}\label{microlocal:cor:projection-smooth}
+  If $u\in\CmIc(\R^{p+k})$ and $\WF(u)\cap\{(x,y,\xi,0);\ \xi\ne0\}=\emptyset$
+  then $(\pi_1)_*u\in\CIc(\R^p)$.
+\end{corollary}
+
+The covectors $(x,y,\xi,0)$ are exactly those which are conormal to the
+fibres $\{x\}\times\R^k$ over which we integrate. Thus the only singularities
+which survive integration are those conormal to the fibres; those which are
+even partially in the direction of integration are wiped out. This fits with
+the fact that integration in \emph{all} variables leaves no singularities
+at all.
+
+% ======================================================================
+\section{Products of distributions}\label{microlocal:sec:products}
+
+We express the product as ``$u_1(x)u_2(x+y)$ restricted to $y=0$''. Let
+$L:\R^{2n}\to\R^{2n}$ be the linear map $L(x,y)=(x,x+y)$, with $\det L=1$
+and transpose $DL^t(\xi,\eta)=(\xi+\eta,\eta)$.
+
+\begin{theorem}[Products]\label{microlocal:thm:products}
+  Let $u_1,u_2\in\CmIc(\R^n)$ satisfy
+  \begin{equation*}
+    (x,\xi)\in\WF(u_1)\Longrightarrow(x,-\xi)\notin\WF(u_2).
+  \end{equation*}
+  Then $w=L^*(u_1\boxtimes u_2)\in\CmIc(\R^{2n})$ satisfies
+  $\WF(w)\cap N^*\{y=0\}=\emptyset$, and the product
+  \begin{equation*}
+    u_1u_2=\iota^*L^*(u_1\boxtimes u_2)\in\CmIc(\R^n)
+  \end{equation*}
+  has the following properties.
+  \begin{enumerate}[label=\textup{(\roman*)}]
+  \item $\supp(u_1u_2)\subset\supp u_1\cap\supp u_2$, and for
+    $\phi\in\cS(\R^n)$ and $\rho$, $\rho_\eps$ as in
+    \cref{microlocal:lem:restriction} (now on $\R^n$), with
+    $\check\rho_\eps(t)=\rho_\eps(-t)$,
+    \begin{equation*}
+      (u_1u_2)(\phi)=\lim_{\eps\to0}u_1\bigl(\phi\cdot(u_2*\check\rho_\eps)\bigr).
+    \end{equation*}
+  \item If $u_1$ or $u_2$ is smooth, $u_1u_2$ is the usual product.
+  \item $(\phi u_1)u_2=\phi(u_1u_2)$ for $\phi\in\CI(\R^n)$.
+  \item The wavefront set satisfies
+    \begin{align*}
+      \WF(u_1u_2)\subset{}&\{(x,\xi);\ x\in\supp u_1,\ (x,\xi)\in\WF(u_2)\}\\
+      &\cup\{(x,\xi);\ x\in\supp u_2,\ (x,\xi)\in\WF(u_1)\}\\
+      &\cup\{(x,\xi_1+\xi_2);\ (x,\xi_1)\in\WF(u_1),\ (x,\xi_2)\in\WF(u_2)\}.
+    \end{align*}
+  \end{enumerate}
+\end{theorem}
+Note that $\xi_1+\xi_2\ne0$ in the last set, by the hypothesis.
+\begin{proof}
+  By \cref{microlocal:thm:wf-diffeo} (for the linear map $L$),
+  \begin{equation*}
+    \WF(w)=\{(x,y;\xi+\eta,\eta);\ (x,x+y;\xi,\eta)\in\WF(u_1\boxtimes u_2)\}.
+  \end{equation*}
+  A point of $N^*\{y=0\}$ has $y=0$ and $\xi+\eta=0$, $\eta\ne0$; by
+  \cref{microlocal:prop:exterior}, $(x,x;-\eta,\eta)$ with both components
+  non-zero can only lie in $\WF(u_1\boxtimes u_2)$ if $(x,-\eta)\in\WF(u_1)$
+  and $(x,\eta)\in\WF(u_2)$, which is excluded. So
+  \cref{microlocal:thm:restriction} applies. The support statement follows
+  from that theorem, since $(x,0)\in\supp w$ means $(x,x)\in\supp u_1\times\supp
+  u_2$. For the formula in (i), by \cref{microlocal:thm:restriction} and the
+  definition of $L^*$,
+  \begin{equation*}
+    (u_1u_2)(\phi)=\lim_{\eps\to0}(u_1\boxtimes u_2)\bigl(\phi(x)\rho_\eps(z-x)\bigr)
+    =\lim_{\eps\to0}u_1\bigl(\phi(x)\,u_2(\rho_\eps(\cdot-x))\bigr),
+  \end{equation*}
+  and $u_2(\rho_\eps(\cdot-x))=(u_2*\check\rho_\eps)(x)$.
+
+  (ii) If $u_2$ is smooth, $u_2*\check\rho_\eps\to u_2$ in $\CI$, so (i) gives
+  $u_1(\phi u_2)$. If $u_1$ is smooth,
+  $u_1(\phi\cdot(u_2*\check\rho_\eps))=u_2((u_1\phi)*\rho_\eps)\to u_2(u_1\phi)$.
+
+  (iii) is immediate from (i).
+
+  (iv) By \cref{microlocal:thm:restriction} and the formula for $\WF(w)$,
+  \begin{equation*}
+    \WF(u_1u_2)\subset\{(x,\xi+\eta);\ (x,x;\xi,\eta)\in\WF(u_1\boxtimes u_2)\},
+  \end{equation*}
+  and \cref{microlocal:prop:exterior} gives the three sets.
+\end{proof}
+
+\begin{remark}\label{microlocal:rem:product-fourier}
+  If the stronger condition $\Sigma(u_1)\cap(-\Sigma(u_2))=\emptyset$ holds,
+  for example if $u_1$ and $u_2$ have small supports near a point $\bar x$ at
+  which the hypothesis of the theorem holds
+  (\cref{microlocal:lem:fourier-global}(iii)), then the familiar formula
+  \begin{equation*}
+    \widehat{u_1u_2}(\xi)=\int\hat u_1(\xi-\eta)\hat u_2(\eta)\,\dbar\eta
+  \end{equation*}
+  holds, with an absolutely convergent integral. Indeed
+  $\hat w(\xi,\eta)=\hat u_1(\xi-\eta)\hat u_2(\eta)$, and $w\in\mathcal
+  R_\delta$ for small $\delta$: choose open cones $V_i\supset\Sigma(u_i)$ with
+  $\overline{V_1}\cap(-\overline{V_2})=\emptyset$; if $\abs\xi\le\delta\abs\eta$
+  then either $\eta\notin V_2$, where $\hat u_2(\eta)$ is rapidly decreasing
+  and $\abs{\hat u_1(\xi-\eta)}\le C\ang\eta^M$, or $\eta\in V_2$, and then
+  $\xi-\eta$, whose direction differs from that of $-\eta$ by at most
+  $2\delta$, lies in a closed cone disjoint from $\Sigma(u_1)$ if $\delta$ is
+  small, so $\hat u_1(\xi-\eta)$ is rapidly decreasing in $\ang\eta$. The
+  formula is then the definition of $\iota^*w$.
+\end{remark}
+
+% ======================================================================
+\section{Pull-back}\label{microlocal:sec:pullback}
+
+Now let $F:\Omega_1\to\Omega_2$ be a smooth map between open sets
+$\Omega_1\subset\R^n$ and $\Omega_2\subset\R^m$; the dimensions may differ.
+When can we define $F^*u$ for $u\in\CmIc(\Omega_2)$, and what is its
+wavefront set? For a general $F$ there is no consistent definition for all
+distributions (consider $F$ constant and $u=\delta$). We assume that $F$ is
+\emph{proper}, i.e.\ $F^{-1}(K)$ is compact for every compact $K\subset\Omega_2$,
+mostly for convenience: then $F^*\phi=\phi\circ F\in\CIc(\Omega_1)$ for
+$\phi\in\CIc(\Omega_2)$. The differential of $F$ defines the cotangent maps
+\begin{equation*}
+  F^*_x:\R^m=T^*_{F(x)}\Omega_2\to T^*_x\Omega_1=\R^n,\qquad
+  \eta\mapsto DF(x)^t\eta,\quad\text{i.e. }
+  \xi_i=\sum_j\frac{\pa F_j}{\pa x_i}(x)\eta_j,
+\end{equation*}
+and we set
+\begin{align*}
+  N_F&=\{(F(x),\eta)\in\Omega_2\times(\R^m\setminus0);\ x\in\Omega_1,\ DF(x)^t\eta=0\},\\
+  F^*W&=\{(x,DF(x)^t\eta);\ (F(x),\eta)\in W\}\quad\text{for }W\subset\Tz{\Omega_2}.
+\end{align*}
+Note that $F^*$ is a relation rather than a map between cotangent spaces.
+$N_F$ is the set of covectors that are mapped to zero; it is empty if $F$ is a
+submersion, and for $\iota$ of the previous section it is $N^*Y$.
+
+The construction decomposes $F$ into elementary maps. Let
+$U=\{(x,y)\in\Omega_1\times\R^m;\ y+F(x)\in\Omega_2\}$ and
+\begin{equation*}
+  H:U\to\Omega_1\times\Omega_2,\qquad H(x,y)=(x,y+F(x)),
+\end{equation*}
+a diffeomorphism with inverse $(x,z)\mapsto(x,z-F(x))$ and $\det DH=1$; it
+maps $U\cap\{y=0\}$ onto the graph of $F$. For a function,
+$F^*\phi=\iota^*H^*(1\boxtimes\phi)$, $\iota(x)=(x,0)$.
+
+\begin{theorem}[Pull-back]\label{microlocal:thm:pullback}
+  Let $F:\Omega_1\to\Omega_2$ be a proper smooth map and let
+  $u\in\CmIc(\Omega_2)$ satisfy $\WF(u)\cap N_F=\emptyset$. Let
+  $\chi\in\CIc(\Omega_1)$ equal $1$ near the compact set $F^{-1}(\supp u)$.
+  Then $H^*(\chi\boxtimes u)\in\CmIc(U)$ satisfies the hypothesis of
+  \cref{microlocal:thm:restriction}, and
+  \begin{equation*}
+    F^*u=\iota^*H^*(\chi\boxtimes u)\in\CmIc(\Omega_1)
+  \end{equation*}
+  is independent of $\chi$, with $\supp F^*u\subset F^{-1}(\supp u)$. This
+  defines a linear map which extends $\phi\mapsto\phi\circ F$ on
+  $\CIc(\Omega_2)$, satisfies
+  \begin{equation*}
+    F^*u(\phi)=\lim_{\eps\to0}u\Bigl(\int\chi(x)\phi(x)\rho_\eps(\cdot-F(x))\,dx\Bigr),
+    \qquad\phi\in\cS(\R^n),
+  \end{equation*}
+  for $\rho\in\CIc(\R^m)$, $\int\rho=1$, agrees with the pull-back of
+  \cref{microlocal:lem:diffeo-pullback} if $F$ is a diffeomorphism, and
+  \begin{equation*}
+    \WF(F^*u)\subset F^*\WF(u)=\bigcup_{x\in\Omega_1}
+    \{x\}\times F_x^*\bigl(\WF(u)\cap T^*_{F(x)}\Omega_2\bigr).
+  \end{equation*}
+\end{theorem}
+\begin{proof}
+  By \cref{microlocal:prop:exterior}, since $\WF(\chi)=\emptyset$,
+  $\WF(\chi\boxtimes u)\subset\{(x,z;0,\eta);\ x\in\supp\chi,\
+  (z,\eta)\in\WF(u)\}$. Since $DH(x,y)^t(\xi,\eta)=(\xi+DF(x)^t\eta,\eta)$,
+  \cref{microlocal:thm:wf-diffeo} gives
+  \begin{equation*}
+    \WF\bigl(H^*(\chi\boxtimes u)\bigr)\subset\{(x,y;DF(x)^t\eta,\eta);\
+    x\in\supp\chi,\ (y+F(x),\eta)\in\WF(u)\}.
+  \end{equation*}
+  A point of this set over $y=0$ lies in $N^*\{y=0\}$ only if
+  $DF(x)^t\eta=0$ and $(F(x),\eta)\in\WF(u)$, i.e.\ if $(F(x),\eta)\in
+  N_F\cap\WF(u)=\emptyset$. Thus \cref{microlocal:thm:restriction} applies,
+  and gives $\supp F^*u\subset\{x\in\supp\chi;\ F(x)\in\supp u\}$ and
+  $\WF(F^*u)\subset\{(x,DF(x)^t\eta);\ (F(x),\eta)\in\WF(u)\}$.
+
+  If $\chi'$ is another choice, $H^*((\chi-\chi')\boxtimes u)$ is supported in
+  $\{(x,y);\ x\in\supp(\chi-\chi'),\ y+F(x)\in\supp u\}$, which does not meet
+  $\{y=0\}$ because $\chi=\chi'$ near $F^{-1}(\supp u)$; hence its restriction
+  vanishes (\cref{microlocal:lem:restriction}(iii)). By
+  \cref{microlocal:thm:restriction}, the formula for $H^*$ in
+  \cref{microlocal:lem:diffeo-pullback} (with Jacobian $1$) and the definition
+  of the exterior product,
+  \begin{equation*}
+    F^*u(\phi)=\lim_{\eps\to0}H^*(\chi\boxtimes u)(\phi\boxtimes\rho_\eps)
+    =\lim_{\eps\to0}(\chi\boxtimes u)\bigl(\phi(x)\rho_\eps(z-F(x))\bigr),
+  \end{equation*}
+  which is the stated formula. If $u$ is smooth, the expression under the
+  limit is $\int\chi(x)\phi(x)(u*\check\rho_\eps)(F(x))\,dx$, with
+  $\check\rho_\eps(t)=\rho_\eps(-t)$, which converges to
+  $\int\chi\phi\,(u\circ F)\,dx=\int\phi\,(u\circ F)\,dx$. If $F$ is a diffeomorphism with
+  inverse $G$, substituting $x=G(z')$ shows that the function
+  $\int\chi\phi(x)\rho_\eps(z-F(x))\,dx$ is
+  $\rho_\eps*f$ with $f=\abs{\det DG}\,(\chi\phi)\circ G\in\CIc(\Omega_2)$, which
+  converges to $f$ in $\CI$; so $F^*u(\phi)=u(f)$, which is the definition in
+  \cref{microlocal:lem:diffeo-pullback} since $\chi\circ G=1$ near $\supp
+  u$.
+\end{proof}
+
+The hypothesis $\WF(u)\cap N_F=\emptyset$ is natural: without it the right
+side of the wavefront set bound would contain zero covectors.
+Restriction to a submanifold, products ($u_1u_2=\Delta^*(u_1\boxtimes u_2)$ with
+$\Delta(x)=(x,x)$, for which $N_\Delta=\{(x,x;\xi,-\xi)\}$) and
+diffeomorphisms are all special cases; see
+\cref{microlocal:ex:pullback-special}.
+
+% ======================================================================
+\section{Push-forward}\label{microlocal:sec:pushforward}
+
+The dual operation is push-forward. Pull-back maps $\CIc$ to $\CIc$ (for
+proper $F$) but is not always defined on distributions. Dually:
+
+\begin{theorem}[Push-forward]\label{microlocal:thm:pushforward}
+  Let $F:\Omega_1\to\Omega_2$ be a smooth map from an open subset of $\R^n$ to
+  an open subset of $\R^m$. For $u\in\CmIc(\Omega_1)$,
+  \begin{equation*}
+    F_*u(\phi)=u(F^*\phi),\qquad\phi\in\CI(\Omega_2),
+  \end{equation*}
+  defines $F_*u\in\CmIc(\Omega_2)$, with $\supp F_*u\subset F(\supp u)$, and
+  \begin{multline*}
+    \WF(F_*u)\subset\{(F(x),\eta);\ x\in\supp u,\ \eta\ne0,\ DF(x)^t\eta=0\}\\
+    \cup\{(F(x),\eta);\ \eta\ne0,\ (x,DF(x)^t\eta)\in\WF(u)\}.
+  \end{multline*}
+\end{theorem}
+
+Thus $F_*$ is always defined, but even if $u\in\CIc(\Omega_1)$ in general
+$F_*u\notin\CIc(\Omega_2)$; if $F$ is a submersion the first set is empty and
+$F_*$ maps $\CIc(\Omega_1)$ into $\CIc(\Omega_2)$. The two sets in the bound
+are really the same, if one regards $(x,0)$ as belonging to the ``wavefront
+set'' of $u$ at every point of $\supp u$.
+
+\begin{proof}
+  $F_*u$ is a distribution since $\phi\mapsto\psi F^*\phi$, $\psi\in\CIc(\Omega_1)$
+  equal to $1$ near $\supp u$, is continuous; the support statement is clear.
+  Formally,
+  \begin{equation*}
+    F_*u(\phi)=\int u(x)\phi(F(x))\,dx=\iint u(x)\delta(y-F(x))\phi(y)\,dy\,dx,
+  \end{equation*}
+  so we write $F_*u=(\pi_2)_*\tilde H^*(u\boxtimes\delta)$, where
+  $\delta\in\CmIc(\R^m)$, $\tilde H:\Omega_1\times\R^m\to\Omega_1\times\R^m$,
+  $\tilde H(x,y)=(x,y-F(x))$, is a diffeomorphism with $\det D\tilde H=1$, and
+  $\pi_2(x,y)=y$. To check this identity, note that
+  $\tilde H^*(u\boxtimes\delta)\in\CmIc(\Omega_1\times\R^m)$ is supported in the
+  compact graph $\{(x,F(x));\ x\in\supp u\}$ and, by
+  \cref{microlocal:lem:diffeo-pullback},
+  \begin{equation*}
+    (\pi_2)_*\tilde H^*(u\boxtimes\delta)(\phi)
+    =(u\boxtimes\delta)\bigl(\psi(x)\phi(z+F(x))\bigr)=u\bigl(\psi\,\phi\circ F\bigr)
+    =F_*u(\phi).
+  \end{equation*}
+  Now we estimate the wavefront set using the elementary operations. Since
+  $\WF(\delta)=\{0\}\times(\R^m\setminus0)$ (\cref{microlocal:ex:delta}),
+  \cref{microlocal:prop:exterior} gives
+  \begin{equation*}
+    \WF(u\boxtimes\delta)\subset\{(x,0;\xi,\eta);\ (\xi,\eta)\ne0,\
+    (x,\xi)\in\WF(u)\text{ or }(\xi=0,\ x\in\supp u)\}.
+  \end{equation*}
+  Since $D\tilde H(x,y)^t(\xi,\eta)=(\xi-DF(x)^t\eta,\eta)$,
+  \cref{microlocal:thm:wf-diffeo} gives
+  \begin{equation*}
+    \WF\bigl(\tilde H^*(u\boxtimes\delta)\bigr)\subset\{(x,F(x);\xi-DF(x)^t\eta,\eta);\
+    (x,\xi)\in\WF(u)\text{ or }(\xi=0,\ x\in\supp u)\}.
+  \end{equation*}
+  Finally, by \cref{microlocal:prop:projection} (with the roles of the
+  factors exchanged), $(y,\eta)\in\WF(F_*u)$ only if $\eta\ne0$ and
+  $(x,y;0,\eta)$ lies in the last set for some $x$, i.e.\ $y=F(x)$ and
+  $\xi=DF(x)^t\eta$ with either $(x,DF(x)^t\eta)\in\WF(u)$, or
+  $DF(x)^t\eta=0$ and $x\in\supp u$.
+\end{proof}
+
+The operator $F_*$ has Schwartz kernel $K(y,x)=\delta(y-F(x))$:
+$F_*u(y)=\int K(y,x)u(x)\,dx$. Locally $K$ is the pull-back of
+$\delta\boxtimes\chi$, $\chi\in\CIc(\Omega_1)$, under the diffeomorphism
+$(y,x)\mapsto(y-F(x),x)$, so by \cref{microlocal:prop:exterior} and
+\cref{microlocal:thm:wf-diffeo},
+\begin{equation*}
+  \WF(K)\subset\{(F(x),x;\eta,-DF(x)^t\eta);\ \eta\ne0\}.
+\end{equation*}
+In the notation of the next section (with the roles of the two factors
+interchanged), $\WFp(K)$ is contained in the relation
+$\{((F(x),\eta),(x,DF(x)^t\eta))\}$, and the bound of
+\cref{microlocal:thm:pushforward} reads
+$\WF(F_*u)\subset\WFp(K)\circ\WF(u)\cup\{(y,\eta);\ (y,x;\eta,0)\in\WF(K),\ x\in\supp u\}$.
+
+% ======================================================================
+\section{The wavefront relation}\label{microlocal:sec:relation}
+
+One serious application of these results is to general operators with
+distributional kernels. Let $\Omega_1\subset\R^n$, $\Omega_2\subset\R^m$ be open
+and $K\in\CmIc(\Omega_1\times\Omega_2)$. Then $K$ defines an operator
+\begin{equation*}
+  A:\CIc(\Omega_2)\to\CmIc(\Omega_1),\qquad Au(\phi)=K(\phi\boxtimes u),
+\end{equation*}
+formally $Au(x)=\int K(x,y)u(y)\,dy$. We set
+\begin{align*}
+  \WFp(K)&=\{((x,\xi),(y,\eta));\ (x,y;\xi,-\eta)\in\WF(K)\}
+  \subset(\Omega_1\times\R^n)\times(\Omega_2\times\R^m),\\
+  \WF_{\Omega_1}(K)&=\{(x,\xi)\in\Tz{\Omega_1};\ (x,y;\xi,0)\in\WF(K)\text{ for some }y\},\\
+  \WFp_{\Omega_2}(K)&=\{(y,\eta)\in\Tz{\Omega_2};\ (x,y;0,-\eta)\in\WF(K)\text{ for some }x\}.
+\end{align*}
+We regard $\WFp(K)$ as a relation: for $W\subset\Tz{\Omega_2}$,
+\begin{equation*}
+  \WFp(K)\circ W=\{(x,\xi)\in\Tz{\Omega_1};\ ((x,\xi),(y,\eta))\in\WFp(K)
+  \text{ for some }(y,\eta)\in W\}.
+\end{equation*}
+
+\begin{theorem}[Wavefront relation]\label{microlocal:thm:relation}
+  Let $K\in\CmIc(\Omega_1\times\Omega_2)$ and let $\chi\in\CIc(\Omega_1)$
+  equal $1$ near the projection of $\supp K$. For every $u\in\CmIc(\Omega_2)$
+  with
+  \begin{equation}\label{microlocal:eq:relation-cond}
+    \WF(u)\cap\WFp_{\Omega_2}(K)=\emptyset
+  \end{equation}
+  the product $K\cdot(\chi\boxtimes u)$ is defined, and
+  \begin{equation*}
+    Au=(\pi_1)_*\bigl(K\cdot(\chi\boxtimes u)\bigr)\in\CmIc(\Omega_1)
+  \end{equation*}
+  extends the operator $A$ above. It satisfies
+  \begin{equation*}
+    \WF(Au)\subset\WFp(K)\circ\WF(u)\ \cup\ \{(x,\xi);\ (x,y;\xi,0)\in\WF(K)
+    \text{ for some }y\in\supp u\}.
+  \end{equation*}
+\end{theorem}
+\begin{proof}
+  By \cref{microlocal:prop:exterior},
+  $\WF(\chi\boxtimes u)\subset\{(x,y;0,\eta);\ (y,\eta)\in\WF(u)\}$. The
+  product condition of \cref{microlocal:thm:products} fails only at points
+  $(x,y;0,-\eta)\in\WF(K)$ with $(y,\eta)\in\WF(u)$, which are excluded by
+  \eqref{microlocal:eq:relation-cond}. If $u$ is smooth the product is
+  $K\cdot(\chi\otimes u)$ and
+  $(\pi_1)_*(K\cdot(\chi\otimes u))(\phi)=K(\chi\phi\boxtimes u)=K(\phi\boxtimes
+  u)$, so $Au$ agrees with the previous definition. By
+  \cref{microlocal:thm:products}(iv), a point of
+  $\WF(K\cdot(\chi\boxtimes u))$ has the form $(x,y;\zeta_1+\zeta_2)$ where
+  either $\zeta_1=(\xi_1,\eta_1)$ with $(x,y;\zeta_1)\in\WF(K)$, or
+  $\zeta_1=0$ and $(x,y)\in\supp K$; and either $\zeta_2=(0,\eta_2)$ with
+  $(y,\eta_2)\in\WF(u)$, or $\zeta_2=0$ and $y\in\supp u$. By
+  \cref{microlocal:prop:projection}, $(x,\xi)\in\WF(Au)$ requires such a
+  point with $\zeta_1+\zeta_2=(\xi,0)$, $\xi\ne0$. If $\zeta_1=0$ the first
+  component of $\zeta_1+\zeta_2$ vanishes, which is excluded. If $\zeta_2=0$
+  then $(x,y;\xi,0)\in\WF(K)$ with $y\in\supp u$. Otherwise $\xi_1=\xi$ and
+  $\eta_1=-\eta_2$, so $(x,y;\xi,-\eta_2)\in\WF(K)$ with
+  $(y,\eta_2)\in\WF(u)$, that is $(x,\xi)\in\WFp(K)\circ\WF(u)$.
+\end{proof}
+
+\begin{remark}\label{microlocal:rem:relation-psido}
+  If $K=K_B$ for some $B\in\Psido m(\R^n)$ with kernel of compact support in
+  $\Omega\times\Omega$, then $Au=Bu$ for every $u\in\CmIc(\Omega)$. Indeed, by
+  \cref{microlocal:thm:products}(i) with a product mollifier
+  $\rho=\rho^{(1)}\boxtimes\rho^{(2)}$ on $\R^{2n}$, and
+  $\phi\in\CIc$, $\psi\in\CIc$ equal to $1$ near $\pi_2(\supp K)$,
+  \begin{equation*}
+    Au(\phi)=\lim_{\eps\to0}K\bigl((\phi\,(\chi*\check\rho^{(1)}_\eps))\boxtimes
+    (\psi\,(u*\check\rho^{(2)}_\eps))\bigr)
+    =\lim_{\eps\to0}(Bu_\eps)(\phi)=\lim_{\eps\to0}u_\eps(B^t\phi)=u(B^t\phi),
+  \end{equation*}
+  where $u_\eps=u*\check\rho^{(2)}_\eps\to u$ in $\cSp$, since
+  $\chi*\check\rho^{(1)}_\eps=1$ near the projection of $\supp K$ for small $\eps$.
+\end{remark}
+
+\begin{corollary}\label{microlocal:cor:relation}
+  Let $K\in\CmIc(\Omega_1\times\Omega_2)$.
+  \begin{enumerate}[label=\textup{(\roman*)}]
+  \item If $\WF(K)\cap\{(x,y;\xi,0)\}=\emptyset$ then $A$ maps $\CIc(\Omega_2)$
+    into $\CIc(\Omega_1)$.
+  \item If $\WF(K)\cap\{(x,y;0,\eta)\}=\emptyset$ then $A$ extends to a linear
+    map $A:\CmIc(\Omega_2)\to\CmIc(\Omega_1)$ with
+    $\WF(Au)\subset\WFp(K)\circ\WF(u)\cup\WF_{\Omega_1}(K)$.
+  \end{enumerate}
+\end{corollary}
+\begin{proof}
+  Immediate from \cref{microlocal:thm:relation}: in (i), $\WF(u)=\emptyset$ for
+  smooth $u$, and in (ii), condition \eqref{microlocal:eq:relation-cond} is
+  void.
+\end{proof}
+
+\subsection{Applications}
+For a pseudodifferential operator $B\in\Psido m(\R^n)$ with kernel of compact
+support, \cref{microlocal:prop:wf-kernel} gives
+\begin{equation*}
+  \WFp(K_B)=\{((x,\xi),(x,\xi));\ (x,\xi)\in\WFp(B)\},
+\end{equation*}
+a subset of the identity relation. In particular $\WF(K_B)$ contains no
+points of the form $(x,y;\xi,0)$ or $(x,y;0,\eta)$, so both parts of
+\cref{microlocal:cor:relation} apply, and by
+\cref{microlocal:rem:relation-psido} \cref{microlocal:thm:relation} reduces to
+$\WF(Bu)\subset\WFp(B)\cap\WF(u)$; this recovers microlocality
+(\cref{microlocal:thm:microlocality}) for such operators. The next
+chapters will show that many other natural operators, such as the
+solution operators of hyperbolic equations, have kernels whose wavefront
+sets are well-behaved relations, and \cref{microlocal:thm:relation} then
+describes how they propagate singularities.
+
+\begin{remark}
+  The restriction to compactly supported kernels is only for simplicity. If
+  $K$ is a distribution on $\Omega_1\times\Omega_2$ with \emph{proper}
+  support, i.e.\ both projections $\supp K\to\Omega_i$ are proper, then $A$
+  maps $\CIc(\Omega_2)$ to distributions of compact support in $\Omega_1$, and
+  the results of this section hold for $u\in\CmIc(\Omega_2)$, since only
+  $K$ on the compact set $\supp K\cap(\Omega_1\times\supp u)$ is involved.
+\end{remark}
+
+% ======================================================================
+\section{Exercises}\label{microlocal:sec:exercises}
+
+\begin{exercise}\label{microlocal:ex:residual-S}
+  Is it true that every $E\in\Psido{-\infty}(\R^n)$ defines a map from
+  $\cSp(\R^n)$ to $\cS(\R^n)$? (Consider $E=\Op(e)$ with $e\in\cS(\R^n_\xi)$
+  and $e(0)\ne0$, acting on the constant function $1$.) Compare with
+  \cref{microlocal:lem:residual-compact}.
+\end{exercise}
+
+\begin{exercise}
+  Show that $\cS(\R^n)$ is dense in $L^2(\R^n)$ by proving that if
+  $\phi\in\CIc(\R^n)$ is identically equal to $1$ near the origin then
+  \begin{equation*}
+    u_k(x)=\phi\Bigl(\frac xk\Bigr)\int e^{ix\cdot\xi}\phi\Bigl(\frac\xi k\Bigr)
+    \hat u(\xi)\,\dbar\xi\in\cS(\R^n)\quad\text{for }u\in L^2(\R^n),
+  \end{equation*}
+  and $u_k\to u$ in $L^2(\R^n)$. Can you see any relation to
+  pseudodifferential operators here?
+\end{exercise}
+
+\begin{exercise}
+  For $k\in\N$ show that
+  $u\in\cSp(\R^n)$ can be written $u=\sum_{\abs\alpha\le k}D^\alpha u_\alpha$
+  with $u_\alpha\in L^2(\R^n)$ if and only if $\ang D^{-k}u\in L^2(\R^n)$, that
+  is, if and only if $u\in H^{-k}(\R^n)$.
+\end{exercise}
+
+\begin{exercise}
+  Let $a\in\CIb(\R^n)$ be real with $a\ge0$, and
+  $A=\sum_{j=1}^nD_{x_j}^2+a(x)$. Show that $Au=0$ has no non-trivial solution
+  $u\in L^2(\R^n)$. (Show first that $u\in H^2(\R^n)$, then compute
+  $\inner{Au}u$.)
+\end{exercise}
+
+\begin{exercise}\label{microlocal:ex:density}
+  Show that for any open set $\Omega\subset\R^n$, $\CIc(\Omega)$ is dense in
+  $\CmIc(\Omega)$ in the weak topology, i.e.\ every $u\in\CmIc(\Omega)$ is the
+  limit of a sequence in $\CIc(\Omega)$ in $\cSp(\R^n)$.
+\end{exercise}
+
+\begin{exercise}\label{microlocal:ex:empty-wf}
+  Let $h\in\CIc(\R^n)$ be supported in $\{1<\abs\eta<2\}$ and not identically
+  zero, and let $a(x,\xi)=h(\xi/\ang x)$. Show that $a\in S^0(\R^n;\R^n)$, that
+  $\conesupp(a)=\emptyset$, so $\WFp(\Op(a))=\emptyset$, but that
+  $a\notin S^{-1}(\R^n;\R^n)$, so $\Op(a)\notin\Psido{-\infty}(\R^n)$.
+\end{exercise}
+
+\begin{exercise}
+  Show that for $u\in\cSp(\R^n)$
+  \begin{equation*}
+    \WF(u)=\bigcap\bigl\{\Char_0(A);\ A\in\Psido0(\R^n),\ Au\in\CI(\R^n)\bigr\},
+  \end{equation*}
+  so that \cref{microlocal:def:wf-compact} extends verbatim.
+\end{exercise}
+
+\begin{exercise}
+  Compute the wavefront sets of the following distributions: $\delta\in\cSp(\R^n)$;
+  $\abs x\in\cSp(\R^n)$; the characteristic function $\chi_{\mathbb B}$ of the
+  unit ball, $\chi_{\mathbb B}(x)=1$ for $\abs x\le1$ and $0$ for $\abs x>1$.
+  (For the last, use \cref{microlocal:thm:wf-diffeo} to reduce to the
+  Heaviside function of one variable, regarded as a function on $\R^n$.)
+\end{exercise}
+
+\begin{exercise}
+  Let $\Gamma\subset\Tz{\R^n}$ be a closed cone and define
+  \begin{equation*}
+    \mathcal C^{-\infty}_{c,\Gamma}(\R^n)=\{u\in\CmIc(\R^n);\
+    Au\in\CI(\R^n)\ \forall\,A\in\Psido0(\R^n)\text{ with }\WFp(A)\cap\Gamma=\emptyset\}.
+  \end{equation*}
+  Show that this is the space of $u\in\CmIc(\R^n)$ with $\WF(u)\subset\Gamma$.
+  Describe a complete topology on this space with respect to which
+  $\CIc(\R^n)$ is a dense subspace.
+\end{exercise}
+
+\begin{exercise}
+  Give an alternative proof of \cref{microlocal:prop:parametrix}, not using
+  global parametrices, along the following lines. Let $z\notin\Char_m(A)$, $a=\sigma_L(A)$,
+  and choose $\eps>0$ so small that $\gamma_\eps=\gamma_{z,\eps}$ is supported
+  where $\abs a\ge c\abs\xi^m$. Then $b_0=\gamma_\eps/a\in S^{-m}(\R^n;\R^n)$.
+  With $B_0=\Op(b_0)$, show that $G=\Id-AB_0\in\Psido0$ has
+  $\sigma_0(G)=[1-\gamma_\eps]$, and that with $C=\Op(\gamma_{z,\eps/4})$,
+  $CG\in\Psido{-1}$ and $z\notin\WFp((\Id-C)G)$. Writing
+  $\Id-AB_0=CG+R_1$, let $B_1\in\Psido{-1}$ be an asymptotic sum of
+  $\sum_{j\ge1}(CG)^j$ and $B=B_0(\Id+B_1)$. Show that $AB=\Id+R_2$ with
+  $z\notin\WFp(R_2)$. Construct a left parametrix in the same way, or by
+  applying the construction to $A^*$ and taking adjoints.
+\end{exercise}
+
+\begin{exercise}\label{microlocal:ex:uniqueness}
+  Show that microlocal parametrices are essentially unique: if $B$ and $B'$
+  satisfy $z\notin\WFp(AB'-\Id)$ and $z\notin\WFp(BA-\Id)$ then
+  $z\notin\WFp(B-B')$.
+\end{exercise}
+
+\begin{exercise}
+  Given $(\bar x,\bar\xi)\in\Tz{\R^n}$, construct $u\in\CmIc(\R^n)$ with
+  \begin{equation*}
+    \WF(u)=\{(\bar x,t\bar\xi);\ t>0\}.
+  \end{equation*}
+  (Hint: take $\phi\in\CIc(\R^n)$ with $\int\phi\ne0$ and
+  $u(x)=\sum_{k\ge1}k^{-2}\phi(k(x-\bar x))e^{ik^3x\cdot\bar\xi}$, and use the
+  Fourier transform. See \cite[Section~8.1]{Hormander-I} for the construction
+  of a distribution with any prescribed closed conic wavefront set.)
+\end{exercise}
+
+\begin{exercise}
+  Suppose $A\in\Psido m(\R^n)$ has Schwartz kernel of compact support. If
+  $u\in\CmIc(\R^n)$ use the elementary operations (and
+  \cref{microlocal:prop:wf-kernel}) to investigate under what conditions
+  $\kappa(x,y)=K_A(x,y)u(y)$, and then $\gamma=(\pi_1)_*\kappa$, make sense.
+  What can you say about $\WF(\gamma)$?
+\end{exercise}
+
+\begin{exercise}
+  Consider the projection $\pi_1:\R^p\times\R^k\to\R^p$. Show that $(\pi_1)_*$
+  can be extended to some distributions which do not have compact support,
+  for example to
+  $\{u\in\cSp(\R^{p+k});\ \supp u\cap(K\times\R^k)\text{ is compact for each compact }K\subset\R^p\}$,
+  with values in distributions on $\R^p$ (that is, continuous linear functionals
+  on $\CIc(\R^p)$), and that \cref{microlocal:prop:projection} remains valid.
+\end{exercise}
+
+\begin{exercise}\label{microlocal:ex:pairing-product}
+  Let $u_1,u_2\in\CmIc(\R^n)$ satisfy \eqref{microlocal:eq:pairing-cond}.
+  Show that $P(u_1,u_2)=(u_1u_2)(\psi)$ for any $\psi\in\CIc(\R^n)$ equal to $1$
+  near $\supp u_1\cup\supp u_2$. (Use \cref{microlocal:thm:products}(i):
+  replace $u_2$ by $u_2*\check\rho_\eps$ in $P$, and use
+  \cref{microlocal:lem:transpose}.) Deduce that $u_1u_2=u_2u_1$.
+\end{exercise}
+
+\begin{exercise}\label{microlocal:ex:pullback-special}
+  Check that \cref{microlocal:thm:pullback} contains
+  \cref{microlocal:thm:restriction} (with $F=\iota$) and
+  \cref{microlocal:thm:products} (with $F=\Delta$, $\Delta(x)=(x,x)$, applied to
+  $u_1\boxtimes u_2$): show that the definitions agree, using the limit
+  formulas, and that the wavefront set bounds coincide.
+\end{exercise}
+
+\section*{Notes}
+The definition of the wavefront set via pseudodifferential operators
+follows Melrose's notes, while the Fourier transform characterization of
+\cref{microlocal:sec:fourier} is H\"ormander's original definition; see
+\cite[Chapter~8]{Hormander-I} for the classical treatment of the calculus of
+wavefront sets (pull-back, products, push-forward and the wavefront relation
+of kernels), including continuity statements in the spaces
+$\mathcal D'_\Gamma$ which we have not discussed, and \cite[Chapter~18]{Hormander-III}
+for the essential support of pseudodifferential operators.
+
+Compared with the original notes, the main changes are as follows. Essential
+supports are used together with compactly supported cut-offs throughout,
+because with uniformly bounded symbols $\WFp(A)=\emptyset$ does not imply
+$A\in\Psido{-\infty}(\R^n)$. The operations on wavefront sets are all proved
+via the Fourier transform characterization and a single restriction theorem;
+products are defined as restrictions of $u_1(x)u_2(x+y)$ to $y=0$ (rather than
+through the pairing), and the pull-back by a general map is defined through
+restriction to a graph, with a limit formula showing consistency with all
+the special cases. The wavefront relation theorem includes the term
+$\WF_{\Omega_1}(K)$, which is needed in general.

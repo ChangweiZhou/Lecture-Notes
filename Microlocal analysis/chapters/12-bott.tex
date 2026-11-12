@@ -1,4 +1,5 @@
 \chapter{Linearization of symbols, K-theory and Bott periodicity}\label{ch:bott}
+\chaptermark{Linearization, K-theory, Bott periodicity}
 \providecommand{\Ginf}{G^{-\infty}}
 \providecommand{\GinfT}{G^{-\infty}_{\mathcal{T}}}
 \providecommand{\GT}{G^{0}_{\mathcal{T}}}
@@ -34,9 +35,9 @@ As consequences we obtain:
   theorem.
 \end{itemize}
 K-theory is defined from scratch in \cref{bott:sec:K}; we follow
-\cite{Atiyah-K} for the topological background. The use of Toeplitz operators
-(rather than the isotropic calculus of \cref{ch:isotropic}, see the Notes) follows
-the source lectures; compare also \cite{Pressley-Segal} for the relation between
+\cite{Atiyah-K} for the topological background. We use Toeplitz operators on the circle
+(an alternative based on the isotropic calculus of \cref{ch:isotropic} is indicated in
+the Notes); compare also \cite{Pressley-Segal} for the relation between
 loop groups and Toeplitz operators.
 
 \section{Conventions and background}\label{bott:sec:background}
@@ -125,8 +126,7 @@ corresponding Hilbert space.
 \end{enumerate}
 
 A smooth family of invertible elliptic Toeplitz operators has smoothly varying
-inverses; we prove this together with its analogue for operators with values in
-smoothing operators in \cref{bott:lem:inverse} below.
+inverses; we prove this in \cref{bott:lem:inverse} below.
 
 \subsection{Elementary deformations of loops}
 
@@ -139,8 +139,10 @@ $\GL(M,\C)$. The following three lemmas are used constantly.
 
 \begin{lemma}\label{bott:lem:normalize}
   Let $h\colon[0,1]\times X\times\Sphere\to\GL(N,\C)$ be smooth and set
-  $\hat h_t(x,\theta)=h_t(x,1)^{-1}h_t(x,\theta)$. Then $\hat h$ is a pointed
-  homotopy; $\hat h_t=h_t$ whenever $h_t$ is pointed, and $\hat h_t=\Id$ whenever
+  \begin{equation*}
+    \hat h_t(x,\theta)=h_t(x,1)^{-1}h_t(x,\theta).
+  \end{equation*}
+  Then $\hat h$ is a pointed homotopy; $\hat h_t=h_t$ whenever $h_t$ is pointed, and $\hat h_t=\Id$ whenever
   $h_t(x,\theta)$ is independent of $\theta$.
 \end{lemma}
 \begin{proof}
@@ -203,8 +205,10 @@ which is a linear isomorphism $E_x\to F_x$ on each fibre.
   (i) Choose open sets $U_1,\dots,U_s$ covering $X$ over which $E$ has trivializations
   $\tau_i\colon E|_{U_i}\to U_i\times\C^n$, and smooth $\psi_i\ge0$ with
   $\supp\psi_i\subset U_i$ and $\sum_i\psi_i>0$. Then
-  $\iota(v)=(\psi_1(x)\tau_1(v),\dots,\psi_s(x)\tau_s(v))$, $v\in E_x$, is a smooth
-  fibrewise injective bundle map $E\to\C^{N}$, $N=sn$. The orthogonal projection
+  \begin{equation*}
+    \iota(v)=(\psi_1(x)\tau_1(v),\dots,\psi_s(x)\tau_s(v)),\quad v\in E_x,
+  \end{equation*}
+  is a smooth fibrewise injective bundle map $E\to\C^{N}$, $N=sn$. The orthogonal projection
   $p(x)$ onto $\iota(E_x)$ depends smoothly on $x$ (locally it is given by the
   Gram--Schmidt process applied to a smooth frame), so $E\cong\Ran p$, and
   $F=\Ran(\Id-p)$ is a complement.
@@ -347,11 +351,10 @@ Laurent polynomials, polynomials and linear loops.
 So we may assume $a=z^{-q}b$ where $b(x,z)=\sum_{j=0}^{p}b_j(x)z^j$, $p=2q$, is a
 polynomial in $z$ which is invertible for $|z|=1$ and satisfies $b(x,1)=\Id$. Since
 $z^{-q}$ is a scalar, \cref{bott:lem:rotation} gives
-\begin{equation*}
-  \diag(a,\Id_N)=\diag(b\,z^{-q}\Id_N,\Id_N)\sim\diag(b,z^{-q}\Id_N),
-  \qquad
+\begin{gather*}
+  \diag(a,\Id_N)=\diag(b\,z^{-q}\Id_N,\Id_N)\sim\diag(b,z^{-q}\Id_N),\\
   \diag(z^{-q}\Id_N,\Id_{(q-1)N})\sim z^{-1}\Id_{qN},
-\end{equation*}
+\end{gather*}
 the second by writing $z^{-q}=z^{-1}\cdots z^{-1}$. It therefore suffices to deal
 with the polynomial loop $b$.
 
@@ -417,9 +420,9 @@ with the polynomial loop $b$.
 \end{proof}
 
 \begin{proof}[Proof of \cref{bott:thm:linearization}]
-  By \cref{bott:lem:laurent} and the reduction following it,
-  $a\oplus\Id\sim\diag(b,z^{-1}\Id_{qN})$ with $b$ a pointed polynomial loop of degree
-  at most $p=2q$. By \cref{bott:lem:poly-linear,bott:lem:linear},
+  By \cref{bott:lem:laurent} and the reduction following it, $a\oplus\Id$ is stably
+  pointed homotopic to $\diag(b,z^{-1}\Id_{qN})$, where $b$ is a pointed polynomial loop
+  of degree at most $p=2q$. By \cref{bott:lem:poly-linear,bott:lem:linear},
   $\diag(b,\Id_{pN})\sim(\Id-\pi)+z\pi$. Hence, with $M=(3q+1)N$,
   $a\oplus\Id_{M-N}$ is pointed homotopic (after a constant permutation of blocks,
   \cref{bott:lem:conjugation}) to \eqref{bott:eq:normal-form} with
@@ -427,10 +430,10 @@ with the polynomial loop $b$.
 \end{proof}
 
 \begin{remark}\label{bott:rem:linearization}
-  The proof gives more: $\pi_-$ may be taken constant. We shall not use this. In the
-  source a different argument was used for \cref{bott:lem:linear}, splitting the
-  linear loop by a contour integral of $p_+^{-1}\,dp_+/dz$; the spectral projection
-  above avoids the need to assume that the leading coefficient is invertible.
+  The proof gives more: $\pi_-$ may be taken constant. We shall not use this. The
+  spectral projection in \cref{bott:lem:linear} can also be written as a contour integral
+  of the logarithmic derivative of the linear loop over $|z|=1$; the formulation above
+  does not require the coefficient of $z$ to be invertible.
 \end{remark}
 
 The decisive point for K-theory is that a loop in normal form is trivial as soon as
@@ -488,10 +491,10 @@ $c\in\C^M$ write $c^\bullet=\pi_\bullet c$.
   from the image, so $Q(\Id-P_k)$ is injective on $\Ran(\Id-P_k)$, and its range
   consists exactly of the $\sum d_me^{im\theta}\in\Cp$ with $d^-_m=0$ for $m<k$,
   $d^0_m=0$ for $m<k+1$ and $d^+_m=0$ for $m<k+2$. The complement $W_k$ follows. For
-  $k=0$ and $u=c_0$ constant, $Qc_0=c_0^0+c_0^+e^{i\theta}$, so $\Nul Q=\Ran\pi_-$, and
-  $\dim W_0=\rank\pi_0+2\rank\pi_+$ minus the $M$ dimensions of $\Ran P_0$ gives the
-  index; the adjoint $Q^*=\pi_-^*U+\pi_0^*+\pi_+^*L$ has the same form with the
-  roles of $\pi_\pm^*$ exchanged.
+  a constant $c_0$, $Qc_0=c_0^0+c_0^+e^{i\theta}$, so $\Nul Q=\Ran\pi_-$. The
+  index is $\dim\Ran P_0-\dim W_0=M-\rank\pi_0-2\rank\pi_+=\rank\pi_--\rank\pi_+$.
+  Finally $Q^*=\pi_-^*U+\pi_0^*+\pi_+^*L$ is of the same form, with the commuting
+  idempotents $\pi_\pm^*$ in exchanged roles, so $\Nul Q^*=\Ran\pi_+^*$.
 \end{proof}
 
 \begin{corollary}[Index formula for Toeplitz operators]\label{bott:cor:index-circle}
@@ -512,8 +515,8 @@ $c\in\C^M$ write $c^\bullet=\pi_\bullet c$.
   \cref{bott:thm:linearization} (with $X$ a point) we may thus assume
   $\sigma_0(P)=\pi_-z^{-1}+\pi_0+\pi_+z$, and then $P$ may be replaced by $Q$ of
   \eqref{bott:eq:normal-op}. Then $\ind Q=\rank\pi_--\rank\pi_+$ by
-  \cref{bott:lem:normal-op}, while $\det\sigma_0(Q)=z^{\rank\pi_+-\rank\pi_-}$ (the
-  idempotents are simultaneously triangularizable), so $\wind\sigma_0(Q)=\rank\pi_+-\rank\pi_-$.
+  \cref{bott:lem:normal-op}, while $\det\sigma_0(Q)=z^{\rank\pi_+-\rank\pi_-}$, since $\sigma_0(Q)$
+  acts as $z^{-1}$, $1$, $z$ on the summands of $\C^M=\Ran\pi_-\oplus\Ran\pi_0\oplus\Ran\pi_+$, so $\wind\sigma_0(Q)=\rank\pi_+-\rank\pi_-$.
 \end{proof}
 
 The same holds for pseudodifferential operators on the circle, except that now both
@@ -635,7 +638,7 @@ If $k$ is admissible then so is every $k'\ge k$, since $\Ran(\Id-P_{k'})\subset\
   $\Nul\Pi\cap\Cp=A'(\Cp)$ meets $W$ only in $0$, and $\dim W=\dim F_k$, both being the
   codimension of $A'(\Cp)$. So $W\cong F_k$.
 
-  (iii) Since $A$ is injective on $\Ran(\Id-P_k)$,
+  (iii) Since $A$ is injective on $\Ran(\Id-P_k)$, we have
   $A(\Id-P_k)\Cp=A(\Id-P_{k+1})\Cp\oplus A(e^{i(k+1)\theta}\C^N)$. Hence
   $W\oplus A(e^{i(k+1)\theta}\C^N)$ is a complement for $(A,k+1)$, and
   $v\mapsto A(e^{i(k+1)\theta}v)$ trivializes the second summand.
@@ -710,7 +713,7 @@ up to stabilization.
   \cref{bott:lem:inverse}.
 \end{proof}
 
-\section{The index isomorphism and Bott periodicity, first form}\label{bott:sec:index-iso}
+\section[The index isomorphism]{The index isomorphism and Bott periodicity, first form}\label{bott:sec:index-iso}
 
 For a pointed loop $a\colon X\times\Sphere\to\GL(N,\C)$, $T_a(x)=Sa(x,\cdot)S$ is a
 smooth elliptic family of Toeplitz operators with symbol $a$; set
@@ -773,9 +776,8 @@ sections and the null space of the adjoint is $E_-$. The Toeplitz operator $L$, 
 $1=[\C]\in K^0(\mathrm{pt})$, is the \emph{Bott element}: $\beta[\C]=[z^{-1}]$.
 
 \begin{remark}
-  In the source the inverse was stated with the roles of $\pi_+$ and $\pi_-$ in
-  \eqref{bott:eq:normal-form} reversed; with the conventions above (for which
-  $\ind U=-1$) that map is $-\beta$.
+  The signs matter here: the loop $\pi_-z^{-1}+\pi_0+\pi_+z$ with $\Ran\pi_\pm\cong E_\pm$
+  represents $-\beta([E_+]-[E_-])$, because $\ind U=-1$.
 \end{remark}
 
 \begin{corollary}\label{bott:cor:reduced}
@@ -792,7 +794,7 @@ $1=[\C]\in K^0(\mathrm{pt})$, is the \emph{Bott element}: $\beta[\C]=[z^{-1}]$.
   where $\ind(a)=-\wind(a)$.
 \end{proof}
 
-\section{The stabilized Toeplitz group and the classifying sequence}\label{bott:sec:classifying}
+\section[The classifying sequence]{The stabilized Toeplitz group and the classifying sequence}\label{bott:sec:classifying}
 
 We now pass from matrices to operators with values in the smoothing operators on
 $Y$, to obtain groups which contain all the $\GL(N,\C)$ at once.
@@ -845,8 +847,26 @@ Elements of $\GT$ are elliptic: $\Id+\sigma_0(A)(\theta)$ has inverse $\Id+\sigm
 $\Id+\sigma_0(A)\in\Omega\Ginf(Y;E)$. The normalization $\sigma_0(A)(1)=0$ removes the
 evaluation map $\GT\to\Ginf(Y;E)$ at $1\in\Sphere$, which would otherwise carry odd
 K-theory. A map $f\colon X\to\GT(\Sphere,Y;E)$ is smooth if $f-\Id$ is smooth into the
-Fr\'echet space $\PsiT{0,-\infty}(\Sphere,Y;E)$; by \cref{bott:lem:inverse}, $f^{-1}$ is then
+Fr\'echet space $\PsiT{0,-\infty}(\Sphere,Y;E)$; by \cref{bott:lem:inverse-Y} below, $f^{-1}$ is then
 smooth too, and products of smooth maps are smooth.
+
+\begin{lemma}\label{bott:lem:inverse-Y}
+  Let $A\in\CI(Z;\PsiT{0,-\infty}(\Sphere,Y;E))$ be a smooth family such that, for
+  all $z\in Z$ and $\theta\in\Sphere$, $\Id+\sigma_0(A(z))(\theta)\in\Ginf(Y;E)$ and
+  $\Id+A(z)$ is invertible on $L^2_+(\Sphere\times Y;E)$. Then $(\Id+A)^{-1}=\Id+B$ with
+  $B\in\CI(Z;\PsiT{0,-\infty}(\Sphere,Y;E))$.
+\end{lemma}
+\begin{proof}
+  The proof of \cref{bott:lem:inverse} applies verbatim. The parametrix construction
+  goes through for operators with values in $\Psido{-\infty}(Y;E)$; the symbol of a parametrix
+  is $(\Id+\sigma_0(A))^{-1}-\Id\in\CI(\Sphere;\Psido{-\infty}(Y;E))$, inversion in
+  $\Ginf(Y;E)$ being smooth, and the lower order corrections are obtained by the same
+  asymptotic summation. This gives $\Id+B_0$ with errors $R,R'$ in
+  $\PsiT{-\infty}(\Sphere\times Y;E)$, and then
+  \begin{equation*}
+    V=(\Id+A)^{-1}=(\Id+B_0)+R(\Id+B_0)+RVR'.
+  \end{equation*}
+\end{proof}
 
 \begin{lemma}\label{bott:lem:open}
   Let $A\in\CI(X;\PsiT{0,-\infty}(\Sphere,Y;E))$ with $\Id+A(x)\in\GT$ for all $x$, $X$
@@ -859,7 +879,7 @@ smooth too, and products of smooth maps are smooth.
   The symbols $\Id+\sigma_0(A')(\theta)$ are uniformly close to the compact set of values of
   $\Id+\sigma_0(A)$ in the open set $\Ginf(Y;E)$, so $\Id+A'$ is elliptic; the operators
   are close in $L^2$ operator norm to invertible ones, so are invertible on
-  $L^2_+(\Sphere\times Y;E)$. By \cref{bott:lem:inverse} the inverses lie in the algebra.
+  $L^2_+(\Sphere\times Y;E)$. By \cref{bott:lem:inverse-Y} (or \cref{bott:lem:inverse}) the inverses lie in the algebra.
 \end{proof}
 
 \subsection{Weak contractibility}
@@ -927,7 +947,7 @@ smooth too, and products of smooth maps are smooth.
   matrices $\begin{pmatrix}c&sh\\-sh^{-1}&c\end{pmatrix}=\diag(h,1)R'_\tau\diag(h^{-1},1)$ and
   $\diag(h,h^{-1})R'_\tau$, $R'_\tau=\begin{pmatrix}c&s\\-s&c\end{pmatrix}$, and they map
   $(u_0,0)$ to $(hu_0,0)$. Let $C_\tau=\sigma_0(M_\tau)(1)$, a constant invertible matrix (it
-  commutes with $S$). Then $C_\tau^{-1}M_\tau$ followed by $C'^{-1}_\tau M'_\tau$ (run from
+  commutes with $S$). Then $C_\tau^{-1}M_\tau$ followed by $(C'_\tau)^{-1}M'_\tau$ (run from
   $\tau=\pi/2$ to $0$, $C'_\tau=\sigma_0(M'_\tau)(1)$) is a homotopy in $\GT(\Sphere;\C^{2N'})$,
   smooth in $h=h(x)$, from $\diag(g'',\Id)$ to $\diag(h,h^{-1})^{-1}\diag(h,h^{-1})=\Id$.
   (This is the deformation of \cref{ch:index}, normalized at $1\in\Sphere$.)
@@ -971,7 +991,7 @@ $A(y,y')$ gives, for $\PsiT{0,-\infty}(\Sphere,Y;E)$, the exact sequence
   $\Id+A+K$ invertible; if moreover $\sigma_0(A)(1)=0$ then $\Id+A+K\in\GT(\Sphere,Y;E)$.
 \end{lemma}
 \begin{proof}
-  A parametrix (\cref{bott:lem:inverse}) inverts $\Id+A$ modulo compact operators, so it is
+  A parametrix (\cref{bott:lem:inverse-Y}) inverts $\Id+A$ modulo compact operators, so it is
   Fredholm, with null space and orthocomplement of the range (the null space of the
   adjoint, which is of the same type) consisting of smooth sections. For the index, the
   family $\Id+(1-t)A+t\Pi_jA\Pi_j$ consists of elliptic, hence Fredholm, operators for $j$
@@ -980,7 +1000,7 @@ $A(y,y')$ gives, for $\PsiT{0,-\infty}(\Sphere,Y;E)$, the exact sequence
   operator on $\C^{\dim V_j}$, and \cref{bott:cor:index-circle} applies. If the index
   vanishes, let $K$ map an orthonormal basis of the null space to one of the orthocomplement
   of the range and vanish on the orthocomplement of the null space; it has finite rank and
-  smooth kernel, $\Id+A+K$ is bijective on $L^2_+$, and \cref{bott:lem:inverse} applies.
+  smooth kernel, $\Id+A+K$ is bijective on $L^2_+$, and \cref{bott:lem:inverse-Y} applies.
 \end{proof}
 
 \begin{theorem}[Classifying sequence]\label{bott:thm:classifying}
@@ -1037,7 +1057,7 @@ $A(y,y')$ gives, for $\PsiT{0,-\infty}(\Sphere,Y;E)$, the exact sequence
   $\pi_{k-1}(\Ginf)=\pi_{k-1}(\GinfT)$.
 \end{remark}
 
-\section{Compactly supported K-theory and Bott periodicity}\label{bott:sec:Kc}
+\section[Compactly supported K-theory]{Compactly supported K-theory and Bott periodicity}\label{bott:sec:Kc}
 
 \subsection{Definitions}
 Let $M$ be a manifold, not necessarily compact. We write $K\Subset M$ for a compact subset.
@@ -1135,7 +1155,7 @@ $K^{-1}(\Sphere^0\times X,X)=K^{-1}(X)$ and $K^{-1}(\Sphere\times X,X)=K^{-2}(X)
     a_R(\omega,x)=a(R\omega,x),
   \end{equation*}
   where $a_R(\omega,x)\colon F_{+,x}\to F_{-,x}$. This is a pointed map into $\GL(N,\C)$; let
-  $\Phi[(E_+,E_-,a)]$ be its class.
+  $\kappa[(E_+,E_-,a)]$ be its class.
 
   \emph{Well-definedness.} Changing $R$, or $a$ by a homotopy (c), changes $g$ by a pointed
   homotopy, and (b) is covered by changing $R$. Under (d), or a change of $(G,\tau)$, $g$ is
@@ -1144,7 +1164,7 @@ $K^{-1}(\Sphere^0\times X,X)=K^{-1}(X)$ and $K^{-1}(\Sphere\times X,X)=K^{-2}(X)
   $\phi_\pm$ of the pull-back bundles, $\phi_\pm(s R\omega,x)$, $s\in[0,1]$, joins
   $\phi_\pm|_{\{|v|=R\}}$ to $\phi_\pm(0,x)$, which is independent of $\omega$; along this
   homotopy $g$ is changed by a pointed homotopy, and at $s=0$ it is replaced by its conjugate
-  by $\tau(\phi_-(0,\cdot)\oplus\Id)\tau^{-1}$ and again the class does not change. $\Phi$ is
+  by $\tau(\phi_-(0,\cdot)\oplus\Id)\tau^{-1}$ and again the class does not change. $\kappa$ is
   additive, since direct sums of triples give block sums of the $g$'s.
 
   \emph{Surjectivity.} For pointed $g$ with values in $\GL(N,\C)$ (\cref{bott:lem:stable})
@@ -1184,7 +1204,7 @@ $K^{-1}(\Sphere^0\times X,X)=K^{-1}(X)$ and $K^{-1}(\Sphere\times X,X)=K^{-2}(X)
 \end{proof}
 
 \begin{remark}
-  The source deduces periodicity from the chain
+  Periodicity can also be deduced from the chain
   $\Kc^0(\R^2\times X)\cong\Kc^{-1}(\R\times X)\cong\Kc^{-2}(X)\cong\Kc^0(X)$, which uses the
   clutching isomorphism for the non-compact manifold $\R\times X$ and the index isomorphism
   for non-compact $X$ (\cref{bott:ex:noncompact}). For compact $X$ the clutching lemma with
@@ -1220,8 +1240,8 @@ Spheres need one more form of the clutching construction.
   $g(e)\tau_-$ makes $g$ pointed.
 
   It is injective: if $[E_g]=[\C^N]$, then $E_g\oplus\C^L\cong\C^{N+L}$, i.e.\ $E_{g'}$,
-  $g'=g\oplus\Id_L$, has a global trivialization. Its restrictions to $U_\pm$ are maps
-  $\tau_\pm\colon U_\pm\to\GL(N+L,\C)$ with $g'=\tau_-^{-1}\tau_+$ on the equator. As $U_\pm$ are
+  $g'=g\oplus\Id_L$, has a global trivialization. In the local trivializations over $U_\pm$ it is given by maps
+  $\tau_\pm\colon U_\pm\to\GL(N+L,\C)$ with $\tau_-=\tau_+g'$, i.e.\ $g'=\tau_+^{-1}\tau_-$, on the equator. As $U_\pm$ are
   star-shaped in suitable coordinates, $\tau_\pm$ are homotopic to constants, so $g'$ is
   homotopic to a constant, and then (as $\GL$ is connected) to $\Id$; normalizing by the value
   at $e$ (\cref{bott:lem:normalize}) makes the homotopy pointed. So $[g]=0$.
@@ -1324,10 +1344,10 @@ shown to coincide. This is taken up in \cref{ch:families}.
 \end{exercise}
 
 \begin{exercise}
-  Show directly from the definition that the Toeplitz operator $T_{z^k}$ has index $-k$, and that
-  for a smooth family of projections $p$ on $\C^N$ over $X$ the family $pL+(\Id-p)$ has null bundle
-  $\Ran p$ (constant sections) and surjective... more precisely has range of finite codimension $0$,
-  so that $\ind(pL+\Id-p)=[\Ran p]$ in $K^0(X)$.
+  Show directly that the Toeplitz operator $T_{z^k}$ has index $-k$. For a smooth family of
+  projections $p$ on $\C^N$ over $X$ show that $pL+(\Id-p)$ is surjective with null space
+  the constant sections of $\Ran p$, and compute $\ind(pL+\Id-p)=[\Ran p]$ directly from
+  \cref{bott:def:families-index} with $k=0$.
 \end{exercise}
 
 \begin{exercise}
@@ -1351,9 +1371,8 @@ shown to coincide. This is taken up in \cref{ch:families}.
   Let $H\to\Sphere^2=\C\cup\{\infty\}$ be the line bundle obtained by clutching the trivial bundles
   over the two hemispheres with the map $z\mapsto z$ on the equator (this is the tautological
   bundle over $\mathbb{CP}^1$, up to conjugation). Show that $[H]-[\C]$ generates
-  $\tilde K^0(\Sphere^2)\cong\Z$, and that $([H]-[\C])^2=0$ is consistent with
-  $H\otimes H\oplus\C\cong H\oplus H$ (which you should prove using clutching functions and
-  \cref{bott:lem:rotation}).
+  $\tilde K^0(\Sphere^2)\cong\Z$, and prove that $(H\otimes H)\oplus\C\cong H\oplus H$ by comparing
+  clutching functions and using \cref{bott:lem:rotation}.
 \end{exercise}
 
 \begin{exercise}
@@ -1378,8 +1397,9 @@ from the index isomorphism for compact spheres together with the clutching const
 of from the (unproved) non-compact index isomorphism. The source also suggests, as an alternative
 to Toeplitz operators, the isotropic calculus on $\R$ of \cref{ch:isotropic}: there the
 `cosphere bundle' of $\R$ is the circle at infinity of $\R^2$, the annihilation operator
-$x+\partial_x$ of the harmonic oscillator is Fredholm of index $1$ with symbol $x+i\xi$, of
-winding number one, and plays the role of $L$; the arguments of this chapter carry over with
+$x+\partial_x$ of the harmonic oscillator is Fredholm of index $1$ (its null space is spanned by
+$e^{-x^2/2}$, that of its adjoint is trivial), with symbol $x+i\xi$ of degree one on the circle at
+infinity, and it plays the role of $L$; the arguments of this chapter carry over with
 $P_k$ replaced by the spectral projections of the harmonic oscillator.
 
 The source conjectures that $\GT(\Sphere,Y;E)$ is actually contractible. Since it is an open subset

@@ -1,0 +1,1874 @@
+\chapter{Isotropic and scattering calculi}\label{ch:isotropic}
+\providecommand{\Gs}[1]{\Gamma^{#1}}
+\providecommand{\Gph}[1]{\Gamma^{#1}_{\mathrm{ph}}}
+\providecommand{\Psiisoph}[1]{\Psi^{#1}_{\mathrm{iso,ph}}}
+\providecommand{\Hiso}[1]{H^{#1}_{\mathrm{iso}}}
+\providecommand{\Gres}{G^{-\infty}_{\mathrm{iso}}}
+\providecommand{\Ampl}[1]{\mathcal{A}^{#1}}
+\providecommand{\rc}{\operatorname{RC}}
+\providecommand{\Hsph}[1]{\mathbb{S}^{#1}_{+}}
+\providecommand{\OpW}{\operatorname{Op}^{\mathrm{W}}}
+
+In this chapter two \emph{global} calculi of pseudodifferential operators on
+$\R^n$ are constructed and analysed. In the \emph{isotropic} calculus the
+symbols are required to satisfy estimates in which the space variables $x$ and
+the dual variables $\xi$ play completely symmetric roles: each derivative, in
+$x$ or in $\xi$, improves the decay by a factor of $(1+|x|+|\xi|)^{-1}$. In
+the \emph{scattering} calculus derivatives in $x$ gain powers of
+$\ang{x}^{-1}$ and derivatives in $\xi$ gain powers of $\ang{\xi}^{-1}$,
+separately. Both calculi are subalgebras of (weighted versions of) the
+traditional calculus $\Psido{m}(\R^n)$ of \cref{ch:euclidean}, and we use the
+results proved there freely. The isotropic calculus is especially simple
+because its residual algebra $\Psiiso{-\infty}(\R^n)$ consists of the
+operators with kernels in $\cS(\R^{2n})$; these operators are compact (indeed
+Hilbert--Schmidt) on $L^2(\R^n)$. This residual algebra, the associated group
+$\Gres(\R^n)$ of invertible perturbations of the identity, and the
+approximation of residual operators by finite rank operators built from the
+eigenfunctions of the harmonic oscillator, are the basic objects for the
+discussion of traces and determinants in \cref{ch:determinants}. Thus this
+chapter is preparatory: the constructions (adjoints, composition,
+parametrices, generalized inverses, Sobolev spaces, $L^2$ estimates, complex
+powers) reappear later for operators on manifolds, and here they can be
+carried out without the complications of coordinate changes.
+
+Unlike the original notes, we work with general (not necessarily
+polyhomogeneous) symbols by default and indicate the polyhomogeneous
+subclasses separately.
+
+\medskip\noindent\textbf{Notation.} Points of $\R^{2n}=\R^n_x\times\R^n_\xi$
+are written $w=(x,\xi)$ and $\ang{w}=\ang{(x,\xi)}=(1+|x|^2+|\xi|^2)^{1/2}$.
+We repeatedly use the following elementary inequalities. For $v,w\in\R^N$ and
+$s\in\R$ (Peetre's inequality)
+\begin{equation}\label{isotropic:eq:peetre}
+  \ang{w+v}^s\le 2^{|s|/2}\ang{w}^s\ang{v}^{|s|},
+\end{equation}
+which follows from $1+|w+v|^2\le 2(1+|w|^2)(1+|v|^2)$, applied to $(w,v)$ if
+$s\ge0$ and to $(w+v,-v)$ if $s<0$. For $z\in\R^p$, $\xi\in\R^n$ and
+$\theta\in[0,1]$,
+\begin{equation}\label{isotropic:eq:split}
+  \max(\ang{z},\ang{\xi})\le\ang{(z,\xi)}\le\ang{z}\ang{\xi},\qquad
+  \ang{(z,\xi)}\ge\ang{z}^\theta\ang{\xi}^{1-\theta},
+\end{equation}
+the last by the arithmetic--geometric mean inequality,
+$\ang{z}^{2\theta}\ang{\xi}^{2(1-\theta)}\le\theta\ang{z}^2+(1-\theta)\ang{\xi}^2\le\ang{(z,\xi)}^2$.
+We write $m_+=\max(m,0)$.
+
+%======================================================================
+\section{Symbol classes}\label{isotropic:sec:symbols}
+
+\subsection{Isotropic symbols}
+
+\begin{definition}\label{isotropic:def:Gamma}
+For $m\in\R$ and $N\in\N$ the space of \emph{isotropic symbols} of order $m$ is
+\begin{equation*}
+  \Gs{m}(\R^N)=\bigl\{a\in\CI(\R^N);\ |\pa^\alpha a(w)|\le C_\alpha\ang{w}^{m-|\alpha|}\ \forall\,\alpha\in\N_0^N\bigr\}.
+\end{equation*}
+It is a Fréchet space with the norms
+$\norm{a}_{m,k}=\max_{|\alpha|\le k}\sup_w\ang{w}^{-m+|\alpha|}|\pa^\alpha a(w)|$.
+We set $\Gs{-\infty}(\R^N)=\bigcap_m\Gs{m}(\R^N)=\cS(\R^N)$ and
+$\Gs{\infty}(\R^N)=\bigcup_m\Gs{m}(\R^N)$. Vector- and matrix-valued symbols are
+defined in the same way.
+\end{definition}
+
+\begin{lemma}\label{isotropic:lem:Gamma-basic}
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $\Gs{m}\cdot\Gs{m'}\subset\Gs{m+m'}$, $\pa^\alpha:\Gs{m}\to\Gs{m-|\alpha|}$,
+  $\Gs{m}\subset\Gs{m'}$ for $m\le m'$, and $\ang{w}^s\in\Gs{s}$ for all $s\in\R$.
+\item If $a\in\Gs{0}(\R^N;\C^M)$ and $F$ is smooth on a neighbourhood of the
+  (compact) closure of $a(\R^N)$, then $F\circ a\in\Gs{0}(\R^N)$.
+\item If $L$ is a linear isomorphism of $\R^N$ then $a\mapsto a\circ L$ is an
+  isomorphism of $\Gs{m}(\R^N)$.
+\item $\cS(\R^N)$ is dense in $\Gs{m}(\R^N)$ in the topology of $\Gs{m'}(\R^N)$
+  for any $m'>m$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(i) follows from Leibniz' formula and, for $\ang{w}^s$, from the fact that
+$\pa^\alpha\ang{w}^s$ is a sum of terms $p(w)\ang{w}^{s-2k}$ with $p$ a
+polynomial of degree at most $2k-|\alpha|$. (ii) By the chain rule
+$\pa^\alpha(F\circ a)$ is a sum of terms
+$(\pa^kF)(a)\,\pa^{\alpha_1}a\cdots\pa^{\alpha_k}a$ with
+$\alpha_1+\dots+\alpha_k=\alpha$, $|\alpha_i|\ge1$, each bounded by
+$C\ang{w}^{-|\alpha|}$. (iii) holds since $c\ang{w}\le\ang{Lw}\le C\ang{w}$.
+(iv) Let $\chi\in\CIc(\R^N)$ equal $1$ near $0$ and $a_k=\chi(w/k)a$. The
+functions $\chi(w/k)$ are bounded in $\Gs{0}$ uniformly in $k\ge1$ and
+$1-\chi(w/k)$ vanishes for $|w|\le ck$, where
+$\ang{w}^{m-m'}\le Ck^{m-m'}$; hence $\norm{a-a_k}_{m',j}\le C_jk^{m-m'}\to0$.
+\end{proof}
+
+\begin{lemma}[Asymptotic completeness]\label{isotropic:lem:asymp-Gamma}
+If $a_j\in\Gs{m-j}(\R^N)$ for $j\in\N_0$, there exists $a\in\Gs{m}(\R^N)$ such that
+\begin{equation*}
+  a-\sum_{j<k}a_j\in\Gs{m-k}(\R^N)\quad\forall\,k\in\N_0;
+\end{equation*}
+$a$ is unique modulo $\cS(\R^N)$ and we write $a\sim\sum_ja_j$.
+\end{lemma}
+\begin{proof}
+Choose $\psi\in\CI(\R^N)$ with $\psi(w)=0$ for $|w|\le1$, $\psi(w)=1$ for
+$|w|\ge2$, and set $\psi_\eps(w)=\psi(\eps w)$ for $0<\eps\le1$. Then
+$\pa^\alpha\psi_\eps=\eps^{|\alpha|}(\pa^\alpha\psi)(\eps w)$ is, for
+$\alpha\ne0$, supported in $1/\eps\le|w|\le2/\eps$, so
+$|\pa^\alpha\psi_\eps|\le C_\alpha\ang{w}^{-|\alpha|}$ uniformly in $\eps$;
+moreover $\ang{w}\ge1/\eps$ on $\supp\psi_\eps$. Hence for $k<j$ and
+$\ell\in\N_0$
+\begin{equation*}
+  \norm{\psi_\eps a_j}_{m-k,\ell}\le C_{j,\ell}\sup_{\supp\psi_\eps}\ang{w}^{k-j}\le C_{j,\ell}\,\eps .
+\end{equation*}
+Choose $\eps_j\downarrow0$ with $C_{j,j}\eps_j\le 2^{-j}$ (we may take
+$C_{j,\ell}$ increasing in $\ell$ and valid for all $k<j$). Then for each $k$
+and $\ell$ the series $\sum_{j>k}\psi_{\eps_j}a_j$ converges in the norm
+$\norm{\cdot}_{m-k,\ell}$, since all but finitely many terms are bounded by
+$2^{-j}$. Thus $a=\sum_j\psi_{\eps_j}a_j$ converges in $\Gs{m}$ and
+\begin{equation*}
+  a-\sum_{j<k}a_j=\sum_{j<k}(\psi_{\eps_j}-1)a_j+\psi_{\eps_k}a_k+\sum_{j>k}\psi_{\eps_j}a_j
+  \in\CIc+\Gs{m-k}+\Gs{m-k}.
+\end{equation*}
+Uniqueness holds because $\bigcap_k\Gs{m-k}=\cS(\R^N)$.
+\end{proof}
+Sums with steps of two, $a\sim\sum_ja_j$ with $a_j\in\Gs{m-2j}$, are covered
+by inserting zero terms.
+
+\subsection{Scattering symbols}
+
+\begin{definition}\label{isotropic:def:Ssc}
+For $m,l\in\R$ the space $S^{m,l}(\R^p;\R^n)$ of \emph{scattering symbols}
+consists of the $a\in\CI(\R^p_z\times\R^n_\xi)$ such that
+\begin{equation*}
+  |D_z^\alpha D_\xi^\beta a(z,\xi)|\le C_{\alpha\beta}\ang{z}^{l-|\alpha|}\ang{\xi}^{m-|\beta|}\quad\forall\,\alpha,\beta.
+\end{equation*}
+Here $m$ is the order in the fibre variables and $l$ the order in the base
+variables.
+\end{definition}
+
+Clearly $S^{m,l}\cdot S^{m',l'}\subset S^{m+m',l+l'}$,
+$D_z:S^{m,l}\to S^{m,l-1}$, $D_\xi:S^{m,l}\to S^{m-1,l}$,
+$S^{m,l}(\R^p;\R^n)\subset\ang{z}^lS^m(\R^p;\R^n)$, and
+$\bigcap_{m,l}S^{m,l}(\R^n;\R^n)=\cS(\R^{2n})$.
+
+\begin{lemma}\label{isotropic:lem:asymp-sc}
+If $a_j\in S^{m-j,l-j}(\R^p;\R^n)$, $j\in\N_0$, there exists $a\in S^{m,l}(\R^p;\R^n)$
+with $a-\sum_{j<k}a_j\in S^{m-k,l-k}(\R^p;\R^n)$ for all $k$; $a$ is unique
+modulo $\cS(\R^{p+n})$.
+\end{lemma}
+\begin{proof}
+Repeat the proof of \cref{isotropic:lem:asymp-Gamma} with
+$\psi_\eps(z,\xi)=1-(1-\psi(\eps z))(1-\psi(\eps\xi))$, which is bounded in
+$S^{0,0}$ uniformly in $\eps$, vanishes where $|z|\le1/\eps$ and
+$|\xi|\le1/\eps$ (so $1-\psi_\eps$ has compact support), and satisfies
+$\ang{z}^{-1}\ang{\xi}^{-1}\le\eps$ on its support. Thus for $k<j$ the
+$S^{m-k,l-k}$ norms of $\psi_\eps a_j$ are bounded by
+$C\sup_{\supp\psi_\eps}(\ang{z}\ang{\xi})^{k-j}\le C\eps$.
+\end{proof}
+
+The two classes are related as follows; this replaces the corresponding lemma
+of the original notes, where the power of $1+|x|^2$ is misprinted.
+
+\begin{lemma}\label{isotropic:lem:Gamma-in-S}
+For $z\in\R^p$, $\xi\in\R^n$,
+\begin{equation*}
+  \Gs{m}(\R^{p+n})\subset
+  \begin{cases}S^{m,m}(\R^p;\R^n),& m\ge0,\\
+   \bigcap_{m\le t\le0}S^{m-t,t}(\R^p;\R^n),& m\le0.\end{cases}
+\end{equation*}
+In particular $\Gs{m}(\R^{p+n})\subset\ang{z}^{m_+}S^m(\R^p;\R^n)$.
+\end{lemma}
+\begin{proof}
+By \eqref{isotropic:eq:split},
+$|\pa_z^\alpha\pa_\xi^\beta a|\le C\ang{(z,\xi)}^{m}\ang{z}^{-|\alpha|}\ang{\xi}^{-|\beta|}$.
+If $m\ge0$, $\ang{(z,\xi)}^m\le\ang{z}^m\ang{\xi}^m$. If $m<0$ and $m\le t\le0$,
+take $\theta=t/m\in[0,1]$ in \eqref{isotropic:eq:split} to get
+$\ang{(z,\xi)}^m\le\ang{z}^{t}\ang{\xi}^{m-t}$.
+\end{proof}
+
+\subsection{Polyhomogeneous symbols and radial compactification}
+
+A function $a\in\CI(\R^N)$ is \emph{homogeneous of degree $\mu$ outside the
+unit ball} if $a(tw)=t^\mu a(w)$ for $|w|\ge1$, $t\ge1$. Such a function lies in
+$\Gs{\mu}(\R^N)$, since on $|w|\ge1$ its derivatives of order $k$ are
+homogeneous of degree $\mu-k$.
+
+\begin{definition}\label{isotropic:def:Gph}
+The space $\Gph{m}(\R^N)$ of \emph{polyhomogeneous} (classical) isotropic
+symbols consists of those $a\in\Gs{m}(\R^N)$ for which there are $a_{m-j}$,
+homogeneous of degree $m-j$ outside the unit ball, with $a\sim\sum_ja_{m-j}$.
+The \emph{principal symbol} of $a$ is the restriction of $a_m$ to the sphere
+$\Sphere^{N-1}$.
+\end{definition}
+
+The polyhomogeneous classes are closed under multiplication and
+differentiation ($\pa_{w_j}:\Gph{m}\to\Gph{m-1}$), contain $\ang{w}^s\in\Gph{s}$
+(expand $\ang{w}^s=|w|^s(1+|w|^{-2})^{s/2}$ binomially for $|w|\ge2$ and cut
+the terms off near $0$), and if $a_j\in\Gph{m-j}$ and $a\sim\sum_ja_j$ then
+$a\in\Gph{m}$, as one sees by collecting the finitely many terms of each
+degree of homogeneity in the expansions of the $a_j$.
+
+The \emph{radial compactification} is the map
+\begin{equation*}
+  \rc:\R^N\ni w\longmapsto\bigl(\ang{w}^{-1},w\ang{w}^{-1}\bigr)\in
+  \Hsph{N}=\{X=(X_0,X')\in\R^{1+N};\ |X|=1,\ X_0\ge0\},
+\end{equation*}
+a diffeomorphism of $\R^N$ onto the interior of the closed half-sphere
+$\Hsph{N}$, a compact manifold with boundary
+$\pa\Hsph{N}=\{X_0=0\}\cong\Sphere^{N-1}$. The function $\rho=X_0$ is a
+boundary defining function and $\rho\circ\rc=\ang{w}^{-1}$. We denote by
+$\dCI(\Hsph{N})$ the smooth functions vanishing to infinite order at the
+boundary. The space $\mathcal L(\Hsph{N})=\bigcup_{k\in\N_0}\rho^{-k}\CI(\Hsph{N})$
+is the space of \emph{Laurent functions} on the half-sphere; more generally
+$\rho^{\mu}\CI(\Hsph{N})$, $\mu\in\C$, is the space of products $\rho^\mu v$ with
+$v$ smooth, regarded as functions on the interior.
+
+\begin{proposition}\label{isotropic:prop:rc}
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item For every $m\in\R$, $\rc^*\bigl(\rho^{-m}\CI(\Hsph{N})\bigr)=\Gph{m}(\R^N)$, and the
+  principal symbol of $\rc^*(\rho^{-m}F)$ is $F|_{\pa\Hsph{N}}$.
+\item $\rc^*\dCI(\Hsph{N})=\cS(\R^N)$.
+\item If $f\in\Gs{-k}(\R^N)$, $k\in\N$, then $f\circ\rc^{-1}$ extends to a
+  $\mathcal C^{k-1}$ function on $\Hsph{N}$ vanishing at the boundary, and
+  $\Gs{-k}(\R^N)\ni f\mapsto f\circ\rc^{-1}\in\mathcal C^{k-1}(\Hsph{N})$ is continuous.
+\end{enumerate}
+\end{proposition}
+\begin{proof}[Sketch of proof]
+Near the boundary use the coordinates $\rho\in[0,1)$ and
+$\theta=X'/|X'|\in\Sphere^{N-1}$; in terms of $w$, $\rho=\ang{w}^{-1}$ and
+$\theta=w/|w|$, so $|w|=(1-\rho^2)^{1/2}/\rho$. In polar coordinates
+$\pa_{w_j}=\theta_j\pa_r+r^{-1}\Omega_j$, where $\Omega_j$ is the vector field
+on $\Sphere^{N-1}$ obtained by projecting $e_j$ tangentially, and
+$\pa_r=-r\rho^3\pa_\rho$. Hence
+\begin{equation}\label{isotropic:eq:b-fields}
+  V_j:=\ang{w}\pa_{w_j}=-\theta_j(1-\rho^2)^{1/2}\rho\pa_\rho+(1-\rho^2)^{-1/2}\Omega_j .
+\end{equation}
+These are smooth vector fields on $\Hsph{N}$ tangent to the boundary, and
+since $\sum_j\theta_j\Omega_j=0$ they span, over $\CI$, the fields $\rho\pa_\rho$
+and $\Omega_j$, that is all smooth vector fields tangent to the boundary. An
+induction shows that $\ang{w}^{|\alpha|}\pa^\alpha$ is a combination, with
+coefficients in $\Gs{0}$, of products of at most $|\alpha|$ of the $V_j$.
+Consequently $\rc^*\CI(\Hsph{N})\subset\Gs{0}$. Conversely, a derivative of
+order $j$ of $f\circ\rc^{-1}$ in $(\rho,\theta)$ is $\rho^{-j}$ times a
+combination of at most $j$-fold products of the $V_j$ applied to $f$; this
+gives (iii), since such products applied to $f\in\Gs{-k}$ are
+$O(\ang{w}^{-k})=O(\rho^k)$, and also (ii), since for $f\in\cS$ these are
+$O(\rho^K)$ for every $K$ (the converse inclusion in (ii) follows from the
+first argument with $\rho^{-K}F$, $F\in\dCI$).
+
+For (i), if $F\in\CI(\Hsph{N})$, Taylor's formula in $\rho$ gives
+$F=\sum_{j<K}\rho^jF_j(\theta)+\rho^KR_K$ near the boundary. Since
+$\rho=|w|^{-1}(1+|w|^{-2})^{-1/2}$ for $|w|\ge1$, each $\rho^{j-m}F_j(\theta)$
+pulls back to an asymptotic sum of functions homogeneous of degrees
+$m-j-2i$, $i\in\N_0$, while $\rho^{K-m}R_K$ pulls back into $\Gs{m-K}$. Thus
+$\rc^*(\rho^{-m}F)\in\Gph{m}$, with leading term $|w|^mF(0,\theta)$. Conversely,
+a function homogeneous of degree $m-j$ outside the unit ball is
+$|w|^{m-j}f(\theta)=\rho^{j-m}(1-\rho^2)^{(m-j)/2}f(\theta)$, which lies in
+$\rho^{-m}\rho^j\CI$ near the boundary. Given $a\sim\sum_ja_{m-j}$, Borel's
+lemma gives $F\in\CI(\Hsph{N})$ with $\rho^{-m}F$ having the same expansion,
+and then $a-\rc^*(\rho^{-m}F)\in\cS(\R^N)=\rc^*\dCI$ by (ii).
+\end{proof}
+
+Thus $\Gph{\Z}(\R^N)=\bigcup_{k\in\Z}\Gph{k}(\R^N)$ is identified with the
+Laurent functions $\mathcal L(\Hsph{N})$ and $\Gph{0}(\R^N)$ with
+$\CI(\Hsph{N})$.
+
+%======================================================================
+\section{Isotropic operators}\label{isotropic:sec:iso-ops}
+
+Recall the left quantization
+$\Op(a)u(x)=\int e^{i(x-y)\cdot\xi}a(x,\xi)u(y)\,dy\,\dbar\xi$ and, for an
+amplitude $a(x,y,\xi)$, the same formula with $a(x,y,\xi)$.
+
+\begin{definition}\label{isotropic:def:Psiiso}
+For $m\in\R$ the space of \emph{isotropic pseudodifferential operators} of
+order $m$ on $\R^n$ is
+\begin{equation*}
+  \Psiiso{m}(\R^n)=\{\Op(a);\ a\in\Gs{m}(\R^{2n})\},\qquad
+  \Psiisoph{m}(\R^n)=\{\Op(a);\ a\in\Gph{m}(\R^{2n})\}.
+\end{equation*}
+We set $\Psiiso{-\infty}=\bigcap_m\Psiiso{m}$ and $\Psiiso{\infty}=\bigcup_m\Psiiso{m}$.
+\end{definition}
+
+By \cref{isotropic:lem:Gamma-in-S}, if $a\in\Gs{m}(\R^{2n})$ then
+$a=\ang{x}^{m_+}b$ with $b\in S^m(\R^n;\R^n)$, so
+$\Op(a)=\ang{x}^{m_+}\Op(b)\in\ang{x}^{m_+}\Psido{m}(\R^n)$. In particular
+isotropic operators act continuously on $\cS(\R^n)$ and on $\cSp(\R^n)$, by the
+results of \cref{ch:euclidean}. The kernel of $\Op(a)$ is
+$K(x,y)=\int e^{i(x-y)\cdot\xi}a(x,\xi)\,\dbar\xi$, i.e.\ the partial inverse
+Fourier transform of $a$ in $\xi$ evaluated at $(x,x-y)$; hence $a$ is
+determined by $\Op(a)$ and we call $\sigma_L(\Op(a))=a$ the \emph{(full) left
+symbol}. Since partial Fourier transformation and linear changes of variables
+preserve $\cS$:
+
+\begin{lemma}\label{isotropic:lem:residual-kernels}
+An operator $A$ is in $\Psiiso{-\infty}(\R^n)$ if and only if it has Schwartz
+kernel in $\cS(\R^{2n})$, and $\Psiiso{-\infty}(\R^n)\ni A\mapsto K_A\in\cS(\R^{2n})$
+is a bijection.
+\end{lemma}
+
+We topologize $\Psiiso{-\infty}(\R^n)$ by this identification.
+
+\begin{example}\label{isotropic:ex:differential}
+Since $\Op(x^\beta\xi^\alpha)=x^\beta D^\alpha$, every differential operator
+with polynomial coefficients,
+$P=\sum_{|\alpha|+|\beta|\le m}c_{\alpha\beta}x^\beta D^\alpha$, lies in
+$\Psiisoph{m}(\R^n)$. Conversely, a differential operator lies in
+$\Psiiso{\infty}(\R^n)$ only if its coefficients are polynomials (a smooth
+function with all derivatives of order $k$ bounded by $C\ang{x}^{m-k}$ for all
+$k$ is a polynomial). The basic example is the \emph{harmonic oscillator}
+$H=\sum_j(D_j^2+x_j^2)$, with symbol $|x|^2+|\xi|^2$, studied in
+\cref{isotropic:sec:harmonic}.
+\end{example}
+
+\subsection{Amplitudes and reduction}
+
+As in \cref{ch:euclidean}, adjoints and products are obtained by reducing
+operators defined by amplitudes to left-reduced form. Note that a left symbol
+$a(x,\xi)\in\Gs{m}(\R^{2n})$, regarded as a function of $(x,y,\xi)$, is
+\emph{not} in general in $\Gs{m}(\R^{3n})$, so we use a hybrid class of
+amplitudes.
+
+\begin{definition}\label{isotropic:def:ampl}
+For $m\in\R$, $\Ampl{m}(\R^{3n})$ is the space of $a\in\CI(\R^{3n}_{x,y,\xi})$
+for which there is $w\ge0$ such that for all multi-indices
+$\alpha'\le\alpha$, $\beta'\le\beta$, $\gamma'\le\gamma$
+\begin{equation}\label{isotropic:eq:ampl}
+  |D_x^\alpha D_y^\beta D_\xi^\gamma a|\le
+  C\ang{(x,\xi)}^{m-k'}\ang{x-y}^{w+k'}\ang{\xi}^{-|\gamma-\gamma'|},\qquad k'=|\alpha'|+|\beta'|+|\gamma'| .
+\end{equation}
+\end{definition}
+
+Thus any subset of the derivatives may be used to improve the decay in
+$(x,\xi)$, at the cost of a corresponding growth in $|x-y|$, while the
+remaining $\xi$-derivatives still give decay in $\xi$.
+
+\begin{lemma}\label{isotropic:lem:ampl-examples}
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item If $a\in\Gs{m}(\R^{2n})$ and $b\in\Gs{m'}(\R^{2n})$ then
+  $a(x,\xi)b(y,\xi)\in\Ampl{m+m'}(\R^{3n})$.
+\item If $a\in\Gs{m}(\R^{2n})$ and $\lambda\in[0,1]$ then
+  $a(x+\lambda(y-x),\xi)\in\Ampl{m}(\R^{3n})$.
+\item If $a\in\Ampl{m}(\R^{3n})$ then
+  $|D_x^\alpha D_y^\beta D_\xi^\gamma a|\le C\ang{x}^{m_+}\ang{x-y}^w\ang{\xi}^{m-|\gamma|}$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(i) By Leibniz' formula $D_x^\alpha D_y^\beta D_\xi^\gamma(ab)$ is a sum of
+terms $(D_x^\alpha D_\xi^{\gamma_1}a)(x,\xi)(D_y^\beta D_\xi^{\gamma_2}b)(y,\xi)$
+with $\gamma_1+\gamma_2=\gamma$. Given $\gamma'\le\gamma$, choose $\gamma_i'\le\gamma_i$
+with $|\gamma_1'|+|\gamma_2'|=|\gamma'|$. Using
+$\ang{(x,\xi)}^{-1}\le\ang{\xi}^{-1}$ we get
+$|D_x^\alpha D_\xi^{\gamma_1}a|\le C\ang{(x,\xi)}^{m-|\alpha'|-|\gamma_1'|}\ang{\xi}^{-|\gamma_1-\gamma_1'|}$,
+and similarly, followed by \eqref{isotropic:eq:peetre} with $v=(y-x,0)$,
+\begin{equation*}
+  |D_y^\beta D_\xi^{\gamma_2}b(y,\xi)|\le C\ang{(y,\xi)}^{m'-|\beta'|-|\gamma_2'|}\ang{\xi}^{-|\gamma_2-\gamma_2'|}
+  \le C'\ang{(x,\xi)}^{m'-|\beta'|-|\gamma_2'|}\ang{x-y}^{|m'|+|\beta'|+|\gamma_2'|}\ang{\xi}^{-|\gamma_2-\gamma_2'|}.
+\end{equation*}
+Multiplying gives \eqref{isotropic:eq:ampl} with $w=|m'|$. (ii) With
+$\bar x=x+\lambda(y-x)$ the derivative is a constant times
+$(\pa^{\alpha+\beta}_xD_\xi^\gamma a)(\bar x,\xi)$, bounded by
+$C\ang{(\bar x,\xi)}^{m-k'}\ang{\xi}^{-|\gamma-\gamma'|}$, and
+\eqref{isotropic:eq:peetre} gives
+$\ang{(\bar x,\xi)}^{m-k'}\le C\ang{(x,\xi)}^{m-k'}\ang{x-y}^{|m|+k'}$.
+(iii) Take $\alpha'=\beta'=\gamma'=0$ and use
+$\ang{(x,\xi)}^m\le\ang{x}^{m_+}\ang{\xi}^m$.
+\end{proof}
+
+By (iii), $\ang{x}^{-m_+}a$ is an amplitude of the traditional calculus of
+\cref{ch:euclidean} (of order $m$ with weight $\ang{x-y}^w$), so
+$\Op(a)=\ang{x}^{m_+}\Op(\ang{x}^{-m_+}a)\in\ang{x}^{m_+}\Psido{m}(\R^n)$ is a
+well-defined continuous operator on $\cS(\R^n)$ and on $\cSp(\R^n)$.
+
+\begin{proposition}[Reduction]\label{isotropic:prop:reduction}
+If $a\in\Ampl{m}(\R^{3n})$ then $\Op(a)\in\Psiiso{m}(\R^n)$ and
+\begin{equation}\label{isotropic:eq:left-reduction}
+  \sigma_L(\Op(a))\sim\sum_\alpha\frac{i^{|\alpha|}}{\alpha!}\bigl(D_\xi^\alpha D_y^\alpha a\bigr)(x,x,\xi),
+\end{equation}
+where the term of index $\alpha$ lies in $\Gs{m-2|\alpha|}(\R^{2n})$.
+\end{proposition}
+\begin{proof}
+Let $c_\alpha(x,\xi)=\frac{i^{|\alpha|}}{\alpha!}(D_\xi^\alpha D_y^\alpha a)(x,x,\xi)$.
+A derivative $D_x^\mu D_\xi^\gamma c_\alpha$ is a sum of values at $y=x$ of
+derivatives of $a$ containing $|\alpha|$ derivatives in $y$, $|\alpha|+|\gamma|$
+in $\xi$ and $|\mu|$ in $x$ or $y$; applying \eqref{isotropic:eq:ampl} with all
+derivatives used for decay, and $\ang{x-y}=1$ at $y=x$, shows
+$c_\alpha\in\Gs{m-2|\alpha|}(\R^{2n})$.
+
+Taylor's formula in $y$ around $x$ gives
+\begin{equation*}
+  a(x,y,\xi)=\sum_{|\alpha|<N}\frac{(y-x)^\alpha}{\alpha!}(\pa_y^\alpha a)(x,x,\xi)
+  +\sum_{|\alpha|=N}\frac{N(y-x)^\alpha}{\alpha!}\int_0^1(1-t)^{N-1}(\pa_y^\alpha a)(x,x+t(y-x),\xi)\,dt .
+\end{equation*}
+Since $(y-x)^\alpha e^{i(x-y)\cdot\xi}=(-D_\xi)^\alpha e^{i(x-y)\cdot\xi}$,
+integration by parts in $\xi$ (legitimate for these oscillatory integrals, as
+in \cref{ch:euclidean}) gives
+\begin{equation}\label{isotropic:eq:taylor-remainder}
+  \Op(a)=\sum_{|\alpha|<N}\Op(c_\alpha)+\Op(r_N),\quad
+  r_N(x,y,\xi)=\sum_{|\alpha|=N}\frac{N i^N}{\alpha!}\int_0^1(1-t)^{N-1}
+  \bigl(D_\xi^\alpha D_y^\alpha a\bigr)(x,x+t(y-x),\xi)\,dt .
+\end{equation}
+We estimate $r_N$. A derivative $D_x^\mu D_y^\nu D_\xi^\gamma$ of the
+integrand is, by the chain rule, a combination with bounded coefficients of
+derivatives of $a$ evaluated at $(x,x+t(y-x),\xi)$ which contain the $N$
+derivatives $D_y^\alpha$, the $N+|\gamma|$ derivatives $D_\xi^{\alpha+\gamma}$
+and further $x$- and $y$-derivatives. Applying \eqref{isotropic:eq:ampl} using
+exactly the $2N$ derivatives $D_y^\alpha D_\xi^\alpha$ for decay, and noting
+that the first argument is still $x$ and $|x-(x+t(y-x))|\le|x-y|$, we find
+\begin{equation*}
+  |D_x^\mu D_y^\nu D_\xi^\gamma r_N|\le C\ang{(x,\xi)}^{m-2N}\ang{x-y}^{w+2N}\ang{\xi}^{-|\gamma|}.
+\end{equation*}
+Let $2N>m$ and $s=N-m/2$. By \eqref{isotropic:eq:split},
+$\ang{(x,\xi)}^{-2s}\le\ang{x}^{-s}\ang{\xi}^{-s}$, so $\ang{x}^sr_N$ is an amplitude
+of the traditional calculus of order $-s$ with weight $\ang{x-y}^{w+2N}$
+(derivatives of $\ang{x}^s$ are bounded by $C\ang{x}^s$). By
+\cref{ch:euclidean}, $\Op(r_N)=\ang{x}^{-s}Q_N$ with $Q_N\in\Psido{-s}(\R^n)$,
+so the left symbol of $\Op(r_N)$ lies in $\ang{x}^{-s}S^{-s}(\R^n;\R^n)$: all its
+derivatives are bounded by $C\ang{x}^{-s}\ang{\xi}^{-s}$.
+
+Now $\Op(a)$ has a left symbol $\sigma\in\ang{x}^{m_+}S^m(\R^n;\R^n)$ and, by
+\eqref{isotropic:eq:taylor-remainder} and uniqueness of left symbols,
+$\sigma-\sum_{|\alpha|<N}c_\alpha\in\ang{x}^{-s}S^{-s}$. Choose
+$b\in\Gs{m}(\R^{2n})$ with $b\sim\sum_\alpha c_\alpha$
+(\cref{isotropic:lem:asymp-Gamma}). Then for every $N$
+\begin{equation*}
+  \sigma-b=\Bigl(\sigma-\sum_{|\alpha|<N}c_\alpha\Bigr)-\Bigl(b-\sum_{|\alpha|<N}c_\alpha\Bigr)
+  \in\ang{x}^{-s}S^{-s}+\Gs{m-2N},
+\end{equation*}
+and all derivatives of elements of both spaces are bounded by
+$C\ang{x}^{-s}\ang{\xi}^{-s}$, with $s=N-m/2$ arbitrarily large. Hence
+$\sigma-b\in\cS(\R^{2n})$, so $\sigma\in\Gs{m}(\R^{2n})$ and
+$\sigma\sim\sum_\alpha c_\alpha$.
+\end{proof}
+
+\subsection{The algebra of isotropic operators}
+
+\begin{theorem}\label{isotropic:thm:algebra}
+The spaces $\Psiiso{m}(\R^n)$ form an order-filtered $*$-algebra with residual
+algebra $\Psiiso{-\infty}(\R^n)$, the operators with kernels in
+$\cS(\R^{2n})$. Precisely, if $A=\Op(a)\in\Psiiso{m}(\R^n)$ and
+$B=\Op(b)\in\Psiiso{m'}(\R^n)$ then
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item the formal adjoint $A^*$, defined by $(Au,v)=(u,A^*v)$ for
+  $u,v\in\cS(\R^n)$, lies in $\Psiiso{m}(\R^n)$ and
+  $\sigma_L(A^*)\sim\sum_\alpha\frac{i^{|\alpha|}}{\alpha!}D_\xi^\alpha D_x^\alpha\bar a$;
+\item $AB\in\Psiiso{m+m'}(\R^n)$ and
+  \begin{equation}\label{isotropic:eq:composition}
+    \sigma_L(AB)=a\# b\sim\sum_\alpha\frac1{\alpha!}\pa_\xi^\alpha a\,D_x^\alpha b,
+    \qquad a\#b-ab\in\Gs{m+m'-2}(\R^{2n});
+  \end{equation}
+\item the subspaces $\Psiisoph{m}(\R^n)$ form a $*$-subalgebra;
+\item the bilinear maps $\Gs{m}\times\Gs{m'}\ni(a,b)\mapsto a\#b\in\Gs{m+m'}$
+  and $(a,b)\mapsto a\#b-\sum_{|\alpha|<N}\frac1{\alpha!}\pa_\xi^\alpha a\,D_x^\alpha b\in\Gs{m+m'-2N}$
+  are continuous.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+(i) The kernel of $A^*$ is $\overline{K_A(y,x)}=\int e^{i(x-y)\cdot\xi}\bar a(y,\xi)\,\dbar\xi$,
+so $A^*=\Op(\bar a(y,\xi))$, and $\bar a(y,\xi)\in\Ampl{m}$ by
+\cref{isotropic:lem:ampl-examples}(ii) with $\lambda=1$; apply
+\cref{isotropic:prop:reduction}.
+
+(ii) Applying (i) to $B^*=\Op(c)$ we find $B=\Op(c)^*=\Op(b_R(y,\xi))$ with
+$b_R=\bar c\in\Gs{m'}$; taking conjugates in the expansion of (i),
+$b_R\sim\sum_\gamma\frac{(-i)^{|\gamma|}}{\gamma!}D_\xi^\gamma D_x^\gamma b$. For
+$u\in\cS$, $\widehat{Bu}(\xi)=\int e^{-iy\cdot\xi}b_R(y,\xi)u(y)\,dy$, hence
+$ABu(x)=\int e^{ix\cdot\xi}a(x,\xi)\widehat{Bu}(\xi)\,\dbar\xi$, i.e.
+$AB=\Op(a(x,\xi)b_R(y,\xi))$. By \cref{isotropic:lem:ampl-examples}(i) and
+\cref{isotropic:prop:reduction}, $AB\in\Psiiso{m+m'}$ with
+$\sigma_L(AB)\sim\sum_\beta\frac{i^{|\beta|}}{\beta!}D_\xi^\beta(a\,D_x^\beta b_R)$.
+Inserting the expansion of $b_R$ (with errors in $\Gs{m'-2N}$, which
+contribute errors in $\Gs{m+m'-2N}$) we obtain a double series whose terms of
+index $(\beta,\gamma)$ lie in $\Gs{m+m'-2|\beta|-2|\gamma|}$. Grouping the
+terms with $|\beta|+|\gamma|=j$ we get a finite sum which, by the identity of
+formal power series in commuting variables
+\begin{equation*}
+  e^{iD_y\cdot(D_\eta+D_\xi)}e^{-iD_y\cdot D_\xi}=e^{iD_y\cdot D_\eta}
+\end{equation*}
+applied to $a(x,\eta)b(y,\xi)$ and evaluated at $y=x$, $\eta=\xi$, equals
+$\sum_{|\alpha|=j}\frac{i^{|\alpha|}}{\alpha!}D_\xi^\alpha a\,D_x^\alpha b$.
+Since $i^{|\alpha|}D_\xi^\alpha=\pa_\xi^\alpha$ this is
+\eqref{isotropic:eq:composition}; the terms with $\alpha\ne0$ lie in
+$\Gs{m+m'-2}$.
+
+(iii) All terms in the expansions are polyhomogeneous when $a,b$ are, and
+asymptotic sums of polyhomogeneous symbols are polyhomogeneous.
+
+(iv) By the closed graph theorem for Fréchet spaces it suffices to check that
+$a\mapsto a\#b$ (for fixed $b$) and $b\mapsto a\#b$ have closed graphs
+(separately continuous bilinear maps of Fréchet spaces are continuous). If
+$a_k\to a$ in $\Gs{m}$ and $a_k\#b\to c$ in $\Gs{m+m'}$, then for
+$u,v\in\cS(\R^n)$, $\pair{\Op(a_k\#b)u}{v}=\pair{\Op(a_k)\Op(b)u}{v}$; the
+left side tends to $\pair{\Op(c)u}{v}$ and the right side to
+$\pair{\Op(a\#b)u}{v}$, since $\pair{\Op(a)f}{v}=\int\!\!\int e^{ix\cdot\xi}a(x,\xi)\hat f(\xi)v(x)\,dx\,\dbar\xi$
+depends continuously on $a\in\Gs{m}$ for $f,v\in\cS$. Thus $c=a\#b$. The second
+map is handled in the same way.
+\end{proof}
+
+\begin{remark}\label{isotropic:rem:principal}
+The \emph{principal symbol} $\sigma_m(A)$ of $A\in\Psiiso{m}(\R^n)$ is the
+class of $\sigma_L(A)$ in $\Gs{m}/\Gs{m-1}$; there is a short exact sequence
+$0\to\Psiiso{m-1}\to\Psiiso{m}\to\Gs{m}/\Gs{m-1}\to0$, and
+$\sigma_{m+m'}(AB)=\sigma_m(A)\sigma_{m'}(B)$, $\sigma_m(A^*)=\overline{\sigma_m(A)}$.
+For $A\in\Psiisoph{m}$ we identify $\sigma_m(A)$ with the principal symbol of
+$\sigma_L(A)$, a function in $\CI(\Sphere^{2n-1})$. A feature of the isotropic
+calculus is that the expansions above proceed in steps of two: $AB-\Op(ab)\in\Psiiso{m+m'-2}$
+and, by \eqref{isotropic:eq:composition},
+$\sigma_L([A,B])-(-i)\{a,b\}\in\Gs{m+m'-4}$, where
+$\{a,b\}=\sum_j(\pa_{\xi_j}a\,\pa_{x_j}b-\pa_{x_j}a\,\pa_{\xi_j}b)$. Under the
+identification of \cref{isotropic:prop:rc}, the theorem shows that the
+Laurent functions $\mathcal L(\Hsph{2n})$ carry a non-commutative product, for
+which $\CI(\Hsph{2n})$ is a subalgebra.
+\end{remark}
+
+\begin{remark}\label{isotropic:rem:vector}
+If $E$ and $F$ are finite-dimensional vector spaces, $\Psiiso{m}(\R^n;E,F)$
+denotes the operators from $\cS(\R^n;E)$ to $\cS(\R^n;F)$ given, after a choice
+of bases, by matrices of elements of $\Psiiso{m}(\R^n)$; equivalently their
+left symbols are in $\Gs{m}(\R^{2n};\Hom(E,F))$. All results of this chapter
+extend to this setting with the obvious changes, and we use them freely; in
+\cref{isotropic:sec:L2} we work with $\C^N$-valued operators explicitly.
+\end{remark}
+
+\subsection{Invariance under the Fourier transform}
+
+A property which distinguishes the isotropic calculus sharply from the
+traditional one is its invariance under the Fourier transform.
+
+\begin{proposition}\label{isotropic:prop:fourier}
+If $A\in\Psiiso{m}(\R^n)$ then $\hat A=\cF A\cF^{-1}\in\Psiiso{m}(\R^n)$, i.e.\
+$\widehat{Au}=\hat A\hat u$; if $A=\Op(b(y,\xi))$ is written in right-reduced
+form, $b\in\Gs{m}(\R^{2n})$, then $\sigma_L(\hat A)(\xi,z)=b(-z,\xi)$. The same holds
+for $\Psiisoph{m}(\R^n)$.
+\end{proposition}
+\begin{proof}
+The right-reduced form exists by the proof of
+\cref{isotropic:thm:algebra}(ii). Suppose first $b\in\cS(\R^{2n})$. Then
+$\widehat{Au}(\xi)=\int e^{-iy\cdot\xi}b(y,\xi)u(y)\,dy$, and substituting
+$u(y)=\int e^{iy\cdot\eta}\hat u(\eta)\,\dbar\eta$ and then $y=-z$,
+\begin{equation*}
+  \widehat{Au}(\xi)=\int\!\!\int e^{i(\xi-\eta)\cdot z}b(-z,\xi)\hat u(\eta)\,d\eta\,\dbar z ,
+\end{equation*}
+which is $\Op(c)\hat u$ with $c(\xi,z)=b(-z,\xi)$, $\xi$ now playing the role of
+the base variable and $z$ that of the dual variable. Clearly $c\in\Gs{m}$ if
+$b\in\Gs{m}$, by \cref{isotropic:lem:Gamma-basic}(iii). For general
+$b\in\Gs{m}$ choose $b_k\in\cS$ with $b_k\to b$ in $\Gs{m+1}$
+(\cref{isotropic:lem:Gamma-basic}(iv)); for $u,v\in\cS$ both
+$\pair{\cF\Op(b_k(y,\xi))\cF^{-1}u}{v}$ and $\pair{\Op(c_k)u}{v}$ depend
+continuously on $b_k\in\Gs{m+1}$, so the identity persists in the limit.
+\end{proof}
+
+%======================================================================
+\section{Scattering operators}\label{isotropic:sec:scattering}
+
+\begin{definition}\label{isotropic:def:Psisc}
+For $m,l\in\R$ set $\Psisc{m,l}(\R^n)=\{\Op(a);\ a\in S^{m,l}(\R^n;\R^n)\}$.
+\end{definition}
+
+Thus $\Psisc{m,l}(\R^n)\subset\ang{x}^l\Psido{m}(\R^n)$, and by
+\cref{isotropic:lem:Gamma-in-S}, $\Psiiso{m}\subset\Psisc{m,m}$ if $m\ge0$ and
+$\Psiiso{m}\subset\Psisc{m-t,t}$ for $m\le t\le0$. Since
+$\bigcap_{m,l}S^{m,l}(\R^n;\R^n)=\cS(\R^{2n})$,
+\begin{equation}\label{isotropic:eq:sc-residual}
+  \bigcap_{m,l}\Psisc{m,l}(\R^n)=\Psiiso{-\infty}(\R^n).
+\end{equation}
+Typical elements are the differential operators
+$\sum_{|\alpha|\le m}c_\alpha(x)D^\alpha$ with
+$|\pa^\beta c_\alpha|\le C_\beta\ang{x}^{l-|\beta|}$; for instance the
+Laplacian $\Delta=\sum_jD_j^2$ is in $\Psisc{2,0}(\R^n)$, and $\Delta+1$ is
+elliptic in the scattering sense below, although it is not an isotropic
+operator.
+
+For scattering operators one uses the amplitudes $\Ampl{m,l}_{\mathrm{sc}}$:
+smooth functions $a(x,y,\xi)$ such that for some $w\ge0$
+\begin{equation*}
+  |D_x^\alpha D_y^\beta D_\xi^\gamma a|\le C\ang{x}^{l-|\alpha'|-|\beta'|}\ang{x-y}^{w+|\alpha'|+|\beta'|}\ang{\xi}^{m-|\gamma|}
+  \qquad\forall\,\alpha'\le\alpha,\ \beta'\le\beta .
+\end{equation*}
+As in \cref{isotropic:lem:ampl-examples}, $a(x,\xi)b(y,\xi)\in\Ampl{m+m',l+l'}_{\mathrm{sc}}$
+if $a\in S^{m,l}$, $b\in S^{m',l'}$ (use \eqref{isotropic:eq:peetre} for
+$\ang{y}^{l'-|\beta'|}$), and $a(x+\lambda(y-x),\xi)\in\Ampl{m,l}_{\mathrm{sc}}$.
+
+\begin{theorem}\label{isotropic:thm:sc-algebra}
+The spaces $\Psisc{m,l}(\R^n)$ form a bi-filtered $*$-algebra,
+$\Psisc{m,l}\circ\Psisc{m',l'}\subset\Psisc{m+m',l+l'}$, with residual space
+\eqref{isotropic:eq:sc-residual}. The left symbols of adjoints and products are
+given by the formul\ae\ of \cref{isotropic:thm:algebra}, the expansions now being
+asymptotic in the sense of \cref{isotropic:lem:asymp-sc}; in particular
+$AB-\Op(ab)\in\Psisc{m+m'-1,l+l'-1}(\R^n)$.
+\end{theorem}
+\begin{proof}
+The proof of \cref{isotropic:prop:reduction} applies with the following
+changes. For $a\in\Ampl{m,l}_{\mathrm{sc}}$ the terms
+$c_\alpha=\frac{i^{|\alpha|}}{\alpha!}(D_\xi^\alpha D_y^\alpha a)(x,x,\xi)$ lie in
+$S^{m-|\alpha|,l-|\alpha|}$, and the remainder in
+\eqref{isotropic:eq:taylor-remainder} satisfies
+$|D_x^\mu D_y^\nu D_\xi^\gamma r_N|\le C\ang{x}^{l-N}\ang{x-y}^{w+N}\ang{\xi}^{m-N-|\gamma|}$.
+Hence $\Op(r_N)\in\ang{x}^{l-N}\Psido{m-N}(\R^n)$ and the left symbol $\sigma$
+of $\Op(a)$ satisfies $\sigma-\sum_{|\alpha|<N}c_\alpha\in\ang{x}^{l-N}S^{m-N}(\R^n;\R^n)$.
+If $b\in S^{m,l}$ with $b\sim\sum c_\alpha$, then
+$\sigma-b\in\bigcap_N\ang{x}^{l-N}S^{m-N}(\R^n;\R^n)=\cS(\R^{2n})$. Adjoints and
+products are then treated exactly as in \cref{isotropic:thm:algebra}.
+\end{proof}
+
+\begin{remark}\label{isotropic:rem:sc-ph}
+Polyhomogeneous scattering symbols are defined using the radial
+compactification in each factor:
+$S^{m,l}_{\mathrm{ph}}(\R^p;\R^n)=\ang{z}^l\ang{\xi}^m(\rc\times\rc)^*\CI(\Hsph{p}\times\Hsph{n})$.
+By \cref{isotropic:prop:rc} applied in each factor these are scattering
+symbols, and they are preserved by $D_z$, $D_\xi$ (which lower the respective
+orders) and by products. If
+$\Psisc{m,l}_{\mathrm{ph}}(\R^n)=\Op(S^{m,l}_{\mathrm{ph}})$ then
+$\Psisc{m,l}_{\mathrm{ph}}\circ\Psisc{m',l'}_{\mathrm{ph}}\subset\Psisc{m+m',l+l'}_{\mathrm{ph}}$:
+the terms of the composition formula are polyhomogeneous, an asymptotic sum
+$\sum_j c_j$ with $c_j\in S^{m-j,l-j}_{\mathrm{ph}}$ can be realized by a
+polyhomogeneous symbol using Borel's lemma for the series
+$\sum_j(\rho_1\rho_2)^jG_j$ on the manifold with corners $\Hsph{p}\times\Hsph{n}$
+($\rho_1,\rho_2$ the two boundary defining functions), and $\cS(\R^{p+n})$ is
+contained in every $S^{m,l}_{\mathrm{ph}}$. Repeating the computation in the
+proof of \cref{isotropic:prop:fourier} shows that
+$\cF\,\Psisc{m,l}(\R^n)\,\cF^{-1}=\Psisc{l,m}(\R^n)$: the Fourier transform
+interchanges the two orders.
+\end{remark}
+
+%======================================================================
+\section{The residual isotropic algebra}\label{isotropic:sec:residual}
+
+The residual algebra $\Psiiso{-\infty}(\R^n)$, a subalgebra of the residual
+algebra $\Psido{-\infty}(\R^n)$ of the traditional calculus, has two important
+properties not shared by the latter: its elements are compact on $L^2(\R^n)$,
+and it is a `corner' in the bounded operators. We use the strong (dual)
+topology on $\cSp(\R^n)$, in which a set is bounded if and only if it is
+weakly bounded (Banach--Steinhaus, $\cS$ being Fréchet), and convergence means
+uniform convergence on bounded subsets of $\cS$.
+
+\begin{lemma}\label{isotropic:lem:partial-pairing}
+If $u\in\cSp(\R^q)$ and $F\in\cS(\R^p\times\R^q)$ then
+$f(z)=\pair{u}{F(z,\cdot)}$ lies in $\cS(\R^p)$, with
+$\pa_z^\alpha f=\pair{u}{\pa_z^\alpha F(z,\cdot)}$, and $(u,F)\mapsto f$ is continuous
+(hypocontinuous) and bounded on products of bounded sets.
+\end{lemma}
+\begin{proof}
+The map $z\mapsto F(z,\cdot)\in\cS(\R^q)$ is smooth, by Taylor's formula with
+remainder and the uniform Schwartz bounds on the derivatives of $F$. The
+distribution $u$ has finite order:
+$|\pair{u}{\phi}|\le C\sum_{|\beta|+|\gamma|\le k}\sup|y^\beta D^\gamma\phi|$. Hence
+$|z^\delta\pa_z^\alpha f(z)|\le C\sum_{|\beta|+|\gamma|\le k}\sup_y|z^\delta y^\beta D_y^\gamma\pa_z^\alpha F(z,y)|$,
+which is bounded.
+\end{proof}
+
+\begin{proposition}\label{isotropic:prop:S'-S}
+A continuous linear operator $A:\cS(\R^n)\to\cSp(\R^n)$ lies in
+$\Psiiso{-\infty}(\R^n)$ if and only if it extends to a continuous linear map
+\begin{equation*}
+  A:\cSp(\R^n)\to\cS(\R^n).
+\end{equation*}
+In particular each $A\in\Psiiso{-\infty}(\R^n)$ maps bounded subsets of
+$L^2(\R^n)$ into bounded subsets of $\cS(\R^n)$.
+\end{proposition}
+\begin{proof}
+If $K_A\in\cS(\R^{2n})$ then $Au(x)=\pair{u}{K_A(x,\cdot)}$ for $u\in\cSp$ by
+\cref{isotropic:lem:partial-pairing}, and
+$\sup_x|x^\gamma D^\alpha Au(x)|\le\sup_{\phi\in B}|\pair{u}{\phi}|$ where
+$B=\{x^\gamma D_x^\alpha K_A(x,\cdot);\ x\in\R^n\}$ is bounded in $\cS$, which is
+continuity for the strong topology.
+
+Conversely suppose $A:\cSp\to\cS$ is continuous. The map
+$\R^n\ni y\mapsto\delta_y\in\cSp$ is smooth, with $\pa_{y_j}\delta_y=-\pa_j\delta_y$,
+since difference quotients of $\phi\in\cS$ converge uniformly for $\phi$ in
+bounded sets. For each $N$ the set
+$\{\ang{y}^N\pa^\beta\delta_y;\ y\in\R^n,\ |\beta|\le N\}$ is weakly, hence
+strongly, bounded in $\cSp$, because
+$|\pair{\ang{y}^N\pa^\beta\delta_y}{\phi}|=\ang{y}^N|\pa^\beta\phi(y)|$ is bounded for
+each $\phi\in\cS$. Its image under $A$ is bounded in $\cS$. Thus
+$K(x,y)=(A\delta_y)(x)$ is smooth and $\ang{y}^N|x^\gamma D_x^\alpha D_y^\beta K(x,y)|$
+is bounded for all $N,\gamma,\alpha$ and $|\beta|\le N$, i.e.\
+$K\in\cS(\R^{2n})$. Finally, for $\phi\in\cS$ the Riemann sums of
+$\int\phi(y)\delta_y\,dy$ converge to $\phi$ in $\cSp$, so
+$A\phi=\int\phi(y)A\delta_y\,dy=\int K(\cdot,y)\phi(y)\,dy$ and $K$ is the kernel of $A$.
+\end{proof}
+
+\begin{proposition}\label{isotropic:prop:compact}
+Each $A\in\Psiiso{-\infty}(\R^n)$ is a Hilbert--Schmidt, hence compact, operator
+on $L^2(\R^n)$, and $\norm{A}_{\Lin(L^2)}\le\norm{K_A}_{L^2(\R^{2n})}$; in particular
+the inclusion $\Psiiso{-\infty}(\R^n)\to\Lin(L^2(\R^n))$ is continuous.
+\end{proposition}
+\begin{proof}
+$K_A\in\cS(\R^{2n})\subset L^2(\R^{2n})$. (Alternatively: by
+\cref{isotropic:prop:S'-S}, $A$ maps the unit ball of $L^2$ into a bounded set
+in $\cS$, and bounded subsets of $\cS$ are precompact in $L^2$ by the
+Arzelà--Ascoli theorem applied to $\ang{x}^{n+1}u$.)
+\end{proof}
+
+\begin{lemma}\label{isotropic:lem:corner}
+If $A_1,A_2\in\Psiiso{-\infty}(\R^n)$ and $B$ is a bounded operator on
+$L^2(\R^n)$, or more generally any continuous linear operator
+$B:\cS(\R^n)\to\cSp(\R^n)$, then $A_1BA_2\in\Psiiso{-\infty}(\R^n)$. Moreover for
+each $k$ there are $k'$ and $C$ such that, for bounded $B$,
+\begin{equation}\label{isotropic:eq:corner-est}
+  p_k(K_{A_1BA_2})\le C\,p_{k'}(K_{A_1})\,p_{k'}(K_{A_2})\,\norm{B}_{\Lin(L^2)},
+\end{equation}
+where $p_k(K)=\sum_{|\alpha|+|\beta|+|\gamma|+|\delta|\le k}\sup|x^\alpha y^\beta D_x^\gamma D_y^\delta K(x,y)|$.
+\end{lemma}
+\begin{proof}
+For bounded $B$ the kernel of $C=A_1BA_2$ is
+\begin{equation*}
+  K_C(x,y)=\bigl(B[K_{A_2}(\cdot,y)],\overline{K_{A_1}(x,\cdot)}\bigr)_{L^2},
+\end{equation*}
+and differentiating under the inner product (the maps
+$y\mapsto K_{A_2}(\cdot,y)$, $x\mapsto K_{A_1}(x,\cdot)$ are smooth into $L^2$)
+\begin{equation*}
+  |x^\alpha y^\beta D_x^\gamma D_y^\delta K_C(x,y)|\le\norm{B}\,
+  \sup_y\norm{y^\beta D_y^\delta K_{A_2}(\cdot,y)}_{L^2}\,\sup_x\norm{x^\alpha D_x^\gamma K_{A_1}(x,\cdot)}_{L^2},
+\end{equation*}
+and $\norm{f(x,\cdot)}_{L^2}\le C\sup_{x'}\ang{x'}^{n}|f(x,x')|$. For general $B$
+with kernel $K_B\in\cSp(\R^{2n})$ (Schwartz kernel theorem),
+$K_C(x,y)=\pair{K_B}{K_{A_1}(x,\cdot)\otimes K_{A_2}(\cdot,y)}$, the pairing being in
+the variables $(x',y')$ of $K_{A_1}(x,x')K_{A_2}(y',y)\in\cS(\R^{4n})$; this is in
+$\cS(\R^{2n})$ by \cref{isotropic:lem:partial-pairing}.
+\end{proof}
+
+Note that $\Psiiso{-\infty}(\R^n)$ is an ideal in $\Psiiso{\infty}(\R^n)$, but
+not in $\Lin(L^2(\R^n))$.
+
+\subsection{Finite rank operators and perturbations of the identity}
+
+If $B$ is a bounded operator on $L^2(\R^n)$ of finite rank, let
+$f_1,\dots,f_N$ be an orthonormal basis of its range; then
+$u\mapsto(Bu,f_j)$ are continuous functionals, given by $g_j\in L^2$, and
+$K_B=\sum_jf_j(x)\overline{g_j(y)}$. If $B\in\Psiiso{-\infty}(\R^n)$ the range
+of $B$ and of $B^*$ lie in $\cS$, so $f_j,g_j\in\cS(\R^n)$; conversely such
+kernels are in $\cS(\R^{2n})$. The finite rank elements of
+$\Psiiso{-\infty}(\R^n)$ form an ideal in $\Psiiso{\infty}(\R^n)$.
+
+\begin{lemma}\label{isotropic:lem:index-const}
+If $K$ is a compact operator on a Hilbert space $\mathcal H$ then for each $t\in\C$,
+$\Id+tK$ has finite-dimensional null space and closed range of finite
+codimension, and $\ind(\Id+tK)=\dim\Nul(\Id+tK)-\dim\Nul(\Id+\bar tK^*)=0$.
+\end{lemma}
+\begin{proof}
+Let $T=\Id+K$ (replace $K$ by $tK$). On $N_0=\Nul(T)$ we have $u=-Ku$, so the
+unit ball of $N_0$ is contained in $K(\text{unit ball})$, which is precompact;
+hence $\dim N_0<\infty$. Let $R_0=N_0^\perp$ and $R_1=\Ran(T)$. If
+$f_k=Tu_k\to f$ with $u_k\in R_0$, then $(u_k)$ is bounded: otherwise along a
+subsequence $\norm{u_k}\to\infty$, and $v_k=u_k/\norm{u_k}$ satisfies
+$v_k=-Kv_k+f_k/\norm{u_k}$; by compactness a subsequence converges to some
+$v\in R_0$ with $\norm{v}=1$ and $Tv=0$, a contradiction. Then
+$u_k=-Ku_k+f_k$ has a convergent subsequence, with limit $u$ satisfying
+$Tu=f$; so $R_1$ is closed, and $N_1=R_1^\perp=\Nul(T^*)$ is finite-dimensional
+by the first argument applied to $K^*$.
+
+To see that the index is locally constant in $t$, fix $t_0$, let $T=\Id+t_0K$
+and write $\Id+tK=T+(t-t_0)K$ as a $2\times2$ matrix with respect to the
+decompositions $\mathcal H=N_0\oplus R_0$ (domain) and $\mathcal H=N_1\oplus R_1$
+(range):
+\begin{equation*}
+  \Id+tK=\begin{pmatrix}(t-t_0)K_{00}&(t-t_0)K_{01}\\(t-t_0)K_{10}&D(t)\end{pmatrix},
+  \qquad D(t)=\tilde T+(t-t_0)K_{11},
+\end{equation*}
+where $\tilde T:R_0\to R_1$ is the restriction of $T$, invertible by the closed
+graph theorem. For $|t-t_0|$ small $D(t)$ is invertible and
+\begin{equation*}
+  \begin{pmatrix}P&Q\\R&D\end{pmatrix}=\begin{pmatrix}\Id&QD^{-1}\\0&\Id\end{pmatrix}
+  \begin{pmatrix}P-QD^{-1}R&0\\0&D\end{pmatrix}\begin{pmatrix}\Id&0\\D^{-1}R&\Id\end{pmatrix}.
+\end{equation*}
+The outer factors are invertible, so null space and cokernel of $\Id+tK$ are
+isomorphic to those of the linear map $G(t)=P-QD^{-1}R:N_0\to N_1$ between
+finite-dimensional spaces, whose index is $\dim N_0-\dim N_1=\ind(\Id+t_0K)$.
+Thus $t\mapsto\ind(\Id+tK)$ is locally constant on $\C$, hence constant, and it
+vanishes at $t=0$.
+\end{proof}
+
+\begin{proposition}\label{isotropic:prop:Id+A}
+Let $A\in\Psiiso{-\infty}(\R^n)$. Then $\Id+A$ is Fredholm of index zero on
+$L^2(\R^n)$: its null space $N_0$ is finite-dimensional and contained in
+$\cS(\R^n)$, and its range is closed and is the orthocomplement of the null
+space $N_1\subset\cS(\R^n)$ of $\Id+A^*$. If $\Pi_0,\Pi_1$ denote the orthogonal
+projections onto $N_0,N_1$, then $\Pi_0,\Pi_1\in\Psiiso{-\infty}(\R^n)$ and there
+is $B\in\Psiiso{-\infty}(\R^n)$ such that
+\begin{equation}\label{isotropic:eq:gen-inverse-residual}
+  (\Id+A)(\Id+B)=\Id-\Pi_1,\qquad(\Id+B)(\Id+A)=\Id-\Pi_0 .
+\end{equation}
+Moreover there is a finite rank $A'\in\Psiiso{-\infty}(\R^n)$, of rank
+$\dim N_0$, such that $\Id+A+sA'$ is invertible on $L^2(\R^n)$ for all $s\ne0$.
+\end{proposition}
+\begin{proof}
+By \cref{isotropic:prop:compact} and \cref{isotropic:lem:index-const}, $\Id+A$
+is Fredholm of index zero. If $u\in N_0$ then $u=-Au\in\cS$, and similarly
+$N_1\subset\cS$, so $\Pi_0=\sum_jf_j\otimes\bar f_j$ and $\Pi_1=\sum_jg_j\otimes\bar g_j$,
+for orthonormal bases $f_j\in N_0$, $g_j\in N_1$, are in $\Psiiso{-\infty}$. The
+restriction of $\Id+A$ is a bijection $N_0^\perp\to N_1^\perp=\Ran(\Id+A)$,
+with bounded inverse; extending this inverse by $0$ on $N_1$ gives a bounded
+operator $\Id+B$ satisfying \eqref{isotropic:eq:gen-inverse-residual}. From the
+first identity $B=-A-AB-\Pi_1$, and from the second
+$AB=-A^2-ABA-A\Pi_0$; hence
+\begin{equation*}
+  B=-A+A^2+ABA+A\Pi_0-\Pi_1\in\Psiiso{-\infty}(\R^n)
+\end{equation*}
+by \cref{isotropic:lem:corner}. Finally, since $\dim N_0=\dim N_1=N$, the operator
+$A'=\sum_{j=1}^Ng_j\otimes\bar f_j$ maps $N_0$ isomorphically onto $N_1$ and
+vanishes on $N_0^\perp$; with respect to $L^2=N_0\oplus N_0^\perp\to N_1\oplus N_1^\perp$,
+$\Id+A+sA'$ is the direct sum of $sA'|_{N_0}$ and $(\Id+A)|_{N_0^\perp}$, invertible
+for $s\ne0$.
+\end{proof}
+
+\begin{remark}\label{isotropic:rem:index-trace}
+Once the trace on $\Psiiso{-\infty}(\R^n)$ has been introduced
+(\cref{ch:determinants}), the vanishing of the index also follows from
+\eqref{isotropic:eq:gen-inverse-residual}:
+$\ind(\Id+A)=\Tr\Pi_0-\Tr\Pi_1=\Tr([A,B])=0$. The argument above is
+independent of the trace.
+\end{remark}
+
+\begin{corollary}\label{isotropic:cor:invertible}
+If $A\in\Psiiso{-\infty}(\R^n)$ and $\Id+A$ is injective, or surjective, on
+$L^2(\R^n)$, then $\Id+A$ is invertible and its inverse lies in
+$\Id+\Psiiso{-\infty}(\R^n)$.
+\end{corollary}
+\begin{proof}
+By index zero both $N_0$ and $N_1$ vanish, and $(\Id+A)^{-1}=\Id+B$.
+\end{proof}
+
+\begin{corollary}\label{isotropic:cor:Id+A-S}
+For $A\in\Psiiso{-\infty}(\R^n)$, $\Id+A$ is Fredholm of index zero as an
+operator on $\cS(\R^n)$ and on $\cSp(\R^n)$: in both cases its null space is
+$N_0$ and its range is $\{f;\ \Pi_1f=0\}$, a closed subspace of codimension
+$\dim N_1$.
+\end{corollary}
+\begin{proof}
+The identities \eqref{isotropic:eq:gen-inverse-residual} hold on $\cS$ and, by
+continuity and density, on $\cSp$. If $u\in\cSp$ and $(\Id+A)u=0$ then
+$u=-Au\in\cS$, so $u\in N_0$. The range contains $\Ran(\Id-\Pi_1)=\Nul(\Pi_1)$
+and is contained in it, since $((\Id+A)u,v)=(u,(\Id+A^*)v)=0$ for $v\in N_1$.
+\end{proof}
+
+%======================================================================
+\section{Exponential and logarithm}\label{isotropic:sec:exp}
+
+\begin{proposition}\label{isotropic:prop:exp-log}
+For $A\in\Psiiso{-\infty}(\R^n)$ the series
+\begin{equation*}
+  \exp(A)=\sum_{j\ge0}\frac1{j!}A^j
+\end{equation*}
+converges in $\Id+\Psiiso{-\infty}(\R^n)$, and $\exp:\Psiiso{-\infty}\to\Id+\Psiiso{-\infty}$
+is continuous and entire (holomorphic along every complex line, locally
+uniformly). Each $\exp(A)$ is invertible with inverse $\exp(-A)$. If
+$\norm{A}_{\Lin(L^2)}<1$ the series
+\begin{equation*}
+  \log(\Id+A)=\sum_{j\ge1}\frac{(-1)^{j+1}}{j}A^j
+\end{equation*}
+converges in $\Psiiso{-\infty}(\R^n)$, $\exp(\log(\Id+A))=\Id+A$, and
+$\log(\exp(A))=A$ if $\norm{A}_{\Lin(L^2)}<\log2$. In particular the range of
+$\exp$ contains the neighbourhood $\{\Id+A;\ \norm{A}_{\Lin(L^2)}<1\}$ of $\Id$
+in $\Id+\Psiiso{-\infty}(\R^n)$.
+\end{proposition}
+\begin{proof}
+For $j\ge2$, $A^j=A\,A^{j-2}A$ (with $A^0=\Id$), so by
+\eqref{isotropic:eq:corner-est}
+$p_k(K_{A^j})\le C\,p_{k'}(K_A)^2\norm{A}^{j-2}_{\Lin(L^2)}$. Thus both series
+converge absolutely in every seminorm, uniformly for $A$ in sets on which
+$p_{k'}(K_A)$ and $\norm{A}$ are bounded (respectively $\norm{A}\le r<1$), which by
+\cref{isotropic:prop:compact} include neighbourhoods of each point. The
+partial sums are continuous polynomial maps, so the limits are continuous and
+holomorphic along complex lines. The identities $\exp(A)\exp(-A)=\Id$,
+$\exp(\log(\Id+A))=\Id+A$ and $\log(\exp A)=A$ (where
+$\norm{\exp A-\Id}\le e^{\norm{A}}-1<1$) hold for the norm-convergent series in
+the Banach algebra $\Lin(L^2)$, and convergence in $\Psiiso{-\infty}$ implies
+convergence in $\Lin(L^2)$.
+\end{proof}
+
+%======================================================================
+\section{Elliptic operators}\label{isotropic:sec:elliptic}
+
+\begin{definition}\label{isotropic:def:elliptic}
+An operator $A\in\Psiiso{m}(\R^n;\C^N)$ with left symbol $a$ is \emph{elliptic}
+if there are $c,R>0$ such that $a(w)$ is invertible and
+$|a(w)^{-1}|\le c^{-1}\ang{w}^{-m}$ for $|w|\ge R$ (for $N=1$:
+$|a(w)|\ge c\ang{w}^m$). For $A\in\Psiisoph{m}$ this holds if and only if the
+principal symbol $\sigma_m(A)$ is invertible at every point of
+$\Sphere^{2n-1}$. Similarly $A\in\Psisc{m,l}(\R^n)$ is elliptic if
+$|a(x,\xi)|\ge c\ang{x}^l\ang{\xi}^m$ for $|x|+|\xi|\ge R$.
+\end{definition}
+
+\begin{theorem}\label{isotropic:thm:parametrix}
+If $A\in\Psiiso{m}(\R^n)$ is elliptic there is $B\in\Psiiso{-m}(\R^n)$, unique
+modulo $\Psiiso{-\infty}(\R^n)$, with
+\begin{equation}\label{isotropic:eq:parametrix}
+  AB-\Id,\ BA-\Id\in\Psiiso{-\infty}(\R^n);
+\end{equation}
+if $A\in\Psiisoph{m}$ then $B\in\Psiisoph{-m}$. Consequently, if $u\in\cSp(\R^n)$
+and $Au\in\cS(\R^n)$ then $u\in\cS(\R^n)$. The same holds for elliptic
+$A\in\Psisc{m,l}(\R^n)$, with $B\in\Psisc{-m,-l}(\R^n)$.
+\end{theorem}
+\begin{proof}
+Let $\chi\in\CIc(\R^{2n})$ equal $1$ on $|w|\le R$. Choose $F\in\CI(\C)$ with
+$F(z)=1/z$ for $|z|\ge c$; then $F(\ang{w}^{-m}a)\in\Gs{0}$ by
+\cref{isotropic:lem:Gamma-basic}(ii), and
+$b_0=(1-\chi)\ang{w}^{-m}F(\ang{w}^{-m}a)\in\Gs{-m}$ satisfies $ab_0=1-\chi$.
+(For matrix symbols use a smooth function equal to the inverse on the closed
+set of matrices $M$ with $|M^{-1}|\le c^{-1}$.) If $a$ is polyhomogeneous so is
+$b_0$, since $1/a=a_m^{-1}\sum_k(-r)^k$ asymptotically, with $r=(a-a_m)/a_m\in\Gph{-1}$
+for large $|w|$. By \eqref{isotropic:eq:composition}, $B_0=\Op(b_0)$ satisfies
+$AB_0=\Id-E$ with $\sigma_L(E)=\chi+\Gs{-2}$, so $E\in\Psiiso{-2}$. Choose
+$B_R\in\Psiiso{-m}$ with $\sigma_L(B_R)\sim\sum_j\sigma_L(B_0E^j)$, the terms
+having orders $-m-2j$. Then for each $N$, $B_R-\sum_{j<N}B_0E^j\in\Psiiso{-m-2N}$
+and
+\begin{equation*}
+  AB_R=\sum_{j<N}(\Id-E)E^j+\Psiiso{-2N}=\Id-E^N+\Psiiso{-2N}=\Id+\Psiiso{-2N}.
+\end{equation*}
+Similarly $B_0A=\Id-E'$ with $E'\in\Psiiso{-2}$, and $B_L\sim\sum_jE'^jB_0$
+satisfies $B_LA-\Id\in\Psiiso{-\infty}$. Then
+$B_L-B_R=B_L(\Id-AB_R)+(B_LA-\Id)B_R\in\Psiiso{-\infty}$, so $B=B_R$ satisfies
+\eqref{isotropic:eq:parametrix}; uniqueness follows in the same way. If
+$Au\in\cS$ then $u=B(Au)-(BA-\Id)u\in\cS$, since residual operators map $\cSp$
+into $\cS$ (\cref{isotropic:prop:S'-S}). In the scattering case the same
+construction works with $E\in\Psisc{-1,-1}$ and asymptotic sums in the sense
+of \cref{isotropic:lem:asymp-sc}, the residual space being
+\eqref{isotropic:eq:sc-residual}.
+\end{proof}
+
+Combining the symbolic construction with the analysis of
+\cref{isotropic:sec:residual} we see that elliptic operators have generalized
+inverses with finite rank errors.
+
+\begin{proposition}\label{isotropic:prop:gen-inverse}
+Let $A\in\Psiiso{m}(\R^n)$ be elliptic. Then $N_0=\Nul(A)$ and $N_1=\Nul(A^*)$
+(on $\cSp(\R^n)$) are finite-dimensional subspaces of $\cS(\R^n)$, and if
+$\Pi_0,\Pi_1$ are the $L^2$-orthogonal projections onto them, there is
+$G\in\Psiiso{-m}(\R^n)$ such that
+\begin{equation}\label{isotropic:eq:gen-inverse}
+  AG=\Id-\Pi_1,\qquad GA=\Id-\Pi_0 .
+\end{equation}
+Hence $A$ is Fredholm on $\cS(\R^n)$ and on $\cSp(\R^n)$, with range
+$\{f;\ \Pi_1f=0\}$ and index $\dim N_0-\dim N_1$. If $A$ is polyhomogeneous
+then so is $G$. The same holds for elliptic $A\in\Psisc{m,l}(\R^n)$, with
+$G\in\Psisc{-m,-l}(\R^n)$.
+\end{proposition}
+\begin{proof}
+Let $B$ be a parametrix, $AB=\Id-E_R$, $BA=\Id-E_L$ with
+$E_R,E_L\in\Psiiso{-\infty}$. If $Au=0$, $u\in\cSp$, then $u=E_Lu$, so
+$N_0\subset\Nul(\Id-E_L)$, which is finite-dimensional and contained in $\cS$
+by \cref{isotropic:cor:Id+A-S}; the same applies to $A^*$, which is elliptic.
+
+We show that $\Ran_{\cS}(A)=\{f\in\cS;\ f\perp N_1\}$. Applying
+\cref{isotropic:prop:Id+A} to $-E_R$ gives $B'\in\Psiiso{-\infty}$ and a finite
+rank orthogonal projection $\Pi$, with range $W\subset\cS$, such that
+$AB(\Id+B')=(\Id-E_R)(\Id+B')=\Id-\Pi$. Hence
+$V=A(\cS)\supset\{f\in\cS;\ f\perp W\}$. Since $W\subset\cS$ is
+finite-dimensional, every $v\in V$ decomposes as $v=(v-P_Wv)+P_Wv$ with
+$v-P_Wv\in V$, so $V=(W^\perp\cap\cS)\oplus(V\cap W)$, and with
+$W_1=W\ominus(V\cap W)$ we get $V=\{f\in\cS;\ f\perp W_1\}$. On the other hand
+$W_1=\{g\in\cS;\ g\perp V\}$ (using the density of $W^\perp\cap\cS$ in
+$W^\perp$), and $g\in\cS$ is orthogonal to $A(\cS)$ if and only if $A^*g=0$.
+Thus $W_1=N_1$, as claimed.
+
+Next, if $f\in\cSp$ and $\Pi_1f=0$, then $f=AB(\Id+B')f+\Pi f$ with $\Pi f\in\cS$
+and $\Pi f\perp N_1$ (as $(Au,v)=(u,A^*v)=0$ for $v\in N_1$), so $\Pi f\in A(\cS)$
+and $f\in A(\cSp)$. Conversely $A(\cSp)\perp N_1$. Hence we may define
+$G:\cSp\to\cSp$ by $G=0$ on $N_1$ and, for $\Pi_1f=0$, $Gf=u$ where $u$ is
+the unique solution of $Au=f$ with $\Pi_0u=0$. Then
+\eqref{isotropic:eq:gen-inverse} holds on $\cSp$, and $G$ maps $\cS$ to $\cS$
+(elliptic regularity). The restriction $G:\cS\to\cS$ has closed graph, hence
+is continuous: if $f_k\to f$ and $Gf_k\to u$ in $\cS$ then $Au=(\Id-\Pi_1)f$
+and $\Pi_0u=0$, so $u=Gf$. Multiplying \eqref{isotropic:eq:gen-inverse} by $B$
+gives $(\Id-E_L)G=B-B\Pi_1$ and $G(\Id-E_R)=B-\Pi_0B$, so
+\begin{equation*}
+  G=B-B\Pi_1+E_LG=B-B\Pi_1+E_LB-E_L\Pi_0B+E_LGE_R .
+\end{equation*}
+Here $E_LGE_R$ is continuous from $\cSp$ to $\cS$, since $E_R:\cSp\to\cS$,
+$G:\cS\to\cS$ and $E_L:\cS\to\cS$ are; so it is in $\Psiiso{-\infty}$ by
+\cref{isotropic:prop:S'-S}. All other terms except $B$ are residual, so
+$G\in B+\Psiiso{-\infty}\subset\Psiiso{-m}$. The statements about $\cS$ follow
+in the same way, and the scattering case is identical.
+\end{proof}
+
+%======================================================================
+\section{\texorpdfstring{$L^2$}{L2} boundedness and compactness}\label{isotropic:sec:L2}
+
+\begin{proposition}\label{isotropic:prop:L2}
+Every $A\in\Psiiso{0}(\R^n;\C^N)$ is bounded on $L^2(\R^n;\C^N)$, and every
+$A\in\Psiiso{-\eps}(\R^n;\C^N)$, $\eps>0$, is compact. Elements of $\Psiiso{m}$
+with $m<-3n/2$ are Hilbert--Schmidt.
+\end{proposition}
+\begin{proof}
+By \cref{isotropic:lem:Gamma-in-S}, $\Psiiso{0}(\R^n)\subset\Psido{0}(\R^n)$,
+which is bounded on $L^2$ by \cref{ch:euclidean}. If $a\in\Gs{-M}$, $M>n$, the
+kernel of $\Op(a)$ satisfies
+$(x-y)^\beta K(x,y)=\int e^{i(x-y)\cdot\xi}(-D_\xi)^\beta a(x,\xi)\,\dbar\xi$, and
+$\int\ang{(x,\xi)}^{-M}d\xi=C\ang{x}^{n-M}$ (substitute $\xi=\ang{x}\eta$), so
+$|K(x,y)|\le C_N\ang{x}^{n-M}\ang{x-y}^{-N}$ for all $N$; this is in
+$L^2(\R^{2n})$ if $M>3n/2$. Now let $A\in\Psiiso{-\eps}$ and $T=A^*A\in\Psiiso{-2\eps}$,
+a bounded self-adjoint operator. For $j$ large, $T^{2^j}\in\Psiiso{-2^{j+1}\eps}$
+is Hilbert--Schmidt, hence compact. If $S$ is bounded and self-adjoint with $S^2$
+compact, then $S$ is compact: for $u_k\rightharpoonup u$ weakly,
+$\norm{S(u_k-u)}^2=(S^2(u_k-u),u_k-u)\le\norm{S^2(u_k-u)}\norm{u_k-u}\to0$. By
+induction $T$ is compact, and then
+$\norm{A(u_k-u)}^2=(T(u_k-u),u_k-u)\to0$, so $A$ is compact.
+\end{proof}
+
+We next identify the norm of $A\in\Psiiso{0}$ modulo compact operators. The
+lower bound uses \emph{coherent states}. For $w=(x_0,\xi_0)\in\R^{2n}$ let
+$(T_wu)(x)=e^{ix\cdot\xi_0}u(x-x_0)$, a unitary operator on $L^2(\R^n)$
+preserving $\cS(\R^n)$; a direct change of variables shows
+\begin{equation}\label{isotropic:eq:phase-translation}
+  T_w^{-1}\Op(a)T_w=\Op(a(\cdot+w)).
+\end{equation}
+Let $u_0=\pi^{-n/4}e^{-|x|^2/2}$, so $\norm{u_0}=1$.
+
+\begin{lemma}\label{isotropic:lem:coherent}
+Let $w_k\in\R^{2n}$ with $|w_k|\to\infty$ and $\phi_k=T_{w_k}u_0$. Then
+$\norm{\phi_k}=1$, $\phi_k\rightharpoonup0$ weakly in $L^2(\R^n)$, and for every
+$a\in\Gs{0}(\R^{2n};M(N,\C))$
+\begin{equation*}
+  \sup_{v\in\C^N,|v|\le1}\norm{\Op(a)(\phi_kv)-\phi_k\,a(w_k)v}_{L^2}\to0 .
+\end{equation*}
+\end{lemma}
+\begin{proof}
+By \eqref{isotropic:eq:phase-translation} the norm in question is
+$\norm{\Op(b_k)(u_0v)}$ with $b_k(w)=a(w+w_k)-a(w_k)$. All derivatives of $b_k$
+are bounded uniformly in $k$ (as $\Gs{0}\subset\CIb$), and
+$|b_k(w)|\le|w|\sup_{t\in[0,1]}|\nabla a(w_k+tw)|\le C|w|\sup_t\ang{w_k+tw}^{-1}\to0$
+for each $w$. Now $\Op(b_k)u_0(x)=\int e^{ix\cdot\xi}b_k(x,\xi)\hat u_0(\xi)\,\dbar\xi$;
+integrating by parts,
+$x^\beta\Op(b_k)u_0=\int e^{ix\cdot\xi}(-D_\xi)^\beta(b_k\hat u_0)\,\dbar\xi$, so
+$|\Op(b_k)u_0(x)|\le C\ang{x}^{-n-1}$ uniformly in $k$, while
+$\Op(b_k)u_0(x)\to0$ pointwise by dominated convergence. Dominated
+convergence in $L^2$ gives $\norm{\Op(b_k)u_0}\to0$.
+
+For the weak convergence it suffices, by density, to show
+$(\phi_k,f)\to0$ for $f\in\cS$, and for this it suffices to show that every
+subsequence has a further subsequence along which this holds. Write
+$w_k=(x_k,\xi_k)$. If $|x_k|\to\infty$ along a subsequence then
+$|(\phi_k,f)|\le\int u_0(x-x_k)|f(x)|\,dx\to0$. Otherwise $x_k\to x_*$ along a
+subsequence and $|\xi_k|\to\infty$; then $(\phi_k,f)=\hat g_k(-\xi_k)$ with
+$g_k=u_0(\cdot-x_k)\bar f\to g_*$ in $L^1$, and
+$|\hat g_k(-\xi_k)|\le\norm{g_k-g_*}_{L^1}+|\hat g_*(-\xi_k)|\to0$ by the
+Riemann--Lebesgue lemma.
+\end{proof}
+
+\begin{theorem}\label{isotropic:thm:ess-norm}
+If $A\in\Psiiso{0}(\R^n;\C^N)$ has left symbol $a$ then
+\begin{equation}\label{isotropic:eq:ess-norm}
+  \inf_{K\ \mathrm{compact}}\norm{A+K}_{\Lin(L^2)}
+  =\inf_{E\in\Psiiso{-\infty}(\R^n;\C^N)}\norm{A+E}_{\Lin(L^2)}
+  =\limsup_{|w|\to\infty}\norm{a(w)}.
+\end{equation}
+If $A\in\Psiisoph{0}$ the right side is $\sup_{p\in\Sphere^{2n-1}}\norm{\sigma_0(A)(p)}$.
+\end{theorem}
+\begin{proof}
+Let $\mu$ be the right side of \eqref{isotropic:eq:ess-norm}. Since residual
+operators are compact, the first infimum is at most the second.
+
+\emph{Lower bound.} Let $K$ be compact. Choose $w_k\to\infty$ with
+$\norm{a(w_k)}\to\mu$ and unit vectors $v_k$ with $|a(w_k)v_k|=\norm{a(w_k)}$;
+passing to a subsequence $v_k\to v$. With $\phi_k$ as in
+\cref{isotropic:lem:coherent}, $K(\phi_kv)\to0$ since $K$ is compact and
+$\phi_k\rightharpoonup0$, so
+\begin{equation*}
+  \norm{A+K}\ge\liminf_k\norm{(A+K)(\phi_kv)}\ge\liminf_k|a(w_k)v|=\mu .
+\end{equation*}
+
+\emph{Upper bound.} Let $C>\mu^2$ and choose $R$ and $\delta'>0$ such that
+$p=C-a^*a\ge2\delta'$ for $|w|\ge R$. With $\chi\in\CIc$ equal to $1$ on
+$|w|\le R$, $0\le\chi\le1$ and supported in $|w|\le R+1$, the function
+$p'=(1-\chi)p+\chi C$ lies in $\Gs{0}$, satisfies $p'\ge2\delta'$ everywhere and
+equals $p$ for $|w|\ge R+1$. Since the square root is smooth on positive
+definite matrices, $q_0=(p')^{1/2}\in\Gs{0}$ is hermitian, invertible, with
+$q_0^{-1}\in\Gs{0}$ (\cref{isotropic:lem:Gamma-basic}(ii)). Let $Q_0=\Op(q_0)$.
+By \cref{isotropic:thm:algebra}, $G_1=Q_0^*Q_0-C+A^*A$ is self-adjoint and lies
+in $\Psiiso{-2}$, since its symbol is $p'-p$ (compactly supported) modulo
+$\Gs{-2}$. Suppose $Q=Q_0+R_1+\dots+R_{k-1}$ has been found with $R_j\in\Psiiso{-2j}$
+and $G_k=Q^*Q-C+A^*A\in\Psiiso{-2k}$, and let $g_k=\sigma_L(G_k)$, so that
+$g_k-g_k^*\in\Gs{-2k-2}$. Set $R_k=\Op(r_k)$, $r_k=-\tfrac12q_0^{-1}g_k$. Then
+$(Q+R_k)^*(Q+R_k)-C+A^*A=G_k+Q^*R_k+R_k^*Q+R_k^*R_k$, whose symbol is, modulo
+$\Gs{-2k-2}$,
+\begin{equation*}
+  g_k+q_0r_k+r_k^*q_0=g_k-\tfrac12g_k-\tfrac12g_k^*\equiv0 .
+\end{equation*}
+Taking $Q\in\Psiiso{0}$ with $\sigma_L(Q)\sim q_0+\sum_k r_k$ we obtain
+$Q^*Q=C-A^*A+G$ with $G\in\Psiiso{-\infty}$ self-adjoint. Hence for $u\in\cS$
+\begin{equation*}
+  \norm{Au}^2=C\norm{u}^2-\norm{Qu}^2+(Gu,u)\le C\norm{u}^2+(Gu,u).
+\end{equation*}
+Given $\delta>0$, approximate the compact operator $G$ within $\delta/2$ by a
+finite rank operator $\sum_{j\le J}f_j\otimes\bar g_j$ and then replace the $g_j$
+by nearby $g_j'\in\cS$, to get a finite-dimensional $W=\operatorname{span}\{g_j'\}\subset\cS$
+with $\norm{Gu}\le\delta\norm{u}$ for $u\perp W$. Let $\Pi_W\in\Psiiso{-\infty}$ be the
+orthogonal projection onto $W$. Then for $u\in\cS$, $u'=(\Id-\Pi_W)u\perp W$ and
+$\norm{A(\Id-\Pi_W)u}^2\le(C+\delta)\norm{u}^2$. Since $A\Pi_W\in\Psiiso{-\infty}$
+and $C>\mu^2$, $\delta>0$ are arbitrary, the second infimum is at most $\mu$.
+
+For polyhomogeneous $A$, $a-a_0\to0$ at infinity, $a_0$ being homogeneous of
+degree $0$ outside the unit ball, so $\mu=\sup_{\Sphere^{2n-1}}\norm{a_0}$.
+\end{proof}
+
+\begin{corollary}\label{isotropic:cor:compact-iff}
+An operator $A\in\Psiiso{0}(\R^n;\C^N)$ is compact on $L^2(\R^n;\C^N)$ if and
+only if $\sigma_L(A)(w)\to0$ as $|w|\to\infty$. In particular
+$A\in\Psiisoph{0}(\R^n;\C^N)$ is compact if and only if $\sigma_0(A)=0$, that is
+$A\in\Psiisoph{-1}(\R^n;\C^N)$.
+\end{corollary}
+\begin{proof}
+If $A$ is compact the left side of \eqref{isotropic:eq:ess-norm} vanishes.
+Conversely if the right side vanishes, $A$ is a norm limit of residual, hence
+compact, operators.
+\end{proof}
+
+\begin{corollary}\label{isotropic:cor:fredholm-L2}
+An operator $A\in\Psiiso{0}(\R^n;\C^N)$ is Fredholm on $L^2(\R^n;\C^N)$ if and
+only if it is elliptic.
+\end{corollary}
+\begin{proof}
+If $A$ is elliptic, \eqref{isotropic:eq:gen-inverse} with $G\in\Psiiso{0}$
+bounded shows that $A$ is Fredholm. Conversely, if $A$ is Fredholm there is a
+bounded $B$ with $BA=\Id-P$, $P$ of finite rank. If $A$ is not elliptic there
+are $w_k\to\infty$ and unit vectors $v_k$ with $|a(w_k)v_k|\to0$; passing to a
+subsequence $v_k\to v$. By \cref{isotropic:lem:coherent}, $\norm{A(\phi_kv)}\to0$,
+hence $\phi_kv=BA(\phi_kv)+P(\phi_kv)\to0$, since $P$ is compact and
+$\phi_k\rightharpoonup0$. This contradicts $\norm{\phi_kv}=1$.
+\end{proof}
+
+In particular ellipticity is necessary in \cref{isotropic:prop:gen-inverse}.
+
+%======================================================================
+\section{The harmonic oscillator}\label{isotropic:sec:harmonic}
+
+The \emph{harmonic oscillator} is the differential operator
+\begin{equation*}
+  H=\sum_{j=1}^n(D_j^2+x_j^2)=\Delta+|x|^2 .
+\end{equation*}
+It is an elliptic element of $\Psiisoph{2}(\R^n)$ with symbol $|w|^2$. Its
+spectral decomposition is computed explicitly using the \emph{creation} and
+\emph{annihilation} operators
+\begin{equation*}
+  C_j=D_j+ix_j,\qquad A_j=D_j-ix_j=C_j^*,\qquad j=1,\dots,n .
+\end{equation*}
+
+\begin{lemma}\label{isotropic:lem:HO-identities}
+The following identities hold for $j,k=1,\dots,n$:
+\begin{gather*}
+  [A_j,A_k]=[C_j,C_k]=0,\qquad[A_j,C_k]=2\delta_{jk},\\
+  H=\sum_jC_jA_j+n=\sum_jA_jC_j-n,\qquad[C_j,H]=-2C_j,\qquad[A_j,H]=2A_j .
+\end{gather*}
+Hence $HC_j=C_j(H+2)$ and $HA_j=A_j(H-2)$.
+\end{lemma}
+\begin{proof}
+Since $[D_j,x_k]=-i\delta_{jk}$,
+$C_jA_j=D_j^2+x_j^2-i[D_j,x_j]=D_j^2+x_j^2-1$ and $A_jC_j=D_j^2+x_j^2+1$, which
+gives the formul\ae\ for $H$ and $[A_j,C_j]=2$; the other commutators of the
+$A$'s and $C$'s are clearly zero. Then
+$[C_j,H]=\sum_kC_k[C_j,A_k]=-2C_j$ and $[A_j,H]=\sum_k[A_j,C_k]A_k=2A_j$.
+\end{proof}
+
+\begin{proposition}\label{isotropic:prop:H-inverse}
+For $u\in\cS(\R^n)$,
+\begin{equation}\label{isotropic:eq:H-positive}
+  (Hu,u)=\sum_j\norm{A_ju}^2+n\norm{u}^2 .
+\end{equation}
+If $u\in\cSp(\R^n)$ and $(H-\lambda)u=0$ for some $\lambda\in\C$, then
+$u\in\cS(\R^n)$, and $u\ne0$ implies $\lambda\in\R$, $\lambda\ge n$. The
+operator $H$ is invertible on $\cS(\R^n)$ and on $\cSp(\R^n)$, with inverse
+$H^{-1}\in\Psiisoph{-2}(\R^n)$, which is a compact, self-adjoint, injective
+operator on $L^2(\R^n)$. More generally $H^p\in\Psiisoph{2p}(\R^n)$ for all
+$p\in\Z$.
+\end{proposition}
+\begin{proof}
+\eqref{isotropic:eq:H-positive} follows from $H=\sum C_jA_j+n$ and $C_j^*=A_j$.
+Since $H-\lambda$ is elliptic, eigenfunctions in $\cSp$ lie in $\cS$
+(\cref{isotropic:thm:parametrix}); then $\lambda\norm{u}^2=(Hu,u)$ is real and
+at least $n\norm{u}^2$. Thus $\Nul(H)=\Nul(H^*)=\{0\}$ on $\cSp$, and
+\cref{isotropic:prop:gen-inverse} gives $G\in\Psiisoph{-2}$ with $HG=GH=\Id$ on
+$\cSp$. By \cref{isotropic:prop:L2}, $G$ is compact on $L^2$; it is injective
+since $HG=\Id$, and self-adjoint since $(Gf,g)=(Gf,HGg)=(HGf,Gg)=(f,Gg)$ for
+$f,g\in\cS$.
+\end{proof}
+
+\begin{proposition}\label{isotropic:prop:HO-spectrum}
+The eigenvalues of $H$ (on $\cSp(\R^n)$) are
+\begin{equation*}
+  \operatorname{spec}(H)=\{n,n+2,n+4,\dots\}=n+2\N_0 .
+\end{equation*}
+The eigenvalue $n$ has a one-dimensional eigenspace spanned by the
+\emph{ground state} $u_0=\pi^{-n/4}\exp(-|x|^2/2)$.
+\end{proposition}
+\begin{proof}
+By \eqref{isotropic:eq:H-positive}, $Hu=nu$ if and only if $A_ju=0$ for all
+$j$. Now $A_ju=-i(\pa_j+x_j)u=-ie^{-|x|^2/2}\pa_j(e^{|x|^2/2}u)$, so for a
+distribution $u$, $A_ju=0$ for all $j$ means that $e^{|x|^2/2}u$ is constant,
+i.e.\ $u\in\C u_0$. Similarly $C_jv=-ie^{|x|^2/2}\pa_j(e^{-|x|^2/2}v)$, so the
+only tempered solution of $C_jv=0$ is $v=0$ (as $e^{x_j^2/2}$ is not tempered);
+thus each $C_j$ is injective on $\cSp$.
+
+If $Hu=\lambda u$ with $0\ne u\in\cS$, then by \cref{isotropic:lem:HO-identities}
+$H(A_ju)=(\lambda-2)A_ju$ and $H(C_ju)=(\lambda+2)C_ju$, with $C_ju\ne0$. So
+$\lambda+2\N_0$ consists of eigenvalues. Since all eigenvalues are $\ge n$,
+$A^\alpha u=0$ when $\lambda-2|\alpha|<n$. Let $k$ be the largest integer such
+that $A^\alpha u\ne0$ for some $|\alpha|=k$, and $v=A^\alpha u$ for such
+$\alpha$. Then $A_jv=0$ for all $j$, so $v\in\C u_0$ and $\lambda-2k=n$.
+Combined with $Hu_0=nu_0$ and the ladder property, the eigenvalues are
+exactly $n+2\N_0$.
+\end{proof}
+
+\begin{proposition}\label{isotropic:prop:HO-eigenspaces}
+For $k\in\N_0$ let $E_k$ be the eigenspace of $H$ with eigenvalue $n+2k$. Then
+the map
+\begin{equation*}
+  \{\text{polynomials on }\R^n\text{ homogeneous of degree }k\}\ni p\longmapsto p(C)u_0\in E_k
+\end{equation*}
+is an isomorphism; thus $\{C^\alpha u_0;\ |\alpha|=k\}$ is a basis of $E_k$ and
+$\dim E_k=\binom{n+k-1}{k}$.
+\end{proposition}
+\begin{proof}
+The $C_j$ commute, so $p(C)$ is well defined, and by
+\cref{isotropic:lem:HO-identities}, $HC^\alpha u_0=C^\alpha(H+2|\alpha|)u_0=(n+2|\alpha|)C^\alpha u_0$.
+From $[A_j,C_k]=2\delta_{jk}$ and $A_ju_0=0$ we get
+$A_jC^\alpha u_0=2\alpha_jC^{\alpha-e_j}u_0$ (zero if $\alpha_j=0$), hence for
+$|\beta|=|\alpha|$
+\begin{equation}\label{isotropic:eq:A-C}
+  A^\beta C^\alpha u_0=\begin{cases}0,&\beta\ne\alpha,\\2^{|\alpha|}\alpha!\,u_0,&\beta=\alpha .\end{cases}
+\end{equation}
+Applying $A^\beta$ to $\sum_{|\alpha|=k}c_\alpha C^\alpha u_0=0$ gives
+$c_\beta=0$, so the map is injective.
+
+For surjectivity we show by induction on $k$: if $v\in E_k$ and $A^\beta v=0$
+for all $|\beta|=k$, then $v=0$. For $k=0$ this is trivial, as $A^0=\Id$.
+For $k>0$ and $j$ fixed, $A_jv\in E_{k-1}$ (or is $0$) and
+$A^\beta(A_jv)=A^{\beta+e_j}v=0$ for $|\beta|=k-1$, so $A_jv=0$ by induction;
+then $v\in E_0=\C u_0$ and $Hv=(n+2k)v$ force $v=0$. Now let $v\in E_k$ be
+orthogonal to all $C^\alpha u_0$, $|\alpha|=k$. Then
+$(A^\alpha v,u_0)=(v,C^\alpha u_0)=0$, and $A^\alpha v\in E_0=\C u_0$, so
+$A^\alpha v=0$ for all $|\alpha|=k$, whence $v=0$. Since $E_k\subset\cS$ is
+finite-dimensional (\cref{isotropic:prop:gen-inverse} applied to $H-n-2k$),
+$E_k$ is spanned by the $C^\alpha u_0$.
+\end{proof}
+
+Eigenfunctions with different eigenvalues are orthogonal, $H$ being symmetric
+on $\cS$, and by \eqref{isotropic:eq:A-C},
+$(C^\alpha u_0,C^\beta u_0)=(A^\beta C^\alpha u_0,u_0)=\delta_{\alpha\beta}2^{|\alpha|}\alpha!$
+for $|\alpha|=|\beta|$, since $\norm{u_0}=1$. Hence the \emph{Hermite functions}
+\begin{equation}\label{isotropic:eq:hermite}
+  u_\alpha=(2^{|\alpha|}\alpha!)^{-1/2}C^\alpha u_0,\qquad\alpha\in\N_0^n,
+\end{equation}
+form an orthonormal set in $L^2(\R^n)$, with $Hu_\alpha=(n+2|\alpha|)u_\alpha$.
+In one variable, $(\pa-x)f=e^{x^2/2}\pa(e^{-x^2/2}f)$ gives
+$C^ke^{-x^2/2}=i^kH_k(x)e^{-x^2/2}$, where
+$H_k(x)=(-1)^ke^{x^2}\frac{d^k}{dx^k}e^{-x^2}$ is the $k$-th Hermite polynomial,
+and in general $u_\alpha(x)=\prod_ju_{\alpha_j}(x_j)$. One also checks
+from \eqref{isotropic:eq:A-C} that
+\begin{equation}\label{isotropic:eq:ladder}
+  C_ju_\alpha=(2\alpha_j+2)^{1/2}u_{\alpha+e_j},\qquad A_ju_\alpha=(2\alpha_j)^{1/2}u_{\alpha-e_j}.
+\end{equation}
+
+\begin{lemma}\label{isotropic:lem:compact-eigen}
+If $K$ is a compact self-adjoint operator on a Hilbert space $V\ne\{0\}$ and
+$K\ne0$, then $K$ has an eigenvector with non-zero eigenvalue.
+\end{lemma}
+\begin{proof}
+Let $\tau=\norm{K}>0$ and choose unit vectors $\phi_j$ with
+$\norm{K\phi_j}\to\tau$. Passing to a subsequence, $\phi_j\rightharpoonup\phi$
+weakly with $\norm{\phi}\le1$, and $K\phi_j\to K\phi$ by compactness. Thus
+$\norm{K\phi}=\tau\le\tau\norm{\phi}$, so $\norm{\phi}=1$ and $\phi$ maximizes
+$\norm{K\psi}^2=(K^2\psi,\psi)$ on the unit sphere. For $\phi'\perp\phi$ the
+function $t\mapsto\norm{K(\phi+t\phi')}^2/\norm{\phi+t\phi'}^2$, $t\in\R$, has a
+maximum at $t=0$, so $\operatorname{Re}(K^2\phi,\phi')=0$; replacing $\phi'$ by
+$i\phi'$, $(K^2\phi,\phi')=0$. Hence $K^2\phi=\tau^2\phi$, i.e.\
+$(K-\tau)(K+\tau)\phi=0$. Either $(K+\tau)\phi\ne0$ is an eigenvector with
+eigenvalue $\tau$, or $\phi$ is one with eigenvalue $-\tau$.
+\end{proof}
+
+\begin{theorem}\label{isotropic:thm:hermite-basis}
+The Hermite functions $u_\alpha$, $\alpha\in\N_0^n$, form an orthonormal basis
+of $L^2(\R^n)$; that is, for $u\in L^2(\R^n)$
+\begin{equation}\label{isotropic:eq:hermite-expansion}
+  u=\sum_\alpha c_\alpha u_\alpha,\qquad c_\alpha=(u,u_\alpha),
+\end{equation}
+with convergence in $L^2$.
+\end{theorem}
+\begin{proof}
+Let $W$ be the closed span of the $u_\alpha$ and $V=W^\perp$. The operator
+$G=H^{-1}$ of \cref{isotropic:prop:H-inverse} satisfies
+$Gu_\alpha=(n+2|\alpha|)^{-1}u_\alpha$, so $G(W)\subset W$ and, $G$ being
+self-adjoint, $G(V)\subset V$. If $V\ne\{0\}$, the restriction of $G$ to $V$ is
+compact, self-adjoint and injective, so by \cref{isotropic:lem:compact-eigen}
+there is $0\ne f\in V$ with $Gf=\mu f$, $\mu\ne0$. Then $Hf=\mu^{-1}f$, so $f$
+is an eigenfunction of $H$, hence lies in some $E_k\subset W$ by
+\cref{isotropic:prop:HO-eigenspaces}, a contradiction.
+\end{proof}
+
+\begin{proposition}\label{isotropic:prop:hermite-schwartz}
+If $u\in\cS(\R^n)$ then the coefficients in \eqref{isotropic:eq:hermite-expansion}
+are rapidly decreasing, $|c_\alpha|\le C_N(1+|\alpha|)^{-N}$ for all $N$, and the
+series converges absolutely in $\cS(\R^n)$. Conversely, every such series
+with rapidly decreasing coefficients converges in $\cS(\R^n)$.
+\end{proposition}
+\begin{proof}
+Since $H^Nu\in\cS$,
+$(n+2|\alpha|)^N|c_\alpha|=|(u,H^Nu_\alpha)|=|(H^Nu,u_\alpha)|\le\norm{H^Nu}$. By
+\eqref{isotropic:eq:ladder} and $2ix_j=C_j-A_j$, $2D_j=C_j+A_j$, each
+$x^\beta D^\gamma u_\alpha$ is a combination of at most $2^{|\beta|+|\gamma|}$ functions
+$u_{\alpha'}$ with coefficients bounded by $(2|\alpha|+2|\beta|+2|\gamma|)^{(|\beta|+|\gamma|)/2}$.
+By the Sobolev embedding
+$\sup|v|\le C\sum_{|\mu|\le n+1}\norm{D^\mu v}_{L^2}$, the Schwartz seminorms of
+$u_\alpha$ are therefore bounded by $C_k(1+|\alpha|)^{M_k}$, and the series
+converges absolutely in $\cS$ when the coefficients are rapidly decreasing;
+its sum is $u$ since it converges to $u$ in $L^2$.
+\end{proof}
+
+For $N\in\N_0$ let $\Pi_N$ be the orthogonal projection onto
+$E_0\oplus\dots\oplus E_N$, i.e.\ $K_{\Pi_N}=\sum_{|\alpha|\le N}u_\alpha(x)\overline{u_\alpha(y)}$;
+it is a finite rank element of $\Psiiso{-\infty}(\R^n)$.
+
+\begin{corollary}\label{isotropic:cor:finite-rank-dense}
+For every $A\in\Psiiso{-\infty}(\R^n)$, $\Pi_NA\Pi_N\to A$ in
+$\Psiiso{-\infty}(\R^n)$ as $N\to\infty$. In particular the finite rank
+elements are dense in $\Psiiso{-\infty}(\R^n)$, and also in $\Lin(L^2)$ norm.
+\end{corollary}
+\begin{proof}
+The functions $u_\alpha(x)\overline{u_\beta(y)}$, $(\alpha,\beta)\in\N_0^{2n}$, are,
+up to factors $\pm1$ (note $\overline{u_\beta}=(-1)^{|\beta|}u_\beta$), the
+Hermite functions of $\R^{2n}$. Hence by
+\cref{isotropic:prop:hermite-schwartz} in $\R^{2n}$ the expansion
+$K_A=\sum_{\alpha,\beta}c_{\alpha\beta}u_\alpha(x)\overline{u_\beta(y)}$ converges
+absolutely in $\cS(\R^{2n})$; its partial sum over $|\alpha|,|\beta|\le N$ is the
+kernel of $\Pi_NA\Pi_N$. The last statement follows from
+\cref{isotropic:prop:compact}.
+\end{proof}
+
+\begin{remark}\label{isotropic:rem:HO-powers}
+The same arguments show that for $p\in\Z$ the eigenvalues of $H^p$ are
+$(n+2k)^p$, with the same eigenspaces $E_k$. Thus $H^p$ is compact if $p<0$ and
+$H^p=\sum_\alpha(n+2|\alpha|)^pu_\alpha\otimes\bar u_\alpha$ is of trace class if $p<-n$.
+\end{remark}
+
+%======================================================================
+\section{Isotropic Sobolev spaces}\label{isotropic:sec:sobolev}
+
+The space $L^2(\R^n)$ is associated with the inclusion
+$\cS(\R^n)\subset\cSp(\R^n)$, and operators of order $0$ are bounded on it. The
+isotropic Sobolev space of order $s$ consists of the distributions mapped into
+$L^2$ by all isotropic operators of order $s$. For each $s\in\R$ we fix the
+elliptic operator $\Lambda_s=\Op(\ang{w}^s)\in\Psiisoph{s}(\R^n)$, and let
+$P_s$ be the orthogonal projection onto its (finite-dimensional) null space
+and $G_s\in\Psiisoph{-s}$ its generalized inverse
+(\cref{isotropic:prop:gen-inverse}), $G_s\Lambda_s=\Id-P_s$.
+
+\begin{definition}\label{isotropic:def:Hiso}
+For $s\in\R$,
+\begin{equation*}
+  \Hiso{s}(\R^n)=\{u\in\cSp(\R^n);\ Au\in L^2(\R^n)\ \forall\,A\in\Psiiso{s}(\R^n)\},
+\end{equation*}
+with the norm $\norm{u}_{s}^2=\norm{\Lambda_su}_{L^2}^2+\norm{P_su}_{L^2}^2$.
+\end{definition}
+
+\begin{proposition}\label{isotropic:prop:Hiso}
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item If $A\in\Psiiso{s}(\R^n)$ is elliptic then
+  $\Hiso{s}(\R^n)=\{u\in\cSp;\ Au\in L^2\}$, and $\norm{Au}+\norm{\Pi_0u}$, with
+  $\Pi_0$ the projection onto $\Nul(A)$, is an equivalent norm.
+\item $\Hiso{s}(\R^n)$ is a Hilbert space in which $\cS(\R^n)$ is dense; $\Hiso{0}=L^2$.
+\item For $k\in\N_0$,
+  $\Hiso{k}(\R^n)=\{u\in L^2;\ x^\alpha D^\beta u\in L^2\ \forall\,|\alpha|+|\beta|\le k\}$
+  with equivalent norm $\bigl(\sum_{|\alpha|+|\beta|\le k}\norm{x^\alpha D^\beta u}^2\bigr)^{1/2}$.
+\item The $L^2$ pairing extends to a non-degenerate pairing
+  $\Hiso{s}\times\Hiso{-s}\to\C$ identifying $\Hiso{-s}$ with the (anti)dual of
+  $\Hiso{s}$.
+\item Each $A\in\Psiiso{m}(\R^n)$ is bounded $\Hiso{s}\to\Hiso{s-m}$ for all $s$.
+\item $\bigcap_s\Hiso{s}=\cS(\R^n)$, $\bigcup_s\Hiso{s}=\cSp(\R^n)$, and for $s>t$
+  the inclusion $\Hiso{s}\to\Hiso{t}$ is compact.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+(i) If $A$ is elliptic of order $s$ with parametrix $B$, any $A'\in\Psiiso{s}$
+can be written $A'=(A'B)A+A'(\Id-BA)$, with $A'B\in\Psiiso{0}$ bounded on $L^2$
+and $A'(\Id-BA)$ residual, mapping $\cSp$ to $\cS$. So $Au\in L^2$ implies
+$A'u\in L^2$. If $G$ is the generalized inverse of $A$,
+$u=GAu+\Pi_0u$, so $\norm{A'u}\le\norm{A'G}\norm{Au}+\norm{A'\Pi_0}\norm{\Pi_0u}$; by
+symmetry the norms are equivalent.
+
+(ii) Let $u_k$ be Cauchy. Then $\Lambda_su_k\to f$ in $L^2$ and $P_su_k\to g$.
+Since $\Pi_1\Lambda_su_k=0$ ($\Pi_1$ the projection onto $\Nul\Lambda_s^*$), also
+$\Pi_1f=0$. As $G_s$ is continuous on $\cSp$, $u_k=G_s\Lambda_su_k+P_su_k\to u=G_sf+g$
+in $\cSp$, and $\Lambda_su=(\Id-\Pi_1)f=f$, $P_su=g$ (note $P_sG_s=0$ by
+construction). Thus $u_k\to u$ in $\Hiso{s}$. For density, given
+$u\in\Hiso{s}$ choose $f_k\in\cS$ with $f_k\to\Lambda_su$ in $L^2$; then
+$u_k=G_sf_k+P_su\in\cS$ and $u_k\to u$ in $\Hiso{s}$. That $\Hiso{0}=L^2$
+follows from (i) with $A=\Id$.
+
+(iii) Since $x^\alpha D^\beta\in\Psiiso{|\alpha|+|\beta|}\subset\Psiiso{k}$ for
+$|\alpha|+|\beta|\le k$, elements of $\Hiso{k}$ satisfy the conditions.
+Conversely the operator
+$Q_k=\sum_{|\alpha|+|\beta|\le k}(x^\alpha D^\beta)^*(x^\alpha D^\beta)\in\Psiisoph{2k}$
+has principal symbol $q_k=\sum_{|\alpha|+|\beta|=k}x^{2\alpha}\xi^{2\beta}$, which is
+positive on $\Sphere^{2n-1}$ (if $w_i\ne0$ the term $w_i^{2k}$ occurs), so $Q_k$
+is elliptic. If $B$ is a parametrix and $A\in\Psiiso{k}$, then
+$Au=\sum(ABD^\beta x^\alpha)(x^\alpha D^\beta u)+A(\Id-BQ_k)u$ with
+$ABD^\beta x^\alpha\in\Psiiso{0}$. The norm equivalence follows as in (i).
+
+(iv) For $u\in\cS$, $v\in\Hiso{-s}$:
+$(u,v)=(G_s\Lambda_su+P_su,v)=(\Lambda_su,G_s^*v)+(u,P_sv)$, and $G_s^*\in\Psiiso{-s}$,
+so $|(u,v)|\le C\norm{u}_s\norm{v}_{-s}$; the pairing extends by density.
+Conversely a continuous antilinear functional $\ell$ on $\Hiso{s}$ is, by the
+Riesz theorem, $\ell(u)=\overline{\inner{w}{u}_s}$ for some $w\in\Hiso{s}$, i.e.\
+$\ell(u)=\overline{(u,v)}$ with $v=\Lambda_s^*\Lambda_sw+P_sw$, and $v\in\Hiso{-s}$
+since $A\Lambda_s^*\in\Psiiso{0}$ for $A\in\Psiiso{-s}$. Non-degeneracy follows
+from the density of $\cS$.
+
+(v) If $A'\in\Psiiso{s-m}$ then $A'A\in\Psiiso{s}$, so $A$ maps $\Hiso{s}$ into
+$\Hiso{s-m}$, and boundedness follows from
+$\norm{\Lambda_{s-m}Au}\le\norm{\Lambda_{s-m}AG_s}\norm{\Lambda_su}+\norm{\Lambda_{s-m}AP_s}\norm{P_su}$.
+
+(vi) If $u\in\Hiso{k}$ for all $k$ then $x^\alpha D^\beta u\in L^2$ for all
+$\alpha,\beta$, so $u\in\cS$ by Sobolev embedding. A tempered distribution
+satisfies
+$|\pair{u}{\phi}|\le C\sum_{|\alpha|+|\beta|\le k}\sup|x^\alpha D^\beta\phi|\le C'\norm{\phi}_{k+n+1}$
+(Sobolev embedding again), so by (iii), (iv) it lies in $\Hiso{-k-n-1}$. For
+compactness, $\Lambda_tu=\Lambda_tG_s\Lambda_su+\Lambda_tP_su$ where
+$\Lambda_tG_s\in\Psiiso{t-s}$ is compact on $L^2$ (\cref{isotropic:prop:L2}) and
+$\Lambda_tP_s$ has finite rank.
+\end{proof}
+
+\begin{proposition}\label{isotropic:prop:Hiso-fredholm}
+An operator $A\in\Psiiso{m}(\R^n)$ is Fredholm as a map
+$\Hiso{s}(\R^n)\to\Hiso{s-m}(\R^n)$ if and only if it is elliptic; then its null
+space and index are those of \cref{isotropic:prop:gen-inverse}, independent of $s$.
+\end{proposition}
+\begin{proof}
+If $A$ is elliptic, \eqref{isotropic:eq:gen-inverse} with $G$ bounded
+$\Hiso{s-m}\to\Hiso{s}$ shows that $A$ is Fredholm, with null space $N_0$ and
+range $\{f;\ \Pi_1f=0\}$. In particular $\Lambda_t:\Hiso{t}\to L^2$ and
+$G_t:L^2\to\Hiso{t}$ are Fredholm. If $A:\Hiso{s}\to\Hiso{s-m}$ is Fredholm,
+then $T=\Lambda_{s-m}AG_s\in\Psiiso{0}$ is Fredholm on $L^2$, so elliptic by
+\cref{isotropic:cor:fredholm-L2}. Since $\sigma_L(T)-\ang{w}^{s-m}a\,\sigma_L(G_s)\in\Gs{-2}$
+and $\ang{w}^{s-m}$ and $\sigma_L(G_s)$ are elliptic of orders $s-m$ and $-s$, $a$
+is elliptic of order $m$.
+\end{proof}
+
+\begin{remark}\label{isotropic:rem:Hsc}
+For the scattering calculus the natural spaces carry two orders,
+$H^{m,l}_{\mathrm{sc}}(\R^n)=\ang{x}^{-l}H^m(\R^n)$, and analogous results hold
+for $\Psisc{m,l}(\R^n)$ acting between them; we do not pursue this here.
+\end{remark}
+
+%======================================================================
+\section{The residual group}\label{isotropic:sec:group}
+
+\begin{definition}\label{isotropic:def:group}
+The \emph{residual isotropic group} is
+\begin{equation*}
+  \Gres(\R^n)=\{\Id+A;\ A\in\Psiiso{-\infty}(\R^n),\ \Id+A\text{ invertible on }L^2(\R^n)\}.
+\end{equation*}
+\end{definition}
+
+By \cref{isotropic:cor:invertible}, $\Gres(\R^n)$ is a group, the inverse of
+$\Id+A$ being of the form $\Id+B$ with $B\in\Psiiso{-\infty}$, and $\Id+A$ is in
+$\Gres$ as soon as it is injective (or surjective) on $L^2$. We identify
+$\Id+\Psiiso{-\infty}(\R^n)$ with $\Psiiso{-\infty}(\R^n)\cong\cS(\R^{2n})$ and
+regard $\Gres(\R^n)$ as an open subset of this Fréchet space.
+
+\begin{proposition}\label{isotropic:prop:group}
+$\Gres(\R^n)$ is open in $\Id+\Psiiso{-\infty}(\R^n)$, and multiplication and
+inversion are smooth; the derivative of inversion at $g$ is
+$v\mapsto-g^{-1}vg^{-1}$. The exponential map of
+\cref{isotropic:prop:exp-log} takes values in $\Gres(\R^n)$ and restricts to a
+homeomorphism of a neighbourhood of $0$ onto a neighbourhood of $\Id$.
+\end{proposition}
+\begin{proof}
+Openness follows from the openness of the invertible operators in $\Lin(L^2)$
+and the continuity of $\Psiiso{-\infty}\to\Lin(L^2)$
+(\cref{isotropic:prop:compact}). Multiplication
+$(\Id+A)(\Id+B)=\Id+A+B+AB$ is continuous and bilinear in $(A,B)$, hence
+smooth. If $(\Id+A)^{-1}=\Id+B$, then as in the proof of
+\cref{isotropic:prop:Id+A}, $B=-A+A^2+ABA$. Since $A\mapsto B$ is continuous
+into $\Lin(L^2)$, \eqref{isotropic:eq:corner-est} shows it is continuous into
+$\Psiiso{-\infty}$. From $(g+tv)^{-1}-g^{-1}=-t(g+tv)^{-1}vg^{-1}$ the
+derivative of inversion is $-g^{-1}vg^{-1}$, continuous in $(g,v)$, and by
+induction inversion is $\CI$. The last statement is
+\cref{isotropic:prop:exp-log}.
+\end{proof}
+
+\subsection{Differential forms}
+
+Here a map $f:U\to F$ from an open subset $U$ of a Fréchet space $E$ into a
+Fréchet space $F$ is $\mathcal C^1$ if the directional derivatives
+$Df(u;v)=\frac{d}{dt}f(u+tv)|_{t=0}$ exist and $(u,v)\mapsto Df(u;v)$ is
+continuous on $U\times E$; $\mathcal C^k$ and $\CI$ are defined inductively.
+For $E=\cS(\R^p)$, the continuous $k$-linear forms on $E$ are identified, by
+the Schwartz kernel theorem, with $\cSp(\R^{kp})$, and the alternating ones with
+\begin{equation*}
+  \Lambda^k\cS(\R^p)=\{u\in\cSp(\R^{kp});\ u(x_{e(1)},\dots,x_{e(k)})=\sgn(e)\,u(x_1,\dots,x_k)\ \forall\,e\},
+\end{equation*}
+$e$ ranging over the permutations of $\{1,\dots,k\}$ and $x_i\in\R^p$. A
+\emph{$k$-form} on an open set $U\subset\cS(\R^p)$ is a map
+$\alpha:U\times E^k\to\C$, alternating and $k$-linear in the last $k$ arguments
+(so $\alpha(u)\in\Lambda^k\cS(\R^p)$ for each $u$), which is smooth on
+$U\times E^k$. The exterior derivative is defined by the usual formula for
+constant vector fields,
+\begin{equation*}
+  d\alpha(u;v_0,\dots,v_k)=\sum_{i=0}^k(-1)^iD_u\alpha(u;v_0,\dots,\widehat{v_i},\dots,v_k)[v_i],
+\end{equation*}
+so that $df(u;v)=Df(u;v)$ for functions; the symmetry of second derivatives
+gives $d^2=0$, and $d(\alpha\wedge\beta)=d\alpha\wedge\beta+(-1)^{\deg\alpha}\alpha\wedge d\beta$.
+Applying this with $U=\Gres(\R^n)$, $E=\Psiiso{-\infty}(\R^n)\cong\cS(\R^{2n})$,
+we obtain the de~Rham complex of $\Gres(\R^n)$; for example the
+Maurer--Cartan form $g^{-1}dg$, $(g;v)\mapsto g^{-1}v$, is a
+$\Psiiso{-\infty}(\R^n)$-valued $1$-form. These forms are used in
+\cref{ch:determinants}.
+
+%======================================================================
+\section{Symplectic invariance and the Weyl quantization}\label{isotropic:sec:symplectic}
+
+The composition law of the isotropic calculus has a more invariant
+formulation, which exhibits its invariance under linear symplectic maps.
+
+\subsection{Symplectic vector spaces}
+
+A \emph{symplectic vector space} is a real vector space $W$ with an
+antisymmetric non-degenerate bilinear form $\omega$:
+\begin{equation*}
+  \omega(w_1,w_2)+\omega(w_2,w_1)=0,\qquad\omega(v,w)=0\ \forall\,w\in W\implies v=0 .
+\end{equation*}
+A subspace $V$ is \emph{isotropic} if $\omega$ vanishes on $V\times V$, and
+\emph{Lagrangian} if moreover $2\dim V=\dim W$.
+
+\begin{lemma}\label{isotropic:lem:lagrangian}
+Every symplectic vector space $W$ has a Lagrangian subspace, and for every
+Lagrangian subspace $U_1$ there is a Lagrangian subspace $U_2$ with
+$W=U_1\oplus U_2$.
+\end{lemma}
+\begin{proof}
+Every one-dimensional subspace is isotropic, by antisymmetry. Let $V$ be an
+isotropic subspace of maximal dimension and $U$ a complement of $V$. The
+pairing $\omega:V\times U\to\R$ is non-degenerate: if $u\in U$ and
+$\omega(v,u)=0$ for all $v\in V$ then $V+\R u$ is isotropic, so $u=0$ by
+maximality; if $v\in V$ and $\omega(v,u)=0$ for all $u\in U$ then, since $\omega$
+vanishes on $V$, $\omega(v,\cdot)=0$ and $v=0$. Hence $\dim U=\dim V$ and $V$ is
+Lagrangian.
+
+Now let $U_1$ be Lagrangian, $\dim W=2n$, and let $V$ be an isotropic subspace
+with $V\cap U_1=\{0\}$, of maximal dimension among such subspaces. Suppose
+$\dim V<n$. The map $V\to U_1'$, $v\mapsto\omega(v,\cdot)|_{U_1}$, is injective,
+for if $\omega(v,U_1)=0$ then $U_1+\R v$ is isotropic, so $v\in U_1$ and $v=0$.
+Hence $U_1\to V'$, $u\mapsto\omega(u,\cdot)|_V$, is surjective. Choose
+$w\notin V\oplus U_1$, possible since $\dim V+\dim U_1<2n$, and $u_1\in U_1$
+with $\omega(u_1,v)=\omega(w,v)$ for all $v\in V$. Then $V\oplus\R(w-u_1)$ is
+isotropic and meets $U_1$ only in $0$ (as $w\notin V+U_1$), contradicting
+maximality. Thus $\dim V=n$ and $U_2=V$ is a Lagrangian complement.
+\end{proof}
+
+Given a Lagrangian decomposition $W=U_1\oplus U_2$, the pairing
+$\omega:U_2\times U_1\to\R$ is non-degenerate. Choosing a basis $e_1,\dots,e_n$ of
+$U_1$ and the basis $f_1,\dots,f_n$ of $U_2$ with $\omega(f_i,e_j)=\delta_{ij}$,
+and writing $w=\sum x_ie_i+\sum\xi_if_i$,
+\begin{equation}\label{isotropic:eq:darboux}
+  \omega(w,w')=\sum_{i=1}^n(\xi_ix_i'-x_i\xi_i'),\qquad\text{i.e.}\quad\omega=\sum_{i=1}^nd\xi_i\wedge dx_i .
+\end{equation}
+These are \emph{Darboux coordinates}. The \emph{Liouville measure}
+$\nu=|\omega^n/n!|$ is, in Darboux coordinates, Lebesgue measure $dx\,d\xi$,
+and is invariant under the symplectic group $\mathrm{Sp}(W)$ of linear maps
+preserving $\omega$.
+
+\subsection{Weyl quantization}
+
+For $a\in\Gs{m}(\R^{2n})$ the \emph{Weyl quantization} of $a$ is
+\begin{equation*}
+  \OpW(a)u(x)=\int\!\!\int e^{i(x-y)\cdot\xi}a\bigl(\tfrac{x+y}2,\xi\bigr)u(y)\,dy\,\dbar\xi ,
+\end{equation*}
+i.e.\ $\OpW(a)=\Op(a(\frac{x+y}2,\xi))$. Its kernel $K$ and $a$ are related by
+\begin{equation}\label{isotropic:eq:weyl-kernel}
+  K\bigl(s+\tfrac t2,s-\tfrac t2\bigr)=\int e^{it\cdot\xi}a(s,\xi)\,\dbar\xi,\qquad
+  a(s,\xi)=\int e^{-it\cdot\xi}K\bigl(s+\tfrac t2,s-\tfrac t2\bigr)\,dt .
+\end{equation}
+
+\begin{proposition}\label{isotropic:prop:weyl}
+For $a\in\Gs{m}(\R^{2n})$, $\OpW(a)\in\Psiiso{m}(\R^n)$ with
+\begin{equation*}
+  \sigma_L(\OpW(a))\sim\sum_\alpha\frac{(i/2)^{|\alpha|}}{\alpha!}D_\xi^\alpha D_x^\alpha a ,
+\end{equation*}
+and $\OpW(a)^*=\OpW(\bar a)$. Conversely every $A\in\Psiiso{m}(\R^n)$ is
+$\OpW(a)$ for a unique $a\in\Gs{m}(\R^{2n})$, the \emph{Weyl symbol} of $A$;
+$A\in\Psiisoph{m}$ if and only if $a\in\Gph{m}$, and $A\in\Psiiso{-\infty}$
+if and only if $a\in\cS(\R^{2n})$.
+\end{proposition}
+\begin{proof}
+The first statement is \cref{isotropic:prop:reduction} applied to the
+amplitude $a(\frac{x+y}2,\xi)\in\Ampl{m}$
+(\cref{isotropic:lem:ampl-examples}(ii) with $\lambda=\frac12$), since
+$D_y^\alpha[a(\frac{x+y}2,\xi)]|_{y=x}=2^{-|\alpha|}D_x^\alpha a(x,\xi)$. The
+adjoint formula is immediate from the kernel. By
+\eqref{isotropic:eq:weyl-kernel}, $a$ is determined by $K$, and
+$a\in\cS(\R^{2n})$ if and only if $K\in\cS(\R^{2n})$. Given $A$ with left symbol
+$b$, choose $a'\in\Gs{m}$ with $a'\sim\sum_\alpha\frac{(-i/2)^{|\alpha|}}{\alpha!}D_\xi^\alpha D_x^\alpha b$;
+by the formal identity $e^{\frac i2D_x\cdot D_\xi}e^{-\frac i2D_x\cdot D_\xi}=1$,
+$A-\OpW(a')\in\Psiiso{-\infty}=\OpW(\cS)$, so $A=\OpW(a)$ with $a-a'\in\cS$. The
+expansions preserve polyhomogeneity.
+\end{proof}
+
+\begin{proposition}\label{isotropic:prop:weyl-product}
+If $a,b\in\cS(\R^{2n})$ then $\OpW(a)\OpW(b)=\OpW(a\#_{\mathrm W}b)$ where
+\begin{equation}\label{isotropic:eq:weyl-product}
+  a\#_{\mathrm W}b(w)=\pi^{-2n}\int\!\!\int_{\R^{2n}\times\R^{2n}}e^{-2i\omega(w_1,w_2)}a(w+w_1)b(w+w_2)\,dw_1\,dw_2,
+\end{equation}
+$\omega$ being the standard symplectic form \eqref{isotropic:eq:darboux} on $\R^{2n}$.
+\end{proposition}
+\begin{proof}
+Let $A=\OpW(a)$, $B=\OpW(b)$ with kernels $K_A,K_B$, and let $c$ be the Weyl
+symbol of $AB$. By \eqref{isotropic:eq:weyl-kernel},
+\begin{align*}
+  c(s,\zeta)&=\int e^{-it\cdot\zeta}\int K_A\bigl(s+\tfrac t2,z\bigr)K_B\bigl(z,s-\tfrac t2\bigr)\,dz\,dt\\
+  &=(2\pi)^{-2n}\int e^{i\Phi}a\bigl(\tfrac s2+\tfrac t4+\tfrac z2,\xi\bigr)b\bigl(\tfrac z2+\tfrac s2-\tfrac t4,\eta\bigr)\,dt\,dz\,d\xi\,d\eta,\\
+  \Phi&=-t\cdot\zeta+\bigl(s+\tfrac t2-z\bigr)\cdot\xi+\bigl(z-s+\tfrac t2\bigr)\cdot\eta,
+\end{align*}
+all integrals converging absolutely. Change variables to
+$X=\frac z2+\frac t4-\frac s2$, $Y=\frac z2-\frac t4-\frac s2$, $\Xi=\xi-\zeta$,
+$\mathrm H=\eta-\zeta$. Then $z-s=X+Y$, $t=2(X-Y)$, $dt\,dz=4^n\,dX\,dY$ and
+$\Phi=2(X\cdot\mathrm H-Y\cdot\Xi)$, so
+\begin{equation*}
+  c(s,\zeta)=\pi^{-2n}\int e^{2i(X\cdot\mathrm H-Y\cdot\Xi)}a(s+X,\zeta+\Xi)b(s+Y,\zeta+\mathrm H)\,dX\,d\Xi\,dY\,d\mathrm H .
+\end{equation*}
+With $w=(s,\zeta)$, $w_1=(X,\Xi)$, $w_2=(Y,\mathrm H)$ we have
+$\omega(w_1,w_2)=\Xi\cdot Y-X\cdot\mathrm H$, which gives \eqref{isotropic:eq:weyl-product}.
+\end{proof}
+
+\begin{theorem}\label{isotropic:thm:symplectic}
+Let $(W,\omega)$ be a symplectic vector space of dimension $2n$ with Liouville
+measure $\nu$. Then
+\begin{equation}\label{isotropic:eq:symplectic-product}
+  a\#b(w)=\pi^{-2n}\int_{W\times W}e^{-2i\omega(w_1,w_2)}a(w+w_1)b(w+w_2)\,d\nu(w_1)\,d\nu(w_2)
+\end{equation}
+defines an associative product on $\cS(W)$. For any Lagrangian decomposition
+$W=U_1\oplus U_2$ and Darboux coordinates as above, $(\cS(W),\#)$ is isomorphic,
+via the Weyl quantization, to $(\Psiiso{-\infty}(\R^n),\circ)$. The product
+extends uniquely to continuous bilinear maps $\Gs{m}(W)\times\Gs{m'}(W)\to\Gs{m+m'}(W)$,
+which in any Darboux coordinates correspond to composition in $\Psiiso{\infty}(\R^n)$,
+and for every $F\in\mathrm{Sp}(W)$
+\begin{equation}\label{isotropic:eq:symplectic-inv}
+  F^*(a\#b)=(F^*a)\#(F^*b).
+\end{equation}
+\end{theorem}
+\begin{proof}
+In Darboux coordinates \eqref{isotropic:eq:symplectic-product} becomes
+\eqref{isotropic:eq:weyl-product}, so the isomorphism (and hence associativity)
+follows from \cref{isotropic:prop:weyl-product,isotropic:prop:weyl}. For
+$F\in\mathrm{Sp}(W)$, substituting $v_i=Fw_i$ in
+\eqref{isotropic:eq:symplectic-product}, which preserves $\omega$ and $\nu$, gives
+\eqref{isotropic:eq:symplectic-inv} for $a,b\in\cS(W)$. In Darboux coordinates
+the Weyl product of symbols in $\Gs{m}$, $\Gs{m'}$ is continuous into
+$\Gs{m+m'}$: it is the composite of the continuous maps $a\mapsto\sigma_L(\OpW(a))$,
+its inverse (both continuous by the closed graph theorem, as in
+\cref{isotropic:thm:algebra}(iv)) and the product of
+\cref{isotropic:thm:algebra}(iv). Since $\cS$ is dense in $\Gs{m}$ for the
+topology of $\Gs{m+\eps}$ (\cref{isotropic:lem:Gamma-basic}(iv)) and $\eps>0$ is
+arbitrary, the extension is unique, and \eqref{isotropic:eq:symplectic-inv}
+extends by continuity because $F^*$ is continuous on each $\Gs{m}(W)$. In
+particular, since two Darboux coordinate systems differ by an element of
+$\mathrm{Sp}(W)$, the extended product does not depend on the choice.
+\end{proof}
+
+\begin{remark}\label{isotropic:rem:metaplectic}
+The Fourier transform is an instance of this invariance. A computation with
+the operators $\OpW(e^{i(p\cdot x+q\cdot\xi)})=e^{i(p\cdot x+q\cdot D)}$ (or a
+comparison with \cref{isotropic:prop:fourier}) shows that the Weyl symbol of
+$\cF A\cF^{-1}$ is $a\circ J$, where $J(x,\xi)=(-\xi,x)$ is symplectic. More
+generally each $F\in\mathrm{Sp}(\R^{2n})$ is implemented, in the sense that
+$\OpW(F^*a)=U_F^{-1}\OpW(a)U_F$, by a unitary operator $U_F$ on $L^2(\R^n)$,
+determined up to a constant factor of modulus one; these operators generate the
+metaplectic group, see \cite[Section~18.5]{Hormander-III}.
+\end{remark}
+
+%======================================================================
+\section{Complex order}\label{isotropic:sec:complex}
+
+The identification $\Gph{0}(\R^{2n})=\rc^*\CI(\Hsph{2n})$ of
+\cref{isotropic:prop:rc} allows us to define isotropic operators of complex
+order. For $z\in\C$ set
+\begin{equation*}
+  \Gph{z}(\R^N)=\ang{w}^z\,\Gph{0}(\R^N)=\rc^*\bigl(\rho^{-z}\CI(\Hsph{N})\bigr),\qquad
+  \Psiiso{z}(\R^n)=\Op\bigl(\Gph{z}(\R^{2n})\bigr).
+\end{equation*}
+For real $z$ this agrees with $\Gph{z}$ as defined before, since $\ang{w}^z\in\Gph{z}$.
+Since $|\pa^\alpha\ang{w}^z|\le C_\alpha\ang{w}^{\operatorname{Re}z-|\alpha|}$,
+$\Gph{z}\subset\Gs{\operatorname{Re}z}$ and $\Psiiso{z}\subset\Psiiso{\operatorname{Re}z}$. The
+definition does not depend on the choice of boundary defining function: if
+$\rho'=f\rho$ with $0<f\in\CI(\Hsph{N})$ then $f^{z}=e^{z\log f}$ is smooth, so
+$\rho'^{-z}\CI=\rho^{-z}\CI$.
+
+\begin{proposition}\label{isotropic:prop:complex-order}
+For $z,z'\in\C$, $\Psiiso{z}(\R^n)\circ\Psiiso{z'}(\R^n)\subset\Psiiso{z+z'}(\R^n)$
+and $\Psiiso{z}(\R^n)^*=\Psiiso{\bar z}(\R^n)$.
+\end{proposition}
+\begin{proof}
+Differentiation maps $\ang{w}^z\Gph{0}$ into $\ang{w}^z\Gph{-1}$, since
+$\pa_{w_j}(\ang{w}^zf)=\ang{w}^z(zw_j\ang{w}^{-2}f+\pa_{w_j}f)$. Hence the terms
+of \eqref{isotropic:eq:composition} satisfy
+$\frac1{\alpha!}\pa_\xi^\alpha a\,D_x^\alpha b\in\ang{w}^{z+z'}\Gph{-2|\alpha|}$. If
+$c=a\#b$ then $c\in\Gs{\mu}$, $\mu=\operatorname{Re}(z+z')$, and the remainders of the
+expansion lie in $\Gs{\mu-2N}$; multiplying by $\ang{w}^{-(z+z')}\in\Gs{-\mu}$,
+$\ang{w}^{-(z+z')}c$ has an asymptotic expansion with terms in $\Gph{-2j}$ and
+remainders in $\Gs{-2N}$, so it lies in $\Gph{0}$. Adjoints are treated in the
+same way.
+\end{proof}
+
+Even more useful are holomorphic families. A map $\Omega\to\CI(\Hsph{N})$, with
+$\Omega\subset\C$ open, is \emph{holomorphic} if it is given by an element of
+$\CI(\Omega\times\Hsph{N})$ satisfying the Cauchy--Riemann equation in the first
+variable. If $h:\Omega\to\C$ is holomorphic, a family $A(z)\in\Psiiso{h(z)}(\R^n)$,
+$z\in\Omega$, is a \emph{holomorphic family of order $h$} if
+$\sigma_L(A(z))=\ang{w}^{h(z)}\rc^*F(z)$ with $F:\Omega\to\CI(\Hsph{2n})$
+holomorphic.
+
+\begin{proposition}\label{isotropic:prop:holomorphic}
+If $h,g$ are holomorphic on an open set $\Omega\subset\C$ and $A(z)$, $B(z)$ are
+holomorphic families of isotropic operators of orders $h(z)$ and $g(z)$, then
+$A(z)\circ B(z)$ is a holomorphic family of order $h(z)+g(z)$.
+\end{proposition}
+\begin{proof}[Sketch of proof]
+It suffices to work on an open $\Omega'$ with compact closure in $\Omega$, on
+which $\operatorname{Re}h,\operatorname{Re}g<M$ and $\operatorname{Re}(h+g)>-M$. The map
+$z\mapsto\ang{w}^{h(z)}$ is holomorphic into $\Gs{M}$ (its derivative
+$h'(z)\log\ang{w}\,\ang{w}^{h(z)}$ lies in $\Gs{M}$, as $\operatorname{Re}h<M$
+strictly), and $\rc^*:\CI(\Hsph{2n})\to\Gs{0}$ is continuous linear, so
+$a(z)=\sigma_L(A(z))$ and $b(z)$ are holomorphic $\Gs{M}$-valued. By
+\cref{isotropic:thm:algebra}(iv), $c(z)=a(z)\#b(z)$ is holomorphic into
+$\Gs{2M}$ and
+\begin{equation*}
+  c(z)=\sum_{|\alpha|<N}\frac1{\alpha!}\pa_\xi^\alpha a(z)\,D_x^\alpha b(z)+R_N(z),
+\end{equation*}
+with $R_N$ holomorphic into $\Gs{2M-2N}$. Using \eqref{isotropic:eq:b-fields},
+$\pa_{w_j}(\ang{w}^h\rc^*F)=\ang{w}^{h-1}\rc^*\bigl(hX_jF+V_jF\bigr)$ with
+$X_j=w_j\ang{w}^{-1}$ and $V_j$ smooth on $\Hsph{2n}$, so
+$\ang{w}^{-h-g}$ times each term of the sum is $\rc^*$ of a holomorphic family
+in $\CI(\Hsph{2n})$, while $\ang{w}^{-h-g}R_N(z)$ is holomorphic into
+$\Gs{3M-2N}$, hence, by \cref{isotropic:prop:rc}(iii), into
+$\mathcal C^{k}(\Hsph{2n})$ for $2N>3M+k$. Thus $\rho^{h+g}c(z)$ (pushed forward
+by $\rc$) is holomorphic into $\mathcal C^k(\Hsph{2n})$ for every $k$, which
+means that it is given by an element of $\CI(\Omega'\times\Hsph{2n})$
+holomorphic in $z$.
+\end{proof}
+
+%======================================================================
+\section{Exercises}\label{isotropic:sec:exercises}
+
+\begin{exercise}\label{isotropic:ex:sobolev-integer}
+For $k\in\N$ define $\Hiso{-k}(\R^n)$ as the space of $u\in\cSp(\R^n)$ which can
+be written $u=\sum_{|\alpha|+|\beta|\le k}x^\alpha D^\beta u_{\alpha\beta}$ with
+$u_{\alpha\beta}\in L^2(\R^n)$. Show directly that each $A\in\Psiiso{p}(\R^n)$,
+$p\in\Z$, maps $\Hiso{k}$ to $\Hiso{k-p}$ for all $k\in\Z$ (with $\Hiso{k}$,
+$k\ge0$, as in \cref{isotropic:prop:Hiso}(iii)), and that these definitions
+agree with \cref{isotropic:def:Hiso}. Deduce that if $A\in\Psiiso{m}(\R^n)$ is
+elliptic, $u\in\cSp(\R^n)$ and $Au\in\Hiso{m'}(\R^n)$, then
+$u\in\Hiso{m'+m}(\R^n)$.
+\end{exercise}
+
+\begin{exercise}\label{isotropic:ex:sobolev-compact}
+Show that for $\eps>0$,
+$\Hiso{\eps}(\R^n)\subset\ang{x}^{-\eps}L^2(\R^n)\cap H^\eps(\R^n)$, and that the
+inclusion is strict. [Hint: compose with $\ang{D}^\eps$ and $\ang{x}^\eps$,
+using the scattering calculus.] Deduce, without using
+\cref{isotropic:prop:L2}, that $\Hiso{\eps}(\R^n)\hookrightarrow L^2(\R^n)$ is
+compact, and hence that each element of $\Psiiso{-\eps}(\R^n)$ is compact on
+$L^2(\R^n)$.
+\end{exercise}
+
+\begin{exercise}\label{isotropic:ex:finite-rank-parametrix}
+Show that if $E\in\Psiiso{-\infty}(\R^n)$ there exists
+$F\in\Psiiso{-\infty}(\R^n)$ such that $(\Id+E)(\Id+F)=\Id+G$ with
+$G\in\Psiiso{-\infty}(\R^n)$ of finite rank. Deduce that an elliptic
+$A\in\Psiiso{m}(\R^n)$ has a parametrix $B\in\Psiiso{-m}(\R^n)$ up to finite
+rank errors, i.e.\ $AB-\Id$ and $BA-\Id$ are finite rank elements of
+$\Psiiso{-\infty}(\R^n)$, and hence that $A:\Hiso{M}(\R^n)\to\Hiso{M-m}(\R^n)$ is
+Fredholm for every $M$. (Recall that a bounded operator between Hilbert spaces
+is Fredholm if it has finite-dimensional null space and closed range of
+finite codimension.)
+\end{exercise}
+
+\begin{exercise}\label{isotropic:ex:index-zero}
+Suppose $A\in\Psiiso{m}(\R^n)$ is elliptic and has index zero as an operator on
+$\cSp(\R^n)$. Show that there is a finite rank $E\in\Psiiso{-\infty}(\R^n)$
+such that $A+E$ is an isomorphism of $\cSp(\R^n)$, of $\cS(\R^n)$ and of
+$\Hiso{s}(\R^n)\to\Hiso{s-m}(\R^n)$ for every $s$, with inverse in $\Psiiso{-m}(\R^n)$.
+\end{exercise}
+
+\begin{exercise}\label{isotropic:ex:koszul}
+[Koszul complex] Let $\Lambda^k=\Lambda^k\R^n$ with basis $dx^I$, $I$ strictly
+increasing $k$-tuples, declared orthonormal, and let $\cSp(\R^n;\Lambda^k)$ be
+the space of $u=\sum_Iu_Idx^I$, $u_I\in\cSp(\R^n)$. Using the annihilation
+operators define
+\begin{equation*}
+  D:\cSp(\R^n;\Lambda^k)\to\cSp(\R^n;\Lambda^{k+1}),\qquad Du=\sum_{j=1}^n\sum_IA_ju_I\,dx_j\wedge dx^I .
+\end{equation*}
+\begin{enumerate}[label=(\alph*)]
+\item Show that $D^2=0$ and that the formal adjoint is
+  $D^*u=\sum_j\sum_IC_ju_I\,\iota_jdx^I$, where $\iota_j$, contraction with $e_j$,
+  is the adjoint of $dx_j\wedge$.
+\item Show that $D+D^*\in\Psiiso{1}(\R^n;\Lambda^*)$ is elliptic, and that
+  $(D+D^*)^2=DD^*+D^*D$ acts on $\cSp(\R^n;\Lambda^k)$ as $H-n+2k$.
+\item Deduce that the null space of $D+D^*$ on $\cSp(\R^n;\Lambda^*)$ is
+  $\C\exp(-|x|^2/2)\subset\cSp(\R^n;\Lambda^0)$, that
+  $\{u\in\cSp(\R^n;\Lambda^0);\ Du=0\}=\C\exp(-|x|^2/2)$, and that for $k\ge1$
+  $\{u\in\cSp(\R^n;\Lambda^k);\ Du=0\}=D\,\cSp(\R^n;\Lambda^{k-1})$.
+\item Conclude that $D+D^*$, as an element of
+  $\Psiiso{1}(\R^n;\Lambda^{\mathrm{even}},\Lambda^{\mathrm{odd}})$, is elliptic of index $1$.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}\label{isotropic:ex:WF-operator}
+[Isotropic operator wavefront set] For $a\in\Gs{m}(\R^{2n})$ define the
+\emph{cone support} $\operatorname{cone\,supp}(a)\subset\R^{2n}\setminus\{0\}$ as
+the complement of the set of $\bar w\ne0$ having a conic neighbourhood
+$\Gamma$ such that $\sup_{w\in\Gamma,|w|\ge1}\ang{w}^N|\pa^\alpha a(w)|<\infty$ for
+all $N$ and $\alpha$. For $A\in\Psiiso{m}(\R^n)$ set
+$\WFp_{\mathrm{iso}}(A)=\operatorname{cone\,supp}(\sigma_L(A))$. Show that
+\begin{equation*}
+  \WFp_{\mathrm{iso}}(A+B)\subset\WFp_{\mathrm{iso}}(A)\cup\WFp_{\mathrm{iso}}(B),\quad
+  \WFp_{\mathrm{iso}}(AB)\subset\WFp_{\mathrm{iso}}(A)\cap\WFp_{\mathrm{iso}}(B),
+\end{equation*}
+$\WFp_{\mathrm{iso}}(A^*)=\WFp_{\mathrm{iso}}(A)$, that $\WFp_{\mathrm{iso}}(A)$ is the
+same when defined using the Weyl symbol, and that
+$\WFp_{\mathrm{iso}}(A)=\emptyset$ if and only if $A\in\Psiiso{-\infty}(\R^n)$.
+\end{exercise}
+
+\begin{exercise}\label{isotropic:ex:partition}
+[Isotropic partition of unity] Let $U_i$, $i=1,\dots,N$, be an open cover of
+$\Sphere^{2n-1}$ and $\tilde U_i=\{w\ne0;\ w/|w|\in U_i\}$. Show that there are
+$A_i\in\Psiisoph{0}(\R^n)$ with $\WFp_{\mathrm{iso}}(A_i)\subset\tilde U_i$ and
+$\Id-\sum_iA_i\in\Psiiso{-\infty}(\R^n)$.
+\end{exercise}
+
+\begin{exercise}\label{isotropic:ex:WF-distribution}
+[Isotropic wavefront set] For $u\in\cSp(\R^n)$ let
+\begin{equation*}
+  \WFiso(u)=\bigcap\bigl\{\Char_{\mathrm{iso}}(A);\ A\in\Psiisoph{0}(\R^n),\ Au\in\cS(\R^n)\bigr\},
+\end{equation*}
+where $\Char_{\mathrm{iso}}(A)$ is the cone over the zero set of $\sigma_0(A)$ in
+$\Sphere^{2n-1}$. Show that $\WFiso(u)$ is a closed cone, that
+$\WFiso(u)=\emptyset$ if and only if $u\in\cS(\R^n)$, that
+$\WFiso(Au)\subset\WFp_{\mathrm{iso}}(A)\cap\WFiso(u)$ for $A\in\Psiiso{m}(\R^n)$,
+and that $\WFiso(\hat u)=\{(\xi,-x);\ (x,\xi)\in\WFiso(u)\}$.
+\end{exercise}
+
+\begin{exercise}\label{isotropic:ex:sc-fourier}
+Verify in detail that $\cF\,\Psisc{m,l}(\R^n)\,\cF^{-1}=\Psisc{l,m}(\R^n)$, and that
+an elliptic element of $\Psisc{m,l}(\R^n)$ with $l\ne0$ cannot be an element of
+$\Psiiso{\infty}(\R^n)$ unless it is elliptic there of order $m=l$.
+\end{exercise}
+
+\section*{Notes}
+
+This chapter follows Sections 3.1--3.13 of the original notes, reorganised.
+The general (non-classical) isotropic class $\Gs{m}$ is the symbol class
+introduced by Shubin \cite{Shubin}, where much of the material here (in
+particular the harmonic oscillator and the isotropic Sobolev spaces) can be
+found; the Weyl calculus and its symplectic invariance are treated in
+\cite[Chapter~18.5]{Hormander-III}. The scattering calculus on $\R^n$ is the
+model for Melrose's scattering calculus on asymptotically Euclidean manifolds
+(R.~B.~Melrose, \emph{Spectral and scattering theory for the Laplacian on
+asymptotically Euclidean spaces}, 1994); see also the work of H.~O.~Cordes and
+C.~Parenti on SG-calculi.
+
+The main departures from the original are as follows. The reduction theorem is
+proved with a new class of amplitudes (\cref{isotropic:def:ampl}) which
+contains the products $a(x,\xi)b(y,\xi)$ and the Weyl amplitudes, and the
+isotropic decay of the remainder is obtained by intersecting weighted
+traditional symbol spaces; this replaces the original argument with a
+two-region decomposition of $\R^{3n}$. The generalized inverse of an elliptic
+operator is constructed on $\cSp$ by a finite-dimensional argument, the
+essential norm estimate is proved with coherent states (which also give the
+necessity of ellipticity for the Fredholm property), the harmonic oscillator
+section uses the generalized inverse $H^{-1}$ to prove completeness of the
+Hermite functions, and the Sobolev spaces of all real orders are treated
+uniformly. Problems on traces and determinants from the original list are in
+\cref{ch:determinants}.
