@@ -28,10 +28,20 @@ with an amplitude independent of $y$ (reduction to the left symbol), and
 \cref{euclidean:sec:composition} deduces from this that the operators form
 an order-filtered $*$-algebra. The remaining sections develop the
 consequences: principal symbols, ellipticity and parametrices, elliptic
-regularity, boundedness on $L^2$ and on (weighted) Sobolev spaces,
-polyhomogeneous (classical) operators and invariance under affine changes of
-variables. Coordinate invariance, and hence operators on manifolds, is the
-subject of \cref{ch:microlocal,ch:manifolds}.
+regularity, boundedness on $L^2$ and on (weighted) Sobolev spaces, and
+polyhomogeneous (classical) operators, including those of complex order.
+\Cref{euclidean:sec:topology} topologizes the operator spaces and shows that
+reduction, adjoints and composition are continuous;
+\cref{euclidean:sec:families} uses this to discuss smooth and holomorphic
+families of operators, including holomorphic families whose order varies
+with the parameter. Finally we show invariance under affine changes of
+variables and, for operators with compactly supported kernels, under
+diffeomorphisms of open subsets of $\R^n$
+(\cref{euclidean:sec:invariance,euclidean:sec:coordinates}); a full
+treatment of the latter, together with the wavefront set, is given in
+\cref{ch:microlocal}, and operators on manifolds are the subject of
+\cref{ch:manifolds}. The semiclassical version of the calculus is developed
+in \cref{ch:semiclassical}.
 
 Throughout, $\ang{\xi}=(1+\abs\xi^2)^{1/2}$, $D=-i\pa$,
 $\dbar\xi=(2\pi)^{-n}d\xi$, and the Schwartz space carries the norms
@@ -1690,21 +1700,683 @@ $\Psido\infty_{\mathrm{ph}}(\R^n)$. As an illustration:
   Hence $B=B_0(\Id+F)\in\Psido{-m}_{\mathrm{ph}}(\R^n)$ is a parametrix.
 \end{proof}
 
-As a subspace, $\Symph m(\R^p;\R^n)$ is not closed in $S^m(\R^p;\R^n)$: since
-it contains $S^{-\infty}$, its closure contains $S^{m'}(\R^p;\R^n)$ for every
-$m'<m$, by \cref{euclidean:lem:density}. To capture its properties one
-strengthens the topology: in addition to the symbol norms
-$\norm a_{N,m}$ one uses the norms
+\subsection{Complex orders}\label{euclidean:sec:complex-order}
+
+For holomorphic families of operators (\cref{euclidean:sec:families}) and,
+later, for complex powers of elliptic operators, it is necessary to allow
+polyhomogeneous symbols of \emph{complex} order. For $m\in\C$ and $t>0$ we
+always take $t^m=e^{m\log t}$, so that $\abs{t^m}=t^{\Re m}$. A function
+$a\in\CI(\R^p\times\R^n)$ is homogeneous of degree $m\in\C$ in $\abs\xi\ge1$
+if $a(z,t\xi)=t^ma(z,\xi)$ for all $z$, $t\ge1$ and $\abs\xi\ge1$. The
+discussion at the beginning of this section goes through unchanged, with the
+real part of the degree in all estimates: such a function satisfying
+\eqref{euclidean:eq:uniform-regular} lies in $S^{\Re m}(\R^p;\R^n)$, and if it
+lies in $S^{\Re m-1}(\R^p;\R^n)$ it vanishes in $\abs\xi\ge1$.
+
+\begin{definition}\label{euclidean:def:ph-complex}
+  For $m\in\C$, $\Symph m(\R^p;\R^n)$ is the space of
+  $a\in S^{\Re m}(\R^p;\R^n)$ for which there exist
+  $a_{m-j}\in S^{\Re m-j}(\R^p;\R^n)$, homogeneous of degree $m-j$ in
+  $\abs\xi\ge1$, $j\in\N_0$, with $a\sim\sum_ja_{m-j}$ (in the sense of
+  \cref{euclidean:def:asymptotic-sum}, with orders $\Re m-j$). The space
+  $\Psido m_{\mathrm{ph}}(\R^n)$, $m\in\C$, is defined as in
+  \cref{euclidean:def:psi-ph}.
+\end{definition}
+
+For real $m$ this is \cref{euclidean:def:polyhomogeneous}, and the terms
+$a_{m-j}$ are again unique in $\abs\xi\ge1$.
+
+\begin{lemma}\label{euclidean:lem:ph-complex}
+  Let $m,m'\in\C$.
+  \begin{enumerate}[label=\textup{(\roman*)}]
+  \item $\Symph m\cdot\Symph{m'}\subset\Symph{m+m'}$; $D_{z_j}$ preserves
+    $\Symph m$, $D_{\xi_j}$ maps $\Symph m$ into $\Symph{m-1}$, complex
+    conjugation maps $\Symph m$ onto $\Symph{\bar m}$, and asymptotic sums
+    of series $\sum_jb_j$ with $b_j\in\Symph{m-j}$ lie in $\Symph m$.
+  \item $\ang\xi^s\in\Symph s(\R^n)$ for every $s\in\C$, and multiplication
+    by $\ang\xi^s$ is a bijection $\Symph m\to\Symph{m+s}$.
+  \item $\Symph{m-k}\subset\Symph m$ for $k\in\N_0$, and
+    $\Symph m\cap S^{\Re m-1}=\Symph{m-1}$.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  (i) and (ii) are proved exactly as \cref{euclidean:lem:ph-basic}; note
+  that $\overline{t^m}=t^{\bar m}$, and that the binomial series
+  $(1+u)^{s/2}=\sum_k\binom{s/2}ku^k$ converges, and is real-analytic, for
+  $\abs u<1$ also when $s$ is complex. (iii) If $a\sim\sum_ja_{m-k-j}$, set
+  $a'_{m-j}=0$ for $j<k$ and $a'_{m-j}=a_{m-j}$ for $j\ge k$; then
+  $a\sim\sum_ja'_{m-j}$. The second statement is proved as in the real case:
+  if $a\in\Symph m\cap S^{\Re m-1}$ then the leading term $a_m$ lies in
+  $S^{\Re m-1}$, hence vanishes in $\abs\xi\ge1$ and is residual, and $a$ has
+  an expansion starting with $a_{m-1}+a_m$.
+\end{proof}
+
+With these facts the proofs of \cref{euclidean:prop:ph-algebra} and
+\cref{euclidean:prop:ph-parametrix} apply verbatim to complex orders. Thus
+$\Psido m_{\mathrm{ph}}(\R^n)\subset\Psido{\Re m}(\R^n)$, an operator
+$A\in\Psido{\Re m}(\R^n)$ lies in $\Psido m_{\mathrm{ph}}(\R^n)$ if and only if
+$\sigma_L(A)\in\Symph m(\R^n;\R^n)$, and for all $m,m'\in\C$
 \begin{equation*}
-  \sup_{z\in\R^p,\ 1\le\abs\xi\le2}\abs{D^\alpha_zD^\beta_\xi a_{m-j}(z,\xi)}
-  \quad\text{and}\quad
-  \Bigl\|a-\sum_{j=0}^{k}a_{m-j}\Bigr\|_{N,m-k-1},\qquad j,k,N\in\N_0,\ \alpha,\beta,
+  \Psido m_{\mathrm{ph}}(\R^n)\circ\Psido{m'}_{\mathrm{ph}}(\R^n)\subset
+  \Psido{m+m'}_{\mathrm{ph}}(\R^n),\qquad
+  \bigl(\Psido m_{\mathrm{ph}}(\R^n)\bigr)^*=\Psido{\bar m}_{\mathrm{ph}}(\R^n).
 \end{equation*}
-on the terms of the expansion. With the corresponding metric topology,
-$\Symph m(\R^p;\R^n)$ is complete (\cref{euclidean:ex:ph-complete}). When
-$\Psido m_{\mathrm{ph}}(\R^n)$ needs to be topologized, it is this topology which is
-transferred by the identification
-$\sigma_L:\Psido m_{\mathrm{ph}}(\R^n)\to\Symph m(\R^n;\R^n)$.
+The principal symbol $\sigma_m(A)$ of $A\in\Psido m_{\mathrm{ph}}(\R^n)$ is
+the leading term $a_m$ of $\sigma_L(A)$, a function homogeneous of degree $m$
+in $\abs\xi\ge1$; then $\sigma_{m+m'}(AB)=\sigma_m(A)\sigma_{m'}(B)$,
+$\sigma_{\bar m}(A^*)=\overline{\sigma_m(A)}$, and by
+\cref{euclidean:lem:ph-complex}(iii) the null space of $\sigma_m$ on
+$\Psido m_{\mathrm{ph}}(\R^n)$ is $\Psido{m-1}_{\mathrm{ph}}(\R^n)$. If
+$\abs{\sigma_m(A)}\ge c\abs\xi^{\Re m}$ in $\abs\xi\ge1$ for some $c>0$, $A$ is
+elliptic as an element of $\Psido{\Re m}(\R^n)$ and all its parametrices
+lie in $\Psido{-m}_{\mathrm{ph}}(\R^n)$. For example
+$\ang D^s=\Op(\ang\xi^s)\in\Psido s_{\mathrm{ph}}(\R^n)$ is elliptic for every
+$s\in\C$, with parametrix (indeed inverse) $\ang D^{-s}$.
+
+The natural topology on the space $\Symph m(\R^p;\R^n)$, which is finer
+than the one induced from $S^{\Re m}(\R^p;\R^n)$, is discussed in
+\cref{euclidean:sec:topology}.
+
+% ======================================================================
+\section{Topologies and continuity of the calculus}\label{euclidean:sec:topology}
+
+The spaces of symbols are Fr\'echet spaces, and the left symbol identifies
+$\Psido m(\R^n)$ with $S^m(\R^n;\R^n)$. We use this to topologize the
+operator spaces and show that all the operations of the calculus (reduction,
+adjoint, composition) are continuous. This is what is needed to speak of
+continuous, smooth or holomorphic dependence of operators on parameters
+(\cref{euclidean:sec:families}). Rather than tracking the constants through
+the proofs of \cref{euclidean:sec:reduction,euclidean:sec:composition}, we
+derive continuity from the closed graph theorem.
+
+\subsection{Two facts from functional analysis}
+
+\begin{lemma}\label{euclidean:lem:auto-continuity}
+  Let $E$, $E_1$, $E_2$ and $F$ be Fr\'echet spaces and let $G$ be a
+  Hausdorff topological vector space with $F\subset G$, the inclusion being
+  continuous.
+  \begin{enumerate}[label=\textup{(\roman*)}]
+  \item A linear map $T:E\to F$ which is continuous as a map $E\to G$ is
+    continuous as a map $E\to F$.
+  \item A bilinear map $B:E_1\times E_2\to F$ which is separately continuous
+    is jointly continuous.
+  \item Consequently, a bilinear map $B:E_1\times E_2\to F$ which is
+    separately continuous as a map into $G$ is jointly continuous as a map
+    into $F$.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  (i) By the closed graph theorem it suffices to show that the graph of $T$
+  is closed in $E\times F$. If $e_k\to e$ in $E$ and $Te_k\to f$ in $F$, then
+  $Te_k\to f$ in $G$, while $Te_k\to Te$ in $G$ by assumption; as $G$ is
+  Hausdorff, $f=Te$.
+
+  (ii) The spaces are metrizable, so it suffices to show that
+  $B(x_k,y_k)\to B(x,y)$ when $x_k\to x$ and $y_k\to y$. Write
+  $B(x_k,y_k)-B(x,y)=B(x_k,y_k-y)+B(x_k-x,y)$. The second term tends to $0$
+  by continuity in the first variable. The linear maps
+  $T_k=B(x_k,\cdot):E_2\to F$ are continuous, and for each $y'\in E_2$ the
+  sequence $T_ky'$ converges (to $B(x,y')$), so is bounded. By the uniform
+  boundedness principle for the Fr\'echet space $E_2$ the family $\{T_k\}$ is
+  equicontinuous, and hence $T_k(y_k-y)\to0$.
+
+  (iii) By (i), applied to $B(x,\cdot)$ and $B(\cdot,y)$, $B$ is separately
+  continuous into $F$; then apply (ii).
+\end{proof}
+
+The same holds for conjugate-linear maps (compose with complex conjugation
+on the target).
+
+\subsection{Topologies on symbols and operators}
+
+The spaces $S^m(\R^p;\R^n)$, $m\in\R$, and $S^{-\infty}(\R^p;\R^n)$ are
+Fr\'echet spaces (\cref{euclidean:lem:symbol-basic}), and so, by
+\cref{euclidean:lem:amplitude-char}, are the spaces of amplitudes
+$\Amp mw(\R^n)$ with the norms $\norm\cdot_{N,m,w}$ and $\Amp{-\infty}w(\R^n)$
+with all these norms. By \cref{euclidean:cor:reduction},
+$\sigma_L:\Psido m(\R^n)\to S^m(\R^n;\R^n)$ is a linear bijection for every
+$m\in\R\cup\{-\infty\}$.
+
+\begin{definition}\label{euclidean:def:psido-topology}
+  For $m\in\R\cup\{-\infty\}$, $\Psido m(\R^n)$ is given the Fr\'echet
+  topology for which $\sigma_L:\Psido m(\R^n)\to S^m(\R^n;\R^n)$ is an
+  isomorphism of topological vector spaces.
+\end{definition}
+
+The inclusions $\Psido m(\R^n)\hookrightarrow\Psido{m'}(\R^n)$, $m\le m'$, are
+continuous, and a sequence converges in $\Psido{-\infty}(\R^n)$ if and only
+if it converges in every $\Psido m(\R^n)$. By the estimates in the proof of
+\cref{euclidean:prop:action-S} (with $w=0$ and $a=\sigma_L(A)$), the bilinear
+map $\Psido m(\R^n)\times\cS(\R^n)\ni(A,u)\mapsto Au\in\cS(\R^n)$ is
+continuous.
+
+\begin{proposition}\label{euclidean:prop:reduction-continuous}
+  For $m\in\R\cup\{-\infty\}$ and $w\in\R$, the map
+  \begin{equation*}
+    \Amp mw(\R^n)\ni a\longmapsto\sigma_L\bigl(\Op(a)\bigr)\in S^m(\R^n;\R^n)
+  \end{equation*}
+  is continuous; equivalently, $\Op:\Amp mw(\R^n)\to\Psido m(\R^n)$ is
+  continuous.
+\end{proposition}
+\begin{proof}
+  The map is linear and well defined by \cref{euclidean:thm:reduction} and
+  \cref{euclidean:cor:reduction}; we show that its graph is closed. Let
+  $a_k\to a$ in $\Amp mw$ and $c_k=\sigma_L(\Op(a_k))\to c$ in
+  $S^m(\R^n;\R^n)$ (for $m=-\infty$, take $m=0$ in what follows). By
+  \eqref{euclidean:eq:I-est}, $I(a_k)\to I(a)$ weakly in $\cSp(\R^{2n})$.
+  Since $S^m(\R^n;\R^n)\subset\Amp m0(\R^n)$ continuously,
+  $c_k(x,\xi)\to c(x,\xi)$ in $\Amp m0(\R^n)$ and so $I(c_k)\to I(c)$ weakly.
+  But $I(c_k)=I(a_k)$ is the kernel of $\Op(a_k)$, so $I(c)=I(a)$, i.e.\
+  $\Op(c)=\Op(a)$, and $c=\sigma_L(\Op(a))$ by uniqueness of the left
+  symbol. The closed graph theorem gives continuity.
+\end{proof}
+
+\subsection{Polyhomogeneous symbols}
+
+As a subspace, $\Symph m(\R^p;\R^n)$ is not closed in $S^{\Re m}(\R^p;\R^n)$:
+it contains $S^{-\infty}$, so by \cref{euclidean:lem:density} its closure
+contains $S^{m'}(\R^p;\R^n)$ for every $m'<\Re m$ (see also
+\cref{euclidean:ex:ph-not-dense}). To capture its structure we strengthen the
+topology by adding norms on the terms of the expansion. Since the terms are
+only determined in $\abs\xi\ge1$ we normalize them. Fix $\rho\in\CI(\R^n)$
+with $\rho(\xi)=0$ for $\abs\xi\le\frac12$ and $\rho(\xi)=1$ for
+$\abs\xi\ge1$. For $a\in\Symph m(\R^p;\R^n)$ with $a\sim\sum_ja_{m-j}$, the
+\emph{normalized terms} are
+\begin{equation*}
+  a_{(m-j)}(z,\xi)=\rho(\xi)\abs\xi^{m-j}a_{m-j}\bigl(z,\xi/\abs\xi\bigr),
+  \qquad j\in\N_0;
+\end{equation*}
+they coincide with $a_{m-j}$ in $\abs\xi\ge1$, are uniquely determined by
+$a$, and $a\sim\sum_ja_{(m-j)}$ since $a_{m-j}-a_{(m-j)}$ is residual.
+
+\begin{definition}\label{euclidean:def:ph-topology}
+  The topology of $\Symph m(\R^p;\R^n)$, $m\in\C$, is defined by the norms
+  \begin{gather*}
+    \norm a_{N,\Re m},\qquad
+    \max_{\abs\alpha+\abs\beta\le N}\ \sup_{z\in\R^p,\ 1\le\abs\xi\le2}
+    \abs{D^\alpha_zD^\beta_\xi a_{(m-j)}(z,\xi)},\qquad
+    \Bigl\|a-\sum_{j=0}^ka_{(m-j)}\Bigr\|_{N,\Re m-k-1},
+  \end{gather*}
+  for $j,k,N\in\N_0$. The space $\Psido m_{\mathrm{ph}}(\R^n)$ is given the
+  topology for which $\sigma_L:\Psido m_{\mathrm{ph}}(\R^n)\to\Symph m(\R^n;\R^n)$
+  is an isomorphism.
+\end{definition}
+
+\begin{lemma}\label{euclidean:lem:ph-frechet}
+  Let $m,m'\in\C$.
+  \begin{enumerate}[label=\textup{(\roman*)}]
+  \item For each $j$, the map $a\mapsto a_{(m-j)}$ is continuous from
+    $\Symph m(\R^p;\R^n)$ to $S^{\Re m-j}(\R^p;\R^n)$.
+  \item $\Symph m(\R^p;\R^n)$ is a Fr\'echet space and the inclusion
+    $\Symph m(\R^p;\R^n)\hookrightarrow S^{\Re m}(\R^p;\R^n)$ is continuous.
+  \item Multiplication $\Symph m\times\Symph{m'}\to\Symph{m+m'}$ is jointly
+    continuous; $D_{z_j}$, $D_{\xi_j}$, complex conjugation, multiplication by
+    $\ang\xi^s$ and the inclusions $\Symph{m-k}\hookrightarrow\Symph m$,
+    $k\in\N_0$, are continuous between the corresponding spaces.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  (i) Write $h=a_{(m-j)}$ and $G=\{1\le\abs\xi\le2\}$. For $\abs\xi\ge1$, by
+  homogeneity,
+  $\abs{D^\alpha_zD^\beta_\xi h(z,\xi)}=\abs\xi^{\Re m-j-\abs\beta}
+  \abs{D^\alpha_zD^\beta_\xi h(z,\xi/\abs\xi)}$, and $\xi/\abs\xi\in G$. For
+  $\frac12\le\abs\xi\le1$ we have $h=\rho\,\tilde h$ with
+  $\tilde h(z,\xi)=2^{-(m-j)}\tilde h(z,2\xi)$, $\tilde h$ the homogeneous
+  extension, and $2\xi\in G$; so the derivatives of $h$ there are bounded by
+  constants times those of $h$ on $G$ (Leibniz' formula for the factor
+  $\rho$). Since $h=0$ for $\abs\xi\le\frac12$,
+  $\norm h_{N,\Re m-j}\le C_N\max_{\abs\alpha+\abs\beta\le N}\sup_{\R^p\times G}
+  \abs{D^\alpha_zD^\beta_\xi h}$.
+
+  (ii) The norms are countable and include those of $S^{\Re m}$, so the
+  topology is metrizable and the inclusion continuous. Let $(a_k)$ be a
+  Cauchy sequence. Then $a_k\to a$ in $S^{\Re m}$. For each $j$, by (i) and its
+  proof, the normalized terms $a_{k,(m-j)}$ form a Cauchy sequence in
+  $S^{\Re m-j}$, with limit $h_j$; pointwise limits of functions of the form
+  $\rho(\xi)\times$(homogeneous of degree $m-j$) are of the same form, so $h_j$ is
+  homogeneous of degree $m-j$ in $\abs\xi\ge1$ and normalized. Finally, for
+  each $K$, $a_k-\sum_{j\le K}a_{k,(m-j)}$ is Cauchy in $S^{\Re m-K-1}$, so
+  converges there, and its limit is the pointwise limit
+  $a-\sum_{j\le K}h_j$. Hence $a\in\Symph m$ with normalized terms $h_j$,
+  and $a_k\to a$ in every norm of \cref{euclidean:def:ph-topology}.
+
+  (iii) Each of these maps is well defined by
+  \cref{euclidean:lem:ph-complex}, and is continuous as a map into the
+  corresponding space $S^{\mu}$ by \cref{euclidean:lem:symbol-basic}; for
+  multiplication by $\ang\xi^s$, use \cref{euclidean:lem:symbol-basic}(i),(ii). Now
+  apply \cref{euclidean:lem:auto-continuity} with $G=S^\mu$.
+\end{proof}
+
+\subsection{Continuity of adjoint and product}
+
+\begin{proposition}\label{euclidean:prop:continuity}
+  For $m,m'\in\R\cup\{-\infty\}$ the adjoint and the product,
+  \begin{equation*}
+    \Psido m(\R^n)\ni A\longmapsto A^*\in\Psido m(\R^n),\qquad
+    \Psido m(\R^n)\times\Psido{m'}(\R^n)\ni(A,B)\longmapsto AB\in\Psido{m+m'}(\R^n),
+  \end{equation*}
+  are continuous \textup{(}the product jointly\textup{)}. The same is true
+  for the polyhomogeneous spaces: $A\mapsto A^*$ is continuous from
+  $\Psido m_{\mathrm{ph}}(\R^n)$ to $\Psido{\bar m}_{\mathrm{ph}}(\R^n)$ and
+  the product is jointly continuous from
+  $\Psido m_{\mathrm{ph}}(\R^n)\times\Psido{m'}_{\mathrm{ph}}(\R^n)$ to
+  $\Psido{m+m'}_{\mathrm{ph}}(\R^n)$, for $m,m'\in\C$.
+\end{proposition}
+\begin{proof}
+  First let $m,m'\in\R$. By \cref{euclidean:prop:adjoint},
+  $\sigma_L(A^*)=\sigma_L\bigl(\Op(\overline{a(y,\xi)})\bigr)$ with
+  $a=\sigma_L(A)$. The map $a\mapsto\overline{a(y,\xi)}$ is continuous (and
+  conjugate-linear) from $S^m(\R^n;\R^n)$ to $\Amp m0(\R^n)$, so continuity of
+  the adjoint follows from \cref{euclidean:prop:reduction-continuous}. In
+  particular $B\mapsto\sigma_R(B)=\overline{\sigma_L(B^*)}$ is continuous
+  from $\Psido{m'}$ to $S^{m'}$. By the proof of
+  \cref{euclidean:thm:composition},
+  \begin{equation*}
+    \sigma_L(AB)=\sigma_L\Bigl(\Op\bigl(\sigma_L(A)(x,\xi)\,\sigma_R(B)(y,\xi)\bigr)\Bigr).
+  \end{equation*}
+  The bilinear map $(a,b)\mapsto a(x,\xi)b(y,\xi)$ is continuous from
+  $S^m(\R^n;\R^n)\times S^{m'}(\R^n;\R^n)$ to $\Amp{m+m'}0(\R^n)$, by Leibniz'
+  formula as in \cref{euclidean:lem:symbol-basic}(ii); composing it with the
+  continuous linear maps $A\mapsto\sigma_L(A)$, $B\mapsto\sigma_R(B)$ and
+  $c\mapsto\sigma_L(\Op(c))$ shows that the product is jointly continuous.
+  If $m=-\infty$ (or $m'=-\infty$), the product
+  $\Psido{-\infty}\times\Psido{m'}\to\Psido{-M}$ factors through the
+  continuous inclusion $\Psido{-\infty}\hookrightarrow\Psido{-M-m'}$ for
+  every $M$, so it is continuous into $\Psido{-\infty}$; similarly for the
+  adjoint.
+
+  For the polyhomogeneous spaces, the adjoint and product map into the
+  stated spaces by \cref{euclidean:sec:complex-order}, and they are
+  continuous into $\Psido{\Re\bar m}(\R^n)$, respectively
+  $\Psido{\Re(m+m')}(\R^n)$, by the first part, since the inclusions
+  $\Symph\mu\hookrightarrow S^{\Re\mu}$ are continuous. By
+  \cref{euclidean:lem:ph-frechet}(ii) the spaces involved are Fr\'echet, so
+  \cref{euclidean:lem:auto-continuity} (with $G=S^{\Re\bar m}$, respectively
+  $G=S^{\Re(m+m')}$) gives the continuity for the polyhomogeneous topologies.
+\end{proof}
+
+\begin{corollary}\label{euclidean:cor:remainder-continuous}
+  For $m,m'\in\R$ and $N\in\N_0$, the remainder in the composition formula,
+  \begin{equation*}
+    r_N(a,b)=\sigma_L\bigl(\Op(a)\Op(b)\bigr)-\sum_{\abs\alpha<N}
+    \frac{i^{\abs\alpha}}{\alpha!}D^\alpha_\xi a\,D^\alpha_xb,
+  \end{equation*}
+  is a continuous bilinear map
+  $S^m(\R^n;\R^n)\times S^{m'}(\R^n;\R^n)\to S^{m+m'-N}(\R^n;\R^n)$.
+\end{corollary}
+\begin{proof}
+  By \cref{euclidean:thm:composition}, $r_N$ takes values in $S^{m+m'-N}$, and
+  by \cref{euclidean:prop:continuity} and \cref{euclidean:lem:symbol-basic} it
+  is continuous into $S^{m+m'}$. Apply
+  \cref{euclidean:lem:auto-continuity}(iii) with $G=S^{m+m'}$.
+\end{proof}
+
+The following consequence of the off-diagonal smoothness of the kernels
+will be used repeatedly when operators are localized.
+
+\begin{lemma}\label{euclidean:lem:off-diagonal-cutoff}
+  Let $\phi_1\in\CIc(\R^n)$ and $\phi_2\in\CIb(\R^n)$, with $\phi_2=1$ on a
+  neighbourhood of $\supp\phi_1$. Then for every $A\in\Psido m(\R^n)$,
+  $\phi_1A(1-\phi_2)\in\Psido{-\infty}(\R^n)$ and
+  $(1-\phi_2)A\phi_1\in\Psido{-\infty}(\R^n)$, and the maps
+  \begin{equation*}
+    \Psido m(\R^n)\ni A\longmapsto\phi_1A(1-\phi_2),\ (1-\phi_2)A\phi_1\in\Psido{-\infty}(\R^n)
+  \end{equation*}
+  are continuous.
+\end{lemma}
+\begin{proof}
+  Since $\supp\phi_1$ is compact and $\supp(1-\phi_2)$ is a closed set
+  disjoint from it, $\delta=\operatorname{dist}(\supp\phi_1,\supp(1-\phi_2))>0$.
+  Let $a=\sigma_L(A)$ and $f(x,y)=\phi_1(x)(1-\phi_2(y))$, which has weight
+  $0$ in the sense of \cref{euclidean:lem:amplitude-char}. Thus
+  $A'=\phi_1A(1-\phi_2)=\Op(fa)\in\Psido m(\R^n)$, with kernel $K'=fK$,
+  $K=I(a)$, and $f$ vanishes unless $\abs{x-y}\ge\delta$.
+
+  By \cref{euclidean:lem:kernel-identities}, as in the proof of
+  \cref{euclidean:prop:residual}, for all $\alpha,\beta,\gamma$,
+  \begin{equation*}
+    (x-y)^{\gamma}D^\alpha_xD^\beta_yK=I(b_{\alpha\beta\gamma}),\qquad
+    b_{\alpha\beta\gamma}=(-D_\xi)^\gamma(\xi+D_x)^\alpha(D_y-\xi)^\beta a
+    \in\Amp{m+\abs\alpha+\abs\beta-\abs\gamma}0(\R^n),
+  \end{equation*}
+  which is a bounded continuous function if $m+\abs\alpha+\abs\beta-\abs\gamma<-n$,
+  by \cref{euclidean:prop:osc-int}(i). Let $W=\{\abs{x-y}>\delta/2\}$. Since
+  $\abs{x-y}^{2L}=\sum_{\abs\gamma=L}\frac{L!}{\gamma!}(x-y)^{2\gamma}$, for
+  $2L>m+n+\abs\alpha+\abs\beta$ we get, in $W$,
+  \begin{equation*}
+    D^\alpha_xD^\beta_yK=\abs{x-y}^{-2L}\sum_{\abs\gamma=L}\frac{L!}{\gamma!}
+    I(b_{\alpha\beta(2\gamma)}),
+  \end{equation*}
+  a continuous function bounded by $C\abs{x-y}^{-2L}$. Thus all
+  distributional derivatives of $K$ in $W$ are continuous, so $K$ is smooth
+  in $W$, which contains a neighbourhood of $\supp f$. Hence $K'=fK$ is
+  smooth, and on $\supp f$, where $\ang{x-y}^{2L}\le C_\delta\abs{x-y}^{2L}$,
+  \begin{equation*}
+    \abs{D^\alpha_xD^\beta_yK'(x,y)}\le C_{\alpha\beta L}\ang{x-y}^{-2L}
+    \quad\text{for all }L,
+  \end{equation*}
+  by Leibniz' formula, the derivatives of $f$ being bounded. By
+  \cref{euclidean:prop:residual}, $A'\in\Psido{-\infty}(\R^n)$.
+
+  The map $A\mapsto A'$ is linear, and continuous into $\Psido m(\R^n)$ by
+  \cref{euclidean:prop:reduction-continuous}, since $a\mapsto fa$ is
+  continuous from $S^m(\R^n;\R^n)$ to $\Amp m0(\R^n)$. By
+  \cref{euclidean:lem:auto-continuity}(i), with $G=S^m(\R^n;\R^n)$, it is
+  continuous into $\Psido{-\infty}(\R^n)$. The case of $(1-\phi_2)A\phi_1$
+  is the same with $f(x,y)=(1-\phi_2(x))\phi_1(y)$ (or follows by taking
+  adjoints).
+\end{proof}
+
+The hypothesis is that the supports of $\phi_1$ and $1-\phi_2$ are disjoint;
+it would not suffice to assume $\phi_1=1$ on $\supp\phi_2$: for $A=\Id$,
+$\phi_1A(1-\phi_2)$ is multiplication by $\phi_1(1-\phi_2)$, which is
+residual only if $\phi_1(1-\phi_2)=0$.
+
+% ======================================================================
+\section{Smooth and holomorphic families}\label{euclidean:sec:families}
+
+With the topologies of \cref{euclidean:sec:topology} the notions of
+continuous, smooth and holomorphic dependence of operators on parameters are
+defined. For operators of fixed order there is nothing new: these are just
+the corresponding properties of the left symbol, and products of such
+families have the same regularity. More interesting is that, for
+polyhomogeneous operators, the \emph{order} itself may vary holomorphically
+with a complex parameter; families such as $\ang D^s$, $s\in\C$, and the
+complex powers of elliptic operators (\cite{Seeley}; see
+\cref{ch:determinants}) are of this type.
+
+\subsection{Fr\'echet-valued functions}
+
+Let $E$ be a Fr\'echet space. For $U\subset\R^k$ open (or an interval such as
+$[0,1]$, with one-sided difference quotients at the end points), a map
+$u:U\to E$ is $\mathcal C^1$ if the partial derivatives
+$\pa_{t_l}u(t)=\lim_{h\to0}h^{-1}\bigl(u(t+he_l)-u(t)\bigr)$ exist in $E$ and
+are continuous maps $U\to E$; inductively $u$ is $\mathcal C^{k+1}$ if it is
+$\mathcal C^1$ with all $\pa_{t_l}u\in\mathcal C^k$, and $\CI(U;E)$ is the
+intersection of these spaces. For $U\subset\C$ open, $u:U\to E$ is
+\emph{holomorphic} if $u'(s)=\lim_{h\to0}h^{-1}(u(s+h)-u(s))$ exists in $E$
+for every $s\in U$, the limit being over complex $h\ne0$. A differentiable
+map is continuous: $u(t+h)-u(t)=h\,\bigl(h^{-1}(u(t+h)-u(t))\bigr)\to0$, as a
+convergent sequence is bounded.
+
+\begin{lemma}\label{euclidean:lem:product-rule}
+  Let $B:E_1\times E_2\to F$ be a continuous bilinear map of Fr\'echet
+  spaces and let $u_i:U\to E_i$ be $\mathcal C^k$, $k\le\infty$
+  \textup{(}respectively holomorphic\textup{)}. Then $B(u_1,u_2)$ is
+  $\mathcal C^k$ \textup{(}respectively holomorphic\textup{)}, with
+  $\pa_{t_l}B(u_1,u_2)=B(\pa_{t_l}u_1,u_2)+B(u_1,\pa_{t_l}u_2)$. The same
+  holds for continuous linear maps $T:E\to F$ and $Tu$.
+\end{lemma}
+\begin{proof}
+  With $Q_hu=h^{-1}(u(t+h e)-u(t))$,
+  $Q_hB(u_1,u_2)=B(Q_hu_1,u_2(t+he))+B(u_1(t),Q_hu_2)$. As $h\to0$,
+  $Q_hu_i$ converges and $u_2(t+he)\to u_2(t)$, so by joint continuity of $B$
+  the right side converges to $B(\pa u_1,u_2)+B(u_1,\pa u_2)$. This
+  expression is continuous in $t$, and the higher derivatives follow by
+  induction. The holomorphic case is the same with complex $h$.
+\end{proof}
+
+\begin{lemma}\label{euclidean:lem:smooth-symbols}
+  Let $U\subset\R^k$ be open \textup{(}or an interval\textup{)}, $m\in\R$,
+  and let $a\in\CI(U\times\R^p\times\R^n)$ satisfy, for every compact
+  $K\subset U$ and all $\gamma,\alpha,\beta$,
+  \begin{equation}\label{euclidean:eq:smooth-symbol-est}
+    \sup_{t\in K}\abs{D^\gamma_tD^\alpha_zD^\beta_\xi a(t,z,\xi)}\le
+    C_{K,\gamma\alpha\beta}\ang\xi^{m-\abs\beta}.
+  \end{equation}
+  Then $t\mapsto a(t,\cdot)$ lies in $\CI(U;S^m(\R^p;\R^n))$, its
+  derivatives being the pointwise derivatives $\pa^\gamma_ta$. Conversely,
+  every element of $\CI(U;S^m(\R^p;\R^n))$ is of this form.
+\end{lemma}
+\begin{proof}
+  Fix $t\in U$, $l$, and a compact neighbourhood $K$ of $t$ which is convex
+  (or a convex neighbourhood relative to the interval). For small $h$, by Taylor's formula in $t_l$,
+  \begin{equation*}
+    h^{-1}\bigl(a(t+he_l)-a(t)\bigr)-\pa_{t_l}a(t)
+    =h\int_0^1(1-\sigma)\,\pa_{t_l}^2a(t+\sigma he_l)\,d\sigma,
+  \end{equation*}
+  and applying $D^\alpha_zD^\beta_\xi$ under the integral and using
+  \eqref{euclidean:eq:smooth-symbol-est} shows that the $S^m$-norms of the left side
+  are $O(\abs h)$. Similarly
+  $\norm{\pa_{t_l}a(t+h)-\pa_{t_l}a(t)}_{N,m}=O(\abs h)$, so
+  $t\mapsto a(t)$ is $\mathcal C^1$ with derivative $\pa_{t_l}a$. Since
+  $\pa_{t_l}a$ again satisfies \eqref{euclidean:eq:smooth-symbol-est}, induction gives
+  smoothness.
+
+  Conversely, if $t\mapsto a(t)\in S^m$ is $\CI$, then, since evaluation of
+  $D^\alpha_zD^\beta_\xi$ at a point is a continuous linear functional on
+  $S^m$, all functions $D^\alpha_zD^\beta_\xi\pa^\gamma_ta$ exist and are given by
+  $D^\alpha_zD^\beta_\xi(\pa_t^\gamma a(t))$. They are jointly continuous: for
+  instance
+  $\abs{F(t,z,\xi)-F(t',z,\xi)}\le\norm{\pa_t^\gamma a(t)-\pa^\gamma_ta(t')}_{N,m}\ang\xi^{m}$
+  for $F=D^\alpha_zD^\beta_\xi\pa^\gamma_ta$, $N\ge\abs\alpha+\abs\beta$. Hence
+  $a\in\CI(U\times\R^p\times\R^n)$, and
+  \eqref{euclidean:eq:smooth-symbol-est} holds because the continuous image
+  $\{\pa^\gamma_ta(t);t\in K\}$ of a compact set is bounded in $S^m$.
+\end{proof}
+
+\begin{lemma}\label{euclidean:lem:holomorphic-symbols}
+  Let $U\subset\C$ be open, $m\in\R$, and let
+  $a\in\CI(U\times\R^p\times\R^n)$ be holomorphic in $s\in U$ for each fixed
+  $(z,\xi)$, and satisfy
+  \begin{equation*}
+    \sup_{s\in K}\abs{D^\alpha_zD^\beta_\xi a(s,z,\xi)}\le
+    C_{K,\alpha\beta}\ang\xi^{m-\abs\beta}
+  \end{equation*}
+  for every compact $K\subset U$ and all $\alpha,\beta$. Then
+  $s\mapsto a(s,\cdot)$ is a holomorphic map $U\to S^m(\R^p;\R^n)$.
+  Conversely, if $s\mapsto a(s)\in S^m$ is holomorphic then $a(s,z,\xi)$ is
+  holomorphic in $s$ and satisfies these estimates.
+\end{lemma}
+\begin{proof}
+  Since $a$ is smooth, $\bar\pa_s$ commutes with $D^\alpha_zD^\beta_\xi$, so
+  $D^\alpha_zD^\beta_\xi a$ is holomorphic in $s$. Fix $s_0$ and $r>0$ with
+  $\{\abs{s-s_0}\le2r\}\subset U$, and let $\abs{s-s_0}<r$,
+  $0<\abs h<r/2$. Cauchy's integral formula over $\abs{t-s_0}=2r$ gives
+  \begin{equation*}
+    \frac{a(s+h)-a(s)}h-\pa_sa(s)=\frac h{2\pi i}\oint_{\abs{t-s_0}=2r}
+    \frac{a(t)\,dt}{(t-s-h)(t-s)^2},
+  \end{equation*}
+  pointwise in $(z,\xi)$, and the same with $D^\alpha_zD^\beta_\xi a$ in place of
+  $a$. Since $\abs{t-s-h}\ge r/2$ and $\abs{t-s}\ge r$ on the contour, the
+  $\norm\cdot_{N,m}$-norm of the left side is at most
+  $8r^{-2}\abs h\sup_{\abs{t-s_0}=2r}\norm{a(t)}_{N,m}$, and similarly
+  $\pa_sa(s)=\frac1{2\pi i}\oint a(t)(t-s)^{-2}dt$ is bounded in $S^m$. Hence
+  the difference quotients converge in $S^m$. The converse follows as in
+  \cref{euclidean:lem:smooth-symbols}: evaluation at a point is continuous,
+  and continuous images of compact sets are bounded.
+\end{proof}
+
+\subsection{Families of fixed order}
+
+\begin{definition}\label{euclidean:def:smooth-family}
+  Let $m\in\R$ and $U$ be as above. A map $U\ni t\mapsto A(t)\in\Psido m(\R^n)$
+  is a \emph{smooth} \textup{(}respectively, for $U\subset\C$,
+  \emph{holomorphic}\textup{)} \emph{family} if $t\mapsto\sigma_L(A(t))$ is a
+  smooth \textup{(}respectively holomorphic\textup{)} map into
+  $S^m(\R^n;\R^n)$; for $m\in\C$, a smooth or holomorphic family in
+  $\Psido m_{\mathrm{ph}}(\R^n)$ is defined in the same way using
+  $\Symph m(\R^n;\R^n)$.
+\end{definition}
+
+By \cref{euclidean:lem:smooth-symbols}, $A(t)$ is a smooth family in
+$\Psido m(\R^n)$ if and only if its left symbol is a smooth function of
+$(t,x,\xi)$ satisfying the symbol estimates of order $m$, together with all
+its $t$-derivatives, locally uniformly in $t$. Similarly
+\cref{euclidean:lem:holomorphic-symbols} characterizes holomorphic families.
+
+\begin{proposition}\label{euclidean:prop:smooth-families}
+  Let $U$ be as above.
+  \begin{enumerate}[label=\textup{(\roman*)}]
+  \item If $a\in\CI(U;\Amp mw(\R^n))$ \textup{(}respectively holomorphic\textup{)},
+    then $\Op(a(t))$ is a smooth \textup{(}respectively holomorphic\textup{)}
+    family in $\Psido m(\R^n)$.
+  \item If $A(t)$ and $B(t)$ are smooth families in $\Psido m(\R^n)$ and
+    $\Psido{m'}(\R^n)$, then $A(t)B(t)$ and $A(t)^*$ are smooth families, and
+    $t\mapsto A(t)u$ is smooth from $U$ to $\cS(\R^n)$ for each
+    $u\in\cS(\R^n)$. If $A(s)$ and $B(s)$ are holomorphic families, so is
+    $A(s)B(s)$. The same holds for polyhomogeneous families of fixed complex
+    orders.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  (i) follows from \cref{euclidean:prop:reduction-continuous} and
+  \cref{euclidean:lem:product-rule} (for the continuous linear map
+  $a\mapsto\sigma_L(\Op(a))$). (ii) follows from
+  \cref{euclidean:prop:continuity}, the continuity of
+  $\Psido m\times\cS\to\cS$, and \cref{euclidean:lem:product-rule}; the
+  adjoint is conjugate-linear, which does not affect real derivatives.
+\end{proof}
+
+In particular, for $A\in\Psido m(\R^n)$ the family $A(t)=A$ is trivially
+smooth, so $t\mapsto B(t)A$ is smooth whenever $B(t)$ is. Note that
+$s\mapsto A(s)^*$ is \emph{anti}-holomorphic if $A(s)$ is holomorphic; the
+family $A(\bar s)^*$ is holomorphic.
+
+\subsection{Holomorphic families of variable order}
+
+Let $U\subset\C$ be open and $f:U\to\C$ holomorphic. We wish to consider
+families $A(s)\in\Psido{f(s)}_{\mathrm{ph}}(\R^n)$. These do not lie in a
+fixed space, so we normalize the order by the elliptic family
+$\ang\xi^{f(s)}$.
+
+\begin{definition}\label{euclidean:def:hol-family}
+  For $f:U\to\C$ holomorphic, $\Psido f_{\mathrm{hol}}(\R^n)$ denotes the
+  space of families $(A(s))_{s\in U}$ of operators of the form
+  \begin{equation*}
+    A(s)=\Op\bigl(\ang\xi^{f(s)}b(s)\bigr),\qquad
+    b:U\to\Symph0(\R^n;\R^n)\ \text{holomorphic}.
+  \end{equation*}
+\end{definition}
+
+Thus $A(s)\in\Psido{f(s)}_{\mathrm{ph}}(\R^n)$ for each $s$, by
+\cref{euclidean:lem:ph-complex}(ii), and $b(s)=\ang\xi^{-f(s)}\sigma_L(A(s))$ is
+determined by $A$. Since $\ang\xi^{f(s)}$ does not depend on $x$,
+\eqref{euclidean:eq:left-quant} gives the exact factorization
+$A(s)=\Op(b(s))\,\ang D^{f(s)}$. For example $\ang D^{s}\in\Psido s_{\mathrm{hol}}(\R^n)$,
+$U=\C$, and if $f\equiv m$ is constant then, by
+\cref{euclidean:lem:ph-frechet}(iii), $\Psido m_{\mathrm{hol}}(\R^n)$ is just the
+space of holomorphic families in $\Psido m_{\mathrm{ph}}(\R^n)$. (The
+subscript ``ph'' is dropped from the notation, as the definition makes
+little sense without polyhomogeneity.)
+
+\begin{lemma}\label{euclidean:lem:japanese-holomorphic}
+  Let $f:U\to\C$ be holomorphic.
+  \begin{enumerate}[label=\textup{(\roman*)}]
+  \item For $s_0\in U$ and $\eps>0$ there is a neighbourhood $V$ of $s_0$
+    such that $s\mapsto\ang\xi^{f(s)}$ is holomorphic from $V$ to
+    $S^{\Re f(s_0)+\eps}(\R^n)$.
+  \item For every $\mu\in\N_0^n$ there are $q_{\mu,k}\in\Symph{-\abs\mu}(\R^n)$,
+    $0\le k\le\abs\mu$, such that
+    $\ang\xi^{-w}D^\mu_\xi\ang\xi^{w}=\sum_{k\le\abs\mu}w^kq_{\mu,k}(\xi)$ for all
+    $w\in\C$.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  (ii) The induction in the proof of \cref{euclidean:lem:symbol-basic}(i) is
+  valid for complex exponents: $D^\mu_\xi\ang\xi^w=\ang\xi^{w-2\abs\mu}P_\mu(w,\xi)$,
+  where $P_\mu$ is a polynomial of degree at most $\abs\mu$ in $\xi$ and in
+  $w$, since
+  $D_{\xi_j}(\ang\xi^{t}P)=\ang\xi^{t-2}\bigl(-it\xi_jP+\ang\xi^2D_{\xi_j}P\bigr)$
+  with $t=w-2\abs\mu$. Writing $P_\mu(w,\xi)=\sum_kw^kp_{\mu,k}(\xi)$, the
+  function $q_{\mu,k}=\ang\xi^{-2\abs\mu}p_{\mu,k}$ lies in
+  $\Symph{-2\abs\mu}\cdot\Symph{\abs\mu}\subset\Symph{-\abs\mu}$ by
+  \cref{euclidean:lem:ph-complex}.
+
+  (i) The function $\ang\xi^{f(s)}=\exp(f(s)\log\ang\xi)$ is smooth in
+  $(s,\xi)$ and holomorphic in $s$, and by (ii),
+  $\abs{D^\beta_\xi\ang\xi^{f(s)}}\le C_\beta(1+\abs{f(s)})^{\abs\beta}\ang\xi^{\Re f(s)-\abs\beta}$.
+  Let $V$ be an open disc about $s_0$, with closure in $U$, on which
+  $\abs{\Re f(s)-\Re f(s_0)}<\eps$. Then the estimates of
+  \cref{euclidean:lem:holomorphic-symbols} hold on $V$ with order
+  $\Re f(s_0)+\eps$.
+\end{proof}
+
+\begin{proposition}\label{euclidean:prop:hol-composition}
+  Let $f,g:U\to\C$ be holomorphic. If $A\in\Psido f_{\mathrm{hol}}(\R^n)$
+  and $B\in\Psido g_{\mathrm{hol}}(\R^n)$, then the family $A(s)B(s)$ lies in
+  $\Psido{f+g}_{\mathrm{hol}}(\R^n)$.
+\end{proposition}
+\begin{proof}
+  Write $\sigma_L(A(s))=\ang\xi^{f(s)}a(s)$ and
+  $\sigma_L(B(s))=\ang\xi^{g(s)}b(s)$ with $a,b:U\to\Symph0(\R^n;\R^n)$
+  holomorphic, and set
+  \begin{equation*}
+    c(s)=\ang\xi^{-f(s)-g(s)}\sigma_L\bigl(A(s)B(s)\bigr).
+  \end{equation*}
+  We must show that $c:U\to\Symph0(\R^n;\R^n)$ is holomorphic; this is a
+  local property, so fix $s_0\in U$. By
+  \cref{euclidean:lem:japanese-holomorphic}(i), with $\eps=\frac18$, there is
+  a neighbourhood $V$ of $s_0$ on which $\ang\xi^{f(s)}$, $\ang\xi^{g(s)}$ and
+  $\ang\xi^{-f(s)-g(s)}$ are holomorphic into $S^{\mu}$, $S^{\mu'}$ and
+  $S^{-\mu-\mu'+3\eps}$, where $\mu=\Re f(s_0)+\eps$, $\mu'=\Re g(s_0)+\eps$.
+  Since $\Symph0\hookrightarrow S^0$ is continuous and multiplication of
+  symbols is continuous, \cref{euclidean:lem:product-rule} shows that
+  $p(s)=\ang\xi^{f(s)}a(s)$ and $q(s)=\ang\xi^{g(s)}b(s)$ are holomorphic from
+  $V$ into $S^{\mu}(\R^n;\R^n)$ and $S^{\mu'}(\R^n;\R^n)$.
+
+  For $N\in\N_0$, with $r_N$ as in \cref{euclidean:cor:remainder-continuous},
+  \begin{equation*}
+    \sigma_L\bigl(A(s)B(s)\bigr)=\sum_{\abs\alpha<N}\frac{i^{\abs\alpha}}{\alpha!}
+    D^\alpha_\xi p(s)\,D^\alpha_xq(s)+r_N\bigl(p(s),q(s)\bigr).
+  \end{equation*}
+  By Leibniz' formula,
+  $\ang\xi^{-f-g}D^\alpha_\xi p\,D^\alpha_xq=\sum_{\nu\le\alpha}\binom\alpha\nu
+  \bigl(\ang\xi^{-f}D^\nu_\xi\ang\xi^{f}\bigr)D^{\alpha-\nu}_\xi a\,D^\alpha_xb$, so
+  \begin{gather*}
+    c(s)=\sum_{\abs\alpha<N}c_\alpha(s)+\ang\xi^{-f(s)-g(s)}r_N\bigl(p(s),q(s)\bigr),\\
+    c_\alpha(s)=\frac{i^{\abs\alpha}}{\alpha!}\sum_{\nu\le\alpha}\binom\alpha\nu
+    \Bigl(\sum_{k\le\abs\nu}f(s)^kq_{\nu,k}\Bigr)D^{\alpha-\nu}_\xi a(s)\,D^\alpha_xb(s),
+  \end{gather*}
+  with $q_{\nu,k}$ as in \cref{euclidean:lem:japanese-holomorphic}(ii). By
+  \cref{euclidean:lem:ph-frechet}(iii) and \cref{euclidean:lem:product-rule},
+  each $c_\alpha$ is holomorphic from $U$ into $\Symph{-\abs\alpha}(\R^n;\R^n)$.
+  By \cref{euclidean:cor:remainder-continuous} and
+  \cref{euclidean:lem:product-rule}, the last term is holomorphic from $V$
+  into $S^{-N+3\eps}\subset S^{-N+\frac12}$. In particular, for each $s\in V$,
+  $c(s)-\sum_{\abs\alpha<N}c_\alpha(s)\in S^{-N+\frac12}$ for every $N$, so
+  $c(s)\sim\sum_l\bigl(\sum_{\abs\alpha=l}c_\alpha(s)\bigr)$, and by
+  \cref{euclidean:lem:ph-complex}(i) and
+  \cref{euclidean:lem:asymptotic-manip}(iii), $c(s)\in\Symph0$ with
+  normalized terms
+  $c(s)_{(-j)}=\sum_{\abs\alpha\le j}c_\alpha(s)_{(-j)}$, where
+  $c_\alpha(s)_{(-j)}$ is the normalized term of degree $-j$ of
+  $c_\alpha(s)\in\Symph{-\abs\alpha}$.
+
+  It remains to check holomorphy in the topology of
+  \cref{euclidean:def:ph-topology}. If each of the maps $s\mapsto c(s)\in S^0$,
+  $s\mapsto c(s)_{(-j)}\in S^{-j}$ and
+  $s\mapsto c(s)-\sum_{j\le k}c(s)_{(-j)}\in S^{-k-1}$ is holomorphic on $V$,
+  then the difference quotients of $c$ are Cauchy in every norm of
+  $\Symph0$, hence converge since $\Symph0$ is complete
+  (\cref{euclidean:lem:ph-frechet}(ii)), and $c$ is holomorphic on $V$. Now:
+  \begin{itemize}
+  \item $c=c_0+\ang\xi^{-f-g}r_1(p,q)$ is holomorphic into $S^0$, as $c_0$
+    is holomorphic into $\Symph0\hookrightarrow S^0$ and the second term into
+    $S^{-1/2}\subset S^0$;
+  \item $c_{(-j)}=\sum_{\abs\alpha\le j}(c_\alpha)_{(-j)}$ is holomorphic into
+    $S^{-j}$ by \cref{euclidean:lem:ph-frechet}(i);
+  \item with $N=k+2$,
+    \begin{equation*}
+      c-\sum_{j\le k}c_{(-j)}=\ang\xi^{-f-g}r_N(p,q)
+      +\sum_{\abs\alpha\le k}\Bigl(c_\alpha-\sum_{j=\abs\alpha}^{k}(c_\alpha)_{(-j)}\Bigr)
+      +\sum_{\abs\alpha=k+1}c_\alpha,
+    \end{equation*}
+    where the first term is holomorphic into $S^{-k-3/2}$, the second into
+    $S^{-k-1}$ by the definition of the topology of $\Symph{-\abs\alpha}$, and
+    the third into $\Symph{-k-1}\hookrightarrow S^{-k-1}$.
+  \end{itemize}
+  Hence $c$ is holomorphic into $\Symph0(\R^n;\R^n)$, and
+  $A(s)B(s)=\Op(\ang\xi^{f(s)+g(s)}c(s))\in\Psido{f+g}_{\mathrm{hol}}(\R^n)$.
+\end{proof}
+
+These families do not have very interesting global examples on $\R^n$
+beyond $\ang D^{s}$ and its products with fixed operators; on a compact
+manifold, however, the complex powers $A^s$ of a positive self-adjoint
+elliptic operator $A$ of order one form a holomorphic family of order $s$,
+by Seeley's theorem \cite{Seeley}, and this is the starting point of the
+theory of $\zeta$-functions and regularized determinants
+(\cref{ch:determinants}).
 
 % ======================================================================
 \section{Affine invariance}\label{euclidean:sec:invariance}
@@ -1746,10 +2418,118 @@ $\sigma_L(A_T)(x,\xi)=\sigma_L(A)(x+c,\xi)$, and for a linear map there is no
 Jacobian factor in \eqref{euclidean:eq:affine-symbol}. This invariance means
 that the spaces $\Psido m(V)$ and $\Psido m_{\mathrm{ph}}(V)$ of operators on
 $\cS(V)$ are well defined for any finite-dimensional real vector space (or
-affine space) $V$, with symbols defined on $V\times V^*$. Invariance under
-general changes of coordinates, which is needed to define pseudodifferential
-operators on manifolds, is considerably more subtle and is discussed in
-\cref{ch:microlocal,ch:manifolds}.
+affine space) $V$, with symbols defined on $V\times V^*$. Since $A\mapsto A_T$
+is linear and maps symbols continuously, it is an isomorphism of the
+Fr\'echet spaces $\Psido m(\R^n)$ and $\Psido m_{\mathrm{ph}}(\R^n)$.
+Invariance under general changes of coordinates, which is needed to define
+pseudodifferential operators on manifolds, is more subtle; it is the subject
+of the next section.
+
+% ======================================================================
+\section{Local coordinate invariance}\label{euclidean:sec:coordinates}
+
+To transfer pseudodifferential operators to manifolds one needs invariance
+not only under affine maps but under diffeomorphisms $F:\Omega\to\Omega'$
+between open subsets of $\R^n$. For this to make sense we consider operators
+on $\R^n$ which only ``see'' $\Omega'$:
+\begin{equation*}
+  \Psido m_{\mathrm c}(\Omega')=\bigl\{A\in\Psido m(\R^n);\ \supp K_A
+  \text{ is a compact subset of }\Omega'\times\Omega'\bigr\},\qquad m\in\R\cup\{-\infty\},
+\end{equation*}
+and similarly $\Psido m_{\mathrm{ph,c}}(\Omega')$, $m\in\C$. There are plenty
+of such operators: if $\phi,\psi\in\CIc(\Omega')$ and $B\in\Psido m(\R^n)$
+then $\phi B\psi=\Op(\phi(x)\psi(y)\sigma_L(B))\in\Psido m_{\mathrm c}(\Omega')$.
+Moreover every symbol $a\in S^m(\R^n;\R^n)$ with $\supp a\subset K\times\R^n$,
+$K\subset\Omega'$ compact, is the left symbol of an element of
+$\Psido m_{\mathrm c}(\Omega')$ modulo $S^{-\infty}$: choose
+$\phi_1,\phi\in\CIc(\Omega')$ with $\phi_1=1$ near $K$ and $\phi=1$ near
+$\supp\phi_1$. Then $\Op(a)=\phi_1\Op(a)$, so by
+\cref{euclidean:lem:off-diagonal-cutoff}
+\begin{equation*}
+  \Op(a)-\phi\Op(a)\phi=\Op(a)(1-\phi)=\phi_1\Op(a)(1-\phi)\in\Psido{-\infty}(\R^n),
+\end{equation*}
+using $\phi\phi_1=\phi_1$.
+
+Let $F:\Omega\to\Omega'$ be a diffeomorphism with inverse $G$, and
+$A\in\Psido m_{\mathrm c}(\Omega')$. Choose $\phi\in\CIc(\Omega')$ equal to
+$1$ near the projection of $\supp K_A$ onto the second factor, and define
+for $u\in\cS(\R^n)$
+\begin{equation*}
+  A_Fu=F^*\bigl(A(\phi\,G^*(u|_\Omega))\bigr),
+\end{equation*}
+extended by zero outside $\Omega$; here $G^*v=v\circ G$ and the argument of
+$A$ lies in $\CIc(\Omega')$, while $A$ maps it to a function with compact
+support in $\Omega'$, so that $F^*$ of it lies in $\CIc(\Omega)$. The result does not depend on $\phi$,
+and by the change of variables $y'=F(y)$ the kernel of $A_F$ is
+\begin{equation*}
+  K_{A_F}(x,y)=K_A\bigl(F(x),F(y)\bigr)\,\abs{\det DF(y)},
+\end{equation*}
+extended by zero, which has compact support in $\Omega\times\Omega$. For a
+linear map this is the operator $A_T$ of \cref{euclidean:sec:invariance}.
+
+\begin{proposition}\label{euclidean:prop:coordinates}
+  If $F:\Omega\to\Omega'$ is a diffeomorphism of open subsets of $\R^n$,
+  then $A\mapsto A_F$ is a linear isomorphism
+  $\Psido m_{\mathrm c}(\Omega')\to\Psido m_{\mathrm c}(\Omega)$, with inverse
+  $B\mapsto B_G$, $G=F^{-1}$, and the same holds for
+  $\Psido m_{\mathrm{ph,c}}$. The principal symbols are related by
+  \begin{equation*}
+    \sigma_L(A_F)(x,\xi)-\sigma_L(A)\bigl(F(x),(DF(x)^t)^{-1}\xi\bigr)\in S^{m-1}(\R^n;\R^n),
+  \end{equation*}
+  where the second term is extended by zero for $x\notin\Omega$ \textup{(}it
+  vanishes for $x$ outside a compact subset of $\Omega$\textup{)}.
+\end{proposition}
+\begin{proof}[Sketch of proof]
+  A complete proof, which also gives the transformation law for the
+  essential support, is given in the coordinate invariance theorem of
+  \cref{ch:microlocal} (with the roles of $F$ and $G$ interchanged); we
+  indicate the main steps. Let $a=\sigma_L(A)$, $K\subset\Omega'$ compact
+  with $\supp K_A\subset K\times K$, and $\psi\in\CIc(\Omega')$ equal to $1$
+  near $K$, so that $A=\Op(b)$ with $b(x',y',\xi')=\psi(x')\psi(y')a(x',\xi')$.
+  Choose $\mu\in\CIc(\R^n)$ equal to $1$ near $0$, with small support, and
+  split $A=A_1+A_2$ where $K_{A_1}=\mu(x'-y')K_A$. By
+  \cref{euclidean:lem:off-diagonal-cutoff} (applied with a partition of unity
+  on $\supp\psi$), or directly from the proof of that lemma, $K_{A_2}$ is
+  smooth with compact support, so $K_{(A_2)_F}$ is smooth with compact support
+  in $\Omega\times\Omega$ and $(A_2)_F\in\Psido{-\infty}(\R^n)$ by
+  \cref{euclidean:prop:residual}.
+
+  For $A_1$, write $F(x)-F(y)=T(x,y)(x-y)$ with
+  $T(x,y)=\int_0^1DF(y+t(x-y))\,dt$; if $\supp\mu$ is small enough, the
+  kernel of $(A_1)_F$ is supported where $x,y$ lie in a fixed compact subset
+  of $\Omega$ and $\abs{x-y}$ is so small that the segment $[x,y]$ lies in
+  $\Omega$ and $T(x,y)$ is invertible, with $\abs{\det T}$ and $\norm{T^{-1}}$
+  bounded. Since $(F(x)-F(y))\cdot\xi'=(x-y)\cdot T(x,y)^t\xi'$, the
+  substitution $\xi=T(x,y)^t\xi'$ (first for residual $b$, then in general by
+  approximation, \cref{euclidean:prop:osc-int}(ii)) gives
+  $K_{(A_1)_F}=I(c)$ with
+  \begin{equation*}
+    c(x,y,\xi)=\mu\bigl(F(x)-F(y)\bigr)\,b\bigl(F(x),F(y),(T(x,y)^t)^{-1}\xi\bigr)
+    \frac{\abs{\det DF(y)}}{\abs{\det T(x,y)}}.
+  \end{equation*}
+  By the chain rule, $D^\alpha_xD^\beta_yD^\gamma_\xi$ of
+  $b(F(x),F(y),S(x,y)\xi)$, $S=(T^t)^{-1}$, is a finite sum of terms
+  $M(x,y)\xi^\nu(D^{\alpha'}_{x'}D^{\beta'}_{y'}D^{\kappa}_{\xi'}b)(F(x),F(y),S\xi)$
+  with smooth bounded coefficients and $\abs\nu\le\abs\kappa-\abs\gamma$:
+  each $\xi$-derivative produces one $\xi'$-derivative of $b$, and an $x$- or
+  $y$-derivative falling on $S\xi$ produces one $\xi'$-derivative and at most
+  one factor of $\xi$. As $\ang{S\xi}$ is comparable to $\ang\xi$ on the
+  support, each term is $O(\ang\xi^{\abs\nu+m-\abs\kappa})=O(\ang\xi^{m-\abs\gamma})$,
+  so $c\in S^m(\R^{2n};\R^n)=\Amp m0(\R^n)$ and $(A_1)_F\in\Psido m(\R^n)$. If
+  $a$ is polyhomogeneous, so is $c$, since $\xi\mapsto S(x,y)\xi$ is linear
+  and $\abs{S\xi}\ge1$ for $\abs\xi\ge R$, uniformly on the support (compare
+  the proof of \cref{euclidean:prop:affine}). Finally, by
+  \cref{euclidean:thm:reduction} $\sigma_L(A_F)\equiv c(x,x,\xi)$ modulo
+  $S^{m-1}$, and since $T(x,x)=DF(x)$ and $\psi a=a$,
+  $c(x,x,\xi)=a(F(x),(DF(x)^t)^{-1}\xi)$. The kernel formula shows that
+  $(A_F)_G=A$.
+\end{proof}
+
+Thus, after cutting off to compact sets, the principal symbol transforms as
+a function on the cotangent bundle: $(x,\xi)\mapsto(F(x),(DF(x)^t)^{-1}\xi)$
+is the inverse of the cotangent map of $F$. This is the basis of the
+definition of pseudodifferential operators on manifolds in
+\cref{ch:manifolds}.
 
 % ======================================================================
 \section{Exercises}\label{euclidean:sec:exercises}
@@ -1829,10 +2609,61 @@ operators on manifolds, is considerably more subtle and is discussed in
 \end{exercise}
 
 \begin{exercise}\label{euclidean:ex:ph-complete}
-  Show that $\Symph m(\R^p;\R^n)$ is complete with respect to the norms
-  introduced at the end of \cref{euclidean:sec:polyhomogeneous}, that it is
-  not closed in $S^m(\R^p;\R^n)$, and that its closure in $S^m(\R^p;\R^n)$
-  contains $S^{m'}(\R^p;\R^n)$ for every $m'<m$.
+  Show that the topology of $\Symph m(\R^p;\R^n)$ in
+  \cref{euclidean:def:ph-topology} does not depend on the choice of the
+  cut-off $\rho$. \emph{Hint:} if $\rho'$ is another choice, the
+  corresponding normalized terms differ by $(\rho-\rho')$ times a homogeneous
+  function, which is supported in $\frac12\le\abs\xi\le1$; estimate its
+  residual norms by the norms of the term on $1\le\abs\xi\le2$.
+\end{exercise}
+
+\begin{exercise}\label{euclidean:ex:ph-not-dense}
+  Let $m\in\R$ and $n\ge1$. Show that
+  $a(\xi)=\ang\xi^m\cos(\log\ang\xi)\in S^m(\R^n)$, but that $a$ is not in
+  the closure of $\Symph m(\R^n)$ in $S^m(\R^n)$, so that $\Symph m$ is not
+  dense in $S^m$. \emph{Hint:} if $b\in\Symph m$ then $\ang{r\theta}^{-m}b(r\theta)$
+  converges as $r\to\infty$ for each $\theta\in\Sphere^{n-1}$, whereas
+  $\ang{r\theta}^{-m}a(r\theta)$ takes the values $\pm1$ for arbitrarily
+  large $r$. On the other hand, show that $\Symph m(\R^p;\R^n)$ is dense in
+  $S^m(\R^p;\R^n)$ for the topology of $S^{m'}(\R^p;\R^n)$, for every $m'>m$.
+\end{exercise}
+
+\begin{exercise}\label{euclidean:ex:hol-asymptotic}
+  (Asymptotic summation of holomorphic families.) Let $U\subset\C$ be open
+  and let $a_j:U\to\Symph{-j}(\R^p;\R^n)$ be holomorphic, $j\in\N_0$. Show
+  that there is a holomorphic $a:U\to\Symph0(\R^p;\R^n)$ such that
+  $a-\sum_{j<N}a_j$ is holomorphic from $U$ into $\Symph{-N}(\R^p;\R^n)$ for
+  every $N$. \emph{Hint:} follow the proof of \cref{euclidean:prop:borel}
+  with $\phi(\eps_j\xi)a_j(s)$, choosing $\eps_j$ so that the relevant norms
+  are at most $2^{-j}$ uniformly for $s$ in the $j$-th set of an exhaustion
+  of $U$ by compact sets; show that $\phi(\eps\xi)a_j(s)$ is again
+  holomorphic into $\Symph{-j}$, and that a locally uniform limit of
+  holomorphic maps into a Fr\'echet space is holomorphic (use the Cauchy
+  integral formula applied to continuous linear functionals, or the
+  difference-quotient formula in the proof of
+  \cref{euclidean:lem:holomorphic-symbols}).
+\end{exercise}
+
+\begin{exercise}\label{euclidean:ex:hol-adjoint}
+  Let $f:U\to\C$ be holomorphic and $A\in\Psido f_{\mathrm{hol}}(\R^n)$. Set
+  $U^*=\{\bar s;\ s\in U\}$ and $f^*(s)=\overline{f(\bar s)}$. Show that the
+  family $s\mapsto A(\bar s)^*$, $s\in U^*$, lies in
+  $\Psido{f^*}_{\mathrm{hol}}(\R^n)$. \emph{Hint:} adapt the proof of
+  \cref{euclidean:prop:hol-composition}, using
+  \eqref{euclidean:eq:adjoint-symbol}.
+\end{exercise}
+
+\begin{exercise}\label{euclidean:ex:smooth-parametrix}
+  Let $U\subset\R^k$ be open and let $A(t)$ be a smooth family in
+  $\Psido m(\R^n)$ which is \emph{locally uniformly elliptic}: for each
+  compact $K\subset U$ there are $\eps,C>0$ with
+  $\abs{\sigma_L(A(t))(x,\xi)}\ge\eps\ang\xi^m$ for $t\in K$, $\abs\xi\ge C$.
+  Show that there is a smooth family $B(t)$ in $\Psido{-m}(\R^n)$ such that
+  $A(t)B(t)-\Id$ and $B(t)A(t)-\Id$ are smooth families in
+  $\Psido{-\infty}(\R^n)$. \emph{Hint:} construct $B$ locally in $t$ as in
+  \cref{euclidean:thm:elliptic}, using \cref{euclidean:lem:smooth-symbols}
+  and a parameter-dependent version of \cref{euclidean:prop:borel}; then use
+  a partition of unity in $t$.
 \end{exercise}
 
 \begin{exercise}\label{euclidean:ex:rho-delta}
@@ -1909,7 +2740,24 @@ The residual characterization (\cref{euclidean:prop:residual}) takes into
 account that the weight of the amplitudes may depend on the order. The
 weighted Sobolev estimates use the weight $\ang x^{-q}\ang y^q$ as a
 multiplier of amplitudes, avoiding a case distinction. We have also added the
-commutator formula \eqref{euclidean:eq:commutator}. The treatment of
+commutator formula \eqref{euclidean:eq:commutator}.
+
+The material on complex orders, topologies, families and local coordinate
+invariance follows the revised version of these notes (\emph{From
+microlocal to global analysis}). There the continuity of the reduction map is
+argued by following the Taylor expansion and the asymptotic summation; we
+have instead derived all continuity statements from the closed graph
+theorem and the uniform boundedness principle for Fr\'echet spaces (see,
+e.g., W.~Rudin, \emph{Functional Analysis}, Chapter~2),
+which requires the completeness of the polyhomogeneous symbol spaces
+(\cref{euclidean:lem:ph-frechet}); for this we normalized the homogeneous
+terms by a fixed cut-off. The localization lemma
+\cref{euclidean:lem:off-diagonal-cutoff} is stated in the original with the
+roles of the two cut-offs interchanged, which is not correct. The original
+gives no proof of the composition law for holomorphic families of variable
+order (\cref{euclidean:prop:hol-composition}); the proof given here reduces
+it, via the remainder estimate of \cref{euclidean:cor:remainder-continuous},
+to holomorphy of finitely many explicit terms. The treatment of
 $L^2$ boundedness via an approximate square root is due to H\"ormander; for
 alternative treatments of the calculus see \cite{Hormander-III},
 \cite{Shubin} and \cite{Seeley}.

@@ -19,13 +19,22 @@ calculus, are discussed in some detail: they form an ideal of ``infinite
 matrices'' with a trace and a group of invertible elements, $\Gsm$, which is
 the starting point for the index theory of later chapters. The main
 applications here are the Hodge theorem for elliptic complexes, in particular
-for the de~Rham complex, and the existence of pseudodifferential projections
-onto prescribed subspaces. The facts about bounded operators on Hilbert space
+for the de~Rham complex (including its distributional form and the
+decomposition of the spectrum of the Laplacians into exact finite-dimensional
+complexes), and the construction of pseudodifferential projections: every
+smooth family of projections on the cosphere bundle is the principal symbol of
+a pseudodifferential projection, and a projection $P$ of this kind carries a
+\emph{Toeplitz algebra} $P\Psido{}P$ with its own symbol calculus and Fredholm
+theory, generalizing the Toeplitz operators on the circle used in
+\cref{ch:index}. Along the way we prove the commutator formula for principal
+symbols, an $L^2$ bound for operators of order zero in terms of the principal
+symbol alone, and the analytic Fredholm alternative for holomorphic families of
+smoothing operators. The facts about bounded operators on Hilbert space
 which are used are collected, with proofs, in \cref{ch:hilbert}.
 
 Throughout, unless explicitly stated otherwise, $X$ is a \emph{compact}
-manifold of dimension $n$; several definitions extend to the non-compact case
-with minor changes, which are indicated in remarks.
+manifold of dimension $n$; the changes needed for non-compact manifolds are
+described in \cref{manifolds:sec:noncompact}.
 
 \section{Smooth manifolds}\label{manifolds:sec:manifolds}
 
@@ -861,6 +870,78 @@ from \cref{manifolds:thm:composition},
 \sigma_{k+m}(PA)=\sigma_k(P)\sigma_m(A).
 \end{equation*}
 
+\subsection{The symbol calculus}
+We collect some consequences of the multiplicativity of the principal symbol
+which are used constantly. Recall that $T^*X$ carries the canonical
+one-form, given in local coordinates by $\sum_j\xi_j\,dx_j$; by
+\eqref{manifolds:eq:cotangent-change} this expression is independent of the
+coordinates. Its differential is the symplectic form
+$\omega=\sum_jd\xi_j\wedge dx_j$, and the \emph{Poisson bracket}
+\begin{equation*}
+\{a,b\}=\sum_{j=1}^n\Big(\frac{\pa a}{\pa\xi_j}\frac{\pa b}{\pa x_j}
+-\frac{\pa a}{\pa x_j}\frac{\pa b}{\pa\xi_j}\Big)=\Ham a b
+\end{equation*}
+of two functions on $T^*X$ is the derivative of $b$ along the Hamilton vector
+field $\Ham a$ of $a$, defined invariantly by $\omega(\cdot,\Ham a)=da$ (with the
+sign convention fixed by $\Ham{\xi_j}=\pa_{x_j}$). In particular the Poisson
+bracket does not depend on the coordinates used to compute it.
+
+\begin{proposition}\label{manifolds:prop:symbol-calculus}
+Let $A\in\Psido m(X;E,F)$.
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item If $\phi\in\CI(X)$ then $[\phi,A]=\phi A-A\phi\in\Psido{m-1}(X;E,F)$ and
+$\sigma_m(\phi A)=\sigma_m(A\phi)=\phi\,\sigma_m(A)$.
+\item If $\rho_i\in\CI(X)$ are finitely many real functions with
+$\sum_i\rho_i^2=1$ then $A-\sum_i\rho_iA\rho_i\in\Psido{m-1}(X;E,F)$.
+\item Let $A\in\Psido m(X;E)$ and $B\in\Psido{m'}(X;E)$ have scalar principal
+symbols, $\sigma_m(A)=[a]\Id_E$ and $\sigma_{m'}(B)=[b]\Id_E$, where
+$a\in S^m(T^*X)$ and $b\in S^{m'}(T^*X)$. Then $[A,B]\in\Psido{m+m'-1}(X;E)$ and
+\begin{equation*}
+\sigma_{m+m'-1}([A,B])=\frac1i\{a,b\}\Id_E .
+\end{equation*}
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+(a) Multiplication by $\phi$ is a differential operator of order zero with
+principal symbol $\phi$, so by the composition theorem $\sigma_m(\phi A)=\phi\sigma_m(A)=\sigma_m(A\phi)$;
+hence $\sigma_m([\phi,A])=0$ and $[\phi,A]\in\Psido{m-1}$ by
+\cref{manifolds:prop:principal-symbol}(a).
+
+(b) $A-\sum_i\rho_iA\rho_i=\sum_i\rho_i[\rho_i,A]$, which lies in $\Psido{m-1}$ by (a).
+
+(c) Since the principal symbols are scalar, they commute, so
+$\sigma_{m+m'}([A,B])=0$ and $[A,B]\in\Psido{m+m'-1}$. The class
+$\frac1i\{a,b\}\in S^{m+m'-1}/S^{m+m'-2}$ is independent of the representatives
+$a$, $b$, and by the remark above is invariantly defined on $T^*X$. Since
+$\sigma_{m+m'-1}$ is determined by its local expressions
+(\cref{manifolds:prop:principal-symbol}), it suffices to show that for a
+trivializing chart $\kappa:W\to\kappa(W)$ and $\psi\in\CIc(W)$ the local
+representative of $\psi[A,B]\psi$ has principal symbol $\psi^2\frac1i\{a,b\}$.
+Choose $\chi\in\CIc(W)$ equal to one near $\supp\psi$. As in the proof of
+\cref{manifolds:prop:principal-symbol}(b), $\psi AB\psi-\psi(\chi A\chi)(\chi
+B\chi)\psi=\psi A(1-\chi^2)B\psi$ is smoothing, and similarly with $A$ and $B$
+interchanged, so $\psi[A,B]\psi\equiv\psi[A_\chi,B_\chi]\psi$ modulo
+$\Psido{-\infty}$, with $A_\chi=\chi A\chi$, $B_\chi=\chi B\chi$. In the chart,
+the local representatives of $A_\chi$ and $B_\chi$ are matrices of elements of
+$\Psido m(\R^n)$ and $\Psido{m'}(\R^n)$ of the form
+$A_\chi=\Op(\chi^2a)\Id+A_1$, $B_\chi=\Op(\chi^2b)\Id+B_1$ with
+$A_1\in\Psido{m-1}$, $B_1\in\Psido{m'-1}$ (by the local exact sequence
+\ref{manifolds:E4}). Now $[\Op(\chi^2a)\Id,B_1]$ has vanishing principal symbol of
+order $m+m'-1$ because $\chi^2a\Id$ commutes with every matrix, so lies in
+$\Psido{m+m'-2}$; similarly for $[A_1,\Op(\chi^2b)\Id]$, and
+$[A_1,B_1]\in\Psido{m+m'-2}$. The remaining term has principal symbol
+$\frac1i\{\chi^2a,\chi^2b\}\Id$ by the commutator formula of
+\cref{ch:euclidean}, and $\psi^2\{\chi^2a,\chi^2b\}=\psi^2\{a,b\}$ since
+$\chi=1$ near $\supp\psi$. Finally, the coordinate changes act on $T^*W$ by the
+maps \eqref{manifolds:eq:cotangent-change}, which preserve $\sum_j\xi_jdx_j$ and
+hence the Poisson bracket, so the local expressions fit together.
+\end{proof}
+
+Part (c) has no analogue when $\sigma_{m'}(B)=b$ is a genuine matrix, even if
+$\sigma_m(A)$ is scalar: then the term $a_{m-1}$ of order $m-1$ in the local
+symbol of $A$, which is not invariantly defined, contributes $[a_{m-1},b]$ to
+the symbol of order $m+m'-1$ of $[A,B]$.
+
 \section{Ellipticity and parametrices}\label{manifolds:sec:elliptic}
 
 \begin{definition}\label{manifolds:def:elliptic}
@@ -944,6 +1025,119 @@ just the difference of the dimensions of the spaces; the index is a genuinely
 infinite-dimensional invariant. Its computation in terms of the principal symbol
 is the content of the Atiyah--Singer index theorem, the subject of
 \cref{ch:index} and the following chapters.
+
+\section{Non-compact manifolds and properly supported operators}\label{manifolds:sec:noncompact}
+In this section $X$ is an arbitrary (paracompact, not necessarily compact)
+manifold, and $E$, $F$, $G$ are vector bundles over it. The definition
+\begin{equation*}
+\Psido m(X;E,F)=\Ic m(X^2,\Diag;\Hom(E,F)\otimes\Omega_R)
+\end{equation*}
+makes sense without change, and so does the action
+\eqref{manifolds:eq:action} on \emph{compactly supported} sections: if
+$u\in\CIc(X;E)$ then $A\cdot\pi_R^*u$ has support in $X\times\supp u$, which meets
+each fibre of $\pi_L$ in a compact set, so fibre integration
+(\cref{manifolds:prop:pushforward}, applied after a locally finite partition of
+unity in the base) gives
+\begin{equation*}
+A:\CIc(X;E)\longrightarrow\CI(X;F).
+\end{equation*}
+\Cref{manifolds:thm:local} and its proof hold verbatim, with ``finite cover''
+replaced by ``locally finite cover''; for $X$ open in $\R^n$ this recovers the
+operators of \cref{ch:euclidean} with kernels conormal to the diagonal.
+Since $A$ need not map $\CIc$ into $\CIc$, and need not act on $\CI(X;E)$, two
+such operators cannot in general be composed. This is remedied by restricting
+the supports.
+
+\begin{definition}\label{manifolds:def:proper}
+An operator $A\in\Psido m(X;E,F)$ is \emph{properly supported} if both
+projections $\pi_L,\pi_R:\supp K_A\to X$ are proper maps, i.e.\ if
+$\supp K_A\cap(L\times X)$ and $\supp K_A\cap(X\times L)$ are compact for every
+compact $L\subset X$. We write $\Psido m_{\mathrm{p}}(X;E,F)$ for the space of
+these operators.
+\end{definition}
+
+If $A$ is properly supported then $\supp(Au)\subset\pi_L\big(\supp K_A\cap\pi_R^{-1}(\supp u)\big)$
+is compact for $u\in\CIc(X;E)$, so $A:\CIc(X;E)\to\CIc(X;F)$. Moreover $A$ acts on
+$\CI(X;E)$: for a relatively compact open set $U\subset X$ and $\chi\in\CIc(X)$
+equal to one on the compact set $\pi_R(\supp K_A\cap\pi_L^{-1}(\overline U))$,
+set $Au|_U=A(\chi u)|_U$, which is independent of $\chi$ and consistent on
+overlaps. The transpose and adjoint of a properly supported operator are
+properly supported, so by duality, as in
+\eqref{manifolds:eq:distributions-action}, $A$ acts on $\CmI(X;E)$ and on
+$\CmIc(X;E)$. When $X$ is compact every operator is properly supported.
+
+\begin{lemma}\label{manifolds:lem:proper}
+Every $A\in\Psido m(X;E,F)$ can be written $A=A_{\mathrm p}+R$ with $A_{\mathrm p}$
+properly supported and $R\in\CI(X^2;\Hom(E,F)\otimes\Omega_R)$ smoothing.
+Moreover $A_{\mathrm p}$ may be chosen with kernel supported in any given
+neighbourhood of the diagonal.
+\end{lemma}
+\begin{proof}
+Let $N$ be the given open neighbourhood of $\Diag$. Each point of $X$ has an open
+neighbourhood $U$ with $U\times U\subset N$. Since $X$ is paracompact (and
+metrizable), this cover has an open star refinement $\{V\}$: for each $V$ the union
+of all members of the refinement meeting $V$ lies in one of the sets $U$. Let
+$\{\phi_a\}$ be a partition of unity with each $\supp\phi_a$ compact and contained in
+some $V_a$, such that every compact set meets only finitely many of the supports.
+Then if $\supp\phi_a\cap\supp\phi_b\ne\emptyset$, both supports lie in the star of
+$V_a$, hence in some $U$, and $\supp\phi_a\times\supp\phi_b\subset U\times U\subset N$. Put
+\begin{equation*}
+\chi(x,y)=\sum_{(a,b):\ \supp\phi_a\cap\supp\phi_b\ne\emptyset}\phi_a(x)\phi_b(y).
+\end{equation*}
+The sum is locally finite, so $\chi\in\CI(X^2)$. If $L$ is compact, only finitely
+many $\phi_a$ are non-zero on $L$, and each of them is paired with finitely many
+$\phi_b$; so $\supp\chi\cap(L\times X)$ is contained in a finite union of the compact
+sets $\supp\phi_a\times\supp\phi_b$, and similarly for $X\times L$: $\chi$ has proper
+support. The set
+$C=\bigcup\{\supp\phi_a\times\supp\phi_b;\ \supp\phi_a\cap\supp\phi_b=\emptyset\}$ is a
+locally finite union of closed sets, hence closed, and disjoint from the
+diagonal; on the open neighbourhood $X^2\setminus C$ of the diagonal,
+$\chi(x,y)=\sum_{a,b}\phi_a(x)\phi_b(y)=1$. Set $A_{\mathrm p}=\chi K_A$ and
+$R=(1-\chi)K_A$; the latter vanishes near the diagonal, so is smooth, and
+$\supp K_{A_{\mathrm p}}\subset\supp\chi\subset N$ by the choice of the partition.
+\end{proof}
+
+\begin{proposition}\label{manifolds:prop:proper-calculus}
+The properly supported operators form a filtered algebra:
+\begin{equation*}
+\Psido m_{\mathrm p}(X;F,G)\circ\Psido{m'}_{\mathrm p}(X;E,F)\subset\Psido{m+m'}_{\mathrm p}(X;E,G),
+\end{equation*}
+the principal symbol is defined, with values in $S^{m-[1]}(T^*X;\hom(E,F))$ (symbol
+estimates uniform on compact subsets of $X$), is multiplicative and gives the
+exact sequence of \cref{manifolds:prop:principal-symbol}(a), and asymptotic sums
+exist. If $A\in\Psido m_{\mathrm p}(X;E,F)$ is elliptic, it has a properly supported
+parametrix $B\in\Psido{-m}_{\mathrm p}(X;F,E)$, with $AB-\Id$ and $BA-\Id$ smoothing,
+and $u\in\CmI(X;E)$, $Au\in\CI(X;F)$ imply $u\in\CI(X;E)$.
+\end{proposition}
+\begin{proof}
+The support of the kernel of $AB$ is contained in the composite relation
+\begin{equation*}
+\{(x,z);\ (x,y)\in\supp K_A\text{ and }(y,z)\in\supp K_B\text{ for some }y\},
+\end{equation*}
+which has proper projections. To see that $AB\in\Psido{m+m'}$, a local property, let
+$\phi,\psi\in\CIc(X)$ and $\chi\in\CIc(X)$ be equal to one on
+$\pi_R(\supp K_A\cap\pi_L^{-1}(\supp\phi))$. Then $\phi A(1-\chi)=0$ and
+$\phi AB\psi=(\phi A\chi)(\chi B\psi)$ is a product of operators with compactly
+supported kernels. The proofs of \cref{manifolds:thm:composition} and
+\cref{manifolds:prop:principal-symbol} only use finitely many charts covering the
+supports of the kernels, so apply to such operators, and give the composition and
+symbol properties. The quantization map \eqref{manifolds:eq:quantization}, now a
+locally finite sum over a locally finite cover by charts, takes values in properly
+supported operators. Asymptotic sums are constructed as in
+\cref{manifolds:prop:asymptotic}, applying \ref{manifolds:E5} in each chart of a
+locally finite cover and multiplying the result by the cutoff $\chi$ of
+\cref{manifolds:lem:proper}. With these ingredients the proof of
+\cref{manifolds:thm:parametrix} goes through unchanged (all operators being
+properly supported, so that all composites are defined), and elliptic regularity
+follows as in \cref{manifolds:cor:regularity}.
+\end{proof}
+
+Local Sobolev spaces $\Hs s_{\mathrm{loc}}(X;E)=\{u\in\CmI;\ \phi u\in\Hs s\ \forall\phi\in\CIc(X)\}$
+and $\Hs s_{\mathrm c}(X;E)$ are defined using \cref{manifolds:lem:sobolev-local}, and
+the proof of \cref{manifolds:thm:sobolev-bounded} shows that properly supported
+operators of order $m$ map $\Hs s_{\mathrm{loc}}\to\Hs{s-m}_{\mathrm{loc}}$ and
+$\Hs s_{\mathrm c}\to\Hs{s-m}_{\mathrm c}$. The global Fredholm theory below, however,
+depends on the compactness of $X$.
 
 \section{Sobolev spaces}\label{manifolds:sec:sobolev}
 
@@ -1118,6 +1312,92 @@ $B$ and $R_E$. For the last statement, an elliptic $\Lambda\in\Psido s(X;E)$ exi
 (e.g.\ $q(\ang\xi^s\Id_E)$ for a metric on $T^*X$), and the inclusions follow from
 \cref{manifolds:thm:sobolev-bounded} and the first part.
 \end{proof}
+
+\subsection{An \texorpdfstring{$L^2$}{L2} bound from the principal symbol}
+The boundedness of $\Psido0(X;E,F)$ on $L^2$ was deduced above from the
+corresponding Euclidean result. There is a more intrinsic argument, due to
+H\"ormander, which uses only the symbol calculus and the boundedness of smoothing
+operators, and which gives more: the norm of $A$ modulo compact operators is
+controlled by the size of its principal symbol at infinity. Fix a positive density,
+hermitian metrics on $E$ and $F$, and a metric on $T^*X$; for a representative $a$ of
+$\sigma_0(A)$ put
+\begin{equation*}
+M(A)=\lim_{R\to\infty}\ \sup\big\{\|a(x,\xi)\|_{\hom(E_x,F_x)};\ (x,\xi)\in T^*X,\ |\xi|\ge R\big\}.
+\end{equation*}
+This does not depend on the representative, since elements of $S^{-1}$ tend to zero
+at infinity, nor on the metric on $T^*X$. For a classical operator, $M(A)$ is the
+maximum over $S^*X$ of the norm of the homogeneous principal symbol.
+
+\begin{proposition}\label{manifolds:prop:L2-bound}
+Let $A\in\Psido0(X;E,F)$ and $C>M(A)^2$. Then there exist a formally self-adjoint
+$B\in\Psido0(X;E)$ and a smoothing $G\in\Psido{-\infty}(X;E)$ such that
+\begin{equation}\label{manifolds:eq:square-root}
+A^*A+B^2=C\,\Id_E-G .
+\end{equation}
+Consequently $\|Au\|_{L^2}^2\le(C+\|G\|)\|u\|_{L^2}^2$, and for every $\eps>0$ there is a
+finite-rank smoothing operator $K$ with $\|A-K\|_{\Lin(L^2)}\le M(A)+\eps$. In
+particular the essential norm satisfies
+$\inf\{\|A+K\|;\ K\in\Kpt(L^2(X;E),L^2(X;F))\}\le M(A)$.
+\end{proposition}
+\begin{proof}
+Let $a$ represent $\sigma_0(A)$, and choose $\eps>0$ and $R$ with
+$\|a(x,\xi)\|^2\le C-2\eps$ for $|\xi|\ge R$, so that $a^*a\le(C-2\eps)\Id$ there (here
+$a^*$ is the pointwise adjoint). Let $\chi\in\CI(T^*X)$, $0\le\chi\le1$, be equal to
+one for $|\xi|\le R$ and to zero for $|\xi|\ge R+1$, and
+\begin{equation*}
+h=(1-\chi)(C-a^*a)+\chi\,\eps\Id_E\in S^0(T^*X;\hom(E)).
+\end{equation*}
+At each point $h$ is a convex combination of self-adjoint endomorphisms which are
+$\ge\eps\Id$, so $\eps\Id\le h\le C'\Id$ for some $C'$. Let $b_0=h^{1/2}$ be the
+positive square root; it is given by the Cauchy integral
+$b_0=\frac1{2\pi i}\oint_\Gamma\lambda^{1/2}(\lambda-h)^{-1}d\lambda$ over a fixed contour in
+$\{\Re\lambda>0\}$ enclosing $[\eps,C']$, and since $(\lambda-h)^{-1}$ satisfies symbol
+estimates of order $0$ uniformly for $\lambda\in\Gamma$ (its derivatives are sums of
+products of $(\lambda-h)^{-1}$ with derivatives of $h$), $b_0\in S^0$. Moreover
+$C-a^*a-b_0^2=\chi(C-a^*a-\eps)$ has compact support, so lies in $S^{-\infty}$.
+
+Let $B_0=\frac12(q(b_0)+q(b_0)^*)$, with $q$ the quantization map
+\eqref{manifolds:eq:quantization}; it is self-adjoint with $\sigma_0(B_0)=b_0$, and
+$R_1=C-A^*A-B_0^2\in\Psido{-1}(X;E)$ is self-adjoint. Suppose inductively that
+$B_k=B_0+D_1+\dots+D_k$ with $D_j\in\Psido{-j}(X;E)$ self-adjoint and
+$R_{k+1}=C-A^*A-B_k^2\in\Psido{-k-1}(X;E)$. For a self-adjoint endomorphism $b\ge c\Id$,
+$c>0$, the linear map $L_b:d\mapsto bd+db$ on $\hom(E_x)$ satisfies
+$\tr\big(d^*L_b(d)\big)=\tr(d^*bd)+\tr(dbd^*)\ge2c\tr(d^*d)$, so it is invertible with
+$\|L_b^{-1}\|\le(2c)^{-1}$ in the Hilbert--Schmidt norm, and it commutes with
+$d\mapsto d^*$. Hence, if $r$ is a self-adjoint representative of
+$\sigma_{-k-1}(R_{k+1})$, then $d=L_{b_0}^{-1}(r)$ is self-adjoint, and
+$d\in S^{-k-1}$ by the same argument as in \cref{manifolds:lem:elliptic} (the
+inverse of the order-zero symbol $L_{b_0}$ is uniformly bounded). Let
+$D_{k+1}=\frac12(q(d)+q(d)^*)$. Then
+\begin{equation*}
+R_{k+2}=C-A^*A-(B_k+D_{k+1})^2=R_{k+1}-B_kD_{k+1}-D_{k+1}B_k-D_{k+1}^2
+\end{equation*}
+has symbol of order $-k-1$ equal to $r-b_0d-db_0=0$, so lies in $\Psido{-k-2}$.
+Taking $B'\sim B_0+\sum_jD_j$ by \cref{manifolds:prop:asymptotic} and
+$B=\frac12(B'+B'^*)$, we obtain \eqref{manifolds:eq:square-root} with
+$G=C-A^*A-B^2\in\bigcap_k\Psido{-k}=\Psido{-\infty}$, self-adjoint.
+
+For $u\in\CI(X;E)$, \eqref{manifolds:eq:square-root} gives
+$\|Au\|^2=C\|u\|^2-\|Bu\|^2-\inner{Gu}u\le(C+\|G\|)\|u\|^2$, where $\|G\|<\infty$ by
+\eqref{manifolds:eq:HS-bound}; by density this bounds $A$ on $L^2$. Now $G$ is compact
+and self-adjoint; given $\delta>0$, let $\pi$ be the orthogonal projection onto the
+(finite-dimensional) sum of the eigenspaces of $G$ with eigenvalues of absolute value
+$\ge\delta$ (\cref{hilbert:thm:spectral}). These eigenvectors lie in the range of $G$,
+so are smooth, and $\pi$ is a finite-rank smoothing operator
+(\cref{manifolds:lem:finite-rank}). For $u\perp\Ran\pi$, $\inner{Gu}u\ge-\delta\|u\|^2$, so
+$\|A(\Id-\pi)u\|^2\le(C+\delta)\|u\|^2$ for all $u$. Thus $K=A\pi$, a finite-rank smoothing
+operator, satisfies $\|A-K\|\le(C+\delta)^{1/2}$, and $C$ and $\delta$ may be chosen with
+$(C+\delta)^{1/2}\le M(A)+\eps$.
+\end{proof}
+
+For classical operators the bound on the essential norm is in fact an equality
+(\cref{manifolds:ex:essential-norm}). Using
+\cref{manifolds:prop:elliptic-estimate}, the Sobolev spaces may also be
+\emph{defined} as $\{u\in\CmI(X;E);\ Pu\in L^2\ \forall P\in\Psido s(X;E,E')\
+\forall E'\}$; with this definition the boundedness $\Psido m:\Hs s\to\Hs{s-m}$ reduces,
+by composition with an elliptic element of $\Psido s$ and its parametrix, to
+$L^2$-boundedness of $\Psido0$, for which \cref{manifolds:prop:L2-bound} provides a
+proof independent of the Euclidean theory.
 
 \section{Fredholm theory of elliptic operators}\label{manifolds:sec:fredholm}
 
@@ -1554,6 +1834,81 @@ theorem gives $z^Nu=Ap(A)u$ for a polynomial $p$, so $u\in\Ran(A)\subset\CI(X;E)
 Alternatively, $\Spec(A)\setminus\{0\}$ is the zero set of the entire function
 $z\mapsto\det(\Id-A/z)$ on $\C\setminus\{0\}$, which tends to one as $|z|\to\infty$.
 
+\subsection{The analytic Fredholm alternative}
+The same reasoning applies to holomorphic families. Let $\Omega\subset\C$ be open.
+A map $A:\Omega\to\Psido{-\infty}(X;E)$ is \emph{holomorphic} if it is holomorphic as
+a map into the Fr\'echet space $\CI(X^2;\Hom(E)\otimes\Omega_R)$, i.e.\ if the kernel
+$A(z)(x,y)$ is smooth in all variables and holomorphic in $z$. Note that
+$z\mapsto A(z)$ is then holomorphic, in particular continuous, as a map into
+$\Lin(L^2(X;E))$, by \eqref{manifolds:eq:HS-bound}.
+
+\begin{proposition}\label{manifolds:prop:analytic-fredholm}
+Let $\Omega\subset\C$ be open and connected and $A:\Omega\to\Psido{-\infty}(X;E)$
+holomorphic. Then either $\Id+A(z)$ is invertible for no $z\in\Omega$, or there is a
+discrete subset $D\subset\Omega$ such that $\Id+A(z)$ is invertible for $z\in\Omega\setminus D$;
+in the second case $(\Id+A(z))^{-1}=\Id+B(z)$, where $B:\Omega\setminus D\to\Psido{-\infty}(X;E)$ is
+holomorphic and near each $p\in D$
+\begin{equation*}
+B(z)=\sum_{j=1}^N(z-p)^{-j}B_j+B'(z),
+\end{equation*}
+with $B_j\in\Psido{-\infty}(X;E)$ of finite rank and $B'$ holomorphic near $p$.
+\end{proposition}
+\begin{proof}
+Fix $p\in\Omega$. By \cref{manifolds:lem:density} and \eqref{manifolds:eq:HS-bound}
+there is a finite-rank smoothing operator $F$, $Fu=\sum_{i=1}^N\inner u{e_i}f_i$ with
+$e_i,f_i\in\CI(X;E)$ and the $f_i$ linearly independent, such that
+$\|A(p)-F\|_{\Lin(L^2)}<\frac12$, and then a disc $U\ni p$ in which
+$\|A(z)-F\|<\frac12$. For $z\in U$ set $C(z)=A(z)-F$. Then $\Id+C(z)$ is invertible, with
+inverse $\Id+C'(z)$ given by a convergent Neumann series, so holomorphic into
+$\Lin(L^2)$; and $C'=-C+C(\Id+C)^{-1}C$ is holomorphic into $\Psido{-\infty}$, since its
+kernel $C(z)(\Id+C(z))^{-1}C(z)$ is, as in \cref{manifolds:lem:sandwich}, a
+continuous trilinear expression in holomorphic functions. Now
+\begin{equation}\label{manifolds:eq:analytic-factor}
+\begin{gathered}
+\Id+A(z)=\big(\Id+K(z)\big)\big(\Id+C(z)\big),\\
+K(z)=F(\Id+C'(z)),\quad
+K(z)u=\sum_{i=1}^N\inner{(\Id+C'(z))u}{e_i}f_i .
+\end{gathered}
+\end{equation}
+So $\Id+A(z)$ is invertible if and only if $\Id+K(z)$ is. The range of $K(z)$ lies in
+$V=\operatorname{span}\{f_i\}$. If $(\Id+K)u=0$ then $u=-Ku\in V$; since $\Id+K$ is
+Fredholm of index zero (\cref{manifolds:thm:fredholm}), it is invertible if and only if
+its restriction to $V$ is injective, i.e.\ if and only if the matrix
+\begin{equation*}
+M(z)_{ij}=\delta_{ij}+\inner{(\Id+C'(z))f_j}{e_i},\qquad (\Id+K(z))f_j=\sum_iM(z)_{ij}f_i,
+\end{equation*}
+is invertible. Its determinant $d(z)$ is holomorphic in $U$, so the set of
+$z\in U$ where $\Id+A(z)$ is not invertible is either all of $U$ or discrete in $U$.
+
+Let $\Omega_1$ be the set of $p\in\Omega$ having a neighbourhood on which $\Id+A(z)$ is
+nowhere invertible, and $\Omega_2$ the set of $p$ having a neighbourhood in which the
+non-invertible points are discrete. Both are open, they are disjoint (a punctured
+neighbourhood of a point of $\Omega_2$ contains invertible points arbitrarily close to
+it), and by the above they cover $\Omega$. Since $\Omega$ is connected, either
+$\Omega=\Omega_1$ or $\Omega=\Omega_2$.
+
+In the second case, invertibility on $\Omega\setminus D$ with inverse $\Id+B(z)$,
+$B(z)\in\Psido{-\infty}$, follows from \cref{manifolds:lem:inverse-smoothing}, and
+$B=-A+A(\Id+A)^{-1}A$ is holomorphic as before. Near $p\in D$, with $U$ as above,
+$(\Id+K)^{-1}=\Id-L(z)$, where $L(z)=(\Id+K|_V)^{-1}K(z)$: indeed $L(z)u\in V$ and
+$\Id+K$ acts on $V$ by the matrix $M$, so $(\Id+K)(\Id-L)=\Id+K-K=\Id$. Explicitly
+\begin{equation*}
+L(z)u=\sum_{i,j}\big(M(z)^{-1}\big)_{ji}\inner{(\Id+C'(z))u}{e_i}f_j,
+\end{equation*}
+and $M(z)^{-1}=\operatorname{adj}M(z)/d(z)$ is meromorphic at $p$. The kernel of
+$u\mapsto\inner{(\Id+C'(z))u}{e_i}$ is a holomorphic family of smooth sections in $y$,
+so the Laurent coefficients of $L$ at $p$ are smoothing with range in $V$. Finally
+$\Id+B(z)=(\Id+C'(z))(\Id-L(z))$ by \eqref{manifolds:eq:analytic-factor}, and
+multiplying the Laurent series of $L$ by the Taylor series of the holomorphic
+$\Psido{-\infty}$-valued function $C'$ shows that the singular part of $B$ at $p$ has
+finite-rank smoothing coefficients.
+\end{proof}
+
+This is the manifold version of the analytic Fredholm theorem proved, for the
+isotropic residual algebra, in \cref{ch:determinants}; there the set of non-invertible
+points is described as the zero set of a Fredholm determinant, which could be done
+here too using \cref{manifolds:rem:determinant}.
+
 \section{Elliptic complexes and the Hodge theorem}\label{manifolds:sec:hodge}
 
 \subsection{Elliptic complexes}
@@ -1625,6 +1980,123 @@ $L^2$ meets $\CI$ in itself). The map $\mathcal H^i\to H^i$ is therefore surject
 injective since $\mathcal H^i\perp P_{i-1}\CI(X;E_{i-1})$.
 \end{proof}
 
+\subsection{The rolled-up complex}
+The Laplacians can be combined into a single operator. On
+$E_*=\bigoplus_iE_i$ let $P=\bigoplus_iP_i$ and $P^*=\bigoplus_iP_i^*$, and put
+\begin{equation*}
+D=P+P^*\in\Diff k(X;E_*),\qquad
+E_{\mathrm{ev}}=\bigoplus_iE_{2i},\quad E_{\mathrm{odd}}=\bigoplus_iE_{2i+1}.
+\end{equation*}
+Since $P^2=0$ and $(P^*)^2=0$, $D^2=PP^*+P^*P=\bigoplus_i\Delta_i$. The operator $D$ is
+formally self-adjoint and interchanges $E_{\mathrm{ev}}$ and $E_{\mathrm{odd}}$; let
+$D_{\mathrm{ev}}:\CI(X;E_{\mathrm{ev}})\to\CI(X;E_{\mathrm{odd}})$ be its restriction, so that
+$D_{\mathrm{ev}}^*$ is the restriction to odd sections.
+
+\begin{corollary}\label{manifolds:cor:rolled-up}
+For an elliptic complex \eqref{manifolds:eq:complex}, $D$ and $D_{\mathrm{ev}}$ are
+elliptic, $\Nul(D)=\bigoplus_i\mathcal H^i$, and
+\begin{equation*}
+\ind(D_{\mathrm{ev}})=\sum_i(-1)^i\dim H^i ,
+\end{equation*}
+the Euler characteristic of the complex.
+\end{corollary}
+\begin{proof}
+$\sigma_k(D)^2=\sigma_{2k}(D^2)=\bigoplus_i\sigma_{2k}(\Delta_i)$ is invertible on
+$T^*X\setminus0$ by \cref{manifolds:thm:hodge}(a), so $\sigma_k(D)$ is invertible there. For
+smooth $u$, $\inner{D^2u}u=\|Du\|^2$, so $\Nul(D)=\Nul(D^2)=\bigoplus_i\mathcal H^i$ (both
+consist of smooth sections by elliptic regularity). Hence
+$\Nul(D_{\mathrm{ev}})=\bigoplus_i\mathcal H^{2i}$ and $\Nul(D_{\mathrm{ev}}^*)=\bigoplus_i\mathcal H^{2i+1}$, and
+the result follows from \cref{manifolds:thm:fredholm}(d) and
+\cref{manifolds:thm:hodge}(c).
+\end{proof}
+
+\subsection{Distributional cohomology}
+The operators $P_i$ act on distributional sections, and the complex
+\eqref{manifolds:eq:complex} with $\CI$ replaced by $\CmI$ has cohomology
+$H^i_{-\infty}=\{u\in\CmI(X;E_i);\ P_iu=0\}/P_{i-1}\CmI(X;E_{i-1})$. The pairing
+$\inner uv$ of $u\in\CmI$ with $v\in\CI$ (extending the $L^2$ inner product, as in
+\cref{manifolds:prop:sobolev}(e)) satisfies $\inner{P_iu}v=\inner u{P_i^*v}$.
+
+\begin{proposition}\label{manifolds:prop:hodge-distributional}
+For an elliptic complex on a compact manifold,
+\begin{equation}\label{manifolds:eq:hodge-distributional}
+\CmI(X;E_i)=\mathcal H^i\oplus P_{i-1}\CmI(X;E_{i-1})\oplus P_i^*\CmI(X;E_{i+1}),
+\end{equation}
+a direct sum, and $\{u\in\CmI(X;E_i);\ P_iu=0\}=\mathcal H^i\oplus P_{i-1}\CmI(X;E_{i-1})$.
+Consequently the inclusion $\CI\hookrightarrow\CmI$ induces isomorphisms
+$H^i\cong H^i_{-\infty}$. In particular, if $u\in\CI(X;E_i)$ and $u=P_{i-1}v$ with
+$v\in\CmI(X;E_{i-1})$, then $u=P_{i-1}v'$ for some $v'\in\CI(X;E_{i-1})$.
+\end{proposition}
+\begin{proof}
+Let $\pi_i$ and $G_i$ be the orthogonal projection onto $\mathcal H^i$ and the
+generalized inverse of $\Delta_i$; both are pseudodifferential, so act on
+distributions, and the identity $\Delta_iG_i=\Id-\pi_i$ extends by continuity. Hence
+every $u\in\CmI(X;E_i)$ is
+\begin{equation*}
+u=\pi_iu+P_{i-1}\big(P_{i-1}^*G_iu\big)+P_i^*\big(P_iG_iu\big).
+\end{equation*}
+To see that the sum is direct, suppose $h+P_{i-1}v+P_i^*w=0$ with $h\in\mathcal H^i$ and $v$, $w$
+distributions. Applying $P_i$ gives $P_iP_i^*w=0$. Then $z=P_i^*w$ satisfies $P_iz=0$
+and $P_{i-1}^*z=0$, so $\Delta_iz=0$ and $z\in\mathcal H^i$ is smooth, and
+$\|z\|^2=\inner{P_i^*w}z=\inner w{P_iz}=0$. Similarly, applying $P_{i-1}^*$ shows that
+$P_{i-1}v=0$, and then $h=0$.
+
+If $P_iu=0$, write $u=h+P_{i-1}v+P_i^*w$ as above; then $P_iP_i^*w=0$, so $P_i^*w=0$ by the
+argument just given. This proves the description of the null space, and hence
+that $\mathcal H^i\to H^i_{-\infty}$ is an isomorphism. Since $\mathcal H^i\to H^i$ is an isomorphism
+by \cref{manifolds:thm:hodge}, so is $H^i\to H^i_{-\infty}$. The last statement is
+injectivity of this map.
+\end{proof}
+
+In particular, for the de~Rham complex below, the cohomology computed with
+distributional (``currents'') or smooth forms is the same. The isomorphism
+$H^i\to H^i_{-\infty}$ is natural, although the harmonic spaces through which it was
+proved depend on the choice of density and metrics.
+
+\subsection{Spectral decomposition}
+The complex also splits along the spectrum of the Laplacians. By
+\cref{manifolds:thm:eigen}, each $\Delta_i$ (elliptic, formally self-adjoint, of positive
+order) has discrete spectrum $0\le\lambda_0<\lambda_1<\cdots\to\infty$ with finite-dimensional
+eigenspaces $E^i_\lambda=\Nul(\Delta_i-\lambda)\subset\CI(X;E_i)$; non-negativity follows from
+$\inner{\Delta_iu}u=\|P_iu\|^2+\|P_{i-1}^*u\|^2$.
+
+\begin{proposition}\label{manifolds:prop:eigen-complex}
+For an elliptic complex, $P_i\Delta_i=\Delta_{i+1}P_i$ and $P_i^*\Delta_{i+1}=\Delta_iP_i^*$. Hence
+$P_i$ maps the orthocomplement $(\mathcal H^i)^\perp\cap\CI(X;E_i)$ into
+$(\mathcal H^{i+1})^\perp$, the complex
+\begin{equation*}
+0\to(\mathcal H^0)^\perp\xrightarrow{P_0}(\mathcal H^1)^\perp\xrightarrow{P_1}\cdots
+\xrightarrow{P_{N-1}}(\mathcal H^N)^\perp\to0
+\end{equation*}
+is exact, and for each $\lambda>0$ the finite-dimensional complex
+\begin{equation*}
+0\to E^0_\lambda\xrightarrow{P_0}E^1_\lambda\xrightarrow{P_1}\cdots\xrightarrow{P_{N-1}}E^N_\lambda\to0
+\end{equation*}
+is exact, with $E^i_\lambda=P_{i-1}E^{i-1}_\lambda\oplus P_i^*E^{i+1}_\lambda$ orthogonally. In
+particular $\sum_i(-1)^i\dim E^i_\lambda=0$ for every $\lambda>0$.
+\end{proposition}
+\begin{proof}
+Using $P_iP_{i-1}=0$ and $P_{i+1}P_i=0$, both $P_i\Delta_i$ and $\Delta_{i+1}P_i$ equal
+$P_iP_i^*P_i$; the second identity is the adjoint of the first. If $h\in\mathcal H^{i+1}$ and
+$u\in\CI(X;E_i)$ then $\inner{P_iu}h=\inner u{P_i^*h}=0$, so the range of $P_i$ is orthogonal
+to $\mathcal H^{i+1}$. If $u\perp\mathcal H^i$ and $P_iu=0$, then by \cref{manifolds:thm:hodge}(c)
+$u=P_{i-1}v$ with $v$ smooth, and replacing $v$ by $v-\pi_{i-1}v$ (note $P_{i-1}\pi_{i-1}=0$) we
+may take $v\perp\mathcal H^{i-1}$; this is the exactness of the first complex. By the
+intertwining identities $P_i$ maps $E^i_\lambda$ into $E^{i+1}_\lambda$ and $P_{i-1}^*$ maps
+$E^i_\lambda$ into $E^{i-1}_\lambda$. If $\lambda>0$, $u\in E^i_\lambda$ and $P_iu=0$, then
+$\lambda u=\Delta_iu=P_{i-1}(P_{i-1}^*u)$, so $u=P_{i-1}(\lambda^{-1}P_{i-1}^*u)$ with
+$\lambda^{-1}P_{i-1}^*u\in E^{i-1}_\lambda$. In general, for $u\in E^i_\lambda$,
+$u=\lambda^{-1}P_{i-1}(P_{i-1}^*u)+\lambda^{-1}P_i^*(P_iu)$ gives the decomposition, which is
+orthogonal as in \cref{manifolds:thm:hodge}(b). The alternating sum of the
+dimensions of an exact sequence of finite-dimensional spaces vanishes.
+\end{proof}
+
+Thus, although $D=P+P^*$ mixes the degrees, each of its non-zero eigenspaces
+decomposes into pieces of pure degree, and the contributions of the non-zero
+eigenvalues to $\sum_i(-1)^i\dim E^i_\lambda$ cancel. Combined with the heat kernel (not
+treated here) this cancellation gives the McKean--Singer formula
+$\sum_i(-1)^i\Tr e^{-t\Delta_i}=\sum_i(-1)^i\dim H^i$ for all $t>0$.
+
 \subsection{The de~Rham complex and the Laplacian on forms}
 The exterior derivative $d:\CI(X;\Lambda^p)\to\CI(X;\Lambda^{p+1})$ extends the
 differential of functions, satisfies $d^2=0$, and in local coordinates is
@@ -1667,10 +2139,9 @@ The index of $d+d^*:\CI(X;\Lambda^{\mathrm{ev}})\to\CI(X;\Lambda^{\mathrm{odd}})
 characteristic $\chi(X)=\sum_p(-1)^pb_p$.
 \end{corollary}
 \begin{proof}
-If $(d+d^*)u=0$ then $\Delta u=0$; conversely if $\Delta u=0$ then each component of $u$
-satisfies $du_p=0$, $d^*u_p=0$. So the null space of $d+d^*$ on even forms is
-$\bigoplus_p\mathcal H^{2p}$; its adjoint is $d+d^*$ on odd forms, with null space
-$\bigoplus_p\mathcal H^{2p+1}$. Now apply \cref{manifolds:thm:fredholm}(d) and
+This is \cref{manifolds:cor:rolled-up} for the de~Rham complex: $D=d+d^*$, and the
+null space of $d+d^*$ on even (odd) forms is $\bigoplus_p\mathcal H^{2p}$
+($\bigoplus_p\mathcal H^{2p+1}$), whose dimension is $\sum_pb_{2p}$ ($\sum_pb_{2p+1}$) by
 \cref{manifolds:cor:hodge-derham}.
 \end{proof}
 
@@ -1679,7 +2150,39 @@ as also follows from the homotopy invariance of the index.
 
 \section{Pseudodifferential projections}\label{manifolds:sec:projections}
 In this section $E$ is a hermitian bundle over the compact manifold $X$, with $L^2$
-defined by a positive density.
+defined by a positive density. We show that every smooth family of projections on
+the cosphere bundle is the principal symbol of a pseudodifferential projection, in
+three steps: a symbolic construction, which makes $P^2-P$ smoothing; a contour
+integral, which removes the smoothing error; and, in
+\cref{manifolds:prop:range-projection}, a characterization of the closed subspaces
+which arise as ranges of such projections.
+
+\begin{lemma}\label{manifolds:lem:newton}
+Let $Q_0\in\Psido0(X;E)$ satisfy $Q_0^2-Q_0\in\Psido{-1}(X;E)$. Then there exists
+$Q\in\Psido0(X;E)$ with $Q-Q_0\in\Psido{-1}(X;E)$ and $Q^2-Q\in\Psido{-\infty}(X;E)$. If $Q_0$
+is classical, or formally self-adjoint, then $Q$ may be chosen with the same property.
+\end{lemma}
+\begin{proof}
+Define inductively
+\begin{equation*}
+E_k=Q_k^2-Q_k,\qquad Q_{k+1}=Q_k+(\Id-2Q_k)E_k .
+\end{equation*}
+Each $Q_k$ and $E_k$ is a polynomial in $Q_0$, so they all commute. Writing $Q=Q_k$,
+$E=E_k$ and using $(\Id-2Q)^2=\Id+4E$,
+\begin{equation*}
+E_{k+1}=E+(2Q-\Id)(\Id-2Q)E+(\Id-2Q)^2E^2=E-(\Id+4E)E+(\Id+4E)E^2=4E^3-3E^2 .
+\end{equation*}
+Hence, by induction, $E_k\in\Psido{-2^k}$ and $Q_{k+1}-Q_k=(\Id-2Q_k)E_k\in\Psido{-2^k}$
+(this is Newton's iteration for the equation $Q^2=Q$). By
+\cref{manifolds:prop:asymptotic} there exists $Q\in\Psido0$ with
+$Q-Q_k\in\Psido{-k-1}$ for all $k$, since $2^j\ge j+1$. Writing $Q=Q_k+T$,
+\begin{equation*}
+Q^2-Q=E_k+Q_kT+TQ_k+T^2-T\in\Psido{-k-1}
+\end{equation*}
+for every $k$, so $Q^2-Q$ is smoothing. If $Q_0$ is classical, so are all $Q_k$ and
+$Q$ may be taken classical. If $Q_0$ is self-adjoint so are all $Q_k$, and
+$\frac12(Q+Q^*)$ has the same properties as $Q$.
+\end{proof}
 
 \begin{proposition}\label{manifolds:prop:projection}
 If $P\in\Psido0(X;E)$ satisfies $P^2-P\in\Psido{-\infty}(X;E)$ then there exists
@@ -1722,6 +2225,48 @@ since $\oint_\gamma(\mu-\lambda)^{-1}d\mu=2\pi i$ for $\lambda$ on $\gamma'$ (in
 $\oint_{\gamma'}(\mu-\lambda)^{-1}d\lambda=0$ for $\mu$ on $\gamma$; the integral over $\gamma'$ equals that
 over $\gamma$ by Cauchy's theorem, the resolvent being holomorphic between the circles.
 \end{proof}
+
+If in \cref{manifolds:prop:projection} $P$ is formally self-adjoint, then so is $\Pi$,
+which is therefore the orthogonal projection onto its range. Indeed
+$\big((\lambda-P)^{-1}\big)^*=(\bar\lambda-P)^{-1}$, so
+\begin{equation*}
+\Pi^*=-\frac1{2\pi i}\oint_\gamma(\bar\lambda-P)^{-1}\,d\bar\lambda
+=\frac1{2\pi i}\oint_\gamma(\mu-P)^{-1}\,d\mu=\Pi ,
+\end{equation*}
+since $\mu=\bar\lambda$ runs over the same circle $\gamma$ (which is symmetric about the
+real axis) with the opposite orientation. Also, $\Pi$ is classical if $P$ is, since
+$\Pi-P$ is smoothing.
+
+\begin{theorem}\label{manifolds:thm:projection-symbol}
+Let $p\in\CI(S^*X;\hom(E))$ satisfy $p^2=p$ (we use the same letter for the pull-back
+of $\hom(E)$ to $S^*X$). Then there exists $P\in\Psido0_{\mathrm{ph}}(X;E)$ with
+\begin{equation*}
+P^2=P,\qquad \sigma_0(P)=p .
+\end{equation*}
+If moreover $p^*=p$ pointwise, then $P$ can be chosen with $P^*=P$, i.e.\ as an
+orthogonal projection on $L^2(X;E)$.
+\end{theorem}
+\begin{proof}
+By \cref{manifolds:prop:principal-symbol}(d) there is $Q_0\in\Psido0_{\mathrm{ph}}(X;E)$ with
+$\sigma_0(Q_0)=p$, and if $p^*=p$ we replace $Q_0$ by $\frac12(Q_0+Q_0^*)$. Then
+$\sigma_0(Q_0^2-Q_0)=p^2-p=0$, so $Q_0^2-Q_0\in\Psido{-1}_{\mathrm{ph}}$. By
+\cref{manifolds:lem:newton} there is a classical $Q$, self-adjoint if $p$ is, with
+$\sigma_0(Q)=p$ and $Q^2-Q$ smoothing, and \cref{manifolds:prop:projection} and the
+remarks above give $P$.
+\end{proof}
+
+The range of a pseudodifferential projection is a closed subspace of $L^2(X;E)$,
+which ``microlocally'' consists of the sections taking values in the range of $p$.
+Three examples play a role later: the Szeg\H{o} projector onto the Hardy space of
+the circle, for which $p$ is $1$ on the positive and $0$ on the negative half of
+$S^*\Sphere^1$ (\cref{ch:index}); the Calder\'on projector onto the boundary values of
+solutions of an elliptic equation (\cref{ch:boundary}); and the projection onto the
+sum of the eigenspaces with positive eigenvalue of a self-adjoint elliptic operator
+$A\in\Psido1(X;E)$, whose symbol is the projection onto the positive eigenspaces of
+$\sigma_1(A)$ (that it is pseudodifferential follows from the theory of complex powers,
+$\Pi_+=\frac12(\Id+A|A|^{-1})$ modulo finite rank, see \cite{Seeley}; it gives the
+boundary condition of Atiyah, Patodi and Singer, see \cite{Melrose-APS}). The
+following result characterizes the possible ranges.
 
 \begin{proposition}\label{manifolds:prop:range-projection}
 Let $P\in\Psido0(X;E)$ satisfy $P^2-P\in\Psido{-\infty}(X;E)$, and let $F\subset\Hs s(X;E)$ be a
@@ -1798,6 +2343,151 @@ of a positive elliptic operator, is not developed here; for these see
 \cite{Seeley} and \cite{Shubin}.
 \end{remark}
 
+\section{The Toeplitz algebra of a pseudodifferential projection}\label{manifolds:sec:toeplitz}
+Let $E$ be a hermitian bundle over the compact manifold $X$, with $L^2$ defined by a
+positive density, and let $P\in\Psido0_{\mathrm{ph}}(X;E)$ be an orthogonal projection,
+$P^2=P=P^*$; such projections exist with any prescribed self-adjoint projection-valued
+principal symbol by \cref{manifolds:thm:projection-symbol}. Its principal symbol
+$p=\sigma_0(P)\in\CI(S^*X;\hom(E))$ satisfies $p^2=p=p^*$, so its range
+\begin{equation*}
+V=\Ran p\subset\pi^*E\longrightarrow S^*X
+\end{equation*}
+is a smooth subbundle of the pull-back of $E$ to $S^*X$ (its rank is locally constant,
+and $p$ provides local frames), with orthocomplement $V^\perp=\Ran(\Id-p)$. Since $P$ is
+bounded on every $\Hs s(X;E)$ and $P^2=P$,
+\begin{equation*}
+\Hs s_P=P\Hs s(X;E)=\Nul(\Id-P)\cap\Hs s(X;E),\qquad \CI_P=P\,\CI(X;E)
+\end{equation*}
+are closed subspaces, and $\CI_P=\bigcap_s\Hs s_P$.
+
+\begin{definition}\label{manifolds:def:toeplitz}
+The \emph{Toeplitz algebra} of $P$ is $\mathcal T_P=\bigcup_m\mathcal T^m_P$,
+\begin{equation*}
+\mathcal T^m_P=\{A\in\Psido m_{\mathrm{ph}}(X;E);\ A=PAP\}=P\,\Psido m_{\mathrm{ph}}(X;E)\,P,
+\end{equation*}
+whose elements we regard as operators on $\CI_P$, or as bounded operators
+$\Hs s_P\to\Hs{s-m}_P$. The \emph{Toeplitz symbol} of $A\in\mathcal T^m_P$ is the
+restriction $\sigma^P_m(A)=\sigma_m(A)|_V$, a section of $N_m\otimes\hom(V)$ over $S^*X$.
+An element $A\in\mathcal T^m_P$ is \emph{elliptic} if $\sigma^P_m(A)$ is invertible at
+each point of $S^*X$.
+\end{definition}
+
+The two descriptions of $\mathcal T^m_P$ agree since $P(PAP)P=PAP$. Note that an
+element of $\mathcal T^m_P$ is never elliptic as an element of $\Psido m(X;E)$ unless $p=\Id$ (and then $\Id-P$,
+a compact projection, has finite rank), since its symbol vanishes on $V^\perp$.
+
+\begin{proposition}\label{manifolds:prop:toeplitz-calculus}
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $\mathcal T_P$ is a filtered $*$-algebra with identity $P$:
+$\mathcal T^m_P\circ\mathcal T^{m'}_P\subset\mathcal T^{m+m'}_P$ and $(\mathcal T^m_P)^*=\mathcal T^m_P$. The
+residual elements $\mathcal T^{-\infty}_P=P\Psido{-\infty}(X;E)P$ form an ideal, and
+asymptotic sums of elements $A_j\in\mathcal T^{m-j}_P$ exist in $\mathcal T^m_P$.
+\item The Toeplitz symbol gives a short exact sequence
+\begin{equation*}
+0\longrightarrow\mathcal T^{m-1}_P\longrightarrow\mathcal T^m_P\xrightarrow{\ \sigma^P_m\ }
+\CI(S^*X;N_m\otimes\hom(V))\longrightarrow0,
+\end{equation*}
+and $\sigma^P_{m+m'}(AB)=\sigma^P_m(A)\sigma^P_{m'}(B)$, $\sigma^P_m(A^*)=\sigma^P_m(A)^*$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+(a) If $A=PAP$ and $B=PBP$ then $AB=P(AB)P$, and $A^*=PA^*P$ since $P^*=P$. If
+$A'\sim\sum_jA_j$ in $\Psido m_{\mathrm{ph}}$ then $A=PA'P\in\mathcal T^m_P$ and
+$A-\sum_{j<N}A_j=P(A'-\sum_{j<N}A_j)P\in\Psido{m-N}$.
+
+(b) For $A\in\mathcal T^m_P$, $a=\sigma_m(A)=p\,a\,p$, so $a$ vanishes on $V^\perp$ and maps $V$
+into $V$; thus $a$ is determined by $a|_V$, and $\sigma^P_m$ is multiplicative and
+compatible with adjoints by \cref{manifolds:prop:principal-symbol}. If
+$\sigma^P_m(A)=0$ then $\sigma_m(A)=0$, so $A\in\Psido{m-1}_{\mathrm{ph}}$, and $A=PAP\in\mathcal T^{m-1}_P$.
+For surjectivity, given a section $b$ of $N_m\otimes\hom(V)$, let $\tilde b=b\circ p$, a
+section of $N_m\otimes\hom(E)$ with $p\tilde b=\tilde b=\tilde bp$; if $A'\in\Psido m_{\mathrm{ph}}$
+has $\sigma_m(A')=\tilde b$, then $A=PA'P\in\mathcal T^m_P$ has $\sigma_m(A)=p\tilde bp=\tilde b$, so
+$\sigma^P_m(A)=b$.
+\end{proof}
+
+\begin{theorem}\label{manifolds:thm:toeplitz-fredholm}
+Let $A\in\mathcal T^m_P$ be elliptic. Then:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item there is $B\in\mathcal T^{-m}_P$ with $AB-P\in\mathcal T^{-\infty}_P$ and $BA-P\in\mathcal T^{-\infty}_P$;
+\item if $u\in\CmI(X;E)$, $u=Pu$ and $Au\in\CI$, then $u\in\CI_P$;
+\item for every $s$, $A:\Hs s_P\to\Hs{s-m}_P$ is Fredholm, with null space
+$\Nul_P(A)=\{u\in\CI_P;\ Au=0\}$ and range $\{f\in\Hs{s-m}_P;\ \inner fv=0\ \forall v\in\Nul_P(A^*)\}$,
+where $A^*\in\mathcal T^m_P$ is elliptic; the same holds for $A:\CI_P\to\CI_P$;
+\item the Toeplitz index $\ind_P(A)=\dim\Nul_P(A)-\dim\Nul_P(A^*)$ is independent of $s$,
+depends only on $\sigma^P_m(A)$, and is constant along families of elliptic elements of
+$\mathcal T^m_P$ which are continuous in $\Lin(\Hs s_P,\Hs{s-m}_P)$ for some $s$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Fix a metric on $T^*X$ and let $\Lambda_m\in\Psido m_{\mathrm{ph}}(X;E)$ be self-adjoint and
+invertible, with principal symbol $|\xi|^m\Id_E$; it is constructed as in
+\cref{manifolds:cor:invertible}, starting from a classical $Q$ with symbol
+$|\xi|^{m/2}\Id_E$. Consider
+\begin{equation*}
+\tilde A=A+(\Id-P)\Lambda_m(\Id-P)\in\Psido m_{\mathrm{ph}}(X;E).
+\end{equation*}
+Its principal symbol is $\sigma_m(A)+|\xi|^m(\Id-p)$, which in the decomposition
+$\pi^*E=V\oplus V^\perp$ is the block diagonal endomorphism
+$\sigma^P_m(A)\oplus|\xi|^m\Id_{V^\perp}$; so $\tilde A$ is elliptic. Moreover $\tilde A$ is
+block diagonal with respect to $\CmI(X;E)=P\CmI\oplus(\Id-P)\CmI$: since $A=PAP$,
+\begin{equation*}
+\tilde AP=AP=A=PA=P\tilde A,\qquad \tilde A(\Id-P)=(\Id-P)\Lambda_m(\Id-P)=(\Id-P)\tilde A .
+\end{equation*}
+In particular $\tilde A$ acts on $\Hs s_P$ as $A$.
+
+(a) If $\tilde B$ is a parametrix of $\tilde A$, $\tilde B\tilde A=\Id-R$, $\tilde A\tilde B=\Id-R'$, then
+$B=P\tilde BP\in\mathcal T^{-m}_P$ satisfies
+$BA=P\tilde B\tilde AP=P-PRP$ and $AB=P\tilde A\tilde BP=P-PR'P$.
+
+(b) $\tilde Au=Au$ is smooth, so $u$ is smooth by \cref{manifolds:cor:regularity}.
+
+(c) By (a), $B:\Hs{s-m}_P\to\Hs s_P$ inverts $A$ up to the operators $PRP$ and $PR'P$, which are
+compact on $\Hs s_P$ and $\Hs{s-m}_P$ by \cref{manifolds:thm:sobolev-bounded}, and $P$ is
+the identity on these spaces; so $A$ is Fredholm by \cref{hilbert:thm:atkinson}. Its
+null space consists of smooth sections by (b). For the range, if $f\in\Hs{s-m}_P$ then
+$f\in\Ran(\tilde A)$ if and only if $f\in A\Hs s_P$: if $f=\tilde A(u_1+u_2)$ with $u_1=Pu$,
+$u_2=(\Id-P)u$, then $\tilde Au_2=(\Id-P)\tilde Au_2=(\Id-P)f=0$, so $f=Au_1$. By
+\cref{manifolds:thm:fredholm}(b) the range of $\tilde A$ is the orthocomplement of
+$\Nul(\tilde A^*)$, and $\tilde A^*=A^*+(\Id-P)\Lambda_m(\Id-P)$ is block diagonal, with
+$\Nul(\tilde A^*)=\Nul_P(A^*)\oplus\big(\Nul(\tilde A^*)\cap(\Id-P)\CI\big)$. Elements of
+$\Hs{s-m}_P$ are orthogonal to $(\Id-P)\CI$, since $P$ is self-adjoint, which gives the
+description of the range. That $A^*\in\mathcal T^m_P$ is elliptic follows from
+\cref{manifolds:prop:toeplitz-calculus}(b). The statement on $\CI_P$ follows as in
+\cref{manifolds:thm:fredholm}(c), using (b).
+
+(d) By (c), the codimension of the range is $\dim\Nul_P(A^*)$ for every $s$. If $A'\in\mathcal T^m_P$
+has the same Toeplitz symbol then $A'-A\in\mathcal T^{m-1}_P$ is compact
+$\Hs s_P\to\Hs{s-m}_P$, and the last two statements follow from the stability of the
+index (\cref{hilbert:thm:stability}).
+\end{proof}
+
+The operator $\tilde A$ in the proof shows a little more: for $m=0$ one may take
+$\Lambda_0=\Id$, and then $\tilde A=A+\Id-P$ is an elliptic element of $\Psido0(X;E)$
+with $\ind(\tilde A)=\ind_P(A)$, since $\tilde A$ is the identity on $(\Id-P)L^2$. Thus the
+Toeplitz index is an ordinary index. In general, Toeplitz ellipticity concerns the
+symbol only on $V$, and the most important elliptic Toeplitz operators are those of
+the form
+\begin{equation*}
+T_a=PaP,\qquad a\in\CI(X;\End(E)),
+\end{equation*}
+with $\sigma^P_0(T_a)=p\,a\,p|_V$; $T_a$ is elliptic if $a$ is invertible, but more
+generally if only the compression of $a$ to $V$ is invertible.
+
+\begin{example}\label{manifolds:example:szego}
+For $X=\Sphere^1$, $E=\C^N$ and $P=S$ the Szeg\H{o} projector onto the Hardy space of
+boundary values of holomorphic functions on the disc, $S^*\Sphere^1$ consists of two
+circles, $V$ is the trivial bundle $\C^N$ over the positive one and zero over the
+negative one, and $\mathcal T_S$ is the Toeplitz algebra of \cref{ch:index}. There it is
+shown that $S\in\Psido0(\Sphere^1)$ and that, for $a\in\CI(\Sphere^1;\GL(N,\C))$, the
+Toeplitz operator $T_a=SaS$ has index $-\operatorname{wind}(\det a)$, minus the winding
+number of $\det a$; for instance $T_{e^{i\theta}}$ is the shift
+$\sum_{k\ge0}c_ke^{ik\theta}\mapsto\sum_{k\ge0}c_ke^{i(k+1)\theta}$, which is injective with
+range of codimension one. The general Toeplitz algebra above extends this to
+arbitrary pseudodifferential projections; on odd-dimensional manifolds, the
+spectral projections of Dirac operators lead in this way to the Toeplitz index
+theorem for Toeplitz operators of Baum and Douglas.
+\end{example}
+
 \section{Exercises}\label{manifolds:sec:exercises}
 
 \begin{exercise}\label{manifolds:ex:compatible}
@@ -1867,6 +2557,85 @@ $\Psido{-\infty}(X;E)$. Prove this directly using \cref{manifolds:lem:density} a
 density of $\GL(M,\C)$ in $M(M,\C)$.
 \end{exercise}
 
+\begin{exercise}\label{manifolds:ex:homogeneous-bundle}
+For $s\in\C$ and $\omega\in\Sphere^{n-1}$ let $N_{s,\omega}$ be the one-dimensional space of
+functions $f$ on the ray $\R^+\omega$ with $f(r\omega)=r^sf(\omega)$. Show that
+$N_s=\bigcup_\omega N_{s,\omega}$ is a smooth line bundle over $\Sphere^{n-1}$ whose smooth
+sections are the smooth functions on $\R^n\setminus0$ positively homogeneous of degree $s$,
+and that it is trivial (any norm $|\cdot|$ gives the non-vanishing section $|z|^s$). Show
+that there is a non-vanishing section invariant under all of $\GL(n,\R)$ only if $s=0$,
+so that $N_s$ is not canonically trivial for $s\ne0$. Deduce the corresponding facts for
+the bundles $N_m$ over $S^*X$ used in \cref{manifolds:prop:principal-symbol}.
+\end{exercise}
+
+\begin{exercise}\label{manifolds:ex:essential-norm}
+Let $A\in\Psido0_{\mathrm{ph}}(X;E,F)$ and let $(\bar x,\bar\xi)\in T^*X\setminus0$,
+$v\in E_{\bar x}$. In local coordinates near $\bar x$, trivializing $E$, set
+$u_t(x)=t^{n/4}\phi\big(t^{1/2}(x-\bar x)\big)e^{itx\cdot\bar\xi}v$ with $\phi\in\CIc(\R^n)$,
+$\|\phi\|_{L^2}=1$. Show that, as $t\to\infty$, $u_t\to0$ weakly in $L^2$, $\|u_t\|_{L^2}$
+converges to a positive limit, and
+$\|Au_t\|_{L^2}/\|u_t\|_{L^2}\to\|\sigma_0(A)(\bar x,\bar\xi)v\|/\|v\|$ (the norms on the fibres being
+those of the coordinate trivialization, adjusted by the density and the metrics). Deduce
+that $\|A+K\|\ge M(A)$ for every compact $K$, so that the inequality in
+\cref{manifolds:prop:L2-bound} is an equality for classical operators.
+\end{exercise}
+
+\begin{exercise}\label{manifolds:ex:rapidly-decreasing}
+Let $\dim X>0$ and let $\Lambda\in\Psido1(X;E)$ be elliptic, self-adjoint and positive, with an
+orthonormal basis of eigenfunctions $e_j$, $\Lambda e_j=\lambda_je_j$, $0<\lambda_1\le\lambda_2\le\cdots$
+(\cref{manifolds:thm:eigen,manifolds:cor:invertible}).
+\begin{enumerate}[label=(\alph*)]
+\item Show that a bounded operator $A$ on $L^2(X;E)$ is smoothing if and only if
+$\Lambda^NA\Lambda^N$ is bounded for all $N$, if and only if the matrix
+$a_{jk}=\inner{Ae_k}{e_j}$ satisfies $\sup_{j,k}(\lambda_j\lambda_k)^N|a_{jk}|<\infty$ for all $N$.
+(Use \cref{manifolds:ex:smoothing-char}.)
+\item Using that $\Lambda^{-s}$ is of trace class for $s>n$ (\cref{manifolds:lem:HS}), show
+that $\lambda_j\ge cj^{1/s}$. Assuming in addition the polynomial upper bound
+$\lambda_j\le Cj^N$ (which follows from the Weyl asymptotics of \cref{ch:wave}), show that
+$A\mapsto(a_{jk})$ is an isomorphism of $\Psido{-\infty}(X;E)$ onto the algebra of
+rapidly decreasing matrices
+$\{(a_{jk})_{j,k\in\N};\ \sup_{j,k}(jk)^N|a_{jk}|<\infty\ \forall N\}$.
+\item Using the eigenfunctions of the harmonic oscillator, show similarly that
+$\Psiiso{-\infty}(\R^n)$ (\cref{ch:isotropic}) is isomorphic to the same algebra.
+Conclude that the smoothing algebras of all compact manifolds of positive dimension are
+isomorphic to each other and to $\Psiiso{-\infty}(\R^n)$, although there is no natural
+isomorphism.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}\label{manifolds:ex:boundary-smoothing}
+Let $M$ be a compact manifold with boundary, such as the radial compactification
+$\RC{\R^n}$ of \cref{ch:distributions}, and let $\nu$ be a smooth positive density on $M$.
+Show that the operators $Au(x)=\int_MA(x,y)u(y)\nu(y)$ with $A\in\CI(M^2)$ form an algebra
+under composition, and that those with kernels vanishing to infinite order at
+$(\pa M\times M)\cup(M\times\pa M)$ form a subalgebra, which is not an ideal. For
+$M=\RC{\R^n}$, using that $\dCI(\RC{\R^n})$ is identified with $\cS(\R^n)$, show that the
+operators $u\mapsto\int K(x,y)u(y)\,dy$ with $K\in\dCI(\RC{\R^n}\times\RC{\R^n})$ are exactly
+the elements of $\Psiiso{-\infty}(\R^n)$, i.e.\ that
+$\dCI(\RC{\R^n}\times\RC{\R^n})=\cS(\R^{2n})$ under the natural identification. (Note that the
+Lebesgue density is not smooth up to the boundary of $\RC{\R^n}$, but this does not
+matter for kernels vanishing to infinite order there.)
+\end{exercise}
+
+\begin{exercise}\label{manifolds:ex:toeplitz-inverse}
+Let $P$ be as in \cref{manifolds:sec:toeplitz} and let $A\in\mathcal T^m_P$ be elliptic. Show that
+there is $G\in\mathcal T^{-m}_P$ with $GA=P-\pi_N$, $AG=P-\pi_{N^*}$, where $\pi_N$, $\pi_{N^*}$ are
+the orthogonal projections onto $\Nul_P(A)$ and $\Nul_P(A^*)$. In particular, if $A$ is
+invertible on $\CI_P$ its inverse lies in $\mathcal T^{-m}_P$. (Apply
+\cref{manifolds:prop:generalized-inverse} to the operator $\tilde A$ in the proof of
+\cref{manifolds:thm:toeplitz-fredholm}.)
+\end{exercise}
+
+\begin{exercise}\label{manifolds:ex:toeplitz-commutator}
+Let $P$ be as in \cref{manifolds:sec:toeplitz} and $a,b\in\CI(X;\End(E))$. Show that
+$T_aT_b-T_{ab}=P[P,a](\Id-P)[P,b]P$, and deduce that $T_aT_b-T_{ab}\in\mathcal T^{-1}_P$ if
+$a$ or $b$ commutes with $p$ on $S^*X$, in particular if one of them is scalar. Let
+$Y\subset X$ be the (compact) projection to $X$ of the set of points of $S^*X$ where
+$V\ne0$. Show that for scalar $a\in\CI(X)$, $T_a$ is elliptic if and only if $a$ vanishes
+nowhere on $Y$, and that then $T_b$ is a parametrix of $T_a$ modulo $\mathcal T^{-1}_P$ for any
+$b\in\CI(X)$ equal to $1/a$ near $Y$.
+\end{exercise}
+
 \section*{Notes}
 This chapter combines Chapter~5 of the 2003 notes with Lectures~5--8 of the 2005
 lectures. The invariant definition of pseudodifferential operators through
@@ -1882,3 +2651,23 @@ The functional calculus (heat kernel, resolvent, complex powers) announced in th
 original is not included; see \cite{Seeley,Shubin}. For a full treatment of
 pseudodifferential operators on manifolds see \cite[Chapter~18]{Hormander-III}
 and \cite{Shubin}.
+
+Several additions come from the later revision of the notes, \emph{From
+microlocal to global analysis} (2008): the treatment of non-compact manifolds through
+properly supported operators (\cref{manifolds:sec:noncompact}), the $L^2$ bound by the
+``approximate square root'' construction (\cref{manifolds:prop:L2-bound}; the
+induction step there, which in the source is only indicated, requires solving the
+matrix equation $b_0d+db_0=r$), the distributional Hodge decomposition and the
+exactness of the eigenspace complexes, the symbolic construction of projections
+(\cref{manifolds:lem:newton}, where we use Newton's iteration
+$Q\mapsto Q+(\Id-2Q)(Q^2-Q)$, which squares the order of the error at each step), and
+the remark that the algebra of smoothing operators is, non-naturally, isomorphic to
+the residual isotropic algebra. The source contains only a heading for the Toeplitz
+algebra; \cref{manifolds:sec:toeplitz} was written for this edition, following the
+model of the Szeg\H{o} projector in \cref{ch:index}; the general Toeplitz calculus
+goes back to L.~Boutet de Monvel and V.~Guillemin, \emph{The spectral theory of
+Toeplitz operators} (Princeton, 1981), and the index theorem alluded to in
+\cref{manifolds:example:szego} is due to P.~Baum and R.~G.~Douglas. The commutator formula
+\cref{manifolds:prop:symbol-calculus}(c) and the analytic Fredholm alternative
+\cref{manifolds:prop:analytic-fredholm} are standard; the latter is proved in the
+source only for the isotropic algebra.
