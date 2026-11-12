@@ -190,11 +190,11 @@ Both terms tend to $0$ by dominated convergence: $1-\phi(x/k)\to1-\phi(0)=0$ poi
 $\abs{1-\phi}\le1+\sup\abs\phi$. Hence $u_k\to u$ in $L^2$, and $\cS(\R^n)$ (even $\CIc(\R^n)$) is
 dense in $L^2(\R^n)$.
 
-\emph{Relation to pseudodifferential operators.} $u_k=A_ku$ with
-$A_k=\Op(a_k)$, $a_k(x,\xi)=\phi(x/k)\phi(\xi/k)$, by \eqref{euclidean:eq:left-quant}. Each $a_k$
-is in $\cS(\R^{2n})$, so $A_k\in\Psido{-\infty}$, and its kernel
-$\phi(x/k)k^n(\cF^{-1}\phi)(k(x-y))$ is in $\cS(\R^{2n})$, so $A_k$ maps even $\cSp(\R^n)$ into
-$\cS(\R^n)$. The family is bounded in $\Psido0$: if $\supp\phi\subset\{\abs\xi\le R\}$, then
+\emph{Relation to pseudodifferential operators.} By \eqref{euclidean:eq:left-quant},
+$u_k=A_ku$ with $A_k=\Op(a_k)$ and $a_k(x,\xi)=\phi(x/k)\phi(\xi/k)$. Each $a_k$ is in
+$\cS(\R^{2n})$, so $A_k\in\Psido{-\infty}$; its kernel, which is
+$\phi(x/k)\,k^n(\cF^{-1}\phi)(k(x-y))$, is in $\cS(\R^{2n})$, so that $A_k$ maps even $\cSp(\R^n)$
+into $\cS(\R^n)$. The family is bounded in $\Psido0$: if $\supp\phi\subset\{\abs\xi\le R\}$, then
 \begin{equation*}
   D^\alpha_xD^\beta_\xi a_k=k^{-\abs\alpha-\abs\beta}(D^\alpha\phi)(x/k)(D^\beta\phi)(\xi/k)
 \end{equation*}
@@ -403,8 +403,8 @@ and also $(Au_\iota)(\phi)\to\int v\phi\,dx$. So $Au=v\in\CI$. By the first part
 $u\in\mathcal C^{-\infty}_{c,\Gamma}$, and $q_{A,R,k}(u_\iota-u)\to0$. The space is complete.
 
 \emph{Density of $\CIc(\R^n)$.} Clearly $\CIc\subset\mathcal C^{-\infty}_{c,\Gamma}$. Let
-$u\in\mathcal C^{-\infty}_{c,\Gamma}$ and $u_\eps=u*\rho_\eps\in\CIc$
-(\cref{solmicrolocal:lem:convolution}(i)). Let $L$ be a compact neighbourhood of $\supp u$, with
+$u\in\mathcal C^{-\infty}_{c,\Gamma}$; by \cref{solmicrolocal:lem:convolution}(i),
+$u_\eps=u*\rho_\eps\in\CIc$. Let $L$ be a compact neighbourhood of $\supp u$, with
 $\abs{u(f)}\le C\sum_{\abs\beta\le k}\sup_L\abs{D^\beta f}$ as in
 \eqref{microlocal:eq:finite-order}. By \cref{solmicrolocal:lem:convolution}(ii),
 for a bounded set $B$,

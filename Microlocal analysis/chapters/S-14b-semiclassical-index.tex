@@ -437,8 +437,11 @@ $r_\epsilon\in\CIc(\R^{2n})$ has all derivatives $O(\epsilon^\infty)$. By
 K(0,z,W)\,dW$.
 
 \emph{The limit.} Let $v_\epsilon=e^{-if/\epsilon}A(\epsilon)(e^{if/\epsilon}u)$. The
-contribution of $r_\epsilon$ is $e^{-if(z)/\epsilon}\int r_\epsilon(z,z')
-e^{if(z')/\epsilon}u(z')\,dz'$; each $z$-derivative of order $\le k$ is bounded by
+contribution of $r_\epsilon$ is
+\begin{equation*}
+  e^{-if(z)/\epsilon}\int r_\epsilon(z,z')e^{if(z')/\epsilon}u(z')\,dz';
+\end{equation*}
+each $z$-derivative of order $\le k$ is bounded by
 $C\epsilon^{-k}$ times sup norms of derivatives of $r_\epsilon$, which are
 $O(\epsilon^\infty)$, and it is supported in a fixed compact set; so it tends to $0$
 in $\CI$. In the main term substitute $z'=z-\epsilon W$:
@@ -478,7 +481,10 @@ mutually inverse bundle maps). For $f'$ real on $U'$ put $f=f'\circ F$. Then
   =h(z)\bigl(e^{-if/\epsilon}A(e^{if/\epsilon}g\,(u'\circ F))\bigr)(z),
 \end{equation*}
 and letting $\epsilon\to0$ on both sides,
-$\sigsl(A')(F(z),df'(F(z)))u'(F(z))=h(z)\sigsl(A)(z,df(z))g(z)u'(F(z))$. Since
+\begin{equation*}
+  \sigsl(A')\bigl(F(z),df'(F(z))\bigr)u'(F(z))=h(z)\,\sigsl(A)\bigl(z,df(z)\bigr)\,g(z)\,u'(F(z)).
+\end{equation*}
+Since
 $df(z)=dF(z)^Tdf'(F(z))$,
 \begin{equation*}
   \sigsl(A')(F(z),\zeta')=h(z)\,\sigsl(A)\bigl(z,dF(z)^T\zeta'\bigr)\,g(z)
@@ -499,8 +505,10 @@ again semiclassical, and
   =\sigsl(A)(z,2\zeta).
 \end{equation*}
 The oscillatory characterization shows the same thing:
-$e^{-if/\epsilon}A(2\epsilon)e^{if/\epsilon}=e^{-i(2f)/(2\epsilon)}A(2\epsilon)
-e^{i(2f)/(2\epsilon)}\to\sigsl(A)(z,2df)$. So the same family of operators has a
+\begin{equation*}
+  e^{-if/\epsilon}A(2\epsilon)e^{if/\epsilon}=e^{-i(2f)/(2\epsilon)}A(2\epsilon)
+  e^{i(2f)/(2\epsilon)}\longrightarrow\sigsl(A)(z,2df).
+\end{equation*} So the same family of operators has a
 different symbol when the parameter is changed: the symbol is composed with the
 fibre dilation by $2$. This is the case $T\equiv2$ of \cref{scindex:rem:slT}. The
 invariant object is the covector $d(f/\epsilon)$ of the phase, which explains why
@@ -530,9 +538,11 @@ Its adjoint is $(\Gamma^*w)(z)=\int_{\mathcal V_z}\gamma(v)w(v)\,dv$, and
 $\Gamma^*\Gamma=\Id$.
 
 \emph{The embedding.} For $A\in\Psido{-\infty}(Z;E)$ with kernel $A(z,z')$, the
-kernel of $\Gamma A\Gamma^*$ is $\gamma(v)A(\varpi v,\varpi v')\gamma(v')$ (with
-respect to the density on $\mathcal V$). In local frames it is
-$\pi^{-k/2}e^{-(\abs w^2+\abs{w'}^2)/2}A(z,z')$: smooth, and Schwartz in the fibre
+kernel of $\Gamma A\Gamma^*$ (with respect to the density on $\mathcal V$) is
+\begin{equation*}
+  \gamma(v)A(\varpi v,\varpi v')\gamma(v')=\pi^{-k/2}e^{-(\abs w^2+\abs{w'}^2)/2}A(z,z')
+\end{equation*}
+in local frames, $v=(z,w)$, $v'=(z',w')$. It is smooth, and Schwartz in the fibre
 variables $(w,w')$ uniformly with all derivatives, i.e.\ in
 $\Psido{-\infty}_{\mathcal S}(\mathcal V;\varpi^*E)$ (\cref{scindex:rem:schwartz}
 with $M=Z$ and $B$ a point). The map $A\mapsto\Gamma A\Gamma^*$ is linear,

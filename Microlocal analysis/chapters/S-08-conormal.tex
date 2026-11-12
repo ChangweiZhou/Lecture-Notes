@@ -177,8 +177,8 @@ $z\ne0$ with $F=0$ for \emph{every} $h$, while $\chi u=D^\alpha\delta_0\in\Ic{\f
 equal to $|z|^{-n}$ on $z\ne0$ has Fourier transform $c\log|\zeta|+c'$ outside $0$, which is
 not a classical symbol. The statement has therefore been corrected to require the relation as
 distributions on $\R^n$. We prove: \emph{$\chi u\in\Ic{-h-\frac{3n}4}_{\mathrm{c},
-\mathrm{ph}}(\R^n,\{0\})$}; this is the order (it is not lower unless the homogeneous part
-$T$ below vanishes, in which case $\chi u$ is smooth). For $\delta_0$, $h=-n$ gives the order
+\mathrm{ph}}(\R^n,\{0\})$}; this is the order (it is not lower unless the part $T$ below is a
+polynomial, in which case $\chi u$ is smooth). For $\delta_0$, $h=-n$ gives the order
 $\frac n4$, as it should.
 
 Idea: the relation says $(E-h)u$ is smooth, $E=z\cdot\pa_z$ the Euler field; solving this
@@ -187,8 +187,9 @@ part, whose Fourier transform is homogeneous of degree $-n-h$ outside $0$.
 
 \emph{Step 1: $(E-h)u\in\CI$.} Write $u_t$ for the pull-back by $z\mapsto tz$, $\pair{u_t}\phi=
 t^{-n}\pair u{\phi(\cdot/t)}$. Since $t\mapsto\phi(\cdot/t)$ is a smooth curve in $\CIc$,
-$t\mapsto u_t$ is differentiable in $\CmI$, and $\frac d{dt}u_t|_{t=1}=-nu-u\circ(z\cdot\pa_z)^t
-\cdots$; explicitly $\frac d{dt}\pair{u_t}\phi|_{t=1}=\pair u{-n\phi-z\cdot\pa\phi}=\pair{Eu}\phi$.
+$t\mapsto u_t$ is differentiable in $\CmI$, and
+$\frac d{dt}\pair{u_t}\phi|_{t=1}=\pair u{-n\phi-z\cdot\pa\phi}=\pair u{-\operatorname{div}
+(z\phi)}=\pair{Eu}\phi$.
 Moreover $E(v_t)=(Ev)_t$, so $\frac d{dt}u_t=t^{-1}(Eu)_t$. Differentiating $u_t=t^hu+F(t,\cdot)$
 at $t=1$ gives
 \begin{equation*}
@@ -241,8 +242,8 @@ with $\chi(z)(1-\psi(\zeta))\hat T(\zeta)\in\Symph\mu(\R^n;\R^n)$ (as in
 \cref{conormal:rem:point-local}). By \cref{conormal:def:local} with $k=n$, $M=m-\frac n4$,
 $\chi u\in\Ic m_{\mathrm c,\mathrm{ph}}(\R^n,\{0\})$ with $m=\mu+\frac n4=-h-\frac{3n}4$. Its
 principal symbol is $\chi(0)$ times the homogeneous function $\hat T|_{\R^n\setminus0}$, which
-is non-zero unless $T$ is a sum of derivatives of $\delta_0$ of order $-n-h$ (only possible if
-$-n-h\in\N_0$) or $0$.
+vanishes only if $\hat T$ is supported at $0$, i.e.\ $T$ is a polynomial; then $\chi u$ is
+smooth.
 
 %----------------------------------------------------------------------
 \subsection*{\Cref{conormal:ex:supported}}

@@ -118,7 +118,8 @@ principal symbol $b$ of $B$ (and by $\delta$), i.e.\ local in the symbol. (If $D
 matrix-valued, $\tr(\nu^{2k+1})\delta$ is to be read as $\tr(\nu^{2k+1}\delta)$.)
 
 \emph{The index formula.} Put $\gamma'(b)=\gamma(b)-\lambda(b)$. Then for every
-family $\beta\in\CI(S^*M;\GTeta(\Sphere;\C^N))$ with symbol $b$,
+smooth family $\beta$ of invertible Toeplitz operators on $\Sphere$ parametrized by
+$S^*M$, with symbol $b$,
 \begin{equation*}
   \eta'(\beta)+\gamma'(b)=\eta(\beta)+\lambda(b)+\gamma(b)-\lambda(b)=\eta(\beta)+\gamma(b).
 \end{equation*}
@@ -151,7 +152,10 @@ $\pa_t\Chodd(a_t)=d\Theta(a_t)$, so
 \end{equation*}
 is exact. Its degree-one part is
 $c_0\bigl(\tr((gh)^{-1}d(gh))-\tr(g^{-1}dg)-\tr(h^{-1}dh)\bigr)$, and
-$\tr((gh)^{-1}d(gh))=\tr(h^{-1}g^{-1}dg\,h)+\tr(h^{-1}dh)=\tr(g^{-1}dg)+\tr(h^{-1}dh)$,
+\begin{equation*}
+  \tr\bigl((gh)^{-1}d(gh)\bigr)=\tr(h^{-1}g^{-1}dg\,h)+\tr(h^{-1}dh)
+  =\tr(g^{-1}dg)+\tr(h^{-1}dh),
+\end{equation*}
 so it vanishes. (Equivalently: the degree-zero part of $\Theta(a_t)$ is
 $c_0\tr(a_t^{-1}\pa_ta_t)=c_0\pa_t\log\det a_t=0$, since $\det a_t=\det g\det h$.)
 
