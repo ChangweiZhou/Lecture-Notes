@@ -1,0 +1,261 @@
+% Solutions for appendix B-blowup
+\providecommand{\Vb}{\mathcal{V}_{\mathrm{b}}}
+\providecommand{\bT}{{}^{\mathrm{b}}T}
+\providecommand{\relRC}[2]{{}^{#1}\overline{#2}}
+
+\section[Solutions: real blow-up]{Solutions for \cref{ch:blowup}: Real blow-up and manifolds with corners}\label{solutions:blowup}
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{blowup:ex:projective}}
+Idea: everything follows from the chain rule for the substitution $z_1=s$, $z_k=st_k$.
+
+(a) On $\{z_1>0\}$ the map $(s,t)\mapsto z=(s,st_2,\dots,st_n)$ is a diffeomorphism onto
+$\{z_1>0\}$, with inverse $s=z_1$, $t_k=z_k/z_1$. A vector field is determined by its
+action on the coordinate functions $s$, $t_k$. Since $\pa_{z_k}s=0$, $\pa_{z_k}t_r=\delta_{kr}/z_1$
+for $k\ge2$, and $\pa_{z_1}s=1$, $\pa_{z_1}t_r=-z_r/z_1^2=-t_r/s$, we get
+\begin{equation*}
+  \pa_{z_k}=s^{-1}\pa_{t_k}\ (k\ge2),\qquad\pa_{z_1}=\pa_s-s^{-1}\sum_{r\ge2}t_r\pa_{t_r}.
+\end{equation*}
+Multiplying by $z_l=st_l$ ($l\ge2$) or $z_1=s$ gives the four cases of
+\eqref{blowup:eq:proj-lifts} with $j=1$: $z_l\pa_{z_m}=t_l\pa_{t_m}$ and $z_1\pa_{z_m}=\pa_{t_m}$
+for $m\ge2$; $z_l\pa_{z_1}=t_l(s\pa_s-\sum_rt_r\pa_{t_r})$ and
+$z_1\pa_{z_1}=s\pa_s-\sum_rt_r\pa_{t_r}$. All are smooth up to $s=0$, which is the front face
+by \cref{blowup:lem:projective}.
+
+(b) Summing, $\sum_lz_l\pa_{z_l}=(s\pa_s-\sum_{r\ge2}t_r\pa_{t_r})+\sum_{l\ge2}t_l\pa_{t_l}=s\pa_s$.
+For the rotation,
+\begin{equation*}
+  z_1\pa_{z_2}-z_2\pa_{z_1}=\pa_{t_2}-t_2\Big(s\pa_s-\sum_{r\ge2}t_r\pa_{t_r}\Big)
+  =(1+t_2^2)\pa_{t_2}-t_2s\pa_s+t_2\sum_{r\ge3}t_r\pa_{t_r}.
+\end{equation*}
+It is tangent to $\{s=0\}$ but does not vanish there.
+
+(c) By (a), $\pa_{z_1}=s^{-1}V$ with $V=s\pa_s-\sum_{r\ge2}t_r\pa_{t_r}$ smooth. If $\pa_{z_1}$
+had a smooth extension $\tilde V$ near a point $(0,t^0)$ of the front face, then $\tilde Vt_2$
+would be a smooth, hence locally bounded, function. But for $s>0$, $\tilde Vt_2=\pa_{z_1}t_2=-t_2/s$,
+which is unbounded as $s\downarrow0$ along the curve $t_2=t^0_2+s^{1/2}$, $t_k=t^0_k$ ($k\ge3$).
+So $\pa_{z_1}$ has no smooth lift near any point of the front face in this chart.
+
+(d) The Jacobian matrix of $(s,t)\mapsto z$ is lower triangular, with first row $(1,0,\dots,0)$
+and $dz_k=t_k\,ds+s\,dt_k$, so its determinant is $s^{n-1}$. Hence
+$\beta^*\abs{dz}=s^{n-1}\abs{ds\,dt}$, in agreement with \cref{blowup:prop:density}.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{blowup:ex:cone}}
+Idea: the cone is invariant under dilations, so in polar coordinates it is a product.
+
+Use polar coordinates $(r,\omega)$, $\omega=(\omega_t,\omega_x,\omega_y)\in\Sphere^2$, on
+$[\R^3;\{0\}]=[0,\infty)\times\Sphere^2$. For $r>0$, $r\omega\in C$ if and only if
+$\omega_t^2=\omega_x^2+\omega_y^2$ and $\omega_t\ge0$; with $\abs\omega=1$ this means
+$\omega_t=1/\sqrt2$ and $(\omega_x,\omega_y)=\theta/\sqrt2$, $\theta\in\Sphere^1$. Let
+$C_1=\{\omega\in\Sphere^2;\ \omega_t=1/\sqrt2\}$. Then $\beta^{-1}(C\setminus0)=(0,\infty)\times C_1$,
+whose closure is $\tilde C=[0,\infty)\times C_1$.
+
+$C_1$ is a smooth circle in $\Sphere^2$, since the restriction of $\omega_t$ to $\Sphere^2$
+has non-zero differential where $\abs{\omega_t}<1$. Near a point of $C_1$ choose an angular
+coordinate $\vartheta$ on $\Sphere^2$ with $(\omega_t-1/\sqrt2,\vartheta)$ local coordinates; then
+$(r,\omega_t-1/\sqrt2,\vartheta)$ are coordinates on $[0,\infty)\times\Sphere^2$ in which
+$\tilde C=\{\omega_t-1/\sqrt2=0\}$ with $\omega_t-1/\sqrt2$ an interior coordinate. So $\tilde C$
+is an interior p-submanifold, diffeomorphic to $[0,\infty)\times\Sphere^1$ by
+$(r,\theta)\mapsto(r,(1,\theta)/\sqrt2)$. It meets the front face $\{r=0\}$ in $\{0\}\times C_1$,
+transversally since $dr\ne0$ on $\tilde C$. Finally $\beta(r,(1,\theta)/\sqrt2)=r(1,\theta)/\sqrt2$.
+Thus the singular space $C$ is resolved to a manifold with boundary, the boundary being
+the circle of directions in which $C$ leaves the vertex.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{blowup:ex:morse}}
+Idea: $u-u(0)$ is homogeneous of degree two to leading order, so it is $r^2$ times a
+function whose zero set on the front face is the cone of null directions of the Hessian.
+
+Substituting $z=r\omega$ gives $\beta^*u=u(0)+r^2\omega^TH(r\omega)\omega=u(0)+r^2U$, with
+$U(r,\omega)=\omega^TH(r\omega)\omega$ smooth on $[0,\infty)\times\Sphere^{n-1}$. At $r=0$,
+$U(0,\omega)=q(\omega)=\omega^TH(0)\omega$. The differential of $q$ along the sphere at $\omega$ is the
+tangential part of $\nabla q(\omega)=2H(0)\omega$, namely $2H(0)\omega-2(\omega\cdot H(0)\omega)\omega$. At a
+point where $q(\omega)=0$ this equals $2H(0)\omega$, which is non-zero because $H(0)$ is invertible.
+Thus $d_\omega U\ne0$ at every point of the compact set $\{r=0,\ U=0\}$, and hence, by continuity,
+$dU\ne0$ on a neighbourhood $\mathcal N$ of it.
+
+The lift of the level set is $\{\beta^*u=u(0)\}=\{r^2U=0\}=\{r=0\}\cup\{U=0\}$. In $\mathcal N$,
+$\{U=0\}$ is a smooth hypersurface, and it meets $\{r=0\}$ transversally: at a common point
+$dU$ has a non-zero component along the sphere, while $dr$ has none, so $dr$ and $dU$ are
+independent. (If $H(0)$ is definite, $q\ne0$ on the sphere and near the front face the lifted
+level set is just the front face, reflecting that $0$ is an isolated point of the level set.)
+In other words, after one blow-up the singular level set has normal crossings.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{blowup:ex:diag-not-p}}
+Idea: a coordinate subspace meets a codimension-two corner in codimension two, but the
+diagonal meets the corner of $X^2$ in codimension one.
+
+Let $p\in\pa X$ and $q=(p,p)$, and let $(x,y)$, $(x',y')$ be boundary coordinates near $p$ on the
+two factors. The boundary hypersurfaces of $X^2$ through $q$ are $\{x=0\}$ and $\{x'=0\}$, and
+$q$ has codimension two. Near $q$,
+\begin{equation*}
+  \Diag\cap\{x=0\}=\Diag\cap\{x'=0\}=\Diag\cap\{x=x'=0\}=\{(p',p');\ p'\in\pa X\},
+\end{equation*}
+a manifold of dimension $n-1$ through $q$.
+
+Suppose $\Diag$ were a p-submanifold, with a chart $(z_1,\dots,z_{2n})$ centred at $q$ in which
+$\Diag=\{z_A=0\}$, $\abs A=n$. By \cref{blowup:lem:bdf} the two boundary hypersurfaces through
+$q$ are $\{z_1=0\}$ and $\{z_2=0\}$ for two boundary coordinates, say $\{x=0\}=\{z_1=0\}$ and
+$\{x'=0\}=\{z_2=0\}$ near $q$. If $1\in A$, then $\Diag\subset\{x=0\}$ near $q$, which is false:
+$(p',p')$ with $p'$ an interior point near $p$ lies in $\Diag$. Similarly $2\notin A$. But then
+$\Diag\cap\{z_1=z_2=0\}=\{z_A=0,\ z_1=z_2=0\}$ is a coordinate subspace of dimension
+$2n-n-2=n-2$ (empty if $n=1$, whereas it contains $q$), contradicting the computation above.
+Hence $\Diag$ is not a p-submanifold. (\Cref{blowup:exa:b-double} shows that its lift to
+$[X^2;(\pa X)^2]$ is one.)
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{blowup:ex:noncommute}}
+Idea: on $[\R^3;Y]$ the angle around $Y$ is a smooth function; on $[\R^3;Z;Y]$ the same
+angle has different limits along two sequences converging to the same point.
+
+\emph{Position.} In the coordinates $z$ themselves, $Y=\{z_A=0\}$ and $Z=\{z_B=0\}$ with
+$A=\{1,2\}$, $B=\{2,3\}$, so they are joint. Since $A\cap B=\{2\}\ne\emptyset$ and neither of
+$A$, $B$ contains the other, they are neither transversal nor nested. So
+\cref{blowup:prop:lift} applies (both lifts are p-submanifolds), but
+\cref{blowup:prop:commute} does not.
+
+\emph{$f$ on $[\R^3;Y;Z]$.} On $[\R^3;Y]=[0,\infty)_\rho\times\Sphere^1_\phi\times\R_{z_3}$, with
+$(z_1,z_2)=\rho(\cos\phi,\sin\phi)$, we have $f=\sin\phi$ for $\rho>0$, which extends smoothly.
+Composing with the blow-down map $[\R^3;Y;Z]\to[\R^3;Y]$ gives a continuous (indeed smooth)
+extension of $f$ to $[\R^3;Y;Z]$.
+
+\emph{$f$ on $[\R^3;Z;Y]$.} On $[\R^3;Z]$, near directions with $z_3>0$, we use projective
+coordinates $(z_1,\sigma,\kappa)$ with $\sigma=z_3\ge0$ and $\kappa=z_2/z_3$
+(\cref{blowup:lem:projective}); the front face is $\{\sigma=0\}$. The lift of $Y$ is the closure
+of $\{z_1=0,\ \kappa=0,\ \sigma>0\}$, which is $\{z_1=0,\ \kappa=0\}$ (\cref{blowup:prop:lift}).
+Blowing it up we use polar coordinates $z_1=R\cos\alpha$, $\kappa=R\sin\alpha$, so
+$(R,\alpha,\sigma)\in[0,\infty)\times\Sphere^1\times[0,\infty)$ are coordinates on an open set of
+$[\R^3;Z;Y]$. Where $R,\sigma>0$ and $\sin\alpha\ne0$, $\cos\alpha\ne0$ we are in the interior and
+$z_2=\sigma\kappa=\sigma R\sin\alpha$, so
+\begin{equation*}
+  f=\frac{\sigma R\sin\alpha}{\sqrt{R^2\cos^2\alpha+\sigma^2R^2\sin^2\alpha}}
+  =\frac{\sigma\sin\alpha}{\sqrt{\cos^2\alpha+\sigma^2\sin^2\alpha}}.
+\end{equation*}
+Let $P$ be the point $(R,\alpha,\sigma)=(0,\pi/2,0)$. The points
+$a_k=(1/k,\ \pi/2-1/k^2,\ 1/k)$ and $b_k=(1/k,\ \pi/2-1/k,\ 1/k^2)$ are interior points
+converging to $P$. At $a_k$, $\cos\alpha\approx k^{-2}$ and $\sigma=k^{-1}$, so
+$f(a_k)=\sigma\sin\alpha/\sqrt{\cos^2\alpha+\sigma^2\sin^2\alpha}\to1$ (the denominator is
+$k^{-1}(1+O(k^{-2}))$). At $b_k$, $\cos\alpha\approx k^{-1}$ and $\sigma=k^{-2}$, so
+$f(b_k)\approx k^{-2}/k^{-1}\to0$. Hence $f$ has no continuous extension to $[\R^3;Z;Y]$.
+
+\emph{Conclusion.} If the identity of $\R^3\setminus(Y\cup Z)$ extended to a homeomorphism
+$\Phi:[\R^3;Z;Y]\to[\R^3;Y;Z]$, then $\tilde f\circ\Phi$, with $\tilde f$ the continuous extension
+on $[\R^3;Y;Z]$, would be a continuous extension of $f$ to $[\R^3;Z;Y]$, which does not exist.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{blowup:ex:corner-exponents}}
+Idea: read off the exponents from \cref{blowup:prop:props}(ii), and the b-differential from
+projective coordinates.
+
+The boundary hypersurfaces of $[\R^{2,2};\{0\}]$ are the front face $\mathrm{ff}$ and the lifts
+$H_1'$, $H_2'$ of $H_1=\{x_1=0\}$, $H_2=\{x_2=0\}$. Since $\{0\}\subset H_1\cap H_2$,
+\cref{blowup:prop:props}(ii) gives $\beta^*x_i=\rho_{\mathrm{ff}}\rho_{H_i'}$, so the exponent matrix
+(rows $\mathrm{ff},H_1',H_2'$, columns $H_1,H_2$) is
+\begin{equation*}
+  e=\begin{pmatrix}1&1\\1&0\\0&1\end{pmatrix}.
+\end{equation*}
+Explicitly, in polar coordinates $x=r(\cos\phi,\sin\phi)$, $\phi\in[0,\pi/2]$, we have
+$\beta^*x_1=r\cos\phi$ and $\beta^*x_2=r\sin\phi$, where $r=\rho_{\mathrm{ff}}$; the lift $H_1'$ of
+$\{x_1=0\}$ is the closure of $\{\phi=\pi/2,\ r>0\}$, with defining function $\cos\phi$, and
+similarly $\sin\phi$ defines $H_2'=\{\phi=0\}$. The first row has two
+non-zero entries: the front face is mapped into the corner, so $\beta$ is not b-normal.
+
+For the b-submersion property, take the projective coordinates $s=x_1$, $t=x_2/x_1$ near
+$\{\phi<\pi/2\}$. Then $\log\beta^*x_1=\log s$, $\log\beta^*x_2=\log s+\log t$, so by
+\cref{blowup:lem:bdiff} $\beta_*(s\pa_s)=x_1\pa_{x_1}+x_2\pa_{x_2}$ and
+$\beta_*(t\pa_t)=x_2\pa_{x_2}$, where $s\pa_s$, $t\pa_t$ is a basis of $\bT$ in this chart (both
+$s,t\ge0$ are boundary coordinates). The images span $\bT\R^{2,2}$, and the other projective chart
+$s=x_2$, $t=x_1/x_2$ is symmetric. Away from the front face $\beta$ is a diffeomorphism. So $\beta$
+is a b-submersion (\cref{blowup:prop:bd-bsub}).
+
+The composite $\pi_1\circ\beta$ is an interior b-map to $[0,\infty)$, whose only boundary
+hypersurface is $\{0\}$; so each row of its exponent matrix has at most one entry and it is
+b-normal. (Its exponents are $e(\mathrm{ff})=1$, $e(H_1')=1$, $e(H_2')=0$.)
+
+In general, let $F$ be a boundary face of codimension $a$. Near a point of $F$ of
+codimension $a$ in $X$, \cref{blowup:lem:bdf} shows that exactly $a$ boundary hypersurfaces pass
+through it, namely $\{x_i=0\}$, $i\le a$, and they contain $F$; any hypersurface containing $F$
+passes through this point. By \cref{blowup:prop:props}(ii), $e(\mathrm{ff},H)=1$ if $F\subset H$ and
+$0$ otherwise. So the row of $\mathrm{ff}$ has exactly $a$ entries equal to $1$, and $\beta$ is b-normal
+if and only if $a=1$, i.e.\ $[X;F]=X$.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{blowup:ex:half-disc}}
+Idea: the fibres change type at the corners, where the restriction of $f$ to the curved face
+is stationary.
+
+\emph{$D_+$ is a manifold with corners.} Put $\rho_S=y$ and $\rho_A=1-x^2-y^2$. Then
+$D_+=\{\rho_S\ge0,\ \rho_A\ge0\}$. At points where only one of them vanishes its differential is
+non-zero ($dy$, resp.\ $-2(x\,dx+y\,dy)\ne0$ on the circle), so it is a boundary coordinate. At
+$(\pm1,0)$ both vanish and $d\rho_S=dy$, $d\rho_A=\mp2\,dx$ are independent, so $(\rho_A,\rho_S)$ is a
+chart onto a neighbourhood of $0$ in $\R^{2,2}$. Hence $D_+$ is a manifold with corners with two
+boundary hypersurfaces, the segment $S=\{\rho_S=0\}$ and the arc $A=\{\rho_A=0\}$, embedded with
+the defining functions $\rho_S$, $\rho_A$, and two corners $(\pm1,0)$.
+
+\emph{$f$.} It is surjective onto $[-1,1]$ and $df=dx\ne0$ everywhere. Its fibre over
+$x\in(-1,1)$ is the segment $\{x\}\times[0,\sqrt{1-x^2}]$, and over $\pm1$ the point $(\pm1,0)$.
+If $f$ were a fibration, each point of $[-1,1]$ would have a neighbourhood over which the fibres
+are all diffeomorphic; since $[-1,1]$ is connected, all fibres would be diffeomorphic. A point
+is not diffeomorphic to a segment, so $f$ is not a fibration.
+
+\emph{Which hypothesis fails.} Regard $f:D_+\to\R$. Its restriction to the face $A$ is
+$x|_A$, whose differential vanishes at $(\pm1,0)$ (the arc is vertical there); and its restriction
+to the zero-dimensional faces $\{(\pm1,0)\}$ is not a submersion onto $\R$. So the hypothesis of
+\cref{blowup:prop:fibration} fails exactly at the corners. Consistently, $f(D_+)=[-1,1]$ is not
+open in $\R$.
+
+\emph{b-map?} The target $[-1,1]$ has boundary hypersurfaces $\{\pm1\}$ with defining functions
+$1\mp x$. Now $f^*(1-x)=1-x$ vanishes on $D_+$ exactly at the point $(1,0)$. For an interior
+b-map, $f^*(1-x)=a\rho_S^{e_S}\rho_A^{e_A}$ with $a>0$ would vanish either nowhere or on a union of
+boundary hypersurfaces; and $f^*(1-x)\not\equiv0$. So $f$ is not a b-map.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{blowup:ex:octagon}}
+Idea: count the faces created by each blow-up, and identify faces through the limits of curves
+in $W$.
+
+\emph{$\mathcal D_1$.} For $\dim U=\dim V=1$, $\RC W$ is a closed disc and $\Sphere U$, $\Sphere V$ are
+pairs of antipodal points of the boundary circle, four points in all. Each is a p-submanifold
+of normal type $(1,1)$ (one boundary and one interior normal variable), so blowing it up replaces
+it by $\Sphere^{1,1}$, a closed half-circle, i.e.\ an interval, and cuts the circle there. The
+resulting space has eight boundary hypersurfaces: four arcs of the circle (the components of the
+lift of $\Sphere W$) and four front faces (two components each of $\mathrm{ff}_U$ and $\mathrm{ff}_V$),
+alternating around the boundary, with eight corners. Topologically it is a disc with boundary
+divided into eight intervals: an octagon.
+
+\emph{$\mathcal D_2$.} $\RC V\times\RC U$ is a square with four sides
+$(\Sphere V)\times\RC U$ (two sides) and $\RC V\times\Sphere U$ (two sides) and four corners
+$\Sphere V\times\Sphere U$. Blowing up a corner (normal type $(2,0)$) inserts a quarter circle
+$\Sphere^{2,0}$. Again we get eight sides alternating between the lifted sides of the square and
+the four front faces.
+
+\emph{Identification.} By \cref{blowup:prop:doubly} there is a diffeomorphism $\mathcal D_1\to\mathcal
+D_2$ extending the identity of $W$; it maps boundary hypersurfaces onto boundary hypersurfaces,
+and we can identify them by the limits of curves in $W$. The interior of a lifted side
+$(\pm\Sphere V)\times\RC U$ of the square is reached by curves $(v,u)$ with $v\to\pm\infty$ and $u$
+bounded; in $\RC W$ they converge to $\pm\Sphere V$, so in $\mathcal D_1$ they end on $\mathrm{ff}_V$.
+Similarly the sides $\RC V\times(\pm\Sphere U)$ correspond to the components of $\mathrm{ff}_U$. The
+interior of the front face over a corner of the square is reached by curves with $\abs u$,
+$\abs v\to\infty$ and $\ang u/\ang v\to c\in(0,\infty)$; in $\RC W$ these converge to points of
+$\Sphere W\setminus(\Sphere U\cup\Sphere V)$, so in $\mathcal D_1$ they end on the lift of $\Sphere W$. Thus:
+\begin{equation*}
+  \mathrm{ff}_V\leftrightarrow\text{lift of }\Sphere V\times\RC U,\qquad
+  \mathrm{ff}_U\leftrightarrow\text{lift of }\RC V\times\Sphere U,\qquad
+  \text{lift of }\Sphere W\leftrightarrow\mathrm{ff}(\Sphere V\times\Sphere U).
+\end{equation*}
+This is the picture of \cref{blowup:fig:octagon}.
+
+\emph{Higher dimensions.} If $\dim U=k\ge2$ and $\dim V=l\ge2$, the spheres $\Sphere U$, $\Sphere
+V$ and $\Sphere W$ are connected. By \cref{blowup:prop:props}(ii) the boundary hypersurfaces of
+$\mathcal D_1$ are the lift of $\Sphere W$ and the front faces $\mathrm{ff}_U$, $\mathrm{ff}_V$. The front
+face $\mathrm{ff}_V$ is a bundle over the connected manifold $\Sphere V$ with connected fibre
+$\Sphere^{1,k}$ (a closed half-sphere), hence connected; likewise $\mathrm{ff}_U$. The lift of $\Sphere W$
+is the closure of $\Sphere W\setminus(\Sphere U\cup\Sphere V)$, and the complement in the connected
+manifold $\Sphere W$ of the two disjoint submanifolds $\Sphere U$, $\Sphere V$ of codimension $l\ge2$,
+$k\ge2$ is connected (a path can be pushed off a submanifold of codimension at least two), so the
+lift is connected. Hence there are exactly three boundary hypersurfaces, identified with those
+of $\mathcal D_2$ as above: the lifts of $\Sphere V\times\RC U$ and $\RC V\times\Sphere U$ and the front
+face over the corner $\Sphere V\times\Sphere U$. When $k=1$ or $l=1$ some of these split into two
+components, as in the octagon.

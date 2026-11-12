@@ -1,0 +1,1539 @@
+\chapter{Real blow-up and manifolds with corners}\label{ch:blowup}
+\providecommand{\Vb}{\mathcal{V}_{\mathrm{b}}}
+\providecommand{\bT}{{}^{\mathrm{b}}T}
+\providecommand{\relRC}[2]{{}^{#1}\overline{#2}}
+\providecommand{\oRC}[1]{{}^{1}\overline{#1}}
+
+Several spaces in this book are built by ``introducing polar coordinates'' around a
+submanifold: the radial compactification of a vector space in \cref{ch:distributions},
+the blow-up of the origin used for homogeneous distributions in \cref{ch:conormal}, the
+semiclassical and adiabatic double spaces of \cref{ch:semiclassical}, the relative
+compactifications carrying product-type symbols in \cref{ch:product}, and the spaces on
+which the symbols of \cref{ch:families,ch:eta} live. This appendix gives the general
+construction, called \emph{real} (or \emph{radial}) \emph{blow-up}, and proves the facts
+about it that those chapters use.
+
+Blow-up is useful for three closely related purposes. It \emph{resolves singular
+functions}: $\abs z$ is not smooth on $\R^n$, but in polar coordinates it is the
+coordinate $r$. It \emph{resolves singular spaces}: the cone $\{t^2=x^2+y^2,\ t\ge0\}$
+becomes, in polar coordinates around the origin of $\R^3$, the smooth manifold with
+boundary $[0,\infty)\times\Sphere^1$. And it \emph{resolves degenerate vector fields}:
+the linear vector fields $z_i\pa_{z_j}$ vanish at $0$, but they lift to polar coordinates
+as smooth vector fields which, together, span all vector fields tangent to the new
+boundary. The price is that each blow-up creates a boundary hypersurface, so after two
+blow-ups we meet corners. We therefore begin with manifolds with corners
+(\cref{blowup:sec:corners}), blow up points (\cref{blowup:sec:point}) and then general
+product-type submanifolds (\cref{blowup:sec:psub}). We then study functions and
+densities on blown-up spaces, including the resolution of semiclassical kernels
+(\cref{blowup:sec:functions}), the behaviour of submanifolds under blow-up and the
+commutation of blow-ups (\cref{blowup:sec:commute}), projective blow-up and the blow-up
+of hypersurfaces (\cref{blowup:sec:projective}), and the maps which replace fibrations
+in this category (\cref{blowup:sec:bfib}). \Cref{blowup:sec:dictionary} lists, with
+references, where each of the spaces used in the book comes from.
+
+\begin{discussion}
+Why not simply ``use polar coordinates''? Because polar coordinates depend on a choice
+of linear coordinates, and we need an object which is defined for a submanifold of a
+manifold, with no choices. The central fact of the theory
+(\cref{blowup:thm:invariance}) is that every diffeomorphism preserving the centre of
+the blow-up lifts to a diffeomorphism of the polar-coordinate spaces. Everything else
+---the global construction, its independence of choices, the lifting of vector
+fields--- follows from this one lemma and from explicit computations in polar or
+projective coordinates.
+\end{discussion}
+
+%======================================================================
+\section{Manifolds with corners}\label{blowup:sec:corners}
+
+Manifolds with boundary were introduced in \cref{ch:boundary}
+(\cref{boundary:sec:manifolds}). We now allow several boundary hypersurfaces to meet,
+transversally, at corners.
+
+\subsection{Local models and smooth maps}
+For $0\le k\le n$ the model space is
+\begin{equation*}
+  \R^{n,k}=[0,\infty)^k\times\R^{n-k},
+\end{equation*}
+with coordinates $(x_1,\dots,x_k,y_1,\dots,y_{n-k})$; the $x_i$ are \emph{boundary
+coordinates}. As in \cref{boundary:sec:manifolds}, an open set in $\R^{n,k}$ means a
+relatively open set $O=O'\cap\R^{n,k}$, $O'\subset\R^n$ open, and a map or function on
+$O$ is \emph{smooth} if it is the restriction of a smooth map or function on such an
+$O'$. A diffeomorphism is a smooth bijection with smooth inverse.
+
+\begin{remark}\label{blowup:rem:smooth}
+As for manifolds with boundary (\cref{boundary:prop:extension}), $u$ is smooth on $O$ if
+and only if it is smooth on $O\cap(0,\infty)^k\times\R^{n-k}$ and all its derivatives
+are bounded on $K\cap(0,\infty)^k\times\R^{n-k}$ for each compact $K\subset O$. The
+proof of \cref{boundary:prop:extension} applies to one boundary coordinate at a time:
+Borel's lemma with parameters extends $u$ across $\{x_1=0\}$, with the same bounds on
+compact sets, and then one continues with $x_2$, and so on. We use this criterion only
+in \cref{blowup:lem:flat}.
+\end{remark}
+
+For a point $p\in\R^{n,k}$ let $L(p)\subset\{1,\dots,k\}$ be the set of $i$ with
+$x_i(p)=0$; its size $|L(p)|$ is the \emph{codimension} of $p$. The \emph{inward cone}
+$C_p$ is the set of velocities $\gamma'(0)$ of smooth curves
+$\gamma:[0,\epsilon)\to\R^{n,k}$ with $\gamma(0)=p$. Clearly
+\begin{equation*}
+  C_p=\{v\in\R^n;\ v_i\ge0\ \text{for}\ i\in L(p)\}.
+\end{equation*}
+
+\begin{lemma}\label{blowup:lem:codim}
+A diffeomorphism $F:O_1\to O_2$ between open subsets of $\R^{n,k}$ and $\R^{n,k'}$
+satisfies $DF(p)(C_p)=C_{F(p)}$, and preserves the codimension of points.
+\end{lemma}
+\begin{proof}
+$F$ maps curves starting at $p$ to curves starting at $F(p)$, and $F^{-1}$ does the
+converse; by the chain rule (for smooth extensions) $DF(p)C_p=C_{F(p)}$. The largest
+linear subspace contained in $C_p$ is $\{v;\ v_i=0,\ i\in L(p)\}$, of dimension
+$n-|L(p)|$. The linear isomorphism $DF(p)$ maps it onto the corresponding subspace of
+$C_{F(p)}$, so $|L(p)|=|L(F(p))|$.
+\end{proof}
+
+\subsection{Manifolds with corners}
+A \emph{chart with corners} on a topological space $X$ is a homeomorphism of an open
+set $U\subset X$ onto an open subset of some $\R^{n,k}$ (with $n$ fixed and $k$ allowed
+to vary). A $t$-manifold (``manifold with corners in the weak sense'') is a
+second-countable Hausdorff space with a maximal atlas of such charts whose transition
+maps are smooth. By \cref{blowup:lem:codim} the codimension of a point is well
+defined. The points of codimension $0$ form the interior $X^\circ$, and the points of
+codimension $1$ form a manifold $X^{(1)}$ without boundary of dimension $n-1$. The
+\emph{boundary hypersurfaces} of $X$ are the closures of the components of $X^{(1)}$.
+The tangent bundle, vector fields, densities and differential operators are defined
+exactly as for manifolds without boundary, and $C_pX\subset T_pX$ denotes the inward
+cone.
+
+\begin{definition}\label{blowup:def:mwc}
+A \emph{manifold with corners} is a $t$-manifold $X$ each of whose boundary
+hypersurfaces $H$ is \emph{embedded}: there is a \emph{boundary defining function}
+$\rho_H\in\CI(X)$ with $\rho_H\ge0$, $H=\{\rho_H=0\}$ and $d\rho_H\ne0$ at every point
+of $H$. We write $\mathcal M_1(X)$ for the set of boundary hypersurfaces.
+\end{definition}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[>=Stealth,scale=0.95]
+  \begin{scope}
+    \fill[gray!15] (0,0) rectangle (2.4,2.4);
+    \draw[very thick] (0,2.4)--(0,0)--(2.4,0);
+    \fill (0,0) circle (1.8pt);
+    \node[left,font=\small] at (0,1.3) {$H_1=\{x_1=0\}$};
+    \node[below,font=\small] at (1.4,0) {$H_2=\{x_2=0\}$};
+    \node[font=\small] at (1.4,1.4) {$\R^{2,2}$};
+    \node[font=\small] at (1.2,-1.0) {(a) a corner};
+  \end{scope}
+  \begin{scope}[xshift=4.6cm]
+    \fill[gray!15] (0,0) .. controls (2.2,0.2) and (2.6,2.6) .. (1.2,2.5)
+       .. controls (0.2,2.4) and (0.2,2.2) .. (0,0);
+    \draw[very thick] (0,0) .. controls (2.2,0.2) and (2.6,2.6) .. (1.2,2.5)
+       .. controls (0.2,2.4) and (0.2,2.2) .. (0,0);
+    \fill (0,0) circle (1.8pt);
+    \node[font=\small,align=center] at (1.2,-1.0) {(b) teardrop: one\\ hypersurface, not embedded};
+  \end{scope}
+  \begin{scope}[xshift=8.8cm]
+    \fill[gray!15] (0,0) rectangle (2.4,2.4);
+    \draw[very thick] (0,0) rectangle (2.4,2.4);
+    \draw[thick,dashed] (0,0)--(2.4,2.4);
+    \node[font=\small] at (1.75,0.9) {$\Diag$};
+    \fill (0,0) circle (1.8pt);
+    \node[font=\small,align=center] at (1.2,-1.0) {(c) $\Diag\subset[0,1]^2$ is\\ not a p-submanifold};
+  \end{scope}
+\end{tikzpicture}
+\caption{(a) Near a corner of codimension two, the two boundary hypersurfaces are
+coordinate hyperplanes. (b) The teardrop is a $t$-manifold but not a manifold with
+corners: its only boundary hypersurface meets itself at the corner, where no defining
+function can have non-zero differential. (c) The diagonal of the square is an embedded
+submanifold but not of product type at $(0,0)$; blowing up the corner repairs this
+(\cref{blowup:fig:corner}).}
+\label{blowup:fig:corners}
+\end{figure}
+
+\begin{lemma}\label{blowup:lem:bdf}
+Let $X$ be a manifold with corners and $p\in X$ of codimension $l$, with chart
+$(x,y)\in\R^{n,l}$ centred at $p$. Then exactly $l$ boundary hypersurfaces
+$H_1,\dots,H_l$ pass through $p$, they can be numbered so that $H_i=\{x_i=0\}$ near
+$p$, and $\rho_{H_i}=x_ig_i$ with $g_i$ smooth and positive near $p$. Any two boundary
+defining functions of $H$ differ by a positive smooth factor.
+\end{lemma}
+\begin{proof}
+Near $p$ the codimension-one points form the sets $\{x_i=0,\ x_j>0\ (j\ne i)\}$, so each
+local hypersurface $\{x_i=0\}$ lies in some boundary hypersurface. If $\{x_1=0\}$ and
+$\{x_2=0\}$ lay in the same $H$, then $\rho_H$ would vanish on both, hence
+$d\rho_H(p)=0$, which is excluded. Taylor's formula gives $\rho_{H_i}=x_ig_i$ with
+$g_i=\int_0^1\pa_{x_i}\rho_{H_i}(\dots,tx_i,\dots)\,dt$. On $\{x_i=0\}$ we have
+$d\rho_{H_i}=g_i\,dx_i\neq0$, so $g_i\ne0$ there; for $x_i>0$, $g_i=\rho_{H_i}/x_i>0$.
+Hence $g_i>0$ near $p$. The quotient of two defining functions is therefore smooth and
+positive near $H$, and it is smooth and positive away from $H$.
+\end{proof}
+
+The intersection of any collection of boundary hypersurfaces is, near each of its
+points, of the form $\{x_i=0,\ i\in I\}$; its components are the \emph{boundary faces}
+of $X$, and are manifolds with corners. The product of two manifolds with corners is a
+manifold with corners, with boundary hypersurfaces $H_1\times X_2$ and $X_1\times H_2$.
+Examples: $[0,1]^n$, the closed half-sphere $\RC{\R^n}$ of \cref{ch:distributions},
+and the \emph{corner spheres}
+\begin{equation*}
+  \Sphere^{a,b}=\{\omega\in\R^{a+b};\ \abs\omega=1,\ \omega_1,\dots,\omega_a\ge0\},
+\end{equation*}
+which are the unit spheres of the models $\R^{a+b,a}$. Thus $\Sphere^{0,k}=\Sphere^{k-1}$,
+$\Sphere^{1,k}$ is a closed half-sphere and $\Sphere^{2,0}$ is a quarter circle. Near a
+point $\omega\in\Sphere^{a,b}$ choose $m$ with $\omega_m\ne0$; then the
+$\omega_k$, $k\ne m$, are coordinates, with $\omega_k\ge0$ for $k\le a$, $k\neq m$, so
+$\Sphere^{a,b}$ is a manifold with corners whose boundary hypersurfaces
+$\{\omega_i=0\}$, $i\le a$, have the defining functions $\omega_i$.
+
+\subsection{Product-type submanifolds}
+Embedded submanifolds of manifolds with corners can meet the boundary in complicated
+ways. The ones we can blow up are those that look like coordinate subspaces.
+
+\begin{definition}\label{blowup:def:psub}
+A closed subset $Y$ of a manifold with corners $X$ is a \emph{p-submanifold}
+(product-type submanifold) if each $p\in Y$ has a chart of the form
+\begin{equation}\label{blowup:eq:adapted}
+  (x,y)\in\R^{a+b,a}\times\R^{m,c},\qquad Y=\{x=0\}\ \text{near}\ p.
+\end{equation}
+Such a chart is \emph{adapted} to $Y$; $x$ are \emph{normal coordinates}, and $(a,b)$ is
+the \emph{normal type} of $Y$ at $p$ (it is locally constant). $Y$ is an \emph{interior}
+p-submanifold if $a=0$ everywhere. Two p-submanifolds $Y$, $Z$ are \emph{joint} if each
+point of $Y\cap Z$ has a chart $(z_1,\dots,z_n)\in\R^{n,k}$ in which
+$Y=\{z_i=0,\ i\in A\}$ and $Z=\{z_i=0,\ i\in B\}$ for index sets $A$, $B$; they are
+\emph{transversal} if moreover $A\cap B=\emptyset$ in such charts.
+\end{definition}
+
+A p-submanifold is a manifold with corners, with coordinates $y$; its boundary
+hypersurfaces are the components of the sets $Y\cap H$, $H\in\mathcal M_1(X)$, $Y\not\subset
+H$, with defining functions $\rho_H|_Y$. Every boundary face $F$ of codimension $a$ is a
+p-submanifold of normal type $(a,0)$. In an adapted chart the boundary hypersurfaces
+through $p$ are the coordinate hyperplanes of boundary coordinates; those containing
+$Y$ are $\{x_i=0\}$, $i\le a$.
+
+The \emph{normal bundle} of $Y$ is $NY=T_YX/TY$; in an adapted chart, $N_pY\cong\R^{a+b}$
+by the components $dx(v)$ of $v\in T_pX$. The \emph{inward normal cone} $N^+_pY$ is the
+image of $C_pX$ in $N_pY$; in an adapted chart it is $[0,\infty)^a\times\R^b$. Finally
+\begin{equation*}
+  S^+_pY=(N^+_pY\setminus0)/\R^+\cong\Sphere^{a,b},\qquad S^+NY=\bigcup_{p\in Y}S^+_pY,
+\end{equation*}
+the \emph{inward-pointing spherical normal bundle}. For interior $Y$ this is the full
+sphere bundle $SNY=(NY\setminus0)/\R^+$.
+
+\begin{example}
+The diagonal of $[0,1]^2$ is an embedded submanifold but not a p-submanifold
+(\cref{blowup:fig:corners}(c), \cref{blowup:ex:diag-not-p}). The curve $\{x_2=x_1^2\}$ in
+$\R^{2,1}=[0,\infty)\times\R$ is not a p-submanifold at $0$ either: it is tangent to the
+boundary there.
+\end{example}
+
+\subsection{b-vector fields and b-maps}
+\begin{lemma}\label{blowup:lem:Vb}
+For a smooth vector field $V$ on a manifold with corners $X$ the following are
+equivalent: \textup{(i)} $V$ is tangent to every boundary hypersurface; \textup{(ii)}
+$V\rho_H\in\rho_H\CI(X)$ for every $H\in\mathcal M_1(X)$; \textup{(iii)} in every chart,
+$V=\sum_ia_ix_i\pa_{x_i}+\sum_jb_j\pa_{y_j}$ with smooth $a_i,b_j$. The space $\Vb(X)$ of
+such vector fields is a Lie algebra and a $\CI(X)$-module.
+\end{lemma}
+\begin{proof}
+Write $V=\sum c_i\pa_{x_i}+\sum b_j\pa_{y_j}$. Tangency to $\{x_i=0\}$ means $c_i=0$ there,
+i.e.\ $c_i=x_ia_i$ by Taylor's formula; this gives (i)$\iff$(iii), and (ii) follows from
+(iii) and \cref{blowup:lem:bdf}, while (ii) implies $c_i=Vx_i\in x_i\CI$ near $p$. If $V,W$
+satisfy (ii) then $[V,W]\rho_H=V(W\rho_H)-W(V\rho_H)\in\rho_H\CI$, since
+$V(\rho_Ha)=\rho_HVa+aV\rho_H$.
+\end{proof}
+
+\begin{definition}\label{blowup:def:bmap}
+A smooth map $f:X\to X'$ between manifolds with corners is an \emph{interior b-map} if
+for each $H'\in\mathcal M_1(X')$
+\begin{equation}\label{blowup:eq:bmap}
+  f^*\rho_{H'}=a_{H'}\prod_{H\in\mathcal M_1(X)}\rho_H^{e(H,H')},\qquad
+  0<a_{H'}\in\CI(X),\ e(H,H')\in\N_0.
+\end{equation}
+The integers $e(H,H')$ form the \emph{exponent matrix}. A \emph{b-map} is a map which,
+for each $H'$, either satisfies \eqref{blowup:eq:bmap} or has $f^*\rho_{H'}\equiv0$.
+\end{definition}
+
+By \cref{blowup:lem:bdf} the condition does not depend on the choice of defining
+functions. An interior b-map maps $X^\circ$ into $X'^\circ$, and $f(H)\subset H'$ when
+$e(H,H')>0$. Composites of interior b-maps are interior b-maps: substitute
+\eqref{blowup:eq:bmap} into itself. Diffeomorphisms, projections
+$X_1\times X_2\to X_1$, and (\cref{blowup:prop:props}) blow-down maps are interior
+b-maps. The inclusion of a boundary face is a b-map which is not interior.
+
+%======================================================================
+\section{Blow-up of a point}\label{blowup:sec:point}
+
+\subsection{Polar coordinates}
+The basic example of a blow-up is the polar coordinate map
+\begin{equation*}
+  \beta:[0,\infty)\times\Sphere^{n-1}\ni(r,\omega)\longmapsto r\omega\in\R^n.
+\end{equation*}
+It is smooth and surjective, a diffeomorphism of $(0,\infty)\times\Sphere^{n-1}$ onto
+$\R^n\setminus0$, and it collapses the \emph{front face} $\{r=0\}$ to the origin
+(\cref{blowup:fig:point}). We write $[\R^n;\{0\}]=[0,\infty)\times\Sphere^{n-1}$ for the
+moment; \cref{blowup:sec:psub} makes this invariant.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[>=Stealth,scale=0.95]
+  \begin{scope}
+    \fill[gray!12] (0,0) circle (1.8);
+    \foreach \a/\s in {20/solid,75/dashed,135/densely dotted}{
+      \draw[thick,\s] (\a:1.8)--(\a+180:1.8);}
+    \fill (0,0) circle (2pt);
+    \node[font=\small] at (0.35,-0.25) {$0$};
+    \node[font=\small] at (0,-2.3) {$\R^2$};
+  \end{scope}
+  \draw[<-] (2.3,0)--(3.5,0) node[midway,above,font=\small]{$\beta$};
+  \begin{scope}[xshift=6cm]
+    \fill[gray!12] (0,0) circle (1.8);
+    \fill[white] (0,0) circle (0.7);
+    \draw[very thick] (0,0) circle (0.7);
+    \foreach \a/\s in {20/solid,75/dashed,135/densely dotted}{
+      \draw[thick,\s] (\a:0.7)--(\a:1.8);
+      \draw[thick,\s] (\a+180:0.7)--(\a+180:1.8);
+      \fill (\a:0.7) circle (1.5pt); \fill (\a+180:0.7) circle (1.5pt);}
+    \node[font=\small,align=center] at (0,0) {ff};
+    \node[font=\small] at (0,-2.3) {$[\R^2;\{0\}]=[0,\infty)\times\Sphere^1$};
+  \end{scope}
+\end{tikzpicture}
+\caption{Blowing up the origin of $\R^2$. Lines through $0$ (left) all meet at the
+origin; their lifts (right) meet the front face $\mathrm{ff}=\{r=0\}$ at distinct points,
+one for each direction. The lifts are disjoint p-submanifolds.}
+\label{blowup:fig:point}
+\end{figure}
+
+\begin{lemma}\label{blowup:lem:vf-point}
+Every smooth vector field on $\R^n$ which vanishes at $0$ is $\beta$-related to a unique
+smooth vector field on $[0,\infty)\times\Sphere^{n-1}$, tangent to the front face. On
+$(0,\infty)\times\Sphere^{n-1}$,
+\begin{equation}\label{blowup:eq:lin-lift}
+  z_i\pa_{z_j}=\omega_i\omega_j\,r\pa_r+\omega_iW_j,\qquad
+  W_j=\sum_k(\delta_{jk}-\omega_j\omega_k)\pa_{\omega_k},
+\end{equation}
+where $W_j$ is the orthogonal projection of $e_j$ onto $T_\omega\Sphere^{n-1}$, a
+smooth vector field on the sphere. The lifts span $\Vb([0,\infty)\times\Sphere^{n-1})$
+over $\CI([0,\infty)\times\Sphere^{n-1})$. On the other hand
+$\pa_{z_j}=\omega_j\pa_r+r^{-1}W_j$ does not lift smoothly.
+\end{lemma}
+\begin{proof}
+For $r>0$, $z_i\pa_{z_j}r=z_iz_j/r=r\omega_i\omega_j$ and
+$z_i\pa_{z_j}\omega_k=z_i(\delta_{jk}r^{-1}-z_jz_kr^{-3})=\omega_i(\delta_{jk}-\omega_j\omega_k)$,
+which gives \eqref{blowup:eq:lin-lift}; it is smooth up to $r=0$ and tangent to it. A
+vector field $V=\sum_jc_j\pa_{z_j}$ vanishing at $0$ has, by Taylor's formula,
+$c_j=\sum_iz_ic_{ij}$ with $c_{ij}$ smooth, so $V=\sum c_{ij}z_i\pa_{z_j}$, and its lift
+is $\sum(\beta^*c_{ij})\,\omega_i\omega_jr\pa_r+\omega_iW_j$, which is smooth. The lift
+is unique because $\beta$ is a diffeomorphism on the dense set $r>0$. Summing
+\eqref{blowup:eq:lin-lift} over $i=j$ gives $\sum_iz_i\pa_{z_i}=r\pa_r$, and the
+rotations lift to $z_i\pa_{z_j}-z_j\pa_{z_i}=\omega_iW_j-\omega_jW_i$, whose value at
+$\omega$ is $\omega_ie_j-\omega_je_i$. For $v\perp\omega$,
+$\sum_{i,j}\omega_iv_j(\omega_ie_j-\omega_je_i)=v-(\omega\cdot v)\omega=v$, so the rotations
+span $T_\omega\Sphere^{n-1}$ at every point. Since $\Vb([0,\infty)\times\Sphere^{n-1})$
+is spanned locally by $r\pa_r$ and vector fields on the sphere, the lifts span it.
+Finally $\pa_{z_j}=\omega_j\pa_r+r^{-1}W_j$ by the same computation, and $W_j\ne0$ at
+points with $\omega_j\ne\pm1$.
+\end{proof}
+
+\subsection{Invariance}
+We now prove that polar coordinates do not depend on the choice of linear coordinates,
+or even on the choice of smooth coordinates, and we do this in the generality needed
+later: with parameters and at corners. Let $\R^{a+b,a}\ni x$ be the normal model and
+$P=\R^{m,c}\ni y$ a model for parameters. Define
+\begin{equation*}
+  \beta:[0,\infty)\times\Sphere^{a,b}\times P\ni(r,\omega,y)\longmapsto(r\omega,y)\in
+  \R^{a+b,a}\times P.
+\end{equation*}
+For $O\subset\R^{a+b,a}\times P$ open write $\tilde O=\beta^{-1}(O)$.
+
+\begin{theorem}\label{blowup:thm:invariance}
+Let $O,O'\subset\R^{a+b,a}\times P$ be open and $F:O\to O'$ a diffeomorphism with
+$F(O\cap\{x=0\})=O'\cap\{x=0\}$. Write $F=(F_N,F_P)$ and
+$A(y)=D_xF_N(0,y)$. Then there is a unique diffeomorphism $\tilde F:\tilde O\to\tilde O'$
+with $\beta\circ\tilde F=F\circ\beta$, and on the front face
+\begin{equation}\label{blowup:eq:ff-action}
+  \tilde F(0,\omega,y)=\Big(0,\frac{A(y)\omega}{\abs{A(y)\omega}},F_P(0,y)\Big).
+\end{equation}
+\end{theorem}
+\begin{proof}
+Uniqueness holds because $\beta$ is a diffeomorphism of the dense set $\{r>0\}$ onto
+$O\setminus\{x=0\}$; there $\tilde F=\beta^{-1}\circ F\circ\beta$. It remains to show that
+this map extends smoothly to $r=0$, with \eqref{blowup:eq:ff-action}; the same argument
+for $F^{-1}$ gives a smooth inverse, since the composites are the identity on the dense
+set $r>0$.
+
+Fix $(0,y_0)\in O$. Choose a smooth extension $F'$ of $F$ to a neighbourhood
+$\{\abs x<\delta\}\times B$ of $(0,y_0)$ in $\R^{a+b}\times\R^m$, with $B$ a ball. The
+derivatives of $F$ at points of $O$ are those of $F'$, and since the extension of $F^{-1}$
+composed with $F'$ is the identity on an open subset of the model with non-empty
+interior near $(0,y_0)$, $DF'(0,y_0)$ is invertible. As $F_N(0,y)=0$ for
+$y\in P$ near $y_0$, and $P$ has interior points near $y_0$, $D_yF_N(0,y_0)=0$; so
+$DF'(0,y_0)$ is block triangular and $A(y_0)=D_xF_N(0,y_0)$ is invertible. Taylor's
+formula in $x$ gives
+\begin{equation*}
+  F_N'(x,y)=F_N'(0,y)+A(x,y)x,\qquad A(x,y)=\int_0^1D_xF_N'(tx,y)\,dt,
+\end{equation*}
+and $F_N'(0,y)=0$ for $y\in P$. Shrinking $\delta$ and $B$ we may assume $A(x,y)$ is
+invertible. Define, for $\abs r<\delta$, $\omega\in\Sphere^{a+b-1}$, $y\in B$,
+\begin{equation*}
+  \tilde F'(r,\omega,y)=\Big(r\abs{A(r\omega,y)\omega},\
+  \frac{A(r\omega,y)\omega}{\abs{A(r\omega,y)\omega}},\ F_P'(r\omega,y)\Big),
+\end{equation*}
+which is smooth. For $r>0$ and $(r\omega,y)\in O$ we have
+\begin{equation*}
+  \beta(\tilde F'(r,\omega,y))=(rA(r\omega,y)\omega,F_P(r\omega,y))=F(r\omega,y),
+\end{equation*}
+so
+$\tilde F'=\beta^{-1}F\beta$ there. In particular $\tilde F'$ maps
+$\tilde O\cap\{r>0\}$ into the model $[0,\infty)\times\Sphere^{a,b}\times P$, which is
+closed, so by continuity it maps $\tilde O$ near $\{0\}\times\Sphere^{a,b}\times\{y_0\}$
+into it. Thus $\beta^{-1}F\beta$ extends smoothly near every point of $\{r=0\}$, and at
+$r=0$ the formula reduces to \eqref{blowup:eq:ff-action}.
+\end{proof}
+
+\begin{discussion}
+The proof uses only that $F$ maps the centre $\{x=0\}$ to itself. Taylor's formula then
+says that, to first order, $F$ acts on the normal variables by the invertible matrix
+$A(x,y)$, and a linear map acts smoothly on directions. Note that the action on the
+front face is through the \emph{normal differential} $A(y)$; this is what makes the
+front face canonically the spherical normal bundle in \cref{blowup:thm:blowup}. With
+$a=b=0$ in the parameter-free case, and $F$ a change of coordinates fixing $0$, the
+theorem is the statement of \cref{distributions:ex:polar}.
+\end{discussion}
+
+\subsection{Projective coordinates}
+Polar coordinates are awkward for computation, since $\omega$ is constrained to the
+sphere. Projective coordinates are often more convenient.
+
+\begin{lemma}\label{blowup:lem:projective}
+Let $1\le j\le a+b$ and $\sigma\in\{\pm1\}$, with $\sigma=+1$ if $j\le a$. On the open set
+$\{\sigma\omega_j>0\}\subset[0,\infty)\times\Sphere^{a,b}$ the functions
+\begin{equation}\label{blowup:eq:projective}
+  s=\abs{x_j}=\sigma r\omega_j,\qquad t_k=\frac{x_k}{\abs{x_j}}=\frac{\omega_k}{\sigma\omega_j}
+  \quad(k\neq j)
+\end{equation}
+are coordinates, identifying $\{\sigma\omega_j>0\}$ with
+$\{(s,t);\ s\ge0,\ t_k\ge0\ \text{for}\ k\le a\}$. The front face is $\{s=0\}$, and the
+lifted boundary hypersurfaces $\{\omega_k=0\}$, $k\le a$, $k\ne j$, are $\{t_k=0\}$. These
+sets, for all admissible $(j,\sigma)$, cover the front face.
+\end{lemma}
+\begin{proof}
+The inverse is $\omega=\theta/\abs\theta$, $r=s\abs\theta$, where $\theta$ has $\sigma$ in
+slot $j$ and $t_k$ in slot $k$; both maps are smooth. Every $\omega\in\Sphere^{a,b}$ has
+some $\omega_j\ne0$, and if $j\le a$ then $\omega_j>0$.
+\end{proof}
+
+In projective coordinates, $x_j=\sigma s$ and $x_k=st_k$. Hence, with $\sigma=+1$ for
+simplicity, $\pa_{x_k}=s^{-1}\pa_{t_k}$ for $k\ne j$ and
+$\pa_{x_j}=\pa_s-s^{-1}\sum_{r\ne j}t_r\pa_{t_r}$, and the linear vector fields lift to
+\begin{equation}\label{blowup:eq:proj-lifts}
+  x_l\pa_{x_m}\longmapsto
+  \begin{cases}
+    t_l\pa_{t_m}, & l\ne j,\ m\ne j,\\
+    \pa_{t_m}, & l=j,\ m\ne j,\\
+    t_l\big(s\pa_s-\sum_{r\ne j}t_r\pa_{t_r}\big), & l\ne j,\ m=j,\\
+    s\pa_s-\sum_{r\ne j}t_r\pa_{t_r}, & l=m=j.
+  \end{cases}
+\end{equation}
+For $\sigma=-1$ the second and third lines change sign. These formulae make the
+smoothness of the lifts obvious, and they are the main computational tool below. In
+particular the Euler field $\sum_lx_l\pa_{x_l}$ lifts to $s\pa_s$.
+
+%======================================================================
+\section{Blow-up of p-submanifolds}\label{blowup:sec:psub}
+
+\subsection{The construction}
+Let $Y$ be a closed p-submanifold of a manifold with corners $X$. As a set, the
+blow-up of $X$ along $Y$ is
+\begin{equation*}
+  [X;Y]=(X\setminus Y)\sqcup S^+NY,
+\end{equation*}
+with the \emph{blow-down map} $\beta:[X;Y]\to X$ equal to the identity on $X\setminus Y$
+and to the bundle projection $S^+NY\to Y$ on $S^+NY$. The \emph{front face} is
+$\mathrm{ff}=\beta^{-1}(Y)=S^+NY$. For an adapted chart $\phi=(x,y):U\to O$ as in
+\eqref{blowup:eq:adapted} define the \emph{polar chart}
+\begin{gather*}
+  \tilde\phi:\beta^{-1}(U)\to\tilde O\subset[0,\infty)\times\Sphere^{a,b}\times\R^{m,c},
+  \\
+  \tilde\phi(q)=\begin{cases}\big(\abs x,\ x/\abs x,\ y\big)(q),& q\in U\setminus Y,\\
+  \big(0,\ \xi/\abs\xi,\ y(p)\big),&q=[v]\in S^+_pY,\ \xi=dx_p(v).\end{cases}
+\end{gather*}
+It is a bijection, and $\beta$ becomes $(r,\omega,y)\mapsto(r\omega,y)$.
+
+\begin{theorem}\label{blowup:thm:blowup}
+There is a unique structure of manifold with corners on $[X;Y]$ for which the charts of
+$X\setminus Y$ and all polar charts are charts. With it, $\beta$ is smooth and proper, it
+restricts to a diffeomorphism $[X;Y]\setminus\mathrm{ff}\to X\setminus Y$, and the front face
+is a union of boundary hypersurfaces (usually one), which is the total space of a fibre bundle over $Y$ with fibre $\Sphere^{a,b}$.
+\end{theorem}
+\begin{proof}
+Transition maps between charts of $X\setminus Y$ are those of $X$. Between a polar chart
+and a chart of $X\setminus Y$ the transition is a restriction of $\beta$ or its inverse to
+$r>0$, a diffeomorphism. Between two polar charts $\tilde\phi_1$, $\tilde\phi_2$ the
+transition is $\widetilde F$ for $F=\phi_2\circ\phi_1^{-1}$, by
+\cref{blowup:thm:invariance}. On $r>0$ this is clear. On $r=0$, for $v\in T_pX$ the chain
+rule gives $dx^{(2)}_p(v)=A(y)\,dx^{(1)}_p(v)$, because $D_yF_N=0$ at $x=0$; so the
+transition acts on $S^+_pY$ by \eqref{blowup:eq:ff-action}, consistently with the
+definition of the polar charts. So we
+have a smooth atlas; we give $[X;Y]$ the topology for which the charts are homeomorphisms
+onto open sets. It is Hausdorff: points of $X\setminus Y$ and of $S^+NY$ with distinct
+images in $X$ are separated by preimages of disjoint open sets of $X$, and points of
+$S^+_pY$ by a polar chart. It is second countable since countably many charts cover it.
+In the charts $\beta$ is $(r,\omega,y)\mapsto(r\omega,y)$ or the identity, hence smooth,
+and $\beta^{-1}$ of a compact set is compact (it is so in each polar chart since
+$\Sphere^{a,b}$ is compact). In polar charts $\mathrm{ff}=\{r=0\}$ and $r$ is a boundary
+coordinate, so the front face is a union of boundary hypersurfaces, and the charts
+exhibit it as a bundle over $Y$ with fibre $\Sphere^{a,b}$.
+
+It remains to check that boundary hypersurfaces are embedded, which we do in
+\cref{blowup:prop:props} by writing down defining functions. Uniqueness of the
+structure is clear, since the charts are prescribed.
+\end{proof}
+
+\begin{proposition}\label{blowup:prop:props}
+Let $Y\subset X$ be a closed p-submanifold and $\beta:[X;Y]\to X$ the blow-down map.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item There is $q_Y\in\CI(X)$, $q_Y\ge0$, vanishing exactly on $Y$, such that near
+each point of $Y$, in an adapted chart, $q_Y=x^TB(x,y)x$ with $B$ smooth and
+positive definite. Then $\rho_{\mathrm{ff}}=(\beta^*q_Y)^{1/2}$ is a smooth defining
+function for the front face; in a polar chart it is $r$ times a positive smooth function.
+\item For $H\in\mathcal M_1(X)$ let $H'$ be the closure of $\beta^{-1}(H\setminus Y)$, the
+\emph{lift} of $H$. Then
+\begin{equation*}
+  \beta^*\rho_H=\rho_{\mathrm{ff}}^{\,e_H}\rho_{H'},\qquad e_H=\begin{cases}1,&Y\subset H\\
+  0,&Y\not\subset H,\end{cases}
+\end{equation*}
+with $\rho_{H'}$ a defining function for $H'$. The boundary hypersurfaces of $[X;Y]$
+are the components of the front face and of the lifts $H'$; in particular $[X;Y]$ is a
+manifold with corners and $\beta$ is an interior b-map. \textup{(}If $Y=H$ is itself a
+boundary hypersurface, $\Sphere^{1,0}$ is a point and $[X;H]=X$.\textup{)}
+\item Every diffeomorphism $F:X\to X'$ with $F(Y)=Y'$ lifts to a unique diffeomorphism
+$[X;Y]\to[X';Y']$, acting on the front face by the projectivized normal differential
+$S^+N_pY\ni[v]\mapsto[F_*v]\in S^+N_{F(p)}Y'$.
+\item If $U\subset X$ is open, $\beta^{-1}(U)=[U;Y\cap U]$. For manifolds with corners
+$X_1$, $X_2$ and $Y_1\subset X_1$ a p-submanifold, $[X_1\times X_2;Y_1\times X_2]=
+[X_1;Y_1]\times X_2$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+(i) Cover $Y$ by adapted charts $U_i$, with normal coordinates $x^{(i)}$, let $U_0=X\setminus
+Y$, and let $(\phi_i)$ be a partition of unity subordinate to this cover. Put
+$q_Y=\phi_0+\sum_{i\ge1}\phi_i\abs{x^{(i)}}^2$. At a point not in $Y$ some term is
+positive. Near $p\in Y$, in an adapted chart with normal coordinates $x$, Taylor's
+formula gives $x^{(i)}=A_i(x,y)x$ with $A_i$ invertible (as in the proof of
+\cref{blowup:thm:invariance}), so $q_Y=x^TBx$ with
+$B=\sum\phi_iA_i^TA_i$ positive definite, $\phi_0$ vanishing near $p$. In polar
+coordinates $\beta^*q_Y=r^2\,\omega^TB(r\omega,y)\omega$ with $\omega^TB\omega>0$, so
+$(\beta^*q_Y)^{1/2}=r(\omega^TB\omega)^{1/2}$ is smooth; away from the front face
+$\beta^*q_Y>0$.
+
+(ii) If $Y\subset H$ then near $p\in Y$ we may take $H=\{x_i=0\}$, $i\le a$, and by
+\cref{blowup:lem:bdf} $\rho_H=x_ig$, $g>0$; so $\beta^*\rho_H=r\omega_i\,\beta^*g$, and
+$\rho_{H'}=\beta^*\rho_H/\rho_{\mathrm{ff}}$ is a positive multiple of $\omega_i$, the
+defining function of the face $\{\omega_i=0\}$ of $\Sphere^{a,b}$, which is $H'$ near
+$\mathrm{ff}$. If $Y\not\subset H$ but $p\in H$, then $H$ is $\{y_l=0\}$ for a boundary
+coordinate $y_l$, and $\beta^*\rho_H$ is a positive multiple of $y_l$, which is a
+coordinate on $[X;Y]$. Away from $\mathrm{ff}$ there is nothing to prove. Thus all the
+codimension-one points of $[X;Y]$ lie in $\mathrm{ff}$ or in some $H'$, and each of these
+sets has a global defining function. The components of a disconnected front face or
+lift are disjoint closed sets, and a defining function for one component is obtained by
+replacing $\rho$ by $1$ near the others (using a cut-off).
+
+(iii) Adapted charts are carried by $F$ to adapted charts, and in polar charts the lift
+is the map of \cref{blowup:thm:invariance}; by \eqref{blowup:eq:ff-action} it acts on the
+front face by the normal differential.
+
+(iv) Both statements follow from the definitions, since adapted charts of $Y_1\subset
+X_1$ times charts of $X_2$ are adapted charts of $Y_1\times X_2$.
+\end{proof}
+
+\begin{discussion}
+The front face remembers \emph{from which direction} a point of $Y$ was approached:
+a curve $\gamma$ in $X\setminus Y$ with $\gamma(t)\to p\in Y$ and $\gamma'(0)\notin T_pY$
+lifts to a curve ending at the point $[\gamma'(0)]$ of $S^+_pY$. Functions which have
+different limits along different directions, such as $x_1/\abs x$, become continuous ---
+indeed smooth--- after the blow-up. Functions on $X$ always lift to smooth functions,
+so $\beta^*:\CI(X)\to\CI([X;Y])$ is injective, but not surjective.
+\end{discussion}
+
+\begin{question}
+Why only p-submanifolds? The diagonal of $[0,1]^2$ is a perfectly good submanifold.
+\end{question}
+\begin{answer}
+The construction needs, near each point of $Y$, a chart in which $Y$ is a coordinate
+subspace; the polar coordinates in the normal variables are then a manifold with corners,
+and \cref{blowup:thm:invariance} makes them independent of the chart. Near $(0,0)$ the
+square, in the coordinates $w=x-x'$ (normal to the diagonal) and $x+x'$ (along it), is the
+wedge $\{\abs w\le x+x'\}$, not a product of a normal model with a tangential one, and
+\cref{blowup:ex:diag-not-p} shows that no chart does better. The standard remedy is to
+blow up first the boundary faces where the product structure fails: after blowing up the
+corner, the diagonal lifts to a p-submanifold (\cref{blowup:exa:b-double}).
+\end{answer}
+
+\subsection{Lifting vector fields}
+\begin{proposition}\label{blowup:prop:vf}
+Let $Y\subset X$ be a closed p-submanifold. Every smooth vector field on $X$ tangent to
+$Y$ lifts to a unique smooth vector field on $[X;Y]$, tangent to the front face. If
+$V\in\Vb(X)$ is tangent to $Y$, its lift lies in $\Vb([X;Y])$. The lifts of the elements
+of $\Vb(X)$ tangent to $Y$ span $\Vb([X;Y])$ over $\CI([X;Y])$ near the front face.
+\end{proposition}
+\begin{proof}
+Uniqueness follows from density of $[X;Y]\setminus\mathrm{ff}$. Work in an adapted chart,
+$x\in\R^{a+b,a}$. A smooth vector field $V=\sum_jc_j\pa_{x_j}+\sum_ld_l\pa_{y_l}$ is tangent
+to $Y$ if and only if $c_j(0,y)=0$, i.e.\ $c_j=\sum_ix_ic_{ij}$. The $\pa_{y_l}$ are
+unchanged in polar coordinates, and by \eqref{blowup:eq:lin-lift} (which holds verbatim
+on $\Sphere^{a,b}$) $x_i\pa_{x_j}$ lifts to $\omega_i\omega_jr\pa_r+\omega_iW_j$, a smooth
+vector field tangent to $r=0$. So all such $V$ lift.
+
+If $V\in\Vb(X)$, then by \cref{blowup:lem:Vb} $c_j\in x_j\CI$ for $j\le a$, and $d_l\in
+y_l\CI$ for boundary coordinates $y_l$. Hence $V$ is a combination of
+\begin{equation}\label{blowup:eq:Vb-Y}
+  x_i\pa_{x_k}\ (k>a,\ \text{any } i),\qquad x_m\pa_{x_m}\ (m\le a),\qquad
+  \text{and the generators of }\Vb\text{ in }y.
+\end{equation}
+By \cref{blowup:prop:props}(ii) the boundary hypersurfaces of $[X;Y]$ are the front face
+and lifts, and we check tangency in projective coordinates
+\eqref{blowup:eq:projective}, which cover the front face. By
+\eqref{blowup:eq:proj-lifts}, $x_m\pa_{x_m}$ lifts to $t_m\pa_{t_m}$ ($m\ne j$) or to
+$s\pa_s-\sum_rt_r\pa_{t_r}$ ($m=j$), and $x_i\pa_{x_k}$ with $k>a$ lifts to $t_i\pa_{t_k}$,
+$\pm\pa_{t_k}$ or $\pm t_i(s\pa_s-\sum_rt_r\pa_{t_r})$; here $t_k$, $k>a$, is an interior
+coordinate. All these are in $\Vb$. For spanning, near a point of $\{\sigma\omega_j>0\}$ the
+space $\Vb([X;Y])$ is spanned by $s\pa_s$, $t_m\pa_{t_m}$ ($m\le a$, $m\ne j$), $\pa_{t_k}$
+($k>a$, $k\ne j$) and the generators in $y$. Now $t_m\pa_{t_m}$ is the lift of
+$x_m\pa_{x_m}$; $\pa_{t_k}=\pm$ the lift of $x_j\pa_{x_k}$ (allowed since $k>a$); and
+\begin{equation*}
+  s\pa_s=\text{lift of }x_j\pa_{x_j}+\sum_{m\le a,m\ne j}t_m\pa_{t_m}+
+  \sum_{k>a,k\ne j}t_k\pa_{t_k},
+\end{equation*}
+where each term on the right is a smooth multiple of a lift.
+\end{proof}
+
+\subsection{Vector bundles and tubular neighbourhoods}
+For a real vector bundle $E\to M$ of rank $k$ over a manifold with corners, the zero
+section $0_E$ is an interior p-submanifold (fibre coordinates are normal coordinates),
+and $N_{0_p}0_E=E_p$ canonically. Thus $S^+N0_E=SE=(E\setminus0_E)/\R^+$, the sphere
+bundle, and
+\begin{equation*}
+  [E;0_E]=(E\setminus0_E)\sqcup SE.
+\end{equation*}
+
+\begin{proposition}\label{blowup:prop:bundle}
+Choose a fibre metric on $E$ and identify $SE$ with the unit sphere bundle. The map
+$[0,\infty)\times SE\ni(t,\theta)\mapsto t\theta$ (for $t>0$), $(0,\theta)\mapsto[\theta]$,
+is a diffeomorphism onto $[E;0_E]$. Every bundle isomorphism $E\to E'$ covering a
+diffeomorphism $M\to M'$ lifts to a diffeomorphism $[E;0_E]\to[E';0_{E'}]$. In
+particular, for a real vector space $W$ the blow-up $[W;\{0\}]=(W\setminus0)\sqcup\Sphere W$
+is a manifold with boundary diffeomorphic to $[0,\infty)\times\Sphere^{n-1}$, and the action
+of $\GL(W)$ on $W$ lifts to a smooth action on it.
+\end{proposition}
+\begin{proof}
+In a local trivialization by a metric-orthonormal frame the map is the identity in polar
+coordinates, so it is a diffeomorphism. Bundle maps lift by
+\cref{blowup:prop:props}(iii) (in a trivialization they are $F(x,y)=(A(y)x,G(y))$). For
+the last part take $M$ a point; the lift of $G\in\GL(W)$ is
+$(r,\omega)\mapsto(r\abs{G\omega},G\omega/\abs{G\omega})$, which is smooth jointly in
+$(G,r,\omega)$.
+\end{proof}
+
+For an interior closed submanifold of a manifold without boundary, the tubular
+neighbourhood theorem reduces the general blow-up to this case.
+
+\begin{proposition}\label{blowup:prop:tubular}
+Let $X$ be a manifold without boundary, $Y\subset X$ a closed submanifold and $f:D\to D'$
+a normal fibration as in \cref{conormal:thm:tubular}. Then $f$ lifts to a diffeomorphism
+$[D;Y]\to[D';0_{NY}]\subset[NY;0_{NY}]$ which is the identity on the front face
+$SNY$. If $Y$ is compact, a neighbourhood of the front face in $[X;Y]$ is
+diffeomorphic to $[0,\epsilon)\times SNY$, with the front face $\{0\}\times SNY$.
+\end{proposition}
+\begin{proof}
+By \cref{blowup:prop:props}(iii,iv) $f$ lifts to a diffeomorphism $[D;Y]\to[D';0_{NY}]$
+acting on the front face by the normal differential of $f$, which is the identity by
+\cref{conormal:thm:tubular}. By \cref{blowup:prop:bundle}, $[D';0_{NY}]$ is an open
+neighbourhood of $\{0\}\times SNY$ in $[0,\infty)\times SNY$, which contains
+$[0,\epsilon)\times SNY$ if $Y$ is compact.
+\end{proof}
+
+%======================================================================
+\section{Functions and densities on blown-up spaces}\label{blowup:sec:functions}
+
+\begin{lemma}\label{blowup:lem:flat}
+Let $Q\subset\R^{d,c}$ be open and $G\in\CI((0,\tau_0)\times Q)$. Suppose that for every
+compact $K\subset Q$, every derivative $\pa^\alpha G$ and every $N$ there is $C$ with
+$\abs{\pa^\alpha G(\tau,q)}\le C\tau^N$ for $q\in K$. Then $G$, extended by $0$ to
+$\tau=0$, lies in $\CI([0,\tau_0)\times Q)$ and vanishes to infinite order at
+$\tau=0$.
+\end{lemma}
+\begin{proof}
+The extension by $0$ to $\tau\le0$ has all derivatives bounded on compact subsets of the
+interior of $(-\infty,\tau_0)\times Q$, and each derivative tends to $0$ as $\tau\downarrow0$;
+by the mean value theorem the derivatives of the extension are continuous across
+$\tau=0$ and vanish there. So it is smooth by \cref{blowup:rem:smooth}.
+\end{proof}
+
+\begin{example}\label{blowup:exa:homogeneous}
+If $f\in\CI(\R^n\setminus0)$ is homogeneous of degree $\mu\in\C$, then on $[\R^n;\{0\}]$,
+$\beta^*f=r^\mu f(\omega)$ is $r^\mu$ times a smooth function. Thus $\abs z=r$ and
+$z_1/\abs z=\omega_1$ are smooth on $[\R^n;\{0\}]$, though not on $\R^n$, and the terms of
+the expansions in \cref{conormal:prop:homogeneous} are powers of $r$ times smooth
+functions.
+\end{example}
+
+\begin{proposition}\label{blowup:prop:density}
+Let $Y\subset X$ be a closed p-submanifold of codimension $k$ and $\nu$ a smooth positive
+density on $X$. Then $\beta^*\nu=\rho_{\mathrm{ff}}^{\,k-1}\tilde\nu$ with $\tilde\nu$ a smooth
+positive density on $[X;Y]$. In polar coordinates $\beta^*\abs{dx\,dy}=r^{k-1}\abs{dr\,d\omega\,dy}$,
+where $d\omega$ is the Euclidean surface measure on $\Sphere^{a,b}$, and in projective
+coordinates $\beta^*\abs{dx\,dy}=s^{k-1}\abs{ds\,dt\,dy}$.
+\end{proposition}
+\begin{proof}
+The polar formula is the classical change of variables $x=r\omega$. In projective
+coordinates $x_j=\sigma s$, $x_k=st_k$, the Jacobian matrix of $(s,t)\mapsto x$ is
+triangular after moving the $j$th row to the top, with determinant $\pm s^{k-1}$. Since
+$r$ and $s$ are positive multiples of $\rho_{\mathrm{ff}}$, the claim follows.
+\end{proof}
+
+\subsection{The semiclassical double space}
+The following result describes exactly when a family of kernels which concentrates at
+the diagonal as $\eps\downarrow0$ becomes smooth after blowing up $\{0\}\times\Diag$. It is
+the geometric content of \cref{semiclassical:rem:double-space} and
+\cref{semiclassical:prop:smoothing-X}(iii). We allow a manifold $P$ (without boundary)
+of parameters, which gives the adiabatic case.
+
+Let $\Omega\subset\R^n$ be open and set
+\begin{equation*}
+  \mathcal X=[0,1]_\eps\times\Omega_x\times\Omega_y\times P,\quad
+  \mathcal Y=\{0\}\times\Diag_\Omega\times P,\quad
+  \mathcal D=[\mathcal X;\mathcal Y].
+\end{equation*}
+In the coordinates $(\eps,x,w=x-y,p)$, $\mathcal Y=\{\eps=0,\ w=0\}$ is a p-submanifold of
+normal type $(1,n)$, so the front face is a bundle of closed half-spheres $\Sphere^{1,n}$
+over $\Diag_\Omega\times P$. Besides the front face and the lift of $\{\eps=1\}$, $\mathcal D$
+has one more boundary hypersurface, the lift $\mathrm{sf}$ of $\{\eps=0\}$ (the \emph{side
+face}).
+
+\begin{question}
+Why blow up, instead of simply using the rescaled variable $Z=(x-y)/\eps$?
+\end{question}
+\begin{answer}
+Because a kernel lives in two regimes at once. Near the diagonal, with $Z$ bounded, it
+is $K(\eps,x,Z)$; away from the diagonal, with $x\ne y$ fixed and $\eps\to0$, it should
+vanish rapidly. The coordinate $Z$ covers only the first regime, and the coordinates
+$(\eps,x,y)$ only the second. The blown-up space contains both as open sets, glued
+along the region where $\abs Z$ is large; rapid decay in $Z$ becomes vanishing to infinite
+order at the side face. Moreover the blown-up space is defined without coordinates, which
+makes the description invariant (\cref{blowup:cor:sc-manifold}).
+\end{answer}
+
+\begin{proposition}\label{blowup:prop:sc-kernels}
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The map $(\eps,x,Z,p)\mapsto\beta^{-1}(\eps,x,x-\eps Z,p)$, $\eps>0$, extends to a
+diffeomorphism $\Psi$ from $\{(\eps,x,Z,p)\in[0,1]\times\Omega\times\R^n\times P;\
+x-\eps Z\in\Omega\}$ onto $\mathcal D\setminus\mathrm{sf}$, mapping $\{\eps=0\}$ onto
+$\mathrm{ff}\setminus\mathrm{sf}$. Thus the interior of the front face is
+$\Omega\times\R^n\times P$, with $Z$ a tangent vector at $x$.
+\item Let $K\in\CI([0,1]\times\Omega\times\R^n\times P)$ satisfy, for every compact
+$L\subset\Omega\times P$, all derivatives (in all variables) and all $N$,
+\begin{equation}\label{blowup:eq:K-est}
+  \sup_{\eps\in[0,1],\ (x,p)\in L,\ Z\in\R^n}\ang Z^N\abs{\pa^\alpha K(\eps,x,Z,p)}<\infty.
+\end{equation}
+Then $k(\eps,x,y,p)=K(\eps,x,(x-y)/\eps,p)$, $\eps>0$, is such that $\beta^*k$ extends to an
+element of $\CI(\mathcal D)$ vanishing to infinite order at $\mathrm{sf}$.
+\item Conversely, let $k\in\CI((0,1]\times\Omega^2\times P)$ be supported in
+$(0,1]\times L$ for a compact $L\subset\Omega^2\times P$, and suppose $\beta^*k$ extends to an
+element of $\CI(\mathcal D)$ vanishing to infinite order at $\mathrm{sf}$. Then
+$K(\eps,x,Z,p)=k(\eps,x,x-\eps Z,p)$ \textup{(}$:=0$ if $x-\eps Z\notin\Omega$\textup{)}
+extends to an element of $\CI([0,1]\times\Omega\times\R^n\times P)$ satisfying
+\eqref{blowup:eq:K-est}.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+The roadmap: (i) is the projective chart with $\eps$ as the projective variable; it
+covers everything except the side face. Near the side face we use projective charts
+based on a component $w_j$ of $w$, in which large $\abs Z$ corresponds to the side face
+defining function going to $0$; rapid decay in $Z$ then translates into vanishing to
+infinite order at $\mathrm{sf}$, and conversely.
+
+(i) In polar coordinates around $\mathcal Y$ the normal variables are $(\eps,w)\in
+[0,\infty)\times\R^n$, with $\omega=(\omega_0,\omega')\in\Sphere^{1,n}$. The side face is
+the closure of $\beta^{-1}(\{\eps=0,\ w\ne0\})$, which is $\{\omega_0=0\}$. On
+$\{\omega_0>0\}=\mathcal D\setminus\mathrm{sf}$ the projective coordinates of
+\cref{blowup:lem:projective} with $j=0$ are $s=\eps$, $t=w/\eps=Z$, together with $x$,
+$p$. This is $\Psi^{-1}$.
+
+(ii) By (i), $\beta^*k=K\circ\Psi^{-1}$ is smooth on $\mathcal D\setminus\mathrm{sf}$. A point
+of $\mathrm{sf}$ has $\omega_0=0$, hence $\omega_j\ne0$ for some $j\ge1$; say $\omega_j>0$
+(the case $\omega_j<0$ is the same with signs changed). Near it we use the projective
+coordinates
+\begin{equation*}
+  s=w_j\ge0,\quad\tau=\eps/w_j\ge0,\quad t_k=w_k/w_j\ (k\ne0,j),\quad x,\ p,
+\end{equation*}
+in which $\mathrm{ff}=\{s=0\}$ and $\mathrm{sf}=\{\tau=0\}$. With $\theta\in\R^n$ having $1$ in slot $j$
+and $t_k$ in slot $k$, we have $\eps=\tau s$ and $Z=w/\eps=\theta/\tau$, so
+\begin{equation*}
+  \beta^*k=G(\tau,s,t,x,p)=K\big(\tau s,x,\theta/\tau,p\big),\qquad\tau>0.
+\end{equation*}
+Since $\pa_\tau$, $\pa_s$, $\pa_{t_k}$ of the arguments are $(s,-\theta/\tau^2)$,
+$(\tau,0)$ and $(0,e_k/\tau)$, induction shows that every derivative of $G$ is a finite
+sum of terms $c(s,t)\tau^{-q}(\pa^\gamma K)(\tau s,x,\theta/\tau,p)$ with $c$ polynomial.
+On a compact set of $(s,t,x,p)$, $\abs{\theta/\tau}\ge1/\tau$, so by \eqref{blowup:eq:K-est}
+each term is $O(\tau^{N-q})$ for every $N$. By \cref{blowup:lem:flat}, $G$ extends
+smoothly to $\tau=0$ and vanishes to infinite order there.
+
+(iii) By (i), $K=\beta^*k\circ\Psi$ is smooth; it vanishes near points with
+$x-\eps Z\in\pa\Omega$ because $L$ is compact, so its extension by $0$ is smooth. For the
+estimates, consider $\abs Z\ge2\sqrt n$ and choose $j$ with $\abs{Z_j}=\max_k\abs{Z_k}$, say
+$Z_j>0$. In the chart of (ii), $\tau=1/Z_j$, $s=\eps Z_j$, $t=Z/Z_j$ with $\abs{t_k}\le1$
+and $\tau\le1$. The set $S=\beta^{-1}([0,1]\times L)$ is compact, and its intersection with
+$\{\tau\le2,\ \abs{t}_\infty\le2\}$ is a compact subset $S'$ of the chart (there all
+components of $\omega$ are at most $2\omega_j$, so $\omega_j\ge(4n+4)^{-1/2}$). Decreasing
+$\tau$ with $(s,t,x,p)$ fixed decreases $\eps=\tau s$ and fixes $(x,y,p)$, so $S'$ contains
+with each point the segment joining it to $\{\tau=0\}$. Since $G$ vanishes to infinite order
+at $\tau=0$, Taylor's formula in $\tau$ gives $\abs{\pa^\gamma G}\le C_{\gamma,N}\tau^N$ on $S'$,
+and $G=0$ off $S$. Now
+$K(\eps,x,Z,p)=G(1/Z_j,\eps Z_j,Z/Z_j,x,p)$, and each derivative of order $q$ of the maps
+$(\eps,Z)\mapsto(1/Z_j,\eps Z_j,Z/Z_j)$ is bounded by $C\ang Z^q$ on this region. By the
+chain rule $\abs{\pa^\alpha K}\le C\ang Z^{\abs\alpha}\sup_{\abs\gamma\le\abs\alpha}
+\abs{\pa^\gamma G}\le C'\ang Z^{\abs\alpha}Z_j^{-N}\le C''\ang Z^{\abs\alpha-N}$, since
+$Z_j\ge\abs Z/\sqrt n$. As $N$ is arbitrary, \eqref{blowup:eq:K-est} holds.
+\end{proof}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[>=Stealth,scale=1.0]
+  \begin{scope}
+    \fill[gray!12] (0,0) rectangle (2.6,2.6);
+    \draw[very thick] (0,2.6)--(0,0)--(2.6,0);
+    \draw[thick,dashed] (0,0)--(2.6,2.6);
+    \fill (0,0) circle (2pt);
+    \node[font=\small] at (2.1,1.5) {$\Diag$};
+    \node[below,font=\small] at (1.3,0) {$x'=0$};
+    \node[left,font=\small] at (0,1.3) {$x=0$};
+    \node[font=\small] at (1.3,-0.9) {$[0,\infty)^2$};
+  \end{scope}
+  \draw[<-] (3.1,1.3)--(4.3,1.3) node[midway,above,font=\small]{$\beta$};
+  \begin{scope}[xshift=4.9cm]
+    \fill[gray!12] (0,0) rectangle (2.6,2.6);
+    \fill[white] (0,0) -- (1,0) arc (0:90:1) -- cycle;
+    \draw[very thick] (0,2.6)--(0,1) arc (90:0:1) -- (2.6,0);
+    \draw[thick,dashed] (45:1)--(2.6,2.6);
+    \fill (45:1) circle (1.6pt);
+    \node[font=\small] at (0.35,0.3) {ff};
+    \node[font=\small] at (2.1,1.5) {$\Diag_{\mathrm b}$};
+    \foreach \a in {14,27,63,76} \draw[gray] (\a:1)--(\a:2.45);
+    \node[font=\footnotesize,align=left] at (3.55,1.0) {gray: $t=x'/x$\\ constant};
+    \node[font=\small] at (1.3,-0.9) {$[[0,\infty)^2;\{0\}]$};
+  \end{scope}
+\end{tikzpicture}
+\caption{Blowing up the corner of $[0,\infty)^2$. The front face is a quarter circle
+$\Sphere^{2,0}$. The diagonal, which is not a p-submanifold, lifts to the interior
+p-submanifold $\Diag_{\mathrm b}=\{t=1\}$ meeting the front face transversally. In the
+projective coordinates $s=x$, $t=x'/x$ (valid away from the left edge), the front face
+is $\{s=0\}$ and the lifted edge $\{x'=0\}$ is $\{t=0\}$.}
+\label{blowup:fig:corner}
+\end{figure}
+
+\begin{corollary}\label{blowup:cor:sc-manifold}
+Let $X$ be a compact manifold of dimension $n$, $\mathcal D_X=[[0,1]\times X^2;\{0\}\times\Diag]$,
+and $k\in\CI((0,1]\times X^2)$. Then $\beta^*k$ extends to an element of $\CI(\mathcal
+D_X)$ vanishing to infinite order at the lift of $\{\eps=0\}$ if and only if
+\textup{(a)} $k$ extends smoothly to $[0,1]\times(X^2\setminus\Diag)$, vanishing to
+infinite order at $\eps=0$, and \textup{(b)} for every coordinate chart $W\cong\Omega
+\subset\R^n$ and $\chi\in\CIc(W\times W)$, $\chi k=K_\chi(\eps,x,(x-y)/\eps)$ with $K_\chi$
+as in \cref{blowup:prop:sc-kernels}(ii) \textup{(}$P$ a point\textup{)}. The front face of
+$\mathcal D_X$ is the bundle over $\Diag\cong X$ of closed half-spheres
+$S^+N_{(0,x,x)}(\{0\}\times\Diag)\subset S(\R\times T_xX)$, and its interior is $TX$ by
+$[\eps:v]\mapsto v/\eps$.
+\end{corollary}
+\begin{proof}
+On $[0,1]\times(X^2\setminus\Diag)$, $\beta$ is a diffeomorphism and the lift of
+$\{\eps=0\}$ is $\{\eps=0\}$, so the first condition there is (a). Near $\Diag$ use
+\cref{blowup:prop:props}(iv): $\beta^{-1}([0,1]\times W^2)=[[0,1]\times W^2;\{0\}\times\Diag_W]$.
+If $\beta^*k$ has the property, so does $\beta^*(\chi k)=(\beta^*\chi)(\beta^*k)$, and
+\cref{blowup:prop:sc-kernels}(iii) gives (b). Conversely, write $k=\chi_0k+\sum_i\chi_ik$
+with $\chi_i\in\CIc(W_i^2)$ and $\supp\chi_0\cap\Diag=\emptyset$; the first term is handled by
+(a), the others by (b) and \cref{blowup:prop:sc-kernels}(ii). The normal bundle of
+$\{0\}\times\Diag$ is $\R\times N\Diag$, with $N_{(x,x)}\Diag\cong T_xX$ by
+$(v,v')\mapsto v-v'$, and the inward part is $\{\eps\ge0\}$; in the coordinates of
+\cref{blowup:prop:sc-kernels}(i) the point $[\eps:v]$ with $\eps>0$ has $Z=v/\eps$.
+\end{proof}
+
+\begin{remark}\label{blowup:rem:adiabatic}
+The same argument applies to the adiabatic families of \cref{semiclassical:sec:adiabatic}.
+For a fibration $\phi:Y\to Z$ with compact fibres, the fibre product
+$Y^2_\phi=\{(y,y');\ \phi(y)=\phi(y')\}=(\phi\times\phi)^{-1}(\Diag_Z)$ is a closed submanifold of
+$Y^2$ (since $\phi\times\phi$ is a submersion), and the adiabatic double space is
+$[[0,1]\times Y^2;\{0\}\times Y^2_\phi]$. In fibred coordinates $(z,\tilde z)$, with
+$\tilde z$ the base coordinates, $Y^2_\phi=\{\tilde z=\tilde z'\}$, so this is the space
+$\mathcal D$ above with $\Omega$ a base chart and parameters $p=(z,z')$. Thus, by
+\cref{blowup:prop:sc-kernels}, kernels $B(\delta,z,z',\tilde z,(\tilde z-\tilde z')/\delta)$
+with $B\in\mathcal K_{\mathrm{ad}}$ (\cref{semiclassical:def:adiabatic}), cut off to compact
+sets, are exactly the smooth functions on the adiabatic double space vanishing to infinite
+order at the side face. The interior of its front face is the bundle
+$Y^2_\phi\times_ZTZ$, on which the adiabatic symbol is the fibrewise Fourier transform.
+\end{remark}
+
+%======================================================================
+\section{Lifts of submanifolds and commutation of blow-ups}\label{blowup:sec:commute}
+
+To blow up twice we must know what the second centre becomes after the first blow-up.
+
+\begin{definition}\label{blowup:def:lift}
+Let $\beta:[X;Y]\to X$ and $Z\subset X$ closed. If $Z\subset Y$, the \emph{lift} of $Z$ is
+$\beta^{-1}(Z)$. If $Z\setminus Y$ is dense in $Z$, the lift is
+$\beta^\#Z=\overline{\beta^{-1}(Z\setminus Y)}$. We write $[X;Y;Z]=[[X;Y];\text{lift of }Z]$
+when the lift is a p-submanifold.
+\end{definition}
+
+\begin{proposition}\label{blowup:prop:lift}
+Let $Y,Z\subset X$ be closed joint p-submanifolds.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item If $Z\subset Y$, then $\beta^{-1}(Z)=S^+NY|_Z$ is a p-submanifold of $[X;Y]$
+contained in the front face.
+\item If $Z\setminus Y$ is dense in $Z$, then $\beta^\#Z$ is a p-submanifold of $[X;Y]$,
+and $\beta$ restricts to the blow-down map of $[Z;Y\cap Z]$, i.e.\ $\beta^\#Z=[Z;Y\cap Z]$.
+In particular, if $Y\subset Z$ then $\beta^\#Z=[Z;Y]$, and if $Y\cap Z=\emptyset$ then
+$\beta^\#Z=\beta^{-1}(Z)\cong Z$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+Work in a joint chart $(z_1,\dots,z_n)$ with $Y=\{z_A=0\}$, $Z=\{z_B=0\}$. Then $z_A$ are
+normal coordinates for $Y$, and the other $z_i$ are tangential.
+
+(i) Here $A\subset B$, and in polar coordinates $\beta^{-1}(Z)=\{r=0,\ z_{B\setminus A}=0\}$,
+a p-submanifold.
+
+(ii) Density of $Z\setminus Y$ means $A\not\subset B$. For $r>0$,
+$\beta^{-1}(Z\setminus Y)=\{\omega_{A\cap B}=0,\ z_{B\setminus A}=0\}$. A point of the closure
+on the front face has $\omega_{A\cap B}=0$, so $\omega_j\ne0$ for some $j\in A\setminus B$,
+and conversely a point of $\{r=0,\ \omega_{A\cap B}=0,\ z_{B\setminus A}=0\}$ is a limit of points
+with $r>0$. In projective coordinates based at such a $j$, with $s=\abs{z_j}$ and
+$t_k=z_k/\abs{z_j}$, the closure is
+\begin{equation*}
+  \beta^\#Z=\{t_{A\cap B}=0,\ z_{B\setminus A}=0\},
+\end{equation*}
+a p-submanifold. The remaining coordinates $(s,t_{A\setminus(B\cup\{j\})},z_{\text{rest}})$ on
+$\beta^\#Z$ are exactly projective coordinates for the blow-up of $Y\cap Z=\{z_{A\cup B}=0\}$
+in $Z$, whose normal coordinates in $Z$ are $z_{A\setminus B}$; so $\beta|_{\beta^\#Z}$ is the
+blow-down map of $[Z;Y\cap Z]$ in each chart.
+\end{proof}
+
+\begin{proposition}\label{blowup:prop:commute}
+Let $Y,Z\subset X$ be closed joint p-submanifolds such that one of the following holds:
+$Y\cap Z=\emptyset$; $Y$ and $Z$ are transversal; $Y\subset Z$; or $Z\subset Y$. Then the
+lifts in \cref{blowup:def:lift} are p-submanifolds, and the identity of $X\setminus(Y\cup Z)$
+extends to a diffeomorphism $[X;Y;Z]\cong[X;Z;Y]$ commuting with the blow-down maps to
+$X$.
+\end{proposition}
+\begin{proof}
+The lifts are p-submanifolds by \cref{blowup:prop:lift}. If a diffeomorphism extending
+the identity exists over each set of an open cover of $X$, the local extensions agree on
+overlaps (the interior is dense) and define a smooth map $[X;Y;Z]\to[X;Z;Y]$; the same
+holds for the inverse, and the composites are the identity on a dense set. So the
+statement is local on $X$, and it suffices to work in a joint chart. Away from $Y\cap Z$
+only one blow-up has an effect. Near a point of $Y\cap Z$ we treat the cases in turn.
+
+\emph{Transversal.} Coordinates $(u,v,w)$ with $Y=\{u=0\}$, $Z=\{v=0\}$. By
+\cref{blowup:prop:props}(iv) both iterated blow-ups are
+$[0,\infty)\times\Sphere_u\times[0,\infty)\times\Sphere_v\times W$, with the interior
+map $(u,v,w)\mapsto(\abs u,u/\abs u,\abs v,v/\abs v,w)$; here $\Sphere_u$, $\Sphere_v$ are
+the corner spheres of the normal models.
+
+\emph{Nested.} Let $Y\subset Z$, with $Z=\{u=0\}$, $Y=\{u=0,\ v=0\}$, $u\in\R^{a_1+b_1,a_1}$,
+$v\in\R^{a_2+b_2,a_2}$, and let $H=\Sphere^{1+a_2,b_2}=\{(\alpha,\phi);\ \alpha\ge0,\ \phi\in
+\R^{a_2+b_2,a_2},\ \alpha^2+\abs\phi^2=1\}$. We show that both spaces are identified with
+\begin{equation*}
+  [0,\infty)\times H\times\Sphere^{a_1,b_1}\times W\quad\text{by}\quad
+  (u,v,w)\longmapsto\Big(\abs{(u,v)},\ \frac{(\abs u,v)}{\abs{(u,v)}},\ \frac u{\abs u},\ w\Big).
+\end{equation*}
+First blow up $Z$: $[X;Z]=[0,\infty)_\rho\times\Sphere^{a_1,b_1}_\theta\times\R_v\times W$ with
+$\rho=\abs u$, and $\beta_Z^{-1}(Y)=\{\rho=0,\ v=0\}$ has normal variables $(\rho,v)\in
+\R^{1+a_2+b_2,1+a_2}$. Blowing it up introduces $\sigma=\abs{(\rho,v)}=\abs{(u,v)}$ and
+$(\rho,v)/\sigma\in H$, as claimed. Now blow up $Y$ first: $[X;Y]=[0,\infty)_R\times
+\Sphere^{a_1+a_2,b_1+b_2}\times W$ with $R=\abs{(u,v)}$ and $(\mu,\nu)=(u,v)/R$, and
+$\beta^\#Z=\{\mu=0\}$. It suffices to show that $(\mu,\nu)\mapsto((\abs\mu,\nu),\mu/\abs\mu)$
+extends to a diffeomorphism $[\Sphere^{a_1+a_2,b_1+b_2};\{\mu=0\}]\to H\times
+\Sphere^{a_1,b_1}$. Away from $\mu=0$ it is a diffeomorphism onto $\{\alpha>0\}$, with
+inverse $((\alpha,\phi),\theta)\mapsto(\alpha\theta,\phi)$. Near a point with $\mu=0$ some
+$\nu_m\ne0$, and $(\mu,\nu')$, $\nu'=(\nu_k)_{k\ne m}$, are coordinates on the sphere with
+$\{\mu=0\}$ a coordinate p-submanifold; polar coordinates around it are
+$(\abs\mu,\mu/\abs\mu,\nu')$. Near the image point, $(\alpha,\phi')$ are coordinates on $H$,
+and in these coordinates the map is $(\abs\mu,\mu/\abs\mu,\nu')\mapsto((\abs\mu,\nu'),
+\mu/\abs\mu)$, the identity. The case $Z\subset Y$ is the same with the names exchanged.
+\end{proof}
+
+\begin{discussion}
+The proof shows what goes wrong in general: for joint $Y$ and $Z$ the lifts are
+p-submanifolds whatever their relative position, but the two iterated blow-ups introduce different
+``rates'' at which points approach $Y\cap Z$. In \cref{blowup:ex:noncommute} the function
+$z_2/\abs{(z_1,z_2)}$ is continuous on one of the two spaces but not on the other. The
+commonest cure is to blow up $Y\cap Z$ first.
+\end{discussion}
+
+\begin{corollary}\label{blowup:cor:intersection}
+Let $Y,Z$ be closed joint p-submanifolds, and $W=Y\cap Z$, with $Y\setminus W$ dense in
+$Y$ and $Z\setminus W$ dense in $Z$ \textup{(}$W$ is a p-submanifold, by the joint
+charts\textup{)}. Then the lifts of $Y$ and $Z$ to $[X;W]$ are disjoint
+p-submanifolds, so $[X;W;Y;Z]\cong[X;W;Z;Y]$.
+\end{corollary}
+\begin{proof}
+In a joint chart, $W=\{z_{A\cup B}=0\}$, and in polar coordinates around $W$ the lifts are
+$\{\omega_A=0\}$ and $\{\omega_B=0\}$ (\cref{blowup:prop:lift}(ii)), which cannot both hold on
+the sphere in $z_{A\cup B}$. Off the front face they are $Y\setminus W$ and $Z\setminus W$,
+which are disjoint.
+\end{proof}
+
+\subsection{Relative compactifications}
+We now prove the identifications used in \cref{ch:distributions,ch:product}. Let
+$W=U\oplus V$ be real vector spaces with Euclidean norms, of dimensions $k,l\ge1$, with
+elements $w=(\zeta,\eta)$. The relative compactification of $W$ with respect to $V$
+(\eqref{distributions:eq:relRC}, and \cref{ch:product}) is
+\begin{equation*}
+  \relRC VW=\RC U\times\RC V,\qquad W\ni(\zeta,\eta)\longmapsto(\zeta,q)\in U\times V,\quad
+  q=\eta/\ang\zeta,
+\end{equation*}
+with boundary hypersurfaces $H_W=\pa\RC U\times\RC V$ and $H_V=\RC U\times\pa\RC V$, and
+$\Sphere V=\pa\RC V\subset\pa\RC W=\Sphere W$ is the sphere at infinity of $V$.
+
+\begin{theorem}\label{blowup:thm:relative}
+$\Sphere V$ is a p-submanifold of $\RC W$, of codimension $k+1$, and the identity of $W$
+extends to a diffeomorphism $\relRC VW\to[\RC W;\Sphere V]$ whose composite with the
+blow-down map is the map $\varpi$ of \cref{product:prop:blow-down}. It maps $H_V$ onto
+the front face and $H_W$ onto the lift of $\Sphere W$, which is $[\Sphere W;\Sphere V]$.
+\end{theorem}
+\begin{proof}
+\emph{Coordinates near $\Sphere V$.} By \cref{distributions:lem:collar}, $(1/\abs w,w/\abs
+w)$ are coordinates on $\RC W$ near its boundary. Where the $V$-component of $w/\abs w$
+is non-zero, we may replace them by
+\begin{equation*}
+  x=1/\abs\eta,\qquad v=\zeta/\abs\eta\in U,\qquad\theta=\eta/\abs\eta\in\Sphere V,
+\end{equation*}
+since $x=s/\abs{\omega_V}$, $v=\omega_U/\abs{\omega_V}$, $\theta=\omega_V/\abs{\omega_V}$ in
+terms of $(s,\omega)=(1/\abs w,w/\abs w)$, with smooth inverse
+$\abs{\omega_V}=(1+\abs v^2)^{-1/2}$, $\omega_U=v\abs{\omega_V}$, $\omega_V=\theta\abs{\omega_V}$,
+$s=x\abs{\omega_V}$. In these coordinates $\Sphere V=\{x=0,\ v=0\}$, a p-submanifold with
+normal coordinates $(x,v)\in\R^{1+k,1}$.
+
+\emph{Near the front face.} Polar coordinates around $\Sphere V$ are
+\begin{equation*}
+  R=\abs{(x,v)}=\frac{\ang\zeta}{\abs\eta}=\frac1{\abs q},\qquad
+  \frac{(x,v)}R=\Big(\frac1{\ang\zeta},\frac\zeta{\ang\zeta}\Big)=\mathrm{RC}_U(\zeta),\qquad
+  \theta=\frac{\eta}{\abs\eta}=\frac q{\abs q}.
+\end{equation*}
+The second is a point of the closed half-sphere $\Sphere^{1,k}$, which is $\RC U$
+(\cref{distributions:def:RC}). On the other hand, $(1/\abs q,q/\abs q)$ are collar
+coordinates on $\RC V$ near $\pa\RC V$. Hence, on the sets $\{R<\delta\}$ (which lie in the
+coordinate domains for $\delta<1$, since $R<\delta$ forces $\abs\eta>\delta^{-1}\ang\zeta>1$), the identity
+of $W$ is the identity map $(R,h,\theta)\mapsto(R,h,\theta)$ of $[0,\delta)\times\Sphere^{1,k}
+\times\Sphere V$, which is a diffeomorphism of a neighbourhood of $H_V$ onto a neighbourhood
+of the front face, mapping $H_V=\{1/\abs q=0\}$ to $\{R=0\}$.
+
+\emph{Away from the front face.} On $\RC U\times\RC V\setminus H_V$ we show that $\varpi$
+is a diffeomorphism onto $\RC W\setminus\Sphere V=[\RC W;\Sphere V]\setminus\mathrm{ff}$. In the
+interior it is the identity. Near a point of $H_W\setminus H_V$ use the coordinates
+$(x',\theta',v')=(1/\abs\zeta,\zeta/\abs\zeta,\eta/\abs\zeta)$ on $\RC W$ near $\Sphere W\setminus\Sphere V$
+(the analogue of $(x,v,\theta)$ with $U$ and $V$ exchanged) and $(s_U,\theta',q)$ on
+$\RC U\times V$, with $s_U=1/\abs\zeta$. Since $q=\eta/\ang\zeta=v'(1+x'^2)^{-1/2}$, the
+map is $(x',\theta',v')\mapsto(x',\theta',v'(1+x'^2)^{-1/2})$, a diffeomorphism. It is bijective
+from $H_W\setminus H_V$ onto $\Sphere W\setminus\Sphere V$ (both are parametrized by
+$(\theta',v')\in\Sphere U\times V$), hence a diffeomorphism.
+
+The two maps agree on the interior, so they define a diffeomorphism of $\relRC VW$ onto
+$[\RC W;\Sphere V]$. It maps $H_W$, the closure of $H_W\setminus H_V$, onto the closure of the
+lift of $\Sphere W\setminus\Sphere V$, which is $[\Sphere W;\Sphere V]$ by
+\cref{blowup:prop:lift}(ii).
+\end{proof}
+
+The main face $H_W=[\Sphere W;\Sphere V]$ fibres over $\Sphere(W/V)$; this is the map
+$\gamma$ used in \cref{ch:families}.
+
+\begin{lemma}\label{blowup:lem:sphere-fibration}
+Let $V\subset W$ be a subspace, $\pi:W\to W/V$ the quotient map and $U$ a complement of $V$
+with Euclidean norms on $U$, $V$. The map $\Sphere W\setminus\Sphere V\ni[w]\mapsto[\pi w]\in\Sphere(W/V)$
+extends to a smooth map $\gamma:[\Sphere W;\Sphere V]\to\Sphere(W/V)$, which is a trivial
+fibre bundle with fibre $\RC V$: the map $[(\zeta,\eta)]\mapsto(\zeta/\abs\zeta,\eta/\abs\zeta)$
+extends to a diffeomorphism $[\Sphere W;\Sphere V]\cong\Sphere U\times\RC V$. The extension
+$\gamma$ depends only on $V\subset W$. The same holds fibrewise for a vector bundle $W$
+with a subbundle $V$, giving a fibre bundle $[\Sphere W;\Sphere V]\to\Sphere(W/V)$ with
+fibres $\RC V$.
+\end{lemma}
+\begin{proof}
+Realize $\Sphere W$ as the unit sphere $\abs\zeta^2+\abs\eta^2=1$. On the complement of
+$\Sphere V=\{\zeta=0\}$ the map $(\zeta,\eta)\mapsto(\zeta/\abs\zeta,\eta/\abs\zeta)\in\Sphere U\times V$
+is a diffeomorphism, with inverse $(\vartheta,p)\mapsto(\vartheta,p)/\abs{(\vartheta,p)}$. Near
+$\Sphere V$ the functions $(\zeta,\theta=\eta/\abs\eta)$ are coordinates on $\Sphere W$ (with
+$\abs\eta=(1-\abs\zeta^2)^{1/2}$), and $\Sphere V=\{\zeta=0\}$; polar coordinates are
+$(a,\vartheta,\theta)=(\abs\zeta,\zeta/\abs\zeta,\theta)$. Near $\Sphere U\times\pa\RC V$ we use the
+collar coordinates $(\vartheta,1/\abs p,p/\abs p)$ with $p=\eta/\abs\zeta$, and in these
+coordinates the map is $(a,\vartheta,\theta)\mapsto(\vartheta,a(1-a^2)^{-1/2},\theta)$, a
+diffeomorphism for $0\le a<1$. Composing with the projection to $\Sphere U\cong\Sphere(W/V)$
+gives $\gamma$, since $\pi(\zeta,\eta)=\zeta$. The map $[w]\mapsto[\pi w]$ is intrinsic on the
+dense set $\Sphere W\setminus\Sphere V$, so its continuous extension is unique. For bundles, use
+local trivializations of $W$ in which $V$ is a coordinate subbundle and fibre metrics; the
+construction depends smoothly on parameters.
+\end{proof}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[>=Stealth,scale=0.9]
+  \begin{scope}
+    \fill[gray!12] (0,0) circle (1.5);
+    \draw[very thick] (0,0) circle (1.5);
+    \foreach \a in {0,90,180,270} \fill (\a:1.5) circle (2pt);
+    \node[right,font=\footnotesize] at (0:1.5) {$\Sphere U$};
+    \node[left,font=\footnotesize] at (180:1.5) {$\Sphere U$};
+    \node[above,font=\footnotesize] at (90:1.5) {$\Sphere V$};
+    \node[below,font=\footnotesize] at (270:1.5) {$\Sphere V$};
+    \node[font=\small] at (0,-2.3) {$\RC{W}$};
+  \end{scope}
+  \draw[<-] (2.3,0)--(3.3,0);
+  \begin{scope}[xshift=5.4cm]
+    \fill[gray!12] (22.5:1.6)--(67.5:1.6)--(112.5:1.6)--(157.5:1.6)--(202.5:1.6)
+      --(247.5:1.6)--(292.5:1.6)--(337.5:1.6)--cycle;
+    \foreach \c in {0,90,180,270}
+      \draw[very thick,densely dashed] (\c-22.5:1.6)--(\c+22.5:1.6);
+    \foreach \c in {45,135,225,315}
+      \draw[very thick] (\c-22.5:1.6)--(\c+22.5:1.6);
+    \node[font=\footnotesize] at (0,0) {$\relRC{U,V}{W}$};
+    \node[font=\small] at (0,-2.3) {octagon};
+  \end{scope}
+  \draw[->] (7.5,0)--(8.5,0);
+  \begin{scope}[xshift=10.4cm]
+    \fill[gray!12] (-1.2,-1.2) rectangle (1.2,1.2);
+    \draw[very thick] (-1.2,-1.2) rectangle (1.2,1.2);
+    \foreach \x in {-1.2,1.2} \foreach \y in {-1.2,1.2} \fill (\x,\y) circle (2pt);
+    \node[font=\small] at (0,-2.3) {$\RC V\times\RC U$};
+  \end{scope}
+\end{tikzpicture}
+\caption{The doubly-relative compactification for $\dim U=\dim V=1$. Blowing up the four
+points $\pm\Sphere U$, $\pm\Sphere V$ of the circle at infinity of $\RC W$ (left), or the four
+corners $\Sphere V\times\Sphere U$ of the square (right), gives the same octagon. Its dashed
+sides are the front faces of the left-hand blow-up and the remains of the sides of the
+square; its solid sides are the remains of the circle and the front faces of the
+right-hand blow-up.}
+\label{blowup:fig:octagon}
+\end{figure}
+
+\begin{proposition}\label{blowup:prop:doubly}
+Let $W=V\times U$ with $\dim U,\dim V\ge1$, and let
+$E:W\to\R^4\times V\times W\times U$ be the embedding of \cref{distributions:ex:doubly}.
+Then $E$ extends to smooth embeddings of both
+\begin{equation*}
+  \mathcal D_1=[\RC W;\Sphere U,\Sphere V]\quad\text{and}\quad
+  \mathcal D_2=[\RC V\times\RC U;\Sphere V\times\Sphere U]
+\end{equation*}
+onto the closure of $E(W)$. Hence the identity of $W$ extends to a diffeomorphism
+$\mathcal D_1\cong\mathcal D_2$, and both are the doubly-relative compactification
+$\relRC{U,V}{U\times V}$. \textup{(}In $\mathcal D_1$ the centres $\Sphere U$, $\Sphere V\subset\Sphere W$
+are disjoint, so the order does not matter.\textup{)}
+\end{proposition}
+\begin{proof}
+Write $\rho_U=\ang u^{-1}$, $\rho_V=\ang v^{-1}$ and note $\ang w^2=\ang u^2+\ang v^2-1$. If
+$\bar E:\mathcal D\to\R^N$ is a continuous extension of $E$ to a compact space $\mathcal D$ in
+which $W$ is dense, then $\bar E(\mathcal D)$ is compact, contains $E(W)$ densely, and hence
+equals $\overline{E(W)}$. So it suffices to show that $E$ extends to injective immersions of
+$\mathcal D_1$ and $\mathcal D_2$; an injective immersion of a compact manifold with
+corners is a diffeomorphism onto its image.
+
+\emph{$\mathcal D_2$.} The components $\rho_U$, $u/\ang u$, $\rho_V$, $v/\ang v$ of $E$ are
+smooth on $\RC V\times\RC U$, and together they embed it. The others are smooth functions of
+these and of $\rho_V/\sqrt Q$, $\rho_U/\sqrt Q$, where
+$Q=\rho_U^2+\rho_V^2-\rho_U^2\rho_V^2$: multiplying numerator and denominator by
+$\rho_U\rho_V$ gives $\ang u/\ang w=\rho_V/\sqrt Q$, $\ang v/\ang w=\rho_U/\sqrt Q$, and then
+$v/\ang w=(v/\ang v)\rho_U/\sqrt Q$, $u/\ang w=(u/\ang u)\rho_V/\sqrt Q$. Since $Q>0$ off the corner, $E$ extends to an
+embedding of $\mathcal D_2\setminus\mathrm{ff}$. Near the front face use polar coordinates
+$\rho_V=R\cos\psi$, $\rho_U=R\sin\psi$: then
+$Q=R^2(1-R^2\cos^2\psi\sin^2\psi)$, so the two functions are smooth, and at $R=0$ the
+components $\ang u/\ang w=\cos\psi$, $\ang v/\ang w=\sin\psi$ have differentials
+$-\sin\psi\,d\psi$, $\cos\psi\,d\psi$ while $d\rho_V=\cos\psi\,dR$, $d\rho_U=\sin\psi\,dR$; with the
+directions $v/\ang v$, $u/\ang u$ this shows $\bar E$ is an immersion. It is injective:
+$\rho_U,u/\ang u,\rho_V,v/\ang v$ determine the image in $\RC V\times\RC U$, and on a fibre of
+the front face $\psi$ is determined by $\ang u/\ang w$, $\ang v/\ang w$.
+
+\emph{$\mathcal D_1$.} By \cref{blowup:thm:relative},
+$[\RC W;\Sphere V]\cong\RC U\times\RC{V}$, with interior coordinates $(u,q)$, $q=v/\ang u$.
+The components $\rho_U$, $u/\ang u$, $\ang u/\ang w=1/\ang q$ and $v/\ang w=q/\ang q$ of $E$
+are smooth on it and embed it; the remaining components $(v,u)/\ang w$ are smooth on
+$\RC W$, while $\rho_V$, $v/\ang v$, $\ang v/\ang w$ are smooth on $[\RC W;\Sphere U]$ by
+symmetry. Since $\Sphere U\cap\Sphere V=\emptyset$, $\mathcal D_1$ maps smoothly to $[\RC
+W;\Sphere V]$, to $[\RC W;\Sphere U]$ and to $\RC W$, so $\bar E$ is smooth on $\mathcal D_1$, and
+it is an injective immersion on $\mathcal D_1\setminus\mathrm{ff}_U\cong[\RC W;\Sphere V]\setminus\Sphere U$
+and, symmetrically, on $\mathcal D_1\setminus\mathrm{ff}_V$. These two open sets cover $\mathcal
+D_1$. If $\bar E(p)=\bar E(p')$, the functions $1/\ang w=\rho_U\cdot\ang u/\ang w$ and
+$w/\ang w$, which are determined by $\bar E$, show that $\beta(p)=\beta(p')$ in $\RC W$; then $p,p'$ lie in the same one of the two open sets (both in
+$\mathrm{ff}_U$, both in $\mathrm{ff}_V$, or neither), so $p=p'$.
+\end{proof}
+
+%======================================================================
+\section{Projective blow-up and blow-up of hypersurfaces}\label{blowup:sec:projective}
+
+In \emph{projective} blow-up one uses two-sided polar coordinates, identifying $\omega$
+with $-\omega$. For the origin in $\R^n$ this gives the tautological line bundle
+\begin{equation*}
+  L=\{(z,\ell)\in\R^n\times\R\mathbb P^{n-1};\ z\in\ell\},\qquad\beta_{\mathbb P}(z,\ell)=z.
+\end{equation*}
+
+\begin{proposition}\label{blowup:prop:projective}
+$L$ is a smooth line bundle over $\R\mathbb P^{n-1}$, $\beta_{\mathbb P}$ is smooth and maps
+$L\setminus0_L$ diffeomorphically onto $\R^n\setminus0$, and on $\{\ell_j\ne0\}$ the functions
+$(z_j,t_k=z_k/z_j)$, $z_j\in\R$, are coordinates. The map
+$[0,\infty)\times\Sphere^{n-1}\ni(r,\omega)\mapsto(r\omega,[\omega])\in L$ induces a
+diffeomorphism $[\R^n;\{0\}]\cong[L;0_L]$; thus radial blow-up is projective blow-up
+followed by the blow-up of the hypersurface $0_L\cong\R\mathbb P^{n-1}$.
+\end{proposition}
+\begin{proof}
+Over $\{\ell_j\ne0\}$ the section $\ell\mapsto(t_k)$ with $t_j=1$ trivializes $L$, and
+$z=z_j(t,1)$, so $(z_j,t)\in\R\times\R^{n-1}$ are coordinates on $L$, with $\beta_{\mathbb P}$
+smooth; for $z\ne0$ the inverse $z\mapsto(z,[z])$ is smooth. By
+\cref{blowup:prop:bundle}, $[L;0_L]\cong[0,\infty)\times SL$, using the metric from $\R^n$,
+and $SL=\{(\omega,[\omega]);\ \omega\in\Sphere^{n-1}\}\cong\Sphere^{n-1}$. In these terms the
+given map is $(r,\omega)\mapsto(r,(\omega,[\omega]))$.
+\end{proof}
+
+The projective blow-up has no boundary, but it is not orientable for even $n$, and the
+functions we need are usually smooth only from each side of $0_L$: $\abs z=\abs{z_j}(1+\abs
+t^2)^{1/2}$ is not smooth across $z_j=0$. Blowing up the one-sided hypersurface $0_L$
+separates the two sides, which is why radial blow-up is preferred. For a two-sided
+hypersurface blow-up simply cuts the space open.
+
+\begin{proposition}\label{blowup:prop:hypersurface}
+Let $H\subset X$ be a closed interior p-submanifold of codimension one in a manifold with
+corners. Then the front face of $[X;H]$ is the double cover $SNH$ of $H$. If
+$H=\{f=0\}$ with $f\in\CI(X;\R)$ and $df\ne0$ on $H$, then $[X;H]$ is canonically the
+disjoint union $X_+\sqcup X_-$ of the manifolds with corners $X_\pm=\{\pm f\ge0\}$, the
+diffeomorphism being the identity on $\{f\ne0\}$.
+\end{proposition}
+\begin{proof}
+The fibre $\Sphere^{0,1}=\{\pm1\}$ of the front face has two points. In an adapted chart
+$H=\{x_1=0\}$ with $x_1$ an interior coordinate, and $f=x_1g$ with $g\ne0$ near $H$ since
+$df\ne0$ there; so $(f,y)$ is again an adapted chart. In it, polar coordinates are
+$(r,\omega)=(\abs f,\sgn f)$, and the map $X_\pm\ni(f,y)\mapsto(\pm f,\pm1,y)$ is a
+diffeomorphism onto $\{\omega=\pm1\}$.
+\end{proof}
+
+%======================================================================
+\section{b-maps, b-submersions and b-fibrations}\label{blowup:sec:bfib}
+
+\subsection{Fibrations of manifolds with corners}
+A smooth map $f:X\to X'$ of manifolds with corners is a \emph{fibration} if each
+$p'\in f(X)$ has an open neighbourhood $U$ with a diffeomorphism $f^{-1}(U)\cong U\times F$
+under which $f$ becomes the projection. For compact manifolds without boundary, a
+surjective submersion is a fibration (Ehresmann's theorem). For manifolds with corners
+this fails: the inclusion $[0,1]\hookrightarrow\R$ has surjective differential, and the
+projection $(x,y)\mapsto x$ of the closed half-disc
+$\{x^2+y^2\le1,\ y\ge0\}$ onto $[-1,1]$ is surjective, with surjective differential
+everywhere, but its fibres are intervals over $(-1,1)$ and points over $\pm1$
+(\cref{blowup:fig:fibrations}, \cref{blowup:ex:half-disc}). The correct condition involves
+the boundary faces.
+
+\begin{proposition}\label{blowup:prop:fibration}
+Let $X$ be a compact manifold with corners, $X'$ a manifold without boundary and $f:X\to
+X'$ smooth. If the restriction of $f$ to every boundary face of $X$ \textup{(}including
+$X$ itself\textup{)} is a submersion, then $f$ is a fibration over its image, which is open
+and closed; its fibres are compact manifolds with corners. Conversely, a fibration over
+$X'$ has this property.
+\end{proposition}
+\begin{proof}
+Fix $p'\in f(X)$ and coordinates $y'$ near $p'$ on a ball $B$, $y'(p')=0$. We construct
+vector fields $V_i$ on $f^{-1}(B)$, tangent to every boundary hypersurface, with
+$f_*V_i=\pa_{y'_i}$. Near $p\in f^{-1}(B)$ of codimension $l$ take a chart $(x,y)\in\R^{n,l}$
+centred at $p$; the boundary face through $p$ is $\{x=0\}$, and the hypothesis says that
+$D_yf(0,0)$ is surjective, hence $D_yf(x,y)$ is surjective nearby. Put
+$W_i=\sum_jc_{ij}\pa_{y_j}$ with $c=(D_yf)^T(D_yf\,(D_yf)^T)^{-1}$ applied to $e_i$. These
+satisfy $f_*W_i=\pa_{y'_i}$ and have no $\pa_x$ components, so they lie in $\Vb$. Both
+conditions are preserved by combinations with a partition of unity, so we get $V_i$ on
+$f^{-1}(B)$. A vector field in $\Vb$ on a compact manifold with corners has a flow defined
+for all times that preserves $X$: in local coordinates the $x_i$-component of an integral
+curve satisfies $\dot x_i=a_ix_i$, so $x_i(t)=x_i(0)\exp\int_0^ta_i$ keeps its sign.
+(Here we apply this to $\chi V_i$, with $\chi=1$ on $f^{-1}(B')$, $B'\Subset B$, and
+$\chi\in\CI(X)$ supported in $f^{-1}(B)$.) Let $B''$ be a ball around $0$ of radius less than half the radius of $B'$. For
+$y'\in B''$ let $\Phi_{y'}$ be the time-one flow of $\sum y'_i\chi V_i$. Where $\chi=1$ this
+field is $f$-related to the constant field $\sum y'_i\pa_{y'_i}$, so for $f(q)\in B''$ the
+image under $f$ of the integral curve moves along a straight segment inside $B'$, and
+$f(\Phi_{y'}(q))=f(q)+y'$. Then, for $B'''\subset B''$ a smaller ball,
+\begin{equation*}
+  B'''\times f^{-1}(p')\ni(y',q)\longmapsto\Phi_{y'}(q)\in f^{-1}(B'''),\qquad
+  q'\longmapsto\big(f(q'),\Phi_{-f(q')}(q')\big),
+\end{equation*}
+are inverse smooth maps, and $f$ becomes the projection. The fibre $f^{-1}(p')$ is a
+manifold with corners: in the chart above it is $\{f(x,y)=p'\}$, and since $D_yf$ is
+surjective the implicit function theorem (with $x$ as parameters) solves for some of the
+$y$. This also shows $f(X)$ is open; it is closed since $X$ is compact. Conversely, in a
+local product $U\times F$ the boundary faces are $U\times G$, $G$ a face of $F$, and the
+projection restricted to them is a submersion.
+\end{proof}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[>=Stealth,scale=1.0]
+  \begin{scope}
+    \fill[gray!12] (-1.5,0) arc (180:0:1.5) -- cycle;
+    \draw[very thick] (-1.5,0) arc (180:0:1.5) -- cycle;
+    \foreach \x in {-1.2,-0.6,0,0.6,1.2}{
+      \pgfmathsetmacro{\h}{sqrt(2.25-\x*\x)}
+      \draw[gray] (\x,0)--(\x,\h);}
+    \draw[->] (0,-0.4)--(0,-0.9);
+    \draw[thick] (-1.5,-1.2)--(1.5,-1.2);
+    \fill (-1.5,-1.2) circle (1.5pt) (1.5,-1.2) circle (1.5pt);
+    \node[below,font=\footnotesize] at (-1.5,-1.25) {$-1$};
+    \node[below,font=\footnotesize] at (1.5,-1.25) {$1$};
+    \node[font=\small,align=center] at (0,-2.3) {(a) surjective, $df$ surjective,\\ not a fibration};
+  \end{scope}
+  \begin{scope}[xshift=5.5cm]
+    \fill[gray!12] (0,0) rectangle (2.4,2.4);
+    \fill[white] (0,0) -- (0.8,0) arc (0:90:0.8) -- cycle;
+    \draw[very thick] (0,2.4)--(0,0.8) arc (90:0:0.8) -- (2.4,0) -- (2.4,2.4) -- cycle;
+    \draw[line width=2.2pt] (0,2.4)--(0,0.8) arc (90:0:0.8);
+    \foreach \x in {0.3,0.6}{
+      \pgfmathsetmacro{\h}{sqrt(0.64-\x*\x)}
+      \draw[gray] (\x,\h)--(\x,2.4);}
+    \foreach \x in {1.1,1.6,2.0} \draw[gray] (\x,0)--(\x,2.4);
+    \draw[->] (1.2,-0.4)--(1.2,-0.9);
+    \draw[thick] (0,-1.2)--(2.4,-1.2);
+    \fill (0,-1.2) circle (1.5pt);
+    \node[below,font=\footnotesize] at (0,-1.25) {$0$};
+    \node[font=\small,align=center] at (1.2,-2.3) {(b) $[[0,1]^2;\{0\}]\to[0,1]$:\\ a b-fibration};
+  \end{scope}
+\end{tikzpicture}
+\caption{(a) The projection of the half-disc onto $[-1,1]$: the fibres (gray) degenerate
+to points at the ends. (b) The blow-down of the corner of $[0,1]^2$ followed by
+$(x,y)\mapsto x$: the fibres over $x>0$ are segments, while the fibre over $0$ (heavy) is
+the union of the front face and the lift of $\{x=0\}$, two boundary hypersurfaces
+meeting at a corner.}
+\label{blowup:fig:fibrations}
+\end{figure}
+
+When $X'$ has boundary, maps such as blow-downs, which are not fibrations, must also be
+allowed. The right notion uses the b-tangent bundle.
+
+\subsection{The b-tangent bundle and the b-differential}
+By \cref{blowup:lem:Vb}, $\Vb(X)$ is locally free with basis $x_i\pa_{x_i}$, $\pa_{y_j}$.
+Hence there is a vector bundle $\bT X$, the \emph{b-tangent bundle}, with
+$\bT_pX=\Vb(X)/\mathcal I_p\Vb(X)$ ($\mathcal I_p$ the functions vanishing at $p$) and
+$\CI(X;\bT X)=\Vb(X)$. For $v=V_p\in\bT_pX$ and a function $h$ which is smooth or of the
+form $\log(a\prod\rho_H^{e_H})$ with $a>0$ smooth, set $v(h)=(Vh)(p)$; this is well defined
+because $V\log\rho_H=V\rho_H/\rho_H$ is smooth for $V\in\Vb(X)$, and it vanishes if $V\in\mathcal
+I_p\Vb$.
+
+\begin{lemma}\label{blowup:lem:bdiff}
+Let $f:X\to X'$ be an interior b-map and $p\in X$, $p'=f(p)$. There is a unique linear map
+$f_*:\bT_pX\to\bT_{p'}X'$, the \emph{b-differential}, such that $(f_*v)(g)=v(f^*g)$ for all
+$g$ smooth near $p'$ and $(f_*v)(\log\rho_{H'})=v(\log f^*\rho_{H'})$ for all $H'\ni p'$.
+For composable interior b-maps, $(g\circ f)_*=g_*f_*$.
+\end{lemma}
+\begin{proof}
+In a chart $(x',y')$ at $p'$, an element $\bar v=\sum\alpha_ix'_i\pa_{x'_i}+\sum\beta_j\pa_{y'_j}$
+of $\bT_{p'}X'$ is determined by $\bar v(\log x'_i)=\alpha_i$ and $\bar v(y'_j)=\beta_j$; this
+gives uniqueness. Define $f_*v$ by $\alpha_i=v(\log f^*x'_i)$, $\beta_j=v(f^*y'_j)$, which
+makes sense by \eqref{blowup:eq:bmap}. For smooth $g$, the chain rule on the dense set
+$X^\circ$ gives $V(f^*g)=\sum f^*(\pa_{x'_i}g)\,f^*x'_i\,V(\log f^*x'_i)+\sum
+f^*(\pa_{y'_j}g)V(f^*y'_j)$, whose value at $p$ is $(f_*v)(g)$. For a defining function
+$\rho_{H'}=cx'_i$ we have $\log\rho_{H'}=\log c+\log x'_i$, and both sides are additive. The
+composition rule follows from uniqueness, since $v(f^*g^*h)=(f_*v)(g^*h)=(g_*f_*v)(h)$ for
+both kinds of $h$.
+\end{proof}
+
+\begin{definition}\label{blowup:def:bfib}
+An interior b-map $f:X\to X'$ is a \emph{b-submersion} if $f_*:\bT_pX\to\bT_{f(p)}X'$ is
+surjective for all $p$. It is \emph{b-normal} if for each $H\in\mathcal M_1(X)$ there is at
+most one $H'\in\mathcal M_1(X')$ with $e(H,H')\ne0$, i.e.\ no boundary hypersurface is mapped
+into a corner of codimension two or more. A \emph{b-fibration} is a b-normal
+b-submersion.
+\end{definition}
+
+A fibration between manifolds with corners which is an interior b-map is a b-fibration,
+by the local product form. Composites of b-submersions are b-submersions by
+\cref{blowup:lem:bdiff}. The blow-down map of an interior p-submanifold is not a
+b-submersion: for $[\R^2;\{0\}]$, $\bT=T$ downstairs and $\beta_*(r\pa_r)=x\pa_x+y\pa_y$ and
+$\beta_*(\pa_\omega)=x\pa_y-y\pa_x$ both vanish at $0$.
+
+\begin{proposition}\label{blowup:prop:bd-bsub}
+For a boundary face $F$ of a manifold with corners $X$, the blow-down map
+$\beta:[X;F]\to X$ is a b-submersion; in fact $\beta_*$ is an isomorphism on each fibre of
+$\bT$. If $F$ has codimension at least two, $\beta$ is not b-normal.
+\end{proposition}
+\begin{proof}
+Away from the front face $\beta$ is a local diffeomorphism. Near the front face use an
+adapted chart with $F=\{x=0\}$, $x\in[0,\infty)^a$, and projective coordinates
+$s=x_j$, $t_m=x_m/x_j$ ($m\ne j$), all of them boundary coordinates. Then
+$\log\beta^*x_j=\log s$ and $\log\beta^*x_m=\log s+\log t_m$, so
+\begin{equation*}
+  \beta_*(s\pa_s)=\sum_{i=1}^ax_i\pa_{x_i},\qquad\beta_*(t_m\pa_{t_m})=x_m\pa_{x_m},\qquad
+  \beta_*(\pa_{y})=\pa_y,
+\end{equation*}
+and these images form a basis of $\bT X$. If $a\ge2$, \cref{blowup:prop:props}(ii) gives
+$e(\mathrm{ff},H_i)=1$ for the $a\ge2$ hypersurfaces $H_i=\{x_i=0\}$ containing $F$.
+\end{proof}
+
+\begin{example}\label{blowup:exa:bfib}
+The composite $f=\pi_1\circ\beta:[[0,1]^2;\{(0,0)\}]\to[0,1]$ of the blow-down of the corner
+and the projection $\pi_1(x,y)=x$ is a b-fibration which is not a fibration
+(\cref{blowup:fig:fibrations}(b)). It is a b-submersion as a composite of b-submersions
+($\pi_1$ maps $x\pa_x\mapsto x\pa_x$ at $x=0$ and $\pa_x\mapsto\pa_x$ elsewhere). It is
+b-normal because $[0,1]$ has no corners of codimension two. In the projective coordinates
+$s=y$, $t=x/y$ near the corner $q$ of the front face and the lift of $\{x=0\}$,
+$f^*x=st$, whose differential vanishes at $q$. If $f$ were a fibration near $q$, then in a
+product decomposition $[0,\delta)\times F$ the function $f^*x$ would be the first coordinate,
+with non-vanishing differential. Note that the fibre over $0$ is the union of two boundary
+hypersurfaces.
+\end{example}
+
+\begin{discussion}
+Why are b-fibrations the right replacement for fibrations? The b-differential sees the
+maps $x\mapsto x^e$ in boundary variables as ``linear'' ($\log x\mapsto e\log x$), so a
+b-submersion is a submersion in the logarithmic coordinates $\log x_i$, which is what
+matters for integration along the fibres of functions with expansions in powers and logarithms
+of boundary defining functions. b-normality prevents a whole boundary hypersurface from
+being squeezed into a corner, where the expansions of different faces would collide.
+Melrose's push-forward theorem (see the Notes) makes this precise.
+\end{discussion}
+
+%======================================================================
+\section{A dictionary of blown-up spaces in this book}\label{blowup:sec:dictionary}
+
+We list the spaces of the book which are blow-ups, with the results above which justify
+the descriptions given where they are used.
+
+\begin{enumerate}[label=(\arabic*),leftmargin=*]
+\item \emph{Radial compactification} (\cref{ch:distributions}). In the inverted coordinate
+$w=4z/\abs z^2$ near $\infty\in\oRC{\R^n}$, the collar coordinates of
+\cref{distributions:lem:collar} are $s=\abs w/4$, $\omega=w/\abs w$: polar coordinates in
+$w$. So $\RC{\R^n}=[\oRC{\R^n};\{\infty\}]$, and this description is independent of
+coordinates by \cref{blowup:thm:invariance}; this answers \cref{distributions:ex:polar}.
+\item \emph{Blow-up of the origin} $[W;\{0\}]$ (\cref{conormal:lem:blowup},
+\cref{conormal:ex:blowup}): \cref{blowup:prop:bundle}, with \cref{blowup:exa:homogeneous}.
+\item \emph{Relative compactifications.} $\relRC VW=[\RC W;\Sphere V]$ with $H_V$ the front
+face (\cref{distributions:rem:blowup}, \cref{product:prop:blow-down},
+\cref{product:ex:blow-up}): \cref{blowup:thm:relative}. The doubly-relative
+compactification is $[\RC{V\times U};\Sphere U,\Sphere V]=[\RC V\times\RC U;\Sphere V\times\Sphere U]$
+(\cref{distributions:rem:blowup}, \cref{distributions:ex:doubly}):
+\cref{blowup:prop:doubly}.
+\item \emph{Product-type symbols} (\cref{ch:product}). Fibrewise, for a subbundle
+$V=\phi^*T^*B$ of $W=T^*M$, the relative compactification is
+$[\RC{T^*M};\phi^*S^*B]$, with main face $H_W=[S^*M;\phi^*S^*B]$ by
+\cref{blowup:thm:relative,blowup:prop:lift}, fibred over $S^*(M/B)$ with fibres radially
+compactified affine spaces by \cref{blowup:lem:sphere-fibration}.
+\item \emph{Families symbols} (\cref{ch:families}). The symbol space
+$[S^*(\tilde M/B);\Sigma]$, $\Sigma=S(\tilde\phi^*T^*(M/B))$, is the blow-up of an interior
+submanifold of a manifold without boundary; the map
+$\gamma:[S^*(\tilde M/B);\Sigma]\to S^*(\tilde M/M)$ in \ref{families:P-fibre} is the map of
+\cref{blowup:lem:sphere-fibration} for $W=T^*(\tilde M/B)$, $V=\tilde\phi^*T^*(M/B)$,
+$W/V=T^*(\tilde M/M)$.
+\item \emph{The circle bundle in \cref{ch:eta}.} In \ref{eta:P1}, $S^*M\times\Sphere=
+\{\tau=0\}$ is a two-sided hypersurface of $S^*(M\times\Sphere)$: on the unit cosphere
+$\abs\xi^2+\tau^2=1$, $d\tau\ne0$ where $\tau=0$. By \cref{blowup:prop:hypersurface} the
+blow-up is the disjoint union of the closed half-sphere bundles $S^*_\pm=\{\pm\tau\ge0\}$.
+\item \emph{Semiclassical and adiabatic double spaces} (\cref{ch:semiclassical}):
+$[[0,1]\times X^2;\{0\}\times\Diag]$ and $[[0,1]\times Y^2;\{0\}\times Y^2_\phi]$, described in
+\cref{blowup:prop:sc-kernels}, \cref{blowup:cor:sc-manifold} and
+\cref{blowup:rem:adiabatic}; these justify \cref{semiclassical:rem:double-space} and
+\cref{semiclassical:prop:smoothing-X}(iii).
+\end{enumerate}
+
+\begin{example}\label{blowup:exa:b-double}
+Let $X$ be a manifold with boundary. The diagonal of $X^2$ is not a p-submanifold
+(\cref{blowup:ex:diag-not-p}), but it lifts to one in the \emph{b-double space}
+$X^2_{\mathrm b}=[X^2;(\pa X)^2]$ (for $\pa X$ connected; in general one blows up the
+products $H_i\times H_i$ of the boundary components). In coordinates $(x,y)$, $(x',y')$
+on the two factors, $(\pa X)^2=\{x=x'=0\}$ is a corner of codimension two. In the
+projective coordinates $s=x$, $t=x'/x$ the diagonal minus $(\pa X)^2$ is $\{t=1,\ y=y'\}$
+with $s>0$, so its closure $\Diag_{\mathrm b}=\{t=1,\ y=y'\}$ is an interior p-submanifold
+meeting the front face transversally (\cref{blowup:fig:corner}). The b-vector fields of the
+left factor lift to $x\pa_x=s\pa_s-t\pa_t$ and $\pa_{y_j}$, and since
+$(s\pa_s-t\pa_t)(t-1)=-1$ and $\pa_{y_j}(y_k-y'_k)=\delta_{jk}$ on $\Diag_{\mathrm b}$, they are
+transversal to $\Diag_{\mathrm b}$: they span its normal bundle at every point. This is the
+starting point of the b-calculus \cite{Melrose-APS}, in which the kernels of
+b-pseudodifferential operators are conormal to $\Diag_{\mathrm b}$ in $X^2_{\mathrm b}$.
+\end{example}
+
+\begin{remark}\label{blowup:rem:other-calculi}
+Other calculi of pseudodifferential operators on manifolds with boundary arise in the
+same way, by resolving the diagonal together with a Lie algebra of vector fields: the
+$0$-calculus of Mazzeo and Melrose (vector fields vanishing at $\pa X$, double space
+$[X^2;\pa\Diag]$), the scattering calculus (double space $[X^2_{\mathrm b};\pa\Diag_{\mathrm b}]$),
+and the cusp and fibred-boundary calculi. We do not use them; see \cite{Melrose-APS} for
+the b-calculus and the Notes for further references.
+\end{remark}
+
+%======================================================================
+\section{Exercises}\label{blowup:sec:exercises}
+
+\begin{exercise}\label{blowup:ex:projective}
+In the projective coordinates $s=z_1$, $t_k=z_k/z_1$ ($k\ge2$) on
+$\{\omega_1>0\}\subset[\R^n;\{0\}]$: (a) verify \eqref{blowup:eq:proj-lifts}; (b) show that the
+Euler field lifts to $s\pa_s$ and the rotation $z_1\pa_{z_2}-z_2\pa_{z_1}$ to
+$(1+t_2^2)\pa_{t_2}-t_2s\pa_s+t_2\sum_{r\ge3}t_r\pa_{t_r}$; (c) show that $\pa_{z_1}$ lifts to
+$s^{-1}$ times a smooth vector field, but not to a smooth one; (d) compute
+$\beta^*\abs{dz}$ in these coordinates.
+\end{exercise}
+
+\begin{exercise}\label{blowup:ex:cone}
+Let $C=\{(t,x,y)\in\R^3;\ t^2=x^2+y^2,\ t\ge0\}$. Show that the closure of
+$\beta^{-1}(C\setminus0)$ in $[\R^3;\{0\}]$ is an interior p-submanifold diffeomorphic to
+$[0,\infty)\times\Sphere^1$, meeting the front face transversally in a circle, and that
+$\beta$ restricts to the polar map $(r,\theta)\mapsto r(1,\theta)/\sqrt2$ on it.
+\end{exercise}
+
+\begin{exercise}\label{blowup:ex:morse}
+Let $u\in\CI(\R^n)$ have a non-degenerate critical point at $0$, so that
+$u(z)=u(0)+z^TH(z)z$ with $H$ smooth, symmetric, and $H(0)$ invertible. Show that on
+$[\R^n;\{0\}]$, $\beta^*u=u(0)+r^2U$ with $U(r,\omega)=\omega^TH(r\omega)\omega$, and that
+$dU\ne0$ near $\{r=0,\ U=0\}$. Conclude that near the front face the lift of the level set
+$\{u=u(0)\}$ is the union of the front face and the hypersurface $\{U=0\}$, which meet
+transversally.
+\end{exercise}
+
+\begin{exercise}\label{blowup:ex:diag-not-p}
+Let $X$ be a manifold with boundary of dimension $n\ge1$ with $\pa X\ne\emptyset$. Show that
+$\Diag\subset X^2$ is not a p-submanifold. (Count the dimensions of $\Diag\cap\{x=0\}$,
+$\Diag\cap\{x'=0\}$ and $\Diag\cap\{x=x'=0\}$.)
+\end{exercise}
+
+\begin{exercise}\label{blowup:ex:noncommute}
+In $\R^3$ let $Y=\{z_1=z_2=0\}$ and $Z=\{z_2=z_3=0\}$. Show that $Y$ and $Z$ are joint
+p-submanifolds, neither transversal nor nested, and that $f=z_2/\abs{(z_1,z_2)}$ extends
+continuously to $[\R^3;Y;Z]$ but not to $[\R^3;Z;Y]$. Conclude that the identity of
+$\R^3\setminus(Y\cup Z)$ does not extend to a homeomorphism $[\R^3;Z;Y]\to[\R^3;Y;Z]$.
+\end{exercise}
+
+\begin{exercise}\label{blowup:ex:corner-exponents}
+Let $\beta:[\R^{2,2};\{0\}]\to\R^{2,2}=[0,\infty)^2$ be the blow-down of the corner. Compute
+the exponent matrix of $\beta$ and verify directly that $\beta$ is a b-submersion which is
+not b-normal, and that $\pi_1\circ\beta$ is b-normal. More generally, show that the blow-down of
+a boundary face of codimension $a$ has $e(\mathrm{ff},H)=1$ for the $a$ hypersurfaces
+$H\supset F$.
+\end{exercise}
+
+\begin{exercise}\label{blowup:ex:half-disc}
+Let $D_+=\{(x,y);\ x^2+y^2\le1,\ y\ge0\}$ and $f(x,y)=x$. Show that $D_+$ is a manifold with
+corners, that $f:D_+\to[-1,1]$ is surjective with surjective differential, and that $f$ is
+not a fibration. Which hypothesis of \cref{blowup:prop:fibration} fails for
+$f:D_+\to\R$? Is $f:D_+\to[-1,1]$ a b-map?
+\end{exercise}
+
+\begin{exercise}\label{blowup:ex:octagon}
+Let $\dim U=\dim V=1$. Show that $\relRC{U,V}{U\times V}$ is an octagon
+(\cref{blowup:fig:octagon}): it has eight boundary hypersurfaces, each an interval.
+Identify them in both descriptions of \cref{blowup:prop:doubly}. Show that if $\dim U,\dim
+V\ge2$ there are exactly three boundary hypersurfaces, and identify them.
+\end{exercise}
+
+\section*{Notes}
+This appendix is based on Lectures~1 and~2 of Melrose's MSRI lectures \emph{Real blow
+ups} (2008); the remaining sections of those notes were not written and are omitted, apart
+from the brief \cref{blowup:exa:b-double,blowup:rem:other-calculi}. Several statements
+have been corrected or completed. The coordinate invariance of polar coordinates is proved
+by an explicit Taylor-formula lift (\cref{blowup:thm:invariance}) instead of the
+homotopy argument sketched originally, and it is proved with parameters and at corners.
+The lifts of linear vector fields in projective coordinates
+\eqref{blowup:eq:proj-lifts} correct the formula of the source. The front face is
+$S^+NY$ with $NY=T_YX/TY$ (not $TY$), the blow-up of the zero section is $[E;0_E]$, and
+the reduction of the general case to the vector bundle case uses the tubular (not collar)
+neighbourhood theorem. The projective blow-up of a point is the tautological line bundle
+over $\R\mathbb P^{n-1}$. The commutation results for nested and transversal centres are
+proved by identifying both iterated blow-ups with an explicit model, and a counterexample
+shows that commutation fails in general. The source asserts that a surjective map with
+surjective differential between manifolds with corners is a fibration; the half-disc shows
+this is false, and \cref{blowup:prop:fibration} gives a correct criterion. The
+identifications of the relative and doubly-relative compactifications, the semiclassical
+criterion and the sphere fibration lemma were added for use in the book. Real blow-up is
+developed systematically in Melrose's unpublished book \emph{Differential analysis on
+manifolds with corners}; b-fibrations and the push-forward theorem for polyhomogeneous
+functions are in R.~B. Melrose, \emph{Calculus of conormal distributions on manifolds with
+corners}, Int.\ Math.\ Res.\ Notices 1992; the b-calculus is in \cite{Melrose-APS}; the
+$0$-calculus is in R.~Mazzeo and R.~B. Melrose, J.\ Funct.\ Anal.\ 75 (1987).
