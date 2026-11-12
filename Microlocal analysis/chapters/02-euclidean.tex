@@ -1,0 +1,1056 @@
+\chapter{Pseudodifferential operators on Euclidean space}\label{ch:euclidean}
+\providecommand{\Amp}[2]{\mathcal{A}^{#1}_{#2}}% amplitudes of order #1 and weight #2
+
+This chapter constructs the basic algebra of pseudodifferential operators on
+$\R^n$, the ``traditional'' calculus with symbols of type $(1,0)$ whose
+coefficients are uniformly smooth in the base variables. The starting point is
+the Fourier representation of a differential operator with coefficients in
+$\CIb(\R^n)$,
+\begin{equation*}
+  P(x,D)u(x)=\int e^{i(x-y)\cdot\xi}P(x,\xi)u(y)\,dy\,\dbar\xi
+  =\int e^{ix\cdot\xi}P(x,\xi)\hat u(\xi)\,\dbar\xi,\qquad u\in\cS(\R^n),
+\end{equation*}
+where $P(x,\xi)=\sum_{\abs\alpha\le m}p_\alpha(x)\xi^\alpha$ is the
+characteristic polynomial. We generalize this formula by replacing the
+polynomial $P(x,\xi)$ by a \emph{symbol}, a smooth function satisfying
+uniform estimates at infinity, and we even allow it to depend on the
+``incoming'' variable $y$, so that operators are given by
+\begin{equation}\label{euclidean:eq:amplitude-operator}
+  Au(x)=\int e^{i(x-y)\cdot\xi}a(x,y,\xi)u(y)\,dy\,\dbar\xi,\qquad u\in\cS(\R^n).
+\end{equation}
+Such integrals are in general not absolutely convergent.
+\Cref{euclidean:sec:symbols} develops the symbol spaces, including
+asymptotic summation. In \cref{euclidean:sec:operators} the integral
+\eqref{euclidean:eq:amplitude-operator} is interpreted as an oscillatory
+integral and shown to define a continuous operator on $\cS(\R^n)$.
+\Cref{euclidean:sec:reduction} shows that every such operator can be written
+with an amplitude independent of $y$ (reduction to the left symbol), and
+\cref{euclidean:sec:composition} deduces from this that the operators form
+an order-filtered $*$-algebra. The remaining sections develop the
+consequences: principal symbols, ellipticity and parametrices, elliptic
+regularity, boundedness on $L^2$ and on (weighted) Sobolev spaces,
+polyhomogeneous (classical) operators and invariance under affine changes of
+variables. Coordinate invariance, and hence operators on manifolds, is the
+subject of \cref{ch:microlocal,ch:manifolds}.
+
+Throughout, $\ang{\xi}=(1+\abs\xi^2)^{1/2}$, $D=-i\pa$,
+$\dbar\xi=(2\pi)^{-n}d\xi$, and the Schwartz space carries the norms
+$\norm\phi_k=\max_{\abs\alpha+\abs\beta\le k}\sup_x\abs{x^\alpha D^\beta\phi(x)}$
+of \cref{ch:distributions}. The bilinear pairing of a distribution $u$ with a
+test function $\phi$ is written $u(\phi)$ or $\pair u\phi$, and
+$\inner uv=\int u\bar v\,dx$ is the $L^2$ inner product.
+
+% ======================================================================
+\section{Symbols}\label{euclidean:sec:symbols}
+
+A polynomial $p(\xi)$ of degree at most $m$ satisfies
+$\abs{p(\xi)}\le C\ang\xi^m$, and since $D^\alpha_\xi p$ has degree at most
+$m-\abs\alpha$, also $\abs{D^\alpha_\xi p(\xi)}\le C_\alpha\ang\xi^{m-\abs\alpha}$.
+If $P(x,\xi)$ is the characteristic polynomial of a differential operator of
+order $m$ with coefficients in $\CIb(\R^n)$ (all derivatives bounded) then
+\begin{equation*}
+  \abs{D^\alpha_xD^\beta_\xi P(x,\xi)}\le C_{\alpha\beta}\ang\xi^{m-\abs\beta}
+  \quad\text{on }\R^n\times\R^n,\ \alpha,\beta\in\N_0^n.
+\end{equation*}
+There is no reason to have the same number of base and fibre variables, so in
+general we define:
+
+\begin{definition}\label{euclidean:def:symbols}
+  For $m\in\R$ the space $S^m(\R^p;\R^n)$ of \emph{symbols of order $m$}
+  consists of the functions $a\in\CI(\R^p\times\R^n)$ satisfying
+  \begin{equation}\label{euclidean:eq:symbol-est}
+    \abs{D^\alpha_zD^\beta_\xi a(z,\xi)}\le C_{\alpha\beta}\ang\xi^{m-\abs\beta}
+    \quad\text{on }\R^p\times\R^n,\ \text{for all }\alpha\in\N_0^p,\ \beta\in\N_0^n.
+  \end{equation}
+  It is given the topology of the norms
+  \begin{equation*}
+    \norm a_{N,m}=\max_{\abs\alpha+\abs\beta\le N}\ \sup_{(z,\xi)\in\R^p\times\R^n}
+    \ang\xi^{-m+\abs\beta}\abs{D^\alpha_zD^\beta_\xi a(z,\xi)},\qquad N\in\N_0.
+  \end{equation*}
+  We set $S^\infty(\R^p;\R^n)=\bigcup_mS^m(\R^p;\R^n)$ and
+  $S^{-\infty}(\R^p;\R^n)=\bigcap_mS^m(\R^p;\R^n)$, the latter with the
+  topology given by all the norms $\norm\cdot_{N,m}$, $N\in\N_0$, $m\in\R$;
+  its elements are called \emph{residual} symbols.
+\end{definition}
+
+\begin{remark}\label{euclidean:rem:symbols-open}
+  The estimates are uniform in the ``base'' variables $z$; this is the
+  analogue of the condition that the coefficients be in $\CIb$. For an open
+  set $\Omega\subset\R^p$ one defines $S^m(\Omega;\R^n)$ in the same way,
+  requiring \eqref{euclidean:eq:symbol-est} on $\Omega\times\R^n$. The class
+  of symbols is not the only reasonable one (see
+  \cref{euclidean:ex:rho-delta}), but it is large enough to contain everything
+  we need at first and small enough for the calculus to work easily.
+\end{remark}
+
+Since $\ang\xi^{m}\le\ang\xi^{m'}$ for $m\le m'$ we have
+$\norm a_{N,m'}\le\norm a_{N,m}$, so there are continuous inclusions
+$S^m(\R^p;\R^n)\hookrightarrow S^{m'}(\R^p;\R^n)$ for $m\le m'$; the symbol
+spaces form a filtration of $S^\infty(\R^p;\R^n)$. A residual symbol is a
+smooth function all of whose derivatives are bounded by
+$C_{\alpha\beta N}\ang\xi^{-N}$ for every $N$.
+
+We shall use repeatedly the following elementary inequality.
+
+\begin{lemma}[Peetre's inequality]\label{euclidean:lem:peetre}
+  For all $x,y\in\R^n$ and $s\in\R$,
+  \begin{equation*}
+    \ang{x+y}^s\le2^{\abs s/2}\ang x^s\ang y^{\abs s}.
+  \end{equation*}
+\end{lemma}
+\begin{proof}
+  Since $\abs{x+y}^2\le2\abs x^2+2\abs y^2$,
+  $1+\abs{x+y}^2\le2(1+\abs x^2)(1+\abs y^2)$, i.e.\
+  $\ang{x+y}\le\sqrt2\ang x\ang y$. This gives the case $s\ge0$. Applied to
+  $x=(x+y)+(-y)$ it gives $\ang x\le\sqrt2\ang{x+y}\ang y$, i.e.\
+  $\ang{x+y}^{-1}\le\sqrt2\ang x^{-1}\ang y$, and raising this to the power
+  $\abs s$ gives the case $s<0$.
+\end{proof}
+
+\begin{lemma}\label{euclidean:lem:symbol-basic}
+  Let $m,m'\in\R$.
+  \begin{enumerate}[label=\textup{(\roman*)}]
+  \item $\ang\xi^m\in S^m(\R^p;\R^n)$.
+  \item Multiplication defines a continuous bilinear map
+    $S^m(\R^p;\R^n)\times S^{m'}(\R^p;\R^n)\to S^{m+m'}(\R^p;\R^n)$.
+  \item $D^\alpha_z$ maps $S^m(\R^p;\R^n)$ continuously into itself and
+    $D^\beta_\xi$ maps it continuously into $S^{m-\abs\beta}(\R^p;\R^n)$.
+  \item $S^m(\R^p;\R^n)$ is a Fr\'echet space.
+  \item If $a\in\CI(\R^p\times\R^n)$ has all derivatives bounded and
+    $a(z,\xi)=0$ for $\abs\xi\ge R$, then $a\in S^{-\infty}(\R^p;\R^n)$.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  (i) By induction on $\abs\beta$,
+  $D^\beta_\xi\ang\xi^m=\ang\xi^{m-2\abs\beta}P_\beta(\xi)$ with $P_\beta$ a
+  polynomial of degree at most $\abs\beta$: indeed
+  $D_{\xi_j}(\ang\xi^{s}P)=\ang\xi^{s-2}\bigl(-is\xi_jP+\ang\xi^2D_{\xi_j}P\bigr)$
+  and the polynomial in brackets has degree at most $\deg P+1$. Hence
+  $\abs{D^\beta_\xi\ang\xi^m}\le C_\beta\ang\xi^{m-\abs\beta}$.
+
+  (ii) By Leibniz' formula,
+  \begin{equation*}
+    \ang\xi^{-m-m'+\abs\beta}\abs{D^\alpha_zD^\beta_\xi(ab)}
+    \le\sum_{\mu\le\alpha,\ \gamma\le\beta}\binom\alpha\mu\binom\beta\gamma
+    \ang\xi^{-m+\abs\gamma}\abs{D^\mu_zD^\gamma_\xi a}\,
+    \ang\xi^{-m'+\abs{\beta-\gamma}}\abs{D^{\alpha-\mu}_zD^{\beta-\gamma}_\xi b},
+  \end{equation*}
+  so $\norm{ab}_{N,m+m'}\le C_N\norm a_{N,m}\norm b_{N,m'}$.
+
+  (iii) is immediate from the definition:
+  $\norm{D^\alpha_za}_{N,m}\le\norm a_{N+\abs\alpha,m}$ and
+  $\norm{D^\beta_\xi a}_{N,m-\abs\beta}\le\norm a_{N+\abs\beta,m}$.
+
+  (iv) If $(a_k)$ is Cauchy in $S^m$ then, for each $\alpha,\beta$,
+  $\ang\xi^{-m+\abs\beta}D^\alpha_zD^\beta_\xi a_k$ converges uniformly. Hence
+  $a_k\to a$ in $\CI$ with all derivatives converging locally uniformly, and
+  the uniform limits are $\ang\xi^{-m+\abs\beta}D^\alpha_zD^\beta_\xi a$; it
+  follows that $a\in S^m$ and $a_k\to a$ in $S^m$.
+
+  (v) $\ang\xi^{N}\abs{D^\alpha_zD^\beta_\xi a}\le\ang R^N\sup\abs{D^\alpha_zD^\beta_\xi a}$.
+\end{proof}
+
+In particular $S^m\cdot S^{m'}=S^{m+m'}$, since
+$a=\ang\xi^{m}\cdot(\ang\xi^{-m}a)$. The inclusion
+$S^m\hookrightarrow S^{m'}$, $m'>m$, is never dense. Instead we have the
+following technical but very useful result.
+
+\begin{lemma}\label{euclidean:lem:density}
+  Let $\chi\in\CIc(\R^n)$ with $0\le\chi\le1$, $\chi(\xi)=1$ for
+  $\abs\xi\le1$ and $\chi(\xi)=0$ for $\abs\xi\ge2$. For
+  $a\in S^m(\R^p;\R^n)$ and $0<\eps\le1$ set
+  $a_\eps(z,\xi)=\chi(\eps\xi)a(z,\xi)$. Then $a_\eps\in S^{-\infty}(\R^p;\R^n)$,
+  the family $(a_\eps)$ is bounded in $S^m(\R^p;\R^n)$, and $a_\eps\to a$ in
+  $S^{m'}(\R^p;\R^n)$ as $\eps\to0$ for every $m'>m$. In particular
+  $S^{-\infty}(\R^p;\R^n)$ is dense in $S^m(\R^p;\R^n)$ in the topology of
+  $S^{m'}(\R^p;\R^n)$ for every $m'>m$.
+\end{lemma}
+\begin{proof}
+  The function $\chi(\eps\xi)$ is bounded in $S^0(\R^n)$ uniformly in
+  $\eps\in(0,1]$: for $\beta\ne0$,
+  $D^\beta_\xi(\chi(\eps\xi))=\eps^{\abs\beta}(D^\beta\chi)(\eps\xi)$ is
+  supported in $1/\eps\le\abs\xi\le2/\eps$, where
+  $\ang\xi\le1+\abs\xi\le3/\eps$, so it is bounded by
+  $3^{\abs\beta}\sup\abs{D^\beta\chi}\,\ang\xi^{-\abs\beta}$. By
+  \cref{euclidean:lem:symbol-basic}(ii) the family $a_\eps$ is bounded in
+  $S^m$, and $a_\eps\in S^{-\infty}$ by \cref{euclidean:lem:symbol-basic}(v).
+  Now $D^\alpha_zD^\beta_\xi(a-a_\eps)$ is bounded by
+  $C_{\alpha\beta}\ang\xi^{m-\abs\beta}$ uniformly in $\eps$ and vanishes for
+  $\abs\xi<1/\eps$. Hence, for $m'>m$,
+  \begin{equation*}
+    \sup\ang\xi^{-m'+\abs\beta}\abs{D^\alpha_zD^\beta_\xi(a-a_\eps)}
+    \le C_{\alpha\beta}\sup_{\abs\xi\ge1/\eps}\ang\xi^{m-m'}
+    \le C_{\alpha\beta}\,\eps^{m'-m}\to0.\qedhere
+  \end{equation*}
+\end{proof}
+
+One cannot take $m'=m$ here, for essentially the same reason that $\cS(\R^n)$
+is not dense in $\CIb(\R^n)$: a limit in $S^m$ of residual symbols satisfies
+$\ang\xi^{-m}a\to0$ as $\abs\xi\to\infty$, so for instance
+$1\in S^0(\R^p;\R^n)$ is not in the closure of $S^{-\infty}$ if $n>0$.
+
+\subsection{Ellipticity of symbols}
+
+\begin{lemma}\label{euclidean:lem:powers}
+  Let $a\in S^m(\R^p;\R^n)$ and let $U\subset\R^p\times\R^n$ be an open set
+  on which $\abs{a(z,\xi)}\ge\eps\ang\xi^m$ for some $\eps>0$. Then on $U$
+  \begin{equation*}
+    \abs{D^\alpha_zD^\beta_\xi(a^{-1})}\le C_{\alpha\beta}\ang\xi^{-m-\abs\beta},
+  \end{equation*}
+  and if moreover $a>0$ on $U$ then, for every $s\in\R$,
+  $\abs{D^\alpha_zD^\beta_\xi(a^{s})}\le C_{\alpha\beta s}\ang\xi^{sm-\abs\beta}$
+  on $U$. The constants depend only on $\eps$, $s$ and the norms of $a$. In
+  particular, if $U=\R^p\times\R^n$, then $a^{-1}\in S^{-m}(\R^p;\R^n)$ and,
+  when $a>0$, $a^s\in S^{sm}(\R^p;\R^n)$.
+\end{lemma}
+\begin{proof}
+  Let $s\in\R$ (with $s=-1$ if $a$ is not positive). We claim that on $U$
+  \begin{equation*}
+    D^\alpha_zD^\beta_\xi(a^s)=\sum_{j=0}^{\abs\alpha+\abs\beta}a^{s-j}G_{j},
+    \qquad G_j=G_{j}^{\alpha\beta}\in S^{jm-\abs\beta}(\R^p;\R^n),
+  \end{equation*}
+  where the $G_j$ are universal polynomials in the derivatives of $a$ (hence
+  defined on all of $\R^p\times\R^n$). This holds for $\alpha=\beta=0$ with
+  $G_0=1$. If it holds for $(\alpha,\beta)$ then
+  \begin{equation*}
+    D_{z_l}(a^{s-j}G_j)=a^{s-j-1}\bigl((s-j)(D_{z_l}a)G_j\bigr)+a^{s-j}D_{z_l}G_j,
+  \end{equation*}
+  with $(D_{z_l}a)G_j\in S^{(j+1)m-\abs\beta}$ and
+  $D_{z_l}G_j\in S^{jm-\abs\beta}$; similarly for $D_{\xi_l}$, where
+  $(D_{\xi_l}a)G_j\in S^{(j+1)m-\abs\beta-1}$ and
+  $D_{\xi_l}G_j\in S^{jm-\abs\beta-1}$. This proves the claim. On $U$,
+  $\abs a^{s-j}\le C\ang\xi^{(s-j)m}$: for $s-j\ge0$ by the upper bound
+  $\abs a\le C\ang\xi^m$, for $s-j<0$ by the lower bound. Hence
+  $\abs{a^{s-j}G_j}\le C\ang\xi^{(s-j)m+jm-\abs\beta}=C\ang\xi^{sm-\abs\beta}$.
+\end{proof}
+
+\begin{definition}\label{euclidean:def:elliptic-symbol}
+  A symbol $a\in S^m(\R^p;\R^n)$ is \emph{elliptic} if there are $\eps>0$ and
+  $C$ such that
+  \begin{equation}\label{euclidean:eq:elliptic-symbol}
+    \abs{a(z,\xi)}\ge\eps\ang\xi^m\quad\text{for all }z\in\R^p,\ \abs\xi\ge C.
+  \end{equation}
+\end{definition}
+
+Note that $\eps$ and $C$ are independent of $z$, so this is a notion of
+\emph{uniform} ellipticity. Condition \eqref{euclidean:eq:elliptic-symbol} is
+equivalent to the existence of $\eps>0$ and $C'$ with
+$\abs{a(z,\xi)}\ge\eps\ang\xi^m-C'\ang\xi^{m-1}$ everywhere. Indeed, the
+latter gives $\abs a\ge\frac\eps2\ang\xi^m$ once $\ang\xi\ge2C'/\eps$;
+conversely, if \eqref{euclidean:eq:elliptic-symbol} holds then for
+$\abs\xi\le C$ we have $\eps\ang\xi^m\le\eps\ang C\ang\xi^{m-1}$, so
+$\abs a\ge\eps\ang\xi^m-\eps\ang C\ang\xi^{m-1}$ everywhere.
+
+\begin{lemma}\label{euclidean:lem:elliptic-symbol}
+  If $a\in S^m(\R^p;\R^n)$ is elliptic there exists
+  $b\in S^{-m}(\R^p;\R^n)$ such that $ab-1\in S^{-\infty}(\R^p;\R^n)$.
+  Conversely, if $ab-1\in S^{-\infty}$ for some $b\in S^{-m}$, then $a$ is
+  elliptic.
+\end{lemma}
+\begin{proof}
+  Let $C$ be as in \eqref{euclidean:eq:elliptic-symbol} and choose
+  $\psi\in\CI(\R^n)$ with $\psi(\xi)=0$ for $\abs\xi\le C+1$ and
+  $\psi(\xi)=1$ for $\abs\xi\ge C+2$; then $\psi\in S^0(\R^n)$. Set
+  $b=\psi/a$ where $\psi\ne0$ and $b=0$ elsewhere; $b$ is smooth since it
+  vanishes on a neighbourhood of $\{\abs\xi\le C+1\}$ and $a\neq 0$ on
+  $\abs\xi>C$. Applying \cref{euclidean:lem:powers} on
+  $U=\{\abs\xi>C\}$ and Leibniz' formula shows $b\in S^{-m}$, and
+  $ab-1=\psi-1$ is smooth, independent of $z$ and supported in
+  $\abs\xi\le C+2$, hence residual.
+
+  Conversely, if $ab=1+e$ with $e\in S^{-\infty}$, choose $C$ with
+  $\abs e\le\frac12$ for $\abs\xi\ge C$. Since $\abs b\le C'\ang\xi^{-m}$, for
+  $\abs\xi\ge C$ we get
+  $\frac12\le\abs a\abs b\le C'\ang\xi^{-m}\abs a$, which is
+  \eqref{euclidean:eq:elliptic-symbol} with $\eps=1/(2C')$.
+\end{proof}
+
+\subsection{Asymptotic summation}
+
+Suppose $a_j\in S^{m-j}(\R^p;\R^n)$, $j\in\N_0$. The decreasing orders mean
+that these symbols become smaller and smaller as $\abs\xi\to\infty$, but the
+series $\sum_ja_j$ need not converge. Nevertheless it can be ``summed''
+asymptotically.
+
+\begin{definition}\label{euclidean:def:asymptotic-sum}
+  Let $m_j\in\R$ be a sequence decreasing to $-\infty$ and
+  $a_j\in S^{m_j}(\R^p;\R^n)$. We write
+  \begin{equation*}
+    a\sim\sum_{j=0}^\infty a_j
+  \end{equation*}
+  if $a\in S^{m_0}(\R^p;\R^n)$ and
+  $a-\sum_{j<N}a_j\in S^{m_N}(\R^p;\R^n)$ for every $N$; $a$ is then called
+  an \emph{asymptotic sum} of the series. Most often $m_j=m-j$.
+\end{definition}
+
+\begin{proposition}[Borel's lemma for symbols]\label{euclidean:prop:borel}
+  Every series $\sum_ja_j$ with $a_j\in S^{m_j}(\R^p;\R^n)$, $m_j\downarrow-\infty$,
+  has an asymptotic sum, and the asymptotic sum is unique up to an additive
+  term in $S^{-\infty}(\R^p;\R^n)$.
+\end{proposition}
+\begin{proof}
+  Uniqueness: if $a$ and $a'$ are both asymptotic sums then
+  $a-a'=(a-\sum_{j<N}a_j)-(a'-\sum_{j<N}a_j)\in S^{m_N}$ for every $N$, so
+  $a-a'\in S^{-\infty}$.
+
+  Existence: we cut off each term near the origin in $\xi$, more and more
+  drastically as $j$ increases. Choose $\phi\in\CI(\R^n)$ with
+  $\phi(\xi)=0$ for $\abs\xi\le1$ and $\phi(\xi)=1$ for $\abs\xi\ge2$
+  (e.g.\ $\phi=1-\chi$ with $\chi$ as in \cref{euclidean:lem:density}).
+  As in the proof of \cref{euclidean:lem:density}, $\phi(\eps\xi)$ is
+  bounded in $S^0(\R^n)$ for $\eps\in(0,1]$, so
+  $\norm{\phi(\eps\xi)a_j}_{N,m_j}\le C_{N,j}$ with $C_{N,j}$ independent
+  of $\eps$. Moreover $\phi(\eps\xi)a_j$ vanishes for $\abs\xi<1/\eps$, where
+  $\ang\xi^{-1}\le\eps$; replacing $m_j$ by $m_j+1$ in the norm therefore
+  gains a factor $\eps$:
+  \begin{equation}\label{euclidean:eq:borel-gain}
+    \norm{\phi(\eps\xi)a_j}_{N,m_j+1}\le C_{N,j}\,\eps.
+  \end{equation}
+  Choose $\eps_j\in(0,1]$ with
+  $C_{N,j}\eps_j\le2^{-j}$ for all $N\le j$, and set
+  \begin{equation*}
+    a(z,\xi)=\sum_{j=0}^\infty\phi(\eps_j\xi)a_j(z,\xi).
+  \end{equation*}
+  The $\eps_j$ may be taken decreasing to $0$, so on each set
+  $\{\abs\xi\le R\}$ only finitely many terms are non-zero and $a$ is a
+  well-defined smooth function. Fix $M\in\N_0$. Since $m_j\downarrow-\infty$
+  there is $J_M$ with $m_j+1\le m_M$ for $j\ge J_M$; for such $j$ and
+  $j\ge N$,
+  $\norm{\phi(\eps_j\xi)a_j}_{N,m_M}\le\norm{\phi(\eps_j\xi)a_j}_{N,m_j+1}\le2^{-j}$.
+  Hence $\sum_{j\ge M}\phi(\eps_j\xi)a_j$ converges absolutely in each norm
+  of the Fr\'echet space $S^{m_M}$ and so converges there; its limit is the
+  pointwise sum. Thus
+  \begin{equation*}
+    a-\sum_{j<M}a_j=\sum_{j<M}(\phi(\eps_j\xi)-1)a_j+\sum_{j\ge M}\phi(\eps_j\xi)a_j
+    \in S^{-\infty}+S^{m_M},
+  \end{equation*}
+  where the first sum is residual by \cref{euclidean:lem:symbol-basic}(v).
+\end{proof}
+
+The following simple observations allow asymptotic sums to be manipulated
+formally.
+
+\begin{lemma}\label{euclidean:lem:asymptotic-manip}
+  \begin{enumerate}[label=\textup{(\roman*)}]
+  \item If $T$ is a linear map with $T(S^{k}(\R^p;\R^n))\subset S^{k+\mu}(\R^{p'};\R^{n})$ for all
+    $k$ \textup{(}e.g.\ multiplication by an element of $S^\mu$,
+    differentiation, complex conjugation, restriction to a linear subspace of
+    $\R^p$\textup{)} and $a\sim\sum_ja_j$, then $Ta\sim\sum_jTa_j$.
+  \item If $a\sim\sum_ja_j$ and $b\sim\sum_kb_k$, with $a_j\in S^{m-j}$,
+    $b_k\in S^{m'-k}$, then $ab\sim\sum_l\sum_{j+k=l}a_jb_k$.
+  \item \textup{(Rearrangement)} Let $a_{j,k}\in S^{m-j-k}(\R^p;\R^n)$ for
+    $j,k\in\N_0$. If $c_j\sim\sum_ka_{j,k}$ for each $j$ and
+    $c\sim\sum_jc_j$, then $c\sim\sum_l\bigl(\sum_{j+k=l}a_{j,k}\bigr)$.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  (i) $Ta-\sum_{j<N}Ta_j=T(a-\sum_{j<N}a_j)\in S^{m_N+\mu}$.
+  (ii) $ab-\sum_{j+k<N}a_jb_k=(a-\sum_{j<N}a_j)b+\sum_{j<N}a_j(b-\sum_{k<N-j}b_k)
+  \in S^{m+m'-N}$.
+  (iii) $c-\sum_{j+k<N}a_{j,k}=(c-\sum_{j<N}c_j)+\sum_{j<N}(c_j-\sum_{k<N-j}a_{j,k})
+  \in S^{m-N}$.
+\end{proof}
+
+% ======================================================================
+\section{Amplitudes and pseudodifferential operators}\label{euclidean:sec:operators}
+
+We now interpret \eqref{euclidean:eq:amplitude-operator}. It turns out to be
+convenient to allow the amplitude $a(x,y,\xi)$ to grow polynomially in the
+direction of $x-y$; this extra freedom makes no difference to the class of
+operators (\cref{euclidean:thm:reduction}) but is very useful, for instance
+for weighted estimates.
+
+\begin{definition}\label{euclidean:def:amplitude}
+  For $m,w\in\R$ let $\Amp mw(\R^n)$ be the space of
+  $a\in\CI(\R^n_x\times\R^n_y\times\R^n_\xi)$ such that
+  \begin{equation}\label{euclidean:eq:amplitude-est}
+    \abs{D^\alpha_xD^\beta_yD^\gamma_\xi a(x,y,\xi)}\le
+    C_{\alpha\beta\gamma}\ang{x-y}^w\ang\xi^{m-\abs\gamma}
+    \quad\text{for all }\alpha,\beta,\gamma\in\N_0^n,
+  \end{equation}
+  with the norms $\norm a_{N,m,w}$, the best constants in
+  \eqref{euclidean:eq:amplitude-est} for $\abs\alpha+\abs\beta+\abs\gamma\le N$.
+  Elements of $\Amp mw(\R^n)$ are called \emph{amplitudes} of order $m$ and
+  weight $w$. We set $\Amp{-\infty}{w}(\R^n)=\bigcap_m\Amp mw(\R^n)$.
+\end{definition}
+
+\begin{lemma}\label{euclidean:lem:amplitude-char}
+  Multiplication by $\ang{x-y}^w$ is an isomorphism of Fr\'echet spaces
+  $S^m(\R^{2n}_{(x,y)};\R^n_\xi)\to\Amp mw(\R^n)$. More generally, call
+  $f\in\CI(\R^{2n})$ \emph{of weight $w'$} if
+  $\abs{D^\alpha_xD^\beta_yf}\le C_{\alpha\beta}\ang{x-y}^{w'}$ for all
+  $\alpha,\beta$; then multiplication by such $f$ maps $\Amp mw(\R^n)$
+  continuously into $\Amp m{w+w'}(\R^n)$.
+\end{lemma}
+\begin{proof}
+  The second statement is immediate from Leibniz' formula. The function
+  $\ang z^w$ is a symbol of order $w$ in $z\in\R^n$ (with no base variables)
+  by \cref{euclidean:lem:symbol-basic}(i), so
+  $\abs{D^\alpha_z\ang z^{w}}\le C\ang z^{w-\abs\alpha}\le C\ang z^w$. Hence
+  $\ang{x-y}^{\pm w}$ is of weight $\pm w$, and multiplication by
+  $\ang{x-y}^{w}$ and by $\ang{x-y}^{-w}$ are mutually inverse continuous
+  maps between $S^m(\R^{2n};\R^n)=\Amp m0(\R^n)$ and $\Amp mw(\R^n)$.
+\end{proof}
+
+Thus $\Amp mw(\R^n)=\ang{x-y}^wS^m(\R^{2n};\R^n)$, and the results of
+\cref{euclidean:sec:symbols} transfer to amplitudes. In particular, by
+\cref{euclidean:lem:density}, if $a\in\Amp mw(\R^n)$ and $\chi$ is as there,
+then $\chi(\eps\xi)a\in\Amp{-\infty}w(\R^n)$ is bounded in $\Amp mw(\R^n)$ and
+converges to $a$ in $\Amp{m'}w(\R^n)$ as $\eps\to0$, for every $m'>m$. Note
+also the following elementary facts:
+\begin{itemize}
+\item $\Amp mw\subset\Amp{m'}{w'}$ if $m\le m'$ and $w\le w'$;
+  $\Amp mw\cdot\Amp{m'}{w'}\subset\Amp{m+m'}{w+w'}$;
+\item $D_{x_j}$, $D_{y_j}$ preserve $\Amp mw$, $D_{\xi_j}$ maps it to
+  $\Amp{m-1}w$ and multiplication by $\xi_j$ maps it to $\Amp{m+1}w$;
+\item $(x-y)^\alpha$ is of weight $\abs\alpha$, so
+  $(x-y)^\alpha\Amp mw\subset\Amp m{w+\abs\alpha}$;
+\item if $a\in S^m(\R^n;\R^n)$ then both $a(x,\xi)$ and $a(y,\xi)$ lie in
+  $\Amp m0(\R^n)$; and if $a\in\Amp mw$ then
+  $a(x,x,\xi)\in S^m(\R^n;\R^n)$.
+\end{itemize}
+
+\subsection{The kernel as an oscillatory integral}
+
+If $a\in\Amp mw(\R^n)$ with $m<-n$ then
+\begin{equation*}
+  K(x,y)=\int e^{i(x-y)\cdot\xi}a(x,y,\xi)\,\dbar\xi
+\end{equation*}
+converges absolutely and locally uniformly, so defines a continuous function
+with $\abs{K(x,y)}\le C\ang{x-y}^w$. For general $m$ we integrate by parts.
+Let $\Delta_x=D_{x_1}^2+\dots+D_{x_n}^2$ be the (positive) Laplacian. Then
+\begin{equation}\label{euclidean:eq:laplace-exp}
+  (1+\Delta_x)^qe^{i(x-y)\cdot\xi}=\ang\xi^{2q}e^{i(x-y)\cdot\xi},\qquad
+  (1+\Delta_y)^qe^{i(x-y)\cdot\xi}=\ang\xi^{2q}e^{i(x-y)\cdot\xi}.
+\end{equation}
+
+\begin{proposition}\label{euclidean:prop:osc-int}
+  Let $a\in\Amp mw(\R^n)$ and let $q\in\N_0$ satisfy $m-2q<-n$. For
+  $\phi\in\cS(\R^{2n})$ the integral
+  \begin{equation}\label{euclidean:eq:I-def}
+    I(a)(\phi)=\int_{\R^{3n}}e^{i(x-y)\cdot\xi}\ang\xi^{-2q}(1+\Delta_x)^q
+    \bigl[a(x,y,\xi)\phi(x,y)\bigr]\,dx\,dy\,\dbar\xi
+  \end{equation}
+  converges absolutely, is independent of the choice of such $q$, and
+  satisfies
+  \begin{equation}\label{euclidean:eq:I-est}
+    \abs{I(a)(\phi)}\le C\norm a_{2q,m,w}\norm\phi_k
+  \end{equation}
+  for some $k=k(q,w,n)$ and $C=C(q,w,n,m)$. Thus $I(a)\in\cSp(\R^{2n})$ and
+  $a\mapsto I(a)$ is continuous in the sense of \eqref{euclidean:eq:I-est}.
+  Moreover:
+  \begin{enumerate}[label=\textup{(\roman*)}]
+  \item if $m<-n$, $I(a)$ is the continuous function
+    $K(x,y)=\int e^{i(x-y)\cdot\xi}a(x,y,\xi)\,\dbar\xi$;
+  \item if $a_k$ is bounded in $\Amp mw(\R^n)$ and $a_k\to a$ in
+    $\Amp{m'}w(\R^n)$ for some $m'>m$, then $I(a_k)(\phi)\to I(a)(\phi)$ for
+    every $\phi\in\cS(\R^{2n})$; in particular, for $\chi$ as in
+    \cref{euclidean:lem:density},
+    \begin{equation*}
+      I(a)(\phi)=\lim_{\eps\to0}\int e^{i(x-y)\cdot\xi}\chi(\eps\xi)a(x,y,\xi)
+      \phi(x,y)\,dx\,dy\,\dbar\xi;
+    \end{equation*}
+  \item the same value is obtained if $(1+\Delta_x)^q$ is replaced by
+    $(1+\Delta_y)^q$ in \eqref{euclidean:eq:I-def}.
+  \end{enumerate}
+\end{proposition}
+
+Part (ii) justifies calling $I(a)$ an \emph{oscillatory integral}: it is
+the limit of the absolutely convergent integrals obtained by cutting off the
+amplitude at large frequencies, and it is the unique extension of the
+absolutely convergent case that is continuous in the sense of (ii).
+
+\begin{proof}
+  By Leibniz' formula $(1+\Delta_x)^q[a\phi]$ is a linear combination of
+  terms $D^\mu_xa\,D^\nu_x\phi$ with $\abs\mu+\abs\nu\le2q$, and
+  $\abs{D^\mu_xa}\le\norm a_{2q,m,w}\ang{x-y}^w\ang\xi^m$. Since
+  $\ang{x-y}\le\sqrt2\ang{(x,y)}$ we have
+  $\ang{x-y}^w\le2^{\abs w/2}\ang{(x,y)}^{\abs w}$. Hence the integrand in
+  \eqref{euclidean:eq:I-def} is bounded by
+  \begin{equation*}
+    C\norm a_{2q,m,w}\ang\xi^{m-2q}\ang{(x,y)}^{\abs w}
+    \sum_{\abs\nu\le2q}\abs{D^\nu\phi(x,y)}
+    \le C'\norm a_{2q,m,w}\norm\phi_k\ang\xi^{m-2q}\ang{(x,y)}^{-2n-1}
+  \end{equation*}
+  for $k\ge2q+\abs w+2n+1$, which is integrable since $m-2q<-n$. This proves
+  absolute convergence and \eqref{euclidean:eq:I-est}.
+
+  If $q$ and $q+1$ are both admissible, put
+  $F=\ang\xi^{-2q-2}(1+\Delta_x)^q[a\phi]$. For fixed $(y,\xi)$, $F$ and all
+  its $x$-derivatives are rapidly decreasing in $x$, so integration by
+  parts and \eqref{euclidean:eq:laplace-exp} give
+  \begin{equation*}
+    \int e^{i(x-y)\cdot\xi}(1+\Delta_x)F\,dx=\int\bigl((1+\Delta_x)e^{i(x-y)\cdot\xi}\bigr)F\,dx
+    =\ang\xi^2\int e^{i(x-y)\cdot\xi}F\,dx.
+  \end{equation*}
+  Integrating in $(y,\xi)$ (both sides being absolutely integrable) shows that
+  the integrals for $q+1$ and $q$ agree. So $I(a)$ is independent of $q$.
+
+  (i) If $m<-n$ we may take $q=0$, and then Fubini's theorem gives
+  $I(a)(\phi)=\int K\phi$.
+
+  (ii) Choose $q$ with $m'-2q<-n$ and apply \eqref{euclidean:eq:I-est} with
+  $m'$ in place of $m$ to $a-a_k$. The particular case follows from the
+  remarks after \cref{euclidean:lem:amplitude-char} and (i).
+
+  (iii) Denote by $I'(a)(\phi)$ the integral with $\Delta_y$ in place of
+  $\Delta_x$. Exactly the same arguments show that it converges absolutely,
+  is independent of $q$ and satisfies \eqref{euclidean:eq:I-est}, hence (ii).
+  For $a\in\Amp{-\infty}w$ both $I(a)(\phi)$ and $I'(a)(\phi)$ equal
+  $\int e^{i(x-y)\cdot\xi}a\phi\,dx\,dy\,\dbar\xi$ (take $q=0$). By (ii), applied
+  to $\chi(\eps\xi)a$, they agree for all $a$.
+\end{proof}
+
+Distributional operations on $I(a)$ correspond to simple operations on the
+amplitude.
+
+\begin{lemma}\label{euclidean:lem:kernel-identities}
+  For $a\in\Amp mw(\R^n)$ and $j=1,\dots,n$, the following identities hold in
+  $\cSp(\R^{2n})$:
+  \begin{gather*}
+    D_{x_j}I(a)=I\bigl((\xi_j+D_{x_j})a\bigr),\qquad
+    D_{y_j}I(a)=I\bigl((D_{y_j}-\xi_j)a\bigr),\\
+    (x_j-y_j)I(a)=I\bigl((x_j-y_j)a\bigr)=I(-D_{\xi_j}a).
+  \end{gather*}
+  Moreover $fI(a)=I(fa)$ for every $f$ of weight $w'$ in the sense of
+  \cref{euclidean:lem:amplitude-char}. In particular, for every
+  $\alpha\in\N_0^n$, $(x-y)^\alpha I(a)=I\bigl((-D_\xi)^\alpha a\bigr)$.
+\end{lemma}
+\begin{proof}
+  Such an $f$ and all its derivatives are polynomially bounded, so
+  $f\phi\in\cS(\R^{2n})$ for $\phi\in\cS(\R^{2n})$, and the integrals defining
+  $I(a)(f\phi)$ and $I(fa)(\phi)$ by \eqref{euclidean:eq:I-def} (with the same
+  $q$) are identical. This gives $fI(a)=I(fa)$, and in particular the first
+  equality in the second line.
+
+  For the remaining identities, suppose first that $a\in\Amp{-\infty}w$. Then
+  all integrals below converge absolutely and
+  \begin{equation*}
+    D_{x_j}I(a)(\phi)=-\int e^{i(x-y)\cdot\xi}a\,D_{x_j}\phi
+    =\int D_{x_j}\bigl(e^{i(x-y)\cdot\xi}a\bigr)\phi
+    =\int e^{i(x-y)\cdot\xi}(\xi_ja+D_{x_j}a)\phi,
+  \end{equation*}
+  integrating by parts in $x$. The identity for $D_{y_j}$ is the same.
+  Since $(x_j-y_j)e^{i(x-y)\cdot\xi}=D_{\xi_j}e^{i(x-y)\cdot\xi}$, integration
+  by parts in $\xi$ (the boundary terms vanish because $a$ is rapidly
+  decreasing in $\xi$) gives $I((x_j-y_j)a)=I(-D_{\xi_j}a)$.
+  For general $a$, apply these identities to $\chi(\eps\xi)a$ and let
+  $\eps\to0$, using \cref{euclidean:prop:osc-int}(ii) for both sides: the
+  amplitudes involved are bounded in $\Amp{m+1}{w+1}$ and converge in
+  $\Amp{m'+1}{w+1}$ for $m'>m$. The last statement follows by induction.
+\end{proof}
+
+\subsection{Pseudodifferential operators}
+
+\begin{proposition}\label{euclidean:prop:action-S}
+  Let $a\in\Amp mw(\R^n)$. For $u\in\cS(\R^n)$ define $\Op(a)u\in\cSp(\R^n)$
+  by
+  \begin{equation}\label{euclidean:eq:Op-def}
+    \pair{\Op(a)u}v=I(a)(v\otimes u),\qquad v\in\cS(\R^n),
+  \end{equation}
+  where $(v\otimes u)(x,y)=v(x)u(y)$. Then $\Op(a)u\in\cS(\R^n)$ and
+  $\Op(a):\cS(\R^n)\to\cS(\R^n)$ is continuous. For $q\in\N_0$ with
+  $m-2q<-n$,
+  \begin{equation}\label{euclidean:eq:Op-formula}
+    \Op(a)u(x)=\int e^{i(x-y)\cdot\xi}\ang\xi^{-2q}(1+\Delta_y)^q
+    \bigl[a(x,y,\xi)u(y)\bigr]\,dy\,\dbar\xi,
+  \end{equation}
+  an absolutely convergent integral; if $m<-n$ this is just
+  $\int e^{i(x-y)\cdot\xi}a(x,y,\xi)u(y)\,dy\,\dbar\xi$. In general
+  \begin{equation*}
+    \Op(a)u(x)=\lim_{\eps\to0}\int e^{i(x-y)\cdot\xi}\chi(\eps\xi)a(x,y,\xi)u(y)\,dy\,\dbar\xi.
+  \end{equation*}
+\end{proposition}
+\begin{proof}
+  Let $F(x)$ denote the right side of \eqref{euclidean:eq:Op-formula}. As in
+  the proof of \cref{euclidean:prop:osc-int}, but now using Peetre's
+  inequality $\ang{x-y}^w\le2^{\abs w/2}\ang x^{\abs w}\ang y^{\abs w}$, its
+  integrand is bounded by
+  $C\norm a_{2q,m,w}\ang x^{\abs w}\ang\xi^{m-2q}\ang y^{\abs w}
+  \sum_{\abs\nu\le2q}\abs{D^\nu u(y)}$. Hence the integral converges
+  absolutely, $F$ is continuous by dominated convergence, and
+  \begin{equation}\label{euclidean:eq:Op-bound}
+    \abs{F(x)}\le C\norm a_{2q,m,w}\norm u_k\ang x^{\abs w}
+  \end{equation}
+  for some $k$. By \cref{euclidean:prop:osc-int}(iii) and Fubini's theorem,
+  $I(a)(v\otimes u)=\int v(x)F(x)\,dx$, so $\Op(a)u=F$. The limit formula
+  follows in the same way from \cref{euclidean:prop:osc-int}(ii), the
+  convergence being locally uniform in $x$ by dominated convergence.
+
+  To see that $\Op(a)u\in\cS$, note that \eqref{euclidean:eq:Op-def} and
+  \cref{euclidean:lem:kernel-identities} give
+  \begin{equation*}
+    D_{x_j}\Op(a)u=\Op\bigl((\xi_j+D_{x_j})a\bigr)u,\qquad
+    x_j\Op(a)u=\Op(a)(x_ju)+\Op(-D_{\xi_j}a)u.
+  \end{equation*}
+  For instance
+  $\pair{D_{x_j}\Op(a)u}v=-I(a)(D_{x_j}v\otimes u)=(D_{x_j}I(a))(v\otimes u)$,
+  and $(x_j-y_j)(v\otimes u)=(x_jv)\otimes u-v\otimes(x_ju)$. By induction,
+  for all $\alpha,\beta$, $x^\alpha D^\beta\Op(a)u$ is a finite sum of terms
+  $\Op(a')(x^{\alpha'}u)$ with $a'\in\Amp{m+\abs\beta}w$, $\abs{\alpha'}\le\abs\alpha$,
+  the $a'$ depending continuously on $a$. By \eqref{euclidean:eq:Op-bound}
+  each such term is a continuous function bounded by
+  $C\norm a_{N,m,w}\norm u_{k'}\ang x^{\abs w}$. Since all distributional
+  derivatives of $\Op(a)u$ are continuous, $\Op(a)u\in\CI(\R^n)$; and since
+  $\ang x^{2L}$ is a polynomial in $x$, we get
+  $\sup\ang x^{2L-\abs w}\abs{D^\beta\Op(a)u}\le C\norm a_{N,m,w}\norm u_{k''}$
+  for all $L$ and $\beta$. Thus $\Op(a)u\in\cS(\R^n)$ and $\Op(a)$ is
+  continuous on $\cS(\R^n)$.
+\end{proof}
+
+\begin{definition}\label{euclidean:def:psido}
+  For $m\in\R$, $\Psido m(\R^n)$ is the space of operators
+  $\Op(a):\cS(\R^n)\to\cS(\R^n)$ with $a\in\Amp mw(\R^n)$ for some $w\in\R$.
+  Its elements are the \emph{pseudodifferential operators of order $m$} (of
+  type $(1,0)$, with uniformly bounded coefficients). We set
+  $\Psido\infty(\R^n)=\bigcup_m\Psido m(\R^n)$ and
+  $\Psido{-\infty}(\R^n)=\bigcap_m\Psido m(\R^n)$. The distribution
+  $K_A=I(a)$ is the \emph{Schwartz kernel} of $A=\Op(a)$.
+\end{definition}
+
+Since $\Amp mw\subset\Amp{m'}{w'}$ for $m\le m'$, $w\le w'$, each
+$\Psido m(\R^n)$ is a linear space and $\Psido m(\R^n)\subset\Psido{m'}(\R^n)$
+for $m\le m'$. By \eqref{euclidean:eq:Op-def}, $K_A$ is determined by $A$ on
+the products $v\otimes u$, and these span a dense subspace of $\cS(\R^{2n})$
+(see \cref{ch:distributions}), so $K_A$ is determined by $A$ even though the
+amplitude is not.
+
+The two extreme cases are amplitudes independent of $y$ and amplitudes
+independent of $x$. For $a,b\in S^m(\R^n;\R^n)$ we write
+\begin{equation*}
+  \Op(a)=\Op\bigl(a(x,\xi)\bigr),\qquad\Op_R(b)=\Op\bigl(b(y,\xi)\bigr),
+\end{equation*}
+the \emph{left} and \emph{right quantizations}; they lie in $\Psido m(\R^n)$.
+
+\begin{proposition}\label{euclidean:prop:left-right}
+  Let $a,b\in S^m(\R^n;\R^n)$ and $u\in\cS(\R^n)$. Then
+  \begin{equation}\label{euclidean:eq:left-quant}
+    \Op(a)u(x)=\int e^{ix\cdot\xi}a(x,\xi)\hat u(\xi)\,\dbar\xi,
+  \end{equation}
+  \begin{equation}\label{euclidean:eq:right-quant}
+    \widehat{\Op_R(b)u}(\xi)=\int e^{-iy\cdot\xi}b(y,\xi)u(y)\,dy,
+  \end{equation}
+  Moreover, if $a\in S^m(\R^n;\R^n)$ and $b\in S^{m'}(\R^n;\R^n)$ then
+  $a(x,\xi)b(y,\xi)\in\Amp{m+m'}0(\R^n)$ and
+  $\Op(a)\Op_R(b)=\Op\bigl(a(x,\xi)b(y,\xi)\bigr)\in\Psido{m+m'}(\R^n)$.
+\end{proposition}
+\begin{proof}
+  If $a\in S^{-\infty}$, \eqref{euclidean:eq:left-quant} follows from the
+  absolutely convergent formula of \cref{euclidean:prop:action-S} and Fubini.
+  In general, let $a_\eps=\chi(\eps\xi)a$. Then $\Op(a_\eps)u(x)\to\Op(a)u(x)$
+  by \cref{euclidean:prop:action-S}, while
+  $\int e^{ix\cdot\xi}a_\eps\hat u\,\dbar\xi\to\int e^{ix\cdot\xi}a\hat u\,\dbar\xi$
+  by dominated convergence, since $\abs{a_\eps}\le C\ang\xi^m$ uniformly
+  and $\hat u\in\cS$.
+
+  For \eqref{euclidean:eq:right-quant} let $g(\xi)$ be the right side and
+  $B=\Op_R(b)$. If $b\in S^{-\infty}$, $g$ is integrable and Fubini gives
+  $Bu(x)=\int e^{ix\cdot\xi}g(\xi)\,\dbar\xi$, so $\widehat{Bu}=g$ by Fourier
+  inversion. In general, with $b_\eps=\chi(\eps\xi)b$ and $B_\eps=\Op_R(b_\eps)$,
+  we have $\widehat{B_\eps u}=g_\eps\to g$ pointwise by dominated convergence;
+  on the other hand $B_\eps u\to Bu$ in $\cSp(\R^n)$, by
+  \cref{euclidean:prop:osc-int}(ii), so $\widehat{B_\eps u}\to\widehat{Bu}$
+  in $\cSp$. Since $g_\eps$ is bounded by $C\ang\xi^{m}\norm u_{L^1}$
+  uniformly in $\eps$, also $g_\eps\to g$ in $\cSp$, and so $\widehat{Bu}=g$.
+
+  Finally let $c(x,y,\xi)=a(x,\xi)b(y,\xi)\in\Amp{m+m'}0$ and choose $q$ with
+  $m+m'-2q<-n$. By \eqref{euclidean:eq:Op-formula} and Fubini,
+  \begin{equation*}
+    \Op(c)u(x)=\int e^{ix\cdot\xi}a(x,\xi)\ang\xi^{-2q}
+    \Bigl[\int e^{-iy\cdot\xi}(1+\Delta_y)^q\bigl(b(y,\xi)u(y)\bigr)dy\Bigr]\dbar\xi .
+  \end{equation*}
+  Integrating by parts in $y$ (for fixed $\xi$, $bu$ is rapidly decreasing
+  with all derivatives) the inner integral is $\ang\xi^{2q}g(\xi)$, so by
+  \eqref{euclidean:eq:left-quant} and \eqref{euclidean:eq:right-quant},
+  $\Op(c)u(x)=\int e^{ix\cdot\xi}a(x,\xi)\widehat{Bu}(\xi)\,\dbar\xi=\Op(a)Bu(x)$.
+\end{proof}
+
+\begin{example}\label{euclidean:ex:diff-ops}
+  Let $P=\sum_{\abs\alpha\le m}p_\alpha(x)D^\alpha$ be a differential operator
+  with coefficients $p_\alpha\in\CIb(\R^n)$; we denote the space of these by
+  $\Diff m_{\mathrm b}(\R^n)$. Its characteristic polynomial
+  $p(x,\xi)=\sum_\alpha p_\alpha(x)\xi^\alpha$ lies in $S^m(\R^n;\R^n)$ and,
+  since $\widehat{D^\alpha u}=\xi^\alpha\hat u$, \eqref{euclidean:eq:left-quant}
+  and Fourier inversion give $P=\Op(p)$. Thus
+  $\Diff m_{\mathrm b}(\R^n)\subset\Psido m(\R^n)$. Similarly, multiplication
+  by $f\in\CIb(\R^n)$ is $\Op(f)\in\Psido0(\R^n)$, and the Fourier multiplier
+  $\ang D^s=\Op(\ang\xi^s)$, $\widehat{\ang D^su}=\ang\xi^s\hat u$, lies in
+  $\Psido s(\R^n)$ for every $s\in\R$.
+\end{example}
+
+\subsection{Adjoints and the action on tempered distributions}
+
+\begin{proposition}\label{euclidean:prop:adjoint}
+  If $A=\Op(a)\in\Psido m(\R^n)$ with $a\in\Amp mw(\R^n)$, then
+  $A^*=\Op(a^*)$ with $a^*(x,y,\xi)=\overline{a(y,x,\xi)}\in\Amp mw(\R^n)$
+  satisfies
+  \begin{equation*}
+    \inner{Au}v=\inner u{A^*v}\quad\text{for all }u,v\in\cS(\R^n).
+  \end{equation*}
+  In particular $A^*\in\Psido m(\R^n)$, and the formal adjoint is
+  determined by this identity. Consequently, the transpose
+  $A^t\phi=\overline{A^*\bar\phi}$, which satisfies $\int(Au)\phi=\int u(A^t\phi)$
+  for $u,\phi\in\cS$, is also continuous on $\cS(\R^n)$.
+\end{proposition}
+\begin{proof}
+  Clearly $a^*\in\Amp mw$, depending continuously on $a$ in each $\Amp{m'}w$.
+  We must show $I(a)(\bar v\otimes u)=\overline{I(a^*)(\bar u\otimes v)}$,
+  since the left side is $\inner{Au}v$ and the right side is
+  $\overline{\inner{A^*v}u}=\inner u{A^*v}$. For $a\in\Amp{-\infty}w$ this
+  follows from the absolutely convergent expressions:
+  \begin{equation*}
+    \overline{I(a^*)(\bar u\otimes v)}
+    =\int e^{-i(x-y)\cdot\xi}a(y,x,\xi)u(x)\overline{v(y)}\,dx\,dy\,\dbar\xi
+    =\int e^{i(x-y)\cdot\xi}a(x,y,\xi)\overline{v(x)}u(y)\,dx\,dy\,\dbar\xi,
+  \end{equation*}
+  after exchanging the names of $x$ and $y$. The general case follows by
+  replacing $a$ by $\chi(\eps\xi)a$ and using
+  \cref{euclidean:prop:osc-int}(ii). Uniqueness of $A^*$ is clear since
+  $\cS$ is dense in $L^2$.
+\end{proof}
+
+This shows one advantage of allowing general amplitudes: closure under
+adjoints is immediate. It also allows every $A\in\Psido m(\R^n)$ to be
+extended to tempered distributions by duality:
+\begin{equation}\label{euclidean:eq:S'-action}
+  (Au)(\phi)=u(A^t\phi),\qquad u\in\cSp(\R^n),\ \phi\in\cS(\R^n).
+\end{equation}
+Since $A^t$ is continuous on $\cS$, this defines $Au\in\cSp(\R^n)$, the map
+$A:\cSp(\R^n)\to\cSp(\R^n)$ is continuous (for the weak topology), and it
+extends $A$ on $\cS(\R^n)$; as $\cS(\R^n)$ is dense in $\cSp(\R^n)$ this
+extension is unique. Since $(AB)^t=B^tA^t$, the extensions satisfy
+$(AB)u=A(Bu)$ for $u\in\cSp$. For example
+$\widehat{\ang D^su}=\ang\xi^s\hat u$ continues to hold for $u\in\cSp(\R^n)$.
+
+% ======================================================================
+\section{Reduction to the left symbol}\label{euclidean:sec:reduction}
+
+The main step towards the composition theorem is to show that every
+pseudodifferential operator can be written, uniquely, as the left
+quantization of a symbol independent of $y$:
+
+\begin{theorem}[Reduction]\label{euclidean:thm:reduction}
+  For each $A\in\Psido m(\R^n)$ there is a unique
+  $\sigma_L(A)\in S^m(\R^n;\R^n)$ with $A=\Op(\sigma_L(A))$. If
+  $A=\Op(a)$ with $a\in\Amp mw(\R^n)$ then
+  \begin{equation}\label{euclidean:eq:reduction}
+    \sigma_L(A)(x,\xi)\sim\sum_{\alpha}\frac{i^{\abs\alpha}}{\alpha!}
+    D^\alpha_\xi D^\alpha_ya(x,y,\xi)\Big|_{y=x}.
+  \end{equation}
+\end{theorem}
+
+Here the terms with $\abs\alpha=j$ are grouped together; they have order
+$m-j$. The symbol $\sigma_L(A)$ is the \emph{left} (or \emph{full})
+\emph{symbol} of $A$. The proof occupies the rest of this section.
+
+\subsection{Taylor expansion of the amplitude}
+
+The key observation is the last identity of
+\cref{euclidean:lem:kernel-identities}: multiplying the amplitude by
+$(x-y)^\alpha$ appears to raise its weight, but actually lowers the order of
+the operator by $\abs\alpha$.
+
+\begin{lemma}\label{euclidean:lem:taylor}
+  Let $a\in\Amp mw(\R^n)$ and $N\in\N$. Then
+  \begin{equation*}
+    \Op(a)=\sum_{j=0}^{N-1}\Op(a_j)+R_N,\qquad
+    a_j(x,\xi)=\sum_{\abs\alpha=j}\frac{i^{\abs\alpha}}{\alpha!}
+    D^\alpha_\xi D^\alpha_ya(x,y,\xi)\Big|_{y=x}\in S^{m-j}(\R^n;\R^n),
+  \end{equation*}
+  with $R_N\in\Psido{m-N}(\R^n)$; in fact $R_N=\Op(r_N)$ with
+  $r_N\in\Amp{m-N}{w_+}(\R^n)$, $w_+=\max(w,0)$.
+\end{lemma}
+\begin{proof}
+  Taylor's formula with integral remainder, applied to $a$ in the variable
+  $y$ about $y=x$, gives
+  \begin{equation*}
+    a(x,y,\xi)=\sum_{\abs\alpha<N}\frac{(y-x)^\alpha}{\alpha!}(\pa^\alpha_ya)(x,x,\xi)
+    +\sum_{\abs\alpha=N}(y-x)^\alpha\rho_\alpha(x,y,\xi),
+  \end{equation*}
+  \begin{equation*}
+    \rho_\alpha(x,y,\xi)=\frac{N}{\alpha!}\int_0^1(1-t)^{N-1}
+    (\pa^\alpha_ya)\bigl(x,x+t(y-x),\xi\bigr)\,dt.
+  \end{equation*}
+  We claim $\rho_\alpha\in\Amp m{w_+}$. Differentiating under the integral,
+  $D^\mu_xD^\nu_yD^\gamma_\xi$ of the integrand is a linear combination, with
+  coefficients that are polynomials in $t$ bounded on $[0,1]$, of
+  derivatives of $\pa^\alpha_ya$ evaluated at $(x,x+t(y-x),\xi)$, and these
+  are bounded by
+  $C\ang{t(x-y)}^w\ang\xi^{m-\abs\gamma}\le C\ang{x-y}^{w_+}\ang\xi^{m-\abs\gamma}$,
+  since $\ang{t(x-y)}\le\ang{x-y}$ and $\ang{t(x-y)}\ge 1$.
+  Now apply \cref{euclidean:lem:kernel-identities}: for any
+  $b\in\Amp{m}{w'}$,
+  \begin{equation*}
+    I\bigl((y-x)^\alpha b\bigr)=(-1)^{\abs\alpha}(x-y)^\alpha I(b)=I\bigl(D^\alpha_\xi b\bigr).
+  \end{equation*}
+  With $b=(\pa^\alpha_ya)(x,x,\xi)/\alpha!$, and $\pa_y^\alpha=i^{\abs\alpha}D^\alpha_y$,
+  this shows that the term of order $\alpha$ in the Taylor sum contributes
+  $\Op\bigl(\tfrac{i^{\abs\alpha}}{\alpha!}D^\alpha_\xi D^\alpha_ya(x,y,\xi)|_{y=x}\bigr)$.
+  With $b=\rho_\alpha$ it shows that the remainder term contributes
+  $\Op(D^\alpha_\xi\rho_\alpha)$, with
+  $D^\alpha_\xi\rho_\alpha\in\Amp{m-N}{w_+}$.
+\end{proof}
+
+\subsection{Residual operators}
+
+Applying Borel's lemma to the series in \cref{euclidean:lem:taylor} we will
+find a symbol $b$ with $\Op(a)-\Op(b)\in\Psido{m-N}$ for all $N$. To finish
+the proof of \cref{euclidean:thm:reduction} we need to identify the residual
+operators. Note that \emph{a priori} an element of $\Psido{-\infty}(\R^n)$
+is only known to be of the form $\Op(a_M)$ with $a_M\in\Amp{-M}{w_M}$ for each
+$M$, where the weight $w_M$ may depend on $M$.
+
+\begin{proposition}\label{euclidean:prop:residual}
+  For a continuous linear operator $A:\cS(\R^n)\to\cSp(\R^n)$ with Schwartz
+  kernel $K$ the following are equivalent:
+  \begin{enumerate}[label=\textup{(\alph*)}]
+  \item $A\in\Psido{-\infty}(\R^n)$;
+  \item $K\in\CI(\R^{2n})$ and for all $\alpha,\beta\in\N_0^n$ and $N\in\N_0$
+    \begin{equation}\label{euclidean:eq:residual-kernel}
+      \abs{D^\alpha_xD^\beta_yK(x,y)}\le C_{\alpha\beta N}\ang{x-y}^{-N};
+    \end{equation}
+  \item $A=\Op(c)$ for some $c\in S^{-\infty}(\R^n;\R^n)$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  (c)$\Rightarrow$(a) is immediate, since
+  $S^{-\infty}(\R^n;\R^n)\subset\Amp M0(\R^n)$ for every $M$.
+
+  (a)$\Rightarrow$(b). For each $M>n$ write $A=\Op(a_M)$ with
+  $a_M\in\Amp{-M}{w_M}$. By \cref{euclidean:prop:osc-int}(i), $I(a_M)$ is a
+  continuous, polynomially bounded function; two such functions which give
+  the same integral against all $v\otimes u$ coincide, so $K=I(a_M)$ is a
+  continuous function independent of $M$. By
+  \cref{euclidean:lem:kernel-identities}, for all $\alpha,\beta,\gamma$,
+  \begin{equation*}
+    (x-y)^\gamma D^\alpha_xD^\beta_yK=I(b),\qquad
+    b=(-D_\xi)^\gamma(\xi+D_x)^\alpha(D_y-\xi)^\beta a_M
+    \in\Amp{-M+\abs\alpha+\abs\beta-\abs\gamma}{w_M},
+  \end{equation*}
+  where the powers of $\xi+D_x$ and $D_y-\xi$ are understood componentwise.
+  Taking $\gamma=0$ and $M>n+\abs\alpha+\abs\beta$ shows that all
+  distributional derivatives of $K$ are continuous functions, so
+  $K\in\CI(\R^{2n})$; then $\abs{(x-y)^\gamma D^\alpha_xD^\beta_yK}\le C\ang{x-y}^{w_M}$
+  for all $\gamma$. Since $\ang{x-y}^{2L}$ is a polynomial in $x-y$, this
+  gives \eqref{euclidean:eq:residual-kernel}.
+
+  (b)$\Rightarrow$(c). Set $g(x,z)=K(x,x-z)$. Since
+  $D_xg=(D_xK+D_yK)(x,x-z)$ and $D_zg=-(D_yK)(x,x-z)$,
+  \eqref{euclidean:eq:residual-kernel} gives
+  $\abs{D^\alpha_xD^\beta_zg(x,z)}\le C_{\alpha\beta N}\ang z^{-N}$, so
+  $\sup_{x,z}\abs{z^\gamma D^\alpha_xD^\beta_zg}<\infty$ for all
+  $\alpha,\beta,\gamma$. Let
+  \begin{equation*}
+    c(x,\xi)=\int e^{-iz\cdot\xi}g(x,z)\,dz.
+  \end{equation*}
+  Then $\xi^\beta D^\gamma_\xi D^\alpha_xc$ is the Fourier transform in $z$ of
+  $D^\beta_z\bigl((-z)^\gamma D^\alpha_xg\bigr)$, which is bounded in $L^1_z$
+  uniformly in $x$; hence $\sup_{x,\xi}\abs{\xi^\beta D^\gamma_\xi D^\alpha_x c}<\infty$
+  for all $\alpha,\beta,\gamma$, i.e.\ $c\in S^{-\infty}(\R^n;\R^n)$. By
+  Fourier inversion $g(x,z)=\int e^{iz\cdot\xi}c(x,\xi)\,\dbar\xi$, so by
+  \cref{euclidean:prop:osc-int}(i) the kernel of $\Op(c)$ is
+  $\int e^{i(x-y)\cdot\xi}c(x,\xi)\,\dbar\xi=g(x,x-y)=K(x,y)$. Hence
+  $A=\Op(c)$.
+\end{proof}
+
+\begin{proof}[Proof of \cref{euclidean:thm:reduction}]
+  Let $A=\Op(a)$, $a\in\Amp mw$, and let $a_j\in S^{m-j}(\R^n;\R^n)$ be as in
+  \cref{euclidean:lem:taylor}. By \cref{euclidean:prop:borel} choose
+  $b\in S^m(\R^n;\R^n)$ with $b\sim\sum_ja_j$. Then for every $N$
+  \begin{equation*}
+    A-\Op(b)=R_N-\Op\Bigl(b-\sum_{j<N}a_j\Bigr)\in\Psido{m-N}(\R^n),
+  \end{equation*}
+  so $A-\Op(b)\in\Psido{-\infty}(\R^n)$ and, by
+  \cref{euclidean:prop:residual}, $A-\Op(b)=\Op(c)$ with $c\in S^{-\infty}$.
+  Thus $A=\Op(b+c)$ and $\sigma_L(A)=b+c$ satisfies
+  \eqref{euclidean:eq:reduction}.
+
+  For uniqueness, suppose $\Op(e)=0$ with $e\in S^m(\R^n;\R^n)$. By
+  \eqref{euclidean:eq:left-quant},
+  $\int e^{ix\cdot\xi}e(x,\xi)\hat u(\xi)\,\dbar\xi=0$ for all $u\in\cS$. For
+  fixed $x$, $\hat u$ ranges over all of $\cS(\R^n)$, so the continuous,
+  polynomially bounded function $\xi\mapsto e^{ix\cdot\xi}e(x,\xi)$ vanishes
+  identically. Hence $e=0$.
+\end{proof}
+
+\begin{corollary}\label{euclidean:cor:reduction}
+  \begin{enumerate}[label=\textup{(\roman*)}]
+  \item $\Op:S^m(\R^n;\R^n)\to\Psido m(\R^n)$ is a bijection with inverse
+    $\sigma_L$; in particular every $A\in\Psido m(\R^n)$ has an amplitude in
+    $\Amp m0(\R^n)$, so the weights $w$ play no role in the definition of
+    $\Psido m(\R^n)$.
+  \item $\Psido{-\infty}(\R^n)=\Op\bigl(S^{-\infty}(\R^n;\R^n)\bigr)$, and
+    for $A\in\Psido m(\R^n)$ and any $k\in\R$, $A\in\Psido{k}(\R^n)$ if and
+    only if $\sigma_L(A)\in S^{k}(\R^n;\R^n)$.
+  \item \textup{(Asymptotic summation of operators)} If
+    $A_j\in\Psido{m-j}(\R^n)$, there exists $A\in\Psido m(\R^n)$, unique up to
+    $\Psido{-\infty}(\R^n)$, with $A-\sum_{j<N}A_j\in\Psido{m-N}(\R^n)$ for
+    all $N$; namely any $A$ with $\sigma_L(A)\sim\sum_j\sigma_L(A_j)$.
+  \end{enumerate}
+\end{corollary}
+\begin{proof}
+  (i) and (ii) are restatements of \cref{euclidean:thm:reduction} and
+  \cref{euclidean:prop:residual}, using that $\sigma_L$ is linear. (iii)
+  follows from (i), (ii) and \cref{euclidean:prop:borel}.
+\end{proof}
+
+% ======================================================================
+\section{Composition and adjoints}\label{euclidean:sec:composition}
+
+We can now prove the fundamental result of this chapter.
+
+\begin{theorem}[Composition]\label{euclidean:thm:composition}
+  The space $\Psido\infty(\R^n)$ is an order-filtered $*$-algebra of
+  continuous operators on $\cS(\R^n)$ (and on $\cSp(\R^n)$):
+  \begin{equation*}
+    A\in\Psido m(\R^n)\Longrightarrow A^*\in\Psido m(\R^n),\qquad
+    A\in\Psido m(\R^n),\ B\in\Psido{m'}(\R^n)\Longrightarrow AB\in\Psido{m+m'}(\R^n).
+  \end{equation*}
+  Moreover the left symbols satisfy
+  \begin{gather}
+    \sigma_L(A^*)(x,\xi)\sim\sum_\alpha\frac{i^{\abs\alpha}}{\alpha!}
+    D^\alpha_\xi D^\alpha_x\overline{\sigma_L(A)(x,\xi)},\label{euclidean:eq:adjoint-symbol}\\
+    \sigma_L(AB)(x,\xi)\sim\sum_\alpha\frac{i^{\abs\alpha}}{\alpha!}
+    D^\alpha_\xi\sigma_L(A)(x,\xi)\,D^\alpha_x\sigma_L(B)(x,\xi).\label{euclidean:eq:composition-symbol}
+  \end{gather}
+\end{theorem}
+
+Formally, \eqref{euclidean:eq:composition-symbol} reads
+$\sigma_L(AB)=e^{iD_\eta\cdot D_y}\sigma_L(A)(x,\eta)\sigma_L(B)(y,\xi)\big|_{y=x,\eta=\xi}$.
+
+\begin{proof}
+  The statement about adjoints is \cref{euclidean:prop:adjoint}. By that
+  proposition, the adjoint of $\Op(a)$, $a\in S^m(\R^n;\R^n)$, has amplitude
+  $\overline{a(y,\xi)}$, so \cref{euclidean:thm:reduction} (with
+  $D^\alpha_y\overline{a(y,\xi)}|_{y=x}=D^\alpha_x\overline{a(x,\xi)}$) gives
+  \eqref{euclidean:eq:adjoint-symbol}.
+
+  \emph{Right symbols.} Every $B\in\Psido{m'}(\R^n)$ can be written as
+  $B=\Op_R(\sigma_R(B))$ with $\sigma_R(B)=\overline{\sigma_L(B^*)}\in S^{m'}$:
+  indeed $B=(B^*)^*=\Op(\sigma_L(B^*))^*$, whose amplitude is
+  $\overline{\sigma_L(B^*)(y,\xi)}$. Taking complex conjugates in
+  \eqref{euclidean:eq:adjoint-symbol} applied to $B$, and using
+  $\overline{D^\alpha f}=(-1)^{\abs\alpha}D^\alpha\bar f$ together with
+  \cref{euclidean:lem:asymptotic-manip}(i),
+  \begin{equation}\label{euclidean:eq:right-left}
+    \sigma_R(B)\sim\sum_\beta\frac{(-i)^{\abs\beta}}{\beta!}
+    D^\beta_\xi D^\beta_x\sigma_L(B).
+  \end{equation}
+
+  \emph{Composition.} Let $a=\sigma_L(A)$ and $b=\sigma_R(B)$. By
+  \cref{euclidean:prop:left-right},
+  $AB=\Op(a)\Op_R(b)=\Op\bigl(a(x,\xi)b(y,\xi)\bigr)$ with
+  $a(x,\xi)b(y,\xi)\in\Amp{m+m'}0$, so $AB\in\Psido{m+m'}(\R^n)$, and
+  \cref{euclidean:thm:reduction} gives
+  \begin{equation*}
+    \sigma_L(AB)\sim\sum_\alpha\frac{i^{\abs\alpha}}{\alpha!}
+    D^\alpha_\xi\bigl[a\,D^\alpha_xb\bigr].
+  \end{equation*}
+  The map $f\mapsto D^\alpha_\xi[a\,D^\alpha_xf]$ lowers orders by
+  $\abs\alpha$ and shifts them by $m$, so by
+  \eqref{euclidean:eq:right-left} and
+  \cref{euclidean:lem:asymptotic-manip}(i),(iii), with $c=\sigma_L(B)$,
+  \begin{equation*}
+    \sigma_L(AB)\sim\sum_\gamma\sum_{\alpha+\beta=\gamma}
+    \frac{i^{\abs\alpha}(-i)^{\abs\beta}}{\alpha!\,\beta!}
+    D^\alpha_\xi\bigl[a\,D^\beta_\xi D^\gamma_xc\bigr],
+  \end{equation*}
+  the terms with $\abs\gamma=l$ having order $m+m'-l$. By Leibniz' formula
+  $D^\alpha_\xi[aD^\beta_\xi f]=\sum_{\mu\le\alpha}\binom\alpha\mu D^\mu_\xi a\,
+  D^{\gamma-\mu}_\xi f$ when $\alpha+\beta=\gamma$, and using
+  $\frac{\gamma!}{\alpha!\beta!}\binom\alpha\mu=\binom\gamma\mu\binom{\gamma-\mu}{\alpha-\mu}$,
+  the coefficient of $\frac1{\gamma!}D^\mu_\xi a\,D^{\gamma-\mu}_\xi D^\gamma_xc$
+  in the inner sum is
+  \begin{equation*}
+    \binom\gamma\mu i^{\abs\mu}\sum_{\delta\le\gamma-\mu}
+    \binom{\gamma-\mu}\delta i^{\abs\delta}(-i)^{\abs{\gamma-\mu-\delta}}
+    =\binom\gamma\mu i^{\abs\mu}\prod_{l=1}^n(i-i)^{\gamma_l-\mu_l},
+  \end{equation*}
+  which vanishes unless $\mu=\gamma$, when it is $i^{\abs\gamma}$. Hence the
+  inner sum equals $\frac{i^{\abs\gamma}}{\gamma!}D^\gamma_\xi a\,D^\gamma_xc$,
+  which is \eqref{euclidean:eq:composition-symbol}.
+
+  The operators extend continuously to $\cSp(\R^n)$ by
+  \eqref{euclidean:eq:S'-action}.
+\end{proof}
+
+The same computation, with the roles of the two expansions interchanged,
+shows that left and right symbols are related by
+\begin{equation}\label{euclidean:eq:left-right}
+  \sigma_L\bigl(\Op_R(b)\bigr)\sim\sum_\alpha\frac{i^{\abs\alpha}}{\alpha!}
+  D^\alpha_\xi D^\alpha_xb,
+\end{equation}
+which is just \cref{euclidean:thm:reduction} for the amplitude $b(y,\xi)$;
+formally $\sigma_L=e^{iD_x\cdot D_\xi}\sigma_R$ and, by
+\eqref{euclidean:eq:right-left}, $\sigma_R=e^{-iD_x\cdot D_\xi}\sigma_L$.
+The map $\Op_R:S^m(\R^n;\R^n)\to\Psido m(\R^n)$ is a bijection with inverse
+$\sigma_R$; see \cref{euclidean:ex:weyl} for a ``centrist'' alternative.
+
+% ======================================================================
+\section{The principal symbol}\label{euclidean:sec:principal}
+
+By \eqref{euclidean:eq:left-right} and \eqref{euclidean:eq:right-left},
+$\sigma_L(A)-\sigma_R(A)\in S^{m-1}(\R^n;\R^n)$ for $A\in\Psido m(\R^n)$: the
+full symbol depends on the choice of quantization, but its leading part does
+not. For this reason we consider the quotient spaces
+\begin{equation*}
+  S^{m}(\R^p;\R^n)/S^{m-1}(\R^p;\R^n),
+\end{equation*}
+and write $[a]$ for the class of $a\in S^m(\R^p;\R^n)$.
+
+\begin{definition}\label{euclidean:def:principal-symbol}
+  The \emph{principal symbol map}
+  $\sigma_m:\Psido m(\R^n)\to S^m(\R^n;\R^n)/S^{m-1}(\R^n;\R^n)$ is
+  $\sigma_m(A)=[\sigma_L(A)]=[\sigma_R(A)]$.
+\end{definition}
+
+Unlike $\sigma_L$ or $\sigma_R$, $\sigma_m$ depends on $m$: one needs to
+know that the order is at most $m$ before it is defined. If $A=\Op(a)$ with
+$a\in\Amp mw$, then $\sigma_m(A)=[a(x,x,\xi)]$ by
+\cref{euclidean:thm:reduction}. For a differential operator
+$P=\sum_{\abs\alpha\le m}p_\alpha D^\alpha\in\Diff m_{\mathrm b}(\R^n)$,
+$\sigma_m(P)$ is represented by $\sum_{\abs\alpha=m}p_\alpha(x)\xi^\alpha$.
+
+\begin{proposition}\label{euclidean:prop:symbol-sequence}
+  For every $m\in\R$ the sequence
+  \begin{equation*}
+    0\longrightarrow\Psido{m-1}(\R^n)\hookrightarrow\Psido m(\R^n)
+    \xrightarrow{\ \sigma_m\ }S^m(\R^n;\R^n)/S^{m-1}(\R^n;\R^n)\longrightarrow0
+  \end{equation*}
+  is exact. Moreover, for $A\in\Psido m(\R^n)$ and $B\in\Psido{m'}(\R^n)$,
+  \begin{equation}\label{euclidean:eq:principal-mult}
+    \sigma_{m+m'}(AB)=\sigma_m(A)\,\sigma_{m'}(B),\qquad
+    \sigma_m(A^*)=\overline{\sigma_m(A)},
+  \end{equation}
+  and the commutator $[A,B]=AB-BA$ lies in $\Psido{m+m'-1}(\R^n)$ with
+  \begin{equation}\label{euclidean:eq:commutator}
+    \sigma_{m+m'-1}([A,B])=\frac1i\{\sigma_m(A),\sigma_{m'}(B)\},\qquad
+    \{a,b\}=\sum_{j=1}^n\Bigl(\frac{\pa a}{\pa\xi_j}\frac{\pa b}{\pa x_j}
+    -\frac{\pa a}{\pa x_j}\frac{\pa b}{\pa\xi_j}\Bigr).
+  \end{equation}
+\end{proposition}
+\begin{proof}
+  Surjectivity of $\sigma_m$ holds because $\sigma_m(\Op(a))=[a]$, and its
+  null space is $\Psido{m-1}$ by \cref{euclidean:cor:reduction}(ii). All
+  terms with $\abs\alpha\ge1$ in \eqref{euclidean:eq:composition-symbol} and
+  \eqref{euclidean:eq:adjoint-symbol} have order at most $m+m'-1$, respectively
+  $m-1$, which gives \eqref{euclidean:eq:principal-mult}. In particular
+  $\sigma_{m+m'}([A,B])=0$, so $[A,B]\in\Psido{m+m'-1}$; the Poisson bracket
+  is well defined on the classes (changing $a$ by an element of $S^{m-1}$
+  changes $\{a,b\}$ by an element of $S^{m+m'-2}$). With $a=\sigma_L(A)$,
+  $b=\sigma_L(B)$, the terms with $\abs\alpha=1$ in
+  \eqref{euclidean:eq:composition-symbol} give
+  \begin{equation*}
+    \sigma_L([A,B])-i\sum_j\bigl(D_{\xi_j}a\,D_{x_j}b-D_{\xi_j}b\,D_{x_j}a\bigr)
+    \in S^{m+m'-2},
+  \end{equation*}
+  and $iD_{\xi_j}a\,D_{x_j}b=-i\,\pa_{\xi_j}a\,\pa_{x_j}b$, which gives
+  \eqref{euclidean:eq:commutator}.
+\end{proof}
+
+The simplicity of \eqref{euclidean:eq:principal-mult} compared with
+\eqref{euclidean:eq:composition-symbol} is achieved at the expense of a great
+loss of information. Still, many problems can be solved using it; it says
+that the principal symbol gives a homomorphism from the filtered algebra
+$\Psido0(\R^n)$ onto the \emph{commutative} algebra
+$S^0(\R^n;\R^n)/S^{-1}(\R^n;\R^n)$.
