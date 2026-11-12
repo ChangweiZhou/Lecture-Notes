@@ -203,9 +203,11 @@ free of both circle factors.
  \HH_2(\Ab)&\cong\ker\Bigl(H^{2n-2}(Y)\xrightarrow{(\int_{Z_H})_H}\C^N
  \Bigr)\oplus H^{2n-3}(Y)\oplus H^{2n-3}(Z\times S_\sigma).
 \end{align*}
-The map \(H^{2n-2}(Y)\to\C^N\) has rank \(N-1\). The inequality
-\(\leq N-1\) is proved, given (ii). Equality, and the description of the kernels in
-(vii), use (S2) of Section~\ref{subsec:status}. If \(N=1\), then
+The topological map \(H^{2n-2}(Y)\to\C^N\) has rank \(N-1\), by Stokes'
+theorem and Lefschetz duality. The rank of \(\partial^{\mathcal A}_2\) is
+\(\leq N-1\), which is proved given (ii). That \(\partial^{\mathcal A}_2\)
+equals the topological map, and the explicit kernels in (vii), depend on (C)
+and on the sketch (S2) (Remark~\ref{rem:description}). If \(N=1\), then
 \(\HH_2(\Ab)\cong\HH_2(\Asb)\).
 \item[(ix)] The index functional, which is the image of the trace under
 \(\partial:\HH_1(\Ab)\to\HH_0(\Ib)\), is nonzero. Hence
@@ -306,10 +308,20 @@ part (i), which also uses the kernel theorem (C3).
 nonvanishing, and their independence of choices.
 \item The b-trace defect formula on \(x^{-\Z}\Psi_b^{-\infty}\)
 (Theorem~\ref{thm:defect}) and the connecting map in (iii).
-\item The de Rham lemmas for flat and formal Laurent forms, and the
-\(E^2\)-pages of \(\Isb\) and \(\Adsb\) (Section~\ref{sec:Is}).
-\item The shift-defect formula for the extended boundary trace
-(Proposition~\ref{prop:omega}).
+\item The de Rham lemmas for flat and formal Laurent forms, and, given
+(C-HKR), the \(E^2\)-pages of \(\Isb\) and \(\Adsb\)
+(Section~\ref{sec:Is}).
+\item The shift-defect formula for the extended boundary trace, and its
+role as connecting cocycle given (Q1) (Proposition~\ref{prop:omega}). The
+residue formula (Lemma~\ref{lem:rhohat}), and the top-order formulas
+(Lemma~\ref{lem:top}); part (b) assumes (C-HKR).
+\item The algebraic convergence and degeneration theorem
+(Proposition~\ref{prop:algconv}).
+\item For every \(n\), the surjectivity of the boundary connecting maps,
+given (C), (ii) (hence (Q1), (Q2), (S1)) and (Q1). The proof uses
+\(\delta_b\)-closed test forms built from the divergence-free field
+\(\zeta|\zeta|^{-n}\) (Proposition~\ref{prop:dict}). Their explicit
+description is the sketch (S2).
 \item For \(n=1\), the surjectivity of both boundary connecting maps of
 \(\Adb\) and of \(\partial^{\mathcal A}_1\), by explicit test cycles. The
 identification of connecting maps uses (Q1).
@@ -352,13 +364,14 @@ Calder\'on--Fedosov formula; and Lefschetz duality.
 
 \emph{Hypothesis.}
 \begin{enumerate}
-\item[(C)] Convergence of the order spectral sequences, with the continuous
-HKR theorem. For \(\Asb\) this is the Benameur--Nistor theorem
-(Theorem~\ref{thm:BN-conv}). For \(\Isb\) and \(\Adsb\) the
-\(E^2\)-pages are computed here and degenerate by the bidegree argument,
-but convergence in the chain model, which requires completeness and
-exhaustiveness of the induced filtrations, is assumed
-(Section~\ref{sec:Is}).
+\item[(C)] For \(\Asb\), \(\Isb\) and \(\Adsb\): (C-HKR), the continuous HKR
+identification of \(E^1\), and (C-stage), the completeness of the order
+filtration in the chain model (Section~\ref{subsec:conv}). The algebraic
+convergence and degeneration theorem is now proved
+(Proposition~\ref{prop:algconv}), and the \(E^2\)-pages are computed here,
+given (C-HKR).
+For \(\Asb\), (C) is part of the Benameur--Nistor theorem
+(Theorem~\ref{thm:BN-conv}); for \(\Isb\) and \(\Adsb\) it is a hypothesis.
 \end{enumerate}
 
 \emph{Sketched.}
@@ -367,22 +380,33 @@ exhaustiveness of the induced filtrations, is assumed
 functions that are Schwartz on strips. We prove the division lemma and the
 exactness of the Koszul complex, but only sketch the comparison of the
 Koszul and bar complexes for this non-unital algebra
-(Proposition~\ref{prop:HKRE}).
-\item[(S2)] For \(n\geq2\), the dictionary that identifies the boundary
-cocycles with \(d\theta_\sigma\) and \(d\theta_\partial\wedge
-d\theta_\sigma\) under the \(E^2\)-isomorphism
-(Proposition~\ref{prop:dict}), and, for every \(n\), the resulting exact
-rank of \(\partial^{\mathcal A}_2\).
+(Proposition~\ref{prop:HKRE}). The proof of Connes' theorem in
+\cite{MelroseMicro} does not transfer: its normalization step inserts the
+unit (dummy variables), and its local-to-global step uses partitions of
+unity. Neither is available for entire functions.
+\item[(S2)] The explicit description of the boundary connecting maps as
+\((\int_{Z_H}\cdot)_H\) under \(*_b\) (Remark~\ref{rem:description}). It
+requires the exact constants and the cancellation of the equatorial
+logarithmic divergences. The surjectivity of these maps is proved; their
+description, the explicit kernels in (vii)--(viii), and the equality
+\(\operatorname{rank}\partial^{\mathcal A}_2=N-1\) depend on (S2).
 \item[(S3)] The general index formula for fully elliptic operators of
-nonzero order (Proposition~\ref{prop:indexgeneral}).
+nonzero order (Proposition~\ref{prop:indexgeneral}). The closed-manifold
+arguments \cite{MelroseMicro} need a holomorphic family \(Q(z)\) of order
+\(-z\) with \(Q(0)=1\), and the meromorphy of \(\Tr(x^wAQ(z))\) in two
+variables, including the double poles at the corner where the diagonal
+meets the front face. In the b-setting \(Q(z)\) must have indicial families
+that are entire and invertible on all of \(\C\); we have not carried this
+out.
 \end{enumerate}
 
-Dependencies: (i) uses (C3). (ii) and (iii) use (Q0)--(Q2), (C3) and (S1).
-(iv)--(vi) use (C). (vii) and (viii) inherit (Q1), (Q2) and (S1)
-from (ii), (C) from (iv)--(vi), and use in addition (S2) when
-\(n\geq2\), and (viii) also uses (S2) for the exact rank of
-\(\partial^{\mathcal A}_2\). (ix) uses (i), (Q0), (Q1) and (C3) together with
-Theorem~\ref{thm:WH}.
+Dependencies: (i) uses (C3). (ii) and (iii) use (Q0)--(Q2), (C3) and
+(S1). (iv)--(vi) use (C). (vii) and (viii) inherit (Q1), (Q2) and (S1)
+from (ii), and (C) from (iv)--(vi). The surjectivity of the connecting
+maps is proved (Propositions~\ref{prop:n1}, \ref{prop:dict}
+and~\ref{prop:connA}). The explicit kernels in (vii)--(viii), and the
+exact rank of \(\partial^{\mathcal A}_2\), use (S2) in addition. (ix) uses
+(i), (Q0), (Q1) and (C3), together with Theorem~\ref{thm:WH}.
 
 \subsection{Organization}
 Part~\ref{part:symbols} keeps the computation for the symbol algebra
@@ -2683,24 +2707,112 @@ residues.
 
 \section{The interior ideal and the boundary symbol algebra}\label{sec:Is}
 
+\subsection{Convergence and degeneration}\label{subsec:conv}
 The algebras \(\Isb\) and \(\Adsb\) are computed by the same order spectral
 sequence as \(\Asb\) in Part~\ref{part:symbols}; only the coefficient
-functions change. We state the convergence input once.
+functions change. In this subsection we separate the purely algebraic part
+of the convergence question from the analytic one.
+
+Let \((C_\bullet,b)\) be a complex such that each \(C_k\) is a
+\emph{subspace} of the space of series \(c=\sum_{p\leq P}c_p\) with
+\(c_p\in C_{p,k}\), containing every component \(C_{p,k}\), where \(b=\sum_{l\geq0}b_l\)
+and \(b_l:C_{p,k}\to C_{p-l,k-1}\). Put \(F_pC_k=\{c:c_q=0\text{ for }q>p\}\),
+let \(E^1_{p,k}=H_k(C_{p,\bullet},b_0)\), and let \(d^1\) be induced by
+\(b_1\). Since \(\sum_{i+j=l}b_ib_j=0\), \(d^1\) is well defined and
+\((d^1)^2=0\); let \(E^2\) be its homology. Because \(C_k\) is only a subspace, completeness is a real condition.
+We call the filtration
+\emph{complete} if every series \(\sum_je_j\) with \(e_j\in F_{p_j}C_k\),
+\(\sup p_j<\infty\) and \(p_j\to-\infty\), defines an element of \(C_k\), and
+\(b\) commutes with such sums.
+
+\begin{proposition}[Algebraic convergence]\label{prop:algconv}
+Assume the filtration is complete and that, for some integer \(n\),
+\(E^2_{p,k}=0\) whenever \(p\neq k-n\). Then every class in \(H_k(C,b)\)
+has a representative in \(F_{k-n}C_k\), and
+\[
+ \Theta:H_k(C,b)\to E^2_{k-n,k},\qquad[c]\mapsto[c_{k-n}],
+\]
+is an isomorphism. All differentials \(d^r\), \(r\geq2\), vanish.
+\end{proposition}
+
+\begin{proof}
+This is the argument of \cite[Ch.~``Hochschild homology'', convergence proposition]{MelroseMicro},
+written out in our notation.
+
+\emph{Step (P).} Let \(c\in F_pC_k\) with \(b_0c_p=0\) and
+\(b_1c_p+b_0c_{p-1}=0\), and suppose \([c_p]=0\) in \(E^2_{p,k}\). Then
+\([c_p]=d^1[x]\) for a \(b_0\)-cycle \(x\in C_{p+1,k+1}\), so
+\(c_p-b_1x=b_0y\) with \(y\in C_{p,k+1}\). The components of \(b(x+y)\) of
+degrees \(p+1\) and \(p\) are \(b_0x=0\) and \(b_1x+b_0y=c_p\), so
+\(c-b(x+y)\in F_{p-1}\).
+
+\emph{Representatives.} If \(c\in F_PC_k\) is a cycle and \(P>k-n\), then
+\(E^2_{P,k}=0\), so (P) lowers \(P\). Finitely many steps reach
+\(F_{k-n}\).
+
+\emph{Well defined.} Let \(c=be\in F_{k-n}\) with \(e\in F_q\). If
+\(q>k+1-n\), then (P) applies to \(e\), since
+\(b_0e_q=(be)_q=0\), \(b_1e_q+b_0e_{q-1}=(be)_{q-1}=0\) and
+\(E^2_{q,k+1}=0\). It replaces \(e\) by an element of \(F_{q-1}\) with the
+same boundary. Once \(q\leq k+1-n\), we have
+\(c_{k-n}=b_1e_{k+1-n}+b_0e_{k-n}\), so \([c_{k-n}]=d^1[e_{k+1-n}]=0\) in
+\(E^2\).
+
+\emph{Injective.} If \(bc=0\), \(c\in F_{k-n}\), and \([c_{k-n}]=0\), apply
+(P) repeatedly; this is possible because \(E^2_{p,k}=0\) for \(p<k-n\).
+It yields \(e_p\in F_{p+1}C_{k+1}\), \(p=k-n,k-n-1,\dots\), with
+\(c-b(\sum_{p\geq P}e_p)\in F_{P-1}\). By completeness, \(c=b\sum_pe_p\).
+
+\emph{Surjective.} Let \(x\in C_{k-n,k}\) be a \(b_0\)-cycle with
+\(d^1[x]=0\). Then \(b_1x=-b_0y\) for some \(y\), and \(c^{(1)}=x+y\) has
+\(bc^{(1)}\in F_{k-n-2}\). Inductively, if \(z=bc^{(r)}\in F_p\) with
+\(p=k-n-r-1\), then \(z\) is a cycle and \(p\neq k-1-n\), so (P) gives
+\(x',y'\) of degree \(\leq p+1<k-n\) with \(z-b(x'+y')\in F_{p-1}\). Set
+\(c^{(r+1)}=c^{(r)}-x'-y'\). By completeness the limit \(c\) exists,
+\(bc=0\), and \(\Theta[c]=[x]\).
+
+\emph{Degeneration.} The differential \(d^r\) maps \(E^r_{p,k}\) to
+\(E^r_{p-r,k-1}\). Source and target can both be nonzero only if
+\(p=k-n\) and \(p-r=(k-1)-n\), that is, only if \(r=1\). Hence \(d^r=0\) for
+\(r\geq2\).
+\end{proof}
+
+By Propositions~\ref{prop:E2}, \ref{prop:Is} and~\ref{prop:Ads} below,
+the \(E^2\)-hypothesis holds for \(\Asb\), \(\Isb\) and \(\Adsb\) as soon as
+the \(E^1\)-page is identified. The analytic input is therefore:
 
 \begin{quote}
-\textbf{Hypothesis (C).} For \(\mathfrak S\in\{\Asb,\Isb,\Adsb\}\), with the
-topologically filtered chains \eqref{eq:BN-chains}, the continuous HKR map
-identifies the \(E^1\)-page of the order spectral sequence with the
+\textbf{Hypothesis (C).} For \(\mathfrak S\in\{\Asb,\Isb,\Adsb\}\):
+\begin{enumerate}
+\item[(C-HKR)] the continuous HKR map identifies \(E^1\) with the
 homogeneous forms whose coefficients have the corresponding boundary
-behaviour, and the spectral sequence converges to
-\(\HH_*^{\mathrm{cont}}(\mathfrak S)\).
+behaviour (Laurent, flat, or formal Laurent); and
+\item[(C-stage)] for every \(k\) and every stage \(N\) there is a stage
+\(N'\geq N\), depending only on \((k,N)\), such that the chains of stage
+\(N'\) in degrees \(k\) and \(k\pm1\) form a subcomplex that is stable under
+step (P). That is, if \(c\) has stage \(N'\), then the corrections \(x,y\)
+can again be chosen of stage \(N'\). Then every iterate in the proof of
+Proposition~\ref{prop:algconv} lies in stage \(N'\), and the filtration is
+complete there.
+\end{enumerate}
 \end{quote}
 
-For \(\Asb\) this is the Benameur--Nistor theorem quoted as
-Theorem~\ref{thm:BN-conv}. For \(\Isb\) the coefficients vanish to infinite
-order at the boundary, and for \(\Adsb\) they are formal Laurent series at
-the boundary. We have not checked that these two cases are covered by
-\cite{BNsymbols,BNfamilies}, so for them (C) is a hypothesis.
+Within a fixed stage \(N\), each component \(C_{p,k}\) is a finite sum of
+multihomogeneous pieces, because each factor has order \(\leq N\). The
+stage itself is the countable product over \(p\leq(k+1)N\) (since
+\(\widehat\otimes_\pi\) commutes with countable products, (C3)). So series
+with bounded stage converge, and (C-stage) is exactly the requirement that
+iterating (P) does not leave the direct limit. The de Rham homotopies used
+at \(E^2\) all preserve pole bounds: the fibre Euler contraction, the
+\(x\)-weight contraction of Lemma~\ref{lem:formal}, the Laurent
+Poincar\'e lemma, and \(*_b\). The faces of \(b\), however, add the orders
+of adjacent factors. In the model of formal sums of multihomogeneous
+functions without a per-factor bound (as in \cite{BG,MelroseMicro}),
+completeness holds tautologically. In that model, Proposition~\ref{prop:algconv}
+proves convergence given (C-HKR). We have not compared that model with
+ours, which is needed for the excision sequences. For \(\Asb\), (C) is
+part of the Benameur--Nistor theorem (Theorem~\ref{thm:BN-conv}). For
+\(\Isb\) and \(\Adsb\), (C) is a hypothesis.
 
 \subsection{Two de Rham lemmas}
 
@@ -2756,7 +2868,7 @@ d\alpha_1\).
 
 \begin{proposition}[Interior ideal]\label{prop:Is}
 \(E^2_{p,q}(\Isb)=H^{2n-p-q}(Y\times S_\sigma,Z\times S_\sigma)\) for
-\(q=n\), and \(E^2_{p,q}(\Isb)=0\) otherwise. Under (C),
+\(q=n\), and \(E^2_{p,q}(\Isb)=0\) otherwise, under (C-HKR). Under (C),
 \(\HH_k(\Isb)\cong H^{2n-k}(Y\times S_\sigma,Z\times S_\sigma)\). The ideal
 \(\Isb\) is the same algebra for the b- and cusp calculi.
 \end{proposition}
@@ -2774,7 +2886,7 @@ do not depend on the blow-up, so \(x^\infty\Psi_b^{\Z}=x^\infty\Psi_c^{\Z}\).
 
 \begin{proposition}[Boundary symbol algebra]\label{prop:Ads}
 \(E^2_{p,q}(\Adsb)=H^{2n-p-q}(Z\times S_\sigma\times S_\partial)\) for
-\(q=n\), and \(E^2_{p,q}(\Adsb)=0\) otherwise. Under (C),
+\(q=n\), and \(E^2_{p,q}(\Adsb)=0\) otherwise, under (C-HKR). Under (C),
 \(\HH_k(\Adsb)\cong H^{2n-k}(Z\times S_\sigma\times S_\partial)\).
 \end{proposition}
 
@@ -2811,11 +2923,16 @@ sum over the two points. Concretely:
 \end{itemize}
 For \(n=1\) the surjectivity of the connecting maps of \(\Adb\) and of
 \(\partial^{\mathcal A}_1\) is proved by explicit test cycles
-(Propositions~\ref{prop:n1} and~\ref{prop:connA}(d)), so (S2) is not
-needed. For \(X=[0,1]\), \(H^0(Y)=\C^2\) and the map to \(\C^2\) is
-\((c_+,c_-)\mapsto(-c_+-c_-,c_++c_-)\), of rank \(1=N-c\). So
-\(\HH_2(\Ab)\cong\C\neq0\). Here the rank is computed directly from the
-formula, and the formula itself is the \(n=1\) case of the dictionary.
+(Propositions~\ref{prop:n1} and~\ref{prop:connA}(d)), without (C).
+For \(X=[0,1]\), write \(Y=Y_+\sqcup Y_-\) (\(\xi=\pm1\)), with the
+symplectic orientation, so that \(Y_-\) is oriented by \(-dx\). Then
+\(H^0(Y)=\C^2\), and the map to \(\C^2\) is, up to an overall sign,
+\((c_+,c_-)\mapsto(c_--c_+,\,c_+-c_-)\). This agrees with the difference
+\(g(1)-g(-1)\) in \(\hat\rho_H\). Its kernel is the constants; for example,
+the cycle \(x^{-1}\otimes h\otimes x-x^{-1}\otimes x\otimes h\) represents
+\((1,1)\), and \(\Omega_H\) vanishes on it. The rank is \(1=N-c\), so
+\(\HH_2(\Ab)\cong\C\neq0\). Identifying \(\partial^{\mathcal A}_2\) with this
+map uses (C) and the sketch of Remark~\ref{rem:description}.
 \end{remark}
 
 \section{\texorpdfstring{The indicial algebra \(\Adb\)}{The indicial algebra}}\label{sec:Ad}
@@ -2954,38 +3071,173 @@ from \eqref{eq:skew}. A direct computation gives
 \(\Omega_H(c'_H)=-\omega_H(i\,x^{-1}\pi_+,x)=-\frac1{2\pi}\).
 \end{proof}
 
-\begin{proposition}[HKR dictionary; sketch (S2)]\label{prop:dict}
-Let \(n\geq2\). Under the isomorphism of Proposition~\ref{prop:Ads} and
-Poincar\'e duality on \(Z\times S_\sigma\times S_\partial\), the class
-\([\omega_H]\in\HH^1(\Adsb)\) corresponds to \(d\theta_\sigma\cdot1_{Z_H}\),
-and \([\Omega_H]\) corresponds to \(\pm d\theta_\partial\wedge d\theta_\sigma
-\cdot1_{Z_H}\). In particular both connecting maps of \(\Adb\) are
-surjective onto \(\C^N\).
-\end{proposition}
+\subsection{The connecting maps for \texorpdfstring{\(n\geq2\)}{n>=2}}
+Identify the suspended variable \(\lambda\) with the b-covariable \(\xi\);
+this is legitimate because \(xD_x\) has symbol \(\xi\) and indicial family
+\(\lambda\). Then principal symbols of elements of \(B'_H\) are homogeneous
+functions on \({}^bT^*_HX\setminus0=(T^*H\times\mathbb R_\xi)\setminus0\).
+Write \(\zeta=(\eta,\xi)\) and \(d=n-1=\dim H\), and put
+\[
+ \hat\rho_H(g)=(2\pi)^{-n}\int_H\int_{\mathbb R^d}\bigl(g(y,\eta,1)-
+ g(y,\eta,-1)\bigr)\,d\eta\,\nu_\partial(y)
+\]
+for \(g\) homogeneous of degree \(1-n\), with \(d\eta\) the density dual to
+\(\nu_\partial\). The integrand is \(O(|\eta|^{-n})\), so the integral
+converges.
 
-\begin{proof}[Sketch]
-The derivation \(D=[\log x,\cdot]\) acts on symbols through the
-Hamiltonian vector field of \(\log x\), which is a multiple of
-\(\partial_\xi\). Under \(*_b\), contraction with this field becomes
-exterior multiplication by \(d\log x\), that is, by \(d\theta_\partial\).
-This explains the relation between \(\Omega_H\) and \(\omega_H\). The
-identification of \([\omega_H]\) with \(d\theta_\sigma\) would follow if
-\(\omega_H\) were cohomologous to the contraction of the boundary residue
-trace with the derivation \([\log Q,\cdot]\), for a positive elliptic
-\(Q\). Such a \(\log Q\) changes symbol order and corresponds to
-\(d\theta_\sigma\). The natural way to prove this is to regularize
-\(\Tr_{\partial,H}\) by \(Q_0^{-\tau}\) instead of by the iterated
-antiderivative. The complex powers \(q_0(\lambda)^{-\tau}\) of a suspended
-family are holomorphic in \(\lambda\) only on a strip, whereas \eqref{eq:omega}
-involves the shifts \(\lambda\mapsto\lambda+ki\) for all \(k\). We have not
-overcome this. For \(n=1\), Proposition~\ref{prop:n1} replaces the sketch.
+\begin{lemma}[Residue formula]\label{lem:rhohat}
+Let \(G\in B'_H\). If \(G\) has order \(\leq-n\), then
+\(\overline\Tr(\partial_\lambda^pG)=0\) for \(p\geq1\). If \(G\) has order
+\(1-n\) with principal symbol \(g\), then
+\(\overline\Tr(\partial_\lambda G)=\hat\rho_H(g)\) and
+\(\overline\Tr(\partial_\lambda^pG)=0\) for \(p\geq2\).
+\end{lemma}
+
+\begin{proof}
+If the order is \(\leq-n\), then \(\partial^pG\) has order \(<-n\), so
+\(\overline\Tr(\partial^pG)=\frac1{2\pi}\int\partial_\lambda\Tr(\partial^{p-1}
+G)\,d\lambda=0\) by Lemma~\ref{lem:bartr}. Now let \(G\) have order
+\(1-n=-d\). The case \(p\geq2\) is the previous one applied to
+\(\partial G\). Changing \(G\) by a family of order \(-n\) does not change
+\(\overline\Tr(\partial G)\). Since \(\overline\Tr\) is defined for
+suspended families on the real line, and its definition does not use
+holomorphy, we may take \(G=\operatorname{Op}(\chi g)\) for real
+\(\lambda\), quantized in charts, with \(\chi\) a cut-off near \(\zeta=0\).
+This family is not entire. From the
+definition of \(\overline\Tr\) applied to \(a=\partial G\) (order \(-n\)) with
+\(p=1\): here \(g_1(\lambda)=\Tr\,\partial G(\lambda)-\Tr\,\partial G(0)\), and the
+term \(2T\Tr\,\partial G(0)\) has no constant part. Hence
+\(\overline\Tr(\partial G)\) is \(\frac1{2\pi}\) times the constant term of
+\(I(T)=\int_{-T}^T\Tr\,\partial_\lambda G\,d\lambda\). Since
+\(\partial_\lambda G\) has order \(-n<-d\), its trace is the integral of its
+symbol, \(\Tr\,\partial_\lambda G=(2\pi)^{-d}\iint\partial_\lambda(\chi g)\,
+d\eta\,\nu_\partial\). This is absolutely integrable over
+\(\{|\lambda|\leq T\}\times\mathbb R^d\). By Fubini,
+\[
+ I(T)=(2\pi)^{-d}\int_H\int_{\mathbb R^d}\bigl(g(\eta,T)-g(\eta,-T)\bigr)\,
+ d\eta\,\nu_\partial
+\]
+for \(T\) large. Substituting \(\eta=T\eta'\) and using homogeneity of
+degree \(-d\) shows that \(I(T)\) is independent of \(T\), and equal to
+\((2\pi)\hat\rho_H(g)\).
 \end{proof}
 
+For a chain \(c\) of \(\Adsb\), let \(\chi(c)\) be its HKR form, computed on
+principal symbols. Let \(\theta_x\) and \(\theta_{\xi x}\) denote the
+coefficients of \(dx/x\) and of \(d\xi\wedge dx/x\) in the \(x\)-weight-zero
+part of a form \(\theta\).
+
+\begin{lemma}[Top-order formulas]\label{lem:top}
+\begin{enumerate}
+\item[(a)] \(\omega_H\) vanishes on \(1\)-chains of total order \(\leq-n\).
+On \(1\)-chains of total order \(\leq1-n\),
+\(\omega_H(c)=-i\,\hat\rho_H\bigl(\chi(c_{1-n})_x\bigr)\).
+\item[(b)] \(\Omega_H\) vanishes on \(2\)-chains of total order
+\(\leq1-n\). Assume (C-HKR). For \(2\)-chains \(c\) of total order
+\(\leq2-n\) with \(b_0c_{2-n}=0\),
+\(\Omega_H(c)=-\hat\rho_H\bigl(\chi(c_{2-n})_{\xi x}\bigr)\).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) In \eqref{eq:omega} the term \(F_k=a_k\alpha^k(b_{-k})\) has order at most
+the total order, and \(\alpha^k\) does not change principal symbols.
+Lemma~\ref{lem:rhohat} gives
+\(\omega_H(A\otimes B)=\sum_kik\,\hat\rho_H(\sigma(a_k)\sigma(b_{-k}))\)
+in total order \(1-n\), and \(0\) below. On the other hand
+\(A\,dB=\sum x^ka_k\,d(x^{-k}b_{-k})\) has weight-zero \(dx/x\)-coefficient
+\(-\sum_kk\,a_kb_{-k}\).
+
+(b) The derivation \(D\) lowers order by one, so \(\Omega_H(A,B,C)=
+-\omega_H(AD(B),C)\) is computed by (a). On elementary tensors this gives
+\(\Omega_H(a\otimes b\otimes c)=-\sum m\,\hat\rho_H(a_j\partial_\xi b_lc_m)\),
+summed over \(j+l+m=0\). Because \(\Omega_H\) is a cocycle and vanishes in
+lower order, it vanishes on \(b_0\)-boundaries of top components. By
+(C-HKR), a top \(b_0\)-cycle is \(b_0\)-homologous to the
+antisymmetrization of its HKR form, and on
+\(a\otimes b\otimes c-a\otimes c\otimes b\), whose HKR form is
+\(a\,db\wedge dc\), a direct comparison gives
+\(-\hat\rho_H((a\,db\wedge dc)_{\xi x})\).
+\end{proof}
+
+\begin{proposition}[The boundary connecting maps]
+\label{prop:dict}
+Let \(n\geq1\), and assume (C) for \(\Adsb\), part (ii) of
+Theorem~\ref{thm:full} (hence (Q1), (Q2), (S1)), and
+Lemma~\ref{lem:conn} (hence (Q1)). Then both connecting maps
+\(\HH_1(\Adsb)\to\HH_0(\Idb)\) and \(\HH_2(\Adsb)\to\HH_1(\Idb)\) are
+surjective onto \(\C^N\). They are given on \(E^2\) by the functionals
+\(\theta\mapsto-i\hat\rho_H(\theta_x)\) and
+\(\theta\mapsto-\hat\rho_H(\theta_{\xi x})\).
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{prop:omega}, Lemma~\ref{lem:top}, and the isomorphism
+\(\Theta\) of Proposition~\ref{prop:algconv}, the composites
+\(\Tr_{\partial,H}\circ\partial_1\) and \(\varphi_H\circ\partial_2\) are the
+functionals \(\theta\mapsto-i\hat\rho_H(\theta_x)\) and
+\(\theta\mapsto-\hat\rho_H(\theta_{\xi x})\) on \(E^2\). We exhibit
+\(\delta_b\)-closed forms on which these are nonzero. Fix a metric on
+\(H\), let \(|\zeta|^2=|\eta|^2+\xi^2\), and let \(\alpha_H=\eta\cdot dy\) be
+the tautological form. Put
+\[
+ f=1_H\,\xi|\zeta|^{-n},\qquad
+ \theta_1=f\,\frac{dx}{x}+1_H|\zeta|^{-n}\alpha_H,\qquad
+ \theta_2=f\,d\xi\wedge\frac{dx}{x}+1_H|\zeta|^{-n}\,d\xi\wedge\alpha_H .
+\]
+These have fibre weights \(1-n\) and \(2-n\) and \(x\)-weight \(0\). With
+\(\{a,c\}_b=\pi_b(da,dc)\), \eqref{eq:poisson-boundary} gives
+\(\{f,\log x\}_b=-\partial_\xi f\), \(\{h,y_j\}_b=-\partial_{\eta_j}h\),
+\(\{f,\xi\}_b=0\) and \(\{\xi,\log x\}_b=-1\). Hence
+\[
+ \delta_b\theta_1=-\operatorname{div}_\zeta V,\qquad
+ \delta_b\theta_2=(\operatorname{div}_\zeta V)\,d\xi,\qquad
+ V=\zeta|\zeta|^{-n}.
+\]
+Since \(\zeta\) ranges over \(\mathbb R^n\setminus0\), the field \(V\) is
+divergence free:
+\(\operatorname{div}V=n|\zeta|^{-n}-n|\zeta|^{-n-2}|\zeta|^2=0\). This holds
+in any coordinates, because
+\[
+ \sum_j\eta_j\partial_{\eta_j}|\zeta|^2+\xi\partial_\xi|\zeta|^2=2|\zeta|^2 .
+\]
+So \(\theta_1\) and \(\theta_2\) define
+\(E^2\)-classes. Now \((\theta_1)_x=(\theta_2)_{\xi x}=f\), and
+\[
+ \hat\rho_{H'}(f)=\delta_{HH'}\,2(2\pi)^{-n}\int_H\int_{\mathbb R^d}
+ (1+|\eta|^2)^{-n/2}\,d\eta\,\nu_\partial\neq0 .
+\]
+This proves surjectivity.
+\end{proof}
+
+\begin{remark}[Description of the connecting maps; sketch (S2)]
+\label{rem:description}
+The identification of these functionals with
+\(\beta\mapsto(\int_{Z_H}\beta_\partial)_H\) and
+\(\beta\mapsto(\int_{Z_H}\beta_0)_H\) is only sketched. Write
+\(\varpi_H=d\eta\wedge dy\) for the symplectic form of \(T^*H\). Then
+\(\pi_b^\sharp(dx/x)\) is a multiple of \(\partial_\xi\), and
+\(\mu_b=d\xi\wedge\frac{dx}{x}\wedge\varpi_H^d/d!\). Hence
+\(*_b(g\,dx/x)\) and \(*_b(g\,d\xi\wedge dx/x)\) are, up to signs, \(g\,
+\frac{dx}{x}\wedge\varpi_H^d/d!\) and \(g\,\varpi_H^d/d!\), while the
+\(dy_j\)-components are carried to forms containing \(d\xi\). The integrals
+over the hyperplanes \(\xi=\pm1\) should then be compared with the
+integral over \(Z_H\) by radial projection. The hyperplanes are not compact.
+The two integrals separately diverge logarithmically near the equator
+\(\xi=0\), and only the difference \(g(\eta,1)-g(\eta,-1)\) in
+\(\hat\rho_H\) converges. A precise proof needs this cancellation and the
+exact signs and constants; we have not written it out. The surjectivity in
+Proposition~\ref{prop:dict} does not depend on this remark. The exact rank
+\(N-1\) of \(\partial^{\mathcal A}_2\), and the explicit kernels in
+Theorem~\ref{thm:full}(vii)--(viii), do.
+\end{remark}
+
 \begin{theorem}\label{thm:Ad}
-Assume (C), and assume (S2) if \(n\geq2\). Then
-\(\HH_k(\Adb)\cong\HH_k(\Adsb)\) for \(k\neq1,2\), and for \(k=1,2\) the
-group \(\HH_k(\Adb)\) is the kernel of the surjection of
-Proposition~\ref{prop:n1}, resp.~\ref{prop:dict}.
+Assume (C) and Theorem~\ref{thm:full}(ii). Then
+\(\HH_k(\Adb)\cong\HH_k(\Adsb)\) for \(k\neq1,2\). For \(k=1,2\), the group
+\(\HH_k(\Adb)\) is the kernel of the surjection of
+Proposition~\ref{prop:n1} (\(n=1\)), resp.\ Proposition~\ref{prop:dict}.
+Its explicit description in Theorem~\ref{thm:full}(vii) uses (S2).
 \end{theorem}
 
 \begin{proof}
@@ -3051,7 +3303,9 @@ indicial family is \(\lambda\), so \(I_H(P_H)-\pi_+\in\cE\). Thus
 \end{proof}
 
 \begin{remark}[Several boundary components]\label{rem:MNcomponents}
-Assume (S2). By Proposition~\ref{prop:dict} and the identity part of
+Assume (C) and (S2). By Proposition~\ref{prop:dict},
+Remark~\ref{rem:description}, the naturality of \(\Theta\),
+and the identity part of
 \(p_*\), the map \(\partial^{\mathcal A}_2\) is
 \(\beta\mapsto(\int_{Z_H}\beta)_H\) on the summand \(H^{2n-2}(Y)\) of
 \(\HH_2(\Asb)\), and it vanishes on the other summands. By Stokes' theorem,
@@ -3078,8 +3332,11 @@ Propositions~\ref{prop:Is} and~\ref{prop:Ads}, and (v) is
 Theorem~\ref{thm:main}. (vii) is Theorem~\ref{thm:Ad}, with the components
 identified by Proposition~\ref{prop:dict}. For (viii), insert
 \(\partial^{\mathcal A}_1=\partial^\partial_1\circ p_*\) and
-\(\partial^{\mathcal A}_2\) into the long exact sequence. By (S2) and the
-identity part of \(p_*\), \(\partial^{\mathcal A}_1\) is
+\(\partial^{\mathcal A}_2\) into the long exact sequence. By
+Proposition~\ref{prop:dict}, Remark~\ref{rem:description} (S2), the
+naturality of the top-component map \(\Theta\) (on \(E^2\), \(p_*\) is
+restriction to the boundary), and the identity part of \(p_*\),
+\(\partial^{\mathcal A}_1\) is
 \(\beta\mapsto(\int_{Z_H}\beta)_H\) on the summand
 \(H^{2n-2}(Z)\cong\C^N\) of \(\HH_1(\Asb)\) and vanishes on the other
 summands. The rank of \(\partial^{\mathcal A}_2\) is \(N-1\)
@@ -3349,6 +3606,11 @@ B. Liu and X. Ma,
 \emph{Differential K-theory and localization formula for eta-invariants},
 Invent. Math. \textbf{222} (2020), 545--613;
 arXiv:1808.03428.
+
+\bibitem{MelroseMicro}
+R. B. Melrose,
+\emph{Introduction to Microlocal Analysis}, lecture notes, chapter
+``Hochschild homology''.
 
 \bibitem{MelroseAPS}
 R. B. Melrose,
