@@ -19,8 +19,8 @@ $A_1$ and $A_2$, with
   R_1=\Id_F-B_1A_1,\quad R_1'=\Id_G-A_1B_1,\quad R_2=\Id_E-B_2A_2,\quad
   R_2'=\Id_F-A_2B_2,
 \end{equation*}
-all smoothing. The composite $A_1A_2\in\Psido{m_1+m_2}(X;E,G)$ has principal symbol
-$\sigma_{m_1}(A_1)\sigma_{m_2}(A_2)$, which is invertible on $S^*X$, so it is
+all smoothing. The composite $A_1A_2$, an element of $\Psido{m_1+m_2}(X;E,G)$, has
+principal symbol $\sigma_{m_1}(A_1)\sigma_{m_2}(A_2)$, which is invertible on $S^*X$, so it is
 elliptic, and $B_2B_1\in\Psido{-m_1-m_2}(X;G,E)$. Using $B_1A_1=\Id-R_1$ and
 $A_2B_2=\Id-R_2'$,
 \begin{align*}
@@ -32,8 +32,8 @@ so $B_2B_1$ is a parametrix of $A_1A_2$ and \cref{index:thm:trace-formula} gives
 \begin{equation*}
   \ind(A_1A_2)=\Tr(R_2)+\Tr(B_2R_1A_2)-\Tr(R_1')-\Tr(A_1R_2'B_1).
 \end{equation*}
-Apply \cref{index:lem:trace-commute} to $B_2\in\Psido{-m_2}(X;F,E)$ and the smoothing
-operator $R_1A_2\in\Psido{-\infty}(X;E,F)$:
+Apply \cref{index:lem:trace-commute} to the operator $B_2\in\Psido{-m_2}(X;F,E)$ and the
+smoothing operator $R_1A_2\in\Psido{-\infty}(X;E,F)$:
 \begin{equation*}
   \Tr(B_2R_1A_2)=\Tr(R_1A_2B_2)=\Tr\bigl(R_1(\Id-R_2')\bigr)=\Tr(R_1)-\Tr(R_1R_2').
 \end{equation*}
@@ -58,10 +58,10 @@ $\sigma_m(A)$ is; so $A^*$ is elliptic. The formal adjoint is an involution:
 $(A^*)^*=A$, since both sides satisfy $\inner{(A^*)^*u}{v}=\inner{u}{A^*v}=\inner{Au}{v}$
 for all smooth $u,v$, and $\CI$ is dense in $L^2$. By
 \cref{index:prop:generalized-inverse}, applied to $A$ and to $A^*$,
-\begin{equation*}
-  \ind(A)=\dim\Nul(A)-\dim\Nul(A^*),\qquad
+\begin{gather*}
+  \ind(A)=\dim\Nul(A)-\dim\Nul(A^*),\\
   \ind(A^*)=\dim\Nul(A^*)-\dim\Nul\bigl((A^*)^*\bigr)=-\ind(A).
-\end{equation*}
+\end{gather*}
 If $E=F$ and $A$ is self-adjoint with respect to some choice of metric and density,
 i.e.\ $A^*=A$, this gives $\ind(A)=-\ind(A)$, so $\ind(A)=0$. (The index
 $\dim\Nul A-\dim\CI(X;F)/A\CI(X;E)$ does not involve the metrics, so it does not matter
@@ -217,11 +217,11 @@ $b\in T_A\Ginf$ to $bB\in T_{AB}\Ginf$, so
   (R_B^*\theta)_A(b)=(AB)^{-1}bB=B^{-1}(A^{-1}b)B,\qquad \theta=A^{-1}dA,
 \end{equation*}
 i.e.\ $R_B^*(A^{-1}dA)=B^{-1}(A^{-1}dA)B$. Therefore
-\begin{equation*}
-  (R_B^*u_{2k-1})(b_1,\dots,b_{2k-1})=\sum_\sigma\sgn(\sigma)\Tr\bigl(B^{-1}c_{\sigma(1)}
-  BB^{-1}c_{\sigma(2)}B\cdots B^{-1}c_{\sigma(2k-1)}B\bigr)
-  =\sum_\sigma\sgn(\sigma)\Tr\bigl(B^{-1}c_{\sigma(1)}\cdots c_{\sigma(2k-1)}B\bigr).
-\end{equation*}
+\begin{align*}
+  (R_B^*u_{2k-1})(b_1,\dots,b_{2k-1})&=\sum_\sigma\sgn(\sigma)\Tr\bigl(B^{-1}c_{\sigma(1)}
+  BB^{-1}c_{\sigma(2)}B\cdots B^{-1}c_{\sigma(2k-1)}B\bigr)\\
+  &=\sum_\sigma\sgn(\sigma)\Tr\bigl(B^{-1}c_{\sigma(1)}\cdots c_{\sigma(2k-1)}B\bigr).
+\end{align*}
 For a smoothing operator $T$ and $B\in\Ginf\subset\Psido0$,
 $\Tr(B^{-1}(TB))=\Tr(TBB^{-1})=\Tr(T)$ by \cref{index:lem:trace-commute}. Hence
 $R_B^*u_{2k-1}=u_{2k-1}$. Together with the left invariance shown before
@@ -234,10 +234,10 @@ Fourier coefficients of $f$ decay rapidly in the distance between such modes.
 
 Write $e_k=e^{ik\theta}$, $f=\sum_mf_me_m$ with $(f_m)$ rapidly decreasing, and
 $H(k)=1$ for $k\ge0$, $H(k)=0$ for $k<0$, so that $Se_k=H(k)e_k$. Then
-\begin{equation*}
+\begin{gather*}
   [S,f]e_k=Sfe_k-fSe_k=\sum_mf_m\bigl(H(k+m)-H(k)\bigr)e_{k+m}
-  =\sum_jc_{jk}e_j,\qquad c_{jk}=f_{j-k}\bigl(H(j)-H(k)\bigr).
-\end{equation*}
+  =\sum_jc_{jk}e_j,\\ c_{jk}=f_{j-k}\bigl(H(j)-H(k)\bigr).
+\end{gather*}
 If $c_{jk}\ne0$ then $j$ and $k$ have opposite signs (one is $\ge0$, the other
 $<0$), so $\abs{j-k}=\abs j+\abs k$ and
 \begin{equation*}
@@ -316,7 +316,7 @@ family of elliptic elements of $\PsiT0$ (constant symbol $ab$). By
 \cref{index:prop:toeplitz-fredholm} and \cref{index:thm:toeplitz-index},
 \begin{equation*}
   \ind_{\mathcal T}(T_aT_b)=\ind_{\mathcal T}(T_{ab})=-\wind\det(ab)
-  =-\wind(\det a\det b)=-\wind\det a-\wind\det b,
+  =-\wind\det a-\wind\det b,
 \end{equation*}
 since $\frac1{2\pi i}\int d\log(gh)=\frac1{2\pi i}\int d\log g+\frac1{2\pi i}\int d\log h$
 for loops $g,h$ in $\C^*$. The right side is $\ind_{\mathcal T}(T_a)+\ind_{\mathcal T}(T_b)$.
