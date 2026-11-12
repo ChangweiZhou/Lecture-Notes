@@ -1,0 +1,1391 @@
+\chapter{Conormal distributions}\label{ch:conormal}
+\providecommand{\osc}[1]{\mathcal{I}[#1]}
+\providecommand{\IH}[1]{IH^{#1}}
+\providecommand{\Vt}{\mathcal{V}}
+\providecommand{\Ffib}{\mathcal{F}_{\mathrm{fib}}}
+
+The Dirac delta function, the Schwartz kernels of pseudodifferential operators
+and the travelling-wave solutions of hyperbolic equations are all examples of
+distributions that are smooth outside a submanifold $Y$ and have a very
+particular, ``symbolic'', singularity at $Y$.  In this chapter we introduce the
+corresponding spaces $\Ic{m}(X,Y)$ of \emph{conormal distributions}.  We start
+with the simplest case, $Y$ a point in $\R^n$, where conormal distributions are
+simply inverse Fourier transforms of symbols; pass to a linear subspace
+$Y=\{0\}\times\R^d\subset\R^n$ (equivalently the zero section of a trivial
+vector bundle), where the Fourier transform is taken only in the normal
+variables; prove the invariance of these spaces under diffeomorphisms preserving
+$Y$; and then define $\Ic{m}(X,Y;\Omegah)$ for a closed embedded submanifold of
+a manifold, either through coordinates or through a normal fibration.  The
+principal symbol is an invariantly defined half-density on the conormal bundle
+$N^*Y$, and gives a short exact sequence.  Finally we show that the conormal
+distributions are characterized, up to an arbitrarily small loss in the order,
+by \emph{iterated regularity}: stability of a fixed Sobolev regularity under
+repeated application of vector fields tangent to $Y$.
+
+We use the symbol spaces of \cref{ch:euclidean}, the radial compactification
+of \cref{ch:distributions} and, for wavefront sets, \cref{ch:microlocal}.
+Pseudodifferential operators on manifolds are discussed only in
+\cref{ch:manifolds}; their action on conormal distributions is derived here in
+local coordinates and globalized in \cref{ch:hj}.
+
+\section{Symbols}\label{conormal:sec:symbols}
+
+\subsection{Symbols with bounds}
+Recall from \cref{ch:euclidean} that for $m\in\R$, $S^m(\R^p;\R^k)$ is the
+space of $a\in\CI(\R^p\times\R^k)$ such that
+\begin{equation}\label{conormal:eq:symbol-est}
+  |D_z^\alpha D_\xi^\beta a(z,\xi)|\le C_{\alpha\beta}\ang{\xi}^{m-|\beta|}
+  \quad\forall\ \alpha,\beta,
+\end{equation}
+with the Fr\'echet topology given by the best constants; $S^m(\R^k)$ denotes the
+case without parameters, $S^{-\infty}=\bigcap_m S^m$, and every sequence
+$a_j\in S^{m-j}$ has an asymptotic sum $a\sim\sum_j a_j$, unique modulo
+$S^{-\infty}$.  We shall also write $S^m_{\mathrm c}(\R^p;\R^k)$ for the
+subspace of symbols vanishing for $z$ outside a compact subset of $\R^p$.
+Clearly $\partial_{\xi_j}:S^m\to S^{m-1}$, $\xi_j:S^m\to S^{m+1}$, and
+$S^m\cdot S^{m'}\subset S^{m+m'}$.  Note that $S^{-\infty}(\R^k)=\cS(\R^k)$.
+
+The symbol spaces are invariant under linear changes of the variable: if
+$A(z)\in\GL(k,\R)$ depends smoothly on $z$, with $A$, $A^{-1}$ and all their
+derivatives bounded, then $a(z,A(z)\xi)\in S^m(\R^p;\R^k)$ whenever
+$a\in S^m(\R^p;\R^k)$, since $\ang{A(z)\xi}$ and $\ang{\xi}$ are uniformly
+comparable and each $z$-derivative falling on $A(z)\xi$ produces a factor of
+order one together with a $\xi$-derivative of $a$.  In particular the symbol
+spaces $S^m(W)$ are well defined for any finite-dimensional real vector space
+$W$.
+
+The following density statement allows many identities to be proved first for
+Schwartz functions.
+
+\begin{lemma}\label{conormal:lem:density}
+  If $a\in S^m(\R^p;\R^k)$, $\phi\in\CIc(\R^k)$ equals $1$ near $0$ and
+  $a_\epsilon(z,\xi)=\phi(\epsilon\xi)a(z,\xi)$, then $a_\epsilon$ is bounded in
+  $S^m$ for $0<\epsilon\le1$ and $a_\epsilon\to a$ in $S^{m'}$ for every $m'>m$
+  as $\epsilon\to0$.
+\end{lemma}
+\begin{proof}
+  The derivative $D_\xi^\gamma[\phi(\epsilon\xi)]=\epsilon^{|\gamma|}
+  (D^\gamma\phi)(\epsilon\xi)$ is supported where $|\xi|\le C/\epsilon$, so it is
+  bounded by $C_\gamma\ang{\xi}^{-|\gamma|}$ uniformly in $\epsilon$; hence
+  $a_\epsilon$ is bounded in $S^m$ by Leibniz' formula.  Moreover
+  $a-a_\epsilon=(1-\phi(\epsilon\xi))a$ and its derivatives are supported in
+  $|\xi|\ge c/\epsilon$, where $\ang{\xi}^{m-|\beta|}\le
+  C\epsilon^{m'-m}\ang{\xi}^{m'-|\beta|}$; so $a-a_\epsilon\to0$ in $S^{m'}$.
+\end{proof}
+
+\subsection{Classical symbols}
+Let $W$ be a real vector space of dimension $k$ and $\RC{W}$ its radial
+compactification (\cref{ch:distributions}), a compact manifold with boundary
+whose interior is $W$; the action of $\GL(W)$ and of translations extends
+smoothly to $\RC W$.  We call the boundary $\Sphere W=\pa\RC W$ the
+\emph{sphere at infinity}; it is canonically $(W\setminus 0)/\R^+$.  Let
+$\rho\in\CI(\RC W)$ be a boundary defining function, for instance
+$\rho=\ang{\xi}^{-1}$ in linear coordinates.  Any two are related by
+$\rho'=f\rho$ with $0<f\in\CI(\RC W)$, so
+\begin{equation*}
+  \Symph{m}(W)=\rho^{-m}\CI(\RC W)=\{a\in\CI(W);\ \rho^m a\in\CI(\RC W)\}
+\end{equation*}
+is independent of the choice; this is the space of \emph{classical} (or
+polyhomogeneous) symbols of order $m$.  (One may regard it as the space of
+sections of a trivial line bundle $N_{-m}$ over $\RC W$ of which $\rho^{-m}$ is
+a global trivializing section.)
+
+\begin{lemma}\label{conormal:lem:classical-basic}
+  For all $m,m'\in\R$:
+  \begin{enumerate}[label=(\roman*)]
+  \item $\Symph{m}(W)\cdot\Symph{m'}(W)=\Symph{m+m'}(W)$ and $\Symph{m}(W)$ is
+    invariant under $\GL(W)$ and translations;
+  \item $\Symph{m}(W)\subset S^m(W)$; in linear coordinates
+    $\xi^\alpha\pa_\xi^\beta:\Symph{m}\to\Symph{m+|\alpha|-|\beta|}$;
+  \item $\bigcap_N\Symph{m-N}(W)=\cS(W)$;
+  \item $a\in\Symph{m}(W)$ if and only if there are functions
+    $a_{m-j}\in\CI(W\setminus0)$, homogeneous of degree $m-j$, such that for
+    one (hence any) $\chi\in\CIc(W)$ equal to one near $0$,
+    \begin{equation}\label{conormal:eq:ph-expansion}
+      a-\sum_{j<N}(1-\chi)a_{m-j}\in S^{m-N}(W)\quad\forall\ N.
+    \end{equation}
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  (i) is immediate from the definition and the invariance of $\RC W$.  For
+  (ii) and (iv) use linear coordinates and, near the boundary, the coordinates
+  $r=|\xi|^{-1}\in[0,1)$, $\omega=\xi/|\xi|\in\Sphere^{k-1}$ on $\RC W$; then
+  $\rho=r\,g$ with $g>0$ smooth up to $r=0$, so $a\in\Symph{m}$ means
+  $a=r^{-m}f(r,\omega)$ with $f$ smooth up to $r=0$.  In these coordinates
+  $\xi_j\pa_{\xi_l}$ is a combination, with coefficients smooth up to $r=0$, of
+  $r\pa_r$ and vector fields on $\Sphere^{k-1}$, while $\pa_{\xi_l}$ is $r$ times
+  such a combination,
+  as one sees from homogeneity ($\xi_j\pa_{\xi_l}$ is homogeneous of degree $0$
+  and $\pa_{\xi_l}$ of degree $-1$).  Since $r\pa_r(r^{-m}f)=r^{-m}(r\pa_r-m)f$,
+  repeated application of such vector fields to $r^{-m}f$ yields $r^{-m}$ times
+  bounded functions, so the estimates \eqref{conormal:eq:symbol-est} hold in
+  $|\xi|\ge1$ (where $r\sim\ang{\xi}^{-1}$), and trivially in $|\xi|\le1$; the
+  mapping property in (ii) follows as well.  Taylor's formula in $r$ at $r=0$,
+  $f=\sum_{j<N}r^jf_j(\omega)+r^Nf_N'(r,\omega)$, gives
+  \eqref{conormal:eq:ph-expansion} with
+  $a_{m-j}(\xi)=|\xi|^{m-j}f_j(\xi/|\xi|)$, the remainder $r^{N-m}f'_N$ being in
+  $S^{m-N}$ by the argument just given.  Conversely, if
+  \eqref{conormal:eq:ph-expansion} holds, then near $r=0$ the function
+  $f=r^{m}a$ satisfies $f-\sum_{j<N}r^jf_j=O(r^N)$ together with all
+  derivatives in $r\pa_r$ and $\pa_\omega$, and $\pa_r=r^{-1}(r\pa_r)$; so $f$ is
+  $\mathcal C^{N-1}$ up to $r=0$ for every $N$, i.e.\ smooth.  Finally (iii): the
+  intersection is contained in $S^{-\infty}(W)=\cS(W)$ by (ii), and conversely a
+  Schwartz function is $r^\infty$ times a smooth function of $(r,\omega)$, by
+  the same change of variables.
+\end{proof}
+
+The leading term in \eqref{conormal:eq:ph-expansion} is the \emph{principal
+part} $\sigma_m(a)=a_m$; it is a smooth function on $W\setminus0$ homogeneous
+of degree $m$, equivalently (multiplying by $\rho^{m}$ and restricting) a
+smooth section of $N_{-m}$ over $\Sphere W$.  Denote by
+$\CI_{(m)}(W\setminus0)$ the space of smooth functions homogeneous of degree $m$.
+
+\begin{proposition}\label{conormal:prop:ph-exact}
+  For every $m$ the sequence
+  \begin{equation*}
+    0\longrightarrow\Symph{m-1}(W)\longrightarrow\Symph{m}(W)
+    \xrightarrow{\ \sigma_m\ }\CI_{(m)}(W\setminus0)\longrightarrow0
+  \end{equation*}
+  is exact.  Equivalently $\rho\CI(\RC W)\to\CI(\RC W)\to\CI(\Sphere W)$ is
+  exact: restriction to the boundary is surjective and a smooth function
+  vanishing at the boundary is $\rho$ times a smooth function.
+\end{proposition}
+\begin{proof}
+  Multiplication by $\rho^m$ reduces the statement to the case $m=0$, where it
+  is Taylor's theorem at the boundary (in the coordinates $(r,\omega)$ above) and
+  the existence of extensions: $f(\omega)\mapsto(1-\chi)f(\xi/|\xi|)$.
+\end{proof}
+
+\begin{proposition}[Asymptotic completeness]\label{conormal:prop:asymp}
+  If $a_j\in\Symph{m-j}(W)$, $j\in\N_0$, there exists $a\in\Symph{m}(W)$ such
+  that $a-\sum_{j<N}a_j\in\Symph{m-N}(W)$ for all $N$; $a$ is unique modulo
+  $\cS(W)$.  The same holds, with the same proof, for symbols depending
+  smoothly on parameters in a compact set.
+\end{proposition}
+\begin{proof}
+  Uniqueness follows from \cref{conormal:lem:classical-basic}(iii).  Multiplying
+  by $\rho^m$, it suffices to show: if $X$ is a compact manifold with boundary,
+  $\rho$ a boundary defining function and $b_j\in\rho^j\CI(X)$, there is
+  $b\in\CI(X)$ with $b-\sum_{j<N}b_j\in\rho^N\CI(X)$ for all $N$.  Using a
+  collar $[0,1)_r\times\pa X$ and a partition of unity this reduces to the
+  following form of Borel's lemma: given $u_j\in\CI(\pa X)$ there is
+  $u\in\CIc([0,1)\times\pa X)$ with $\pa_r^ju(0,\cdot)=u_j$ for all $j$.  (Indeed,
+  write $b_j=\sum_{l}r^{j+l}c_{jl}(\omega)/(j+l)!+O(r^\infty)$ near the boundary and
+  take the $u$ with $u_p=\sum_{j\le p}c_{j,p-j}$; then $b-\sum_{j<N}b_j$
+  vanishes to order $N$ at $r=0$.)  Choose $\chi\in\CIc(\R)$ with $\chi=1$ on
+  $|r|<\frac12$, $\chi=0$ on $|r|>1$, and set
+  \begin{equation*}
+    u(r,\omega)=\sum_j \frac{r^j}{j!}u_j(\omega)\chi(r/\epsilon_j),\qquad
+    0<\epsilon_j\le1.
+  \end{equation*}
+  Each term vanishes for $r>\epsilon_j$, and for $l\le j$ and any differential
+  operator $Q$ of order $q$ on $\pa X$,
+  $|\pa_r^l Q(r^ju_j\chi(r/\epsilon_j)/j!)|\le C_{j,l,Q}\,\epsilon_j^{j-l}$,
+  with $C_{j,l,Q}$ independent of $\epsilon_j$, since
+  $\pa_r^p[\chi(r/\epsilon_j)]=\epsilon_j^{-p}\chi^{(p)}(r/\epsilon_j)$ and
+  $r\le\epsilon_j$ on the support.  Fix an exhausting sequence
+  $Q_1,Q_2,\dots$ of differential operators on $\pa X$.  Choosing
+  $\epsilon_j\le 2^{-j}/(1+\max_{l+q\le j-1}C_{j,l,Q_q})$ imposes only finitely
+  many conditions on each $\epsilon_j$, and makes every differentiated series
+  converge uniformly.  Hence $u$ is smooth and, since only the term $j$
+  contributes to $\pa_r^j u(0,\cdot)$, $\pa_r^ju(0,\cdot)=u_j$.  Parameters are
+  handled by including the parameter derivatives among the $Q_q$.
+\end{proof}
+
+The symbol estimates \eqref{conormal:eq:symbol-est} do not imply that $a$ is
+classical: $\Symph{m}(W)$ is a closed subspace of $S^m(W)$ in the topology of
+$\rho^{-m}\CI(\RC W)$, and $\cS(W)$ is not dense in it in that topology, though
+by \cref{conormal:lem:density} it is dense in the weaker topology of
+$S^{m'}$, $m'>m$.  The relation between the two classes is explored in
+\cref{conormal:ex:Vkl,conormal:ex:Ab}.  For symbols depending on parameters
+$z\in\R^p$ we write $\Symph{m}(\R^p;\R^k)$ for those $a\in S^m(\R^p;\R^k)$
+having an expansion \eqref{conormal:eq:ph-expansion} with
+$a_{m-j}\in\CI(\R^p\times(\R^k\setminus0))$ homogeneous in $\xi$, uniformly
+bounded with all derivatives on $\R^p\times\Sphere^{k-1}$, the remainders being
+in $S^{m-N}(\R^p;\R^k)$.  All statements in this chapter hold for the classical
+spaces as well as for the spaces of symbols with bounds; we indicate the
+classical versions by a subscript ``$\mathrm{ph}$''.
+
+\section{Conormal distributions at a point}\label{conormal:sec:point}
+
+\begin{definition}\label{conormal:def:point}
+  For $m\in\R$ set
+  \begin{equation*}
+    \Ic{m}_{\cS}(\R^n,\{0\})=\{u\in\cSp(\R^n);\ \hat u\in S^{m-\frac n4}(\R^n)\},
+    \qquad
+    \Ic{m}_{\cS,\mathrm{ph}}(\R^n,\{0\})=\cF^{-1}\big(\Symph{m-\frac n4}(\R^n)\big).
+  \end{equation*}
+\end{definition}
+
+The shift $n/4$ in the order is a normalization, which is explained by the
+behaviour of the order under the operations considered later (it makes the
+order of the Schwartz kernel of a pseudodifferential operator of order $m$, as
+a conormal distribution at the diagonal, equal to $m$).  For example
+$\hat\delta_0=1$, so
+\begin{equation*}
+  \delta_0\in\Ic{\frac n4}_{\cS,\mathrm{ph}}(\R^n,\{0\}).
+\end{equation*}
+Since $S^{m-1}\subset S^m$, $\Ic{m-1}_\cS\subset\Ic{m}_\cS$, and
+$\bigcap_m\Ic{m}_\cS(\R^n,\{0\})=\cF^{-1}\cS(\R^n)=\cS(\R^n)$.
+
+\begin{lemma}\label{conormal:lem:point-basic}
+  Let $u\in\Ic{m}_\cS(\R^n,\{0\})$ (resp.\ the classical space).  Then
+  \begin{enumerate}[label=(\roman*)]
+  \item $z^\alpha D_z^\beta u\in\Ic{m+|\beta|-|\alpha|}_\cS(\R^n,\{0\})$ (resp.\
+    classical);
+  \item if $m<-\frac{3n}4-j$, $j\in\N_0$, then $u\in\mathcal C^j(\R^n)$ and
+    $D^\beta u\in\Czinf(\R^n)$ for $|\beta|\le j$;
+  \item if $\chi\in\CIc(\R^n)$ equals one near $0$, then $(1-\chi)u\in\cS(\R^n)$;
+    in particular $\singsupp u\subset\{0\}$;
+  \item the integral $\int u\,dz$, defined as $\int\chi u+\int(1-\chi)u$
+    (independent of $\chi$), equals $\hat u(0)$;
+  \item if $v\in\Ic{m'}_\cS(\R^n,\{0\})$ then $u*v\in
+    \Ic{m+m'-\frac n4}_\cS(\R^n,\{0\})$.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  (i) follows from $\cF(z^\alpha D^\beta u)=(-D_\zeta)^\alpha(\zeta^\beta\hat
+  u)$ and \cref{conormal:lem:classical-basic}(ii).  (ii): if $m<-3n/4-j$ then
+  $\zeta^\beta\hat u\in S^{m-\frac n4+|\beta|}\subset L^1$ for $|\beta|\le j$,
+  so $D^\beta u$ is the inverse Fourier transform of an integrable function,
+  hence continuous and vanishing at infinity by the Riemann--Lebesgue lemma.
+  (iii): by (i) and (ii), $|z|^{2N}D^\beta u=\sum_{|\gamma|=N}c_\gamma
+  z^{2\gamma}D^\beta u$ is bounded if $2N>m+|\beta|+3n/4$; since $1-\chi$ vanishes
+  near $0$, $|D^\beta((1-\chi)u)|\le C_{N,\beta}\ang{z}^{-2N}$ for all $N$ and
+  $\beta$.  (iv): the definition is independent of $\chi$ since the two
+  definitions agree on $\CIc(\R^n)$; and $\int\chi u=\widehat{\chi u}(0)$,
+  $\int(1-\chi)u=\widehat{(1-\chi)u}(0)$ add up to $\hat u(0)$.  (v): $\widehat{u*v}=
+  \hat u\hat v\in S^{m-\frac n4+m'-\frac n4}=S^{(m+m'-\frac n4)-\frac n4}$.
+\end{proof}
+
+\subsection{Densities and invariance}
+To see that these spaces are naturally associated to the origin of an abstract
+vector space we need densities.  Let $W$ be a real vector space of dimension
+$n$.  For $t\in\R$, the space $\Omega^tW$ of \emph{$t$-densities} consists of the
+maps $\nu:\Lambda^nW\setminus0\to\R$ with $\nu(cv)=|c|^t\nu(v)$ for
+$c\in\R\setminus0$; it is a line, and $\Omega W=\Omega^1W$.  If $G\in\GL(W)$
+then $G^*\nu=|\det G|^t\nu$; for $W=\R^n$ we write $|dz|^t$ for the $t$-density
+taking the value $1$ on $e_1\wedge\dots\wedge e_n$.  Densities are what one
+integrates invariantly: $\int G^*\mu=\int\mu$ for $\mu\in\cS(W;\Omega W)$.  The
+pairing $\Omega W\otimes\Omega W'\to\R$, $|dz|\otimes|d\zeta|\mapsto1$ for dual
+bases, is independent of the basis, so $\Omega W'=(\Omega W)'$.
+
+For $u\in\cS(\R^n)$ and $G\in\GL(n,\R)$ the change of variables $y=Gz$ gives
+\begin{equation*}
+  \widehat{G^*u}(\zeta)=\int e^{-iz\cdot\zeta}u(Gz)\,dz
+  =|\det G|^{-1}\hat u\big((G^{-1})^t\zeta\big).
+\end{equation*}
+Thus if we define the Fourier transform to take values in densities,
+$\cF u=\hat u(\zeta)|d\zeta|$, then $\cF(G^*u)=((G^{-1})^t)^*\cF u$: the
+Fourier transform is a linear-invariant isomorphism
+\begin{equation}\label{conormal:eq:invariant-FT}
+  \cF:\cS(W)\longrightarrow\cS(W';\Omega W'),\qquad
+  \cF^{-1}\mu(w)=(2\pi)^{-n}\int_{W'}e^{i\pair w\zeta}\mu(\zeta),
+\end{equation}
+extending to $\cSp(W)\to\cSp(W';\Omega W')$.  Consequently
+\begin{equation*}
+  \Ic{m}(W,\{0\})=\cF^{-1}\big(S^{m-\frac n4}(W';\Omega W')\big),
+\end{equation*}
+where $S^r(W';\Omega W')=S^r(W')\cdot|d\zeta|$, is well defined independently of
+any choice of basis, and similarly for the classical space; the integral of
+\cref{conormal:lem:point-basic}(iv) becomes the invariant map
+$\Ic{m}(W,\{0\};\Omega W)\ni u\mapsto(\cF u)(0)$ if $u$ is density-valued.  The
+\emph{principal symbol} of $u$ is the class of $\cF u$ in
+$S^{m-\frac n4}(W';\Omega W')/S^{m-\frac n4-1}(W';\Omega W')$ and, in the
+classical case, its principal part, a density on $W'\setminus0$ homogeneous of
+degree $m-\frac n4+n=m+\frac{3n}{4}$ (the density factor $|d\zeta|$ being
+homogeneous of degree $n$).  By \cref{conormal:prop:ph-exact} there are short
+exact sequences
+\begin{equation*}
+  \Ic{m-1}(W,\{0\})\hookrightarrow\Ic{m}(W,\{0\})\xrightarrow{\ \sigma_m\ }
+  S^{m-\frac n4}(W';\Omega W')/S^{m-\frac n4-1}(W';\Omega W'),
+\end{equation*}
+and, in the classical case, onto the homogeneous densities of degree
+$m+\frac{3n}4$ on $W'\setminus0$.
+
+Invariance under non-linear changes of coordinates fixing $0$ is a special case
+of \cref{conormal:thm:invariance} below.
+
+\subsection{Homogeneity and conormality}
+For classical conormal distributions the singularity at the origin can be
+described quite explicitly.  We use two facts about homogeneous distributions
+\cite[Theorems~3.2.3, 7.1.16, 7.1.18]{Hormander-I}: if $f\in\CI(\R^n\setminus0)$
+is homogeneous of degree $\mu$ and $\mu\notin\{-n,-n-1,\dots\}$, then $f$ has a
+unique extension to a distribution $\tilde f\in\cSp(\R^n)$ homogeneous of degree
+$\mu$; and the Fourier transform of a homogeneous distribution of degree $\mu$
+which is smooth outside $0$ is homogeneous of degree $-n-\mu$ and smooth outside
+$0$.
+
+\begin{proposition}\label{conormal:prop:homogeneous}
+  Let $u\in\Ic{m}_{\cS,\mathrm{ph}}(\R^n,\{0\})$, so $\hat u\in\Symph{\mu}(\R^n)$
+  with $\mu=m-\frac n4$, and suppose $\mu\notin\Z$.  Then there are functions
+  $U_j\in\CI(\R^n\setminus0)$, homogeneous of degree $-n-\mu+j$ and determined by
+  the homogeneous terms $\hat u_{\mu-j}$ in the expansion of $\hat u$, such that
+  \begin{equation*}
+    u-\sum_{j<N}U_j\in\mathcal C^r(\R^n)\quad\text{for } 0\le r<N-\mu-n.
+  \end{equation*}
+  Conversely the $U_j$ determine the terms $\hat u_{\mu-j}$, so $u$ is determined
+  modulo $\cS(\R^n)$ by its expansion.
+\end{proposition}
+\begin{proof}
+  Let $\chi\in\CIc(\R^n)$ equal one near $0$.  Since $\mu-j$ is not an integer,
+  $\hat u_{\mu-j}$ has a homogeneous extension $\tilde a_j$, and
+  $U_j:=\cF^{-1}\tilde a_j$ is homogeneous of degree $-n-\mu+j$ and smooth
+  outside $0$.  The difference $(1-\chi)\hat u_{\mu-j}-\tilde a_j=-\chi\tilde a_j$
+  has compact support, so its inverse Fourier transform is smooth.  The remainder
+  $\hat u-\sum_{j<N}(1-\chi)\hat u_{\mu-j}\in S^{\mu-N}$ has inverse Fourier
+  transform in $\mathcal C^r$ if $\mu-N+r<-n$.  The converse follows by
+  applying the Fourier transform to the homogeneous terms, which are
+  distinguished by their degrees.
+\end{proof}
+
+When $\mu$ is an integer the expansion of $\hat u$ is unchanged, but the
+expansion of $u$ may contain terms $p(z)\log|z|$ with $p$ a homogeneous
+polynomial (for $\mu\le-n$), coming from the homogeneous terms of degree
+$-n-l$, $l\in\N_0$, which have no homogeneous extension; and for
+$\mu\in\N_0$ the polynomial part of $\hat u$ corresponds to derivatives of the
+delta function at $0$, invisible in $z\neq0$.
+
+\subsection{Blow-up of the origin}
+A construction dual to radial compactification is the blow-up of the origin,
+which resolves the singularity of such homogeneous functions.  Polar coordinates
+give a smooth surjective map
+\begin{equation*}
+  \beta:[0,\infty)\times\Sphere^{n-1}\ni(r,\omega)\longmapsto r\omega\in\R^n,
+\end{equation*}
+a diffeomorphism of $(0,\infty)\times\Sphere^{n-1}$ onto $\R^n\setminus0$ which
+collapses $\{0\}\times\Sphere^{n-1}$ to $0$.  Each $U_j$ in
+\cref{conormal:prop:homogeneous} is of the form $r^{-n-\mu+j}$ times a smooth
+function on the sphere.
+
+\begin{lemma}\label{conormal:lem:blowup}
+  The action of $\GL(n,\R)$ on $\R^n$ lifts under $\beta$ to a smooth action on
+  $[0,\infty)\times\Sphere^{n-1}$.
+\end{lemma}
+\begin{proof}
+  For $G\in\GL(n,\R)$ the lift is
+  $\tilde G(r,\omega)=(r|G\omega|,\,G\omega/|G\omega|)$, which is smooth up to
+  $r=0$, satisfies $\beta\circ\tilde G=G\circ\beta$, and $\widetilde{GH}=\tilde
+  G\tilde H$.  (Infinitesimally: the linear vector fields $z_i\pa_{z_j}$ are
+  homogeneous of degree $0$, so on $(0,\infty)\times\Sphere^{n-1}$ they are of the
+  form $a(\omega)r\pa_r+V(\omega)$ with $V$ a vector field on the sphere, which
+  extends smoothly to $r=0$, tangent to the boundary.)
+\end{proof}
+Thus for a vector space $W$ the blown-up space $[W,\{0\}]$, a manifold with
+boundary $\Sphere W$ with a blow-down map onto $W$, is well defined; see
+\cref{conormal:ex:blowup}.
+
+\section{The local model}\label{conormal:sec:local}
+
+\subsection{Notation}
+Throughout the rest of the chapter $n$ is the dimension of the ambient space,
+$k$ the codimension of the submanifold and $d=n-k$ its dimension.  In the local
+model
+\begin{equation*}
+  \R^n=\R^k_x\times\R^d_y,\qquad Y=\{x=0\},\qquad
+  z=(x,y),\ \zeta=(\xi,\eta),
+\end{equation*}
+and the order of a conormal distribution is related to the order of its
+symbol by
+\begin{equation}\label{conormal:eq:order}
+  M=m+\frac n4-\frac k2 .
+\end{equation}
+For a point ($k=n$) this is $M=m-\frac n4$ as in \cref{conormal:def:point};
+for the diagonal in $\R^n\times\R^n$ ($n\to2n$, $k=n$) it is $M=m$.
+
+For an amplitude $c\in S^M(\R^n;\R^k)$, i.e.\ $c=c(x,y,\xi)$ satisfying the
+estimates \eqref{conormal:eq:symbol-est} uniformly in $(x,y)$, we define the
+distribution
+\begin{equation}\label{conormal:eq:osc}
+  \osc{c}(x,y)=\int_{\R^k}e^{ix\cdot\xi}c(x,y,\xi)\,\dbar\xi,
+  \qquad
+  \pair{\osc{c}}{\phi}=\int\Big(\int e^{ix\cdot\xi}c(x,y,\xi)\phi(x,y)\,dx\,dy\Big)
+  \dbar\xi,
+\end{equation}
+for $\phi\in\CIc(\R^n)$; here $\dbar\xi=(2\pi)^{-k}d\xi$.  Writing
+$e^{ix\cdot\xi}=\ang{\xi}^{-2N}(1-\Delta_x)^Ne^{ix\cdot\xi}$ and integrating by
+parts shows that the inner integral is $O(\ang\xi^{M-2N})$, so the outer
+integral converges for $2N>M+k$ and $\osc{c}\in\CmI(\R^n)$.  When $M<-k$ the
+integral in \eqref{conormal:eq:osc} converges absolutely and $\osc{c}$ is
+continuous.  By \cref{conormal:lem:density}, $\osc{c_\epsilon}\to\osc{c}$ in
+$\CmI$ if $c_\epsilon\to c$ in $S^{M'}$, which justifies the formal
+manipulations below.
+
+\begin{lemma}\label{conormal:lem:osc-ops}
+  For $c\in S^M(\R^n;\R^k)$:
+  \begin{enumerate}[label=(\roman*)]
+  \item $D_{y_l}\osc{c}=\osc{D_{y_l}c}$, $D_{x_j}\osc{c}=\osc{\xi_jc+D_{x_j}c}$,
+    $x_j\osc{c}=\osc{-D_{\xi_j}c}$ and $\psi\osc{c}=\osc{\psi c}$ for
+    $\psi\in\CIb(\R^n)$;
+  \item if $M<-k-r$ then $\osc{c}\in\mathcal C^r(\R^n)$ with bounded derivatives
+    of order $\le r$;
+  \item $\osc{c}$ is smooth in $x\ne0$ and, for every $\epsilon>0$,
+    $\sup_{|x|\ge\epsilon}\ang{x}^N|D_x^\alpha D_y^\gamma\osc{c}|<\infty$ for all
+    $N,\alpha,\gamma$.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  (i) holds for $c$ of order $<-k$ by differentiation under the integral and,
+  for $x_j$, by $x_je^{ix\cdot\xi}=D_{\xi_j}e^{ix\cdot\xi}$ and integration by
+  parts; it extends by continuity.  (ii) holds since then $D_x^\alpha D_y^\gamma
+  \osc{c}$, $|\alpha+\gamma|\le r$, is $\osc{c'}$ with $c'$ of order $<-k$.  (iii):
+  by (i), $|x|^{2N}D_x^\alpha D_y^\gamma\osc{c}=\osc{c'}$ with $c'$ of order
+  $M+|\alpha|-2N$, which is bounded with all derivatives up to order $r$ once
+  $2N>M+|\alpha|+k+r$.
+\end{proof}
+
+\begin{lemma}[Reduction]\label{conormal:lem:reduction}
+  If $c\in S^M(\R^n;\R^k)$ and $a\in S^M(\R^d;\R^k)$ satisfies
+  \begin{equation}\label{conormal:eq:reduction}
+    a(y,\xi)\sim\sum_{\alpha}\frac1{\alpha!}(-D_\xi)^\alpha\pa_x^\alpha
+    c(0,y,\xi),
+  \end{equation}
+  then $\osc{c}-\osc{a}\in\CI(\R^n)$.  If $c$ is classical, so is $a$.
+\end{lemma}
+\begin{proof}
+  By Taylor's formula in $x$,
+  $c(x,y,\xi)=\sum_{|\alpha|<N}\frac{x^\alpha}{\alpha!}\pa_x^\alpha c(0,y,\xi)
+  +\sum_{|\alpha|=N}x^\alpha r_\alpha(x,y,\xi)$ with
+  $r_\alpha=\frac N{\alpha!}\int_0^1(1-t)^{N-1}\pa_x^\alpha c(tx,y,\xi)\,dt\in
+  S^M(\R^n;\R^k)$.  By \cref{conormal:lem:osc-ops}(i),
+  $\osc{x^\alpha f}=\osc{(-D_\xi)^\alpha f}$, so
+  \begin{equation*}
+    \osc{c}-\osc{a}=\osc{a_N-a}+\sum_{|\alpha|=N}\osc{(-D_\xi)^\alpha r_\alpha},
+    \quad a_N=\sum_{|\alpha|<N}\frac1{\alpha!}(-D_\xi)^\alpha\pa_x^\alpha
+    c(0,y,\xi).
+  \end{equation*}
+  Both terms on the right have amplitudes of order $M-N$, so are in
+  $\mathcal C^r$ if $N>M+k+r$.  As $N$ is arbitrary, $\osc{c}-\osc{a}$ is smooth.
+\end{proof}
+
+\begin{definition}\label{conormal:def:local}
+  Let $\Omega\subset\R^n$ be open.  The space $\Ic{m}_{\mathrm c}(\Omega,Y)$
+  consists of the $u\in\CmIc(\Omega)$ of the form $u=\osc{c}+f$ with
+  $c\in S^M(\R^n;\R^k)$, $M$ given by \eqref{conormal:eq:order}, and
+  $f\in\CI(\R^n)$; $\Ic{m}_{\mathrm c,\mathrm{ph}}(\Omega,Y)$ is defined with
+  $c\in\Symph{M}(\R^n;\R^k)$.  Further, $\Ic{m}(\Omega,Y)$ is the space of
+  $u\in\CmI(\Omega)$ such that $\phi u\in\Ic{m}_{\mathrm c}(\Omega,Y)$ for all
+  $\phi\in\CIc(\Omega)$, and similarly in the classical case.
+\end{definition}
+
+If $u=\osc{c}+f\in\Ic{m}_{\mathrm c}(\Omega,Y)$ and $\chi\in\CIc(\Omega)$ equals
+one near $\supp u$, then $u=\osc{\chi c}+\chi f$, so the amplitude can be taken
+with compact support in $(x,y)$.  By \cref{conormal:lem:reduction} it can also be
+taken independent of $x$: $u=\osc{a}+f'$ with $a\in S^M_{\mathrm c}(\R^d;\R^k)$
+and $f'$ smooth (not compactly supported in general).  We call such an $a$ a
+\emph{full symbol} of $u$.
+
+\begin{proposition}\label{conormal:prop:local-basic}
+  Let $\Omega\subset\R^n$ be open.  Then (and likewise for the classical spaces):
+  \begin{enumerate}[label=(\roman*)]
+  \item $\Ic{m}(\Omega,Y)$ is a $\CI(\Omega)$-module, $\Ic{m-1}\subset\Ic{m}$,
+    $x_j:\Ic{m}\to\Ic{m-1}$, $D_{x_j}:\Ic{m}\to\Ic{m+1}$, and every smooth vector
+    field tangent to $Y$ maps $\Ic{m}$ to itself;
+  \item each $u\in\Ic{m}(\Omega,Y)$ is smooth in $\Omega\setminus Y$, and
+    $\bigcap_m\Ic{m}(\Omega,Y)=\CI(\Omega)$;
+  \item a full symbol of $u\in\Ic{m}_{\mathrm c}(\Omega,Y)$ is determined modulo
+    $S^{-\infty}$; and $u\in\Ic{m-1}_{\mathrm c}(\Omega,Y)$ if and only if its
+    full symbols lie in $S^{M-1}$;
+  \item if $u_j\in\Ic{m-j}_{\mathrm c}(\Omega,Y)$ have supports in a fixed
+    compact set, there is $u\in\Ic{m}_{\mathrm c}(\Omega,Y)$ with
+    $u-\sum_{j<N}u_j\in\Ic{m-N}_{\mathrm c}(\Omega,Y)$ for all $N$;
+  \item if $P=\sum_{|\alpha|\le q}p_\alpha(z)D_z^\alpha$ with
+    $p_\alpha\in\CI(\Omega)$, then $P:\Ic{m}(\Omega,Y)\to\Ic{m+q}(\Omega,Y)$ and,
+    if $u\in\Ic{m}_{\mathrm c}$ has full symbol $a$, then $Pu$ has full symbol
+    congruent to $p_q(0,y;\xi,0)a(y,\xi)$ modulo $S^{M+q-1}$, where
+    $p_q(z,\zeta)=\sum_{|\alpha|=q}p_\alpha(z)\zeta^\alpha$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  (i): for $\psi\in\CI(\Omega)$ and $u\in\Ic{m}_{\mathrm c}$,
+  $\psi u=\psi\chi u=\osc{\psi\chi c}+\psi\chi f$ with $\chi$ as above.  The rest
+  follows from \cref{conormal:lem:osc-ops}(i), since the vector fields tangent
+  to $Y$ are spanned over $\CI$ by $x_i\pa_{x_j}$ and $\pa_{y_l}$ (see
+  \cref{conormal:lem:generators} below) and $x_i\pa_{x_j}$ maps an amplitude of
+  order $M$ to $(-D_{\xi_i})(i\xi_jc+\pa_{x_j}c)$, of order $M$.
+  (ii): smoothness off $Y$ is \cref{conormal:lem:osc-ops}(iii).  If $u$ lies in
+  every $\Ic{m}$, then for each $\phi$ and $r$, $\phi u$ is the sum of a smooth
+  function and $\osc{c}$ with $c$ of order $<-k-r$, so $\phi u\in\mathcal C^r$.
+  Conversely $\CIc(\Omega)\subset\Ic{m}_{\mathrm c}$ trivially.
+  (iii): suppose $\osc{a}\in\CI(\R^n)$ with $a\in S^M_{\mathrm c}(\R^d;\R^k)$.
+  Let $\chi\in\CIc(\R^k)$ equal one near $0$.  For each $y$, $\osc{a}(\cdot,y)$
+  is the inverse Fourier transform of $a(y,\cdot)$, and it is the sum of
+  $\chi(x)\osc{a}(x,y)$, smooth with compact support, and
+  $(1-\chi(x))\osc{a}(x,y)$, which is in $\cS(\R^k)$ by
+  \cref{conormal:lem:osc-ops}(iii), both with seminorms bounded with all
+  $y$-derivatives.  Hence $a\in S^{-\infty}$.  If now $u=\osc{a}+f=\osc{b}+g$
+  then $\osc{a-b}$ is smooth, so $a-b\in S^{-\infty}$.  The second statement
+  follows: if $u\in\Ic{m-1}_{\mathrm c}$ it has a full symbol $b\in S^{M-1}$, and
+  any other full symbol differs from $b$ by an element of $S^{-\infty}$.
+  (iv): with full symbols $a_j\in S^{M-j}_{\mathrm c}$ supported in a fixed
+  compact set of $y$, take $u=\chi\osc{a}$ with $a\sim\sum a_j$ (with support in
+  the same set) and $\chi\in\CIc(\Omega)$ equal one near all the supports.
+  (v): by (i) and \cref{conormal:lem:osc-ops}(i), $D^\alpha\osc{a}=\osc{(\xi,0)^\alpha
+  a}+\osc{c'}$ with $c'$ of order $M+|\alpha|-1$ (the $y$-derivatives do not
+  raise the order), and $p_\alpha\osc{b}=\osc{p_\alpha b}$, whose reduction is
+  $p_\alpha(0,y)b$ modulo order $M'-1$ by \eqref{conormal:eq:reduction}.
+\end{proof}
+
+\begin{remark}\label{conormal:rem:point-local}
+  For $k=n$ (so $Y=\{0\}$) we recover the spaces of \cref{conormal:sec:point}:
+  $\Ic{m}_\cS(\R^n,\{0\})=\Ic{m}_{\mathrm c}(\R^n,\{0\})+\cS(\R^n)$.  Indeed if
+  $\hat u\in S^{m-\frac n4}$ then $u=\chi u+(1-\chi)u$ with $(1-\chi)u\in\cS$ by
+  \cref{conormal:lem:point-basic}(iii) and $\chi u=\osc{\chi\hat u}$.  Conversely
+  $\osc{c}$ with $c$ compactly supported in $z$ has Fourier transform
+  $\int\hat c(\zeta-\xi;\xi)\,\dbar\xi$, where $\hat c(\cdot;\xi)$ is the Fourier
+  transform of $c(\cdot,\xi)$; this is in $S^{m-\frac n4}$ by Peetre's inequality
+  $\ang{\xi}^{M}\le2^{|M|}\ang{\zeta}^M\ang{\zeta-\xi}^{|M|}$ (moving derivatives
+  onto $c$ after the substitution $\xi\mapsto\zeta-\xi$).  In particular
+  $\Ic{m}_\cS(\R^n,\{0\})$ is a $\CIb(\R^n)$-module (Schwartz functions being
+  harmlessly added), which was the content of the corresponding statement in
+  the original treatment.
+\end{remark}
+
+\begin{example}[An elliptic problem at a point]\label{conormal:ex:elliptic-point}
+  Let $P=\sum_{|\alpha|\le q}p_\alpha(z)D^\alpha$ with $p_\alpha\in\CIb(\R^n)$,
+  and suppose $P$ is \emph{elliptic at $0$}: $p_q(0,\zeta)=\sum_{|\alpha|=q}
+  p_\alpha(0)\zeta^\alpha\ne0$ for $\zeta\ne0$.  Then for every
+  $f\in\Ic{m}_\cS(\R^n,\{0\})$ there is $u\in\Ic{m-q}_\cS(\R^n,\{0\})$ with
+  $Pu-f\in\cS(\R^n)$.  Indeed, by \cref{conormal:prop:local-basic}(v) and
+  \cref{conormal:rem:point-local}, $P:\Ic{r}_\cS\to\Ic{r+q}_\cS$ and
+  $Pv-p_q(0,D)v\in\Ic{r+q-1}_\cS$ for $v\in\Ic{r}_\cS$.  Choose
+  $\chi\in\CIc(\R^n)$ equal to one near $0$ and set
+  $\hat u_0=(1-\chi)\hat f/p_q(0,\cdot)\in S^{m-q-\frac n4}$, using that
+  $(1-\chi)/p_q(0,\cdot)\in\Symph{-q}$.  Then $p_q(0,D)u_0-f\in\cS$, so
+  $Pu_0=f-f_1$ with $f_1\in\Ic{m-1}_\cS$.  Repeating with $f$ replaced by $f_1$,
+  we find $u_j\in\Ic{m-q-j}_\cS$ with $P(u_0+\dots+u_j)-f\in\Ic{m-j-1}_\cS$;
+  an asymptotic sum $u\sim\sum u_j$ (\cref{conormal:prop:local-basic}(iv)) then
+  satisfies $Pu-f\in\bigcap_j\Ic{m-j}_\cS=\cS(\R^n)$.  The same works in the
+  classical spaces.
+\end{example}
+
+\subsection{Pseudodifferential operators}
+We now let pseudodifferential operators on $\R^n$, as in \cref{ch:euclidean},
+act on conormal distributions.  For $a\in S^M_{\mathrm c}(\R^d;\R^k)$ the
+distribution $\osc{a}$ is tempered, with Fourier transform
+\begin{equation}\label{conormal:eq:FT-osc}
+  \widehat{\osc{a}}(\xi,\eta)=\tilde a(\xi,\eta)=\int e^{-iy\cdot\eta}
+  a(y,\xi)\,dy,\qquad
+  |D_\xi^\beta D_\eta^\gamma\tilde a(\xi,\eta)|\le
+  C_{N\beta\gamma}\ang{\eta}^{-N}\ang\xi^{M-|\beta|},
+\end{equation}
+the estimate following by integration by parts in $y$.
+
+\begin{proposition}\label{conormal:prop:psido-local}
+  Let $A=\Op(b)$, $b\in S^{m'}(\R^n;\R^n)$, and $u\in\Ic{m}_{\mathrm c}(\R^n,Y)$
+  with full symbol $a\in S^M_{\mathrm c}(\R^d;\R^k)$.  Then
+  $Au\in\Ic{m+m'}(\R^n,Y)$; more precisely $Au-\osc{c}\in\cS(\R^n)$ where
+  $c\in S^{M+m'}(\R^n;\R^k)$ is given by
+  \begin{equation}\label{conormal:eq:psido-amp}
+    c(x,y,\xi)=\int e^{iy\cdot\eta}b(x,y,\xi,\eta)\tilde a(\xi,\eta)\,\dbar\eta
+    \sim\sum_\gamma\frac1{\gamma!}\pa_\eta^\gamma b(x,y,\xi,0)\,D_y^\gamma
+    a(y,\xi).
+  \end{equation}
+  In particular $Au$ has full symbol (if $b$ has compact support in $z$)
+  \begin{equation}\label{conormal:eq:psido-full}
+    a'(y,\xi)\sim\sum_{\alpha,\gamma}\frac1{\alpha!\gamma!}(-D_\xi)^\alpha\pa_x^\alpha
+    \Big(\pa_\eta^\gamma b(x,y,\xi,0)D_y^\gamma a(y,\xi)\Big)\Big|_{x=0},
+  \end{equation}
+  and $a'-b(0,y,\xi,0)a\in S^{M+m'-1}$.  If $b$ and $a$ are classical, so is $c$.
+\end{proposition}
+\begin{proof}
+  Write $u=\osc{a}-g$.  Then $g$ is smooth, and outside a compact set equals
+  $\osc{a}$, which vanishes for $y$ outside the support of $a$ and is rapidly
+  decreasing in $x$ by \cref{conormal:lem:osc-ops}(iii); so $g\in\cS(\R^n)$
+  and $Ag\in\cS(\R^n)$.  By \eqref{conormal:eq:FT-osc}, $A\osc{a}(x,y)=\int
+  e^{ix\cdot\xi+iy\cdot\eta}b(x,y,\xi,\eta)\tilde a(\xi,\eta)\,\dbar\xi\,\dbar\eta$,
+  the $\eta$-integral being absolutely convergent; this is $\osc{c}$ with $c$ as in
+  \eqref{conormal:eq:psido-amp}.  To estimate $c$, note that derivatives in
+  $(x,y)$ and $\xi$ may be taken under the integral, and by Peetre's inequality
+  \begin{equation*}
+    |\pa_z^\delta\pa_\xi^{\beta}b(z,\xi,\eta)|\le
+    C\ang{(\xi,\eta)}^{m'-|\beta|}\le C'\ang\xi^{m'-|\beta|}
+    \ang{\eta}^{|m'|+|\beta|};
+  \end{equation*}
+  combined with \eqref{conormal:eq:FT-osc} (and $y$-derivatives falling on
+  $e^{iy\cdot\eta}$ producing powers of $\eta$) this gives $c\in S^{M+m'}$.  For
+  the expansion, Taylor's formula in $\eta$ gives
+  $b(z,\xi,\eta)=\sum_{|\gamma|<L}\frac{\eta^\gamma}{\gamma!}\pa_\eta^\gamma
+  b(z,\xi,0)+\sum_{|\gamma|=L}\eta^\gamma r_\gamma(z,\xi,\eta)$ with
+  \begin{equation*}
+    |\pa_z^\delta\pa_\xi^\beta r_\gamma|\le C\sup_{0\le t\le1}
+    \ang{(\xi,t\eta)}^{m'-L-|\beta|}\le C\ang\xi^{m'-L-|\beta|}
+    \ang\eta^{|m'-L|+|\beta|}.
+  \end{equation*}  Since $\int e^{iy\cdot\eta}\eta^\gamma\tilde
+  a\,\dbar\eta=D_y^\gamma a$, the terms with $|\gamma|<L$ give the expansion
+  and the remainder is of order $M+m'-L$ by the same estimate as before.
+  Finally \eqref{conormal:eq:psido-full} follows from
+  \cref{conormal:lem:reduction}.  In the classical case each term of
+  \eqref{conormal:eq:psido-amp} is classical, so the asymptotic sum is.
+\end{proof}
+
+The microlocal content of this computation is that $u$ is singular only in the
+conormal directions to $Y$.  Recall from \cref{ch:microlocal} that
+$(\bar z,\bar\zeta)\notin\WF(u)$ if and only if there is $A\in\Psido{0}(\R^n)$
+elliptic at $(\bar z,\bar\zeta)$ with $Au\in\CI$.  The conormal bundle of $Y$
+is $N^*Y=\{(0,y;\xi,0)\}\subset T^*\R^n$.
+
+\begin{proposition}\label{conormal:prop:WF-local}
+  If $u\in\Ic{m}(\Omega,Y)$ then $\WF(u)\subset N^*Y\setminus0$.  More
+  precisely, if $u\in\Ic{m}_{\mathrm c}(\Omega,Y)$ has full symbol $a$, then
+  $(0,\bar y;\bar\xi,0)\notin\WF(u)$ if and only if $a$ satisfies the estimates
+  of $S^{-\infty}$ in $U\times\Gamma$, for some neighbourhood $U$ of $\bar y$ and
+  open cone $\Gamma\ni\bar\xi$.
+\end{proposition}
+\begin{proof}
+  We may assume $u\in\Ic{m}_{\mathrm c}$.  Over $\Omega\setminus Y$, $u$ is
+  smooth.  Let $\bar z=(0,\bar y)$ and $\bar\zeta=(\bar\xi,\bar\eta)$ with
+  $\bar\eta\ne0$.  Choose $\delta>0$ with $|\bar\eta|>2\delta|\bar\xi|$, and
+  $b=\phi(z)\psi(\zeta)$ with $\phi\in\CIc$, $\phi(\bar z)\ne0$,
+  $\psi\in\Symph{0}(\R^n)$ homogeneous of degree $0$ in $|\zeta|\ge1$, equal to
+  one near $\bar\zeta/|\bar\zeta|$ there, and supported in
+  $\{|\eta|\ge\delta|\xi|,\ |\zeta|\ge\frac12\}$.  On the support of $\psi$,
+  $\ang\eta\ge c\ang\xi$, so by \eqref{conormal:eq:FT-osc} the amplitude $c$ of
+  \eqref{conormal:eq:psido-amp} satisfies
+  $|c|\le C_N\int_{\ang\eta\ge c\ang\xi}\ang\eta^{-N}\ang\xi^{M}\,d\eta\le
+  C'_N\ang\xi^{M-N+d}$ for all $N$, and similarly for derivatives; thus $c\in
+  S^{-\infty}$ and $\Op(b)u\in\CI$.  Hence $\WF(u)\subset N^*Y$.
+
+  For the refined statement let $\bar\zeta=(\bar\xi,0)$.  If $a$ is of order
+  $-\infty$ in $U\times\Gamma$, take $b=\phi(z)\psi(\xi,\eta)$ as before but
+  with $\phi$ supported in $\R^k\times U'$, $U'\Subset U$, and $\psi$ supported in
+  a small conic neighbourhood of $(\bar\xi,0)$, so that $(y,\xi)\in U'\times\Gamma$
+  on the support of $\phi(x,y)\psi(\xi,0)$ for $|\xi|\ge1$.  Each term in
+  \eqref{conormal:eq:psido-full} then vanishes to infinite order (the terms involve
+  $a$ only at points of $U'\times\Gamma$), so $Au\in\CI$ and $A$ is elliptic at
+  $(\bar z,\bar\zeta)$.  Conversely, if $(\bar z,\bar\zeta)\notin\WF(u)$, choose
+  $B=\Op(b)$ as just described with $b=1$ on a conic neighbourhood of
+  $(\bar z,\bar\zeta)$ and $\WFp(B)\cap\WF(u)=\emptyset$; then $Bu\in\CI$ by
+  \cref{ch:microlocal}, so its full symbol \eqref{conormal:eq:psido-full} is in
+  $S^{-\infty}$, and near $(\bar y,\bar\xi)$ all terms with
+  $(\alpha,\gamma)\neq0$ vanish because $b$ is constant there, leaving
+  $a\in S^{-\infty}$ near $(\bar y,\bar\xi)$.
+\end{proof}
+
+\section{Invariance}\label{conormal:sec:invariance}
+
+We now show that the spaces $\Ic{m}_{\mathrm c}(\Omega,Y)$ are invariant under
+diffeomorphisms preserving $Y$, and compute the effect on the full symbol
+modulo lower order terms.  Let $F:\Omega'\to\Omega$ be a diffeomorphism between
+open subsets of $\R^n$ with $F(\Omega'\cap Y)=\Omega\cap Y$.  Write
+$F(x,y)=(F'(x,y),F''(x,y))$; then $F'(0,y)=0$, so $\pa_yF'(0,y)=0$, and
+\begin{equation}\label{conormal:eq:F-data}
+  g(y)=F''(0,y),\qquad A(y)=\pa_xF'(0,y)\in\GL(k,\R)
+\end{equation}
+define a diffeomorphism $g$ of $\Omega'\cap Y$ onto $\Omega\cap Y$ and the
+linear maps $A(y)$ induced by $F_*$ on the normal spaces.
+
+\begin{lemma}\label{conormal:lem:fibre-linear}
+  Let $V\subset\R^d$ be open, let $g$ be a diffeomorphism of $V$ onto $g(V)$
+  and let $A\in\CI(V;\GL(k,\R))$.  Set $F_0(x,y)=(A(y)x,g(y))$, a diffeomorphism
+  of $\R^k\times V$ onto $\R^k\times g(V)$.  If $a\in S^M_{\mathrm c}(\R^d;\R^k)$ has
+  support in $g(V)\times\R^k$ then
+  \begin{equation*}
+    F_0^*\osc{a}=\osc{a_{F}},\qquad
+    a_{F}(y,\eta)=|\det A(y)|^{-1}a\big(g(y),A(y)^{-t}\eta\big)
+    \in S^M_{\mathrm c}(\R^d;\R^k),
+  \end{equation*}
+  where $A^{-t}=(A^t)^{-1}$; $a_F$ is classical if $a$ is.
+\end{lemma}
+\begin{proof}
+  For fixed $y$ this is the linear change of variables
+  $\xi=A(y)^{-t}\eta$ in $\int e^{iA(y)x\cdot\xi}a(g(y),\xi)\,\dbar\xi$.  That
+  $a_F$ is a symbol follows from the invariance of symbol estimates under
+  smooth families of linear maps, the support of $a_F$ in $y$ being compact.
+\end{proof}
+
+\begin{lemma}\label{conormal:lem:tangent-lower}
+  A vector field of the form
+  \begin{equation}\label{conormal:eq:V-form}
+    V=\sum_{i,j,l}x_ix_j\alpha_{ijl}(z)\pa_{x_l}+\sum_{i,l}x_i\beta_{il}(z)\pa_{y_l},
+    \qquad\alpha_{ijl},\beta_{il}\in\CI(\Omega),
+  \end{equation}
+  maps $\Ic{m}(\Omega,Y)$ to $\Ic{m-1}(\Omega,Y)$.
+\end{lemma}
+\begin{proof}
+  By \cref{conormal:prop:local-basic}(i), $x_ix_j\pa_{x_l}$ maps $\Ic{m}$ into
+  $\Ic{m+1-2}$ and $x_i\pa_{y_l}$ maps $\Ic{m}$ into $\Ic{m-1}$, and the
+  coefficients are harmless.
+\end{proof}
+
+We also need conormal distributions depending smoothly on a parameter
+$s\in[0,1]$.  A \emph{smooth family} $u(s)\in\Ic{m}_{\mathrm c}(\Omega,Y)$ is
+one of the form $u(s)=\osc{c(s)}+f(s)$ with $c\in S^M(\R_s\times\R^n;\R^k)$
+and $f\in\CI(\R\times\R^n)$, the supports of $u(s)$ lying in a fixed compact
+subset of $\Omega$; that is, $u$ is an element of $\Ic{m}_{\mathrm c}$ on
+$\R_s\times\R^n$ with respect to $\R_s\times Y$, restricted to $[0,1]$.  By
+\cref{conormal:prop:local-basic} applied in $n+1$ variables, $\pa_su(s)$ and
+$\int_s^1u(s')\,ds'$ are smooth families of order $m$, $V_su(s)$ is a smooth
+family of order $m-1$ if $V_s$ is of the form \eqref{conormal:eq:V-form} with
+coefficients smooth in $s$, and families of orders $m-j$ have asymptotic sums.
+
+\begin{proposition}\label{conormal:prop:moser}
+  Let $H$ be a diffeomorphism from a neighbourhood $O$ of $\bar z=(0,\bar y)$
+  onto its image such that $H(0,y)=(0,y)$ and $\pa_xH'(0,y)=\Id$ for
+  $(0,y)\in O$.  Then there is a neighbourhood $O'$ of $\bar z$ such that
+  $H^*u-u\in\Ic{m-1}_{\mathrm c}(\R^n,Y)$ for all
+  $u\in\Ic{m}_{\mathrm c}(\R^n,Y)$ with support in $O'$; similarly in the
+  classical case.
+\end{proposition}
+\begin{proof}
+  Set $H_s(z)=z+s(H(z)-z)$, $s\in[0,1]$, so $H_0=\Id$, $H_1=H$ and
+  $H_s(0,y)=(0,y)$.  At points of $Y$, $dH_s=\begin{psmallmatrix}\Id&0\\
+  sB&\Id\end{psmallmatrix}$ with $B=\pa_xH''(0,y)$, which is invertible.  By the
+  inverse function theorem, applied uniformly for $s$ in the compact set
+  $[0,1]$, there is a ball $O_1\ni\bar z$ such that each $H_s$ is a
+  diffeomorphism of $O_1$ onto its image, and a smaller ball $O'$ contained in
+  $H_s(O_1)$ for all $s$.  For $w\in O'$ let
+  \begin{equation*}
+    V_s(w)=(H-\Id)\big(H_s^{-1}(w)\big),
+  \end{equation*}
+  a vector field depending smoothly on $s$.  For smooth $v$ the chain rule gives
+  \begin{equation}\label{conormal:eq:chain}
+    \frac{d}{ds}H_s^*v=H_s^*(V_sv),
+  \end{equation}
+  and the same holds for a smooth family of distributions $v(s)$ in the form
+  $\frac d{ds}H_s^*v(s)=H_s^*(\pa_sv+V_sv)$: pairing with a test function
+  $\phi$, $\pair{H_s^*v(s)}\phi=\pair{v(s)}{\phi_s}$ with
+  $\phi_s=|\det dH_s^{-1}|\,(H_s^{-1})^*\phi$ smooth in $s$, and the identity
+  $\pair{w}{\pa_s\phi_s}=\pair{H_s^*(V_sw)}{\phi}$, valid for smooth $w$ by
+  \eqref{conormal:eq:chain}, extends to distributions by density.
+
+  Since $H'(x,y)-x=O(|x|^2)$, $H''(x,y)-y=O(|x|)$ and the $x$-component of
+  $H_s^{-1}(w)$ vanishes on $Y$ (so is a combination $\sum x_i(\dots)$), $V_s$
+  is of the form \eqref{conormal:eq:V-form} with coefficients smooth in $s$.
+
+  Now let $u\in\Ic{m}_{\mathrm c}$ have support in $O'$.  We construct a smooth
+  family $u(s)$, with supports in a fixed compact subset of $O'$, such that
+  \begin{equation}\label{conormal:eq:moser}
+    u(1)=u,\qquad \pa_su(s)+V_su(s)=r(s)\in\CIc([0,1]\times O'),\qquad
+    u(0)-u\in\Ic{m-1}_{\mathrm c}.
+  \end{equation}
+  Set $u_0(s)=u$ and $f_1(s)=V_su\in\Ic{m-1}$.  Inductively, given smooth
+  families $u_0,\dots,u_N$ with $u_j$ of order $m-j$, $u_j(1)=0$ for $j\ge1$,
+  and $\pa_s(u_0+\dots+u_N)+V_s(u_0+\dots+u_N)=f_{N+1}$ of order $m-N-1$, put
+  $u_{N+1}(s)=\int_s^1f_{N+1}(s')\,ds'$.  Then $u_{N+1}$ has order $m-N-1$,
+  vanishes at $s=1$, and the new error is $f_{N+2}=V_su_{N+1}$, of order
+  $m-N-2$.  Let $\tilde u(s)\sim\sum_ju_j(s)$ be an asymptotic sum, multiplied by a
+  cut-off equal to one near the supports.  Then $\pa_s\tilde u+V_s\tilde u$ is a
+  smooth family of every order, hence a smooth function of $(s,z)$, and
+  $\tilde u(1)-u=\tilde u(1)-\sum_{j<N}u_j(1)$ has order $m-N$ for every $N$, so
+  is smooth.  Thus $u(s)=\tilde u(s)-(\tilde u(1)-u)$ satisfies
+  \eqref{conormal:eq:moser}; note that $u(0)-u\equiv\sum_{j\ge1}u_j(0)$ modulo
+  $\CI$ has order $m-1$.
+  Then
+  \begin{equation*}
+    H^*u=H_1^*u(1)=H_0^*u(0)+\int_0^1\frac{d}{ds}H_s^*u(s)\,ds
+    =u(0)+\int_0^1H_s^*r(s)\,ds,
+  \end{equation*}
+  and the last integral is smooth.  Hence
+  $H^*u-u=(u(0)-u)+\CI\subset\Ic{m-1}_{\mathrm c}$.
+\end{proof}
+
+\begin{theorem}\label{conormal:thm:invariance}
+  Let $F:\Omega'\to\Omega$ be a diffeomorphism of open subsets of $\R^n$ with
+  $F(\Omega'\cap Y)=\Omega\cap Y$, and $g$, $A$ as in \eqref{conormal:eq:F-data}.
+  Then $F^*:\Ic{m}_{\mathrm c}(\Omega,Y)\to\Ic{m}_{\mathrm c}(\Omega',Y)$, and if
+  $u\in\Ic{m}_{\mathrm c}(\Omega,Y)$ has full symbol $a$, then $F^*u$ has full
+  symbol congruent modulo $S^{M-1}$ to
+  \begin{equation}\label{conormal:eq:symbol-transform}
+    |\det A(y)|^{-1}a\big(g(y),A(y)^{-t}\eta\big).
+  \end{equation}
+  The same holds for the classical spaces.
+\end{theorem}
+\begin{proof}
+  Using a partition of unity and the module property we may assume that $u$ has
+  support in a small neighbourhood of $F(\bar z)$, $\bar z\in Y\cap\Omega'$ (away
+  from $Y$, $u$ and $F^*u$ are smooth).  Let $F_0(x,y)=(A(y)x,g(y))$, a
+  diffeomorphism of $\R^k\times(Y\cap\Omega')$ onto $\R^k\times(Y\cap\Omega)$
+  (identifying $Y$ with $\R^d$), and $H=F_0^{-1}\circ F$, defined near $\bar z$.
+  Then $H(0,y)=(0,y)$ and $\pa_xH'(0,y)=A(y)^{-1}\pa_xF'(0,y)=\Id$, so
+  \cref{conormal:prop:moser} applies to $H$.  With $u=\osc{a}+f$ we have, by
+  \cref{conormal:lem:fibre-linear}, $F_0^*u=\osc{a_F}+F_0^*f$ (after cutting
+  off), and $F^*u=H^*(F_0^*u)\in F_0^*u+\Ic{m-1}_{\mathrm c}$.
+\end{proof}
+
+\section{Conormality at the zero section of a vector bundle}\label{conormal:sec:bundle}
+
+Let $\pi:W\to Y$ be a real vector bundle of rank $k$ over a manifold $Y$ of
+dimension $d$, so $W$ has dimension $n=d+k$, and let $0_W\subset W$ be the zero
+section and $W'$ the dual bundle.  The linear invariance of the radial
+compactification allows it to be performed fibrewise: $\RC W$ is a manifold with
+boundary, fibred over $Y$ with fibres $\RC{W_y}$ (formally, the bundle associated
+to the frame bundle of $W$ with fibre $\RC{\R^k}$), and $\rho^{-M}\CI(\RC W)$
+is well defined.  Symbols with bounds $S^M(W)$ on a bundle over a compact base,
+or with compact support in the base, are defined via local trivializations, by
+the linear invariance of the estimates.
+
+Let $\Omega_{\mathrm{fib}}=\Omega_{\mathrm{fib}}(W')$ be the line bundle over
+$W'$ whose fibre at $\zeta\in W'_y$ is $\Omega(W'_y)$, the densities on the fibre.
+The fibrewise version of \eqref{conormal:eq:invariant-FT} is an isomorphism
+\begin{equation*}
+  \Ffib:\cS(W)\longrightarrow\cS(W';\Omega_{\mathrm{fib}}),
+\end{equation*}
+defined for (fibrewise) Schwartz functions; in a local trivialization
+$W|_U\cong U\times\R^k$ it is the partial Fourier transform in the fibre
+variables followed by multiplication by $|d\xi|$, and it does not depend on the
+trivialization.  Its inverse is defined on symbols as an oscillatory integral.
+
+\begin{definition}\label{conormal:def:bundle}
+  For $Y$ compact, $\Ic{m}(W,0_W)$ is the space of distributions $u=\Ffib^{-1}b+f$
+  with $b\in S^{M}(W';\Omega_{\mathrm{fib}})$ (that is, $b=\beta|d\xi|$ with
+  $\beta\in S^M$ in local trivializations), $M=m+\frac n4-\frac k2$, and
+  $f\in\CI(W)$; similarly $\Ic{m}_{\mathrm{ph}}(W,0_W)$ with $b$ classical.
+\end{definition}
+
+In a local trivialization, with fibre coordinates $x$ and base coordinates $y$,
+$\Ffib^{-1}(\beta|d\xi|)=\osc{\beta}$, so $\Ic{m}(W,0_W)$ consists of the
+distributions which are smooth outside $0_W$ and lie in the spaces of
+\cref{conormal:def:local} in every such local trivialization.  Changes of
+trivialization are of the fibre-linear form of \cref{conormal:lem:fibre-linear}
+(with $g$ a change of coordinates on $Y$), under which $\beta|d\xi|$ transforms
+as a fibre density, so we obtain a well-defined symbol map with values in
+$S^M(W';\Omega_{\mathrm{fib}})/S^{M-1}(W';\Omega_{\mathrm{fib}})$, and, by
+\cref{conormal:prop:local-basic}(iii) and the surjectivity of the inverse
+Fourier transform, a short exact sequence
+\begin{equation}\label{conormal:eq:bundle-exact}
+  \Ic{m-1}(W,0_W)\hookrightarrow\Ic{m}(W,0_W)\xrightarrow{\ \sigma_m\ }
+  S^{M}(W';\Omega_{\mathrm{fib}})/S^{M-1}(W';\Omega_{\mathrm{fib}}),
+\end{equation}
+and in the classical case the corresponding sequence onto the smooth fibre
+densities on $W'\setminus0$ homogeneous of degree $M+k$.  For a product
+$W=Y\times\R^k$ the definition says that $\Ic{m}(Y\times\R^k,Y\times\{0\})$
+consists of smooth functions of $y\in Y$ with values in
+$\Ic{m-\frac d4}(\R^k,\{0\})$ (up to smooth terms), the topology of
+$\CI(Y;\rho^{-M}\CI(\RC{\R^k}))=\rho^{-M}\CI(Y\times\RC{\R^k})$ making precise
+what it means for a conormal distribution to depend smoothly on parameters.
+
+Bundle isomorphisms, possibly covering a diffeomorphism of the base, act on
+$\Ic{m}(W,0_W)$ by \cref{conormal:lem:fibre-linear}.  For the extension to
+submanifolds, the essential point is invariance under diffeomorphisms which do
+not preserve the linear structure.  If $h$ is a diffeomorphism between
+neighbourhoods of $0_W$ which maps $0_W$ to itself, then at each point of $0_W$
+the differential $h_*$ preserves $T0_W$ and so induces a map on
+$T_yW/T_y0_W=W_y$.
+
+\begin{lemma}\label{conormal:lem:factor}
+  Any diffeomorphism $h$ of a neighbourhood of $0_W$ onto a neighbourhood of
+  $0_W$ with $h(0_W)=0_W$ factorizes, near $0_W$, as $h=h_0\circ h_1$ where $h_0$
+  is a bundle isomorphism (covering $h|_{0_W}$) and $h_1$ is the identity on
+  $0_W$ with $(h_1)_*=\Id$ on $W_y=T_yW/T_y0_W$ for all $y$.
+\end{lemma}
+\begin{proof}
+  Take $h_0$ to be the bundle map induced by $h$ on the normal spaces, i.e.\
+  $h_0(w)=h_*(w)$ for $w\in W_y=N_y0_W$, covering $h|_{0_W}$; then
+  $h_1=h_0^{-1}\circ h$ has the stated properties.  In local trivializations this
+  is the factorization $F=F_0\circ H$ used in the proof of
+  \cref{conormal:thm:invariance}.
+\end{proof}
+
+\begin{proposition}\label{conormal:prop:bundle-invariance}
+  Let $Y$ be compact and $h:N\to N'$ a diffeomorphism between open
+  neighbourhoods of $0_W$ which is the identity on $0_W$ and induces the
+  identity on $W_y$ for all $y\in Y$.  If $u\in\Ic{m}(W,0_W)$ has support in $N'$
+  then $h^*u-u\in\Ic{m-1}(W,0_W)$; in particular $\sigma_m(h^*u)=\sigma_m(u)$.
+  Combined with \cref{conormal:lem:factor}, every diffeomorphism $h$ between
+  neighbourhoods of $0_W$ mapping $0_W$ to itself acts on conormal distributions
+  supported in its range, with $\sigma_m(h^*u)=h_0^*\sigma_m(u)$.
+\end{proposition}
+\begin{proof}
+  Cover $Y$ by finitely many open sets over which $W$ is trivial, take a
+  partition of unity $\phi_j$ of a neighbourhood of $0_W$ subordinate to their
+  preimages and apply \cref{conormal:prop:moser} (in the form of the proof of
+  \cref{conormal:thm:invariance}) to each $\phi_ju$, noting that $u-\sum\phi_ju$
+  is smooth.
+\end{proof}
+
+\section{Conormal distributions on manifolds}\label{conormal:sec:manifold}
+
+\subsection{Preliminaries}
+Manifolds are discussed systematically in \cref{ch:manifolds}; here we need
+only a few notions.  Let $X$ be a smooth manifold of dimension $n$.  The
+density bundles $\Omega^t(X)$, $t\in\R$, are the line bundles with fibres
+$\Omega^t(T_pX)$; in local coordinates their sections are $v|dz|^t$, and under a
+change of coordinates $z=F(z')$, $v|dz|^t$ pulls back to $(v\circ
+F)|\det F'|^t|dz'|^t$.  Smooth compactly supported densities can be integrated,
+and $\CmI(X;\Omegah)$ is the dual of $\CIc(X;\Omegah)$, the pairing of two
+half-densities being a density; locally an element of $\CmI(X;\Omegah)$ is
+$v|dz|^{1/2}$ with $v$ a distribution in coordinates, transforming as above.
+A smooth vector field $V$ acts on half-densities by the Lie derivative: in
+coordinates, with $V=\sum v_j\pa_{z_j}$,
+\begin{equation}\label{conormal:eq:Lie}
+  \mathcal L_V(\phi|dz|^{t})=\big(V\phi+t(\textstyle\sum_j\pa_{z_j}v_j)\phi\big)|dz|^{t}.
+\end{equation}
+
+Let $Y\subset X$ be a closed embedded submanifold of codimension $k$.  An
+\emph{adapted chart} is a chart $\psi:U\to\psi(U)\subset\R^n=\R^k_x\times\R^d_y$
+with $\psi(U\cap Y)=\psi(U)\cap\{x=0\}$; such charts cover $Y$.  The
+\emph{normal bundle} $NY$ has fibres $N_yY=T_yX/T_yY$, and the \emph{conormal
+bundle} $N^*Y\subset T^*X$, with fibres $N_y^*Y=\{\zeta\in T^*_yX;\
+\zeta(T_yY)=0\}$, is its dual.  In an adapted chart,
+$N^*Y=\{(0,y;\xi,0)\}$, and $(y,\xi)$ are coordinates on $N^*Y$.  If
+$F:\Omega'\to\Omega$ is a change of adapted charts as in
+\cref{conormal:sec:invariance}, the pull-back
+$F^*(\xi\cdot dx)=(A(y)^t\xi)\cdot dx'$ at $(0,y)$, since $\pa_yF'(0,y)=0$; so
+the induced identification of conormal bundles is
+\begin{equation}\label{conormal:eq:Fsharp}
+  F^\sharp:N^*Y\ni(y,\eta)\longmapsto\big(g(y),A(y)^{-t}\eta\big)\in N^*Y,
+\end{equation}
+(primed coordinates on the left, unprimed on the right) which is linear on the
+fibres.
+
+\begin{definition}\label{conormal:def:manifold}
+  The space $\Ic{m}(X,Y;\Omegah)$ consists of those $u\in\CmI(X;\Omegah)$ which
+  are smooth on $X\setminus Y$ and such that for every adapted chart
+  $\psi:U\to\psi(U)$ and every $\phi\in\CIc(U)$,
+  $(\psi^{-1})^*(\phi u)=v|dz|^{1/2}$ with $v\in\Ic{m}_{\mathrm c}(\psi(U),\{x=0\})$.
+  The classical subspace $\Ic{m}_{\mathrm{ph}}(X,Y;\Omegah)$ is defined in the
+  same way.  For a vector bundle $E$ over $X$, $\Ic{m}(X,Y;E\otimes\Omegah)$ is
+  defined by requiring the coefficients in local trivializations to be in
+  $\Ic{m}(X,Y;\Omegah)$; similarly with $\Omegah$ omitted.
+\end{definition}
+
+By \cref{conormal:thm:invariance} (the factor $|\det F'|^{1/2}$ being smooth)
+it suffices to check the condition for a family of adapted charts covering $Y$,
+and the definition agrees with \cref{conormal:def:local} for $X=\R^n$ and with
+\cref{conormal:def:bundle} for the zero section of a vector bundle; it is
+independent of the choice of transition functions for $E$ by the module
+property.
+
+\subsection{Normal fibrations}
+Alternatively, $\Ic{m}(X,Y)$ can be defined by transferring
+\cref{conormal:def:bundle} from the normal bundle to $X$.
+
+\begin{theorem}[Tubular neighbourhood theorem]\label{conormal:thm:tubular}
+  If $Y\subset X$ is a closed embedded submanifold, there are an open
+  neighbourhood $D$ of $Y$ in $X$, an open neighbourhood $D'$ of the zero section
+  of $NY$, and a diffeomorphism $f:D\to D'$ (a \emph{normal fibration}) such
+  that $f|_Y$ is the natural identification of $Y$ with $0_{NY}$ and, for each
+  $y\in Y$, the map induced by $f_*$ from $N_yY=T_yX/T_yY$ to
+  $T_y(NY)/T_y0_{NY}=N_yY$ is the identity.  If $f_1,f_2$ are two normal
+  fibrations then $f_2\circ f_1^{-1}$ is a diffeomorphism between neighbourhoods
+  of $0_{NY}$ satisfying the hypotheses of
+  \cref{conormal:prop:bundle-invariance}.
+\end{theorem}
+\begin{proof}[Sketch of proof]
+  Choose a Riemannian metric on $X$; it identifies $N_yY$ with the orthogonal
+  complement of $T_yY$ in $T_yX$.  The exponential map $NY\ni(y,v)\mapsto\exp_y(v)$
+  is smooth, is the identity on the zero section and has differential the
+  identity at points of the zero section (with respect to the splitting
+  $T_y(NY)=T_yY\oplus N_yY$), so it is a local diffeomorphism near $0_{NY}$; a
+  standard argument (using that it is injective on $0_{NY}$ and $Y$ is closed)
+  shows it is a diffeomorphism of a neighbourhood $D'$ of $0_{NY}$ onto a
+  neighbourhood $D$ of $Y$, and $f$ is its inverse.  The last statement is
+  immediate from the definition.
+\end{proof}
+
+\begin{proposition}\label{conormal:prop:fibration-def}
+  Let $f:D\to D'$ be a normal fibration and $Y$ compact.  Then $u\in\CmI(X)$
+  lies in $\Ic{m}(X,Y)$ if and only if $u$ is smooth outside $Y$ and, for some
+  (hence any) $\phi\in\CIc(D)$ equal to one near $Y$, $(f^{-1})^*(\phi u)\in
+  \Ic{m}(NY,0_{NY})$.
+\end{proposition}
+\begin{proof}
+  Local trivializations of $NY$ composed with $f$ are adapted charts for $Y$, and
+  local trivializations of $NY$ are adapted charts for $0_{NY}$, so both
+  conditions amount to the condition of \cref{conormal:def:manifold} in a
+  particular covering family of adapted charts.  Independence of $f$ also
+  follows from \cref{conormal:prop:bundle-invariance} and
+  \cref{conormal:thm:tubular}.
+\end{proof}
+
+\subsection{The principal symbol}
+For $r\in\R$ let $S^r(N^*Y;\Omegah)$ be the space of smooth half-densities on
+$N^*Y$ which in each adapted chart are of the form $\beta(y,\xi)|dy\,d\xi|^{1/2}$
+with $\phi\beta\in S^{r-\frac k2}(\R^d;\R^k)$ for all $\phi\in\CIc$ of the chart.
+This is invariant under the fibre-linear maps \eqref{conormal:eq:Fsharp}, so is
+well defined; the shift by $k/2$ reflects the fact that $|d\xi|^{1/2}$ is
+homogeneous of degree $k/2$ under fibre dilations, so that the order $r$ is the
+total homogeneity.  Write
+$S^{r-[1]}(N^*Y;\Omegah)=S^r(N^*Y;\Omegah)/S^{r-1}(N^*Y;\Omegah)$.  In the
+classical case the principal parts are smooth half-densities on
+$N^*Y\setminus0$ homogeneous of degree $r$; we denote this space
+$\CI_{(r)}(N^*Y\setminus0;\Omegah)$.
+
+\begin{theorem}\label{conormal:thm:symbol}
+  There is a unique map
+  \begin{equation*}
+    \sigma_m:\Ic{m}(X,Y;\Omegah)\longrightarrow S^{m+\frac n4-[1]}(N^*Y;\Omegah)
+  \end{equation*}
+  such that if $u=(\osc{a}+f)|dx\,dy|^{1/2}$ in an adapted chart then
+  $\sigma_m(u)=a(y,\xi)|dy\,d\xi|^{1/2}$ there.  It gives a short exact sequence
+  \begin{equation}\label{conormal:eq:exact}
+    0\longrightarrow\Ic{m-1}(X,Y;\Omegah)\longrightarrow\Ic{m}(X,Y;\Omegah)
+    \xrightarrow{\ \sigma_m\ }S^{m+\frac n4-[1]}(N^*Y;\Omegah)\longrightarrow0,
+  \end{equation}
+  and, in the classical case, a short exact sequence
+  \begin{equation*}
+    0\to\Ic{m-1}_{\mathrm{ph}}(X,Y;\Omegah)\to\Ic{m}_{\mathrm{ph}}(X,Y;\Omegah)
+    \xrightarrow{\sigma_m}\CI_{(m+\frac n4)}(N^*Y\setminus0;\Omegah)\to0.
+  \end{equation*}
+  Moreover $\sigma_m(\psi u)=(\psi|_Y)\sigma_m(u)$ for $\psi\in\CI(X)$, where
+  $\psi|_Y$ is lifted to $N^*Y$.
+\end{theorem}
+\begin{proof}
+  We must check that the local definition is consistent.  Let $F$ be a change of
+  adapted coordinates.  If $u=v|dz|^{1/2}$ then $F^*u=(F^*v)|\det
+  F'|^{1/2}|dz'|^{1/2}$.  At $x=0$, $F'$ is block triangular with diagonal
+  blocks $A(y)$ and $g'(y)$, so $|\det F'(0,y)|^{1/2}=|\det A|^{1/2}|\det
+  g'|^{1/2}$; by \cref{conormal:thm:invariance} and the multiplication rule in
+  \cref{conormal:prop:local-basic}(v), the full symbol of $F^*u$ is congruent
+  modulo $S^{M-1}$ to
+  \begin{equation*}
+    |\det A(y)|^{-\frac12}|\det g'(y)|^{\frac12}a\big(g(y),A(y)^{-t}\eta\big).
+  \end{equation*}
+  On the other hand the Jacobian determinant of $F^\sharp$ in
+  \eqref{conormal:eq:Fsharp} is $\det g'(y)\det A(y)^{-1}$, so
+  $(F^\sharp)^*(a|dy\,d\xi|^{1/2})$ is exactly this function times
+  $|dy\,d\eta|^{1/2}$.  Hence $\sigma_m$ is well defined, with
+  $\sigma_m(F^*u)=(F^\sharp)^*\sigma_m(u)$; the classical case is the same.
+  The multiplicative property holds because $\psi(x,y)-\psi(0,y)=\sum_jx_j\psi_j$
+  and $x_j$ lowers the order.  Exactness in the middle is local and is
+  \cref{conormal:prop:local-basic}(iii); injectivity is trivial.  For
+  surjectivity, given $b\in S^{m+\frac n4}(N^*Y;\Omegah)$, cover $Y$ by adapted
+  charts $U_j$ (a locally finite cover) with a partition of unity $\phi_j$ on $Y$,
+  write $\phi_jb=\beta_j|dy\,d\xi|^{1/2}$ and let
+  $u=\sum_j\chi_j\osc{\beta_j}|dz|^{1/2}$, with $\chi_j\in\CIc(U_j)$ equal to one
+  near $\supp\phi_j\times\{0\}$; then $\sigma_m(u)=\sum_j\phi_jb=b$.
+\end{proof}
+
+\subsection{Properties}
+We collect the main properties of the spaces $\Ic{m}(X,Y;\Omegah)$; all hold
+equally for the classical spaces.
+
+\begin{theorem}\label{conormal:thm:properties}
+  Let $Y\subset X$ be a closed embedded submanifold of codimension $k$, $\dim
+  X=n$.
+  \begin{enumerate}[label=(\roman*)]
+  \item Elements of $\Ic{m}(X,Y;\Omegah)$ are smooth outside $Y$,
+    $\Ic{m-1}\subset\Ic{m}$ and $\bigcap_m\Ic{m}(X,Y;\Omegah)=\CI(X;\Omegah)$.
+  \item \emph{(Asymptotic completeness)} If $u_j\in\Ic{m-j}(X,Y;\Omegah)$, there
+    exists $u\in\Ic{m}(X,Y;\Omegah)$ with $u-\sum_{j<N}u_j\in\Ic{m-N}$ for all $N$.
+  \item \emph{(Invariance)} If $F:X'\to X$ is a diffeomorphism and
+    $Y'=F^{-1}(Y)$, then $F^*:\Ic{m}(X,Y;\Omegah)\to\Ic{m}(X',Y';\Omegah)$ and
+    $\sigma_m(F^*u)=(F^\sharp)^*\sigma_m(u)$, where $F^\sharp:N^*Y'\to N^*Y$ is the
+    inverse of the restriction of $F^*:T^*X\to T^*X'$.  The same holds for
+    diffeomorphisms between open subsets, for distributions supported in the
+    range.
+  \item \emph{(Differential operators)} If $P\in\Diff{q}(X;\Omegah)$ then
+    $P:\Ic{m}(X,Y;\Omegah)\to\Ic{m+q}(X,Y;\Omegah)$ and
+    $\sigma_{m+q}(Pu)=\sigma_q(P)|_{N^*Y}\,\sigma_m(u)$, where $\sigma_q(P)$ is the
+    principal symbol, characterized by $P(e^{itf}v)=e^{itf}(t^q\sigma_q(P)(df)v
+    +O(t^{q-1}))$ as $t\to\infty$ for real $f\in\CI(X)$ and
+    $v\in\CIc(X;\Omegah)$.
+  \item \emph{(Wavefront set)} $\WF(u)\subset N^*Y\setminus0$ for
+    $u\in\Ic{m}(X,Y;\Omegah)$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  All statements are local and invariant, so follow from the local results:
+  (i) from \cref{conormal:prop:local-basic}(ii); (ii) from
+  \cref{conormal:prop:local-basic}(iv) and a partition of unity; (iii) from
+  \cref{conormal:thm:invariance,conormal:thm:symbol}; (iv) from
+  \cref{conormal:prop:local-basic}(v), since in coordinates
+  $\sigma_q(P)(z,\zeta)=p_q(z,\zeta)$ (the half-density factor and the lower order
+  terms only contribute terms of order $q-1$); (v) from
+  \cref{conormal:prop:WF-local}.
+\end{proof}
+
+\begin{remark}\label{conormal:rem:scalar}
+  If one works with functions rather than half-densities, the computation in the
+  proof of \cref{conormal:thm:symbol} shows that the full symbol transforms by
+  \eqref{conormal:eq:symbol-transform}, i.e.\ $a|d\xi|$ transforms as a fibre
+  density on $N^*Y$: the principal symbol of $u\in\Ic{m}(X,Y)$ is then a
+  section of $\Omega_{\mathrm{fib}}(N^*Y)$ with coefficient of order $M$, as in
+  \eqref{conormal:eq:bundle-exact}.  Half-densities make the symbol a
+  half-density on the symplectic manifold $N^*Y$, which is the form used in
+  \cref{ch:hj}.
+\end{remark}
+
+\section{Iterated regularity}\label{conormal:sec:iterated}
+
+We now show that conormal distributions are characterized by a regularity
+property which is manifestly invariant and does not involve the Fourier
+transform.  Let $\Vt(X,Y)$ denote the space of smooth vector fields on $X$
+tangent to $Y$; it is a Lie algebra and a $\CI(X)$-module.
+
+\begin{lemma}\label{conormal:lem:generators}
+  In the local model, $\Vt(\Omega,Y)$ is spanned over $\CI(\Omega)$ by the
+  vector fields $x_i\pa_{x_j}$, $1\le i,j\le k$, and $\pa_{y_l}$, $1\le l\le d$.
+\end{lemma}
+\begin{proof}
+  A vector field $V=\sum_ja_j\pa_{x_j}+\sum_lb_l\pa_{y_l}$ is tangent to
+  $\{x=0\}$ if and only if $a_j(0,y)=0$ for all $j$, that is, $a_j=\sum_i
+  x_ia_{ij}$ with $a_{ij}\in\CI$ (Taylor's formula with integral remainder in $x$,
+  valid in a neighbourhood of each point of $Y$; away from $Y$ use
+  $\pa_{x_j}=\sum_i(x_i/|x|^2)x_i\pa_{x_j}$ and a partition of unity).
+\end{proof}
+
+\begin{definition}\label{conormal:def:IH}
+  For $s\in\R$ let
+  \begin{equation*}
+    \IH{s}(X,Y;\Omegah)=\{u\in H^s_{\mathrm{loc}}(X;\Omegah);\
+    \mathcal L_{V_1}\cdots\mathcal L_{V_j}u\in H^s_{\mathrm{loc}}(X;\Omegah)\
+    \forall\ j,\ V_i\in\Vt(X,Y)\},
+  \end{equation*}
+  and $\Ic{*}(X,Y;\Omegah)=\bigcup_s\IH{s}(X,Y;\Omegah)$.
+\end{definition}
+Here $H^s_{\mathrm{loc}}$ is defined via coordinates and is invariant under
+diffeomorphisms (\cref{ch:microlocal}); the zeroth order terms in
+\eqref{conormal:eq:Lie} are irrelevant since $H^s_{\mathrm{loc}}$ is a
+$\CI$-module, so in coordinates we may replace $\mathcal L_V$ by $V$ acting on
+coefficients.  Thus $\IH{s}$ is manifestly invariant under diffeomorphisms
+preserving $Y$, and $\bigcap_s\IH{s}(X,Y;\Omegah)=\CI(X;\Omegah)$ by Sobolev
+embedding.
+
+\begin{lemma}\label{conormal:lem:IH-local}
+  Let $u\in H^s(\R^n)$ have compact support.  Then $u\in\IH{s}(\R^n,Y)$ if and
+  only if
+  \begin{equation}\label{conormal:eq:IH-local}
+    x^\alpha D_x^\beta D_y^\gamma u\in H^s(\R^n)\quad\text{for all }
+    \alpha,\beta,\gamma\text{ with }|\beta|\le|\alpha|,
+  \end{equation}
+  or equivalently if and only if $D_x^\beta D_y^\gamma x^\alpha u\in H^s$ for
+  all $|\beta|\le|\alpha|$.
+\end{lemma}
+\begin{proof}
+  If $V_i\in\Vt$, then by \cref{conormal:lem:generators}, moving coefficients to
+  the left using $[W,\psi]=W\psi$, $V_1\cdots V_ju$ is a combination with smooth
+  coefficients of products of at most $j$ of the generators $x_i\pa_{x_j}$,
+  $\pa_{y_l}$ applied to $u$; and such products are linear combinations with
+  constant coefficients of $x^\alpha D_x^\beta D_y^\gamma$ with $|\alpha|=|\beta|$.
+  Conversely, by induction on $|\alpha|$, $x^\alpha D_x^\beta$ with
+  $|\alpha|=|\beta|$ is a combination of products of the $x_iD_{x_j}$, since
+  $x_iD_{x_j}x^{\alpha'}D_x^{\beta'}=x_ix^{\alpha'}D_{x_j}D_x^{\beta'}+
+  x_i(D_{x_j}x^{\alpha'})D_x^{\beta'}$ and the last term is shorter.  The cases
+  $|\beta|<|\alpha|$ follow by multiplying by $\chi x^{\alpha''}$, with
+  $\chi\in\CIc$ equal to one on $\supp u$; and $D^\beta x^\alpha$ is a
+  combination of $x^{\alpha-\delta}D^{\beta-\delta}$, which preserves the
+  condition $|\beta|\le|\alpha|$.
+\end{proof}
+
+The key analytic step converts weighted $L^2$ bounds on all derivatives into
+symbol estimates.
+
+\begin{lemma}\label{conormal:lem:L2-sup}
+  Let $t\in\R$, $j\in\N_0$, $L>j+\frac k2$, and let $b\in\CI(\R^k)$ satisfy
+  $\ang\xi^{t+|\alpha|}D^\alpha b\in L^2(\R^k)$ for $|\alpha|\le L$.  Then
+  \begin{equation*}
+    |D^\beta b(\xi)|\le C\ang\xi^{-t-\frac k2-|\beta|},\quad |\beta|\le j,
+    \qquad C=C_{k,j,t,L}\sum_{|\alpha|\le L}\norm{\ang\xi^{t+|\alpha|}D^\alpha b}_{L^2}.
+  \end{equation*}
+  Conversely, if $b\in S^\mu(\R^k)$ then $\ang\xi^{t+|\alpha|}D^\alpha b\in L^2$
+  for all $\alpha$ provided $t<-\mu-\frac k2$.
+\end{lemma}
+\begin{proof}
+  The converse is immediate since $\ang\xi^{t+\mu}\in L^2$ if $2(t+\mu)<-k$.
+  For the direct statement, let $A=\{\frac12<|\zeta|<2\}$ and $\chi\in\CIc(A)$
+  equal to one on $|\zeta|=1$.  For $R\ge1$ set $b_R(\zeta)=b(R\zeta)$.  On
+  $RA$ we have $R/2\le\ang\xi\le3R$, so
+  \begin{equation*}
+    \norm{D^\alpha b_R}^2_{L^2(A)}=R^{2|\alpha|-k}\int_{RA}|D^\alpha b|^2d\xi
+    \le CR^{2|\alpha|-k}R^{-2(t+|\alpha|)}\norm{\ang\xi^{t+|\alpha|}D^\alpha b}^2_{L^2}.
+  \end{equation*}
+  Hence $\norm{\chi b_R}_{H^L}\le CR^{-t-\frac k2}$, and by Sobolev's embedding
+  $|D^\beta b_R(\zeta)|\le CR^{-t-\frac k2}$ for $|\zeta|=1$, $|\beta|\le j$.
+  Given $|\xi|\ge1$ take $R=|\xi|$, $\zeta=\xi/|\xi|$: then $D^\beta b(\xi)=
+  R^{-|\beta|}(D^\beta b_R)(\zeta)$, which gives the estimate.  For $|\xi|\le1$
+  apply Sobolev's embedding to $\chi_0b$ with $\chi_0\in\CIc$ equal to one on the
+  unit ball.
+\end{proof}
+
+\begin{theorem}\label{conormal:thm:IH}
+  In the local model, for compactly supported distributions,
+  \begin{equation}\label{conormal:eq:IH-incl}
+    \Ic{m}_{\mathrm c}(\R^n,Y)\subset\IH{s}(\R^n,Y)\ \text{ if } s<-m-\frac n4,
+    \qquad
+    \IH{s}(\R^n,Y)\cap\CmIc(\R^n)\subset\Ic{-s-\frac n4}_{\mathrm c}(\R^n,Y).
+  \end{equation}
+  Consequently, for any closed embedded submanifold $Y\subset X$,
+  \begin{equation*}
+    \IH{s}(X,Y;\Omegah)\subset\Ic{-s-\frac n4}(X,Y;\Omegah)\subset
+    \IH{s'}(X,Y;\Omegah)\quad\forall\ s'<s,
+  \end{equation*}
+  so $\Ic{*}(X,Y;\Omegah)=\bigcup_m\Ic{m}(X,Y;\Omegah)$.
+\end{theorem}
+\begin{proof}
+  First inclusion.  Let $u=\osc{c}+f$ with $c\in S^M$ compactly supported in
+  $(x,y)$ and $f\in\CIc$.  By \cref{conormal:lem:osc-ops}(i), each
+  $x^\alpha D_x^\beta D_y^\gamma$ with $|\alpha|=|\beta|$ maps $\osc{c}$ to some
+  $\osc{c'}$ with $c'$ of order $M$ and compact support, so by
+  \cref{conormal:lem:IH-local} it suffices to show $\osc{c}\in H^s$.  Let
+  $\hat c(\zeta',\eta;\xi)$ be the Fourier transform of $c(\cdot,\cdot,\xi)$ in
+  $(x,y)$; since $c$ has compact support in $(x,y)$,
+  $|\hat c(\zeta',\eta;\xi)|\le C_N\ang{\zeta'}^{-N}\ang{\eta}^{-N}\ang\xi^{M}$.
+  Then (first for $M<-k$, by Fubini, then in general by
+  \cref{conormal:lem:density})
+  \begin{align*}
+    \widehat{\osc{c}}(\zeta,\eta)&=\int\hat c(\zeta-\xi,\eta;\xi)\,\dbar\xi,\\
+    |\widehat{\osc{c}}(\zeta,\eta)|&\le C_N\ang\eta^{-N}\int
+    \ang{\zeta-\xi}^{-N}\ang\xi^M\,d\xi\le C'_N\ang\eta^{-N}\ang\zeta^M
+  \end{align*}
+  by Peetre's inequality, for $N>k+|M|$.  Since
+  $\ang{(\zeta,\eta)}^{s}\le\ang\zeta^s\ang\eta^{|s|}$,
+  $\ang{(\zeta,\eta)}^s\widehat{\osc{c}}\in L^2$ provided $2(s+M)<-k$, i.e.\
+  $s<-M-\frac k2=-m-\frac n4$.
+
+  Second inclusion.  Let $u\in\IH{s}$ have compact support, so $\hat u$ is smooth.
+  By \cref{conormal:lem:IH-local} and $\cF(x^\alpha u)=(-D_\zeta)^\alpha\hat u$,
+  $\zeta^\beta\eta^\gamma D_\zeta^\alpha\hat u\in\ang{(\zeta,\eta)}^{-s}L^2$ for
+  $|\beta|\le|\alpha|$ and all $\gamma$.  Since $\ang\zeta^{|\alpha|}\le
+  C\sum_{|\beta|\le|\alpha|}|\zeta^\beta|$, similarly for $\ang\eta^N$, and
+  $\ang{(\zeta,\eta)}^{s}\ge c\ang\zeta^{s}\ang\eta^{-|s|}$, we get
+  \begin{equation}\label{conormal:eq:weighted}
+    \ang\zeta^{s+|\alpha|}\ang\eta^{N}D_\zeta^\alpha\hat u(\zeta,\eta)\in
+    L^2(\R^n)\quad\forall\ \alpha,N.
+  \end{equation}
+  Let $a(y,\zeta)=\int e^{iy\cdot\eta}\hat u(\zeta,\eta)\,\dbar\eta$ be the
+  partial Fourier transform of $u$ in $x$; it is smooth, has compact support in
+  $y$, and $u=\osc{a}$.  By Minkowski's and the Cauchy--Schwarz inequalities, for
+  $N>|\gamma|+\frac d2$,
+  \begin{equation*}
+    \norm{\ang\zeta^{s+|\alpha|}D_\zeta^\alpha D_y^\gamma a(y,\cdot)}_{L^2}\le
+    \int|\eta|^{|\gamma|}\norm{\ang\zeta^{s+|\alpha|}D_\zeta^\alpha
+    \hat u(\cdot,\eta)}_{L^2}\dbar\eta
+    \le C\norm{\ang\eta^N\ang\zeta^{s+|\alpha|}D_\zeta^\alpha\hat u}_{L^2(\R^n)},
+  \end{equation*}
+  uniformly in $y$.  Applying \cref{conormal:lem:L2-sup} with $t=s$ to
+  $D_y^\gamma a(y,\cdot)$ gives $|D_\zeta^\beta D_y^\gamma a|\le
+  C\ang\zeta^{-s-\frac k2-|\beta|}$, so $a\in S^{-s-\frac k2}_{\mathrm c}$, which
+  by \eqref{conormal:eq:order} means $u\in\Ic{-s-\frac n4}_{\mathrm c}$.
+
+  The global statement follows by localization in adapted charts, using the
+  invariance of $\IH{s}$ and of $\Ic{m}$.  Note that the middle space in the
+  global chain is $\Ic{-s-\frac n4}$, and $\Ic{-s-\frac n4}\subset\IH{s'}$ for
+  $s'<s$ by the first inclusion.
+\end{proof}
+
+\begin{remark}
+  \Cref{conormal:thm:IH} gives a second proof that $\Ic{*}(X,Y)$ is invariant
+  under diffeomorphisms, and that the order is invariant up to an arbitrarily
+  small loss; the sharp invariance of the order and of the principal symbol
+  requires \cref{conormal:thm:invariance}.  For $Y=\{0\}$ the theorem is the
+  statement that $D_\zeta^\alpha\hat u\in\ang\zeta^{-s-|\alpha|}L^2$ for all
+  $\alpha$ implies $\hat u\in S^{-s-\frac n2}$, and conversely
+  $S^{\mu}\subset\ang\zeta^{-s-|\alpha|}L^2$-type spaces for $s<-\mu-\frac n2$.
+\end{remark}
+
+\section{Examples}\label{conormal:sec:examples}
+
+\begin{example}[Delta sections]\label{conormal:ex:delta}
+  In the local model, $\delta(x)=\delta(x_1)\cdots\delta(x_k)=\osc{1}$, the full
+  symbol being $1\in S^0$; so $\delta(x)\in\Ic{m}_{\mathrm{ph}}(\R^n,Y)$ with
+  $M=0$, i.e.\ $m=\frac k2-\frac n4=\frac14(\operatorname{codim}Y-\dim Y)$.
+  Invariantly: the restriction to $Y$ of the density bundle of $X$ splits as
+  $\Omega_YX=\Omega Y\otimes\Omega(NY)$, where $\Omega(NY)$ is the bundle of
+  densities on the fibres of the normal bundle.  If $0<\mu\in\CI(Y;\Omega(NY))$
+  is a positive normal density, then
+  \begin{equation*}
+    u_\mu:\CIc(X;\Omega X)\ni\nu\longmapsto\int_Y\nu|_Y/\mu
+  \end{equation*}
+  is a well-defined distribution, and in adapted coordinates in which
+  $\mu=\mu(y)|dx|$ it is $\mu(y)^{-1}\delta(x)$.  So $u_\mu\in
+  \Ic{\frac14(k-d)}_{\mathrm{ph}}(X,Y)$ with full symbol $\mu(y)^{-1}$; with the
+  normalization of \cref{conormal:rem:scalar}, its principal symbol is the fibre
+  density on $N^*Y$ dual to $\mu$, up to the factor $(2\pi)^{-k}$.
+\end{example}
+
+\begin{example}[Poincar\'e dual forms]\label{conormal:ex:poincare}
+  Conormal sections of vector bundles are defined in
+  \cref{conormal:def:manifold}.  Let $X$ be a compact oriented manifold of
+  dimension $n$ and $Y\subset X$ a closed embedded oriented submanifold of
+  dimension $d$.  Near any point of $Y$ choose oriented coordinates in which
+  $Y=\{z_{d+1}=\dots=z_n=0\}$ and $(z_1,\dots,z_d)$ are oriented coordinates on $Y$,
+  and set
+  \begin{equation*}
+    p_Y=\delta(z_{d+1})\cdots\delta(z_n)\,dz_{d+1}\wedge\dots\wedge dz_n\in
+    \Ic{\frac14(n-2d)}_{\mathrm{ph}}(X,Y;\Lambda^{n-d}).
+  \end{equation*}
+  This is independent of the choices, because it is characterized by
+  \begin{equation*}
+    \int_X\phi\wedge p_Y=\int_Y\phi\qquad\forall\ \phi\in\CI(X;\Lambda^d),
+  \end{equation*}
+  as one checks in the given coordinates ($\phi\wedge p_Y$ only involves the
+  coefficient of $dz_1\wedge\dots\wedge dz_d$ in $\phi$).  It follows that
+  $dp_Y=0$ in the distributional sense: for $\psi\in\CI(X;\Lambda^{d-1})$,
+  $\int_X\psi\wedge dp_Y=\pm\int_Xd\psi\wedge p_Y=\pm\int_Yd\psi=0$ by Stokes'
+  theorem.  The distributional de Rham cohomology, defined by the complex
+  $d:\CmI(X;\Lambda^j)\to\CmI(X;\Lambda^{j+1})$, is canonically isomorphic to the
+  smooth de Rham cohomology (this follows, for instance, from the Hodge theorem),
+  and the class of $p_Y$ in $H^{n-d}_{\mathrm{dR}}(X)$ is, by the displayed
+  identity, the Poincar\'e dual of $Y$.
+\end{example}
+
+\section{Exercises}\label{conormal:sec:exercises}
+
+\begin{exercise}\label{conormal:ex:Vkl}
+  Show by induction that $a\in S^0(\R^n)$ if and only if $a\in\CI(\R^n)$ and
+  $V_1\cdots V_Na\in L^\infty(\R^n)$ for all $N$ and all choices of
+  $V_j\in\{\xi_k\pa_{\xi_l}\}$ (including $N=0$).  (Hint: in $|\xi|\ge1$,
+  $\pa_{\xi_l}=\sum_k\xi_k|\xi|^{-2}\,\xi_k\pa_{\xi_l}$.)
+\end{exercise}
+
+\begin{exercise}\label{conormal:ex:Ab}
+  For a compact manifold with boundary $X$ let $\mathcal V_{\mathrm b}(X)$ be the
+  Lie algebra of smooth vector fields tangent to $\pa X$ and
+  \begin{equation*}
+    \mathcal A(X)=\{a\in\CI(X\setminus\pa X)\cap L^\infty;\ V_1\cdots V_Na\in
+    L^\infty\ \forall\ N,\ V_i\in\mathcal V_{\mathrm b}(X)\}.
+  \end{equation*}
+  Using that the linear vector fields $\xi_k\pa_{\xi_l}$ span
+  $\mathcal V_{\mathrm b}(\RC{\R^n})$ near the boundary, show that
+  $S^m(\R^n)=\rho^{-m}\mathcal A(\RC{\R^n})$.
+\end{exercise}
+
+\begin{exercise}\label{conormal:ex:blowup}
+  Let $W$ be a real vector space of dimension $n$.  Define the sphere of $W$ as
+  $\Sphere W=(W\setminus0)/\R^+$.  Show that $[W,\{0\}]=(W\setminus0)\sqcup\Sphere W$
+  has a unique structure of manifold with boundary, diffeomorphic to
+  $[0,\infty)\times\Sphere^{n-1}$, such that the blow-down map $\beta:[W,\{0\}]\to
+  W$ (the identity on $W\setminus0$, mapping $\Sphere W$ to $0$) is smooth and the
+  action of $\GL(W)$ lifts to a smooth action (use \cref{conormal:lem:blowup}).
+\end{exercise}
+
+\begin{exercise}
+  Let $U$ be a finite-dimensional complex vector space and set
+  $\Ic{m}(W,\{0\};U)=\Ic{m}(W,\{0\})\otimes U$.  Show that the Fourier transform
+  gives an isomorphism $\Ic{m}(W,\{0\};U)\to S^{m-\frac n4}(W';U\otimes\Omega W')$
+  (with $n=\dim W$), that $\Omega U'\otimes\Omega U$ is canonically trivial for a
+  real vector space $U$, and that the integral of
+  \cref{conormal:lem:point-basic}(iv) defines a linearly invariant map
+  $\Ic{m}(W,\{0\};\Omega W)\to\C$.
+\end{exercise}
+
+\begin{exercise}
+  Let $u\in\CmI(\R^n)$ be smooth outside $0$ and homogeneous modulo $\CI$ of
+  degree $h$: $u(tz)=t^hu(z)+F(t,z)$ for $t>0$, $z\ne0$, with
+  $F\in\CI((0,\infty)\times\R^n)$.  Show that $\chi u$ is a classical conormal
+  distribution at $0$ for $\chi\in\CIc(\R^n)$, and determine its order.
+\end{exercise}
+
+\begin{exercise}
+  Show that every $u\in\Ic{m}(X,Y)$ with $\supp u\subset Y$ is of the form $Pu_\mu$
+  for some $P\in\Diff{q}(X)$, with $u_\mu$ as in \cref{conormal:ex:delta}, at
+  least locally.  Which orders $m$ can occur?
+\end{exercise}
+
+\begin{exercise}
+  Let $u\in\Ic{m}(X,Y;\Omegah)$ be classical, with principal symbol nonvanishing
+  on $N^*Y\setminus0$.  Show that $\WF(u)=N^*Y\setminus0$, and that if
+  $A\in\Psido{0}(\R^n)$ satisfies $Au\in\CI$ then the principal symbol of $A$
+  vanishes on $N^*Y$ (locally).
+\end{exercise}
+
+\section*{Notes}
+This chapter merges the treatment of conormal distributions in the 1998 lecture
+notes (where they are introduced through iterated regularity) with that of the
+2005 lectures (where they are defined by Fourier transform of classical symbols,
+first at a point, then at the zero section of a vector bundle, then at a
+submanifold via a normal fibration).  The opening argument of the earlier notes,
+relating iterated regularity to symbol estimates, has been completed
+(\cref{conormal:lem:L2-sup,conormal:thm:IH}), and the invariance under
+diffeomorphisms is proved by Moser's homotopy method in the sharp form
+$H^*u-u\in\Ic{m-1}$, which yields the invariance of the principal symbol without
+the loss $\epsilon$ inherent in the Sobolev approach.  We use H\"ormander's
+normalization of the order, for which $\delta_0\in\Ic{n/4}(\R^n,\{0\})$ and the
+kernels of pseudodifferential operators of order $m$ have order $m$; some
+formulas for the order in the 2005 lectures contain sign slips which have been
+corrected.  The standard reference is \cite[Section~18.2]{Hormander-III}; see also
+\cite{Hormander-FIO} for the more general Lagrangian distributions, of which
+conormal distributions are the special case associated to the Lagrangian
+submanifold $N^*Y$.

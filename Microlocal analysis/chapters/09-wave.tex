@@ -1,0 +1,1074 @@
+\chapter{The wave equation and Weyl asymptotics}\label{ch:wave}
+\providecommand{\vol}{\operatorname{vol}}
+\providecommand{\inj}{\operatorname{inj}}
+\providecommand{\Lset}{\mathcal{L}}
+
+In this chapter the theory of conormal distributions (\cref{ch:conormal}) and
+the Hamilton--Jacobi and transport equations (\cref{ch:hj}) are applied to
+the wave operator $P=D_t^2-\Delta$ on $\R\times X$, where $X$ is a compact
+Riemannian manifold. We first solve the Cauchy problem and construct the
+forward fundamental solution, with energy estimates and finite speed of
+propagation. Then we construct, for short times, a parametrix for the wave
+kernel as a superposition of conormal distributions associated with
+characteristic hypersurfaces (equivalently, as an oscillatory integral whose
+phase solves the eikonal equation). Restricting this parametrix to the diagonal
+and integrating gives the singularity at $t=0$ of the trace of the wave group,
+$T(t)=\sum_j\cos(t\lambda_j)$; a Tauberian argument then yields Weyl's
+asymptotic formula for the eigenvalues of $\Delta$ with remainder
+$O(\lambda^{n-1})$. Finally we explain how the propagation of singularities
+leads to the Poisson relation: the singularities of $T$ lie at $0$ and at the
+lengths of closed geodesics.
+
+\section{Setup}\label{wave:sec:setup}
+
+\subsection{The Laplacian on a compact manifold}
+
+Throughout, $X$ is a compact $\CI$ manifold without boundary, of dimension
+$n\ge1$, with a Riemannian metric $g$. In local coordinates
+$g=\sum g_{ij}(x)\,dx^idx^j$, $(g^{ij})=(g_{ij})^{-1}$, $|g|=\det(g_{ij})$, the
+Riemannian measure is $\dvol=|g|^{1/2}dx$ and the (non-negative) Laplacian is
+\begin{equation*}
+\Delta u=-|g|^{-1/2}\sum_{i,j=1}^n\pa_i\big(|g|^{1/2}g^{ij}\pa_ju\big),\qquad
+\int_X\Delta u\,\bar v\dvol=\int_X\ang{du,dv}_g\dvol .
+\end{equation*}
+For a covector we write $|\xi|_{g(x)}=(\sum g^{ij}(x)\xi_i\xi_j)^{1/2}$ and set
+$q(x,\xi)=|\xi|_{g(x)}$. We use $\dvol$ to identify densities with functions:
+$\CmI(X)$ is the dual of $\CI(X)$ under $\pair{u}{v}=\int_Xuv\dvol$, and the
+Schwartz kernel $K_A$ of an operator $A$ is taken with respect to $\dvol$,
+$Au(x)=\int_XK_A(x,y)u(y)\dvol(y)$. In particular $K_{\Id}=|g(y)|^{-1/2}\delta(x-y)$
+in local coordinates.
+
+We use the following consequences of the elliptic theory on compact manifolds
+(\cref{ch:manifolds}; see also \cite{Shubin}).
+\begin{enumerate}[label=(F\arabic*)]
+\item\label{wave:F1} There is an orthonormal basis $\{\phi_j\}_{j\ge0}$ of
+  $L^2(X)$ of real eigenfunctions $\phi_j\in\CI(X)$, $\Delta\phi_j=\lambda_j^2\phi_j$,
+  with $0=\lambda_0\le\lambda_1\le\lambda_2\le\dots\to\infty$ (repeated with
+  multiplicity).
+\item\label{wave:F2} For $s\in\R$, writing $u_j=\pair{u}{\phi_j}$ and
+  $\ang{\lambda}=(1+\lambda^2)^{1/2}$,
+  \begin{equation*}
+  \Hs{s}(X)=\Big\{u\in\CmI(X);\ \norm{u}_s^2=\sum_j\ang{\lambda_j}^{2s}|u_j|^2<\infty\Big\}
+  \end{equation*}
+  with a norm equivalent to the usual one. Thus $\CI(X)=\bigcap_s\Hs{s}(X)$,
+  $\CmI(X)=\bigcup_s\Hs{s}(X)$, every $u\in\CmI(X)$ is the sum of its expansion
+  $\sum_ju_j\phi_j$ (in some $\Hs{s}$), and for $u\in\CI(X)$ the expansion
+  converges in $\CI(X)$. For $s>n/2+k$ there is the Sobolev embedding
+  $\norm{u}_{\mathcal C^k}\le C\norm{u}_s$.
+\end{enumerate}
+For a bounded Borel function $F$ on $[0,\infty)$ we set
+$F(\Lambda)u=\sum_jF(\lambda_j)u_j\phi_j$; here $\Lambda=\Delta^{1/2}$. Such an
+operator is bounded on every $\Hs{s}(X)$ with norm $\le\sup|F|$. We shall use
+$\cos(t\Lambda)$ and $\Lambda^{-1}\sin(t\Lambda)$, the latter defined by the
+function $\lambda\mapsto\sin(t\lambda)/\lambda$ (equal to $t$ at $\lambda=0$).
+The counting function is
+\begin{equation*}
+N(\lambda)=\#\{j;\ \lambda_j\le\lambda\}
+=\text{number of eigenvalues of $\Delta$ in $[0,\lambda^2]$, with multiplicity.}
+\end{equation*}
+
+\begin{lemma}\label{wave:lem:apriori}
+For every $s>n/2$ there is $C_s$ with
+$\sum_j\ang{\lambda_j}^{-2s}|\phi_j(x)|^2\le C_s^2$ for all $x\in X$; hence
+$\sum_j\ang{\lambda_j}^{-2s}\le C_s^2\vol(X)$ and
+$N(\lambda)\le C_s^2\vol(X)\ang{\lambda}^{2s}$.
+\end{lemma}
+\begin{proof}
+By the Sobolev embedding, $u\mapsto u(x)$ is a continuous linear functional on
+$\Hs{s}(X)$ of norm at most $C_s$, uniformly in $x$. In the spectral description
+\ref{wave:F2}, $u(x)=\sum_ju_j\phi_j(x)$, and the norm of this functional is
+exactly $(\sum_j\ang{\lambda_j}^{-2s}|\phi_j(x)|^2)^{1/2}$. Integrating over $X$
+gives the second statement, and $N(\lambda)\ang{\lambda}^{-2s}\le\sum_{\lambda_j\le\lambda}\ang{\lambda_j}^{-2s}$
+gives the third.
+\end{proof}
+
+In particular $\sum_j\ang{\lambda_j}^{-M}<\infty$ for $M>n$, and the sup norms
+of $\phi_j$ and their derivatives grow at most polynomially in $\lambda_j$.
+
+\subsection{The wave operator and its bicharacteristics}
+
+The wave operator is $P=D_t^2-\Delta$ on $\R\times X$, $D_t=-i\pa_t$. In the
+canonical coordinates $(t,x,\tau,\xi)$ of $T^*(\R\times X)=T^*\R\times T^*X$
+its principal symbol is
+\begin{equation*}
+p(t,x,\tau,\xi)=\tau^2-|\xi|^2_{g(x)},
+\end{equation*}
+and the characteristic set is $\Sigma(P)=\Char(P)=\{p=0\}\setminus0$. On
+$\Sigma(P)$ we have $\tau=\pm|\xi|_g$ with $\tau\ne0$, $\xi\ne0$, so
+$d_{(\tau,\xi)}p=(2\tau,-2g^{-1}\xi)\ne0$: $P$ is of real principal type and
+$\Sigma(P)$ is a smooth conic hypersurface. We use the Hamilton vector field
+$\Ham{f}=\sum_j(\pa_{\xi_j}f\,\pa_{x_j}-\pa_{x_j}f\,\pa_{\xi_j})$ (with the
+corresponding $\tau,t$ terms on $T^*(\R\times X)$); a \emph{null bicharacteristic}
+of $P$ is an integral curve of $\Ham{p}$ in $\Sigma(P)$. Let
+\begin{equation*}
+G_s=\exp(s\Ham{q})\colon T^*X\setminus0\to T^*X\setminus0,\qquad q=|\xi|_g,
+\end{equation*}
+be the (homogeneous) geodesic flow. It is complete since $X$ is compact,
+commutes with dilations in $\xi$ and preserves $q$, and the projection to $X$ of
+$s\mapsto G_s(x,\xi)$ is the unit speed geodesic with initial velocity
+$g^{-1}\xi/|\xi|_g$: indeed $\Ham{q}=q^{-1}\Ham{q^2/2}$ on $T^*X\setminus0$,
+and Hamilton's equations for $\frac12q^2$ are the geodesic equations
+($\dot x=g^{-1}\xi$ is the Legendre transform).
+
+\begin{lemma}\label{wave:lem:bichar}
+Along a null bicharacteristic, $\tau$ is constant and $t$ is strictly monotone.
+Parametrised by $t$, the null bicharacteristic through $(\bar t,\bar x,\tau,\bar\xi)$ with
+$\tau=\mp|\bar\xi|_g$ is
+\begin{equation*}
+t\longmapsto\big(t,G_{\pm(t-\bar t)}(\bar x,\bar\xi),\tau\big),\qquad t\in\R .
+\end{equation*}
+In particular its projection to $X$ is a unit speed geodesic.
+\end{lemma}
+\begin{proof}
+$\Ham{p}=2\tau\pa_t-\Ham{q^2}=2\tau\pa_t-2q\Ham{q}$, so $\dot\tau=0$, $\dot t=2\tau\ne0$
+and $d(x,\xi)/dt=-(q/\tau)\Ham{q}=\pm\Ham{q}$ when $\tau=\mp q$.
+\end{proof}
+
+\subsection{Conormal distributions and oscillatory integrals}
+
+We recall from \cref{ch:conormal} the local description of conormal
+distributions associated with a hypersurface, which is all we need. Let $M$ be
+a manifold of dimension $N$ and $H\subset M$ a closed embedded hypersurface.
+Then $u\in\Ic{m}(M,H)$ if $u\in\CmI(M)$ is smooth on $M\setminus H$ and near
+each point of $H$, in local coordinates $(s,z)\in\R\times\R^{N-1}$ with
+$H=\{s=0\}$,
+\begin{equation}\label{wave:eq:conormal-local}
+u=\frac1{2\pi}\int_\R e^{is\rho}a(z,\rho)\,d\rho+\CI,\qquad
+a\in\Sym{m+\frac N4-\frac12}(\R^{N-1}_z;\R_\rho).
+\end{equation}
+(We work with functions rather than half-densities; in fixed coordinates the
+two differ by a smooth non-vanishing factor.) The class of $a$ modulo symbols
+of one order lower is the local form of the principal symbol. Any defining
+function $h$ of $H$ (with $dh\ne0$ on $H$) may be used in place of $s$, since it
+can be taken as a coordinate; and amplitudes $a(s,z,\rho)$ depending also on $s$
+give elements of the same space (\cref{ch:conormal}; a special case is proved
+in \cref{wave:lem:fourier-amplitude} below). For $M=\R$, $H=\{0\}$: a compactly
+supported $u\in\CmI(\R)$ lies in $\Ic{m}(\R,\{0\})$ iff $\hat u\in\Sym{m-\frac14}(\R)$.
+We always have $\WF(u)\subset N^*H$.
+
+A hypersurface $H=\{h=0\}$ is \emph{characteristic} for $P$ if
+$N^*H\subset\Sigma(P)$, i.e.\ $p(dh)=0$ on $H$; for $P$ this is the eikonal
+equation $(\pa_th)^2=|d_xh|_g^2$. Characteristic hypersurfaces are obtained by
+Hamilton--Jacobi theory, and the symbols of conormal solutions of $Pu\in\CI$
+satisfy transport equations along $\Ham{p}$ (\cref{ch:hj}). For $P$ we carry
+this out explicitly in \cref{wave:sec:parametrix}.
+
+Finally we use standard facts about oscillatory integrals
+\cite[Sections~8.1, 8.2]{Hormander-I}. Let $\Omega\subset\R^d$ be open and
+$\Phi\in\CI(\Omega\times(\R^N\setminus0))$ real, homogeneous of degree one in
+$\theta$, with $d_{z,\theta}\Phi\ne0$, and let $a\in\Sym{\mu}(\Omega;\R^N)$
+vanish near $\theta=0$. Then
+$I(z)=\int e^{i\Phi(z,\theta)}a(z,\theta)\,d\theta$, defined as
+$\lim_{\eps\downarrow0}\int e^{i\Phi}a(z,\theta)\chi_0(\eps\theta)\,d\theta$ for any
+$\chi_0\in\CIc(\R^N)$ with $\chi_0(0)=1$, is a distribution on $\Omega$, and
+\begin{equation}\label{wave:eq:WF-osc}
+\WF(I)\subset\{(z,d_z\Phi(z,\theta));\ d_\theta\Phi(z,\theta)=0,\ \theta\in\operatorname{cone\,supp}a\}.
+\end{equation}
+In particular $I\in\CI$ if $a\in\Sym{-\infty}$, or near points where
+$d_\theta\Phi\ne0$ on the support of $a$. If some of the variables $z$ are
+parameters $t$ and $d_{z',\theta}\Phi\ne0$ in the remaining variables, $I$ is a
+smooth function of $t$ with values in distributions.
+
+\section{The Cauchy problem}\label{wave:sec:cauchy}
+
+\begin{theorem}\label{wave:thm:cauchy}
+Let $s\in\R$, let $I\subset\R$ be an open interval containing $0$, and let
+$u_0\in\Hs{s}(X)$, $u_1\in\Hs{s-1}(X)$, $f\in\Cz(I;\Hs{s-1}(X))$. There is a
+unique $u\in\Cz(I;\Hs{s})\cap\mathcal C^1(I;\Hs{s-1})$ with
+\begin{equation}\label{wave:eq:cauchy}
+Pu=f\ \text{ in }I\times X,\qquad u(0)=u_0,\qquad D_tu(0)=u_1,
+\end{equation}
+namely
+\begin{equation}\label{wave:eq:duhamel}
+u(t)=\cos(t\Lambda)u_0+i\Lambda^{-1}\sin(t\Lambda)u_1-\int_0^t\Lambda^{-1}\sin((t-r)\Lambda)f(r)\,dr .
+\end{equation}
+It satisfies, for $t\in I$, the energy estimate
+\begin{equation}\label{wave:eq:energy}
+\norm{u(t)}_s+\norm{D_tu(t)}_{s-1}\le 4(1+|t|)\Big(\norm{u_0}_s+\norm{u_1}_{s-1}
++\Big|\int_0^t\norm{f(r)}_{s-1}dr\Big|\Big),
+\end{equation}
+and if $f=0$ the energy $\norm{\pa_tu(t)}^2_{L^2}+\norm{du(t)}^2_{L^2}$ is
+independent of $t$ (for $s\ge1$). Uniqueness holds in the larger class
+$\mathcal C^2(I;\Hs{-M}(X))$, any $M$. If $u_0,u_1\in\CI(X)$ and
+$f\in\CI(I\times X)$ then $u\in\CI(I\times X)$.
+\end{theorem}
+\begin{proof}
+Expanding in eigenfunctions, $u$ solves \eqref{wave:eq:cauchy} iff its
+coefficients $u_j(t)=\pair{u(t)}{\phi_j}$ solve
+$u_j''+\lambda_j^2u_j=-f_j$, $u_j(0)=u_{0,j}$, $u_j'(0)=iu_{1,j}$ (recall
+$D_t^2=-\pa_t^2$ and $\pair{\Delta u}{\phi_j}=\lambda_j^2u_j$), whose unique
+solution is the $j$-th coefficient of \eqref{wave:eq:duhamel}. This proves
+uniqueness in $\mathcal C^2(I;\Hs{-M})$: if the data vanish, every $u_j$
+vanishes, hence $u=0$ by \ref{wave:F2}. For the estimate use
+$|\sin(t\lambda)/\lambda|\le\min(|t|,\lambda^{-1})\le2(1+|t|)\ang{\lambda}^{-1}$:
+\begin{align*}
+\ang{\lambda_j}^s|u_j(t)|&\le\ang{\lambda_j}^s|u_{0,j}|+2(1+|t|)\Big(\ang{\lambda_j}^{s-1}|u_{1,j}|
++\Big|\int_0^t\ang{\lambda_j}^{s-1}|f_j(r)|\,dr\Big|\Big),\\
+\ang{\lambda_j}^{s-1}|D_tu_j(t)|&\le\ang{\lambda_j}^s|u_{0,j}|+\ang{\lambda_j}^{s-1}|u_{1,j}|
++\Big|\int_0^t\ang{\lambda_j}^{s-1}|f_j(r)|\,dr\Big|,
+\end{align*}
+the second because $D_tu_j=i\lambda_j\sin(t\lambda_j)u_{0,j}+\cos(t\lambda_j)u_{1,j}
++i\int_0^t\cos((t-r)\lambda_j)f_j(r)\,dr$. Taking $\ell^2$ norms in $j$ (and
+Minkowski's inequality for the integral) gives \eqref{wave:eq:energy}; the same
+bounds and dominated convergence show that \eqref{wave:eq:duhamel} lies in
+$\Cz(I;\Hs{s})\cap\mathcal C^1(I;\Hs{s-1})$. If $f=0$ then
+$|u_j'|^2+\lambda_j^2|u_j|^2$ is constant for each $j$, and summing gives the
+conservation of $\norm{\pa_tu}^2+\pair{\Delta u}{\bar u}=\norm{\pa_tu}^2+\norm{du}^2$.
+Smoothness is the case $Y=\{\mathrm{pt}\}$ of \cref{wave:prop:param}.
+\end{proof}
+
+The \emph{wave group} is the map
+$U(t)\colon(u_0,u_1)\mapsto(u(t),D_tu(t))$ for $f=0$; explicitly
+\begin{equation*}
+U(t)=\begin{pmatrix}\cos t\Lambda&i\Lambda^{-1}\sin t\Lambda\\ i\Lambda\sin t\Lambda&\cos t\Lambda\end{pmatrix}.
+\end{equation*}
+By \cref{wave:thm:cauchy} it is a strongly continuous group of bounded operators
+on $\Hs{s}(X)\oplus\Hs{s-1}(X)$ for each $s$: $U(t+t')=U(t)U(t')$ by
+uniqueness. Its (distributional) trace is $2\sum_j\cos(t\lambda_j)$, see
+\cref{wave:sec:trace}.
+
+We need a version with parameters. Let $Y$ be a compact manifold (possibly a
+point) and let $\Delta_X$ act on the first factor of $X\times Y$.
+
+\begin{proposition}\label{wave:prop:param}
+Let $I\ni0$ be an open interval. If $w\in\mathcal C^2(I;\Hs{-M}(X\times Y))$
+satisfies $(D_t^2-\Delta_X)w=0$ and $w(0)=D_tw(0)=0$, then $w=0$. If
+$F\in\CI(I\times X\times Y)$ and $w_0,w_1\in\CI(X\times Y)$, the solution of
+$(D_t^2-\Delta_X)w=F$, $w(0)=w_0$, $D_tw(0)=w_1$, given by
+\eqref{wave:eq:duhamel} with $\Lambda=\Lambda_X$, lies in $\CI(I\times X\times Y)$.
+\end{proposition}
+\begin{proof}
+Choose a metric on $Y$ with Laplacian $\Delta_Y$ and eigenbasis $\psi_l$,
+$\Delta_Y\psi_l=\mu_l^2\psi_l$. Then $\{\phi_j\otimes\psi_l\}$ is an orthonormal
+basis of $L^2(X\times Y)$ of eigenfunctions of the Laplacian
+$\Delta_X+\Delta_Y$ of the product metric, so by \ref{wave:F2} on $X\times Y$,
+$\Hs{s}(X\times Y)$ is characterised by
+$\sum_{j,l}(1+\lambda_j^2+\mu_l^2)^s|w_{jl}|^2<\infty$. Uniqueness follows as
+before from the ODEs $w_{jl}''+\lambda_j^2w_{jl}=0$. The operators $\cos(t\Lambda_X)$
+and $\Lambda_X^{-1}\sin(t\Lambda_X)$ act on the coefficients by multiplication by
+functions bounded by $1+|t|$, so they are bounded on every $\Hs{s}(X\times Y)$,
+locally uniformly and strongly continuously in $t$. Hence
+$w\in\Cz(I;\Hs{s}(X\times Y))$ for all $s$; the equation gives
+$\pa_t^2w=-\Delta_Xw-F\in\Cz(I;\Hs{s-2})$, and inductively
+$w\in\mathcal C^k(I;\Hs{s}(X\times Y))$ for all $k,s$. By the Sobolev
+embedding, $w\in\CI(I\times X\times Y)$.
+\end{proof}
+
+\begin{theorem}[Finite propagation speed]\label{wave:thm:finite-speed}
+Let $K\subset X$ be closed, $K_r=\{x\in X;\ d(x,K)\le r\}$ for $r\ge0$, where $d$ is
+the Riemannian distance. If $u$ is the solution of \eqref{wave:eq:cauchy} with
+$f=0$ and $\supp u_0\cup\supp u_1\subset K$ (any $s$), then
+$\supp u(t)\subset K_{|t|}$ for all $t$.
+\end{theorem}
+\begin{proof}
+First let $u_0,u_1\in\CI(X)$, so $u\in\CI(\R\times X)$. Fix
+$x_0\in X$ and $0<R<\inj(X)$ (the injectivity radius, positive as $X$ is compact)
+with $R<d(x_0,K)$. On the ball $B(x_0,\inj X)$ the function $d(x_0,\cdot)^2$ is
+smooth, so $\rho_\eps=(d(x_0,\cdot)^2+\eps^2)^{1/2}$ is smooth there and
+$|d\rho_\eps|_g=d(x_0,\cdot)/\rho_\eps<1$. Let $\theta_\delta\in\CI(\R)$ be
+non-decreasing, $\theta_\delta=0$ on $(-\infty,0]$, $\theta_\delta=1$ on
+$[\delta,\infty)$, and $\psi(t,x)=\theta_\delta(R-t-\rho_\eps(x))$, a smooth
+function supported in $\{\rho_\eps\le R-t\}\subset B(x_0,R)$ for $t\ge0$. With
+the energy density $e=|\pa_tu|^2+|du|_g^2$ and $\pa_t^2u=-\Delta u$ we have
+$\pa_te=2\operatorname{Re}(\overline{\pa_tu}\,\pa_t^2u+\ang{d\pa_tu,du}_g)$ and, integrating by
+parts, the terms with two derivatives of $u$ cancel:
+\begin{equation*}
+\frac{d}{dt}\int_X\psi e\dvol=\int_X(\pa_t\psi)e\dvol-2\operatorname{Re}\int_X\overline{\pa_tu}\,\ang{d\psi,du}_g\dvol
+\le\int_X(\pa_t\psi+|d\psi|_g)e\dvol\le0,
+\end{equation*}
+because $\pa_t\psi=-\theta_\delta'$ and $|d\psi|_g=\theta_\delta'|d\rho_\eps|_g\le\theta_\delta'$.
+At $t=0$ the integral vanishes since $u_0,u_1$ vanish on $\bar B(x_0,R)$.
+Letting $\delta,\eps\to0$ we get $e(t,x)=0$ for $0\le t<R$,
+$d(x_0,x)<R-t$, hence $\pa_tu=0$ there, and since $u(0)=0$ on $B(x_0,R)$,
+$u=0$ on this cone. Given $0\le t<\inj(X)$ and $x_0\notin K_t$ we may choose
+$R\in(t,\min(\inj X,d(x_0,K)))$, so $u(t,x_0)=0$: $\supp u(t)\subset K_t$ for
+$0\le t<\inj X$. Since $(K_a)_b\subset K_{a+b}$ by the triangle inequality,
+applying this repeatedly (to the solution with data at time $t_1$, using
+uniqueness and time-translation invariance) gives all $t\ge0$; $t\le0$ follows
+by time reversal $t\mapsto-t$.
+
+For distributional data use duality: $\cos(t\Lambda)$ and $\Lambda^{-1}\sin(t\Lambda)$
+are symmetric for the bilinear pairing (the $\phi_j$ are real). If
+$\phi\in\CI(X)$ has $\supp\phi\cap K_{|t|}=\emptyset$, then
+$d(\supp\phi,K)>|t|$, so by the smooth case $\cos(t\Lambda)\phi$ and
+$\Lambda^{-1}\sin(t\Lambda)\phi$ vanish near $K$ and
+$\pair{u(t)}{\phi}=\pair{u_0}{\cos(t\Lambda)\phi}+i\pair{u_1}{\Lambda^{-1}\sin(t\Lambda)\phi}=0$.
+\end{proof}
+
+\section{The forward fundamental solution}\label{wave:sec:forward}
+
+For $\phi\in\CIc(\R\times X)$ set
+\begin{equation*}
+E\phi(t)=-\int_{-\infty}^t\Lambda^{-1}\sin((t-r)\Lambda)\phi(r)\,dr,\qquad
+E^\dagger\phi(t)=-\int_t^\infty\Lambda^{-1}\sin((r-t)\Lambda)\phi(r)\,dr .
+\end{equation*}
+By \cref{wave:thm:cauchy} and \cref{wave:prop:param} (with data at a time
+before, resp.\ after, $\supp\phi$) these are the unique solutions in $\CI(\R\times X)$ of
+$Pu=\phi$ vanishing for $t\ll0$, resp.\ $t\gg0$, and they depend continuously on
+$\phi$. The Schwartz kernel of $E$ is
+\begin{equation}\label{wave:eq:E-kernel}
+E(t,x;t',x')=-H(t-t')\,K_{\sin}(t-t',x,x'),\qquad
+K_{\sin}(t,x,y)=\sum_j\frac{\sin(t\lambda_j)}{\lambda_j}\phi_j(x)\phi_j(y),
+\end{equation}
+($H$ the Heaviside function), and $E^\dagger$ is its transpose for the
+pairing $\pair{u}{v}=\int uv\,dt\dvol$, since $K_{\sin}$ is symmetric in $(x,y)$.
+For $A\subset\R\times X$ let
+$J^\pm(A)=\{(t,x);\ \exists(t',x')\in A,\ d(x,x')\le\pm(t-t')\}$ be the causal
+future and past.
+
+\begin{theorem}\label{wave:thm:forward}
+Let $f\in\CmI(\R\times X)$ have $\supp f\subset[T,\infty)\times X$ for some $T$.
+Then there is a unique $u\in\CmI(\R\times X)$ with support bounded below in $t$
+such that $Pu=f$. It satisfies $\supp u\subset J^+(\supp f)\subset[T,\infty)\times X$,
+it is given by $\pair{u}{\phi}=\pair{f}{E^\dagger\phi}$ for
+$\phi\in\CIc(\R\times X)$ (so $u=Ef$, extending $E$), and $u\in\CI$ if $f\in\CI$.
+In particular $E$ is the unique forward fundamental solution of $P$:
+$PE=EP=\Id$ on distributions with support bounded below, and
+$\supp E\subset\{(t,x,t',x');\ d(x,x')\le t-t'\}$.
+\end{theorem}
+\begin{proof}
+By \cref{wave:thm:finite-speed} (applied with initial time $\sup\{t;(t,x)\in\supp\phi\}$),
+$\supp E^\dagger\phi\subset J^-(\supp\phi)$, so $\supp f\cap\supp E^\dagger\phi$ is
+compact and $\pair{f}{E^\dagger\phi}$ is defined; it is continuous in $\phi$, so it
+defines $u\in\CmI(\R\times X)$. Since $P$ is formally self-adjoint for the
+bilinear pairing ($P^t=P$), $\pair{Pu}{\phi}=\pair{f}{E^\dagger P\phi}=\pair{f}{\phi}$,
+because $E^\dagger P\phi-\phi$ solves the homogeneous equation and vanishes for $t\gg0$,
+hence is zero by \cref{wave:thm:cauchy}. If $\supp\phi\cap J^+(\supp f)=\emptyset$
+then $J^-(\supp\phi)\cap\supp f=\emptyset$, so $\pair{u}{\phi}=0$; this gives the
+support statement. For uniqueness let $v$ have support bounded below and $Pv=0$.
+For $\phi\in\CIc$, $\supp v\cap\supp E^\dagger\phi$ is compact, so
+$\pair{v}{\phi}=\pair{v}{PE^\dagger\phi}=\pair{Pv}{E^\dagger\phi}=0$. If $f\in\CI$,
+the Duhamel integral $-\int_{-\infty}^t\Lambda^{-1}\sin((t-r)\Lambda)f(r)\,dr$ is a smooth
+solution (\cref{wave:prop:param}) vanishing for $t<T$, hence equals $u$. The
+statements about $E$ are a reformulation, the support of the kernel coming from
+\cref{wave:thm:finite-speed}.
+\end{proof}
+
+\begin{remark}\label{wave:rem:volterra}
+On non-compact manifolds (for instance $\R^n$ with a metric that is Euclidean
+outside a compact set) the spectral formula is not available, and one instead
+constructs $E$ from a local parametrix $E'$ with $PE'=\Id+F$, where $F$ has a
+smooth kernel supported in $t\ge t'$; $\Id+F$ is then inverted by the Volterra
+(Neumann) series $\sum_k(-F)^{\circ k}$ for the $t$-convolution, which converges
+because the $k$-fold composition gains a factor $|t-t'|^{k-1}/(k-1)!$ (see
+\cref{wave:ex:volterra}).
+\end{remark}
+
+\section{The short-time structure of the wave kernel}\label{wave:sec:parametrix}
+
+We now describe the Schwartz kernels
+\begin{equation*}
+K_{\cos}(t,x,y)=\sum_j\cos(t\lambda_j)\phi_j(x)\phi_j(y),\qquad K_{\sin}(t,x,y)=\sum_j\frac{\sin(t\lambda_j)}{\lambda_j}\phi_j(x)\phi_j(y)
+\end{equation*}
+of $\cos(t\Lambda)$ and $\Lambda^{-1}\sin(t\Lambda)$ for small $|t|$. For fixed
+$y$, $K_{\cos}$ solves $PK_{\cos}=0$ with $K_{\cos}(0)=\delta_y$,
+$D_tK_{\cos}(0)=0$, and $K_{\sin}$ solves $PK_{\sin}=0$ with $K_{\sin}(0)=0$,
+$\pa_tK_{\sin}(0)=\delta_y$. Both series converge in
+$\CI(\R;\Hs{-M}(X\times X))$ for $M$ large, by \cref{wave:lem:apriori}.
+
+\subsection{Plane waves}
+
+The initial datum $\delta_y$ is conormal to the point $\{y\}$, but the only
+characteristic submanifolds for $P$ are hypersurfaces: if $Z\subset\R\times X$
+has codimension $k$ and $N^*Z\subset\Sigma(P)\cup0$, then each fibre $N^*_zZ$ is a
+$k$-dimensional linear space on which the Lorentzian quadratic form $p$ of
+signature $(1,n)$ vanishes, so $k\le1$. The way around this is to write $\delta$
+as a superposition of distributions conormal to hyperplanes. In $\R^n$, using
+polar coordinates $\xi=r\omega$ and symmetrising $(r,\omega)\mapsto(-r,-\omega)$,
+\begin{equation}\label{wave:eq:plane-waves}
+\delta(x)=(2\pi)^{-n}\int_{\Sphere^{n-1}}\int_0^\infty e^{irx\cdot\omega}r^{n-1}\,dr\,d\omega
+=\frac{1}{2(2\pi)^{n-1}}\int_{\Sphere^{n-1}}f_n(x\cdot\omega)\,d\omega,
+\end{equation}
+where
+\begin{equation*}
+f_n(s)=\frac1{2\pi}\int_\R e^{isr}|r|^{n-1}\,dr=|D_s|^{n-1}\delta(s).
+\end{equation*}
+For $n$ odd, $f_n=D_s^{n-1}\delta$; for $n$ even, $|D_s|^{n-1}$ is a
+pseudodifferential operator and $f_n$ is not supported at $0$.
+
+\begin{lemma}\label{wave:lem:fn}
+$f_n\in\Ic{n-\frac34}(\R,\{0\})$ (modulo a smooth function), and the pull-back
+$f_n(x\cdot\omega)$ under the submersion $\R^n\times\Sphere^{n-1}\ni(x,\omega)\mapsto x\cdot\omega$
+lies in $\Ic{\frac n2-\frac14}(\R^n\times\Sphere^{n-1},R)$, $R=\{x\cdot\omega=0\}$.
+\end{lemma}
+\begin{proof}
+Let $\rho\in\CI(\R)$ vanish near $0$ and equal $1$ for $|r|\ge1$. Then
+$f_n=\frac1{2\pi}\int e^{isr}\rho(r)|r|^{n-1}dr+\frac1{2\pi}\int e^{isr}(1-\rho(r))|r|^{n-1}dr$;
+the second term is smooth (the inverse Fourier transform of a compactly supported
+function) and the first is of the form \eqref{wave:eq:conormal-local} with symbol
+$\rho|r|^{n-1}\in\Sym{n-1}$, so of order $m$ with $m+\frac14-\frac12=n-1$. The map
+$(x,\omega)\mapsto x\cdot\omega$ has differential $\omega\cdot dx+x\cdot d\omega\ne0$, so it
+is a submersion, $R$ is a smooth hypersurface and $x\cdot\omega$ is a defining function.
+The pull-back is $\frac1{2\pi}\int e^{i(x\cdot\omega)r}\rho(r)|r|^{n-1}dr+\CI$, with the same
+symbol, now on a manifold of dimension $N=2n-1$; thus
+$m+\frac{2n-1}4-\frac12=n-1$, i.e.\ $m=\frac n2-\frac14$.
+\end{proof}
+
+\begin{proposition}[Radon inversion]\label{wave:prop:radon}
+If $\pi_1\colon\R^n\times\Sphere^{n-1}\to\R^n$ is the projection, then
+$(\pi_1)_*\big(f_n(x\cdot\omega)\,d\omega\big)=2(2\pi)^{n-1}\delta$; this is \eqref{wave:eq:plane-waves}.
+\end{proposition}
+\begin{proof}
+For $\phi\in\cS(\R^n)$ and fixed $\omega$, $\int f_n(x\cdot\omega)\phi(x)\,dx=\pair{f_n}{\mathcal R_\omega\phi}$,
+where $\mathcal R_\omega\phi(s)=\int_{x\cdot\omega=s}\phi$ satisfies
+$\widehat{\mathcal R_\omega\phi}(r)=\hat\phi(r\omega)$. Hence
+$\pair{f_n}{\mathcal R_\omega\phi}=\frac1{2\pi}\int_\R|r|^{n-1}\hat\phi(-r\omega)\,dr$ and, by
+polar coordinates and Fourier inversion,
+$\int_{\Sphere^{n-1}}\pair{f_n}{\mathcal R_\omega\phi}\,d\omega=\frac2{2\pi}\int_{\R^n}\hat\phi(\xi)\,d\xi=2(2\pi)^{n-1}\phi(0)$.
+\end{proof}
+
+Thus, to solve the Cauchy problem with datum $\delta_y$ we may solve it, for each
+$\omega$, with data conormal to the hyperplane $\{(x-y)\cdot\omega=0\}$, using the two
+characteristic hypersurfaces through it, and then integrate over $\omega$. It is
+convenient to keep the radial variable as well: this amounts to an oscillatory
+integral whose phase solves the eikonal equation.
+
+\subsection{The eikonal equation}
+
+Work in a coordinate chart $U\subset\R^n$ of $X$, and let $q(x,\eta)=|\eta|_{g(x)}$.
+
+\begin{lemma}\label{wave:lem:eikonal}
+Let $W\Subset U$ be open. There exist $t_0>0$ and unique real
+$\varphi_\pm\in\CI((-t_0,t_0)\times W\times(\R^n\setminus0))$, homogeneous of degree
+one in $\eta$, with
+\begin{equation}\label{wave:eq:eikonal}
+\pa_t\varphi_\pm=\pm q(x,d_x\varphi_\pm),\qquad \varphi_\pm(0,x,\eta)=x\cdot\eta .
+\end{equation}
+Moreover $\varphi_-(t,x,\eta)=\varphi_+(-t,x,\eta)$, $d_x\varphi_\pm\ne0$, and for $y\in W$:
+\begin{equation}\label{wave:eq:critical}
+d_\eta\big(\varphi_\pm(t,x,\eta)-y\cdot\eta\big)=0\iff\big(x,d_x\varphi_\pm(t,x,\eta)\big)=G_{\mp t}(y,\eta),
+\end{equation}
+in which case $(x,d_x\varphi_\pm)$ lies on the geodesic flow-out and
+$d(x,y)\le|t|$.
+\end{lemma}
+\begin{proof}
+This is the method of characteristics (the Hamilton--Jacobi theorem of
+\cref{ch:hj}) for $F_\pm=\tau\mp q(x,\xi)$ with initial surface $\{t=0\}$, which is
+non-characteristic since $\pa_\tau F_\pm=1$. Explicitly, consider $\varphi_+$ and let
+$(x(t),\xi(t))=G_{-t}(x_0,\eta)$, i.e.\ $\dot x=-\pa_\xi q$, $\dot\xi=\pa_xq$, which are the
+$x,\xi$ components of the bicharacteristics of $F_+$. For $|t|<t_0$ small, uniformly for
+$|\eta|=1$ and $x_0$ near $\bar W$, the map $x_0\mapsto x(t;x_0,\eta)$ is a
+diffeomorphism onto a neighbourhood of $\bar W$, and $\varphi_+$ is defined by
+$\varphi_+(t,x(t;x_0,\eta),\eta)=x_0\cdot\eta$, extended homogeneously; the Hamilton--Jacobi
+theorem shows that it solves \eqref{wave:eq:eikonal} and that
+$d_x\varphi_+(t,x(t;x_0,\eta),\eta)=\xi(t)\ne0$ (consistently, $\frac d{dt}\varphi_+(t,x(t),\eta)
+=q-\xi\cdot\pa_\xi q=0$ by Euler's relation). Uniqueness also follows from the
+characteristics. Since $\psi(t)=\varphi_+(-t)$ solves the equation with the sign $-$,
+$\varphi_-(t)=\varphi_+(-t)$.
+
+For \eqref{wave:eq:critical}, differentiate $\varphi_+(t,x(t;x_0,\eta),\eta)=x_0\cdot\eta$ in
+$\eta$:
+\begin{equation*}
+d_\eta\varphi_+(t,x(t),\eta)+\xi(t)\cdot\pa_\eta x(t;x_0,\eta)=x_0 .
+\end{equation*}
+The second term vanishes: with $w=\pa_\eta x\cdot\delta\eta$, $v=\pa_\eta\xi\cdot\delta\eta$,
+$\frac d{dt}(\xi\cdot w)=\pa_xq\cdot w-\xi\cdot(\pa_x\pa_\xi q\,w+\pa_\xi^2q\,v)=0$, since
+$\xi\cdot\pa_\xi\pa_xq=\pa_xq$ and $\xi\cdot\pa_\xi^2q=0$ by homogeneity, and $w=0$ at $t=0$.
+(This is the invariance of the Liouville form $\xi\cdot dx$ under the homogeneous
+flow $G_s$.) Hence $d_\eta\varphi_+(t,x,\eta)=y$ iff $x=x(t;y,\eta)$, i.e.\ iff
+$(x,d_x\varphi_+(t,x,\eta))=G_{-t}(y,\eta)$. The case of $\varphi_-$ follows from
+$\varphi_-(t)=\varphi_+(-t)$. Since $G_s$ moves base points along unit speed
+geodesics, $d(x,y)\le|t|$.
+\end{proof}
+
+\subsection{Transport equations}
+
+For a real phase $\phi(t,x)$ and an amplitude $a(t,x)$, a direct computation
+(using $\Delta e^{i\phi}=e^{i\phi}(|d_x\phi|_g^2+i\Delta\phi)$) gives
+\begin{equation}\label{wave:eq:P-on-exp}
+P(e^{i\phi}a)=e^{i\phi}\Big[\big((\pa_t\phi)^2-|d_x\phi|_g^2\big)a-iL_\phi a+Pa\Big],
+\end{equation}
+\begin{equation*}
+L_\phi a=2\big(\pa_t\phi\,\pa_ta-\ang{d_x\phi,d_xa}_g\big)+\big(\pa_t^2\phi+\Delta\phi\big)a .
+\end{equation*}
+If $\phi$ solves the eikonal equation the first term vanishes, and $L_\phi$ is a
+first order operator whose principal part is the vector field
+$V_\phi=2(\pa_t\phi\,\pa_t-\sum g^{ij}\pa_i\phi\,\pa_j)$, the projection to $\R\times X$
+of $\Ham{p}$ restricted to the Lagrangian manifold $\{(t,x,d\phi)\}$. For
+$\phi=\varphi_\pm(t,x,\eta)-y\cdot\eta$ the $\pa_t$-coefficient is $\pm2q(x,d_x\varphi_\pm)\ne0$,
+so $V_\phi$ is transversal to $\{t=0\}$ and its integral curves are (reparametrised)
+unit speed geodesics. If $a\sim\sum_{k\ge0}a_k$ with $a_k$ homogeneous of degree
+$\mu-k$ in $\eta$, then $P(e^{i\phi}a)=e^{i\phi}r$ with $r\in\Sym{-\infty}$ in $\eta$
+provided the \emph{transport equations}
+\begin{equation}\label{wave:eq:transport}
+L_\phi a_0=0,\qquad L_\phi a_k=-iPa_{k-1}\quad(k\ge1)
+\end{equation}
+hold; both sides of the $k$-th equation are homogeneous of degree $\mu+1-k$. Each is
+a linear ODE along the integral curves of $V_\phi$, uniquely solvable for small $|t|$
+given $a_k(0,\cdot)$, and the solution is homogeneous of the right degree.
+
+\subsection{The parametrix}
+
+Fix $\chi\in\CI(\R^n)$ with $\chi(\eta)=0$ for $|\eta|\le\frac12$ and $\chi(\eta)=1$ for
+$|\eta|\ge1$. Choose a finite cover of $X$ by coordinate charts $U_k$, open sets
+$V_k\Subset U_k$ still covering $X$, a partition of unity $\chi_k$ with
+$\supp\chi_k\subset V_k$, and $\delta_0>0$ such that the $3\delta_0$-neighbourhood of
+$\bar V_k$ is relatively compact in $U_k$ for all $k$. Let $W_k$ be the
+$2\delta_0$-neighbourhood of $\bar V_k$ and $\zeta_k\in\CIc(W_k)$ with $\zeta_k=1$ on the
+$\delta_0$-neighbourhood of $\bar V_k$.
+
+\begin{theorem}\label{wave:thm:parametrix}
+There are $t_0\in(0,\delta_0)$, phase functions $\varphi_{k,\pm}$ on
+$(-t_0,t_0)\times W_k\times(\R^n\setminus0)$ as in \cref{wave:lem:eikonal}, and
+polyhomogeneous symbols $a_{k,\pm}\in\Symph{0}$, $b_{k,\pm}\in\Symph{-1}$ in
+$\eta\in\R^n$, depending smoothly on $(t,x,y)\in(-t_0,t_0)\times W_k\times V_k$, such that
+\begin{align*}
+K_{\cos}(t,x,y)&\equiv\sum_{k,\pm}\zeta_k(x)\chi_k(y)(2\pi)^{-n}\int e^{i(\varphi_{k,\pm}(t,x,\eta)-y\cdot\eta)}a_{k,\pm}(t,x,y,\eta)\chi(\eta)\,d\eta,\\
+K_{\sin}(t,x,y)&\equiv\sum_{k,\pm}\zeta_k(x)\chi_k(y)(2\pi)^{-n}\int e^{i(\varphi_{k,\pm}(t,x,\eta)-y\cdot\eta)}b_{k,\pm}(t,x,y,\eta)\chi(\eta)\,d\eta,
+\end{align*}
+modulo $\CI((-t_0,t_0)\times X\times X)$. At $t=0$,
+\begin{equation}\label{wave:eq:initial-symbols}
+a_{k,\pm}(0,x,y,\eta)-\tfrac12|g(y)|^{-1/2}\in\Sym{-1},\qquad
+b_{k,\pm}(0,x,y,\eta)\mp\frac{|g(y)|^{-1/2}}{2i\,q(x,\eta)}\in\Sym{-2}.
+\end{equation}
+\end{theorem}
+\begin{proof}
+Apply \cref{wave:lem:eikonal} on $W_k$ (with $W_k\Subset U_k$), shrinking $t_0$
+so that also all integral curves of the transport fields starting in $W_k$ stay in
+the $3\delta_0$-neighbourhood for $|t|<t_0$. We construct the cosine term; write
+$\phi_\pm=\varphi_{k,\pm}-y\cdot\eta$ and $S=\sum_\pm(2\pi)^{-n}\int e^{i\phi_\pm}a_\pm\chi\,d\eta$.
+
+\emph{Amplitudes.} We seek $a_\pm\sim\sum_{j\ge0}a_{\pm,j}$, $a_{\pm,j}$ homogeneous
+of degree $-j$, solving \eqref{wave:eq:transport} for $\phi_\pm$, with initial values
+fixed by the requirements $S(0)\equiv|g(y)|^{-1/2}\delta(x-y)$, $D_tS(0)\equiv0$.
+Since $\phi_\pm(0)=(x-y)\cdot\eta$ and $\pa_t\phi_\pm(0)=\pm q(x,\eta)$, these amount to
+\begin{gather*}
+a_{+,0}+a_{-,0}=|g(y)|^{-1/2},\qquad a_{+,j}+a_{-,j}=0\ (j\ge1),\\
+q(x,\eta)(a_{+,j}-a_{-,j})+D_ta_{+,j-1}+D_ta_{-,j-1}=0\ (j\ge0)
+\end{gather*}
+at $t=0$ (with $a_{\pm,-1}=0$), the last being the part homogeneous of degree
+$1-j$ of $\sum_\pm(\pa_t\phi_\pm a_\pm+D_ta_\pm)|_{t=0}$. Inductively in $j$: the
+initial values of $a_{\pm,j}$ are determined by these equations, given
+$a_{\pm,j-1}$ for all $t$, and then $a_{\pm,j}$ is determined for $|t|<t_0$ by the
+transport equation. In particular $a_{\pm,0}(0)=\frac12|g(y)|^{-1/2}$. Let $a_\pm$ be
+a Borel sum of the series, multiplied by $\chi$. Then
+$PS=(2\pi)^{-n}\sum_\pm\int e^{i\phi_\pm}r_\pm\,d\eta$ with $r_\pm\in\Sym{-\infty}$, so
+$PS\in\CI$; similarly $S(0)-|g(y)|^{-1/2}\delta(x-y)$ and $D_tS(0)$ are oscillatory
+integrals with amplitudes in $\Sym{-\infty}$, hence smooth. For the sine term the
+conditions are $\sum_\pm b_\pm(0)\in\Sym{-\infty}$ and
+$\sum_\pm(i\pa_t\phi_\pm b_\pm+\pa_tb_\pm)(0)-|g(y)|^{-1/2}\in\Sym{-\infty}$, giving
+$b_{\pm,0}(0)=\pm|g(y)|^{-1/2}/(2iq(x,\eta))$ and then the same induction.
+
+\emph{Singular support.} The phase $\phi_\pm$ is non-degenerate in $(y,\eta)$
+($d_y\phi_\pm=-\eta\ne0$), so $S$ is a smooth function of $t$ with values in
+distributions on $W_k\times V_k$, and by \eqref{wave:eq:WF-osc} and
+\eqref{wave:eq:critical} it is smooth on $\{d(x,y)>|t|\}$.
+
+\emph{Comparison.} Let $w=\chi_k(y)K_{\cos}-\zeta_k(x)\chi_k(y)S$ on
+$(-t_0,t_0)\times X\times X$. Then
+\begin{equation*}
+Pw=-\zeta_k\chi_kPS-[P,\zeta_k]\chi_kS\in\CI,
+\end{equation*}
+the commutator term because $d\zeta_k=0$ on the $\delta_0$-neighbourhood of
+$\supp\chi_k$, while $S$ is smooth where $d(x,y)>|t|$ and $|t|<t_0<\delta_0$. Also
+$w(0)=\chi_k(y)(K_{\Id}-\zeta_k(x)S(0))$ and $D_tw(0)$ are smooth, since
+$\zeta_k(x)=1$ near the support of $\chi_k(y)\delta(x-y)$. Both $K_{\cos}$ and $S$ lie
+in $\CI((-t_0,t_0);\Hs{-M}(X\times X))$ for $M$ large, so by \cref{wave:prop:param}
+(with $Y=X$ the $y$-factor) $w\in\CI$. Summing over $k$ proves the claim for
+$K_{\cos}$, and the same argument applies to $K_{\sin}$.
+\end{proof}
+
+\begin{remark}[Conormal superposition]\label{wave:rem:superposition}
+In polar coordinates $\eta=r\omega$, homogeneity gives
+$\varphi_{\pm}(t,x,r\omega)-ry\cdot\omega=rh_\pm(t,x,y,\omega)$, so each term of the parametrix is
+\begin{equation*}
+(2\pi)^{1-n}\int_{\Sphere^{n-1}}u_\pm(t,x;y,\omega)\,d\omega,\qquad
+u_\pm=\frac1{2\pi}\int_0^\infty e^{irh_\pm(t,x,y,\omega)}a_\pm(t,x,y,r\omega)\chi(r\omega)r^{n-1}\,dr .
+\end{equation*}
+For fixed $(y,\omega)$, $u_\pm$ is a conormal distribution, of order $\frac{3n-3}4$, associated
+with the hypersurface $H_\pm(y,\omega)=\{h_\pm=0\}\subset(-t_0,t_0)\times W_k$, which is
+characteristic for $P$ ($(\pa_th_\pm)^2=|d_xh_\pm|_g^2$ by \eqref{wave:eq:eikonal}) and
+meets $\{t=0\}$ in the hyperplane $\{(x-y)\cdot\omega=0\}$; there are exactly two such
+characteristic hypersurfaces, corresponding to the two points $\tau=\pm|\omega|_g$ of
+$\Sigma(P)$ over the conormal $\omega\,dx$. The amplitude of $u_\pm$ solves the transport
+equation, and at $t=0$ the sum $u_++u_-$ reproduces the plane wave decomposition
+\eqref{wave:eq:plane-waves} of $\delta_y$. As a function of all variables
+$(t,x,y,\omega)$, $u_\pm$ is conormal with respect to the hypersurface
+$\{h_\pm=0\}$, smooth since $d_yh_\pm=-\omega\ne0$, and the kernel is its push-forward
+along $\Sphere^{n-1}$.
+\end{remark}
+
+\begin{corollary}\label{wave:cor:WF-short}
+For $|t|<t_0$ the wavefront sets of $K_{\cos}$ and $K_{\sin}$ are contained in
+\begin{equation*}
+\Gamma=\big\{(t,x,y;\tau,\xi,-\eta);\ \eta\ne0,\ \tau=\pm|\eta|_{g(y)},\ (x,\xi)=G_{\mp t}(y,\eta)\big\}.
+\end{equation*}
+In particular their singular supports are contained in $\{d(x,y)=|t|\}$ for
+$|t|<\min(t_0,\inj X)$.
+\end{corollary}
+\begin{proof}
+By \eqref{wave:eq:WF-osc}, the wavefront set of each term is contained in the set
+of points
+\begin{equation*}
+(t,x,y;\pa_t\phi_\pm,d_x\phi_\pm,d_y\phi_\pm)\quad\text{with}\quad d_\eta\phi_\pm=0,\qquad \phi_\pm=\varphi_{k,\pm}(t,x,\eta)-y\cdot\eta .
+\end{equation*}
+By \eqref{wave:eq:critical} there $(x,d_x\varphi_\pm)=G_{\mp t}(y,\eta)$, while
+$d_y\phi_\pm=-\eta$ and $\pa_t\phi_\pm=\pm q(x,d_x\varphi_\pm)=\pm q(y,\eta)$ since $G$
+preserves $q$. Within the injectivity radius the geodesic of length $|t|$ is
+minimising, so $d(x,y)=|t|$.
+\end{proof}
+
+By \cref{wave:lem:bichar}, $\Gamma$ is the union of the null bicharacteristics of
+$D_t^2-\Delta_x$ (acting in $(t,x)$, with $(y,\eta)$ fixed) through the points
+$(0,y,y;\pm|\eta|,\eta,-\eta)$, i.e.\ the flow-out of the wavefront set of the
+initial datum $\delta(x-y)$.
+
+\section{Operations on conormal distributions}\label{wave:sec:operations}
+
+We record the behaviour of conormal distributions under push-forward along
+fibres and restriction to transversal submanifolds, and the reduction of
+amplitudes depending on the normal variable. Together these compute the trace
+of the wave group in \cref{wave:sec:trace}.
+
+\begin{proposition}[Push-forward]\label{wave:prop:pushforward}
+Let $M_1$ be a manifold of dimension $N_1$, $Z$ a compact manifold of dimension $d$
+with a smooth positive density $\nu$, $\pi\colon M_1\times Z\to M_1$ the projection, and
+$H_1\subset M_1$ a hypersurface. If $u\in\Ic{m}(M_1\times Z,H_1\times Z)$ then
+$\pi_*u=\int_Zu\,\nu\in\Ic{m+\frac d4}(M_1,H_1)$; in local coordinates, with
+$u=\frac1{2\pi}\int e^{is\rho}a(z',w,\rho)\,d\rho$, the push-forward has amplitude
+$\int_Za(z',w,\rho)\,\nu(w)$.
+\end{proposition}
+\begin{proof}
+$\pi_*$ maps $\CI$ to $\CI$ and distributions smooth off $H_1\times Z$ to
+distributions smooth off $H_1$. Near $H_1$ choose coordinates $(s,z')$ on $M_1$ with
+$H_1=\{s=0\}$; then $s\circ\pi$ defines $H_1\times Z$ and, using a partition of unity
+on $Z$ and coordinates $w$ there, $u$ is locally as in \eqref{wave:eq:conormal-local}
+with $a(z',w,\rho)\in\Sym{\mu}$, $\mu=m+\frac{N_1+d}4-\frac12$. Integrating in $w$
+gives an amplitude in $\Sym{\mu}(\R^{N_1-1};\R)$, and $\mu=m'+\frac{N_1}4-\frac12$ with
+$m'=m+\frac d4$.
+\end{proof}
+
+\begin{proposition}[Restriction]\label{wave:prop:restriction}
+Let $H\subset M$ be a hypersurface, $\dim M=N$, and $Y\subset M$ a submanifold of
+codimension $k$ transversal to $H$ ($T_zH+T_zY=T_zM$ for $z\in H\cap Y$). Then
+restriction extends from $\CI$ to a map
+$\Ic{m}(M,H)\to\Ic{m+\frac k4}(Y,H\cap Y)$, and the local amplitude restricts.
+\end{proposition}
+\begin{proof}
+By transversality there are local coordinates $(s,z',z'')$ with $H=\{s=0\}$ and
+$Y=\{z''=0\}$, $z''\in\R^k$. Then $u=\frac1{2\pi}\int e^{is\rho}a(z',z'',\rho)\,d\rho$ depends
+smoothly on $z''$ as a distribution in $(s,z')$, and $u|_Y=\frac1{2\pi}\int e^{is\rho}a(z',0,\rho)\,d\rho$,
+consistent with the restriction of smooth functions (and with $N^*Y\cap N^*H=0$).
+The symbol order $\mu=m+\frac N4-\frac12$ is unchanged, and
+$\mu=m'+\frac{N-k}4-\frac12$ gives $m'=m+\frac k4$.
+\end{proof}
+
+\begin{lemma}\label{wave:lem:fourier-amplitude}
+Let $B\in\CI(\R\times\R)$ satisfy $B(t,\rho)=0$ for $|t|\ge t_1$ and
+$|\pa_t^k\pa_\rho^lB(t,\rho)|\le C_{kl}\ang{\rho}^{m-l}$. Then
+\begin{equation*}
+J_B(\lambda)=\int_\R\Big(\int_\R e^{it(\rho-\lambda)}B(t,\rho)\,dt\Big)d\rho
+\end{equation*}
+(an absolutely convergent iterated integral) lies in $\Sym{m}(\R)$, and
+$J_B(\lambda)\sim2\pi\sum_{k\ge0}\frac{i^k}{k!}\pa_t^k\pa_\rho^kB(0,\lambda)$; in particular
+$J_B(\lambda)-2\pi B(0,\lambda)\in\Sym{m-1}(\R)$. If $B_\eps$ is bounded in this class
+for $\eps\in(0,1]$ and $B_\eps\to B$ pointwise, then $J_{B_\eps}\to J_B$ pointwise.
+Consequently $v=\frac1{2\pi}\int e^{it\rho}B(t,\rho)\,d\rho\in\Ic{m+\frac14}(\R,\{0\})$, with
+$\hat v=J_B/(2\pi)$.
+\end{lemma}
+\begin{proof}
+Let $\hat B(\sigma,\rho)=\int e^{-it\sigma}B(t,\rho)\,dt$; then
+$|\pa_\sigma^j\pa_\rho^l\hat B|\le C_{Njl}\ang{\sigma}^{-N}\ang{\rho}^{m-l}$, and
+$J_B(\lambda)=\int\hat B(\lambda-\rho,\rho)\,d\rho=\int\hat B(\sigma,\lambda-\sigma)\,d\sigma$. Taylor's
+formula in the second variable gives
+$\hat B(\sigma,\lambda-\sigma)=\sum_{k<K}\frac{(-\sigma)^k}{k!}\pa_\rho^k\hat B(\sigma,\lambda)+R_K$ with,
+by Peetre's inequality $\ang{\lambda-s\sigma}^{\mu}\le2^{|\mu|}\ang{\lambda}^{\mu}\ang{\sigma}^{|\mu|}$,
+$|R_K|\le C_N\ang{\sigma}^{K+|m-K|-N}\ang{\lambda}^{m-K}$, which integrates to
+$O(\ang{\lambda}^{m-K})$. Since $\sigma^k\hat B=\widehat{D_t^kB}$ and $\int\hat f\,d\sigma=2\pi f(0)$, the
+$k$-th term is $2\pi\frac{(-1)^k}{k!}D_t^k\pa_\rho^kB(0,\lambda)=2\pi\frac{i^k}{k!}\pa_t^k\pa_\rho^kB(0,\lambda)$.
+Finally $\pa_\lambda J_B=J_{\pa_\rho B}$ and $\pa_\rho B$ is of the same type with $m$
+replaced by $m-1$, so the bound $|J_B|\le C\ang{\lambda}^m$ (case $K=0$) gives the symbol
+estimates. The convergence statement follows by dominated convergence from the
+uniform bound $|\hat B_\eps(\lambda-\rho,\rho)|\le C\ang{\lambda-\rho}^{-N}\ang{\rho}^m$. For the last
+statement, $\hat v(\lambda)=\frac1{2\pi}J_B(\lambda)\in\Sym{m}$ and $v$ has compact support,
+so $v\in\Ic{m+\frac14}(\R,\{0\})$.
+\end{proof}
+
+In \cref{wave:lem:fourier-amplitude} the amplitude $B(t,\rho)$ is replaced by the
+amplitude $\hat v(\rho)$ independent of $t$; this is the one-dimensional case of
+the statement that amplitudes may depend on the normal variable.
+
+\section{The trace of the wave group}\label{wave:sec:trace}
+
+For $\psi\in\cS(\R)$ let
+$C_\psi=\int\psi(t)\cos(t\Lambda)\,dt=\tilde\psi(\Lambda)$, where
+$\tilde\psi(\lambda)=\int\psi(t)\cos(t\lambda)\,dt=\frac12(\hat\psi(\lambda)+\hat\psi(-\lambda))$ is rapidly
+decreasing. By \cref{wave:lem:apriori} and the polynomial bounds on
+$\norm{\phi_j}_{\mathcal C^k}$, the kernel
+$K_{C_\psi}(x,y)=\sum_j\tilde\psi(\lambda_j)\phi_j(x)\phi_j(y)$ converges in $\CI(X\times X)$;
+$C_\psi$ is smoothing and of trace class, and
+\begin{equation*}
+\Tr C_\psi=\sum_j\tilde\psi(\lambda_j)=\int_XK_{C_\psi}(x,x)\dvol(x).
+\end{equation*}
+Since $\sum_j\ang{\lambda_j}^{-M}<\infty$ for $M>n$, this is a continuous linear functional
+on $\cS(\R)$:
+
+\begin{definition}\label{wave:def:trace}
+The \emph{(even) wave trace} is the tempered distribution
+\begin{equation*}
+T(t)=\Tr\cos(t\Lambda)=\sum_{j\ge0}\cos(t\lambda_j),\qquad T(\psi)=\Tr C_\psi .
+\end{equation*}
+\end{definition}
+
+The trace of the wave group $U(t)$ is $2T$. With the measure $\mu=\sum_j\delta_{\lambda_j}$
+on $[0,\infty)$ and its even part $\mu_e=\frac12\sum_j(\delta_{\lambda_j}+\delta_{-\lambda_j})$,
+$T(t)=\int e^{it\sigma}d\mu_e(\sigma)$, i.e.\ $\hat T=2\pi\mu_e$, and $N(\lambda)=\mu([0,\lambda])$. For
+$\psi\in\CIc(\R)$,
+\begin{equation}\label{wave:eq:psiT-hat}
+\widehat{\psi T}(\lambda)=T(\psi e^{-i\lambda\cdot})=\frac12\sum_j\big(\hat\psi(\lambda-\lambda_j)+\hat\psi(\lambda+\lambda_j)\big).
+\end{equation}
+Let $\omega_n$ denote the volume of the unit ball in $\R^n$ (so $\vol(\Sphere^{n-1})=n\omega_n$).
+
+\begin{theorem}\label{wave:thm:trace}
+Let $t_0>0$ be as in \cref{wave:thm:parametrix}. For every $\psi\in\CIc((-t_0,t_0))$,
+$\psi T\in\Ic{n-\frac34}(\R,\{0\})$, i.e.\ $\widehat{\psi T}\in\Sym{n-1}(\R)$; more precisely,
+$\widehat{\psi T}$ is polyhomogeneous as $\lambda\to\pm\infty$ and
+\begin{equation}\label{wave:eq:trace-leading}
+\widehat{\psi T}(\lambda)=\frac{n\,\omega_n}{2(2\pi)^{n-1}}\,\psi(0)\vol(X)\,|\lambda|^{n-1}+O(|\lambda|^{n-2}),\qquad|\lambda|\to\infty .
+\end{equation}
+\end{theorem}
+\begin{proof}
+\emph{Reduction to the parametrix.} With $\psi_\lambda=\psi e^{-i\lambda\cdot}$,
+$\widehat{\psi T}(\lambda)=\int_XK_{C_{\psi_\lambda}}(x,x)\dvol$ (the definition of $C_\psi$
+extends to complex $\psi$), and $K_{C_{\psi_\lambda}}=\int\psi_\lambda(t)K_{\cos}(t)\,dt$. By
+\cref{wave:thm:parametrix}, $K_{\cos}=\sum_{k,\pm}S_{k,\pm}+R$, with $S_{k,\pm}$ the terms of the parametrix, on
+$(-t_0,t_0)\times X\times X$ with $R$ smooth; the contribution
+$\iint\psi(t)e^{-it\lambda}R(t,x,x)\,dt\dvol$ of $R$ is $O(|\lambda|^{-\infty})$. Fix $k$ and
+the sign $+$ (the sign $-$ is analogous) and write $\varphi=\varphi_{k,+}$,
+$a=a_{k,+}$. Then
+\begin{gather*}
+\int\psi_\lambda(t)S_{k,+}(t,x,y)\,dt=(2\pi)^{-n}\int e^{-iy\cdot\eta}\alpha(x,y,\eta)\,d\eta,\\
+\alpha=\zeta_k(x)\chi_k(y)\chi(\eta)\int e^{i(\varphi(t,x,\eta)-t\lambda)}\psi(t)a\,dt .
+\end{gather*}
+For fixed $\lambda$, $|\pa_t\varphi-\lambda|=|q(x,d_x\varphi)-\lambda|\ge c|\eta|$ for $|\eta|\ge C(1+|\lambda|)$, so
+repeated integration by parts with $(\pa_t\varphi-\lambda)^{-1}D_t$ shows that $\alpha$ and all its
+$(x,y)$-derivatives are rapidly decreasing in $\eta$. Hence this kernel is smooth, given
+by an absolutely convergent integral, and its value at $x=y$ is the absolutely
+convergent iterated integral $(2\pi)^{-n}\int(\int\cdots dt)\,d\eta$. Thus
+\begin{equation*}
+I_{k,+}(\lambda)=(2\pi)^{-n}\int_X\int_{\R^n}\Big(\int_\R e^{i(\varphi(t,x,\eta)-x\cdot\eta-t\lambda)}b(t,x,\eta)\,dt\Big)d\eta\dvol(x),
+\end{equation*}
+with $b(t,x,\eta)=\psi(t)\chi_k(x)a(t,x,x,\eta)\chi(\eta)$ (using $\zeta_k\chi_k=\chi_k$). By
+dominated convergence we may insert $\chi_0(\eps\eta)$, $\chi_0\in\CIc(\R^n)$, $\chi_0(0)=1$,
+and let $\eps\to0$; for $\eps>0$ the integral is absolutely convergent and Fubini's
+theorem allows the $t$-integration to be done last.
+
+\emph{Restriction to the diagonal.} Since $\varphi(0,x,\eta)=x\cdot\eta$,
+\begin{equation*}
+\varphi(t,x,\eta)-x\cdot\eta=tQ(t,x,\eta),\qquad Q(t,x,\eta)=\int_0^1q\big(x,d_x\varphi(st,x,\eta)\big)\,ds,
+\end{equation*}
+with $Q$ smooth, positive, homogeneous of degree one in $\eta$ and
+$Q(0,x,\eta)=|\eta|_{g(x)}$. (Thus the restriction of the characteristic hypersurface
+$\{h_+=0\}$ of \cref{wave:rem:superposition} to the diagonal is exactly $\{t=0\}$, the
+transversal situation of \cref{wave:prop:restriction}.) In polar coordinates
+$\eta=r\omega$ and then $\rho=rQ(t,x,\omega)$ for fixed $(t,x,\omega)$,
+$d\eta=\rho^{n-1}Q(t,x,\omega)^{-n}d\rho\,d\omega$, and we obtain
+$I_{k,+}(\lambda)=\lim_{\eps\to0}\iint e^{it(\rho-\lambda)}B_\eps(t,\rho)\,dt\,d\rho$ with
+\begin{equation*}
+B_\eps(t,\rho)=(2\pi)^{-n}\int_X\int_{\Sphere^{n-1}}b\Big(t,x,\frac{\rho\omega}{Q}\Big)\chi_0\Big(\frac{\eps\rho\omega}{Q}\Big)\frac{\rho^{n-1}}{Q(t,x,\omega)^n}\,d\omega\dvol(x)
+\end{equation*}
+for $\rho>0$, and $B_\eps=0$ for $\rho\le0$ (as $\chi=0$ near $0$). This is the
+push-forward of \cref{wave:prop:pushforward} along $X\times\Sphere^{n-1}$. The
+$B_\eps$ are bounded in the class of \cref{wave:lem:fourier-amplitude} with $m=n-1$ and
+converge to $B=B_0$, whose amplitude is polyhomogeneous in $\rho$. By
+\cref{wave:lem:fourier-amplitude}, $I_{k,+}=J_B\in\Sym{n-1}$, polyhomogeneous, and
+$I_{k,+}(\lambda)=2\pi B(0,\lambda)+O(\ang{\lambda}^{n-2})$. In particular $I_{k,+}(\lambda)=O(|\lambda|^{-\infty})$
+as $\lambda\to-\infty$.
+
+\emph{Leading term.} At $t=0$, $b(0,x,\eta)=\psi(0)\chi_k(x)a(0,x,x,\eta)$ for $|\eta|\ge1$, and by
+\eqref{wave:eq:initial-symbols} $a(0,x,x,\eta)=\frac12|g(x)|^{-1/2}+\Sym{-1}$. Hence for
+$\rho\to+\infty$
+\begin{equation*}
+B(0,\rho)=\frac{\psi(0)}{2(2\pi)^n}\rho^{n-1}\int_X\chi_k(x)|g(x)|^{-1/2}\int_{\Sphere^{n-1}}|\omega|_{g(x)}^{-n}\,d\omega\dvol(x)+O(\rho^{n-2}).
+\end{equation*}
+In polar coordinates the ellipsoid $\{\eta;\ |\eta|_{g(x)}\le1\}$ has volume
+$\frac1n\int_{\Sphere^{n-1}}|\omega|_{g(x)}^{-n}d\omega$, and it is the image of the unit ball under a linear
+map of determinant $\det(g^{ij})^{-1/2}=|g(x)|^{1/2}$; so the inner integral is $n\omega_n|g(x)|^{1/2}$ and
+$B(0,\rho)=\frac{n\omega_n}{2(2\pi)^n}\psi(0)\rho^{n-1}\int_X\chi_k\dvol+O(\rho^{n-2})$. The terms with the sign
+$-$ have phase $\varphi_{k,-}-x\cdot\eta=-tQ_-$ and give the same expression with $\lambda$ replaced by
+$-\lambda$, rapidly decreasing as $\lambda\to+\infty$. Summing over $k$ ($\sum\chi_k=1$) and
+multiplying by $2\pi$ gives \eqref{wave:eq:trace-leading}.
+\end{proof}
+
+\begin{remark}\label{wave:rem:circle}
+For the circle $X=\R/L\Z$, $\lambda=2\pi|k|/L$ for $k\in\Z$ and
+$T(t)=\sum_{k\in\Z}\cos(2\pi kt/L)$, while by Poisson summation $\sum_k\hat\psi(\lambda-2\pi k/L)
+=L\sum_m\psi(mL)e^{-imL\lambda}=L\psi(0)$ if $\supp\psi\subset(-L,L)$. Thus
+$\widehat{\psi T}=L\psi(0)$, in agreement with \eqref{wave:eq:trace-leading} ($n=1$,
+$\omega_1=2$). The restriction on the support of $\psi$ is necessary: $T$ is singular at every
+$t\in L\Z$, the lengths of the closed geodesics (\cref{wave:sec:poisson}).
+\end{remark}
+
+\section{Weyl asymptotics}\label{wave:sec:weyl}
+
+\begin{theorem}[Weyl's law with remainder]\label{wave:thm:weyl}
+Let $X$ be a compact Riemannian manifold of dimension $n\ge2$. Then
+\begin{equation*}
+N(\lambda)=(2\pi)^{-n}\omega_n\vol(X)\lambda^n+O(\lambda^{n-1}),\qquad\lambda\to\infty .
+\end{equation*}
+\end{theorem}
+\begin{proof}
+Write $C_W=(2\pi)^{-n}\omega_n\vol(X)$.
+
+\emph{Choice of a test function.} Let $\theta\in\CIc((-t_0/2,t_0/2))$ be real, even,
+non-negative and not identically zero, normalised by $\int\theta^2=1$, and let
+$\psi=\theta*\theta$. Then $\psi\in\CIc((-t_0,t_0))$ is even, $\psi(0)=1$ and
+$\hat\psi=\hat\theta^2=|\hat\theta|^2\ge0$. Set $\rho=\hat\psi/(2\pi)$: $\rho\in\cS(\R)$ is even and
+non-negative, $\int\rho=\psi(0)=1$, and $\rho(0)=(2\pi)^{-1}(\int\theta)^2>0$, so there are
+$a,c_0>0$ with $\rho\ge c_0$ on $[-a,a]$.
+
+\emph{Smoothed density.} By \eqref{wave:eq:psiT-hat},
+$(\rho*\mu)(\lambda)=\sum_j\rho(\lambda-\lambda_j)=\pi^{-1}\widehat{\psi T}(\lambda)-\sum_j\rho(\lambda+\lambda_j)$. For
+$\lambda\ge0$, $\sum_j\rho(\lambda+\lambda_j)\le C_M\sum_j(1+\lambda+\lambda_j)^{-M}=O(\lambda^{-\infty})$, by
+\cref{wave:lem:apriori}. Hence by \cref{wave:thm:trace}
+\begin{equation}\label{wave:eq:smoothed-density}
+(\rho*\mu)(\lambda)=nC_W\lambda^{n-1}+O(\lambda^{n-2}),\quad\lambda\to+\infty;\qquad(\rho*\mu)(\lambda)=O(\ang{\lambda}^{-\infty}),\quad\lambda\to-\infty,
+\end{equation}
+the second because $\lambda-\lambda_j\le\lambda<0$. Note $\pi^{-1}\frac{n\omega_n}{2(2\pi)^{n-1}}=n(2\pi)^{-n}\omega_n$.
+
+\emph{Step 1: a priori bound.} Since $\rho\ge0$ and $\rho\ge c_0$ on $[-a,a]$,
+$\mu([\lambda-a,\lambda+a])\le c_0^{-1}(\rho*\mu)(\lambda)\le C(1+|\lambda|)^{n-1}$ for all $\lambda\in\R$
+(the function $\rho*\mu$ is continuous). Covering an interval of length $2r$ by at most
+$1+r/a$ intervals of length $2a$,
+\begin{equation}\label{wave:eq:local-bound}
+\mu([\lambda-r,\lambda+r])\le C'(1+r)^n(1+|\lambda|)^{n-1},\qquad\lambda\in\R,\ r\ge0 .
+\end{equation}
+
+\emph{Step 2: the smoothed counting function.} Let
+$N_\rho(\lambda)=\int N(\lambda-\sigma)\rho(\sigma)\,d\sigma=\sum_jR(\lambda-\lambda_j)$, $R(s)=\int_{-\infty}^s\rho$.
+Termwise differentiation (justified by the locally uniform convergence of
+$\sum_j\rho(\lambda-\lambda_j)$) gives $N_\rho'=\rho*\mu$, and $N_\rho(\lambda)\to0$ as $\lambda\to-\infty$.
+Thus, by \eqref{wave:eq:smoothed-density} and $n\ge2$,
+\begin{equation*}
+N_\rho(\lambda)=\int_{-\infty}^1(\rho*\mu)\,ds+\int_1^\lambda\big(nC_Ws^{n-1}+O(s^{n-2})\big)\,ds=C_W\lambda^n+O(\lambda^{n-1}).
+\end{equation*}
+
+\emph{Step 3: removing the smoothing.} Since $\int\rho=1$, $\rho\ge0$ and $N$ is
+non-decreasing, $|N(\lambda)-N(\lambda-\sigma)|\le\mu([\lambda-|\sigma|,\lambda+|\sigma|])$, so by
+\eqref{wave:eq:local-bound}
+\begin{equation*}
+|N(\lambda)-N_\rho(\lambda)|\le\int|N(\lambda)-N(\lambda-\sigma)|\rho(\sigma)\,d\sigma
+\le C'(1+|\lambda|)^{n-1}\int(1+|\sigma|)^n\rho(\sigma)\,d\sigma .
+\end{equation*}
+Combining with Step 2 proves the theorem.
+\end{proof}
+
+\begin{remark}\label{wave:rem:weyl-sharp}
+\begin{enumerate}[label=(\roman*)]
+\item The remainder cannot be improved in general: on the round sphere
+  $\Sphere^n$ the eigenvalues $k(k+n-1)$ of $\Delta$ have multiplicities of order $k^{n-1}$,
+  so $N$ has jumps of order $\lambda^{n-1}$ (\cref{wave:ex:sphere}). The remainder is
+  $o(\lambda^{n-1})$ if the set of periodic points of the geodesic flow on the unit
+  cosphere bundle has measure zero (Duistermaat--Guillemin, Ivrii); this uses the
+  structure of $T$ at the non-zero periods. The weaker formula
+  $N(\lambda)\sim C_W\lambda^n$ can also be obtained from the heat kernel or, as in
+  \cite{Guillemin-Weyl}, from residues of the zeta function of $\Delta$.
+\item For $n=1$ each component of $X$ is a circle and everything is explicit
+  (\cref{wave:rem:circle}); in that case $N(\lambda)=C_W\lambda+O(1)$, but the argument of Step 2
+  only gives $O(\log\lambda)$ unless one uses that the lower order terms in
+  \eqref{wave:eq:trace-leading} vanish.
+\item The proof only used: the trace formula \eqref{wave:eq:trace-leading} for
+  \emph{one} positive test function with small support, the positivity of $\mu$, and a
+  polynomial a priori bound. See \cite[Section~17.5]{Hormander-III} for the same
+  method based on the Hadamard parametrix.
+\end{enumerate}
+\end{remark}
+
+\section{Propagation of singularities and the Poisson relation}\label{wave:sec:poisson}
+
+In this section we explain, with some steps only sketched, how the global
+behaviour of $T$ is governed by closed geodesics. The full theory requires Fourier
+integral operators \cite{Hormander-FIO} and the propagation theorem for operators of
+real principal type; for the strictly hyperbolic case see
+\cite[Chapter~XXIII]{Hormander-III}.
+
+Let $C_+\subset\Sigma(P)\times\Sigma(P)$ be the forward bicharacteristic relation:
+$(\zeta,\zeta')\in C_+$ if $\zeta$ lies on the null bicharacteristic through $\zeta'$ and
+$t(\zeta)\ge t(\zeta')$. Write $\Delta^*$ for the diagonal of
+$(T^*(\R\times X)\setminus0)^2$ and $\WFp(E)=\{(\zeta,\zeta');\ (\zeta,-\zeta')\in\WF(E)\}$.
+
+\begin{lemma}\label{wave:lem:WF-E}
+$\WFp(E)\cap\{|t-t'|<t_0\}\subset\Delta^*\cup C_+$, and $\WF(E)$ contains no
+points with zero covector in either factor.
+\end{lemma}
+\begin{proof}[Sketch of proof]
+By \eqref{wave:eq:E-kernel}, $E=-H(t-t')K_{\sin}(t-t',x,x')$. For
+$0<|t-t'|<t_0$, \cref{wave:cor:WF-short} gives $\WF(E)\subset$ pull-back of $\Gamma$, and by
+\cref{wave:lem:bichar} a point of $\Gamma$ at time $t-t'>0$ corresponds exactly to a pair
+in $C_+$ (the point $(t',x',\tau,\eta)$ is carried to $(t,G_{\mp(t-t')}(x',\eta),\tau)$ for
+$\tau=\pm|\eta|$). At $t=t'$, $\WF(H(t-t'))$ consists of covectors $(\sigma,0;-\sigma,0)$ and
+$\WF(K_{\sin}(t-t',x,x'))$ of covectors $(\tau,\xi;-\tau,-\xi)$ with $x=x'$, $\tau=\pm|\xi|$; their sum
+is never zero, so the product is defined \cite[Section~8.2]{Hormander-I}, and all
+resulting points over $\{t=t',x=x'\}$ have the form $(\zeta,-\zeta)$ with $\zeta\ne0$, i.e.\ lie in
+$\Delta^*$ in the primed notation. The last claim follows from the same description.
+\end{proof}
+
+\begin{theorem}[Propagation of singularities]\label{wave:thm:propagation}
+Let $u\in\CmI(\R\times X)$. Then $\WF(u)\setminus\WF(Pu)\subset\Sigma(P)$, and if
+$\gamma\colon J\to\Sigma(P)\setminus\WF(Pu)$ is a null bicharacteristic on an interval $J$ with
+$\gamma(s_0)\in\WF(u)$ for some $s_0\in J$, then $\gamma(J)\subset\WF(u)$.
+\end{theorem}
+\begin{proof}[Sketch of proof]
+The first statement is microlocal elliptic regularity. Let $z=\gamma(s_0)\in\WF(u)\setminus\WF(Pu)$,
+$\bar t=t(z)$, and parametrise $\gamma$ by $t$ (\cref{wave:lem:bichar}). As $\WF(Pu)$ is closed,
+there is $\delta\in(0,t_0/2)$ such that $\gamma(t)\notin\WF(Pu)$ for $|t-\bar t|\le2\delta$. Let
+$t_1\in(\bar t-\delta,\bar t)$ and suppose $\gamma(t_1)\notin\WF(u)$; then, $\WF(u)$ being closed,
+$\gamma(t)\notin\WF(u)$ for $|t-t_1|\le\eps$. Choose $\chi\in\CI(\R)$ with $\chi=0$ for
+$t<t_1-\eps$, $\chi=1$ for $t>t_1+\eps$. Then $\chi u$ has support bounded below and
+$P(\chi u)=g=\chi Pu+[P,\chi]u$, so $\chi u=Eg$ by \cref{wave:thm:forward}. Since $\chi u=u$
+near $\bar t$ and only $g$ on $\{t>\bar t-2\delta\}$ influences $Eg$ near $\bar t$ modulo
+$\CI$ (smoothness of $E$ off $\WFp$, finite speed), the wavefront calculus for
+operators with kernel $E$ \cite[Section~8.2]{Hormander-I} and \cref{wave:lem:WF-E} give
+$z\in\WF(g)\cup C_+\circ\WF(g)$. Now $z\notin\WF(g)$, so some $\zeta'\in\WF(g)$ lies on the
+backward bicharacteristic segment of $z$ within time $2\delta$. It is not in $\WF(Pu)$,
+hence $\zeta'\in\WF([P,\chi]u)\subset\WF(u)\cap\{|t-t_1|\le\eps\}$, i.e.\ $\zeta'=\gamma(t)$ with
+$|t-t_1|\le\eps$, a contradiction. Therefore $\gamma(t)\in\WF(u)$ for $t\in(\bar t-\delta,\bar t]$;
+applying this to $u(-t,x)$ (which reverses time and is handled by the backward
+fundamental solution) also for $t\in[\bar t,\bar t+\delta)$. So the set of $s\in J$ with
+$\gamma(s)\in\WF(u)$ is open, and it is closed in $J$ since $\WF(u)$ is closed; $J$ being
+connected, it is all of $J$.
+\end{proof}
+
+The same argument applies to $D_t^2-\Delta_X$ on $\R\times X\times Y$ (fundamental solution
+$E\otimes\Id_Y$) at points where $(\tau,\xi)\ne0$, for distributions whose wavefront set does
+not meet $\{\tau=0,\ \xi=0\}$; the bicharacteristics now leave the $(y,\eta)$ components fixed.
+
+\begin{proposition}\label{wave:prop:WF-kernel}
+For all $t\in\R$, $\WF(K_{\cos})\subset\Gamma$, with $\Gamma$ as in \cref{wave:cor:WF-short}.
+\end{proposition}
+\begin{proof}[Sketch of proof]
+$K_{\cos}$ is annihilated by $D_t^2-\Delta_x$ and by $D_t^2-\Delta_y$ (as $\cos(t\Lambda)$
+commutes with $\Delta$), so $\WF(K_{\cos})\subset\{\tau^2=|\xi|^2=|\eta|^2\}$, which does not meet
+$\{\tau=0,\xi=0\}$. By the extension of \cref{wave:thm:propagation}, $\WF(K_{\cos})$ is a
+union of complete bicharacteristics of $D_t^2-\Delta_x$; each of these meets
+$\{|t|<t_0\}$, where $\WF(K_{\cos})\subset\Gamma$ by \cref{wave:cor:WF-short}. Since $\Gamma$ is a union of
+such bicharacteristics, $\WF(K_{\cos})\subset\Gamma$.
+\end{proof}
+
+Let $\Lset$ be the set of lengths of closed (non-constant, unit speed) geodesics of
+$X$. It is closed, and $\inf\Lset\ge2\inj(X)>0$, since a geodesic loop at $x$ cannot be
+shorter than $2\inj(X)$.
+
+\begin{theorem}[Poisson relation]\label{wave:thm:poisson}
+$\singsupp T\subset\{0\}\cup\Lset\cup(-\Lset)$.
+\end{theorem}
+\begin{proof}[Sketch of proof]
+Let $\iota\colon\R\times X\to\R\times X\times X$, $(t,x)\mapsto(t,x,x)$, and $\pi\colon\R\times X\to\R$. The
+conormal bundle of $\iota(\R\times X)$ consists of covectors $(0,\xi,-\xi)$, which are not in
+$\Gamma$ (there $\tau\ne0$), so $\iota^*K_{\cos}$ is defined and
+$\WF(\iota^*K_{\cos})\subset\{(t,x;\tau,\xi-\eta);\ (t,x,x;\tau,\xi,-\eta)\in\Gamma\}$
+\cite[Section~8.2]{Hormander-I}. Since integration over $t$ against $\psi$ commutes with
+$\iota^*$ and turns $K_{\cos}$ into the smooth kernel $K_{C_\psi}$, $T=\pi_*\iota^*K_{\cos}$.
+For the push-forward, $\WF(\pi_*v)\subset\{(t,\tau);\ \exists x,\ (t,x;\tau,0)\in\WF(v)\}$. Hence if
+$(t,\tau)\in\WF(T)$ there are $x$ and $\eta\ne0$ with $(x,\eta)=G_{\mp t}(x,\eta)$, i.e.\ either
+$t=0$, or the geodesic through $x$ in the direction $g^{-1}\eta$ is closed of length dividing
+$|t|$ — in particular $|t|\in\Lset$ (a multiple of a closed geodesic is a closed
+geodesic).
+\end{proof}
+
+\begin{corollary}\label{wave:cor:trace-extended}
+The conclusions of \cref{wave:thm:trace} hold for every $\psi\in\CIc((-\inf\Lset,\inf\Lset))$.
+\end{corollary}
+\begin{proof}
+Take $\psi_0\in\CIc((-t_0,t_0))$ with $\psi_0=1$ near $0$. Then $(1-\psi_0)\psi T$ is smooth
+with compact support by \cref{wave:thm:poisson}, so its Fourier transform is
+rapidly decreasing, and \cref{wave:thm:trace} applies to $\psi_0\psi$, with $(\psi_0\psi)(0)=\psi(0)$.
+\end{proof}
+
+\section{Exercises}
+
+\begin{exercise}\label{wave:ex:darboux}
+Let $E$ be a real vector space with a non-degenerate antisymmetric bilinear form
+$\omega$. Show that $\dim E=2n$ is even and that there is a basis
+$v_1,\dots,v_n,w_1,\dots,w_n$ with dual basis $v_j^*,w_j^*$ such that
+$\omega=\sum_jv_j^*\wedge w_j^*$. \emph{Hint:} choose $v_1\ne0$, then $w_1$ with
+$\omega(v_1,w_1)=1$; then $v_2$ in the $\omega$-orthogonal complement of $\mathrm{span}(v_1,w_1)$ (why
+is this complement a complement, and why is $\omega$ non-degenerate on it?), and so on.
+Deduce that there is a linear isomorphism $L\colon E\to\R^{2n}$ with $\omega=L^*\omega_0$, where
+$\omega_0=\sum_jd\xi_j\wedge dx_j$ is the standard symplectic form.
+\end{exercise}
+
+\begin{exercise}\label{wave:ex:lagrangian}
+Extend \cref{wave:ex:darboux}: if $V\subset E$ is a Lagrangian subspace ($\dim V=n$,
+$\omega|_V=0$), then $L$ can be chosen to map $V$ onto $\{x=0\}\subset\R^{2n}$. \emph{Hint:}
+construct the basis with all $v_j\in V$ (or all $w_j$, depending on the sign convention).
+\end{exercise}
+
+\begin{exercise}\label{wave:ex:poisson}
+Let $(S,\omega)$ be a symplectic manifold and $\Ham{f}$ the Hamilton vector field of
+$f\in\CI(S)$, defined by $\iota_{\Ham{f}}\omega=-df$ (or with the opposite sign). Show that the
+Poisson bracket $\{f,g\}=\Ham{f}g$ makes $\CI(S)$ into a Lie algebra, and that
+$[\Ham{f},\Ham{g}]=\Ham{\{f,g\}}$. \emph{Hint:} the Jacobi identity is equivalent to $d\omega=0$.
+\end{exercise}
+
+\begin{exercise}\label{wave:ex:initial-split}
+Let $H_0=\{(x-y)\cdot\omega=0\}\subset\R^n$ and let $H_\pm$ be the two characteristic
+hypersurfaces of \cref{wave:rem:superposition} through $\{0\}\times H_0$. Show that for
+$v_0\in\Ic{m}(\R^n,H_0)$ and $v_1\in\Ic{m+1}(\R^n,H_0)$ there are conormal $u_\pm$,
+associated with $H_\pm$ and solving $Pu_\pm\in\CI$ near $t=0$, with $u_++u_-=v_0$ and
+$D_t(u_++u_-)=v_1$ at $t=0$ modulo $\CI$, and that their full symbols at $t=0$ are
+uniquely determined. (Write the conditions on the symbols as a triangular system,
+as in the proof of \cref{wave:thm:parametrix}.)
+\end{exercise}
+
+\begin{exercise}\label{wave:ex:volterra}
+Let $F\in\Cz([0,t_1]\times X\times X)$ with $|F|\le M$, extended by $0$ for $t<0$, and define the
+$t$-convolution $(F\circ G)(t,x,y)=\int_0^t\int_XF(t-s,x,z)G(s,z,y)\dvol(z)\,ds$. Show that the
+iterates $F^{(1)}=F$, $F^{(k)}=F^{(k-1)}\circ F$ satisfy
+$|F^{(k)}(t,x,y)|\le M^k\vol(X)^{k-1}t^{k-1}/(k-1)!$, and deduce that $\Id+F$ (with $\Id$ the
+identity for $t$-convolution, kernel $\delta(t)\delta_y(x)$) has inverse $\Id+\tilde F$,
+$\tilde F=\sum_{k\ge1}(-1)^kF^{(k)}$, with $\tilde F$ continuous. Show that if $F$ is smooth and
+vanishes to infinite order at $t=0$ then so does $\tilde F$, and use this, together with a local
+parametrix, to construct a forward fundamental solution as in \cref{wave:rem:volterra}.
+\end{exercise}
+
+\begin{exercise}\label{wave:ex:circle}
+For $X=\R/L\Z$ compute $N(\lambda)$ exactly and verify $N(\lambda)=\frac L\pi\lambda+O(1)$. Show that
+$T=\sum_{k\in\Z}\cos(2\pi kt/L)=L\sum_{m\in\Z}\delta(t-mL)$ and compare with
+\cref{wave:thm:poisson}.
+\end{exercise}
+
+\begin{exercise}\label{wave:ex:torus}
+For the flat torus $X=\R^n/2\pi\Z^n$ show that the eigenvalues of $\Delta$ are $|k|^2$,
+$k\in\Z^n$, and deduce from \cref{wave:thm:weyl} the lattice point estimate
+$\#\{k\in\Z^n;\ |k|\le\lambda\}=\omega_n\lambda^n+O(\lambda^{n-1})$ ($n\ge2$).
+\end{exercise}
+
+\begin{exercise}\label{wave:ex:sphere}
+On the round sphere $\Sphere^2$ the eigenvalues of $\Delta$ are $k(k+1)$, $k\in\N_0$, with
+multiplicity $2k+1$. Show that $C_W=1$ and that $N(\lambda)-\lambda^2$ takes values $\ge\frac12\lambda$ and
+$\le-\frac12\lambda$ for arbitrarily large $\lambda$, so the remainder in \cref{wave:thm:weyl} is not
+$o(\lambda^{n-1})$ in general. Compute $T$ for $\Sphere^2$ and locate its singularities.
+\end{exercise}
+
+\begin{exercise}\label{wave:ex:fn}
+Show that $f_n$ is homogeneous of degree $-n$, that $f_n=D_s^{n-1}\delta$ for $n$ odd, and that
+for $n$ even $f_n(s)=c_ns^{-n}$ for $s\ne0$, with a constant $c_n\ne0$ (compute it). Deduce from
+\cref{wave:prop:radon} that, for $n$ odd, $\delta$ is a superposition of distributions supported on
+hyperplanes, whereas for $n$ even it is not.
+\end{exercise}
+
+\section*{Notes}
+
+Compared with the original notes, we have restricted attention to compact $X$
+(dropping the case of $\R^n$ with a metric that is Euclidean at infinity), and solved
+the Cauchy problem and constructed the forward fundamental solution by spectral
+decomposition, keeping the Volterra-series construction as a remark and an exercise.
+The short-time parametrix is written as an oscillatory integral whose phase solves
+the eikonal equation; in polar coordinates it is exactly the superposition of
+conormal solutions associated with characteristic hypersurfaces through hyperplanes
+that the original uses (\cref{wave:rem:superposition}). The order of $f_n(x\cdot\omega)$ in
+\cref{wave:lem:fn} is $\frac n2-\frac14$ (not $\frac n4-\frac14$), and Weyl's formula with the
+remainder $O(\lambda^{n-1})$ is what the Tauberian argument proves; the original stated
+$o(\lambda^{n-1})$, which is false in general (\cref{wave:ex:sphere}).
+
+The remainder $O(\lambda^{n-1})$ is due to Avakumovi\'c, Levitan and H\"ormander
+(L.~H\"ormander, \emph{The spectral function of an elliptic operator}, Acta Math.\ 121
+(1968)); see also \cite[Section~17.5]{Hormander-III}. The Poisson relation and the
+improvement to $o(\lambda^{n-1})$ under a condition on periodic geodesics are due to
+Chazarain, Colin de Verdi\`ere and Duistermaat--Guillemin (J.~J.~Duistermaat and
+V.~W.~Guillemin, \emph{The spectrum of positive elliptic operators and periodic
+bicharacteristics}, Invent.\ Math.\ 29 (1975)), and Ivrii. For Fourier integral operators
+and Lagrangian distributions, of which the wave kernel is the basic example, see
+\cite{Hormander-FIO}, \cite{Bruning-Guillemin}; for a different proof of the leading term
+see \cite{Guillemin-Weyl}.
