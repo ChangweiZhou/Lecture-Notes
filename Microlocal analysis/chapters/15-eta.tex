@@ -1,0 +1,1433 @@
+\chapter{Eta forms and the index of product-type families}\label{ch:eta}
+\providecommand{\Ch}{\operatorname{Ch}}
+\providecommand{\Chodd}{\operatorname{Ch}_{\mathrm{odd}}}
+\providecommand{\Td}{\operatorname{Td}}
+\providecommand{\Trbar}{\overline{\operatorname{Tr}}}
+\providecommand{\TrR}{\operatorname{Tr}_{\mathrm{R}}}
+\providecommand{\res}{\operatorname{res}}
+\providecommand{\FP}{\operatorname{FP}}
+\providecommand{\wind}{\operatorname{wind}}
+\providecommand{\Hardy}{\mathcal{H}}
+\providecommand{\GT}{G_{\mathcal{T}}}
+\providecommand{\PsiT}[1]{\Psi^{#1}_{\mathcal{T}}}
+\providecommand{\Psipt}[1]{\Psi^{#1}_{\mathrm{pt}}}
+\providecommand{\PsiptT}[1]{\Psi^{#1}_{\mathrm{pt},\mathcal{T}}}
+
+The index formula for product-type operators involves, besides the familiar
+Atiyah--Singer integrand, a `regularized odd Chern character' of the base family,
+which we call an eta form. In this chapter we first construct the necessary
+regularization of the trace on a compact manifold, using holomorphic families of
+pseudodifferential operators: Seeley's theorem on the meromorphic continuation of
+traces, the residue trace, the regularized trace and the trace-defect formula (these
+are the analogues for compact manifolds of the constructions for the isotropic
+algebra in \cref{ch:determinants}). We then specialize to the circle and define eta
+forms on the group of invertible Toeplitz operators, compute their exterior
+derivative and relate them to the odd Chern forms and the Fredholm determinant of
+\cref{ch:index}. The main result, \cref{eta:thm:index}, is an index formula for
+fully elliptic operators of Toeplitz product type on $M\times\Sphere$; the proof
+uses the product-type calculus of \cref{ch:product}, the weak contractibility of the
+Toeplitz group from \cref{ch:bott} and the Atiyah--Singer theorem of
+\cref{ch:families}. A version for the full (non-Toeplitz) product-type calculus
+follows. The last section discusses, more briefly and partly conjecturally, the
+general product-type index problem, a corresponding cohomology theory and the
+determinant line bundle. The eta forms here are close relatives of the eta
+invariant of Atiyah--Patodi--Singer \cite{Melrose-APS} and of the eta forms of
+Bismut and Cheeger \cite{Bismut-Cheeger}; see also \cite{Melrose-Rochon}.
+
+Throughout, $Z$ denotes a compact manifold without boundary of dimension $d\ge1$
+and $E\longrightarrow Z$ a complex vector bundle. We fix a smooth positive density
+on $Z$ and a Hermitian structure on $E$, so that operators act on $L^2(Z;E)$; the
+trace does not depend on these choices.
+
+\section{The trace on operators of low order}\label{eta:sec:trace}
+
+\subsection{Operators of complex order} Recall (\cref{ch:distributions,ch:conormal})
+that the classical symbols of order $m$ on $\R^d$ are exactly the functions of the
+form $\rho^{-m}b$ with $b\in\CI(\RC{\R^d})$, where $\RC{\R^d}$ is the radial
+compactification and $\rho$ is a boundary defining function, for instance
+$\rho=\ang{\xi}^{-1}$. This description makes sense for any $m\in\C$: we say that
+$a\in\CI(U\times\R^d;M(N,\C))$ is a \emph{classical symbol of order $m\in\C$} if
+$a=\rho^{-m}b$ with $b\in\CI(U\times\RC{\R^d};M(N,\C))$. Such a symbol has an
+asymptotic expansion $a\sim\sum_{j\ge0}a_{m-j}$ with $a_{m-j}$ homogeneous of degree
+$m-j$ in $\abs\xi\ge1$, obtained from the Taylor series of $b$ at the boundary.
+Correspondingly $\Psido{m}(Z;E)$, $m\in\C$, denotes the operators whose kernels are
+smooth away from the diagonal and which in any coordinate chart $U$ over which $E$ is
+trivial, after cut-off, are of the form $\Op(a)$ with $a$ a classical symbol of
+order $m$ (left quantization), modulo smoothing operators. The composition theorem
+and the symbol calculus of \cref{ch:manifolds} hold without change for complex
+orders: $\Psido{m}\circ\Psido{m'}\subset\Psido{m+m'}$, principal symbols multiply and
+$\Psido{m}\subset\Psido{m'}$ if $\Re m'-\Re m\in\N_0$ and $m'-m\in\N_0$. We write
+\[
+\Psido{\Z}(Z;E)=\bigcup_{m\in\Z}\Psido{m}(Z;E)
+\]
+for the algebra of classical operators of integral order.
+
+\begin{lemma}\label{eta:lem:trace-class}
+If $A\in\Psido{m}(Z;E)$ with $\Re m<-d$ then $A$ is of trace class on $L^2(Z;E)$, its
+kernel $K_A$ is continuous and
+\[
+\Tr(A)=\int_Z\tr_E K_A(z,z).
+\]
+If $U$ is a coordinate chart over which $E$ is trivialized,
+$\phi,\psi\in\CIc(U)$ and $A=\phi\Op(a)\psi$ with $a$ a symbol of order $m$, then
+\begin{equation}\label{eta:eq:local-trace}
+\Tr(A)=(2\pi)^{-d}\int_U\int_{\R^d}\phi(z)\psi(z)\tr a(z,\xi)\,d\xi\,dz.
+\end{equation}
+\end{lemma}
+
+\begin{proof} Using a partition of unity $\{\phi_i\}$ subordinate to coordinate
+charts and $\psi_i\in\CIc$ equal to $1$ near $\supp\phi_i$, write
+$A=\sum_i\phi_iA\psi_i+R$ with $R=\sum_i\phi_iA(1-\psi_i)$ smoothing. Smoothing
+operators on a compact manifold are of trace class with trace given by the integral
+of the kernel over the diagonal, so it suffices to consider $A=\phi\Op(a)\psi$ in a
+chart. Write $a=a'\ang\xi^{m/2}$ with $a'=a\ang\xi^{-m/2}$ of order $m/2$. Since the
+second factor is a Fourier multiplier, $\Op(a')\Op(\ang\xi^{m/2})=\Op(a)$ exactly in the
+left quantization, so $A=T_1T_2$ with $T_1=\phi\Op(a')$, $T_2=\Op(\ang\xi^{m/2})\psi$. The
+kernel of $T_2$ is $k(z-z')\psi(z')$ with $\hat k=\ang\xi^{m/2}\in L^2(\R^d)$ since
+$\Re m<-d$; hence $\int\int\abs{k(z-z')\psi(z')}^2dz\,dz'=\norm k^2\norm\psi^2$ and
+$T_2$ is Hilbert--Schmidt. The kernel of $T_1$ is
+$\phi(z)\int e^{i(z-z')\cdot\xi}a'(z,\xi)\dbar\xi$ which, for each $z$, is in $L^2$ in
+$z'$ with norm $\norm{a'(z,\cdot)}_{L^2}$, uniformly bounded; as $\phi$ has compact
+support $T_1$ is Hilbert--Schmidt. Thus $A$ is of trace class and
+$\Tr(A)=\int\int K_{T_1}(z,z')K_{T_2}(z',z)\,dz'\,dz$. Since $a$ is integrable in
+$\xi$, locally uniformly in $z$, the kernel
+$K_A(z,z')=\phi(z)\int e^{i(z-z')\cdot\xi}a(z,\xi)\dbar\xi\,\psi(z')$ is continuous and
+the double integral equals $\int K_A(z,z)\,dz$, which is \eqref{eta:eq:local-trace}.
+\end{proof}
+
+\begin{lemma}\label{eta:lem:trace-property}
+If $A\in\Psido{m_1}(Z;E)$, $B\in\Psido{m_2}(Z;E)$ and $\Re(m_1+m_2)<-d$ then
+$\Tr(AB)=\Tr(BA)$.
+\end{lemma}
+
+\begin{proof} If $A$ is smoothing then $AB$ and $BA$ are smoothing and both traces are
+the pairing of $K_A(z,z')$ with $K_B(z',z)$, so they agree. In general choose
+$\delta>0$ with $\Re(m_1+m_2)+\delta<-d$ and smoothing operators $A_\epsilon\to A$ in
+$\Psido{m_1+\delta}$ as $\epsilon\to0$ (for instance by cutting off the local symbols
+with $\chi(\epsilon\xi)$, $\chi\in\CIc(\R^d)$ equal to $1$ near $0$). Composition is
+continuous and, by \eqref{eta:eq:local-trace}, the trace is continuous on
+$\Psido{m}$ for $\Re m<-d$, so $\Tr(AB)=\lim\Tr(A_\epsilon B)=\lim\Tr(BA_\epsilon)=\Tr(BA)$.
+\end{proof}
+
+\section{Holomorphic families}\label{eta:sec:holomorphic}
+
+The space $\Psido{m}(Z;E)$ of fixed order has a natural Fr\'echet topology and there is
+no difficulty in speaking of holomorphic maps $\Omega\longrightarrow\Psido{m}(Z;E)$ for
+$\Omega\subset\C$ open. We need families in which the order varies holomorphically
+as well; these are not maps into a fixed space.
+
+\begin{definition}\label{eta:def:hol-family}
+Let $\Omega\subset\C$ be open and $\mu:\Omega\longrightarrow\C$ holomorphic. A family
+$A(s)\in\Psido{\mu(s)}(Z;E)$, $s\in\Omega$, is a \emph{holomorphic family of order
+$\mu$} if
+\begin{enumerate}[label=(\roman*)]
+\item for every $\chi\in\CI(Z^2)$ vanishing near the diagonal, $\chi K_{A(s)}$ is a
+holomorphic map from $\Omega$ to $\CI(Z^2;\Hom(E)\otimes\Omega_R)$, and
+\item for every coordinate chart $U$ over which $E$ is trivial and all
+$\phi,\psi\in\CIc(U)$,
+\[
+\phi A(s)\psi=\Op\bigl(\rho^{-\mu(s)}b(s)\bigr)+R(s),
+\]
+where $b\in\CI(\Omega\times U\times\RC{\R^d};M(N,\C))$ is holomorphic in $s$ with
+support in a fixed compact subset of $U$ in $z$, and $R(s)$ is a holomorphic family
+of smoothing operators.
+\end{enumerate}
+\end{definition}
+
+Changing the boundary defining function $\rho$ to $\rho'=f\rho$, $f>0$ smooth, replaces
+$b(s)$ by $f^{\mu(s)}b(s)$, which is again smooth and holomorphic in $s$; so the
+definition does not depend on $\rho$. Its independence of the coordinates follows,
+exactly as for a single operator in \cref{ch:manifolds}, from the fact that the
+coordinate-change formula for symbols is an asymptotic sum whose terms are
+obtained from the symbol by applying differential operators in $(z,\xi)$ and
+multiplying by smooth functions; these operations preserve
+$\rho^{-\mu(s)}\CI(\Omega\times U\times\RC{\R^d})$, with holomorphic dependence, and the
+asymptotic summation can be carried out holomorphically (Borel's lemma with
+cut-offs chosen independently of $s$, uniformly on compact subsets of $\Omega$). For
+$\mu$ constant this is the usual notion of a holomorphic family. In the same way one
+obtains:
+
+\begin{lemma}\label{eta:lem:hol-composition}
+If $A(s)\in\Psido{\mu(s)}(Z;F,G)$ and $B(s)\in\Psido{\nu(s)}(Z;E,F)$ are holomorphic
+families on $\Omega$ then $A(s)B(s)$ is a holomorphic family of order $\mu+\nu$.
+\end{lemma}
+
+\begin{proof}[Sketch] Off the diagonal this follows from the corresponding property of
+compositions with smoothing operators. Near the diagonal, in local coordinates, the
+symbol of the composite has the expansion $\sum_\alpha\frac1{\alpha!}\pa_\xi^\alpha a(s)
+D_z^\alpha b(s)$, each term lying in $\rho^{-\mu(s)-\nu(s)}\CI$ holomorphically, and the
+remainder after $J$ terms satisfies symbol estimates of order $\Re(\mu+\nu)-J$
+locally uniformly in $s$; by Cauchy's formula the same holds for its $s$-derivatives,
+which gives holomorphy of the composite symbol.
+\end{proof}
+
+We also need a division property.
+
+\begin{lemma}\label{eta:lem:division}
+If $F(s)$ is a holomorphic family of order $\mu$ on $\Omega$ and $F(s_0)=0$ for some
+$s_0\in\Omega$, then $F(s)=(s-s_0)F_1(s)$ with $F_1$ a holomorphic family of order
+$\mu$.
+\end{lemma}
+
+\begin{proof} Off the diagonal $\chi K_{F(s)}$ is holomorphic and vanishes at $s_0$,
+so is divisible by $s-s_0$. Near the diagonal $\phi F(s)\psi=\Op(\rho^{-\mu(s)}b(s))
++R(s)$, and $\rho^{-\mu(s_0)}b(s_0)$ is a symbol of order $-\infty$, so $b(s_0)$
+vanishes to infinite order at the boundary; subtracting
+$\rho^{-\mu(s)}\rho^{\mu(s_0)}b(s_0)$ (which changes $R$ by a holomorphic smoothing
+family vanishing at $s_0$) we may assume $b(s_0)=0$ and then $b(s)=(s-s_0)b_1(s)$
+with $b_1$ smooth and holomorphic. Similarly $R(s)=(s-s_0)R_1(s)$.
+\end{proof}
+
+\begin{proposition}\label{eta:prop:admissible}
+There is an entire family $E(s)\in\Psido{s}(Z;E)$, $s\in\C$, with
+\[
+E(0)=\Id
+\]
+and principal symbol $\abs\xi_g^s\Id_E$ for a Riemannian metric $g$; in particular
+$E(s)$ is elliptic for every $s$.
+\end{proposition}
+
+\begin{proof} Choose a finite cover by coordinate charts $U_i$ over which $E$ is
+trivialized, a subordinate partition of unity $\phi_i$, functions
+$\psi_i\in\CIc(U_i)$ equal to $1$ near $\supp\phi_i$, and a metric $g$. Set
+\[
+E(s)=\sum_i\phi_i\Op\bigl((1+\abs\xi_{g(z)}^2)^{s/2}\Id\bigr)\psi_i.
+\]
+This is an entire family of order $s$ with principal symbol $\abs\xi_g^s\Id$, and since
+$\Op(1)=\Id$, $E(0)=\sum_i\phi_i\psi_i=\sum_i\phi_i=\Id$.
+\end{proof}
+
+Using Seeley's complex powers \cite{Seeley} one can also take $E(s)=(\Delta+1)^{s/2}$,
+with $\Delta$ a Laplacian, which is in addition invertible for all $s$; we shall not
+need this. We call an entire family $E(s)$ of order $s$ with $E(0)=\Id$
+\emph{admissible}.
+
+\begin{theorem}[Seeley]\label{eta:thm:seeley}
+Let $A(s)$ be a holomorphic family of order $m+s$, $m\in\C$, on a connected open set
+$\Omega\subset\C$ which meets the half-plane $\{\Re s<-d-\Re m\}$. Then the function
+$\Tr(A(s))$, holomorphic on $\Omega\cap\{\Re s<-d-\Re m\}$, extends to a meromorphic
+function on $\Omega$ with at most simple poles, located in $-d-m+\N_0$. The operator $A(s_j)$ at $s_j=j-d-m$ has integral order $j-d$, and the residue there is
+\begin{equation}\label{eta:eq:seeley-residue}
+\operatorname*{Res}_{s=s_j}\Tr(A(s))=-\res\bigl(A(s_j)\bigr),
+\end{equation}
+where for $B\in\Psido{k}(Z;E)$, $k\in\Z$,
+\[
+\res(B)=(2\pi)^{-d}\sum_i\int_{U_i}\phi_i(z)\int_{\abs\xi=1}\tr b^{(i)}_{-d}(z,\xi)\,dS(\xi)\,dz,
+\]
+$b^{(i)}_{-d}$ being the term of homogeneity $-d$ in the symbol of $B$ in the chart $U_i$
+(and $0$ if $k<-d$); here $\{\phi_i\}$ is a partition of unity subordinate to charts
+$U_i$ over which $E$ is trivial.
+\end{theorem}
+
+\begin{proof} As in the proof of \cref{eta:lem:trace-class},
+$A(s)=\sum_i\phi_iA(s)\psi_i+R(s)$ where $R(s)$ is a holomorphic family of
+smoothing operators, so $\Tr(R(s))$ is entire. By the definition, $\phi_iA(s)\psi_i
+=\Op(\rho^{-m-s}b_i(s))$ modulo holomorphic smoothing families, and we may choose
+$\rho=\abs\xi^{-1}$ in $\abs\xi\ge1$. By \eqref{eta:eq:local-trace}, for
+$\Re s<-d-\Re m$,
+\begin{multline*}
+\Tr(\phi_iA(s)\psi_i)=(2\pi)^{-d}\int_U\int_{\abs\xi\le1}\tr(\cdots)\,d\xi\,dz\\
++(2\pi)^{-d}\int_U\int_{\Sphere^{d-1}}\int_0^1 r^{-m-s-d-1}\tr b_i(s,z,r,\omega)\,
+dr\,d\omega\,dz,
+\end{multline*}
+where we have used polar coordinates $\xi=r^{-1}\omega$ in $\abs\xi\ge1$, so that
+$d\xi=r^{-d-1}dr\,d\omega$, and $b_i$ is smooth in $r\in[0,1]$ (this is the meaning of
+smoothness on $\RC{\R^d}$). The first term is entire. Taylor expanding,
+$b_i(s,z,r,\omega)=\sum_{j<J}b_{i,j}(s,z,\omega)r^j+r^Jb_{i,J}(s,z,r,\omega)$ with all
+coefficients smooth and holomorphic in $s$, so
+\[
+\int_0^1r^{-m-s-d-1}b_i\,dr=\sum_{j<J}\frac{b_{i,j}(s,z,\omega)}{j-d-m-s}
++\int_0^1r^{J-m-s-d-1}b_{i,J}\,dr,
+\]
+and the last integral is holomorphic in $\Re s<J-d-\Re m$. Since $J$ is arbitrary
+this gives the meromorphic continuation, with at most simple poles at the points
+$s_j$, and residue $-(2\pi)^{-d}\sum_i\int\int\tr b_{i,j}(s_j,z,\omega)\,d\omega\,dz$
+there. Now $r^{-m-s_j+j}b_{i,j}(s_j,z,\omega)=\abs\xi^{-d}b_{i,j}(s_j,z,\omega)$ is
+precisely the term of homogeneity $-d$ in the symbol of $\phi_iA(s_j)\psi_i$. Finally
+the full symbol of $\phi_iB\psi_i$ is $\phi_i$ times the local symbol of $B$ modulo
+$S^{-\infty}$, because $\psi_i\equiv1$ near $\supp\phi_i$; this gives
+\eqref{eta:eq:seeley-residue}.
+\end{proof}
+
+\section{The residue trace and the regularized trace}\label{eta:sec:residue}
+
+\begin{proposition}\label{eta:prop:residue}
+For $A\in\Psido{m}(Z;E)$, $m\in\Z$, and any holomorphic family $A(s)$ of order $m+s$
+on a connected open set containing $0$ and meeting $\{\Re s<-d-m\}$, with
+$A(0)=A$,
+\[
+\operatorname*{Res}_{s=0}\Tr(A(s))=-\res(A).
+\]
+The \emph{residue trace} $\TrR(A):=\operatorname*{Res}_{s=0}\Tr(AE(s))$, $E$ admissible,
+therefore does not depend on $E$, and
+\begin{equation}\label{eta:eq:residue-formula}
+\TrR(A)=-\res(A)=-(2\pi)^{-d}\int_{S^*Z}\tr\sigma_{-d}(A),
+\end{equation}
+where $\sigma_{-d}(A)$ is the homogeneous term of degree $-d$ in the symbol of $A$ and the
+integral means, in local coordinates, $\int\int_{\abs\xi=1}\tr\sigma_{-d}(A)\,dS(\xi)\,dz$;
+the integrand is a well-defined density on $S^*Z$ although $\sigma_{-d}(A)$ itself depends
+on the coordinates. Moreover $\TrR$ vanishes on $\Psido{m}(Z;E)$ for $m<-d$ and on
+$\Psido{-\infty}(Z;E)$, and
+\[
+\TrR([A,B])=0\quad\forall\ A,B\in\Psido{\Z}(Z;E).
+\]
+\end{proposition}
+
+\begin{proof} The first statement is \eqref{eta:eq:seeley-residue} at $s_j=0$, since the
+expression for $\res$ only involves $A(0)=A$. By \cref{eta:lem:hol-composition},
+$AE(s)$ is such a family. The formula \eqref{eta:eq:seeley-residue} is a priori written
+with a partition of unity; applying it to an operator supported in the intersection of
+two charts shows that the density $\bigl(\int_{\abs\xi=1}\tr a_{-d}(z,\xi)dS(\xi)\bigr)dz$
+is independent of the coordinates (one can also check this directly, since for a
+function $h$ homogeneous of degree $-d$ the form $\iota_R(h\,d\xi)$, $R$ the radial
+vector field, is closed on $\R^d\setminus0$). If $m<-d$, $AE(s)$ has order
+$m+s$ with $\Re(m+s)<-d$ near $s=0$, so there is no pole.
+
+For the trace property, $\Tr(ABE(s))=\Tr(BE(s)A)$ for $\Re s$ very negative by
+\cref{eta:lem:trace-property}, hence for all $s$ by meromorphic continuation, so
+\[
+\Tr([A,B]E(s))=\Tr\bigl(B[E(s),A]\bigr).
+\]
+The family $[E(s),A]$ is holomorphic of order $m_A+s$ and vanishes at $s=0$, so by
+\cref{eta:lem:division} $[E(s),A]=sC(s)$ with $C$ holomorphic. Since $\Tr(BC(s))$ has
+at most a simple pole at $0$, $s\Tr(BC(s))$ is regular there, so $\TrR([A,B])=0$.
+\end{proof}
+
+Thus, with our convention that $E(s)$ has order $+s$, the residue trace is minus the
+Wodzicki--Guillemin residue \cite{Wodzicki-residue,Guillemin-residue}.
+
+\begin{definition}\label{eta:def:regularized-trace}
+For an admissible family $E$ the \emph{regularized trace} of $A\in\Psido{\Z}(Z;E)$ is
+the finite part
+\[
+\Trbar_E(A)=\FP_{s=0}\Tr(AE(s))=\lim_{s\to0}\Bigl(\Tr(AE(s))-\frac1s\TrR(A)\Bigr).
+\]
+\end{definition}
+
+Clearly $\Trbar_E$ is linear and $\Trbar_E(A)=\Tr(A)$ if $A\in\Psido{m}$, $m<-d$, in
+particular on smoothing operators. From the proof of \cref{eta:thm:seeley} the
+Laurent coefficients of $\Tr(AE(s))$ at $s=0$ are given by convergent integrals of
+the (Taylor coefficients of the) symbol of $AE(s)$, so $\Trbar_E$ is continuous on
+each $\Psido{m}(Z;E)$. However $\Trbar_E$ is not a trace, and it depends on $E$.
+
+\begin{lemma}\label{eta:lem:reg-dependence}
+If $E$ and $E'$ are admissible then $E'(s)=E(s)+sF(s)$ with $F$ an entire family of
+order $s$; setting $D(E,E')=F(0)\in\Psido{0}(Z;E)$,
+\[
+\Trbar_{E'}(A)=\Trbar_E(A)+\TrR\bigl(AD(E,E')\bigr)\quad\forall\ A\in\Psido{\Z}(Z;E).
+\]
+\end{lemma}
+
+\begin{proof} The first statement is \cref{eta:lem:division}. Then
+$\Tr(AE'(s))=\Tr(AE(s))+s\Tr(AF(s))$; here $AF(s)$ is holomorphic of order $m+s$
+with value $AD(E,E')$ at $0$, so $s\Tr(AF(s))$ is regular at $0$ with value
+$\TrR(AD(E,E'))$, while the residues of $\Tr(AE'(s))$ and $\Tr(AE(s))$ agree.
+\end{proof}
+
+\begin{proposition}\label{eta:prop:affine}
+The regularized traces $\Trbar_E$, as $E$ ranges over admissible families, form an
+affine space modelled on $\Psido{0}(Z;E)/\Psido{-\infty}(Z;E)$: the map
+$E'\longmapsto[D(E,E')]$ identifies $\{\Trbar_{E'}\}$ with
+$\Psido{0}/\Psido{-\infty}$.
+\end{proposition}
+
+\begin{proof} Every $D\in\Psido{0}$ occurs: $E'(s)=E(s)+sDE(s)$ is admissible with
+$D(E,E')=D$. By \cref{eta:lem:reg-dependence} it remains to see that the functional
+$A\mapsto\TrR(AD)$ on $\Psido{\Z}$ vanishes if and only if $D\in\Psido{-\infty}$. If
+$D$ is smoothing so is $AD$. Conversely, if $D\notin\Psido{-\infty}$ let $k\in\N_0$
+be such that $D\in\Psido{-k}$ has non-vanishing principal symbol $\sigma_{-k}(D)$. For
+$A\in\Psido{k-d}$ the term of homogeneity $-d$ in the symbol of $AD$ is
+$\sigma_{k-d}(A)\sigma_{-k}(D)$, so by \eqref{eta:eq:residue-formula}
+\[
+\TrR(AD)=-(2\pi)^{-d}\int_{S^*Z}\tr\bigl(\sigma_{k-d}(A)\sigma_{-k}(D)\bigr).
+\]
+Choosing $\sigma_{k-d}(A)=\chi\,\sigma_{-k}(D)^*$ (extended homogeneously) with
+$0\le\chi$, $\chi>0$ somewhere where $\sigma_{-k}(D)\ne0$, makes this non-zero.
+\end{proof}
+
+\subsection{The trace-defect formula} The failure of $\Trbar_E$ to be a trace is
+measured by a derivation.
+
+\begin{definition}\label{eta:def:derivation}
+For an admissible family $E$ and $A\in\Psido{\Z}(Z;E)$ let
+\[
+D_EA=\frac{d}{ds}[E(s),A]\Big|_{s=0},
+\]
+so that $[E(s),A]=sC(s)$ with $C$ holomorphic of order $m+s$ and $C(0)=D_EA$.
+\end{definition}
+
+Formally, if $E(s)=Q^s$ then $D_EA=[\log Q,A]$; $\log Q$ is not in the algebra, but
+the commutator is.
+
+\begin{proposition}\label{eta:prop:derivation}
+$D_E$ is a derivation of $\Psido{\Z}(Z;E)$ mapping $\Psido{m}$ into $\Psido{m}$; if the
+principal symbol of $E(s)$ is $\abs\xi_g^s\Id$ (as in \cref{eta:prop:admissible}) then
+$D_E(\Psido{m})\subset\Psido{m-1}$ and
+\begin{equation}\label{eta:eq:DE-symbol}
+\sigma_{m-1}(D_EA)=-i\{\log\abs\xi_g,\sigma_m(A)\}.
+\end{equation}
+For two admissible families, $D_{E'}A=D_EA+[D(E,E'),A]$. Moreover
+\[
+\TrR(D_EA)=0\quad\forall\ A\in\Psido{\Z}(Z;E).
+\]
+\end{proposition}
+
+\begin{proof} Differentiating $[E(s),AB]=[E(s),A]B+A[E(s),B]$ at $s=0$ gives the
+derivation property, and the difference formula by
+differentiating $[E(s)+sF(s),A]$. If the principal symbol $e_s$ of $E(s)$ is
+scalar, the principal symbol of $[E(s),A]$ of order $m+s$ vanishes, and the term of
+order $m+s-1$ is
+\[
+-i\{e_s,\sigma_m(A)\}=-is\abs\xi_g^s\{\log\abs\xi_g,\sigma_m(A)\};
+\]
+dividing by $s$ and setting $s=0$ gives \eqref{eta:eq:DE-symbol}. Finally, the
+family $C(s)$ has order $m+s$ and value $D_EA$ at $0$, so $\TrR(D_EA)$ is the residue
+of $\Tr(C(s))=s^{-1}\Tr([E(s),A])$; but $\Tr([E(s),A])=0$ for $\Re s$ very negative by
+\cref{eta:lem:trace-property}, hence identically.
+\end{proof}
+
+One can show that $D_E$ is not an inner derivation (see \cref{eta:ex:not-inner} for the
+circle).
+
+\begin{lemma}[Trace-defect formula]\label{eta:lem:trace-defect}
+For all $A,B\in\Psido{\Z}(Z;E)$,
+\[
+\Trbar_E([A,B])=\TrR\bigl((D_EA)B\bigr)=\TrR\bigl(BD_EA\bigr).
+\]
+\end{lemma}
+
+\begin{proof} As in the proof of \cref{eta:prop:residue},
+$\Tr([A,B]E(s))=\Tr(B[E(s),A])=s\Tr(BC(s))$, which is regular at $s=0$ with value
+$\operatorname*{Res}_{s=0}\Tr(BC(s))=\TrR(BD_EA)$. Since $\TrR([A,B])=0$, this value is
+$\Trbar_E([A,B])$; the second equality is the trace property of $\TrR$.
+\end{proof}
+
+We shall apply this to operator-valued differential forms. If $X$ is a manifold and
+$\alpha=\sum_IA_I\,dx^I$, $\beta=\sum_JB_J\,dx^J$ are smooth forms of degrees $p$ and
+$q$ with values in $\Psido{\Z}(Z;E)$, products are taken in the algebra and in the
+exterior algebra, $\Trbar_E$, $\TrR$ and $D_E$ act on coefficients, and the graded
+commutator is $[\alpha,\beta]=\alpha\beta-(-1)^{pq}\beta\alpha
+=\sum_{I,J}[A_I,B_J]\,dx^I\wedge dx^J$. Hence:
+
+\begin{corollary}\label{eta:cor:graded-defect}
+For operator-valued forms $\alpha$, $\beta$ as above,
+$\Trbar_E([\alpha,\beta])=\TrR\bigl((D_E\alpha)\wedge\beta\bigr)$, and $\TrR$ vanishes on
+graded commutators. Moreover $d\,\Trbar_E(\alpha)=\Trbar_E(d\alpha)$, by continuity
+and linearity of $\Trbar_E$.
+\end{corollary}
+
+\section{The circle}\label{eta:sec:circle}
+
+On $\Sphere=\R/2\pi\Z$, with variable $\theta$ and dual variable $\xi$, we use the
+admissible family
+\begin{equation}\label{eta:eq:circle-E}
+E(s)e^{ik\theta}=\lambda_k^se^{ik\theta},\qquad\lambda_k=(1+k^2)^{1/2},
+\end{equation}
+acting diagonally on $\CI(\Sphere;\C^N)$. It is the Fourier multiplier with symbol
+$\ang\xi^s$, an entire family of invertible elliptic operators of order $s$ with
+$E(0)=\Id$. From now on $\Trbar=\Trbar_E$ and $D_E$ refer to this family. Here
+$S^*\Sphere=\Sphere\times\{\pm1\}$.
+
+\begin{lemma}\label{eta:lem:circle}
+\begin{enumerate}[label=(\roman*)]
+\item For $A\in\Psido{-1}(\Sphere;\C^N)$ with symbol term $a_{-1}$ of homogeneity $-1$,
+\[
+\TrR(A)=-\frac1{2\pi}\int_0^{2\pi}\tr\bigl(a_{-1}(\theta,1)+a_{-1}(\theta,-1)\bigr)\,d\theta.
+\]
+\item For $A\in\Psido{m}(\Sphere;\C^N)$ with principal symbol $a$, $D_EA\in\Psido{m-1}$
+has principal symbol
+\[
+\sigma_{m-1}(D_EA)(\theta,\xi)=-i\,\xi^{-1}\pa_\theta a(\theta,\xi);
+\]
+in fact $D_EA$ has full symbol $\sum_{k\ge1}\frac1{k!}\pa_\xi^k(\log\ang\xi)D_\theta^ka$.
+\item If $f\in\CI(\Sphere;M(N,\C))$ acts by multiplication and $\Pi$ is the Szeg\H{o}
+projector then
+\[
+\Trbar(f)=0,\qquad\Trbar(\Pi f\Pi)=\frac1{4\pi}\int_0^{2\pi}\tr f\,d\theta;
+\]
+in particular $\Trbar(\Pi)=\frac12$, and $\TrR(f)=\TrR(\Pi f\Pi)=0$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} (i) is \eqref{eta:eq:residue-formula} for $d=1$. For (ii), since the
+symbol $e_s=\ang\xi^s$ depends only on $\xi$, $\Op(a)\Op(e_s)=\Op(ae_s)$ while
+$\Op(e_s)\Op(a)$ has symbol $\sum_k\frac1{k!}\pa_\xi^ke_sD_\theta^ka$; every term with
+$k\ge1$ is divisible by $s$, with $\frac{d}{ds}\pa_\xi^ke_s|_{s=0}=\pa_\xi^k\log\ang\xi$.
+The leading term is $\pa_\xi\log\ang\xi\,D_\theta a=\xi\ang\xi^{-2}(-i\pa_\theta a)$.
+For (iii), the multiplication operator has diagonal matrix entries
+$\langle fe_k,e_k\rangle=\frac1{2\pi}\int f\,d\theta$ for every $k\in\Z$ (in
+$\Pi f\Pi$ only for $k\ge0$), so for $\Re s<-1$
+\[
+\Tr(fE(s))=\frac1{2\pi}\int\tr f\,d\theta\sum_{k\in\Z}\lambda_k^s,\quad
+\Tr(\Pi f\Pi E(s))=\frac1{2\pi}\int\tr f\,d\theta\sum_{k\ge0}\lambda_k^s.
+\]
+Now $\sum_{k\ge0}\lambda_k^s=1+\zeta(-s)+h(s)$ with
+$h(s)=\sum_{k\ge1}(\lambda_k^s-k^s)$; since $\lambda_k^s-k^s=O(\abs s k^{\Re s-2})$,
+$h$ is holomorphic in $\Re s<1$ with $h(0)=0$. The Riemann zeta function is regular
+at $0$ with $\zeta(0)=-\frac12$, so the finite part (in fact the value) at $s=0$ is
+$\frac12$, and $\sum_{k\in\Z}\lambda_k^s=2\sum_{k\ge0}\lambda_k^s-1$ has value $0$.
+\end{proof}
+
+\begin{example}\label{eta:ex:defect-check}
+Let $A$ be multiplication by $e^{i\theta}$ and $B=e^{-i\theta}\Pi$. Then $AB=\Pi$ and
+$BA=e^{-i\theta}\Pi e^{i\theta}$ is the projection onto the span of the $e^{ik\theta}$,
+$k\ge-1$, so $[A,B]=-\pi_{-1}$, minus the projection onto $e^{-i\theta}$, and $\Trbar([A,B])=-1$. On the other hand, by \cref{eta:lem:circle}(ii),
+$(D_EA)B$ has symbol $\xi^{-1}$ in $\xi>0$ and is rapidly decreasing in $\xi<0$, so
+$\TrR((D_EA)B)=-\frac1{2\pi}\int_0^{2\pi}1\,d\theta=-1$, as it must be by
+\cref{eta:lem:trace-defect}. This confirms the signs in the trace-defect formula.
+\end{example}
+
+\section{Odd Chern forms and the Toeplitz index}\label{eta:sec:chern}
+
+\subsection{Toeplitz operators} We recall from \cref{ch:index}. The Szeg\H{o} projector
+$\Pi\in\Psido{0}(\Sphere)$ projects onto the span $\Hardy$ of the $e^{ik\theta}$,
+$k\ge0$; its symbol is $1$ on $\xi>0$ and its full symbol is rapidly decreasing as
+$\xi\to-\infty$. The Toeplitz algebra
+\[
+\PsiT{m}(\Sphere;\C^N)=\Pi\Psido{m}(\Sphere;\C^N)\Pi
+\]
+acts on $\Hardy\otimes\C^N$, with identity $\Pi$; the full symbols of its elements are
+rapidly decreasing as $\xi\to-\infty$, and we write $\sigma_0(A)(\theta)$ for the
+principal symbol at $(\theta,+1)$. An element of $\PsiT{0}$ is Fredholm on
+$\Hardy\otimes\C^N$ if and only if $\sigma_0(A)$ is invertible, and then
+\begin{equation}\label{eta:eq:toeplitz-index}
+\ind(A)=\frac{i}{2\pi}\int_0^{2\pi}\tr\bigl(\sigma_0(A)^{-1}\pa_\theta\sigma_0(A)\bigr)d\theta
+=-\wind\det\sigma_0(A).
+\end{equation}
+For instance the shift $U=\Pi e^{i\theta}\Pi$ has index $-1$. Let
+\[
+\GT(\Sphere;\C^N)=\{B\in\PsiT{0}(\Sphere;\C^N);\ B\text{ invertible on }\Hardy\otimes\C^N,
+\ B^{-1}\in\PsiT{0}(\Sphere;\C^N)\}
+\]
+and $G^{-\infty}_{\mathcal T}=\GT\cap(\Pi+\PsiT{-\infty})$. Symbols of elements of
+$\GT$ are loops in $\GL(N,\C)$ with winding number $0$. Products of operators on
+$\Hardy\otimes\C^N$ are products in $\Psido{\Z}(\Sphere;\C^N)$, so $\Trbar$ and $\TrR$
+apply to elements of $\PsiT{\Z}$.
+
+\subsection{Odd Chern forms} For a manifold $W$ and $a\in\CI(W;\GL(N,\C))$ set
+\begin{equation}\label{eta:eq:chodd}
+\Chodd(a)=\sum_{k\ge0}c_k\tr\bigl((a^{-1}da)^{2k+1}\bigr),\qquad
+c_k=-\frac{k!}{(2\pi i)^{k+1}(2k+1)!}.
+\end{equation}
+The same formula, with $\tr$ replaced by $\Tr$, defines $\Chodd$ for maps into the
+group $G^{-\infty}$ of \cref{ch:index}. The forms are closed: with
+$\nu=a^{-1}da$ we have $d\nu=-\nu^2$, hence
+\begin{equation}\label{eta:eq:d-power}
+d(\nu^{2k+1})=\sum_{j=0}^{2k}(-1)^j\nu^jd\nu\,\nu^{2k-j}=-\nu^{2k+2},
+\end{equation}
+and $\tr(\nu^{2k+2})=0$ because $\tr(\nu\wedge\nu^{2k+1})=-\tr(\nu^{2k+1}\wedge\nu)$. The
+constants $c_k$ are fixed by \cref{eta:prop:toeplitz-chern} below; note
+$c_0=i/2\pi$, consistent with \eqref{eta:eq:toeplitz-index}.
+
+\emph{Conventions.} On a product $W\times\Sphere$ every form can be written uniquely as
+$\omega=\omega_0+\omega_1\wedge d\theta$ with $\omega_0,\omega_1$ not containing
+$d\theta$, and we set $\int_\Sphere\omega=\int_0^{2\pi}\omega_1\,d\theta$, a form on
+$W$. With this (`fibre last') convention $d\int_\Sphere=\int_\Sphere d$,
+$\int_\Sphere(\pi^*\alpha\wedge\omega)=\alpha\wedge\int_\Sphere\omega$, and
+$\int_{W\times\Sphere}=\int_W\int_\Sphere$ when $W\times\Sphere$ carries the product
+orientation (first $W$, then $d\theta$).
+
+\begin{lemma}\label{eta:lem:transgression}
+Let $a_t\in\CI(W;\GL(N,\C))$ depend smoothly on $t\in[0,1]$ and regard $a$ as a map on
+$W\times[0,1]$. Then
+\[
+\Chodd(a)=\Chodd(a_t)+\Theta(a_t)\wedge dt,\qquad
+\Theta(a_t)=\sum_{k\ge0}(2k+1)c_k\tr\bigl((a_t^{-1}da_t)^{2k}a_t^{-1}\pa_ta_t\bigr),
+\]
+and $\pa_t\Chodd(a_t)=d\Theta(a_t)$.
+\end{lemma}
+
+\begin{proof} Write $a^{-1}Da=\nu+\lambda\,dt$, $D=d+dt\,\pa_t$, $\nu=a_t^{-1}da_t$,
+$\lambda=a_t^{-1}\pa_ta_t$. The $dt$-component of $(\nu+\lambda dt)^{2k+1}$ is
+\[
+\sum_j\nu^j\lambda\,dt\,\nu^{2k-j}=\sum_j(-1)^{2k-j}\nu^j\lambda\nu^{2k-j}\wedge dt,
+\]
+and $\tr(\nu^j\lambda\nu^{2k-j})=(-1)^{j(2k-j)}\tr(\lambda\nu^{2k})=(-1)^j\tr(\lambda\nu^{2k})$,
+giving $(2k+1)\tr(\nu^{2k}\lambda)\wedge dt$. The second identity is the
+$dt$-component of $D\Chodd(a)=0$, using $dt\wedge\pa_t\omega=-\pa_t\omega\wedge dt$
+for $\omega$ of odd degree.
+\end{proof}
+
+Applying this to the rotation homotopy from $g\oplus h$ to $gh\oplus\Id$ shows that
+$\Chodd(gh)-\Chodd(g)-\Chodd(h)$ is exact (\cref{eta:ex:chodd-product}).
+
+\begin{proposition}\label{eta:prop:toeplitz-chern}
+Let $W$ be compact, $b\in\CI(W\times\Sphere;\GL(N,\C))$ and let $T(w)\in\PsiT{0}(\Sphere;\C^N)$
+be a smooth family with symbol $b(w,\cdot)$. Then the Chern character of the index
+bundle $\ind(T)\in K^0(W)$ is
+\begin{equation}\label{eta:eq:toeplitz-chern}
+\Ch(\ind T)=\Bigl[\int_\Sphere\Chodd(b)\Bigr]\in H^{\mathrm{even}}(W;\C),
+\end{equation}
+where $\Ch$ of a bundle with curvature $\Omega$ is represented by $\tr\exp(i\Omega/2\pi)$.
+\end{proposition}
+
+\begin{proof} This is the families index theorem for Toeplitz operators of
+\cref{ch:families}; we recall the structure of the argument and verify the
+constants. Both sides are additive under direct sums, unchanged by stabilization and
+homotopy invariant (the right side by \cref{eta:lem:transgression}). Multiplying
+$T$ by the $\theta$-independent invertible matrix $b(w,1)^{-1}$ changes neither side
+(for the right side use \cref{eta:ex:chodd-product} and the fact that
+$\int_\Sphere\Chodd(g)=0$ for $\theta$-independent $g$). By the homotopy results of
+\cref{ch:bott}, after these reductions and stabilization $b$ may be deformed to
+$\pi_-e^{-i\theta}+\pi_0+\pi_+e^{i\theta}$, with $\pi_\pm,\pi_0$ smooth families of
+commuting projections on some $\C^M$ summing to $\Id$. This is the product of the
+commuting symbols $\pi_+e^{i\theta}+(\Id-\pi_+)$ and $\pi_-e^{-i\theta}+(\Id-\pi_-)$;
+the index is additive under composition (the Toeplitz operator of a product differs
+from the product of the Toeplitz operators by a compact family) and $\Chodd$ is additive
+up to exact forms (\cref{eta:ex:chodd-product}), so it suffices to consider the two
+factors. The second is obtained from a symbol of the first type by $\theta\mapsto-\theta$,
+which reverses the sign of both sides. So it suffices to consider $b=\pi e^{i\theta}+\pi'$, with
+Toeplitz operator $\pi U+\pi'$: it is injective with cokernel $\pi\C^M$ (in the
+constants), so $\ind(T)=-[V]$, $V=\Ran\pi$. The connection $\pi d$ on $V$ has
+curvature $\Omega=\pi\,d\pi\wedge d\pi\,\pi$, so the left side of
+\eqref{eta:eq:toeplitz-chern} is $-\sum_k\frac1{k!}(\frac i{2\pi})^k\tr\Omega^k$.
+
+On the other hand, writing $d'$ for the differential on $W\times\Sphere$,
+\[
+b^{-1}d'b=i\pi\,d\theta+\nu,\quad \nu=f\,\pi\,d\pi\,\pi'+g\,\pi'd\pi\,\pi,\quad
+f=1-e^{-i\theta},\ g=e^{i\theta}-1,
+\]
+using $\pi\,d\pi\,\pi=0$ and $\pi'd\pi\,\pi'=0$. The $d\theta$-component of
+$(b^{-1}d'b)^{2k+1}$ has trace $(2k+1)i\tr(\pi\nu^{2k}\pi)\wedge d\theta$ (by
+cyclicity, as in \cref{eta:lem:transgression}) and $\pi\nu^{2k}\pi=(fg)^k
+(\pi\,d\pi\,\pi'd\pi\,\pi)^k=(-1)^k(2-2\cos\theta)^k\Omega^k$. Since
+$\int_0^{2\pi}(2-2\cos\theta)^kd\theta=2\pi\frac{(2k)!}{(k!)^2}$,
+\[
+\int_\Sphere\tr\bigl((b^{-1}d'b)^{2k+1}\bigr)=2\pi i(-1)^k\frac{(2k+1)!}{(k!)^2}\tr\Omega^k,
+\]
+and multiplying by $c_k$ gives exactly $-\frac1{k!}(\frac i{2\pi})^k\tr\Omega^k$.
+\end{proof}
+
+\subsection{The Fredholm determinant} Recall from \cref{ch:index} that on $G^{-\infty}$
+the Fredholm determinant satisfies $d\log\det A=\Tr(A^{-1}dA)$, so that the degree-one
+part $c_0\Tr(A^{-1}dA)$ of $\Chodd$ is $\frac{i}{2\pi}d\log\det A$, and that
+$\frac1{2\pi i}\int_\gamma\Tr(A^{-1}dA)\in\Z$ for every loop $\gamma$; this integer is the
+case $W=\{\mathrm{pt}\}$ of \eqref{eta:eq:toeplitz-index}--\eqref{eta:eq:toeplitz-chern}.
+
+\section{Eta forms}\label{eta:sec:eta}
+
+Let $X$ be a manifold and $B\in\CI(X;\GT(\Sphere;\C^N))$ a smooth family of invertible
+Toeplitz operators. Then
+\[
+\alpha=B^{-1}dB\in\CI(X;\Lambda^1\otimes\PsiT{0}(\Sphere;\C^N))
+\]
+and the symbol $b=\sigma_0(B)\in\CI(X\times\Sphere;\GL(N,\C))$ satisfies $\wind\det b(x,\cdot)=0$.
+We write
+\[
+\nu=b^{-1}d_Xb,\qquad\mu=b^{-1}\pa_\theta b,
+\]
+for the components of $b^{-1}d'b=\nu+\mu\,d\theta$ on $X\times\Sphere$.
+
+\begin{definition}\label{eta:def:eta}
+The \emph{eta forms} of $B$ are
+\[
+\eta_{2k+1}(B)=\Trbar\bigl((B^{-1}dB)^{2k+1}\bigr),\qquad\eta(B)=\sum_{k\ge0}c_k\eta_{2k+1}(B),
+\]
+and the associated \emph{symbolic correction forms} are
+\[
+\gamma_{2k+1}(b)=\frac{i}{4\pi}\int_0^{2\pi}\tr\bigl(\nu^{2k+1}\mu\bigr)d\theta,\qquad
+\gamma(b)=\sum_{k\ge0}c_k\gamma_{2k+1}(b).
+\]
+\end{definition}
+
+The $\gamma$-forms are local in the symbol $b$; they vanish if $b$ is independent of
+$\theta$. If $B\in\CI(X;G^{-\infty}_{\mathcal T})$ then $B^{-1}dB$ is smoothing, so
+$\Trbar=\Tr$ and $\eta(B)=\Chodd(B)$, while $b=\Id$ and $\gamma(b)=0$. Thus $\eta$
+\emph{extends the odd Chern character from the normal subgroup $G^{-\infty}_{\mathcal T}$
+to the whole group} $\GT$, at the expense of no longer being closed.
+
+\begin{theorem}\label{eta:thm:variation}
+For every smooth family $B\in\CI(X;\GT(\Sphere;\C^N))$ with symbol $b$,
+\begin{equation}\label{eta:eq:variation}
+d\bigl(\eta_{2k+1}(B)+\gamma_{2k+1}(b)\bigr)=\frac{i}{4\pi(2k+3)}\int_\Sphere
+\tr\bigl((b^{-1}d'b)^{2k+3}\bigr)
+\end{equation}
+and consequently
+\begin{equation}\label{eta:eq:variation-total}
+d\bigl(\eta(B)+\gamma(b)\bigr)=-\int_\Sphere\Chodd(b).
+\end{equation}
+\end{theorem}
+
+\begin{proof} By \cref{eta:cor:graded-defect} and \eqref{eta:eq:d-power} applied to
+$\alpha$,
+\[
+d\eta_{2k+1}(B)=\Trbar\bigl(d(\alpha^{2k+1})\bigr)=-\Trbar(\alpha^{2k+2})
+=-\frac12\Trbar\bigl([\alpha,\alpha^{2k+1}]\bigr)
+=-\frac12\TrR\bigl((D_E\alpha)\wedge\alpha^{2k+1}\bigr),
+\]
+since the graded commutator is $[\alpha,\alpha^{2k+1}]=2\alpha^{2k+2}$. The operator
+$(D_E\alpha)\wedge\alpha^{2k+1}$ has order $-1$, and its full symbol is rapidly
+decreasing as $\xi\to-\infty$ because $\alpha$ is Toeplitz. By
+\cref{eta:lem:circle}(i),(ii) only the principal symbol at $\xi=+1$, namely
+$-i(\pa_\theta\nu)\nu^{2k+1}$, contributes:
+\[
+d\eta_{2k+1}(B)=-\frac12\cdot\Bigl(-\frac1{2\pi}\Bigr)\int_0^{2\pi}\tr\bigl(-i\,\pa_\theta\nu\wedge
+\nu^{2k+1}\bigr)d\theta=-\frac{i}{4\pi}\int_0^{2\pi}\tr\bigl(\pa_\theta\nu\wedge\nu^{2k+1}\bigr)d\theta.
+\]
+Differentiating $\nu=b^{-1}d_Xb$ and $\mu=b^{-1}\pa_\theta b$ gives the Maurer--Cartan
+identity $\pa_\theta\nu=d_X\mu+\nu\mu-\mu\nu$. By cyclicity
+$\tr(\nu\mu\nu^{2k+1})=-\tr(\mu\nu^{2k+2})$, and by \eqref{eta:eq:d-power}
+$\tr(d\mu\wedge\nu^{2k+1})=d\tr(\mu\nu^{2k+1})+\tr(\mu\nu^{2k+2})$. Hence
+\[
+\tr(\pa_\theta\nu\wedge\nu^{2k+1})=d\tr(\mu\nu^{2k+1})-\tr(\mu\nu^{2k+2}),
+\]
+and, $\mu$ being of degree $0$,
+\[
+d\eta_{2k+1}(B)=-d\gamma_{2k+1}(b)+\frac{i}{4\pi}\int_0^{2\pi}\tr(\nu^{2k+2}\mu)\,d\theta.
+\]
+Finally, the $d\theta$-component of $(\nu+\mu\,d\theta)^{2k+3}$ is
+$\sum_{j=0}^{2k+2}(-1)^j\nu^j\mu\nu^{2k+2-j}\wedge d\theta$, whose trace is
+$(2k+3)\tr(\nu^{2k+2}\mu)\wedge d\theta$ since $\tr(\nu^j\mu\nu^{2k+2-j})=(-1)^j\tr(\mu\nu^{2k+2})$.
+This proves \eqref{eta:eq:variation}. For \eqref{eta:eq:variation-total} note that the
+constants satisfy
+\[
+c_k\cdot\frac{i}{4\pi(2k+3)}=-c_{k+1},
+\]
+so the sum over $k$ of \eqref{eta:eq:variation} gives $-\int_\Sphere\Chodd(b)$ except
+for the term $c_0\int_\Sphere\tr(b^{-1}d'b)=c_0\int_0^{2\pi}\tr\mu\,d\theta$ of degree
+$0$. By \eqref{eta:eq:toeplitz-index} this is $\ind(B(x))=0$.
+\end{proof}
+
+Thus $-\bigl(\eta(B)+\gamma(b)\bigr)$ is an explicit primitive of the form
+$\int_\Sphere\Chodd(b)$, which by \cref{eta:prop:toeplitz-chern} represents the Chern
+character of the index bundle of any Toeplitz family with symbol $b$, a class that
+vanishes here because the family $B$ is invertible. Note that the variation of the eta
+form depends only on the leading part of the symbol, not on the lower order terms or
+on the smoothing part of $B$. The situation can be summarized in the diagram
+\[
+\begin{tikzcd}[column sep=small]
+\Chodd & \eta\arrow[l,"\text{restrict}"']\arrow[r,"d(\cdot+\gamma)"] & -\int_\Sphere\Chodd\\
+G^{-\infty}_{\mathcal T}(\Sphere;\C^N)\arrow[r] & \GT(\Sphere;\C^N)\arrow[r,"\sigma_0"] &
+\CI(\Sphere;\GL(N,\C))_0
+\end{tikzcd}
+\]
+where the right-hand group consists of loops of winding number $0$. In the stabilized
+setting of \cref{ch:bott} (where $\C^N$ is replaced by $\Psido{-\infty}(Y;F)$ and $\tr$
+by the trace on $Y$; all the arguments above go through verbatim) the bottom row is
+the classifying sequence for $K$-theory, with weakly contractible middle group, and the
+eta form is a transgression form for the even Chern character of the quotient. That
+the transgression only involves the principal symbol is a higher analogue of the
+`miracle of the loop group' of Pressley and Segal \cite{Pressley-Segal}.
+
+\begin{proposition}\label{eta:prop:eta-det}
+Let $B\in\CI(X;\GT(\Sphere;\C^N))$ and $g\in\CI(X;G^{-\infty}_{\mathcal T})$. Then
+\begin{enumerate}[label=(\roman*)]
+\item $\eta_1(g)=\Tr(g^{-1}dg)=d\log\det g$;
+\item $\eta_1(Bg)=\eta_1(B)+d\log\det g$ and $\eta_1(gB)=\eta_1(B)+d\log\det g$;
+\item $d\bigl(\eta_1(B)+\gamma_1(b)\bigr)=\dfrac{i}{12\pi}\displaystyle\int_\Sphere\tr\bigl((b^{-1}d'b)^3\bigr)$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof} (i) was noted above and (iii) is \eqref{eta:eq:variation} for $k=0$. For
+(ii), $(Bg)^{-1}d(Bg)=g^{-1}\alpha g+g^{-1}dg$, and
+$g^{-1}\alpha g-\alpha=[g^{-1}\alpha,g]$, so by \cref{eta:lem:trace-defect}
+\[
+\Trbar(g^{-1}\alpha g)-\Trbar(\alpha)=\TrR\bigl(D_E(g^{-1}\alpha)\,g\bigr).
+\]
+Since $g-\Pi$ is smoothing and $\sigma_0(g^{-1}\alpha)=\nu$, by
+\cref{eta:lem:circle} the right side is
+\[
+\frac{i}{2\pi}\int_0^{2\pi}\pa_\theta\tr\nu\,d\theta=0.
+\] Also $\Trbar(g^{-1}dg)=\Tr(g^{-1}dg)$. For $gB$, we have
+$(gB)^{-1}d(gB)=B^{-1}(g^{-1}dg)B+\alpha$ and
+$\Tr(B^{-1}(g^{-1}dg)B)=\Tr(g^{-1}dg)$ because $g^{-1}dg$ is of trace class.
+\end{proof}
+
+\begin{remark}\label{eta:rem:determinant-connection}
+Consider the principal bundle $\GT\longrightarrow\GT/G^{-\infty}_{\mathcal T}$ and the line
+bundle $L$ associated to it by the character $\det:G^{-\infty}_{\mathcal T}\longrightarrow\C^*$.
+By (ii), and since $\gamma_1(\sigma_0(Bg))=\gamma_1(\sigma_0(B))$, the $1$-form
+$\eta_1+\gamma_1$ on $\GT$ is a connection form for $L$ (its restriction to the
+fibres is $d\log\det$ and it transforms correctly); by (iii) its curvature is the
+$2$-form $\frac{i}{12\pi}\int_\Sphere\tr((b^{-1}d'b)^3)$, which depends only on the
+symbol and so descends. The first Chern form $\frac{i}{2\pi}d(\eta_1+\gamma_1)$ of $L$
+is therefore $-\frac1{24\pi^2}\int_\Sphere\tr((b^{-1}d'b)^3)$, which is minus the
+degree-two part of $\int_\Sphere\Chodd(b)$. This is consistent with the identification
+of $L$ with the determinant line bundle $\Lambda^{\max}(\Nul)^*\otimes\Lambda^{\max}
+(\text{coker})$ of the index bundle, whose first Chern class is $-c_1(\ind)$. Thus
+$\eta_1$ is a regularized form of $d\log\det$ on the Toeplitz group; see also
+\cref{eta:sec:determinant}.
+\end{remark}
+
+\section{Product-type Toeplitz operators}\label{eta:sec:product-toeplitz}
+
+\subsection{The product-type calculus on $M\times\Sphere$} Let $M$ be a compact
+manifold without boundary of dimension $n\ge1$ and consider the trivial fibration
+$\pi:M\times\Sphere\longrightarrow M$. We use the following facts from
+\cref{ch:product} about the product-type operators $\Psipt{0,0}(M\times\Sphere;\C^N)$
+associated to this fibration.
+
+\begin{enumerate}[label=(P\arabic*)]
+\item\label{eta:P1} They form an algebra, acting on $\CI(M\times\Sphere;\C^N)$ and
+boundedly on $L^2$, closed under adjoints. There are two multiplicative symbol maps.
+The \emph{principal symbol} $\sigma(A)$ is a smooth function on the blow-up of
+$S^*(M\times\Sphere)$ along $S^*M\times\Sphere$ (the covectors annihilating the fibres,
+$\tau=0$ where $\tau$ is dual to $\theta$); this blow-up is the disjoint union of the
+two closed half-sphere bundles
+\[
+S^*_\pm=\{\pm\tau\ge0\}\subset S^*(M\times\Sphere),\qquad\pa S^*_\pm=S^*M\times\Sphere.
+\]
+The \emph{base family} $\beta(A)\in\CI(S^*M;\Psido{0}(\Sphere;\C^N))$ is a family of
+operators on the fibre parametrized by $S^*M$.
+\item\label{eta:P2} The symbols are compatible: the principal symbol of $\beta(A)(x)$ on
+$S^*\Sphere=\Sphere\times\{\pm1\}$ is the restriction of $\sigma(A)$ to
+$\{x\}\times\Sphere\subset\pa S^*_\pm$. Conversely any compatible pair, depending
+smoothly on parameters, is the joint symbol of a smooth family of operators.
+\item\label{eta:P3} If $\sigma(A)=0$ and $\beta(A)=0$ then $A$ is compact on $L^2$.
+\item\label{eta:P4} If $A$ is \emph{fully elliptic}, i.e.\ $\sigma(A)$ and all $\beta(A)(x)$ are
+invertible, then $A$ is Fredholm on $L^2$ and on $\CI$, with the same index; the
+index depends only on the joint symbol and is constant along smooth families of
+fully elliptic operators.
+\item\label{eta:P5} The ordinary operators $\Psido{0}(M\times\Sphere;\C^N)$ are product-type,
+with $\sigma(P)$ the lift of the usual principal symbol and $\beta(P)(x)$ the
+multiplication operator by $\sigma(P)|_{\{x\}\times\Sphere}$. Fibrewise families
+$Q\in\CI(M;\Psido{0}(\Sphere;\C^N))$ are product-type, with $\sigma(Q)$ the lift of
+the fibre symbol and $\beta(Q)(m,\xi)=Q(m)$; in particular multiplication by
+$h\in\CI(M\times\Sphere;M(N,\C))$ has symbol $h$ and base family the multiplication by
+$h(m,\cdot)$.
+\end{enumerate}
+
+Since the Szeg\H{o} projector $\Pi$, acting in $\theta$, is a fibrewise operator, it is in
+$\Psipt{0,0}$ with $\sigma(\Pi)=1$ on $S^*_+$, $\sigma(\Pi)=0$ on $S^*_-$, and
+$\beta(\Pi)=\Pi$. The \emph{product-type Toeplitz algebra} is
+\[
+\PsiptT{0,0}(M\times\Sphere;\C^N)=\Pi\,\Psipt{0,0}(M\times\Sphere;\C^N)\,\Pi,
+\]
+acting on $\Hardy(M\times\Sphere;\C^N)=\Pi\CI(M\times\Sphere;\C^N)$ (or its $L^2$
+closure), with identity $\Pi$. For $A$ in this algebra the principal symbol vanishes
+on $S^*_-$; we set
+\begin{gather*}
+a=\sigma(A)|_{S^*_+}\in\CI(S^*_+;M(N,\C)),\\
+\beta=\beta(A)\in\CI(S^*M;\PsiT{0}(\Sphere;\C^N)),\quad b=a|_{\pa S^*_+}=\sigma_0(\beta).
+\end{gather*}
+$A$ is \emph{fully elliptic} if $a$ takes values in $\GL(N,\C)$ and
+$\beta\in\CI(S^*M;\GT(\Sphere;\C^N))$; then $A$ is Fredholm on $\Hardy$ (apply
+\ref{eta:P4} to $A+\Id-\Pi$) and its index has the properties in \ref{eta:P4}. We
+write $\ind(A)$ for the index on $\Hardy$.
+
+\subsection{Geometry and orientations} Fix a metric on $M$ and use the product metric
+on $M\times\Sphere$. In each fibre of $S^*_+\to M\times\Sphere$, stereographic
+projection $(\xi,\tau)\mapsto\xi/(1+\tau)$ identifies the closed half-sphere
+$\{\abs\xi^2+\tau^2=1,\ \tau\ge0\}$ diffeomorphically with the closed unit ball in
+$T^*_mM$; thus $S^*_+\cong\overline{B^*M}\times\Sphere$ is a ball bundle over
+$M\times\Sphere$, with `centre' the section $(\xi,\tau)=(0,1)$, i.e.\ $d\theta$.
+
+We orient cotangent bundles by the Liouville form: if $\omega=\sum_jd\xi_j\wedge dx_j$
+then $T^*M$ is oriented by $\omega^n/n!$. The ball bundle $\overline{B^*M}$ inherits
+this orientation, and $S^*M=\pa\overline{B^*M}$ is given the boundary orientation
+(outward normal first); we call this the \emph{Liouville orientation} of $S^*M$, and
+similarly for $S^*(M\times\Sphere)$, whose open subset $\{\tau>0\}$ orients $S^*_+$.
+For $n=1$ the two components $\{\xi=\pm1\}$ of $S^*M\cong M\times\{\pm1\}$ receive
+opposite orientations ($\pm dx$ if $M$ is oriented by $dx$).
+
+\begin{lemma}\label{eta:lem:orientation}
+With these orientations, $\pa S^*_+=S^*M\times\Sphere$ with the product orientation,
+$S^*M$ first and $d\theta$ last.
+\end{lemma}
+
+\begin{proof} The Liouville form of $T^*(M\times\Sphere)$ is $\omega_M+d\tau\wedge d\theta$,
+and $(\omega_M+d\tau\wedge d\theta)^{n+1}/(n+1)!=\omega_M^n/n!\wedge d\tau\wedge d\theta$.
+At a point with $\tau=0$ the outward radial vector $R$ is tangent to the $\xi$
+directions, so $S^*(M\times\Sphere)$ is oriented there by
+$\iota_R(\omega_M^n/n!)\wedge d\tau\wedge d\theta=\sigma\wedge d\tau\wedge d\theta$, where
+$\sigma$ is the Liouville orientation of $S^*M$. The outward normal of $S^*_+$ at
+$\tau=0$ is $-\pa_\tau$, and $\iota_{-\pa_\tau}(\sigma\wedge d\tau\wedge d\theta)=
+(-1)^{2n}\sigma\wedge d\theta$ since $\sigma$ has degree $2n-1$.
+\end{proof}
+
+We use the Atiyah--Singer theorem in the following form, with $\Td(M)$ a closed form
+representing the Todd class of $TM\otimes\C$ (by Stokes' theorem the right side does
+not depend on the choice of form).
+
+\begin{theorem}[Atiyah--Singer, cosphere form]\label{eta:thm:AS}
+If $W$ is a compact manifold without boundary and $P\in\Psido{0}(W;\C^N)$ is elliptic
+with principal symbol $p\in\CI(S^*W;\GL(N,\C))$ then
+\[
+\ind(P)=\int_{S^*W}\Td(W)\wedge\Chodd(p),
+\]
+where $S^*W$ carries the Liouville orientation and only the component of degree $2\dim W-1$
+is integrated.
+\end{theorem}
+
+This is the case of a point base of the families index theorem of \cref{ch:families},
+once the relative Chern character of the symbol class in $K_c(T^*W)$ is transgressed to
+the cosphere bundle; the normalization of $\Chodd$ is the one forced by Bott
+periodicity, \cref{eta:prop:toeplitz-chern}. For $W=\Sphere$ it is the elementary formula
+$\ind P=-\wind\det p(\cdot,1)+\wind\det p(\cdot,-1)$, which follows from
+\eqref{eta:eq:toeplitz-index} by splitting $P$ into its positive and negative Toeplitz
+parts (see \cref{ch:bott}); with the Liouville orientations ($d\theta$ on $\xi=1$,
+$-d\theta$ on $\xi=-1$) this agrees with the theorem, which checks the orientation
+convention.
+
+\section{The index formula}\label{eta:sec:index}
+
+For a fully elliptic $A\in\PsiptT{0,0}(M\times\Sphere;\C^N)$ with symbols
+$(a,\beta)$, $b=\sigma_0(\beta)$, set
+\begin{equation}\label{eta:eq:I}
+I(A)=\int_{S^*M}\Td(M)\wedge\bigl(\eta(\beta)+\gamma(b)\bigr)
++\int_{S^*_+}\Td(M)\wedge\Chodd(a),
+\end{equation}
+where $\Td(M)$ is pulled back to $S^*M$ and to $S^*_+$, the orientations are those of the
+previous section, and only components of top degree are integrated. Note that $I(A)$
+depends only on the joint symbol of $A$.
+
+\begin{theorem}\label{eta:thm:index}
+For every fully elliptic $A\in\PsiptT{0,0}(M\times\Sphere;\C^N)$,
+\[
+\ind(A)=\int_{S^*M}\Td(M)\wedge\bigl(\eta(\beta)+\gamma(b)\bigr)
++\int_{S^*_+(M\times\Sphere)}\Td(M)\wedge\Chodd(a).
+\]
+\end{theorem}
+
+For $M$ a point (formally $n=0$) the formula reduces to \eqref{eta:eq:toeplitz-index},
+$S^*_+$ being the circle oriented by $d\theta$. The proof occupies the rest of this
+section. We write $\Delta(A)=\ind(A)-I(A)$.
+
+\begin{proposition}\label{eta:prop:homotopy}
+If $(a_t,\beta_t)$, $t\in[0,1]$, is a smooth family of compatible pairs of fully
+elliptic symbols then $I$ is constant in $t$. Consequently $\Delta(A)$ depends only on
+the homotopy class of the joint symbol of $A$ through fully elliptic symbols.
+\end{proposition}
+
+\begin{proof} Write $T=\Td(M)$, a closed even form, $X=S^*M$, and
+$I(t)=I_1(t)+I_2(t)$ for the two terms. By \cref{eta:lem:transgression},
+$\pa_t\Chodd(a_t)=d\Theta(a_t)$, so by Stokes' theorem and \cref{eta:lem:orientation}
+\[
+I_2'(t)=\int_{S^*_+}T\wedge d\Theta(a_t)=\int_{X\times\Sphere}T\wedge\Theta(b_t)
+=\int_XT\wedge\int_\Sphere\Theta(b_t),
+\]
+where $\Theta(b_t)$ is the restriction of $\Theta(a_t)$ to the boundary, given by the same
+formula in terms of $b_t$. Now apply \cref{eta:thm:variation} to the family $\beta$
+on $X\times[0,1]$, with total differential $D=d+dt\,\pa_t$. Writing
+$\eta(\beta)+\gamma(b)=\zeta(t)+\zeta'(t)\wedge dt$ and, by
+\cref{eta:lem:transgression} applied on $X\times\Sphere\times[0,1]$,
+\[
+\int_\Sphere\Chodd(b)=\int_\Sphere\Chodd(b_t)+\int_\Sphere\bigl(\Theta(b_t)\wedge dt\bigr)
+=\int_\Sphere\Chodd(b_t)-\Bigl(\int_\Sphere\Theta(b_t)\Bigr)\wedge dt
+\]
+(moving $dt$ past $d\theta$), the $dt$-component of \eqref{eta:eq:variation-total} reads
+$-\pa_t\zeta+d_X\zeta'=\int_\Sphere\Theta(b_t)$, using $dt\wedge\pa_t\zeta=-\pa_t\zeta\wedge dt$
+($\zeta$ is odd). Since $T$ is closed and $X$ is compact without boundary,
+\[
+I_1'(t)=\int_XT\wedge\pa_t\zeta=-\int_XT\wedge\int_\Sphere\Theta(b_t)=-I_2'(t).
+\]
+The second statement follows from \ref{eta:P2} and \ref{eta:P4}: a homotopy of joint
+symbols is realized by a smooth family of fully elliptic operators, along which the
+index is constant.
+\end{proof}
+
+We use direct sums and stabilization freely: if $A$ acts on $\C^N$-valued functions,
+$A\oplus\Pi$ acting on $\C^{N+K}$-valued functions has the same index and the same $I$,
+and both $\ind$ and $I$ are additive under direct sums (all the forms involved are
+traces of block-diagonal expressions).
+
+\begin{lemma}\label{eta:lem:multiplicative}
+If $A,A'\in\PsiptT{0,0}(M\times\Sphere;\C^N)$ are fully elliptic then
+$\Delta(AA')=\Delta(A)+\Delta(A')$.
+\end{lemma}
+
+\begin{proof} The index is additive under composition of Fredholm operators. Let
+$R_t$ be the constant unitary $\begin{psmallmatrix}\cos t&-\sin t\\ \sin t&\cos t\end{psmallmatrix}
+\otimes\Id_N$ on $\C^{2N}$; it commutes with $\Pi$ and is an invertible element of the
+algebra. Then
+\[
+C_t=R_t(A\oplus\Pi)R_t^{-1}(\Pi\oplus A'),\qquad 0\le t\le\pi/2,
+\]
+is a smooth family of fully elliptic operators with $C_0=A\oplus A'$ and
+$C_{\pi/2}=\Pi\oplus AA'$. By \cref{eta:prop:homotopy} and additivity,
+$I(A)+I(A')=I(\Pi\oplus AA')=I(AA')$, since $I(\Pi)=0$ ($\beta(\Pi)$ is constant and
+$a=\Id$).
+\end{proof}
+
+\begin{lemma}\label{eta:lem:base-multiplication}
+If $h\in\CI(M;\GL(N,\C))$ and $H$ denotes multiplication by $h$ on
+$\Hardy(M\times\Sphere;\C^N)$, then $H$ is fully elliptic and $\ind(H)=I(H)=0$.
+\end{lemma}
+
+\begin{proof} $H$ is invertible, so $\ind(H)=0$. Its symbols are $a=h$ (pulled back to
+$S^*_+$) and $\beta=\Pi h\Pi$, constant in $\xi$ and $\theta$. Hence $\gamma(b)=0$ and, by
+\cref{eta:lem:circle}(iii), $\eta(\beta)=\frac12\Chodd(h)$ pulled back from $M$. The form
+$\Td(M)\wedge\Chodd(h)$ is pulled back from $M$, which has dimension $n$, whereas
+$\dim S^*_+=2n+1>n$ and $\dim S^*M=2n-1$; so both integrals in \eqref{eta:eq:I} vanish
+when $n\ge2$. If $n=1$ the second still vanishes, and the first vanishes because
+$S^*M\cong M\times\{\pm1\}$ with opposite orientations on the two components.
+\end{proof}
+
+\begin{lemma}\label{eta:lem:compression}
+Let $P\in\Psido{0}(M\times\Sphere;\C^N)$ be elliptic with principal symbol $p$ equal to
+$\Id$ outside a compact subset of $\{\tau>0\}\subset S^*(M\times\Sphere)$. Then
+$\Pi P\Pi\in\PsiptT{0,0}$ is fully elliptic with $a=p|_{S^*_+}$, $\beta=\Pi$, and
+\[
+\ind(\Pi P\Pi)=\ind(P)=I(\Pi P\Pi).
+\]
+\end{lemma}
+
+\begin{proof} By \ref{eta:P5}, $\beta(P)$ is multiplication by $p|_{\tau=0}=\Id$, so
+$\beta(\Pi P\Pi)=\Pi$ and $\sigma(\Pi P\Pi)=p$ on $S^*_+$. With respect to
+$L^2=\Hardy\oplus\Hardy^\perp$ write $P=\Pi P\Pi+(\Id-\Pi)P(\Id-\Pi)+K$,
+$K=\Pi P(\Id-\Pi)+(\Id-\Pi)P\Pi$. Both symbols of $K$ vanish ($\sigma(\Pi)\sigma(\Id-\Pi)=0$
+and $\Pi\,\Id\,(\Id-\Pi)=0$), and both symbols of $(\Id-\Pi)P(\Id-\Pi)-(\Id-\Pi)$ vanish
+(on $S^*_-$, $p=\Id$). By \ref{eta:P3} these are compact, so $\ind(P)=\ind(\Pi P\Pi)
++\ind\bigl((\Id-\Pi)+\text{compact}\bigr)=\ind(\Pi P\Pi)$. On the other hand
+$\eta(\Pi)=0$ and $\gamma(\Id)=0$, so $I(\Pi P\Pi)=\int_{S^*_+}\Td(M)\wedge\Chodd(p)$.
+Since $p=\Id$ on $S^*_-$, $\Chodd(p)=0$ there, and $\Td(M\times\Sphere)=\Td(M)$ (as
+$T(M\times\Sphere)\otimes\C=\pi^*(TM\otimes\C)\oplus\C$); so \cref{eta:thm:AS} on
+$M\times\Sphere$ gives $\ind(P)=I(\Pi P\Pi)$.
+\end{proof}
+
+We also need the weak contractibility of the normalized Toeplitz group from
+\cref{ch:bott}, in the following form. If $\beta'\in\CI(X;\GT(\Sphere;\C^N))$, $X$
+compact, satisfies the normalization $\sigma_0(\beta')(x,1)=\Id$ (at $\theta=0$), then
+after stabilization $\C^N\subset\C^K$, $\beta'\oplus\Pi$ is smoothly homotopic through
+$\CI(X;\GT(\Sphere;\C^K))$ to the constant family $\Pi$. Indeed \cref{ch:bott} gives
+such a homotopy in the group stabilized by the smoothing operators on an auxiliary
+manifold $Y$, with $\C^N$ embedded as the span of the first $N$ eigenfunctions of a
+Laplacian on $Y$; compressing the homotopy by the spectral projection onto the first
+$K$ eigenfunctions gives, for $K$ large, a homotopy of the required kind, since the
+compressions converge in the $\CI$ topology and invertibility is an open condition,
+uniformly on the compact parameter space.
+
+\begin{proof}[Proof of \cref{eta:thm:index}] Let $A$ be fully elliptic with symbols
+$(a,\beta)$, $X=S^*M$. We show $\Delta(A)=0$ in four steps; each step replaces $A$ by
+an operator with the same $\Delta$.
+
+\emph{Homotopies with prescribed boundary values.} Choose a collar
+$\pa S^*_+\times[0,\epsilon)_r$ of the boundary of $S^*_+$ and $\phi\in\CI([0,\epsilon))$ with
+$\phi=0$ near $0$ and $\phi=1$ on $[\epsilon/2,\epsilon)$. If $b_t$ is a smooth homotopy of
+$b_0=a|_{\pa S^*_+}$ through maps into $\GL(N,\C)$, then
+\[
+a_t(q,r)=b_{t(1-\phi(r))}(q)\,b_0(q)^{-1}a(q,r)\ \text{in the collar},\qquad
+a_t=a\ \text{elsewhere},
+\]
+is a smooth homotopy of $a$ through invertible symbols with $a_t|_{\pa S^*_+}=b_t$. So any
+smooth homotopy $\beta_t$ of $\beta$ through $\CI(X;\GT)$ extends to a homotopy of fully
+elliptic compatible pairs $(a_t,\beta_t)$, which does not change $\Delta$
+(\cref{eta:prop:homotopy}).
+
+\emph{Step 1: $\beta$ constant in $\theta$.} Let $g(x)=b(x,1)\in\GL(N,\C)$ and
+$\beta'=g^{-1}\beta$ (the matrix $g(x)^{-1}$ acting on $\Hardy\otimes\C^N$, which
+commutes with $\Pi$). Then $\beta'$ is normalized, so after stabilization there is a
+homotopy $\beta'_t$ from $\beta'$ to $\Pi$, and $\beta_t=g\beta'_t$ is a homotopy from $\beta$
+to $\Pi g\Pi$. After extending it as above we may assume that $\beta(x)=\Pi g(x)\Pi$
+with $g\in\CI(X;\GL(N,\C))$; then $b(x,\theta)=g(x)$.
+
+\emph{Step 2: $\beta$ pulled back from $M$.} The submanifold $S^*_+\cap\{\theta=0\}$ is
+a closed ball bundle over $M$ with boundary $X$, and $a$ restricted to it extends $g$.
+Contracting the balls linearly to their centres (in the stereographic picture,
+$v\mapsto(1-t)v$) gives a smooth homotopy $g_t$, $g_0=g$, from $g$ to $h\circ\pi_M$,
+where $h(m)$ is the value of $a$ at the centre over $(m,0)$. The family
+$\beta_t=\Pi g_t\Pi$ consists of invertible operators; extending as above we may assume
+$\beta=\Pi h\Pi$ with $h\in\CI(M;\GL(N,\C))$.
+
+\emph{Step 3: $\beta=\Pi$.} Let $H$ be multiplication by $h$ and $A'=H^{-1}A$. Then
+$\beta(A')=\Pi$ and $a'=h^{-1}a$ satisfies $a'|_{\pa S^*_+}=\Id$. By
+\cref{eta:lem:multiplicative,eta:lem:base-multiplication},
+$\Delta(A)=\Delta(H)+\Delta(A')=\Delta(A')$.
+
+\emph{Step 4: reduction to an ordinary operator.} Let $\kappa\in\CI([0,\epsilon))$ be
+non-decreasing with $\kappa=0$ on $[0,\epsilon/2]$ and $\kappa(r)=r$ near $\epsilon$, and
+let $\Phi_t(q,r)=(q,(1-t)r+t\kappa(r))$ in the collar, $\Phi_t=\Id$ elsewhere. Then
+$a'\circ\Phi_t$ is a homotopy of invertible symbols with boundary value $\Id$, and
+$a''=a'\circ\Phi_1$ equals $\Id$ near $\pa S^*_+$. Keeping $\beta=\Pi$, this is a homotopy
+of fully elliptic pairs. Extend $a''$ by $\Id$ to a smooth function $p$ on
+$S^*(M\times\Sphere)$ and choose $P\in\Psido{0}(M\times\Sphere;\C^N)$ with principal symbol
+$p$. Then $\Pi P\Pi$ has the joint symbol $(a'',\Pi)$, so by
+\cref{eta:lem:compression} and \cref{eta:prop:homotopy}, $\Delta(A')=\Delta(\Pi P\Pi)=0$.
+\end{proof}
+
+\begin{remark}\label{eta:rem:finite-rank}
+The theorem contains the Atiyah--Singer formula on $M$. Let $\pi_{\le k}$ be the
+projection onto the span of $e^{ij\theta}$, $0\le j\le k$, and let
+$Q\in\Psido{0}(M;\C^N\otimes\C^{k+1})$ be elliptic, $\C^{k+1}\cong\Ran\pi_{\le k}$. The
+operator $A=Q\pi_{\le k}+(\Pi-\pi_{\le k})$ is in $\PsiptT{0,0}$ (compare the compressions
+in \cref{ch:product}) with $a=\Id$ and $\beta=\sigma(Q)\pi_{\le k}+\Pi-\pi_{\le k}$, a
+finite-rank perturbation of $\Pi$; so $b=\Id$, $\gamma(b)=0$ and
+$\eta(\beta)=\Chodd(\sigma(Q))$. Since $\ind(A)=\ind(Q)$, \cref{eta:thm:index} reduces to
+\cref{eta:thm:AS} on $M$ with the Liouville orientation of $S^*M$, consistently with
+\cref{eta:lem:orientation}. Conversely, one might try to prove the theorem by
+deforming every $A$ to this form; but a fully elliptic $A$ need not be deformable to one
+with $a=\Id$, because the obstruction, the index bundle over $M$ of the Toeplitz family
+with symbol $a$ restricted to the centre section, need not vanish (it only vanishes
+after pull-back to $S^*M$). This is why the proof above deforms in the opposite
+direction and uses the Atiyah--Singer theorem on $M\times\Sphere$.
+\end{remark}
+
+\begin{remark}\label{eta:rem:gamma}
+The symbolic term $\gamma(b)$ cannot be omitted. Take $n=1$, $M=\Sphere_x$, $N=1$, and
+symbols $a_t=\exp(it\chi\sin(x+\theta))$ on $S^*_+$, where $\chi$ is a function on the
+fibres of $S^*_+$ (half-circles) equal to $1$ at the end $\xi=+1$ and to $0$ at the end
+$\xi=-1$. Thus $b_t=\exp(it\sin(x+\theta))$ on the component $\xi=+1$ of $S^*M$ and
+$b_t=1$ on $\xi=-1$. Since $(a_t)$ starts at $a_0=1$, invertible base families $\beta_t$
+with symbols $b_t$ and $\beta_0=\Pi$ exist (lift the homotopy as in \cref{ch:index}). In
+degree one, with $\Td=1$ there,
+\[
+\int_{S^*M}\gamma(b_t)=c_0\int_0^{2\pi}\frac{i}{4\pi}\int_0^{2\pi}
+(it\cos(x+\theta))^2\,d\theta\,dx=\frac{i}{2\pi}\cdot\frac{i}{4\pi}\cdot(-t^2)\cdot2\pi^2
+=\frac{t^2}4,
+\]
+which depends on $t$. Since $I$ is constant along the family by
+\cref{eta:prop:homotopy}, the remaining terms of $I$ vary by $-t^2/4$, so the formula
+without $\gamma$ cannot hold for all $t$.
+\end{remark}
+
+\section{Non-Toeplitz product-type operators}\label{eta:sec:full}
+
+The formula extends to the full product-type calculus, where both halves $S^*_\pm$ of the
+blown-up cosphere bundle carry symbols. For a fully elliptic
+$P\in\Psipt{0,0}(M\times\Sphere;\C^N)$ write $a_\pm=\sigma(P)|_{S^*_\pm}$,
+$\beta=\beta(P)\in\CI(S^*M;\Psido{0}(\Sphere;\C^N))$ and $b_\pm=a_\pm|_{\pa S^*_\pm}$, regarded as
+functions on $S^*M\times\Sphere$. The eta form $\eta(\beta)$ is defined exactly as before, with
+$\Trbar$ on $\Psido{0}(\Sphere;\C^N)$. For a map $c\in\CI(S^*M\times\Sphere;\GL(N,\C))$ let
+$\langle\Chodd(c)\rangle=\frac1{2\pi}\int_0^{2\pi}\Chodd(c(\cdot,\theta))\,d\theta$ be the
+$\theta$-average of the odd Chern forms of the maps $c(\cdot,\theta)$ on $S^*M$.
+
+\begin{proposition}\label{eta:prop:full}
+For every fully elliptic $P\in\Psipt{0,0}(M\times\Sphere;\C^N)$,
+\begin{multline*}
+\ind(P)=\int_{S^*M}\Td(M)\wedge\bigl(\eta(\beta)+\langle\Chodd(b_-)\rangle+\gamma(b_+)-\gamma(b_-)\bigr)\\
++\int_{S^*_+}\Td(M)\wedge\Chodd(a_+)+\int_{S^*_-}\Td(M)\wedge\Chodd(a_-),
+\end{multline*}
+with $S^*_\pm$ oriented as subsets of $S^*(M\times\Sphere)$ and $S^*M$ Liouville
+oriented.
+\end{proposition}
+
+\begin{proof} Let $J:\Hardy^\perp\longrightarrow\Hardy$ be the unitary
+$(Ju)(\theta)=e^{-i\theta}u(-\theta)$, mapping $e^{-i(k+1)\theta}$ to $e^{ik\theta}$, and
+\[
+\mathcal U:L^2(M\times\Sphere;\C^N)\longrightarrow\Hardy(M\times\Sphere;\C^{2N}),\quad
+\mathcal Uu=\bigl(\Pi u,J(\Id-\Pi)u\bigr).
+\]
+The reflection $\theta\mapsto-\theta$ is a fibre-preserving diffeomorphism, so it
+preserves the product-type calculus, and the off-diagonal blocks $\Pi P(\Id-\Pi)$,
+$(\Id-\Pi)P\Pi$ have vanishing principal symbol. Hence $P^\sharp=\mathcal UP\mathcal U^{-1}$
+is a fully elliptic element of $\PsiptT{0,0}(M\times\Sphere;\C^{2N})$ with
+\[
+a^\sharp=a_+\oplus R^*a_-,\qquad\beta^\sharp=\mathcal U\beta\,\mathcal U^{-1},
+\]
+where $R:S^*_+\longrightarrow S^*_-$ is induced by $(\theta,\tau)\mapsto(-\theta,-\tau)$, and
+$\ind(P)=\ind(P^\sharp)$. We evaluate $I(P^\sharp)$.
+
+The map $R$ preserves the Liouville form $d\tau\wedge d\theta$ and the radial structure, so
+it preserves orientations and $\int_{S^*_+}\Td\wedge\Chodd(R^*a_-)=\int_{S^*_-}\Td\wedge\Chodd(a_-)$.
+The boundary symbol of $P^\sharp$ is $b_+\oplus b_-^R$ with
+$b_-^R(x,\theta)=b_-(x,-\theta)$; the substitution $\theta\mapsto-\theta$ changes the sign of
+$\mu$ and not of $\nu$, so $\gamma(b_-^R)=-\gamma(b_-)$. Finally
+$\Trbar(\mathcal UQ\,\mathcal U^{-1})=\Trbar_{E_1}(Q)$ where $E_1=\mathcal U^{-1}E\,\mathcal U$
+multiplies $e^{ij\theta}$ by $\lambda_j^s$ for $j\ge0$ and by $\lambda_{\abs j-1}^s$ for $j<0$.
+This is an admissible family and, by \cref{eta:lem:reg-dependence},
+$\Trbar_{E_1}(Q)=\Trbar(Q)+\TrR(QD)$ where $D=\frac{d}{ds}(E_1-E)|_{s=0}$ is the Fourier
+multiplier by $\log\lambda_{\abs j-1}-\log\lambda_{\abs j}$ for $j<0$ and $0$ for
+$j\ge0$, with symbol $\xi^{-1}$ (modulo lower order) in $\xi<0$ and rapidly
+decreasing in $\xi>0$. With $Q=(\beta^{-1}d\beta)^{2k+1}$, \cref{eta:lem:circle}(i) gives
+\[
+\TrR(QD)=-\frac1{2\pi}\int_0^{2\pi}\tr\bigl(\nu_-^{2k+1}\cdot(-1)\bigr)d\theta
+=\frac1{2\pi}\int_0^{2\pi}\tr\bigl((b_-^{-1}d_Xb_-)^{2k+1}\bigr)d\theta,
+\]
+so $\eta(\beta^\sharp)=\eta(\beta)+\langle\Chodd(b_-)\rangle$. Now apply
+\cref{eta:thm:index} to $P^\sharp$.
+\end{proof}
+
+As a check, let $P\in\Psido{0}(M\times\Sphere;\C^N)$ be an ordinary elliptic operator.
+Then $\beta$ is multiplication by $b=b_+=b_-$, so $\eta(\beta)=0$ by
+\cref{eta:lem:circle}(iii) and the $\gamma$-terms cancel. For fixed $\theta$ the map
+$b(\cdot,\theta)$ on $S^*M$ extends over the ball bundle $S^*_+\cap\{\theta\}$, hence is
+homotopic to a map pulled back from $M$, so $\int_{S^*M}\Td\wedge\Chodd(b(\cdot,\theta))=0$
+as in \cref{eta:lem:base-multiplication}. The formula therefore reduces to
+\cref{eta:thm:AS} on $M\times\Sphere$. The asymmetric term $\langle\Chodd(b_-)\rangle$
+reflects the fact that the regularization \eqref{eta:eq:circle-E} is not invariant under
+$J$.
+
+\section{Towards general product-type index theorems}\label{eta:sec:general}
+
+In this final section we indicate how the results above should fit into a general
+index theory for product-type families. Parts of it are conjectural, and are labelled
+as such.
+
+\subsection{Thom isomorphisms and the Todd class} For an oriented real vector bundle
+$V\longrightarrow M$ of rank $r$ over a compact manifold, integration over the fibres gives
+the Thom isomorphism $H^*_c(V)\longrightarrow H^{*-r}(M)$. For a complex vector bundle
+there is also a Thom isomorphism $K_c(V)\longrightarrow K(M)$ in $K$-theory, extending Bott
+periodicity (the case of trivial $V$). Both sides carry Chern characters, giving a square
+\[
+\begin{tikzcd}
+K_c(V)\arrow[r,"\text{Thom}"]\arrow[d,"\Ch"'] & K(M)\arrow[d,"\Ch"]\\
+H^{\mathrm{even}}_c(V)\arrow[r,"\text{Thom}"'] & H^{\mathrm{even}}(M)
+\end{tikzcd}
+\]
+which does \emph{not} commute: the two composites differ by multiplication by a
+characteristic class of $V$, which (with appropriate conventions) is the Todd class. This
+is the origin of the factor $\Td(M)=\Td(TM\otimes\C)$ in the index formula. A direct
+computation of the Chern character of the index bundle in the families index theorem
+of \cref{ch:families} produces the Todd class in the same way.
+
+\subsection{Product-type $K$-theory} Recall that for a fibration $\phi:M\longrightarrow B$ of
+compact manifolds the families index theorem is the equality of two maps
+\[
+\ind_a=\ind_t:K^0_c(T^*(M/B))\longrightarrow K^0(B),
+\]
+the analytic index being defined by representing a class by the symbol of an elliptic
+family $A\in\Psido{0}(M/B;\mathbb E)$ and taking the stabilized index bundle, the
+topological index by embedding the fibration in a product $\Sphere^N\times B$.
+
+Consider now a compound fibration of compact manifolds
+\[
+M\xrightarrow{\ \psi\ }Y\xrightarrow{\ \Phi\ }B,\qquad\phi=\Phi\circ\psi,
+\]
+and the families $A\in\Psipt{0,0}(M/B;\mathbb E)$ of operators on the fibres of $\phi$
+which are of product type with respect to the fibration (over $\Phi^{-1}(b)$) induced by
+$\psi$. Such a family has two symbols,
+\[
+\sigma(A)\in\CI\bigl([S^*(M/B),\psi^*S^*(Y/B)];\hom(\mathbb E)\bigr),\qquad
+\beta(A)\in\Psido{0}\bigl(\pi^*M/S^*(Y/B);\mathbb E\bigr),
+\]
+the second being a family of operators on the fibres of $\psi$ parametrized by
+$S^*(Y/B)$, and full ellipticity means invertibility of both. Then the analytic index
+$\ind_a(A)\in K^0(B)$ is well defined by stabilization and depends only on
+$(\sigma(A),\beta(A))$. Considering all compatible invertible pairs modulo bundle
+isomorphism, stabilization and homotopy one expects an abelian group
+$K^0_{c,\psi\text{-pt}}(T^*(M/B))$ (and an odd version $K^{-1}_{c,\psi\text{-pt}}$) on which
+the analytic index is defined. Forgetting $\beta$ gives a map to $K^0_c(T^*(M/Y))$
+(evaluation of $\sigma$ in the vertical directions of $\psi$), and the families index
+of $\psi$, pulled back to $S^*(Y/B)$, gives a map
+$K^0_c(T^*(M/Y))\longrightarrow K^0(S^*(Y/B))$ which vanishes on the image, expressing the
+invertibility of $\beta$. Identifying $K^{-1}(S^*(Y/B))$ with homotopy classes of maps into
+$G^{-\infty}$, i.e.\ with invertible base families with symbol the identity, one is led to:
+
+\begin{remark}[Conjectural six-term sequence]\label{eta:rem:six-term}
+There should be an exact sequence
+\[
+\begin{tikzcd}[column sep=small]
+K^{-1}(S^*(Y/B))\arrow[r] & K^0_{c,\psi\text{-pt}}(T^*(M/B))\arrow[r,"\sigma"] &
+K^0_c(T^*(M/Y))\arrow[d,"\ind"]\\
+K^{-1}_c(T^*(M/Y))\arrow[u,"\ind"] & K^{-1}_{c,\psi\text{-pt}}(T^*(M/B))\arrow[l,"\sigma"'] &
+K^0(S^*(Y/B))\arrow[l]
+\end{tikzcd}
+\]
+and the analytic index should extend to an equality
+$\ind_a=\ind_t:K^0_{c,\psi\text{-pt}}(T^*(M/B))\longrightarrow K^0(B)$ with a topological
+index defined by embedding. A natural problem is to find a more traditional
+realization of the group $K^0_{c,\psi\text{-pt}}(T^*(M/B))$, for which the six-term
+sequence should serve as a guide. Groups of this type were subsequently constructed
+by Melrose and Rochon; see \cite{Melrose-Rochon} for the closely related families index
+for manifolds with boundary.
+\end{remark}
+
+\subsection{Product-type cohomology} The cohomological form of the index theorem
+expresses the Chern character of the index in terms of a Chern character of the symbol.
+\Cref{eta:thm:index} suggests what the latter should be in the product-type case: a
+pair consisting of the Chern form of $\sigma$ and the eta form of $\beta$, related by
+\cref{eta:thm:variation}. We formulate the corresponding cohomology in an abstract
+setting (correcting the degree conventions of the original notes).
+
+Let $Z$ be a compact manifold with boundary and $\psi:\pa Z\longrightarrow Y$ a fibration
+over a compact manifold $Y$ without boundary, with compact oriented fibres of
+dimension $f$, and let $\psi_*$ denote integration over the fibres with the `fibre
+last' convention, so that $\psi_*d=d\psi_*$ and $\int_{\pa Z}=\int_Y\psi_*$ when $\pa Z$
+is oriented by $Y$ followed by the fibres. Let $\iota:\pa Z\hookrightarrow Z$. Set
+\[
+C^k(Z,\psi)=\CI(Z;\Lambda^k)\oplus\CI(Y;\Lambda^{k-f-1}),\qquad
+\mathcal D(u,\tau)=(du,\ \psi_*\iota^*u-d\tau).
+\]
+Then $\mathcal D^2=0$; a pair is closed if $du=0$ and $d\tau=\psi_*\iota^*u$, and exact if
+it is of the form $(dv,\psi_*\iota^*v-d\varsigma)$. Denote the cohomology by $H^k(Z,\psi)$.
+
+\begin{proposition}\label{eta:prop:psi-cohomology}
+\begin{enumerate}[label=(\roman*)]
+\item There is a long exact sequence
+\begin{multline*}
+\cdots\longrightarrow H^{k-f-1}(Y)\longrightarrow H^k(Z,\psi)\longrightarrow H^k(Z)\\
+\xrightarrow{\ \psi_*\iota^*\ }H^{k-f}(Y)\longrightarrow H^{k+1}(Z,\psi)\longrightarrow\cdots.
+\end{multline*}
+\item If $\dim Z=n$, the pairing $\langle(u,\tau),[Z,\psi]\rangle=\int_Zu-\int_Y\tau$ on
+$C^n(Z,\psi)$ vanishes on exact pairs, so defines a linear form on $H^n(Z,\psi)$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof} (i) The sequence of complexes $0\longrightarrow\CI(Y;\Lambda^{\bullet-f-1})
+\longrightarrow C^\bullet(Z,\psi)\longrightarrow\CI(Z;\Lambda^\bullet)\longrightarrow0$,
+$\tau\mapsto(0,\tau)$ and $(u,\tau)\mapsto u$, is exact and compatible with the
+differentials (up to the sign of $d$ on the first complex, which does not affect
+cohomology). The connecting map sends $[u]$ to the class of $\psi_*\iota^*u$, since
+$\mathcal D(u,0)=(0,\psi_*\iota^*u)$. (ii) $\int_Zdv-\int_Y(\psi_*\iota^*v-d\varsigma)=
+\int_{\pa Z}v-\int_{\pa Z}v=0$ by Stokes' theorem.
+\end{proof}
+
+When $\psi$ is the identity of $\pa Z$ ($f=0$), $C^\bullet(Z,\psi)$ is the mapping cone of
+$\iota^*$, and $H^k(Z,\psi)$ is the relative cohomology $H^k(Z,\pa Z)$, i.e.\ the
+compactly supported cohomology of the interior (\cref{eta:ex:relative}).
+
+In the setting of \cref{eta:thm:index}, with $Z=S^*_+$, $Y=S^*M$ and $\psi$ the projection
+$S^*M\times\Sphere\longrightarrow S^*M$ ($f=1$), \cref{eta:thm:variation} says precisely that
+\[
+\Ch_{\mathrm{pt}}(A)=\bigl(\Td(M)\wedge\Chodd(a),\ -\Td(M)\wedge(\eta(\beta)+\gamma(b))\bigr)
+\]
+is closed, and \cref{eta:thm:index} becomes
+\[
+\ind(A)=\bigl\langle\Ch_{\mathrm{pt}}(A),[S^*_+,\psi]\bigr\rangle.
+\]
+The proof of \cref{eta:prop:homotopy} amounts to showing that the class of
+$\Ch_{\mathrm{pt}}(A)$ is homotopy invariant. In general one expects a Chern character
+$K^0_{c,\psi\text{-pt}}(T^*(M/B))\longrightarrow H^{\mathrm{even}}_{c,\psi\text{-pt}}(T^*(M/B))$,
+given by the pair (relative Chern form of $\sigma$, eta form of $\beta$) and defined
+using connections, mapping the $K$-theory six-term sequence of \cref{eta:rem:six-term}
+to the corresponding cohomological one, together with a push-forward
+$H^{\mathrm{even}}_{c,\psi\text{-pt}}(T^*(M/B))\longrightarrow H^{\mathrm{even}}(B)$ when the
+fibres are oriented, so that $\Ch(\ind_a(A))$ is the push-forward of $\Td\cdot\Ch_{\mathrm{pt}}(A)$.
+
+\subsection{The determinant line bundle}\label{eta:sec:determinant} The numerical index
+is the degree-zero part of the Chern character of the index bundle. In the odd case the
+degree-one part may be thought of as the `spectral flow' of the phase of a determinant.
+In the even case the degree-two part corresponds to the determinant line bundle, which we
+now construct; the degree-three part in the odd case corresponds to the curvature of a
+gerbe, and the degree-four part in the even case to a $2$-gerbe.
+
+Let $\phi:M\longrightarrow B$ be a fibration with compact fibres $Z_b$ and let
+$P\in\Psido{0}(M/B;E_+,E_-)$ be an elliptic family of numerical index $0$. Then each
+$P_b$ can be perturbed by a smoothing operator to be invertible, so the sets
+\[
+\mathcal P_b=\bigl\{P_b+Q_b;\ Q_b\in\Psido{-\infty}(Z_b;E_+,E_-),\ (P_b+Q_b)^{-1}\in
+\Psido{0}(Z_b;E_-,E_+)\bigr\}
+\]
+are non-empty. Each $\mathcal P_b$ is a principal homogeneous space for the group
+$G^{-\infty}(Z_b;E_-)$ acting on the left: if $A,A'\in\mathcal P_b$ then
+$A'=(\Id+R)A$ with $\Id+R=A'A^{-1}$, $R=(A'-A)A^{-1}$ smoothing. Thus
+$\mathcal P=\bigcup_b\mathcal P_b\longrightarrow B$ behaves like a principal bundle, although
+the structure groups $G^{-\infty}(Z_b;E_-)$ form a bundle of groups rather than a fixed
+group. (Using exhausting families of smoothing projections, as in the stabilization of the
+index bundle in \cref{ch:index}, one sees that the components of the space of sections of
+this bundle of groups are canonically $K^{-1}(B)$, so it is `weakly trivial'.) The
+Fredholm determinant is a character of each $G^{-\infty}(Z_b;E_-)$, so we may form the
+associated line bundle.
+
+\begin{proposition}\label{eta:prop:det-bundle}
+Let $\operatorname{Det}_b=(\mathcal P_b\times\C)/\sim$, where
+$(A,z)\sim\bigl((\Id+R)A,\det(\Id+R)^{-1}z\bigr)$ for $\Id+R\in G^{-\infty}(Z_b;E_-)$. Then
+$\operatorname{Det}=\bigcup_b\operatorname{Det}_b$ is a smooth line bundle over $B$, and
+\[
+s(b)=\bigl[A,\det(A^{-1}P_b)\bigr],\qquad A\in\mathcal P_b,
+\]
+is a well-defined smooth section of $\operatorname{Det}$ which vanishes exactly at the points
+$b$ where $P_b$ is not invertible.
+\end{proposition}
+
+\begin{proof} The relation is an equivalence relation because $\det$ is multiplicative.
+For fixed $A_0\in\mathcal P_b$, every element of $\mathcal P_b$ is uniquely $(\Id+R)A_0$, so
+$z\mapsto[A_0,z]$ is a bijection $\C\longrightarrow\operatorname{Det}_b$, and the linear structures
+induced by different choices of $A_0$ agree. Local triviality: if $A_0=P_{b_0}+Q_0\in\mathcal
+P_{b_0}$, choose a local trivialization of the fibration near $b_0$ and transport $Q_0$ to a
+smooth family $Q_b$; since invertibility is open, $P_b+Q_b\in\mathcal P_b$ for $b$ near
+$b_0$, giving a local smooth section of $\mathcal P$, hence a local trivialization, and the
+transition functions are $\det$ of smooth families in $G^{-\infty}$, hence smooth. For
+$s$: $A^{-1}P_b=\Id-A^{-1}Q_b\in\Id+\Psido{-\infty}$ has a Fredholm determinant, which is
+smooth in $b$ for a smooth local section $A$. Replacing $A$ by $(\Id+R)A$ gives
+$\det(A^{-1}(\Id+R)^{-1}P_b)=\det(\Id+R)^{-1}\det(A^{-1}P_b)$, using the multiplicativity
+of $\det$ and its invariance under conjugation by $A$; so $s$ is well defined.
+Finally $\det(A^{-1}P_b)\ne0$ if and only if $A^{-1}P_b$, equivalently $P_b$, is invertible.
+\end{proof}
+
+When $P_b$ is invertible, $s(b)=[P_b,1]$. The section $s$ is the determinant of the family.
+The curvature of natural connections on $\operatorname{Det}$ (Quillen, Bismut--Freed)
+represents the degree-two part of $-\Ch(\ind P)$ (compare
+\cref{eta:rem:determinant-connection}); with the opposite convention for the
+equivalence relation one obtains the dual line bundle.
+
+\section{Exercises}\label{eta:sec:exercises}
+
+\begin{exercise}\label{eta:ex:defect-shift}
+Let $U=\Pi e^{i\theta}\Pi$ and $L=\Pi e^{-i\theta}\Pi$ be the shifts on $\Hardy$. Show
+that $[L,U]$ is the projection onto the constants, and verify the trace-defect formula
+$\Trbar([L,U])=\TrR((D_EL)U)=1$ directly from \cref{eta:lem:circle}.
+\end{exercise}
+
+\begin{exercise}\label{eta:ex:not-inner}
+Show that $D_E$ is not an inner derivation of $\Psido{\Z}(\Sphere)$. (Hint: if
+$D_E=[C,\cdot]$ with $C\in\Psido{k}(\Sphere)$, compare the principal symbols of
+$D_Ef=-i\xi^{-1}f'+\dots$ and $[C,f]$, $f\in\CI(\Sphere)$; show that $k\le0$ is forced and
+that $k=0$ would require $\pa_\xi\sigma_0(C)=\xi^{-1}$ with $\sigma_0(C)$ homogeneous of
+degree $0$.)
+\end{exercise}
+
+\begin{exercise}\label{eta:ex:change-eta}
+Let $E'$ be another admissible family on $\Sphere$ with $D=D(E,E')\in\Psido{-1}(\Sphere)$ of
+principal symbol $\delta(\theta,\xi)$. Show that the eta forms defined using $E'$ are
+\[
+\eta'(B)=\eta(B)-\frac1{2\pi}\sum_kc_k\int_0^{2\pi}\tr(\nu^{2k+1})\,\delta(\theta,1)\,d\theta,
+\]
+so that they differ from $\eta$ by a term local in the symbol of $B$. Deduce that
+\cref{eta:thm:index} holds with $\eta'$ in place of $\eta$ provided $\gamma$ is replaced by
+$\gamma$ minus this local term.
+\end{exercise}
+
+\begin{exercise}\label{eta:ex:chodd-product}
+Let $g,h\in\CI(W;\GL(N,\C))$. Using the homotopy
+$R_t(g\oplus\Id)R_t^{-1}(\Id\oplus h)$ and \cref{eta:lem:transgression}, show that
+$\Chodd(gh)-\Chodd(g)-\Chodd(h)$ is exact, and that its degree-one part vanishes.
+\end{exercise}
+
+\begin{exercise}\label{eta:ex:circle-AS}
+Show that for elliptic $P\in\Psido{0}(\Sphere;\C^N)$,
+$\ind(P)=\int_{S^*\Sphere}\Chodd(\sigma_0(P))$ with the Liouville orientation, by writing
+$P$, up to compact operators, as $\Pi P_+\Pi+(\Id-\Pi)P_-(\Id-\Pi)$ and applying
+\eqref{eta:eq:toeplitz-index} to both parts (for the negative part use $J$ from the proof of
+\cref{eta:prop:full}).
+\end{exercise}
+
+\begin{exercise}\label{eta:ex:orientation}
+Verify directly in local coordinates that for $n=1$ the Liouville orientation of
+$S^*M\cong M\times\{\pm1\}$ is $\pm dx$, and that the orientation of $\pa S^*_+$ is
+$\pm dx\wedge d\theta$ on the two components.
+\end{exercise}
+
+\begin{exercise}\label{eta:ex:relative}
+Check that when $\psi:\pa Z\longrightarrow\pa Z$ is the identity, $H^k(Z,\psi)$ is
+naturally isomorphic to $H^k(Z,\pa Z)=H^k_c(Z\setminus\pa Z)$. (Hint: given a closed pair
+$(u,\tau)$, use a collar and a cut-off $\chi$ equal to $1$ near $\pa Z$ to replace it by the
+cohomologous pair $(u-d(\chi\tau),0)$, with $u-d(\chi\tau)$ vanishing near $\pa Z$.)
+\end{exercise}
+
+\begin{exercise}\label{eta:ex:les}
+Give the details of \cref{eta:prop:psi-cohomology}(i), and show that the connecting map
+$H^k(Z)\longrightarrow H^{k-f}(Y)$ is induced by $\psi_*\iota^*$.
+\end{exercise}
+
+\begin{exercise}\label{eta:ex:det-section}
+In the setting of \cref{eta:prop:det-bundle}, suppose $P_b=P_0+K_b$ where $P_0$ is a
+fixed invertible family (in a local trivialization of the fibration) and
+$K_b\in\Psido{-\infty}$. Show that in the trivialization $z\mapsto[P_0,z]$ of
+$\operatorname{Det}$ the determinant section is $s(b)=\det(\Id+P_0^{-1}K_b)$, and that
+$\operatorname{Det}$ is trivial if every $P_b$ is invertible.
+\end{exercise}
+
+\section*{Notes}
+
+Regularized traces of this kind were studied by Kontsevich and Vishik, and the
+trace-defect formula appears in the treatment of the b-trace in \cite{Melrose-APS}; the
+residue trace is due to Wodzicki
+and Guillemin \cite{Wodzicki-residue,Guillemin-residue}, and the meromorphic
+continuation to Seeley \cite{Seeley}. In the APS index theorem the eta invariant arises in
+the same way, as a regularized trace of the indicial family \cite{Melrose-APS}; the eta
+forms here are the corresponding objects for the odd Chern character, analogous to the
+eta forms of Bismut and Cheeger \cite{Bismut-Cheeger}, and appear in the families index
+theorem of Melrose and Rochon \cite{Melrose-Rochon}.
+
+The main departures from the original lecture notes are as follows. We have fixed all
+normalizations: with $E(s)$ of order $+s$ the residue trace is minus the Wodzicki residue,
+the trace-defect formula reads $\Trbar_E([A,B])=\TrR(BD_EA)$ with
+$D_EA=\frac{d}{ds}[E(s),A]|_{s=0}$, and the constants of the odd Chern character are
+determined by the Toeplitz index (\cref{eta:prop:toeplitz-chern}). The variation formula
+for the eta forms, \cref{eta:thm:variation}, has been corrected; it contains a symbolic
+term $\gamma$ which must also appear in the index formula (\cref{eta:rem:gamma}), and with
+these normalizations the eta form enters with coefficient $+1$ rather than $-\frac12$.
+The original proof of the index formula reduced to the Atiyah--Singer theorem on $M$ by
+composing with the inverse of a bundle isomorphism; in the Toeplitz algebra such an
+inverse need not exist (\cref{eta:rem:finite-rank}), and we have instead given a proof
+based on the weak contractibility of the Toeplitz group and the Atiyah--Singer theorem on
+$M\times\Sphere$. The non-Toeplitz case is deduced by a unitary doubling. In the product-type
+cohomology the compatibility condition has been changed to $d\tau=\psi_*\iota^*u$ (push-forward
+along the fibres), which is what the variation formula requires; the suggested
+identification with the cohomology of the space obtained by collapsing the fibres of
+$\psi$ refers to the pull-back condition and has been dropped. The original also asserts
+that $D_E$ is the unique continuous outer derivation up to inner derivations and
+constant multiples; we have not proved this. For the Todd class in the comparison of
+Thom isomorphisms see Atiyah and Singer, \emph{The index of elliptic operators III}, and
+for determinant line bundles Quillen and Bismut--Freed.

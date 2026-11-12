@@ -1,0 +1,637 @@
+\chapter{Hochschild homology}\label{ch:hochschild}
+\providecommand{\cA}{\mathcal{A}}
+\providecommand{\cB}{\mathcal{B}}
+
+The algebra $\Psido{\Z}(X)$ of classical pseudodifferential operators of
+integral order on a compact manifold $X$, studied in \cref{ch:manifolds}, is
+a non-commutative deformation of a commutative algebra: modulo
+$\Psido{-\infty}(X)$ it is, via the full symbol, the algebra of formal sums of
+homogeneous functions on $T^*X\setminus0$, with a product whose leading term
+is pointwise multiplication and whose first correction is the Poisson bracket.
+Hochschild homology is the basic homological invariant of an associative
+algebra; in degree zero it is the dual of the space of traces. The aim of this
+chapter is to compute the Hochschild homology of the algebra
+$\Psido{\Z}(X)/\Psido{-\infty}(X)$ of formal symbols, following
+Brylinski--Getzler \cite{Brylinski-Getzler} and Wodzicki
+\cite{Wodzicki-residue,Wodzicki-cyclic}:
+\begin{equation*}
+  \HH_k\bigl(\Psido{\Z}(X)/\Psido{-\infty}(X)\bigr)\cong H^{2n-k}(S^*X)\oplus
+  H^{2n-k-1}(S^*X),\qquad n=\dim X .
+\end{equation*}
+The computation proceeds in three stages. First (\cref{hochschild:sec:complex,hochschild:sec:polynomial})
+we set up the Hochschild complex and compute it for polynomial algebras by
+means of the Koszul resolution. Secondly (\cref{hochschild:sec:smooth,hochschild:sec:commutative})
+we prove the theorem of Hochschild--Kostant--Rosenberg and Connes that the
+Hochschild homology of $\CI(X)$ is the space of differential forms, and deduce
+the analogous statement for the commutative algebra of homogeneous symbols.
+Finally (\cref{hochschild:sec:symbols,hochschild:sec:spectral,hochschild:sec:E2,hochschild:sec:main})
+we filter the Hochschild complex of the symbol algebra by order; the
+resulting spectral sequence has $E_1$ term the homogeneous differential forms
+on $T^*X\setminus0$, its first differential is the Poisson (Koszul--Brylinski)
+differential, a symplectic Hodge star identifies $E_2$ with de Rham cohomology,
+and a homogeneity argument shows that the spectral sequence degenerates and
+converges.
+
+Throughout, vector spaces are complex, $\otimes$ without decoration is the
+algebraic tensor product over $\C$, and $X$ is a smooth manifold of dimension
+$n$.
+
+\section{The Hochschild complex}\label{hochschild:sec:complex}
+
+\subsection{Chains and differentials}
+Let $\cA$ be an associative algebra over $\C$, not necessarily with identity.
+The space of (algebraic) Hochschild $k$-chains, $k\in\N_0$, is
+\begin{equation*}
+  C_k(\cA)=\cA^{\otimes(k+1)}=\cA\otimes\cA\otimes\dots\otimes\cA .
+\end{equation*}
+For $k\ge1$ define the \emph{face maps} $d_i:C_k(\cA)\longrightarrow C_{k-1}(\cA)$,
+$0\le i\le k$, by
+\begin{equation}
+\begin{aligned}
+  d_i(a_0\otimes\dots\otimes a_k)&=a_0\otimes\dots\otimes a_{i-1}\otimes
+  a_ia_{i+1}\otimes a_{i+2}\otimes\dots\otimes a_k,\quad 0\le i\le k-1,\\
+  d_k(a_0\otimes\dots\otimes a_k)&=a_ka_0\otimes a_1\otimes\dots\otimes a_{k-1},
+\end{aligned}
+\label{hochschild:eq:faces}
+\end{equation}
+and set
+\begin{equation}
+  b'=\sum_{i=0}^{k-1}(-1)^id_i,\qquad b=b'+(-1)^kd_k=\sum_{i=0}^k(-1)^id_i
+  \quad\text{on }C_k(\cA),
+  \label{hochschild:eq:b}
+\end{equation}
+with $b=b'=0$ on $C_0(\cA)=\cA$.
+
+\begin{lemma}\label{hochschild:lem:simplicial}
+For $k\ge2$ and $0\le i<j\le k$ the face maps satisfy
+$d_id_j=d_{j-1}d_i$ as maps $C_k(\cA)\longrightarrow C_{k-2}(\cA)$.
+Consequently $(b')^2=0$ and $b^2=0$.
+\end{lemma}
+\begin{proof}
+If $j\le k-1$ both sides only multiply neighbouring factors and the identity
+is the associativity of the product (for $j=i+1$ both sides replace
+$a_i\otimes a_{i+1}\otimes a_{i+2}$ by $a_ia_{i+1}a_{i+2}$; for $j>i+1$ the
+two multiplications commute). If $j=k$ and $i=0$, both sides give
+$a_ka_0a_1\otimes a_2\otimes\dots\otimes a_{k-1}$; if $j=k$ and $0<i<k-1$,
+both give $a_ka_0\otimes\dots\otimes a_ia_{i+1}\otimes\dots\otimes a_{k-1}$;
+and if $j=k$, $i=k-1$, both give $a_{k-1}a_ka_0\otimes a_1\otimes\dots\otimes
+a_{k-2}$.
+
+Now $b^2=\sum_{i=0}^{k-1}\sum_{j=0}^{k}(-1)^{i+j}d_id_j$ on $C_k(\cA)$. The
+map $(i,j)\longmapsto(j-1,i)$ is a bijection from the pairs with $i<j\le k$
+onto the pairs $(i',j')$ with $j'\le i'\le k-1$, and by the identity the
+corresponding terms are equal but carry the opposite signs $(-1)^{i+j}$ and
+$(-1)^{i+j-1}$; hence $b^2=0$. The same argument with $k$ replaced by $k-1$
+in the range of $j$ gives $(b')^2=0$.
+\end{proof}
+
+\begin{definition}\label{hochschild:def:HH}
+The \emph{Hochschild homology} of $\cA$ is the homology of the complex
+$(C_\bullet(\cA),b)$:
+\begin{equation*}
+  \HH_k(\cA)=\frac{\Nul\bigl(b:C_k(\cA)\to C_{k-1}(\cA)\bigr)}
+  {\Ran\bigl(b:C_{k+1}(\cA)\to C_k(\cA)\bigr)},\qquad k\in\N_0 .
+\end{equation*}
+\end{definition}
+
+In degree zero $b(a_0\otimes a_1)=a_0a_1-a_1a_0$, so
+$\HH_0(\cA)=\cA/[\cA,\cA]$, where $[\cA,\cA]$ is the span of the commutators.
+Thus the linear functionals on $\HH_0(\cA)$ are precisely the \emph{traces}
+on $\cA$, the linear maps $\tau$ with $\tau(ab)=\tau(ba)$. If $\cA$ is
+commutative then $b=0$ on $C_1(\cA)$ and $\HH_0(\cA)=\cA$.
+
+\subsection{The bar complex}
+The complex $(C_\bullet(\cA),b')$ is the \emph{bar complex}. It is, in
+contrast to the Hochschild complex, trivial for algebras with identity.
+
+\begin{lemma}\label{hochschild:lem:bar-acyclic}
+If $\cA$ has an identity $1$, then $s(a_0\otimes\dots\otimes a_k)=1\otimes
+a_0\otimes\dots\otimes a_k$ defines maps $s:C_k(\cA)\to C_{k+1}(\cA)$ with
+\begin{equation*}
+  b's+sb'=\Id\quad\text{on }C_k(\cA),\ k\ge0;
+\end{equation*}
+in particular $(C_\bullet(\cA),b')$ is acyclic.
+\end{lemma}
+\begin{proof}
+On $C_{k+1}(\cA)$, $d_0(1\otimes a)=a$ for $a\in C_k(\cA)$, while for $1\le
+i\le k$, $d_i(1\otimes a)=1\otimes d_{i-1}a$. Hence
+$b'sa=a+\sum_{i=1}^{k}(-1)^i\,1\otimes d_{i-1}a=a-sb'a$.
+\end{proof}
+
+\begin{definition}\label{hochschild:def:H-unital}
+An associative algebra is \emph{H-unital} if its bar complex
+$(C_\bullet(\cA),b')$ is acyclic.
+\end{definition}
+
+So every unital algebra is H-unital. For H-unital algebras Hochschild homology
+has good excision properties (Wodzicki); we shall not need these.
+
+\subsection{Hochschild homology as a derived functor}
+\label{hochschild:sec:Tor}
+Suppose $\cA$ has an identity and let $\cA^e=\cA\otimes\cA^{\mathrm{op}}$, so that
+$\cA$-bimodules are the same as left $\cA^e$-modules; $\cA$ itself is an
+$\cA^e$-module by $(a\otimes a')\cdot c=aca'$. Set
+\begin{equation*}
+  P_k=\cA\otimes\cA^{\otimes k}\otimes\cA\ (=\cA^{\otimes(k+2)}),
+  \qquad (a\otimes a')\cdot(a_0\otimes\dots\otimes a_{k+1})
+  =aa_0\otimes a_1\otimes\dots\otimes a_{k+1}a'.
+\end{equation*}
+Each $P_k\cong\cA^e\otimes\cA^{\otimes k}$ is a free $\cA^e$-module, the bar
+differential $b'$ of \eqref{hochschild:eq:b} (on $\cA^{\otimes(k+2)}$, i.e.\
+$b'=\sum_{i=0}^{k}(-1)^id_i$) is $\cA^e$-linear, and by
+\cref{hochschild:lem:bar-acyclic} the complex
+\begin{equation}
+  \dots\xrightarrow{b'}P_2\xrightarrow{b'}P_1\xrightarrow{b'}P_0\xrightarrow{\ m\ }\cA\longrightarrow0,
+  \qquad m(a_0\otimes a_1)=a_0a_1,
+  \label{hochschild:eq:bar-res}
+\end{equation}
+is exact: it is a free resolution of $\cA$ as an $\cA^e$-module. Applying
+$\cA\otimes_{\cA^e}(\cdot)$ and using the isomorphism
+\begin{equation*}
+  \cA\otimes_{\cA^e}P_k\longrightarrow C_k(\cA),\quad
+  c\otimes(a_0\otimes a_1\otimes\dots\otimes a_k\otimes a_{k+1})\longmapsto
+  a_{k+1}ca_0\otimes a_1\otimes\dots\otimes a_k,
+\end{equation*}
+the differential $\Id\otimes b'$ becomes $b$: the term $d_0$ of $b'$ gives
+$d_0$, and the last term $(-1)^k(\dots\otimes a_ka_{k+1})$ of $b'$ on $P_k$
+(with $a_{k+1}=1$) gives $(-1)^ka_kca_0\otimes\dots=(-1)^kd_k$. Thus
+\begin{equation*}
+  \HH_k(\cA)=\operatorname{Tor}^{\cA^e}_k(\cA,\cA).
+\end{equation*}
+The practical content of this is the following standard fact
+(the \emph{comparison theorem} of homological algebra): if
+$Q_\bullet\to\cA\to0$ is another resolution of $\cA$ by free (or projective)
+$\cA^e$-modules, then there are $\cA^e$-linear chain maps $\Phi:Q_\bullet\to
+P_\bullet$ and $\Psi:P_\bullet\to Q_\bullet$ inducing the identity on $\cA$,
+and $\Psi\Phi$, $\Phi\Psi$ are $\cA^e$-linearly chain homotopic to the
+identity. The maps are constructed degree by degree: on a basis element $e$
+of $Q_k$ one chooses $\Phi(e)$ in $P_k$ with $b'\Phi(e)=\Phi(\partial e)$,
+which is possible because $\Phi(\partial e)$ is a cycle (for $k=0$, lies over
+the right element of $\cA$) and $P_\bullet$ is exact; the homotopies are
+constructed in the same way. Consequently $\HH_\bullet(\cA)$ is also the
+homology of $\cA\otimes_{\cA^e}Q_\bullet$.
+
+\subsection{Topological algebras}\label{hochschild:sec:topological}
+For the `large' algebras of analysis the algebraic tensor product is
+inappropriate and is replaced by a completion. If $\cA$ is a Fréchet algebra
+(multiplication jointly continuous) one uses the completed projective tensor
+product $\cA^{\hat\otimes(k+1)}$; the face maps extend by continuity and
+\cref{hochschild:lem:simplicial,hochschild:lem:bar-acyclic} continue to hold,
+by density of the algebraic tensor product. The resulting homology is the
+\emph{continuous} Hochschild homology.
+
+For $\cA=\CI(X)$, $X$ compact, a theorem of Grothendieck identifies
+$\CI(X)\hat\otimes\CI(Y)$ with $\CI(X\times Y)$ (this rests on the nuclearity
+of $\CI(X)$; the algebraic tensor product is in any case dense in
+$\CI(X\times Y)$). We shall simply \emph{define} the chain spaces for $\CI(X)$
+to be $\CI(X^{k+1})$, see \cref{hochschild:sec:smooth}; for the symbol
+algebras the completion used is specified in \cref{hochschild:def:chains-comm,hochschild:def:chains-full}.
+
+\section{Polynomial algebras}\label{hochschild:sec:polynomial}
+
+Let $\cA=\C[x]=\C[x_1,\dots,x_n]$, regarded as the algebra of polynomial
+functions on $\R^n$. Then $C_k(\cA)=\C[z_0,z_1,\dots,z_k]$, $z_j\in\R^n$, is
+the space of polynomials on $(\R^n)^{k+1}$, the element
+$a_0\otimes\dots\otimes a_k$ corresponding to $a_0(z_0)a_1(z_1)\cdots
+a_k(z_k)$. In these terms the face maps \eqref{hochschild:eq:faces} are
+restrictions to diagonals:
+\begin{equation}
+\begin{aligned}
+  (d_iu)(z_0,\dots,z_{k-1})&=u(z_0,\dots,z_{i-1},z_i,z_i,z_{i+1},\dots,z_{k-1}),
+  \quad 0\le i\le k-1,\\
+  (d_ku)(z_0,\dots,z_{k-1})&=u(z_0,z_1,\dots,z_{k-1},z_0).
+\end{aligned}
+\label{hochschild:eq:faces-fn}
+\end{equation}
+Let $\Omega^k_{\mathrm{pol}}=\C[x]\otimes\Lambda^k(\C^n)$ be the space of
+$k$-forms on $\R^n$ with polynomial coefficients, $dx^j$ corresponding to the
+$j$-th basis vector $e_j$ of $\C^n$.
+
+\subsection{The Hochschild--Kostant--Rosenberg map}
+For a function $u$ of $(z_0,\dots,z_k)$ set
+\begin{equation}
+  \varepsilon(u)(x)=\frac1{k!}\sum_{j_1,\dots,j_k=1}^n
+  \frac{\pa^ku}{\pa z_1^{j_1}\cdots\pa z_k^{j_k}}(x,x,\dots,x)\,
+  dx^{j_1}\wedge\dots\wedge dx^{j_k},
+  \label{hochschild:eq:HKR}
+\end{equation}
+where $z_l^{j}$ is the $j$-th coordinate of $z_l$. Thus
+$\varepsilon(a_0\otimes a_1\otimes\dots\otimes a_k)=\frac1{k!}a_0\,da_1\wedge\dots\wedge da_k$.
+For $a_0,\dots,a_k\in\cA$ we also set
+\begin{equation}
+  \varphi(a_0;a_1,\dots,a_k)=\sum_{\sigma\in\mathfrak S_k}\sgn(\sigma)\,
+  a_0\otimes a_{\sigma(1)}\otimes\dots\otimes a_{\sigma(k)}\in C_k(\cA).
+  \label{hochschild:eq:antisym}
+\end{equation}
+
+\begin{lemma}\label{hochschild:lem:HKR-chain}
+For any commutative algebra $\cA$, define
+$\varepsilon:C_k(\cA)\to\Omega^k_{\cA}$ by $\varepsilon(a_0\otimes\dots\otimes
+a_k)=\frac1{k!}a_0\,da_1\wedge\dots\wedge da_k$, where $\Omega^\bullet_\cA$
+is any graded-commutative algebra containing $\cA$ in degree zero, with a
+derivation $d$ (for instance the de Rham complex of a manifold, with $\cA$ a
+subalgebra of the smooth functions). Then $\varepsilon\circ b=0$,
+$b\,\varphi(a_0;a_1,\dots,a_k)=0$ and
+$\varepsilon\bigl(\varphi(a_0;a_1,\dots,a_k)\bigr)=a_0\,da_1\wedge\dots\wedge da_k$.
+\end{lemma}
+\begin{proof}
+Write $T_i=a_0a_i\,da_1\wedge\dots\wedge\widehat{da_i}\wedge\dots\wedge da_k$.
+By the Leibniz rule $d(a_ia_{i+1})=a_{i+1}da_i+a_ida_{i+1}$, so
+$(k-1)!\,\varepsilon(b(a_0\otimes\dots\otimes a_k))$ equals
+\begin{equation*}
+  T_1+\sum_{i=1}^{k-1}(-1)^i(T_{i+1}+T_i)+(-1)^kT_k=0 .
+\end{equation*}
+In $b\varphi$, the terms $d_i$ with $1\le i\le k-1$ cancel in pairs, since
+$\sigma$ and $\sigma\circ(i\ i{+}1)$ have opposite signs and $\cA$ is
+commutative. The term $d_0$ for $\sigma$ is $\sgn(\sigma)a_0a_{\sigma(1)}\otimes
+a_{\sigma(2)}\otimes\dots$, and the term $(-1)^kd_k$ for $\sigma'$, where
+$\sigma'(j)=\sigma(j+1)$ for $j<k$ and $\sigma'(k)=\sigma(1)$, is
+$(-1)^k\sgn(\sigma')a_{\sigma(1)}a_0\otimes a_{\sigma(2)}\otimes\dots$; since
+$\sgn(\sigma')=(-1)^{k-1}\sgn(\sigma)$ these cancel. Finally
+$\varepsilon\varphi=\frac1{k!}\sum_\sigma\sgn(\sigma)a_0\,da_{\sigma(1)}\wedge\dots\wedge
+da_{\sigma(k)}=a_0\,da_1\wedge\dots\wedge da_k$.
+\end{proof}
+
+\subsection{The Koszul resolution}
+We identify $\cA^e=\C[x]\otimes\C[x]$ with $\C[x,y]$, polynomials in
+$(x,y)\in\R^n\times\R^n$, via $a\otimes a'\mapsto a(x)a'(y)$; then $\cA$ is the
+$\cA^e$-module $\C[x,y]/(x_1-y_1,\dots,x_n-y_n)$. The \emph{Koszul complex} is
+\begin{equation*}
+  K_k=\C[x,y]\otimes\Lambda^k(\C^n),\quad
+  \pa(f\,e_{i_1}\wedge\dots\wedge e_{i_k})=\sum_{l=1}^k(-1)^{l-1}
+  (x_{i_l}-y_{i_l})f\,e_{i_1}\wedge\dots\wedge\widehat{e_{i_l}}\wedge\dots\wedge e_{i_k},
+\end{equation*}
+with augmentation $K_0=\C[x,y]\to\cA$, $f\mapsto f(x,x)$.
+
+\begin{lemma}\label{hochschild:lem:Koszul}
+The augmented Koszul complex $\dots\to K_1\to K_0\to\cA\to0$ is exact, so $K_\bullet$
+is a free resolution of $\cA$ as an $\cA^e$-module.
+\end{lemma}
+\begin{proof}
+In the variables $u=x-y$, $v=y$ identify $K_k$ with the $k$-forms in $u$ with
+coefficients in $\C[u,v]$, $e_i\leftrightarrow du_i$. Then $\pa=\iota_E$ is
+contraction with the Euler field $E=\sum_iu_i\pa_{u_i}$ and the augmentation
+is $f\mapsto f|_{u=0}$. Let $d_u$ be the exterior derivative in $u$ (with $v$
+as a parameter). By Cartan's formula $d_u\iota_E+\iota_Ed_u=\mathcal L_E$,
+and $\mathcal L_E$ multiplies $u^\alpha du_I$ (with coefficients in $\C[v]$)
+by $|\alpha|+|I|$. Hence if $\omega\in K_k$, $k\ge1$, is homogeneous of total
+degree $N=|\alpha|+|I|\ge1$ in $u$ and $\pa\omega=0$, then
+$\omega=\pa(d_u\omega/N)$; splitting a general cycle into homogeneous parts,
+$K_\bullet$ is exact in degrees $k\ge1$. In degree $0$ the kernel of the
+augmentation consists of the $f$ with no term of degree $0$ in $u$, and such
+an $f$ equals $\pa(\sum_N d_uf_N/N)$, $f_N$ its homogeneous parts. Finally the
+augmentation is surjective.
+\end{proof}
+
+\begin{theorem}[Hochschild--Kostant--Rosenberg]\label{hochschild:thm:polynomial}
+For the polynomial algebra $\cA=\C[x_1,\dots,x_n]$ the map
+\eqref{hochschild:eq:HKR} induces an isomorphism
+\begin{equation*}
+  \varepsilon_*:\HH_k(\C[x])\longrightarrow\Omega^k_{\mathrm{pol}}
+  =\C[x]\otimes\Lambda^k(\C^n),\qquad k\in\N_0,
+\end{equation*}
+with inverse induced by $a_0\,dx^{i_1}\wedge\dots\wedge dx^{i_k}\longmapsto
+\varphi(a_0;x_{i_1},\dots,x_{i_k})$. In particular $\HH_k(\C[x])=0$ for
+$k>n$.
+\end{theorem}
+\begin{proof}
+Let $P_\bullet$ be the bar resolution \eqref{hochschild:eq:bar-res} and define
+the $\cA^e$-linear maps $\Phi:K_k\to P_k$ by
+\begin{equation*}
+  \Phi(e_{i_1}\wedge\dots\wedge e_{i_k})=\sum_{\sigma\in\mathfrak S_k}\sgn(\sigma)\,
+  1\otimes x_{i_{\sigma(1)}}\otimes\dots\otimes x_{i_{\sigma(k)}}\otimes1 .
+\end{equation*}
+This is a chain map. Indeed, applying $b'$, the inner terms (multiplying two
+adjacent $x$'s) cancel in pairs as in \cref{hochschild:lem:HKR-chain}. The
+first term is $x_{i_{\sigma(1)}}\cdot(1\otimes x_{i_{\sigma(2)}}\otimes\dots\otimes1)$
+(left action, i.e.\ multiplication by the variable $x$) and, grouping the
+$\sigma$ with $\sigma(1)=l$, contributes
+$\sum_l(-1)^{l-1}x_{i_l}\Phi(e_{i_1}\wedge\dots\widehat{e_{i_l}}\dots\wedge e_{i_k})$;
+the last term is $(-1)^k(1\otimes\dots\otimes1)\cdot x_{i_{\sigma(k)}}$
+(right action, multiplication by $y$) and, grouping the $\sigma$ with
+$\sigma(k)=l$ (sign $(-1)^{k-l}$), contributes
+$-\sum_l(-1)^{l-1}y_{i_l}\Phi(\dots\widehat{e_{i_l}}\dots)$. Together this is
+$\Phi(\pa e_{i_1}\wedge\dots\wedge e_{i_k})$. In degree $0$, $\Phi$ is the
+identity of $\cA^e$, so $\Phi$ lies over the identity of $\cA$.
+
+By \cref{hochschild:lem:Koszul} both complexes are free resolutions of $\cA$,
+so by the comparison theorem (\cref{hochschild:sec:Tor}) $\Id\otimes\Phi$
+induces an isomorphism from the homology of $\cA\otimes_{\cA^e}K_\bullet$ to
+that of $\cA\otimes_{\cA^e}P_\bullet$, i.e.\ to $\HH_\bullet(\cA)$. Now
+$\cA\otimes_{\cA^e}K_k=\cA\otimes\Lambda^k(\C^n)=\Omega^k_{\mathrm{pol}}$ and
+the induced differential vanishes, since $x_i-y_i$ acts on $\cA$ as $0$. Under
+the identification $\cA\otimes_{\cA^e}P_k=C_k(\cA)$, $\Id\otimes\Phi$ becomes
+$a_0\,dx^{i_1}\wedge\dots\wedge dx^{i_k}\mapsto\varphi(a_0;x_{i_1},\dots,x_{i_k})$,
+which therefore induces an isomorphism $\varphi_*:\Omega^k_{\mathrm{pol}}\to\HH_k(\cA)$.
+By \cref{hochschild:lem:HKR-chain}, $\varepsilon$ descends to homology and
+$\varepsilon_*\varphi_*=\Id$, so $\varepsilon_*=\varphi_*^{-1}$.
+\end{proof}
+
+\begin{remark}\label{hochschild:rem:Laurent}
+The same argument applies to the algebra $\C[r,r^{-1}]$ of Laurent
+polynomials in one variable. Here $\cA^e=\C[r^{\pm1},s^{\pm1}]$ and the Koszul
+resolution is $0\to\cA^e\xrightarrow{\ r-s\ }\cA^e\to\cA\to0$; it is exact
+because $r-s$ is not a zero divisor and $f(r,s)-f(r,r)$ is divisible by $r-s$
+in $\cA^e$ (write $f=(rs)^{-N}g$ with $g$ a polynomial). Hence
+$\HH_0(\C[r^{\pm1}])=\C[r^{\pm1}]$, $\HH_1(\C[r^{\pm1}])=\C[r^{\pm1}]\,dr$
+and $\HH_k(\C[r^{\pm1}])=0$ for $k\ge2$, the isomorphisms again being
+induced by $\varepsilon$.
+\end{remark}
+
+The original direct argument for \cref{hochschild:thm:polynomial} proceeds
+instead by successively restricting to chains vanishing on diagonals. This
+reduction is very useful for smooth functions, where no finite free
+resolution is at hand, and we now describe it.
+
+\section{Smooth functions}\label{hochschild:sec:smooth}
+
+\subsection{The complex}
+Let $X$ be a compact manifold. We take as the space of Hochschild $k$-chains
+of $\CI(X)$ the space $C_k=\CI(X^{k+1})$, a completion of
+$\CI(X)^{\otimes(k+1)}$ (see \cref{hochschild:sec:topological}), with the
+face maps \eqref{hochschild:eq:faces-fn}; these are the continuous extensions
+of \eqref{hochschild:eq:faces}, and $b=\sum_i(-1)^id_i$ as before. The map
+$\varepsilon:C_k\to\Omega^k(X)=\CI(X;\Lambda^kT^*X)$ is defined by
+\eqref{hochschild:eq:HKR} in local coordinates. This is invariant: the
+mixed derivative $\pa^k u/\pa z_1^{j_1}\cdots\pa z_k^{j_k}$, in which each
+variable is differentiated once, restricted to the diagonal, transforms as a
+section of $(T^*X)^{\otimes k}$ under change of coordinates, and
+$\varepsilon(u)$ is $\frac1{k!}$ times its image under
+$v_1\otimes\dots\otimes v_k\mapsto v_1\wedge\dots\wedge v_k$.
+
+\begin{lemma}\label{hochschild:lem:HKR-smooth}
+$\varepsilon\circ b=0$ on $C_{k+1}$, and $\varepsilon_*:\HH_k(\CI(X))\to
+\Omega^k(X)$ is surjective.
+\end{lemma}
+\begin{proof}
+The value of $\varepsilon(bu)$ at $x\in X$ only involves derivatives of $u$
+of order at most $k+1$ at $(x,\dots,x)$. Replacing $u$, in local coordinates,
+by its Taylor polynomial of that order, which is a sum of products of
+functions of the individual variables, the first statement follows from
+\cref{hochschild:lem:HKR-chain}. Embedding $X$ in some $\R^N$, every
+$k$-form is a finite sum of forms $a_0\,da_1\wedge\dots\wedge da_k$ with
+$a_j\in\CI(X)$ (take $a_1,\dots,a_k$ among the restricted coordinate
+functions). By \cref{hochschild:lem:HKR-chain},
+$\varphi(a_0;a_1,\dots,a_k)$ is a cycle with $\varepsilon$-image
+$a_0\,da_1\wedge\dots\wedge da_k$.
+\end{proof}
+
+The main result of this section is the corresponding injectivity.
+
+\begin{theorem}[Connes]\label{hochschild:thm:Connes}
+For a compact manifold $X$, $\varepsilon$ induces an isomorphism
+$\varepsilon_*:\HH_k(\CI(X))\longrightarrow\Omega^k(X)$ for each $k\in\N_0$.
+\end{theorem}
+
+The bar complex $(C_\bullet,b')$ is acyclic by the continuous version of
+\cref{hochschild:lem:bar-acyclic}, with $(su)(z_0,\dots,z_{k+1})=u(z_1,\dots,z_{k+1})$;
+so $\CI(X)$ is (continuously) H-unital.
+
+\subsection{Reduction to normalized chains}
+The following discussion applies verbatim to $\CI(X)$ and to the polynomial
+algebra (with $X=\R^n$ and $C_k$ the polynomials on $(\R^n)^{k+1}$). For
+$u\in C_k$ consider the diagonals
+\begin{equation*}
+  D_i=\{z\in X^{k+1};z_i=z_{i+1}\},\ 0\le i\le k-1,\qquad
+  D_k=\{z\in X^{k+1};z_k=z_0\},
+\end{equation*}
+so that $d_iu$ is essentially the restriction of $u$ to $D_i$, and set
+\begin{equation*}
+\begin{gathered}
+  N_k=\{u\in C_k;\ u|_{D_i}=0,\ 0\le i\le k-1\},\qquad
+  M_k=\{u\in N_k;\ u|_{D_k}=0\},\\
+  B_k=d_{k+1}(N_{k+1})=\{v(z_0,\dots,z_k,z_0);\ v\in N_{k+1}\}.
+\end{gathered}
+\end{equation*}
+Note $N_0=C_0$, $M_0=C_0$, and $B_k\subset M_k$: a $v\in N_{k+1}$ vanishes on
+$\{z_k=z_{k+1}\}$, so $v(z_0,\dots,z_k,z_0)$ vanishes when $z_k=z_0$.
+If $u\in N_k$ then $d_iu=0$ for $i<k$, so $bu=(-1)^kd_ku$; and $d_ku$ vanishes
+on the diagonals $\{z_i=z_{i+1}\}$, $i\le k-2$, of $X^k$. Thus $(N_\bullet,b)$
+is a subcomplex of $(C_\bullet,b)$, and
+\begin{equation}
+  H_k(N_\bullet,b)=M_k/B_k .
+  \label{hochschild:eq:HN}
+\end{equation}
+
+\begin{proposition}\label{hochschild:prop:normalized}
+The inclusion $N_\bullet\hookrightarrow C_\bullet$ induces an isomorphism in
+homology. Hence $\HH_k=M_k/B_k$; in particular a chain in $M_k$ which is a
+$b$-boundary in $C_\bullet$ lies in $B_k$.
+\end{proposition}
+\begin{proof}
+For $j\in\N_0$ let $J^j_m=\{u\in C_m;\ u|_{D_i}=0\text{ for }0\le i<\min(j,m)\}$.
+Thus $J^0=C$, and $J^j_m=N_m$ for $m\le j$. Each $J^j_\bullet$ is a
+subcomplex: if $u\in J^j_m$ then $d_iu=0$ for $i<\min(j,m)$, and for the other
+$i$ the restriction $d_iu$ still vanishes on $\{z_l=z_{l+1}\}$ for
+$l<\min(j,m-1)$ (for $i\le m-1$ because $i\ge l+1$; for $i=m$ trivially).
+
+Let $V^j_m=\{u\in J^j_m;\ u\text{ independent of }z_{j+1}\}$ for $m\ge j+1$,
+and $V^j_m=0$ for $m\le j$. For $m\ge j+1$ every $u\in J^j_m$ decomposes
+uniquely as
+\begin{equation*}
+  u=u'+u'',\qquad u'(z)=u(z_0,\dots,z_j,z_j,z_{j+2},\dots,z_m)\in V^j_m,\quad
+  u''=u-u'\in J^{j+1}_m,
+\end{equation*}
+($u''$ vanishes on $\{z_j=z_{j+1}\}$; uniqueness because a function
+independent of $z_{j+1}$ vanishing at $z_{j+1}=z_j$ vanishes). So
+$J^j_\bullet=J^{j+1}_\bullet\oplus V^j_\bullet$ as graded spaces. We show that
+$V^j_\bullet$ is a contractible subcomplex; then this is a direct sum of
+complexes and $J^{j+1}\hookrightarrow J^j$ is a quasi-isomorphism.
+
+Let $u\in V^j_m$. In $bu$ the terms $d_iu$, $i<j$, vanish, and
+$d_ju=d_{j+1}u$ (both delete the variable $z_{j+1}$ on which $u$ does not
+depend; if $j+1=m$, $d_{j+1}$ is the cyclic face $d_m$ and the same holds), so
+these cancel. Hence
+\begin{equation*}
+  bu=\sum_{i=j+2}^m(-1)^id_iu,
+\end{equation*}
+which is independent of $z_{j+1}$ and lies in $J^j_{m-1}$; so $bu\in
+V^j_{m-1}$ (and $bu=0$ if $m=j+1$). Define $H:V^j_m\to V^j_{m+1}$ by inserting
+a dummy variable in position $j+2$:
+\begin{equation*}
+  (Hu)(z_0,\dots,z_{m+1})=u(z_0,\dots,z_{j+1},z_{j+3},\dots,z_{m+1}).
+\end{equation*}
+Then $d_{j+2}Hu=u$ (if $m=j+1$ this is the cyclic face, which also just
+deletes the dummy variable), $d_iHu=Hd_{i-1}u$ for $j+3\le i\le m+1$ (for
+$i=m+1$ both sides equal $u(z_0,\dots,z_{j+1},z_{j+3},\dots,z_m,z_0)$ after
+renaming), hence
+\begin{equation*}
+  bHu=(-1)^ju+\sum_{i=j+3}^{m+1}(-1)^iHd_{i-1}u=(-1)^ju-Hbu,
+\end{equation*}
+i.e.\ $bH+Hb=(-1)^j\Id$ on $V^j_\bullet$. Thus $V^j_\bullet$ is contractible.
+
+Consequently $H_k(C)=H_k(J^0)\cong H_k(J^1)\cong\dots\cong H_k(J^{k+1})$, and
+$J^{k+1}$ coincides with $N$ in degrees $\le k+1$, so $H_k(J^{k+1})=H_k(N)$.
+All isomorphisms are induced by inclusions. The last statement follows from
+\eqref{hochschild:eq:HN}.
+\end{proof}
+
+\subsection{Structure of the normalized cycles}
+\begin{lemma}\label{hochschild:lem:B-module}
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $B_k$ is a $\CI(X^{k+1})$-submodule of $M_k$.
+\item If $f\in\CI(X)$ and $g\in M_k$, then $(f(z_j)-f(z_{j+1}))g\in B_k$ for
+$0\le j\le k-1$, and $(f(z_k)-f(z_0))g\in B_k$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(i) If $\psi\in\CI(X^{k+1})$ and $v\in N_{k+1}$, then
+$\tilde\psi v\in N_{k+1}$, where $\tilde\psi(z_0,\dots,z_{k+1})=\psi(z_0,\dots,z_k)$,
+and $d_{k+1}(\tilde\psi v)=\psi\,d_{k+1}v$.
+
+(ii) For $0\le j\le k-1$ set
+\begin{equation*}
+  w(z_0,\dots,z_{k+1})=(-1)^{j+1}\bigl(f(z_j)-f(z_{j+1})\bigr)\,
+  g(z_0,\dots,z_j,z_{j+2},\dots,z_{k+1})\in C_{k+1}.
+\end{equation*}
+We compute $bw$. For $i<j$, $d_iw=0$ since $g$ vanishes on $\{z_i=z_{i+1}\}$;
+$d_jw=0$ because of the first factor; for $j+2\le i\le k$, $d_iw=0$ because
+$g$ vanishes on its diagonal $D_{i-1}$; and $d_{k+1}w=0$ because $g$ vanishes
+on its diagonal $D_k$ (here $j\le k-1$ is used, so that $z_{k+1}$ is a variable
+of $g$). Finally $d_{j+1}w$ identifies $z_{j+1}$ with $z_{j+2}$ and gives
+$(-1)^{j+1}(f(z_j)-f(z_{j+1}))g(z_0,\dots,z_k)$. Hence
+$bw=(f(z_j)-f(z_{j+1}))g$. This lies in $M_k$ and is a boundary in $C_\bullet$,
+so it lies in $B_k$ by \cref{hochschild:prop:normalized}. The last case
+follows from $f(z_k)-f(z_0)=-\sum_{j=0}^{k-1}(f(z_j)-f(z_{j+1}))$.
+\end{proof}
+
+Near the full diagonal $\Delta=\{z_0=z_1=\dots=z_k\}$ we use the following
+coordinates. Let $x_0\in X$, choose coordinates near $x_0$ identifying a
+neighbourhood with an open set in $\R^n$, and on a neighbourhood
+$W=\{|x-x_0|<\delta,\ |y_j|<\delta\}$ of $(x_0,\dots,x_0)$ use
+\begin{equation}
+  x=z_0,\qquad y_j=z_j-z_{j-1},\ j=1,\dots,k .
+  \label{hochschild:eq:diag-coords}
+\end{equation}
+Then $D_{j-1}=\{y_j=0\}$ for $1\le j\le k$, $D_k=\{y_1+\dots+y_k=0\}$ and
+$\Delta=\{y=0\}$.
+
+\begin{lemma}\label{hochschild:lem:antisym}
+Let $q$ be a $k$-linear form on $\R^n$ (with complex values). Then
+$q(y_1,\dots,y_{k-1},-(y_1+\dots+y_{k-1}))\equiv0$ if and only if $q$ is
+alternating.
+\end{lemma}
+\begin{proof}
+If $q$ is alternating the expression is
+$-\sum_{j<k}q(y_1,\dots,y_{k-1},y_j)=0$. Conversely each term
+$q(y_1,\dots,y_{k-1},y_j)$, $j<k$, is of degree $2$ in $y_j$ and of degree $1$
+in the other $y_i$, $i<k$; these multidegrees are distinct, so each term
+vanishes separately. Thus $q$ vanishes whenever the $j$-th and $k$-th
+arguments coincide, i.e.\ $q$ is alternating in these two arguments. The
+transpositions $(j\ k)$ generate $\mathfrak S_k$, so $q$ is alternating.
+\end{proof}
+
+\begin{lemma}\label{hochschild:lem:leading}
+Let $u\in N_k$. In the coordinates \eqref{hochschild:eq:diag-coords},
+$u=\sum_Iy_{1,i_1}\cdots y_{k,i_k}w_I(x,y)$ on $W$, with $w_I$ smooth, where
+$I=(i_1,\dots,i_k)\in\{1,\dots,n\}^k$ and $y_{j,i}$ is the $i$-th component of
+$y_j$. Hence the Taylor series of $u$ at $y=0$ (with coefficients smooth in
+$x$) starts with the $k$-linear term $u_{(k)}(x;y)=\sum_Iw_I(x,0)y_{1,i_1}\cdots
+y_{k,i_k}$, and
+\begin{equation*}
+  \varepsilon(u)(x)=\frac1{k!}\sum_Iw_I(x,0)\,dx^{i_1}\wedge\dots\wedge dx^{i_k}.
+\end{equation*}
+If $u\in M_k$, then $u_{(k)}(x;\cdot)$ is alternating and $\varepsilon(u)(x)=0$
+if and only if $u_{(k)}(x;\cdot)=0$, i.e.\ if and only if $u$ vanishes to
+order $k+1$ at $(x,\dots,x)$.
+\end{lemma}
+\begin{proof}
+By Hadamard's lemma in $y_1$, $u=\sum_iy_{1,i}u_i$ with
+$u_i=\int_0^1(\pa_{y_{1,i}}u)(x,ty_1,y_2,\dots,y_k)\,dt$; the $u_i$ still
+vanish on $\{y_j=0\}$, $j\ge2$. Repeating in $y_2,\dots,y_k$ gives the
+representation. Since $z_l=x+y_1+\dots+y_l$, the derivative $\pa_{z_l}$
+equals $\pa_{y_l}-\pa_{y_{l+1}}$ ($\pa_{y_l}$ for $l=k$). In
+$\pa_{z_1^{i_1}}\cdots\pa_{z_k^{i_k}}u$ at $y=0$ only terms in which every
+factor $y_{l,\cdot}$ is differentiated survive; since $\pa_{z_k}$ can only hit
+$y_k$, then $\pa_{z_{k-1}}$ only $y_{k-1}$, and so on, the result is
+$w_I(x,0)$, which gives the formula for $\varepsilon(u)$. If $u\in M_k$, the
+homogeneous term $u_{(k)}$ vanishes on $\{y_1+\dots+y_k=0\}$, so it is
+alternating by \cref{hochschild:lem:antisym}. An alternating tensor is
+determined by its image in $\Lambda^k$, whence the last statement.
+\end{proof}
+
+\begin{lemma}\label{hochschild:lem:poly-lift}
+Let $k\ge1$ and $m\ge k+1$. Let $\mathcal M_m$ be the space of homogeneous
+polynomials $q$ of degree $m$ in $y=(y_1,\dots,y_k)\in(\R^n)^k$ which vanish
+on each of the subspaces $\{y_j=0\}$, $1\le j\le k$, and
+$\{y_1+\dots+y_k=0\}$, and let $\mathcal V_m$ be the space of homogeneous
+polynomials of degree $m$ in $(y_1,\dots,y_{k+1})\in(\R^n)^{k+1}$ vanishing on
+each $\{y_j=0\}$, $1\le j\le k+1$. Then
+\begin{equation*}
+  R:\mathcal V_m\longrightarrow\mathcal M_m,\quad
+  (RV)(y_1,\dots,y_k)=V(y_1,\dots,y_k,-(y_1+\dots+y_k)),
+\end{equation*}
+is surjective.
+\end{lemma}
+\begin{proof}
+Given $q\in\mathcal M_m$, the polynomial chain
+$u(z_0,\dots,z_k)=q(z_1-z_0,\dots,z_k-z_{k-1})$ for $\C[x]$ lies in $M_k$, and
+$\varepsilon(u)=0$ since $u$ vanishes to order $m>k$ on $\Delta$. By
+\cref{hochschild:thm:polynomial} and \cref{hochschild:prop:normalized} (for
+polynomials) $u\in B_k$, i.e.\ $u=d_{k+1}v$ with $v\in N_{k+1}$. Writing $v$
+in the coordinates $x=z_0$, $y_j=z_j-z_{j-1}$, $1\le j\le k+1$, as
+$V(x;y_1,\dots,y_{k+1})$, $V$ vanishes on the subspaces $\{y_j=0\}$, and
+$d_{k+1}v=V(x;y_1,\dots,y_k,-(y_1+\dots+y_k))$ because $z_{k+1}=z_0$ means
+$y_{k+1}=-(y_1+\dots+y_k)$. The component of $V$ of degree $0$ in $x$ and
+degree $m$ in $y$ lies in $\mathcal V_m$ and is mapped by $R$ to the
+corresponding component of $u$, which is $q$.
+\end{proof}
+
+\begin{lemma}\label{hochschild:lem:local}
+Let $u\in M_k$, $k\ge1$, satisfy $\varepsilon(u)=0$. Then every point $p\in
+X^{k+1}$ has a neighbourhood on which $u$ coincides with an element of $B_k$.
+\end{lemma}
+\begin{proof}
+First let $p\notin\Delta$. Then $p_j\ne p_{j+1}$ for some $0\le j\le k-1$ (else
+all $p_j$ coincide), and we choose $f\in\CI(X)$ with $f(p_j)\ne f(p_{j+1})$
+and $\psi\in\CI(X^{k+1})$ supported where $f(z_j)\ne f(z_{j+1})$, equal to
+$1$ near $p$. Then $g=\psi u/(f(z_j)-f(z_{j+1}))\in M_k$ and $u=(f(z_j)-f(z_{j+1}))g$
+near $p$; this lies in $B_k$ by \cref{hochschild:lem:B-module}.
+
+Now let $p=(x_0,\dots,x_0)\in\Delta$ and use the coordinates
+\eqref{hochschild:eq:diag-coords}. The Taylor series of $u$ in $y$ at $y=0$ is
+$\sum_mu_{(m)}(x;y)$, where $u_{(m)}(x;\cdot)$ is homogeneous of degree $m$
+and vanishes on the same linear subspaces as $u$, so
+$u_{(m)}\in\CI(B)\otimes\mathcal M_m$, $B=\{|x-x_0|<\delta\}$. By
+\cref{hochschild:lem:leading}, $u_{(m)}=0$ for $m\le k$. For $m\ge k+1$,
+choosing a linear right inverse of $R$ in \cref{hochschild:lem:poly-lift}, we
+find $V_{(m)}\in\CI(B)\otimes\mathcal V_m$ with $RV_{(m)}=u_{(m)}$. By Borel's
+lemma (see \cite[Section~1.2]{Hormander-I}), shrinking $\delta$, there is a smooth
+$V(x;y_1,\dots,y_{k+1})=\sum_m\chi(\lambda_m|y|)V_{(m)}(x;y)$, with
+$\chi\in\CIc(\R)$ equal to $1$ near $0$ and $\lambda_m\to\infty$ fast
+enough, having Taylor series $\sum_mV_{(m)}$ at $y=0$; each term, hence $V$,
+vanishes on the subspaces $\{y_j=0\}$. Let $\Theta\in\CIc$ be a cut-off near
+$(x_0,\dots,x_0)\in X^{k+2}$ and let $v=\Theta V\in N_{k+1}$, extended by
+zero (written in the variables $x=z_0$, $y_j=z_j-z_{j-1}$, $j\le k+1$). Then
+$s=d_{k+1}v\in B_k$ has the same Taylor series as $u$ at $\Delta$ near $p$. So
+$g=u-s\in M_k$ vanishes to infinite order at $\Delta$ near $p$. Near $p$,
+\begin{equation*}
+  g=\sum_{j=1}^k\sum_{i=1}^ny_{j,i}\,g_{j,i},\qquad
+  g_{j,i}=\frac{y_{j,i}\,g}{|y|^2},
+\end{equation*}
+where $g_{j,i}$, extended by $0$ on $\Delta$, is smooth since $g$ is flat
+there, and vanishes wherever $g$ does. Taking $f_i\in\CI(X)$ equal to the
+$i$-th coordinate near $x_0$, and a cut-off $\psi$ equal to $1$ near $p$, we
+have $y_{j,i}=-(f_i(z_{j-1})-f_i(z_j))$ on the support of $\psi$, so near $p$,
+$g=-\sum_{j,i}(f_i(z_{j-1})-f_i(z_j))\psi g_{j,i}\in B_k$ by
+\cref{hochschild:lem:B-module}. Hence $u=s+g$ coincides near $p$ with an
+element of $B_k$.
+\end{proof}
+
+\begin{proof}[Proof of \cref{hochschild:thm:Connes}]
+For $k=0$, $(bu)(z_0)=u(z_0,z_0)-u(z_0,z_0)=0$ for $u\in C_1$, so
+$\HH_0=\CI(X)=\Omega^0(X)$. Let $k\ge1$. By
+\cref{hochschild:lem:HKR-smooth} it remains to show injectivity. By
+\cref{hochschild:prop:normalized} every class in $\HH_k$ is represented by
+some $u\in M_k$, and $u$ is a boundary if (and only if) $u\in B_k$. Suppose
+$\varepsilon(u)=0$. By \cref{hochschild:lem:local} and compactness there is a
+finite partition of unity $\sum_\beta\psi_\beta=1$ on $X^{k+1}$ and
+$s_\beta\in B_k$ with $u=s_\beta$ on $\supp\psi_\beta$. Then
+$u=\sum_\beta\psi_\beta s_\beta\in B_k$ by \cref{hochschild:lem:B-module}(i).
+\end{proof}
+
+\begin{remark}\label{hochschild:rem:noncompact}
+Compactness was only used to make the partitions of unity finite. With some
+care about supports (using locally finite partitions of unity and cut-offs
+in all variables) the same argument applies to non-compact $X$.
+\end{remark}
