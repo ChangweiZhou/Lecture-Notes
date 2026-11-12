@@ -9,7 +9,7 @@
 \usetikzlibrary{arrows.meta,positioning}
 \usepackage[hidelinks]{hyperref}
 \hypersetup{
-  pdftitle={Hochschild Homology of the b-Pseudodifferential Symbol Algebra},
+  pdftitle={Hochschild Homology of the b-Calculus},
   pdfauthor={Changwei Zhou}
 }
 
@@ -24,6 +24,16 @@
 \newcommand{\Sbstar}{{}^{b}S^*X}
 \newcommand{\Tbstar}{{}^{b}T^*X}
 \newcommand{\Gb}{\mathcal G_b}
+\DeclareMathOperator{\Tr}{Tr}
+\newcommand{\cE}{\mathcal E}
+\newcommand{\Sexp}{\mathcal S_{\exp}}
+\newcommand{\Ib}{\mathcal I^b}
+\newcommand{\Idb}{\mathcal I^b_\partial}
+\newcommand{\Isb}{\mathcal I^b_\sigma}
+\newcommand{\Ab}{\mathcal A^b}
+\newcommand{\Asb}{\mathcal A^b_\sigma}
+\newcommand{\Adb}{\mathcal A^b_\partial}
+\newcommand{\Adsb}{\mathcal A^b_{\partial,\sigma}}
 \allowdisplaybreaks
 
 \theoremstyle{plain}
@@ -40,8 +50,7 @@
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem*{discussion}{Discussion}
 
-\title{Hochschild Homology of the\\
-b-Pseudodifferential Symbol Algebra}
+\title{Hochschild Homology of the b-Calculus}
 \author{Changwei Zhou}
 \date{}
 
@@ -60,40 +69,333 @@ b-Pseudodifferential Symbol Algebra}
 \setcounter{page}{1}
 
 \begin{abstract}
-Let \(X\) be a compact \(n\)-manifold with embedded boundary and let
-\(E\to X\) be a complex vector bundle. We give an expository account of
-the continuous Hochschild homology of the Benameur--Nistor Laurent
-complete-symbol algebra of the b-groupoid,
-\[
- \cA_{b,L}(X;E)
- =\cO(X)\left(
- \Psi^\infty(\Gb;E)/\Psi^{-\infty}(\Gb;E)\right),
-\]
-where \(\cO(X)\) consists of functions with finite Laurent singularities at
-the boundary and the algebra carries the topologically filtered completion
-of Benameur--Nistor. The result,
-\[
- \HH_k^{\mathrm{cont}}(\cA_{b,L}(X;E))
- \cong H_L^{2n-k}(\Sbstar\times S^1_\sigma;\C),
-\]
-is the b-groupoid specialization of the Benameur--Nistor theorem on
-Laurent complete symbols. The circle \(S^1_\sigma\) records symbol order
-and \(H_L^*\) is Laurent de Rham cohomology at the boundary. We give a
-self-contained computation of the \(E^1\)- and \(E^2\)-pages of the order
-spectral sequence and check the hypotheses for the b-groupoid; convergence
-and the continuous Hochschild--Kostant--Rosenberg theorem are quoted. A
-bidegree count shows that \(E^2\) is concentrated on one row, so the
-spectral sequence degenerates and, given convergence, the displayed
-isomorphism is canonical; only its splitting into four interior and
-boundary summands involves choices. We also describe an alternative
-\v Cech--de Rham organization, which depends on a quoted localization
-theorem for Hochschild chains, and a heuristic Rees--Fedosov
-reorganization that is not an independent proof. Finally we separate this
-result from the Hochschild homology of an unreduced operator algebra,
-which depends on the chosen residual ideal and completion.
+Let \(X\) be a compact \(n\)-manifold with boundary, let \(\partial X\) have
+\(N\) components, and let \(x\) be a boundary defining function. We
+compute the continuous Hochschild homology of the algebra of
+b-pseudodifferential operators of integral order with Laurent coefficients
+at the boundary, of its quotient
+\(\Ab=x^{-\Z}\Psi_b^{\Z}(X)/x^\infty\Psi_b^{-\infty}(X)\), and of the
+ideals and quotients cut out by the two natural filtrations, by operator
+order and by powers of \(x\). This is the b-calculus analogue of the
+computation of Melrose and Nistor for the cusp calculus. The final groups
+have the same form as theirs: they are expressed through the de Rham
+cohomology of \(\Sbstar\), of its boundary, and of two auxiliary circles
+recording symbol order and boundary order. The proofs differ at the
+boundary. Conjugation by \(x\) acts on indicial families by the complex
+shift \(\lambda\mapsto\lambda-i\), so the boundary algebras are Laurent
+series twisted by an automorphism rather than by a derivation, and their
+coefficients are entire functions of \(\lambda\) rather than Schwartz
+functions. We compute the homology of the boundary ideal by a weight
+decomposition and a crossed-product argument. We identify the connecting
+map to the residual ideal with the b-trace defect formula and evaluate the
+index functional on residual perturbations of the identity, where it
+reduces to a Wiener--Hopf winding number and to \(-\tfrac12\) times the
+b-eta invariant. The computation for the Laurent symbol algebra
+\(\Asb\), which is the b-groupoid case of the Benameur--Nistor theorem,
+is retained as Part~\ref{part:symbols}. Each step is labelled as proved,
+quoted, or sketched; see Section~\ref{subsec:status}.
 \end{abstract}
 
-\section{The precise statement}
+\section{Introduction}\label{sec:intro}
+
+\subsection{The algebras}\label{subsec:algebras}
+Let \(X\) be a compact manifold with boundary of dimension \(n\). Its
+boundary \(\partial X=\bigsqcup_{H}H\) has \(N\) components. Fix a
+boundary defining function \(x\), a collar
+\([0,\varepsilon)_x\times\partial X\hookrightarrow X\), and a smooth positive
+density \(\nu_\partial\) on \(\partial X\). Let \(\Psi_b^m(X)\), \(m\in\Z\),
+be the small calculus of classical b-pseudodifferential operators
+(Section~\ref{sec:bconv}). Conjugation by powers of \(x\) preserves each
+\(\Psi_b^m(X)\) (Lemma~\ref{lem:conj}), so
+\[
+ x^{-\Z}\Psi_b^{\Z}(X)=\bigcup_{\ell\in\Z,\,m\in\Z}x^{\ell}\Psi_b^m(X)
+\]
+is an algebra. Following Melrose--Nistor \cite[(8)--(10)]{MN}, we consider
+its ideal of operators that are residual for both filtrations and the
+quotients by it:
+\begin{align*}
+ \Ib&=x^\infty\Psi_b^{-\infty}(X)=\bigcap_{\ell}x^\ell\Psi_b^{-\infty}(X),
+ &\Ab&=x^{-\Z}\Psi_b^{\Z}(X)/\Ib,\\
+ \Idb&=x^{-\Z}\Psi_b^{-\infty}(X)/\Ib,
+ &\Isb&=x^{\infty}\Psi_b^{\Z}(X)/\Ib,\\
+ \Asb&=\Ab/\Idb,\qquad \Adb=\Ab/\Isb,
+ &\Adsb&=\Ab/(\Isb+\Idb).
+\end{align*}
+The kernels of elements of \(\Ib\) are exactly the smooth functions on
+\(X^2\) that vanish to infinite order at \(\partial(X^2)\). The algebra
+\(\Asb\) is the algebra of Laurent b-complete symbols treated in
+Part~\ref{part:symbols}, \(\Adb\) is the algebra of Laurent series of
+indicial operators, and \(\Adsb\) is the algebra of Laurent series of
+complete symbols at the boundary. These algebras form the diagram of
+extensions in Figure~\ref{fig:extensions}, which is the b-version of the
+diagram in \cite[p.~4]{MN}.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzcd}[column sep=3.2em,row sep=2.6em]
+ & & 0\arrow[d] & 0\arrow[d] & \\
+ & & \Isb\arrow[d]\arrow[r,equal] & \Isb\arrow[d] & \\
+ 0\arrow[r] & \Idb\arrow[r]\arrow[d,equal] & \Ab\arrow[r]\arrow[d]
+   & \Asb\arrow[r]\arrow[d,"p"] & 0\\
+ 0\arrow[r] & \Idb\arrow[r] & \Adb\arrow[r]\arrow[d] & \Adsb\arrow[r]
+   \arrow[d] & 0\\
+ & & 0 & 0 &
+\end{tikzcd}
+\caption[The diagram of extensions]{The extensions relating the b-algebras.
+Rows are the indicial (boundary) extensions; columns are the symbol
+(interior) extensions. Since \(\Isb\cap\Idb=0\) in \(\Ab\), the central
+square is a pull-back: \(\Ab=\Adb\times_{\Adsb}\Asb\)
+(Lemma~\ref{lem:fibre}). In addition,
+\(0\to\Ib\to x^{-\Z}\Psi_b^{\Z}(X)\to\Ab\to0\) and
+\(0\to\Ib\to x^{-\Z}\Psi_b^{-\infty}(X)\to\Idb\to0\).}
+\label{fig:extensions}
+\end{figure}
+
+\subsection{The main theorem}\label{subsec:mainthm}
+Set \(Y=\Sbstar\) and \(Z=Y|_{\partial X}={}^bS^*_{\partial X}X\), and let
+\(Z_H\) be the part of \(Z\) over the component \(H\). Let \(S_\sigma\) and
+\(S_\partial\) be circles, and write \(d\theta_\sigma\) and
+\(d\theta_\partial\) for their generators; they correspond to \(d\log r\)
+(\(r\) a fibre norm) and to \(d\log x\). Homology is continuous Hochschild
+homology in the chain model of Section~\ref{subsec:chainmodel}.
+Cohomology has complex coefficients. For \(\beta\) in \(H^{2n-2}(Z)\), or
+in \(H^{2n-2}(Y)\) after restriction to \(Z\), write
+\(\int_{Z_H}\beta\) for its integral over \(Z_H\), oriented as part of
+\(\partial Y\).
+
+\emph{Standing hypotheses.} \(X\) is connected and \(\partial X\neq
+\varnothing\). For \(n\geq2\) every \(Z_H\) is connected and oriented. The
+case \(n=1\) is treated in Remark~\ref{rem:n1}.
+
+\begin{theorem}[Hochschild homology of the b-calculus]\label{thm:full}
+Assume the standing hypotheses, hypothesis~\textup{(C)} of
+Section~\ref{sec:Is}, and the inputs listed in
+Section~\ref{subsec:status}. Parts (i)--(iii) and (ix) hold for every
+\(n\geq1\). Parts (iv)--(viii) are stated for \(n\geq2\).
+\begin{enumerate}
+\item[(i)] \(\HH_0(\Ib)\cong\C\), with dual basis the trace, and
+\(\HH_k(\Ib)=0\) for \(k>0\).
+\item[(ii)] \(\HH_k(\Idb)\cong\C^N\) for \(k=0,1\), and \(\HH_k(\Idb)=0\)
+for \(k\geq2\). The boundary traces \(\Tr_{\partial,H}\) of \eqref{eq:Trd}
+form a dual basis in degree \(0\), and the cyclic cocycles \(\varphi_H\) of
+\eqref{eq:phi} form a dual basis in degree \(1\).
+\item[(iii)] \(\HH_0(x^{-\Z}\Psi_b^{-\infty}(X))\cong\C^N\),
+\(\HH_1(x^{-\Z}\Psi_b^{-\infty}(X))\cong\C^{N-1}\), and the higher groups
+vanish. The connecting map \(\HH_1(\Idb)\to\HH_0(\Ib)\) is the b-trace
+defect.
+\item[(iv)] \(\HH_k(\Isb)\cong H^{2n-k}(Y\times S_\sigma,Z\times
+S_\sigma)\).
+\item[(v)] \(\HH_k(\Asb)\cong H_L^{2n-k}(Y\times S_\sigma)\cong
+H^{2n-k}(Y\times S_\sigma)\oplus H^{2n-k-1}(Z\times S_\sigma)\).
+\item[(vi)] \(\HH_k(\Adsb)\cong H^{2n-k}(Z\times S_\sigma\times
+S_\partial)\).
+\item[(vii)] \(\HH_k(\Adb)\cong\HH_k(\Adsb)\) for \(k\neq1,2\). For
+\(k=1,2\), \(\HH_k(\Adb)\) is the kernel of a surjection
+\(\HH_k(\Adsb)\to\C^N\). For \(k=1\) the surjection is
+\(\beta\mapsto(\int_{Z_H}\beta_\partial)_H\), where \(\beta_\partial\) is
+the coefficient of \(d\theta_\partial\). For \(k=2\) it is
+\(\beta\mapsto(\int_{Z_H}\beta_0)_H\), where \(\beta_0\) is the component
+free of both circle factors.
+\item[(viii)] \(\HH_k(\Ab)\cong\HH_k(\Asb)\) for \(k\neq1,2\). Moreover
+\begin{align*}
+ \HH_1(\Ab)&\cong\C\oplus H^{2n-1}(Y\times S_\sigma)\oplus
+ H^{2n-3}(Z),\\
+ \HH_2(\Ab)&\cong\ker\Bigl(H^{2n-2}(Y)\xrightarrow{(\int_{Z_H})_H}\C^N
+ \Bigr)\oplus H^{2n-3}(Y)\oplus H^{2n-3}(Z\times S_\sigma).
+\end{align*}
+The map \(H^{2n-2}(Y)\to\C^N\) has rank \(N-1\). The inequality
+\(\leq N-1\) is proved, given (ii). Equality, and the description of the kernels in
+(vii), use (S2) of Section~\ref{subsec:status}. If \(N=1\), then
+\(\HH_2(\Ab)\cong\HH_2(\Asb)\).
+\item[(ix)] The index functional, which is the image of the trace under
+\(\partial:\HH_1(\Ab)\to\HH_0(\Ib)\), is nonzero. Hence
+\(\HH_k(x^{-\Z}\Psi_b^{\Z}(X))\cong\HH_k(\Ab)\) for \(k\neq1\), and
+\(\HH_1(x^{-\Z}\Psi_b^{\Z}(X))\) is the kernel of the index functional on
+\(\HH_1(\Ab)\).
+\end{enumerate}
+\end{theorem}
+
+The direct-sum decompositions in (v), (vii) and (viii) depend on choices
+(a collar and the splittings of Proposition~\ref{prop:face}); the groups do
+not. Remark~\ref{rem:choices} discusses how the generators depend on \(x\)
+and on the collar. If \(X\) has \(c\) components, each with nonempty boundary, the rank
+in (viii) becomes \(N-c\), and the summand \(\C\) in \(\HH_1(\Ab)\)
+becomes \(\C^{c}\) (Remark~\ref{rem:MNcomponents}). Components without
+boundary contribute as in the closed case.
+
+For \(N=1\), parts (ii) and (iv)--(viii) have the same form as the
+cusp-calculus result of Melrose and Nistor \cite[(16)]{MN}, which is stated
+for Hochschild cohomology, with \({}^cS^*X\) replaced by \({}^bS^*X\). Both
+cosphere bundles are diffeomorphic to \(S^*X\)
+(Proposition~\ref{prop:anchor}). The bookkeeping for several components is
+new.
+
+\subsection{Relation to Melrose--Nistor and novelty}\label{subsec:MN}
+\begin{remark}[Comparison with Melrose--Nistor]\label{rem:MN}
+Melrose and Nistor \cite{MN} compute the Hochschild homology of the full
+\emph{cusp} calculus \(x^{-\Z}\Psi_c^{\Z}(X)\). They say that they use the cusp
+calculus rather than the b-calculus ``to avoid certain problems with
+completeness''. They also remark that the cusp commutation relation
+\([x^2\partial_x,x]=x^2\), in place of the b-relation
+\([x\partial_x,x]=x\), ``makes quite a lot of difference'', and that
+``methods similar to those used here can be applied directly to the
+b-calculus'' \cite[pp.~3--4]{MN}. The present notes carry this out. The
+differences are as follows.
+\begin{enumerate}
+\item \emph{Twist.} In the cusp case the boundary algebras are Laurent
+series \(\Psi_{\mathrm{sus}}(\partial X)[[x]\) in which \(x\) and the
+suspension variable satisfy \([x,\partial_t]=x^2\) \cite[(14)]{MN}; to
+leading order the twist is a derivation. In the b-case,
+\(x^{-1}Ax\) has indicial family \(I(A,\lambda-i)\)
+(Lemma~\ref{lem:conj}), so the twist is the \emph{automorphism}
+\(\alpha\) of complex translation by \(-i\). The associated graded
+algebra for the \(x\)-filtration is therefore not commutative, and
+Melrose--Nistor's \(x\)-adic spectral sequence \cite[proof of
+Prop.~6]{MN} is replaced by a weight decomposition and a crossed-product
+computation (Section~\ref{sec:Id}).
+\item \emph{Entire indicial families.} Indicial families in the small
+b-calculus are entire in \(\lambda\) and suspended on every horizontal
+strip; residual ones are Schwartz on every strip. The cusp indicial
+families are only Schwartz, or symbols, on the real line. Analyticity is
+what makes complex shifts possible. It is also the source of the
+completeness problem mentioned by Melrose--Nistor: an operator is
+invertible modulo \(\Ib\) only if its indicial family is invertible for
+\emph{all} \(\lambda\in\C\) (Lemma~\ref{lem:invertible}). Geometric Dirac
+operators never satisfy this.
+\item \emph{Traces.} The boundary trace on \(\Idb\) is the residue of
+\(\Tr(x^w\cdot)\) at \(w=0\). The b-trace is the finite part of the same
+function. The connecting map for \(\Ib\subset x^{-\Z}\Psi_b^{-\infty}\) is
+Melrose's b-trace defect formula (Theorem~\ref{thm:defect}). The extension
+of the boundary trace to \(\Adb\) is Melrose's regularized suspended trace.
+Its Hochschild boundary is given by a \emph{shift defect}
+(Proposition~\ref{prop:omega}), which replaces \cite[Lemma~13]{MN}.
+\end{enumerate}
+Melrose--Nistor's Appendix~C \cite[Prop.~26]{MN} lifts b-operators to cusp
+operators by the transcendental blow-up \(t=e^{-1/x}\). This lift is useful
+for index formulas, but it does not identify the Laurent algebras: Laurent
+series in \(t\) and Laurent series in \(x=1/\log(1/t)\) are different
+algebras.
+\end{remark}
+
+\emph{Novelty.} We have not located a published computation of the
+Hochschild homology of the b-calculus operator algebra.
+Theorem~\ref{thm:full} should therefore be read as a careful execution of
+the programme suggested in \cite{MN}, not as a known result. The symbol
+part (v) is the b-groupoid case of the Benameur--Nistor theorem
+\cite{BNsymbols,BNfamilies}.
+
+\subsection{Status of the proofs}\label{subsec:status}
+We separate what is proved here from what is quoted, sketched, or
+assumed. Melrose--Nistor \cite{MN} are cited only for comparison; no
+result of theirs is used as an input.
+
+\emph{Proved in these notes.}
+\begin{itemize}
+\item The structure theorems for \(\Idb\) and \(\Adb\) as twisted Laurent
+series (Propositions~\ref{prop:structure} and~\ref{prop:structureA}).
+These rest on (Q0) and (C3), and give only an algebraic surjection; no
+continuous section is claimed.
+\item The explicit H-unitality contractions for \(\Ib\),
+\(\Psi^{-\infty}(H)\) and \(\Idb\) (Lemma~\ref{lem:Hunital}).
+\item The Morita lemma for smoothing kernels (Lemma~\ref{lem:morita}), and
+part (i), which also uses the kernel theorem (C3).
+\item The vanishing of the nonzero weights for \(\Idb\)
+(Proposition~\ref{prop:weights}), given the excision theorem (Q1).
+\item The coinvariants and invariants of the shift (Lemma~\ref{lem:coinv}).
+\item The trace \(\Tr_\partial\), the cocycle \(\varphi\), their
+nonvanishing, and their independence of choices.
+\item The b-trace defect formula on \(x^{-\Z}\Psi_b^{-\infty}\)
+(Theorem~\ref{thm:defect}) and the connecting map in (iii).
+\item The de Rham lemmas for flat and formal Laurent forms, and the
+\(E^2\)-pages of \(\Isb\) and \(\Adsb\) (Section~\ref{sec:Is}).
+\item The shift-defect formula for the extended boundary trace
+(Proposition~\ref{prop:omega}).
+\item For \(n=1\), the surjectivity of both boundary connecting maps of
+\(\Adb\) and of \(\partial^{\mathcal A}_1\), by explicit test cycles. The
+identification of connecting maps uses (Q1).
+\item The fibre-product description of \(\Ab\), and the bound \(N-1\) on the
+rank of \(\partial^{\mathcal A}_2\). The bound uses
+\(\dim\HH_1(\Idb)=N\) from (ii), and so inherits (Q1), (Q2) and (S1).
+\item The invertibility criterion (Lemmas~\ref{lem:autoinv}
+and~\ref{lem:invertible}).
+\item The Wiener--Hopf index formula for residual perturbations of the
+identity (Theorem~\ref{thm:WH}), and the nonvanishing of the index
+functional. Part (ix) uses in addition (i), (Q0), (Q1) and (C3).
+\end{itemize}
+
+\emph{Quoted inputs.}
+\begin{enumerate}
+\item[(Q0)] The small b-composition theorem, including the ideal property
+\(x^K\Psi_b^m\circ\Psi_b^{m'}\subset x^K\Psi_b^{m+m'}\), and the
+trace-class property of \(x^\varepsilon\Psi_b^{-\infty}\) for
+\(\varepsilon>0\) \cite{MelroseAPS,Notes}.
+\item[(Q1)] Wodzicki's excision theorem in the chain model of
+Section~\ref{subsec:chainmodel} (Theorem~\ref{thm:excision}). Its
+topological input, exactness of the chain spaces, is proved
+(Lemma~\ref{lem:exactchains}).
+\item[(Q2)] The weight-zero part of the Hochschild homology of a crossed
+product by \(\Z\) (Theorem~\ref{thm:crossed}). The cited proofs are
+algebraic. Its continuous version for \(\cE\rtimes_\alpha\Z\), and the
+reduction of the H-unital case to the unital case, are assumed, not
+proved.
+\item[(C3)] Standard analysis and topology. This includes: nuclearity of
+\(\cE\), \(B_H\), \(B'_{H,N}\) and of the pieces of the b-calculus; the
+facts that \(\widehat\otimes_\pi\) commutes with countable products and is
+exact on nuclear Fréchet spaces \cite{Treves}; the Schwartz kernel theorem
+\(\dot C^\infty(X^2)=\dot C^\infty(X)\widehat\otimes\dot C^\infty(X)\); Taylor
+expansion and asymptotic summation of conormal kernels at a face meeting the
+conormal set transversally; the suspended calculus on strips; the identity
+\(\Tr(PQ)=\Tr(QP)\) when \(\operatorname{ord}P+\operatorname{ord}Q<-\dim H\);
+mapping properties on weighted b-Sobolev spaces and the
+Calder\'on--Fedosov formula; and Lefschetz duality.
+\end{enumerate}
+
+\emph{Hypothesis.}
+\begin{enumerate}
+\item[(C)] Convergence of the order spectral sequences, with the continuous
+HKR theorem. For \(\Asb\) this is the Benameur--Nistor theorem
+(Theorem~\ref{thm:BN-conv}). For \(\Isb\) and \(\Adsb\) the
+\(E^2\)-pages are computed here and degenerate by the bidegree argument,
+but convergence in the chain model, which requires completeness and
+exhaustiveness of the induced filtrations, is assumed
+(Section~\ref{sec:Is}).
+\end{enumerate}
+
+\emph{Sketched.}
+\begin{enumerate}
+\item[(S1)] The continuous HKR theorem for the algebra \(\cE\) of entire
+functions that are Schwartz on strips. We prove the division lemma and the
+exactness of the Koszul complex, but only sketch the comparison of the
+Koszul and bar complexes for this non-unital algebra
+(Proposition~\ref{prop:HKRE}).
+\item[(S2)] For \(n\geq2\), the dictionary that identifies the boundary
+cocycles with \(d\theta_\sigma\) and \(d\theta_\partial\wedge
+d\theta_\sigma\) under the \(E^2\)-isomorphism
+(Proposition~\ref{prop:dict}), and, for every \(n\), the resulting exact
+rank of \(\partial^{\mathcal A}_2\).
+\item[(S3)] The general index formula for fully elliptic operators of
+nonzero order (Proposition~\ref{prop:indexgeneral}).
+\end{enumerate}
+
+Dependencies: (i) uses (C3). (ii) and (iii) use (Q0)--(Q2), (C3) and (S1).
+(iv)--(vi) use (C). (vii) and (viii) inherit (Q1), (Q2) and (S1)
+from (ii), (C) from (iv)--(vi), and use in addition (S2) when
+\(n\geq2\), and (viii) also uses (S2) for the exact rank of
+\(\partial^{\mathcal A}_2\). (ix) uses (i), (Q0), (Q1) and (C3) together with
+Theorem~\ref{thm:WH}.
+
+\subsection{Organization}
+Part~\ref{part:symbols} keeps the computation for the symbol algebra
+\(\Asb\) (Sections~\ref{sec:symbol}--\ref{sec:checks}). Part~\ref{part:ideals}
+treats the b-calculus conventions, the structure of the boundary algebras,
+the Hochschild tools, and the ideals \(\Ib\), \(\Idb\) and
+\(x^{-\Z}\Psi_b^{-\infty}\). Part~\ref{part:assembly} assembles the
+remaining algebras and treats the index functional.
+
+
+\part{The Laurent symbol algebra}\label{part:symbols}
+
+\section{\texorpdfstring{The symbol algebra \(\Asb\)}{The symbol algebra}}\label{sec:symbol}
 
 The phrase \emph{the algebra generated by b-pseudodifferential operators} is
 ambiguous. At least four choices affect Hochschild homology: the allowed
@@ -198,20 +500,18 @@ Proposition~\ref{prop:face}). The subspace
 \(H^{2n-k}(Y\times S^1_\sigma)\) and the boundary quotient
 \(H^{2n-k-1}(Z\times S^1_\sigma)\) are canonical.
 
-\begin{remark}[Comparison with Melrose--Nistor]\label{rem:MN}
-Melrose and Nistor \cite{MN} compute the Hochschild and cyclic homology of
-the algebra of \emph{cusp} pseudodifferential operators on a compact manifold
-with boundary. This is the full operator algebra, including its residual
-ideal, not a symbol quotient. They interpret the index as a Hochschild
-\(1\)-cocycle and obtain an extension of the Atiyah--Patodi--Singer formula,
-whose boundary term is an eta invariant of the suspended algebra of the
-boundary. Their work does not treat the b-calculus. The present theorem
-concerns only the Laurent symbol quotient of the b-calculus. The
-b-calculus analogue of the Melrose--Nistor computation is not
-addressed here: the Hochschild homology of the full operator algebra
-\(\Psi_b^{\Z}(X;E)\) and the connecting map to the symbol algebra.
-Section~\ref{sec:unreduced} explains why that problem depends on the
-choice of residual ideal and completion.
+\begin{remark}[The algebraic Laurent quotient]\label{rem:Asb}
+The underlying filtered algebra of \(\cA_{b,L}\) is
+\(\Asb=x^{-\Z}\Psi_b^{\Z}(X)/x^{-\Z}\Psi_b^{-\infty}(X)\), the quotient of
+the Introduction. Throughout, \(\Asb\) carries the Benameur--Nistor
+topology, in which the projective completion in decreasing order is taken
+at fixed pole order and the inductive limit is taken afterwards
+\eqref{eq:BN-chains}. Accordingly \(\HH_*(\Asb)\) means
+\(\HH_*^{\mathrm{cont}}(\cA_{b,L})\). Theorem~\ref{thm:main} has the same form
+as the cusp result \cite[Prop.~2]{MN}, \(\HH_*(\cA_\sigma)\cong
+{}^bH^{2n-*}({}^cS^*X\times S_\sigma)\); this is a comparison, and the
+present proof does not use it. Here \(S^1_\sigma\) is the circle
+\(S_\sigma\) of Theorem~\ref{thm:full}.
 \end{remark}
 
 \begin{figure}[htbp]
@@ -334,7 +634,11 @@ b-Poisson tensor
        +\sum_j\partial_{y_j}\wedge\partial_{\eta_j}.
 \]
 This is the geometric bracket appearing in the first nonzero differential of
-the Hochschild spectral sequence.
+the Hochschild spectral sequence. We set \(\{a,c\}_b=\pi_b(da,dc)\). With
+this convention \(\{\xi,x\}_b=-x\) and \(\{\eta_j,y_j\}_b=-1\). The
+commutator rule below is \(\sigma([A,C])=i\{a,c\}_b\). It is consistent with
+\([D_{y_j},y_j]=-i\) and with \([xD_x,x]=-ix\) of \eqref{eq:weightcomm},
+because \(xD_x\) has b-symbol \(\xi\).
 
 \begin{proposition}[Anchor bridge]\label{prop:anchor}
 \begin{enumerate}
@@ -407,7 +711,7 @@ the Laurent functions that are homogeneous of degree \(m\) in the fibers.
 In a b-Darboux chart, a choice of local Weyl quantization gives the
 expansion
 \begin{equation}\label{eq:symbol-product}
- a\# c\sim ac+\frac{1}{2i}\{a,c\}_b
+ a\# c\sim ac+\frac{i}{2}\{a,c\}_b
  +\text{terms two orders lower},
 \end{equation}
 where changing quantization changes the individual lower-order symmetric
@@ -415,7 +719,7 @@ terms. Without a chosen global symplectic connection, the full Weyl
 formula is not coordinate invariant. What is invariant, and all that is
 used below, is the commutator symbol
 \[
- \sigma_{m+m'-1}([A,C])=i^{-1}\{a,c\}_b.
+ \sigma_{m+m'-1}([A,C])=i\{a,c\}_b.
 \]
 This one-order drop is the origin of the first nonzero differential.
 
@@ -487,7 +791,7 @@ which is the displayed indexing.
 For classical b-symbols \(a\) and \(c\), symbolic composition gives
 \[
  \sigma_{m+m'-1}([A,C])
- =\frac1{i}\{a,c\}_b.
+ =i\{a,c\}_b.
 \]
 Consequently the first differential after HKR is, up to the harmless factor
 \(i\), the Poisson differential
@@ -807,7 +1111,7 @@ Consequently \(d^r=0\) for all \(r\geq2\) and \(E^2=E^r\) for every
 
 \begin{proof}
 By Proposition~\ref{prop:E1}, \(E^1_{p,q}\) is the space of Laurent
-\(k\)-forms of weight \(p\), \(k=p+q\), and \(d^1=i^{-1}\delta_b\) by
+\(k\)-forms of weight \(p\), \(k=p+q\), and \(d^1=i\delta_b\) by
 Section~\ref{sec:poisson}. By \eqref{eq:symplectic-duality} and
 \eqref{eq:weight-shift}, \(*_b\) identifies \(E^2_{p,q}\) with the
 cohomology of the Laurent de Rham complex in degree \(2n-k\) and weight
@@ -1005,7 +1309,7 @@ the global forms. Hence
  E^1(\operatorname{Tot}K)\cong\Omega_L^*(\Tbstar\setminus0)_{\mathrm{hom}},
 \]
 the same page as in Proposition~\ref{prop:E1}. The first order-lowering part
-of the symbol product gives \(d^1=i^{-1}\delta_b\), exactly as in
+of the symbol product gives \(d^1=i\delta_b\), exactly as in
 \eqref{eq:poisson-boundary}.
 
 For a closed manifold these are exactly the local filtered steps in the
@@ -1124,9 +1428,9 @@ this chart becomes
 where \(C_j\) is b-bidifferential and lowers the unscaled symbol order by
 \(j\).  Its antisymmetric first term is
 \[
- C_1(a,c)-C_1(c,a)=i^{-1}\{a,c\}_b,
+ C_1(a,c)-C_1(c,a)=i\{a,c\}_b,
 \]
-so \([a,c]_\star=(\hbar/i)\{a,c\}_b+O(\hbar^2)\).
+so \([a,c]_\star=i\hbar\{a,c\}_b+O(\hbar^2)\).
 
 The space \(M\) has the symplectic Lie algebroid \({}^bTM\) with symplectic
 form \(\omega_b\).  Choose a torsion-free b-symplectic connection and use
@@ -1307,7 +1611,7 @@ the formal Hochschild homology lives over \(\C((\hbar))\), on all of
 answer.}
 \end{figure}
 
-\section{Checks and consequences}
+\section{Checks and consequences}\label{sec:checks}
 
 \subsection{The closed-manifold case}
 
@@ -1381,98 +1685,1588 @@ Then \(Y\simeq[0,1]\times W\) and \(Z=W\sqcup W\). Therefore
 This example separates the order-circle contribution from the two boundary
 faces.
 
-\section{The unreduced operator algebra}\label{sec:unreduced}
+\part{The residual and boundary ideals}\label{part:ideals}
 
-Let
+\section{From symbols to operators}\label{sec:unreduced}
+
+Part~\ref{part:symbols} treats the quotient of the operator algebra by
+\emph{all} smoothing operators with Laurent coefficients. To recover the
+operator algebra one has to choose the residual ideal and its topology
+(Section~\ref{sec:symbol}). We make the choice of Melrose--Nistor
+\cite[(8)--(10)]{MN}: the small calculus, Laurent powers \(x^{-\Z}\), and the
+ideal \(\Ib=x^\infty\Psi_b^{-\infty}\) of operators with kernels in
+\(\dot C^\infty(X^2)\). With these choices the remaining pieces are
+\(\Ib\), the boundary ideal \(\Idb\), and the extensions of
+Figure~\ref{fig:extensions}. The H-unitality of the ideals
+(Lemma~\ref{lem:Hunital}) puts the excision theorem at our disposal. At
+the level of homology, the extension
 \[
- \PsiL(X;E)=\bigcup_{m\in\Z,\,\ell\geq0}x^{-\ell}\Psi_b^m(X;E),
- \qquad
- \Psi_{b,L}^{-\infty}(X;E)=\bigcup_{\ell\geq0}x^{-\ell}\Psi_b^{-\infty}(X;E),
+ 0\to\Idb\to\Ab\to\Asb\to0
 \]
-the Laurent b-operators of integral order and their residual ideal (an
-algebra and a two-sided ideal, since conjugation by \(x^{\ell}\) preserves
-each \(\Psi_b^m\)), each with a chosen topology. The unreduced operator
-algebra fits into
-\begin{equation}\label{eq:extension}
- 0\longrightarrow\Psi_{b,L}^{-\infty}(X;E)
- \longrightarrow\PsiL(X;E)
- \longrightarrow\cA_{b,L}(X;E)
- \longrightarrow0.
+replaces the extension by \(\Psi_{b,L}^{-\infty}\) that was discussed in
+earlier versions of these notes. Its connecting map is computed in
+Section~\ref{sec:A}.
+
+\section{Conventions for the b-calculus}\label{sec:bconv}
+
+We follow the companion notes \cite{Notes}, whose conventions are recalled
+here.
+
+\subsection{Kernels and coordinates}
+Extend \(\mu_b=\frac{dx}{x}\nu_\partial\) from the collar to a positive
+b-density on \(X\). Operators act on functions, and the kernel of \(A\) is
+defined by \(Au(p)=\int_XK_A(p,p')u(p')\,\mu_b(p')\). The b-stretched
+product \(X_b^2\) is obtained from \(X^2\) by blowing up \(H\times H\) for
+every component \(H\). It has front faces \(\mathrm{ff}_H\) and the lifts
+\(\mathrm{lb}\), \(\mathrm{rb}\) of \(\partial X\times X\) and
+\(X\times\partial X\). Near \(\mathrm{ff}_H\) we use the projective
+coordinates
+\begin{equation}\label{eq:proj}
+ (x',s,y,y'),\qquad s=\frac{x}{x'}\in[0,\infty),\qquad z=\log s,
 \end{equation}
-The answer for \(\PsiL\) is not obtained by simply reusing
-\eqref{eq:main}. It depends on the topology placed on the residual ideal and
-on whether kernels are required to vanish rapidly at the side faces, merely
-have polyhomogeneous expansions, or are completed in an operator norm.
+in which \(\mathrm{ff}_H=\{x'=0\}\), \(\mathrm{lb}=\{s=0\}\) and the lifted
+diagonal is \(\Delta_b=\{s=1,\ y=y'\}\). Near \(\mathrm{rb}\) one uses
+\((x,s'=x'/x,y,y')\) instead. We write
+\(K_A=\kappa_A(x',s,y,y')\) in these coordinates.
 
-For an H-unital residual ideal, excision gives the long exact sequence
+The space \(\Psi_b^{-\infty}(X)\) consists of the operators whose kernels
+lift to smooth functions on \(X_b^2\) that vanish to infinite order at
+\(\mathrm{lb}\cup\mathrm{rb}\). The space \(\Psi_b^m(X)\) consists of
+kernels that are classical conormal of order \(m\) at \(\Delta_b\), smooth up
+to the front faces, and vanish to infinite order at \(\mathrm{lb}\cup
+\mathrm{rb}\). These spaces are closed under composition (Q0)
+\cite[Thm.~``Small b-composition'']{Notes}.
+
+\subsection{Indicial families}
+For \(A\in\Psi_b^m(X)\), the restriction \(\kappa_A(0,s,y,y')\) of its
+kernel to \(\mathrm{ff}_H\) is the convolution kernel of the normal
+operator. The indicial family is its Mellin transform,
+\begin{equation}\label{eq:indicial}
+ I_H(A,\lambda)=\int_0^\infty s^{-i\lambda}\kappa_A(0,s,\cdot,\cdot)
+ \frac{ds}{s}
+ =\int_{\mathbb R}e^{-iz\lambda}\kappa_A(0,e^z,\cdot,\cdot)\,dz,
+\end{equation}
+regarded as an operator on \(H\) with kernel relative to \(\nu_\partial\).
+This is the convention of \cite[Sect.~``The normal operator'']{Notes}. For
+differential operators it gives \(I(P,\lambda)=x^{-i\lambda}Px^{i\lambda}
+|_{\partial X}\); in particular, with \(D_x=-i\partial_x\),
+\begin{equation}\label{eq:IxDx}
+ I(xD_x,\lambda)=\lambda .
+\end{equation}
+The inversion formula is
+\(\kappa_A(0,e^z)=\frac1{2\pi}\int e^{iz\lambda}I_H(A,\lambda)\,d\lambda\).
+At \(z=0\) it reads
+\begin{equation}\label{eq:diagvalue}
+ \kappa_A(0,1,y,y')=\frac1{2\pi}\int_{\mathbb R}I_H(A,\lambda)(y,y')\,
+ d\lambda .
+\end{equation}
+
+\begin{lemma}[Conjugation by powers of \(x\)]\label{lem:conj}
+Let \(A\in\Psi_b^m(X)\), \(m\in\Z\cup\{-\infty\}\), and \(w\in\C\). Then
+\(x^{-w}Ax^{w}\in\Psi_b^m(X)\), its kernel is \(s^{-w}K_A\) near each front
+face, and
 \[
- \cdots\to
- \HH_k(\Psi_{b,L}^{-\infty})
- \to\HH_k(\PsiL)
- \to\HH_k(\cA_{b,L})
- \xrightarrow{\partial}
- \HH_{k-1}(\Psi_{b,L}^{-\infty})
- \to\cdots .
+ I_H(x^{-w}Ax^{w},\lambda)=I_H(A,\lambda-iw).
 \]
-Melrose and Nistor study the corresponding extension for the cusp calculus
-\cite{MN}. There the connecting map evaluates the index cocycle and produces
-an eta-invariant term. The analogous extension for the b-calculus is not
-computed in this paper; see also Moroianu--Nistor \cite{MoroianuNistor} for
-the relation between index and homology on manifolds with boundary.
-
-Here H-unitality means that the completed bar complex of the nonunital
-residual ideal is acyclic; this is the hypothesis that prevents an
-additional excision defect. Continuous excision and H-unitality are
-substantial theorems of Wodzicki type \cite{Wodzicki}. Even for a rapidly
-decreasing nuclear smoothing algebra, H-unitality is not proved by a
-one-line finite-rank approximation; it has to be checked (or quoted) for
-the completion in use. Allowing
-polyhomogeneous side-face terms changes both topology and residual
-homology, so H-unitality must be verified anew for the chosen completion.
-
-The Hochschild connecting morphism can be seen on a symbol cycle. Choose operator lifts
-of its tensor factors, apply the Hochschild boundary upstairs, and observe
-that the result lies in the residual ideal because its image vanishes in the
-quotient. The resulting residual homology class is independent of the lifts.
-This Hochschild map is not literally the Fredholm boundary map in
-\(K\)-theory. Compatibility appears only after applying the Chern character
-to cyclic homology and using excision in both theories. Boundary logarithmic
-classes then pair with regularized cyclic cocycles; the eta term is an
-analytic realization of such a pairing, not an element produced by the
-Hochschild boundary alone.
-
-Thus \eqref{eq:main} is the complete answer for Laurent complete symbols,
-while \eqref{eq:extension}, together with the homology of the chosen residual
-ideal, is the correct computation for a specified unreduced operator algebra.
-
-\section{Relation to index theory}
-
-An elliptic b-operator determines an invertible matrix over the
-complete-symbol algebra. A Fredholm index additionally requires invertibility
-of its normal family. Its \(K_1\)-class has a Chern character in cyclic
-homology, which can pair with cyclic cocycles arising from the Hochschild
-classes above. In this qualified sense, the ordinary residue class supplies
-the interior symbolic term and a boundary logarithmic cocycle supplies the
-indicial correction. The operator-extension boundary map is the Fredholm
-index only under full ellipticity.
-
-The work of Liu and Ma on differential \(K\)-theory and eta-invariant
-localization supplies a geometric refinement of this pairing: differential
-forms and eta data refine the topological \(K\)-class. It does not replace the
-Hochschild spectral-sequence calculation \cite{LMlocalization}. The
-logical division is therefore
+In particular \(\alpha(A):=x^{-1}Ax\) has \(I_H(\alpha(A),\lambda)=
+I_H(A,\lambda-i)\). The operator
 \[
- \text{Melrose--Nistor (cusp calculus) and Benameur--Nistor: algebraic homology,}
+ D(A):=\frac{d}{dw}\Big|_{w=0}x^{w}Ax^{-w}=[\log x,A]
 \]
-\[
- \text{Liu--Ma: differential-\(K\) and eta localization of index data.}
-\]
+has kernel \(z\,K_A\), lies in \(\Psi_b^m(X)\), and satisfies
+\(I_H(D(A),\lambda)=i\,\partial_\lambda I_H(A,\lambda)\). The map \(D\) is a
+derivation of \(x^{-\Z}\Psi_b^{\Z}(X)\) that commutes with \(\alpha\) and
+satisfies \(D(x)=0\).
+\end{lemma}
 
-Mazzeo--Melrose's fibred-boundary calculus gives complementary analytic
-background for normal families, mapping properties, and Fredholm criteria
-\cite{MazzeoMelrose}. It does not replace the Benameur--Nistor
-topologically filtered Hochschild theorem. This distinction is useful when
-transporting the present computation to edge or fibred-cusp settings.
+\begin{proof}
+Since \((x^{-w}Ax^{w}u)(p)=\int x(p)^{-w}K_A(p,p')x(p')^{w}u(p')\,\mu_b\),
+the new kernel is \((x'/x)^wK_A\), which equals \(s^{-w}K_A\) near the front
+faces. On \(X_b^2\) the function \(x'/x\) is a smooth positive multiple of
+\(\rho_{\mathrm{rb}}/\rho_{\mathrm{lb}}\). The factor \((x'/x)^w\) is
+therefore smooth on the interior and near \(\Delta_b\), where \(s=1\), and
+it grows at most like a power of \(\rho_{\mathrm{lb}}\rho_{\mathrm{rb}}\);
+infinite-order vanishing at \(\mathrm{lb}\) and \(\mathrm{rb}\) absorbs this
+growth. Since \(s^{-i\lambda}s^{-w}=s^{-i(\lambda-iw)}\), the Mellin
+transform is shifted as stated. Differentiating \(s^{w}\) at \(w=0\) gives
+\(\log s=z\), and \(ze^{-iz\lambda}=i\partial_\lambda e^{-iz\lambda}\).
+Differentiating \(x^w(AB)x^{-w}=(x^wAx^{-w})(x^wBx^{-w})\) shows that \(D\)
+is a derivation. It commutes with \(\alpha\) because conjugations by powers
+of \(x\) commute, and \(D(x)=0\) because \(x\) commutes with \(x^w\).
+\end{proof}
+
+Fix a b-vector field equal to \(x\partial_x\) in the collar and put
+\(h=-i\,x\partial_x\) there; we write \(h=xD_x\). Then
+\(I(h,\lambda)=\lambda\), and in the collar
+\begin{equation}\label{eq:weightcomm}
+ [h,x^k]=-ik\,x^k .
+\end{equation}
+
+\subsection{Entire functions that are Schwartz on strips}
+For a Fréchet space \(F\) let \(\Sexp(\mathbb R;F)\) be the space of smooth
+\(g:\mathbb R\to F\) with \(\sup_ze^{N|z|}p(g^{(j)}(z))<\infty\) for all
+\(N\), \(j\) and continuous seminorms \(p\). Let \(\cE(F)\) be the space of
+entire \(f:\C\to F\) with
+\[
+ \sup_{|\operatorname{Im}\lambda|\leq N}\langle\lambda\rangle^jp(f(\lambda))
+ <\infty\quad\text{for all }N,j,p .
+\]
+By Cauchy's estimates on slightly wider strips, every derivative of \(f\) satisfies the same
+bounds. Write \(\cE=\cE(\C)\).
+
+\begin{lemma}[Paley--Wiener]\label{lem:PW}
+The Fourier transform \(\widehat g(\lambda)=\int e^{-iz\lambda}g(z)\,dz\) is a
+topological isomorphism \(\Sexp(\mathbb R;F)\to\cE(F)\). It carries
+convolution to pointwise product, and multiplication by \(e^{-z}\) to the
+shift \(f\mapsto f(\cdot-i)\).
+\end{lemma}
+
+\begin{proof}
+If \(g\in\Sexp\), then \(\widehat g\) is entire, and for
+\(|\operatorname{Im}\lambda|\leq N\) we have
+\(|\lambda^j\widehat g(\lambda)|\leq\int e^{N|z|}|g^{(j)}(z)|\,dz\).
+Conversely, let \(f\in\cE(F)\) and
+\(g(z)=\frac1{2\pi}\int_{\mathbb R}e^{iz\lambda}f(\lambda)\,d\lambda\). For
+\(z>0\), Cauchy's theorem moves the contour to
+\(\operatorname{Im}\lambda=N\); the vertical sides vanish by the decay on
+the strip. This gives \(|g(z)|\leq e^{-Nz}\frac1{2\pi}\int|f(\xi+iN)|\,d\xi\).
+For \(z<0\) one uses \(\operatorname{Im}\lambda=-N\), and derivatives are
+handled in the same way. Finally,
+\(\int e^{-iz(\lambda-i)}g\,dz=\int e^{-iz\lambda}e^{-z}g\,dz\).
+\end{proof}
+
+\begin{definition}[Model algebras]\label{def:model}
+For a component \(H\), let \(B_H=\cE(\Psi^{-\infty}(H))\) with pointwise
+composition, and let \(B'_H=\Psi^{\Z}_{\mathrm{sus,ent}}(H)\) be the algebra
+of entire families \(\lambda\mapsto a(\lambda)\) of pseudodifferential
+operators on \(H\) of integral order \(m\) that are suspended of order \(m\)
+uniformly on every strip \(|\operatorname{Im}\lambda|\leq C\)
+\cite{Notes,MelroseEta}. By Lemma~\ref{lem:PW}, \(B_H\) is exactly the set
+of indicial families of dilation-invariant operators on the model
+\(M_H=[0,\infty)_x\times H\) whose kernels \(\beta(x/x',y,y')\) satisfy
+\(\beta(e^z,\cdot)\in\Sexp(\mathbb R;C^\infty(H^2))\). For
+\(b\in B'_H\) we write \(b(xD_x)\) for the dilation-invariant operator on
+\(M_H\) with indicial family \(b\), and \(\alpha(b)(\lambda)=b(\lambda-i)\).
+\end{definition}
+
+\section{Taylor series at the front face}\label{sec:taylor}
+
+\begin{lemma}[Composition at the front face]\label{lem:compff}
+Let \(A,A'\in\Psi_b^{-\infty}(X)\) have kernels supported in
+\(\{x,x'<\varepsilon\}\), and near \(\mathrm{ff}_H\) let
+\(\kappa_A\sim\sum_{j\geq0}x'^j\kappa_j(s,y,y')\) and
+\(\kappa_{A'}\sim\sum_{l\geq0}x'^l\kappa'_l(s,y,y')\) be the Taylor
+expansions. Then \(\kappa_{AA'}\sim\sum_kx'^k\kappa''_k\), with
+\begin{equation}\label{eq:taylorcomp}
+ \kappa''_k(s)=\sum_{j+l=k}\int_0^\infty t^j\,\kappa_j(s/t)\circ
+ \kappa'_l(t)\,\frac{dt}{t},
+\end{equation}
+where \(\circ\) denotes composition of kernels on \(H\).
+\end{lemma}
+
+\begin{proof}
+In the coordinates \eqref{eq:proj},
+\[
+ K_{AA'}(x,y;x',y')=\int_0^\infty\!\!\int_H
+ \kappa_A\Bigl(x'',\frac{x}{x''},y,y''\Bigr)
+ \kappa_{A'}\Bigl(x',\frac{x''}{x'},y'',y'\Bigr)\,
+ \nu_\partial(y'')\frac{dx''}{x''}.
+\]
+Substituting \(x''=x't\) gives
+\(\int\kappa_A(x't,s/t,\cdot)\circ\kappa_{A'}(x',t,\cdot)\,dt/t\). The
+second factor decreases faster than any power of \(t\) and of \(t^{-1}\),
+and the first decreases faster than any power of \(s/t\) and of \(t/s\).
+Both bounds hold uniformly with all \(x'\)-derivatives, and \(x't<\varepsilon\)
+on the support. Hence one may differentiate under the integral sign in
+\(x'\) at \(x'=0\). Expanding \(\kappa_A(x't,\cdot)=\sum_j(x't)^j\kappa_j\)
+gives \eqref{eq:taylorcomp}.
+\end{proof}
+
+\begin{definition}[Twisted Laurent series and the Taylor map]
+For an algebra \(\mathcal B\) of entire families, closed under
+\(\alpha\), let \(\mathcal B[[x;\alpha]\) be the space of formal series
+\(\sum_{k\geq-\ell}x^kb_k\), \(b_k\in\mathcal B\), with the product
+\begin{equation}\label{eq:skew}
+ (x^ja)(x^kb)=x^{j+k}\alpha^k(a)\,b,\qquad
+ \alpha(a)(\lambda)=a(\lambda-i).
+\end{equation}
+This product is associative: both bracketings of
+\((x^ia)(x^jb)(x^kc)\) equal \(x^{i+j+k}\alpha^{j+k}(a)\alpha^k(b)c\).
+Every coefficient of a product is a finite sum. For
+\(A\in x^{-\ell}\Psi_b^{-\infty}(X)\) the kernel has, near
+\(\mathrm{ff}_H\), an expansion \(\kappa_A\sim\sum_{k\geq-\ell}x'^k
+\kappa_k(s,y,y')\), because \(x^{-\ell}=x'^{-\ell}s^{-\ell}\). Put
+\(\beta_k=s^{-k}\kappa_k\), let \(b_k\) be the Mellin transform of
+\(\beta_k\), and define
+\[
+ T_H(A)=\sum_{k\geq-\ell}x^kb_k\in B_H[[x;\alpha],\qquad
+ T=(T_H)_H .
+\]
+The term \(x^kb_k\) is the operator \(x^k\circ b_k(xD_x)\) on \(M_H\): its
+kernel is \(x^k\beta_k(s)=x'^k\kappa_k(s)\).
+\end{definition}
+
+\begin{proposition}[Structure of \(\Idb\)]\label{prop:structure}
+The Taylor map
+\[
+ T:x^{-\Z}\Psi_b^{-\infty}(X)\longrightarrow\bigoplus_HB_H[[x;\alpha]
+\]
+is a surjective algebra homomorphism with kernel \(\Ib\). It is
+continuous on each piece \(x^{-\ell}\Psi_b^{-\infty}(X)\). Hence \(\Idb\cong\bigoplus_HB_H[[x;\alpha]\). In addition,
+\(T(D(A))=\sum_kx^k\,i\partial_\lambda b_k\), and the constant term of
+\(T_H(A)\) is \(I_H(A,\cdot)\) when \(A\in\Psi_b^{-\infty}(X)\).
+\end{proposition}
+
+\begin{proof}
+\emph{Kernel.} If \(T(A)=0\), the kernel vanishes to infinite order at every
+front face, and also at \(\mathrm{lb}\) and \(\mathrm{rb}\). Hence it lies
+in \(\dot C^\infty(X_b^2)=\dot C^\infty(X^2)\), which is \(\Ib\). The
+converse is clear.
+
+\emph{Cut-off.} Let \(\chi\in C_c^\infty([0,\varepsilon))\) equal \(1\) near
+\(0\). The kernel \((1-\chi(x)\chi(x'))K_A\) vanishes near the front faces
+and to infinite order at \(\mathrm{lb}\) and \(\mathrm{rb}\), so it lies in
+\(\Ib\). Modulo \(\Ib\) we may therefore assume that kernels are supported
+in the collar.
+
+\emph{Multiplicativity.} For \(A,A'\in\Psi_b^{-\infty}\),
+Lemma~\ref{lem:compff} gives the Taylor coefficients of \(AA'\). Since
+\(\kappa_j=s^j\beta_j\) and \(\kappa'_l=s^l\beta'_l\),
+\[
+ s^{-k}t^j\kappa_j(s/t)\kappa'_l(t)
+ =(s/t)^{-l}\beta_j(s/t)\,\beta'_l(t)\qquad(j+l=k),
+\]
+and \((s/t)^{-l}\beta_j(s/t)\) is the kernel of \(\alpha^l(b_j(xD_x))\) by
+Lemma~\ref{lem:conj}. Hence the \(k\)-th coefficient of \(T(AA')\) is
+\(\sum_{j+l=k}\alpha^l(b_j)b'_l\), which is the \(k\)-th coefficient of
+\(T(A)T(A')\) by \eqref{eq:skew}. From the definitions,
+\(T(x^{-\ell}A)=x^{-\ell}T(A)\) and \(T(Ax^{-\ell})=T(A)x^{-\ell}\): the
+kernel \(x'^{k-\ell}\kappa_k\) gives \(\beta=s^{\ell}\beta_k\), which is the
+kernel of \(\alpha^{-\ell}(b_k)\), while
+\((x^kb_k)x^{-\ell}=x^{k-\ell}\alpha^{-\ell}(b_k)\). Since
+\(x^{\ell'}\Psi_b^{-\infty}x^{-\ell'}=\Psi_b^{-\infty}\), multiplicativity
+on \(x^{-\Z}\Psi_b^{-\infty}\) follows.
+
+\emph{Surjectivity.} Let \(F_H\) be the Fréchet space of smooth functions of
+\((s,y,y')\in(0,\infty)\times H^2\) that decrease rapidly, with all
+derivatives in \(s\partial_s\) and \(y,y'\), as \(s\to0\) and as
+\(s\to\infty\). Given \((b_k)_{k\geq-\ell}\), the functions
+\(\kappa_k=s^k\beta_k\) lie in \(F_H\) by Lemma~\ref{lem:PW}. Let
+\(\{p_j\}\) be an increasing sequence of seminorms defining \(F_H\), and let
+\(\phi\in C_c^\infty([0,1))\) equal \(1\) near \(0\). By Borel's argument,
+\(G=\sum_{k\geq0}x'^k\phi(x'/\varepsilon_k)\kappa_{k-\ell}\) converges in
+\(C^\infty([0,1);F_H)\) and has the prescribed Taylor series, provided
+\(\varepsilon_k\) is so small that the \(k\)-th term has \(C^{k-1}\)-norm,
+measured with \(p_k\), at most \(2^{-k}\). Put
+\(K=x'^{-\ell}\chi(x)\chi(x')G\) near \(\mathrm{ff}_H\), extended by zero.
+In the chart \((x,s')\) near \(\mathrm{rb}\) we have \(x'=xs'\) and
+\(s=1/s'\), and the rapid decrease as \(s\to\infty\), uniform in \(x'\),
+gives smoothness and infinite-order vanishing at \(\mathrm{rb}\). No
+continuous linear right inverse is claimed: the Borel map
+\(\prod_kF_H\to C^\infty([0,1/2];F_H)\) has none. A Fréchet space
+with a continuous norm, such as \(C^\infty([0,1/2];F_H)\) when \(F_H\) has
+one, cannot contain a copy of \(\prod_k\C\), which has no continuous norm.
+A continuous linear right inverse would embed one. Continuity of \(T\) itself is clear.
+The last assertions follow from Lemma~\ref{lem:conj}.
+\end{proof}
+
+\begin{proposition}[Structure of \(\Adb\)]\label{prop:structureA}
+The Taylor map extends to a surjective homomorphism
+\(x^{-\Z}\Psi_b^{\Z}(X)\to\bigoplus_HB'_H[[x;\alpha]\) with kernel
+\(x^\infty\Psi_b^{\Z}(X)\), so that \(\Adb\cong\bigoplus_HB'_H[[x;\alpha]\).
+\end{proposition}
+
+\begin{proof}
+We use (Q0) in the following form: \(\Psi_b^{\Z}\) is an algebra; for
+\(K\geq0\), \(x^K\Psi_b^m\circ\Psi_b^{m'}\) and
+\(\Psi_b^{m'}\circ x^K\Psi_b^m\) lie in \(x^K\Psi_b^{m+m'}\) (the latter by
+Lemma~\ref{lem:conj}); and conormal kernels admit Taylor expansion at
+\(\mathrm{ff}_H\), which \(\Delta_b\) meets transversally, and asymptotic
+summation (C3).
+
+\emph{Model identity.} On the model \(M_H\), the operators
+\(x^ja(xD_x)\) with \(a\in B'_H\) satisfy, exactly,
+\[
+ (x^ja(xD_x))(x^kb(xD_x))=x^{j+k}(\alpha^k(a)b)(xD_x).
+\]
+Indeed,
+\(a(xD_x)x^k=x^k(x^{-k}a(xD_x)x^k)\), and by Lemma~\ref{lem:conj} the last
+factor has indicial family \(a(\lambda-ik)\). Dilation-invariant operators
+compose by multiplying indicial families.
+
+\emph{Cut-off model operators.} For \(a\in B'_H\), put
+\(Q_k(a)=\chi(x)\,x^ka(xD_x)\,\chi(x')\), transplanted to \(X\) via the
+collar, where \(\chi\in C_c^\infty([0,\varepsilon))\) equals \(1\) on
+\([0,\varepsilon/2]\). We claim
+\[
+ Q_j(a)Q_k(b)-Q_{j+k}(\alpha^k(a)b)\in x^\infty\Psi_b^{\Z}(X) .
+\]
+The difference is \(\chi x^ja(xD_x)(\chi^2-1)x^kb(xD_x)\chi\). Its kernel is
+an integral over \(x''\) of kernels evaluated at \(x/x''\) and
+\(x''/x'\), where \(x,x'<\varepsilon\) and \(x''\geq\varepsilon/2\) on the
+support of \(\chi^2-1\). Both kernels are smooth there and decrease faster
+than any power of \(x/x''\), resp.\ \(x'/x''\), wherever \(x\) and
+\(x'\) stay away from the support of \(\chi^2-1\). Near \(\mathrm{ff}\) the
+difference therefore vanishes to infinite order. Away from \(\mathrm{ff}\)
+it is an operator of order \(\leq m+m'\) supported where
+\(x,x'\geq\varepsilon/2\) or near the singular set \(x\approx x''\). Its
+kernel need not be smoothing: for \(a=b=1\) the difference is the
+multiplication operator \(\chi(\chi^2-1)x^{j+k}\). But it vanishes to
+infinite order at \(\mathrm{ff}\), so it lies in \(x^\infty\Psi_b\), which is
+the kernel of the Taylor map \(T\). This is all that is used below.
+
+\emph{Taylor expansion.} By transversality, the kernel of
+\(A\in x^{-\ell}\Psi_b^m\) has a Taylor expansion at \(\mathrm{ff}_H\) whose
+coefficients are dilation-invariant kernels conormal at \(\{s=1,y=y'\}\),
+rapidly decreasing as \(|z|\to\infty\). As in
+Proposition~\ref{prop:structure}, this defines
+\(T_H(A)=\sum x^ka_k\) with \(a_k\in B'_H\), and
+\[
+ A-\sum_{k<K}Q_k(a_k)\in x^{K}\Psi_b^m(X)+\Ib\quad\text{for every }K .
+\]
+\emph{Multiplicativity.} Write \(A=\sum_{j<K}Q_j(a_j)+R\) and
+\(A'=\sum_{k<K}Q_k(a'_k)+R'\), with \(R,R'\in x^{K}\Psi_b+\Ib\). By the
+claim and the ideal property, \(AA'\equiv\sum_{j+k<K}Q_{j+k}(\alpha^k(a_j)
+a'_k)\) modulo \(x^{K}\Psi_b\), since \(\Ib\) and \(x^\infty\Psi_b\) are
+contained in \(x^K\Psi_b\). Since \(K\) is arbitrary,
+\(T(AA')=T(A)T(A')\).
+
+\emph{Kernel and surjectivity.} \(T(A)=0\) means that \(A\in x^K\Psi_b^m\) for
+every \(K\). Conversely, given \(\sum_{k\geq-\ell}x^ka_k\) with
+\(a_k\in B'_{H,m}\), asymptotic summation of the kernels of \(Q_k(a_k)\)
+(C3) produces \(A\in x^{-\ell}\Psi_b^m\) with this Taylor series.
+\end{proof}
+
+\begin{example}[The model \(X=[0,1)\)]\label{ex:model}
+Let \(\partial X=\{0\}\). Then \(B=\cE\), \(B'\) is the algebra of entire
+functions of \(\lambda\) with classical symbol expansions on strips, and
+\[
+ \Idb\cong\cE[[x;\alpha]
+ =\Bigl\{\sum_{k\geq-\ell}x^k\,b_k(xD_x):b_k\in\cE\Bigr\}.
+\]
+The rule \eqref{eq:skew} is
+\(b(xD_x)\,x^k=x^k\,b(xD_x-ik)\), which follows from \eqref{eq:weightcomm}.
+The operator \(h=xD_x\) does not belong to \(\Idb\), but it is a
+multiplier of \(\Idb\) and an element of \(\Adb\), and
+\([h,x^kb(h)]=-ik\,x^kb(h)\). The \(x\)-adic associated graded algebra is
+again \(\cE[x,x^{-1};\alpha]\), which is not commutative. This is where the
+b-case departs from \cite[proof of Prop.~6]{MN}.
+\end{example}
+
+\section{Hochschild tools}\label{sec:hhtools}
+
+\subsection{The chain model}\label{subsec:chainmodel}
+All algebras in these notes are treated in one chain model.
+
+\begin{definition}[Filtered nuclear algebras and their chains]
+A \emph{filtered nuclear algebra} is an increasing union
+\(\mathfrak A=\bigcup_{N\geq0}\mathfrak A_N\) of nuclear Fréchet spaces,
+each closed in the next, such that multiplication maps
+\(\mathfrak A_N\times\mathfrak A_M\to\mathfrak A_{N+M}\) continuously. Its
+chain spaces are
+\[
+ C_k(\mathfrak A)=\varinjlim_N\mathfrak A_N^{\widehat\otimes(k+1)},
+\]
+with completed projective tensor products. Write \(d_i\), \(0\leq i<k\), for
+multiplication of the factors in slots \(i\) and \(i+1\), and \(d_k\) for
+\(a_0\otimes\cdots\otimes a_k\mapsto a_ka_0\otimes a_1\otimes\cdots\otimes
+a_{k-1}\). Then \(b=\sum_{i=0}^k(-1)^id_i\) maps the \(N\)-th piece in
+degree \(k\) continuously into the \((k+1)N\)-th piece, and
+\(b'=\sum_{i=0}^{k-1}(-1)^id_i\). If \(J\) is a closed ideal, then \(J\) and
+\(\mathfrak A/J\) are filtered nuclear algebras with pieces
+\(J_N=J\cap\mathfrak A_N\) and \(\mathfrak A_N/J_N\).
+\end{definition}
+
+The filtrations used are as follows.
+\begin{itemize}
+\item \(x^{-\Z}\Psi_b^{\Z}(X)\): \(\mathfrak A_N=x^{-N}\Psi_b^N(X)\), with
+the Fréchet topology of classical conormal kernels on \(X_b^2\) (symbol
+seminorms at \(\Delta_b\), and \(C^\infty\) seminorms weighted by
+\(\rho_{\mathrm{lb}}^{-M}\rho_{\mathrm{rb}}^{-M}\) away from \(\Delta_b\)).
+\item \(x^{-\Z}\Psi_b^{-\infty}(X)\): \(\mathfrak A_N=x^{-N}
+\Psi_b^{-\infty}(X)\), with the corresponding \(C^\infty\) topology.
+\item \(\Ib\): the single Fréchet space \(\dot C^\infty(X^2)\).
+\item \(\Ab\), \(\Asb\), \(\Isb\), \(\Idb\), \(\Adb\), \(\Adsb\): the
+induced quotient and subspace filtrations.
+\end{itemize}
+For \(\Asb\) these pieces are the diagonal pieces \(F^N_{N,N}\) of
+\eqref{eq:BN-chains}, so Part~\ref{part:symbols} uses the same model. Via
+the Taylor map (Propositions~\ref{prop:structure}
+and~\ref{prop:structureA}), the pieces of \(\Idb\) and \(\Adb\) become
+\(x^{-N}\prod_{k\geq0}x^kB_H\) and \(x^{-N}\prod_{k\geq0}x^kB'_{H,N}\), where
+\(B'_{H,N}\) consists of the elements of order \(\leq N\), with suspended
+seminorms on strips. All ideals that occur (\(\Ib\), the smoothing ideal,
+and the ideals of infinite order of vanishing at the boundary) are kernels
+of continuous maps (full symbol, Taylor series at the front faces), hence
+closed. On a closed subspace the induced Fréchet topology coincides with
+any finer Fréchet topology for which the inclusion is continuous, by the
+open mapping theorem. For example, \(\Ib\) has the same topology whether it is regarded
+as \(\dot C^\infty(X^2)\) or as a subspace of \(x^{-N}\Psi_b^N\).
+
+For \(R=B[[x;\alpha]\) the completed tensor products of nuclear Fréchet
+spaces commute with countable products. A \(k\)-chain is therefore a family
+\((c_{\mathbf j})\) indexed by multi-indices \(\mathbf j=(j_0,\dots,j_k)\)
+with all \(j_i\geq-N\) for some \(N\), where \(c_{\mathbf j}\in
+B^{\widehat\otimes(k+1)}\). For \(B=\cE(\Psi^{-\infty}(H))\), the space
+\(B^{\widehat\otimes(k+1)}\) consists of entire functions of
+\((\lambda_0,\dots,\lambda_k)\) with values in \(\Psi^{-\infty}(H^{k+1})\),
+Schwartz on products of strips. In this picture, by \eqref{eq:skew},
+\(d_i\) evaluates slot \(i\) at \(\lambda-ij_{i+1}\) and slot \(i+1\) at
+\(\lambda\), composes in the \(H\)-variables, and gives the new slot the
+exponent \(j_i+j_{i+1}\). The \emph{weight} \(g=\sum_ij_i\) is preserved by
+every face map.
+
+\begin{lemma}[Exactness of chain spaces]\label{lem:exactchains}
+Let \(J\subset\mathfrak A\) be a closed ideal of a filtered nuclear algebra.
+Then for every \(k\)
+\[
+ 0\to\mathcal K_k\to C_k(\mathfrak A)\to C_k(\mathfrak A/J)\to0
+\]
+is exact. Here \(\mathcal K_k\) is the direct limit over \(N\) of the closed
+sums \(\sum_i\mathfrak A_N^{\widehat\otimes i}\widehat\otimes J_N\widehat
+\otimes\mathfrak A_N^{\widehat\otimes(k-i)}\).
+\end{lemma}
+
+\begin{proof}
+For Fréchet spaces, \(\widehat\otimes_\pi\) carries quotient maps to quotient
+maps. When one factor is nuclear it also preserves injections, so it is
+exact on short exact sequences of nuclear Fréchet spaces \cite[Chs.~43,~50]
+{Treves}. Apply this factor by factor to
+\(0\to J_N\to\mathfrak A_N\to\mathfrak A_N/J_N\to0\), and then pass to the
+direct limit. The limit is taken algebraically, as a filtered colimit of
+vector spaces, which is exact. The transition maps are injective by
+nuclearity, and homology is computed algebraically, so no strictness or
+regularity of the LF topology is needed.
+\end{proof}
+
+\subsection{H-unitality and excision}
+A filtered nuclear algebra is \emph{topologically H-unital} if its
+\(b'\)-complex admits a contraction \(E\), with \(b'E+Eb'=1\) in all degrees
+(\(b'=0\) on \(C_0\)), that maps \(\mathfrak A_N^{\widehat\otimes(k+1)}\)
+continuously into \(\mathfrak A_N^{\widehat\otimes(k+2)}\).
+
+\begin{theorem}[Excision; quoted input (Q1)]\label{thm:excision}
+Let \(J\subset\mathfrak A\) be a closed ideal of a filtered nuclear algebra,
+and suppose \(J\) is topologically H-unital. Then
+\(C(J)\to\mathcal K\) is a quasi-isomorphism, where \(\mathcal K\) is the
+kernel of Lemma~\ref{lem:exactchains}. Consequently there is a long exact
+sequence
+\[
+ \cdots\to\HH_k(J)\to\HH_k(\mathfrak A)\to\HH_k(\mathfrak A/J)
+ \xrightarrow{\partial}\HH_{k-1}(J)\to\cdots .
+\]
+To compute \(\partial[c]\), lift \(c\) to a chain \(\tilde c\) of
+\(\mathfrak A\), which is possible by Lemma~\ref{lem:exactchains}; then
+\(\partial[c]\) is the class of \(b\tilde c\in\mathcal K\). This is
+Wodzicki's theorem \cite{Wodzicki}. His proof is algebraic, and in the
+present model its inputs are the exactness of Lemma~\ref{lem:exactchains}
+and the contraction \(E\). We have not rewritten the proof in the completed
+setting, so we list the theorem as an input. No continuous linear section
+of \(\mathfrak A\to\mathfrak A/J\) is assumed. The Taylor maps have no such
+section, because of the Borel-map obstruction.
+\end{theorem}
+
+\begin{lemma}[Connecting maps on cocycles]\label{lem:conn}
+In the situation of Theorem~\ref{thm:excision}, let \(\tau\) be a
+\((k-1)\)-cocycle on \(J\), and let \(\hat\tau\) be a continuous
+\((k-1)\)-cochain on \(\mathfrak A\) that extends \(\tau\) and is such that
+\(b\hat\tau\) vanishes whenever one of its arguments lies in \(J\). Then
+\(b\hat\tau\) descends to a cocycle \(\overline{b\hat\tau}\) on
+\(\mathfrak A/J\), and \(\langle\tau,\partial[c]\rangle=
+\langle\overline{b\hat\tau},c\rangle\) for every cycle \(c\).
+\end{lemma}
+
+\begin{proof}
+The hypothesis says that \(\hat\tau|_{\mathcal K}\) is a cocycle on
+\(\mathcal K\). It restricts to \(\tau\) on \(C(J)\), so under the
+quasi-isomorphism it represents \([\tau]\). Hence
+\(\langle\tau,\partial[c]\rangle=\langle\hat\tau,b\tilde c\rangle=
+\langle b\hat\tau,\tilde c\rangle=\langle\overline{b\hat\tau},c\rangle\).
+\end{proof}
+
+\begin{lemma}[Explicit contractions]\label{lem:Hunital}
+\begin{enumerate}
+\item[(a)] Let \(V,W\) be Fréchet spaces with a continuous pairing
+\(\langle\cdot,\cdot\rangle:W\times V\to\C\), and let
+\(\mathcal K=V\widehat\otimes W\) carry the product
+\((v\otimes w)(v'\otimes w')=\langle w,v'\rangle v\otimes w'\). Choose
+\(\psi\in W\) and \(\tilde\psi\in V\) with \(\langle\psi,\tilde\psi\rangle=1\).
+Then
+\[
+ E\bigl((v\otimes w)\otimes c\bigr)=(v\otimes\psi)\otimes
+ (\tilde\psi\otimes w)\otimes c
+\]
+is a continuous contraction of the \(b'\)-complex. This applies to
+\(\Psi^{-\infty}(H)=C^\infty(H)\widehat\otimes C^\infty(H)\) and to
+\(\Ib=\dot C^\infty(X)\widehat\otimes\dot C^\infty(X)\), with the pairings
+given by \(\nu_\partial\) and \(\mu_b\).
+\item[(b)] Let \(B=\cE(\Psi^{-\infty}(H))\) and let \(R\) be \(B[[x;\alpha]\),
+\(B\rtimes_\alpha\Z=\bigoplus_kx^kB\), or the same algebras with \(\cE\) in
+place of \(B\). Let \(\phi(\zeta)=e^{-\zeta^2}\). On the component
+\(\mathbf j=(j_0,\dots,j_k)\) define \(EF\) as the component
+\((0,j_0,\dots,j_k)\) given by
+\[
+ (EF)(\mu,\lambda_0,\dots;v,v',u,u',\dots)
+ =\phi(\mu-\lambda_0+ij_0)\,\psi(v')\tilde\psi(u)\,
+ F(\lambda_0,\dots;v,u',\dots).
+\]
+Here \((v,v')\) are the kernel variables of the new slot, \((u,u')\) those
+of the old slot \(0\), and \(\int_H\psi\tilde\psi\,\nu_\partial=1\). Then
+\(E\) is a continuous contraction of the \(b'\)-complex of \(R\). It
+preserves weights and pole bounds.
+\end{enumerate}
+Consequently \(\Ib\), \(\Psi^{-\infty}(H)\), \(\Idb\), \(B\rtimes_\alpha\Z\),
+\(\cE[[x;\alpha]\) and \(\cE\rtimes_\alpha\Z\) are topologically H-unital.
+\end{lemma}
+
+\begin{proof}
+In both cases \(d_0E=1\) and \(d_{i+1}E=Ed_i\) for \(i\geq0\). This gives
+\(b'E=1-Eb'\). For (a):
+\((v\otimes\psi)(\tilde\psi\otimes w)=v\otimes w\), and
+\(d_1E((v\otimes w)\otimes a_1\otimes\cdots)=(v\otimes\psi)\otimes
+(\tilde\psi\otimes w)a_1\otimes\cdots=Ed_0(\cdots)\), because
+\((v\otimes w)a_1=v\otimes(w\cdot a_1)\).
+
+For (b), merging the new slot (exponent \(0\), variable \(\mu\)) with the old
+slot \(0\) (exponent \(j_0\)) sets \(\mu=\lambda-ij_0\) and
+\(\lambda_0=\lambda\), by \eqref{eq:skew}. Then
+\(\phi(\lambda-ij_0-\lambda+ij_0)=\phi(0)=1\), and the kernel factors give
+\(\int\psi\tilde\psi=1\); hence \(d_0E=1\). Merging the old slots \(0\) and
+\(1\) sets \(\lambda_0=\lambda-ij_1\) and \(\lambda_1=\lambda\), and turns
+the prefactor into \(\phi(\mu-\lambda+i(j_0+j_1))\). This is the prefactor
+of \(E\) on the merged component, whose first exponent is \(j_0+j_1\);
+hence \(d_1E=Ed_0\). For \(i\geq2\) the identity \(d_iE=Ed_{i-1}\) is
+clear. Finally,
+\(|\phi(\zeta)|=e^{-(\operatorname{Re}\zeta)^2+(\operatorname{Im}\zeta)^2}\).
+Together with the decay of \(F\) in \(\lambda_0\), this shows that \(EF\) is
+Schwartz on products of strips, with continuous dependence on \(F\).
+\end{proof}
+
+\begin{lemma}[Inner derivations {\cite[1.3.3]{Loday}}]\label{lem:inner}
+Let \(\mathfrak A\) be unital and \(h\in\mathfrak A\). Put
+\(s_h(a_0\otimes\cdots\otimes a_k)=\sum_{i=0}^k(-1)^{i+1}a_0\otimes\cdots
+\otimes a_i\otimes h\otimes a_{i+1}\otimes\cdots\otimes a_k\). Then
+\(bs_h+s_hb=L_h\), where \(L_h(a_0\otimes\cdots\otimes a_k)=\sum_ia_0\otimes
+\cdots\otimes[h,a_i]\otimes\cdots\otimes a_k\).
+\end{lemma}
+
+\begin{proof}
+This is a direct computation. For \(k=0\):
+\(bs_h(a_0)=-b(a_0\otimes h)=[h,a_0]\).
+\end{proof}
+
+\begin{lemma}[Morita invariance for smoothing kernels]\label{lem:morita}
+Let \(\mathcal K=V\widehat\otimes W\), and let \(\psi\) and
+\(\tilde\psi\) be as in Lemma~\ref{lem:Hunital}(a), and put \(e=\tilde\psi\otimes\psi\). Let
+\(\mathfrak A\) be unital or topologically H-unital. Then
+\[
+ \iota(a_0\otimes\cdots\otimes a_k)=(e\otimes a_0)\otimes\cdots\otimes
+ (e\otimes a_k)
+\]
+and the generalized trace
+\(\Tr_*\bigl((\kappa_0\otimes a_0)\otimes\cdots\otimes(\kappa_k\otimes a_k)
+\bigr)=\Tr(\kappa_0\cdots\kappa_k)\,a_0\otimes\cdots\otimes a_k\) are chain
+maps with \(\Tr_*\iota=1\). Moreover, \(C(\mathcal K\widehat\otimes
+\mathfrak A)=\iota C(\mathfrak A)\oplus C'\) with \(C'=\ker\Tr_*\) acyclic.
+If \(\mathfrak A\) is graded by a weight and the contraction preserves
+weights, the statement holds weight by weight.
+\end{lemma}
+
+\begin{proof}
+Write a chain as
+\((v_0\otimes w_0\otimes a_0)\otimes\cdots\otimes(v_k\otimes w_k\otimes a_k)\)
+and rearrange it as the \emph{letters} \(\ell_i=w_i\otimes v_{i+1}\in
+U:=W\widehat\otimes V\) (indices mod \(k+1\)), together with
+\(a_0\otimes\cdots\otimes a_k\). Let \(\varepsilon(w\otimes v)=\langle w,v
+\rangle\). The face \(d_i\) applies \(\varepsilon\) to the letter
+\(\ell_i\), multiplies \(a_i\) with \(a_{i+1}\) (for \(i=k\) it puts
+\(a_ka_0\) in slot \(0\)), and leaves the other letters unchanged. Split
+\(U=\C u_0\oplus U'\), where \(u_0=\psi\otimes\tilde\psi\) and
+\(U'=\ker\varepsilon\). Because \(\varepsilon(U')=0\), the number \(m\) of
+letters lying in \(U'\) is preserved by \(b\). For \(m=0\) all letters are
+\(u_0\), so every slot is \(\tilde\psi\otimes\psi=e\); this summand is
+\(\iota C(\mathfrak A)\), and \(b\) acts on it as the Hochschild boundary
+of \(\mathfrak A\). Projection onto it is \(\Tr_*\), since
+\(\prod_i\varepsilon(\ell_i)=\Tr(\kappa_0\cdots\kappa_k)\).
+
+For \(m\geq1\), filter by the position \(w\) of the last \(U'\)-letter. A
+face \(d_i\) with \(i<w\) lowers \(w\), the face \(d_w\) vanishes, and the
+faces \(d_i\) with \(w<i\leq k\) preserve \(w\). In the associated graded
+complex only the faces \(d_{w+1},\dots,d_k\) survive, with alternating
+signs \((-1)^i\). They multiply consecutive elements of the block
+\((a_{w+1},\dots,a_k,a_0)\), which is a \(b'\)-complex of \(\mathfrak A\) of
+length \(k-w+1\geq1\), tensored with the spectators \(a_1,\dots,a_w\) and
+the earlier letters. That \(b'\)-complex is contractible: by \(1\otimes\)
+in the unital case, or by \(E\), inserted at the front of the block. In
+each degree the filtration is finite, so \(C'\) is acyclic.
+\end{proof}
+
+\begin{theorem}[Crossed products by \(\Z\); quoted (Q2)]\label{thm:crossed}
+Let \(\mathfrak B\) be unital or topologically H-unital (with a
+contraction compatible with \(\alpha\)), let \(\alpha\) be an automorphism,
+and let \(\mathfrak B\rtimes_\alpha\Z=\bigoplus_kx^k\mathfrak B\) with the
+product \eqref{eq:skew}. Let \(C^{(0)}\) be the weight-zero part of its
+Hochschild complex. Then there are natural short exact sequences
+\[
+ 0\to\HH_q(\mathfrak B)_\alpha\to H_q(C^{(0)})\to
+ \HH_{q-1}(\mathfrak B)^\alpha\to0,
+\]
+where \(V_\alpha=V/(1-\alpha_*)V\) and \(V^\alpha=\ker(1-\alpha_*)\). In the
+unital case, and algebraically, \(C^{(0)}\) is quasi-isomorphic to the
+mapping cone of \(1-\alpha_*\) on \(C(\mathfrak B)\)
+\cite{FeiginTsygan,NistorCrossed,GetzlerJones}. We assume the same
+statement in the chain model of Section~\ref{subsec:chainmodel} for
+\(\mathfrak B=\cE\). We also assume the reduction of the H-unital case to
+the unital one (apply the unital case to the unitization, then
+Theorem~\ref{thm:excision} weight by weight). Neither step is proved here.
+\end{theorem}
+
+\section{The residual ideal}\label{sec:I}
+
+\begin{proposition}\label{prop:I}
+The ideal \(\Ib\) is topologically H-unital, and \(\HH_0(\Ib)\cong\C\) by
+the trace \(\Tr(A)=\int_XK_A(p,p)\,\mu_b(p)\), while \(\HH_k(\Ib)=0\) for
+\(k\geq1\). The same holds for \(\Psi^{-\infty}(H)\).
+\end{proposition}
+
+\begin{proof}
+By the kernel theorem, \(\dot C^\infty(X^2)=\dot C^\infty(X)\widehat\otimes
+\dot C^\infty(X)\) (the Schwartz kernel theorem for flat functions), and composition is
+the product of Lemma~\ref{lem:Hunital}(a) for the pairing
+\(\int_Xwv\,\mu_b\). Apply Lemma~\ref{lem:Hunital}(a) and
+Lemma~\ref{lem:morita} with \(\mathfrak A=\C\), for which \(C(\C)\) is
+\(\C\) in degree \(0\) up to an acyclic complex. The generalized trace is
+\(\Tr\).
+\end{proof}
+
+\section{The boundary ideal}\label{sec:Id}
+
+We first treat the scalar model \(\cE[[x;\alpha]\) of
+Example~\ref{ex:model}. The general case then follows by
+Lemma~\ref{lem:morita}.
+
+\subsection{\texorpdfstring{The algebra \(\cE\)}{The algebra E}}
+Chains of \(\cE\) are entire functions \(F(\lambda_0,\dots,\lambda_k)\)
+that are Schwartz on products of strips, and
+\[
+ (bF)(\lambda_0,\dots,\lambda_{k-1})
+ =\sum_{i<k}(-1)^iF(\dots,\lambda_i,\lambda_i,\dots)
+ +(-1)^kF(\lambda_0,\dots,\lambda_{k-1},\lambda_0).
+\]
+Let \(\chi_0=1\), \(\chi_1(F)=(\partial_{\lambda_1}F)(\lambda,\lambda)\,
+d\lambda\), and \(\chi_k=0\) for \(k\geq2\). Let \(\iota_0=1\) and
+\(\iota_1(f\,d\lambda)=f(\lambda_0)\psi_1(\lambda_1-\lambda_0)\), where
+\(\psi_1(\zeta)=\zeta e^{-\zeta^2}\).
+
+\begin{proposition}[HKR for \(\cE\)]\label{prop:HKRE}
+\begin{enumerate}
+\item[(a)] The maps \(\chi\) and \(\iota\) are chain maps between
+\(C(\cE)\) and the complex \(\cE\leftarrow\cE\,d\lambda\) with zero
+differential. They satisfy \(\chi\iota=1\), and they commute with the
+diagonal action of \(\alpha\).
+\item[(b)] \emph{(Division lemma.)} If \(G\in\cE(\C^2)\) and
+\(G(\lambda,\lambda)=0\), then \(G=(\lambda_0-\lambda_1)G_1\) with
+\(G_1\in\cE(\C^2)\) depending continuously on \(G\).
+\item[(c)] The Koszul complex \(0\to\cE(\C^2)\xrightarrow{\lambda_0-\lambda_1}
+\cE(\C^2)\to\cE\to0\), whose last map is restriction to the diagonal, is
+exact. Restriction has the continuous right inverse
+\(f\mapsto f(\lambda_0)e^{-(\lambda_0-\lambda_1)^2}\).
+\item[(d)] \emph{(Sketch, (S1).)} \(\chi\) is a quasi-isomorphism. Thus
+\(\HH_0(\cE)=\cE\), \(\HH_1(\cE)=\cE\,d\lambda\), and \(\HH_q(\cE)=0\) for
+\(q\geq2\).
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(a) On \(C_1\), \(bF(\lambda)=F(\lambda,\lambda)-F(\lambda,\lambda)=0\), so
+\(\chi_0b=0\). For \(F\in C_2\),
+\[
+ bF(\mu_0,\mu_1)=F(\mu_0,\mu_0,\mu_1)-F(\mu_0,\mu_1,\mu_1)+
+ F(\mu_0,\mu_1,\mu_0).
+\]
+Applying \(\partial_{\mu_1}\) at \(\mu_0=\mu_1\)
+gives \(\partial_3F-(\partial_2+\partial_3)F+\partial_2F=0\), so
+\(\chi_1b=0\). Also \(\chi_1\iota_1(f)=f\,\psi_1'(0)=f\). Both maps are
+built from diagonal evaluations and are therefore translation-equivariant.
+
+(b) Put \(G_1(\lambda_0,\lambda_1)=-\int_0^1(\partial_2G)(\lambda_0,
+\lambda_0+t(\lambda_1-\lambda_0))\,dt\), which is entire. If
+\(|\operatorname{Re}(\lambda_0-\lambda_1)|\geq1\), then \(|G_1|\leq|G|\).
+Otherwise every point of the segment has real part within \(1\) of
+\(\operatorname{Re}\lambda_1\). Cauchy estimates for \(\partial_2G\) on
+slightly wider strips then give decay in both variables. Derivatives are
+estimated in the same way.
+
+(c) Multiplication by \(\lambda_0-\lambda_1\) is injective on entire
+functions; exactness in the middle is (b); and the stated map is a right
+inverse.
+
+(d) For a unital algebra, (c) is a resolution of the diagonal bimodule by
+free bimodules. The comparison theorem then makes the Hochschild complex
+homotopy equivalent to \(\cE\otimes_{\cE^e}(\text{Koszul})=(\cE\xleftarrow0
+\cE)\), and \(\chi\) realizes this equivalence. The algebra \(\cE\) is not
+unital. Its bar complex is still exact, by H-unitality
+(Lemma~\ref{lem:Hunital}), but the modules \(\cE(\C^{k+2})\) are not free
+bimodules, and the comparison homotopy has to be built by hand, using the
+coupled unit \(\phi(\lambda_0-\lambda_1)\) of Lemma~\ref{lem:Hunital}(b) in
+place of \(1\otimes1\). We have not written this construction out. What is
+proved is that \(\HH_0(\cE)=\cE\), which is immediate since \(b=0\) on
+\(C_1\), and that \(\chi_1\) maps \(\HH_1(\cE)\) onto \(\cE\,d\lambda\).
+\end{proof}
+
+\subsection{Coinvariants of the shift}
+
+\begin{lemma}\label{lem:coinv}
+Let \(\alpha f(\lambda)=f(\lambda-i)\) on \(\cE\). Then
+\(\ker(1-\alpha)=0\), and the image of \(1-\alpha\) is the closed
+hyperplane \(\{f:\int_{\mathbb R}f\,d\lambda=0\}\), with a continuous
+inverse given by
+\[
+ (1-\alpha)^{-1}f=\widehat{g_f},\qquad
+ g_f(z)=\frac{\check f(z)}{1-e^{-z}},\qquad
+ \check f(z)=\frac1{2\pi}\int e^{iz\lambda}f(\lambda)\,d\lambda .
+\]
+Consequently \(\cE_\alpha\cong\C\) by \(f\mapsto\frac1{2\pi}\int f\,
+d\lambda\) and \(\cE^\alpha=0\). The same holds for \(\cE\,d\lambda\).
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:PW}, \(1-\alpha\) corresponds to multiplication of
+\(\check f\in\Sexp\) by \(1-e^{-z}\). This function vanishes on
+\(\mathbb R\) only at \(z=0\), where its zero is simple, so the kernel is
+zero. If \(\int f=2\pi\check f(0)=0\), then \(\check f/(1-e^{-z})\) is
+smooth by the one-variable division lemma. For \(z\geq1\) the factor
+\((1-e^{-z})^{-1}\) is bounded with bounded derivatives. For \(z\leq-1\) it
+is bounded by \(2e^{z}\), again with derivatives. Hence the quotient lies
+in \(\Sexp\) and depends continuously on \(f\). Conversely,
+\(\int(1-\alpha)g\,d\lambda=0\) by a contour shift, as in the proof of
+Proposition~\ref{prop:generators}(a). The shift preserves \(d\lambda\).
+\end{proof}
+
+\subsection{The weight decomposition}
+
+\begin{proposition}[Nonzero weights are acyclic]\label{prop:weights}
+Let \(R=B[[x;\alpha]\) with \(B=\cE\) or \(B=\cE(\Psi^{-\infty}(H))\). Then:
+\begin{enumerate}
+\item[(a)] \(C(R)=C^{(0)}(R)\oplus C^{\neq0}(R)\) as complexes, where
+\(C^{(0)}(R)\) consists of the components of weight zero;
+\item[(b)] \(C^{(0)}(R)=C^{(0)}(B\rtimes_\alpha\Z)\);
+\item[(c)] \(C^{\neq0}(R)\) is acyclic.
+\end{enumerate}
+Hence \(\HH_*(R)\cong H_*(C^{(0)}(B\rtimes_\alpha\Z))\).
+\end{proposition}
+
+\begin{proof}
+(a) Projection onto the components of weight zero is defined
+componentwise and commutes with \(b\), because every face preserves the
+weight.
+
+(b) If all \(j_i\geq-\ell\) and \(\sum j_i=0\), then \(j_i\leq k\ell\), so
+only finitely many multi-indices occur. A chain of weight zero is
+therefore a finite sum, that is, a chain of the polynomial crossed product.
+The converse is clear.
+
+(c) Let \(\tilde R=R\oplus\C[h]\), where \(h\) acts as the multiplier
+\(h\cdot x^ka=x^k(\lambda-ik)a\) and \(x^ka\cdot h=x^ka\lambda\). This is a
+unital algebra containing \(R\) as an ideal, with \(\tilde R/R=\C[h]\) and
+the obvious linear section. By Lemma~\ref{lem:Hunital}(b) and
+Theorem~\ref{thm:excision}, \(C(R)\to\mathcal K=\ker(C(\tilde R)\to C(\C[h]))\)
+is a quasi-isomorphism. Both complexes split by weight, and the map
+respects the splitting, since \(h\) has weight \(0\). By
+\eqref{eq:weightcomm}, \([h,x^ka]=-ik\,x^ka\), so \(L_h=-ig\) on chains of
+weight \(g\). The homotopy \(s_h\) of Lemma~\ref{lem:inner} preserves
+\(\mathcal K\), weights, and pole bounds. Therefore
+\(\Sigma=\sum_{g\neq0}(-ig)^{-1}s_hP_g\), where \(P_g\) is the projection to
+weight \(g\), is a well-defined contracting homotopy of
+\(\mathcal K^{\neq0}\). Hence \(H(\mathcal K^{\neq0})=0\), and so
+\(H(C^{\neq0}(R))=0\).
+\end{proof}
+
+\subsection{Generators and the theorem}
+For \(A\in\Idb\) with \(T_H(A)=\sum_kx^kb_k\), define
+\begin{equation}\label{eq:Trd}
+ \Tr_{\partial,H}(A)=\frac1{2\pi}\int_{\mathbb R}\Tr_H\,b_0(\lambda)\,
+ d\lambda ,
+\end{equation}
+\begin{equation}\label{eq:phi}
+ \varphi_H(A,B)=\Tr_{\partial,H}\bigl(A\,D(B)\bigr),\qquad
+ T(D(B))=\sum_kx^k\,i\partial_\lambda b_k .
+\end{equation}
+
+\begin{proposition}\label{prop:generators}
+\begin{enumerate}
+\item[(a)] \(\Tr_{\partial,H}\) is a continuous trace on \(\Idb\).
+\item[(b)] \(\Tr_{\partial,H}\circ D=0\), and \(\varphi_H\) is a continuous
+cyclic Hochschild \(1\)-cocycle on \(\Idb\).
+\item[(c)] There are elements \(e'_H\) and \(1\)-cycles \(z_H\) of weight
+zero with \(\Tr_{\partial,H'}(e'_H)=\delta_{HH'}\) and
+\(\varphi_{H'}(z_H)=\delta_{HH'}\).
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(a) By \eqref{eq:skew}, for \(j+k=0\),
+\[
+ \Tr_\partial((x^ja)(x^kb))=\frac1{2\pi}\int\Tr(a(\lambda-ki)b(\lambda))\,
+ d\lambda,\quad
+ \Tr_\partial((x^kb)(x^ja))=\frac1{2\pi}\int\Tr(b(\lambda+ki)a(\lambda))\,
+ d\lambda,
+\]
+and both vanish if \(j+k\neq0\). Shift the contour by \(\lambda\mapsto\lambda-ki\). This is
+justified by Cauchy's theorem on a rectangle, because the integrand is
+Schwartz on the strip and the vertical sides therefore tend to zero. The
+trace property of \(\Tr_H\) on smoothing operators then gives equality.
+
+(b) \(\Tr_\partial(D(b))=\frac{i}{2\pi}\int\Tr\,\partial_\lambda b_0\,
+d\lambda=0\). Using (a) and the Leibniz rule,
+\((b\varphi)(a,b,c)=\Tr(abDc)-\Tr(aD(b)c)-\Tr(abDc)+\Tr(caDb)=0\), and
+\(\varphi(b,a)=-\Tr(D(b)a)=-\varphi(a,b)\).
+
+(c) Let \(e_H\) be a rank-one projection in \(\Psi^{-\infty}(H)\), and let
+\(f,g\in\cE\). Put \(e'_H=fe_H\) with \(\int f=2\pi\), and
+\(z_H=(fe_H)\otimes(ge_H)\) in weight zero. Then
+\(bz_H=fge_H-gfe_H=0\) and \(\varphi_H(z_H)=\frac{i}{2\pi}\int fg'\,
+d\lambda\). For \(g=e^{-\lambda^2}\) and \(f=-c\lambda e^{-\lambda^2}\),
+this equals \(\frac{ic}{\pi}\int\lambda^2e^{-2\lambda^2}d\lambda\neq0\);
+normalize \(c\). The components \(H'\neq H\) do not see these elements.
+\end{proof}
+
+\begin{theorem}\label{thm:Id}
+\(\HH_k(\Idb)\cong\C^N\) for \(k=0,1\), and \(\HH_k(\Idb)=0\) for
+\(k\geq2\). The functionals \(\Tr_{\partial,H}\) and \(\varphi_H\) are dual
+bases in degrees \(0\) and \(1\). This uses (Q1), (Q2) and (S1).
+\end{theorem}
+
+\begin{proof}
+By Proposition~\ref{prop:structure}, \(\Idb=\bigoplus_HR_H\). Excision for
+the split ideals \(R_H\) (Theorem~\ref{thm:excision}) reduces the
+computation to a single \(R_H=B_H[[x;\alpha]\).
+Proposition~\ref{prop:weights} reduces it further to the weight-zero part
+of \(B_H\rtimes_\alpha\Z=\Psi^{-\infty}(H)\widehat\otimes(\cE\rtimes_\alpha
+\Z)\). Lemma~\ref{lem:morita}, applied weight by weight, reduces it to
+\(C^{(0)}(\cE\rtimes_\alpha\Z)\). Theorem~\ref{thm:crossed} and
+Proposition~\ref{prop:HKRE}(d) then give exact sequences with
+\(\HH_q(\cE)_\alpha\) and \(\HH_{q-1}(\cE)^\alpha\). By
+Lemma~\ref{lem:coinv}, \(\HH_0(\cE)_\alpha\cong\C\),
+\((\cE\,d\lambda)_\alpha\cong\C\), and all invariants vanish. Hence
+\(H_0\cong\C\), \(H_1\cong\C\), and \(H_q=0\) for \(q\geq2\). By
+Proposition~\ref{prop:generators}, \(\Tr_{\partial,H}\) and \(\varphi_H\)
+are nonzero on these one-dimensional groups.
+\end{proof}
+
+\begin{remark}
+In the language of \cite[(16), (68)]{MN},
+\(\HH_k(\Idb)\cong\bigoplus_HH^{1-k}(S_\partial)\). The trace
+\(\Tr_{\partial,H}\) is a residue in \(x\) (Lemma~\ref{lem:residue}) and
+corresponds to \(d\theta_\partial\). The class of \(\varphi_H\) corresponds
+to \(1\). In the cusp case, Melrose--Nistor reach the same answer by an
+\(x\)-adic spectral sequence whose \(E^1\)-term is commutative; here the
+weight argument replaces it.
+\end{remark}
+
+\section{The b-trace and the Laurent residual algebra}\label{sec:btrace}
+
+\begin{lemma}[Diagonal residues]\label{lem:residue}
+Let \(A\in x^{-\ell}\Psi_b^{-\infty}(X)\). The function
+\(\Tr(x^wA)=\int_Xx^wK_A(p,p)\,\mu_b(p)\) is holomorphic for
+\(\operatorname{Re}w>\ell\), extends meromorphically to \(\C\) with at
+most simple poles at \(w\in\{-k:k\geq-\ell\}\), and
+\[
+ \operatorname{Res}_{w=0}\Tr(x^wA)=\sum_H\Tr_{\partial,H}(T(A)).
+\]
+The same holds for holomorphic families \(A(w)\), with residue
+\(\sum_H\Tr_{\partial,H}(T(A(0)))\).
+\end{lemma}
+
+\begin{proof}
+On \(\Delta_b\) the coordinates are \(s=1\), \(x'=x\), and \(y=y'\), so
+\(K_A(p,p)\sim\sum_{k\geq-\ell}x^k\kappa_k(1,y,y)\). Moreover
+\(\kappa_k(1)=\beta_k(1)=\frac1{2\pi}\int b_k\,d\lambda\) by
+\eqref{eq:diagvalue}. Away from the collar the integral is entire. In the
+collar, the term \(x^k\) contributes
+\(\int_0^\varepsilon x^{w+k-1}dx=\varepsilon^{w+k}/(w+k)\), and the Taylor
+remainder of order \(M\) is holomorphic for \(\operatorname{Re}w>-M\). The
+residue at \(w=0\) is \(\int_H\kappa_0(1,y,y)\nu_\partial\), which is
+\(\frac1{2\pi}\int\Tr_Hb_0\,d\lambda\).
+\end{proof}
+
+We define the b-trace by
+\({}^b\Tr(A)=\operatorname{FP}_{w=0}\Tr(x^wA)\) for
+\(A\in x^{-\Z}\Psi_b^{-\infty}(X)\). On \(\Ib\) it is the trace, and on
+\(\Psi_b^{-\infty}\) it is the b-trace of \cite[Sect.~``The b-trace
+defect'']{Notes}.
+
+\begin{theorem}[b-trace defect]\label{thm:defect}
+For \(A,B\in x^{-\Z}\Psi_b^{-\infty}(X)\) with \(T_H(A)=\sum x^ka_k\) and
+\(T_H(B)=\sum x^kb_k\),
+\[
+ {}^b\Tr([A,B])=\sum_H\Tr_{\partial,H}\bigl(D(A)B\bigr)
+ =\sum_H\frac{i}{2\pi}\sum_k\int_{\mathbb R}
+ \Tr_H\bigl((\partial_\lambda a_k)(\lambda+ki)\,b_{-k}(\lambda)\bigr)\,
+ d\lambda .
+\]
+For \(A,B\in\Psi_b^{-\infty}(X)\) this is
+\(\frac{i}{2\pi}\sum_H\int\Tr_H(\partial_\lambda I_H(A,\lambda)\,
+I_H(B,\lambda))\,d\lambda\), which is the formula of
+\cite[Thm.~``b-trace defect formula'']{Notes}.
+\end{theorem}
+
+\begin{proof}
+For \(\operatorname{Re}w\) large, \(x^wAB\), \(x^wBA\) and \(Ax^wB\) are
+trace class (Q0), and their traces are integrals of their kernels over the
+diagonal. Both \(\Tr(x^wBA)\) and \(\Tr(Ax^wB)\) equal the absolutely
+convergent double integral \(\iint x(p)^wK_B(p,q)K_A(q,p)\,\mu_b\mu_b\). Hence
+\[
+ \Tr(x^w[A,B])=\Tr\bigl((x^wA-Ax^w)B\bigr)=w\,\Tr\bigl(x^wC(w)B\bigr),
+ \qquad C(w)=\frac{A-x^{-w}Ax^{w}}{w}.
+\]
+By Lemma~\ref{lem:conj}, \(C(w)\) has kernel \(w^{-1}(1-s^{-w})K_A\). This
+is an entire family in \(x^{-\ell}\Psi_b^{-\infty}\) with \(C(0)=D(A)\).
+By Lemma~\ref{lem:residue}, \(\Tr(x^wC(w)B)\) has at most a simple pole at
+\(0\), with residue \(\sum_H\Tr_{\partial,H}(D(A)B)\). Hence
+\(\Tr(x^w[A,B])\) is regular at \(0\), and its value there is that residue.
+The explicit form follows from \eqref{eq:skew}: the constant term of
+\((x^ki\partial_\lambda a_k)(x^{-k}b_{-k})\) is
+\(\alpha^{-k}(i\partial_\lambda a_k)b_{-k}\).
+\end{proof}
+
+\begin{theorem}\label{thm:Laurentres}
+Let \(\mathcal M=x^{-\Z}\Psi_b^{-\infty}(X)\). In the long exact sequence of
+\(0\to\Ib\to\mathcal M\to\Idb\to0\), the composite
+\(\Tr\circ\partial:\HH_1(\Idb)\to\C\) equals \(-\sum_H\varphi_H\).
+Consequently \(\HH_0(\mathcal M)\cong\C^N\), spanned by the residues
+\(\operatorname{Res}_{w=0}\Tr(x^w\,\cdot\,)\) at the components, and
+\(\HH_1(\mathcal M)\cong\C^{N-1}\), while \(\HH_k(\mathcal M)=0\) for
+\(k\geq2\).
+\end{theorem}
+
+\begin{proof}
+The ideal \(\Ib\) is H-unital (Lemma~\ref{lem:Hunital}), and
+\(\Ib\) is a closed ideal of the filtered nuclear algebra
+\(x^{-\Z}\Psi_b^{-\infty}\), whose quotient is identified with \(\Idb\) by
+Proposition~\ref{prop:structure}. So Theorem~\ref{thm:excision} applies. Let \(c=\sum a_i\otimes b_i\) be a
+\(1\)-cycle, with lifts \(\tilde a_i,\tilde b_i\). Then
+\(\partial[c]=[\sum[\tilde a_i,\tilde b_i]]\). Since \({}^b\Tr=\Tr\) on
+\(\Ib\), Theorem~\ref{thm:defect} gives \(\Tr\partial[c]=\sum_{H,i}
+\Tr_{\partial,H}(D(a_i)b_i)=-\sum_{H,i}\varphi_H(a_i,b_i)\), using the
+cyclicity in Proposition~\ref{prop:generators}. This map
+\(\C^N\to\C\) is surjective. Now insert this into the long exact sequence,
+together with Proposition~\ref{prop:I} and Theorem~\ref{thm:Id}.
+\end{proof}
+
+\begin{remark}[Dependence on choices]\label{rem:choices}
+The algebras and extensions depend only on \(X\), because
+\(x^{-\Z}\Psi_b^{\Z}\) and the ideals are unchanged under \(x\mapsto ax\)
+with \(0<a\in C^\infty(X)\). The Taylor maps \(T_H\) depend on \(x\) and on
+the collar. The residue \(\Tr_{\partial,H}=\operatorname{Res}_{w=0}
+\Tr(x^w\,\cdot\,)\) does not: since \(a^w=1+w\log a+O(w^2)\), the extra
+term \(w\Tr(x^w\log a\,A)\) is regular at \(0\). The b-trace changes by
+\(\Tr_\partial(\log a\,\cdot\,)\). The derivation changes to
+\(D'=D+[\log a,\cdot]\), so
+\[
+ \varphi'_H(A,B)=\varphi_H(A,B)+\Tr_{\partial,H}(A[\log a,B])
+ =\varphi_H(A,B)-(b\psi)(A,B),\qquad\psi(A)=\Tr_{\partial,H}(A\log a),
+\]
+using the trace property. Hence the class of \(\varphi_H\) is
+independent of the choices.
+\end{remark}
+
+\begin{remark}
+Theorem~\ref{thm:Laurentres} is a homological form of the statement that
+the b-trace is not a trace. The trace on \(\Ib\) admits no extension to a
+trace on \(\mathcal M\), and the obstruction is exactly
+\(\sum_H\varphi_H\). The traces of \(\mathcal M\) are the \(N\) boundary
+residues.
+\end{remark}
+
+\part{Assembly and the index functional}\label{part:assembly}
+
+\section{The interior ideal and the boundary symbol algebra}\label{sec:Is}
+
+The algebras \(\Isb\) and \(\Adsb\) are computed by the same order spectral
+sequence as \(\Asb\) in Part~\ref{part:symbols}; only the coefficient
+functions change. We state the convergence input once.
+
+\begin{quote}
+\textbf{Hypothesis (C).} For \(\mathfrak S\in\{\Asb,\Isb,\Adsb\}\), with the
+topologically filtered chains \eqref{eq:BN-chains}, the continuous HKR map
+identifies the \(E^1\)-page of the order spectral sequence with the
+homogeneous forms whose coefficients have the corresponding boundary
+behaviour, and the spectral sequence converges to
+\(\HH_*^{\mathrm{cont}}(\mathfrak S)\).
+\end{quote}
+
+For \(\Asb\) this is the Benameur--Nistor theorem quoted as
+Theorem~\ref{thm:BN-conv}. For \(\Isb\) the coefficients vanish to infinite
+order at the boundary, and for \(\Adsb\) they are formal Laurent series at
+the boundary. We have not checked that these two cases are covered by
+\cite{BNsymbols,BNfamilies}, so for them (C) is a hypothesis.
+
+\subsection{Two de Rham lemmas}
+
+\begin{lemma}[Flat forms]\label{lem:flat}
+Let \(V\) be a compact manifold with boundary, and let
+\(\dot\Omega^*(V)\) be the complex of forms vanishing to infinite order at
+\(\partial V\). Then \(H^*(\dot\Omega^*(V))\cong H^*(V,\partial V)\).
+\end{lemma}
+
+\begin{proof}
+Let \(J^*\) be the complex of formal Taylor series at \(\partial V\) of
+forms on \(V\). In a collar these are
+\(\sum_{k\geq0}x^k(a_k+dx\wedge c_k)\) with \(a_k,c_k\) forms on
+\(\partial V\). By Borel's lemma,
+\[
+ 0\to\dot\Omega^*(V)\to\Omega^*(V)\to J^*\to0
+\]
+is exact. On \(J^*\) put \(K(\sum x^k(a_k+dx\wedge c_k))=\sum
+x^{k+1}c_k/(k+1)\), which is the formal integral from \(0\). The
+fundamental theorem of calculus gives \(dK+Kd=1-\pi^*\rho\), where \(\rho\)
+restricts to \(x=0\) and \(\pi\) is the collar projection. Hence
+\(\rho:J^*\to\Omega^*(\partial V)\) is a quasi-isomorphism. The relative
+complex \(\Omega^*(V,\partial V)=\Omega^*(V)\oplus\Omega^{*-1}(\partial V)\),
+with \(D(\alpha,\beta)=(d\alpha,\alpha|_{\partial V}-d\beta)\), receives the
+chain map \(\alpha\mapsto(\alpha,0)\) from \(\dot\Omega^*(V)\). This map is
+compatible with the long exact sequences of the displayed short exact
+sequence and of the pair \((V,\partial V)\). The five lemma gives the
+claim.
+\end{proof}
+
+\begin{lemma}[Formal Laurent forms]\label{lem:formal}
+Let \(W\) be a manifold, and let \(\Omega^*(W)((x))\) be formal Laurent
+series in \(x\) with coefficients in forms on \(W\), together with the
+generator \(dx/x\). The complex
+\(\Omega^*(W)((x))\oplus\frac{dx}{x}\wedge\Omega^{*-1}(W)((x))\) has
+cohomology \(H^*(W)\oplus\frac{dx}{x}H^{*-1}(W)\cong H^*(W\times
+S_\partial)\).
+\end{lemma}
+
+\begin{proof}
+Let \(\mathcal E_x=x\partial_x\). It preserves the \(x\)-degree \(k\), and
+on degree \(k\) we have \(d\iota_{\mathcal E_x}+\iota_{\mathcal E_x}d=
+\mathcal L_{\mathcal E_x}=k\). For \(k\neq0\) the map
+\(k^{-1}\iota_{\mathcal E_x}\) is a contracting homotopy. These homotopies
+can be summed over \(k\), because they do not lower the \(x\)-degree. In
+degree \(0\) the complex is
+\(\Omega^*(W)\oplus\frac{dx}{x}\wedge\Omega^{*-1}(W)\) with
+\(d(\alpha_0+\frac{dx}{x}\wedge\alpha_1)=d\alpha_0-\frac{dx}{x}\wedge
+d\alpha_1\).
+\end{proof}
+
+\subsection{\texorpdfstring{The \(E^2\)-pages}{The E2-pages}}
+
+\begin{proposition}[Interior ideal]\label{prop:Is}
+\(E^2_{p,q}(\Isb)=H^{2n-p-q}(Y\times S_\sigma,Z\times S_\sigma)\) for
+\(q=n\), and \(E^2_{p,q}(\Isb)=0\) otherwise. Under (C),
+\(\HH_k(\Isb)\cong H^{2n-k}(Y\times S_\sigma,Z\times S_\sigma)\). The ideal
+\(\Isb\) is the same algebra for the b- and cusp calculi.
+\end{proposition}
+
+\begin{proof}
+The arguments of Sections~\ref{sec:graded}--\ref{sec:homogeneity} apply
+verbatim to symbols that vanish to infinite order at \(x=0\), because
+\(\pi_b\), \(*_b\) and the Euler field preserve flatness. The weight-zero
+complex is \(\dot\Omega^*(Y\times S_\sigma)\), and Lemma~\ref{lem:flat}
+computes its cohomology. The rows \(q\neq n\) vanish as in
+Proposition~\ref{prop:E2}, so the spectral sequence degenerates. Kernels
+conormal to the diagonal that vanish to infinite order at \(\partial(X^2)\)
+do not depend on the blow-up, so \(x^\infty\Psi_b^{\Z}=x^\infty\Psi_c^{\Z}\).
+\end{proof}
+
+\begin{proposition}[Boundary symbol algebra]\label{prop:Ads}
+\(E^2_{p,q}(\Adsb)=H^{2n-p-q}(Z\times S_\sigma\times S_\partial)\) for
+\(q=n\), and \(E^2_{p,q}(\Adsb)=0\) otherwise. Under (C),
+\(\HH_k(\Adsb)\cong H^{2n-k}(Z\times S_\sigma\times S_\partial)\).
+\end{proposition}
+
+\begin{proof}
+Elements of \(\Adsb\) are formal Laurent series in \(x\) of complete b-symbols
+at \(\partial X\). On the \(E^1\)-page the coefficients are formal Laurent
+series in \(x\) with values in homogeneous forms on
+\({}^bT^*_{\partial X}X\setminus0\). The b-Poisson tensor
+\(\pi_b=x\partial_x\wedge\partial_\xi+\sum\partial_{y_j}\wedge\partial_{\eta_j}\)
+and the duality \(*_b\) preserve the \(x\)-degree, so \(d^1\) and the
+symplectic duality of Section~\ref{sec:poisson} apply degree by degree.
+The fibre Euler field kills the nonzero fibre weights
+(Section~\ref{sec:homogeneity}); the weight-zero part produces
+\(S_\sigma\). Lemma~\ref{lem:formal}, with \(W=Z\times S_\sigma\), kills
+the nonzero \(x\)-degrees and produces \(S_\partial\). The row argument of
+Proposition~\ref{prop:E2} gives degeneration.
+\end{proof}
+
+\begin{remark}[\(n=1\)]\label{rem:n1}
+Let \(n=1\). Then \(Y\) is two copies of \(X\) (\(\xi=\pm1\)), and each
+\(Z_H\) is two points with the orientation of \(\partial Y\).
+Parts (iv)--(vi) of Theorem~\ref{thm:full} hold as stated. In (vii) and
+(viii), \(H^{2n-2}(Z)=H^0(Z)\cong\C^{2N}\), and the summand \(H^{2n-2}(Z)\)
+must be replaced by the kernel of
+\(\beta\mapsto(\int_{Z_H}\beta)_H\in\C^N\), where \(\int_{Z_H}\) is the signed
+sum over the two points. Concretely:
+\begin{itemize}
+\item \(\HH_1(\Ab)\cong\C\oplus H^1(Y\times S_\sigma)\oplus
+\ker\bigl(H^0(Z)\to\C^N\bigr)\);
+\item \(\HH_2(\Ab)\cong\ker\bigl(H^0(Y)\to\C^N\bigr)\), where the map is
+\(\beta\mapsto(\int_{Z_H}\beta)_H\);
+\item for \(k=1,2\), \(\HH_k(\Adb)\) is the kernel of the surjection
+\(\HH_k(\Adsb)\to\C^N\) given by the same signed sums.
+\end{itemize}
+For \(n=1\) the surjectivity of the connecting maps of \(\Adb\) and of
+\(\partial^{\mathcal A}_1\) is proved by explicit test cycles
+(Propositions~\ref{prop:n1} and~\ref{prop:connA}(d)), so (S2) is not
+needed. For \(X=[0,1]\), \(H^0(Y)=\C^2\) and the map to \(\C^2\) is
+\((c_+,c_-)\mapsto(-c_+-c_-,c_++c_-)\), of rank \(1=N-c\). So
+\(\HH_2(\Ab)\cong\C\neq0\). Here the rank is computed directly from the
+formula, and the formula itself is the \(n=1\) case of the dictionary.
+\end{remark}
+
+\section{\texorpdfstring{The indicial algebra \(\Adb\)}{The indicial algebra}}\label{sec:Ad}
+
+\subsection{The regularized suspended trace}
+Let \(a\in B'_H\) have order \(m\) and put \(d=\dim H=n-1\). For \(p>m+d\)
+the operator \(\partial_\lambda^pa(\lambda)\) has order \(m-p<-d\), so it is
+trace class. On \(\mathbb R\) the function
+\(f_p(\lambda)=\Tr_H\,\partial_\lambda^pa(\lambda)\) has a classical
+expansion \(f_p\sim\sum_jc_j^\pm|\lambda|^{m-p+d-j}\) as
+\(\lambda\to\pm\infty\). To see this, apply the trace formula
+\(\Tr P=(2\pi)^{-d}\iint\sigma_P\,dy\,d\eta\) to the suspended symbol and
+substitute \(\eta=|\lambda|\eta'\) in each homogeneous term. Let \(g_p\) be the
+\(p\)-fold iterated integral of \(f_p\) from \(0\). Then
+\(\int_{-T}^Tg_p\,d\lambda\) has an asymptotic expansion in powers \(T^j\)
+and terms \(T^j\log T\) as \(T\to\infty\). Define \(\overline\Tr(a)\) as
+\(1/2\pi\) times its constant term.
+
+\begin{lemma}\label{lem:bartr}
+\begin{enumerate}
+\item[(1)] \(\overline\Tr(a)\) does not depend on \(p\). If \(a\) has order
+\(<-n\), then \(\overline\Tr(a)=\frac1{2\pi}\int\Tr_Ha\,d\lambda\).
+\item[(2)] \(\overline\Tr([a,b])=0\) for \(a,b\in B'_H\).
+\item[(3)] If \(a\in B_H\), then \(\overline\Tr(\partial_\lambda^pa)=0\) for
+\(p\geq1\).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) Since \(g_{p+1}^{(p+1)}=f_{p+1}=f_p'=g_p^{(p+1)}\), the difference
+\(g_{p+1}-g_p\) is a polynomial. The constant term of
+\(\int_{-T}^T\lambda^j\,d\lambda\) is zero for every \(j\). For order
+\(<-n\), \(g_p\) differs from \(\Tr_Ha\) by its Taylor polynomial at \(0\),
+and \(\Tr_Ha\) is integrable.
+(2) Here \(f_p([a,b])=\sum_j\binom pj\Tr_H[\partial^ja,\partial^{p-j}b]\).
+Each term vanishes, because \(\Tr(PQ)=\Tr(QP)\) for pseudodifferential
+operators on a closed manifold whose orders add up to less than \(-d\).
+(3) follows from (1), since \(\int\partial_\lambda(\Tr\,\partial^{p-1}a)
+\,d\lambda=0\).
+\end{proof}
+
+\begin{lemma}[Shift defect]\label{lem:shift}
+Let \(a\in B'_H\) have order \(m\), let \(c\in\C\), and let \(P>m+n\). Then
+\(a_c(\lambda)=a(\lambda+c)\) lies in \(B'_H\), and
+\[
+ \overline\Tr(a_c)-\overline\Tr(a)
+ =\sum_{p=1}^{P-1}\frac{c^p}{p!}\,\overline\Tr(\partial_\lambda^pa).
+\]
+\end{lemma}
+
+\begin{proof}
+By Taylor's formula,
+\(a_c=\sum_{p<P}\frac{c^p}{p!}\partial^pa+R\), where
+\(R(\lambda)=\frac{c^P}{(P-1)!}\int_0^1(1-t)^{P-1}(\partial^Pa)
+(\lambda+tc)\,dt\). The family \(\partial^Pa\) has order \(<-n\), uniformly
+on strips, so by Lemma~\ref{lem:bartr}(1) we have
+\(\overline\Tr(R)=\frac1{2\pi}\int\Tr R\,d\lambda\). A contour shift on the
+strip turns \(\int\Tr(\partial^Pa)(\lambda+tc)\,d\lambda\) into
+\(\int\partial_\lambda\Tr(\partial^{P-1}a)\,d\lambda\). This vanishes,
+because \(\partial^{P-1}a\) has order \(<-d\) and its trace tends to \(0\)
+at \(\pm\infty\).
+\end{proof}
+
+For \(A\in\Adb\) with \(T_H(A)=\sum x^ka_k\), put
+\(\widehat\Tr_{\partial,H}(A)=\overline\Tr(a_0)\). By
+Lemma~\ref{lem:bartr}(1), this extends \(\Tr_{\partial,H}\) from \(\Idb\).
+
+\begin{proposition}[The connecting cocycle]\label{prop:omega}
+For \(A,B\in\Adb\) with \(T_H(A)=\sum x^ka_k\) and \(T_H(B)=\sum x^kb_k\),
+\begin{equation}\label{eq:omega}
+ \omega_H(A,B):=\widehat\Tr_{\partial,H}([A,B])
+ =\sum_{k\neq0}\sum_{p\geq1}\frac{(ki)^p}{p!}\,
+ \overline\Tr\bigl(\partial_\lambda^p(a_k\,\alpha^k(b_{-k}))\bigr),
+\end{equation}
+a finite sum. It vanishes if \(A\) or \(B\) lies in \(\Idb\), so it is a
+Hochschild \(1\)-cocycle on \(\Adsb\). In the long exact sequence of
+\(0\to\Idb\to\Adb\to\Adsb\to0\) we have
+\(\Tr_{\partial,H}\circ\partial=\langle\omega_H,\cdot\rangle\) on
+\(\HH_1(\Adsb)\). The cocycle
+\[
+ \Omega_H(A,B,C)=-\omega_H(A\,D(B),C)
+\]
+on \(\Adsb\) satisfies \(\varphi_H\circ\partial=\langle\Omega_H,\cdot\rangle\)
+on \(\HH_2(\Adsb)\).
+\end{proposition}
+
+\begin{proof}
+By \eqref{eq:skew}, the constant term of \([A,B]\) is
+\(\sum_k(\alpha^{-k}(a_k)b_{-k}-\alpha^k(b_{-k})a_k)\). Put
+\(F_k=a_k\alpha^k(b_{-k})\). Then \(\alpha^{-k}(F_k)=\alpha^{-k}(a_k)b_{-k}\),
+and \(\overline\Tr(\alpha^k(b_{-k})a_k)=\overline\Tr(F_k)\) by
+Lemma~\ref{lem:bartr}(2). Since \(\alpha^{-k}F(\lambda)=F(\lambda+ki)\),
+Lemma~\ref{lem:shift} gives \eqref{eq:omega}. If \(a_k\in B_H\) or
+\(b_{-k}\in B_H\), then \(F_k\in B_H\), and each term vanishes by
+Lemma~\ref{lem:bartr}(3). The ideal \(\Idb\) is H-unital, so
+Lemma~\ref{lem:conn} applies with \(\tau=\Tr_{\partial,H}\) and
+\(\hat\tau=\widehat\Tr_{\partial,H}\).
+
+For \(\varphi_H\), take \(\hat\varphi(A,B)=\widehat\Tr_{\partial,H}(AD(B))\).
+It extends \(\varphi_H\), because \(D\) preserves \(\Idb\). A direct
+expansion gives \(b\hat\varphi(A,B,C)=-\widehat\Tr([AD(B),C])\), which
+vanishes when an argument lies in \(\Idb\). Lemma~\ref{lem:conn} then
+gives the last assertion.
+\end{proof}
+
+\begin{proposition}[Nonvanishing for \(n=1\)]\label{prop:n1}
+Let \(n=1\), so that each \(H\) is a point and \(B'_H\) is the algebra of
+entire functions with classical symbol expansions on strips. Let
+\(\pi_+(\lambda)=\frac12(1+\operatorname{erf}\lambda)\in B'_H\), and work
+in the summand of \(H\). Then
+\[
+ c_H=x^{-1}\pi_+\otimes x,\qquad
+ c'_H=x^{-1}\pi_+\otimes h\otimes x-x^{-1}\pi_+\otimes x\otimes h
+\]
+are cycles in \(\Adsb\), and
+\(\langle\omega_{H'},c_H\rangle=-\frac{i}{2\pi}\delta_{HH'}\) and
+\(\langle\Omega_{H'},c'_H\rangle=-\frac1{2\pi}\delta_{HH'}\). Hence both
+connecting maps \(\HH_1(\Adsb)\to\HH_0(\Idb)\) and
+\(\HH_2(\Adsb)\to\HH_1(\Idb)\) are surjective.
+\end{proposition}
+
+\begin{proof}
+By \eqref{eq:skew}, \((x^{-1}\pi_+)x=\alpha(\pi_+)\) and
+\(x(x^{-1}\pi_+)=\pi_+\). Hence \(bc_H=\pi_+(\lambda-i)-\pi_+(\lambda)\).
+This lies in \(\cE\), since \(\operatorname{erf}\) tends to \(\pm1\) on
+strips with Gaussian error, so \(c_H\) is a cycle in \(\Adsb\). In
+\eqref{eq:omega} only \(k=-1\) occurs, with \(F_{-1}=\pi_+\). Here
+\(\overline\Tr(\pi_+')=\frac1{2\pi}\), while
+\(\overline\Tr(\pi_+^{(p)})=0\) for \(p\geq2\). Therefore
+\(\omega_H(c_H)=-i/2\pi\).
+
+For \(c'_H\), use \(hx=x(h-i)\) and \(hx^{-1}=x^{-1}(h+i)\), which follow
+from \eqref{eq:skew}. A direct computation gives
+\(bc'_H=(\pi_+-\alpha(\pi_+))\otimes h\), which is zero in \(\Adsb\). Since
+\(D(h)=i\) and \(D(x)=0\),
+\(\Omega_H(c'_H)=-\omega_H(i\,x^{-1}\pi_+,x)=-\frac1{2\pi}\).
+\end{proof}
+
+\begin{proposition}[HKR dictionary; sketch (S2)]\label{prop:dict}
+Let \(n\geq2\). Under the isomorphism of Proposition~\ref{prop:Ads} and
+Poincar\'e duality on \(Z\times S_\sigma\times S_\partial\), the class
+\([\omega_H]\in\HH^1(\Adsb)\) corresponds to \(d\theta_\sigma\cdot1_{Z_H}\),
+and \([\Omega_H]\) corresponds to \(\pm d\theta_\partial\wedge d\theta_\sigma
+\cdot1_{Z_H}\). In particular both connecting maps of \(\Adb\) are
+surjective onto \(\C^N\).
+\end{proposition}
+
+\begin{proof}[Sketch]
+The derivation \(D=[\log x,\cdot]\) acts on symbols through the
+Hamiltonian vector field of \(\log x\), which is a multiple of
+\(\partial_\xi\). Under \(*_b\), contraction with this field becomes
+exterior multiplication by \(d\log x\), that is, by \(d\theta_\partial\).
+This explains the relation between \(\Omega_H\) and \(\omega_H\). The
+identification of \([\omega_H]\) with \(d\theta_\sigma\) would follow if
+\(\omega_H\) were cohomologous to the contraction of the boundary residue
+trace with the derivation \([\log Q,\cdot]\), for a positive elliptic
+\(Q\). Such a \(\log Q\) changes symbol order and corresponds to
+\(d\theta_\sigma\). The natural way to prove this is to regularize
+\(\Tr_{\partial,H}\) by \(Q_0^{-\tau}\) instead of by the iterated
+antiderivative. The complex powers \(q_0(\lambda)^{-\tau}\) of a suspended
+family are holomorphic in \(\lambda\) only on a strip, whereas \eqref{eq:omega}
+involves the shifts \(\lambda\mapsto\lambda+ki\) for all \(k\). We have not
+overcome this. For \(n=1\), Proposition~\ref{prop:n1} replaces the sketch.
+\end{proof}
+
+\begin{theorem}\label{thm:Ad}
+Assume (C), and assume (S2) if \(n\geq2\). Then
+\(\HH_k(\Adb)\cong\HH_k(\Adsb)\) for \(k\neq1,2\), and for \(k=1,2\) the
+group \(\HH_k(\Adb)\) is the kernel of the surjection of
+Proposition~\ref{prop:n1}, resp.~\ref{prop:dict}.
+\end{theorem}
+
+\begin{proof}
+Use the long exact sequence of Theorem~\ref{thm:excision} together with
+Theorem~\ref{thm:Id}. Surjectivity of
+\(\HH_2(\Adsb)\to\HH_1(\Idb)\) makes \(\HH_1(\Idb)\to\HH_1(\Adb)\) zero.
+Surjectivity of \(\HH_1(\Adsb)\to\HH_0(\Idb)\) makes
+\(\HH_0(\Idb)\to\HH_0(\Adb)\) zero. For \(k\geq3\) the groups of \(\Idb\)
+vanish.
+\end{proof}
+
+\section{\texorpdfstring{The algebra \(\Ab\) and the full operator algebra}{The algebra Ab and the full operator algebra}}\label{sec:A}
+
+\begin{lemma}\label{lem:fibre}
+\(\Isb\cap\Idb=0\) in \(\Ab\), and \(\Ab\to\Adb\times_{\Adsb}\Asb\) is an
+isomorphism.
+\end{lemma}
+
+\begin{proof}
+\(x^\infty\Psi_b^{\Z}\cap x^{-\Z}\Psi_b^{-\infty}=x^\infty\Psi_b^{-\infty}\).
+For any ring and ideals \(I,J\), the ring \(R/(I\cap J)\) is the fibre product
+\(R/I\times_{R/(I+J)}R/J\).
+\end{proof}
+
+\begin{proposition}\label{prop:connA}
+Let \(\partial^{\mathcal A}_k:\HH_k(\Asb)\to\HH_{k-1}(\Idb)\) be the connecting
+maps of \(0\to\Idb\to\Ab\to\Asb\to0\), and let \(p:\Asb\to\Adsb\) be the
+quotient map.
+\begin{enumerate}
+\item[(a)] \(\partial^{\mathcal A}_k=\partial^{\partial}_k\circ p_*\), where
+\(\partial^\partial\) denotes the connecting maps of \(\Adb\).
+\item[(b)] The composite \(\HH_1(\Idb)\to\HH_1(\Ab)\to\HH_0(\Ib)\), where
+the second map is the connecting map of
+\(0\to\Ib\to x^{-\Z}\Psi_b^{\Z}\to\Ab\to0\), equals
+\(-\sum_H\varphi_H\).
+\item[(c)] The image of \(\partial^{\mathcal A}_2\) is contained in
+\(\ker\sum_H\varphi_H\), so its rank is at most \(N-1\).
+\item[(d)] If \(n=1\), then \(\partial^{\mathcal A}_1\) is surjective.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(a) and (b) express the naturality of the excision sequence for the
+morphisms of extensions \((\Idb\subset\Ab)\to(\Idb\subset\Adb)\) and
+\((\Ib\subset x^{-\Z}\Psi_b^{-\infty})\to(\Ib\subset x^{-\Z}\Psi_b^{\Z})\).
+Part (b) then follows from Theorem~\ref{thm:Laurentres}.
+
+(c) The composite \(\HH_2(\Asb)\to\HH_1(\Idb)\to\HH_1(\Ab)\) is zero by
+exactness, and the second map followed by the connecting map of (b) is
+\(-\sum\varphi_H\).
+
+(d) Choose \(P_H\in\Psi_b^0(X)\), supported near \(H\), with full symbol
+\(\chi_H(x)1_{\xi>0}\) and with no lower-order terms. Then \(x^{-1}P_Hx-P_H\)
+is smoothing, because the full symbol of \(x^{-1}Px\) is
+\(\sum_k\frac{(-i)^k}{k!}\partial_\xi^kp\), by Lemma~\ref{lem:conj} applied
+to symbols, and \(\partial_\xi p=0\) for \(\xi\neq0\). Hence
+\(x^{-1}P_H\otimes x\) is a cycle in \(\Asb\). Its image under \(p\)
+differs from \(c_H\) of Proposition~\ref{prop:n1} only by elements of
+\(\Idb\). Indeed, the b-covariable \(\xi\) is the symbol of \(xD_x\), whose
+indicial family is \(\lambda\), so \(I_H(P_H)-\pi_+\in\cE\). Thus
+\(\Tr_{\partial,H'}\partial^{\mathcal A}_1[x^{-1}P_H\otimes x]=
+-\frac{i}{2\pi}\delta_{HH'}\).
+\end{proof}
+
+\begin{remark}[Several boundary components]\label{rem:MNcomponents}
+Assume (S2). By Proposition~\ref{prop:dict} and the identity part of
+\(p_*\), the map \(\partial^{\mathcal A}_2\) is
+\(\beta\mapsto(\int_{Z_H}\beta)_H\) on the summand \(H^{2n-2}(Y)\) of
+\(\HH_2(\Asb)\), and it vanishes on the other summands. By Stokes' theorem,
+\(\sum_H\int_{Z_H}\beta=\int_Yd\beta=0\), which recovers the bound of
+Proposition~\ref{prop:connA}(c). Exactness of
+\(H^{2n-2}(Y)\to H^{2n-2}(\partial Y)\to H^{2n-1}(Y,\partial Y)\), together
+with Lefschetz duality \(H^{2n-1}(Y,\partial Y)\cong H_0(Y)\) (C3), shows
+that the image is the kernel of the sum map
+\(H^{2n-2}(\partial Y)\to H_0(Y)\). If \(X\) is connected and \(n\geq2\),
+then \(Y\) is connected, \(H^{2n-2}(\partial Y)=\C^N\), and the rank is
+\(N-1\). If \(X\) has \(c\) components, each with nonempty boundary, the rank is
+\(N-c\), and \(\operatorname{coker}\partial^{\mathcal A}_2\cong\C^c\). In the cusp case
+Melrose and Nistor find \(\partial[i_{\log x}\Tr_\partial]=0\)
+\cite[Prop.~12]{MN}, because \(d\theta_\sigma\) extends over the whole
+cosphere bundle. For each \(H\) separately, the class
+\(d\theta_\sigma\cdot1_{Z_H}\) does not extend when \(N\geq2\); only the
+sum over all \(H\) does. We mention this only for comparison.
+\end{remark}
+
+\begin{proof}[Proof of Theorem~\textup{\ref{thm:full}}]
+(i) is Proposition~\ref{prop:I}, (ii) is Theorem~\ref{thm:Id}, and (iii) is
+Theorem~\ref{thm:Laurentres}. (iv) and (vi) are
+Propositions~\ref{prop:Is} and~\ref{prop:Ads}, and (v) is
+Theorem~\ref{thm:main}. (vii) is Theorem~\ref{thm:Ad}, with the components
+identified by Proposition~\ref{prop:dict}. For (viii), insert
+\(\partial^{\mathcal A}_1=\partial^\partial_1\circ p_*\) and
+\(\partial^{\mathcal A}_2\) into the long exact sequence. By (S2) and the
+identity part of \(p_*\), \(\partial^{\mathcal A}_1\) is
+\(\beta\mapsto(\int_{Z_H}\beta)_H\) on the summand
+\(H^{2n-2}(Z)\cong\C^N\) of \(\HH_1(\Asb)\) and vanishes on the other
+summands. The rank of \(\partial^{\mathcal A}_2\) is \(N-1\)
+(Remark~\ref{rem:MNcomponents}). Use also \(\HH_*(\Idb)\). This gives \(\HH_0(\Ab)\cong\HH_0(\Asb)\),
+\(\HH_1(\Ab)\cong\operatorname{coker}\partial^{\mathcal A}_2\oplus
+\ker\partial^{\mathcal A}_1\), and \(\HH_2(\Ab)\cong\ker\partial^{\mathcal
+A}_2\). (ix) follows from Corollary~\ref{cor:IF} and the long exact
+sequence of \(0\to\Ib\to x^{-\Z}\Psi_b^{\Z}\to\Ab\to0\), using (i).
+\end{proof}
+
+\section{The index functional}\label{sec:index}
+
+\begin{lemma}[Inverses of indicial families]\label{lem:autoinv}
+Let \(a\in B'_H\) have order \(m\) and be elliptic. If \(a(\lambda)\) is
+invertible for every \(\lambda\in\C\), then \(a^{-1}\in B'_H\). If
+\(a=1+k\) with \(k\in B_H\) and \(a(\lambda)\) is invertible for every
+\(\lambda\in\C\), then \(a^{-1}-1\in B_H\).
+\end{lemma}
+
+\begin{proof}
+Fix a strip \(S=\{|\operatorname{Im}\lambda|\leq C\}\). The suspended
+calculus (C3) gives \(q\in\Psi^{-m}_{\mathrm{sus}}\) on \(S\) with
+\(aq=1-r\), where \(r\) is smoothing and decreases rapidly, in all
+Sobolev norms, as \(|\operatorname{Re}\lambda|\to\infty\). The family
+\(q\) need not be holomorphic. For \(|\operatorname{Re}\lambda|\geq R\)
+the Neumann series gives \(a^{-1}=q(1-r)^{-1}=q+q\,r(1-r)^{-1}\). For
+\(|\operatorname{Re}\lambda|\leq R\), the identity \(a^{-1}=q+a^{-1}r\)
+holds with \(a^{-1}\) holomorphic, hence bounded on that compact set. So
+\(a^{-1}-q\) is smoothing with the decay of \(r\), and \(a^{-1}\) is entire
+because \(a\) is. Hence \(a^{-1}\in B'_H\). In the second case, \(a^{-1}\)
+is uniformly bounded on each \(H^s\) over \(S\): use the Neumann series
+where \(\|k\|<\tfrac12\), and compactness elsewhere. Then
+\(a^{-1}-1=-k+ka^{-1}k\) is smoothing and decreases rapidly on \(S\).
+\end{proof}
+
+\begin{lemma}\label{lem:invertible}
+Let \(A\in\Psi_b^m(X)\) be b-elliptic. If for every \(H\) and every
+\(\lambda\in\C\) the operator \(I_H(A,\lambda)\) is invertible, then
+\([A]\) is invertible in \(\Ab\).
+Conversely, if \([A]\) is invertible in \(\Ab\), then \(I_H(A,\lambda)\) is
+invertible for every \(\lambda\in\C\).
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:fibre} it suffices to invert \(A\) in \(\Asb\), where the
+usual symbolic parametrix construction works, and in \(\Adb\). Write
+\(T_H(A)=\sum_{k\geq0}x^ka_k\) with \(a_0=I_H(A)\). By \eqref{eq:skew}, the
+coefficient of \(x^k\) in \(T(A)\sum x^lb_l\) is
+\(\alpha^k(a_0)b_k+\sum_{j\geq1}\alpha^{k-j}(a_j)b_{k-j}\). Solve recursively,
+using \(\alpha^k(a_0)^{-1}=\alpha^k(a_0^{-1})\in B'_H\)
+(Lemma~\ref{lem:autoinv}). A left inverse is
+constructed in the same way, and the two inverses agree. Conversely, let
+the inverse be \(\sum_{l\geq-\ell}x^lb_l\). Its lowest coefficient
+satisfies \(b_{-\ell}a_0=0\). Since \(a_0(\lambda)\) is invertible for large
+\(|\operatorname{Re}\lambda|\), analytic continuation gives
+\(b_{-\ell}=0\) if \(\ell>0\). Hence \(b_0a_0=a_0b_0=1\) on all of \(\C\).
+\end{proof}
+
+\begin{remark}[Dirac operators]
+A b-Dirac operator of product type, \(c(dx/x)(x\partial_x+A_\partial)\), has
+\(I(\lambda)=c(dx/x)(i\lambda+A_\partial)\), which fails to be invertible at
+\(\lambda=i\mu\) for every \(\mu\in\operatorname{spec}A_\partial\). It is
+therefore never invertible in \(\Ab\). Its index on \(x^\delta L^2_b\) depends
+on \(\delta\), and the algebra \(\Ab\) cannot see this dependence. This is
+the precise form of the ``problems with completeness'' that led
+Melrose--Nistor to the cusp calculus \cite[p.~3]{MN}, where indicial
+families need only be invertible on \(\mathbb R\).
+\end{remark}
+
+\begin{proposition}[Fedosov]\label{prop:fedosov}
+Let \(A\in x^{-\ell}\Psi_b^m(X)\) and \(B\in x^{-\Z}\Psi_b^{\Z}(X)\) with
+\(AB-1,BA-1\in\Ib\). Then
+\(A:x^\delta H^s_b\to x^{\delta-\ell}H^{s-m}_b\) is Fredholm for all
+\(\delta,s\), with kernel and cokernel in \(\dot C^\infty(X)\) and index
+independent of \(\delta\) and \(s\). Moreover
+\[
+ \operatorname{Ind}(A)=\Tr(AB-BA)=-\Tr\bigl(\partial[B\otimes A]\bigr),
+\]
+where \(B\otimes A\) is a \(1\)-cycle of \(\Ab\).
+\end{proposition}
+
+\begin{proof}
+Operators in \(\Ib\) have kernels in \(\dot C^\infty(X^2)\), so they are
+trace class on every weighted Sobolev space and map into
+\(\dot C^\infty(X)\). Hence \(\ker A\subset\ker BA\subset\dot C^\infty\),
+and similarly for \(A^*\). The mapping properties of b-operators on
+weighted b-Sobolev spaces, and the Calder\'on--Fedosov formula, are inputs
+(C3). The latter gives
+\(\operatorname{Ind}A=\Tr(1-BA)-\Tr(1-AB)\). Finally,
+\(b(B\otimes A)=BA-AB\) lifts the boundary.
+\end{proof}
+
+\begin{theorem}[Residual perturbations of the identity]\label{thm:WH}
+Let \(K\in\Psi_b^{-\infty}(X)\), and suppose that for every \(H\) the family
+\(a_H(\lambda)=1+I_H(K,\lambda)\) is invertible for every \(\lambda\in\C\).
+Then \(A=1+K\) is Fredholm on every
+\(x^\delta H^s_b\), and
+\[
+ \operatorname{Ind}(A)
+ =\frac{i}{2\pi}\sum_H\int_{\mathbb R}\Tr_H\bigl(a_H^{-1}\partial_\lambda a_H
+ \bigr)\,d\lambda
+ =-\frac12\sum_H\eta_b(a_H)
+ =-\sum_H\operatorname{wind}\bigl(\det a_H\bigr),
+\]
+where \(\eta_b(a)=\frac1{\pi i}\int_{\mathbb R}\Tr(a^{-1}\partial_\lambda a)
+\,d\lambda\), and \(\operatorname{wind}\) is the winding number of the
+Fredholm determinant along \(\mathbb R\).
+\end{theorem}
+
+\begin{proof}
+The symbol of \(A\) is \(1\), and \(a_H^{-1}-1\in B_H\) by
+Lemma~\ref{lem:autoinv}. By Lemma~\ref{lem:invertible}, the inverse in
+\(\Adb\) is \(1+\sum_{k\geq0}x^kl_k\) with \(l_0=a_H^{-1}-1\) and all
+\(l_k\in B_H\). By Proposition~\ref{prop:structure}, there is
+\(L\in\Psi_b^{-\infty}\) with this Taylor series, and then
+\(B=1+L\) satisfies \(AB-1,BA-1\in\Ib\). By
+Proposition~\ref{prop:fedosov} and Theorem~\ref{thm:defect},
+\[
+ \operatorname{Ind}A=\Tr([K,L])={}^b\Tr([K,L])
+ =\sum_H\Tr_{\partial,H}(D(K)L).
+\]
+Since \(T(D(K))\) and \(T(L)\) contain only nonnegative powers of \(x\),
+the constant term of their product is
+\(i\partial_\lambda a_H\cdot(a_H^{-1}-1)\). The integral of
+\(\Tr\,\partial_\lambda a_H\) vanishes. Moreover
+\(\Tr(a^{-1}\partial a)=\partial_\lambda\log\det a\), and
+\(\det a_H\to1\) at \(\pm\infty\), so the integral equals
+\(2\pi i\,\operatorname{wind}\).
+\end{proof}
+
+\begin{example}[Index \(-1\)]\label{ex:WH}
+Let \(e_H\) be a rank-one projection on \(H\), and put
+\(a_H(\lambda)=1+(e^{2\pi i\pi_+(\lambda)}-1)e_H\), with \(\pi_+\) as in
+Proposition~\ref{prop:n1}. Then \(e^{\pm2\pi i\pi_+}-1\in\cE\),
+\(a_H^{-1}=1+(e^{-2\pi i\pi_+}-1)e_H\), and \(\det a_H=e^{2\pi i\pi_+}\) winds
+once. Taking \(a_{H'}=1\) for \(H'\neq H\), the operator \(1+K\) has index
+\(-1\). It is not a compact perturbation of the identity on \(L^2_b\),
+because its normal operator is translation invariant in \(u=\log x\). Near
+\(H\), in the variable \(u\), it is a Wiener--Hopf operator on a half-line
+with symbol \(a_H\). The theorem is the b-calculus form of the
+Gohberg--Krein index formula \cite{GohbergKrein}.
+\end{example}
+
+\begin{corollary}\label{cor:IF}
+The index functional \(\Tr\circ\partial:\HH_1(\Ab)\to\C\) is nonzero.
+\end{corollary}
+
+\begin{proof}
+For the operator of Example~\ref{ex:WH}, Proposition~\ref{prop:fedosov}
+gives \(\Tr\partial[B\otimes A]=-\operatorname{Ind}(A)=1\).
+\end{proof}
+
+\begin{proposition}[General index formula; sketch (S3)]\label{prop:indexgeneral}
+Let \(A\in\Psi_b^m(X)\) satisfy the hypotheses of
+Lemma~\ref{lem:invertible}, with inverse \(B\) modulo \(\Ib\). Choose a
+positive elliptic \(Q\in\Psi_b^1(X)\), dilation invariant near
+\(\partial X\). Suppose that \(\Tr(x^wCQ^{-\tau})\) is meromorphic near
+\((0,0)\) with at most simple poles in each variable, with \(Q^{-\tau}\) taken
+from the full b-calculus. Then
+\(\operatorname{Ind}A=\operatorname{FP}_{\tau=0}\operatorname{FP}_{w=0}
+\Tr(x^w[A,B]Q^{-\tau})\) splits into a residue term \(\operatorname{AS}(A)\)
+in the symbols of \(A\) and \(B\), and a boundary term. If \(A\) is
+dilation invariant near \(\partial X\), the boundary term is
+\[
+ \frac{i}{2\pi}\sum_H\overline{\int}\Tr_H\bigl(I_H(A)^{-1}\partial_\lambda
+ I_H(A)\bigr)\,d\lambda=-\frac12\sum_H\eta_b(I_H(A)),
+\]
+the regularized form of Theorem~\ref{thm:WH}.
+\end{proposition}
+
+\begin{proof}[Sketch]
+Write \(\Tr([A,B]x^wQ^{-\tau})\) as the sum of the trace defects of \(x^w\)
+and of \(Q^{-\tau}\), as in the proof of Theorem~\ref{thm:defect}. The
+\(x^w\)-defect gives \(\widehat\Tr_\partial(D(A)B)\), regularized by
+\(Q^{-\tau}\). For dilation-invariant \(A\) only the constant terms
+contribute, and the computation of Theorem~\ref{thm:WH} goes through with
+\(\overline{\Tr}\) in place of \(\Tr\). The \(Q^{-\tau}\)-defect is a residue
+term. The analytic input, meromorphy of the double zeta function with
+complex powers from the full calculus, is not proved here.
+\end{proof}
+
+\begin{remark}
+Moroianu and Nistor relate index and homology for manifolds with boundary
+\cite{MoroianuNistor}. Liu and Ma refine eta invariants through
+differential \(K\)-theory \cite{LMlocalization}. Mazzeo and Melrose treat
+the fibred-boundary analogue of the calculus \cite{MazzeoMelrose}.
+\end{remark}
 
 \phantomsection
 \addcontentsline{toc}{section}{References}
@@ -1489,6 +3283,47 @@ M.-T. Benameur and V. Nistor,
 \emph{Homology of complete symbols and noncommutative geometry},
 in \emph{Quantization of Singular Symplectic Quotients},
 Progr. Math. 198, Birkh\"auser, 2001, 21--46.
+
+\bibitem{FeiginTsygan}
+B. L. Feigin and B. L. Tsygan,
+\emph{Additive K-theory},
+in \emph{K-theory, Arithmetic and Geometry (Moscow, 1984--1986)},
+Lecture Notes in Math. 1289, Springer, 1987, 67--209.
+
+\bibitem{GetzlerJones}
+E. Getzler and J. D. S. Jones,
+\emph{The cyclic homology of crossed product algebras},
+J. Reine Angew. Math. \textbf{445} (1993), 161--174.
+
+\bibitem{GohbergKrein}
+I. C. Gohberg and M. G. Krein,
+\emph{Systems of integral equations on a half line with kernels depending
+on the difference of arguments},
+Amer. Math. Soc. Transl. (2) \textbf{14} (1960), 217--287.
+
+\bibitem{Loday}
+J.-L. Loday,
+\emph{Cyclic Homology},
+Grundlehren Math. Wiss. 301, Springer, 1992.
+
+\bibitem{MelroseEta}
+R. B. Melrose,
+\emph{The eta invariant and families of pseudodifferential operators},
+Math. Res. Lett. \textbf{2} (1995), 541--561.
+
+\bibitem{NistorCrossed}
+V. Nistor,
+\emph{Group cohomology and the cyclic cohomology of crossed products},
+Invent. Math. \textbf{99} (1990), 411--424.
+
+\bibitem{Notes}
+\emph{Notes on the b-Calculus and the APS Index Theorem}, based on lectures
+by P. Loya, notes taken by C. Zhou (companion notes).
+
+\bibitem{Seeley}
+R. T. Seeley,
+\emph{Extension of \(C^\infty\) functions defined in a half space},
+Proc. Amer. Math. Soc. \textbf{15} (1964), 625--626.
 
 \bibitem{BG}
 J.-L. Brylinski and E. Getzler,
@@ -1547,6 +3382,11 @@ Physics}, 2008.
 \bibitem{Teleman}
 N. Teleman,
 \emph{Localization of the Hochschild homology complex for fine algebras}.
+
+\bibitem{Treves}
+F. Tr\`eves,
+\emph{Topological Vector Spaces, Distributions and Kernels},
+Academic Press, 1967.
 
 \bibitem{Wodzicki}
 M. Wodzicki,

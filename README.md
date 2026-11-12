@@ -10,17 +10,25 @@ Three proof-focused manuscripts are maintained:
   theorem, Gauss--Bonnet, the signature theorem, almost Hermitian and almost
   Kähler geometry, the almost Dolbeault operator, and Riemann--Roch.
 - `Lecture draft/Hochschild homology of b-pseudodifferential operators.tex`:
-  the continuous Hochschild homology of the Laurent complete-symbol algebra
-  of the b-calculus, including the filtration, Poisson differential, Laurent
-  de Rham model, face decomposition, residual-operator caveat, and carefully
-  scoped alternative reconstructions by Čech--de Rham descent and
-  Rees--Fedosov Hochschild-chain formality.
+  the Hochschild homology of the full b-calculus x^{-Z}Ψ_b^Z(X), the
+  b-analogue of Melrose--Nistor's computation for the cusp calculus. It covers:
+  - the residual and boundary ideals;
+  - the b-trace defect as a connecting map;
+  - the Laurent b-symbol algebra;
+  - the boundary Taylor-series algebras, which are skew Laurent series twisted
+    by the indicial shift λ ↦ λ − i;
+  - the index functional.
+
+  Proofs are written out explicitly. A "Status of the proofs" section lists the quoted
+  standard inputs: b-composition, Wodzicki excision, crossed products and
+  functional analysis. It also lists one convergence hypothesis and three
+  remaining sketches.
 
 Compiled releases, with stable contents and figure lists, are available here:
 
 - [Heat Kernels and Index Theory](<output/pdf/Atiyah-Singer index theorem.pdf>)
 - [Notes on the b-Calculus and the APS Index Theorem](<output/pdf/Lecture draft.pdf>)
-- [Hochschild Homology of the b-Pseudodifferential Symbol Algebra](<output/pdf/Hochschild homology of b-pseudodifferential operators.pdf>)
+- [Hochschild Homology of the b-Calculus](<output/pdf/Hochschild homology of b-pseudodifferential operators.pdf>)
 
 ## Origin
 
@@ -36,7 +44,10 @@ The July 2026 revision has three parts:
   heat-kernel proof of the APS theorem (original lectures 20--24 were empty
   headings) and the K-theoretic proof sketches.
 - It adds the Hochschild homology manuscript, which is new 2026 work. Its
-  main theorem is the b-groupoid case of a theorem of Benameur and Nistor.
+  symbol-algebra part is the b-groupoid case of a theorem of Benameur and
+  Nistor. Its full-operator-algebra part is the b-calculus counterpart of
+  Melrose and Nistor's cusp-calculus computation, which they did not carry
+  out for the b-calculus.
 
 Relevant classroom discussion is retained as concise Discussion and
 Question/Answer interludes. Unresolved chatter, duplicated chapters,
