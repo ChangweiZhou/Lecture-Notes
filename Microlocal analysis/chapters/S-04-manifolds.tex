@@ -1,1 +1,817 @@
-% solutions for 04-manifolds (in progress)
+% Solutions to the exercises of chapters/04-manifolds.tex
+\providecommand{\Gsm}{G^{-\infty}}
+\providecommand{\Symq}[1]{S^{#1-[1]}}
+\providecommand{\osc}[1]{\mathcal{I}[#1]}
+
+\section{Solutions for \cref{ch:manifolds}: Pseudodifferential operators on manifolds}\label{solutions:manifolds}
+
+\subsection*{\Cref{manifolds:ex:compatible}}
+\emph{A correction.} In an earlier version of \cref{manifolds:def:structure} two
+$\CI$ structures were called compatible as soon as $\mathcal F_1\cup\mathcal F_2$ is a
+$\CI$ structure. With that definition the exercise is false. On $X=\R$ let, for odd
+$k\in\N$,
+\begin{equation*}
+\mathcal F_k=\{g(x^{1/k});\ g\in\CI(\R)\},
+\end{equation*}
+$x^{1/k}$ being the real root, a homeomorphism of $\R$. Each $\mathcal F_k$ is a $\CI$
+structure with global coordinate $x^{1/k}$. The union $\mathcal F_1\cup\mathcal F_3$ is a
+$\CI$ structure, with coordinate $y=x^{1/3}$: every $g(x)=g(y^3)$ is a smooth function
+of $y$. Likewise $\mathcal F_1\cup\mathcal F_5$ is a $\CI$ structure. But
+$\mathcal F_3\cup\mathcal F_5$ is not. Suppose $f\in\mathcal F_3\cup\mathcal F_5$ were a
+coordinate near $0$ for it, say $f=h(y)$ with $y=x^{1/3}$ and $h$ smooth (the case
+$f\in\mathcal F_5$ is the same with $3$ and $5$ exchanged). Since $y$ belongs to the
+structure, $y=g(f)=g(h(y))$ near $0$ with $g$ smooth, so $h'(0)\ne0$ and $f$ is a
+smooth coordinate change of $y$. Then $x^{1/5}=y^{3/5}$, which also belongs to the
+structure, would be a smooth function of $y$ near $0$, and it is not. So the old
+relation was not transitive. Note also that $\mathcal F_1\subset\mathcal F_3$, so a
+structure could be contained in two different ``maximal'' structures. For this reason
+\cref{manifolds:def:structure} now also requires that every coordinate system of
+$\mathcal F_1$ and of $\mathcal F_2$ remain a coordinate system for $\mathcal F_1\cup\mathcal F_2$.
+The last sentence of the exercise has been rephrased to match. We prove the
+corrected statement.
+
+\emph{Two preliminary remarks.} (P1) If $\kappa:\Omega\to\R^n$ is a coordinate system for a
+$\CI$ structure $\mathcal G$ and $\Omega'\subset\Omega$ is open, then $\kappa|_{\Omega'}$ is
+again a coordinate system for $\mathcal G$. (P2) Let $\kappa:\Omega\to\kappa(\Omega)$ be a
+homeomorphism onto an open set, and let $f$ be a function on $\Omega$ such that each point of
+$\Omega$ has a neighbourhood $\Omega_1$ with $f|_{\Omega_1}=g_1\circ\kappa$ and $g_1$ smooth. Then
+$f=g\circ\kappa$ on $\Omega$ with $g=f\circ\kappa^{-1}$. The function $g$ agrees near each
+point of $\kappa(\Omega)$ with a smooth function, so it is smooth.
+
+\emph{Reflexivity and symmetry.} $\mathcal F\cup\mathcal F=\mathcal F$, and every coordinate
+system for $\mathcal F$ is a coordinate system for $\mathcal F$. The definition is
+symmetric in $\mathcal F_1$ and $\mathcal F_2$.
+
+\emph{Transitivity.} Suppose $\mathcal F_1\sim\mathcal F_2$ and $\mathcal F_2\sim\mathcal F_3$.
+Let $\kappa:\Omega\to\kappa(\Omega)$ be a coordinate system for $\mathcal F_1$ and
+$x\in\Omega$. Choose a coordinate system $\kappa_2:\Omega_2\to\kappa_2(\Omega_2)$ for $\mathcal F_2$
+near $x$. Since $\mathcal F_1\sim\mathcal F_2$, both $\kappa$ and $\kappa_2$ are coordinate
+systems for $\mathcal F_1\cup\mathcal F_2$. The components of $\kappa_2$ lie in this union, so
+$\kappa_2=h\circ\kappa$ on $\Omega$, with $h$ smooth. Since
+$\mathcal F_2\sim\mathcal F_3$, $\kappa_2$ is a coordinate system for $\mathcal F_2\cup\mathcal F_3$.
+Hence every $f\in\mathcal F_3$ satisfies $f=g\circ\kappa_2=g\circ h\circ\kappa$ on
+$\Omega\cap\Omega_2$, with $g$ smooth. By (P2), $f|_\Omega$ is a smooth function of $\kappa$.
+Elements of $\mathcal F_1$ are smooth functions of $\kappa$ by assumption. So $\kappa$ is a
+coordinate system for $\mathcal F_1\cup\mathcal F_3$. By symmetry the same holds for every
+coordinate system of $\mathcal F_3$. Each point has a coordinate system for $\mathcal F_1$, so
+$\mathcal F_1\cup\mathcal F_3$ is a $\CI$ structure. Hence $\mathcal F_1\sim\mathcal F_3$.
+
+\emph{Maximal elements.} Let $\mathcal C$ be an equivalence class, $\mathcal F_0\in\mathcal C$ and
+$\mathcal U=\bigcup_{\mathcal F\in\mathcal C}\mathcal F$. Let $\kappa:\Omega\to\kappa(\Omega)$ be any
+coordinate system for $\mathcal F_0$. For $\mathcal F\in\mathcal C$, $\kappa$ is a coordinate
+system for $\mathcal F_0\cup\mathcal F$, so each element of $\mathcal F$ is a smooth function of
+$\kappa$ on $\Omega$. Hence $\kappa$ is a coordinate system for $\mathcal U$, and $\mathcal U$ is a
+$\CI$ structure. It is compatible with $\mathcal F_0$: $\mathcal F_0\cup\mathcal U=\mathcal U$,
+coordinate systems for $\mathcal U$ trivially remain such, and we have just seen that those
+for $\mathcal F_0$ do too. So $\mathcal U\in\mathcal C$. If $\mathcal M\in\mathcal C$ is maximal for
+inclusion within $\mathcal C$, then $\mathcal M\subset\mathcal U$, so $\mathcal M=\mathcal U$. Thus
+$\mathcal U$ is the unique maximal element of $\mathcal C$, and it contains every member of
+$\mathcal C$. In particular every $\CI$ structure $\mathcal F$ is contained in a unique
+maximal structure compatible with it, namely the union of its class.
+
+\subsection*{\Cref{manifolds:ex:maximal}}
+We use the definition of compatibility as amended in \cref{manifolds:def:structure}
+(see the previous solution). Let $\kappa_a:O_a\to\kappa_a(O_a)$ be coordinate systems for
+$\mathcal F$ with $\bigcup_aO_a=X$, and let
+\begin{equation*}
+\mathcal M=\{u:X\to\R;\ u|_{O_a}=g_a\circ\kappa_a\ \text{with}\ g_a\in\CI(\kappa_a(O_a))\ \text{for every }a\}.
+\end{equation*}
+Its elements are continuous, since the $\kappa_a$ are homeomorphisms. We show that
+$\mathcal M$ is the maximal structure compatible with $\mathcal F$.
+
+(i) $\mathcal F\subset\mathcal M$, by the definition of a coordinate system.
+
+(ii) $\mathcal M$ is a $\CI$ structure, and each $\kappa_a$ is a coordinate system for it. The
+components of $\kappa_a$ lie in $\mathcal F\subset\mathcal M$, and every element of $\mathcal M$
+is a smooth function of $\kappa_a$ on $O_a$ by definition.
+
+(iii) $\mathcal M\sim\mathcal F$. Since $\mathcal F\cup\mathcal M=\mathcal M$, it remains to show
+that every coordinate system $\kappa:\Omega\to\kappa(\Omega)$ for $\mathcal F$ is one for
+$\mathcal M$. Let $x\in\Omega$ and $x\in O_a$. The components of $\kappa_a$ are in $\mathcal F$, so
+$\kappa_a=h\circ\kappa$ on $\Omega\cap O_a$ with $h$ smooth. For $u\in\mathcal M$ we then have
+$u=g_a\circ h\circ\kappa$ on $\Omega\cap O_a$. By (P2) of the previous solution, $u|_\Omega$
+is a smooth function of $\kappa$.
+
+(iv) If $\mathcal F'\sim\mathcal F$ then $\mathcal F'\subset\mathcal M$. Each $\kappa_a$ is a
+coordinate system for $\mathcal F$, hence for $\mathcal F\cup\mathcal F'$. So every $f\in\mathcal F'$
+is a smooth function of $\kappa_a$ on $O_a$, for every $a$, that is, $f\in\mathcal M$.
+
+By (iii) and (iv), $\mathcal M$ lies in the class of $\mathcal F$ and contains its union. By the
+previous exercise it is the maximal $\CI$ structure compatible with $\mathcal F$; in
+particular it does not depend on the covering. It is an algebra: if
+$u=g_a\circ\kappa_a$ and $v=h_a\circ\kappa_a$ on $O_a$, then $u+v=(g_a+h_a)\circ\kappa_a$ and
+$uv=(g_ah_a)\circ\kappa_a$ there, and the constants are $c=c\circ\kappa_a$.
+
+\subsection*{\Cref{manifolds:ex:partition}}
+\emph{A correction.} As originally stated, with $i\in\N$, the exercise is false for manifolds
+which are not second countable. Let $X=\R\times D$ with $D$ an uncountable discrete set,
+which is a paracompact Hausdorff manifold of dimension one, and take the cover consisting
+of $X$ alone. A compact subset of $X$ meets only finitely many of the components
+$\R\times\{d\}$. Countably many compact sets $K_{X,i}$ therefore miss some component, on
+which $\sum_i\rho_{X,i}=0$. The statement now allows an arbitrary index set $I$, and
+$I=\N$ when $X$ is second countable; we prove this version.
+
+\emph{Idea:} use paracompactness twice to get a locally finite cover by relatively compact
+sets with a shrinking, then add finitely many bump functions on each piece.
+
+\emph{Bumps.} Let $\kappa:W\to\kappa(W)$ be a chart, i.e.\ a coordinate system for $\CI(X)$,
+and $\beta\in\CIc(\kappa(W))$. The function $b$ equal to $\beta\circ\kappa$ on $W$ and to $0$ on
+$X\setminus W$ lies in $\CI(X)$. Indeed $K=\kappa^{-1}(\supp\beta)$ is compact, hence closed in
+the Hausdorff space $X$. On any chart domain $O$ the function $b$ is a smooth function of
+the chart: on $O\cap W$ because the transition maps are smooth, by remark (P1)--(P2) in
+the solution of \cref{manifolds:ex:compatible}, and on $O\setminus K$ because it vanishes.
+By \cref{manifolds:ex:maximal}, $b\in\CI(X)$. Moreover, given $p\in W$ and an open
+neighbourhood $U\subset W$ of $p$, we may choose $\beta\ge0$ with $\beta(\kappa(p))>0$ and
+$\supp\beta\subset\kappa(U)$.
+
+\emph{Step 1.} Let $\mathcal V$ be the set of open $V\subset X$ such that $\overline V$ is compact
+and contained in $O_a\cap W$ for some $a$ and some chart domain $W$. It covers $X$: for
+$p\in O_a$ and a chart $\kappa$ near $p$, take a closed ball $B\subset\kappa(O_a\cap W)$ centred at
+$\kappa(p)$ and $V=\kappa^{-1}(\operatorname{int}B)$. Then $\overline V\subset\kappa^{-1}(B)$, which is
+compact. By paracompactness there is a locally finite open refinement
+$\{W_j\}_{j\in J}$ of $\mathcal V$, with all $W_j\ne\emptyset$. For each $j$ choose $a(j)$ with
+$\overline W_j\subset O_{a(j)}$; each $\overline W_j$ is compact.
+
+\emph{Step 2 (shrinking).} Let $\mathcal U$ be the set of open $U$ with $\overline U$ compact
+and contained in some $W_j$. As in Step 1, $\mathcal U$ covers $X$. Let $\{U_k\}$ be a
+locally finite open refinement of $\mathcal U$, and put $W'_j=\bigcup\{U_k;\ \overline U_k\subset W_j\}$.
+The closure of a locally finite union of sets is the union of their closures, so
+$\overline{W'_j}\subset W_j$, and $\overline{W'_j}$ is compact. Each $U_k$ lies in some
+$U\in\mathcal U$ with $\overline U\subset W_j$, so $U_k\subset W'_j$. Hence the $W'_j$ cover $X$.
+
+\emph{Step 3.} For each $j$ and each $p\in\overline{W'_j}$ choose a bump function as above,
+with support in $W_j$ and positive near $p$. Finitely many of these are positive on
+neighbourhoods covering the compact set $\overline{W'_j}$. Their sum $\phi_j\in\CI(X)$
+satisfies $\phi_j\ge0$, $\phi_j>0$ on $\overline{W'_j}$, and has compact support
+$K_j\subset W_j$.
+
+\emph{Step 4.} Since $\{W_j\}$ is locally finite, $\Phi=\sum_j\phi_j$ is near each point a
+finite sum, so $\Phi\in\CI(X)$ by locality. Also $\Phi>0$, since every point lies in some
+$W'_j$. Then $1/\Phi\in\CI(X)$, since in a chart it is $1/g$ with $g$ smooth and positive.
+Put $\rho_j=\phi_j/\Phi$. Then $0\le\rho_j\le1$, $\sum_j\rho_j=1$, $\supp\rho_j=K_j$ is compact
+and contained in $O_{a(j)}$, and every point has a neighbourhood meeting only finitely
+many $K_j$.
+
+\emph{Step 5 (indexing).} Take $I=J$ and set $\rho_{a,j}=\rho_j$, $K_{a,j}=K_j$ if $a=a(j)$,
+and $\rho_{a,j}=0$, $K_{a,j}=\emptyset$ otherwise. This has all the required properties.
+If $X$ is second countable it is Lindel\"of. Every point $x$ has an open neighbourhood
+$N_x$ meeting only finitely many $W_j$, and countably many $N_x$ cover $X$. Each $W_j$
+meets one of them, so $J$ is countable. Composing with an injection $J\hookrightarrow\N$,
+and putting $\rho_{a,i}=0$ for the unused $i$, gives the indexing by $a\in\mathcal A$,
+$i\in\N$.
+
+\subsection*{\Cref{manifolds:ex:restriction}}
+\emph{Idea:} in adapted coordinates $u$ depends smoothly on the variable $t$ normal to $Z$,
+and $u|_Z$ is its value at $t=0$. Independence of the coordinates follows from a trace
+estimate in a norm built from vector fields tangent to $Y$. Conormal distributions can
+be approximated in such norms, and the norm is invariant.
+
+\emph{Setting.} As in the proof of \cref{manifolds:prop:restriction} we may assume that
+$E$ is trivial and that $u$ has compact support in a coordinate patch $U$ near
+$p\in Y\cap Z$, with coordinates $(w',t,z)\in\R^{N-q-k}\times\R^q\times\R^k$ in which
+$Y=\{z=0\}$ and $Z=\{t=0\}$. Write $x'=(w',z)$, so that $Z\cong\R^{N-q}_{x'}$ and $Y\cap Z=\{z=0\}$.
+Then $u=\osc{a}+v$, where
+\begin{equation*}
+\osc{a}(w',t,z)=\int e^{iz\cdot\zeta}a(w',t,\zeta)\,\dbar\zeta,\qquad a\in S^M_{\mathrm c}(\R^{N-k};\R^k),\quad M=m+\tfrac N4-\tfrac k2,
+\end{equation*}
+and $v$ is smooth; this is the notation of \cref{ch:conormal}, with normal variable $z$
+and tangential variable $(w',t)$. Choose $\phi\in\CIc(U)$ equal to one near $\supp u$.
+Then $u=\phi u=\osc{\phi a}+\phi v$ by \cref{conormal:lem:osc-ops}(i). Here the amplitude
+$\phi a$ depends on all the variables and has compact support in them.
+
+\emph{Step 1: $u$ is smooth in $t$.} For $\chi\in\CIc(\R^{N-q}_{x'})$ set
+\begin{equation*}
+\pair{\osc{a}(t)}{\chi}=\int\!\!\int a(w',t,\zeta)\,\Big(\int e^{iz\cdot\zeta}\chi(w',z)\,dz\Big)\dbar\zeta\,dw'.
+\end{equation*}
+The inner integral is rapidly decreasing in $\zeta$, locally uniformly in $w'$. Hence the
+integral converges absolutely and may be differentiated in $t$ under the integral sign,
+the $t$-derivatives of $a$ being symbols of order $M$. So $t\mapsto\osc{a}(t)\in\CmI(\R^{N-q})$
+is smooth (weakly), and by Fubini $\pair{\osc a}{\Xi}=\int\pair{\osc a(t)}{\Xi(\cdot,t)}\,dt$
+for $\Xi\in\CIc(\R^N)$. In general we call $w\in\CmI(\R^N)$ \emph{$t$-regular} if there is a
+weakly smooth map $t\mapsto w(t)\in\CmI(\R^{N-q})$ with
+$\pair w\Xi=\int\pair{w(t)}{\Xi(\cdot,t)}\,dt$. The family $w(t)$ is then unique, by
+testing with $\Xi=\chi(x')\theta(t)$, and for smooth $w$ it is $w(t)=w(\cdot,t)$. For
+$t$-regular $w$ and $\psi\in\CI$ the product $\psi w$ is $t$-regular, with
+$(\psi w)(t)=\psi(\cdot,t)w(t)$. We define $w|_{t=0}=w(0)$. Thus $u$ is $t$-regular and
+\begin{equation}\label{solmanifolds:eq:restriction}
+u|_Z=u(0)=\osc{a(\cdot,0,\cdot)}+v|_{t=0},
+\end{equation}
+which is the formula in the proof. Since $u=\phi u$, also $u|_Z=\phi|_Zu|_Z$.
+
+\emph{Step 2: the approximations.} Let $\chi\in\CIc(\R^k)$ be equal to one near $0$ and
+$a_R=\chi(\zeta/R)a$. Then $u_R=\osc{a_R}+v$ is smooth, since the integral converges
+absolutely together with all its derivatives. By \cref{conormal:lem:density}, $a_R\to a$ in
+$S^{M+1}$ as $R\to\infty$. Since $\osc{c}$ depends continuously on $c$ (see the
+remark preceding \cref{conormal:lem:osc-ops}), $u_R\to u$ in $\CmI(M)$. In the same way
+$a_R(\cdot,0,\cdot)\to a(\cdot,0,\cdot)$ in $S^{M+1}$, so
+$u_R|_Z=\osc{a_R(\cdot,0,\cdot)}+v|_{t=0}\to u|_Z$ in $\CmI(Z)$. We also use the cut-off
+versions $u^\phi_R=\phi u_R$. These are smooth with compact support, satisfy
+$u^\phi_R-u=\osc{\phi(a_R-a)}$, and $u^\phi_R|_Z=\phi|_Zu_R|_Z\to\phi|_Zu|_Z=u|_Z$.
+
+\emph{Step 3: three estimates.} Fix $s<-M-1-\frac k2$ and an integer $J>\abs s+\frac q2$.
+
+(A) \emph{Trace estimate.} For $w\in\CIc(\R^N)$,
+\begin{equation*}
+\norm{w(\cdot,0)}_{\Hs s(\R^{N-q})}\le C\sum_{\abs\gamma\le J}\norm{\pa_t^\gamma w}_{\Hs s(\R^N)}.
+\end{equation*}
+Indeed, with $\hat w(\zeta',\tau)$ the Fourier transform in $(x',t)$, the Fourier transform of
+$w(\cdot,0)$ is $(2\pi)^{-q}\int\hat w(\zeta',\tau)\,d\tau$. Since
+$\ang{\zeta'}\le\ang{(\zeta',\tau)}\le\ang{\zeta'}\ang\tau$ we have
+$\ang{(\zeta',\tau)}^{-2s}\le\ang{\zeta'}^{-2s}\ang\tau^{2\abs s}$, and the Cauchy--Schwarz
+inequality gives
+\begin{equation*}
+\Big|\int\hat w\,d\tau\Big|^2\le\ang{\zeta'}^{-2s}\int\ang\tau^{2\abs s-2J}d\tau\cdot
+\int\ang\tau^{2J}\ang{(\zeta',\tau)}^{2s}\abs{\hat w}^2d\tau .
+\end{equation*}
+The first integral is finite because $2J-2\abs s>q$. Multiplying by $\ang{\zeta'}^{2s}$,
+integrating in $\zeta'$ and using $\ang\tau^{2J}\le C\sum_{\abs\gamma\le J}\abs{\tau^\gamma}^2$
+gives (A).
+
+(B) \emph{Sobolev bound.} If $c\in S^{M+1}(\R^N;\R^k)$ has support, in the base variables,
+in a fixed compact set $K$, then $\norm{\osc c}_{\Hs s}\le C_Kp(c)$ for a continuous seminorm
+$p$ of $S^{M+1}$. This is what the proof of the first inclusion in \cref{conormal:thm:IH}
+shows: the Fourier transform of $\osc c$ is bounded by $C'_N\ang\eta^{-N}\ang\zeta^{M+1}$,
+with $C'_N$ a constant times a seminorm of $c$, and $s<-(M+1)-\frac k2$.
+
+(C) \emph{Tangent vector fields.} If $V$ is a smooth vector field near $K$ tangent to
+$Y$, then $V\osc c=\osc{c_V}$ with $c_V$ of the same order and support, depending linearly
+and continuously on $c$. Indeed
+$V=\sum_i\alpha_i\pa_{w'_i}+\sum_j\beta_j\pa_{t_j}+\sum_l\gamma_l\pa_{z_l}$, where
+$\gamma_l$ vanishes on $\{z=0\}$, so $\gamma_l=\sum_kz_k\gamma_{kl}$ with $\gamma_{kl}$
+smooth. By \cref{conormal:lem:osc-ops}(i), $\pa_{w'},\pa_t$ act on the amplitude by
+differentiation, multiplication by a smooth function acts by multiplication, and
+$z_k\pa_{z_l}\osc c=\osc{-D_{\zeta_k}(i\zeta_lc+\pa_{z_l}c)}$, which has the same order.
+
+\emph{Step 4: independence of the coordinates.} Let $(\tilde w',\tilde t,\tilde z)$ be a
+second adapted coordinate system near $p$, with $Y=\{\tilde z=0\}$ and $Z=\{\tilde t=0\}$. By
+linearity and the localization in Step 1 we may assume that $\supp u$ and $\phi$ lie in the
+intersection of both patches. Let $u|_Z^{(1)}$, $u|_Z^{(2)}$ be the distributions
+\eqref{solmanifolds:eq:restriction} computed in the two systems, and $u^\phi_R$,
+$\tilde u^\phi_R$ the corresponding approximations of Step 2. Let
+\begin{equation*}
+\mathcal N(w)=\sum_{\abs\gamma\le J}\norm{\pa_{\tilde t}^\gamma w}_{\Hs s},
+\end{equation*}
+the Sobolev norms being computed in the second coordinates. The fields $\pa_{\tilde t_j}$
+preserve $\tilde z$, so they are tangent to $Y$. Expressed in the first coordinates they
+are therefore smooth vector fields tangent to $Y$. By (C),
+$\pa_{\tilde t}^\gamma(u^\phi_R-u)=\osc{c_{R,\gamma}}$ with $c_{R,\gamma}\to0$ in $S^{M+1}$,
+supported in a fixed compact set. By (B) these tend to zero in $\Hs s$ computed in the
+first coordinates. For distributions supported in a fixed compact set these norms are
+equivalent to those computed in the second coordinates, by
+\cref{manifolds:lem:sobolev-local}(a). So $\mathcal N(u^\phi_R-u)\to0$. Applying the same
+argument in the second coordinates gives $\mathcal N(\tilde u^\phi_R-u)\to0$. Hence
+$\mathcal N(u^\phi_R-\tilde u^\phi_R)\to0$. Now apply (A) in the second coordinates to the smooth
+compactly supported functions $u^\phi_R-\tilde u^\phi_R$: their honest restrictions to $Z$
+tend to zero in $\Hs s(Z)$, hence in $\CmI(Z)$. By Step 2 these restrictions tend to
+$u|_Z^{(1)}-u|_Z^{(2)}$. Hence $u|_Z^{(1)}=u|_Z^{(2)}$. The special case of two
+representations $u=\osc a+v=\osc{a'}+v'$ in the same coordinates shows that $u|_Z$ does
+not depend on the amplitude either. Consequently the restriction of a general $u$,
+defined with a partition of unity $\sum\rho_i=1$ by $u|_Z=\sum_i(\rho_iu)|_Z$, does not depend
+on any of the choices. The product rule below shows that refining the partition does not
+change the result.
+
+\emph{Step 5: the product rule.} For $\phi\in\CI(M)$, in adapted coordinates $u$ is
+$t$-regular, hence so is $\phi u$, with $(\phi u)(t)=\phi(\cdot,t)u(t)$. Since $\phi u$ is again
+conormal, Step 4 shows that its restriction is the value at $t=0$ in any adapted
+coordinates. Hence $(\phi u)|_Z=\phi|_Z\,u|_Z$.
+
+\subsection*{\Cref{manifolds:ex:smoothing-char}}
+\emph{A remark on the statement.} With the weak topology on $\CmI(X;E)$, a
+\emph{continuous} linear map $T:\CmI(X;E)\to\CI(X;F)$ has finite rank. Indeed, fix a
+hermitian metric on $F$. By continuity at $0$ there are $\phi_1,\dots,\phi_k$ such that
+$\abs{u(\phi_i)}<1$ for all $i$ implies $\sup\abs{Tu}<1$. If $u(\phi_i)=0$ for all $i$, the
+same applies to $\lambda u$ for every $\lambda>0$, so $Tu=0$. Thus $T$ vanishes on a subspace of
+codimension at most $k$. Smoothing operators of infinite rank exist whenever $\dim X>0$.
+For instance $\sum_jc_jf_j(x)\overline{f_j(y)}$ with $f_j$ bump functions with disjoint
+supports in a chart, and $c_j>0$ decreasing so fast that the series converges in $\CI$,
+defines one. So in the first statement ``continuous'' must be understood sequentially,
+which is how the exercise is now phrased. (One may equivalently use the strong dual
+topology.) Fix a smooth positive density $\nu$ and use it to identify $\Omega$ with the
+trivial bundle.
+
+\emph{Smoothing implies the extension.} Let $A(x,y)=k(x,y)\nu(y)$ with $k$ smooth. For
+$u\in\CmI(X;E)$ put $\tilde Au(x)=u\big(k(x,\cdot)\nu\big)$, with $u$ acting in $y$. Locally in
+$x$, trivializing $F$, the map $x\mapsto k(x,\cdot)\nu$ is smooth into $\CI(X;E'\otimes\Omega)$:
+its difference quotients converge in $\CI$ by Taylor's formula applied to $k$. Hence
+$\tilde Au$ is smooth with $D^\alpha_x\tilde Au(x)=u\big(D^\alpha_xk(x,\cdot)\nu\big)$. For smooth $u$,
+$\tilde Au=Au$. Let $u_j\to u$ weakly. By the uniform boundedness principle for the
+Fr\'echet space $\CI(X;E'\otimes\Omega)$ there are a continuous seminorm $p$ and a constant $C$
+with $\abs{u_j(\phi)}\le Cp(\phi)$ for all $j$ and $\phi$, and then also $\abs{u(\phi)}\le Cp(\phi)$.
+An equicontinuous sequence which converges pointwise converges uniformly on compact
+sets. To see this, cover a compact set $\mathcal K$ by finitely many balls
+$\{p(\phi-\phi_i)<\delta\}$; then
+$\abs{(u_j-u)(\phi)}\le2C\delta+\max_i\abs{(u_j-u)(\phi_i)}$ for $\phi\in\mathcal K$. The set
+$\{D^\alpha_xk(x,\cdot)\nu;\ x\in L\}$, for $L$ compact in a trivializing chart, is compact, being
+the continuous image of $L$. Hence $D^\alpha\tilde Au_j\to D^\alpha\tilde Au$ uniformly, that is,
+$\tilde Au_j\to\tilde Au$ in $\CI(X;F)$.
+
+\emph{The extension implies smoothing.} Let $\tilde A$ be a sequentially continuous linear
+extension. For $y\in X$ and $e\in E_y$ let $\delta_{y,e}\in\CmI(X;E)$ be
+$\phi\nu\mapsto\phi(y)(e)$, for $\phi\in\CI(X;E')$, and define
+$k(x,y)e=(\tilde A\delta_{y,e})(x)$. In a trivializing chart near $y_0$, with frame $e_l$, the
+maps $y\mapsto T_l(y)=\delta_{y,e_l(y)}$ have, along every sequence, weakly convergent
+difference quotients: $(T_l(y+h_je_i)-T_l(y))/h_j\to\pa_iT_l(y)$, where
+$\pa_iT_l(y)(\phi\nu)=\pa_{y_i}[\phi(y)(e_l(y))]$. The same holds for all higher derivatives, and
+$\pa^\beta T_l(y_j)\to\pa^\beta T_l(y)$ weakly when $y_j\to y$. Applying $\tilde A$, the map
+$y\mapsto\tilde AT_l(y)$ is $\CI$ from the chart into the Fr\'echet space $\CI(X;F)$, with
+derivatives $\tilde A\pa^\beta T_l(y)$, all continuous in $y$. Hence
+$\pa^\alpha_x\pa^\beta_y(k(x,y)e_l(y))=\pa^\alpha_x\big(\tilde A\pa^\beta T_l(y)\big)(x)$ is jointly
+continuous, and $k\in\CI(X^2;\Hom(E,F))$. To identify $A$, by linearity and a partition of
+unity take $u\in\CI(X;E)$ supported in a chart, with $\nu=\nu_0\abs{dy}$ there, and let
+$R_h=\sum_{\gamma\in h\Z^n}h^n\nu_0(\gamma)\delta_{\gamma,u(\gamma)}$. For each test section,
+$R_h(\phi\nu)$ is a Riemann sum of $\int\phi(u)\nu$, so $R_h\to u$ weakly as $h=1/j\to0$.
+Hence $\tilde AR_h\to Au$ in $\CI$. But
+$\tilde AR_h(x)=\sum_\gamma h^n\nu_0(\gamma)k(x,\gamma)u(\gamma)$, a Riemann sum converging to
+$\int k(x,y)u(y)\nu(y)$. Thus $A$ has the smooth kernel $k(x,y)\nu(y)$.
+
+\emph{The counterexample.} Let $\dim X>0$, $E=F=\C$, and $g\in L^2(X)\setminus\CI(X)$, for
+instance the characteristic function of a coordinate ball. The operator
+$Au=\inner ug\cdot1=\big(\int u\bar g\,\nu\big)\cdot1$ maps $L^2(X)$ into the constants, with
+$\sup\abs{Au}\le\norm g\norm u$ and all derivatives zero. So $A:L^2\to\CI$ is bounded for
+every seminorm of $\CI$. Its kernel is $1\otimes\bar g(y)\nu(y)$, which is not smooth. So $A$ is
+not smoothing, and by the first part it does not even extend sequentially continuously to
+$\CmI(X)$.
+
+\subsection*{\Cref{manifolds:ex:oscillatory}}
+\emph{A correction.} Without an assumption on $\supp u$ the expansion fails when $m<1$. Let
+$X=\R/2\pi\Z$, $\bar x=0$, and let $\rho\in\CIc((\frac\pi2,\frac{3\pi}2))$ with $\int\rho=1$. Let
+$A=\Id+R$ with $Ru(x)=\int\rho(y)u(y)\,dy$, a smoothing operator, so $A\in\Psido0_{\mathrm{ph}}$
+with $\sigma_0(A)=1$. Take $u=1$ and $f=\chi\sin$ with $\chi\in\CI(X)$ equal to $1$ near $0$
+and to $0$ near $\supp\rho$, so $f(0)=0$ and $f'(0)=1$. Then
+$e^{-itf}A(e^{itf})(0)=1+\int\rho=2$ for all $t$, not $1+O(t^{-1})$. The trouble is the
+oscillatory integral of a smoothing kernel against $e^{itf}u$ near critical points of $f$,
+which in general is only $O(1)$. The statement now assumes $df\ne0$ on $\supp u$. For
+$m\ge1$ the original statement is also true, as we note at the end.
+
+\emph{Idea:} split $u$ into a piece near $\bar x$ and a piece away from it. The second
+contributes $O(t^{-\infty})$ by pseudolocality and non-stationary phase. The first is
+computed in coordinates, after separating the frequencies $\abs\xi\sim t$ from the rest.
+
+\emph{Non-stationary phase.} If $w\in\CI(X;\Omega)$ and $df\ne0$ on $\supp w$, then
+$\int_Xe^{itf}w=O(t^{-\infty})$. By a partition of unity it suffices to treat
+$\int_{\R^n}e^{it\tilde f}g\,dy$ with $g\in\CIc$ and $\nabla\tilde f\ne0$ on $\supp g$. With
+$L=(it)^{-1}\abs{\nabla \tilde f}^{-2}\nabla\tilde f\cdot\nabla$ we have $Le^{it\tilde f}=e^{it\tilde f}$, and integrating
+by parts $N$ times gives a bound $C_Nt^{-N}$.
+
+\emph{Splitting.} Let $\kappa:W\to\kappa(W)$ be a chart near $\bar x$ trivializing $E$ and $F$,
+and write $\tilde f=f\circ\kappa^{-1}$, $\bar\eta=\nabla \tilde f(\kappa(\bar x))\ne0$. Choose a ball
+$\tilde B\subset\kappa(W)$ around $\kappa(\bar x)$ with $c\le\abs{\nabla \tilde f}\le C_0$ on $\tilde B$, and
+$\phi\in\CIc(\kappa^{-1}(\tilde B))$ with $\phi=1$ near $\bar x$. Then
+$u=\phi u+(1-\phi)u$. Let $\phi'=1$ near $\bar x$ with $\supp\phi'$ inside the interior of
+$\{\phi=1\}$. Then $A((1-\phi)e^{itf}u)(\bar x)=\big(\phi'A(1-\phi)\big)(e^{itf}u)(\bar x)$, and
+$\phi'A(1-\phi)$ has a smooth kernel $K$ by \cref{manifolds:thm:local}(i). So this term is
+$\int_Xe^{itf(y)}K(\bar x,y)(1-\phi(y))u(y)$. The integrand is supported in $\supp u$, where
+$df\ne0$, so the term is $O(t^{-\infty})$. For the other term choose $\psi\in\CIc(W)$ equal to one
+near $\supp\phi$. Then $A(e^{itf}\phi u)(\bar x)=(\psi A\psi)(e^{itf}\phi u)(\bar x)$. In the chart,
+$\psi A\psi$ is a matrix $\Op(a)$ with $a\in S^m_{\mathrm{ph}}$ (\cref{manifolds:thm:local},
+\ref{manifolds:E2}). Let $a_m$ be its leading homogeneous term. Then $a-a_m\in S^{m-1}$ in
+$\abs\xi\ge1$, and $a_m(\kappa(\bar x),\cdot)$ is the local expression of $\sigma_m(A)(\bar x,\cdot)$,
+since $\psi(\bar x)=1$ (\cref{manifolds:prop:principal-symbol}). Put $v=\kappa_*(\phi u)\in\CIc(\tilde B)$
+and identify $\bar x$ with $\kappa(\bar x)$. It remains to show that
+\begin{equation}\label{solmanifolds:eq:osc-local}
+e^{-it\tilde f(\bar x)}\Op(a)(e^{it\tilde f}v)(\bar x)=t^ma_m(\bar x,\bar\eta)v(\bar x)+O(t^{m-1}).
+\end{equation}
+
+\emph{Frequencies away from $t\bar\eta$.} Fix $\rho\in\CIc(\R^n\setminus0)$ with $\rho=1$ on
+$\{\frac c2\le\abs\eta\le2C_0\}$ and $\supp\rho\subset\{\frac c4\le\abs\eta\le4C_0\}$, and split
+$a=a\rho(\xi/t)+a(1-\rho(\xi/t))$. By \eqref{euclidean:eq:left-quant} the second part
+contributes $\int e^{i\bar x\cdot\xi}a(\bar x,\xi)(1-\rho(\xi/t))\hat w_t(\xi)\,\dbar\xi$, where
+$w_t=e^{it\tilde f}v$. Here $\hat w_t(\xi)=\int e^{i(t\tilde f(y)-y\cdot\xi)}v(y)\,dy$, and on
+$\supp(1-\rho(\xi/t))$ the phase gradient $t\nabla \tilde f(y)-\xi$ satisfies
+$\abs{t\nabla \tilde f-\xi}\ge c'(t+\abs\xi)$. If $\abs\xi\le\frac c2t$ it is at least $\frac c2t$, and if
+$\abs\xi\ge2C_0t$ it is at least $\frac12\abs\xi$. Integrating by parts with
+$L=\abs{t\nabla \tilde f-\xi}^{-2}(t\nabla \tilde f-\xi)\cdot D_y$, whose coefficients have derivatives
+bounded by $Ct/\abs{t\nabla \tilde f-\xi}^2\le C'/(t+\abs\xi)$, gives
+$\abs{\hat w_t(\xi)}\le C_N(t+\abs\xi)^{-N}$ there. With $\abs{a}\le C(t+\abs\xi)^{\abs m}$ the
+contribution is $O(t^{\abs m+n-N})$ for every $N$, that is, $O(t^{-\infty})$.
+
+\emph{Frequencies near $t\bar\eta$.} The first part is an absolutely convergent integral.
+Substituting $\xi=t\eta$ gives
+\begin{equation*}
+e^{-it\tilde f(\bar x)}\Op(a\rho_t)(w_t)(\bar x)=t^n\int\!\!\int e^{it\psi(y,\eta)}a(\bar x,t\eta)\rho(\eta)v(y)\,dy\,\dbar\eta,
+\qquad\psi=(\bar x-y)\cdot\eta+\tilde f(y)-\tilde f(\bar x).
+\end{equation*}
+With $\Phi(y)=\int_0^1\nabla \tilde f(y+s(\bar x-y))\,ds$, which is smooth on the convex set $\tilde B$,
+we have $\tilde f(y)-\tilde f(\bar x)=-(\bar x-y)\cdot\Phi(y)$, so $\psi=(\bar x-y)\cdot(\eta-\Phi(y))$. For a
+bounded family $b$ in $\CIc(\tilde B\times\R^n)$ with fixed support we claim
+\begin{equation}\label{solmanifolds:eq:Jt}
+J_t(b)=t^n\int\!\!\int e^{it(\bar x-y)\cdot(\eta-\Phi(y))}b(y,\eta)\,dy\,\dbar\eta=b(\bar x,\bar\eta)+O(t^{-1}).
+\end{equation}
+Substitute $\eta=\Phi(y)+\zeta$ and then $y=\bar x-z/t$. With $B(y,\zeta)=b(y,\Phi(y)+\zeta)$ and
+$\check B(y,z)=\int e^{iz\cdot\zeta}B(y,\zeta)\,\dbar\zeta$ this gives
+$J_t(b)=\int\check B(\bar x-z/t,z)\,dz$. Now $\check B$ and $\nabla_y\check B$ are bounded by
+$C_N\ang z^{-N}$, uniformly over the family. Also $\int\check B(\bar x,z)\,dz=B(\bar x,0)=b(\bar x,\Phi(\bar x))$
+by Fourier inversion, and $\Phi(\bar x)=\bar\eta$. Since
+$\abs{\check B(\bar x-z/t,z)-\check B(\bar x,z)}\le C\abs z\ang z^{-N}/t$, we obtain
+\eqref{solmanifolds:eq:Jt}. Finally, on $\supp\rho$ and for $t$ large,
+$a(\bar x,t\eta)=t^ma_m(\bar x,\eta)+t^{m-1}e_t(\eta)$, where
+$e_t=t^{1-m}(a-a_m)(\bar x,t\eta)$ satisfies
+$\abs{\pa^\beta e_t}\le Ct^{1-m+\abs\beta}\ang{t\eta}^{m-1-\abs\beta}\le C'$. So $e_t\rho v$ is a bounded
+family. By \eqref{solmanifolds:eq:Jt}, and since $\rho(\bar\eta)=1$, the first part equals
+$t^m\big(a_m(\bar x,\bar\eta)v(\bar x)+O(t^{-1})\big)+t^{m-1}O(1)$, which proves
+\eqref{solmanifolds:eq:osc-local}. Since $v(\bar x)=u(\bar x)$, this gives
+$e^{-itf}A(e^{itf}u)(\bar x)=t^m\sigma_m(A)(\bar x,df(\bar x))u(\bar x)+O(t^{m-1})$.
+
+\emph{Conclusions.} If $m\ge1$, the splitting step works for every $u$, because the smoothing
+term is then $O(1)\subset O(t^{m-1})$. The left side
+$e^{-itf}A(e^{itf}u)(\bar x)$ is defined without coordinates. Every
+$(\bar x,\bar\xi)\in T^*X\setminus0$ is $(\bar x,df(\bar x))$ for some real $f$, for instance a cut-off linear
+function in a chart, and every $e\in E_{\bar x}$ is $u(\bar x)$ for some $u$ supported where
+$df\ne0$. Therefore
+$\sigma_m(A)(\bar x,\bar\xi)e=\lim_{t\to\infty}t^{-m}e^{-itf}A(e^{itf}u)(\bar x)$ characterizes the
+homogeneous principal symbol invariantly. For $P\in\Diff k$ the left side is exactly the
+polynomial \eqref{manifolds:eq:oscillatory-test}, with leading coefficient
+$U_k(\bar x)=\sigma_k(P)(\bar x,df(\bar x))u(\bar x)$, so this definition extends that one.
+
+\subsection*{\Cref{manifolds:ex:index-zero}}
+If $A=A^*$ then $N^*=\Nul(A^*)=\Nul(A)=N$, so $\ind(A)=\dim N-\dim N^*=0$ by
+\cref{manifolds:thm:fredholm}(d).
+
+For the second statement we interpret ``connected through elliptic symbols'' as follows:
+there is a path $[0,1]\ni s\mapsto a_s\in S^m(T^*X;\hom(E))$, continuous for the Fr\'echet
+topology, with each $a_s$ elliptic in the sense of \cref{manifolds:def:elliptic},
+$a_0$ representing $\sigma_m(A)$ and $a_1$ representing $\sigma_m(B)$ for some elliptic
+$B=B^*$. Let $A_s=q(a_s)$, with $q$ the quantization map \eqref{manifolds:eq:quantization}.
+By \cref{manifolds:thm:fredholm}(d), $\ind A=\ind A_0$ and $\ind A_1=\ind B=0$, so it
+suffices to show that $s\mapsto\ind A_s$ is locally constant.
+
+Fix $s_0$ and let $b\in S^{-m}$ satisfy $a_{s_0}b-\Id$, $ba_{s_0}-\Id\in S^{-1}$. Then $q(b)$ is
+elliptic and $q(a_{s_0})q(b)-\Id\in\Psido{-1}$. By the product formula and the dependence of
+the index on the symbol only,
+\begin{equation*}
+\ind A_{s_0}+\ind q(b)=\ind\Id=0,\qquad
+\ind A_s+\ind q(b)=\ind q(c_s),\quad c_s=a_sb,
+\end{equation*}
+because $q(a_s)q(b)-q(c_s)\in\Psido{-1}$. Thus $\ind A_s-\ind A_{s_0}=\ind q(c_s)$. Fix
+metrics, and let $p(a)=\sup_{T^*X}\ang\xi^{-m}\norm{a}$, a continuous seminorm on $S^m$.
+Then $c_s-\Id=(a_s-a_{s_0})b+(a_{s_0}b-\Id)$. The second term lies in $S^{-1}$ and tends to
+zero at infinity. The first term is bounded by $p(a_s-a_{s_0})\sup\ang\xi^m\norm b$, which is
+less than $\frac12$ for $s$ close to $s_0$. In the notation of
+\cref{manifolds:prop:L2-bound}, $M(q(c_s)-\Id)<\frac12$. By that proposition there is a
+finite-rank $K$ with $\norm{q(c_s)-\Id-K}_{\Lin(L^2)}<1$. Then $q(c_s)-K$ is invertible on
+$L^2$ by the Neumann series, so $\ind q(c_s)=\ind(q(c_s)-K)=0$
+(\cref{hilbert:thm:stability}(b); by \cref{manifolds:thm:fredholm}(d) the index on $L^2$
+is the index). So $\ind A_s=\ind A_{s_0}$ near $s_0$, and by connectedness of $[0,1]$,
+$\ind A=\ind B=0$.
+
+\subsection*{\Cref{manifolds:ex:poincare}}
+Let $g$ be the metric, $\mathrm{vol}$ the Riemannian volume form of the orientation, and
+$\langle\cdot,\cdot\rangle$ the induced hermitian metric on $\Lambda^p$, conjugate-linear in the
+second slot. The Hodge star is the complex-linear bundle map
+$*:\Lambda^p\to\Lambda^{n-p}$ characterized by
+\begin{equation*}
+\alpha\wedge*\bar\beta=\langle\alpha,\beta\rangle\,\mathrm{vol},\qquad\alpha,\beta\in\Lambda^p_x .
+\end{equation*}
+In an oriented orthonormal coframe, $*(e^{i_1}\wedge\dots\wedge e^{i_p})=\pm e^{j_1}\wedge\dots\wedge e^{j_{n-p}}$, where
+$\{j\}$ is the complementary index set and the sign is such that the wedge product is
+$\mathrm{vol}$. From this one reads off that $*$ is an isometry and $**=(-1)^{p(n-p)}$ on
+$\Lambda^p$. In particular $*$ is an isomorphism, and it commutes with complex conjugation.
+
+\emph{The formula for $d^*$.} Let $\alpha\in\CI(X;\Lambda^{p-1})$ and $\beta\in\CI(X;\Lambda^p)$.
+Since $d(\alpha\wedge*\bar\beta)=d\alpha\wedge*\bar\beta+(-1)^{p-1}\alpha\wedge d*\bar\beta$ and
+$\int_Xd(\cdot)=0$ by Stokes' theorem ($X$ is closed),
+\begin{equation*}
+\inner{d\alpha}\beta=\int_Xd\alpha\wedge*\bar\beta=(-1)^p\int_X\alpha\wedge d*\bar\beta .
+\end{equation*}
+Put $\omega=d*\bar\beta\in\Lambda^{n-p+1}$. Then $\omega=(-1)^{(n-p+1)(p-1)}*(*\omega)$, so
+$\alpha\wedge\omega=(-1)^{(n-p+1)(p-1)}\alpha\wedge*\overline{\overline{*\omega}}
+=(-1)^{(n-p+1)(p-1)}\langle\alpha,\overline{*\omega}\rangle\mathrm{vol}$. Here
+$\overline{*\omega}=*d*\beta$. Hence $d^*=(-1)^{p+(n-p+1)(p-1)}*d*$ on $p$-forms. Modulo
+$2$ the exponent is $p+n(p-1)+(p-1)\equiv n(p+1)+1$, so
+\begin{equation*}
+d^*=(-1)^{n(p+1)+1}*d*\quad\text{on $p$-forms; in particular } d^*=\pm*d* .
+\end{equation*}
+
+\emph{Harmonic forms.} By \cref{manifolds:cor:hodge-derham}, $u$ is harmonic iff $du=0$ and
+$d^*u=0$. Let $u$ be a harmonic $p$-form. Then $d^*u=\pm*d*u=0$, and $*$ is injective, so
+$d(*u)=0$. Also $d^*(*u)=\pm*d**u=\pm*du=0$. So $*u$ is a harmonic $(n-p)$-form. Thus $*$
+maps $\mathcal H^p$ into $\mathcal H^{n-p}$, and $\mathcal H^{n-p}$ into $\mathcal H^p$, and
+$**=\pm1$, so $*:\mathcal H^p\to\mathcal H^{n-p}$ is an isomorphism (indeed an isometry). By
+\cref{manifolds:cor:hodge-derham}, $b_p=\dim\mathcal H^p=\dim\mathcal H^{n-p}=b_{n-p}$. If $n$ is
+odd, $p$ and $n-p$ have opposite parity, so substituting $p\mapsto n-p$ gives
+$\chi(X)=\sum_p(-1)^pb_p=\sum_p(-1)^{n-p}b_{n-p}=-\sum_p(-1)^pb_{p}=-\chi(X)$, i.e.\
+$\chi(X)=0$.
+
+\subsection*{\Cref{manifolds:ex:G-dense}}
+\emph{Using the determinant.} We read ``entire function on $\Psido{-\infty}$'' as: for
+$A\in\Psido{-\infty}(X;E)$ the function $f(z)=\det(\Id+zA)$ is entire. From multiplicativity,
+$\det\Id=(\det\Id)^2$, and $\det\Id\ne0$ because $0\in\Gsm$; so $f(0)=1$. Hence $f\not\equiv0$
+and its zeros are isolated. Choose $z_k\to1$ with $f(z_k)\ne0$. Then $z_kA\in\Gsm$, and
+$z_kA\to A$ in $\Psido{-\infty}(X;E)$.
+
+\emph{Directly.} Let $A\in\Psido{-\infty}(X;E)$ and $\mathcal W$ a neighbourhood of $A$. By
+\cref{manifolds:lem:density} there is a finite-rank smoothing $A_N\in\mathcal W$, whose kernel is
+$\sum_if_i(x)e_i(y)\nu(y)$ with smooth $f_i$, $e_i$. Let $v_1,\dots,v_M$ be an orthonormal basis of the
+span $V\subset\CI(X;E)$ of the $f_i$ and the duals $e_i^\dagger$ (as after
+\cref{manifolds:lem:finite-rank}), so $A_Nu=\sum_{j,k}a_{jk}\inner u{v_k}v_j$. Since
+$\GL(M,\C)$ is dense in $M(M,\C)$, there are matrices $a'\to a$ with $\Id+a'$ invertible.
+For example $\det(\Id+a+\lambda\Id)$ is a non-zero polynomial in $\lambda$, so it is non-zero for
+small $\lambda\ne0$. Let $A'u=\sum_{j,k}a'_{jk}\inner u{v_k}v_j$. Then
+$\Id+A'=(\Id_V+a')\oplus\Id_{V^\perp}$ is invertible on $L^2$, so $A'\in\Gsm(X;E)$. Its kernel
+differs from that of $A_N$ by $\sum_{j,k}(a'-a)_{jk}v_j(x)v_k(y)^\dagger\nu(y)$, which tends to $0$ in
+$\CI$ as $a'\to a$, the $v_j$ being fixed. So $A'\in\mathcal W$ for $a'$ close to $a$.
+
+\subsection*{\Cref{manifolds:ex:homogeneous-bundle}}
+\emph{Bundle structure.} We call a section $\omega\mapsto f_\omega\in N_{s,\omega}$ smooth if the
+function $F(r\omega)=f_\omega(r\omega)$ on $\R^n\setminus0$ is smooth. Such $F$ are exactly the smooth
+functions homogeneous of degree $s$. With the Euclidean norm, the map
+\begin{equation*}
+\Theta:\Sphere^{n-1}\times\C\to N_s,\qquad(\omega,c)\mapsto\big(r\omega\mapsto c\,r^s\big),
+\end{equation*}
+is a fibrewise linear bijection. Under $\Theta$ a section $c(\omega)$ corresponds to
+$F(z)=c(z/\abs z)\abs z^s$, which is smooth on $\R^n\setminus0$ iff $c\in\CI(\Sphere^{n-1})$. (If $c$ is
+smooth then $F$ is, since $z/\abs z$ and $\abs z^s$ are. Conversely $c=F|_{\Sphere^{n-1}}$.)
+Declaring $\Theta$ to be a diffeomorphism therefore makes $N_s$ a smooth (trivial) line
+bundle whose smooth sections are exactly the smooth homogeneous functions of degree $s$.
+This structure is intrinsic. Any other trivialization with the same smooth sections,
+for instance $\norm z^s$ for a norm which is smooth on $\R^n\setminus0$, differs from $\Theta$ by
+multiplication by the smooth non-vanishing function $\norm\omega^s$ on the sphere. A general
+norm gives a non-vanishing continuous section, which shows triviality as a topological
+bundle.
+
+\emph{No invariant section unless $s=0$.} $g\in\GL(n,\R)$ acts on $\Sphere^{n-1}$ by
+$\omega\mapsto g\omega/\abs{g\omega}$, and on $N_s$ by $(g_*f)(z)=f(g^{-1}z)$. This maps $N_{s,\omega}$
+linearly onto $N_{s,g\omega/\abs{g\omega}}$, and smooth sections to smooth sections, so it is a
+bundle automorphism covering the action on the sphere. A section invariant under all $g$
+is a homogeneous $F$ with $F\circ g^{-1}=F$ for all $g$. Since $\GL(n,\R)$ acts transitively on
+$\R^n\setminus0$, $F$ is constant, $F\equiv c\ne0$, and homogeneity gives $c=c\,r^s$ for all $r>0$,
+so $s=0$. (Already the scalars $\lambda\Id$, $\lambda>0$, suffice: they cover the identity of the
+sphere and act on $N_s$ as multiplication by $\lambda^{-s}$.) For $s=0$ the constant $1$ is
+invariant. Thus $N_s$ is trivial but not canonically so when $s\ne0$.
+
+\emph{The bundles $N_m$ over $S^*X$.} The fibre of $N_m$ at $(x,[\xi])$ is the space of
+functions on the ray $\R^+\xi\subset T^*_xX$ homogeneous of degree $m$. Its smooth sections are
+the smooth functions on $T^*X\setminus0$ homogeneous of degree $m$. Applying the above in each
+fibre, in local coordinates where $T^*X|_W\cong W\times\R^n$, shows that $N_m$ is a smooth
+line bundle. A Riemannian metric on $X$ gives the global non-vanishing smooth section
+$\abs\xi^m_g$, so $N_m\cong S^*X\times\C$, and a section $a$ corresponds to
+$a/\abs\xi_g^m\in\CI(S^*X)$. For $m\ne0$ no trivialization is natural. The dilations
+$\xi\mapsto\lambda\xi$ of $T^*X$ act on $N_m$ covering the identity of $S^*X$, by multiplication
+by $\lambda^m$, so they fix no non-vanishing section. More generally, a section invariant
+under the fibrewise linear action of $\GL(T^*_xX)$ is constant on each fibre, which forces
+$m=0$ as above. Different metrics give different trivializations, related by
+multiplication by $(\abs\xi_{g'}/\abs\xi_g)^m$.
+
+\subsection*{\Cref{manifolds:ex:essential-norm}}
+Work in a chart $\kappa:W\to\kappa(W)$ near $\bar x$ trivializing $E$ and $F$, identifying points
+with their coordinates. Write $\nu=\nu_0\abs{dx}$, and let $h_E(x)$, $h_F(x)$ be the positive
+matrices of the metrics, so that $\norm w^2=\int\langle h_Ew,w\rangle\nu_0\,dx$ for $w$ supported
+in $W$. For $t$ large, $u_t$ is supported in a fixed compact subset of $W$. We assume
+$v\ne0$.
+
+\emph{Norm and weak limit.} Substituting $x=\bar x+t^{-1/2}y$,
+\begin{equation*}
+\norm{u_t}^2=\int\abs{\phi(y)}^2\langle h_E(\bar x+t^{-1/2}y)v,v\rangle\nu_0(\bar x+t^{-1/2}y)\,dy
+\longrightarrow\nu_0(\bar x)\langle h_E(\bar x)v,v\rangle>0 ,
+\end{equation*}
+by dominated convergence. For $g\in\CI(X;E)$,
+$\abs{\inner{u_t}g}\le Ct^{n/4}\int\abs{\phi(t^{1/2}(x-\bar x))}\,dx=Ct^{-n/4}\norm\phi_{L^1}\to0$. Since
+$\norm{u_t}$ is bounded and $\CI$ is dense, $u_t\rightharpoonup0$ weakly in $L^2$.
+
+\emph{Localization.} Choose $\psi'\in\CIc(W)$ with $\psi'=1$ near $\bar x$, and $\psi\in\CIc(W)$
+with $\psi=1$ near $\supp\psi'$. For $t$ large $u_t=\psi'u_t$, so
+$Au_t=\psi A\psi'u_t+(1-\psi)A\psi'u_t$. The operator $(1-\psi)A\psi'$ is smoothing
+(\cref{manifolds:thm:local}(i)), hence compact on $L^2$
+(\cref{manifolds:thm:sobolev-bounded}), so $\norm{(1-\psi)A\psi'u_t}\to0$
+(\cref{hilbert:prop:compact}(b)). In the chart $\psi A\psi'$ is a matrix $\Op(a)$ with
+$a\in S^0_{\mathrm{ph}}$. Let $a_0$ be the homogeneous extension of its leading term, so
+that $\abs{a-a_0}\le C\abs\xi^{-1}$ for $\abs\xi\ge1$, and $\sigma:=a_0(\bar x,\bar\xi)$ is the matrix of
+$\sigma_0(A)(\bar x,\bar\xi)$ because $\psi(\bar x)=\psi'(\bar x)=1$.
+
+\emph{The main computation.} Let $\tilde u_t(x)=t^{n/4}\phi(t^{1/2}(x-\bar x))e^{itx\cdot\bar\xi}v$. Then
+$\hat{\tilde u}_t(\xi)=t^{-n/4}e^{-i\bar x\cdot(\xi-t\bar\xi)}\hat\phi(t^{-1/2}(\xi-t\bar\xi))v$. Using
+\eqref{euclidean:eq:left-quant}, substituting $\xi=t\bar\xi+t^{1/2}\zeta$, and writing
+$y=t^{1/2}(x-\bar x)$,
+\begin{equation*}
+\Op(a)\tilde u_t(x)-\sigma\tilde u_t(x)=t^{n/4}e^{itx\cdot\bar\xi}\,T_t(y),\qquad
+T_t(y)=\int e^{iy\cdot\zeta}b_t(y,\zeta)\hat\phi(\zeta)\,\dbar\zeta\,v,
+\end{equation*}
+with $b_t(y,\zeta)=a(\bar x+t^{-1/2}y,t\bar\xi+t^{1/2}\zeta)-\sigma$. Pointwise $b_t\to0$. Indeed
+$\abs{t\bar\xi+t^{1/2}\zeta}\to\infty$, so $a-a_0\to0$ there, and
+$a_0(\bar x+t^{-1/2}y,t\bar\xi+t^{1/2}\zeta)=a_0(\bar x+t^{-1/2}y,\bar\xi+t^{-1/2}\zeta)\to\sigma$ by homogeneity
+and continuity. Also $\abs{b_t}\le C$. For $\abs\alpha\ge1$,
+$\abs{\pa^\alpha_\zeta b_t}=t^{\abs\alpha/2}\abs{\pa^\alpha_\xi a}\le Ct^{\abs\alpha/2}\ang{t\bar\xi+t^{1/2}\zeta}^{-\abs\alpha}$. This is
+at most $C'$ when $\abs\zeta\le\frac12t^{1/2}\abs{\bar\xi}$, and at most $C'\ang\zeta^{\abs\alpha}$ otherwise.
+Integrating by parts with $y^\alpha e^{iy\cdot\zeta}=D^\alpha_\zeta e^{iy\cdot\zeta}$ therefore gives
+$\abs{T_t(y)}\le C\ang y^{-n-1}$ uniformly in $t\ge1$, while $T_t(y)\to0$ pointwise by dominated
+convergence. Hence $\int\abs{T_t(y)}^2dy\to0$, which equals
+$\norm{\Op(a)\tilde u_t-\sigma\tilde u_t}^2_{L^2(dx)}$. The weights $h_F\nu_0$ are bounded on the
+relevant compact set, so $\norm{\psi A\psi'u_t-\sigma u_t}_{L^2(X;F)}\to0$, where $\sigma u_t$ denotes the
+section with values $t^{n/4}\phi(\cdot)e^{ix\cdot\bar\xi}\sigma v$. As for $u_t$,
+$\norm{\sigma u_t}^2\to\nu_0(\bar x)\langle h_F(\bar x)\sigma v,\sigma v\rangle$. Altogether
+\begin{equation*}
+\frac{\norm{Au_t}}{\norm{u_t}}\longrightarrow\frac{\big(\nu_0(\bar x)\langle h_F\sigma v,\sigma v\rangle\big)^{1/2}}
+{\big(\nu_0(\bar x)\langle h_Ev,v\rangle\big)^{1/2}}=\frac{\abs{\sigma_0(A)(\bar x,\bar\xi)v}_{F_{\bar x}}}{\abs v_{E_{\bar x}}},
+\end{equation*}
+with the norms of the hermitian metrics; the density factor cancels.
+
+\emph{The essential norm.} Let $K$ be compact. Along a sequence $t_k\to\infty$, $Ku_{t_k}\to0$ in norm
+(\cref{hilbert:prop:compact}(b)), so
+$\norm{A+K}\ge\limsup\norm{(A+K)u_{t_k}}/\norm{u_{t_k}}=\abs{\sigma_0(A)(\bar x,\bar\xi)v}/\abs v$. Taking
+the supremum over $v$ and over $(\bar x,\bar\xi)\in S^*X$ gives $\norm{A+K}\ge M(A)$, since for classical
+$A$, $M(A)$ is the maximum over $S^*X$ of the norm of the homogeneous principal symbol.
+Together with \cref{manifolds:prop:L2-bound},
+$\inf_K\norm{A+K}=M(A)$.
+
+\subsection*{\Cref{manifolds:ex:rapidly-decreasing}}
+Since $\Lambda$ is positive and elliptic, $\Nul\Lambda=0$, and its generalized inverse
+$\Lambda^{-1}\in\Psido{-1}(X;E)$ is an inverse (\cref{manifolds:prop:generalized-inverse}). So
+$\Lambda^N\in\Psido N$ for all $N\in\Z$, $\Lambda^N:\Hs t\to\Hs{t-N}$ is an isomorphism, and
+$\Lambda^Ne_j=\lambda_j^Ne_j$. For $u\in\CI(X;E)$ we have $\inner u{e_k}=\lambda_k^{-M}\inner{\Lambda^Mu}{e_k}$, so
+the coefficients of $u$ decay faster than any power of $\lambda_k$. If $w\in\Hs{-N}$ and
+$\inner w{e_j}=0$ for all $j$, then $\inner{\Lambda^{-N}w}{e_j}=\lambda_j^{-N}\inner w{e_j}=0$, so $w=0$.
+
+\emph{A summability fact.} Let $q_0$ be an integer with $2q_0>n$. By \cref{manifolds:lem:HS},
+$\Lambda^{-q_0}$ is Hilbert--Schmidt, and
+$\sum_j\lambda_j^{-2q_0}=\sum_j\norm{\Lambda^{-q_0}e_j}^2=\norm{\Lambda^{-q_0}}_2^2<\infty$. (If one uses, as the
+exercise suggests, that $\Lambda^{-s}$ is of trace class for $s>n$, then likewise
+$\sum_j\lambda_j^{-s}=\Tr\Lambda^{-s}<\infty$.)
+
+(a) We interpret ``$\Lambda^NA\Lambda^N$ bounded'' as: $\norm{\Lambda^NA\Lambda^Nu}\le C\norm u$ for
+$u\in\CI(X;E)$, where $\Lambda^NA\Lambda^Nu\in\Hs{-N}$.
+
+\emph{Smoothing $\Rightarrow$ bounded.} If $A$ is smoothing, so is $\Lambda^NA\Lambda^N$
+(\cref{manifolds:cor:smoothing-ideal}), and it is bounded on $L^2$ by \eqref{manifolds:eq:HS-bound}.
+
+\emph{Bounded $\Rightarrow$ matrix estimate.} Since $\Lambda$ is formally self-adjoint and $e_j$ is
+smooth,
+$(\lambda_j\lambda_k)^Na_{jk}=\inner{A\Lambda^Ne_k}{\Lambda^Ne_j}=\inner{\Lambda^NA\Lambda^Ne_k}{e_j}$, so
+$\abs{(\lambda_j\lambda_k)^Na_{jk}}\le\norm{\Lambda^NA\Lambda^N}$.
+
+\emph{Matrix estimate $\Rightarrow$ bounded.} Let $C_N=\sup(\lambda_j\lambda_k)^N\abs{a_{jk}}$ and
+$b_{jk}=(\lambda_j\lambda_k)^Na_{jk}$. Then $\abs{b_{jk}}\le C_{N+q_0}(\lambda_j\lambda_k)^{-q_0}$, so
+$\sum_{j,k}\abs{b_{jk}}^2\le C_{N+q_0}^2(\sum_j\lambda_j^{-2q_0})^2<\infty$, and $(b_{jk})$ is the matrix of a
+Hilbert--Schmidt operator $\tilde B$. For $u\in\CI$, the series
+$A\Lambda^Nu=\sum_k\inner{\Lambda^Nu}{e_k}Ae_k$ converges in $L^2$, so
+\begin{equation*}
+\inner{\Lambda^NA\Lambda^Nu}{e_j}=\lambda_j^N\inner{A\Lambda^Nu}{e_j}=\sum_k\lambda_j^N\lambda_k^N\inner u{e_k}a_{jk}=\inner{\tilde Bu}{e_j}.
+\end{equation*}
+By the remark above, $\Lambda^NA\Lambda^Nu=\tilde Bu$, which gives the bound.
+
+\emph{Bounded $\Rightarrow$ smoothing.} Let $B_N$ be the bounded extension of $\Lambda^NA\Lambda^N$
+to $L^2$. Then $\tilde A_N=\Lambda^{-N}B_N\Lambda^{-N}:\Hs{-N}\to\Hs N$ is bounded, and agrees with
+$A$ on $\CI$. Two of these agree on the dense subspace $\CI$, so they are compatible, and
+define $\tilde A:\CmI=\bigcup_N\Hs{-N}\to\CI=\bigcap_N\Hs N$ (\cref{manifolds:prop:sobolev}(c)).
+$\tilde A$ is sequentially continuous. Let $u_j\to u$ weakly in $\CmI$. By the uniform
+boundedness principle and Sobolev embedding, $\abs{u_j(\phi)}\le C\norm\phi_{\mathcal C^l}\le C'\norm\phi_{\Hs{l'}}$,
+so $(u_j)$ is bounded in $\Hs{-l'}$ (\cref{manifolds:prop:sobolev}(e)). By Rellich
+(\cref{manifolds:prop:sobolev}(d)) every subsequence has a subsequence converging in
+$\Hs{-l'-1}$, necessarily to $u$; hence $u_j\to u$ in $\Hs{-l'-1}$. Then
+$\tilde Au_j\to\tilde Au$ in every $\Hs M$, hence in $\CI$. By
+\cref{manifolds:ex:smoothing-char}, $A$ is smoothing.
+
+(b) The $\lambda_j$ are non-decreasing, so with $S=\sum_i\lambda_i^{-s}$ we get
+$j\lambda_j^{-s}\le\sum_{i\le j}\lambda_i^{-s}\le S$, i.e.\ $\lambda_j\ge S^{-1/s}j^{1/s}$.
+
+The upper bound can be proved directly. Fix a chart $\kappa$ whose image contains the
+cube $Q=[0,1]^n$ (here $\dim X=n>0$ is used), with $E$ trivial over it, a unit vector
+$e\in\C^{N_E}$, and $0\ne\phi\in\CIc(\{\abs y<1\})$. Let $l=\lceil j^{1/n}\rceil$ and $r=1/(2l)$. Divide $Q$ into
+$l^n\ge j$ cubes of side $2r$ and let $p_1,\dots,p_j$ be centres of $j$ of them. The sections
+$\phi_i=\kappa^*\big(\phi((x-p_i)/r)e\big)$ have disjoint supports, so for $u=\sum c_i\phi_i$
+\begin{equation*}
+\norm u^2_{L^2}\ge c_0r^n\norm\phi^2\sum\abs{c_i}^2,\qquad\norm u^2_{\Hs1}\le C\sum\abs{c_i}^2\norm{\phi((\cdot-p_i)/r)}^2_{\Hs1}
+\le C'r^{n-2}\sum\abs{c_i}^2 ,
+\end{equation*}
+using \cref{manifolds:prop:sobolev}(a) for the second. Hence
+$\inner{\Lambda u}u\le\norm{\Lambda u}\norm u\le C\norm u_{\Hs1}\norm u\le C''r^{-1}\norm u^2$ on the
+$j$-dimensional space $V_j=\operatorname{span}\{\phi_i\}$. On the other hand some $0\ne u\in V_j$ is
+orthogonal to $e_1,\dots,e_{j-1}$, and for it
+$\inner{\Lambda u}u=\sum_{k\ge j}\lambda_k\abs{\inner u{e_k}}^2\ge\lambda_j\norm u^2$. Therefore
+$\lambda_j\le C''r^{-1}\le4C''j^{1/n}$. This is the polynomial upper bound (with $N=1/n$),
+without appeal to \cref{ch:wave}.
+
+With $cj^{1/s}\le\lambda_j\le Cj^{N_0}$ we have $c^{2N}(jk)^{N/s}\le(\lambda_j\lambda_k)^N\le C^{2N}(jk)^{NN_0}$. So the
+condition in (a) holds for all $N$ iff $\sup_{j,k}(jk)^N\abs{a_{jk}}<\infty$ for all $N$. By (a),
+$A\mapsto(a_{jk})$ maps $\Psido{-\infty}(X;E)$ into the space $\mathcal R$ of rapidly decreasing
+matrices. It is injective, since a bounded operator is determined by its matrix, and
+surjective: a matrix in $\mathcal R$ is square summable, so it defines a bounded (indeed
+Hilbert--Schmidt) operator, which is smoothing by (a). By Parseval,
+$\inner{ABe_k}{e_j}=\sum_l\inner{Be_k}{e_l}\inner{Ae_l}{e_j}$, so composition corresponds to the
+matrix product, and $A^*$ to the conjugate transpose. In particular $\mathcal R$ is closed
+under products, and the map is an isomorphism of $*$-algebras.
+
+(c) By \cref{isotropic:thm:hermite-basis} the Hermite functions $u_\alpha$, $\alpha\in\N_0^n$, form an
+orthonormal basis of $L^2(\R^n)$, with $Hu_\alpha=(n+2\abs\alpha)u_\alpha$. By
+\cref{isotropic:lem:residual-kernels}, $A\in\Psiiso{-\infty}(\R^n)$ iff $K_A\in\cS(\R^{2n})$. As in
+the proof of \cref{isotropic:cor:finite-rank-dense}, the $u_\alpha(x)\overline{u_\beta(y)}$ are, up to
+signs, the Hermite functions of $\R^{2n}$, and the coefficient of $K_A$ is
+$c_{\alpha\beta}=\inner{Au_\beta}{u_\alpha}$. By \cref{isotropic:prop:hermite-schwartz}, $K_A\in\cS$ iff
+$\abs{c_{\alpha\beta}}\le C_N(1+\abs\alpha+\abs\beta)^{-N}$ for all $N$; conversely such coefficients define
+a kernel in $\cS(\R^{2n})$. Enumerate $\N_0^n$ as $\alpha(1),\alpha(2),\dots$ with $\abs{\alpha(j)}$
+non-decreasing. If $\abs{\alpha(j)}=k$ then
+\begin{equation*}
+\Big(\frac kn\Big)^n\le\binom{n+k-1}n<j\le\binom{n+k}n\le(1+k)^n ,
+\end{equation*}
+because the $\binom{n+k-1}n$ multi-indices of length $<k$ come first. Hence
+$j^{1/n}\le1+\abs{\alpha(j)}\le1+nj^{1/n}$. Since
+$1+\abs\alpha+\abs\beta\le(1+\abs\alpha)(1+\abs\beta)\le(1+\abs\alpha+\abs\beta)^2$, rapid decrease in
+$1+\abs\alpha+\abs\beta$ is equivalent to rapid decrease in $jk$. So $A\mapsto(\inner{Au_{\alpha(k)}}{u_{\alpha(j)}})$ is a
+bijection of $\Psiiso{-\infty}(\R^n)$ onto $\mathcal R$, and as in (b) a $*$-algebra
+isomorphism. Consequently every $\Psido{-\infty}(X;E)$, for any compact $X$ of positive
+dimension and any bundle $E$, and every $\Psiiso{-\infty}(\R^n)$, $n\ge1$, is isomorphic to
+$\mathcal R$, hence to each other. The isomorphisms depend on the choice of $\Lambda$, of the
+orthonormal eigenbasis, and of its enumeration, so none of them is natural.
+
+\subsection*{\Cref{manifolds:ex:boundary-smoothing}}
+\emph{The algebra.} If $A,B\in\CI(M^2)$, the composite has kernel
+$C(x,z)=\int_MA(x,y)B(y,z)\nu(y)$. Since $M$ is compact we may differentiate under the
+integral, so $C\in\CI(M^2)$ with $\pa^\alpha_x\pa^\beta_zC=\int\pa^\alpha_xA\,\pa^\beta_zB\,\nu$. Composition of
+operators is associative, so these operators form an algebra.
+
+\emph{The subalgebra.} Let $\dCI(M^2)$ denote the kernels vanishing to infinite order at
+$(\pa M\times M)\cup(M\times\pa M)$. If $A$ vanishes to infinite order at $\pa M\times M$ then every
+$\pa_x^\alpha A(x,y)$ tends to $0$ as $x\to\pa M$, uniformly in $y$. Hence every derivative of $C$ tends
+to $0$ as $x\to\pa M$, i.e.\ $C$ vanishes to infinite order at $\pa M\times M$. The same argument
+in $z$ applies when $B$ vanishes at $M\times\pa M$. So $\dCI(M^2)$ is closed under
+composition.
+
+\emph{Not an ideal} (if $\pa M\ne\emptyset$). Let $A\equiv1$ and $B(y,z)=\phi(y)\phi(z)$ with
+$0\le\phi\in\CIc(M^\circ)$, $\phi\ne0$. Then $B\in\dCI(M^2)$, but $(AB)(x,z)=(\int\phi\nu)\phi(z)$ does not
+vanish at $x\in\pa M$ when $\phi(z)\ne0$. Similarly $BA\notin\dCI$.
+
+\emph{The radial compactification.} We show that $K\in\CI(\R^{2n})$ extends to an element of
+$\dCI(\RC{\R^n}\times\RC{\R^n})$ iff $K\in\cS(\R^{2n})$, following the proof of
+\cref{distributions:prop:S-dCI} in each factor. Cover $\RC{\R^n}$ by the interior region
+$\{\abs z<2\}$, with coordinates $z$, and the collar $\{\abs z>1\}$, with coordinates
+$(s,\omega)=(\abs z^{-1},z/\abs z)\in[0,1)\times\Sphere^{n-1}$ (\cref{distributions:lem:collar}). Then
+$\RC{\R^n}\times\RC{\R^n}$ is covered by products of these, with product coordinates.
+
+If $K\in\cS(\R^{2n})$, then in a product region such as $\{\abs x>1,\abs y>1\}$ each derivative of
+$F(s,\omega,s',\omega')=K(\omega/s,\omega'/s')$ is a finite sum of bounded smooth functions times
+$\abs x^p\abs y^{p'}x^\alpha\pa^\beta_xy^\gamma\pa^\delta_yK$. This uses $\pa_s=-\abs z\sum z_j\pa_{z_j}$ and the
+rotation fields of \cref{distributions:lem:vf}, in each factor. Since $K$ is Schwartz, such a
+term is $O(s^Ns'^N)$ for every $N$. In mixed regions such as $\{\abs x>1,\abs y<2\}$ the derivatives
+are $O(s^N)$. So every derivative tends to $0$ at every boundary point, and as in the proof
+of \cref{distributions:prop:S-dCI} the extension by zero is smooth, with all derivatives
+vanishing at the boundary hypersurfaces.
+
+Conversely, let $F\in\dCI$. By \cref{distributions:lem:vf},
+$\pa_{z_j}=s(-\omega_js\pa_s+W_j)$ and $z_j=\omega_j/s$, so in the corner region
+$x^\alpha\pa^\beta_xy^\gamma\pa^\delta_yK=s^{\abs\beta-\abs\alpha}s'^{\abs\delta-\abs\gamma}QF$ with $Q$ a differential
+operator with smooth coefficients. $QF$ vanishes to infinite order at $s=0$ and at
+$s'=0$. By Taylor's formula in $s$ and in $s'$ on the compact region, $\abs{QF}\le C_Ns^Ns'^N$,
+so $x^\alpha\pa^\beta_xy^\gamma\pa^\delta_yK$ is bounded there. The other regions are similar and
+simpler. Hence $K\in\cS(\R^{2n})$.
+
+Finally, the Lebesgue density is $dy=\ang y^{-n-1}\nu_0$ with $\nu_0$ a smooth positive density
+on $\RC{\R^n}$. In the collar $dy=s^{-n-1}ds\,d\omega$ and $\ang y^{-1}=s(1+s^2)^{-1/2}$. So
+$K(x,y)\,dy=\tilde K(x,y)\nu_0(y)$ with $\tilde K=\ang y^{-n-1}K$, and multiplication by $\ang y^{\pm(n+1)}$
+preserves $\cS(\R^{2n})$. Thus the operators $u\mapsto\int K(x,y)u(y)\,dy$ with
+$K\in\dCI(\RC{\R^n}\times\RC{\R^n})$ are exactly those with kernel in $\cS(\R^{2n})$, which by
+\cref{isotropic:lem:residual-kernels} are exactly the elements of $\Psiiso{-\infty}(\R^n)$. They are
+also the operators $\int\tilde K(x,y)u(y)\nu_0(y)$ with $\tilde K\in\dCI$, i.e.\ the subalgebra above
+for $M=\RC{\R^n}$, $\nu=\nu_0$.
+
+\subsection*{\Cref{manifolds:ex:toeplitz-inverse}}
+Let $\Lambda_m$ and $\tilde A=A+(\Id-P)\Lambda_m(\Id-P)$ be as in the proof of
+\cref{manifolds:thm:toeplitz-fredholm}. There $\Lambda_m=Q^*Q+\pi$ as in
+\cref{manifolds:cor:invertible}, so $\inner{\Lambda_mu}u=\norm{Qu}^2+\norm{\pi u}^2>0$ for
+$0\ne u\in\CI$. The operator $\tilde A\in\Psido m_{\mathrm{ph}}(X;E)$ is elliptic and commutes
+with $P$.
+
+\emph{Null spaces.} If $\tilde Au=0$, then $u$ is smooth, and so are $Pu$ and $(\Id-P)u$. Applying
+$P$ and $\Id-P$ gives $APu=0$ and $(\Id-P)\Lambda_m(\Id-P)u=0$. Pairing the latter with
+$(\Id-P)u$ gives $\inner{\Lambda_m(\Id-P)u}{(\Id-P)u}=0$, so $(\Id-P)u=0$. Hence
+$\Nul(\tilde A)=\Nul_P(A)=:N$. Since $\tilde A^*=A^*+(\Id-P)\Lambda_m(\Id-P)$ with
+$A^*\in\mathcal T^m_P$, likewise $\Nul(\tilde A^*)=\Nul_P(A^*)=:N^*$. As $N,N^*\subset\Ran P$ and $P$
+is self-adjoint, $P\pi_N=\pi_N=\pi_NP$ and $P\pi_{N^*}=\pi_{N^*}=\pi_{N^*}P$.
+
+\emph{The inverse.} Let $\tilde G\in\Psido{-m}(X;E)$ be the generalized inverse of $\tilde A$
+(\cref{manifolds:prop:generalized-inverse}). It is classical, since it differs by a smoothing
+operator from a parametrix, which is classical by \cref{manifolds:thm:parametrix}. We have
+$\tilde G\tilde A=\Id-\pi_N$ and $\tilde A\tilde G=\Id-\pi_{N^*}$. Put $G=P\tilde GP\in\mathcal T^{-m}_P$. Using
+$PA=A=AP$, $\tilde AP=A=P\tilde A$,
+\begin{equation*}
+GA=P\tilde GA=P\tilde G\tilde AP=P(\Id-\pi_N)P=P-\pi_N,\qquad
+AG=A\tilde GP=P\tilde A\tilde GP=P(\Id-\pi_{N^*})P=P-\pi_{N^*}.
+\end{equation*}
+If $A$ is invertible on $\CI_P$ then $N=0$. If $v\in N^*$, write $v=Au$ with $u\in\CI_P$; then
+$\norm v^2=\inner{Au}v=\inner u{A^*v}=0$, so $N^*=0$. Thus $GA=AG=P$, the identity of
+$\CI_P$, and $G\in\mathcal T^{-m}_P$ is the inverse.
+
+\subsection*{\Cref{manifolds:ex:toeplitz-commutator}}
+Since $P^2=P$, $P[P,a]=Pa-PaP=Pa(\Id-P)$ and $[P,b]P=PbP-bP=-(\Id-P)bP$. Hence
+\begin{equation*}
+P[P,a](\Id-P)[P,b]P=-Pa(\Id-P)bP=PaPbP-PabP=T_aT_b-T_{ab}.
+\end{equation*}
+Multiplication by $a$ is in $\Psido0_{\mathrm{ph}}(X;E)$ with principal symbol $a$, so
+$\sigma_0([P,a])=[p,a]$. If $[p,a]=0$ on $S^*X$, then $[P,a]\in\Psido{-1}_{\mathrm{ph}}$
+(\cref{manifolds:prop:principal-symbol}(d)), and the formula shows that
+$T_aT_b-T_{ab}\in P\Psido{-1}_{\mathrm{ph}}P=\mathcal T^{-1}_P$. The same holds if $[p,b]=0$. A scalar
+function commutes with every endomorphism, in particular with $p$.
+
+\emph{The set $Y$.} The rank of $p$ is $\tr p$, a continuous integer-valued function, hence
+locally constant on $S^*X$. So $\{V\ne0\}$ is open and closed in the compact space $S^*X$,
+hence compact, and its projection $Y$ is compact.
+
+\emph{Ellipticity.} For scalar $a$, $pap=ap$, so $\sigma^P_0(T_a)=a(x)\Id_{V_{(x,\xi)}}$. At points
+with $V=0$ this is the identity of the zero space, hence invertible. At points with $V\ne0$,
+i.e.\ over $Y$, it is invertible iff $a(x)\ne0$. So $T_a$ is elliptic iff $a$ vanishes nowhere on
+$Y$.
+
+\emph{Parametrix.} Let $b\in\CI(X)$ equal $1/a$ near $Y$. By the first part
+$T_bT_a-T_{ba}$ and $T_aT_b-T_{ab}$ lie in $\mathcal T^{-1}_P$. Moreover
+$\sigma^P_0(T_{ab}-P)=(ab-1)\Id_V=0$, since $ab=1$ over $Y$ and $V=0$ elsewhere, and
+$\sigma^P_0(P)=p|_V=\Id_V$. By \cref{manifolds:prop:toeplitz-calculus}(b),
+$T_{ab}-P\in\mathcal T^{-1}_P$. Hence $T_bT_a-P$ and $T_aT_b-P$ lie in $\mathcal T^{-1}_P$, i.e.\ $T_b$ is a
+parametrix of $T_a$ modulo $\mathcal T^{-1}_P$, $P$ being the identity of $\mathcal T_P$.

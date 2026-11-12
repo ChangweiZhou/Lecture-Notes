@@ -1,1 +1,368 @@
-% solutions for 04b-semiclassical (in progress)
+% Solutions to the exercises of chapters/04b-semiclassical.tex
+\providecommand{\Psisl}[1]{\Psi^{#1}_{\mathrm{sl}}}
+\providecommand{\Ssl}[1]{S^{#1}_{\mathrm{sl}}}
+\providecommand{\Sslph}[1]{S^{#1}_{\mathrm{sl,ph}}}
+\providecommand{\Psislph}[1]{\Psi^{#1}_{\mathrm{sl,ph}}}
+\providecommand{\ssl}{\sigma_{\mathrm{sl}}}
+\providecommand{\sad}{\sigma_{\mathrm{ad}}}
+\providecommand{\Psiad}{\Psi^{-\infty}_{\mathrm{ad}}}
+\providecommand{\Psisa}{\Psi^{-\infty}_{\mathrm{sl,ad}}}
+\providecommand{\Amp}[2]{\mathcal{A}^{#1}_{#2}}
+
+\section{Solutions for \cref{ch:semiclassical}: Semiclassical and adiabatic calculus}\label{solutions:semiclassical}
+
+Throughout, $\Delta_{\mathrm{eucl}}=\sum_j\pa_{x_j}^2$ and, as in the chapter, $\Delta_\eta=\sum_jD_{\eta_j}^2$.
+For a symbol $a$ we write $a^\flat(\eps,x,\xi)=a(\eps,x,\eps\xi)$, so that $\Op_\eps(a)=\Op(a^\flat(\eps))$.
+
+\subsection*{\Cref{semiclassical:ex:wkb}}
+\emph{The computation.} By the product rule,
+$\pa_j(e^{if/\eps}u)=e^{if/\eps}\big(\tfrac i\eps\pa_jf\,u+\pa_ju\big)$, and differentiating once more,
+\begin{equation*}
+\pa_j^2(e^{if/\eps}u)=e^{if/\eps}\Big(-\frac{(\pa_jf)^2}{\eps^2}u+\frac{2i}\eps\pa_jf\,\pa_ju+\frac i\eps(\pa_j^2f)u+\pa_j^2u\Big).
+\end{equation*}
+Multiplying by $-\eps^2$, summing over $j$ and adding $Vu$ gives
+\begin{equation}\label{solsemiclassical:eq:wkb}
+e^{-if/\eps}P_\eps(e^{if/\eps}u)=\big(\abs{\nabla f}^2+V\big)u-i\eps\big(2\nabla f\cdot\nabla u+(\Delta_{\mathrm{eucl}}f)u\big)-\eps^2\Delta_{\mathrm{eucl}}u .
+\end{equation}
+
+\emph{Comparison.} Since $-i\nabla=D$ and $-\eps^2\Delta_{\mathrm{eucl}}=\eps^2\sum D_j^2$, the right side of
+\eqref{solsemiclassical:eq:wkb} is
+$\sum_j(\eps D_j)^2u+2\sum_j\pa_jf\,\eps D_ju+\abs{\nabla f}^2u+Vu-i\eps(\Delta_{\mathrm{eucl}}f)u$. By
+\cref{semiclassical:ex:differential} this is $\Op_\eps(c_f)u$ with
+\begin{equation*}
+c_f(\eps,x,\eta)=\abs{\eta+\nabla f(x)}^2+V(x)-i\eps\,\Delta_{\mathrm{eucl}}f(x).
+\end{equation*}
+This is the symbol of \cref{semiclassical:prop:oscillatory}, now computed exactly. As
+predicted, $c_f(0,x,\eta)=\ssl(P)(x,\eta+df(x))$ with $\ssl(P)=\abs\eta^2+V$, and as
+$\eps\downarrow0$ the right side of \eqref{solsemiclassical:eq:wkb} tends to $\ssl(P)(x,df(x))u$.
+
+\emph{The eikonal equation.} We read the WKB ansatz as $w_\eps=e^{if/\eps}U_\eps$, where for every
+$N$, $U_\eps-\sum_{j<N}\eps^ju_j=O(\eps^N)$ in the norm $\sup_{\abs\beta\le2}\abs{\pa^\beta\cdot}$, with
+$u_j\in\mathcal C^2_{\mathrm b}$. Suppose $(P_\eps-\lambda)w_\eps=O(\eps^\infty)$ uniformly; even $o(1)$
+suffices. Multiplying by $e^{-if/\eps}$, which has modulus one, and using
+\eqref{solsemiclassical:eq:wkb},
+\begin{equation*}
+\big(\abs{\nabla f}^2+V-\lambda\big)U_\eps-i\eps\big(2\nabla f\cdot\nabla U_\eps+(\Delta_{\mathrm{eucl}}f)U_\eps\big)-\eps^2\Delta_{\mathrm{eucl}}U_\eps\to0 .
+\end{equation*}
+Here $\nabla f$ and $\Delta_{\mathrm{eucl}}f$ are bounded, $U_\eps$ is bounded in $\mathcal C^2$, and
+$U_\eps\to u_0$ uniformly. Letting $\eps\downarrow0$ gives $(\abs{\nabla f}^2+V-\lambda)u_0=0$. So
+$\abs{\nabla f}^2+V=\lambda$ on $\{u_0\ne0\}$, and by continuity on its closure $\supp u_0$. (If the
+error is $O(\eps^2)$, subtracting this, dividing by $\eps$ and letting $\eps\downarrow0$ gives the
+next equation
+$(\abs{\nabla f}^2+V-\lambda)u_1=i(2\nabla f\cdot\nabla u_0+(\Delta_{\mathrm{eucl}}f)u_0)$. Where the eikonal
+equation holds on an open set this becomes the transport equation
+$2\nabla f\cdot\nabla u_0+(\Delta_{\mathrm{eucl}}f)u_0=0$.)
+
+\emph{Ellipticity.} $P=\Op_\eps(p)$ with $p=\abs\eta^2+V(x)\in\Sslph2(\R^n)$, independent of $\eps$. By
+\cref{semiclassical:lem:elliptic}, $P$ is elliptic iff (i) $p(x,\eta)$ is invertible for all
+$(x,\eta)$ with $\abs{p^{-1}}\le C\ang\eta^{-2}$, and (ii) the same holds for $\abs\eta\ge R$. If $\inf V=c>0$
+then $p\ge\abs\eta^2+c\ge\min(1,c)\ang\eta^2$, so (i) and (ii) hold. Conversely, suppose (i) holds. If
+$V(x)<0$ for some $x$, then $p(x,\eta)=0$ for $\abs\eta^2=-V(x)$, which is impossible. And if $V(x)=0$
+then $p(x,0)=0$. So $V>0$, and $\abs{p(x,0)^{-1}}=V(x)^{-1}\le C$ gives $V\ge1/C$, i.e.\ $\inf V>0$.
+
+\subsection*{\Cref{semiclassical:ex:reparametrize}}
+$T$ is a diffeomorphism of $[0,1]$ fixing $0$, so it is increasing, $T'>0$, and
+$S=T^{-1}$ is also one. By Taylor's formula $S(\eps')=\eps'g(\eps')$ with
+$g(\eps')=\int_0^1S'(r\eps')\,dr$, which is smooth and satisfies $0<g_-\le g\le g_+$ on $[0,1]$. Also
+$g(0)=S'(0)=1/T'(0)$. Let $A=\Op_\eps(a)$, $a\in\Ssl m(\R^n)$. For $\eps'\in(0,1]$,
+\begin{equation*}
+A'_{\eps'}=A_{S(\eps')}=\Op\big(a(S(\eps'),x,S(\eps')\xi)\big)=\Op\big(a'(\eps',x,\eps'\xi)\big)=\Op_{\eps'}(a'),\qquad
+a'(\eps',x,\eta)=a\big(\eps'g(\eps'),x,g(\eps')\eta\big).
+\end{equation*}
+We check $a'\in\Ssl m(\R^n)$. It is smooth on $[0,1]\times\R^{2n}$. Since $g_-\le g\le g_+$, the
+quantities $\ang{g\eta}$ and $\ang\eta$ are comparable. By the chain rule and induction,
+$\pa^k_{\eps'}D^\alpha_xD^\beta_\eta a'$ is a finite sum of terms
+\begin{equation*}
+c(\eps')\,\eta^\gamma\,(\pa^l_\eps D^\alpha_xD^{\beta+\gamma}_\eta a)\big(\eps'g(\eps'),x,g(\eps')\eta\big),\qquad\abs\gamma\le k,
+\end{equation*}
+with $c$ smooth on $[0,1]$. Indeed, each $\pa_{\eps'}$ either falls on $c$, or on the first
+argument (producing $(\eps'g)'\pa_\eps$), or on the third argument (producing $g'(\eps')\eta\cdot\pa_\eta$),
+or on $\eta^\gamma$ (giving zero). Each term is bounded by
+$C\ang\eta^{\abs\gamma}\ang{g\eta}^{m-\abs\beta-\abs\gamma}\le C'\ang\eta^{m-\abs\beta}$. Hence $a'\in\Ssl m$ and
+$A'\in\Psisl m(\R^n)$. Finally
+$\ssl(A')(x,\eta)=a'(0,x,\eta)=a(0,x,g(0)\eta)=\ssl(A)(x,\eta/T'(0))$.
+
+\subsection*{\Cref{semiclassical:ex:smoothing-expansion}}
+By \cref{semiclassical:prop:smoothing-kernels} the symbol of $AB$ is
+$c(\eps,x,\eta)=\int e^{-iZ\cdot\eta}M(\eps,x,Z)\,dZ$, with $M$ as in
+\eqref{semiclassical:eq:smoothing-composition}. Taylor's formula in the second argument of $L$
+gives, for each $N$,
+\begin{gather*}
+L(\eps,x-\eps t,W)=\sum_{\abs\alpha<N}\frac{(-\eps t)^\alpha}{\alpha!}\pa^\alpha_xL(\eps,x,W)+\eps^N\rho_N(\eps,x,t,W),\\
+\rho_N=\sum_{\abs\alpha=N}\frac{N(-t)^\alpha}{\alpha!}\int_0^1(1-s)^{N-1}(\pa^\alpha_xL)(\eps,x-s\eps t,W)\,ds .
+\end{gather*}
+Insert this with $W=Z-t$ into \eqref{semiclassical:eq:smoothing-composition}. For the term
+with index $\alpha$, substitute $Z=t+W$, so that $e^{-iZ\cdot\eta}=e^{-it\cdot\eta}e^{-iW\cdot\eta}$, and use
+Fubini (all integrands are rapidly decreasing). Its contribution to $c$ is
+\begin{equation*}
+\frac{(-\eps)^{\abs\alpha}}{\alpha!}\Big(\int e^{-it\cdot\eta}t^\alpha K\,dt\Big)\Big(\int e^{-iW\cdot\eta}\pa^\alpha_xL\,dW\Big)
+=\frac{(-\eps)^{\abs\alpha}}{\alpha!}(i\pa_\eta)^\alpha a\;\pa^\alpha_xb
+=\frac{\eps^{\abs\alpha}}{\alpha!}\pa^\alpha_\eta a\,D^\alpha_xb,
+\end{equation*}
+since $(-1)^{\abs\alpha}i^{\abs\alpha}\pa^\alpha_x=(-i)^{\abs\alpha}\pa^\alpha_x=D^\alpha_x$.
+
+The remainder is $\eps^Nr_N$ with $r_N=\int e^{-iZ\cdot\eta}M_N\,dZ$ and
+$M_N(\eps,x,Z)=\int K(\eps,x,t)\rho_N(\eps,x,t,Z-t)\,dt$. We claim $M_N\in\mathcal K(\R^n)$. Derivatives in
+$x$ and $Z$ fall on $K$ or on $\pa^\alpha_xL$. A derivative in $\eps$ falling on the first argument
+$x-s\eps t$ of $L$ produces a factor $-st$. In all cases the integrand is bounded by
+$C\ang t^{N+j}\abs{K}\,\ang{Z-t}^{-N'}\le C'\ang t^{-N'}\ang{Z-t}^{-N'}$. By Peetre's inequality
+$\ang Z^{N'}\le2^{N'/2}\ang t^{N'}\ang{Z-t}^{N'}$ the $t$-integral is bounded by $C\ang Z^{-N'+n+1}$, for
+every $N'$. Hence $r_N\in\Ssl{-\infty}(\R^n)$, as in \cref{semiclassical:prop:smoothing-kernels}, and
+\begin{equation*}
+c-\sum_{\abs\alpha<N}\frac{\eps^{\abs\alpha}}{\alpha!}\pa^\alpha_\eta a\,D^\alpha_xb\in\eps^N\Ssl{-\infty}(\R^n)\quad\text{for every }N .
+\end{equation*}
+In particular all $\eps$-derivatives at $\eps=0$ of $c$ and of the formal series agree, which is
+the stated expansion in the sense of Taylor series. It is the expansion
+\eqref{semiclassical:eq:composition} of \cref{semiclassical:thm:composition}, as it must be,
+since by the bijectivity of $\Op_\eps$ the symbol $c$ of $AB$ equals $a\#b$.
+
+\subsection*{\Cref{semiclassical:ex:off-diagonal}}
+\emph{The identity.} $D_{\eta_j}e^{i(x-y)\cdot\eta/\eps}=\eps^{-1}(x_j-y_j)e^{i(x-y)\cdot\eta/\eps}$, so
+$\eps^2\Delta_\eta e^{i(x-y)\cdot\eta/\eps}=\abs{x-y}^2e^{i(x-y)\cdot\eta/\eps}$.
+
+\emph{Off-diagonal estimate.} Let $a\in\Ssl m(\R^n)$ and $k(\eps,x,y)$ the kernel of $\Op_\eps(a)$,
+$\eps>0$. We claim that for $x\ne y$ and every $L$ with $m-2L<-n$,
+\begin{equation}\label{solsemiclassical:eq:ibp}
+k(\eps,x,y)=(2\pi\eps)^{-n}\eps^{2L}\abs{x-y}^{-2L}\int e^{i(x-y)\cdot\eta/\eps}\Delta^L_\eta a(\eps,x,\eta)\,d\eta .
+\end{equation}
+For $a_R=\chi(\eta/R)a$, $\chi\in\CIc$ equal to one near $0$, the integral defining the kernel converges
+absolutely, and \eqref{solsemiclassical:eq:ibp} follows by $L$ integrations by parts using the
+identity. As $R\to\infty$ the kernels of $\Op_\eps(a_R)$ converge to $k$ as distributions
+(\cref{euclidean:prop:osc-int}), since $a_R^\flat\to a^\flat$ in $\Amp{m+1}0$ by
+\cref{euclidean:lem:density}. The right sides converge locally uniformly on $\{x\ne y\}$ by
+dominated convergence, because $\abs{\Delta^L_\eta a_R}\le C\ang\eta^{m-2L}$ uniformly. Hence
+\eqref{solsemiclassical:eq:ibp} holds.
+
+Now fix $j$, $\alpha$, $\beta$, take $L$ with $m+j+\abs\alpha+\abs\beta-2L<-n$, and differentiate
+\eqref{solsemiclassical:eq:ibp} under the integral sign. A derivative $\pa_x$ or $\pa_y$ either
+falls on $a$, or on $\abs{x-y}^{-2L}$, producing $\abs{x-y}^{-2L-1}$, or on the phase, producing
+$\pm i\eta/\eps$. A derivative $\pa_\eps$ either falls on $a$, or on $\eps^{2L-n}$, producing $\eps^{-1}$, or
+on the phase, producing $-i(x-y)\cdot\eta/\eps^2$. So $\pa^j_\eps\pa^\alpha_x\pa^\beta_yk$ is a finite sum of
+terms
+\begin{equation*}
+\eps^{2L-n-p}\,g(x-y)\int e^{i(x-y)\cdot\eta/\eps}\eta^\delta\,\pa^{j'}_\eps\pa^{\alpha'}_x\Delta^L_\eta a\,d\eta,\qquad
+p\le2j+\abs\alpha+\abs\beta,\ \abs\delta\le j+\abs\alpha+\abs\beta,
+\end{equation*}
+where $\abs{g(z)}\le C\abs z^{j-2L}$ for $\abs z\ge d$. The integrals converge absolutely and uniformly,
+so $k$ is smooth on $(0,1]\times\{\abs{x-y}>d\}$, and there
+\begin{equation*}
+\abs{\pa^j_\eps\pa^\alpha_x\pa^\beta_yk}\le C\eps^{2L-n-2j-\abs\alpha-\abs\beta}\ang{x-y}^{j-2L}.
+\end{equation*}
+Since $L$ may be taken arbitrarily large, this is $\le C_N\eps^N\ang{x-y}^{-N}$ for every $N$. All derivatives
+tend to zero uniformly as $\eps\downarrow0$, so they extend continuously by zero, and by the mean
+value theorem $k$ extends smoothly by zero to $\eps=0$. This proves
+\cref{semiclassical:lem:off-diagonal}.
+
+\emph{Second proof of \cref{semiclassical:thm:reduction}.} Let $p\in\Ssl m(\R^{2n};\R^n)$.
+
+\emph{Step 1 (Taylor expansion).} Taylor's formula in $y$ about $y=x$ gives
+\begin{equation*}
+p(\eps,x,y,\eta)=\sum_{\abs\alpha<N}\frac{(y-x)^\alpha}{\alpha!}\pa^\alpha_yp(\eps,x,x,\eta)+\sum_{\abs\alpha=N}(y-x)^\alpha\rho_\alpha,
+\end{equation*}
+with $\rho_\alpha=\frac N{\alpha!}\int_0^1(1-s)^{N-1}\pa^\alpha_yp(\eps,x,x+s(y-x),\eta)\,ds\in\Ssl m(\R^{2n};\R^n)$. All
+$(x,y)$-derivatives of $p$ are bounded, so no weight in $x-y$ appears.
+
+\emph{Step 2 (kernel identity).} For $q\in\Ssl\mu(\R^{2n};\R^n)$,
+$\Op_\eps((y-x)^\alpha q)=\eps^{\abs\alpha}\Op_\eps(D^\alpha_\eta q)$. Indeed, for fixed $\eps>0$,
+$\Op_\eps(q)=\Op(q^\flat)$, and by \cref{euclidean:lem:kernel-identities},
+$\Op((y-x)^\alpha q^\flat)=\Op(D^\alpha_\xi q^\flat)$, while $D^\alpha_\xi q^\flat=\eps^{\abs\alpha}(D^\alpha_\eta q)^\flat$. Hence
+\begin{equation*}
+\Op_\eps(p)=\sum_{j<N}\eps^j\Op_\eps(b_j)+\eps^N\Op_\eps(r_N),\qquad
+b_j=\sum_{\abs\alpha=j}\frac1{\alpha!}\pa^\alpha_\eta D^\alpha_yp(\eps,x,y,\eta)\big|_{y=x}\in\Ssl{m-j}(\R^n),
+\end{equation*}
+using $D^\alpha_\eta\pa^\alpha_y=\pa^\alpha_\eta D^\alpha_y$. Here $r_N=\sum_{\abs\alpha=N}D^\alpha_\eta\rho_\alpha\in\Ssl{m-N}(\R^{2n};\R^n)$.
+
+\emph{Step 3 (kernels of $\eps^N\Op_\eps(q)$).} Let $q\in\Ssl\mu(\R^{2n};\R^n)$, and let $k_q$ be the kernel of
+$\eps^N\Op_\eps(q)$. If $\mu+j+\abs\alpha+\abs\beta<-n$, the computation above, now with the amplitude
+depending on $y$ as well, shows that
+\begin{equation*}
+\abs{\pa^j_\eps\pa^\alpha_x\pa^\beta_yk_q}\le C\eps^{N-n-2j-\abs\alpha-\abs\beta}\ang{x-y}^{j-2L}\qquad\text{for every }L .
+\end{equation*}
+For $\abs{x-y}\le1$ use the absolutely convergent integral directly. For $\abs{x-y}\ge1$ first
+integrate by parts with $\eps^{2L}\abs{x-y}^{-2L}\Delta^L_\eta$, which only improves the power of
+$\eps$.
+
+\emph{Step 4 (summation).} By \cref{semiclassical:lem:borel}(i) choose $b\in\Ssl m(\R^n)$ with
+$b-\sum_{j<N}\eps^jb_j\in\eps^N\Ssl{m-N}$ for all $N$. Let $D=\Op_\eps(p)-\Op_\eps(b)$. For each $N$, by
+Step 2,
+\begin{equation*}
+D=\eps^N\Op_\eps(r_N)-\Op_\eps\Big(b-\sum_{j<N}\eps^jb_j\Big)=\eps^N\Op_\eps(q_N),\qquad q_N\in\Ssl{m-N}(\R^{2n};\R^n),
+\end{equation*}
+a left symbol being a special amplitude. Given $j$, $\alpha$, $\beta$ and $N_0$, apply Step 3 with $N$
+so large that $m-N+j+\abs\alpha+\abs\beta<-n$ and $N-n-2j-\abs\alpha-\abs\beta\ge N_0$, and with
+$2L\ge N_0+j$. Since $D$ does not depend on $N$, its kernel is smooth on $(0,1]\times\R^{2n}$ and
+satisfies $\abs{\pa^j_\eps\pa^\alpha_x\pa^\beta_yk_D}\le C\eps^{N_0}\ang{x-y}^{-N_0}$. Hence it extends
+smoothly by zero to $\eps=0$ and satisfies \eqref{semiclassical:eq:residual-kernel}. By
+\cref{semiclassical:lem:residual-ideal}, $D=\Op_\eps(r)$ with $r\in\eps^\infty\Ssl{-\infty}(\R^n)$. Thus
+$\Op_\eps(p)=\Op_\eps(c)$ with $c=b+r\in\Ssl m(\R^n)$. This $c$ satisfies \eqref{semiclassical:eq:reduction},
+and is unique by the bijectivity of $\Op_\eps$. This is the argument of
+\cref{euclidean:thm:reduction}: Taylor expansion of the amplitude, Borel summation, and
+identification of the residual part. Here \cref{semiclassical:lem:borel} controls the
+orders in $\eps$ and in $\eta$ simultaneously, and the integration by parts of the first part
+controls the kernels.
+
+\subsection*{\Cref{semiclassical:ex:norm}}
+Let $f(x)=x\cdot\eta_0$, so $\pa_jf=(\eta_0)_j$ is constant, and let $0\ne\phi\in\CIc(\R^n)$. By
+\cref{semiclassical:prop:oscillatory},
+$e^{-if/\eps}A_\eps(e^{if/\eps}\phi)\to\ssl(A)(x,\eta_0)\phi$ in $\cS(\R^n)$, hence in $L^2$. Multiplication by
+$e^{\mp if/\eps}$ is unitary on $L^2$, so
+\begin{equation*}
+\norm{A_\eps}\ge\frac{\norm{A_\eps(e^{if/\eps}\phi)}}{\norm{e^{if/\eps}\phi}}=\frac{\norm{e^{-if/\eps}A_\eps(e^{if/\eps}\phi)}}{\norm\phi}
+\longrightarrow\frac{\norm{\ssl(A)(\cdot,\eta_0)\phi}}{\norm\phi}.
+\end{equation*}
+Take $\phi=\phi_k=k^{n/2}\chi(k(x-x_0))$ with $0\ne\chi\in\CIc$. Then $\norm{\phi_k}=\norm\chi$ and
+\begin{equation*}
+\norm{\ssl(A)(\cdot,\eta_0)\phi_k}^2=\int\abs{\ssl(A)(x_0+z/k,\eta_0)}^2\abs{\chi(z)}^2\,dz\to\abs{\ssl(A)(x_0,\eta_0)}^2\norm\chi^2,
+\end{equation*}
+by continuity and boundedness of $\ssl(A)\in S^0$. Hence
+$\liminf_{\eps\downarrow0}\norm{A_\eps}\ge\abs{\ssl(A)(x_0,\eta_0)}$ for every $(x_0,\eta_0)$, so
+$\liminf\norm{A_\eps}\ge\sup\abs{\ssl(A)}$. Combined with \cref{semiclassical:cor:norm},
+$\sup\abs{\ssl(A)}\le\liminf\norm{A_\eps}\le\limsup\norm{A_\eps}\le\sup\abs{\ssl(A)}$, so the limit exists and
+equals $\sup\abs{\ssl(A)}$.
+
+\subsection*{\Cref{semiclassical:ex:residual}}
+\emph{$e^{-1/\eps}\Id$.} $A_\eps=\Op_\eps(e^{-1/\eps})$, with symbol $a(\eps)=e^{-1/\eps}$ extended by $0$ at
+$\eps=0$, which is smooth on $[0,1]$ and constant in $(x,\eta)$. For each $N$,
+$a=\eps^N\cdot\eps^{-N}e^{-1/\eps}$, and $\eps^{-N}e^{-1/\eps}$ (extended by $0$) is again smooth on $[0,1]$, so
+it lies in $\Ssl0$. Hence $A\in\eps^N\Psisl0$ for every $N$. If $A$ were in
+$\eps^\infty\Psisl{-\infty}\subset\Psisl{-\infty}$, then by the bijectivity of $\Op_\eps$ its symbol
+$e^{-1/\eps}$ would lie in $\Ssl{-1}$, i.e.\ $e^{-1/\eps}\le C\ang\eta^{-1}$ for all $\eta$, which fails
+for each fixed $\eps>0$. (Equivalently, the kernel $e^{-1/\eps}\delta(x-y)$ is not smooth.)
+
+\emph{$\eps\Id$.} It is $\Op_\eps(\eps)\in\Psisl0$, invertible for each $\eps>0$ with inverse
+$\eps^{-1}\Id$. It is not elliptic, since $\ssl(\eps\Id)=0$ is not invertible
+(\cref{semiclassical:lem:elliptic}(i)). The inverse family is not semiclassical: if
+$\eps^{-1}\Id=\Op_\eps(b)$ with $b\in\Ssl m$, then by injectivity of $\Op$ for each $\eps>0$,
+$b(\eps,x,\eta)=\eps^{-1}$, which does not extend continuously to $\eps=0$.
+
+\emph{The exact inverse.} $\Op_\eps(\ang\eta^{-2})=\Op(\ang{\eps\xi}^{-2})$ is the Fourier multiplier by
+$(1+\eps^2\abs\xi^2)^{-1}$, and $1-\eps^2\Delta_{\mathrm{eucl}}$ is the Fourier multiplier by
+$1+\eps^2\abs\xi^2$. The composite of Fourier multipliers is the multiplier by the product,
+which is $1$. So $(1-\eps^2\Delta_{\mathrm{eucl}})\Op_\eps(\ang\eta^{-2})=\Op_\eps(\ang\eta^{-2})(1-\eps^2\Delta_{\mathrm{eucl}})=\Id$
+on $\cS(\R^n)$ and on $\cSp(\R^n)$, for every $\eps>0$. This is consistent with
+\cref{semiclassical:thm:composition}: for symbols independent of $x$ all terms of the
+expansion with $\abs\alpha>0$ vanish, and $\ang\eta^2\#\ang\eta^{-2}=1$ exactly.
+
+\subsection*{\Cref{semiclassical:ex:weyl}}
+\emph{Membership and symbol.} Put $p(\eps,x,y,\eta)=a(\eps,\frac{x+y}2,\eta)$. Every derivative
+$\pa^k_\eps D^\alpha_xD^\gamma_yD^\beta_\eta p$ is $2^{-\abs\alpha-\abs\gamma}(\pa^k_\eps D^{\alpha+\gamma}_xD^\beta_\eta a)(\eps,\frac{x+y}2,\eta)$, so
+$p\in\Ssl m(\R^{2n};\R^n)$. By \cref{semiclassical:thm:reduction},
+$\Op^W_\eps(a)=\Op_\eps(p)=\Op_\eps(c)\in\Psisl m(\R^n)$ with
+\begin{equation*}
+c\sim\sum_\alpha\frac{\eps^{\abs\alpha}}{\alpha!}\pa^\alpha_\eta D^\alpha_yp\big|_{y=x}
+=\sum_\alpha\frac{\eps^{\abs\alpha}}{2^{\abs\alpha}\alpha!}\pa^\alpha_\eta D^\alpha_xa(\eps,x,\eta),
+\end{equation*}
+in the sense of \eqref{semiclassical:eq:reduction}. In particular $c-a\in\eps\Ssl{m-1}$, so
+$\sigma_{\eps,m}(\Op^W_\eps(a))=[a]$.
+
+\emph{The order-$\eps$ term.} The terms with $\abs\alpha=1$ give
+$\frac\eps2\sum_j\pa_{\eta_j}D_{x_j}a=-\frac{i\eps}2\sum_j\pa_{\eta_j}\pa_{x_j}a$, so
+\begin{equation*}
+c=a-\frac{i\eps}2\sum_{j=1}^n\frac{\pa^2a}{\pa\eta_j\pa x_j}\mod\eps^2\Ssl{m-2}(\R^n).
+\end{equation*}
+If $a=a_0+\eps a_1+O(\eps^2)$, the coefficient of $\eps$ in the left symbol is
+$a_1-\frac i2\sum_j\pa_{\eta_j}\pa_{x_j}a_0$. For example, for $n=1$ and $a=x\eta$,
+$\Op^W_\eps(x\eta)=\frac12(x\,\eps D+\eps D\,x)=x\,\eps D-\frac{i\eps}2$, whose left symbol is
+$x\eta-\frac{i\eps}2$, in agreement with the formula.
+
+\emph{Adjoint.} Fix $\eps>0$. $\Op_\eps(p)=\Op(p^\flat)$ with $p^\flat(x,y,\xi)=p(\eps,x,y,\eps\xi)\in\Amp m0$. By
+\cref{euclidean:prop:adjoint}, $\Op(p^\flat)^*=\Op(\overline{p^\flat(y,x,\xi)})$, that is,
+$\Op_\eps(p)^*=\Op_\eps(p^\dagger)$ with $p^\dagger(\eps,x,y,\eta)=\overline{p(\eps,y,x,\eta)}$. For the Weyl
+amplitude, $p^\dagger(\eps,x,y,\eta)=\overline{a(\eps,\frac{y+x}2,\eta)}$, so
+$\Op^W_\eps(a)^*=\Op^W_\eps(\bar a)$.
+
+\subsection*{\Cref{semiclassical:ex:projection-identity}}
+$(\Id-2P)^2=\Id-4P+4P^2=\Id+4(P^2-P)=\Id+4E$. If $P^2=P$ then $E=0$ and $(\Id-2P)^2=\Id$, so
+$\Id-2P$ is an involution.
+
+Now let $p_0\in\C$ and define $e_k=p_k^2-p_k$, $p_{k+1}=p_k+(1-2p_k)e_k$. By
+\cref{semiclassical:lem:newton} in the algebra $\C$, $e_{k+1}=4e_k^3-3e_k^2$. Suppose
+$\abs{e_0}\le\frac18$. If $\abs{e_k}\le\frac14$, then $\abs{e_{k+1}}\le\abs{e_k}^2(3+4\abs{e_k})\le4\abs{e_k}^2$, i.e.\
+$4\abs{e_{k+1}}\le(4\abs{e_k})^2$. By induction
+\begin{equation*}
+4\abs{e_k}\le(4\abs{e_0})^{2^k}\le4\abs{e_0}\le\tfrac12 ,
+\end{equation*}
+so $e_k\to0$ quadratically. Since $(1-2p_k)^2=1+4e_k$, we have $\abs{1-2p_k}\le(1+4\abs{e_k})^{1/2}\le\sqrt2$,
+hence $\abs{p_{k+1}-p_k}\le\sqrt2\abs{e_k}$. The series $\sum\abs{e_k}$ converges, so $p_k$ converges to some
+$p$ with $p^2-p=\lim e_k=0$, i.e.\ $p\in\{0,1\}$. Moreover
+\begin{equation*}
+\abs{p-p_k}\le\sqrt2\sum_{l\ge k}\abs{e_l}\le\frac{\sqrt2}4\sum_{l\ge k}(4\abs{e_0})^{2^l}\le C(4\abs{e_0})^{2^k},
+\end{equation*}
+which is quadratic convergence. The limit is the root nearer to $p_0$. Indeed
+$\abs{p-p_0}\le\sqrt2\sum_k\abs{e_k}\le2\sqrt2\abs{e_0}$ is small, while
+$\abs{p_0}\abs{p_0-1}=\abs{e_0}$ forces $p_0$ to be within $\abs{e_0}^{1/2}$ of $0$ or of $1$.
+
+\subsection*{\Cref{semiclassical:ex:adiabatic-n0}}
+\emph{The case $n=0$.} Then $\R^n$ is a point, and the variables $z,z'$ are absent. The
+space $\mathcal K_{\mathrm{ad}}$ consists of the smooth $B(\delta,\tilde z,\tilde Z)$ with
+$\abs{\pa^k_\delta\pa^\beta_{\tilde z}\pa^\gamma_{\tilde Z}B}\le C\ang{\tilde Z}^{-N}$ for all indices and $N$. This is
+exactly the space $\mathcal K(\R^{\tilde n})$ of \cref{semiclassical:prop:smoothing-kernels}, with
+$\delta$ in place of $\eps$. The kernels $\delta^{-\tilde n}B(\delta,\tilde z,(\tilde z-\tilde z')/\delta)$ of
+\cref{semiclassical:def:adiabatic} are then exactly the kernels
+\eqref{semiclassical:eq:smoothing-kernel}. By \cref{semiclassical:prop:smoothing-kernels},
+$\Psiad(\R^0;\R^{\tilde n})=\Psisl{-\infty}(\R^{\tilde n})$ with parameter $\delta$. Moreover
+$\sad(B)(\tilde z,\tilde\zeta)=\int e^{-i\tilde Z\cdot\tilde\zeta}B(0,\tilde z,\tilde Z)\,d\tilde Z$, a smoothing
+operator on $\R^0$, i.e.\ a number. This is the value at $\delta=0$ of the symbol
+$\int e^{-i\tilde Z\cdot\tilde\zeta}B(\delta,\tilde z,\tilde Z)\,d\tilde Z$ of
+\cref{semiclassical:prop:smoothing-kernels}, i.e.\ $\sad=\ssl$.
+
+\emph{The case $\tilde n=0$.} Then $\tilde z,\tilde Z$ are absent, and $\mathcal K_{\mathrm{sl,ad}}$ consists of
+the smooth $B(\eps,\delta,z,Z)$ on $[0,1]^2\times\R^{2n}$ with
+$\abs{\pa^j_\eps\pa^k_\delta\pa^\alpha_z\pa^{\alpha'}_ZB}\le C\ang Z^{-N}$. The kernels are $\eps^{-n}B(\eps,\delta,z,(z-z')/\eps)$. By
+\cref{semiclassical:prop:smoothing-kernels}, $\Psisl{-\infty}(\R^n)$ is identified with
+$\mathcal K(\R^n)$, a Fr\'echet space with seminorms $\sup\ang Z^N\abs{\pa^j_\eps\pa^\alpha_z\pa^\beta_ZK}$; we
+give $\Psisl{-\infty}(\R^n)$ this topology. Claim: $B\in\mathcal K_{\mathrm{sl,ad}}$ iff
+$\delta\mapsto B(\cdot,\delta,\cdot)$ is a $\CI$ map $[0,1]\to\mathcal K(\R^n)$. If $B\in\mathcal K_{\mathrm{sl,ad}}$,
+Taylor's formula in $\delta$ with the bounds on $\pa^{k+2}_\delta B$ shows that the difference
+quotients of $\pa^k_\delta B$ converge in every seminorm of $\mathcal K(\R^n)$ to $\pa^{k+1}_\delta B$, and
+these are continuous in $\delta$. So the map is $\CI$, with derivatives $\pa^k_\delta B$. Conversely,
+if the map is $\CI$, then $B$ is jointly smooth with $\pa^k_\delta$ given by the derivatives of the
+map. Each $\pa^k_\delta B$ is a continuous map from the compact interval into
+$\mathcal K(\R^n)$, hence bounded in every seminorm, which are the estimates defining
+$\mathcal K_{\mathrm{sl,ad}}$. Hence $\Psisa(\R^n;\R^0)=\CI([0,1]_\delta;\Psisl{-\infty}(\R^n))$. In this
+case $\sad(B)=B(\cdot,0,\cdot)$, the value at $\delta=0$, and $\ssl(B)(\delta)$ is the semiclassical
+symbol of the family at fixed $\delta$.
+
+\subsection*{\Cref{semiclassical:ex:commutator-order}}
+\emph{Order.} By \cref{semiclassical:thm:manifold-calculus}(b),(c),
+$[A,B]\in\Psisl{m+m'}(X;E)$ with $\sigma_{\eps,m+m'}([A,B])=[ab-ba]\Id=0$, since the symbols are scalar.
+By the exactness of the third sequence (\cref{semiclassical:thm:manifold-calculus}(c)),
+$[A,B]\in\eps\Psisl{m+m'-1}(X;E)$. So $[A,B]=\eps C$ with $C\in\Psisl{m+m'-1}(X;E)$.
+
+\emph{The symbol.} By the uniqueness in \cref{semiclassical:thm:manifold-calculus}(c) it
+suffices to show the following. For each trivializing chart $\kappa:W\to\kappa(W)$ and
+$\psi\in\CIc(W)$, the semiclassical symbol of the local representative of $\psi C\psi$ is $\psi^2$ times
+the local expression of $\frac1i\{a(0),b(0)\}\Id$. Let $\chi\in\CIc(W)$ equal one near $\supp\psi$. Then
+\begin{equation*}
+\psi AB\psi-\psi(\chi A\chi)(\chi B\chi)\psi=\psi A(1-\chi^2)B\psi\in\eps^\infty\Psisl{-\infty}(X;E),
+\end{equation*}
+because $\psi$ and $1-\chi^2$ have disjoint supports (condition (i) of
+\cref{semiclassical:def:manifold}) and by \cref{semiclassical:thm:manifold-calculus}(a). The
+same holds with $A$ and $B$ exchanged. Hence
+$\psi C\psi=\eps^{-1}\psi[\chi A\chi,\chi B\chi]\psi$ modulo $\eps^\infty\Psisl{-\infty}$, whose elements have
+vanishing semiclassical symbol. In the chart, the local representatives of $\chi A\chi$ and
+$\chi B\chi$ are $\Op_\eps(\alpha)$ and $\Op_\eps(\beta)$, with
+\begin{equation*}
+\alpha=\chi^2a\,\Id+\eps\alpha_1,\quad\alpha_1\in\Ssl{m-1},\qquad\beta=\chi^2b\,\Id+\eps\beta_1,\quad\beta_1\in\Ssl{m'-1}
+\end{equation*}
+(matrices). Here $a$, $b$ denote the local expressions of the symbols, by the defining
+property of $\sigma_{\eps}$. Products of matrices of families are computed entrywise with $\#$, so
+\begin{equation*}
+\alpha\#\beta-\beta\#\alpha=(\chi^2a\#\chi^2b-\chi^2b\#\chi^2a)\Id+\eps\big[\chi^2a\Id,\beta_1\big]_\#
++\eps\big[\alpha_1,\chi^2b\Id\big]_\#+\eps^2[\alpha_1,\beta_1]_\#,
+\end{equation*}
+where $[\cdot,\cdot]_\#$ denotes the $\#$-commutator. By \cref{semiclassical:cor:commutator}, the first
+term is $\frac\eps i\{\chi^2a,\chi^2b\}\Id$ modulo $\eps^2\Ssl{m+m'-2}$. In the second, each entry is
+$\chi^2a\#(\beta_1)_{kl}-(\beta_1)_{kl}\#\chi^2a\in\eps\Ssl{m+m'-2}$, again by
+\cref{semiclassical:cor:commutator}, because scalars commute; likewise for the third. The
+last term lies in $\eps^2\Ssl{m+m'-2}$. Hence
+\begin{equation*}
+\eps^{-1}[\Op_\eps(\alpha),\Op_\eps(\beta)]=\Op_\eps\Big(\frac1i\{\chi^2a,\chi^2b\}\Id+\eps g\Big),\qquad g\in\Ssl{m+m'-2},
+\end{equation*}
+and by \cref{semiclassical:cor:localization} the local representative of $\psi C\psi$ has
+semiclassical symbol $\psi^2\frac1i\{\chi^2a(0),\chi^2b(0)\}\Id=\psi^2\frac1i\{a(0),b(0)\}\Id$, since $\chi=1$ near
+$\supp\psi$. Finally, the coordinate changes act on $T^*W$ by the maps of
+\cref{semiclassical:prop:invariance}. These are the canonical maps of cotangent bundles and
+preserve the canonical one-form, hence the Poisson bracket (see the discussion before
+\cref{manifolds:prop:symbol-calculus}). So the local expressions are those of the invariant
+function $\frac1i\{a(0),b(0)\}$ on $T^*X$, and $\ssl(\eps^{-1}[A,B])=\frac1i\{a(0),b(0)\}\Id$.
