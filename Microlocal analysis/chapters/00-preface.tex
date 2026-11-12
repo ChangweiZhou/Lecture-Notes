@@ -1,4 +1,5 @@
 \chapter*{Preface}
+\usetikzlibrary{fit}
 \addcontentsline{toc}{chapter}{Preface}
 
 This book combines three sets of lecture notes by Richard Melrose:
@@ -51,6 +52,99 @@ been corrected. The ``addenda'' to the 18.157 lectures have been moved into the 
 or the exercises. Draft material has been removed, including chapters that existed in
 the originals only as headings. Each chapter ends with exercises and a short note on its
 main departures from the original notes.
+
+\subsection*{How to read this book}
+The book is written for readers at the beginning of graduate school. Each chapter opens
+by saying what problem it solves and how it connects to what came before. Short
+\emph{Discussion} paragraphs explain the idea behind a definition or a proof, and
+\emph{Question} and \emph{Answer} pairs take up points that often puzzle a first-time
+reader. These can be skipped by readers who already know the material.
+
+\Cref{preface:fig:dependencies} shows how the chapters depend on each other. Part~I is
+the foundation for everything else. The other four parts depend on Part~I but are
+largely independent of each other. The main exception is Part~IV: the proof of Bott
+periodicity in \cref{ch:bott} uses the isotropic calculus of \cref{ch:isotropic}, and
+traces and determinants from \cref{ch:determinants} appear occasionally. Within each
+of Parts~III and~IV the chapters are best read in order.
+
+For a first one-semester course we suggest the following path through Part~I.
+\begin{itemize}[nosep]
+\item \Cref{ch:distributions}, possibly quickly if distributions are familiar. The
+  radial compactification (\cref{distributions:sec:radial}) is used throughout and
+  should not be skipped; \cref{distributions:sec:other} can wait.
+\item \Cref{ch:euclidean} up to and including Sobolev spaces
+  (\cref{euclidean:sec:sobolev}). The later sections on topologies and holomorphic
+  families are needed only for complex powers and determinants.
+\item \Cref{ch:microlocal}: wavefront sets, the characteristic variety and microlocal
+  elliptic regularity, followed by propagation of singularities
+  (\cref{microlocal:sec:propagation}).
+\item \Cref{ch:manifolds} up to the Fredholm theory of elliptic operators
+  (\cref{manifolds:sec:fredholm}). The facts about conormal distributions that it uses
+  are recalled in \cref{manifolds:sec:recall}, so \cref{ch:conormal} can be read
+  lightly on a first pass.
+\end{itemize}
+A second course can then follow either the analytic route (Part~III) or the
+topological route (Part~II and Part~IV).
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,
+  ch/.style={draw,rounded corners=2pt,align=center,font=\footnotesize,
+    text width=2.75cm,minimum height=0.9cm,inner sep=2pt,fill=white},
+  part/.style={draw=gray,dashed,rounded corners=4pt,inner sep=5pt},
+  plab/.style={font=\footnotesize\bfseries,anchor=south west,inner sep=1pt}]
+  % Part I
+  \node[ch] (dist) at (0,0) {\labelcref{ch:distributions}. Distributions};
+  \node[ch] (eucl) at (0,-1.3) {\labelcref{ch:euclidean}. Operators\\on $\R^n$};
+  \node[ch] (micro) at (0,-2.6) {\labelcref{ch:microlocal}. Microlocalization};
+  \node[ch] (conormal) at (0,-3.9) {\labelcref{ch:conormal}. Conormal\\distributions};
+  \node[ch] (manifolds) at (0,-5.2) {\labelcref{ch:manifolds}. Operators\\on manifolds};
+  \node[ch] (semicl) at (0,-6.5) {\labelcref{ch:semiclassical}. Semiclassical\\calculus};
+  % Part II
+  \node[ch] (iso) at (4.7,0) {\labelcref{ch:isotropic}. Isotropic and\\scattering calculi};
+  \node[ch] (det) at (7.9,0) {\labelcref{ch:determinants}. Traces and\\determinants};
+  % Part IV
+  \node[ch] (index) at (4.7,-1.9) {\labelcref{ch:index}. Index and\\Toeplitz operators};
+  \node[ch] (bott) at (7.9,-1.9) {\labelcref{ch:bott}. K-theory and\\Bott periodicity};
+  \node[ch] (product) at (11.1,-1.9) {\labelcref{ch:product}. Product-type\\operators};
+  \node[ch] (families) at (11.1,-3.2) {\labelcref{ch:families}. Families\\index theorem};
+  \node[ch] (semiidx) at (7.9,-3.2) {\labelcref{ch:semiclassical-index}. Semiclassical\\index theorem};
+  \node[ch] (eta) at (11.1,-4.5) {\labelcref{ch:eta}. Eta forms};
+  % Part III
+  \node[ch] (boundary) at (4.7,-6.5) {\labelcref{ch:boundary}. Elliptic\\boundary problems};
+  \node[ch] (hj) at (7.9,-6.5) {\labelcref{ch:hj}. Lagrangian\\distributions};
+  \node[ch] (wave) at (11.1,-6.5) {\labelcref{ch:wave}. Wave equation,\\Weyl law};
+  % Part V
+  \node[ch] (hoch) at (4.7,-8.3) {\labelcref{ch:hochschild}. Hochschild\\homology};
+  % part boxes
+  \node[part,fit=(dist)(semicl),label={[plab]north west:Part I}] (PI) {};
+  \node[part,fit=(iso)(det),label={[plab]north west:Part II}] (PII) {};
+  \node[part,fit=(index)(product)(eta),label={[plab]north west:Part IV}] (PIV) {};
+  \node[part,fit=(boundary)(wave),label={[plab]north west:Part III}] (PIII) {};
+  \node[part,fit=(hoch),label={[plab]north west:Part V}] (PV) {};
+  % arrows inside Part I
+  \foreach \a/\b in {dist/eucl,eucl/micro,micro/conormal,conormal/manifolds,manifolds/semicl}
+    \draw[->] (\a)--(\b);
+  % Part II, III, IV
+  \draw[->] (iso)--(det);
+  \draw[->] (hj)--(wave);
+  \draw[->] (index)--(bott); \draw[->] (bott)--(product); \draw[->] (product)--(families);
+  \draw[->] (families)--(semiidx); \draw[->] (families)--(eta);
+  % between parts
+  \draw[->,thick,gray] (PI.east|-iso) -- (PII.west|-iso);
+  \draw[->,thick,gray] (PI.east|-bott) -- (PIV.west|-bott);
+  \draw[->,thick,gray] (PI.east|-boundary) -- (PIII.west|-boundary);
+  \draw[->,thick,gray] (PI.south) |- (PV.west);
+  \draw[->] (iso.south east) -- (bott.north west);
+  \draw[->,dashed] (semicl.east) .. controls (3,-5.6) and (5.5,-3.9) .. (semiidx.south west);
+\end{tikzpicture}
+\caption{Dependencies between the chapters. Grey arrows mean that a part uses Part~I;
+black arrows show the main dependencies between individual chapters. The dashed arrow
+indicates that the semiclassical proof of the index theorem in
+\cref{ch:semiclassical-index} uses the semiclassical calculus of
+\cref{ch:semiclassical}.}
+\label{preface:fig:dependencies}
+\end{figure}
 
 \subsection*{Acknowledgements}
 Melrose thanks many people for their help with the notes, including Benoit Charbonneau,

@@ -1,5 +1,15 @@
 \chapter{Pseudodifferential operators on Euclidean space}\label{ch:euclidean}
 \providecommand{\Amp}[2]{\mathcal{A}^{#1}_{#2}}% amplitudes of order #1 and weight #2
+\usetikzlibrary{patterns}
+
+Differential operators form an algebra, but it is too small for most purposes: the
+inverse of an elliptic differential operator, such as $(1+\Delta)^{-1}$, is never a
+differential operator. On the Fourier side, $1+\Delta$ is multiplication by
+$\ang\xi^2$, and its inverse is multiplication by $\ang\xi^{-2}$, a smooth function
+that behaves like a polynomial of negative degree. Pseudodifferential operators are
+what we get by allowing all such ``polynomial-like'' multipliers, with coefficients
+depending on $x$. They form an algebra that contains approximate inverses of elliptic
+operators, and this is the main reason to introduce them.
 
 This chapter constructs the basic algebra of pseudodifferential operators on
 $\R^n$, the ``traditional'' calculus with symbols of type $(1,0)$ whose
@@ -41,7 +51,37 @@ diffeomorphisms of open subsets of $\R^n$
 treatment of the latter, together with the wavefront set, is given in
 \cref{ch:microlocal}, and operators on manifolds are the subject of
 \cref{ch:manifolds}. The semiclassical version of the calculus is developed
-in \cref{ch:semiclassical}.
+in \cref{ch:semiclassical}. \Cref{euclidean:fig:roadmap} shows how the main results
+depend on each other; a first reading can stop after \cref{euclidean:sec:sobolev}.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,
+  box/.style={draw,rounded corners=2pt,align=center,font=\small,inner sep=4pt}]
+  \node[box] (sym) at (0,0) {symbols $S^m$\\Borel's lemma};
+  \node[box] (osc) at (4.2,0) {amplitudes,\\oscillatory integral $I(a)$};
+  \node[box] (op)  at (8.6,0) {$\Op(a)$ continuous\\on $\cS$ and $\cSp$};
+  \node[box] (red) at (4.2,-1.9) {reduction to\\the left symbol};
+  \node[box] (res) at (0,-1.9) {residual operators\\$=$ smooth kernels};
+  \node[box] (comp) at (8.6,-1.9) {composition\\and adjoints};
+  \node[box] (prin) at (8.6,-3.8) {principal symbol,\\exact sequence};
+  \node[box] (ell) at (4.2,-3.8) {ellipticity,\\parametrix};
+  \node[box] (reg) at (0,-3.8) {elliptic\\regularity};
+  \node[box] (L2) at (4.2,-5.7) {$L^2$ boundedness\\(square root)};
+  \node[box] (sob) at (8.6,-5.7) {Sobolev\\estimates};
+  \draw[->] (sym)--(osc); \draw[->] (osc)--(op);
+  \draw[->] (osc)--(red); \draw[->] (res)--(red); \draw[->] (sym)--(res);
+  \draw[->] (red)--(comp); \draw[->] (op)--(comp);
+  \draw[->] (comp)--(prin); \draw[->] (prin)--(ell);
+  \draw[->] (ell)--(reg); \draw[->] (res)--(reg);
+  \draw[->] (prin)--(L2); \draw[->] (L2)--(sob); \draw[->] (comp.east) to[out=-30,in=30] (sob.east);
+\end{tikzpicture}
+\caption{Logical structure of the chapter, up to Sobolev estimates. The
+polyhomogeneous calculus, the topologies, families and coordinate invariance
+(\cref{euclidean:sec:polyhomogeneous,euclidean:sec:topology,euclidean:sec:families,euclidean:sec:invariance,euclidean:sec:coordinates})
+refine this core.}
+\label{euclidean:fig:roadmap}
+\end{figure}
 
 Throughout, $\ang{\xi}=(1+\abs\xi^2)^{1/2}$, $D=-i\pa$,
 $\dbar\xi=(2\pi)^{-n}d\xi$, and the Schwartz space carries the norms
@@ -92,6 +132,33 @@ general we define:
   \cref{euclidean:ex:rho-delta}), but it is large enough to contain everything
   we need at first and small enough for the calculus to work easily.
 \end{remark}
+
+\begin{discussion}
+The estimate \eqref{euclidean:eq:symbol-est} says two things. The size of $a$ is at most
+$\ang\xi^m$, like a polynomial of degree $m$. More importantly, each derivative in $\xi$
+gains a factor $\ang\xi^{-1}$. This means that $a(z,\cdot)$ is roughly constant on balls
+of radius comparable to $\ang\xi$ around $\xi$ (\cref{euclidean:fig:symbol-scale}): a
+symbol only varies on the scale of the frequency itself. Functions homogeneous of
+degree $m$ in $\xi$, cut off near $\xi=0$, are the model examples. No such gain is
+required in $z$: the coefficients need only be smooth with bounded derivatives.
+\end{discussion}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.6]
+  \draw[->] (-0.3,0)--(15.2,0) node[right]{$\abs\xi$};
+  \foreach \c in {1,2,3.6,6.4,11.5}{
+    \draw[fill=gray!20] (\c,0) circle ({0.28*\c});
+    \fill (\c,0) circle (0.04);
+  }
+  \draw[<->] (11.5,0.12)--(11.5,3.22) node[midway,right]{\small radius $\sim\ang{\xi}$};
+\end{tikzpicture}
+\caption{A symbol $a\in S^m$ is roughly constant on balls of radius proportional to
+$\ang{\xi_0}$ centred at $\xi_0$: by Taylor's formula and the symbol estimates,
+$\abs{a(z,\xi)-a(z,\xi_0)}\le C\eps\ang{\xi_0}^m$ when $\abs{\xi-\xi_0}\le\eps\ang{\xi_0}$
+with $\eps\le\frac12$. The balls grow linearly with the frequency.}
+\label{euclidean:fig:symbol-scale}
+\end{figure}
 
 Since $\ang\xi^{m}\le\ang\xi^{m'}$ for $m\le m'$ we have
 $\norm a_{N,m'}\le\norm a_{N,m}$, so there are continuous inclusions
@@ -306,7 +373,7 @@ asymptotically.
   $a-a'\in S^{-\infty}$.
 
   Existence: we cut off each term near the origin in $\xi$, more and more
-  drastically as $j$ increases. Choose $\phi\in\CI(\R^n)$ with
+  drastically as $j$ increases (\cref{euclidean:fig:borel}). Choose $\phi\in\CI(\R^n)$ with
   $\phi(\xi)=0$ for $\abs\xi\le1$ and $\phi(\xi)=1$ for $\abs\xi\ge2$
   (e.g.\ $\phi=1-\chi$ with $\chi$ as in \cref{euclidean:lem:density}).
   As in the proof of \cref{euclidean:lem:density}, $\phi(\eps\xi)$ is
@@ -338,6 +405,25 @@ asymptotically.
   \end{equation*}
   where the first sum is residual by \cref{euclidean:lem:symbol-basic}(v).
 \end{proof}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[xscale=0.9,yscale=1.2]
+  \draw[->] (-0.2,0)--(12.5,0) node[right]{$\abs\xi$};
+  \draw[->] (0,-0.1)--(0,1.4);
+  \node[left] at (0,1) {\small $1$};
+  \foreach \a/\lab in {1/0, 2/1, 3.4/2, 5.6/3}{
+    \draw[thick] (0,0)--(\a,0) .. controls ({1.5*\a},0) and ({1.5*\a},1) .. ({2*\a},1)--(12.3,1);
+    \node[below] at (\a,0) {\small $\eps_{\lab}^{-1}$};
+  }
+  \node[above] at (8,1) {\small $\phi(\eps_j\xi)$, $j=0,1,2,3$, all equal to $1$ here};
+\end{tikzpicture}
+\caption{The cut-offs in the proof of Borel's lemma. The $j$-th term $a_j$ is switched on
+only for $\abs\xi\ge\eps_j^{-1}$. Since $\eps_j\to0$, on any bounded set of frequencies
+only finitely many terms are non-zero, and far out each term is small relative to the
+preceding ones.}
+\label{euclidean:fig:borel}
+\end{figure}
 
 The following simple observations allow asymptotic sums to be manipulated
 formally.
@@ -430,6 +516,12 @@ If $a\in\Amp mw(\R^n)$ with $m<-n$ then
 \end{equation*}
 converges absolutely and locally uniformly, so defines a continuous function
 with $\abs{K(x,y)}\le C\ang{x-y}^w$. For general $m$ we integrate by parts.
+The idea is that the factor $e^{i(x-y)\cdot\xi}$ oscillates faster and faster as
+$\abs\xi\to\infty$, and these oscillations cancel against the growth of $a$, once the
+integral is paired with a smooth test function. Each integration by parts in $x$ turns
+a derivative of the exponential into a factor $\xi$ and so lets us divide by
+$\ang\xi^2$, at the cost of differentiating the amplitude and the test function. We
+repeat this until the $\xi$-integral converges absolutely.
 Let $\Delta_x=D_{x_1}^2+\dots+D_{x_n}^2$ be the (positive) Laplacian. Then
 \begin{equation}\label{euclidean:eq:laplace-exp}
   (1+\Delta_x)^qe^{i(x-y)\cdot\xi}=\ang\xi^{2q}e^{i(x-y)\cdot\xi},\qquad
@@ -634,6 +726,21 @@ independent of $x$. For $a,b\in S^m(\R^n;\R^n)$ we write
 \end{equation*}
 the \emph{left} and \emph{right quantizations}; they lie in $\Psido m(\R^n)$.
 
+\begin{question}
+If every operator turns out to be the left quantization of a symbol
+(\cref{euclidean:thm:reduction}), why allow amplitudes $a(x,y,\xi)$ depending on both
+$x$ and $y$ at all?
+\end{question}
+\begin{answer}
+Because many operations are obvious for amplitudes and hard for left symbols. The
+adjoint of $\Op(a)$ has amplitude $\overline{a(y,x,\xi)}$
+(\cref{euclidean:prop:adjoint}). The product $\Op(a)\Op_R(b)$ has amplitude
+$a(x,\xi)b(y,\xi)$ (\cref{euclidean:prop:left-right}). Conjugation by weights or changes
+of variables multiply the amplitude by functions of $(x,y)$. In each case the
+reduction theorem then converts the amplitude back into a left symbol, and its
+asymptotic formula computes that symbol.
+\end{answer}
+
 \begin{proposition}\label{euclidean:prop:left-right}
   Let $a,b\in S^m(\R^n;\R^n)$ and $u\in\cS(\R^n)$. Then
   \begin{equation}\label{euclidean:eq:left-quant}
@@ -705,7 +812,8 @@ the \emph{left} and \emph{right quantizations}; they lie in $\Psido m(\R^n)$.
   for $u,\phi\in\cS$, is also continuous on $\cS(\R^n)$.
 \end{proposition}
 \begin{proof}
-  Clearly $a^*\in\Amp mw$, depending continuously on $a$ in each $\Amp{m'}w$.
+  The estimates \eqref{euclidean:eq:amplitude-est} are symmetric in $x$ and $y$, so
+  $a^*\in\Amp mw$, depending continuously on $a$ in each $\Amp{m'}w$.
   We must show $I(a)(\bar v\otimes u)=\overline{I(a^*)(\bar u\otimes v)}$,
   since the left side is $\inner{Au}v$ and the right side is
   $\overline{\inner{A^*v}u}=\inner u{A^*v}$. For $a\in\Amp{-\infty}w$ this
@@ -753,7 +861,12 @@ quantization of a symbol independent of $y$:
 
 Here the terms with $\abs\alpha=j$ are grouped together; they have order
 $m-j$. The symbol $\sigma_L(A)$ is the \emph{left} (or \emph{full})
-\emph{symbol} of $A$. The proof occupies the rest of this section.
+\emph{symbol} of $A$. The proof occupies the rest of this section and has three steps.
+First, Taylor expansion of $a$ in $y$ around $y=x$ produces the terms of
+\eqref{euclidean:eq:reduction} plus a remainder of arbitrarily low order
+(\cref{euclidean:lem:taylor}). Second, Borel's lemma sums the terms. Third, the error is
+an operator of order $-\infty$, and we show that such operators are exactly the left
+quantizations of residual symbols (\cref{euclidean:prop:residual}).
 
 \subsection{Taylor expansion of the amplitude}
 
@@ -1015,6 +1128,17 @@ and write $[a]$ for the class of $a\in S^m(\R^p;\R^n)$.
   $\sigma_m(A)=[\sigma_L(A)]=[\sigma_R(A)]$.
 \end{definition}
 
+\begin{discussion}
+Why pass to a quotient? The full symbol carries all the information about $A$, but it
+depends on choices (left, right or Weyl quantization) and it transforms in a
+complicated way under composition and changes of variables. The principal symbol
+forgets everything except the leading behaviour as $\abs\xi\to\infty$. In exchange it
+is multiplicative \eqref{euclidean:eq:principal-mult}, and on manifolds it will be an
+invariantly defined function on the cotangent bundle (\cref{euclidean:sec:coordinates}).
+Many qualitative questions, above all ellipticity, are decided by the principal symbol
+alone.
+\end{discussion}
+
 Unlike $\sigma_L$ or $\sigma_R$, $\sigma_m$ depends on $m$: one needs to
 know that the order is at most $m$ before it is defined. If $A=\Op(a)$ with
 $a\in\Amp mw$, then $\sigma_m(A)=[a(x,x,\xi)]$ by
@@ -1068,6 +1192,11 @@ $S^0(\R^n;\R^n)/S^{-1}(\R^n;\R^n)$.
 
 % ======================================================================
 \section{Ellipticity and parametrices}\label{euclidean:sec:ellipticity}
+
+We now use the calculus to invert operators. Exact inverses are usually out of reach,
+and also unnecessary: it is enough to invert up to an error in $\Psido{-\infty}$, since
+such errors are smoothing (\cref{euclidean:lem:smoothing}). The principal symbol tells us
+exactly when this is possible.
 
 \begin{definition}\label{euclidean:def:elliptic}
   An operator $A\in\Psido m(\R^n)$ is \emph{elliptic} if it is invertible
@@ -1203,7 +1332,7 @@ are smoothing.
   $Eu=f$.
 \end{proof}
 
-Directly from the existence of parametrices we deduce the regularity of
+From the existence of parametrices we deduce the regularity of
 solutions of elliptic equations.
 
 \begin{proposition}\label{euclidean:prop:elliptic-regularity}
@@ -1219,6 +1348,19 @@ solutions of elliptic equations.
 A more precise, quantitative version is given in
 \cref{euclidean:prop:elliptic-sobolev}; a local version requires the
 microlocal methods of \cref{ch:microlocal}.
+
+\begin{question}
+Where exactly was ellipticity used in the proof of
+\cref{euclidean:prop:elliptic-regularity}?
+\end{question}
+\begin{answer}
+Only to produce a left parametrix $B$ with $BA=\Id+E$, $E\in\Psido{-\infty}$. The rest of
+the argument works for any operator: $B$ preserves $\cS$, and $E$ maps every tempered
+distribution to a smooth function. Without ellipticity the conclusion fails: for
+$A=D_{x_1}$ on $\R^2$, the distribution $u=\delta(x_2)$, defined by
+$u(\phi)=\int\phi(x_1,0)\,dx_1$, satisfies $Au=0$ but is not smooth. The characteristic set $\{\xi_1=0\}$ of $D_{x_1}$ is where the singularity is
+allowed to live.
+\end{answer}
 
 \subsection{The Laplacian}
 
@@ -1285,6 +1427,16 @@ can now prove ``finite order'' regularity results, the basic one being:
 The proof is in two stages: residual operators are handled by direct
 estimation, and the general case is reduced to that one by H\"ormander's
 trick of using an approximate square root.
+
+\begin{discussion}
+The idea of the square-root trick is simple. If $A\in\Psido0$ and $C>\sup\abs{\sigma_L(A)}^2$,
+then the symbol of $C-A^*A$ is positive. A positive symbol has a square root in the
+symbol calculus, so $C-A^*A=B^*B+G$ with $G$ residual. Then
+$\norm{A\phi}^2=C\norm\phi^2-\norm{B\phi}^2-\inner{G\phi}\phi\le C\norm\phi^2+\abs{\inner{G\phi}\phi}$.
+Positivity of a symbol becomes positivity of an operator, up to a residual error which
+Schur's lemma controls.
+\end{discussion}
+
 
 \begin{lemma}[Schur]\label{euclidean:lem:schur}
   If $K$ is a measurable function on $\R^{2n}$ such that
@@ -1425,7 +1577,8 @@ $m$. We set
 \begin{equation*}
   H^\infty(\R^n)=\bigcap_sH^s(\R^n),\qquad H^{-\infty}(\R^n)=\bigcup_sH^s(\R^n).
 \end{equation*}
-Then $\cS\subsetneq H^\infty\subsetneq H^{-\infty}\subsetneq\cSp$: for
+The Sobolev scale measures smoothness in $L^2$ terms: $u\in H^s$ means roughly that
+``$s$ derivatives of $u$ are square integrable''. Then $\cS\subsetneq H^\infty\subsetneq H^{-\infty}\subsetneq\cSp$: for
 instance $\ang x^{-n}\in H^\infty\setminus\cS$ (all its derivatives are
 $O(\ang x^{-n})$, hence square integrable), $\delta_0\in H^{-\infty}\setminus H^\infty$
 (as $\hat\delta_0=1$), and $1\notin H^{-\infty}$ (as $\hat 1=(2\pi)^n\delta_0$).
@@ -1469,7 +1622,21 @@ $\int\abs{\hat u}\,\dbar\xi\le\bigl(\int\ang\xi^{-2s}\dbar\xi\bigr)^{1/2}\norm u
 \end{proof}
 
 This is a typical instance where amplitudes of non-zero weight are useful;
-the left symbol of $Q$ is of course given by \cref{euclidean:thm:reduction}.
+the left symbol of $Q$ is given by \cref{euclidean:thm:reduction}.
+
+\begin{question}
+On a compact manifold an operator of negative order is compact on $L^2$. Is every
+$A\in\Psido{-1}(\R^n)$, or even every $A\in\Psido{-\infty}(\R^n)$, compact on
+$L^2(\R^n)$?
+\end{question}
+\begin{answer}
+No. Let $\chi\in\cS(\R^n)$ be non-zero and $A=\Op(\chi(\xi))\in\Psido{-\infty}(\R^n)$, the
+Fourier multiplier by $\chi$. It commutes with translations $\tau_cu(x)=u(x-c)$. Pick
+$u\in L^2$ with $Au\ne0$. As $\abs c\to\infty$, $\tau_cu\to0$ weakly in $L^2$, but
+$\norm{A\tau_cu}=\norm{Au}$ does not tend to zero, so $A$ is not compact. Order measures
+decay in $\xi$ only; to get compactness one also needs decay in $x$, as in
+\cref{euclidean:ex:weighted-compact}.
+\end{answer}
 
 \begin{lemma}\label{euclidean:lem:S'-union}
   $\cSp(\R^n)=\bigcup_{M\in\N_0}\ang x^MH^{-M}(\R^n)$.
@@ -1568,7 +1735,7 @@ $\abs{a(z,\xi)}=t^{-\mu}\abs{a(z,t\xi)}\le Ct^{-1}\ang{\xi}^{\mu-1}$ for all $t\
 By the remark preceding the definition, the terms $a_{m-j}$ are uniquely
 determined by $a$ in $\abs\xi\ge1$ (if $\sum_{j<N}(a_{m-j}-a'_{m-j})\in S^{m-N}$
 then inductively each difference is homogeneous and of lower order, so vanishes
-in $\abs\xi\ge1$). Clearly $S^{-\infty}\subset\Symph m$ for every $m$ (take all
+in $\abs\xi\ge1$). Also $S^{-\infty}\subset\Symph m$ for every $m$ (take all
 $a_{m-j}=0$), and $\Symph m\cap S^{m-1}=\Symph{m-1}$: if $a\in\Symph m\cap
 S^{m-1}$ then $a_m\in S^{m-1}$ vanishes in $\abs\xi\ge1$, so $a_m\in S^{-\infty}$ and
 $a\sim a_{m-1}'+\sum_{j\ge2}a_{m-j}$ with $a'_{m-1}=a_{m-1}+a_m$, which is homogeneous
@@ -2024,6 +2191,35 @@ will be used repeatedly when operators are localized.
   \end{equation*}
   are continuous.
 \end{lemma}
+\Cref{euclidean:fig:off-diagonal} shows the geometry: the cut-off kernel lives in a
+region a fixed distance away from the diagonal, where the kernel of $A$ is smooth and
+rapidly decreasing.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.85]
+  \draw[->] (-3.2,0)--(3.4,0) node[right]{$y$};
+  \draw[->] (0,-3.2)--(0,3.4) node[above]{$x$};
+  \fill[gray!15] (-3,-2.2)--(-2.2,-3)--(3,2.2)--(2.2,3)--cycle;
+  \draw[very thick] (-3,-3)--(3,3) node[above right]{$x=y$};
+  % supp phi_1 in x: [-0.8,0.8]; phi_2=1 on [-1.6,1.6]
+  \draw[dashed] (-3.1,0.8)--(3.1,0.8) (-3.1,-0.8)--(3.1,-0.8);
+  \draw[dashed] (-1.6,-3.1)--(-1.6,3.1) (1.6,-3.1)--(1.6,3.1);
+  \fill[pattern=north east lines] (1.6,-0.8) rectangle (3.1,0.8);
+  \fill[pattern=north east lines] (-3.1,-0.8) rectangle (-1.6,0.8);
+  \draw[decorate,decoration={brace,amplitude=4pt}] (-3.35,-0.8)--(-3.35,0.8)
+    node[midway,left=4pt]{\small $\supp\phi_1$};
+  \draw[decorate,decoration={brace,amplitude=4pt,mirror}] (-1.6,-3.3)--(1.6,-3.3)
+    node[midway,below=4pt]{\small $\phi_2=1$};
+\end{tikzpicture}
+\caption{The kernel of $\phi_1A(1-\phi_2)$ is supported in the hatched region
+$\supp\phi_1\times\supp(1-\phi_2)$, which stays at distance at least $\delta>0$ from the
+diagonal. The kernel of $A$ is singular only on the diagonal and is smooth and rapidly
+decreasing in the rest of the plane; the shading indicates a neighbourhood of the
+diagonal.}
+\label{euclidean:fig:off-diagonal}
+\end{figure}
+
 \begin{proof}
   Since $\supp\phi_1$ is compact and $\supp(1-\phi_2)$ is a closed set
   disjoint from it, $\delta=\operatorname{dist}(\supp\phi_1,\supp(1-\phi_2))>0$.
@@ -2228,7 +2424,7 @@ its $t$-derivatives, locally uniformly in $t$. Similarly
   adjoint is conjugate-linear, which does not affect real derivatives.
 \end{proof}
 
-In particular, for $A\in\Psido m(\R^n)$ the family $A(t)=A$ is trivially
+In particular, for $A\in\Psido m(\R^n)$ the constant family $A(t)=A$ is
 smooth, so $t\mapsto B(t)A$ is smooth whenever $B(t)$ is. Note that
 $s\mapsto A(s)^*$ is \emph{anti}-holomorphic if $A(s)$ is holomorphic; the
 family $A(\bar s)^*$ is holomorphic.

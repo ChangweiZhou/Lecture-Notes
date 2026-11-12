@@ -3,6 +3,14 @@
 \providecommand{\qRC}[1]{{}^{q}\overline{#1}}       % quadratic compactification
 \providecommand{\relRC}[2]{{}^{#1}\overline{#2}}    % compactification relative to a subspace
 
+Why do we need distributions at all? A linear differential equation $Pu=f$ usually has
+solutions that are not smooth, and the fundamental solutions of the simplest operators
+(the Laplacian, the wave operator) are not even functions. Distributions give a space
+large enough to contain all such solutions while still allowing us to differentiate,
+multiply by smooth functions and take Fourier transforms. The Fourier transform turns
+differentiation into multiplication by a polynomial. This simple fact is the seed of
+the whole theory of pseudodifferential operators.
+
 This chapter sets out the analytic framework for the rest of the book. Microlocal
 analysis studies distributions with special singularities, and we work in the space
 $\cSp(\R^n)$ of tempered distributions, the dual of the Schwartz space $\cS(\R^n)$. The
@@ -74,7 +82,7 @@ and define the distance
 \end{equation}
 \end{definition}
 
-Each $\norm{\cdot}_k$ is a norm: it is clearly a seminorm, and $\norm{\phi}_k\ge\sup|\phi|$.
+Each $\norm{\cdot}_k$ is a norm: it is a seminorm, and $\norm{\phi}_k\ge\sup|\phi|$.
 The norms increase with $k$, that is $\norm{\phi}_k\le\norm{\phi}_{k+1}$. By
 \eqref{distributions:eq:japanese} an equivalent family of norms is
 $\max_{|\beta|\le k}\sup\ang{x}^k|D^\beta\phi|$. More precisely, each
@@ -107,6 +115,16 @@ Fr\'echet space.
 
 The space is not trivial. For example $\exp(-|x|^2)\in\cS(\R^n)$, since every derivative
 is a polynomial times $\exp(-|x|^2)$. Every $\phi\in\CIc(\R^n)$ is in $\cS(\R^n)$.
+
+\begin{discussion}
+Why this particular space of test functions? The conditions defining $\cS(\R^n)$ are
+symmetric in two operations: multiplication by $x_j$ and differentiation $D_j$. The
+Fourier transform exchanges these two operations (\cref{distributions:sec:fourier}), so
+it maps $\cS(\R^n)$ to itself. The space $\CIc(\R^n)$ does not have this property: the
+Fourier transform of a non-zero compactly supported function is never compactly
+supported. Choosing $\cS$ as test functions is what makes the Fourier transform
+available on the dual space.
+\end{discussion}
 
 \begin{lemma}\label{distributions:lem:cutoff}
 Let $\chi\in\CIc(\R^n)$ with $\chi=1$ on $|x|\le1$, and set $\chi_R(x)=\chi(x/R)$. Then
@@ -181,6 +199,11 @@ continuous.
 \section{Tempered distributions}\label{distributions:sec:tempered}
 
 \subsection{Definition}
+A tempered distribution is a ``generalized function'' that we only know through its
+averages $\int u\phi\,dx$ against Schwartz functions. We first see how ordinary functions
+give such averages, then take the abstract definition: any continuous linear functional
+on $\cS(\R^n)$.
+
 Integration $\int\colon\cS(\R^n)\to\C$ is continuous, since
 $|\int\phi\,dx|\le\int\ang{x}^{-n-1}dx\cdot\sup\ang{x}^{n+1}|\phi|$. Combined with
 multiplication it gives the bilinear pairing
@@ -251,7 +274,8 @@ $(Tu)(\psi)=u(T^t\psi)$ defines a weakly continuous extension
 $T\colon\cSp(\R^n)\to\cSp(\R^n)$. It is consistent with the inclusion
 $\cS\subset\cSp$, and it is the unique continuous extension by
 \cref{distributions:prop:dense}. Integration by parts shows that $D_j^t=-D_j$, and
-clearly $x_j^t=x_j$ and $a^t=a$ for multiplication by $a\in\CIb(\R^n)$. Thus for
+directly from the definition $x_j^t=x_j$ and $a^t=a$ for multiplication by
+$a\in\CIb(\R^n)$. Thus for
 $u\in\cSp(\R^n)$, $\psi\in\cS(\R^n)$ and $a\in\CIb(\R^n)$ we define
 \begin{equation}\label{distributions:eq:dual-ops}
   D_ju(\psi)=u(-D_j\psi),\qquad x_ju(\psi)=u(x_j\psi),\qquad au(\psi)=u(a\psi).
@@ -259,6 +283,15 @@ $u\in\cSp(\R^n)$, $\psi\in\cS(\R^n)$ and $a\in\CIb(\R^n)$ we define
 These are continuous maps $\cSp(\R^n)\to\cSp(\R^n)$ which extend the corresponding
 operations on $\cS(\R^n)$. Consequently, if $u$ is a bounded continuous function then
 $x^\beta D^\alpha u\in\cSp(\R^n)$ for all $\alpha,\beta$.
+
+\begin{discussion}
+This is the basic principle for extending operations to distributions. We never
+``evaluate'' a distribution at a point. Instead we move the operation onto the test
+function, where it makes sense, by the rule we would get from integration by parts if
+$u$ were a function. Every extension in this book (differentiation, change of
+variables, Fourier transform, and later pseudodifferential operators) follows this
+pattern: find the transpose on test functions, check that it is continuous, and dualize.
+\end{discussion}
 
 Similarly, the exterior product extends to distributions. For $u\in\cSp(\R^n)$ and
 $v\in\cSp(\R^m)$ there is a unique $u\boxtimes v\in\cSp(\R^{n+m})$ with
@@ -312,6 +345,14 @@ $D_ju=0$ and $x_ju=0$. They are good exercises in the definitions. More importan
 they are exactly what we need for the proof of the Fourier inversion formula in
 \cref{distributions:sec:fourier}. Each is proved by a decomposition of test functions
 that is dual to the equation.
+
+\begin{discussion}
+Heuristically, $D_nu=0$ says that $u$ is constant in $x_n$, and $x_ju=0$ for all $j$
+says that $u$ lives only at the origin. The proofs make these intuitions precise in
+the only way available for distributions: by testing. To show $D_nu=0$ forces $u$ to be
+independent of $x_n$, we split every test function into a part that $u$ sees only
+through $\int\phi\,dx_n$ and a part of the form $D_n\psi$, which $u$ annihilates.
+\end{discussion}
 
 Write $x=(x',x_n)\in\R^{n-1}\times\R$ (by relabelling, any variable $x_j$ can be
 treated in the same way). Define the integration map
@@ -467,6 +508,32 @@ formula, change variables $\xi=2\eta$:
 $\int e^{ix\xi}e^{-|\xi|^2/4}d\xi=2^n\int e^{-i(-2x)\cdot\eta}e^{-|\eta|^2}d\eta
 =2^n\pi^{n/2}e^{-|x|^2}$. Multiplying by $(2\pi)^{-n}$ gives the result.
 \end{proof}
+
+The usual proofs of the inversion formula compute $\mathcal{G}\cF\phi$ with a Gaussian
+cut-off and let the cut-off go away. We take a more structural route, which previews
+the way kernels are used throughout the book. The composite $\mathcal{G}\cF$ commutes
+with translations and with multiplication by $x_j$, so its kernel must be a multiple of
+$\delta(x-y)$; a single Gaussian computation fixes the multiple.
+\Cref{distributions:fig:inversion} shows the logic.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzcd}[column sep=3.2em,row sep=2.8em]
+  \text{kernel $K$ of }\mathcal{G}\cF
+    \arrow[r,"\text{\small Step 1}"]
+  & \begin{array}{c}(x_j-y_j)K=0\\(D_{x_j}+D_{y_j})K=0\end{array}
+    \arrow[r,"\text{\small Step 2}"]
+  & \begin{array}{c}D_{x_j}K'=0\\z_jK'=0\end{array}
+    \arrow[d,"\text{\small Step 3: the two lemmas}"]\\
+  \mathcal{G}\cF=\Id
+  & \arrow[l] c=1
+  & \arrow[l,"\text{\small Step 4: Gaussian}"'] K=c\,\delta(x-y)
+\end{tikzcd}
+\caption{The logic of the proof of the Fourier inversion formula. The two little lemmas
+of \cref{distributions:sec:little} pin the kernel down up to a constant, and the
+Gaussian computation (\cref{distributions:lem:gaussian}) shows the constant is $1$.}
+\label{distributions:fig:inversion}
+\end{figure}
 
 \begin{theorem}[Fourier inversion]\label{distributions:thm:inversion}
 $\cF\colon\cS(\R^n)\to\cS(\R^n)$ is an isomorphism with inverse $\mathcal{G}$.
@@ -822,6 +889,14 @@ for some bounded continuous function $k$ on $\R^{n+m}$ and some $N,M$.
 \end{theorem}
 We call $K=K_A$ the \emph{Schwartz kernel} of $A$, and write formally
 $A\psi(x)=\int K_A(x,y)\psi(y)\,dy$.
+
+The proof has three steps. First, separate continuity of the bilinear form
+$B(\phi,\psi)=(A\psi)(\phi)$ is upgraded to a joint estimate
+(\cref{distributions:lem:joint}). Second, the operators $A_{N,M}$ in each set of variables
+convert this estimate into a bound by weighted $L^2$ norms of Fourier transforms
+(\cref{distributions:lem:basic-est}). Third, the Riesz representation argument of
+\cref{distributions:lem:representation} produces a bounded continuous function $k$, and
+$K$ is a derivative of $k$.
 \begin{proof}
 Uniqueness follows from \cref{distributions:lem:tensor-dense}. For existence, let
 $B(\phi,\psi)=(A\psi)(\phi)$. This is separately continuous: in $\phi$ because
@@ -861,7 +936,8 @@ $(-D)^\alpha\delta(\phi)=\delta(D^\alpha\phi)$. For the identity operator on $\c
 $K_{\Id}(\phi\boxtimes\psi)=\int\phi\psi\,dx$, so $K_{\Id}=\delta(x-y)$. This notation
 means the pull-back of $1\boxtimes\delta$ under the change of variables of
 Step~2 of \cref{distributions:thm:inversion}; the proof of that theorem identified
-$K_{\mathcal{G}\cF}=\delta(x-y)$. If $K_A$ is the kernel of $A$, then the kernel of
+$K_{\mathcal{G}\cF}=\delta(x-y)$. \Cref{distributions:fig:kernels} shows the supports of
+these kernels. If $K_A$ is the kernel of $A$, then the kernel of
 $D^\alpha\circ A$ is $D_x^\alpha K_A$ and the kernel of $A\circ D^\alpha$ is
 $(-D_y)^\alpha K_A$. In particular the operator $P(x,D)$ of
 \eqref{distributions:eq:Pxd} has kernel
@@ -872,6 +948,44 @@ $(-D_y)^\alpha K_A$. In particular the operator $P(x,D)$ of
 The second expression is an oscillatory integral, interpreted via
 \eqref{distributions:eq:Pxd}. The kernels of pseudodifferential operators in
 \cref{ch:euclidean} are of the same form with more general symbols $P(x,\xi)$.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+  \begin{scope}
+    \draw[->] (-1.8,0)--(1.9,0) node[right]{$y$};
+    \draw[->] (0,-1.8)--(0,1.9) node[above]{$x$};
+    \draw[very thick] (-1.6,-1.6)--(1.6,1.6) node[above right]{$x=y$};
+    \node at (0,-2.3) {\small differential operator};
+  \end{scope}
+  \begin{scope}[xshift=6.2cm]
+    \draw[->] (-1.8,0)--(1.9,0) node[right]{$y$};
+    \draw[->] (0,-1.8)--(0,1.9) node[above]{$x$};
+    \fill[gray!25] (-1.6,-1.6)--(-1.6,-0.9)--(0.9,1.6)--(1.6,1.6)--(1.6,0.9)--(-0.9,-1.6)--cycle;
+    \draw[very thick] (-1.6,-1.6)--(1.6,1.6);
+    \node at (0,-2.3) {\small pseudodifferential operator};
+  \end{scope}
+\end{tikzpicture}
+\caption{Supports and singularities of Schwartz kernels in the $(y,x)$-plane. A
+differential operator, such as $\Id$ or $P(x,D)$, has kernel supported on the diagonal
+$\{x=y\}$ (left). A pseudodifferential operator of \cref{ch:euclidean} has a kernel that
+is still singular only on the diagonal, but is no longer supported there: it is smooth
+off the diagonal and decays rapidly as $|x-y|\to\infty$ (right; the shading indicates
+where the kernel is concentrated).}
+\label{distributions:fig:kernels}
+\end{figure}
+
+\begin{question}
+Where does the Fourier transform enter the proof of the kernel theorem, which is a
+statement about operators and not about frequencies?
+\end{question}
+\begin{answer}
+Only in \cref{distributions:lem:basic-est}. The Schwartz norms $\norm{\cdot}_k$ are not
+Hilbert norms, so Riesz representation cannot be applied to them directly. After
+applying $A_{N,M}^{-1}$, a Schwartz-norm estimate becomes a bound by
+$\norm{\ang{\xi}^{-n}\hat\psi}_{L^2}$, a Hilbert norm. In that Hilbert space the point
+evaluations $e_x$ are bounded, and this is what produces the continuous function $k$.
+\end{answer}
 
 %======================================================================
 \section{Radial compactification}\label{distributions:sec:radial}
@@ -888,6 +1002,16 @@ every vector space. For us the most important one is the \emph{radial
 compactification}. Smooth functions on it are the classical symbols of order $0$, and
 Schwartz functions are the smooth functions on it that vanish to infinite order at the
 boundary.
+
+\begin{discussion}
+Why compactify at all? Estimates such as $|D^\alpha a(z)|\le C\ang{z}^{-|\alpha|}$, or
+``rapid decay with all derivatives'', are conditions on the behaviour of a function at
+infinity. On a compact manifold the analogous conditions are just smoothness, or
+vanishing to infinite order, at a boundary. Compactifying turns asymptotic analysis at
+infinity into local analysis near a boundary, where Taylor's formula and the other
+tools of calculus apply. The price is that we must choose the compactification
+carefully, so that the linear maps we care about extend smoothly.
+\end{discussion}
 
 \subsection{The one-point compactification and its defect}
 \label{distributions:sec:one-point}
@@ -928,8 +1052,65 @@ Thus the one-point compactification depends on a conformal structure on $W$, and
 only on its linear structure (\cref{distributions:ex:conformal}). It reappears in the
 proof of the index theorem, but it is not the right compactification for symbols.
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.25,>=Latex]
+  % one-point compactification
+  \begin{scope}
+    \draw (0,0) circle (1);
+    \draw[thick] (-1.9,1)--(1.9,1) node[right]{\small $\{1\}\times\R^n$};
+    \fill (0,-1) circle (0.04) node[below]{\small south pole $=\infty$};
+    \coordinate (z) at (1.4,1);
+    \draw[dashed] (0,-1)--(z);
+    % intersection: t=4/(4+|z|^2) on line (-1,0)+t(2,z)  (drawn in (horizontal=z, vertical=X_0))
+    \pgfmathsetmacro{\tpar}{4/(4+1.4*1.4)}
+    \fill ($(0,-1)+\tpar*(1.4,2)$) circle (0.04);
+    \fill (z) circle (0.04) node[above]{\small $z$};
+    \node at (0,-1.75) {\small one-point: $\oRC{\R^n}$};
+  \end{scope}
+  % radial compactification
+  \begin{scope}[xshift=5cm]
+    \fill[gray!15] (-1,0) arc (180:0:1)--cycle;
+    \draw (1,0) arc (0:180:1);
+    \draw[very thick] (-1,0)--(1,0);
+    \draw[thick] (-1.9,1)--(1.9,1) node[right]{\small $\{1\}\times\R^n$};
+    \fill (0,0) circle (0.04) node[below]{\small $0$};
+    \coordinate (z) at (1.4,1);
+    \draw[dashed] (0,0)--(z);
+    \pgfmathsetmacro{\rpar}{1/sqrt(1+1.4*1.4)}
+    \fill ($\rpar*(1.4,1)$) circle (0.04);
+    \fill (z) circle (0.04) node[above]{\small $z$};
+    \draw[dashed] (0,0)--(-1.9,1);
+    \pgfmathsetmacro{\rparb}{1/sqrt(1+1.9*1.9)}
+    \fill ($\rparb*(-1.9,1)$) circle (0.04);
+    \node[below] at (0.75,0) {\small $X_0=0$};
+    \node at (0,-1.0) {\small radial: $\RC{\R^n}=\Sphere^n_+$};
+    \node at (0,-1.4) {\small boundary $=$ sphere at infinity};
+  \end{scope}
+\end{tikzpicture}
+\caption{Two compactifications of $\R^n$, drawn for $n=1$ with $\R^n$ placed at height
+$X_0=1$. Left: stereographic projection from the south pole adds a single point
+$\infty$. Right: projection from the origin maps $\R^n$ onto the open upper hemisphere,
+and each direction $\omega$ in $\R^n$ acquires its own point at infinity on the
+equator $\{X_0=0\}$.}
+\label{distributions:fig:compactifications}
+\end{figure}
+
+\begin{question}
+Why not use the one-point compactification for symbols? It is simpler, and it is a
+smooth manifold without boundary.
+\end{question}
+\begin{answer}
+For two reasons. First, \cref{distributions:prop:one-point} shows that general linear
+changes of variables do not extend to it, while symbols must be invariant under them.
+Second, the typical symbol $\xi/|\xi|$ (for $|\xi|>1$) has a different limit along each
+ray, so it does not even extend continuously to a single point at infinity. The radial
+compactification keeps one point at infinity for each direction, which is exactly what
+homogeneous functions of degree $0$ need.
+\end{answer}
+
 \subsection{The radial compactification}
-Instead of the south pole, project from the origin. The ray from $0$ through $(1,z)$
+Instead of the south pole, project from the origin (\cref{distributions:fig:compactifications}). The ray from $0$ through $(1,z)$
 meets the upper half of the unit sphere at the point
 \begin{equation}\label{distributions:eq:RC}
   \mathrm{RC}\colon\R^n\ni z\longmapsto\Big(\frac1{\ang{z}},\frac z{\ang{z}}\Big)\in
@@ -1217,7 +1398,43 @@ $\ang{v/\ang{u}}=(1+|u|^2+|v|^2)^{1/2}/\ang{u}$. The map $(v,u)\mapsto(v/\ang{u}
 diffeomorphism of $W$, so $R_V$ is a diffeomorphism onto the interior of the compact
 manifold with corners $\RC{U}\times\RC{V}$, with inverse $(t,u',s,v')\mapsto(v'/(st),u'/t)$.
 We write $\relRC{V}{W}$ for $\RC{U}\times\RC{V}$ with this identification, and call it the
-\emph{radial compactification of $W$ relative to $V$}.
+\emph{radial compactification of $W$ relative to $V$}. \Cref{distributions:fig:relative}
+shows the simplest case.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.2,>=Latex]
+  \begin{scope}
+    \fill[gray!15] (-1,-1) rectangle (1,1);
+    \draw[thick] (-1,-1)--(1,-1) (-1,1)--(1,1);
+    \draw[very thick] (-1,-1)--(-1,1) (1,-1)--(1,1);
+    \node[below] at (0,-1) {\small $\{u'=-1\}$};
+    \node[above] at (0,1) {\small $\{u'=+1\}$};
+    \node[left,align=right] at (-1,0) {\small front\\[-0.6ex]\small face};
+    \node[right,align=left] at (1,0) {\small front\\[-0.6ex]\small face};
+    \draw[->] (-0.5,0)--(0.6,0) node[right]{\small $v$};
+    \draw[->] (0,-0.5)--(0,0.6) node[above]{\small $u$};
+    \node at (0,-1.75) {\small $\relRC{V}{W}=\RC{U}\times\RC{V}$};
+  \end{scope}
+  \draw[->] (2.3,0)--(3.4,0) node[midway,above]{\small $\beta$};
+  \begin{scope}[xshift=5.2cm]
+    \fill[gray!15] (0,0) circle (1);
+    \draw[thick] (0,0) circle (1);
+    \fill (1,0) circle (0.06) node[right]{\small $+\mathbb{S}V$};
+    \fill (-1,0) circle (0.06) node[left]{\small $-\mathbb{S}V$};
+    \draw[->] (-0.5,0)--(0.6,0) node[above]{\small $v$};
+    \draw[->] (0,-0.5)--(0,0.6) node[above]{\small $u$};
+    \node at (0,-1.75) {\small $\RC{W}$};
+  \end{scope}
+\end{tikzpicture}
+\caption{The relative compactification for $W=\R^2$, $V=\R\times\{0\}$ and $U=\{0\}\times\R$.
+The square $\RC{U}\times\RC{V}$ maps onto the disc $\RC{W}$ by a map $\beta$ extending
+the identity of $W$. The faces $\{s=0\}$ (heavy vertical sides), where $|v|\to\infty$
+with $u$ bounded, collapse to the two points $\pm\mathbb{S}V$ of the sphere at infinity
+of $V$; the other two sides map to the two arcs of the circle. This is the blow-up
+$[\RC{W},\mathbb{S}V]$ of \cref{distributions:rem:blowup}.}
+\label{distributions:fig:relative}
+\end{figure}
 
 \begin{proposition}\label{distributions:prop:relative}
 Every affine map of $W$ whose linear part maps $V$ into itself extends to a
