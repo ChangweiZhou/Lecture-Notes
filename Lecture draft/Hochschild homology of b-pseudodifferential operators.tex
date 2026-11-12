@@ -101,7 +101,7 @@ operator orders, the allowed powers of a boundary defining function, the
 residual ideal, and the locally convex completion. We use the standard algebra
 for which the homology has a finite-dimensional geometric description.
 It is the b-groupoid specialization of the Laurent symbol algebras studied in
-\cite{MN,BNsymbols,BNfamilies}.
+\cite{BNsymbols,BNfamilies}.
 
 \emph{Status of the result.} Theorem~\ref{thm:main} below is the
 b-groupoid case of the Benameur--Nistor theorem on Laurent complete symbols
@@ -199,16 +199,19 @@ Proposition~\ref{prop:face}). The subspace
 \(H^{2n-k-1}(Z\times S^1_\sigma)\) are canonical.
 
 \begin{remark}[Comparison with Melrose--Nistor]\label{rem:MN}
-Melrose and Nistor \cite{MN} study the Hochschild homology of the
-non-Laurent b-calculus, in particular of the complete-symbol algebra of
-classical b-operators of integral order with smooth, not Laurent,
-coefficients, \(\Psi_b^{\Z}(X;E)/\Psi_b^{-\infty}(X;E)\). The four-summand
-formula \eqref{eq:expanded} has the same shape as their answer for that
-algebra: an interior contribution \(H^*(Y\times S^1_\sigma)\) plus a
-boundary contribution from \(Z\times S^1_\sigma\), shifted by one degree;
-compare \cite{MN}. We have not checked the two answers against each other
-degree by degree, and the algebras differ, so no identification of the two
-homologies is claimed here.
+Melrose and Nistor \cite{MN} compute the Hochschild and cyclic homology of
+the algebra of \emph{cusp} pseudodifferential operators on a compact manifold
+with boundary. This is the full operator algebra, including its residual
+ideal, not a symbol quotient. They interpret the index as a Hochschild
+\(1\)-cocycle and obtain an extension of the Atiyah--Patodi--Singer formula,
+whose boundary term is an eta invariant of the suspended algebra of the
+boundary. Their work does not treat the b-calculus. The present theorem
+concerns only the Laurent symbol quotient of the b-calculus. The
+b-calculus analogue of the Melrose--Nistor computation is not
+addressed here: the Hochschild homology of the full operator algebra
+\(\Psi_b^{\Z}(X;E)\) and the connecting map to the symbol algebra.
+Section~\ref{sec:unreduced} explains why that problem depends on the
+choice of residual ideal and completion.
 \end{remark}
 
 \begin{figure}[htbp]
@@ -1353,7 +1356,8 @@ nonempty boundary. Hence
 Continuous traces are continuous linear functionals vanishing on
 \([\cA,\cA]_{\mathrm{cont}}\), so they form a space of dimension at most
 \(|\pi_0(\partial X)|\). Conversely, the boundary-face residue functionals,
-one for each component of \(\partial X\) (see \cite{MN,BNfamilies}), are
+one for each component of \(\partial X\) (see \cite{BNfamilies}; compare
+the residue traces of the cusp calculus in \cite{MN}), are
 continuous traces; granting their linear independence, the space of
 continuous traces has dimension exactly \(|\pi_0(\partial X)|\). In that
 case \([\cA,\cA]_{\mathrm{cont}}\) is the joint kernel of finitely many
@@ -1410,8 +1414,10 @@ For an H-unital residual ideal, excision gives the long exact sequence
  \HH_{k-1}(\Psi_{b,L}^{-\infty})
  \to\cdots .
 \]
-Melrose and Nistor study the corresponding extension for the non-Laurent
-b-calculus \cite{MN}; see also Moroianu--Nistor \cite{MoroianuNistor} for
+Melrose and Nistor study the corresponding extension for the cusp calculus
+\cite{MN}. There the connecting map evaluates the index cocycle and produces
+an eta-invariant term. The analogous extension for the b-calculus is not
+computed in this paper; see also Moroianu--Nistor \cite{MoroianuNistor} for
 the relation between index and homology on manifolds with boundary.
 
 Here H-unitality means that the completed bar complex of the nonunital
@@ -1456,7 +1462,7 @@ forms and eta data refine the topological \(K\)-class. It does not replace the
 Hochschild spectral-sequence calculation \cite{LMlocalization}. The
 logical division is therefore
 \[
- \text{Melrose--Nistor and Benameur--Nistor: algebraic homology,}
+ \text{Melrose--Nistor (cusp calculus) and Benameur--Nistor: algebraic homology,}
 \]
 \[
  \text{Liu--Ma: differential-\(K\) and eta localization of index data.}
