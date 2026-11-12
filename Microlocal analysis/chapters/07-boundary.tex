@@ -659,3 +659,263 @@ matter. It is \emph{false} for a general pseudodifferential operator of order $-
 place of $D^{-1}$ (for instance for $\Op(\ang{\zeta}^{-1})$ in $\R^n$, $n\ge2$, the
 result is not smooth up to $H$); it depends on the special form of the symbol of
 $D^{-1}$, which we now examine.
+
+\section{Rational symbols and layer potentials}\label{boundary:sec:rational}
+
+\subsection*{Symbols over a closed set}
+Let $W\subset\R^n$ be open and $K\subset W$ closed in $\R^n$ (we shall take $K$ a
+compact subset of a closed half-space). We say $a\in\CI(W\times\R^n)$ is a symbol of
+order $m$ \emph{over $K$}, $a\in S^m(K)$, if for all $\alpha,\beta$,
+$\sup_{z\in K}|D_z^\alpha D_\zeta^\beta a(z,\zeta)|\le C_{\alpha\beta}\ang{\zeta}^{m-|\beta|}$.
+These classes are closed under products, $D_z$ and $D_\zeta$ in the usual way. For a
+symbol $q\in S^m(\R^n;\R^n)$, $\Op(q)f(z)$ depends only on $q(z,\cdot)$.
+
+Let $D=\sum_jA_j(z)D_{z_j}+A'(z)$ be a first-order operator on $W$ (with matrix
+coefficients), with full symbol $d(z,\zeta)=\sigma(z,\zeta)+A'(z)$. Since $d$ is
+linear in $\zeta$, for $q\in S^m(\R^n;\R^n)$ with $z$-support in $W$,
+\begin{equation}\label{boundary:eq:comp-diff}
+D\,\Op(q)=\Op(d\circ q),\qquad d\circ q=dq+\sum_jA_jD_{z_j}q,
+\end{equation}
+exactly, as follows by differentiating under the integral sign.
+
+\subsection*{Rational symbols}
+Suppose now that $W$ carries a Riemannian metric with dual metric $g(z,\zeta)=
+\sum g^{jk}(z)\zeta_j\zeta_k$ and Hermitian structures, and that $\tau(z,\zeta)$ is
+linear in $\zeta$, with $\sigma\tau=g$ and $\tau\sigma=g$ for $z\in K$. (If $D$ is of
+Dirac type on $K$, take $\tau=\sigma^*$ computed with respect to the Hermitian
+structures; outside $K$ the identities need not hold.)
+
+\begin{definition}
+For $r\in\Z$, $\Rat{r}$ is the space of finite sums of matrix-valued functions
+$p(z,\zeta)/(1+g(z,\zeta))^j$, where $j\ge0$ and $p$ is a polynomial in $\zeta$ of
+degree at most $2j+r$ with coefficients in $\CI(W)$.
+\end{definition}
+
+Clearly $\Rat{r}\cdot\Rat{s}\subset\Rat{r+s}$, $\Rat{r}\subset\Rat{r+1}$, and
+$\Rat{r}$ is preserved by $D_{z_j}$ and multiplication by $\CI(W)$; moreover
+$\pa_{\zeta_j}\Rat{r}\subset\Rat{r-1}$, since $\pa_{\zeta_j}(p(1+g)^{-j})=
+(\pa_{\zeta_j}p)(1+g)^{-j}-jp(\pa_{\zeta_j}g)(1+g)^{-j-1}$. Since $1+g\ge c\ang{\zeta}^2$
+on compact sets, it follows that $\Rat{r}\subset S^r(L)$ for every compact $L\subset W$.
+
+\begin{lemma}[Rational symbols]\label{boundary:lem:rational}
+In this setting there are $\rho_N\in\Rat{-1}$, $N\ge1$, with $\rho_1=\tau/(1+g)$ and
+$\rho_{N+1}-\rho_N\in\Rat{-N-1}$, such that the following holds. If $L\subset K$ is
+compact and $q\in S^{-1}(\R^n;\R^n)$ satisfies $d\circ q-1\in S^{-\infty}(L')$ for a
+compact neighbourhood $L'$ of $L$ in $K$, then
+\begin{equation*}
+q-\rho_N\in S^{-N-1}(L)\quad\text{for all}\ N.
+\end{equation*}
+Similarly, with $\phi\in\CIc(\R^n)$ equal to $1$ near $0$,
+$q-\sum_{l=1}^N(1-\phi)p_lg^{1-2l}\in S^{-N-1}(L)$, where $p_1=\tau$ and
+\begin{equation*}
+p_{l+1}=-\tau\Big(gA'p_l+\sum_jA_j\big(gD_{z_j}p_l-(2l-1)(D_{z_j}g)p_l\big)\Big)
+\end{equation*}
+are polynomials in $\zeta$, homogeneous of degree $3l-2$. Thus the homogeneous terms of
+the symbol of a parametrix of a generalized Dirac operator are of the form
+$g^{1-2l}p_l$.
+\end{lemma}
+\begin{proof}
+Over $K$, $d\circ\rho_1=g/(1+g)+A'\tau/(1+g)+\sum_jA_jD_{z_j}(\tau/(1+g))=1-e_1$ with
+$e_1\in\Rat{-1}$. Inductively, if $d\circ\rho_k=1-e_k$ over $K$ with $e_k\in
+\Rat{-k}$, set $\rho_{k+1}=\rho_k+\tau e_k/(1+g)$. Then $\tau e_k/(1+g)\in\Rat{-k-1}$
+and over $K$
+\begin{equation*}
+d\circ\frac{\tau e_k}{1+g}=e_k-\frac{e_k}{1+g}+A'\frac{\tau e_k}{1+g}+\sum_jA_j
+D_{z_j}\frac{\tau e_k}{1+g},
+\end{equation*}
+so $d\circ\rho_{k+1}=1-e_{k+1}$ with $e_{k+1}\in\Rat{-k-1}$. (The identity
+$\sigma\tau=g$ is used only pointwise; the derivatives fall on the smooth functions
+$\tau,g$.)
+
+Now let $e=q-\rho_N\in S^{-1}(L')$. Then $d\circ e=(d\circ q-1)+e_N\in S^{-N}(L')$.
+Suppose $e\in S^{-k}(L'')$ for a compact neighbourhood $L''\subset L'$ of $L$, $k\le
+N$. Then $\sigma e=d\circ e-A'e-\sum_jA_jD_{z_j}e\in S^{-k}(L'')$ and
+$e=(1-\phi)\tau g^{-1}\sigma e+\phi e\in S^{-k-1}(L'')$. Starting from $k=1$ we
+reach $e\in S^{-N-1}(L)$ (the neighbourhoods may be fixed in advance, since only
+derivatives at points of $L''$ are involved). The homogeneous version is proved in
+the same way: writing $q_{-l}=p_lg^{1-2l}$, the terms of order $-l$ in
+$d\circ\sum_lq_{-l}=1$ give $\sigma q_{-1}=1$ and $q_{-l-1}=-g^{-1}\tau\big(A'q_{-l}+
+\sum_jA_jD_{z_j}q_{-l}\big)$, and substituting
+$D_{z_j}q_{-l}=g^{-2l}\big(gD_{z_j}p_l-(2l-1)(D_{z_j}g)p_l\big)$ gives the recursion for
+$p_l$; the degree of $p_{l+1}$ is $1+2+(3l-2)=3(l+1)-2$.
+\end{proof}
+
+\subsection*{The basic contour integral}
+Let $W=(-1,1)_x\times O$, $O\subset\R^{n-1}$ open, so $\zeta=(\xi,\eta)$, and write
+\begin{equation*}
+g(z,\xi,\eta)=g^{11}(z)\xi^2+2\beta(z,\eta)\xi+g'(z,\eta),\quad
+\beta=\sum_{k\ge2}g^{1k}\eta_k.
+\end{equation*}
+By positive-definiteness $g^{11}>0$ and $g^{11}g'(\eta)-\beta(\eta)^2\ge c|\eta|^2$
+locally uniformly. Hence for each $(z,\eta)$ the equation $1+g(z,\xi,\eta)=0$ has the
+two roots
+\begin{equation*}
+\xi_\pm(z,\eta)=\frac{-\beta(z,\eta)\pm i\,s(z,\eta)}{g^{11}(z)},\quad
+s=\big(g^{11}(1+g')-\beta^2\big)^{1/2}\ge c\ang{\eta},
+\end{equation*}
+which lie in the upper and lower half planes, at distance $\ge c\ang{\eta}$ from the
+real axis and from each other, with $|\xi_\pm|\le C\ang{\eta}$. For $\rho=p/(1+g)^j\in
+\Rat{r}$ with $r\le-1$ and $x\ge0$ set
+\begin{equation}\label{boundary:eq:Gplus}
+G^+_\rho(z',x,\eta)=\frac1{2\pi}\oint_{\gamma}e^{ix\xi}\rho(z',\xi,\eta)\,d\xi=
+i\operatorname*{Res}_{\xi=\xi_+(z',\eta)}\big(e^{ix\xi}\rho(z',\xi,\eta)\big),
+\end{equation}
+where $\gamma$ is a positively oriented circle in $\{\operatorname{Im}\xi>0\}$
+enclosing $\xi_+(z',\eta)$ but not $\xi_-(z',\eta)$; similarly
+$G^-_\rho(z',x,\eta)=-i\operatorname{Res}_{\xi=\xi_-}(e^{ix\xi}\rho)$ for $x\le0$.
+
+\begin{lemma}\label{boundary:lem:contour}
+Let $\rho\in\Rat{r}$, $r\le-1$, and let $L\subset W$ be compact.
+\begin{enumerate}[label=(\roman*)]
+\item For fixed $(z',\eta)$ the inverse Fourier transform of $\xi\mapsto\rho(z',\xi,
+\eta)$ (an $L^2$ function) is $H(x)G^+_\rho(z',x,\eta)-H(-x)G^-_\rho(z',x,\eta)$.
+\item For $z'\in L$, $x\ge0$ and all $\alpha,k,\beta$,
+$|D^\alpha_{z'}D^k_xD^\beta_\eta G^+_\rho(z',x,\eta)|\le C\ang{\eta}^{r+1+k-|\beta|}$.
+In particular $G^+_\rho(z',0,\eta)\in S^{r+1}(L)$ (as a symbol in $\eta$).
+\item For $z'\in L$, $G^+_\rho(z',0,\eta)$ is classical: for $|\eta|$ large it has an
+asymptotic expansion in functions homogeneous in $\eta$ of degrees $r+1-l$, $l\ge0$.
+\item If $\rho=\tau/(1+g)$, the term of degree $0$ in (iii) is
+$i\,\tau(z',\xi^0_+,\eta)/\big(g^{11}(\xi^0_+-\xi^0_-)\big)$, where $\xi^0_\pm=
+(-\beta\pm i(g^{11}g'-\beta^2)^{1/2})/g^{11}$ are the roots of $g(z',\xi,\eta)=0$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(i) Since $r<0$, $\rho$ is a proper rational function of $\xi$ and has a partial
+fraction decomposition $\sum_{k=1}^j\big(a_k(\xi-\xi_+)^{-k}+b_k(\xi-\xi_-)^{-k}\big)$.
+From $\int_0^\infty e^{-ix(\xi-\xi_+)}dx=-i(\xi-\xi_+)^{-1}$ (convergent as
+$\operatorname{Im}\xi_+>0$) we get $\cF^{-1}[(\xi-\xi_+)^{-1}]=iH(x)e^{ix\xi_+}$, and
+differentiating in $\xi_+$, $\cF^{-1}[(\xi-\xi_+)^{-k}]=iH(x)(ix)^{k-1}e^{ix\xi_+}/
+(k-1)!=iH(x)\operatorname{Res}_{\xi_+}\big(e^{ix\xi}(\xi-\xi_+)^{-k}\big)$; similarly
+$\cF^{-1}[(\xi-\xi_-)^{-k}]=-iH(-x)\operatorname{Res}_{\xi_-}(e^{ix\xi}(\xi-
+\xi_-)^{-k})$. Summing gives (i).
+
+(ii) Near a given $(z_0,\eta_0)$ we may fix $\gamma$ to be the circle with centre
+$\xi_+(z_0,\eta_0)$ and radius $c'\ang{\eta_0}$, $c'$ small; it encloses
+$\xi_+(z',\eta)$ and lies in $\operatorname{Im}\xi\ge c''\ang{\eta}$ for $(z',\eta)$
+in a neighbourhood of size comparable to $\ang{\eta_0}$ in $\eta$ (by the estimates on
+$\xi_\pm$ and $|\pa_{z,\eta}\xi_\pm|\le C$, $|\pa_z\xi_\pm|\le C\ang\eta$). On $\gamma$,
+$|\xi|\le C\ang{\eta}$ and $|1+g|=g^{11}|\xi-\xi_+||\xi-\xi_-|\ge c\ang{\eta}^2$, so
+$|\rho|\le C\ang{\eta}^r$, and likewise $|D_{z'}^\alpha D_\eta^\beta\rho|\le
+C\ang\eta^{r-|\beta|}$ because $D_z^\alpha D_\eta^\beta\rho\in\Rat{r-|\beta|}$.
+Moreover $|e^{ix\xi}|\le1$ and $|D_x^ke^{ix\xi}|\le C\ang{\eta}^k$ for $x\ge0$. As
+$\gamma$ has length $O(\ang{\eta})$, differentiation under the integral gives (ii).
+
+(iii) For $|\eta|\ge1$ write $\eta=|\eta|\theta$, $\xi=|\eta|t$ and $\epsilon=
+|\eta|^{-2}$; then $1+g=|\eta|^2(\epsilon+g(z',t,\theta))$ and, decomposing $p$ into
+homogeneous parts $p_{(k)}$,
+\begin{equation*}
+G^+_\rho(z',0,\eta)=\sum_k|\eta|^{k+1-2j}\,\frac1{2\pi}\oint_{\gamma'}\frac{p_{(k)}(z',t,
+\theta)}{(\epsilon+g(z',t,\theta))^j}\,dt,
+\end{equation*}
+where $\gamma'$ is a fixed circle around the root $t^0_+(z',\theta)$ of
+$g(z',t,\theta)=0$ in the upper half plane, which for $0\le\epsilon\le\epsilon_0$ still
+encloses exactly one root of $\epsilon+g=0$. The integrals are smooth in
+$(z',\theta,\epsilon)$ for $0\le\epsilon\le\epsilon_0$; Taylor expansion in $\epsilon=
+|\eta|^{-2}$ gives an expansion in homogeneous functions of degrees $k+1-2j-2l\le
+r+1-2l$.
+
+(iv) This is the term $k=1$, $l=0$, i.e.\ $\epsilon=0$: the residue of $\tau/g$ at the
+simple pole $\xi^0_+$.
+\end{proof}
+
+\subsection*{Boundary behaviour of layer potentials}
+
+\begin{theorem}\label{boundary:thm:layer}
+Let $M$ be a compact manifold without boundary, $x\in\CI(M)$ real with $dx\ne0$ on
+$H=\{x=0\}$, $M_+=\{x\ge0\}$, and let $D\in\Diff{1}(M;V_1,V_2)$ be elliptic on an open
+neighbourhood $U$ of $M_+$ and of Dirac type on $M_+$ (for some metric and Hermitian
+structures on $M$). Let $Q\in\Psido{-1}(M;V_2,V_1)$ satisfy $\chi(DQ-\Id)\in
+\Psido{-\infty}$ for some $\chi\in\CI(M)$ supported in $U$ and equal to $1$ near
+$M_+$. Then for $w\in\CI(H;V_2)$:
+\begin{enumerate}[label=(\roman*)]
+\item $Q(w\,\delta(x))$ restricted to $M_+^\circ$ extends to an element of
+$\CI(M_+;V_1)$;
+\item the boundary value map $Q_+w=b_+\big(Q(w\,\delta(x))\big)$ is a classical
+pseudodifferential operator $Q_+\in\Psido{0}(H;V_2,V_1)$;
+\item with $\nu=dx/|dx|$ and $T^*H$ identified with the covectors orthogonal to $\nu$,
+\begin{equation*}
+\sigma_0(Q_+)(y,\eta)=\frac{i|\eta|\,\sigma(\nu)^*+\sigma(\eta)^*}{2|dx|\,|\eta|}.
+\end{equation*}
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Since $\singsupp Q(w\,\delta(x))\subset\supp w\subset H$, only points of $H$ need
+attention, and by a partition of unity we may assume $w$ is supported in a coordinate
+patch. Choose coordinates $(x,y)$ on $W=(-1,1)\times O$ around the patch, with $x$ the
+given function, trivializing $V_1,V_2$, and with $W\subset\{\chi=1\}$ if we shrink to
+$x>-1/2$ (only $x\ge0$ matters). Let $\phi,\psi\in\CIc(W)$ with $\psi=1$ on
+$\supp\phi$ and near $\supp w\times\{0\}$, and $\phi=1$ on a neighbourhood of a given
+compact $L_0\subset W$. By \cref{ch:manifolds}, in these coordinates $\phi Q\psi=
+\Op(q)+R$ with $q\in S^{-1}(\R^n;\R^n)$ and $R$ with smooth compactly supported kernel,
+and $\phi Q\psi(w\delta(x))=\phi Q(w\delta(x))$. Moreover, by
+\eqref{boundary:eq:comp-diff}, $\Op(d\circ q)=D\phi Q\psi-DR=\phi\psi+\phi(DQ-\Id)\psi
++[D,\phi]Q\psi-DR$; the commutator is multiplication by a matrix function vanishing
+on $\{\phi=1\}^\circ$, so over the compact set $K'=L'\cap\{x\ge0\}$, for
+$L'\subset\{\phi=1\}^\circ$ a compact neighbourhood of $L_0$, we have $d\circ q-1\in
+S^{-\infty}(K')$. \Cref{boundary:lem:rational} applies with $K=\{x\ge0\}$ and gives
+$q=\rho_N+e$ with $e\in S^{-N-1}(L)$, $L=L_0\cap\{x\ge0\}$.
+
+Let $\phi_1\in\CIc(W)$ equal $1$ near $L_0$. For $z\in L$, $\Op(q)f(z)=
+\Op(\phi_1\rho_N)f(z)+\Op(e')f(z)$ with $e'=q-\phi_1\rho_N\in S^{-1}$, $e'=e$ near
+$L$. We compute both terms on $f=w\otimes\delta(x)$, $\hat f(\xi,\eta)=\hat w(\eta)$,
+using the approximations $f_\epsilon=w\otimes\varphi_\epsilon(x)$,
+$\varphi_\epsilon=\epsilon^{-1}\varphi(x/\epsilon)$, which converge to $f$ in
+$\cSp$, so that $\Op(a)f_\epsilon\to\Op(a)f$ in $\cSp$ for any symbol $a$.
+
+\emph{The remainder.} For $z\in L$, $|D_z^\alpha(e^{iz\cdot\zeta}e'(z,\zeta))|\le
+C\ang\zeta^{|\alpha|-N-1}$ and $\int\ang{\zeta}^{|\alpha|-N-1}d\xi\le C\ang\eta^{|\alpha|
+-N}$ if $|\alpha|\le N-1$. Since $\hat w$ is rapidly decreasing, dominated convergence
+shows that $\Op(e')f_\epsilon(z)\to\int\!\!\int e^{iz\cdot\zeta}e'(z,\zeta)\hat
+w(\eta)\,\dbar\xi\,\dbar\eta$ uniformly on $L$, together with $z$-derivatives of order
+$\le N-1$. Thus on the interior of $L$ (relative to $\R^n$), $\Op(e')f$ is this
+absolutely convergent integral, which is $\mathcal{C}^{N-1}$ on $L$, including up to
+$x=0$. Its value at $x=0$ is $\int e^{iy\cdot\eta}t_N(y,\eta)\hat w(\eta)\dbar\eta$
+with $t_N(y,\eta)=\int e((0,y),\xi,\eta)\dbar\xi$, and since $D^\beta_\eta e\in
+S^{-N-1-|\beta|}(L)$, $t_N\in S^{-N}$.
+
+\emph{The main term.} $\phi_1\rho_N$ is a finite sum of terms $\phi_1\rho$, $\rho\in
+\Rat{-1}$. By \cref{boundary:lem:contour}(i), $\int e^{ix\xi}\rho(z,\xi,\eta)\hat
+\varphi(\epsilon\xi)\dbar\xi$ is the convolution in $x$ of
+$H(x)G^+_\rho-H(-x)G^-_\rho$ with $\varphi_\epsilon$; for $x>0$ and $\epsilon$ small
+it converges to $G^+_\rho(z,x,\eta)$, with error at most $C\epsilon\ang\eta^{r+2}$
+uniformly for $x\ge2\epsilon$ by (ii) of that lemma. Hence for $z\in L$ with $x>0$,
+\begin{equation*}
+\Op(\phi_1\rho)f(z)=\phi_1(z)\int e^{iy\cdot\eta}G^+_\rho(z,x,\eta)\hat w(\eta)\,
+\dbar\eta,
+\end{equation*}
+and by \cref{boundary:lem:contour}(ii) and the rapid decrease of $\hat w$ the right side
+is smooth in $z\in L$ up to $x=0$, with boundary value $\int e^{iy\cdot\eta}
+G^+_\rho((0,y),0,\eta)\hat w(\eta)\dbar\eta$.
+
+Combining, $Q(w\delta(x))$ is $\mathcal{C}^{N-1}$ up to $x=0$ near $L$ for every $N$,
+which proves (i) since $L_0$ was arbitrary. Moreover, near $L$,
+\begin{equation*}
+Q_+w=\Op_H\big(\sigma^{(N)}+t_N\big)w+R_+w,\qquad\sigma^{(N)}(y,\eta)=
+\sum G^+_{\phi_1\rho}((0,y),0,\eta),
+\end{equation*}
+with $R_+$ smoothing, the sum over the terms of $\rho_N$. Here $\sigma^{(N)}\in S^0$
+is classical, $t_N\in S^{-N}$, and $\sigma^{(N+1)}-\sigma^{(N)}\in S^{-N}$ since
+$\rho_{N+1}-\rho_N\in\Rat{-N-1}$. Hence locally $Q_+$ is a pseudodifferential operator
+of order $0$ whose symbol agrees modulo $S^{-N}$ with a classical symbol for every
+$N$, i.e.\ it is classical. If $\psi_1,\phi_2\in\CI(H)$ have disjoint supports,
+$\psi_1Q_+\phi_2$ has smooth kernel, since $Q(\phi_2w\delta(x))$ is given near
+$\supp\psi_1$ by integrating the kernel of $Q$, smooth off the diagonal, against
+$\phi_2w$ over $H$. Choosing a cover of $H$ by coordinate patches such that any two
+that meet lie in a common patch, it follows that $Q_+\in\Psido{0}(H;V_2,V_1)$, which
+is (ii).
+
+For (iii) we compute at a point of $H$. Changing the coordinates $y$ (which does not
+affect $x$, $\delta(x)$ or $Q_+$) we may assume $dy_k\perp dx$ at that point, i.e.\
+$\beta=0$; then $g^{11}=|dx|^2$, $g'(\eta)=|\eta|^2$ and $\xi^0_\pm=\pm i|\eta|/|dx|$.
+The principal symbol of $Q_+$ comes from $\rho_1=\tau/(1+g)$ only, and by
+\cref{boundary:lem:contour}(iv) equals
+$i\tau(\xi^0_+dx+\eta)/(2i|dx||\eta|)$; since $\xi^0_+dx=i|\eta|\nu$ and $\tau$ is
+complex linear, this is the stated formula.
+\end{proof}
+
+\begin{remark}\label{boundary:rem:other-side}
+If $D$ is of Dirac type on $M_-=\{x\le0\}$ as well, the same argument gives
+smoothness of $Q(w\delta(x))$ up to $H$ from $M_-$, with boundary value
+$Q_-\in\Psido{0}(H;V_2,V_1)$, $\sigma_0(Q_-)=(-i|\eta|\sigma(\nu)^*+\sigma(\eta)^*)/
+(2|dx||\eta|)$, obtained from the residue at $\xi_-$.
+\end{remark}
