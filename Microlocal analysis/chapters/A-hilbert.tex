@@ -144,6 +144,15 @@ Here $\Ran(A)^\perp=\Nul(A^*)$ for any bounded $A$, and if $\Ran(A)$ is closed i
 orthocomplement of $\Nul(A^*)$. Thus $A$ is Fredholm if and only if $A^*$ is, and
 $\ind(A^*)=-\ind(A)$.
 
+\begin{discussion}
+Fredholm operators are the operators that are ``invertible up to finite
+dimensions''. Their null space and cokernel can jump under perturbation, but
+only together, so that the difference of their dimensions, the index, is
+stable. Atkinson's theorem below makes this practical: to prove that an
+operator is Fredholm it suffices to invert it modulo compact operators, which
+is exactly what a parametrix does on a compact manifold.
+\end{discussion}
+
 \begin{proposition}[Generalized inverse]\label{hilbert:prop:generalized-inverse}
 If $A\in\Lin(H_1,H_2)$ is Fredholm there is a unique $G\in\Lin(H_2,H_1)$ with
 \begin{equation*}
@@ -203,6 +212,19 @@ $v\in\Nul A+\Ran B$; and the kernel of the last map is $\Ran A/\Ran AB$. The alt
 dimensions in an exact sequence vanishes, and $\dim H_2/\Ran B=\dim\Nul B^*$ etc.\ since the
 ranges are closed; this gives the formula.
 \end{proof}
+
+\begin{question}
+Why must the range be closed in the definition? Is it not enough that
+$\Nul(A)$ and $\Ran(A)^\perp$ are finite-dimensional?
+\end{question}
+\begin{answer}
+No. The diagonal operator $Ae_k=k^{-1}e_k$ on a space with orthonormal basis
+$(e_k)$ is injective with dense range, so both spaces are zero; but it is
+compact, its range is not closed, and it has no bounded inverse on its range.
+Being compact, it is certainly not invertible modulo compact operators, so
+Atkinson's theorem fails for it. Closedness of the range is what the
+parametrix characterization and the stability of the index rely on.
+\end{answer}
 
 \begin{theorem}[Stability of the index]\label{hilbert:thm:stability}
 Let $A\in\Lin(H_1,H_2)$ be Fredholm.

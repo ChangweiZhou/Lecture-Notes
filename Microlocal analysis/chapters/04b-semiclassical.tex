@@ -1694,11 +1694,12 @@ parametrix errors are smoothing, hence compact, and one obtains only the
 Fredholm property. Here they are also $O(\eps^\infty)$ in norm, and a Neumann
 series removes them for small $\eps$. The logic is:
 \begin{equation*}
-\begin{tikzcd}[column sep=large,row sep=large]
-\sigma_{\eps,m}(A)\ \text{invertible}\arrow[r,"\text{quantize, sum}"]
-&B,\ AB-\Id\in\eps^\infty\Psisl{-\infty}\arrow[d,"\norm{AB-\Id}=O(\eps^\infty)"]\\
-A_\eps^{-1}=G_\eps,\ G-B\in\eps^\infty\Psisl{-\infty}
-&\Id+R_\eps\ \text{invertible for }\eps<\eps_0\arrow[l,"\text{Neumann series}"']
+\begin{tikzcd}[column sep=7em,row sep=large]
+\sigma_{\eps,m}(A)^{-1}\arrow[r,"\text{quantize, sum}"]
+&B\arrow[d,"AB=\Id+R",
+  "R\in\eps^\infty\Psisl{-\infty}"']\\
+G=B(\Id+R)^{-1}=A_\eps^{-1}
+&\norm{R_\eps}=O(\eps^\infty)\arrow[l,"\text{Neumann series}"']
 \end{tikzcd}
 \end{equation*}
 In particular the index of an elliptic semiclassical family vanishes for
