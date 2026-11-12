@@ -340,6 +340,12 @@ smooth in $(\rho_W,q)$ including $q=0$; along the rays $q=\rho_Wv$ its
 $q$-derivatives are $\rho_W^{M'-|\alpha|}\pa^\alpha p(v)$, which stay bounded only if
 $\pa^\alpha p=0$ for $|\alpha|>M'$.}
 
+The hypothesis $f=\dim U>0$ is used here: it guarantees that the main face
+$H_W=SU\times\RC V$ is non-empty, so that there are points $\omega\in SU$ along which
+to take the limit below. (If $f=0$ then $H_W=\emptyset$,
+$S^{M,M'}_{\mathrm{ph}}(W,W)=\Symph M(W)$ by \cref{product:ex:degenerate}, and every
+$p\in\Symph M(\R^b)$ qualifies.)
+
 Write $a=\rho_V^{-M}\rho_W^{-M'}b$ with $b\in\CI(\RelC VW)$. On $\RC U\times V$
 (which contains the interior of $H_W$) $\rho_V=\ang q^{-1}$ is smooth and positive, so
 $G:=\rho_W^{M'}a=\ang q^Mb$ is smooth there. Near $\pa\RC U$ we may use the
@@ -360,8 +366,8 @@ number $\pa^\alpha_qG(0,\omega,0)$. If $|\alpha|>M'$ then $r^{M'-|\alpha|}\to\in
 $\pa^\alpha p(v)=0$. Hence all derivatives of $p$ of order $>M'$ vanish, and $p$ is a
 polynomial of degree at most $M'$.
 
-\emph{The statement of \cref{product:rem:base-lift}.} Let $M=Z\times B$,
-$P\in\Psido m(B)$, and suppose $\Id_Z\otimes P\in\Psipt{\mu,\mu'}(M)$ for some
+\emph{The statement of \cref{product:rem:base-lift}.} Let $M=Z\times B$ with
+$f=\dim Z>0$, $P\in\Psido m(B)$, and suppose $\Id_Z\otimes P\in\Psipt{\mu,\mu'}(M)$ for some
 $\mu,\mu'$. Its kernel is $\delta(z-z')K_P(y,y')$.
 
 (a) \emph{Off the diagonal of $B$.} By \cref{product:prop:model-properties}(iii) (or
@@ -384,8 +390,11 @@ Step 2 of \cref{product:ex:intersection}, $\chi_2P\chi'_2$ is then a differentia
 operator.
 
 By (a) and (b) and a partition of unity, $P$ is a differential operator. Conversely,
-if $P$ is a differential operator of order $k\le m$ then $\Id_Z\otimes P\in\Diff
-k(M)\subset\Psido m(M)\subset\Psipt{m,m}(M)$ by \cref{product:prop:subalgebras}(ii).
+if $P$ is a differential operator of order $k$ then $\Id_Z\otimes P\in\Diff
+k(M)\subset\Psido k_{\mathrm{ph}}(M)\subset\Psipt{k,k}(M)$ by
+\cref{product:prop:subalgebras}(ii). (For $f=0$ the conclusion fails: $Z$ is a
+point, $\Psipt{\mu,\mu'}(M)=\Psido\mu_{\mathrm{ph}}(M)$, and a non-zero smoothing
+operator $P$ on $B$ is its own lift, product-type but not differential.)
 This is the statement of the remark. (Note that (a) alone already excludes
 non-local $P$; (b) shows that even the part of the kernel near the diagonal fails to
 be of product type unless $P$ is differential, which is the point made in the remark.)
