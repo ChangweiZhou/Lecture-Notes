@@ -1139,8 +1139,9 @@ $\tilde F^*b=b\circ\tilde F$.
   Here $p\in\Ssl m(\R^{2n};\R^n)$: it is compactly supported in $(x',y')$, and the
   symbol estimates follow from the chain rule since $(G^T)^{-1}$ is smooth and
   uniformly invertible on the support, so $\ang{(G^T)^{-1}\eta'}$ and $\ang{\eta'}$ are
-  comparable. By \cref{semiclassical:thm:reduction}, $A_F-\eps^\infty\Psisl{-\infty}\ni\Op_\eps(p)=\Op_\eps(c)$
-  with $c-p(\eps,x',x',\eta')\in\eps\Ssl{m-1}$. Since $G(x',x')=DH(x')$ and $\chi=1$
+  comparable. Thus $A_F=\Op_\eps(p)+R$ with $R\in\eps^\infty\Psisl{-\infty}$, and by
+  \cref{semiclassical:thm:reduction}, $\Op_\eps(p)=\Op_\eps(c)$ with
+  $c-p(\eps,x',x',\eta')\in\eps\Ssl{m-1}$. Since $G(x',x')=DH(x')$ and $\chi=1$
   on $F(K)$, which contains the $x'$-support of $a(\eps,H(x'),\cdot)$,
   $p(\eps,x',x',\eta')=a(\eps,H(x'),(DH(x')^T)^{-1}\eta')=\tilde F^*a$. The
   statement about supports is clear, and if $a$ is classical then so is $p$ and,
@@ -1976,12 +1977,10 @@ The meaning of \eqref{semiclassical:eq:sl-ad-compatibility} is that the limits
 $\eps\downarrow0$ and $\delta\downarrow0$ may be taken in either order with the same result. For
 a fibration $\phi:Y\to Z$, the semiclassical-adiabatic families
 $\Psi^{-\infty}_{\mathrm{sl,ad}(\phi)}(Y;E)$ are defined by localization as in
-\cref{semiclassical:rem:adiabatic-fibration}; the semiclassical symbol is then a
-smooth family in $\delta\in[0,1]$ of Schwartz functions on a bundle
-${}^{\mathrm{sl,ad}}T^*Y$ over $[0,1]_\delta\times Y$ which equals ${}^{\mathrm{sl}}T^*Y$
-for $\delta>0$ (rescaled in the base directions by $\delta$, as in the remark preceding
-\cref{semiclassical:prop:sl-ad}) and, at $\delta=0$, is ${}^{\mathrm{sl}}T^*(Y/Z)\oplus\phi^*\,{}^{\mathrm{sl}}T^*Z$
-for a choice of connection; the adiabatic symbol takes values in
+\cref{semiclassical:rem:adiabatic-fibration}, and
+\cref{semiclassical:prop:sl-ad} holds for them, the semiclassical symbol being a
+smooth family in $\delta\in[0,1]$ of Schwartz functions on (rescaled) cotangent spaces
+of $Y$ and the adiabatic symbol taking values in
 $\cS(T^*Z;\Psisl{-\infty}(\pi^*Y/T^*Z;E))$. These are the algebras used in
 \cref{ch:semiclassical-index} to prove the multiplicativity of the semiclassical
 index under iterated fibrations.
