@@ -1,0 +1,97 @@
+% Shared preamble for "Introduction to Microlocal Analysis" (streamlined edition).
+% Every chapter file relies only on the packages and macros defined here.
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[a4paper,margin=1.15in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{enumitem}
+\usepackage{tikz-cd}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,decorations.pathreplacing}
+\usepackage{microtype}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=green!35!black,urlcolor=blue!50!black]{hyperref}
+\usepackage[capitalise,noabbrev]{cleveref}
+
+\numberwithin{equation}{section}
+
+% ---------------------------------------------------------------- theorems
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}{Exercise}[chapter]
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\crefname{exercise}{Exercise}{Exercises}
+
+% ---------------------------------------------------------------- number systems
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Sphere}{\mathbb{S}}
+
+% ---------------------------------------------------------------- function spaces
+\newcommand{\CI}{\mathcal{C}^\infty}            % smooth functions
+\newcommand{\CIc}{\mathcal{C}^\infty_{\mathrm{c}}} % compactly supported smooth
+\newcommand{\dCI}{\dot{\mathcal{C}}^\infty}      % smooth, vanishing to infinite order at boundary
+\newcommand{\CmI}{\mathcal{C}^{-\infty}}         % distributions
+\newcommand{\CmIc}{\mathcal{C}^{-\infty}_{\mathrm{c}}} % compactly supported distributions
+\newcommand{\Cz}{\mathcal{C}^0}                  % continuous functions
+\newcommand{\CIb}{\mathcal{C}^\infty_{\mathrm{b}}}  % smooth, all derivatives bounded (Melrose: C^\infty_\infty)
+\newcommand{\Czinf}{\mathcal{C}^0_0}           % continuous, vanishing at infinity
+\newcommand{\cS}{\mathcal{S}}                    % Schwartz space
+\newcommand{\cSp}{\mathcal{S}'}                  % tempered distributions
+\newcommand{\Hs}[1]{H^{#1}}                      % Sobolev space
+\newcommand{\Lp}[1]{L^{#1}}
+
+% ---------------------------------------------------------------- symbols & operators
+\newcommand{\ang}[1]{\langle #1\rangle}          % Japanese bracket (1+|x|^2)^{1/2}
+\newcommand{\Sym}[1]{S^{#1}}                     % symbol class S^m
+\newcommand{\Symph}[1]{S^{#1}_{\mathrm{ph}}}     % polyhomogeneous (classical) symbols
+\newcommand{\Psido}[1]{\Psi^{#1}}                % pseudodifferential operators
+\newcommand{\Psiiso}[1]{\Psi^{#1}_{\mathrm{iso}}}% isotropic operators
+\newcommand{\Psisc}[1]{\Psi^{#1}_{\mathrm{sc}}}  % scattering operators
+\newcommand{\Diff}[1]{\operatorname{Diff}^{#1}}  % differential operators
+\newcommand{\Op}{\operatorname{Op}}              % (left) quantization
+\newcommand{\dbar}{{\mathchar'26\mkern-12mu d}}  % d-bar: \dbar\xi = (2\pi)^{-n} d\xi
+\newcommand{\Id}{\operatorname{Id}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\ind}{\operatorname{ind}}
+\newcommand{\Nul}{\operatorname{Nul}}
+\newcommand{\Ran}{\operatorname{Ran}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\singsupp}{\operatorname{sing\,supp}}
+\newcommand{\WF}{\operatorname{WF}}
+\newcommand{\WFiso}{\operatorname{WF}_{\mathrm{iso}}}
+\newcommand{\WFp}{\operatorname{WF}'}
+\newcommand{\ess}{\operatorname{ess\,supp}}
+\newcommand{\Char}{\operatorname{Char}}
+\newcommand{\Diag}{\operatorname{Diag}}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\dvol}{\,d\mathrm{vol}}
+\newcommand{\pa}{\partial}
+\newcommand{\Ham}[1]{H_{#1}}                     % Hamilton vector field
+\newcommand{\RC}[1]{\overline{#1}}               % radial compactification, e.g. \RC{\R^n}
+\newcommand{\HH}{\operatorname{HH}}              % Hochschild homology
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\norm}[1]{\lVert #1\rVert}
+\newcommand{\abs}[1]{\lvert #1\rvert}
+\newcommand{\pair}[2]{\langle #1, #2\rangle}     % distributional pairing
+\newcommand{\inner}[2]{( #1, #2)}                % Hilbert inner product
+\newcommand{\Lin}{\mathcal{B}}                   % bounded operators, \Lin(H)
+\newcommand{\Kpt}{\mathcal{K}}                   % compact operators
+\newcommand{\cF}{\mathcal{F}}                    % Fourier transform
+\newcommand{\Omegah}{\Omega^{\frac12}}           % half-density bundle
+\newcommand{\Ic}[1]{I^{#1}}                      % conormal distributions
+\newcommand{\eps}{\epsilon}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\sgn}{sgn}
