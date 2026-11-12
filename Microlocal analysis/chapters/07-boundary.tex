@@ -30,10 +30,13 @@ projector $\PiC$, a pseudodifferential projection on $H$ whose range is the spac
 boundary values of solutions on one side, is obtained by an explicit formula. We then
 treat a compact manifold with boundary, where the same construction works modulo
 smoothing errors, and where some abstract functional analysis of smoothing operators
-and generalized inverses is needed to correct them. Finally we show that a
-pseudodifferential projection $\Pi$ on the boundary defines a Fredholm boundary
-problem $\{u;\ \Pi(u|_{\pa X})=0\}$ precisely when $\Pi$ restricted to the range of
-$\PiC$ is Fredholm, and give a symbolic criterion for this.
+and generalized inverses is needed to correct them; together with Green's formula and
+a right inverse for the adjoint this yields a Calder\'on projector, unique up to the
+choice of its null space. Finally we show that a pseudodifferential projection $\Pi$ on
+the boundary defines a Fredholm boundary problem $\{u;\ \Pi(u|_{\pa X})=0\}$ precisely
+when $\Pi$ restricted to the range of $\PiC$ is Fredholm, with index the relative index
+of the two projections, and give a symbolic criterion for this which is the analogue of
+the Lopatinski--Shapiro condition.
 
 Throughout, $\Psido{m}(Y;E,F)$ for a compact manifold $Y$ without boundary is as in
 \cref{ch:manifolds}; ``classical'' means that the local full symbols are
@@ -308,8 +311,8 @@ Both maps from $\CI(X)$ into distributions are injective; we regard the map into
 $\CmI(X)$ as an identification, but \emph{not} the map $u\mapsto u_c$.
 
 \subsection*{Actions of differential operators}
-Let $E,F$ be vector bundles over $X$ and $P\in\Diff{m}(X;E,F)$, with transpose
-$P^t\in\Diff{m}(X;F^*\otimes\Omega,E^*\otimes\Omega)$ defined by $\int_X\pair{P^t\varphi}{u}=
+Let $E,F$ be vector bundles over $X$ and $P\in\Diff{m}(X;E,F)$. Its transpose
+$P^t\in\Diff{m}(X;F^*\otimes\Omega,E^*\otimes\Omega)$ is defined by $\int_X\pair{P^t\varphi}{u}=
 \int_X\pair{\varphi}{Pu}$ for $u\in\CIc(X^\circ;E)$, $\varphi\in\CIc(X^\circ;F^*\otimes
 \Omega)$. Integration by parts shows that this identity continues to hold if
 $u\in\CI(X;E)$ and $\varphi\in\dCI(X;F^*\otimes\Omega)$, or vice versa, but
@@ -471,10 +474,10 @@ P:H^m(X;E)\to H^{m-k}(X;F),\qquad \dot P:\Hdot{m}(X;E)\to\Hdot{m-k}(X;F),
 \end{equation*}
 by restriction from an extension $\tilde P$, consistently with the actions on
 distributions. Moreover
-\begin{equation*}
-\CmI(X;E)=\bigcup_mH^m(X;E),\quad \CI(X;E)=\bigcap_mH^m(X;E),\quad
-\dCmI(X;E)=\bigcup_m\Hdot{m}(X;E),\quad \dCI(X;E)=\bigcap_m\Hdot{m}(X;E).
-\end{equation*}
+\begin{align*}
+\CmI(X;E)&=\bigcup_mH^m(X;E),& \CI(X;E)&=\bigcap_mH^m(X;E),\\
+\dCmI(X;E)&=\bigcup_m\Hdot{m}(X;E),& \dCI(X;E)&=\bigcap_m\Hdot{m}(X;E).
+\end{align*}
 For the second: if $u\in H^m(X)$ for all $m$, then for each $k$, $u$ is the
 restriction of a $\mathcal{C}^k$ function on $\Xt$ (Sobolev embedding), so all
 derivatives of $u$ are bounded on $X^\circ$ and $u\in\CI(X)$ by
@@ -966,9 +969,11 @@ Uniqueness: a projection on $\CI(H;V)$ is determined by its range and null space
 and these are forced to be $b_+(\mathcal{N}_+)$ and $b_-(\mathcal{N}_-)$; a
 pseudodifferential operator is determined by its action on $\CI$.
 
-Finally, by \cref{boundary:thm:layer}(iii), $\sigma_0(\PiC)=\sigma_0(Q_+)\frac1i|dx|
-\sigma(\nu)=\frac12\big(\sigma(\nu)^*\sigma(\nu)+\sigma(\eta)^*\sigma(\nu)/(i|\eta|)
-\big)$. By \eqref{boundary:eq:dirac} $\sigma(\nu)^*\sigma(\nu)=\Id$, and by
+Finally, by \cref{boundary:thm:layer}(iii),
+\begin{equation*}
+\sigma_0(\PiC)=\sigma_0(Q_+)\frac1i|dx|\sigma(\nu)=\frac12\Big(\sigma(\nu)^*\sigma(\nu)+
+\frac{\sigma(\eta)^*\sigma(\nu)}{i|\eta|}\Big).
+\end{equation*} By \eqref{boundary:eq:dirac} $\sigma(\nu)^*\sigma(\nu)=\Id$, and by
 \eqref{boundary:eq:clifford}, since $g(\eta,\nu)=0$,
 $\sigma(\eta)^*\sigma(\nu)=-\sigma(\nu)^*\sigma(\eta)=-\sigma(\nu)^{-1}\sigma(\eta)$,
 which gives \eqref{boundary:eq:calderon-symbol}. With $A=i\sigma(\nu)^{-1}\sigma(\eta)/
@@ -1044,7 +1049,7 @@ $\norm{A}_k=\norm{A(\cdot,\cdot)}_{\mathcal{C}^k(X\times X)}$ (defined using a f
 finite atlas), form a bi-ideal.
 \end{proposition}
 \begin{proof}
-The kernel of $AB$ is $\int_XA(z,z'')B(z'',z')dz''$, whose $\mathcal{C}^k$ norm is
+The kernel of $AB$ is obtained by integrating $A(z,z'')B(z'',z')$ over $z''\in X$; its $\mathcal{C}^k$ norm is
 bounded by $\operatorname{vol}(X)\norm{A}_k\norm{B}_k$; the kernel of $A^*$ is
 $A(z',z)^*$; and $\norm{A}_\Lin\le\norm{A(\cdot,\cdot)}_{L^2(X\times X)}\le C\norm{A}_0$.
 For \ref{boundary:it:corner}, the kernel of $A_1BA_2$ is $\inner{BA_2(\cdot,z')}{A_1(z,
@@ -1111,10 +1116,10 @@ If $A$ has a left parametrix $B_L$ modulo $\cJ_1$, then $A$ has closed range and
 finite-dimensional null space, the orthogonal projection $\pi_L$ onto $\Nul A$ lies in
 $\cJ_1\cap\Fin$, and there are $J\in\cJ_1$, $\pi'_L\in\cJ_1\cap\Fin$ a self-adjoint
 projection with $\pi_L\le\pi'_L$, and $G\in\Lin(\mathcal{H}_2,\mathcal{H}_1)$ such that
-\begin{equation*}
-B'_L=(\Id+J)B_L\ \text{satisfies}\ B'_LA=\Id-\pi'_L,\quad\text{and}\quad
-B''_L=B'_L+(\pi'_L-\pi_L)G\ \text{satisfies}\ B''_LA=\Id-\pi_L,
-\end{equation*}
+\begin{align*}
+B'_L&=(\Id+J)B_L&&\text{satisfies}\ B'_LA=\Id-\pi'_L,\quad\text{and}\\
+B''_L&=B'_L+(\pi'_L-\pi_L)G&&\text{satisfies}\ B''_LA=\Id-\pi_L,
+\end{align*}
 with $\pi'_L-\pi_L\in\cJ_1\cap\Fin$.
 \end{proposition}
 \begin{proof}
@@ -1144,8 +1149,8 @@ $\pi_R=\pi'_R\pi_R\pi'_R\in\cJ_2$. Finally $AG=\Id-\pi_R$ and $\pi_R\pi'_R=\pi_R
 $AB''_R=\Id-\pi'_R+(\Id-\pi_R)(\pi'_R-\pi_R)=\Id-\pi_R$.
 \end{proof}
 
-An operator with closed range and either finite-dimensional null space or
-finite-codimensional range is called \emph{semi-Fredholm}. The existence of a left or
+An operator with closed range and either a null space of finite dimension or a
+range of finite codimension is called \emph{semi-Fredholm}. The existence of a left or
 right parametrix modulo compact operators is necessary and sufficient for these two
 kinds of semi-Fredholmness.
 
@@ -1340,5 +1345,546 @@ of the inverse.
 \end{proof}
 
 Thus $\tilde I_D$ is a left parametrix for $\tilde b$, in the sense that $\tilde I_D
-\tilde b=\Id+G$ on $\mathcal{N}^0$ (where $\tilde I_D$ maps into $L^2(X;V_1)\supset
-\mathcal{N}^0$).
+\tilde b=\Id-G$ on $\mathcal{N}^0$ (where $\tilde I_D$ maps into $L^2(X;V_1)\supset
+\mathcal{N}^0$). To obtain a pseudodifferential projection onto $\overline{\Cau}$ we
+need more: an \emph{exact} formula expressing a solution in terms of its boundary
+values, with an error which is smoothing as a function of the boundary values. This
+comes from Green's formula, combined with a right inverse for the adjoint $D^*$.
+
+\subsection*{Green's formula and the adjoint}
+We use the sesquilinear pairings $\inner{f}{g}_X=\int_X(f,g)\dvol$, given by the
+Riemannian density and the Hermitian structures, and similarly on $\Xt$ for the
+extended structures; they extend to pairs (distribution, smooth section), and then
+$\inner{\tilde Df}{g}_{\Xt}=\inner{f}{\tilde D^*g}_{\Xt}$ for $f\in\CmI(\Xt;\tilde V_1)$,
+$g\in\CI(\Xt;\tilde V_2)$, where $\tilde D^*$ is the formal adjoint. On $Y=\pa X$ we
+use the smooth positive density $\nu_Y$ for which
+\begin{equation*}
+\inner{w\,\delta(x)}{g}_{\Xt}=\inner{w}{g|_Y}_Y=\int_Y(w,g|_Y)\,\nu_Y,\quad
+w\in\CI(Y;\tilde V_2|_Y),\ g\in\CI(\Xt;\tilde V_2);
+\end{equation*}
+if $\dvol=\mu\,|dx\,dy|$ in local coordinates then $\nu_Y=\mu(0,y)\,|dy|$. By
+\cref{boundary:lem:layers} both sides extend continuously to $w\in H^{-\frac12}
+(Y;\tilde V_2|_Y)$, the right side being the extension of the $L^2(Y)$ pairing to
+$H^{-\frac12}\times\CI$. Smoothing operators on $Y$, and the spaces $L^2(Y)$, are
+defined with respect to $\nu_Y$.
+
+\begin{lemma}[Green's formula]\label{boundary:lem:green}
+For $u\in\mathcal{D}$ and $\psi\in\CI(X;V_2)$,
+\begin{equation*}
+\inner{u}{D^*\psi}_X=\inner{Du}{\psi}_X+\Big\langle\frac1i\sigma(dx)\beta(u),
+\psi|_Y\Big\rangle_Y.
+\end{equation*}
+\end{lemma}
+\begin{proof}
+Let $\tilde\psi\in\CI(\Xt;\tilde V_2)$ be an extension of $\psi$. Pairing
+\eqref{boundary:eq:beta} with $\tilde\psi$ gives $\inner{u_c}{\tilde D^*\tilde\psi}_{\Xt}=\inner{(Du)_c}{\tilde
+\psi}_{\Xt}+\inner{T_{\beta(u)}}{\tilde\psi}_{\Xt}$, and the three terms are those of the
+formula, since $\tilde D^*\tilde\psi=D^*\psi$ on $X$.
+\end{proof}
+
+We need one more property of layers: for $v\in H^{-\frac12}(Y;V)$ the pairing of
+$T_v\in H^{-1}(\Xt;\tilde V_2)$ with $w\in H^1(\Xt;\tilde V_2)$ only involves $R_Xw$,
+provided the latter is smooth up to the boundary:
+\begin{equation}\label{boundary:eq:layer-pairing}
+w\in H^1(\Xt;\tilde V_2),\ R_Xw\in\CI(X;V_2)\Longrightarrow\inner{T_v}{w}_{\Xt}=
+\Big\langle\frac1i\sigma(dx)v,(R_Xw)|_Y\Big\rangle_Y.
+\end{equation}
+Indeed, let $w'\in\CI(\Xt;\tilde V_2)$ extend $R_Xw$; the formula holds for $w'$ by
+definition of $\nu_Y$. The difference $w-w'\in H^1(\Xt;\tilde V_2)$ is supported in the
+manifold with boundary $X'=\{x\le0\}$, so by \cref{boundary:lem:Hdot-dense} (applied to
+$X'$) it is the $H^1$-limit of sections in $\CIc(\{x<0\};\tilde V_2)$, all of which
+pair to zero with $T_v$. Hence $\inner{T_v}{w-w'}=0$.
+
+The formal adjoint $D^*\in\Diff1(X;V_2,V_1)$ satisfies the standing hypotheses as well:
+it is of Dirac type, $\tilde D^*$ is an extension elliptic on $U$, and $\tilde Q^*\in
+\Psido{-1}(\Xt;\tilde V_1,\tilde V_2)$ is a parametrix for it near $X$ in the required
+sense, since $\chi(\tilde D^*\tilde Q^*-\Id)=E_L^*$ and $(\tilde Q^*\tilde D^*-\Id)\chi=
+E_R^*$ are smoothing; finally \eqref{boundary:eq:UC} is symmetric in $D$ and $D^*$.
+Applying \cref{boundary:lem:Qprime} and \cref{boundary:thm:right-inverse} to $D^*$ we
+obtain
+\begin{equation}\label{boundary:eq:Qstar}
+Q_*:\CI(X;V_1)\to\CI(X;V_2),\quad D^*Q_*=\Id,\quad Q_*=Q'_*+E''_*,\quad Q'_*\varphi=
+R_X\tilde Q^*(\varphi_c),
+\end{equation}
+where $Q'_*$ maps $\CI(X;V_1)$ into $\CI(X;V_2)$ and $E''_*$ has smooth kernel on
+$X\times X$.
+
+\begin{proposition}[Exact representation of solutions]\label{boundary:prop:exact-repr}
+There is an operator $S$ with smooth kernel on $X\times Y$, so $S:\CmI(Y;V)\to
+\CI(X;V_1)$, such that
+\begin{equation}\label{boundary:eq:exact-repr}
+u=\big(\tilde I_D+S\big)\,\tilde bu\quad\text{for all}\ u\in\mathcal{N}^0.
+\end{equation}
+\end{proposition}
+\begin{proof}
+Let $u\in\mathcal{N}^0$, $v=\tilde bu$, and $\varphi\in\CI(X;V_1)$. Applying
+\cref{boundary:lem:green} with $\psi=Q_*\varphi\in\CI(X;V_2)$, so that $D^*\psi=\varphi$,
+and using $Du=0$,
+\begin{equation*}
+\inner{u}{\varphi}_X=\Big\langle\frac1i\sigma(dx)v,(Q'_*\varphi)|_Y\Big\rangle_Y+
+\Big\langle\frac1i\sigma(dx)v,(E''_*\varphi)|_Y\Big\rangle_Y.
+\end{equation*}
+For the first term, $w=\tilde Q^*(\varphi_c)\in H^1(\Xt;\tilde V_2)$ has $R_Xw=Q'_*\varphi
+\in\CI(X;V_2)$, so by \eqref{boundary:eq:layer-pairing}
+\begin{equation*}
+\Big\langle\frac1i\sigma(dx)v,(Q'_*\varphi)|_Y\Big\rangle_Y=\inner{T_v}{\tilde Q^*
+(\varphi_c)}_{\Xt}=\inner{\tilde QT_v}{\varphi_c}_{\Xt}=\inner{\tilde I_Dv}{\varphi}_X;
+\end{equation*}
+the middle identity holds for smooth sections in place of $T_v$, hence by continuity for
+$T_v\in H^{-1}$, as $\tilde Q:H^{-1}\to L^2$ and $\tilde Q^*:L^2\to H^1$ are bounded.
+For the second, if $K(z,z')$ is the kernel of $E''_*$ (with respect to $\dvol$), then
+$\inner{\frac1i\sigma(dx)v}{(E''_*\varphi)|_Y}_Y=\inner{Sv}{\varphi}_X$ where
+\begin{equation*}
+Sv(z)=\int_YK(y,z)^*\,\frac1i\sigma(dx)(y)\,v(y)\,\nu_Y(y),
+\end{equation*}
+the integral being interpreted as a distributional pairing in $y$. The kernel of $S$ is
+smooth on $X\times Y$. Thus $\inner{u-\tilde I_Dv-Sv}{\varphi}_X=0$ for all $\varphi\in
+\CI(X;V_1)$, which is dense in $L^2(X;V_1)$, so \eqref{boundary:eq:exact-repr} holds.
+\end{proof}
+
+Next we produce many solutions from boundary data, correcting $\tilde I_D$ by means of
+the right inverse $Q$ of \cref{boundary:thm:right-inverse}. With $R'$ as in
+\eqref{boundary:eq:Rprime}, set
+\begin{equation*}
+Iv=\tilde I_Dv-QR'v,\quad v\in H^{-\frac12}(Y;V).
+\end{equation*}
+
+\begin{lemma}\label{boundary:lem:solutions}
+$I$ maps $H^{-\frac12}(Y;V)$ continuously into $\mathcal{N}^0$, and $\CI(Y;V)$ into
+$\mathcal{N}^\infty$. Moreover $\tilde b\circ I=P+B$ with $B\in\Psido{-\infty}(Y;V)$.
+\end{lemma}
+\begin{proof}
+$R'$ has smooth kernel $R'(z,y)$ on $X\times Y$, so $y\mapsto R'(\cdot,y)$ is a smooth
+map from $Y$ into the Fr\'echet space $\CI(X;\Hom(V,V_2))$. As $Q$ is continuous on
+$\CI$ (closed graph theorem), $y\mapsto QR'(\cdot,y)$ is smooth as well, i.e.\ $QR'$
+has smooth kernel on $X\times Y$; it maps $\CmI(Y;V)$ continuously into $\CI(X;V_1)$.
+Hence $Iv\in L^2(X;V_1)$ depends continuously on $v\in H^{-\frac12}$, and $DIv=R'v-
+DQR'v=0$, so $Iv\in\mathcal{N}^0$. For smooth $v$, $\tilde I_Dv$ and hence $Iv$ is
+smooth. Finally, by \cref{boundary:lem:repr}(i), $\beta(Iv)=Pv-(QR'v)|_Y$, so $\tilde
+b\circ I=P+B$ where $B$ has kernel $-QR'(y',y)$, $(y',y)\in Y\times Y$, which is smooth.
+\end{proof}
+
+\section{The Calder\'on projector}\label{boundary:sec:calderon}
+
+We continue with the standing hypotheses of \cref{boundary:sec:right-inverse},
+including \eqref{boundary:eq:UC}. Recall that $P\in\Psido0(Y;V)$, $Y=\pa X$,
+$V=V_1|_Y$, is the classical operator defined in \eqref{boundary:eq:P}, and
+$\overline{\Cau}=\tilde b(\mathcal{N}^0)\subset H^{-\frac12}(Y;V)$ is closed by
+\cref{boundary:lem:repr}.
+
+\begin{lemma}\label{boundary:lem:almost-projection}
+There are $A,B\in\Psido{-\infty}(Y;V)$ such that
+\begin{equation*}
+(\Id-P)v=Av\ \ \forall\,v\in\overline{\Cau},\qquad (P+B)H^{-\frac12}(Y;V)\subset
+\overline{\Cau}.
+\end{equation*}
+Consequently $P^2-P\in\Psido{-\infty}(Y;V)$.
+\end{lemma}
+\begin{proof}
+The second statement, with $B$ as in \cref{boundary:lem:solutions}, is that lemma, since
+$(P+B)v=\tilde b(Iv)$. For the first, let $v=\tilde bu$, $u\in\mathcal{N}^0$. Applying
+$\beta$ to \eqref{boundary:eq:exact-repr} and using \cref{boundary:lem:repr}(i) and the
+smoothness of $Sv$,
+\begin{equation*}
+v=\beta(\tilde I_Dv)+\beta(Sv)=Pv+(Sv)|_Y,
+\end{equation*}
+so $(\Id-P)v=Av$ where $A$ has kernel $S(y',y)$, the restriction of the kernel of $S$ to
+$Y\times Y$. Finally, applying the first identity to $(P+B)v\in\overline{\Cau}$ gives
+$(\Id-P)(P+B)=A(P+B)$ on $H^{-\frac12}$, so
+\begin{equation*}
+P-P^2=A(P+B)-(\Id-P)B\in\Psido{-\infty}(Y;V).\qedhere
+\end{equation*}
+\end{proof}
+
+These are exactly the hypotheses of the characterization of ranges of
+pseudodifferential projections in \cref{ch:manifolds}
+(\cref{manifolds:prop:range-projection}, with $s=-\frac12$ and $F=\overline{\Cau}$).
+
+\begin{theorem}[Calder\'on projector]\label{boundary:thm:calderon}
+Let $X$ be a compact Riemannian manifold with boundary and $D\in\Diff1(X;V_1,V_2)$ a
+generalized Dirac operator satisfying \eqref{boundary:eq:UC}. Then there is a classical
+$\PiC\in\Psido0(\pa X;V)$, $V=V_1|_{\pa X}$, with $\PiC^2=\PiC$, such that:
+\begin{enumerate}[label=(\roman*)]
+\item $\PiC H^{-\frac12}(\pa X;V)=\tilde b(\mathcal{N}^0)$ and $\PiC\CI(\pa X;V)=\Cau=
+b(\mathcal{N}^\infty)$;
+\item $\PiC-P\in\Psido{-\infty}(\pa X;V)$; in particular $\sigma_0(\PiC)$ is given by
+\eqref{boundary:eq:calderon-symbol}, with $\nu=dx/|dx|$ the inward unit conormal;
+\item the \emph{Poisson operator} $I_{\mathcal C}=(\tilde I_D+S)\PiC$ maps $H^{-\frac12}
+(\pa X;V)$ continuously into $\mathcal{N}^0$ and $\CI(\pa X;V)$ into $\mathcal{N}^\infty$,
+and
+\begin{equation*}
+\tilde b\circ I_{\mathcal C}=\PiC,\qquad I_{\mathcal C}\circ\tilde b=\Id\ \text{on}\
+\mathcal{N}^0;
+\end{equation*}
+\item $\mathcal{N}^\infty$ is dense in $\mathcal{N}^0$, and $\tilde b$ is the continuous
+extension of $b:\mathcal{N}^\infty\to\Cau$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+By \cref{boundary:lem:almost-projection} and \cref{manifolds:prop:range-projection} there
+is $B'\in\Psido{-\infty}(Y;V)$ such that $\PiC=P+B'$ satisfies $\PiC^2=\PiC$ and
+$\PiC H^{-\frac12}(Y;V)=\overline{\Cau}$. It is classical since $P$ is, and (ii) holds;
+the symbol of $P$ was identified after \eqref{boundary:eq:P}.
+
+(iii) Let $v\in H^{-\frac12}(Y;V)$. Then $\PiC v\in\overline{\Cau}$, so $\PiC v=\tilde bu$
+for a unique $u\in\mathcal{N}^0$, and by \eqref{boundary:eq:exact-repr} $u=(\tilde I_D+S)
+\PiC v=I_{\mathcal C}v$. Hence $I_{\mathcal C}v\in\mathcal{N}^0$ and $\tilde bI_{\mathcal
+C}v=\PiC v$. If $u\in\mathcal{N}^0$ then $\PiC\tilde bu=\tilde bu$, since $\PiC$ is the
+identity on its range, and \eqref{boundary:eq:exact-repr} gives $I_{\mathcal C}\tilde bu=
+u$. Continuity follows from that of $\tilde I_D:H^{-\frac12}\to\mathcal D$ and of $S$. If
+$v$ is smooth, then $\PiC v$ is smooth, so $\tilde I_D\PiC v$ is smooth by
+\cref{boundary:thm:layer}, and $S\PiC v$ is smooth; thus $I_{\mathcal C}v\in
+\mathcal{N}^\infty$.
+
+(i) The first statement is the choice of $B'$. If $v\in\Cau$, $v=bu$ with $u\in
+\mathcal{N}^\infty$, then $v\in\overline{\Cau}$ is smooth and $v=\PiC v\in\PiC\CI(Y;V)$.
+Conversely if $v=\PiC w$ with $w$ smooth, then $u=I_{\mathcal C}w\in\mathcal{N}^\infty$
+and $bu=\tilde bu=\PiC w=v$, so $v\in\Cau$.
+
+(iv) $\PiC\CI(Y;V)$ is dense in $\PiC H^{-\frac12}(Y;V)$, as $\PiC$ is continuous and
+$\CI$ is dense in $H^{-\frac12}$. Applying the continuous map $I_{\mathcal C}$, and using
+(iii), $\mathcal{N}^\infty=I_{\mathcal C}(\PiC\CI)$ is dense in $I_{\mathcal C}(\PiC
+H^{-\frac12})=\mathcal{N}^0$.
+\end{proof}
+
+Any $\PiC$ with these properties is called a \emph{Calder\'on projector} for $D$. In
+contrast to the dividing case (\cref{boundary:thm:calderon-dividing}) it is not unique:
+only its range is determined. If $\PiC'$ is another one then $\PiC\PiC'=\PiC'$ and
+$\PiC'\PiC=\PiC$, since each is the identity on the common range, and $\PiC'-\PiC$ is
+smoothing by (ii), but in general $\PiC'\ne\PiC$. A Calder\'on projector can always be chosen to be self-adjoint on
+$L^2(Y;V)$, see \cref{boundary:ex:orthogonal-calderon}, but the orthogonal projection onto
+$\overline{\Cau}$ in $H^{-\frac12}$ is usually not pseudodifferential. From now on we no
+longer distinguish between $\tilde b$ and $b$.
+
+\begin{remark}\label{boundary:rem:calderon-cases}
+(1) In the dividing case of \cref{boundary:sec:dividing}, \eqref{boundary:eq:UC} holds on
+$X=M_+$ (a solution vanishing to infinite order at $H$ extends by zero to a smooth
+solution on $M$, which vanishes as $D$ and $D^*$ are invertible). The construction above
+works with $M$ in place of the double $\Xt$, and we may take $\tilde Q=D^{-1}$; then
+$E_R=E_L=0$, $R'=0$, and $P$ is exactly the projection \eqref{boundary:eq:PiC-def}. By
+(iv) and continuity its range on $H^{-\frac12}$ is the closure of $\Cau$, which is
+$\tilde b(\mathcal{N}^0)$. So the projector of \cref{boundary:thm:calderon-dividing} is a
+Calder\'on projector in the present sense.
+
+(2) Since $\sigma_0(\PiC)$ is the orthogonal projection onto the $+1$ eigenspace of the
+involution $A(y,\eta)=i\sigma(\nu)^{-1}\sigma(\eta)/|\eta|$, and $A(y,-\eta)=-A(y,\eta)$,
+\begin{equation*}
+\sigma_0(\PiC)(y,-\eta)=\Id-\sigma_0(\PiC)(y,\eta),\qquad \operatorname{rank}
+\sigma_0(\PiC)(y,\eta)+\operatorname{rank}\sigma_0(\PiC)(y,-\eta)=\operatorname{rank}V.
+\end{equation*}
+In particular the range of $\PiC$ and its null space are both infinite-dimensional
+(if $\dim X\ge2$): the boundary values of solutions form ``half'' of all sections.
+\end{remark}
+
+\section{Pseudodifferential boundary conditions}\label{boundary:sec:bc}
+
+We continue under the hypotheses of \cref{boundary:thm:calderon}, and fix a Calder\'on
+projector $\PiC$. By that theorem a solution $u\in\mathcal{N}^\infty$ is uniquely
+determined by its boundary value, but $bu$ ranges over the infinite-dimensional space
+$\Cau=\PiC\CI(Y;V)$; a \emph{boundary condition} should cut this down to a
+finite-dimensional space, without restricting the right-hand side $Du$ too much.
+
+\begin{definition}\label{boundary:def:bc}
+For a projection $\Pi\in\Psido0(Y;V)$, $\Pi^2=\Pi$, the \emph{realization} of $D$ with
+boundary condition $\Pi$ is
+\begin{equation*}
+D_\Pi:\mathcal{D}_\Pi\to\CI(X;V_2),\quad \mathcal{D}_\Pi=\{u\in\CI(X;V_1);\
+\Pi(bu)=0\},\quad D_\Pi u=Du.
+\end{equation*}
+A linear map between vector spaces is \emph{Fredholm} if its null space and the
+quotient of its target by its range (its \emph{cokernel}) are finite-dimensional; its
+index is then the difference of these dimensions.
+\end{definition}
+
+For the Fr\'echet spaces involved here this algebraic notion agrees with the
+topological one: $\mathcal D_\Pi$ is a closed subspace of $\CI(X;V_1)$, $D_\Pi$ is
+continuous, and a continuous linear map between Fr\'echet spaces whose range has finite
+codimension automatically has closed range (apply the open mapping theorem to the map
+$\mathcal{D}_\Pi\oplus\C^k\to\CI(X;V_2)$ obtained by adding a complement of the range).
+
+The Fredholm property of $D_\Pi$ is equivalent to that of an operator on the boundary,
+namely the restriction of $\Pi$ to the boundary values of solutions,
+\begin{equation}\label{boundary:eq:T-Pi}
+T_\Pi:\Cau=\PiC\CI(Y;V)\longrightarrow\Pi\CI(Y;V),\quad T_\Pi v=\Pi v.
+\end{equation}
+It depends only on $\Pi$ and the space $\Cau$, not on the choice of $\PiC$; as an operator
+on $\CI(Y;V)$ it is $\Pi\PiC$. When $T_\Pi$ is Fredholm its index is called the
+\emph{relative index} of the pair $(\PiC,\Pi)$.
+
+\begin{theorem}\label{boundary:thm:fredholm-bc}
+Let $\Pi\in\Psido0(Y;V)$ be a projection. Then $b$ induces isomorphisms
+\begin{equation*}
+\Nul(D_\Pi)\cong\Nul(T_\Pi),\qquad \CI(X;V_2)/D(\mathcal D_\Pi)\cong\Pi\CI(Y;V)/
+\Pi(\Cau).
+\end{equation*}
+In particular $D_\Pi$ is Fredholm if and only if $T_\Pi$ is Fredholm, and then
+$\ind(D_\Pi)=\ind(T_\Pi)$.
+\end{theorem}
+\begin{proof}
+\emph{Null space.} If $u\in\mathcal{D}_\Pi$ and $Du=0$ then $u\in\mathcal{N}^\infty$, so
+$bu\in\Cau$, and $\Pi bu=0$. Conversely each $v\in\Cau$ with $\Pi v=0$ is $bu$ for a
+unique $u\in\mathcal{N}^\infty$, by \cref{boundary:thm:calderon}, and then $u\in
+\mathcal{D}_\Pi$. Since $b$ is injective on $\mathcal{N}^\infty$, $b:\Nul(D_\Pi)\to
+\Nul(T_\Pi)$ is an isomorphism.
+
+\emph{Cokernel.} Define
+\begin{equation*}
+\tau:\CI(Y;V)\to\CI(X;V_2)/D(\mathcal{D}_\Pi),\quad\tau(v)=[Du]\ \text{where}\
+u\in\CI(X;V_1),\ bu=v.
+\end{equation*}
+This is well defined: such $u$ exist since $b$ is surjective, and if $bu=bu'$ then
+$\Pi b(u-u')=0$, so $D(u-u')\in D(\mathcal{D}_\Pi)$. It is surjective: for $f\in
+\CI(X;V_2)$ let $u=Qf$, with $Q$ the right inverse of \cref{boundary:thm:right-inverse};
+then $\tau(bu)=[f]$. Its null space is
+\begin{equation*}
+\Nul\tau=\Cau+\Nul(\Pi|_{\CI}),\qquad \Nul(\Pi|_{\CI})=(\Id-\Pi)\CI(Y;V).
+\end{equation*}
+Indeed, if $v=w+v'$ with $w\in\Cau$ and $\Pi v'=0$, write $w=bu_0$ with $u_0\in
+\mathcal{N}^\infty$ and $v'=bu'$ with $u'\in\CI$; then $u'\in\mathcal{D}_\Pi$ and
+$\tau(v)=[Du_0+Du']=[Du']=0$. Conversely, if $\tau(v)=0$, $v=bu$, then $Du=Du'$ for some
+$u'\in\mathcal{D}_\Pi$, so $u-u'\in\mathcal{N}^\infty$ and $v=b(u-u')+bu'\in\Cau+
+\Nul(\Pi)$. Hence $\tau$ induces an isomorphism
+\begin{equation*}
+\CI(Y;V)/\big(\Cau+(\Id-\Pi)\CI(Y;V)\big)\cong\CI(X;V_2)/D(\mathcal{D}_\Pi).
+\end{equation*}
+Finally $v\mapsto\Pi v$ induces an isomorphism of the left side onto $\Pi\CI(Y;V)/
+\Pi(\Cau)$: it is surjective, and $\Pi v\in\Pi(\Cau)$ if and only if $\Pi(v-w)=0$ for
+some $w\in\Cau$, i.e.\ $v\in\Cau+(\Id-\Pi)\CI$. Since $\Pi(\Cau)=\Ran(T_\Pi)$, this is the
+second isomorphism.
+\end{proof}
+
+\begin{example}\label{boundary:ex:calderon-realization}
+For $\Pi=\PiC$, $T_\Pi$ is the identity of $\Cau$, so $D_{\PiC}:\{u\in\CI(X;V_1);\
+\PiC(bu)=0\}\to\CI(X;V_2)$ is an isomorphism; its inverse is $f\mapsto Qf-I_{\mathcal C}
+bQf$. At the other extreme, for $\Pi=\Id-\PiC$ we have $T_\Pi=0$ with infinite-dimensional
+null space $\Cau$: this ``boundary condition'' is satisfied by every solution. For
+$\Pi=0$ (no boundary condition) $T_\Pi$ is surjective with null space $\Cau$, while for
+$\Pi=\Id$ (the Dirichlet condition $bu=0$) $T_\Pi$ is injective with cokernel
+$(\Id-\PiC)\CI$; neither is Fredholm (if $\dim X\ge2$), in accordance with
+\cref{boundary:rem:calderon-cases}(2).
+\end{example}
+
+\subsection*{A symbolic criterion}
+The operator $T_\Pi$ is a ``Toeplitz-type'' operator between the ranges of two
+pseudodifferential projections, and its Fredholm property can be decided from principal
+symbols.
+
+\begin{theorem}\label{boundary:thm:symbolic}
+Let $\Pi\in\Psido0(Y;V)$ be a classical projection, $\pi=\sigma_0(\Pi)$, and
+$p=\sigma_0(\PiC)$, given by \eqref{boundary:eq:calderon-symbol}. Suppose that for every
+$(y,\eta)\in T^*Y\setminus0$
+\begin{equation}\label{boundary:eq:symbolic}
+\pi(y,\eta):\Ran p(y,\eta)\longrightarrow\Ran\pi(y,\eta)\ \text{is an isomorphism},
+\end{equation}
+equivalently $V_y=\Ran p(y,\eta)\oplus\Nul\pi(y,\eta)$. Then:
+\begin{enumerate}[label=(\roman*)]
+\item for every $s\in\R$, $\Pi:\PiC H^s(Y;V)\to\Pi H^s(Y;V)$ is Fredholm;
+\item if $v\in\PiC H^s(Y;V)$ and $\Pi v\in\CI$ then $v\in\CI$;
+\item $T_\Pi$ is Fredholm, with the same null space and index as the operators in (i).
+\end{enumerate}
+Consequently $D_\Pi$ is Fredholm and $\ind(D_\Pi)=\ind(T_\Pi)$ is the relative index of
+$(\PiC,\Pi)$.
+\end{theorem}
+\begin{proof}
+The equivalence of the two forms of \eqref{boundary:eq:symbolic}: if $\pi$ is an
+isomorphism $\Ran p\to\Ran\pi$, then $\Ran p\cap\Nul\pi=0$ and $\dim\Ran p=\dim\Ran\pi=
+\dim V_y-\dim\Nul\pi$; conversely, if $V_y=\Ran p\oplus\Nul\pi$ then $\pi|_{\Ran p}$ is
+injective and $\pi(\Ran p)=\pi(V_y)=\Ran\pi$.
+
+Since $p$ and $\pi$ are smooth projection-valued functions, homogeneous of degree $0$,
+$\Ran p$ and $\Ran\pi$ are smooth vector bundles over $T^*Y\setminus0$ and
+$\pi|_{\Ran p}$ is a smooth bundle isomorphism between them. Thus
+\begin{equation*}
+q=\iota\circ(\pi|_{\Ran p})^{-1}\circ\pi\in\CI(T^*Y\setminus0;\hom(V)),
+\end{equation*}
+with $\iota$ the inclusion of $\Ran p$, is homogeneous of degree $0$, and by construction
+\begin{equation*}
+pq=q,\qquad q\pi p=p,\qquad \pi q=\pi.
+\end{equation*}
+(For the second, $q(\pi pw)=pw$ because $pw\in\Ran p$; for the third, $\pi qw=\pi z$
+where $z\in\Ran p$ is the element with $\pi z=\pi w$.) Let $B_0\in\Psido0(Y;V)$ be classical with $\sigma_0(B_0)=q$
+(\cref{manifolds:prop:principal-symbol}) and set
+\begin{equation*}
+B=\PiC B_0\Pi,\qquad T=\Pi\PiC .
+\end{equation*}
+Then $\sigma_0(BT)=pq\pi\pi p=pq\pi p=p$ and $\sigma_0(TB)=\pi pp q\pi=\pi q\pi=\pi$, so
+\begin{equation*}
+BT=\PiC+R_1,\qquad TB=\Pi+R_2,\qquad R_1,R_2\in\Psido{-1}(Y;V).
+\end{equation*}
+Now $T$ maps $\PiC H^s$ into $\Pi H^s$ (where it acts as $\Pi$) and $B$ maps $\Pi H^s$
+into $\PiC H^s$; on these closed subspaces $BT=\Id+R_1$ and $TB=\Id+R_2$, and $R_1$,
+$R_2$ map the respective subspaces into themselves (e.g.\ $R_1v=BTv-v\in\PiC H^s$ for $v\in
+\PiC H^s$) and are compact there, being of negative order. By Atkinson's theorem
+(\cref{ch:hilbert}), (i) follows.
+
+For (ii), if $v=\PiC v\in H^s$ and $\Pi v=Tv\in\CI$, then $v=BTv-R_1v\in H^{s+1}$;
+iterating, $v\in\CI$.
+
+(iii) By (ii) the null space of the operator in (i) consists of smooth sections, so it is
+$\Nul(T_\Pi)$, independent of $s$. Also by (ii), $\Ran(T_\Pi)=\Pi(\PiC H^s)\cap\CI$. The map
+$\Pi\CI/\Ran(T_\Pi)\to\Pi H^s/\Pi(\PiC H^s)$ induced by inclusion is therefore injective;
+it is also surjective, since the target is finite-dimensional and the image of the dense
+subspace $\Pi\CI\subset\Pi H^s$ under the continuous quotient map (the range in (i) being
+closed) is dense, hence everything. So the cokernels have the same dimension. The last
+statement follows from \cref{boundary:thm:fredholm-bc}.
+\end{proof}
+
+The condition \eqref{boundary:eq:symbolic} is the analogue for pseudodifferential
+boundary conditions of the Lopatinski--Shapiro (``covering'') condition for local
+boundary conditions; it says that the boundary condition determines, at the symbolic
+level, exactly the half of the boundary data which is free for solutions. With some more
+work (boundary regularity for $D$) one shows that under \eqref{boundary:eq:symbolic} the
+realization is also Fredholm as a map $\{u\in H^1(X;V_1);\ \Pi bu=0\}\to L^2(X;V_2)$, and
+that, conversely, the condition is necessary for the Fredholm property in these spaces; we
+do not pursue this here, see the Notes.
+
+\begin{remark}\label{boundary:rem:bc-examples}
+(1) If $\sigma_0(\Pi)=\sigma_0(\PiC)$ then \eqref{boundary:eq:symbolic} holds trivially.
+This is the case for $\Pi=\PiC$, and for the boundary condition of Atiyah, Patodi and
+Singer when $D$ has product form near the boundary: there $\Pi$ is the spectral projection
+onto the non-negative eigenspaces of a self-adjoint elliptic operator on $Y$, whose
+symbol is the projection appearing in \eqref{boundary:eq:calderon-symbol}; see
+\cite{Melrose-APS}.
+
+(2) \emph{Local boundary conditions.} Suppose $\Pi$ is a bundle projection, i.e.\
+multiplication by a smooth $\pi\in\CI(Y;\End(V))$ with $\pi^2=\pi$; then $\sigma_0(\Pi)
+(y,\eta)=\pi(y)$ does not depend on $\eta$. If \eqref{boundary:eq:symbolic} holds then
+$\operatorname{rank}p(y,\eta)=\operatorname{rank}V-\dim\Nul\pi(y)=\operatorname{rank}\pi(y)$
+for all $\eta$, so by \cref{boundary:rem:calderon-cases}(2)
+\begin{equation*}
+\operatorname{rank}V=\operatorname{rank}p(y,\eta)+\operatorname{rank}p(y,-\eta)=
+2\operatorname{rank}\pi(y).
+\end{equation*}
+Thus a local elliptic boundary condition can only exist if $\operatorname{rank}V_1$ is
+even. For instance the Cauchy--Riemann operator $D_x+iD_y$ acting on scalar functions on
+a surface with boundary has no local elliptic boundary condition, although it has many
+pseudodifferential ones; see \cref{boundary:ex:disc,boundary:ex:local-bc}.
+\end{remark}
+
+\section{Exercises}\label{boundary:sec:exercises}
+
+\begin{exercise}\label{boundary:ex:collar-noncompact}
+Let $X$ be a manifold with boundary, $\pa X$ not necessarily compact. Show that there is a
+boundary defining function $\rho$, an open neighbourhood $C$ of $\pa X$ and a
+diffeomorphism $C\to[0,1)\times\pa X$ whose first component is $\rho$. (Hint: with $V$ as
+in the proof of \cref{boundary:lem:collar}, find a smooth $\epsilon:\pa X\to(0,1]$ such
+that $\psi(t,p)=\exp(tV)p$ is defined, satisfies $\rho(\psi(t,p))=t$, and is a
+diffeomorphism from $\{(t,p);\ 0\le t<\epsilon(p)\}$ onto an open set; then use
+$(s,p)\mapsto\psi(s\epsilon(p),p)$, and modify $\rho$ away from $\pa X$.) Deduce that the
+doubling construction of \cref{boundary:sec:manifolds} works for all manifolds with
+boundary.
+\end{exercise}
+
+\begin{exercise}\label{boundary:ex:sobolev-intrinsic}
+Let $X$ be a compact manifold with boundary and $k\in\N_0$. Show that
+\begin{equation*}
+H^k(X)=\{u\in L^2(X);\ Pu\in L^2(X)\ \text{for all}\ P\in\Diff{k}(X)\},
+\end{equation*}
+where $Pu$ is computed in $\CmI(X)$, and that an equivalent norm is
+$\sum_j\norm{P_ju}_{L^2}$ for any finite set of $P_j$ generating $\Diff k(X)$ as a
+$\CI(X)$-module. (Hint: in a collar,
+use a finite reflection $Eu(x,y)=\sum_{j=0}^{k-1}a_ju(-2^jx,y)$ for $x<0$, with
+$\sum_ja_j(-2^j)^l=1$ for $0\le l\le k-1$, to extend $u$ across the boundary; check that
+$E$ is bounded from the right side into $H^k$ by approximating $u$ with smooth functions,
+for which the derivatives of order $<k$ of $Eu$ are continuous across $x=0$.)
+\end{exercise}
+
+\begin{exercise}\label{boundary:ex:calderon-bvp}
+Under the standing hypotheses of \cref{boundary:sec:dividing}, show that for $f\in
+\CI(M_+;V_2)$ and $v\in\CI(H;V)$ there is a unique $u\in\CI(M_+;V_1)$ with
+\begin{equation*}
+Du=f\ \text{in}\ M_+,\qquad \PiC(b_+u)=\PiC v,
+\end{equation*}
+namely $u=R_Df+I_D\PiC v$. (Hint: show that $D^{-1}(f_c)$ is smooth up to $H$ from both
+sides, with equal boundary values by \eqref{boundary:eq:jump-two}, and that its restriction
+to $M_-$ lies in $\mathcal{N}_-$; deduce $\PiC b_+R_Df=0$. Note that the condition
+$b_+u=\PiC v$ is not the right one: $(\Id-\PiC)b_+u=b_+R_Df$ is determined by $f$.)
+\end{exercise}
+
+\begin{exercise}\label{boundary:ex:orthogonal-calderon}
+Let $\mathcal H$ be a Hilbert space and $\Pi\in\Lin(\mathcal H)$ with $\Pi^2=\Pi$.
+\begin{enumerate}[label=(\alph*)]
+\item Show that $T=\Pi+\Pi^*-\Id$ is self-adjoint with $T^2=\Id+(\Pi-\Pi^*)(\Pi-\Pi^*)^*
+\ge\Id$, so $T$ is invertible, and that $\Pi T=\Pi\Pi^*=T\Pi^*$, $T\Pi=\Pi^*\Pi=\Pi^*T$.
+\item Deduce that $\Pi_o=\Pi T^{-1}$ is the orthogonal projection onto $\Ran\Pi$.
+\item If $\Pi\in\Psido0(Y;V)$ is a projection on a compact manifold, show that $T$ is
+elliptic and that $\Pi_o\in\Psido0(Y;V)$ (use \cref{ch:manifolds} for the inverse of an
+invertible elliptic operator). Conclude that the Calder\'on projector may be chosen
+self-adjoint on $L^2(Y;V)$, and that its symbol is still
+\eqref{boundary:eq:calderon-symbol}.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}\label{boundary:ex:disc}
+Let $X=\{z\in\C;\ |z|\le1\}$ with the Euclidean metric and $D=D_x+iD_y=-2i\pa_{\bar z}$
+acting on functions.
+\begin{enumerate}[label=(\alph*)]
+\item Show that $D$ is of Dirac type and that \eqref{boundary:eq:UC} holds.
+\item Show that $\Cau$ consists of the $v\in\CI(\pa X)$, $v(\theta)=\sum_kv_ke^{ik\theta}$,
+with $v_k=0$ for $k<0$, and that the Szeg\H{o} projector $S$, $Sv=\sum_{k\ge0}v_ke^{ik\theta}$,
+is a Calder\'on projector.
+\item Using local coordinates $x=1-r$, $y=\theta$ near $z=1$, verify that
+\eqref{boundary:eq:calderon-symbol} gives $\sigma_0(S)(\theta,\eta)=\frac12(1+\eta/|\eta|)$,
+in agreement with (b).
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}\label{boundary:ex:disc-index}
+In the setting of \cref{boundary:ex:disc}, for $N\in\Z$ let $\Pi_N$ be the projection
+onto $\operatorname{span}\{e^{ik\theta};\ k\ge N\}$. Show that $\Pi_N\in\Psido0(\pa X)$,
+that \eqref{boundary:eq:symbolic} holds, and that the realization $D_{\Pi_N}$ has index
+$N$; describe its null space and cokernel explicitly for $N>0$ and $N<0$.
+\end{exercise}
+
+\begin{exercise}\label{boundary:ex:local-bc}
+On the unit disc, let $D=\begin{pmatrix}D_x+iD_y&0\\0&D_x-iD_y\end{pmatrix}$ act on
+$\C^2$-valued functions.
+\begin{enumerate}[label=(\alph*)]
+\item Show that $D$ is of Dirac type and compute $\Cau$ and $\sigma_0(\PiC)$.
+\item Show that the local boundary condition $u_1|_{\pa X}=u_2|_{\pa X}$ is of the form
+$\Pi(bu)=0$ for a bundle projection $\Pi$ satisfying \eqref{boundary:eq:symbolic}.
+\item Show directly that the null space of $D_\Pi$ consists of the constant functions
+$(c,c)$ and that $D_\Pi$ is surjective, so $\ind D_\Pi=1$; check this against
+\cref{boundary:thm:fredholm-bc}.
+\end{enumerate}
+\end{exercise}
+
+\section*{Notes}
+
+The treatment of boundary problems by means of the Calder\'on projector goes back to
+A.~P. Calder\'on (\emph{Boundary value problems for elliptic equations}, Outlines of the
+joint Soviet--American symposium on partial differential equations, Novosibirsk, 1963)
+and R.~T.~Seeley (\emph{Singular integrals and boundary value problems}, Amer.\ J.\ Math.\
+\textbf{88} (1966)), who showed that the projector is pseudodifferential for general
+elliptic operators; the extension operator in \cref{boundary:prop:extension} is from
+R.~T.~Seeley, \emph{Extension of $\CI$ functions defined in a half space}, Proc.\ Amer.\
+Math.\ Soc.\ \textbf{15} (1964). The unique continuation theorem used to justify
+\eqref{boundary:eq:UC} is that of N.~Aronszajn (J.\ Math.\ Pures Appl.\ \textbf{36}
+(1957)) for second-order operators with scalar principal symbol. For operators of Dirac
+type a thorough account, including the invertible double, the gluing formula, local
+boundary conditions and the Atiyah--Patodi--Singer condition, is B.~Boo{\ss}-Bavnbek and
+K.~P.~Wojciechowski, \emph{Elliptic boundary problems for Dirac operators}
+(Birkh\"auser, 1993); for the classical theory of elliptic boundary problems with local
+boundary conditions see \cite[Chapter~20]{Hormander-III}, and for the APS condition
+\cite{Melrose-APS}.
+
+Compared with the original notes we restrict to operators of Dirac type throughout and
+supply complete arguments in several places: the regularity of layer potentials is proved
+by the contour-deformation argument for rational symbols; the construction of the
+Calder\'on projector on a manifold with boundary, sketched in the original, is completed
+by the exact representation formula \cref{boundary:prop:exact-repr}, which uses Green's
+formula together with a right inverse for $D^*$ and shows directly that $\Id-P$ is
+smoothing on the boundary values of solutions; and the reduction of a pseudodifferential
+boundary problem to the relative index of two projections
+(\cref{boundary:thm:fredholm-bc}) is complemented by the symbolic criterion
+\cref{boundary:thm:symbolic}. The boundary condition in \cref{boundary:ex:calderon-bvp}
+corrects that of the original. Several sections announced in the original (the Poisson
+operator in Sobolev spaces, unique continuation, boundary regularity, local boundary
+conditions, absolute and relative Hodge cohomology, the transmission condition) were never
+written and are omitted, apart from the brief remarks above. The same applies to the
+gluing formula: if $D$ is of Dirac type on a compact manifold $M$ without boundary,
+divided by a hypersurface $H$ into $M_1$ and $M_2$, then $\ind D$ equals the relative index
+of the pair $(\Pi_{1,\mathcal C},\Id-\Pi_{2,\mathcal C})$ of Calder\'on projectors of the
+two sides; in the invertible case of \cref{boundary:sec:dividing} this reduces to
+$\Pi_{2,\mathcal C}=\Id-\Pi_{1,\mathcal C}$ (\cref{boundary:thm:calderon-dividing}), and
+in general it is proved in the book of Boo{\ss}-Bavnbek and Wojciechowski cited above.
