@@ -284,8 +284,7 @@ augmentation is surjective.
 \end{proof}
 
 \begin{theorem}[Hochschild--Kostant--Rosenberg]\label{hochschild:thm:polynomial}
-For the polynomial algebra $\cA=\C[x_1,\dots,x_n]$ the map
-\eqref{hochschild:eq:HKR} induces an isomorphism
+Let $\cA=\C[x_1,\dots,x_n]$. The map \eqref{hochschild:eq:HKR} induces an isomorphism
 \begin{equation*}
   \varepsilon_*:\HH_k(\C[x])\longrightarrow\Omega^k_{\mathrm{pol}}
   =\C[x]\otimes\Lambda^k(\C^n),\qquad k\in\N_0,
@@ -507,7 +506,7 @@ Then $D_{j-1}=\{y_j=0\}$ for $1\le j\le k$, $D_k=\{y_1+\dots+y_k=0\}$ and
 $\Delta=\{y=0\}$.
 
 \begin{lemma}\label{hochschild:lem:antisym}
-Let $q$ be a $k$-linear form on $\R^n$ (with complex values). Then
+Let $q$ be a complex-valued $k$-linear form on $\R^n$. Then
 $q(y_1,\dots,y_{k-1},-(y_1+\dots+y_{k-1}))\equiv0$ if and only if $q$ is
 alternating.
 \end{lemma}
@@ -635,3 +634,636 @@ Compactness was only used to make the partitions of unity finite. With some
 care about supports (using locally finite partitions of unity and cut-offs
 in all variables) the same argument applies to non-compact $X$.
 \end{remark}
+
+\section{The commutative symbol algebra}\label{hochschild:sec:commutative}
+
+From now on $X$ is compact, $n=\dim X\ge1$, and
+\begin{equation*}
+  Y=T^*X\setminus0,\qquad \rho_t(x,\xi)=(x,t\xi),\ t>0,\qquad
+  S^*X=Y/\R^+ .
+\end{equation*}
+A function $a$ on $Y$ is homogeneous of degree $m\in\Z$ if $\rho_t^*a=t^ma$
+for all $t>0$, and similarly for differential forms; we write
+$\CI_{(m)}(Y)$ and $\Omega^k_{(m)}(Y)$ for the smooth homogeneous functions
+and $k$-forms of degree $m$. (Equivalently, $\CI_{(m)}(Y)$ is the space of
+sections of a line bundle over $S^*X$.) Choosing a Riemannian metric on $X$
+and setting $R=|\xi|$ identifies $S^*X$ with $\{R=1\}$ and
+\begin{equation}
+  Y\cong S^*X\times(0,\infty),\qquad (x,\xi)\longmapsto\bigl((x,\xi/|\xi|),|\xi|\bigr);
+  \label{hochschild:eq:polar}
+\end{equation}
+we write $s\in S^*X$ and $r=R$ for the two factors.
+
+The \emph{commutative algebra of formal symbols} is
+\begin{equation*}
+  \cA_0=\Bigl\{a=\sum_{m\le M}a_m;\ a_m\in\CI_{(m)}(Y),\ M\in\Z\Bigr\},\qquad
+  (ab)_m=\sum_{l\in\Z}a_{m-l}b_l,
+\end{equation*}
+the sum being finite. It contains the algebra
+$\cA_{\mathrm{fin}}=\bigoplus_m\CI_{(m)}(Y)$ of finite sums.
+
+\begin{definition}\label{hochschild:def:chains-comm}
+For a multi-index $I=(I_0,\dots,I_k)\in\Z^{k+1}$ let $\CI_{(I)}(Y^{k+1})$ be the
+space of smooth functions on $Y^{k+1}$ homogeneous of degree $I_j$ in the
+$j$-th factor, and for $m\in\Z$ let $C_{m,k}=\bigoplus_{|I|=m}\CI_{(I)}(Y^{k+1})$
+(finite sums), $|I|=I_0+\dots+I_k$. The space of Hochschild $k$-chains of the
+symbol algebra is
+\begin{equation*}
+  \cB^{(k)}=\Bigl\{u=\sum_{m\le M}u_m;\ u_m\in C_{m,k},\ M\in\Z\Bigr\}.
+\end{equation*}
+\end{definition}
+
+Each $\CI_{(I)}(Y^{k+1})$ is the completed projective tensor product of the
+spaces $\CI_{(I_j)}(Y)$, and $\cA_0^{\otimes(k+1)}\subset\cB^{(k)}$: a finite
+sum of products $a^0(\zeta_0)\cdots a^k(\zeta_k)$ of formal sums has, in each
+total degree $m$, only finitely many non-zero multihomogeneous components,
+because each $a^j$ has degrees bounded above. The face maps
+\eqref{hochschild:eq:faces-fn}, with $\zeta_j\in Y$ in place of $z_j$, map
+$\CI_{(I)}(Y^{k+1})$ to $\CI_{(I')}(Y^k)$ where $I'$ is obtained by adding two
+adjacent (or the last and the first) entries; they preserve the total degree
+and extend the face maps of $\cA_0$. So $(\cB^{(\bullet)},b)$ is a complex,
+the direct product over $m$ (with degrees bounded above) of the complexes
+$(C_{m,\bullet},b)$. Homology commutes with such products, so
+\begin{equation}
+  \HH_k(\cA_0)=\Bigl\{\sum_{m\le M}h_m;\ h_m\in H_k(C_{m,\bullet},b)\Bigr\}.
+  \label{hochschild:eq:product}
+\end{equation}
+
+\begin{theorem}\label{hochschild:thm:commutative}
+The map $\varepsilon$ of \eqref{hochschild:eq:HKR} (applied on $Y$) induces
+isomorphisms $H_k(C_{m,\bullet},b)\cong\Omega^k_{(m)}(Y)$ for all $m\in\Z$,
+$k\in\N_0$. Hence
+\begin{equation*}
+  \HH_k(\cA_0)\cong\Bigl\{\alpha=\sum_{m\le M}\alpha_m;\ \alpha_m\in\Omega^k_{(m)}(Y)\Bigr\},
+\end{equation*}
+the space of formal sums of homogeneous $k$-forms on $T^*X\setminus0$.
+\end{theorem}
+\begin{proof}
+Under \eqref{hochschild:eq:polar}, an element of the space $\CI_{(I)}(Y^{k+1})$ is
+of the form $r_0^{I_0}\cdots r_k^{I_k}v(s_0,\dots,s_k)$ with $v\in\CI((S^*X)^{k+1})$, so
+\begin{equation*}
+  \bigoplus_mC_{m,k}=\CI\bigl((S^*X)^{k+1}\bigr)\otimes\C[r_0^{\pm1},\dots,r_k^{\pm1}].
+\end{equation*}
+The face maps of the left side are the tensor products of the face maps of
+the Hochschild complexes of $\CI(S^*X)$ (\cref{hochschild:sec:smooth}) and of
+$\C[r^{\pm1}]$. With the degeneracies $s_i$ (insertion of the identity in
+position $i+1$) the Hochschild complex of a unital algebra is a simplicial
+vector space, and the complex above is the diagonal of the tensor product of
+two simplicial vector spaces. By the Eilenberg--Zilber theorem, the shuffle
+map $\mathrm{sh}$ from the tensor product complex
+$C_\bullet(\CI(S^*X))\otimes C_\bullet(\C[r^{\pm1}])$ to the diagonal complex
+is a quasi-isomorphism, and by the K\"unneth formula over $\C$ the homology of
+the tensor product complex is $\HH_\bullet(\CI(S^*X))\otimes\HH_\bullet(\C[r^{\pm1}])$.
+A direct computation from the definition of the shuffle map shows
+$\varepsilon(\mathrm{sh}(\alpha\otimes\beta))=\varepsilon(\alpha)\wedge\varepsilon(\beta)$
+(the $\binom{p+q}{p}$ shuffles each contribute the same wedge product, and
+$\binom{p+q}p/(p+q)!=1/(p!q!)$). By \cref{hochschild:thm:Connes} and
+\cref{hochschild:rem:Laurent} it follows that $\varepsilon$ induces an
+isomorphism of $H_k(\bigoplus_mC_{m,\bullet})$ onto
+\begin{equation*}
+  \Omega^k(S^*X)\otimes\C[r^{\pm1}]\;\oplus\;\Omega^{k-1}(S^*X)\otimes\C[r^{\pm1}]\,dr ,
+\end{equation*}
+which by \eqref{hochschild:eq:polar} is the space of finite sums of
+homogeneous $k$-forms on $Y$: a $k$-form homogeneous of degree $m$ is exactly
+$r^m(\alpha'+\alpha''\wedge dr/r)$ with $\alpha'$, $\alpha''$ forms on $S^*X$.
+Since $\varepsilon$ maps $C_{m,k}$ to $\Omega^k_{(m)}(Y)$, the isomorphism
+respects the grading by $m$; \eqref{hochschild:eq:product} gives the last
+statement.
+\end{proof}
+
+\section{The algebra of formal symbols}\label{hochschild:sec:symbols}
+
+\subsection{Full symbols and the star product}
+Let $\Psido{m}(X)$ denote the classical pseudodifferential operators of order
+$m$ on $X$ (\cref{ch:manifolds}), $\Psido{\Z}(X)=\bigcup_{m\in\Z}\Psido{m}(X)$
+and $\Psido{-\infty}(X)=\bigcap_m\Psido{m}(X)$. Then $\Psido{-\infty}(X)$ is an
+ideal and we consider the quotient algebra
+\begin{equation*}
+  \cA=\Psido{\Z}(X)/\Psido{-\infty}(X).
+\end{equation*}
+The principal symbol gives exact sequences $0\to\Psido{m-1}(X)\to\Psido{m}(X)
+\xrightarrow{\sigma_m}\CI_{(m)}(Y)\to0$, with
+$\sigma_{m+m'}(AB)=\sigma_m(A)\sigma_{m'}(B)$ and
+\begin{equation*}
+  \sigma_{m+m'-1}([A,B])=-i\{\sigma_m(A),\sigma_{m'}(B)\},\qquad
+  \{a,b\}=\sum_{j=1}^n\Bigl(\frac{\pa a}{\pa\xi_j}\frac{\pa b}{\pa x_j}-
+  \frac{\pa a}{\pa x_j}\frac{\pa b}{\pa\xi_j}\Bigr)=H_ab,
+\end{equation*}
+the Poisson bracket, $H_a$ being the Hamilton vector field of $a$ (in
+canonical coordinates $(x,\xi)$ on $T^*X$).
+
+To compute Hochschild homology we need the full symbol. We use the following
+standard facts on global symbol calculus (see \cite{Brylinski-Getzler} and the
+references there). After the choice of a Riemannian metric, and hence of a
+global quantization map, there is a linear bijection
+\begin{equation*}
+  \sigma:\cA\longrightarrow\cA_0,\qquad \sigma\bigl(\Psido{m}(X)\bigr)=\{a\in\cA_0;\ a_j=0\text{ for }j>m\},
+\end{equation*}
+whose top-degree component on $\Psido{m}(X)$ is the principal symbol, and
+there are bidifferential operators $P_l$, $l\in\N_0$, on $Y$ with
+$P_l(\CI_{(p)}(Y),\CI_{(q)}(Y))\subset\CI_{(p+q-l)}(Y)$, such that the
+product transported to $\cA_0$ is
+\begin{equation}
+\begin{gathered}
+  a\star b=\sigma\bigl(\sigma^{-1}(a)\sigma^{-1}(b)\bigr)=\sum_{l\ge0}P_l(a,b),\\
+  P_0(a,b)=ab,\qquad P_1(a,b)-P_1(b,a)=-i\{a,b\}.
+\end{gathered}
+  \label{hochschild:eq:star}
+\end{equation}
+The sum is meaningful in $\cA_0$: the component of degree $m$ of $a\star b$ is
+the finite sum $\sum_{l\ge0}\sum_pP_l(a_p,b_{m+l-p})$. In local coordinates,
+with the left quantization, the composition formula of \cref{ch:euclidean}
+gives $P_l(a,b)=\sum_{|\alpha|=l}(\alpha!)^{-1}\pa_\xi^\alpha a\,D_x^\alpha b$,
+and then indeed
+\begin{equation*}
+  P_1(a,b)-P_1(b,a)=-i\sum_j(\pa_{\xi_j}a\,\pa_{x_j}b-\pa_{\xi_j}b\,\pa_{x_j}a).
+\end{equation*}
+The relations \eqref{hochschild:eq:star} for $P_0$ and the antisymmetric part
+of $P_1$ are forced by the principal symbol calculus; these, together with
+associativity of $\star$, are all that will be used.
+
+\subsection{Hochschild chains}
+\begin{definition}\label{hochschild:def:chains-full}
+The Hochschild complex of $\cA\cong(\cA_0,\star)$ has the chain spaces
+$\cB^{(k)}$ of \cref{hochschild:def:chains-comm}, with face maps
+$d_i^\star=\sum_{l\ge0}d_i^{(l)}$, where, for $u\in\CI_{(I)}(Y^{k+1})$,
+$d_i^{(l)}u$ is obtained by applying the bidifferential operator $P_l$ in the
+variables $(\zeta_i,\zeta_{i+1})$ (in $(\zeta_k,\zeta_0)$ for $i=k$, the first
+argument being $\zeta_k$) and then restricting as in
+\eqref{hochschild:eq:faces-fn}. We write
+\begin{equation*}
+  b=\sum_{i=0}^k(-1)^id_i^\star=\sum_{l\ge0}b_l,\qquad
+  b_l=\sum_{i=0}^k(-1)^id_i^{(l)}:C_{m,k}\longrightarrow C_{m-l,k-1}.
+\end{equation*}
+\end{definition}
+
+On $a_0\otimes\dots\otimes a_k$ the map $d^{(l)}_i$ replaces
+$a_i\otimes a_{i+1}$ by $P_l(a_i,a_{i+1})$ (and $d^{(l)}_k$ gives
+$P_l(a_k,a_0)\otimes a_1\otimes\dots\otimes a_{k-1}$), so $b$ extends the
+Hochschild differential of $(\cA_0,\star)$. For $u=\sum_{m\le M}u_m$ the
+component of degree $m$ of $bu$ is the finite sum $\sum_{l\ge0}b_lu_{m+l}$, so
+$b$ is well defined on $\cB^{(k)}$. Moreover $b^2=0$: on the algebraic tensor
+product of copies of $\cA_{\mathrm{fin}}$ this is \cref{hochschild:lem:simplicial}
+(which only uses associativity), each component of $b^2$ is a finite sum of
+operators continuous in the $\CI$ topology, and finite sums of products are
+dense in each $\CI_{(I)}(Y^{k+1})$. The differential $b_0$ is the Hochschild
+differential of the commutative algebra $\cA_0$ of
+\cref{hochschild:sec:commutative}. We define $\HH_k(\cA)$ to be the homology
+of $(\cB^{(\bullet)},b)$.
+
+\begin{remark}[Semiclassical interpretation]\label{hochschild:rem:semiclassical}
+For $h>0$ let $L_h:\cA_0\to\cA_0$, $L_h(\sum_ja_j)=\sum_jh^ja_j$, and define
+$a\star_hb=L_h^{-1}(L_ha\star L_hb)$. Since $P_l(h^pa_p,h^qb_q)=h^{p+q}P_l(a_p,b_q)$
+has degree $p+q-l$,
+\begin{equation*}
+  a\star_hb=\sum_{l\ge0}h^lP_l(a,b),
+\end{equation*}
+a family of associative products, all isomorphic to $\star=\star_1$ via
+$L_h$, which at $h=0$ reduces to the commutative product. The Hochschild
+differential of $\star_h$ is $b_h=\sum_lh^lb_l$. Thus the symbol algebra is
+a deformation of $\cA_0$ in the direction of the Poisson bracket, and its
+Hochschild homology can be computed by expanding in powers of $h$, the
+`semiclassical limit'. Expanding chains in powers of $h$ is equivalent to
+filtering them by homogeneity, which is how we proceed: the spectral sequence
+of the next section is the one associated to the Taylor expansion of
+$h$-dependent chains at $h=0$.
+\end{remark}
+
+\section{The filtration by order and its spectral sequence}\label{hochschild:sec:spectral}
+
+\subsection{The first terms}
+The complex $(\cB^{(\bullet)},b)$ is filtered by the subcomplexes
+$F_p\cB^{(k)}=\{u;\ u_m=0\text{ for }m>p\}$ of chains of order at most $p$;
+$b(F_p)\subset F_p$ since each $b_l$ lowers degrees by $l\ge0$. The filtration
+is exhaustive, $\bigcap_pF_p=0$, and complete: a series $\sum_je_j$ with
+$e_j\in F_{p_j}$, $p_j\to-\infty$ and $\sup p_j<\infty$ converges in the sense
+that each component is a finite sum, and $b$ commutes with such sums.
+
+Comparing components of degree $m-l$ in $b^2=0$ gives
+$\sum_{i+j=l}b_ib_j=0$ for every $l$, in particular
+\begin{equation}
+  b_0^2=0,\qquad b_0b_1+b_1b_0=0,\qquad b_1^2+b_0b_2+b_2b_0=0 .
+  \label{hochschild:eq:bb}
+\end{equation}
+Define
+\begin{equation*}
+  E^1_{p,k}=H_k(C_{p,\bullet},b_0),
+\end{equation*}
+the homology of the associated graded complex. By \eqref{hochschild:eq:bb},
+$b_1$ maps $b_0$-cycles to $b_0$-cycles and $b_0$-boundaries to
+$b_0$-boundaries, so induces $d^1:E^1_{p,k}\to E^1_{p-1,k-1}$, and
+$(d^1)^2=0$. Set
+\begin{equation*}
+  E^2_{p,k}=\frac{\Nul(d^1:E^1_{p,k}\to E^1_{p-1,k-1})}{\Ran(d^1:E^1_{p+1,k+1}\to E^1_{p,k})}.
+\end{equation*}
+These are the first two terms of the spectral sequence of the filtered
+complex; the higher terms $E^r$, with differentials
+$d^r:E^r_{p,k}\to E^r_{p-r,k-1}$, will not be needed explicitly. By
+\cref{hochschild:thm:commutative},
+\begin{equation}
+  E^1_{p,k}\cong\Omega^k_{(p)}(Y),
+  \label{hochschild:eq:E1}
+\end{equation}
+the isomorphism being induced by $\varepsilon$.
+
+\subsection{Degeneration and convergence}
+The following purely algebraic statement reduces the computation of
+$\HH_\bullet(\cA)$ to that of $E^2$. It applies to any complex of the form
+$C_k=\{\sum_{p\le P}c_p;\ c_p\in C_{p,k}\}$ with $b=\sum_{l\ge0}b_l$,
+$b_l:C_{p,k}\to C_{p-l,k-1}$, $b^2=0$, and $E^1$, $E^2$ defined as above.
+
+\begin{proposition}\label{hochschild:prop:convergence}
+Suppose there is an integer $n$ such that $E^2_{p,k}=0$ whenever $p\ne k-n$.
+Then every class in $H_k(C,b)$ has a representative $c\in F_{k-n}C_k$, and
+\begin{equation*}
+  \Theta:H_k(C,b)\longrightarrow E^2_{k-n,k},\qquad [c]\longmapsto[c_{k-n}],
+\end{equation*}
+is a well-defined isomorphism. Moreover all differentials $d^r$, $r\ge2$, of
+the spectral sequence vanish.
+\end{proposition}
+
+Note that if $c\in F_{k-n}$ and $bc=0$, then $b_0c_{k-n}=(bc)_{k-n}=0$ and
+$b_1c_{k-n}=-b_0c_{k-n-1}$, so $c_{k-n}$ defines an element of $E^2_{k-n,k}$.
+
+\begin{proof}
+We use the following step.
+
+\emph{(P)} Let $c\in F_pC_k$ satisfy $b_0c_p=0$ and $b_1c_p+b_0c_{p-1}=0$
+(e.g.\ $bc=0$, or more generally $bc\in F_{p-2}$), and suppose that the class
+of $c_p$ in $E^2_{p,k}$ vanishes. Then there are $x\in C_{p+1,k+1}$ with
+$b_0x=0$ and $y\in C_{p,k+1}$ such that $c-b(x+y)\in F_{p-1}$.
+
+Indeed, $[c_p]\in E^1_{p,k}$ is a $d^1$-cycle, and as it vanishes in $E^2$
+it equals $d^1[x]=[b_1x]$ for some $b_0$-cycle $x\in C_{p+1,k+1}$; so
+$c_p-b_1x=b_0y$ for some $y\in C_{p,k+1}$. The components of $b(x+y)$ of
+degree $p+1$ and $p$ are $b_0x=0$ and $b_1x+b_0y=c_p$, which proves (P).
+
+\emph{Representatives.} If $c\in F_PC_k$ is a cycle with $P>k-n$, then
+$E^2_{P,k}=0$ and (P) replaces $c$ by a homologous cycle in $F_{P-1}$. After
+finitely many steps $c\in F_{k-n}$.
+
+\emph{Well-definedness.} It suffices to show that if $c=be\in F_{k-n}C_k$,
+$e\in F_qC_{k+1}$, then $[c_{k-n}]=0$ in $E^2$. If $q>k+1-n$, then $be\in
+F_{q-2}$ and $E^2_{q,k+1}=0$, so by (P) applied to $e$ we may replace $e$ by
+$e-b(x+y)\in F_{q-1}$ without changing $be$. Repeating, we may assume $q\le
+k+1-n$. Then $b_0e_{k+1-n}=(be)_{k+1-n}=0$ and
+$c_{k-n}=b_1e_{k+1-n}+b_0e_{k-n}$, so the class of $c_{k-n}$ in $E^1$ is
+$d^1[e_{k+1-n}]$, which vanishes in $E^2$.
+
+\emph{Injectivity.} Let $c\in F_{k-n}C_k$ be a cycle with $[c_{k-n}]=0$ in
+$E^2$. By (P), $c-b(x_{k-n}+y_{k-n})=c^{(1)}\in F_{k-n-1}$. Since
+$E^2_{p,k}=0$ for $p<k-n$, (P) applies again to $c^{(1)}$, and so on: we
+obtain $e_p=x_p+y_p\in F_{p+1}C_{k+1}$, $p=k-n,k-n-1,\dots$, with
+$c-b(\sum_{p\ge P}e_p)\in F_{P-1}$ for every $P$. By completeness
+$e=\sum_pe_p$ exists, and $c=be$.
+
+\emph{Surjectivity.} Let $x\in C_{k-n,k}$ with $b_0x=0$ represent a class in
+$E^2_{k-n,k}$. Then $[b_1x]=d^1[x]=0$ in $E^1$, i.e.\ $b_1x=-b_0y$ for some
+$y\in C_{k-n-1,k}$, and $c^{(1)}=x+y$ satisfies $bc^{(1)}\in F_{k-n-2}$.
+Suppose $c^{(r)}\in F_{k-n}$, $r\ge1$, has $c^{(r)}_{k-n}=x$ and
+$z=bc^{(r)}\in F_{p}C_{k-1}$, $p=k-n-r-1$. Then $z$ is a cycle and
+$p\ne(k-1)-n$, so (P) gives $x'\in C_{p+1,k}$, $y'\in C_{p,k}$ with
+$z-b(x'+y')\in F_{p-1}$. Set $c^{(r+1)}=c^{(r)}-x'-y'$; since $p+1<k-n$, its
+component of degree $k-n$ is still $x$, and $bc^{(r+1)}\in F_{p-1}$. The
+corrections have degrees tending to $-\infty$, so $c=\lim_rc^{(r)}$ exists,
+$bc=0$ and $\Theta[c]=[x]$.
+
+\emph{Degeneration.} Each $E^r_{p,k}$, $r\ge2$, is a subquotient of
+$E^2_{p,k}$, so vanishes unless $p=k-n$. The differential $d^r$ maps
+$E^r_{k-n,k}$ to $E^r_{k-n-r,k-1}$, which vanishes unless $k-n-r=k-1-n$, i.e.\
+$r=1$. Hence $d^r=0$ for $r\ge2$.
+\end{proof}
+
+\section{The first differential: the Poisson complex}\label{hochschild:sec:d1}
+
+The canonical symplectic form on $T^*X$ is $\omega=\sum_jd\xi_j\wedge dx_j$ in
+canonical coordinates. Its inverse is the Poisson bivector $\Pi$; we regard it
+as the antisymmetric bilinear form on $T^*Y$ with
+$\Pi(da,db)=\{a,b\}$, i.e.\ $\Pi(\theta,\eta)=\sum_j\bigl(\theta(\pa_{\xi_j})\eta(\pa_{x_j})-
+\theta(\pa_{x_j})\eta(\pa_{\xi_j})\bigr)$. Let $\iota_\Pi:\Omega^k(Y)\to\Omega^{k-2}(Y)$
+be contraction with $\Pi$:
+\begin{equation*}
+  \iota_\Pi(\theta_1\wedge\dots\wedge\theta_k)=\sum_{j<l}(-1)^{j+l+1}
+  \Pi(\theta_j,\theta_l)\,\theta_1\wedge\dots\wedge\widehat{\theta_j}\wedge\dots
+  \wedge\widehat{\theta_l}\wedge\dots\wedge\theta_k ;
+\end{equation*}
+in canonical coordinates $\iota_\Pi=\sum_j\iota_{\pa_{x_j}}\iota_{\pa_{\xi_j}}$,
+as one checks by expanding the right side on decomposable forms. Following
+Koszul and Brylinski, set
+\begin{equation*}
+  \delta=\iota_\Pi d-d\iota_\Pi:\Omega^k(Y)\longrightarrow\Omega^{k-1}(Y).
+\end{equation*}
+Since $\Pi$ lowers homogeneity by one, $\delta$ maps $\Omega^k_{(p)}(Y)$ to
+$\Omega^{k-1}_{(p-1)}(Y)$.
+
+\begin{lemma}\label{hochschild:lem:delta}
+For functions $a_0,\dots,a_k$,
+\begin{multline*}
+  \delta(a_0\,da_1\wedge\dots\wedge da_k)=\sum_{j=1}^k(-1)^{j+1}\{a_0,a_j\}\,
+  da_1\wedge\dots\wedge\widehat{da_j}\wedge\dots\wedge da_k\\
+  +\sum_{1\le j<l\le k}(-1)^{j+l}a_0\,d\{a_j,a_l\}\wedge da_1\wedge\dots
+  \wedge\widehat{da_j}\wedge\dots\wedge\widehat{da_l}\wedge\dots\wedge da_k .
+\end{multline*}
+Moreover, if $f$ is a function and $\beta$ a form with constant coefficients
+in canonical coordinates, then $\delta(f\beta)=\iota_{H_f}\beta$.
+\end{lemma}
+\begin{proof}
+Write $D_{jl}$ for $da_1\wedge\dots\wedge da_k$ with $da_j$ and $da_l$ omitted ($D_{0l}$: only $da_l$ omitted).
+Applying $\iota_\Pi$ to $da_0\wedge da_1\wedge\dots\wedge da_k$, the pairs
+$(0,l)$ give $\sum_l(-1)^{l+1}\{a_0,a_l\}D_{0l}$ and the pairs $1\le j<l$ give
+$\sum(-1)^{j+l+1}\{a_j,a_l\}da_0\wedge D_{jl}$. On the other hand
+$d\iota_\Pi(a_0\,da_1\wedge\dots\wedge da_k)=\sum_{j<l}(-1)^{j+l+1}
+(\{a_j,a_l\}da_0+a_0\,d\{a_j,a_l\})\wedge D_{jl}$. Subtracting gives the
+formula. For the second statement, $d\beta=0$ and $d\iota_\Pi\beta=0$, so
+$\delta(f\beta)=\iota_\Pi(df\wedge\beta)-df\wedge\iota_\Pi\beta$. For vector
+fields $X$, $Z$ and a $1$-form $\theta$ one has
+$\iota_X\iota_Z(\theta\wedge\beta)-\theta\wedge\iota_X\iota_Z\beta=\theta(Z)\iota_X\beta-\theta(X)\iota_Z\beta$;
+with $X=\pa_{x_j}$, $Z=\pa_{\xi_j}$, $\theta=df$, summed over $j$, this is
+$\iota_V\beta$ with $V=\sum_j(\pa_{\xi_j}f\,\pa_{x_j}-\pa_{x_j}f\,\pa_{\xi_j})=H_f$.
+\end{proof}
+
+\begin{proposition}\label{hochschild:prop:d1}
+Under the identification \eqref{hochschild:eq:E1}, $d^1=-i\,\delta$.
+\end{proposition}
+\begin{proof}
+Homogeneous forms of degree $p$ are finite sums of forms
+$\alpha=a_0\,da_1\wedge\dots\wedge da_k$ with $a_j$ homogeneous of total
+degree $p$ (use \eqref{hochschild:eq:polar} and an embedding of $S^*X$ in
+some $\R^N$). By \cref{hochschild:lem:HKR-chain} the chain
+$F=\varphi(a_0;a_1,\dots,a_k)\in C_{p,k}$ is a $b_0$-cycle with
+$\varepsilon(F)=\alpha$, so $d^1\alpha=\varepsilon(b_1F)$.
+
+Decompose $P_1=S+A$ with $S(a,b)=\frac12(P_1(a,b)+P_1(b,a))$ symmetric and
+$A(a,b)=-\frac i2\{a,b\}$ by \eqref{hochschild:eq:star}. Replacing $P_1$ by
+$S$ in $b_1F$, the inner terms cancel in pairs (as $\sigma$ and
+$\sigma\circ(i\ i{+}1)$ have opposite signs) and the first and last terms
+cancel as in the proof of \cref{hochschild:lem:HKR-chain}, now using
+$S(a_0,a_{\sigma(1)})=S(a_{\sigma(1)},a_0)$. Thus $b_1F$ may be computed with
+$P_1$ replaced by $c\{\cdot,\cdot\}$, $c=-\frac i2$. Then $(k-1)!\,\varepsilon(b_1F)$
+is the sum of the following, with the notation $D_{jl}$ of the proof of \cref{hochschild:lem:delta}:
+\begin{enumerate}[label=(\alph*)]
+\item the first terms $c\sum_\sigma\sgn(\sigma)\{a_0,a_{\sigma(1)}\}
+da_{\sigma(2)}\wedge\dots\wedge da_{\sigma(k)}$; grouping according to
+$\sigma(1)=j$ (sign $(-1)^{j-1}$) this is $c(k-1)!\sum_j(-1)^{j-1}\{a_0,a_j\}D_{0j}$;
+\item the last terms $(-1)^kc\sum_\sigma\sgn(\sigma)\{a_{\sigma(k)},a_0\}
+da_{\sigma(1)}\wedge\dots\wedge da_{\sigma(k-1)}$; grouping according to
+$\sigma(k)=j$ (sign $(-1)^{k-j}$) this equals the expression in (a);
+\item the inner terms $c\sum_\sigma\sgn(\sigma)\sum_{i=1}^{k-1}(-1)^ia_0\,
+da_{\sigma(1)}\wedge\dots\wedge d\{a_{\sigma(i)},a_{\sigma(i+1)}\}\wedge\dots
+\wedge da_{\sigma(k)}$. Moving $d\{\cdot,\cdot\}$ to the front costs
+$(-1)^{i-1}$; for fixed $i$ and $(\sigma(i),\sigma(i+1))=(j,l)$, $j<l$, the
+sign of $\sigma$ is $(-1)^{j+l+1}$ times the sign of the induced ordering of
+the remaining indices, and the pair $(l,j)$ gives the same contribution since
+both $\{a_l,a_j\}$ and the sign change. Each $i$ thus contributes
+$-2c(k-2)!\sum_{j<l}(-1)^{j+l+1}a_0\,d\{a_j,a_l\}\wedge D_{jl}$, and there are
+$k-1$ values of $i$.
+\end{enumerate}
+Dividing by $(k-1)!$,
+\begin{equation*}
+  \varepsilon(b_1F)=2c\Bigl(\sum_j(-1)^{j+1}\{a_0,a_j\}D_{0j}
+  +\sum_{j<l}(-1)^{j+l}a_0\,d\{a_j,a_l\}\wedge D_{jl}\Bigr)=-i\,\delta\alpha
+\end{equation*}
+by \cref{hochschild:lem:delta}.
+\end{proof}
+
+In particular $\delta^2=0$, which can also be checked directly. The complex
+$(\Omega^\bullet(Y),\delta)$ is the \emph{canonical} (or Koszul--Brylinski)
+complex of the Poisson manifold $Y$.
+
+\section{The \texorpdfstring{$E^2$}{E2} term}\label{hochschild:sec:E2}
+
+\subsection{The symplectic star operator}
+Fix $\zeta\in Y$ and let $V=T_\zeta Y$, of dimension $2n$. The bilinear form
+$\Pi$ on $V^*$ is non-degenerate; let $\Pi^\sharp:V^*\to V$ be defined by
+$\eta(\Pi^\sharp\theta)=\Pi(\theta,\eta)$, so that $\Pi^\sharp(df)=H_f$. On
+$\Lambda^kV^*$ define the bilinear form
+\begin{equation*}
+  \Lambda(\theta_1\wedge\dots\wedge\theta_k,\eta_1\wedge\dots\wedge\eta_k)
+  =\det\bigl(\Pi(\theta_i,\eta_j)\bigr)_{i,j=1}^k ,
+\end{equation*}
+which is non-degenerate since $\Lambda(\alpha,\beta)=(-1)^k\langle\alpha,
+\Lambda^k\Pi^\sharp\,\beta\rangle$ and $\Pi^\sharp$ is invertible. Let
+$\mathrm{vol}=\omega^n/n!$. The \emph{symplectic star operator}
+$*:\Lambda^kV^*\to\Lambda^{2n-k}V^*$ is defined by
+\begin{equation*}
+  \alpha\wedge{*\beta}=\Lambda(\alpha,\beta)\,\mathrm{vol}\quad\text{for all }\alpha\in\Lambda^kV^*;
+\end{equation*}
+it is an isomorphism because the wedge pairing
+$\Lambda^k\times\Lambda^{2n-k}\to\Lambda^{2n}$ is non-degenerate. Applied
+pointwise it gives a bundle isomorphism, hence isomorphisms
+$*:\Omega^k(Y)\to\Omega^{2n-k}(Y)$, and in canonical coordinates it maps forms
+with constant coefficients to forms with constant coefficients (as $\Pi$ and
+$\mathrm{vol}$ have constant coefficients). This is the operator $W_\omega$
+of the original notes, which describes it in the basis $dx_{i},d\xi_i$.
+
+\begin{lemma}\label{hochschild:lem:star}
+For $\theta\in V^*$ and $\beta\in\Lambda^kV^*$, $k\ge1$,
+\begin{equation*}
+  *^{-1}(\theta\wedge{*\beta})=(-1)^{k-1}\iota_{\Pi^\sharp\theta}\beta .
+\end{equation*}
+\end{lemma}
+\begin{proof}
+Expanding the determinant along the first row,
+$\Lambda(\theta\wedge\alpha,\beta)=\Lambda(\alpha,\iota_{\Pi^\sharp\theta}\beta)$
+for $\alpha\in\Lambda^{k-1}V^*$, since $\iota_v(\eta_1\wedge\dots\wedge\eta_k)
+=\sum_j(-1)^{j+1}\eta_j(v)\,\eta_1\wedge\dots\widehat{\eta_j}\dots\wedge\eta_k$
+and $\eta_j(\Pi^\sharp\theta)=\Pi(\theta,\eta_j)$. Let
+$\mu=*^{-1}(\theta\wedge*\beta)\in\Lambda^{k-1}V^*$. For all $\alpha\in\Lambda^{k-1}V^*$,
+\begin{equation*}
+  \Lambda(\alpha,\mu)\mathrm{vol}=\alpha\wedge*\mu=\alpha\wedge\theta\wedge*\beta
+  =(-1)^{k-1}\theta\wedge\alpha\wedge*\beta=(-1)^{k-1}\Lambda(\alpha,\iota_{\Pi^\sharp\theta}\beta)\mathrm{vol},
+\end{equation*}
+and $\Lambda$ is non-degenerate.
+\end{proof}
+
+\begin{proposition}[Brylinski]\label{hochschild:prop:star-d}
+On $k$-forms, $\delta=(-1)^{k-1}*^{-1}d\,*$. Moreover $*$ maps
+$\Omega^k_{(p)}(Y)$ onto $\Omega^{2n-k}_{(p+n-k)}(Y)$.
+\end{proposition}
+\begin{proof}
+Both sides are first-order differential operators, so it suffices to compare
+them on $f\beta$ with $f$ a function and $\beta$ a form with constant
+coefficients in canonical coordinates. Then $*\beta$ has constant
+coefficients, $d(f*\beta)=df\wedge*\beta$ and, by \cref{hochschild:lem:star},
+$*^{-1}d*(f\beta)=(-1)^{k-1}\iota_{H_f}\beta$, which is $(-1)^{k-1}\delta(f\beta)$
+by \cref{hochschild:lem:delta}.
+
+Since $\{a,b\}$ is homogeneous of degree $p+q-1$ if $a$, $b$ are homogeneous
+of degrees $p$, $q$, the function $\Lambda(\alpha,\beta)$ is homogeneous of
+degree $p+q-k$ for $\alpha\in\Omega^k_{(p)}$, $\beta\in\Omega^k_{(q)}$, and
+$\mathrm{vol}$ is homogeneous of degree $n$. Hence for such $\alpha$,
+$\beta$,
+\begin{equation*}
+  \alpha\wedge\rho_t^*({*\beta})=\rho_t^*\bigl(t^{-p}\alpha\wedge*\beta\bigr)
+  =t^{-p}\rho_t^*\bigl(\Lambda(\alpha,\beta)\mathrm{vol}\bigr)=t^{q+n-k}\alpha\wedge*\beta .
+\end{equation*}
+As the values of the forms $\alpha\in\Omega^k_{(p)}(Y)$ at any point span
+$\Lambda^k$, $\rho_t^*({*\beta})=t^{q+n-k}{*\beta}$. The same argument applies
+to $*^{-1}$.
+\end{proof}
+
+\subsection{Homogeneous de Rham cohomology}
+\begin{proposition}\label{hochschild:prop:homog-dR}
+Let $c\in\Z$. The cohomology of the complex $(\Omega^\bullet_{(c)}(Y),d)$ of
+forms homogeneous of degree $c$ vanishes if $c\ne0$, while for $c=0$
+\begin{equation*}
+  H^j\bigl(\Omega^\bullet_{(0)}(Y),d\bigr)\cong H^j(S^*X)\oplus H^{j-1}(S^*X).
+\end{equation*}
+\end{proposition}
+\begin{proof}
+Let $E$ be the generator of the dilations $\rho_t$ (the radial vector field
+$\sum_j\xi_j\pa_{\xi_j}$). Since $\rho_t$ commutes with the flow of $E$, the
+contraction $\iota_E$ preserves homogeneity, and $\mathcal L_E\alpha=c\alpha$
+for $\alpha\in\Omega^\bullet_{(c)}(Y)$. By Cartan's formula
+$d\iota_E+\iota_Ed=\mathcal L_E$, so if $c\ne0$ and $d\alpha=0$ then
+$\alpha=d(\iota_E\alpha/c)$.
+
+For $c=0$ use \eqref{hochschild:eq:polar}. Every form on $S^*X\times(0,\infty)$
+can be written $\alpha'+\alpha''\wedge dr/r$ with $\alpha'$, $\alpha''$ not
+containing $dr$; since $\rho_t^*(dr/r)=dr/r$, the form is homogeneous of
+degree $0$ if and only if $\alpha'$ and $\alpha''$ are (pull-backs of) forms
+on $S^*X$. As $d(\alpha'+\alpha''\wedge dr/r)=d\alpha'+d\alpha''\wedge dr/r$,
+the complex $\Omega^\bullet_{(0)}(Y)$ is the direct sum of the de Rham complex
+of $S^*X$ and of the same complex shifted by one, which gives the result.
+\end{proof}
+
+The splitting depends on the choice of the radial function $R$; replacing $R$
+by $aR$, $a\in\CI(S^*X)$ positive, changes $\alpha'$ by $\alpha''\wedge
+d\log a$, which does not change the induced map on cohomology from the
+second summand, nor the subspace given by the first.
+
+\begin{theorem}\label{hochschild:thm:E2}
+For the spectral sequence of \cref{hochschild:sec:spectral},
+\begin{equation*}
+  E^2_{p,k}\cong\begin{cases}H^{2n-k}(S^*X)\oplus H^{2n-k-1}(S^*X),&p=k-n,\\
+  0,&p\ne k-n .\end{cases}
+\end{equation*}
+\end{theorem}
+\begin{proof}
+By \eqref{hochschild:eq:E1} and \cref{hochschild:prop:d1}, $E^2_{p,k}$ is the
+homology at $\Omega^k_{(p)}(Y)$ of
+$\Omega^{k+1}_{(p+1)}\xrightarrow{\delta}\Omega^k_{(p)}\xrightarrow{\delta}\Omega^{k-1}_{(p-1)}$.
+By \cref{hochschild:prop:star-d}, $*$ maps this sequence isomorphically onto
+$\Omega^{2n-k-1}_{(c)}\to\Omega^{2n-k}_{(c)}\to\Omega^{2n-k+1}_{(c)}$,
+$c=p+n-k$, intertwining $\delta$ with $\pm d$ (the sign depending only on the
+degree). So $E^2_{p,k}\cong H^{2n-k}(\Omega^\bullet_{(p+n-k)}(Y),d)$, and
+\cref{hochschild:prop:homog-dR} gives the result.
+\end{proof}
+
+\section{The Hochschild homology of the symbol algebra}\label{hochschild:sec:main}
+
+\begin{theorem}[Brylinski--Getzler, Wodzicki]\label{hochschild:thm:main}
+Let $X$ be a compact manifold of dimension $n\ge1$. The Hochschild homology of
+the algebra $\cA=\Psido{\Z}(X)/\Psido{-\infty}(X)$ of formal symbols, with
+the chain spaces of \cref{hochschild:def:chains-full}, is
+\begin{equation*}
+  \HH_k(\cA)\cong H^{2n-k}(S^*X)\oplus H^{2n-k-1}(S^*X),\qquad k\in\N_0 .
+\end{equation*}
+More precisely, every class in $\HH_k(\cA)$ is represented by a cycle of order
+at most $k-n$, and the map assigning to such a cycle the class in
+$E^2_{k-n,k}$ of the homogeneous $k$-form $\varepsilon(c_{k-n})$ of degree
+$k-n$ is an isomorphism; composing with \cref{hochschild:thm:E2} gives the displayed
+isomorphism. In particular $\HH_k(\cA)=0$ for $k>2n$ and
+$\HH_{2n}(\cA)\cong H^0(S^*X)$.
+\end{theorem}
+\begin{proof}
+By \cref{hochschild:thm:E2} the hypothesis of
+\cref{hochschild:prop:convergence} holds, with $n=\dim X$.
+\end{proof}
+
+The degeneration of the spectral sequence at $E^2$, part of
+\cref{hochschild:prop:convergence}, thus comes down to the observation that
+the $E^2$ term is concentrated on the line $p=k-n$, where the order of a
+chain is tied to its degree; differentials $d^r$, $r\ge2$, would have to
+connect different such lines.
+
+\begin{remark}[The residue trace]\label{hochschild:rem:residue}
+In degree $0$, $\HH_0(\cA)=\cA/b(\cB^{(1)})$, the quotient by (the closure of)
+the commutators, and its dual is the space of traces on $\cA$. By
+\cref{hochschild:thm:main}, $\HH_0(\cA)\cong H^{2n-1}(S^*X)$, and the
+isomorphism is computed as follows. Every $A\in\Psido{\Z}(X)$ is congruent
+modulo $b(\cB^{(1)})$ to some $A'\in\Psido{-n}(X)$. The class of the function
+$a=\sigma_{-n}(A')\in\Omega^0_{(-n)}(Y)$ corresponds under $*$ to
+$a\,\mathrm{vol}\in\Omega^{2n}_{(0)}(Y)$, and writing
+$a\,\mathrm{vol}=\alpha''\wedge dr/r$ as in \cref{hochschild:prop:homog-dR},
+$\alpha''=-\iota_E(a\,\mathrm{vol})|_{S^*X}$. Hence, if $X$ is connected and
+$n\ge2$, so that $S^*X$ is connected (and it is always orientable) and
+$H^{2n-1}(S^*X)\cong\C$, the isomorphism $\HH_0(\cA)\cong\C$ is, up to a
+constant factor,
+\begin{equation*}
+  A\longmapsto\int_{S^*X}\sigma_{-n}(A')\,\iota_E\Bigl(\frac{\omega^n}{n!}\Bigr).
+\end{equation*}
+This is the noncommutative residue of Wodzicki and Guillemin
+\cite{Wodzicki-residue,Guillemin-residue}: up to normalization it is
+$\int_{S^*X}\sigma_{-n}(A)\,\iota_E(\omega^n/n!)$, computed for general $A$
+in local coordinates from the term of homogeneity $-n$ of the full symbol.
+Thus, for $n\ge2$ and $X$ connected, the residue is the unique trace on
+$\Psido{\Z}(X)/\Psido{-\infty}(X)$ up to a multiple. For $n=1$, $S^*X$ has
+two components over each component of $X$, and there are correspondingly
+two independent residue traces, one for each direction of $\xi$.
+\end{remark}
+
+\section{Exercises}
+
+\begin{exercise}\label{hochschild:ex:diagonal}
+Let $\cA=\C^N$ with componentwise multiplication. Show that $\cA$ is a
+projective $\cA^e$-module (the idempotent $\sum_je_j\otimes e_j\in\cA^e$
+splits the multiplication map $\cA^e\to\cA$) and deduce $\HH_0(\cA)=\C^N$,
+$\HH_k(\cA)=0$ for $k\ge1$.
+\end{exercise}
+
+\begin{exercise}\label{hochschild:ex:matrices}
+Let $\cA=M_N(\C)$. Show that $\cA$ is a projective $\cA^e$-module, that
+$\HH_k(\cA)=0$ for $k\ge1$, and that the trace induces an isomorphism
+$\HH_0(\cA)\cong\C$.
+\end{exercise}
+
+\begin{exercise}\label{hochschild:ex:delta-low}
+Using \cref{hochschild:lem:delta}, compute $\delta$ on $1$-forms and on
+$2$-forms on $Y$, and verify directly that $\delta^2=0$ on $2$-forms. (Hint:
+use the Jacobi identity for the Poisson bracket.)
+\end{exercise}
+
+\begin{exercise}\label{hochschild:ex:circle}
+Let $X=\Sphere^1$. Show that $S^*X$ is the disjoint union of two circles and
+deduce from \cref{hochschild:thm:main} that $\HH_0(\cA)\cong\C^2$,
+$\HH_1(\cA)\cong\C^4$, $\HH_2(\cA)\cong\C^2$ and $\HH_k(\cA)=0$ for $k\ge3$.
+Find explicit representatives of order $-1$ for the classes in
+$\HH_0(\cA)$, and the two traces.
+\end{exercise}
+
+\begin{exercise}\label{hochschild:ex:top}
+Show directly, using \cref{hochschild:thm:E2} and
+\cref{hochschild:prop:convergence}, that a class in $\HH_{2n}(\cA)$ is
+represented by a cycle of order at most $n$ whose leading part corresponds to
+a locally constant multiple of $\omega^n$ on $Y$.
+\end{exercise}
+
+\section*{Notes}
+The polynomial case of the Hochschild--Kostant--Rosenberg theorem is proved
+here by the Koszul resolution instead of the direct reduction used in the
+original notes, which is kept, in a sharpened form
+(\cref{hochschild:prop:normalized}), for the proof of Connes' theorem. That
+proof was incomplete in the original (the key exactness statement was left
+open); the argument above reduces it, via the module property of the
+boundaries (\cref{hochschild:lem:B-module}) and Borel's lemma, to the
+polynomial case. Connes' original proof (A.~Connes, \emph{Non-commutative
+differential geometry}, Publ.\ Math.\ IH\'ES \textbf{62}, 1985) uses a
+topological Koszul resolution. The Eilenberg--Zilber and K\"unneth theorems
+used in \cref{hochschild:thm:commutative} are standard; see J.-L.~Loday,
+\emph{Cyclic homology}, Springer, 1992, Chapters~1 and~4, which also covers
+H-unitality. The identification $\CI(X)\hat\otimes\CI(Y)=\CI(X\times Y)$ is
+in F.~Tr\`eves, \emph{Topological vector spaces, distributions and kernels},
+Academic Press, 1967.
+
+The semiclassical family of the original has been replaced by the
+equivalent filtration by order, and the degeneration and convergence of the
+spectral sequence are proved in \cref{hochschild:prop:convergence} by the
+homogeneity argument. The complex $(\Omega^\bullet,\delta)$ and the
+symplectic star operator are due to Koszul and to J.-L.~Brylinski (\emph{A
+differential complex for Poisson manifolds}, J.\ Differential Geom.\
+\textbf{28}, 1988). The main theorem is due to Brylinski--Getzler
+\cite{Brylinski-Getzler} and Wodzicki \cite{Wodzicki-residue,Wodzicki-cyclic};
+these papers also treat cyclic homology and the algebras $\Psido{-\infty}(X)$
+and $\Psido{\Z}(X)$, and they use a global symbol calculus (due to Widom)
+for which the product has the form \eqref{hochschild:eq:star}.

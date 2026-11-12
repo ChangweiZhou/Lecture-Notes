@@ -1,0 +1,661 @@
+\chapter{Elliptic boundary problems}\label{ch:boundary}
+\providecommand{\dCmI}{\dot{\mathcal{C}}^{-\infty}}
+\providecommand{\Hdot}[1]{\dot{H}^{#1}}
+\providecommand{\Xt}{\tilde{X}}
+\providecommand{\PiC}{\Pi_{\mathcal{C}}}
+\providecommand{\Cau}{\mathfrak{C}}
+\providecommand{\Rat}[1]{\mathcal{R}^{#1}}
+\providecommand{\cJ}{\mathcal{J}}
+\providecommand{\Fin}{\mathcal{F}}
+
+An elliptic differential operator on a compact manifold \emph{with boundary} has, in
+general, an infinite-dimensional null space. The basic problem of the theory of elliptic
+boundary problems is to parametrize this null space by boundary data, and then to
+decide which boundary conditions single out a Fredholm problem. In this chapter we
+carry this out, following the approach of Calder\'on, for first-order operators of Dirac
+type. The analysis rests on three ingredients: a careful description of function spaces
+and distributions on a manifold with boundary, culminating in the \emph{jump formula}
+(an invariant form of Green's formula); the observation that a manifold with boundary
+can always be regarded as a closed subset of a manifold without boundary, so that the
+calculus of \cref{ch:manifolds} is available; and an explicit analysis of the boundary
+behaviour of $Q(w\,\delta(x))$, where $Q$ is a parametrix for a Dirac-type operator and
+$w\,\delta(x)$ is a layer supported on a hypersurface. For Dirac-type operators the
+symbol of $Q$ is rational in the fibre variables, and contour deformation shows that
+these layer potentials are smooth up to the hypersurface from each side, with boundary
+values given by pseudodifferential operators.
+
+We treat first the model situation of a hypersurface $H$ dividing a compact manifold
+$M$ without boundary, on which $D$ is assumed invertible; here the Calder\'on
+projector $\PiC$, a pseudodifferential projection on $H$ whose range is the space of
+boundary values of solutions on one side, is obtained by an explicit formula. We then
+treat a compact manifold with boundary, where the same construction works modulo
+smoothing errors, and where some abstract functional analysis of smoothing operators
+and generalized inverses is needed to correct them. Finally we show that a
+pseudodifferential projection $\Pi$ on the boundary defines a Fredholm boundary
+problem $\{u;\ \Pi(u|_{\pa X})=0\}$ precisely when $\Pi$ restricted to the range of
+$\PiC$ is Fredholm, and give a symbolic criterion for this.
+
+Throughout, $\Psido{m}(Y;E,F)$ for a compact manifold $Y$ without boundary is as in
+\cref{ch:manifolds}; ``classical'' means that the local full symbols are
+polyhomogeneous (in $\Symph{m}$), and then the principal symbol $\sigma_m$ is a
+homogeneous function on $T^*Y\setminus0$. A manifold is always assumed paracompact and
+Hausdorff, and vector bundles are complex.
+
+\section{Manifolds with boundary}\label{boundary:sec:manifolds}
+
+The local model for a manifold with boundary is the half-space
+\begin{equation*}
+\R^{n,1}=[0,\infty)\times\R^{n-1}.
+\end{equation*}
+An \emph{open set} in $\R^{n,1}$ means a relatively open set, $O=O'\cap\R^{n,1}$ with
+$O'\subset\R^n$ open. A map $F:O_1\to O_2$ between open subsets of $\R^{n,1}$ is
+\emph{smooth} if it is the restriction of a smooth map: there are open sets
+$O_i'\subset\R^n$ with $O_i=O_i'\cap\R^{n,1}$ and a $\CI$ map $F':O_1'\to O_2'$ with
+$F=F'|_{O_1}$. This is much stronger than smoothness of $F$ on $O_1\cap\{x_1>0\}$. A
+\emph{diffeomorphism} is a smooth bijection with smooth inverse.
+
+\begin{definition}
+A \emph{coordinate system} on a topological space $X$ is a homeomorphism
+$\Phi:U\to O$ from an open set $U\subset X$ onto an open set $O\subset\R^{n,1}$. Two
+coordinate systems $(U_i,\Phi_i,O_i)$ are \emph{compatible} if $U_1\cap U_2=\emptyset$
+or $\Phi_2\circ\Phi_1^{-1}:\Phi_1(U_1\cap U_2)\to\Phi_2(U_1\cap U_2)$ is a
+diffeomorphism. A \emph{$\CI$ manifold with boundary} is a paracompact Hausdorff space
+with a maximal covering by mutually compatible coordinate systems.
+\end{definition}
+
+Equivalently, $X$ is a manifold with boundary if there is a manifold $\Xt$ without
+boundary and $f\in\CI(\Xt)$, real-valued, with $df\ne0$ on $\{f=0\}$, such that
+$X=\{p\in\Xt;\ f(p)\ge0\}$ with the coordinate systems obtained by restriction. One
+direction is clear; the doubling construction below gives the other.
+
+The \emph{boundary} $\pa X$ is the union of the sets $\Phi^{-1}(O\cap(\{0\}\times
+\R^{n-1}))$ over coordinate systems; it is well defined because a diffeomorphism of
+open subsets of $\R^{n,1}$ maps boundary points to boundary points (its extension is a
+local diffeomorphism of $\R^n$, hence an open map, so it cannot map a boundary point to
+an interior point of $\R^{n,1}$ and still map a neighbourhood into $\R^{n,1}$, and
+symmetrically for the inverse). $\pa X$ is a manifold without boundary, compact if $X$
+is, and $X^\circ=X\setminus\pa X$ is a manifold without boundary.
+
+A \emph{boundary defining function} is a real $\rho\in\CI(X)$ (see the next section)
+with $\rho\ge0$, $\pa X=\{\rho=0\}$ and $d\rho\ne0$ on $\pa X$. Such functions exist:
+locally the first coordinate is one, and these may be patched together with a
+partition of unity, since positive combinations of local defining functions are again
+defining functions.
+
+\begin{lemma}[Collar neighbourhoods]\label{boundary:lem:collar}
+Let $X$ be a manifold with compact boundary and $\rho$ a boundary defining function.
+Then there exist $\epsilon>0$, an open neighbourhood $C$ of $\pa X$ and a
+diffeomorphism $\varphi:C\to[0,\epsilon)\times\pa X$ whose first component is $\rho$.
+\end{lemma}
+\begin{proof}
+Choose a Riemannian metric on $X$ (by patching local ones) and let $V$ be a smooth
+vector field equal to $\nabla\rho/|\nabla\rho|^2$ near $\pa X$; it is inward pointing
+and $V\rho=1$ near $\pa X$. For $p\in\pa X$ the integral curve $t\mapsto\exp(tV)p$
+exists for $0\le t<\epsilon$, for some $\epsilon>0$ uniform by compactness of $\pa X$,
+and $\rho(\exp(tV)p)=t$ for small $t$. The map $\psi:[0,\epsilon)\times\pa X\ni(t,p)
+\mapsto\exp(tV)p$ is smooth, its differential at $t=0$ is an isomorphism (it maps
+$\pa_t$ to $V$, transversal to $\pa X$), and it is injective since $\rho(\psi(t,p))=t$
+and the curves starting at distinct boundary points are distinct. Shrinking $\epsilon$,
+$\psi$ is a diffeomorphism onto an open neighbourhood $C$; take $\varphi=\psi^{-1}$.
+\end{proof}
+
+Using a collar we can \emph{double} $X$. Let
+\begin{equation*}
+\Xt=(X\sqcup X)/\pa X
+\end{equation*}
+be two copies of $X$ with corresponding boundary points identified, and define
+$\CI(\Xt)$ to consist of the pairs $(u_1,u_2)\in\CI(X)\oplus\CI(X)$ for which there
+is $f\in\CI((-\epsilon,\epsilon)\times\pa X)$ with $(\varphi^{-1})^*(u_1|_C)=
+f(\rho,\cdot)$ and $(\varphi^{-1})^*(u_2|_C)=f(-\rho,\cdot)$. This is a $\CI$ structure
+on $\Xt$, a manifold without boundary which is compact if $X$ is, the first copy
+embeds $X$ as $\{x\ge0\}$ where $x\in\CI(\Xt)$ is equal to $\rho$ on the first copy
+and $-\rho$ on the second near $\pa X$, and $\CI(X)=\CI(\Xt)|_X$. Vector bundles over
+$X$ double in the same way (using the collar to identify $E$ near $\pa X$ with the
+pull-back of $E|_{\pa X}$). Thus all the usual objects --- tensor bundles, densities,
+differential operators --- may be obtained by restriction from $\Xt$.
+
+\section{Smooth functions}\label{boundary:sec:smooth}
+
+For $O\subset\R^{n,1}$ open there are two natural definitions of smooth functions:
+\begin{equation}\label{boundary:eq:CI-ext}
+\CI(O)=\{u:O\to\C;\ u=\tilde u|_O\ \text{for some}\ \tilde u\in\CI(O'),\ O'\subset
+\R^n\ \text{open},\ O=O'\cap\R^{n,1}\}
+\end{equation}
+and the intrinsic one: $u\in\CI(O^\circ)$, $O^\circ=O\cap((0,\infty)\times\R^{n-1})$,
+with
+\begin{equation}\label{boundary:eq:CI-int}
+\sup_{K\cap O^\circ}|D^\alpha u|<\infty\quad\text{for all}\ K\Subset O\ \text{and
+all}\ \alpha.
+\end{equation}
+Certainly \eqref{boundary:eq:CI-ext} implies \eqref{boundary:eq:CI-int}. Conversely,
+\eqref{boundary:eq:CI-int} implies that each $D^\alpha u$ is uniformly continuous on
+$K\cap O^\circ$, hence extends continuously to $O$, and these extensions are the
+derivatives of the extension of $u$ in the closed half-space.
+
+\begin{proposition}\label{boundary:prop:extension}
+If $u$ satisfies \eqref{boundary:eq:CI-int}, then $u$ extends to a smooth function on
+an open set $O'\subset\R^n$ with $O'\cap\R^{n,1}=O$; hence the two definitions agree.
+Moreover there is a linear extension map $E:\CI(O)\to\CI(O')$, continuous in the sense
+that for every compact $K'\subset O'$ and $k$ there is a compact $K\subset O$ with
+$\sup_{K'}|D^\alpha Eu|\le C\sum_{|\beta|\le k}\sup_{K}|D^\beta u|$ for $|\alpha|\le k$.
+\end{proposition}
+\begin{proof}
+We prove the existence of extensions, which is all that is used below. By a
+partition of unity we may assume $u$ has compact support in $O$. Let
+$u_k(y)=\pa_x^ku(0,y)$, which are in $\CIc(\R^{n-1})$. By Borel's lemma with
+parameters (the usual proof, $\tilde u(x,y)=\sum_k\chi(x/\epsilon_k)x^ku_k(y)/k!$ with
+$\epsilon_k\downarrow0$ chosen so that the $k$th term is bounded by $2^{-k}$ in
+$\mathcal{C}^{k-1}$, works verbatim; see \cite[Section~1.2]{Hormander-I}) there is
+$\tilde u\in\CIc(\R^n)$ with $\pa_x^k\tilde u(0,y)=u_k(y)$ for all $k$. Set $Eu=u$ for
+$x\ge0$ and $Eu=\tilde u$ for $x<0$. All derivatives of $Eu$ from the two sides are
+continuous and agree on $x=0$, so $Eu\in\mathcal{C}^k$ for every $k$ (a function
+which is $\mathcal{C}^1$ on each closed half-space with matching derivatives is
+$\mathcal{C}^1$, by the mean value theorem, and one iterates). A linear continuous
+extension with the stated bounds is Seeley's extension operator $Eu(x,y)=
+\sum_k a_k\psi(-b_kx)u(-b_kx,y)$ for $x<0$, with $b_k=2^k$, $\psi$ a cut-off and
+$a_k$ chosen with $\sum_ka_k(-b_k)^j=1$ for all $j$ and $\sum_k|a_k|b_k^j<\infty$; see
+the Notes.
+\end{proof}
+
+For a manifold $X$ with boundary, $\CI(X)$ is the space of functions whose
+coordinate representations are smooth in this sense; it suffices to check this for
+one covering by coordinate systems. As for manifolds without boundary, $\CI(X)$ admits
+partitions of unity, and its topology is given by the seminorms $\sup_K|D^\alpha
+(\Phi^{-1})^*(u|_U)|$, $K\Subset O$, of which a countable subset suffices; for $X$
+compact $\CI(X)$ is a Fr\'echet space. The restriction map $\CI(X)\ni u\mapsto
+u|_{\pa X}\in\CI(\pa X)$ is surjective: using a collar, extend $v\in\CI(\pa X)$ to be
+independent of $\rho$ and cut off.
+
+We think of $\CI(X)\subset\CI(X^\circ)$; a differential operator $P\in\Diff{m}(X)$ is
+a differential operator on $X^\circ$ with coefficients smooth up to the boundary, and
+$P:\CI(X)\to\CI(X)$. The space of functions vanishing to infinite order at the
+boundary is
+\begin{equation*}
+\dCI(X)=\{u\in\CI(X);\ (Pu)|_{\pa X}=0\ \ \forall\,P\in\Diff{*}(X)\}.
+\end{equation*}
+Extension by zero identifies $\dCI(X)$ with the closed subspace of $\CI(\Xt)$ of
+functions supported in $X$. Given a collar with normal variable $x=\rho$, Taylor's
+theorem and Borel's lemma give an isomorphism
+\begin{equation*}
+\CI(X)/\dCI(X)\cong\CI(\pa X)[[x]],\quad u\mapsto\sum_k\frac{x^k}{k!}\,
+(\pa_x^ku)|_{\pa X},
+\end{equation*}
+onto formal power series with coefficients in $\CI(\pa X)$. The same applies to
+sections of vector bundles.
+
+\section{Distributions}\label{boundary:sec:distributions}
+
+Let $X$ be a compact manifold with boundary and $\Xt$ a compact manifold without
+boundary containing $X$ as $\{x\ge0\}$ (for example the double). There are three
+spaces of distributions associated with $X$. The coarsest is $\CmI(X^\circ)$, the dual
+of $\CIc(X^\circ;\Omega)$; its elements may behave arbitrarily badly at $\pa X$ and
+play only a conceptual role. The direct analogue of the boundaryless case is the space
+of \emph{supported distributions}
+\begin{equation*}
+\dCmI(X)=\big(\CI(X;\Omega)\big)'.
+\end{equation*}
+Since the restriction map $\CI(\Xt;\Omega)\to\CI(X;\Omega)$ is continuous and
+surjective, duality gives an injective map
+\begin{equation}\label{boundary:eq:supp-incl}
+\dCmI(X)\ni u\longmapsto\tilde u\in\CmI(\Xt),\quad \tilde u(\varphi)=u(\varphi|_X).
+\end{equation}
+
+\begin{proposition}\label{boundary:prop:supported}
+The range of \eqref{boundary:eq:supp-incl} is $\{\tilde u\in\CmI(\Xt);\
+\supp\tilde u\subset X\}$.
+\end{proposition}
+
+The proof is given after \cref{boundary:prop:extendible}. We use
+\eqref{boundary:eq:supp-incl} to identify $\dCmI(X)$ with the distributions on $\Xt$
+supported in $X$; this is consistent with the identification of $\dCI(X)$ with
+smooth functions on $\Xt$ supported in $X$. The closed subspace $\dCI(X;\Omega)\subset
+\CI(\Xt;\Omega)$ has dual the space of \emph{extendible distributions}
+\begin{equation*}
+\CmI(X)=\big(\dCI(X;\Omega)\big)',
+\end{equation*}
+and transposing the inclusion gives the restriction map
+\begin{equation}\label{boundary:eq:RX}
+R_X:\CmI(\Xt)\to\CmI(X),\quad R_Xu(\varphi)=u(\varphi),\ \varphi\in\dCI(X;\Omega).
+\end{equation}
+This is not an identification: its null space is
+$\{v\in\CmI(\Xt);\ \supp v\cap X^\circ=\emptyset\}=\dCmI(\Xt\setminus X^\circ)$, the
+distributions supported ``on the other side of the boundary''.
+
+\begin{proposition}\label{boundary:prop:extendible}
+$\CIc(X^\circ;\Omega)$ is dense in $\dCI(X;\Omega)$. Hence restriction gives an
+injective map $\CmI(X)\hookrightarrow\CmI(X^\circ)$, while $R_X:\dCmI(X)\to\CmI(X)$
+(and a fortiori $R_X$ on $\CmI(\Xt)$) is surjective.
+\end{proposition}
+\begin{proof}
+Let $V$ be a real vector field on $\Xt$ which is inward pointing across $\pa X$, and
+$F_s=\exp(sV)$, a one-parameter group of diffeomorphisms of $\Xt$ with $F_s(X)\subset
+X^\circ$ for $s>0$. If $\varphi\in\dCI(X)$ then $F_s^*\varphi\to\varphi$ in $\CI(\Xt)$
+as $s\to0$, and for $s<0$, $F_s^*\varphi=\varphi\circ F_s$ is supported in
+$F_{-s}(X)\Subset X^\circ$, so lies in $\CIc(X^\circ)$. The same argument applies to
+densities. Injectivity of $\CmI(X)\to\CmI(X^\circ)$ follows by duality. Surjectivity
+of $R_X$ on $\dCmI(X)$ follows from the Hahn--Banach theorem: a continuous linear
+functional on the closed subspace $\dCI(X;\Omega)\subset\CI(X;\Omega)$ extends to
+$\CI(X;\Omega)$.
+\end{proof}
+
+\begin{proof}[Proof of \cref{boundary:prop:supported}]
+For $\tilde u\in\CmI(\Xt)$ the condition $\supp\tilde u\subset X$ means $\tilde
+u(\varphi)=0$ for all $\varphi\in\CIc(\Xt\setminus X;\Omega)$. This certainly holds
+if $\tilde u$ comes from $\dCmI(X)$, since then $\varphi|_X=0$. Conversely, if it
+holds, then by continuity and the density of $\CIc(\Xt\setminus X;\Omega)$ in
+$\dCI(\Xt\setminus X^\circ;\Omega)$ (\cref{boundary:prop:extendible} applied to the
+manifold with boundary $\Xt\setminus X^\circ$), $\tilde u$ vanishes on the null space
+of the restriction $\CI(\Xt;\Omega)\to\CI(X;\Omega)$, so it factors through this
+(open, by the open mapping theorem) surjection.
+\end{proof}
+
+On $\dCmI(X)$ and $\CmI(X)$ we may use the weak topologies, given by the seminorms
+$u\mapsto|u(\varphi)|$ for test functions $\varphi$.
+
+\begin{lemma}\label{boundary:lem:weak-density}
+$\CIc(X^\circ)$ is weakly dense in both $\dCmI(X)$ and $\CmI(X)$.
+\end{lemma}
+\begin{proof}
+For $u\in\dCmI(X)$, with $F_s$ as above and $s>0$, the push-forward $u_s=(F_s)_*u$,
+$u_s(\varphi)=u(F_s^*\varphi)$, has compact support in $X^\circ$, and $u_s\to u$
+weakly since $F_s^*\varphi\to\varphi$ in $\CI$. A distribution with compact support
+in $X^\circ$ is the weak limit of elements of $\CIc(X^\circ)$ (mollify in local
+coordinates after a partition of unity). Weak density being transitive, the first
+claim follows. For $u\in\CmI(X)$ choose by \cref{boundary:prop:extendible}
+$\tilde u\in\CmI(\Xt)$ with $R_X\tilde u=u$; $\tilde u$ is a weak limit of
+$\psi_k\in\CI(\Xt)$ (on a compact manifold without boundary), so $u$ is the weak limit
+of $\psi_k|_X\in\CI(X)$. Finally $\psi\in\CI(X)$ is the weak limit in $\CmI(X)$ of
+$\chi_k\psi$ with $\chi_k\in\CIc(X^\circ)$, $0\le\chi_k\le1$, $\chi_k\to1$ pointwise
+on $X^\circ$, by dominated convergence.
+\end{proof}
+
+\section{Boundary terms and the jump formula}\label{boundary:sec:jump}
+
+To relate supported and extendible distributions we use the space of
+\emph{boundary terms}
+\begin{equation*}
+\dCmI_{\pa X}(X)=\{u\in\dCmI(X);\ \supp u\subset\pa X\},
+\end{equation*}
+the support being computed in $\Xt$, and the map ``cutting off at the boundary''
+\begin{equation*}
+\CI(X)\ni u\longmapsto u_c\in\dCmI(X),\quad u_c(\varphi)=\int_Xu\varphi\ \ \forall\,
+\varphi\in\CI(X;\Omega),
+\end{equation*}
+which in terms of $\Xt$ is extension by zero. The following is immediate from the
+definitions and \cref{boundary:prop:extendible}.
+
+\begin{proposition}\label{boundary:prop:exact}
+For a compact manifold with boundary $X$ there is a commutative diagram
+\begin{equation*}
+\begin{tikzcd}
+& & & \dCI(X)\arrow[d,hook] & \\
+& & & \CI(X)\arrow[d,hook]\arrow[dl,"(\cdot)_c"'] & \\
+0\arrow[r] & \dCmI_{\pa X}(X)\arrow[r] & \dCmI(X)\arrow[r,"R_X"] & \CmI(X)\arrow[r] & 0
+\end{tikzcd}
+\end{equation*}
+with exact bottom row.
+\end{proposition}
+\begin{proof}
+$R_X(u_c)=u$ for $u\in\CI(X)$, which is the commutativity. Surjectivity of $R_X$ is
+in \cref{boundary:prop:extendible}. If $v\in\dCmI_{\pa X}(X)$ then $v(\varphi)=0$ for
+$\varphi\in\CIc(X^\circ;\Omega)$, hence by density for $\varphi\in\dCI(X;\Omega)$, so
+$R_Xv=0$. Conversely if $u\in\dCmI(X)$ and $R_Xu=0$ then $u(\varphi)=0$ for
+$\varphi\in\CIc(X^\circ;\Omega)$, so $\supp u\cap X^\circ=\emptyset$ and $\supp u
+\subset\pa X$.
+\end{proof}
+
+Both maps from $\CI(X)$ into distributions are injective; we regard the map into
+$\CmI(X)$ as an identification, but \emph{not} the map $u\mapsto u_c$.
+
+\subsection*{Actions of differential operators}
+Let $E,F$ be vector bundles over $X$ and $P\in\Diff{m}(X;E,F)$, with transpose
+$P^t\in\Diff{m}(X;F^*\otimes\Omega,E^*\otimes\Omega)$ defined by $\int_X\pair{P^t\varphi}{u}=
+\int_X\pair{\varphi}{Pu}$ for $u\in\CIc(X^\circ;E)$, $\varphi\in\CIc(X^\circ;F^*\otimes
+\Omega)$. Integration by parts shows that this identity continues to hold if
+$u\in\CI(X;E)$ and $\varphi\in\dCI(X;F^*\otimes\Omega)$, or vice versa, but
+\emph{not} for $u,\varphi$ both merely smooth up to the boundary. Accordingly $P$ acts
+in two ways on distributions, by duality:
+\begin{align*}
+P&:\CmI(X;E)\to\CmI(X;F), & (Pu)(\varphi)&=u(P^t\varphi),\ \varphi\in\dCI(X;F^*\otimes
+\Omega),\\
+\dot P&:\dCmI(X;E)\to\dCmI(X;F), & (\dot Pu)(\varphi)&=u(P^t\varphi),\
+\varphi\in\CI(X;F^*\otimes\Omega).
+\end{align*}
+The first extends the action on $\CI(X;E)$. If $\tilde P$ is any extension of $P$ to a
+differential operator on $\Xt$, then $\dot P$ is the restriction of $\tilde P$ to
+distributions supported in $X$, since $\tilde P^t\tilde\varphi$ restricted to $X$
+depends only on $\tilde\varphi|_X$. The failure of $\dot P(u_c)=(Pu)_c$ for $u\in
+\CI(X;E)$ is measured by a boundary term, $\dot P(u_c)-(Pu)_c\in\dCmI_{\pa X}(X;F)$,
+which we now compute: this is Green's formula in distributional form.
+
+Fix a collar $C\cong[0,\epsilon)_x\times\pa X$ as in \cref{boundary:lem:collar}, and
+identify $E$, $F$ over $C$ with the pull-backs of $E|_{\pa X}$, $F|_{\pa X}$ (possible
+since $C$ retracts onto $\pa X$). On the double, $x$ extends to
+$(-\epsilon,\epsilon)\times\pa X$ and we have the distributions
+\begin{equation*}
+v\,D_x^j\delta(x)\in\dCmI_{\pa X}(X;F),\quad v\in\CI(\pa X;F),\ j\ge0,
+\end{equation*}
+defined in local coordinates $(x,y)$ as $v(y)\otimes D_x^j\delta(x)$, i.e.\ by
+$(v\,D^j_x\delta(x))(\varphi\,|dx\,dy|)=\int v(y)\cdot((-D_x)^j\varphi)(0,y)\,dy$;
+this is independent of the choice of $y$. With $H(x)$ the Heaviside function, $u_c=
+H(x)u$ near $\pa X$, and $\delta(x)=\pa_xH(x)=iD_xH(x)$.
+
+\begin{proposition}[Jump formula]\label{boundary:prop:jump}
+For each $P\in\Diff{m}(X;E,F)$ there are differential operators $P_{jk}\in
+\Diff{m-1-j-k}(\pa X;E,F)$, $j,k\ge0$, $j+k\le m-1$, such that for all $u\in\CI(X;E)$
+\begin{equation}\label{boundary:eq:jump-general}
+\dot P(u_c)-(Pu)_c=\sum_{j+k\le m-1}\big(P_{jk}\,(D_x^ku)|_{\pa X}\big)\,D_x^j\delta(x),
+\end{equation}
+and $P_{0,m-1}=-i\,\sigma_m(P)(dx)|_{\pa X}$.
+\end{proposition}
+\begin{proof}
+Both sides vanish if $u\in\dCI(X;E)$ (then $u_c$ is smooth on $\Xt$), so only the
+Taylor series of $u$ at $\pa X$ matters and we may work in $C$. There
+\begin{equation*}
+P=\sum_{l=0}^mP_l(x)D_x^l,
+\end{equation*}
+where $P_l(x)\in\Diff{m-l}(\pa X;E,F)$ depends smoothly on $x$, and
+$P_m(0)=\sigma_m(P)(dx)$ (with the convention that $D_x$ has symbol $\xi$). From
+$D_x(Hf)=HD_xf-i\delta(x)f(0,\cdot)$ one finds by induction
+\begin{equation*}
+D_x^l(Hu)=HD_x^lu-i\sum_{k=0}^{l-1}\big((D_x^ku)|_{\pa X}\big)\,D_x^{l-1-k}\delta(x).
+\end{equation*}
+The tangential operators $P_l(x)$ commute with multiplication by $H$. Expanding
+$P_l(x)=\sum_{r<m}x^rP_{l,r}+x^mP_l'(x)$ by Taylor's formula and using $x^rD^p_x\delta
+(x)=c_{r,p}D_x^{p-r}\delta(x)$, where $c_{r,p}=i^rp!/(p-r)!$ for $r\le p$ and
+$c_{r,p}=0$ for $r>p$ (in particular $c_{0,p}=1$), we obtain
+\eqref{boundary:eq:jump-general} with
+\begin{equation*}
+P_{jk}=-i\sum_{l,r:\ l-1-k-r=j}c_{r,l-1-k}P_{l,r}.
+\end{equation*}
+Here $P_{l,r}$ has order at most $m-l\le m-1-j-k$. The only contribution to
+$P_{0,m-1}$ comes from $l=m$, $r=0$, giving $-iP_m(0)=-i\sigma_m(P)(dx)$.
+\end{proof}
+
+For first-order operators there is no choice involved:
+
+\begin{corollary}\label{boundary:cor:jump1}
+If $D\in\Diff{1}(X;E,F)$ and $u\in\CI(X;E)$ then
+\begin{equation}\label{boundary:eq:jump}
+\dot D(u_c)=(Du)_c+\frac1i\,\sigma_1(D)(dx)\big(u|_{\pa X}\big)\,\delta(x).
+\end{equation}
+\end{corollary}
+
+The right side does not depend on the choice of $x$: if $x'=ax$ with $a>0$ then on
+$\pa X$, $\sigma_1(D)(dx')=a\sigma_1(D)(dx)$ while $\delta(x')=a^{-1}\delta(x)$. In
+the sequel we write $b$ for the restriction map, $bu=u|_{\pa X}$.
+
+The same discussion applies to an embedded hypersurface $H$ with a defining function
+$x$ in a manifold without boundary: if $u$ is smooth on each of the two sides
+$\{\pm x\ge0\}$ near $H$ (i.e.\ $u|_{\{\pm x>0\}}$ extends smoothly to $\{\pm x\ge0\}$),
+with boundary values $b_\pm u$, then applying \eqref{boundary:eq:jump} on both sides,
+\begin{equation}\label{boundary:eq:jump-two}
+Du=(Du)_{+,c}+(Du)_{-,c}+\frac1i\sigma_1(D)(dx)\big(b_+u-b_-u\big)\delta(x),
+\end{equation}
+where $(Du)_{\pm,c}$ is $Du$ computed in $\{\pm x>0\}$, extended by zero.
+
+\subsection*{Formal solutions at the boundary}
+For an elliptic first-order operator, the Cauchy problem can always be solved
+formally at the boundary.
+
+\begin{lemma}\label{boundary:lem:formal}
+Let $D\in\Diff{1}(X;V_1,V_2)$ with $\sigma_1(D)(dx)$ invertible at $\pa X$ (this holds
+if $D$ is elliptic).
+\begin{enumerate}[label=(\roman*)]
+\item For $f\in\CI(X;V_2)$ and $v\in\CI(\pa X;V_1)$ there is $u\in\CI(X;V_1)$ with
+$bu=v$ and $Du-f\in\dCI(X;V_2)$.
+\item If $u\in\CI(X;V_1)$, $bu=0$ and $Du\in\dCI(X;V_2)$, then $u\in\dCI(X;V_1)$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+In the collar, shrinking it if necessary, $D=A(x)\big(D_x+E(x)\big)$ with $A(x)$ an
+invertible bundle map ($A(0)=\sigma_1(D)(dx)$) and $E(x)\in\Diff{1}(\pa X;V_1)$
+depending smoothly on $x$. Write $u_k=(D_x^ku)|_{\pa X}$. The condition that
+$D_x^k\big((D_x+E)u-A^{-1}f\big)$ vanish at $x=0$ for all $k$ is
+\begin{equation*}
+u_{k+1}=\big(D_x^k(A^{-1}f)\big)|_{x=0}-\sum_{j\le k}\binom kj\big(D_x^{k-j}E\big)(0)\,u_j,
+\quad k\ge0.
+\end{equation*}
+For (i) set $u_0=v$, define $u_k$ recursively and use Borel's lemma to find $u$ with
+these Taylor coefficients. For (ii), the recursion with $f$ replaced by $Du$ (all of
+whose Taylor coefficients vanish) and $u_0=0$ gives $u_k=0$ for all $k$.
+\end{proof}
+
+\section{Sobolev spaces}\label{boundary:sec:sobolev}
+
+As for smooth functions, the (extendible) Sobolev spaces on a compact manifold with
+boundary $X\subset\Xt$ are defined by restriction,
+\begin{equation*}
+H^m(X)=R_X\big(H^m(\Xt)\big)\subset\CmI(X),\quad \norm{u}_{H^m(X)}=\inf\{\norm{\tilde
+u}_{H^m(\Xt)};\ R_X\tilde u=u\},\quad m\in\R,
+\end{equation*}
+the quotient norm; independence of the choice of $\Xt$ follows from the locality of
+Sobolev spaces and their invariance under diffeomorphisms. The \emph{supported}
+Sobolev spaces are
+\begin{equation*}
+\Hdot{m}(X)=\{u\in H^m(\Xt);\ \supp u\subset X\}\subset\dCmI(X),
+\end{equation*}
+closed subspaces of $H^m(\Xt)$. Both are $\CI(X)$-modules, and for a vector bundle $E$
+one sets $H^m(X;E)=H^m(X)\otimes_{\CI(X)}\CI(X;E)$, and similarly for $\Hdot{m}$.
+
+\begin{lemma}\label{boundary:lem:Hdot-dense}
+$\CIc(X^\circ)$ is dense in $\Hdot{m}(X)$ for every $m\in\R$.
+\end{lemma}
+\begin{proof}
+With $F_s$ as in the proof of \cref{boundary:prop:extendible}, the operators $u\mapsto
+(F_s)_*u$ are uniformly bounded on $H^m(\Xt)$ for $|s|\le1$ (their norms depend on
+finitely many derivatives of $F_s$) and $(F_s)_*u\to u$ for $u\in\CI(\Xt)$, hence for
+all $u\in H^m(\Xt)$ by density. For $u\in\Hdot{m}(X)$ and $s>0$, $(F_s)_*u\in
+H^m(\Xt)$ has compact support in $X^\circ$, and is approximated in $H^m$ by
+mollification in local coordinates.
+\end{proof}
+
+\begin{proposition}\label{boundary:prop:duality}
+For $m\in\R$ the pairing $(u,v)\mapsto\int_Xuv$, $u\in\CI(X)$, $v\in\dCI(X;\Omega)$,
+extends by continuity to a non-degenerate pairing identifying $H^m(X)$ with the dual
+of $\Hdot{-m}(X;\Omega)$, and $\Hdot{m}(X)$ with the dual of $H^{-m}(X;\Omega)$.
+\end{proposition}
+\begin{proof}
+The dual of the closed subspace $\Hdot{-m}(X;\Omega)\subset H^{-m}(\Xt;\Omega)$ is the
+quotient of $H^m(\Xt)=(H^{-m}(\Xt;\Omega))'$ by the annihilator $\{v\in H^m(\Xt);\
+v(w)=0\ \forall\,w\in\Hdot{-m}(X;\Omega)\}$. By \cref{boundary:lem:Hdot-dense} it
+suffices to test with $w\in\CIc(X^\circ;\Omega)$, so the annihilator is $\{v;\
+v|_{X^\circ}=0\}$, the null space of $R_X$ on $H^m(\Xt)$. Hence the dual is
+$H^m(\Xt)/\Nul(R_X)\cong H^m(X)$ with the quotient norm. The second statement follows
+since Hilbert spaces are reflexive.
+\end{proof}
+
+A differential operator $P\in\Diff{k}(X;E,F)$ defines bounded maps
+\begin{equation*}
+P:H^m(X;E)\to H^{m-k}(X;F),\qquad \dot P:\Hdot{m}(X;E)\to\Hdot{m-k}(X;F),
+\end{equation*}
+by restriction from an extension $\tilde P$, consistently with the actions on
+distributions. Moreover
+\begin{equation*}
+\CmI(X;E)=\bigcup_mH^m(X;E),\quad \CI(X;E)=\bigcap_mH^m(X;E),\quad
+\dCmI(X;E)=\bigcup_m\Hdot{m}(X;E),\quad \dCI(X;E)=\bigcap_m\Hdot{m}(X;E).
+\end{equation*}
+For the second: if $u\in H^m(X)$ for all $m$, then for each $k$, $u$ is the
+restriction of a $\mathcal{C}^k$ function on $\Xt$ (Sobolev embedding), so all
+derivatives of $u$ are bounded on $X^\circ$ and $u\in\CI(X)$ by
+\cref{boundary:prop:extension}. The others follow from the corresponding statements
+on $\Xt$.
+
+\subsection*{Layers on a hypersurface}
+We shall need the Sobolev regularity of distributions supported on a hypersurface.
+In $\R^n=\R_x\times\R^{n-1}_y$, for $v\in\CmIc(\R^{n-1})$ the distribution $v\otimes
+\delta(x)$ has Fourier transform $\hat v(\eta)$, so, since
+$\int_\R(1+|\eta|^2+\xi^2)^t\,d\xi=c_t\ang{\eta}^{2t+1}$ with $c_t=\int(1+s^2)^tds
+<\infty$ precisely for $t<-\frac12$,
+\begin{equation}\label{boundary:eq:layer-norm}
+\norm{v\otimes\delta(x)}^2_{H^t(\R^n)}=\frac{c_t}{2\pi}\norm{v}^2_{H^{t+\frac12}(\R^{n-1})},
+\quad t<-\tfrac12.
+\end{equation}
+
+\begin{lemma}\label{boundary:lem:layers}
+Let $H\subset M$ be a compact embedded hypersurface, with defining function $x$ near
+$H$, in a manifold $M$ without boundary, and $E$ a vector bundle over $M$.
+\begin{enumerate}[label=(\roman*)]
+\item For $t<-\frac12$, $v\mapsto v\,\delta(x)$ is bounded and injective
+$H^{t+\frac12}(H;E)\to H^t_{\mathrm{c}}(M;E)$, with closed range; in particular
+for $t=-1$ it is an isomorphism of $H^{-\frac12}(H;E)$ onto a closed subspace of
+$H^{-1}_{\mathrm c}(M;E)$.
+\item Every $T\in H^{-1}_{\mathrm{c}}(M;E)$ with $\supp T\subset H$ is of the form
+$T=v\,\delta(x)$ with $v\in H^{-\frac12}(H;E)$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(i) follows from \eqref{boundary:eq:layer-norm} by a partition of unity, which also
+shows that the norms of $v$ and $v\,\delta(x)$ are equivalent. For (ii), localize: we
+may assume $T\in H^{-1}(\R^n)$ has compact support in $\{x=0\}$. If $\varphi\in
+\CIc(\R^n)$ vanishes on $\{x=0\}$, let $\chi\in\CIc(\R)$ equal $1$ near $0$ and
+$\varphi_\epsilon=(1-\chi(x/\epsilon))\varphi$. Then $T(\varphi_\epsilon)=0$, and
+$\varphi_\epsilon\to\varphi$ in $H^1$: indeed $\chi(x/\epsilon)\varphi$ is supported
+in $|x|\le C\epsilon$ where $|\varphi|\le C|x|$, so its $L^2$ norm is $O(\epsilon^{3/2})$
+and that of its derivative is $O(\epsilon^{1/2})$ (the term $\epsilon^{-1}\chi'(x/\epsilon)
+\varphi$ being bounded). Hence $T(\varphi)=0$, i.e.\ $T(\varphi)$ depends only on
+$\varphi(0,\cdot)$, and $T=v\otimes\delta(x)$ where $v(\psi)=T(\chi(x)\psi(y))$ is a
+compactly supported distribution. Then $\hat T(\xi,\eta)=\hat v(\eta)$ and
+$\norm{T}_{H^{-1}}^2=c\int|\hat v(\eta)|^2\ang{\eta}^{-1}d\eta<\infty$, so $v\in
+H^{-\frac12}$.
+\end{proof}
+
+\section{Generalized Dirac operators}\label{boundary:sec:dirac}
+
+For $D\in\Diff{1}(M;V_1,V_2)$, in local coordinates and trivializations
+$D=\sum_jA_j(z)D_{z_j}+A'(z)$, and the principal symbol is
+$\sigma_1(D)(z,\zeta)=\sum_jA_j(z)\zeta_j$, linear in $\zeta\in T^*_zM$.
+
+\begin{definition}\label{boundary:def:dirac}
+Let $M$ be a manifold with or without boundary, with a Riemannian metric $g$, and let
+$V_1,V_2$ be Hermitian vector bundles over $M$. An operator $D\in\Diff{1}(M;V_1,V_2)$
+is a \emph{generalized Dirac operator} (or \emph{of Dirac type}) if
+\begin{equation}\label{boundary:eq:dirac}
+\sigma_1(D)(z,\zeta)^*\,\sigma_1(D)(z,\zeta)=|\zeta|_g^2\,\Id_{V_1}\quad\text{for all}
+\ (z,\zeta)\in T^*M,
+\end{equation}
+and $\operatorname{rank}V_1=\operatorname{rank}V_2$. If $M_+\subset M$ is a subset,
+$D$ is of Dirac type on $M_+$ if \eqref{boundary:eq:dirac} holds for $z\in M_+$.
+\end{definition}
+
+We abbreviate $\sigma(\zeta)=\sigma_1(D)(z,\zeta)$ and write $\tau(\zeta)=
+\sigma(\zeta)^*$ for real $\zeta$, extended complex-linearly to complex covectors, and
+$g(\zeta)=|\zeta|^2_g$, extended as a complex quadratic form. Then $\sigma(\zeta)$ is
+invertible for $\zeta\ne0$ with
+\begin{equation*}
+\sigma(\zeta)^{-1}=\frac{\tau(\zeta)}{g(\zeta)},\qquad \sigma(\zeta)\tau(\zeta)=
+g(\zeta)\Id_{V_2},
+\end{equation*}
+since a left inverse of a square matrix is a right inverse. Thus $D$ is elliptic, its
+formal adjoint $D^*$ (with respect to the Riemannian density and the Hermitian
+structures) is again of Dirac type, with $\sigma_1(D^*)=\sigma_1(D)^*$, and $D^*D$,
+$DD^*$ are second order with principal symbol $|\zeta|^2_g\Id$. Polarizing
+\eqref{boundary:eq:dirac} and its counterpart on $V_2$ gives the \emph{Clifford
+relations}
+\begin{equation}\label{boundary:eq:clifford}
+\sigma(\zeta)^*\sigma(\zeta')+\sigma(\zeta')^*\sigma(\zeta)=2g(\zeta,\zeta')\Id_{V_1},\quad
+\sigma(\zeta)\sigma(\zeta')^*+\sigma(\zeta')\sigma(\zeta)^*=2g(\zeta,\zeta')\Id_{V_2}
+\end{equation}
+for real covectors $\zeta,\zeta'$.
+
+\begin{example}\label{boundary:ex:dirac}
+(1) The Cauchy--Riemann operator $D=D_x+iD_y$ on $\R^2$ (or on a Riemann surface with
+a compatible metric, acting on functions with values in $(0,1)$-forms) has
+$\sigma(\xi,\eta)=\xi+i\eta$, $\sigma^*\sigma=\xi^2+\eta^2$.
+(2) On a Riemannian manifold, $d+d^*$ acting from even to odd forms has symbol
+$i(\zeta\wedge-\iota_\zeta)$, and $(\zeta\wedge-\iota_\zeta)^2=-|\zeta|^2$; so it is
+of Dirac type, as is $d+d^*$ on all forms.
+(3) The Dirac operator on the spinor bundle of a spin manifold, possibly twisted by a
+Hermitian bundle with connection, is of Dirac type; this is the origin of the name.
+\end{example}
+
+\section{Dividing hypersurfaces}\label{boundary:sec:dividing}
+
+To isolate the essential idea of Calder\'on we first consider the following
+situation.
+
+\medskip\noindent\textbf{Standing hypotheses (dividing case).} $M$ is a compact
+Riemannian manifold without boundary, $D\in\Diff{1}(M;V_1,V_2)$ is a generalized
+Dirac operator, and $x\in\CI(M)$ is real with $dx\ne0$ on $H=\{x=0\}$; thus $H$ is a
+compact hypersurface with trivial normal bundle, and
+\begin{equation*}
+M=M_+\cup M_-,\quad M_\pm=\{\pm x\ge0\},\quad M_+\cap M_-=H,
+\end{equation*}
+where $M_\pm$ are compact manifolds with boundary $H$. In addition we assume
+\begin{equation}\label{boundary:eq:invertible}
+D:\CI(M;V_1)\to\CI(M;V_2)\ \text{is an isomorphism.}
+\end{equation}
+
+By \cref{ch:manifolds}, $D$ is Fredholm, so \eqref{boundary:eq:invertible} forces the
+index to vanish; it is made to simplify the discussion. By the results there,
+$D^{-1}\in\Psido{-1}(M;V_2,V_1)$, and $D^{-1}$ extends to an isomorphism
+$\CmI(M;V_2)\to\CmI(M;V_1)$ inverting $D$ on distributions.
+
+Our object is to parametrize the spaces of solutions
+\begin{equation*}
+\mathcal{N}_\pm=\{u\in\CI(M_\pm;V_1);\ Du=0\ \text{in}\ M_\pm^\circ\}
+\end{equation*}
+by their boundary values. Let $V=V_1|_H$ and $b_\pm:\CI(M_\pm;V_1)\to\CI(H;V)$ the
+restriction maps.
+
+\begin{lemma}\label{boundary:lem:unique}
+Under the standing hypotheses $b_\pm:\mathcal{N}_\pm\to\CI(H;V)$ are injective.
+\end{lemma}
+\begin{proof}
+If $u\in\mathcal{N}_+$ and $b_+u=0$, then by \cref{boundary:lem:formal}(ii) $u$
+vanishes to infinite order at $H$. Hence $\tilde u$, equal to $u$ in $M_+$ and to $0$
+in $M_-$, is smooth on $M$, and $D\tilde u=0$. By \eqref{boundary:eq:invertible},
+$\tilde u=0$.
+\end{proof}
+
+The main result in this setting is the following.
+
+\begin{theorem}[Calder\'on projector, dividing case]\label{boundary:thm:calderon-dividing}
+Under the standing hypotheses there is a unique $\PiC\in\Psido{0}(H;V)$ with
+$\PiC^2=\PiC$ such that
+\begin{equation*}
+b_+:\mathcal{N}_+\to\PiC\,\CI(H;V)\quad\text{and}\quad
+b_-:\mathcal{N}_-\to(\Id-\PiC)\,\CI(H;V)
+\end{equation*}
+are isomorphisms. In particular $\CI(H;V)=b_+(\mathcal{N}_+)\oplus b_-(\mathcal{N}_-)$.
+$\PiC$ is classical and, if $\nu=dx/|dx|$ is the unit conormal and $T^*H$ is identified
+with the covectors orthogonal to $\nu$,
+\begin{equation}\label{boundary:eq:calderon-symbol}
+\sigma_0(\PiC)(y,\eta)=\frac12\Big(\Id+\frac{i\,\sigma(\nu)^{-1}\sigma(\eta)}{|\eta|}
+\Big),\quad(y,\eta)\in T^*H\setminus0,
+\end{equation}
+the orthogonal projection onto the $+1$ eigenspace of the self-adjoint involution
+$i\sigma(\nu)^{-1}\sigma(\eta)/|\eta|$.
+\end{theorem}
+
+The construction uses the jump formula ``in reverse''. Consider the space of
+piecewise solutions
+\begin{equation*}
+\mathcal{N}_H=\{u\in L^1(M;V_1);\ u|_{M_\pm^\circ}\in\mathcal{N}_\pm\}\cong
+\mathcal{N}_+\oplus\mathcal{N}_-.
+\end{equation*}
+By \eqref{boundary:eq:jump-two}, for $u\in\mathcal{N}_H$,
+\begin{equation}\label{boundary:eq:jump-solutions}
+Du=\frac1i\sigma(dx)\big(b_+u-b_-u\big)\,\delta(x)\in\CI(H;V_2)\,\delta(x).
+\end{equation}
+
+\begin{proposition}\label{boundary:prop:layer-iso}
+Under the standing hypotheses, $D:\mathcal{N}_H\to\CI(H;V_2)\,\delta(x)$ is an
+isomorphism with inverse $w\,\delta(x)\mapsto D^{-1}(w\,\delta(x))$.
+\end{proposition}
+\begin{proof}
+Injectivity: if $u\in\mathcal{N}_H$ and $Du=0$ on $M$ then $u=D^{-1}Du=0$. For
+surjectivity we must show that for $w\in\CI(H;V_2)$,
+\begin{equation}\label{boundary:eq:layer-smooth}
+u=D^{-1}(w\,\delta(x))\ \text{satisfies}\ u|_{M_\pm^\circ}\in\CI(M_\pm;V_1);
+\end{equation}
+then $Du=0$ in $M_\pm^\circ$ and $u\in\mathcal{N}_H$ (note $u\in H^{1/2-\epsilon}
+\subset L^1$ by \cref{boundary:lem:layers}). This is the case $Q=D^{-1}$ of
+\cref{boundary:thm:layer} below, applied on both sides of $H$.
+\end{proof}
+
+The regularity statement \eqref{boundary:eq:layer-smooth} is the analytic heart of the
+matter. It is \emph{false} for a general pseudodifferential operator of order $-1$ in
+place of $D^{-1}$ (for instance for $\Op(\ang{\zeta}^{-1})$ in $\R^n$, $n\ge2$, the
+result is not smooth up to $H$); it depends on the special form of the symbol of
+$D^{-1}$, which we now examine.
