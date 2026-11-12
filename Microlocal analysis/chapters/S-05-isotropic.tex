@@ -177,15 +177,20 @@ $\check\phi_R$ is the inverse Fourier transform of $\phi(\cdot/R)$, lies in
 $\cS(\R^{2n})\subset L^2(\R^{2n})$, so $K_R$ is Hilbert--Schmidt, hence compact,
 on $L^2$. For $u\in Y$, using Plancherel,
 \begin{equation*}
-  \norm{u-K_Ru}\le\norm{(1-\phi(x/R))u}+\norm{(1-\phi(D/R))u}
-  \le\sup_{|x|\ge R}\ang x^{-\eps}\norm{\ang x^\eps u}+\sup_{|\xi|\ge R}\ang\xi^{-\eps}\norm{\ang D^\eps u}
+\begin{aligned}
+  \norm{u-K_Ru}&\le\norm{(1-\phi(x/R))u}+\norm{(1-\phi(D/R))u}\\
+  &\le\sup_{|x|\ge R}\ang x^{-\eps}\norm{\ang x^\eps u}+\sup_{|\xi|\ge R}\ang\xi^{-\eps}\norm{\ang D^\eps u}
   \le R^{-\eps}\norm u_Y .
+\end{aligned}
 \end{equation*}
 So $\iota$ is the operator norm limit of the compact operators $K_R\circ\iota$,
-hence compact. By Steps 1 and 2 (with the estimate
-$\norm u_Y\le C(\norm{\Lambda u}+\norm u)$ for $u\in\Hiso{\eps}$ obtained there,
-$\ang x^\eps R$ and $\ang D^\eps R$ being residual, hence bounded on $L^2$), the
-inclusion $\Hiso\eps\to Y$ is continuous, so $\Hiso{\eps}\hookrightarrow L^2$ is compact.
+hence compact. For $u\in\Hiso{\eps}$ write $u=G_\eps\Lambda_\eps u+P_\eps u$ with $\Lambda_\eps$,
+$G_\eps\in\Psiiso{-\eps}$ and $P_\eps$ as in \cref{isotropic:def:Hiso}. By Step 1,
+$\norm{G_\eps\Lambda_\eps u}_Y\le C\norm{\Lambda_\eps u}$; and $P_\eps$ is the
+orthogonal projection onto a finite-dimensional subspace of $\cS$, on which all
+norms are equivalent, so $\norm{P_\eps u}_Y\le C\norm{P_\eps u}$. Hence
+$\norm u_Y\le C\norm u_\eps$, the inclusion $\Hiso\eps\to Y$ is continuous, and
+$\Hiso{\eps}\hookrightarrow L^2$ is compact.
 
 Finally let $A\in\Psiiso{-\eps}$. By Step 1, $\ang x^\eps A$ and $\ang D^\eps A$
 are bounded on $L^2$, so $A:L^2\to Y$ is bounded, and $A=\iota\circ A$ is
@@ -330,9 +335,11 @@ and $|\sigma(w)^{-1}|=|w|^{-1}\le\sqrt2\ang w^{-1}$ for $|w|\ge1$: $D+D^*$ is
 elliptic. As $D^2=(D^*)^2=0$, $(D+D^*)^2=DD^*+D^*D$, and using
 $A_jC_k=C_kA_j+2\delta_{jk}$ and \cref{isotropic:lem:HO-identities},
 \begin{equation*}
-  DD^*+D^*D=\sum_{j,k}\bigl(A_jC_k\epsilon_j\iota_k+C_kA_j\iota_k\epsilon_j\bigr)
-  =\sum_{j,k}C_kA_j(\epsilon_j\iota_k+\iota_k\epsilon_j)+2\sum_j\epsilon_j\iota_j
-  =\sum_jC_jA_j+2\mathcal N=H-n+2\mathcal N,
+\begin{aligned}
+  DD^*+D^*D&=\sum_{j,k}\bigl(A_jC_k\epsilon_j\iota_k+C_kA_j\iota_k\epsilon_j\bigr)
+  =\sum_{j,k}C_kA_j(\epsilon_j\iota_k+\iota_k\epsilon_j)+2\sum_j\epsilon_j\iota_j\\
+  &=\sum_jC_jA_j+2\mathcal N=H-n+2\mathcal N,
+\end{aligned}
 \end{equation*}
 which on $\Lambda^k$ is $H-n+2k$ applied to each coefficient. (These are
 identities between differential operators with polynomial coefficients, so they
@@ -388,18 +395,18 @@ $a\in\mathcal R_\Gamma$ then $\Gamma\cap\operatorname{cone\,supp}(a)=\emptyset$.
 
 \emph{Lemma.} (1) $\mathcal R_\Gamma$ is a vector space closed under complex
 conjugation, under all $\pa^\alpha$, and under multiplication by elements of
-$\Gs{\infty}$. (2) If $c\in\Gs{\mu}$ and $c_j\in\mathcal R_\Gamma$, $j\in\N_0$, satisfy
-$c-\sum_{j<J}c_j\in\Gs{\mu-J}$ for all $J$, then $c\in\mathcal R_\Gamma$.
+$\Gs{\infty}$. (2) If $c\in\Gs{\mu}$ and for every $J\in\N$ there is $s_J\in\mathcal R_\Gamma$ with
+$c-s_J\in\Gs{\mu-J}$, then $c\in\mathcal R_\Gamma$.
 
 \emph{Proof.} (1) is clear from Leibniz' formula, since all derivatives of
 $g\in\Gs{m'}$ are $O(\ang w^{m'})$. (2) Given $N$, $\alpha$, take $J\ge\mu+N$;
 then on $\Gamma\cap\{|w|\ge1\}$,
-$\ang w^N|\pa^\alpha c|\le\sum_{j<J}\ang w^N|\pa^\alpha c_j|+C\ang w^{N+\mu-J-|\alpha|}$,
+$\ang w^N|\pa^\alpha c|\le\ang w^N|\pa^\alpha s_J|+C\ang w^{N+\mu-J-|\alpha|}$,
 which is bounded. \qed
 
-All asymptotic expansions of the chapter, whose terms of index $\alpha$ lie in
-$\Gs{\mu-2|\alpha|}$, are of the form in (2) after grouping the finitely many
-terms with $2|\alpha|\in\{J-1,J\}$ (and inserting zeros).
+In particular (2) applies to every asymptotic expansion
+$c\sim\sum_\alpha c_\alpha$ of the chapter with $c_\alpha\in\Gs{\mu-2|\alpha|}\cap\mathcal R_\Gamma$,
+taking $s_J=\sum_{2|\alpha|<J}c_\alpha$.
 
 Let $a=\sigma_L(A)\in\Gs m$, $b=\sigma_L(B)\in\Gs{m'}$.
 
@@ -587,10 +594,10 @@ $B=\cF A\cF^{-1}$. Hence $\cF\Psisc{m,l}\cF^{-1}=\Psisc{l,m}$.
   \sigma_L(\cF A\cF^{-1})(\xi,z)=b(-z,\xi)\sim\sum_\alpha\frac{(-i)^{|\alpha|}}{\alpha!}\bigl(D_\xi^\alpha D_x^\alpha a\bigr)(-z,\xi),
 \end{equation*}
 the term of index $\alpha$ lying in $S^{l-|\alpha|,m-|\alpha|}$. In particular
-\begin{equation*}
-  \sigma_L(\cF A\cF^{-1})(\xi,z)\equiv a(-z,\xi)\mod S^{l-1,m-1},\qquad
+\begin{gather*}
+  \sigma_L(\cF A\cF^{-1})(\xi,z)\equiv a(-z,\xi)\mod S^{l-1,m-1},\\
   \sigma_L(\cF A\cF^{-1})(\xi,z)\equiv a(-z,\xi)+i\sum_j\bigl(\pa_{x_j}\pa_{\xi_j}a\bigr)(-z,\xi)\mod S^{l-2,m-2}.
-\end{equation*}
+\end{gather*}
 For example, for $A=x_1D_1$ ($a=x_1\xi_1$) we get $-z_1\xi_1+i$, and indeed
 $\cF x_1D_1\cF^{-1}=-D_{\xi_1}\xi_1=-\xi_1D_{\xi_1}+i$.
 
@@ -645,13 +652,17 @@ $V(t)u(x)=T_{L_t}u(x)=e^{-t\tr\beta/2}u(e^{-t\beta}x)$. These operators are
 unitary on $L^2$ and preserve $\cS$. For $u\in\cS$ and $v=V(t)u$, the chain rule
 gives pointwise
 \begin{equation*}
+\begin{gathered}
   \pa_tv(x)=-\tfrac12\tr\beta\,v(x)-e^{-t\tr\beta/2}\pair{\beta e^{-t\beta}x}{(\nabla u)(e^{-t\beta}x)}
-  =V(t)g(x),\qquad g=-\tfrac12\tr\beta\,u-\pair{\beta x}{\nabla u}\in\cS,
+  =V(t)g(x),\\ g=-\tfrac12\tr\beta\,u-\pair{\beta x}{\nabla u}\in\cS,
+\end{gathered}
 \end{equation*}
 using $\beta e^{-t\beta}=e^{-t\beta}\beta$. Also
 $\nabla v(x)=e^{-t\tr\beta/2}e^{-t\beta^T}(\nabla u)(e^{-t\beta}x)$, so
-$\pair{\beta x}{\nabla v(x)}=e^{-t\tr\beta/2}\pair{e^{-t\beta}\beta x}{(\nabla u)(e^{-t\beta}x)}$ and
-therefore $\pa_tv=-\pair{\beta x}{\nabla v}-\frac12\tr\beta\,v=-i\OpW(q)V(t)u$.
+\begin{equation*}
+  \pair{\beta x}{\nabla v(x)}=e^{-t\tr\beta/2}\pair{e^{-t\beta}\beta x}{(\nabla u)(e^{-t\beta}x)},
+\end{equation*}
+and therefore $\pa_tv=-\pair{\beta x}{\nabla v}-\frac12\tr\beta\,v=-i\OpW(q)V(t)u$.
 The family $V(t)$ is strongly continuous on $L^2$ (for $f\in\CIc$,
 $V(t)f\to V(t_0)f$ uniformly with supports in a fixed compact set; then use
 $\norm{V(t)}=1$ and density). Hence $s\mapsto V(s)g$ is continuous into $L^2$,
@@ -697,8 +708,8 @@ $\varphi(\lambda U_{S'}\mathcal F_0)=\lambda^2\sgn\det B\,i^n$. This equals $1$ 
 $\lambda^2=(-i)^n\sgn\det B$, which gives the stated kernels.
 
 \emph{Mehler's formula.} Let $q=\frac12|w|^2$, so $\exp(-\frac{it}2H)=W_q(t)$ lies
-over $e^{tJ}=\bigl(\begin{smallmatrix}\cos t\,\Id&\sin t\,\Id\\-\sin t\,\Id&\cos t\,\Id\end{smallmatrix}\bigr)$
-(previous solutions). For $0<t<\pi$, $B=\sin t\,\Id$ is invertible with
+over $e^{tX_q}=e^{tJ}=\bigl(\begin{smallmatrix}\cos t\,\Id&\sin t\,\Id\\-\sin t\,\Id&\cos t\,\Id\end{smallmatrix}\bigr)$
+(\cref{isotropic:prop:exponentials}; here $X_q=J$ and $J^2=-\Id$). For $0<t<\pi$, $B=\sin t\,\Id$ is invertible with
 $\det B=\sin^nt>0$, $EB^{-1}=B^{-1}A=\cot t\,\Id$, $B^{-1}=(\sin t)^{-1}\Id$, so the
 phase is $\frac{(|x|^2+|y|^2)\cos t-2x\cdot y}{2\sin t}$ and the kernel is
 $\lambda(2\pi\sin t)^{-n/2}\exp(i\frac{(|x|^2+|y|^2)\cos t-2x\cdot y}{2\sin t})$ with
@@ -781,10 +792,13 @@ every point of $G$ is joined to $(\Id,1)$, and $G$ is connected.
 
 Let $U\in\mathcal M(2n)$, $S=\pi(U)$. For $A\in\Psiisoph{0}$ with Weyl symbol $a$,
 \cref{isotropic:cor:conj-calculus}(ii) gives $U^{-1}AU=\OpW(a\circ S)\in\Psiisoph{0}$.
-If $a_0$ is the leading term of $a$, homogeneous of degree $0$ outside the unit
-ball, and $\tilde a_0(w)=a_0(w/|w|)$ its homogeneous extension to
-$\R^{2n}\setminus\{0\}$, then $a\circ S-\tilde a_0\circ S$ is in $\Gs{-1}$ away from a
-compact set, and $\tilde a_0\circ S$ is homogeneous of degree $0$. Since left and
+Write $a=a_0+r$ with $a_0$ homogeneous of degree $0$ outside the unit ball and
+$r\in\Gs{-1}$, and let $\tilde a_0(w)=a_0(w/|w|)$ be the homogeneous extension of
+$a_0$ to $\R^{2n}\setminus\{0\}$. Then $r\circ S\in\Gs{-1}$
+(\cref{isotropic:lem:Gamma-basic}(iii)), and $a_0\circ S$ differs by a compactly
+supported smooth function from $\psi\cdot(\tilde a_0\circ S)$ ($\psi$ as in the
+solution of \cref{isotropic:ex:partition}), which is homogeneous of degree $0$
+outside the unit ball. Since left and
 Weyl symbols agree modulo $\Gs{-2}$, the principal symbol of $U^{-1}AU$ is
 $(\tilde a_0\circ S)|_{\Sphere^{2n-1}}$, and
 $\Char_{\mathrm{iso}}(U^{-1}AU)=\{w\ne0;\ \tilde a_0(Sw)=0\}=S^{-1}\Char_{\mathrm{iso}}(A)$.
