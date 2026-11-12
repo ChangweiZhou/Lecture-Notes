@@ -401,7 +401,9 @@ collapses $\{0\}\times\Sphere^{n-1}$ to $0$.  Each $U_j$ in
 function on the sphere.  Radial compactification adds a sphere at infinity;
 blowing up replaces the origin by a sphere (\cref{conormal:fig:compactify}).
 In both cases a homogeneous function becomes a power of the boundary defining
-function times a smooth function.
+function times a smooth function (\cref{blowup:exa:homogeneous}).  The general
+construction of blow-ups, of which this is the simplest instance, is the subject of
+\cref{ch:blowup}; here we only need the origin of a vector space.
 
 \begin{figure}[htbp]
 \centering
@@ -448,14 +450,19 @@ $[W,\{0\}]$.}
   For $G\in\GL(n,\R)$ the lift is
   $\tilde G(r,\omega)=(r|G\omega|,\,G\omega/|G\omega|)$, which is smooth up to
   $r=0$, satisfies $\beta\circ\tilde G=G\circ\beta$, and $\widetilde{GH}=\tilde
-  G\tilde H$.  (Infinitesimally: the linear vector fields $z_i\pa_{z_j}$ are
+  G\tilde H$.  This is the case $M=\{\mathrm{pt}\}$ of \cref{blowup:prop:bundle}.
+  (Infinitesimally: the linear vector fields $z_i\pa_{z_j}$ are
   homogeneous of degree $0$, so on $(0,\infty)\times\Sphere^{n-1}$ they are of the
   form $a(\omega)r\pa_r+V(\omega)$ with $V$ a vector field on the sphere, which
-  extends smoothly to $r=0$, tangent to the boundary.)
+  extends smoothly to $r=0$, tangent to the boundary; explicitly,
+  \eqref{blowup:eq:lin-lift} in \cref{blowup:lem:vf-point}.)
 \end{proof}
 Thus for a vector space $W$ the blown-up space $[W,\{0\}]$, a manifold with
 boundary $\Sphere W$ with a blow-down map onto $W$, is well defined; see
-\cref{conormal:ex:blowup}.
+\cref{conormal:ex:blowup}, and \cref{blowup:prop:bundle} for the proof.  More
+generally, every local diffeomorphism fixing $0$, not only a linear one, lifts to a
+diffeomorphism of a neighbourhood of the boundary (\cref{blowup:thm:invariance}), so
+the blow-up of a point in a manifold is also well defined.
 
 \section{The local model}\label{conormal:sec:local}
 
@@ -1576,6 +1583,7 @@ symbol estimates.
   W$ (the identity on $W\setminus0$, mapping $\Sphere W$ to $0$) is smooth and the
   action of $\GL(W)$ lifts to a smooth action (use \cref{conormal:lem:blowup}).
   (These two properties alone do not determine the structure.)
+  This is a special case of \cref{blowup:prop:bundle}.
 \end{exercise}
 
 \begin{exercise}\label{conormal:ex:valued}

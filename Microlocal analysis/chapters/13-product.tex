@@ -60,6 +60,11 @@ If $M$ is compact, $B$ is connected and $\phi$ is a submersion, then $\phi$ is
 automatically surjective (if $M\neq\emptyset$): its range is open, since $\phi$ is
 a submersion, and closed, since $M$ is compact.
 
+For maps between manifolds with corners, such as those between the blown-up spaces used
+later in this chapter, a surjective submersion need not be a fibration; the appropriate
+replacement is the notion of a b-fibration (\cref{blowup:def:bfib}, see
+\cref{blowup:sec:bfib}).
+
 \begin{theorem}[Local triviality]\label{product:thm:local-triviality}
 Let $\phi:M\longrightarrow B$ be a fibration.
 \begin{enumerate}[label=\textup{(\arabic*)}]
@@ -732,7 +737,10 @@ W\ni(\zeta,\eta)\longmapsto(t,s,\zeta',\eta')=\Big(\frac1{\ang\zeta},
 which is $\{t,s\ge0,\ t^2+|\zeta'|^2=1=s^2+|\eta'|^2\}$, the product of two
 half-spheres. The point is that the identification of the interior with $W$ is
 \emph{not} the obvious product one: the second factor is compactified in the
-rescaled variable $q=\eta/\ang\zeta$.
+rescaled variable $q=\eta/\ang\zeta$. This is the same space as the relative
+compactification of \eqref{distributions:eq:relRC} in \cref{ch:distributions} (there
+written with $W=V\times U$ and $q=v/\ang u$), and we use the same notation for it; by
+\cref{blowup:thm:relative} it is the blow-up $[\RC W;SV]$.
 
 \begin{proposition}\label{product:prop:relative-coords}
 Smooth coordinates \textup{(}more precisely, smooth functions among which a
@@ -853,7 +861,8 @@ translations. Thus $H_W$ is naturally a fibration
 \RC V\text{---}H_W\longrightarrow S(W/V),
 \end{equation}
 trivial but not naturally a product, whose fibres are radial compactifications
-of affine spaces modelled on $V$.
+of affine spaces modelled on $V$. In terms of the blow-up, $H_W=[SW;SV]$ and the
+fibration is the extension $\gamma$ of $[w]\mapsto[w+V]$ (\cref{blowup:lem:sphere-fibration}).
 
 \begin{proposition}\label{product:prop:blow-down}
 \begin{enumerate}[label=\textup{(\roman*)}]
@@ -889,8 +898,10 @@ Part (ii) is immediate from the definition.
 
 In fact $\varpi$ identifies $\RelC VW$ with the manifold obtained from $\RC W$ by
 introducing polar coordinates around the submanifold $SV$ of its boundary, the
-\emph{blow-up} $[\RC W;SV]$ (\cref{product:ex:blow-up}); $H_V$ is the `front face'
-produced by the blow-up and $H_W$ is the lift of the original boundary.
+\emph{blow-up} $[\RC W;SV]$ (\cref{product:ex:blow-up}, proved in
+\cref{blowup:thm:relative}): $SV$ is a p-submanifold of $\RC W$ of codimension
+$k+1$, $H_V$ is the front face produced by the blow-up, and $H_W$ is the lift of the
+original boundary, $H_W=[SW;SV]$.
 
 \begin{remark}\label{product:rem:relative-bundle}
 By \cref{product:prop:relative-invariance} the construction applies fibrewise to a
@@ -1757,9 +1768,9 @@ $\RelC{\phi^*T^*B}{T^*M}$ over $M$. Its main face
 \begin{equation*}
 H_W=[S^*M;\phi^*S^*B]
 \end{equation*}
-has interior $S^*M\setminus\phi^*S^*B$ and fibres over $S^*(M/B)$ with fibre
+(the fibrewise form of \cref{blowup:thm:relative}) has interior $S^*M\setminus\phi^*S^*B$ and fibres over $S^*(M/B)$ with fibre
 over a point above $b\in B$ a radially compactified affine space modelled on
-$T^*_bB$, by \eqref{product:eq:HW}; its boundary, the corner, is
+$T^*_bB$, by \eqref{product:eq:HW} and \cref{blowup:lem:sphere-fibration}; its boundary, the corner, is
 $S^*(M/B)\times_M\phi^*S^*B$, which is the vertical cosphere bundle
 $S^*(\pi^*M/S^*B)$ of the pulled-back fibration $\pi^*M=M\times_BS^*B\longrightarrow
 S^*B$. The front face is $H_V=\overline{T^*(M/B)}\times_M\phi^*S^*B$. On the other
@@ -2363,6 +2374,7 @@ coordinates of \cref{product:prop:relative-coords}(ii),(iii) to
 $(R,(x,v)/R,\theta)$ is a diffeomorphism onto a neighbourhood of
 $\{R=0\}\times\Sphere^k_+\times\Sphere^{l-1}$. Conclude that $\RelC VW$ is the
 blow-up $[\RC W;SV]$ of $\RC W$ along $SV$, with $H_V$ the front face.
+(This is the argument of \cref{blowup:thm:relative}.)
 \end{exercise}
 
 \begin{exercise}\label{product:ex:faces}
@@ -2371,6 +2383,7 @@ of $H_V$ with $\overline{W/V}\times SV$ is natural, whereas $H_W$ is only natura
 a fibration over $S(W/V)$. In the setting of a nested pair $Z\subset Y\subset X$,
 show that $H_W$ is naturally identified with the blow-up
 $[SN^*Z;S(N^*Y|_Z)]$, fibred over the cosphere bundle of $Z$ in $Y$.
+(Compare \cref{blowup:thm:relative,blowup:lem:sphere-fibration}.)
 \end{exercise}
 
 \begin{exercise}\label{product:ex:base-lift}

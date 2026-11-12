@@ -47,6 +47,11 @@ reorganized into five parts.
   from the 2008 notes) and eta forms.
 \item Part~V covers the algebraic structure of the calculus: Hochschild homology.
 \end{itemize}
+Two appendices collect background material: \cref{ch:hilbert} on bounded operators on
+Hilbert space, and \cref{ch:blowup} on real blow-up and manifolds with corners. The
+latter is new; it gives a uniform treatment of the blown-up spaces that appear in
+Parts~I and~IV (relative compactifications, the semiclassical and adiabatic double
+spaces, and the spaces carrying the symbols of product-type operators).
 Notation has been simplified and made uniform throughout. Proofs that were only
 sketched, or left as exercises but needed later, have been completed, and errors have
 been corrected. The ``addenda'' to the 18.157 lectures have been moved into the main text
@@ -66,7 +71,9 @@ the foundation for everything else. The other four parts depend on Part~I but ar
 largely independent of each other. The main exception is Part~IV: the proof of Bott
 periodicity in \cref{ch:bott} uses the isotropic calculus of \cref{ch:isotropic}, and
 traces and determinants from \cref{ch:determinants} appear occasionally. Within each
-of Parts~III and~IV the chapters are best read in order.
+of Parts~III and~IV the chapters are best read in order. \Cref{ch:blowup} can be
+consulted when needed: the chapters that use blow-ups describe them briefly and
+intuitively, and refer to the appendix for precise statements and proofs.
 
 For a first one-semester course we suggest the following path through Part~I.
 \begin{itemize}[nosep]
@@ -117,6 +124,8 @@ topological route (Part~II and Part~IV).
   \node[ch] (wave) at (11.1,-6.5) {\labelcref{ch:wave}. Wave equation,\\Weyl law};
   % Part V
   \node[ch] (hoch) at (4.7,-8.3) {\labelcref{ch:hochschild}. Hochschild\\homology};
+  % Appendix B
+  \node[ch,dashed] (blowup) at (11.1,-8.3) {\labelcref{ch:blowup}. Real blow-up,\\corners};
   % part boxes
   \node[part,fit=(dist)(semicl),label={[plab]north west:Part I}] (PI) {};
   \node[part,fit=(iso)(det),label={[plab]north west:Part II}] (PII) {};
@@ -138,12 +147,18 @@ topological route (Part~II and Part~IV).
   \draw[->,thick,gray] (PI.south) |- (PV.west);
   \draw[->] (iso.south east) -- (bott.north west);
   \draw[->,dashed] (semicl.east) .. controls (3,-5.6) and (5.5,-3.9) .. (semiidx.south west);
+  % uses of the blow-up appendix
+  \foreach \t in {product,families,eta}
+    \draw[->,dashed,gray] (blowup.east) -- (12.95,-8.3) |- (\t.east);
+  \foreach \t in {dist,conormal,semicl}
+    \draw[->,dashed,gray] (blowup.south) -- (11.1,-9.2) -- (-1.85,-9.2) |- (\t.west);
 \end{tikzpicture}
 \caption{Dependencies between the chapters. Grey arrows mean that a part uses Part~I;
 black arrows show the main dependencies between individual chapters. The dashed arrow
 indicates that the semiclassical proof of the index theorem in
 \cref{ch:semiclassical-index} uses the semiclassical calculus of
-\cref{ch:semiclassical}.}
+\cref{ch:semiclassical}. The dashed box is \cref{ch:blowup}, on real blow-up; the
+dashed grey arrows point to the chapters whose blown-up spaces it constructs.}
 \label{preface:fig:dependencies}
 \end{figure}
 

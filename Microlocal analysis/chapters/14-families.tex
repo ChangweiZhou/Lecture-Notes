@@ -249,7 +249,8 @@ from \cref{ch:product}, in the families version and for order $(0,0)$.
 \begin{enumerate}[label=(P\arabic*)]
 \item\label{families:P-symbols} There are two symbol maps. The \emph{usual
   symbol} $\sigma(A)$ is a smooth function on the blow-up
-  $[S^*(\tilde M/B);\Sigma]$. The \emph{base symbol} $\beta(A)$ is a family,
+  $[S^*(\tilde M/B);\Sigma]$, in which $\Sigma$ is replaced by its inward-pointing
+  spherical normal bundle (\cref{blowup:thm:blowup}). The \emph{base symbol} $\beta(A)$ is a family,
   parametrized by $\eta\in S^*(M/B)$, of operators in $\Psido0(Y_m)$,
   $Y_m=\tilde\phi^{-1}(m)$, $m$ the base point of $\eta$. Both are
   multiplicative and compatible with adjoints. The two symbols determine $A$
@@ -265,7 +266,10 @@ from \cref{ch:product}, in the families version and for order $(0,0)$.
   $\gamma:[S^*(\tilde M/B);\Sigma]\to S^*(\tilde M/M)$ is the extension to the
   blow-up of the radial projection of the restriction map
   $T^*(\tilde M/B)\to T^*(\tilde M/M)$, which vanishes exactly on
-  $\tilde\phi^*T^*(M/B)$.
+  $\tilde\phi^*T^*(M/B)$. By \cref{blowup:lem:sphere-fibration} (applied fibrewise
+  with $W=T^*(\tilde M/B)$, $V=\tilde\phi^*T^*(M/B)$, $W/V=T^*(\tilde M/M)$), $\gamma$ is a
+  smooth fibre bundle whose fibres are the radial compactifications of the fibres
+  of $\tilde\phi^*T^*(M/B)$.
 \item\label{families:P-ordinary} $\Psido0(\tilde M/B)\subset\Psiptfam{0,0}(\tilde
   M/B)$; $\sigma(A)$ is the pull-back of $\sigma_0(A)$ under the blow-down map,
   and $\beta(A)(\eta)$ is multiplication by the restriction of $\sigma_0(A)$ to

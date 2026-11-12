@@ -896,7 +896,7 @@ for the full expansion from this point of view.
   submanifold is \emph{blown up}, i.e.\ after introducing as new coordinates
   $(\eps,x,Z)$, $Z=(x-y)/\eps$, near it. Globally, the blown-up space
   $[[0,1]\times\R^{2n};\{0\}\times\Diag]$ is obtained by replacing $\{0\}\times\Diag$
-  by its inward-pointing spherical normal bundle; the new boundary hypersurface,
+  by its inward-pointing spherical normal bundle (\cref{blowup:thm:blowup}); the new boundary hypersurface,
   the \emph{front face}, is a bundle of closed half-spheres over $\Diag$, whose
   interior is identified with $T\R^n$ through $(\eps,x,y)\mapsto(x,(x-y)/\eps)$. The
   other boundary face is the lift of $\{\eps=0\}$, i.e.\ $\{\eps=0\}$ away from
@@ -906,10 +906,15 @@ for the full expansion from this point of view.
   space which vanish to infinite order at the lifted face $\{\eps=0\}$ (with the
   appropriate uniformity as $x\to\infty$), and the semiclassical symbol at $\eps=0$
   (\cref{semiclassical:def:symbol-maps}) is the fibrewise Fourier transform of the
-  restriction of the kernel to the front face. On a compact manifold $X$ the same
-  description holds with $[[0,1]\times X^2;\{0\}\times\Diag]$, as follows from
-  \cref{semiclassical:prop:invariance}; this is the space used in
-  \cref{ch:semiclassical-index}. The identification of the interior of the front face
+  restriction of the kernel to the front face. The precise local statement, with
+  the uniformity required in $Z$, is \cref{blowup:prop:sc-kernels}. The factor
+  $\eps^{-n}$ is accounted for by the density: since $dy=\eps^n\,dZ$ at fixed
+  $(\eps,x)$, $\eps^{-n}K\abs{dy}=K\abs{dZ}$, in accordance with
+  \cref{blowup:prop:density} (here the centre has codimension $n+1$). On a compact
+  manifold $X$ the same description holds with $[[0,1]\times X^2;\{0\}\times\Diag]$, as
+  follows from \cref{semiclassical:prop:invariance}; this is the space used in
+  \cref{ch:semiclassical-index}, and the statement is proved in
+  \cref{blowup:cor:sc-manifold}. The identification of the interior of the front face
   with $TX$, and hence of the domain of the semiclassical symbol with $T^*X$,
   depends on the choice of the parameter $\eps$ up to a positive multiple; see
   \cref{semiclassical:rem:sl-cotangent}. The two spaces are sketched in
@@ -962,7 +967,7 @@ different points of the front face ff, whose interior is parametrized by
 $Z=(x-y)/\eps\in\R^n$. Semiclassical smoothing kernels are smooth here,
 vanish to infinite order at the lifted face $\{\eps=0\}$, and their
 restriction to ff is the inverse Fourier transform of the semiclassical
-symbol.}
+symbol (\cref{blowup:prop:sc-kernels,blowup:cor:sc-manifold}).}
 \label{semiclassical:fig:double-space}
 \end{figure}
 
@@ -1621,7 +1626,8 @@ in \cref{ch:semiclassical-index}.
     rapidly decreasing in $Z$ (as in \cref{semiclassical:prop:smoothing-kernels}). In
     the language of \cref{semiclassical:rem:double-space}, the kernels are $\eps^{-n}$
     times smooth sections over $[[0,1]\times X^2;\{0\}\times\Diag]$ vanishing to
-    infinite order at all boundary faces other than the front face.
+    infinite order at the lift of $\{\eps=0\}$, the boundary face other than the front
+    face and the lift of $\{\eps=1\}$ (\cref{blowup:cor:sc-manifold}).
   \item The identity $\Id\in\Psisl0(X;E)$ has $\ssl(\Id)=\Id$, so that
     $\ssl(A)=\ssl(\Id\circ A)=\Id\cdot\ssl(A)$ is consistent with multiplicativity.
   \end{enumerate}
@@ -1636,7 +1642,8 @@ in \cref{ch:semiclassical-index}.
   chart, $\psi A\psi$ has kernel $\eps^{-n}K'(\eps,x,(x-y)/\eps)$ near the diagonal
   plus a term in $\dCI$ away from it, with $K'$ of the stated type; by
   \cref{semiclassical:prop:smoothing-kernels,semiclassical:lem:residual-ideal} this
-  is an element of $\Psisl{-\infty}(\R^n)$.
+  is an element of $\Psisl{-\infty}(\R^n)$. The reformulation in terms of the
+  blown-up space is \cref{blowup:cor:sc-manifold}.
 \end{proof}
 
 \subsection{Ellipticity and invertibility}
@@ -2084,7 +2091,11 @@ i.e.\ diffeomorphisms which preserve the projection onto the $\tilde z$ variable
   \end{equation*}
   where $\pi:T^*Z\to Z$. As in \cref{semiclassical:rem:sl-cotangent}, $T^*Z$ should
   properly be replaced by ${}^{\mathrm{sl}}T^*Z$, identified with it by the choice of
-  $\delta$.
+  $\delta$. Geometrically, as for the semiclassical double space of
+  \cref{semiclassical:rem:double-space}, these kernels are the smooth functions on the
+  adiabatic double space $[[0,1]\times Y^2;\{0\}\times Y^2_\phi]$, with $Y^2_\phi$ the fibre
+  product, which vanish to infinite order at the lift of $\{\delta=0\}$; the interior of
+  the front face is $Y^2_\phi\times_ZTZ$ (\cref{blowup:rem:adiabatic}).
 \end{remark}
 
 \subsection{Semiclassical-adiabatic families}
@@ -2302,7 +2313,9 @@ Newton iteration (\cref{semiclassical:lem:newton}) instead of the original linea
 iteration and the Riesz projection of \cref{manifolds:prop:projection}. The sections on
 blow-up and on the resolution of semiclassical kernels were not written in the
 original; their content is summarized in \cref{semiclassical:rem:double-space} and
-\cref{semiclassical:prop:smoothing-X}(iii). For the general theory of blow-up and of
-calculi defined by kernels on blown-up spaces see \cite{Melrose-APS}. Holomorphic
+\cref{semiclassical:prop:smoothing-X}(iii), and the blow-up itself, with the resolution
+of semiclassical and adiabatic kernels, is treated in \cref{ch:blowup}
+(\cref{blowup:prop:sc-kernels,blowup:cor:sc-manifold,blowup:rem:adiabatic}). For
+calculi defined by kernels on blown-up spaces more generally see \cite{Melrose-APS}. Holomorphic
 families of symbols, discussed briefly in the original after the semiclassical limit,
 are not needed here and are omitted.

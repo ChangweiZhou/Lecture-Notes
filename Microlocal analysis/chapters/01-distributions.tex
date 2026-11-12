@@ -1364,7 +1364,9 @@ map $\beta\colon X\to M$ is the blow-up of $M$ at $p$ if $\beta$ is a diffeomorp
 $X\setminus\pa X$ onto $M\setminus\{p\}$, maps $\pa X$ to $p$, and polar coordinates
 around $p$ (in some local coordinates) lift to a diffeomorphism of a neighbourhood of
 $\pa X$ onto $[0,\epsilon)\times\Sphere^{n-1}$. This does not depend on the choice of local
-coordinates (\cref{distributions:ex:polar}).
+coordinates (\cref{distributions:ex:polar}, and \cref{blowup:thm:invariance} for the
+general statement). Blow-up of points and of more general submanifolds, and of manifolds
+with corners, is developed systematically in \cref{ch:blowup}.
 
 \subsection{Subspaces and relative compactifications}
 \begin{proposition}\label{distributions:prop:inclusion}
@@ -1481,9 +1483,10 @@ infinity of $V$, which is a submanifold of the boundary. Similarly, for a produc
 $W=V\times U$ the identity map extends to neither $\RC{V}\times\RC{U}\to\RC{W}$ nor its
 inverse. However, the doubly-relative compactification
 (\cref{distributions:ex:doubly}) is canonically both $[\RC{V\times U};\mathbb{S}U,\mathbb{S}V]$
-and $[\RC{V}\times\RC{U};\mathbb{S}V\times\mathbb{S}U]$. We do not prove these
-identifications here. Blow-up of submanifolds is taken up when it is needed later in the
-book.
+and $[\RC{V}\times\RC{U};\mathbb{S}V\times\mathbb{S}U]$. These identifications are
+proved in \cref{ch:blowup}: the first in \cref{blowup:thm:relative} (where $\mathbb{S}V$
+is shown to be a p-submanifold of $\RC{W}$, of codimension $\dim W-\dim V+1$), the second
+in \cref{blowup:prop:doubly}.
 \end{remark}
 
 %======================================================================
@@ -1619,7 +1622,9 @@ $\dim U,\dim V\ge2$. Denote it by $\relRC{U,V}{U\times V}$. Show that translatio
 linear maps preserving both $U$ and $V$, lift to diffeomorphisms. Show that the
 inclusions of $\RC{U}$ and $\RC{V}$ extend smoothly, and that the identity of $W$
 extends to smooth maps from $\relRC{U,V}{U\times V}$ to both $\RC{U\times V}$ and
-$\RC{U}\times\RC{V}$. Draw a picture for $\dim U=\dim V=1$.
+$\RC{U}\times\RC{V}$. Draw a picture for $\dim U=\dim V=1$. (The identification of this
+space with two iterated blow-ups is \cref{blowup:prop:doubly}; compare
+\cref{blowup:fig:octagon}.)
 \end{exercise}
 
 \begin{exercise}\label{distributions:ex:polar}
@@ -1627,7 +1632,9 @@ Show that a change of local coordinates fixing $0\in\R^n$ induces a diffeomorphi
 $[0,\epsilon)\times\Sphere^{n-1}$, for some $\epsilon>0$, under polar coordinates
 $(r,\omega)\mapsto r\omega$. (Treat linear changes first, using
 \cref{distributions:prop:affine}. Then reduce to the case where the Jacobian at $0$ is
-the identity.) Conclude that the blow-up of a point is well defined.
+the identity.) Conclude that the blow-up of a point is well defined. (The general form of
+this statement, for submanifolds and with the action on the front face, is
+\cref{blowup:thm:invariance}.)
 \end{exercise}
 
 \section*{Notes}
