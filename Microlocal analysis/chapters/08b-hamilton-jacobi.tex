@@ -1,4 +1,5 @@
-\chapter{Hamilton--Jacobi theory and transport equations}\label{ch:hj}
+\chapter{Lagrangian distributions and Hamilton--Jacobi theory}\label{ch:hj}
+\chaptermark{Lagrangian distributions and Hamilton--Jacobi}
 \providecommand{\osc}[1]{\mathcal{I}[#1]}
 
 Elliptic operators have no singular solutions: if $P$ is elliptic and
@@ -15,6 +16,25 @@ $N^*Y$, and requiring it to vanish leads to the \emph{transport equations}.
 Solving these iteratively produces solutions of $Pu\in\CI$ with prescribed
 restriction to a transversal hypersurface (``travelling waves''); this is used in
 \cref{ch:wave} to construct a parametrix for the wave equation.
+
+The second half of the chapter removes the restriction to conormal
+distributions.  When a characteristic hypersurface develops singularities, the
+union of the bicharacteristics making up its conormal bundle is still a smooth
+conic Lagrangian submanifold $\Lambda$ of $T^*X$, but no longer a conormal
+bundle.  We show that every conic Lagrangian is locally parametrized by a
+non-degenerate phase function, prove that any two parametrizations are related
+by stationary phase and a change of fibre variables, and define the space
+$\Ic{m}(X,\Lambda;\Omegah)$ of Lagrangian distributions: distributions which
+are microlocally oscillatory integrals $\int e^{i\varphi(x,\theta)}
+a(x,\theta)\,d\theta$ with phases parametrizing $\Lambda$, or, equivalently,
+push-forwards of conormal distributions.  Conormal distributions are the case
+$\Lambda=N^*Y$, and the wave kernel of \cref{ch:wave}, an oscillatory integral
+whose phase solves the eikonal equation, is another example.  Keller's example
+of a caustic for the wave equation in two space dimensions shows that the
+principal symbol of a Lagrangian distribution is not simply a half-density on
+$\Lambda$, but involves the Keller--Maslov line bundle; we define it and prove
+its invariance, and finally show how the symbol can be recovered by pairing
+with oscillatory test functions.
 
 We use the conormal distributions of \cref{ch:conormal} (whose notation and
 normalization of orders we follow) and the pseudodifferential operators on
@@ -600,6 +620,1249 @@ along the bicharacteristics (Duhamel's principle).  In \cref{ch:wave} this
 construction, applied to the wave operator with $H=\{t=0\}$, gives a
 parametrix for the Cauchy problem.
 
+\section{Conic Lagrangian submanifolds and phase functions}\label{hj:sec:lagrangian}
+
+The construction of \cref{hj:thm:travelling} works only as long as the
+characteristic hypersurface $\tilde G$ is smooth.  In general the integral
+curves of $H_p$ which make up $N^*\tilde G$ continue to exist, and their union
+is still a smooth Lagrangian submanifold of $T^*X$, but it need not be the
+conormal bundle of anything: its projection to $X$ may become singular (a
+\emph{caustic}, see \cref{hj:sec:keller}).  To describe the corresponding
+solutions we need a class of distributions associated with an arbitrary conic
+Lagrangian submanifold.  In this section we develop the necessary symplectic
+geometry: every conic Lagrangian is locally \emph{parametrized} by a
+non-degenerate phase function, and any two parametrizations are related in a
+precise way.
+
+\subsection{Conic Lagrangian submanifolds}
+For $t>0$ let $M_t:T^*X\to T^*X$, $M_t(x,\xi)=(x,t\xi)$, be the fibre dilation,
+and let $\varrho=\sum_j\xi_j\pa_{\xi_j}$ be the radial vector field, the
+generator of $s\mapsto M_{e^s}$.  A subset $\Lambda\subset T^*X\setminus0$ is
+\emph{conic} if $M_t(\Lambda)=\Lambda$ for all $t>0$.
+
+\begin{lemma}\label{hj:lem:conic-lagr}
+  A conic submanifold $\Lambda\subset T^*X\setminus0$ of dimension $n$ is
+  Lagrangian if and only if the canonical one-form $\alpha$ pulls back to zero on
+  $\Lambda$.
+\end{lemma}
+\begin{proof}
+  If $\alpha$ pulls back to zero, so does $\omega=d\alpha$.  Conversely, in
+  canonical coordinates $\omega(\varrho,v)=\sum_j\big(d\xi_j(\varrho)dx_j(v)-
+  dx_j(\varrho)d\xi_j(v)\big)=\sum_j\xi_jdx_j(v)=\alpha(v)$, i.e.\
+  $\iota_\varrho\omega=\alpha$.  Since $\Lambda$ is conic, $\varrho$ is tangent to
+  $\Lambda$, so if $\Lambda$ is Lagrangian then $\alpha(v)=\omega(\varrho,v)=0$
+  for $v\in T\Lambda$.
+\end{proof}
+
+The basic examples are the conormal bundles $N^*Y\setminus0$
+(\cref{hj:lem:examples}).  For $\lambda\in\Lambda$ let
+\begin{equation*}
+  K(\lambda)=\dim\big(T_\lambda\Lambda\cap T_\lambda(T^*_{\pi(\lambda)}X)\big)
+  =n-\operatorname{rank}\big(d\pi|_{T_\lambda\Lambda}\big),
+\end{equation*}
+the dimension of the space of ``vertical'' tangent vectors.  Since
+$0\ne\varrho(\lambda)$ is vertical and tangent to $\Lambda$, $K(\lambda)\ge1$ for
+a conic Lagrangian: unlike the Lagrangians of \cref{hj:lem:graph}, a conic
+Lagrangian is never locally a graph over $X$.  For $\Lambda=N^*Y\setminus0$,
+$K\equiv\operatorname{codim}Y$.  Points where $K(\lambda)$ jumps up project
+to the \emph{caustic} of $\Lambda$.
+
+Conic Lagrangians in the characteristic variety arise as flow-outs, just as in
+the proof of \cref{hj:thm:HJ}; this does not require the projection to $X$ to
+stay non-singular.
+
+\begin{lemma}\label{hj:lem:flowout}
+  Let $p\in\CI(T^*X\setminus0)$ be real and homogeneous of degree $m'$, and let
+  $\Lambda_0\subset p^{-1}(0)$ be a conic submanifold of dimension $n-1$ on which
+  $\alpha$ pulls back to zero and to which $H_p$ is nowhere tangent.  Let
+  $\Lambda$ be the union of the maximal integral curves of $H_p$ through
+  $\Lambda_0$, and $\Psi(s,\lambda_0)=\exp(sH_p)(\lambda_0)$ on its (open) domain
+  of definition in $\R\times\Lambda_0$.  Then $\Psi$ is an immersion, its image
+  $\Lambda$ is conic and contained in $p^{-1}(0)$, and $\Lambda$ is a Lagrangian
+  immersed submanifold: wherever $\Psi$ is injective (in particular locally)
+  its image is a conic Lagrangian submanifold.
+\end{lemma}
+\begin{proof}
+  At $s=0$ the differential of $\Psi$ has image $T\Lambda_0\oplus\R H_p$, of
+  dimension $n$; since $\Psi(s+s',\lambda_0)=\exp(sH_p)\Psi(s',\lambda_0)$ and
+  $\exp(sH_p)$ is a diffeomorphism mapping $H_p$ to $H_p$, $\Psi$ is an
+  immersion everywhere.  That the tangent spaces are Lagrangian is proved
+  exactly as in the proof of \cref{hj:thm:HJ}, using $dp=0$ on $T\Lambda_0$ and
+  the invariance of $\omega$ under the flow.  Since $H_pp=0$,
+  $\Lambda\subset p^{-1}(0)$.  Finally, homogeneity of $p$ gives
+  $(M_t)_*H_p=t^{1-m'}H_p\circ M_t$, so if $\gamma$ is an integral curve of $H_p$
+  then so is $s\mapsto M_t\gamma(t^{m'-1}s)$; as $\Lambda_0$ is conic, so is
+  $\Lambda$.
+\end{proof}
+
+\subsection{Non-degenerate phase functions}
+Let $X\subset\R^n$ be open (we work in local coordinates; see
+\cref{hj:lem:osc-change} for the change of coordinates) and let
+$\Gamma\subset X\times(\R^N\setminus0)$ be an open cone, i.e.\ invariant under
+$(x,\theta)\mapsto(x,t\theta)$, $t>0$.
+
+\begin{definition}\label{hj:def:phase}
+  A \emph{phase function} on $\Gamma$ is a real $\varphi\in\CI(\Gamma)$,
+  homogeneous of degree one in $\theta$, with $d_{x,\theta}\varphi\neq0$ on
+  $\Gamma$.  Its \emph{critical set} is
+  $C_\varphi=\{(x,\theta)\in\Gamma;\ d_\theta\varphi(x,\theta)=0\}$, and
+  $\varphi$ is \emph{non-degenerate} if the differentials
+  $d(\pa\varphi/\pa\theta_1),\dots,d(\pa\varphi/\pa\theta_N)$ are linearly
+  independent at each point of $C_\varphi$.
+\end{definition}
+
+\begin{proposition}\label{hj:prop:phase-lagrangian}
+  If $\varphi$ is a non-degenerate phase function on $\Gamma$ then $C_\varphi$ is
+  a conic submanifold of $\Gamma$ of dimension $n$, and
+  \begin{equation*}
+    j_\varphi:C_\varphi\ni(x,\theta)\longmapsto(x,d_x\varphi(x,\theta))\in
+    T^*X\setminus0
+  \end{equation*}
+  is a homogeneous immersion whose image is (locally) a conic Lagrangian
+  submanifold $\Lambda_\varphi$.
+\end{proposition}
+\begin{proof}
+  $C_\varphi$ is the common zero set of the $N$ functions
+  $\pa_{\theta_j}\varphi$, homogeneous of degree $0$, with independent
+  differentials; so it is a conic submanifold of dimension $n+N-N=n$.  On
+  $C_\varphi$, $d_\theta\varphi=0$ and $d\varphi\neq0$, so $d_x\varphi\neq0$ and
+  $j_\varphi$ maps into $T^*X\setminus0$; it is homogeneous of degree one in
+  the fibres since $d_x\varphi$ is.  A tangent vector $(\delta x,\delta\theta)$ to
+  $C_\varphi$ satisfies $\varphi''_{\theta x}\delta x+\varphi''_{\theta\theta}
+  \delta\theta=0$; if moreover $dj_\varphi(\delta x,\delta\theta)=0$ then
+  $\delta x=0$ and $\varphi''_{x\theta}\delta\theta=0$, so
+  $\varphi''_{\theta\theta}\delta\theta=0$ as well.  The $N\times(n+N)$ matrix
+  $(\varphi''_{\theta x}\ \varphi''_{\theta\theta})$ has rank $N$ by
+  non-degeneracy, so its transpose is injective and $\delta\theta=0$: $j_\varphi$
+  is an immersion.  Finally
+  \begin{equation*}
+    j_\varphi^*\alpha=\sum_i\frac{\pa\varphi}{\pa x_i}dx_i\Big|_{C_\varphi}
+    =\Big(d\varphi-\sum_j\frac{\pa\varphi}{\pa\theta_j}d\theta_j\Big)\Big|_{C_\varphi}
+    =d\big(\varphi|_{C_\varphi}\big)=0,
+  \end{equation*}
+  since $\varphi=\sum_j\theta_j\pa_{\theta_j}\varphi$ vanishes on $C_\varphi$ by
+  Euler's relation.  By \cref{hj:lem:conic-lagr} the image is Lagrangian.
+\end{proof}
+
+\begin{definition}\label{hj:def:parametrize}
+  Let $\Lambda\subset T^*X\setminus0$ be a conic Lagrangian submanifold and
+  $\bar\lambda\in\Lambda$.  A non-degenerate phase function $\varphi$ on $\Gamma$
+  \emph{parametrizes $\Lambda$ near $\bar\lambda$} if $j_\varphi$ is a
+  diffeomorphism of $C_\varphi$ onto an open conic subset $\Lambda_\varphi$ of
+  $\Lambda$ containing $\bar\lambda$.
+\end{definition}
+
+If $j_\varphi(\bar x,\bar\theta)=\bar\lambda$ and $j_\varphi(C_\varphi)\subset
+\Lambda$ near $(\bar x,\bar\theta)$, then replacing $\Gamma$ by a small conic
+neighbourhood of $(\bar x,\bar\theta)$ gives a parametrization near
+$\bar\lambda$, since an immersion between manifolds of the same dimension is a
+local diffeomorphism and both sides are conic.
+
+\begin{example}\label{hj:ex:phases}
+  (i) In adapted coordinates $(x,y)\in\R^k\times\R^d$ for $Y=\{x=0\}$, the
+  function $\varphi(x,y,\xi)=x\cdot\xi$, $\xi\in\R^k\setminus0$, is a
+  non-degenerate phase function: $C_\varphi=\{x=0\}$,
+  $d(\pa_{\xi_j}\varphi)=dx_j$, and $j_\varphi(0,y,\xi)=(0,y;\xi,0)$ is a
+  diffeomorphism onto $N^*Y\setminus0$.  The conormal distributions
+  $\osc{a}$ of \cref{ch:conormal} are exactly oscillatory integrals with this
+  phase.
+
+  (ii) The parametrix for the wave kernel constructed in \cref{ch:wave} is a
+  sum of oscillatory integrals with phases
+  $\varphi_\pm(t,x,\eta)-y\cdot\eta$ on $\R_t\times X_x\times X_y\times
+  (\R^n_\eta\setminus0)$, where $\varphi_\pm$ solves the eikonal equation
+  $\pa_t\varphi_\pm=\pm|d_x\varphi_\pm|_g$ with $\varphi_\pm(0,x,\eta)=x\cdot\eta$.
+  These are non-degenerate phase functions, since
+  $d(\pa_{\eta_j}(\varphi_\pm-y\cdot\eta))=d(\pa_{\eta_j}\varphi_\pm)-dy_j$, and
+  $d_y(\varphi_\pm-y\cdot\eta)=-\eta\ne0$.  The Lagrangian they parametrize
+  is the flow-out $\{(t,x,y;\pm|\eta|_{g(y)},\xi,-\eta);\
+  (x,\xi)=G_{\mp t}(y,\eta)\}$ by the geodesic flow $G$, the wavefront set
+  computed in \cref{ch:wave}.
+\end{example}
+
+The number $N$ of phase variables is not determined by $\Lambda$, but it is
+bounded below by $K$.
+
+\begin{lemma}\label{hj:lem:rank}
+  If $\varphi$ is a non-degenerate phase function, $p\in C_\varphi$ and
+  $\lambda=j_\varphi(p)$, then $K(\lambda)=N-\operatorname{rank}
+  \varphi''_{\theta\theta}(p)$ for the (local) Lagrangian $\Lambda_\varphi$.  In
+  particular $N\ge K(\lambda)$, with equality if and only if
+  $\varphi''_{\theta\theta}(p)=0$.
+\end{lemma}
+\begin{proof}
+  Since $j_\varphi$ is an immersion and $\pi\circ j_\varphi(x,\theta)=x$, the
+  vertical tangent vectors of $\Lambda_\varphi$ at $\lambda$ correspond to the
+  vectors $(0,\delta\theta)$ tangent to $C_\varphi$, i.e.\ to the solutions of
+  $\varphi''_{\theta\theta}(p)\delta\theta=0$.
+\end{proof}
+
+We call $\varphi$ \emph{minimal} at $p$ if $\varphi''_{\theta\theta}(p)=0$.
+Note that $\varphi''_{\theta\theta}(x,\theta)\theta=0$ by Euler's relation for the
+function $\pa_\theta\varphi$, homogeneous of degree zero, so $\theta$ itself is
+always in the null space.
+
+\subsection{Parametrization by hypersurfaces}
+Melrose's original approach parametrizes $\Lambda$ by hypersurfaces in
+$X\times\R^k$; it is equivalent to the use of phase functions, as follows.  Let
+$H=\{h=0\}\subset X\times\R^k_z$ be a hypersurface, $h$ real with $dh\neq0$ on
+$H$, and let
+\begin{equation*}
+  C_H=\{(x,z)\in H;\ \pa_zh(x,z)=0\}
+\end{equation*}
+be the set of points where the fibre $\{x\}\times\R^k$ is tangent to $H$.  This
+depends only on $H$: if $h'=bh$ with $b\neq0$ then $\pa_zh'=b\,\pa_zh$ on $H$.
+Call $H$ \emph{non-degenerate} at $(\bar x,\bar z)\in C_H$ if $dh$ and
+$d(\pa_{z_1}h),\dots,d(\pa_{z_k}h)$ are linearly independent there; then $C_H$
+is a submanifold of dimension $n-1$ near $(\bar x,\bar z)$.
+
+\begin{proposition}\label{hj:prop:hypersurface}
+  Let $H=\{h=0\}$ be non-degenerate along $C_H$ and set, for $\theta=(\theta_0,
+  \theta')\in\R\times\R^k$ with $\theta_0>0$,
+  \begin{equation*}
+    \varphi(x,\theta)=\theta_0\,h(x,\theta'/\theta_0).
+  \end{equation*}
+  Then $\varphi$ is a non-degenerate phase function near $C_\varphi$,
+  $C_\varphi=\{(x,\theta_0,\theta_0z);\ (x,z)\in C_H,\ \theta_0>0\}$, and the
+  Lagrangian it parametrizes is
+  \begin{equation*}
+    \Lambda_H=\{(x,\tau\,d_xh(x,z));\ (x,z)\in C_H,\ \tau>0\}.
+  \end{equation*}
+  Conversely, every phase function on a cone $\Gamma$ on which, after a linear
+  change of the $\theta$ variables, $\theta_0>0$, is of this form with
+  $h(x,z)=\varphi(x,1,z)$.
+\end{proposition}
+\begin{proof}
+  With $z=\theta'/\theta_0$ we have $\pa_{\theta_j}\varphi=(\pa_{z_j}h)(x,z)$ for
+  $j\ge1$ and $\pa_{\theta_0}\varphi=h-\sum_jz_j\pa_{z_j}h$, so $C_\varphi$ is as
+  stated, and $d_x\varphi=\theta_0d_xh$ there.  On $C_\varphi$,
+  $d(\pa_{\theta_0}\varphi)=dh-\sum_jz_jd(\pa_{z_j}h)$ (all forms pulled back by
+  the submersion $(x,\theta)\mapsto(x,\theta'/\theta_0)$), so the span of the
+  $d(\pa_{\theta_j}\varphi)$ is the pull-back of the span of $dh,d(\pa_zh)$;
+  pull-back by a submersion is injective, so the non-degeneracy conditions
+  coincide.  Also $d\varphi\ne0$ near $C_\varphi$ since $d_x\varphi=\theta_0
+  d_xh$ and $d_xh\ne0$ on $C_H$ ($dh\neq0$ and $\pa_zh=0$).  The converse is
+  homogeneity.
+\end{proof}
+
+\begin{remark}[Lagrangian distributions as push-forwards]\label{hj:rem:pushforward}
+  If $v\in\Ic{m'}(X\times\R^k,H)$ has compact support, then by
+  \cref{ch:conormal} (any defining function may be used, and amplitudes may
+  depend on all variables) $v=\frac1{2\pi}\int e^{i\theta_0h(x,z)}
+  c(x,z,\theta_0)\,d\theta_0$ modulo $\CI$, with $c\in S^{\mu'}$,
+  $\mu'=m'+\frac{n+k}4-\frac12$.  The substitution $\theta'=\theta_0z$ in
+  $\theta_0>0$ gives
+  \begin{equation*}
+    \int_{\R^k}v(x,z)\,dz=(2\pi)^k\int_{\theta_0>0}e^{i\varphi(x,\theta)}
+    c(x,\theta'/\theta_0,\theta_0)\,\theta_0^{-k}\,\dbar\theta+(\text{same with }
+    \theta_0<0)+\CI,
+  \end{equation*}
+  and $c(x,\theta'/\theta_0,\theta_0)\theta_0^{-k}$ is a symbol of order
+  $\mu'-k$ in $\theta\in\R^{k+1}$ on the cone $\theta_0>0$ (as $c$ is compactly
+  supported in $z$).  In the notation of \cref{hj:def:lagrangian} below, the
+  push-forward is therefore microlocally on $\Lambda_H$ a Lagrangian
+  distribution of order $m=m'-\frac k4$ (the part with $\theta_0<0$ lives on
+  $-\Lambda_H$).  This is Melrose's definition of Lagrangian distributions:
+  they are, microlocally, push-forwards of conormal distributions under the
+  projection $X\times\R^k\to X$, and the singularities of $v$ that survive the
+  integration are those at points where the fibres are tangent to $H$.
+\end{remark}
+
+\subsection{Existence of parametrizations}
+
+\begin{lemma}\label{hj:lem:adapted}
+  Let $\Lambda\subset T^*X\setminus0$ be a conic Lagrangian submanifold,
+  $\bar\lambda=(\bar x,\bar\xi)\in\Lambda$ and $K=K(\bar\lambda)$.  There are
+  local coordinates $x=(x',x'')\in\R^K\times\R^{n-K}$ near $\bar x$, with
+  $\bar x=0$ and $\bar\xi=dx_1$, such that, with $\xi=(\xi',\xi'')$ the dual
+  coordinates, $(\xi',x'')$ restrict to coordinates on $\Lambda$ near
+  $\bar\lambda$.  Moreover $dx'$ vanishes on $T_{\bar\lambda}\Lambda$.
+\end{lemma}
+\begin{proof}
+  Let $S=d\pi(T_{\bar\lambda}\Lambda)\subset T_{\bar x}X$, of dimension $n-K$.
+  For $v\in T_{\bar\lambda}\Lambda$, $\bar\xi(d\pi\,v)=\alpha(v)=0$ by
+  \cref{hj:lem:conic-lagr}, so $\bar\xi$ annihilates $S$.  Choose linear
+  coordinates with $\bar x=0$, $S=\operatorname{span}\{\pa_{x_{K+1}},\dots,
+  \pa_{x_n}\}$ and $\bar\xi=dx_1$ (possible since $\bar\xi\neq0$ lies in the
+  annihilator of $S$, which is spanned by $dx_1,\dots,dx_K$).  Then $dx'$ vanishes
+  on $T_{\bar\lambda}\Lambda$.  Let $V=T_{\bar\lambda}\Lambda\cap\ker d\pi$, of
+  dimension $K$; its elements are $v=\sum\delta\xi_j\pa_{\xi_j}$, and for
+  $w\in T_{\bar\lambda}\Lambda$, $0=\omega(v,w)=\sum_j\delta\xi_j\,dx_j(w)$, i.e.\
+  $\delta\xi$ annihilates $S$, so $\delta\xi''=0$.  Now if $w\in
+  T_{\bar\lambda}\Lambda$ is annihilated by $d\xi'$ and $dx''$, then $d\pi\,w\in
+  S$ has vanishing $x''$-components, so $d\pi\,w=0$, $w\in V$, and then
+  $\delta\xi'=0=\delta\xi''$, so $w=0$.  Hence the $n$ functions $(\xi',x'')$ have
+  independent differentials on $T_{\bar\lambda}\Lambda$.
+\end{proof}
+
+\begin{theorem}\label{hj:thm:param-exists}
+  Let $\Lambda$, $\bar\lambda$, $K$ and the coordinates be as in
+  \cref{hj:lem:adapted}.  There is a smooth function $G(\theta,x'')$, defined
+  for $x''$ near $0$ and $\theta$ in a conic neighbourhood of
+  $\bar\theta=(1,0,\dots,0)\in\R^K$, homogeneous of degree one in $\theta$, such
+  that
+  \begin{equation}\label{hj:eq:normal-phase}
+    \varphi(x,\theta)=x'\cdot\theta-G(\theta,x'')
+  \end{equation}
+  is a non-degenerate phase function parametrizing $\Lambda$ near $\bar\lambda$,
+  minimal at the point $(0,\bar\theta)$ over $\bar\lambda$.  Near $\bar\lambda$,
+  \begin{equation*}
+    \Lambda=\{(x',x'';\xi',\xi'');\ x'=\pa_{\xi'}G(\xi',x''),\
+    \xi''=-\pa_{x''}G(\xi',x'')\}.
+  \end{equation*}
+\end{theorem}
+\begin{proof}
+  By \cref{hj:lem:adapted}, near $\bar\lambda$, $\Lambda=\{x'=X'(\xi',x''),\
+  \xi''=\Xi''(\xi',x'')\}$ for smooth $X',\Xi''$.  Since $M_t$ maps the point of
+  $\Lambda$ with coordinates $(\xi',x'')$ to the point with coordinates
+  $(t\xi',x'')$, $X'$ is homogeneous of degree $0$ and $\Xi''$ of degree $1$ in
+  $\xi'$; they are thus defined on a conic neighbourhood
+  $\{\xi'/|\xi'|\text{ near }\bar\theta,\ x''\text{ near }0\}$, and the
+  coordinate map is injective there (two points with the same coordinates can be
+  rescaled by the same factor to lie near $\bar\lambda$).  Let
+  $G(\xi',x'')=X'(\xi',x'')\cdot\xi'$, homogeneous of degree one.  On
+  $\Lambda$, $0=\alpha=\xi'\cdot dx'+\xi''\cdot dx''=d(x'\cdot\xi')-x'\cdot d\xi'+
+  \xi''\cdot dx''$, so in the coordinates $(\xi',x'')$
+  \begin{equation*}
+    dG=X'\cdot d\xi'-\Xi''\cdot dx'',\quad\text{i.e.}\quad \pa_{\xi'}G=X',\
+    \pa_{x''}G=-\Xi''.
+  \end{equation*}
+  For $\varphi$ as in \eqref{hj:eq:normal-phase}, $d_{x'}\varphi=\theta\neq0$,
+  $\pa_\theta\varphi=x'-\pa_\theta G$, whose differentials
+  $dx'_j-d(\pa_{\theta_j}G)$ are independent, and $C_\varphi=\{x'=X'(\theta,x'')\}$
+  with $j_\varphi(x,\theta)=(x;\theta,-\pa_{x''}G)=(x;\theta,\Xi''(\theta,x''))$.
+  So $\varphi$ parametrizes $\Lambda$ near $\bar\lambda$.  Finally
+  $\varphi''_{\theta\theta}=-\pa_\theta^2G=-\pa_\theta X'$, which vanishes at
+  $(\bar\theta,0)$ because $dx'=0$ on $T_{\bar\lambda}\Lambda$.
+\end{proof}
+
+\subsection{Reduction and equivalence of phase functions}
+
+\begin{lemma}\label{hj:lem:reduce}
+  Let $\varphi$ be a non-degenerate phase function on $\Gamma$ and $\bar
+  p=(\bar x,\bar\theta)\in C_\varphi$.  After a linear change of the $\theta$
+  variables, $\theta=(\theta',\theta'')\in\R^{K}\times\R^r$, $r=N-K$,
+  $K=K(j_\varphi(\bar p))$, where $\bar\theta''=0$, $\varphi''_{\theta''\theta''}
+  (\bar p)$ is invertible and $\varphi''_{\theta'\theta}(\bar p)=0$.  Then near
+  $(\bar x,\bar\theta')$ there is a unique smooth $\Theta(x,\theta')$,
+  homogeneous of degree one, with $\Theta(\bar x,\bar\theta')=0$ and
+  $\pa_{\theta''}\varphi(x,\theta',\Theta(x,\theta'))=0$, and
+  \begin{equation*}
+    \varphi_0(x,\theta')=\varphi(x,\theta',\Theta(x,\theta'))
+  \end{equation*}
+  is a non-degenerate phase function, minimal at $(\bar x,\bar\theta')$.  The map
+  $s(x,\theta')=(x,\theta',\Theta(x,\theta'))$ is a diffeomorphism of
+  $C_{\varphi_0}$ onto a neighbourhood of $\bar p$ in $C_\varphi$ with
+  $j_{\varphi_0}=j_\varphi\circ s$.  At points of $C_{\varphi_0}$,
+  \begin{equation}\label{hj:eq:sgn-add}
+    \sgn\varphi''_{\theta\theta}\circ s=\sgn\varphi_0''{}_{\theta'\theta'}+
+    \sgn\varphi''_{\theta''\theta''}\circ s .
+  \end{equation}
+\end{lemma}
+\begin{proof}
+  The symmetric matrix $\varphi''_{\theta\theta}(\bar p)$ has rank $N-K$ by
+  \cref{hj:lem:rank}; choose linear coordinates in which its null space is
+  $\R^K\times0$ and its range $0\times\R^r$.  By Euler's relation $\bar\theta$ is
+  in the null space, so $\bar\theta''=0$, $\bar\theta'\neq0$.  The implicit
+  function theorem gives $\Theta$ near $(\bar x,\bar\theta')$; since
+  $\pa_{\theta''}\varphi$ is homogeneous of degree $0$, $t\Theta(x,\theta')$
+  solves the equation at $(x,t\theta')$, so by uniqueness $\Theta$ is
+  homogeneous of degree one and extends to a conic neighbourhood.  Then
+  $\pa_{\theta'}\varphi_0=(\pa_{\theta'}\varphi)\circ s$ and
+  $d_x\varphi_0=(d_x\varphi)\circ s$, because $\pa_{\theta''}\varphi\circ s=0$;
+  hence $C_{\varphi_0}=s^{-1}(C_\varphi)$, $s$ maps $C_{\varphi_0}$ onto
+  $C_\varphi\cap\{\theta''=\Theta\}$, which is a neighbourhood of $\bar p$ in
+  $C_\varphi$, and $j_{\varphi_0}=j_\varphi\circ s$.  For non-degeneracy, suppose
+  $\sum_jc_jd(\pa_{\theta'_j}\varphi_0)=0$ at a point of $C_{\varphi_0}$, i.e.\
+  $s^*\beta=0$ with $\beta=\sum_jc_jd(\pa_{\theta'_j}\varphi)$.  The map $s$ is a
+  diffeomorphism onto $W=\{\pa_{\theta''}\varphi=0\}$, so $\beta$ vanishes on
+  $TW$, i.e.\ is a combination of the $d(\pa_{\theta''_l}\varphi)$; by
+  non-degeneracy of $\varphi$, $c=0$.  Also $d\varphi_0\ne0$ near
+  $C_{\varphi_0}$ since $d_x\varphi_0\ne0$ there.  Finally, at a point of
+  $C_{\varphi_0}$ write $\varphi''_{\theta\theta}=\begin{psmallmatrix}A&B\\
+  B^t&D\end{psmallmatrix}$ with $D=\varphi''_{\theta''\theta''}$ invertible;
+  differentiating $\pa_{\theta'}\varphi_0=\pa_{\theta'}\varphi\circ s$ and using
+  $\pa_{\theta'}\Theta=-D^{-1}B^t$ gives $\varphi_0''{}_{\theta'\theta'}=A-BD^{-1}B^t$,
+  and $\varphi''_{\theta\theta}$ is congruent to $\operatorname{diag}(A-BD^{-1}B^t,D)$;
+  this gives \eqref{hj:eq:sgn-add}.  Minimality holds by \cref{hj:lem:rank},
+  since $\varphi_0$ has $K$ phase variables.
+\end{proof}
+
+\begin{theorem}[Equivalence of minimal phase functions]\label{hj:thm:equivalence}
+  Let $\varphi_1$, $\varphi_2$ be non-degenerate phase functions in the same
+  number $K$ of variables, both parametrizing $\Lambda$ near $\bar\lambda$ and
+  minimal at the points $(\bar x,\bar\theta_i)=j_{\varphi_i}^{-1}(\bar\lambda)$.
+  Then there is a diffeomorphism $\kappa(x,\theta)=(x,\Theta(x,\theta))$ from a
+  conic neighbourhood of $(\bar x,\bar\theta_1)$ onto a conic neighbourhood of
+  $(\bar x,\bar\theta_2)$, with $\Theta$ homogeneous of degree one in $\theta$,
+  such that $\varphi_2\circ\kappa=\varphi_1$.
+\end{theorem}
+\begin{proof}
+  \emph{Step 1: matching the critical sets.}  Since $\pi\circ j_{\varphi_i}$ is
+  the projection $(x,\theta)\mapsto x$, the subspace
+  $S=d\pi(T_{\bar\lambda}\Lambda)$ is the projection of $T C_{\varphi_i}$ at
+  $(\bar x,\bar\theta_i)$ for $i=1,2$.  Choose linear coordinates
+  $x=(x',x'')\in\R^K\times\R^{n-K}$ such that $dx''|_S$ is an isomorphism.  By
+  minimality every vector $(0,\delta\theta)$ is tangent to $C_{\varphi_i}$ at
+  $(\bar x,\bar\theta_i)$, and it follows (as in \cref{hj:lem:adapted}) that
+  $(\theta,x'')$ are coordinates on $C_{\varphi_i}$ near
+  $(\bar x,\bar\theta_i)$: $C_{\varphi_i}=\{x'=X_i(\theta,x'')\}$, with $X_i$
+  homogeneous of degree $0$.  The diffeomorphism
+  $c=j_{\varphi_2}^{-1}\circ j_{\varphi_1}:C_{\varphi_1}\to C_{\varphi_2}$
+  preserves $x$, so in these coordinates
+  $c(\theta,x'')=(\Theta_c(\theta,x''),x'')$ with $\pa_\theta\Theta_c$ invertible,
+  $\Theta_c$ homogeneous of degree one and
+  $X_2(\Theta_c(\theta,x''),x'')=X_1(\theta,x'')$.  The map
+  $\kappa_0(x,\theta)=(x,\Theta_c(\theta,x''))$ is a homogeneous fibre-preserving
+  local diffeomorphism mapping $C_{\varphi_1}$ onto $C_{\varphi_2}$ and equal to
+  $c$ there.  Replacing $\varphi_2$ by $\varphi_2\circ\kappa_0$ (again a minimal
+  non-degenerate phase function parametrizing $\Lambda$) we may assume that
+  $C_{\varphi_1}=C_{\varphi_2}=C$ and $j_{\varphi_1}=j_{\varphi_2}$ on $C$, i.e.\
+  $d_x\varphi_1=d_x\varphi_2$ on $C$.  As also $\varphi_i=0$ and
+  $d_\theta\varphi_i=0$ on $C$, the difference $\psi=\varphi_2-\varphi_1$ vanishes
+  with its differential on $C$.
+
+  \emph{Step 2: Moser's argument.}  The functions $F_j=\pa_{\theta_j}\varphi_1$,
+  homogeneous of degree $0$, define $C$ with independent differentials.  Using
+  homogeneous coordinates $(\rho,c',F)$ near $(\bar x,\bar\theta_1)$, with
+  $\rho=|\theta|$ and $c'$ homogeneous of degree $0$, Taylor's formula in $F$
+  gives
+  \begin{equation*}
+    \psi=\sum_{i,j}G_{ij}F_iF_j,\qquad G_{ij}=G_{ji}=\int_0^1(1-\tau)
+    \frac{\pa^2\psi}{\pa F_i\pa F_j}(\rho,c',\tau F)\,d\tau,
+  \end{equation*}
+  with $G_{ij}$ homogeneous of degree one.  Let $\varphi_t=\varphi_1+t\psi$,
+  $t\in[0,1]$.  Then
+  \begin{equation*}
+    \pa_{\theta_l}\varphi_t=\sum_jA_{lj}(t)F_j,\qquad A_{lj}(t)=\delta_{lj}+
+    t\sum_i\Big(\frac{\pa G_{ij}}{\pa\theta_l}F_i+2G_{ij}
+    \frac{\pa^2\varphi_1}{\pa\theta_l\pa\theta_i}\Big),
+  \end{equation*}
+  and $A$ is homogeneous of degree $0$ and equal to the identity at
+  $(\bar x,\bar\theta_1)$, because $F=0$ there and $\varphi_1$ is minimal.  So
+  $A(t)$ is invertible on a conic neighbourhood of $(\bar x,\bar\theta_1)$ for
+  all $t\in[0,1]$; consequently $C_{\varphi_t}=C$, each $\varphi_t$ is a
+  non-degenerate phase function, and $d_x\varphi_t=d_x\varphi_1$ on $C$.  We seek
+  homogeneous fibre-preserving maps $\kappa_t$, $\kappa_0=\Id$, with
+  $\varphi_t\circ\kappa_t=\varphi_1$, generated by vertical vector fields
+  $V_t=\sum_lv_l(t,x,\theta)\pa_{\theta_l}$, $\frac d{dt}\kappa_t=V_t\circ\kappa_t$.
+  Differentiating, the condition becomes $(\psi+V_t\varphi_t)\circ\kappa_t=0$,
+  which holds if
+  \begin{equation*}
+    v_l=-\sum_{i,j}G_{ij}F_i\,(A(t)^{-1})_{jl},
+  \end{equation*}
+  since then $V_t\varphi_t=\sum_lv_l\sum_jA_{lj}F_j=-\sum_{i,j}G_{ij}F_iF_j=-\psi$.
+  The coefficients $v_l$ are homogeneous of degree one, so $V_t$ commutes with
+  the dilations, and $V_t$ vanishes on $C$.  Since $V_t$ vanishes at
+  $(\bar x,\bar\theta_1)$, its flow is defined for $t\in[0,1]$ on a neighbourhood
+  of this point, hence by homogeneity on a conic neighbourhood, and
+  $\kappa=\kappa_1$ satisfies $\varphi_2\circ\kappa=\varphi_1$.  Composing with
+  $\kappa_0$ from Step 1 proves the theorem.
+\end{proof}
+
+\begin{corollary}\label{hj:cor:signature}
+  Let $\varphi_1$, $\varphi_2$ be non-degenerate phase functions, with $N_1$ and
+  $N_2$ variables, parametrizing $\Lambda$ on conic open sets
+  $\Lambda_{\varphi_1}$, $\Lambda_{\varphi_2}$.  For
+  $\lambda\in\Lambda_{\varphi_i}$ let $s_i(\lambda)=\sgn\varphi_i''{}_{\theta\theta}
+  (j_{\varphi_i}^{-1}(\lambda))$.  Then $s_1-s_2$ is locally constant on
+  $\Lambda_{\varphi_1}\cap\Lambda_{\varphi_2}$, and
+  $s_1-s_2\equiv N_1-N_2\pmod 2$.
+\end{corollary}
+\begin{proof}
+  Fix $\bar\lambda$ in the intersection and reduce both phases at the points
+  over $\bar\lambda$ by \cref{hj:lem:reduce}, to minimal phases
+  $\varphi_{1,0}$, $\varphi_{2,0}$ in $K=K(\bar\lambda)$ variables.  By
+  \cref{hj:thm:equivalence}, $\varphi_{2,0}\circ\kappa=\varphi_{1,0}$, and
+  differentiating twice at points of $C_{\varphi_{1,0}}$, where
+  $\pa_\theta\varphi_{2,0}\circ\kappa=0$,
+  $\varphi_{1,0}''{}_{\theta\theta}=(\pa_\theta\Theta)^t\,(\varphi_{2,0}''{}_{\theta\theta}
+  \circ\kappa)\,\pa_\theta\Theta$; moreover $j_{\varphi_{2,0}}\circ\kappa=
+  j_{\varphi_{1,0}}$ on $C_{\varphi_{1,0}}$.  So the minimal phases have equal
+  signatures at points over the same $\lambda$, and by \eqref{hj:eq:sgn-add}
+  $s_1-s_2=\sgn D_1-\sgn D_2$ near $\bar\lambda$, where $D_i$ are the invertible
+  $r_i\times r_i$ matrices $\varphi''_{i,\theta''\theta''}$.  These signatures are
+  locally constant, and $\sgn D_i\equiv r_i=N_i-K\pmod2$.
+\end{proof}
+
+\section{Lagrangian distributions}\label{hj:sec:lagrangian-dist}
+
+\subsection{Oscillatory integrals}
+Let $X\subset\R^n$ be open and $\varphi$ a phase function on the open cone
+$\Gamma\subset X\times(\R^N\setminus0)$.  For $\mu\in\R$ let $S^\mu_\Gamma$ be
+the space of $a\in S^\mu(\R^n;\R^N)$ which vanish for $|\theta|\le1$ and whose
+support is contained in $L\times\R^N$, $L\subset X$ compact, and in a closed
+cone (in $X\times(\R^N\setminus0)$) contained in $\Gamma$.  For such $a$ the
+oscillatory integral
+\begin{equation*}
+  I_\varphi(a)(x)=\int_{\R^N}e^{i\varphi(x,\theta)}a(x,\theta)\,\dbar\theta,\qquad
+  \dbar\theta=(2\pi)^{-N}d\theta,
+\end{equation*}
+is defined as the distribution $\phi\mapsto\lim_{\epsilon\downarrow0}\iint
+e^{i\varphi}a\,\chi_0(\epsilon\theta)\phi\,dx\,\dbar\theta$, $\chi_0\in\CIc$,
+$\chi_0(0)=1$; the limit exists and is independent of $\chi_0$, because
+$d_{x,\theta}\varphi\neq0$ allows repeated integration by parts
+\cite[Section~7.8]{Hormander-I}.  If $\mu<-N-r$ the integral converges
+absolutely and $I_\varphi(a)\in\mathcal C^r$; in particular $I_\varphi(a)\in\CI$
+if $a\in S^{-\infty}$.  Moreover \cite[Section~8.1]{Hormander-I}, as recalled
+in \cref{ch:wave},
+\begin{equation}\label{hj:eq:WF-osc}
+  \WF(I_\varphi(a))\subset j_\varphi\big(C_\varphi\cap\operatorname{cone\,supp}a\big),
+\end{equation}
+where $\operatorname{cone\,supp}a$ is the smallest closed cone outside which $a$
+is of order $-\infty$; and if $d_\theta\varphi\ne0$ on $\operatorname{cone\,supp}a$
+then $I_\varphi(a)\in\CI$ (integrate by parts with $L=|d_\theta\varphi|^{-2}
+\sum_j\pa_{\theta_j}\varphi\,D_{\theta_j}$, $Le^{i\varphi}=e^{i\varphi}$).  On a
+manifold we work with half-densities: in a chart, $I_\varphi(a)|dx|^{1/2}$.  We
+write
+\begin{equation*}
+  \mu_N=m+\frac n4-\frac N2
+\end{equation*}
+for the amplitude order corresponding to order $m$; for the conormal phase of
+\cref{hj:ex:phases}(i), $N=k$ and $\mu_k=M$ is the order of \cref{ch:conormal}.
+
+\begin{lemma}\label{hj:lem:osc-change}
+  (i) If $\kappa(x,\theta)=(x,\Theta(x,\theta))$ is a homogeneous
+  fibre-preserving diffeomorphism between open cones and $\varphi_2\circ\kappa=
+  \varphi_1$, then $I_{\varphi_2}(a)=I_{\varphi_1}(a\circ\kappa\,|\det
+  \pa_\theta\Theta|)$ for $a\in S^\mu_{\Gamma_2}$, and
+  $a\circ\kappa|\det\pa_\theta\Theta|\in S^\mu_{\Gamma_1}$.
+  (ii) If $F:X'\to X$ is a diffeomorphism of open sets then
+  $F^*(I_\varphi(a)|dx|^{1/2})=I_{\varphi\circ F}(a\circ F\,|\det F'|^{1/2})
+  |dx'|^{1/2}$, where $\varphi\circ F(x',\theta)=\varphi(F(x'),\theta)$
+  parametrizes $(F^\sharp)^{-1}(\Lambda_\varphi)$, $F^\sharp$ being the induced
+  map $T^*X'\to T^*X$.
+  (iii) If $a\in S^\mu_\Gamma$ and $a|_{C_\varphi}\in S^{\mu-1}$ (that is, $a$
+  coincides on $C_\varphi$ with an element of $S^{\mu-1}_\Gamma$) then
+  $I_\varphi(a)=I_\varphi(a')+\CI$ with $a'\in S^{\mu-1}_\Gamma$.
+\end{lemma}
+\begin{proof}
+  (i) and (ii) are changes of variables (first for $a$ of very negative order,
+  then by continuity); composition with a homogeneous diffeomorphism preserves
+  symbol classes, and $\det\pa_\theta\Theta$ is homogeneous of degree $0$.
+  (iii) Subtract an element of $S^{\mu-1}_\Gamma$ equal to $a$ on $C_\varphi$; so we
+  may assume $a=0$ on $C_\varphi$.  Let $\chi$ be homogeneous of degree zero for
+  $|\theta|\ge1$, equal to one near $C_\varphi$ and supported in a conic
+  neighbourhood of $C_\varphi$ covered by finitely many conic sets in which
+  homogeneous coordinates $(\rho,c',F)$, $F=\pa_\theta\varphi$, exist (we use a
+  subordinate partition of unity homogeneous of degree $0$ and treat each piece
+  separately).  Then $d_\theta\varphi\neq0$ on the support of $(1-\chi)a$, so
+  $I_\varphi((1-\chi)a)\in\CI$; and as in the proof of
+  \cref{hj:thm:equivalence}, $\chi a=\sum_jF_jb_j$ with
+  $b_j=\chi\int_0^1\pa_{F_j}a(\rho,c',\tau F)\,d\tau\in S^\mu_\Gamma$.  Since
+  $F_je^{i\varphi}=D_{\theta_j}e^{i\varphi}$, integration by parts gives
+  $I_\varphi(\chi a)=-\sum_jI_\varphi(D_{\theta_j}b_j)$, and $D_{\theta_j}b_j\in
+  S^{\mu-1}_\Gamma$.
+\end{proof}
+
+The next result is the analytic counterpart of \cref{hj:lem:reduce}: phase
+variables in which the phase is non-degenerate can be eliminated by
+stationary phase.  Recall that for an invertible real symmetric $r\times r$
+matrix $D$,
+\begin{equation}\label{hj:eq:fresnel}
+  \int_{\R^r}e^{\frac i2\ang{Dw,w}}\,dw=(2\pi)^{\frac r2}|\det D|^{-\frac12}
+  e^{\frac{i\pi}4\sgn D}
+\end{equation}
+as an oscillatory integral \cite[Section~7.6]{Hormander-I}.
+
+\begin{proposition}\label{hj:prop:sp-reduction}
+  Let $\varphi$, $\bar p$, $\Theta$, $\varphi_0$ be as in \cref{hj:lem:reduce},
+  and write $D(x,\theta')=\varphi''_{\theta''\theta''}(x,\theta',\Theta(x,\theta'))$,
+  homogeneous of degree $-1$, with constant signature $\sgn D$ near
+  $(\bar x,\bar\theta')$.  There are conic neighbourhoods $\Gamma_1$ of $\bar p$ and
+  $\Gamma_0$ of $(\bar x,\bar\theta')$ such that:
+  \begin{enumerate}[label=(\roman*)]
+  \item for every $a\in S^\mu_{\Gamma_1}$ there is $b\in S^{\mu+\frac r2}_{\Gamma_0}$
+    with $I_\varphi(a)-I_{\varphi_0}(b)\in\CI$ and
+    \begin{equation}\label{hj:eq:sp-symbol}
+      b(x,\theta')\equiv(2\pi)^{-\frac r2}e^{\frac{i\pi}4\sgn D}
+      |\det D(x,\theta')|^{-\frac12}a(x,\theta',\Theta(x,\theta'))
+      \mod S^{\mu+\frac r2-1};
+    \end{equation}
+  \item conversely, for every $b\in S^{\mu+\frac r2}_{\Gamma_0}$ there is
+    $a\in S^\mu_{\Gamma_1}$ with $I_\varphi(a)-I_{\varphi_0}(b)\in\CI$.
+  \end{enumerate}
+  Classical amplitudes correspond to classical amplitudes.
+\end{proposition}
+\begin{proof}[Sketch of proof]
+  (i) Choose $\chi(x,\theta)$, homogeneous of degree $0$, supported where
+  $|\theta''-\Theta(x,\theta')|<\epsilon|\theta'|$ and equal to one where
+  $|\theta''-\Theta|<\epsilon|\theta'|/2$.  On the support of $(1-\chi)a$ (for
+  $\Gamma_1$ small) $\pa_{\theta''}\varphi\ne0$, so $I_\varphi((1-\chi)a)\in\CI$.
+  For $\chi a$ substitute $\theta''=\Theta(x,\theta')+|\theta'|w$; then
+  $\varphi=|\theta'|\Phi(x,\hat\theta',w)$, $\hat\theta'=\theta'/|\theta'|$, where
+  $\Phi$ has, in $w$, a unique non-degenerate critical point at $w=0$ with value
+  $\varphi_0(x,\hat\theta')$ and Hessian $|\theta'|D(x,\theta')$.  The method of
+  stationary phase with the large parameter $|\theta'|$
+  \cite[Theorem~7.7.5]{Hormander-I}, applied with symbol amplitudes (the
+  derivatives in $w$ of $a(x,\theta',\Theta+|\theta'|w)$ are $O(|\theta'|^{\mu})$
+  and each term of the expansion gains a factor $|\theta'|^{-1}$; see
+  \cite[Section~25.1]{Hormander-III}), shows that
+  \begin{equation*}
+    \int e^{i\varphi(x,\theta',\theta'')}\chi a(x,\theta',\theta'')\,\dbar\theta''
+    =e^{i\varphi_0(x,\theta')}b(x,\theta')
+  \end{equation*}
+  with $b\in S^{\mu+\frac r2}$ having an asymptotic expansion whose leading term,
+  by \eqref{hj:eq:fresnel} and the factor $(2\pi)^{-r}$ in $\dbar\theta''$, is
+  \eqref{hj:eq:sp-symbol}.  (ii) Given $b$, put
+  $a_0=(2\pi)^{\frac r2}e^{-\frac{i\pi}4\sgn D}|\det D|^{\frac12}b(x,\theta')\,
+  \chi(x,\theta)$, of order $\mu$; by (i), $I_\varphi(a_0)=I_{\varphi_0}(b-b_1)$
+  modulo $\CI$ with $b_1\in S^{\mu+\frac r2-1}$.  Repeating with $b_1$ and so on,
+  and summing the $a_j$ asymptotically, gives $a$.
+\end{proof}
+
+\subsection{Definition and independence of the parametrization}
+
+\begin{definition}\label{hj:def:lagrangian}
+  Let $X$ be a manifold of dimension $n$ and $\Lambda\subset T^*X\setminus0$ a
+  closed conic Lagrangian submanifold.  The space $\Ic{m}(X,\Lambda;\Omegah)$
+  of \emph{Lagrangian distributions} of order $m$ consists of those
+  $u\in\CmI(X;\Omegah)$ such that $\WF(u)\subset\Lambda$ and, for every
+  $\bar\lambda\in\Lambda$, there are a chart near $\pi(\bar\lambda)$, a
+  non-degenerate phase function $\varphi$ in $N$ variables parametrizing
+  $\Lambda$ near $\bar\lambda$, and $a\in S^{\mu_N}_\Gamma$, such that
+  \begin{equation*}
+    \bar\lambda\notin\WF\big(u-I_\varphi(a)|dx|^{\frac12}\big).
+  \end{equation*}
+  The classical subspace $\Ic{m}_{\mathrm{ph}}(X,\Lambda;\Omegah)$ is defined
+  by requiring $a$ to be classical.
+\end{definition}
+
+Thus a Lagrangian distribution is smooth away from $\pi(\Lambda)$ and is,
+microlocally near each point of $\Lambda$, an oscillatory integral with a
+phase function parametrizing $\Lambda$.  By \eqref{hj:eq:WF-osc},
+$I_\varphi(a)|dx|^{1/2}$ itself lies in $\Ic{m}(X,\Lambda;\Omegah)$ when
+$a\in S^{\mu_N}_\Gamma$ and $\varphi$ parametrizes $\Lambda$ (with $\Gamma$ small,
+so that $j_\varphi(C_\varphi)\subset\Lambda$).  Since the definition only asks
+for \emph{some} parametrization, the real content of the following theorem is
+that \emph{every} parametrization can be used.
+
+\begin{theorem}\label{hj:thm:independence}
+  Let $u\in\Ic{m}(X,\Lambda;\Omegah)$, $\bar\lambda\in\Lambda$, and let $\varphi$ be
+  any non-degenerate phase function, in $N$ variables, parametrizing $\Lambda$
+  near $\bar\lambda$ (in some chart).  Then there is $a\in S^{\mu_N}_\Gamma$ with
+  $\bar\lambda\notin\WF(u-I_\varphi(a)|dx|^{1/2})$; $a$ is classical if $u$ is.
+\end{theorem}
+\begin{proof}
+  By \cref{hj:lem:osc-change}(ii) we may use a single chart.  Let
+  $\varphi_1$, $a_1\in S^{\mu_{N_1}}$ be as in the definition.  By
+  \cref{hj:lem:reduce} and \cref{hj:prop:sp-reduction}(i) (after a linear change
+  of the $\theta$ variables, which changes $a_1$ by a constant factor), and
+  after cutting $a_1$ off to a small conic neighbourhood of the point over
+  $\bar\lambda$ (which by \eqref{hj:eq:WF-osc} changes $I_{\varphi_1}(a_1)$ only
+  away from a conic neighbourhood of $\bar\lambda$), $I_{\varphi_1}(a_1)\equiv
+  I_{\varphi_{1,0}}(b_1)$ modulo $\CI$, with $\varphi_{1,0}$ minimal in $K$
+  variables and $b_1\in S^{\mu_K}$, since $\mu_{N_1}+\frac{N_1-K}2=\mu_K$.  Reduce
+  $\varphi$ in the same way to a minimal $\varphi_0$.  By
+  \cref{hj:thm:equivalence} and \cref{hj:lem:osc-change}(i),
+  $I_{\varphi_{1,0}}(b_1)=I_{\varphi_0}(b)$ with $b\in S^{\mu_K}$, and by
+  \cref{hj:prop:sp-reduction}(ii), $I_{\varphi_0}(b)\equiv I_\varphi(a)$ modulo
+  $\CI$ with $a\in S^{\mu_K-\frac{N-K}2}=S^{\mu_N}$.  All steps preserve
+  classical amplitudes.
+\end{proof}
+
+\begin{remark}\label{hj:rem:global}
+  Using a microlocal partition of unity one can show that every
+  $u\in\Ic{m}(X,\Lambda;\Omegah)$ is a locally finite sum of oscillatory
+  integrals $I_{\varphi_j}(a_j)|dx|^{1/2}$ plus a smooth half-density, and that
+  properly supported pseudodifferential operators of order $m'$ map
+  $\Ic{m}(X,\Lambda;\Omegah)$ into $\Ic{m+m'}(X,\Lambda;\Omegah)$; see
+  \cite[Chapter~25]{Hormander-III}, \cite{Hormander-FIO}.  We shall only need
+  the special case in the proof of the next theorem.
+\end{remark}
+
+\subsection{Conormal distributions}
+Conormal distributions are the Lagrangian distributions associated with
+conormal bundles, with the same orders.
+
+\begin{theorem}\label{hj:thm:conormal-lagrangian}
+  Let $Y\subset X$ be a closed embedded submanifold.  Then
+  \begin{equation*}
+    \Ic{m}(X,N^*Y\setminus0;\Omegah)=\Ic{m}(X,Y;\Omegah),
+  \end{equation*}
+  and similarly for the classical subspaces.
+\end{theorem}
+\begin{proof}
+  Let $u\in\Ic{m}(X,Y;\Omegah)$.  Then $\WF(u)\subset N^*Y\setminus0$
+  (\cref{ch:conormal}).  In an adapted chart, $\phi u=(\osc{a}+f)|dz|^{1/2}$ with
+  $a\in S^M$, $M=m+\frac n4-\frac k2=\mu_k$, which we may cut off to vanish for
+  $|\xi|\le1$ (changing $\osc{a}$ by a smooth function); so $\phi u$ is, modulo
+  $\CI$, an oscillatory integral with the phase $x\cdot\xi$ of
+  \cref{hj:ex:phases}(i), and $u\in\Ic{m}(X,N^*Y\setminus0;\Omegah)$.
+
+  Conversely let $u\in\Ic{m}(X,N^*Y\setminus0;\Omegah)$.  Then $u$ is smooth
+  outside $Y$.  Fix $\bar y\in Y$ and an adapted chart near $\bar y$.  By
+  \cref{hj:thm:independence}, applied with the phase $x\cdot\xi$, each
+  $\bar\lambda\in N^*_{\bar y}Y\setminus0$ has an open conic neighbourhood
+  $\Gamma_{\bar\lambda}$ in $T^*X\setminus0$ and $a_{\bar\lambda}\in
+  S^M$ with $\WF(u-\osc{a_{\bar\lambda}}|dz|^{1/2})\cap\Gamma_{\bar\lambda}=
+  \emptyset$.  By compactness of the sphere in $N^*_{\bar y}Y$, finitely many
+  $\Gamma_j=\Gamma_{\bar\lambda_j}$ cover $N^*_{y}Y\setminus0$ for $y$ in a
+  neighbourhood $U$ of $\bar y$.  Choose properly supported $B_j\in\Psido0(X)$
+  with $\WF'(B_j)\subset\Gamma_j$ and $\sum_jB_j=\Id$ microlocally near
+  $N^*Y\cap T^*U$, i.e.\ $\sum_j\sigma_0(B_j)=1$ on a conic neighbourhood of
+  $N^*Y\cap T^*U$ (\cref{ch:microlocal}).  For $\phi\in\CIc(U)$, since
+  $\WF(\phi u)\subset N^*Y$,
+  \begin{equation*}
+    \phi u\equiv\sum_jB_j(\phi u)\equiv\sum_jB_j\big(\phi\osc{a_j}|dz|^{\frac12}\big)
+    \mod\CI,
+  \end{equation*}
+  because $\WF(B_jw)\subset\WF'(B_j)\cap\WF(w)$.  The right side is conormal,
+  since pseudodifferential operators preserve conormal distributions
+  (\cref{hj:thm:psido-conormal}).  So $u\in\Ic{m}(X,Y;\Omegah)$.  The classical
+  case is the same.
+\end{proof}
+
+\begin{remark}[The wave kernel]\label{hj:rem:wave-kernel}
+  By \cref{hj:ex:phases}(ii), the short-time parametrix for the wave kernel
+  constructed in \cref{ch:wave} is a sum of oscillatory integrals with
+  non-degenerate phases $\varphi_\pm(t,x,\eta)-y\cdot\eta$, in $N=n$ variables, on
+  the manifold $\R\times X\times X$ of dimension $2n+1$, with amplitudes of order
+  $0$ (for the cosine kernel).  Since $0=m+\frac{2n+1}4-\frac n2$, the cosine
+  kernel is (for small $|t|$) a Lagrangian distribution of order $-\frac14$
+  associated with the flow-out of the diagonal described there; the sine kernel
+  has order $-\frac54$.  The conormal superposition used in \cref{ch:wave} is the
+  hypersurface parametrization of \cref{hj:prop:hypersurface} in polar
+  coordinates.
+\end{remark}
+
+\section{Keller's example of a caustic}\label{hj:sec:keller}
+
+J.~B.~Keller was the first to compute with Lagrangian distributions in a
+situation, that of a caustic, where the factors which are now organized into the
+Keller--Maslov line bundle cannot be avoided.  The example motivates the
+definition of the principal symbol in the next section.
+
+Let $P=D_t^2-D_x^2-D_y^2$ on $\R^3$, with $p=\tau^2-\xi^2-\eta^2$ and
+$\Sigma(P)=\{\tau^2=\xi^2+\eta^2\}$.  Its null bicharacteristics are the
+\emph{light rays}: $(\tau,\xi,\eta)$ is constant and $(t,x,y)$ moves on the
+straight line $t=t_0+s$, $x=x_0-\xi s/\tau$, $y=y_0-\eta s/\tau$ (after
+reparametrization).  Characteristic planes such as $\{t=\omega\cdot(x,y)\}$,
+$|\omega|=1$, carry the travelling waves of \cref{hj:ex:plane}, and by
+\cref{hj:cor:characteristic} any smooth curve $C$ in the plane $\{t=0\}$ is the
+intersection with $\{t=0\}$ of two characteristic surfaces, defined for $|t|$
+small (one for each choice of the sign of $\tau$ relative to the normal).  These
+surfaces in general develop singularities, but by \cref{hj:lem:flowout} the
+corresponding Lagrangian, the union of the light rays through the conormal
+covectors of $C$, stays smooth.  We consider the parabola
+\begin{equation*}
+  C=\{y=\tfrac12x^2\},\qquad N^*C=\{(x_0,\tfrac12x_0^2;-x_0\eta,\eta);\
+  x_0,\eta\in\R\}.
+\end{equation*}
+
+\begin{proposition}\label{hj:prop:keller}
+  Let $\Lambda_0=\{(0,x_0,\frac12x_0^2;\tau,-x_0\eta,\eta);\ \eta\neq0,\
+  \tau=-(1+x_0^2)^{1/2}\eta\}$ and let $\Lambda$ be the flow-out of $\Lambda_0$ by
+  $H_p$.  Then, with $w=w(x_0)=(1+x_0^2)^{-1/2}$,
+  \begin{equation}\label{hj:eq:keller-Lambda}
+    \Lambda=\Big\{\big(t,\ x_0(1-tw),\ \tfrac12x_0^2+tw;\ -\eta/w,\ -x_0\eta,\
+    \eta\big);\ x_0,t\in\R,\ \eta\neq0\Big\},
+  \end{equation}
+  a closed conic Lagrangian submanifold of $T^*\R^3\setminus0$ contained in
+  $\Sigma(P)$, invariant under $\zeta\mapsto-\zeta$.  Moreover:
+  \begin{enumerate}[label=(\roman*)]
+  \item $K(\lambda)=1$ at all points of $\Lambda$ except those with
+    $t=(1+x_0^2)^{3/2}$, where $K=2$; these project to the curve
+    \begin{equation*}
+      \mathcal K=\{(t,x,y)=\big((1+x_0^2)^{\frac32},\ -x_0^3,\ 1+\tfrac32x_0^2\big);\
+      x_0\in\R\},
+    \end{equation*}
+    the caustic, which is singular only at $(1,0,1)$.
+  \item In $\{t<1\}$, $\Lambda=N^*G\setminus0$ where $G=\{(t,x_0(1-tw),
+    \frac12x_0^2+tw);\ t<1,\ x_0\in\R\}$ is a smooth embedded characteristic
+    surface.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  $\Lambda_0$ is conic, of dimension $2$, contained in $\Sigma(P)$ (as
+  $\tau^2=(1+x_0^2)\eta^2=\xi^2+\eta^2$), $\alpha=\tau\,dt+\xi\,dx+\eta\,dy$
+  vanishes on it ($dt=0$ and $-x_0\eta\,dx_0+\eta\,x_0dx_0=0$), and $H_p=2\tau\pa_t-
+  2\xi\pa_x-2\eta\pa_y$ is transversal to it since $\tau\neq0$.  The light ray
+  through a point of $\Lambda_0$ is $t\mapsto(t,x_0-\xi t/\tau,\frac12x_0^2-\eta
+  t/\tau)$ with $\xi/\tau=x_0w$, $\eta/\tau=-w$, which gives
+  \eqref{hj:eq:keller-Lambda}; the parametrization by $(x_0,t,\eta)$ is
+  injective (the covector determines $\eta$ and $x_0$), so by
+  \cref{hj:lem:flowout} $\Lambda$ is a conic Lagrangian submanifold.  It is
+  closed in $T^*\R^3\setminus0$: if $\lambda_k\in\Lambda$ converge to a point of
+  $T^*\R^3\setminus0$ then $\eta_k$ stays away from $0$ (otherwise, the covectors
+  being bounded below, $|x_{0,k}|\to\infty$ and then
+  $|x|=|x_{0,k}|\,|1-tw|\to\infty$), so $(x_{0,k},t_k,\eta_k)$ converges.
+
+  (i) The projection is $(x_0,t,\eta)\mapsto(t,x,y)$; its differential has rank
+  one in the $(t)$-direction plus the rank of $\pa_{x_0}(x,y)$, which is
+  \begin{equation*}
+    \pa_{x_0}\big(x_0(1-tw)\big)=1-t(1+x_0^2)^{-\frac32},\qquad
+    \pa_{x_0}\big(\tfrac12x_0^2+tw\big)=x_0\big(1-t(1+x_0^2)^{-\frac32}\big),
+  \end{equation*}
+  so the rank of $d\pi|_{T\Lambda}$ is $2$ (i.e.\ $K=1$) unless
+  $t=(1+x_0^2)^{3/2}$, where it is $1$.  Substituting this value of $t$ gives
+  $\mathcal K$.  All three components of the derivative of the parametrization of
+  $\mathcal K$, $(3x_0(1+x_0^2)^{1/2},-3x_0^2,3x_0)$, vanish only at $x_0=0$.
+
+  (ii) For $t<1$, $\pa_{x_0}x=1-t(1+x_0^2)^{-3/2}>0$, so for fixed $t$ the map
+  $x_0\mapsto(x,y)$ is an injective immersion, and $G$ is a smooth embedded
+  surface; $\Lambda\cap\{t<1\}$ is a conic Lagrangian projecting onto $G$ with
+  $K=1$, contained in $N^*G$ (as $\alpha=0$ on it) and of the same dimension.
+  It is characteristic since $\Lambda\subset\Sigma(P)$.
+\end{proof}
+
+For fixed $t$, the curve $C_t=G\cap\{t\}$ is the parallel curve to $C$ at
+distance $t$, on the concave side: $(x,y)=(x_0,\frac12x_0^2)+t(-x_0,1)w$, the
+unit normal being $(-x_0,1)w$.  The projection of $\mathcal K$ to the $(x,y)$
+plane is the evolute of the parabola, the locus of its centres of curvature
+(the radius of curvature of $C$ at $x_0$ is $(1+x_0^2)^{3/2}$), the semicubical
+parabola $(y-1)^3=\frac{27}8x^2$.  For $t<1$, $C_t$ is smooth; at $t=1$ it has a
+single singular point $(0,1)$; for $t>1$ it has two cusps, at
+$x_0=\pm(t^{2/3}-1)^{1/2}$, on the evolute, and a self-intersection on the axis
+$x=0$, at $y=\frac12(t^2+1)$ (\cref{fig:keller}).  The arc of $C_t$ between the
+cusps, which contains the vertex $(0,t)$, is curved the opposite way from the
+rest (\cref{hj:ex:keller}).
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}[scale=1.35]
+    \draw[->,gray] (-2.6,0)--(2.6,0) node[right]{$x$};
+    \draw[->,gray] (0,-0.2)--(0,3.6) node[above]{$y$};
+    \foreach \t/\c in {0/black,0.6/black,1/black,1.7/black}{
+      \draw[\c,thick,domain=-2.1:2.1,samples=120,smooth,variable=\u]
+        plot ({\u*(1-\t/sqrt(1+\u*\u))},{\u*\u/2+\t/sqrt(1+\u*\u)});
+    }
+    \draw[dashed,domain=-1.12:1.12,samples=80,smooth,variable=\u]
+      plot ({-\u*\u*\u},{1+1.5*\u*\u});
+    \node[right] at (2.1,2.2) {$C_0=C$};
+    \node[left] at (-0.6,2.95) {$C_{1.7}$};
+    \node[right] at (1.42,2.9) {$\mathcal K$};
+  \end{tikzpicture}
+  \caption{The parallel curves $C_t$ of the parabola for $t=0,\,0.6,\,1,\,1.7$
+  and the caustic $\mathcal K$ (dashed), projected to the $(x,y)$-plane.}
+  \label{fig:keller}
+\end{figure}
+
+\subsection{A parametrization near the cusp}
+We follow the proof of \cref{hj:thm:param-exists} near the point of $\Lambda$
+over $(t,x,y)=(1,0,1)$ with $x_0=0$, $\eta=1$, i.e.\ $\bar\lambda=(1,0,1;-1,0,1)$,
+where $K=2$.  The tangent space of $\Lambda$ projects onto
+$\operatorname{span}\{\pa_t+\pa_y\}$, and $\bar\lambda=dy-dt$.  So we use the
+linear coordinates and their dual variables
+\begin{equation*}
+  S=y-t,\quad x,\quad R=\tfrac12(y+t)-1;\qquad \sigma=\tfrac12(\eta-\tau),\quad
+  \xi,\quad\rho=\eta+\tau,
+\end{equation*}
+so that $\tau\,dt+\xi\,dx+\eta\,dy=\sigma\,dS+\xi\,dx+\rho\,dR$, the base point is
+$(S,x,R)=0$, $\bar\lambda=dS$, and $x'=(S,x)$, $x''=R$, $\theta=(\sigma,\xi)$ in
+the notation of \cref{hj:thm:param-exists}.  On $\Lambda$, with $q=(1+x_0^2)^{1/2}$,
+\begin{equation*}
+  S=\tfrac12x_0^2+t(w-1),\quad R=\tfrac14x_0^2+\tfrac12t(1+w)-1,\quad
+  \sigma=\tfrac12\eta(1+q),\quad\xi=-x_0\eta,\quad\rho=\eta(1-q).
+\end{equation*}
+It is convenient to use the homogeneous coordinate $z=\xi/\sigma=-2x_0/(1+q)$;
+then
+\begin{equation*}
+  x_0=-\frac{4z}{4-z^2},\qquad q=\frac{4+z^2}{4-z^2},\qquad w=\frac{4-z^2}{4+z^2},
+  \qquad |z|<2,
+\end{equation*}
+and solving for $t$ from $(R,z)$ and substituting one finds, on $\Lambda$,
+\begin{equation*}
+  x=z(1+R)-\frac{16z}{(4-z^2)^2},\qquad S=\frac{2z^2(4+z^2)}{(4-z^2)^2}-
+  \frac{z^2}2(1+R),\qquad \frac\rho\sigma=-\frac{z^2}2 .
+\end{equation*}
+These are $x=\pa_zF$, $S=F-z\pa_zF$ and $\rho/\sigma=-\pa_RF$ for
+\begin{equation*}
+  F(R,z)=\frac{z^2}2(1+R)-\frac{2z^2}{4-z^2}=\frac{z^2}2R-\frac{z^4}8-
+  \frac{z^6}{32}-\cdots,
+\end{equation*}
+and $G(\sigma,\xi,R)=\sigma F(R,\xi/\sigma)$ is the generating function of
+\cref{hj:thm:param-exists}.  Thus $\Lambda$ is parametrized near $\bar\lambda$
+by the minimal phase function
+\begin{equation}\label{hj:eq:keller-phase}
+  \varphi(S,x,R;\sigma,\xi)=\sigma S+\xi x-\sigma F(R,\xi/\sigma)=\sigma\,
+  h(S,x,R,\xi/\sigma),\qquad h=S+zx-F(R,z),
+\end{equation}
+on $\sigma>0$, $|\xi|<2\sigma$, the hypersurface $\{h=0\}\subset\R^3\times\R_z$
+being a parametrization in the sense of \cref{hj:prop:hypersurface}.
+(For $\eta<0$ one uses $\sigma<0$ in the same formula.)  Since
+$\pa_z^2F(R,0)=R$,
+\begin{equation*}
+  \varphi''_{\xi\xi}=\frac1\sigma\pa_z^2h=-\frac{R}\sigma\quad\text{at }z=0 .
+\end{equation*}
+The points of $C_\varphi$ with $\xi=0$ are those with $x=\pa_zF(R,0)=0$ and
+$S=F(R,0)=0$, i.e.\ they lie over the points $(t,0,t)$ of the axis, the
+vertices of the fronts $C_t$, and there $R=t-1$.  So $\varphi''_{\theta\theta}$
+has rank one (and $K=1$) at these points for $t\ne1$, with
+\begin{equation}\label{hj:eq:keller-sign}
+  \sgn\varphi''_{\theta\theta}=\sgn\varphi''_{\xi\xi}=\sgn\big((1-t)\sigma\big).
+\end{equation}
+
+\subsection{The phase shift across the caustic}
+Let $u=I_\varphi(a)$ with $a\in S^{\mu}$, $\mu=m+\frac34-1$, classical, supported
+in a small conic neighbourhood of $\{(0,\sigma,0);\ \sigma>0\}$, so that
+$u\in\Ic{m}(\R^3,\Lambda)$ near $(1,0,1)$.  Near a point $(t,0,t)$ with
+$0<|t-1|$ small, $u$ is microlocally conormal to the smooth sheet of the front
+through that point (the part of $G$ near its vertex for $t<1$, and the reversed
+arc of the front for $t>1$).  Indeed \cref{hj:prop:sp-reduction}, applied with
+$\theta'=\sigma$, $\theta''=\xi$ (at these points $\varphi''_{\sigma\sigma}=
+\varphi''_{\sigma\xi}=0$ by Euler's relation), shows that $u\equiv I_{\varphi_0}(b)$
+with the phase $\varphi_0(S,x,R,\sigma)=\sigma g(S,x,R)$, where $g=h(\cdot,Z)$,
+$\pa_zh(\cdot,Z)=0$, defines the front, and
+\begin{equation*}
+  b\equiv(2\pi)^{-\frac12}e^{\frac{i\pi}4\sgn((1-t)\sigma)}\,
+  \frac{|\sigma|^{\frac12}}{|t-1|^{\frac12}}\,a(S,x,R,\sigma,0)
+  \quad\text{at the points over }(t,0,t).
+\end{equation*}
+Two features appear.  The factor $|t-1|^{-1/2}$ shows that the conormal
+amplitude blows up as the vertex approaches the caustic, the intensity
+predicted by geometrical optics becoming infinite; this factor is the ratio
+$(d_{C_\varphi}/d_{C_{\varphi_0}})^{1/2}$ of
+\cref{hj:sec:lagrangian-symbol} and is accounted for by using half-densities on
+$\Lambda$.  The second is \emph{Keller's observation}: after removing the
+factor $|t-1|^{-1/2}$ and the smooth amplitude $a$, the conormal symbol on the
+sheet beyond the caustic differs from that before it by
+\begin{equation*}
+  e^{\frac{i\pi}4(\sgn(1-t)-\sgn(1-t'))\sgn\sigma}\Big|_{t>1>t'}=
+  e^{-\frac{i\pi}2\sgn\sigma}=\mp i\quad\text{for }\pm\sigma>0 .
+\end{equation*}
+So one must expect factors $e^{\pm i\pi/2}$ in passing from one conormal
+description of a Lagrangian distribution to another across a caustic.  These
+are the transition functions of the Keller--Maslov bundle.  (Solutions of
+$Pu\in\CI$ of this form exist: the travelling waves with initial data conormal
+to $C$ constructed in \cref{hj:thm:travelling} continue, by the general theory
+of \cite{Hormander-FIO}, as Lagrangian distributions associated with $\Lambda$
+through the caustic, with principal symbol satisfying a transport equation
+along $\Lambda$.)
+
+\section{The principal symbol and the Maslov bundle}\label{hj:sec:lagrangian-symbol}
+
+\subsection{The density on the critical set}
+Let $\varphi$ be a non-degenerate phase function on $\Gamma\subset
+X\times(\R^N\setminus0)$, $X\subset\R^n$ open, and $F_j=\pa_{\theta_j}\varphi$.
+Near $C_\varphi$ there are local coordinates $(c,F)$ with $c$ restricting to
+coordinates on $C_\varphi$; if $|dx\,d\theta|=J(c,F)|dc\,dF|$, we set
+$d_{C_\varphi}=J(c,0)|dc|$.  This density on $C_\varphi$ is independent of the
+choice of $c$ (if $\tilde c=\tilde c(c,F)$ then
+$|dc\,dF|=|\det\pa_c\tilde c|^{-1}|d\tilde c\,dF|$), and it is homogeneous of
+degree $N$ under $\theta\mapsto t\theta$, since $|dx\,d\theta|$ is homogeneous of
+degree $N$ and the $F_j$ of degree $0$.  Thus for $a\in S^{\mu_N}_\Gamma$,
+$(j_\varphi)_*(a|_{C_\varphi}\sqrt{d_{C_\varphi}})$ is a half-density on
+$\Lambda_\varphi$ of ``order'' $\mu_N+\frac N2=m+\frac n4$.  For the conormal
+phase $x\cdot\xi$ of \cref{hj:ex:phases}(i), $F=x$ and
+$|dx\,dy\,d\xi|=|dy\,d\xi|\,|dF|$, so $d_{C_\varphi}=|dy\,d\xi|$.
+
+\subsection{Symbol spaces}
+Let $\Lambda$ be a conic manifold (with the action of $M_t$, $t>0$, free and
+proper).  A function $g\in\CI(\Lambda)$ is a \emph{symbol of order $0$} if
+$V_1\cdots V_kg$ is bounded on $\{\lambda\in U;\ |\lambda|\ge1\}$ for every $k$,
+every conic set $U$ with compact image in $\Lambda/\R_+$, and all smooth vector
+fields $V_j$ commuting with the dilations; here $|\lambda|$ is any positive
+function homogeneous of degree one.  The space $S^r(\Lambda;\Omegah)$ consists
+of the half-densities $g\beta_0$, locally, with $g$ a symbol of order $0$ and
+$\beta_0$ a smooth non-vanishing half-density homogeneous of degree $r$.  For
+$\Lambda=N^*Y$, in coordinates $(y,\xi)$ the vector fields $\pa_y$ and
+$\xi_i\pa_{\xi_j}$ generate those commuting with dilations and
+$|dy\,d\xi|^{1/2}$ is homogeneous of degree $\frac k2$, so this is the space
+$S^r(N^*Y;\Omegah)$ of \cref{ch:conormal} (restricted to $N^*Y\setminus0$).
+The quotient $S^{r-[1]}=S^r/S^{r-1}$ and, for flat line bundles $L$, the
+spaces $S^r(\Lambda;\Omegah\otimes L)$ are defined in the same way using local
+flat trivializations.
+
+\subsection{The Maslov bundle}
+Let $\Lambda\subset T^*X\setminus0$ be a conic Lagrangian submanifold and cover
+it by open conic sets $\Lambda_{\varphi_i}$ parametrized by non-degenerate phase
+functions $\varphi_i$ in $N_i$ variables (in charts of $X$).  Let
+$s_i(\lambda)=\sgn\varphi_i''{}_{\theta\theta}(j_{\varphi_i}^{-1}(\lambda))$.
+By \cref{hj:cor:signature}, the functions
+\begin{equation*}
+  g_{ij}=e^{\frac{i\pi}4(s_j-s_i)}\quad\text{on }\Lambda_{\varphi_i}\cap
+  \Lambda_{\varphi_j}
+\end{equation*}
+are locally constant (with values in the eighth roots of unity, in fact in
+$\{\pm1,\pm i\}$ times $e^{\frac{i\pi}4(N_j-N_i)}$), and they trivially satisfy
+$g_{ij}g_{jk}=g_{ik}$.
+
+\begin{definition}\label{hj:def:maslov}
+  The \emph{Keller--Maslov bundle} $M_\Lambda$ is the flat complex line bundle
+  over $\Lambda$ defined by the cocycle $(g_{ij})$: a section is a family of
+  functions $c_i$ on $\Lambda_{\varphi_i}$ with $c_i=g_{ij}c_j$ on the overlaps,
+  i.e.\ such that the (in general discontinuous) function
+  $e^{\frac{i\pi}4s_i}c_i$ is independent of $i$.
+\end{definition}
+
+Adding more parametrizations to the cover does not change the bundle (up to
+canonical isomorphism), by \cref{hj:cor:signature} again.  Over a conormal
+bundle $N^*Y\setminus0$ the phases $x\cdot\xi$ in adapted coordinates all have
+$\varphi''_{\theta\theta}=0$, so they define a canonical trivialization of
+$M_{N^*Y}$.  In Keller's example, \eqref{hj:eq:keller-sign} shows that the
+trivializations of $M_\Lambda$ defined by conormal phases for the sheets of the
+front before and after the caustic differ by the factor $e^{\mp i\pi/2}$ found
+in \cref{hj:sec:keller}.  Each component of that $\Lambda$ is contractible, so
+$M_\Lambda$ is trivial there, but no trivialization is compatible with all
+conormal descriptions.  In general $M_\Lambda$ need not be trivial; its first
+Chern class is the image of the Maslov class in $H^1(\Lambda;\Z)$, see
+\cite[Chapter~21]{Hormander-III}.
+
+\subsection{The principal symbol}
+
+\begin{theorem}\label{hj:thm:lagrangian-symbol}
+  Let $\Lambda\subset T^*X\setminus0$ be a closed conic Lagrangian submanifold.
+  There is a unique linear map
+  \begin{equation*}
+    \sigma_m:\Ic{m}(X,\Lambda;\Omegah)\longrightarrow
+    S^{m+\frac n4-[1]}(\Lambda;\Omegah\otimes M_\Lambda)
+  \end{equation*}
+  such that, whenever $\varphi$ parametrizes $\Lambda$ on $\Lambda_\varphi$ and
+  $\bar\lambda\notin\WF(u-I_\varphi(a)|dx|^{1/2})$ with $a\in S^{\mu_N}_\Gamma$,
+  then near $\bar\lambda$, in the trivialization of $M_\Lambda$ given by
+  $\varphi$,
+  \begin{equation}\label{hj:eq:lagrangian-symbol}
+    \sigma_m(u)=(2\pi)^{\frac n4-\frac N2}(j_\varphi)_*\big(a|_{C_\varphi}
+    \sqrt{d_{C_\varphi}}\big)\mod S^{m+\frac n4-1}.
+  \end{equation}
+  Equivalently: if $\bar\lambda\notin\WF(u-I_{\varphi_i}(a_i)|dx|^{1/2})$ for
+  $i=1,2$, then near $\bar\lambda$
+  \begin{equation}\label{hj:eq:symbol-change}
+    (2\pi)^{-\frac{N_1}2}e^{\frac{i\pi}4s_1}(j_{\varphi_1})_*\big(a_1\sqrt{d_{C_{\varphi_1}}}\big)
+    \equiv(2\pi)^{-\frac{N_2}2}e^{\frac{i\pi}4s_2}(j_{\varphi_2})_*\big(a_2
+    \sqrt{d_{C_{\varphi_2}}}\big)\mod S^{m+\frac n4-1}.
+  \end{equation}
+  There is a short exact sequence
+  \begin{equation*}
+    0\longrightarrow\Ic{m-1}(X,\Lambda;\Omegah)\longrightarrow
+    \Ic{m}(X,\Lambda;\Omegah)\xrightarrow{\ \sigma_m\ }
+    S^{m+\frac n4-[1]}(\Lambda;\Omegah\otimes M_\Lambda)\longrightarrow0,
+  \end{equation*}
+  and similarly for the classical spaces, with values in the smooth sections of
+  $\Omegah\otimes M_\Lambda$ homogeneous of degree $m+\frac n4$.  For
+  $\Lambda=N^*Y\setminus0$, with the canonical trivialization of $M_\Lambda$,
+  \begin{equation}\label{hj:eq:symbol-conormal}
+    \sigma_m(u)=(2\pi)^{\frac n4-\frac k2}\,\sigma^{Y}_m(u),\qquad k=\operatorname{codim}Y,
+  \end{equation}
+  where $\sigma^Y_m$ is the principal symbol of \cref{ch:conormal}.
+\end{theorem}
+
+The normalizing constant $(2\pi)^{\frac n4-\frac N2}$ is chosen so that
+\eqref{hj:eq:lagrangian-symbol} is the symbol of \cite{Hormander-FIO} and
+\cite[Section~25.1]{Hormander-III}, where oscillatory integrals are normalized
+by the factor $(2\pi)^{-\frac{n+2N}4}$ instead of our $(2\pi)^{-N}$.  Since the
+relation between the two symbols in \eqref{hj:eq:symbol-conormal} depends on
+$k$, no normalization makes it the identity for all submanifolds at once.
+
+\begin{proof}[Proof (with the analytic steps sketched)]
+  \emph{(a) Equivalent phases.}  Let $\varphi_2\circ\kappa=\varphi_1$,
+  $\kappa(x,\theta)=(x,\Theta(x,\theta))$, and $a_1=(a_2\circ\kappa)|\det
+  \pa_\theta\Theta|$ as in \cref{hj:lem:osc-change}(i).  On $C_{\varphi_1}$,
+  $\pa_\theta\varphi_1=(\pa_\theta\Theta)^t(\pa_\theta\varphi_2\circ\kappa)$, so
+  $d(\pa_\theta\varphi_1)=(\pa_\theta\Theta)^t\,\kappa^*d(\pa_\theta\varphi_2)$
+  there, and $\kappa^*|dx\,d\theta|=|\det\pa_\theta\Theta|\,|dx\,d\theta|$; hence
+  $\kappa^*d_{C_{\varphi_2}}=|\det\pa_\theta\Theta|^2d_{C_{\varphi_1}}$ and
+  $a_1\sqrt{d_{C_{\varphi_1}}}=\kappa^*(a_2\sqrt{d_{C_{\varphi_2}}})$.  Also
+  $j_{\varphi_2}\circ\kappa=j_{\varphi_1}$ on $C_{\varphi_1}$, $N_1=N_2$ and
+  $s_1=s_2$ (proof of \cref{hj:cor:signature}).  So both sides of
+  \eqref{hj:eq:symbol-change} agree exactly.
+
+  \emph{(b) Reduction.}  In the situation of \cref{hj:lem:reduce}, use near
+  $C_\varphi$ the coordinates $(x,\theta',w)$, $w=\pa_{\theta''}\varphi$, for
+  which $|dx\,d\theta|=|\det\varphi''_{\theta''\theta''}|^{-1}|dx\,d\theta'\,dw|$;
+  on $\{w=0\}=s(\{(x,\theta')\})$ the remaining defining functions
+  $\pa_{\theta'}\varphi$ restrict to $\pa_{\theta'}\varphi_0$.  Hence
+  $s^*d_{C_\varphi}=|\det D|^{-1}d_{C_{\varphi_0}}$, and with
+  \eqref{hj:eq:sp-symbol} and \eqref{hj:eq:sgn-add}
+  \begin{align*}
+    (2\pi)^{-\frac K2}e^{\frac{i\pi}4\sgn\varphi_0''}b\sqrt{d_{C_{\varphi_0}}}
+    &\equiv(2\pi)^{-\frac K2-\frac r2}e^{\frac{i\pi}4(\sgn\varphi_0''+\sgn D)}
+    |\det D|^{-\frac12}a\,|\det D|^{\frac12}s^*\sqrt{d_{C_\varphi}}\\
+    &=(2\pi)^{-\frac N2}e^{\frac{i\pi}4\sgn\varphi''}s^*\big(a\sqrt{d_{C_\varphi}}\big),
+  \end{align*}
+  where $a$ is evaluated at $\theta''=\Theta$ and $\varphi''=\varphi''_{\theta\theta}\circ s$.
+  So \eqref{hj:eq:symbol-change} holds for a phase and its reduction.
+
+  \emph{(c) Independence of the amplitude.}  By the proof of
+  \cref{hj:thm:independence}, (a) and (b) reduce \eqref{hj:eq:symbol-change} to
+  the following statement: if $\varphi$ is minimal at the point over
+  $\bar\lambda$ and $\bar\lambda\notin\WF(I_\varphi(a)-I_\varphi(a'))$ with
+  $a\in S^\mu$, $a'\in S^{\mu-1}$, then $a|_{C_\varphi}\in S^{\mu-1}$ near the
+  point over $\bar\lambda$.  By (a), \cref{hj:thm:equivalence} and
+  \cref{hj:lem:osc-change}(ii) we may take $\varphi=x'\cdot\theta-G(\theta,x'')$
+  as in \cref{hj:thm:param-exists}.  Since $C_\varphi=\{x'=\pa_\theta G\}$,
+  \cref{hj:lem:osc-change}(iii) allows us to replace $a$ and $a'$ by their
+  restrictions to $C_\varphi$, regarded as functions of $(x'',\theta)$
+  independent of $x'$ (a cut-off in $x'$ is unnecessary: for $|x'|$ large
+  $|d_\theta\varphi|\ge|x'|/2$, and integration by parts shows that the
+  resulting integrals are rapidly decreasing in $x'$ with all derivatives).
+  Then, for $c=a-a'$ cut off to a small conic neighbourhood of
+  $(\bar x'',\bar\theta)$,
+  \begin{equation*}
+    v(x',x'')=\int e^{ix'\cdot\theta}\big(e^{-iG(\theta,x'')}c(x'',\theta)\big)\,\dbar\theta
+  \end{equation*}
+  is, for each $x''$, the inverse Fourier transform in $x'$ of
+  $e^{-iG}c$.  By \eqref{hj:eq:WF-osc}, $\WF(v)$ lies in $\Lambda$, where
+  $|\xi''|\le C|\xi'|$, and by hypothesis it avoids a conic neighbourhood of
+  $\bar\lambda$; so for $\psi\in\CIc$ supported near $\bar x''$, the Fourier
+  transform of $\psi(x'')v$ in all variables is rapidly decreasing in the
+  region where $\xi'$ lies in a small cone around $\bar\theta$ (both where
+  $|\xi''|\le2C|\xi'|$, by the hypothesis, and where $|\xi''|\ge2C|\xi'|$, which
+  meets no point of $\Lambda$).  Integrating out $\xi''$, the partial Fourier
+  transform $\psi(x'')e^{-iG}c(x'',\theta)$ is rapidly decreasing, with all
+  derivatives, for $\theta$ in that cone.  Since the derivatives of $e^{iG}$ grow
+  only polynomially, $c\in S^{-\infty}$ near $(\bar x'',\bar\theta)$; hence
+  $a|_{C_\varphi}\in S^{\mu-1}$ there.
+
+  \emph{(d) Conclusion.}  By (a)--(c) the local expressions
+  \eqref{hj:eq:lagrangian-symbol} are well defined modulo $S^{m+\frac n4-1}$ and
+  are compatible on overlaps with the transition functions of $M_\Lambda$, so
+  they define $\sigma_m(u)$.  If $u\in\Ic{m-1}$ its local amplitudes have order
+  $\mu_N-1$ and $\sigma_m(u)=0$.  Conversely if $\sigma_m(u)=0$, the local
+  amplitudes satisfy $a|_{C_\varphi}\in S^{\mu_N-1}$, and
+  \cref{hj:lem:osc-change}(iii) shows that $u$ is microlocally an oscillatory
+  integral of order $m-1$ near each point, i.e.\ $u\in\Ic{m-1}$.  For
+  surjectivity, take a locally finite cover of $\Lambda$ by conic sets
+  $\Lambda_{\varphi_j}$ with a subordinate partition of unity $\psi_j$ by
+  functions homogeneous of degree $0$; given $\beta$, extend the coefficient
+  $(2\pi)^{\frac N2-\frac n4}(\psi_j\beta)/\sqrt{d_{C_{\varphi_j}}}$ (pulled back
+  to $C_{\varphi_j}$) to an amplitude $a_j\in S^{\mu_{N_j}}_{\Gamma_j}$, and let
+  $u=\sum_jI_{\varphi_j}(a_j)|dx|^{1/2}$ (with cut-offs in $x$ to make the sum
+  locally finite).  By \eqref{hj:eq:WF-osc}, $u\in\Ic{m}(X,\Lambda;\Omegah)$, and
+  $\sigma_m(u)=\sum_j\psi_j\beta=\beta$.  The classical case is the same.
+  Finally, \eqref{hj:eq:symbol-conormal} follows from
+  \eqref{hj:eq:lagrangian-symbol} with $N=k$, $d_{C_\varphi}=|dy\,d\xi|$ and the
+  definition of $\sigma^Y_m$ in \cref{ch:conormal}.
+\end{proof}
+
+\begin{remark}\label{hj:rem:lagrangian-ops}
+  The results of \cref{hj:sec:psido,hj:sec:transport} extend to Lagrangian
+  distributions \cite[Chapter~25]{Hormander-III}, \cite{Hormander-FIO}: if
+  $A\in\Psido{m'}(X;\Omegah)$ is properly supported then
+  $\sigma_{m+m'}(Au)=\sigma_{m'}(A)|_\Lambda\,\sigma_m(u)$; and if
+  $\Lambda\subset\Sigma(P)$, so that $H_p$ is tangent to $\Lambda$
+  (\cref{hj:lem:tangent}), then $Pu\in\Ic{m+m'-1}(X,\Lambda;\Omegah)$ and
+  $\sigma_{m+m'-1}(Pu)=(-i\mathcal L_{H_p}+p_s)\sigma_m(u)$, where the Lie
+  derivative acts on $\Omegah\otimes M_\Lambda$ using the flat structure of
+  $M_\Lambda$.  For $\Lambda=N^*Y$ these are \cref{hj:thm:psido-conormal} and
+  \cref{hj:thm:transport}.  Since the transport equation is an ordinary
+  differential equation along the bicharacteristics in $\Lambda$, it can be
+  solved through caustics, where the methods of \cref{hj:sec:transport} break
+  down; this is how the travelling waves of \cref{hj:thm:travelling} are
+  continued for all time, and in Keller's example it produces the phase shift
+  $e^{\mp i\pi/2}$ of \cref{hj:sec:keller}.
+\end{remark}
+
+\section{Oscillatory testing}\label{hj:sec:testing}
+
+The symbol of a conormal distribution is obtained by a Fourier transform across
+the submanifold.  For a Lagrangian distribution there is an analogous
+procedure: pair $u$ with an oscillatory test function $e^{-isf}\nu$ whose phase
+$f$ has differential at a point equal to a given $\lambda\in\Lambda$, and study
+the behaviour as $s\to\infty$.
+
+\begin{lemma}\label{hj:lem:test-phase}
+  Let $\Lambda\subset T^*X\setminus0$ be a conic Lagrangian and
+  $\bar\lambda=(\bar x,\bar\xi)\in\Lambda$.
+  \begin{enumerate}[label=(\roman*)]
+  \item There is a real $f\in\CI(X)$ with $f(\bar x)=0$, $df(\bar x)=\bar\xi$ and
+    $\operatorname{graph}(df)=\{(x,df(x))\}$ transversal to $\Lambda$ at
+    $\bar\lambda$; then $\bar\lambda$ is an isolated point of
+    $\operatorname{graph}(df)\cap\Lambda$.
+  \item If $\varphi$ parametrizes $\Lambda$ near $\bar\lambda$ and
+    $j_\varphi(\bar x,\bar\theta)=\bar\lambda$, then
+    $\Phi(x,\theta)=\varphi(x,\theta)-f(x)$ has a critical point at $(\bar
+    x,\bar\theta)$, with $\Phi(\bar x,\bar\theta)=0$, and its Hessian
+    $\Phi''(\bar x,\bar\theta)$ in all variables $(x,\theta)$ is non-degenerate if
+    and only if $\operatorname{graph}(df)$ is transversal to $\Lambda$ at
+    $\bar\lambda$.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  (i) In the coordinates of \cref{hj:thm:param-exists},
+  $\Lambda=\{x'=\pa_\theta G,\ \xi''=-\pa_{x''}G\}$ near $\bar\lambda$, and
+  since $dx'=0$ on $T_{\bar\lambda}\Lambda$, $\pa^2_{\theta\theta}G=0$ and
+  $\pa^2_{\theta x''}G=0$ at $\bar\lambda$.  So
+  $T_{\bar\lambda}\Lambda=\{\delta x'=0,\ \delta\xi''=-G_{x''x''}\delta x''\}$, with
+  $G_{x''x''}=\pa_{x''}^2G(\bar\theta,0)$.  For $f=x_1+\frac12\ang{Bx'',x''}$ the
+  tangent space of the graph of $df$ at $\bar\lambda$ is
+  $\{\delta\xi'=0,\ \delta\xi''=B\delta x''\}$, and the intersection is
+  $\{\delta x'=0,\ \delta\xi'=0,\ (B+G_{x''x''})\delta x''=0\}$, which is zero if
+  $B+G_{x''x''}$ is invertible.  Both submanifolds have dimension $n$, so this is
+  transversality, which implies that the intersection is a discrete set near
+  $\bar\lambda$.
+  (ii) At points of $C_\varphi$, $d_\theta\Phi=0$, and $d_x\Phi=d_x\varphi-df=0$
+  exactly when $j_\varphi(x,\theta)\in\operatorname{graph}(df)$; and $\varphi=0$ on
+  $C_\varphi$.  A vector $(\delta x,\delta\theta)$ is in the null space of the
+  Hessian if and only if $\varphi''_{\theta x}\delta x+\varphi''_{\theta\theta}
+  \delta\theta=0$, i.e.\ it is tangent to $C_\varphi$, and $\varphi''_{xx}\delta
+  x+\varphi''_{x\theta}\delta\theta=f''\delta x$, i.e.\
+  $dj_\varphi(\delta x,\delta\theta)=(\delta x,f''\delta x)$ is tangent to
+  $\operatorname{graph}(df)$.  Since $dj_\varphi$ is injective, the null space is
+  isomorphic to $T_{\bar\lambda}\Lambda\cap T_{\bar\lambda}\operatorname{graph}(df)$.
+\end{proof}
+
+\begin{proposition}\label{hj:prop:testing}
+  Let $u\in\Ic{m}(X,\Lambda;\Omegah)$, $\bar\lambda\in\Lambda$ and $f$ as in
+  \cref{hj:lem:test-phase}(i).  If $\nu\in\CIc(X;\Omegah)$ has support in a
+  sufficiently small neighbourhood of $\bar x$, then
+  \begin{equation*}
+    A(s)=\pair{u}{e^{-isf}\nu},\qquad s\ge1,
+  \end{equation*}
+  is a symbol of order $m-\frac n4$ on $[1,\infty)$, classical if $u$ is.  If
+  $\bar\lambda\notin\WF(u-I_\varphi(a)|dx|^{1/2})$ and $\nu=\nu_0|dx|^{1/2}$ in the
+  chart, then, with $\Phi$ as in \cref{hj:lem:test-phase}(ii),
+  \begin{equation}\label{hj:eq:testing}
+    A(s)\equiv(2\pi)^{\frac{n-N}2}s^{\frac{N-n}2}e^{\frac{i\pi}4\sgn\Phi''}
+    |\det\Phi''|^{-\frac12}\nu_0(\bar x)\,a(\bar x,s\bar\theta)\mod
+    S^{m-\frac n4-1},
+  \end{equation}
+  $\Phi''=\Phi''(\bar x,\bar\theta)$.  In particular, for classical $u$ and
+  $\nu_0(\bar x)\neq0$, $A\in S^{m-\frac n4-1}$ if and only if the principal symbol
+  $\sigma_m(u)$ vanishes at $\bar\lambda$.
+\end{proposition}
+\begin{proof}[Sketch of proof]
+  \emph{Localization.}  If $w\in\CmI(X;\Omegah)$ and $\WF(w)$ contains no point
+  $(x,t\,df(x))$ with $x\in\supp\nu$, $t>0$, then
+  $\pair{w}{e^{-isf}\nu}=O(s^{-\infty})$: in local coordinates in which $f=y_1$
+  (possible near $\bar x$ as $df\neq0$) the pairing is the Fourier transform of
+  the compactly supported distribution $\nu w$ at $s\,dy_1$, which is rapidly
+  decreasing by the definition of the wavefront set (\cref{ch:microlocal}),
+  using a partition of unity on $\supp\nu$ if necessary.  Since $\Lambda$ is
+  closed and conic and $\bar\lambda$ is isolated in
+  $\operatorname{graph}(df)\cap\Lambda$, for $\supp\nu$ small the only points of
+  $\Lambda$ of the form $(x,t\,df(x))$, $x\in\supp\nu$, are those of the ray
+  through $\bar\lambda$.  Hence $A(s)\equiv\pair{I_\varphi(a)|dx|^{1/2}}{e^{-isf}\nu}$
+  modulo $O(s^{-\infty})$, and we may cut $a$ off to a small conic neighbourhood
+  of $(\bar x,\bar\theta)$.
+
+  \emph{Stationary phase.}  Substituting $\theta=s\vartheta$,
+  \begin{equation*}
+    A(s)\equiv(2\pi)^{-N}s^N\iint e^{is\Phi(x,\vartheta)}a(x,s\vartheta)\nu_0(x)
+    \,dx\,d\vartheta .
+  \end{equation*}
+  Where $|\vartheta|$ is small, $|d_x\Phi|\ge|df|-C|\vartheta|>0$; where
+  $|\vartheta|$ is large, $|d_x\varphi|+|\vartheta||d_\vartheta\varphi|\ge
+  c|\vartheta|$ on the support forces $d\Phi\neq0$; in both regions integration
+  by parts gives $O(s^{-\infty})$.  On the remaining compact region $\Phi$ has
+  the single critical point $(\bar x,\bar\theta)$ (by \cref{hj:lem:test-phase}),
+  non-degenerate, with $\Phi=0$ there.  The method of stationary phase in the
+  $n+N$ variables $(x,\vartheta)$ \cite[Theorem~7.7.5]{Hormander-I} gives
+  \eqref{hj:eq:testing}, the factor being
+  $(2\pi)^{-N}s^N(2\pi/s)^{\frac{n+N}2}$; the order is
+  $\mu_N+\frac{N-n}2=m-\frac n4$.  For classical $a$, expanding
+  $a(x,s\vartheta)\sim\sum_js^{\mu_N-j}a_{\mu_N-j}(x,\vartheta)$ gives a full
+  expansion of $A$ in powers $s^{m-\frac n4-j}$.  The symbol estimates for
+  $\pa_s^kA$ follow in the same way: $\pa_s$ produces the factors $i\Phi$, which
+  vanishes to second order at the critical point and hence lowers the order by
+  one, and $\vartheta\cdot\pa_\theta a(x,s\vartheta)$, of order $\mu_N-1$ in $s$.
+  The last statement follows since, for classical $a$, the principal symbol
+  vanishes at $\bar\lambda$ if and only if $a_{\mu_N}(\bar x,\bar\theta)=0$, by
+  \eqref{hj:eq:lagrangian-symbol}.
+\end{proof}
+
+Comparing the leading terms in \eqref{hj:eq:testing} for two different
+representations of the same $u$ shows directly that the vanishing of the
+principal symbol at a point does not depend on the parametrization; this is the
+injectivity statement in \cref{hj:thm:lagrangian-symbol} for classical
+distributions.  Conversely, oscillatory testing can be used to \emph{define}
+the symbol: the leading coefficient of $A(s)$ is a non-zero multiple of the
+value of $\sigma_m(u)$ on the ray through $\bar\lambda$, the multiple depending
+on $f$ and $\nu$ (through $\Phi''$) and on the parametrization only through the
+Maslov factor $e^{\frac{i\pi}4\sgn\varphi''_{\theta\theta}}$; compare the
+transformation law \eqref{hj:eq:symbol-change}.
+
 \section{Exercises}\label{hj:sec:exercises}
 
 \begin{exercise}\label{hj:ex:transversal}
@@ -642,6 +1905,58 @@ parametrix for the Cauchy problem.
   density.
 \end{exercise}
 
+\begin{exercise}\label{hj:ex:add-variables}
+  Let $\varphi$ be a non-degenerate phase function in $N$ variables
+  parametrizing $\Lambda$, and $B$ a real invertible symmetric $q\times q$
+  matrix.  Show that $\tilde\varphi(x,\theta,\omega)=\varphi(x,\theta)+
+  \ang{B\omega,\omega}/(2|\theta|)$, defined for $|\omega|<c|\theta|$, is a
+  non-degenerate phase function in $N+q$ variables parametrizing the same
+  Lagrangian, with $C_{\tilde\varphi}=C_\varphi\times\{0\}$ and
+  $\sgn\tilde\varphi''=\sgn\varphi''+\sgn B$.  Conclude that $\Lambda$ can be
+  parametrized near $\bar\lambda$ with any number $N\ge K(\bar\lambda)$ of phase
+  variables, and check \eqref{hj:eq:symbol-change} directly for $\varphi$ and
+  $\tilde\varphi$ using \eqref{hj:eq:fresnel}.
+\end{exercise}
+
+\begin{exercise}\label{hj:ex:constant-rank}
+  Let $\varphi$ be a non-degenerate phase function with
+  $\varphi''_{\theta\theta}=0$ at every point of $C_\varphi$.  Show that
+  $\Lambda_\varphi$ is locally the conormal bundle of a submanifold of
+  codimension $N$.  (Hint: by \cref{hj:lem:rank}, $\pi|_{\Lambda_\varphi}$ has
+  constant rank $n-N$, so its image is locally a submanifold $Y$; use
+  \cref{hj:lem:conic-lagr} to show $\Lambda_\varphi\subset N^*Y$.)  Conversely,
+  if $Y=\{g_1=\dots=g_k=0\}$ with independent $dg_j$, show that
+  $\varphi(x,\theta)=\sum_j\theta_jg_j(x)$ parametrizes $N^*Y\setminus0$ and
+  is minimal everywhere.
+\end{exercise}
+
+\begin{exercise}\label{hj:ex:keller}
+  In \cref{hj:sec:keller}: (a) Show that the curvature of the parallel curve
+  $C_t$ at the point coming from $x_0$, measured with respect to the normal
+  $(-x_0,1)w$, is $\kappa/(1-t\kappa)$ with $\kappa=(1+x_0^2)^{-3/2}$, and deduce
+  that for $t>1$ the arc $|x_0|<(t^{2/3}-1)^{1/2}$ between the two cusps is curved
+  the opposite way from the rest of $C_t$.  (b) Verify the formulas for $x_0,q,w$
+  in terms of $z$ and for $x$, $S$, $\rho/\sigma$ and $F$ on $\Lambda$.
+  (c) Show that over points of the caustic other than $(1,0,1)$ the phase
+  \eqref{hj:eq:keller-phase} (or its analogue at other base points) has
+  $\varphi''_{\theta\theta}$ of rank one, and that the jump of
+  $\sgn\varphi''_{\theta\theta}$ across $\mathcal K$ along $\Lambda$ is again
+  $\pm2$.
+\end{exercise}
+
+\begin{exercise}\label{hj:ex:testing-invariant}
+  Let $\bar\lambda\in\Lambda$, $\bar x=\pi(\bar\lambda)$, and let $S\subset X$ be a
+  submanifold through $\bar x$ with $\bar\lambda\in N^*S$ and
+  $T_{\bar\lambda}N^*S=T_{\bar\lambda}\Lambda$.  Show that such $S$ exist (in the
+  coordinates of \cref{hj:thm:param-exists} take $S=\{x'=Q(x'')\}$ with $Q$
+  quadratic) and that, for real $f$ with $df(\bar x)=\bar\lambda$,
+  $\operatorname{graph}(df)$ is transversal to $\Lambda$ at $\bar\lambda$ if and
+  only if $f|_S$ has a non-degenerate critical point at $\bar x$.  Deduce that
+  transversality is an open condition: it persists at $\lambda'=(x',df(x'))$ for
+  small perturbations $f+\epsilon g$ with $\lambda'\in\Lambda$, even though
+  $K(\lambda')$ may differ from $K(\bar\lambda)$.
+\end{exercise}
+
 \section*{Notes}
 This chapter is a rewriting of the second half of the conormal/wave kernel
 chapter of the 1998 notes.  The section on Riemann metrics and quantization
@@ -651,6 +1966,33 @@ equation is derived for submanifolds of any codimension with the zeroth order
 term identified as the subprincipal symbol, the restriction theorem (an exercise
 in the original) is proved, and the construction of travelling waves is made
 precise.  For the general theory see \cite[Sections~18.1, 25.2]{Hormander-III}
-and \cite{Hormander-FIO}, where conormal distributions are replaced by
-Lagrangian distributions and the analogue of \eqref{hj:eq:transport} holds on
-any Lagrangian submanifold contained in $\Sigma(P)$.
+and \cite{Hormander-FIO}, where the analogue of \eqref{hj:eq:transport} is
+proved on any Lagrangian submanifold contained in $\Sigma(P)$.
+
+The sections on Lagrangian parametrization, Lagrangian distributions, Keller's
+example and oscillatory testing are based on Sections~9.2--9.5 of Melrose's
+revised notes \emph{From microlocal to global analysis} (2008), which are
+themselves only partly written.  We work throughout with H\"ormander's
+homogeneous phase functions and explain how Melrose's parametrization by
+hypersurfaces in $X\times\R^k$ (and his definition of Lagrangian distributions
+as push-forwards of conormal distributions) fits in
+(\cref{hj:prop:hypersurface,hj:rem:pushforward}), keeping track of orders,
+which the source does not do.  The equivalence of minimal parametrizations is
+proved in full by Moser's method in the homogeneous setting, where minimality is
+exactly what makes the interpolating phases non-degenerate; the reduction of
+non-minimal phases is done by stationary phase, which we only sketch.  The
+principal symbol, its Maslov factor and the exact sequence, left by the source
+for a later section, are stated precisely, with the analytic steps of the
+proof sketched; for complete proofs see \cite{Hormander-FIO},
+\cite[Sections~21.2, 25.1]{Hormander-III}.  In Keller's example we have
+corrected and completed the computations: the caustic is
+$\{x=-x_0^3,\ y=1+\frac32x_0^2\}$ (the same set as in the source), the
+generating function is $F(R,z)=\frac{z^2}2(1+R)-\frac{2z^2}{4-z^2}$ (the
+source has $F=x\xi$, which omits the term coming from $S$), and the Hessian of
+the phase at the vertices is $(1-t)/\sigma$; accordingly the phase shift across
+the caustic is $e^{-i\pi/2}$ on the half $\sigma>0$ and $e^{i\pi/2}$ on
+$\sigma<0$, rather than ``multiplication by $i$''.  The source's proof that
+the oscillatory test is a classical symbol (by exhibiting it as the Fourier
+transform of a conormal distribution at a point) is replaced by a stationary
+phase argument, which also gives the leading term.  The ``problems'' referred to
+in the source are \cref{hj:ex:add-variables,hj:ex:constant-rank,hj:ex:keller,hj:ex:testing-invariant}.

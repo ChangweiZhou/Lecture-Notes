@@ -1,0 +1,635 @@
+\chapter{Semiclassical and adiabatic calculus}\label{ch:semiclassical}
+\providecommand{\Psisl}[1]{\Psi^{#1}_{\mathrm{sl}}}
+\providecommand{\Ssl}[1]{S^{#1}_{\mathrm{sl}}}
+\providecommand{\ssl}{\sigma_{\mathrm{sl}}}
+\providecommand{\sad}{\sigma_{\mathrm{ad}}}
+\providecommand{\Psiad}{\Psi^{-\infty}_{\mathrm{ad}}}
+\providecommand{\Psisa}{\Psi^{-\infty}_{\mathrm{sl,ad}}}
+\providecommand{\Qcl}[2]{\mathcal{Q}^{#1}_{#2}}
+
+In this chapter we study one-parameter families of pseudodifferential
+operators $A_\eps$, $0<\eps\le1$, which degenerate in a controlled way as
+$\eps\downarrow0$: the \emph{semiclassical} families. The model is the
+Schr\"odinger operator
+\begin{equation*}
+  -\tfrac12\hbar\,\frac{d^2}{dx^2}+V(x)=-\tfrac12\Bigl(\eps\frac{d}{dx}\Bigr)^2+V(x),
+  \qquad\hbar=\eps^2,
+\end{equation*}
+the quantization of the classical energy $E(x,\xi)=\frac12\xi^2+V(x)$. For
+$\eps>0$ this is an ordinary elliptic operator, but as $\eps\downarrow0$ it
+``becomes'' the classical observable $E$; the derivatives only enter in the
+combination $\eps D$. The general semiclassical family is obtained by
+quantizing a symbol $a(\eps,x,\eta)$, depending smoothly on $\eps\in[0,1]$, at
+the rescaled frequency $\eta=\eps\xi$:
+\begin{equation*}
+  A_\eps u(x)=\int e^{i(x-y)\cdot\xi}a(\eps,x,\eps\xi)u(y)\,dy\,\dbar\xi
+  =(2\pi\eps)^{-n}\int e^{i(x-y)\cdot\eta/\eps}a(\eps,x,\eta)u(y)\,dy\,d\eta.
+\end{equation*}
+Such families form an algebra with \emph{two} symbol maps: the
+\emph{semiclassical symbol} $\ssl(A)=a(0,\cdot,\cdot)$, a function on the
+whole cotangent bundle which is multiplicative and records the leading
+behaviour as $\eps\downarrow0$ (the operators ``become commutative'' in the
+limit), and a rescaled version of the usual principal symbol, uniform in
+$\eps$. The two are compatible at $\eps=0$ and together control the family
+modulo $\eps\Psisl{m-1}$. The residual ideal is that of smoothing families
+vanishing to infinite order at $\eps=0$, so that elliptic semiclassical
+families are actually \emph{invertible} for small $\eps$. This is what makes
+the calculus useful in index theory: semiclassical quantization of symbols
+with values in invertible matrices, or in projections, produces invertible
+families, respectively families of projections, of operators on a compact
+manifold. These facts are the basis of the semiclassical proof of the
+Atiyah--Singer index theorem in \cref{ch:semiclassical-index}.
+
+\Cref{semiclassical:sec:symbols} introduces the semiclassical symbol spaces
+and the relevant asymptotic summation. In
+\cref{semiclassical:sec:quantization} the operators on $\R^n$ are defined and,
+using an exact oscillatory integral formula for the symbol of a composite, it
+is shown that they form an order-filtered $*$-algebra with an expansion in
+powers of $\eps$. \Cref{semiclassical:sec:residual} describes the residual
+families and the kernels, and \cref{semiclassical:sec:symbol-maps} the symbol
+maps, ellipticity, uniform boundedness on $L^2$, oscillatory testing and
+coordinate invariance. In \cref{semiclassical:sec:manifolds} everything is
+transferred to compact manifolds, following \cref{ch:manifolds}, and in
+\cref{semiclassical:sec:projections} projection-valued symbols are quantized to
+families of projections. Finally \cref{semiclassical:sec:adiabatic} treats the
+\emph{adiabatic} families, in which only some of the variables are rescaled,
+and the two-parameter semiclassical-adiabatic families. We use freely the
+calculus on $\R^n$ of \cref{ch:euclidean} and on compact manifolds of
+\cref{ch:manifolds}; notation is as there, in particular $D=-i\pa$,
+$\dbar\xi=(2\pi)^{-n}d\xi$, and $\Delta=D_1^2+\dots+D_n^2$ is the positive
+Laplacian, so that $(1+\Delta_y)e^{-iy\cdot\zeta}=\ang\zeta^2e^{-iy\cdot\zeta}$.
+The parameter $\eps$ always ranges over $[0,1]$ (for symbols) or $(0,1]$ (for
+operators).
+
+% ======================================================================
+\section{Semiclassical symbols}\label{semiclassical:sec:symbols}
+
+\begin{definition}\label{semiclassical:def:symbols}
+  For $m\in\R$ the space $\Ssl m(\R^p;\R^n)$ of \emph{semiclassical symbols of
+  order $m$} consists of the functions $a\in\CI([0,1]_\eps\times\R^p_z\times\R^n_\eta)$
+  such that for all $k\in\N_0$, $\alpha\in\N_0^p$, $\beta\in\N_0^n$,
+  \begin{equation}\label{semiclassical:eq:symbol-est}
+    \abs{\pa_\eps^kD^\alpha_zD^\beta_\eta a(\eps,z,\eta)}\le C_{k\alpha\beta}\ang\eta^{m-\abs\beta}
+    \quad\text{on }[0,1]\times\R^p\times\R^n,
+  \end{equation}
+  topologized by the best constants in \eqref{semiclassical:eq:symbol-est} as
+  seminorms. We set $\Ssl{-\infty}(\R^p;\R^n)=\bigcap_m\Ssl m(\R^p;\R^n)$, and
+  for $N\in\N_0$, $\eps^N\Ssl m(\R^p;\R^n)=\{\eps^Na;a\in\Ssl m(\R^p;\R^n)\}$.
+  When $p=n$ we simply write $\Ssl m(\R^n)$.
+\end{definition}
+
+Thus $a\in\Ssl m$ if and only if each $\pa_\eps^ka$ is bounded, as $\eps$
+varies, in the Fr\'echet space $S^m(\R^p;\R^n)$ of \cref{ch:euclidean}. By
+Taylor's formula (applied pointwise, with the remainder estimated using the
+bounds on $\pa^{k+2}_\eps a$) this is equivalent to $a$ being a $\CI$ map
+$[0,1]\to S^m(\R^p;\R^n)$, so $\Ssl m(\R^p;\R^n)=\CI([0,1];S^m(\R^p;\R^n))$,
+and we shall use the two descriptions interchangeably. Clearly
+$\Ssl m\cdot\Ssl{m'}\subset\Ssl{m+m'}$, $D_z$ preserves $\Ssl m$ and $D_\eta$
+maps it to $\Ssl{m-1}$.
+
+\begin{lemma}\label{semiclassical:lem:taylor}
+  Let $a\in\Ssl m(\R^p;\R^n)$ and $N\in\N$. Then
+  \begin{equation*}
+    a(\eps,z,\eta)=\sum_{k<N}\eps^ka_k(z,\eta)+\eps^Nr_N(\eps,z,\eta),\qquad
+    a_k=\frac1{k!}\pa_\eps^ka(0,\cdot,\cdot)\in S^m(\R^p;\R^n),\ r_N\in\Ssl m(\R^p;\R^n).
+  \end{equation*}
+  In particular $a\in\eps^N\Ssl m$ if and only if $\pa^k_\eps a(0,\cdot,\cdot)=0$
+  for $k<N$.
+\end{lemma}
+\begin{proof}
+  Taylor's formula gives the expansion with
+  $r_N(\eps,z,\eta)=\frac1{(N-1)!}\int_0^1(1-s)^{N-1}(\pa_\eps^Na)(s\eps,z,\eta)\,ds$,
+  and differentiating under the integral shows that $r_N$ satisfies
+  \eqref{semiclassical:eq:symbol-est}, since $\pa_\eps^k$ of the integrand is
+  $s^k(\pa_\eps^{N+k}a)(s\eps,z,\eta)$. Conversely, if $a=\eps^Nb$ then the first
+  $N$ derivatives of $a$ at $\eps=0$ vanish.
+\end{proof}
+
+The residual symbols which will appear as errors are those which are of
+order $-\infty$ \emph{and} vanish to infinite order at $\eps=0$.
+
+\begin{lemma}\label{semiclassical:lem:residual-symbols}
+  For $a\in\CI([0,1]\times\R^p\times\R^n)$ the following are equivalent:
+  \begin{enumerate}[label=\textup{(\roman*)}]
+  \item $a\in\bigcap_N\eps^N\Ssl{-N}(\R^p;\R^n)$;
+  \item $a\in\bigcap_N\eps^N\Ssl{m-N}(\R^p;\R^n)$ for some (and then every) $m\in\R$;
+  \item for all $k,\alpha,\beta$ and $N$,
+    $\abs{\pa_\eps^kD^\alpha_zD^\beta_\eta a}\le C_{k\alpha\beta N}\,\eps^N\ang\eta^{-N}$;
+  \item $a\in\Ssl{-\infty}(\R^p;\R^n)$ and $\pa_\eps^ka(0,\cdot,\cdot)=0$ for all $k$.
+  \end{enumerate}
+  The space of such symbols is denoted $\eps^\infty\Ssl{-\infty}(\R^p;\R^n)$.
+\end{lemma}
+\begin{proof}
+  (i)$\Rightarrow$(ii) and (iii)$\Rightarrow$(iv) are clear, and (ii) for one
+  $m$ implies (i), since $\eps^{N'}\Ssl{m-N'}\subset\eps^N\Ssl{-N}$ if
+  $N'\ge N+\max(m,0)$. If $a=\eps^{N'}b$ with $b\in\Ssl{-N'}$ then by Leibniz'
+  formula $\abs{\pa^k_\eps D^\alpha_zD^\beta_\eta a}\le C\eps^{N'-k}\ang\eta^{-N'}$;
+  taking $N'=N+k$ gives (iii). Finally (iv)$\Rightarrow$(i): by
+  \cref{semiclassical:lem:taylor}, applied with $m=-N$, $a=\eps^Nr_N$ with
+  $r_N\in\Ssl{-N}$.
+\end{proof}
+
+Since we are going to quantize at the frequency $\eta=\eps\xi$, we need to
+know how the rescaled function $a(\eps,z,\eps\xi)$ behaves as an ordinary
+symbol.
+
+\begin{lemma}\label{semiclassical:lem:rescale}
+  Let $a\in\Ssl m(\R^p;\R^n)$, put $a^\flat(\eps,z,\xi)=a(\eps,z,\eps\xi)$ and
+  $m_+=\max(m,0)$.
+  \begin{enumerate}[label=\textup{(\roman*)}]
+  \item For each $\eps\in(0,1]$, $a^\flat(\eps,\cdot,\cdot)\in S^m(\R^p;\R^n)$.
+  \item For all $k,\alpha,\beta$ there are constants such that, for $0<\eps\le1$,
+    \begin{equation*}
+      \abs{\pa^k_\eps D^\alpha_zD^\beta_\xi a^\flat(\eps,z,\xi)}\le
+      C_{k\alpha\beta}\ang\xi^{m_++k-\abs\beta};
+    \end{equation*}
+    that is, $\pa_\eps^ka^\flat$ is bounded in $S^{m_++k}(\R^p;\R^n)$ for
+    $\eps\in(0,1]$.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  The basic inequalities are, for $0<\eps\le1$,
+  \begin{equation*}
+    \ang{\eps\xi}\le\ang\xi,\qquad \ang{\eps\xi}\ge\eps\ang\xi,\qquad
+    \frac{\eps}{\ang{\eps\xi}}=(\eps^{-2}+\abs\xi^2)^{-1/2}\le\ang\xi^{-1}.
+  \end{equation*}
+  Since $D^\beta_\xi a^\flat=\eps^{\abs\beta}(D^\beta_\eta a)^\flat$,
+  \begin{equation*}
+    \abs{D^\alpha_zD^\beta_\xi a^\flat}\le C\eps^{\abs\beta}\ang{\eps\xi}^{m-\abs\beta}
+    =C\Bigl(\frac{\eps}{\ang{\eps\xi}}\Bigr)^{\abs\beta}\ang{\eps\xi}^m
+    \le C\ang\xi^{-\abs\beta}\ang{\eps\xi}^m.
+  \end{equation*}
+  If $m\ge0$, $\ang{\eps\xi}^m\le\ang\xi^m$; if $m<0$, $\ang{\eps\xi}^m\le1$
+  and also $\ang{\eps\xi}^m\le\eps^m\ang\xi^m$. This proves (i) and the case
+  $k=0$ of (ii). For $k\ge1$, by the chain rule
+  $\pa_\eps a^\flat=(\pa_\eps a)^\flat+\sum_j\xi_j(\pa_{\eta_j}a)^\flat$, and by
+  induction $\pa_\eps^ka^\flat$ is a finite sum of terms
+  $\xi^\gamma\,(\pa_\eps^{l}\pa_\eta^\gamma a)^\flat$ with $l+\abs\gamma=k$. Here
+  $\pa_\eps^l\pa^\gamma_\eta a\in\Ssl{m-\abs\gamma}$, so by the case $k=0$ the
+  second factor is bounded in $S^{(m-\abs\gamma)_+}$, while $\xi^\gamma\in
+  S^{\abs\gamma}$; since $\abs\gamma+(m-\abs\gamma)_+\le m_++k$, (ii) follows.
+\end{proof}
+
+\subsection{Asymptotic summation}
+For semiclassical symbols there are two independent ways of being small:
+vanishing at $\eps=0$ and decay in $\eta$. We need to sum series which are
+asymptotic in both senses simultaneously.
+
+\begin{lemma}\label{semiclassical:lem:borel}
+  \begin{enumerate}[label=\textup{(\roman*)}]
+  \item If $b_j\in\Ssl{m-j}(\R^p;\R^n)$ for $j\in\N_0$, there exists
+    $b\in\Ssl m(\R^p;\R^n)$ such that
+    \begin{equation}\label{semiclassical:eq:double-asymptotic}
+      b-\sum_{j<N}\eps^jb_j\in\eps^N\Ssl{m-N}(\R^p;\R^n)\quad\text{for every }N;
+    \end{equation}
+    we write $b\sim\sum_j\eps^jb_j$. It is unique modulo
+    $\eps^\infty\Ssl{-\infty}(\R^p;\R^n)$.
+  \item If $b_j\in\Ssl{m}(\R^p;\R^n)$ for all $j$, there exists
+    $b\in\Ssl m(\R^p;\R^n)$ with $b-\sum_{j<N}\eps^jb_j\in\eps^N\Ssl m(\R^p;\R^n)$
+    for all $N$, and if all $b_j\in\Ssl{-\infty}$ then $b$ may be chosen in
+    $\Ssl{-\infty}$ with $b-\sum_{j<N}\eps^jb_j\in\eps^N\Ssl{-\infty}$.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  (i) Fix $\psi\in\CI(\R)$ with $\psi(s)=1$ for $s\le\frac12$ and $\psi(s)=0$ for
+  $s\ge1$, and for $0<\delta\le1$ set $\psi_\delta(\eps,\eta)=\psi\bigl(\eps/(\delta\ang\eta)\bigr)$.
+  Then $\eps\le\delta\ang\eta$ on $\supp\psi_\delta$ and
+  $\eps\ge\frac12\delta\ang\eta$ on $\supp(1-\psi_\delta)$. Each $\pa_\eps$
+  applied to $\psi_\delta$ produces a factor $(\delta\ang\eta)^{-1}$, and
+  $\eta$-derivatives of $\eps/(\delta\ang\eta)$ are bounded on $\supp\psi$ by
+  $C\ang\eta^{-1}$ times powers of $\eps/(\delta\ang\eta)\le1$, so
+  \begin{equation}\label{semiclassical:eq:psi-delta}
+    \abs{\pa_\eps^kD^\beta_\eta\psi_\delta}\le C_{k\beta}\,\delta^{-k}\ang\eta^{-k-\abs\beta},
+  \end{equation}
+  with $C_{k\beta}$ independent of $\delta$. For $j\ge N$ consider
+  $g_{j,N}=\eps^{j-N}\psi_\delta$. Since $\abs{\pa^i_\eps\eps^{j-N}}\le
+  C\eps^{j-N-i}\le C(\delta\ang\eta)^{j-N-i}$ on $\supp\psi_\delta$ (for $i\le j-N$,
+  and the derivative vanishes for $i>j-N$), Leibniz' formula and
+  \eqref{semiclassical:eq:psi-delta} give
+  \begin{equation*}
+    \abs{\pa_\eps^kD^\beta_\eta g_{j,N}}\le C_{k\beta jN}\,\delta^{j-N-k}\ang\eta^{j-N-k-\abs\beta}.
+  \end{equation*}
+  Hence each seminorm of $g_{j,N}b_j$ in $\Ssl{m-N}$ involving at most $k$
+  derivatives in $\eps$ is bounded by $C\delta^{j-N-k}$ times a seminorm of
+  $b_j$ in $\Ssl{m-j}$. Now choose $\delta_j\in(0,1]$ so small that for all
+  $N<j$ the seminorms of $g_{j,N}b_j$ in $\Ssl{m-N}$ with at most $j-N-1$
+  $\eps$-derivatives and at most $j$ derivatives in all are bounded by $2^{-j}$,
+  where $g_{j,N}$ is formed with $\delta=\delta_j$; this is possible since all
+  these seminorms carry the factor $\delta_j^{j-N-k}$ with $j-N-k\ge1$. Then
+  for each $N$ and each seminorm of $\Ssl{m-N}$, all but finitely many terms
+  of $\sum_{j\ge N}g_{j,N}b_j$ are bounded by $2^{-j}$, so the series converges
+  in $\Ssl{m-N}$. Set
+  \begin{equation*}
+    b=\sum_j\eps^j\psi_{\delta_j}b_j=\eps^N\sum_{j\ge N}g_{j,N}b_j+\sum_{j<N}\eps^j\psi_{\delta_j}b_j .
+  \end{equation*}
+  Taking $N=0$ shows $b\in\Ssl m$. For $j<N$,
+  $\eps^j(\psi_{\delta_j}-1)b_j=\eps^N h_{j,N}b_j$ with
+  $h_{j,N}=\eps^{j-N}(\psi_{\delta_j}-1)$, which vanishes for $\eps<\frac12\delta_j$;
+  on its support $\eps^{j-N}\le(\frac12\delta_j\ang\eta)^{j-N}$ and, as above,
+  $\abs{\pa^k_\eps D^\beta_\eta h_{j,N}}\le C\ang\eta^{j-N-\abs\beta}$, so
+  $h_{j,N}\in\Ssl{j-N}$ and $h_{j,N}b_j\in\Ssl{m-N}$. Therefore
+  $b-\sum_{j<N}\eps^jb_j=\eps^N\bigl(\sum_{j\ge N}g_{j,N}b_j+\sum_{j<N}h_{j,N}b_j\bigr)
+  \in\eps^N\Ssl{m-N}$. If $b'$ is another such sum then
+  $b-b'\in\bigcap_N\eps^N\Ssl{m-N}=\eps^\infty\Ssl{-\infty}$ by
+  \cref{semiclassical:lem:residual-symbols}.
+
+  (ii) The same construction with $\psi(\eps/\delta_j)$ in place of
+  $\psi_{\delta_j}$ works: now $g_{j,N}=\eps^{j-N}\psi(\eps/\delta_j)$ has
+  $C^k([0,1])$-norm bounded by $C\delta_j^{j-N-k}$ and does not depend on
+  $\eta$, so the series $\sum_{j\ge N}g_{j,N}b_j$ converges in $\Ssl m$, and
+  in every $\Ssl{-K}$ if the $\delta_j$ are also chosen so that the
+  corresponding seminorms of $b_j$ in $\Ssl{-K}$, $K\le j$, are dominated;
+  and $h_{j,N}=\eps^{j-N}(\psi(\eps/\delta_j)-1)\in\CI([0,1])$.
+\end{proof}
+
+\subsection{Classical symbols}
+A function $f$ on $\R^p\times\R^n$ is said to be homogeneous of degree $\mu$
+for $\abs\eta\ge1$ if $f(z,t\eta)=t^\mu f(z,\eta)$ for $t\ge1$, $\abs\eta\ge1$.
+
+\begin{definition}\label{semiclassical:def:classical}
+  A symbol $a\in\Ssl m(\R^p;\R^n)$ is \emph{classical} if there are
+  $a_j\in\Ssl{m-j}(\R^p;\R^n)$, each homogeneous of degree $m-j$ for
+  $\abs\eta\ge1$ (for every $\eps$), such that
+  $a-\sum_{j<N}a_j\in\Ssl{m-N}(\R^p;\R^n)$ for all $N$. The space of these is
+  $\Ssl m_{\mathrm{ph}}(\R^p;\R^n)$.
+\end{definition}
+
+For each $\eps$, $a(\eps,\cdot,\cdot)$ is then a classical symbol in the
+sense of \cref{ch:euclidean}, and the leading term $a_0$ restricts to a smooth
+function on $[0,1]\times\R^p\times\Sphere^{n-1}$. Products of classical
+symbols are classical, and so are asymptotic sums
+$\sum_j\eps^jb_j$ of classical $b_j\in\Ssl{m-j}_{\mathrm{ph}}$: the
+remainder in \eqref{semiclassical:eq:double-asymptotic} lies in $\Ssl{m-N}$, so
+the homogeneous terms of $b$ of degree $m-k$ are
+$\sum_{j\le k}\eps^j(b_j)_{k-j}$.
+
+% ======================================================================
+\section{Semiclassical quantization on \texorpdfstring{$\R^n$}{Rn}}\label{semiclassical:sec:quantization}
+
+\begin{definition}\label{semiclassical:def:psisl}
+  For $a\in\Ssl m(\R^n)$ and $0<\eps\le1$ the \emph{semiclassical
+  quantization} of $a$ is
+  \begin{equation*}
+    \Op_\eps(a)=\Op\bigl(a^\flat(\eps,\cdot,\cdot)\bigr)\in\Psido m(\R^n),\qquad
+    a^\flat(\eps,x,\xi)=a(\eps,x,\eps\xi),
+  \end{equation*}
+  so that for $u\in\cS(\R^n)$
+  \begin{equation}\label{semiclassical:eq:quantization}
+    \Op_\eps(a)u(x)=\int e^{ix\cdot\xi}a(\eps,x,\eps\xi)\hat u(\xi)\,\dbar\xi
+    =(2\pi\eps)^{-n}\int e^{i(x-y)\cdot\eta/\eps}a(\eps,x,\eta)u(y)\,dy\,d\eta,
+  \end{equation}
+  the last integral being oscillatory. The space $\Psisl m(\R^n)$ of
+  \emph{semiclassical families of order $m$} consists of the families
+  $A=(A_\eps)_{0<\eps\le1}$, $A_\eps=\Op_\eps(a)$, with $a\in\Ssl m(\R^n)$.
+  We write $\eps^N\Psisl m(\R^n)=\Op_\eps(\eps^N\Ssl m(\R^n))$,
+  $\Psisl{-\infty}(\R^n)=\bigcap_m\Psisl m(\R^n)$, $\Psisl{m}_{\mathrm{ph}}(\R^n)=\Op_\eps(\Ssl m_{\mathrm{ph}}(\R^n))$
+  and
+  \begin{equation*}
+    \eps^\infty\Psisl{-\infty}(\R^n)=\Op_\eps\bigl(\eps^\infty\Ssl{-\infty}(\R^n)\bigr)=\bigcap_N\eps^N\Psisl{-N}(\R^n).
+  \end{equation*}
+\end{definition}
+
+By \cref{semiclassical:lem:rescale}(i), $A_\eps\in\Psido m(\R^n)$ for each
+$\eps>0$; but note that the estimates on its left symbol $a^\flat(\eps)$ in
+$S^m$ are uniform in $\eps$ only if $m\le0$ and the derivatives in $\xi$ are
+not counted. Since $\Op:S^m(\R^n;\R^n)\to\Psido m(\R^n)$ is injective
+(\cref{euclidean:cor:reduction}), $A$ determines $a(\eps,\cdot,\cdot)$ for every
+$\eps>0$, hence by continuity also for $\eps=0$: \emph{the map
+$\Op_\eps:\Ssl m(\R^n)\to\Psisl m(\R^n)$ is a bijection}. This justifies the
+notation in the definition (e.g.\ $\Psisl{-\infty}=\Op_\eps(\Ssl{-\infty})$ by
+\cref{euclidean:cor:reduction}(ii)). The Schwartz kernel of $A_\eps$ is, with
+$\cF^{-1}$ the inverse Fourier transform in $\eta$,
+\begin{equation}\label{semiclassical:eq:kernel}
+  K_{A_\eps}(x,y)=\eps^{-n}K\Bigl(\eps,x,\frac{x-y}\eps\Bigr),\qquad
+  K(\eps,x,Z)=\int e^{iZ\cdot\eta}a(\eps,x,\eta)\,\dbar\eta=\cF^{-1}_{\eta\to Z}a(\eps,x,\cdot),
+\end{equation}
+as follows from \eqref{semiclassical:eq:quantization} by the change of variables
+$\eta=\eps\xi$. So as $\eps\downarrow0$ the kernel concentrates at the diagonal,
+on the scale $\abs{x-y}\sim\eps$; this is studied in
+\cref{semiclassical:sec:residual}.
+
+\begin{example}\label{semiclassical:ex:differential}
+  $\Op_\eps(1)=\Id$, $\Op_\eps(f(x))$ is multiplication by $f\in\CIb(\R^n)$, and
+  $\Op_\eps(\eta^\alpha)=\eps^{\abs\alpha}D^\alpha$. More generally, if
+  $p_\alpha\in\CI([0,1];\CIb(\R^n))$ (all derivatives in $(\eps,x)$ bounded) then
+  \begin{equation*}
+    P_\eps=\sum_{\abs\alpha\le m}p_\alpha(\eps,x)(\eps D)^\alpha=\Op_\eps(p),\qquad
+    p(\eps,x,\eta)=\sum_{\abs\alpha\le m}p_\alpha(\eps,x)\eta^\alpha\in\Ssl m_{\mathrm{ph}}(\R^n).
+  \end{equation*}
+  For instance the Schr\"odinger operator $-\eps^2\Delta_{\mathrm{eucl}}+V$,
+  with $\Delta_{\mathrm{eucl}}=\sum_j\pa_{x_j}^2$ and $V\in\CIb(\R^n)$ real, is
+  $\Op_\eps(\abs\eta^2+V(x))$.
+\end{example}
+
+As in \cref{ch:euclidean} it is convenient to allow amplitudes depending on
+both $x$ and $y$: for $p\in\Ssl m(\R^{2n};\R^n)$, i.e.\ $p=p(\eps,x,y,\eta)$, we set
+\begin{equation*}
+  \Op_\eps(p)=\Op\bigl(p(\eps,x,y,\eps\xi)\bigr),
+\end{equation*}
+which for each $\eps>0$ is an element of $\Psido m(\R^n)$ given by an amplitude in
+$\Amp m0(\R^n)$, by \cref{semiclassical:lem:rescale}(i) with $p=2n$. That such
+families are again in $\Psisl m(\R^n)$ is part of
+\cref{semiclassical:thm:reduction} below.
+
+\subsection{An oscillatory integral}
+The proof that the composition theorem of \cref{ch:euclidean} survives the
+semiclassical rescaling with uniform control in $\eps$ rests on an exact
+formula for the symbol of a composite. It involves the following class of
+functions on $\R^n_x\times\R^n_\xi\times\R^n_y\times\R^n_\zeta$.
+
+\begin{definition}\label{semiclassical:def:Q}
+  For $\mu,w\in\R$ and $k\ge0$ let $\Qcl\mu{k,w}$ be the space of
+  $q\in\CI(\R^{4n})$ such that for all multi-indices
+  \begin{equation}\label{semiclassical:eq:Q-est}
+    \abs{\pa^\alpha_x\pa^\beta_\xi\pa^\gamma_y\pa^\delta_\zeta q(x,\xi,y,\zeta)}\le
+    C_{\alpha\beta\gamma\delta}\ang\xi^{\mu-\abs\beta}\ang\zeta^{k+\abs\beta+\abs\delta}\ang y^w,
+  \end{equation}
+  with the best constants as seminorms.
+\end{definition}
+
+The typical elements are as follows. If $a\in S^m(\R^n;\R^n)$ and
+$0\le t\le1$ then, by Peetre's inequality (\cref{euclidean:lem:peetre}),
+\begin{equation}\label{semiclassical:eq:peetre-shift}
+  \ang{\xi+t\zeta}^{s}\le2^{\abs s/2}\ang\xi^{s}\ang\zeta^{\abs s},
+\end{equation}
+so $\abs{\pa^\beta_\xi\pa^\delta_\zeta[a(x,\xi+t\zeta)]}\le
+Ct^{\abs\delta}\ang{\xi+t\zeta}^{m-\abs\beta-\abs\delta}\le
+C\ang\xi^{m-\abs\beta}\ang\zeta^{\abs m+\abs\beta+\abs\delta}$, using
+$\ang\xi^{-\abs\delta}\le1$. Hence, uniformly in $t\in[0,1]$,
+\begin{equation}\label{semiclassical:eq:Q-examples}
+  \begin{gathered}
+    a(x,\xi+t\zeta)\,b(x+y,\xi)\in\Qcl{m+m'}{\abs m,0}\quad\text{if }a\in S^m(\R^n;\R^n),\ b\in S^{m'}(\R^n;\R^n),\\
+    p(x,x+y,\xi+t\zeta)\in\Qcl m{\abs m,0}\quad\text{if }p\in S^m(\R^{2n};\R^n),
+  \end{gathered}
+\end{equation}
+with seminorms bounded by products of seminorms of $a$ and $b$, respectively
+by seminorms of $p$. Fix $\chi\in\CIc(\R^n)$ with $\chi=1$ near $0$.
+
+\begin{lemma}\label{semiclassical:lem:J}
+  Let $q\in\Qcl\mu{k,w}$. The limit
+  \begin{equation*}
+    J(q)(x,\xi)=\lim_{s\downarrow0}(2\pi)^{-n}\int\!\!\int e^{-iy\cdot\zeta}\chi(sy)\chi(s\zeta)q(x,\xi,y,\zeta)\,dy\,d\zeta
+  \end{equation*}
+  exists, and for integers $M,L$ with $2M>n+w$ and $2L>n+k+2M$,
+  \begin{equation}\label{semiclassical:eq:J-formula}
+    J(q)(x,\xi)=(2\pi)^{-n}\int\!\!\int e^{-iy\cdot\zeta}\ang y^{-2M}(1+\Delta_\zeta)^M
+    \Bigl[\ang\zeta^{-2L}(1+\Delta_y)^Lq(x,\xi,y,\zeta)\Bigr]\,dy\,d\zeta,
+  \end{equation}
+  an absolutely convergent integral. Moreover:
+  \begin{enumerate}[label=\textup{(\roman*)}]
+  \item $J$ is a continuous linear map $\Qcl\mu{k,w}\to S^\mu(\R^n;\R^n)$, and
+    $\pa_xJ(q)=J(\pa_xq)$, $\pa_\xi J(q)=J(\pa_\xi q)$;
+  \item $J(\zeta^\alpha q)=J(D^\alpha_yq)$ for all $\alpha$;
+  \item if $q$ is independent of $\zeta$ then $J(q)(x,\xi)=q(x,\xi,0,\cdot)$; if
+    $q$ is independent of $y$ then $J(q)(x,\xi)=q(x,\xi,\cdot,0)$;
+  \item if $q$ depends on a parameter $t$ in an interval, with
+    $\pa^j_tq\in\Qcl\mu{k,w}$ bounded for each $j$, then
+    $\pa^j_tJ(q)=J(\pa^j_tq)$, and $J(q)$ satisfies symbol estimates of order
+    $\mu$ uniformly in $t$, together with all its $t$-derivatives.
+  \item if $q_l$ is a bounded sequence in $\Qcl\mu{k,w}$ converging, with all
+    derivatives, locally uniformly to $q$, then $J(q_l)\to J(q)$ pointwise,
+    with $\abs{J(q_l)}\le C\ang\xi^\mu$.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  For $s\in(0,1]$ let $q_s=\chi(sy)\chi(s\zeta)q$. Since
+  $\pa^\gamma_y[\chi(sy)]=s^{\abs\gamma}(\pa^\gamma\chi)(sy)$ is bounded uniformly in
+  $s$, the functions $q_s$ are bounded in $\Qcl\mu{k,w}$. They have compact
+  support in $(y,\zeta)$, so using
+  $(1+\Delta_y)^Le^{-iy\cdot\zeta}=\ang\zeta^{2L}e^{-iy\cdot\zeta}$ and
+  $(1+\Delta_\zeta)^Me^{-iy\cdot\zeta}=\ang y^{2M}e^{-iy\cdot\zeta}$ we may
+  integrate by parts (the operators are formally self-adjoint) to obtain
+  \eqref{semiclassical:eq:J-formula} with $q$ replaced by $q_s$, for the
+  integral defining $J$ before the limit. The function in square brackets is a
+  sum of terms $\pa^\delta_\zeta(\ang\zeta^{-2L})\pa^{\delta'}_\zeta\pa^\gamma_yq_s$ with
+  $\abs\gamma\le2L$, $\abs\delta+\abs{\delta'}\le2M$, and
+  $\abs{\pa^\delta_\zeta\ang\zeta^{-2L}}\le C\ang\zeta^{-2L}$; so by
+  \eqref{semiclassical:eq:Q-est} the integrand is bounded by
+  \begin{equation}\label{semiclassical:eq:J-bound}
+    C\,\ang y^{w-2M}\ang\zeta^{k+2M-2L}\ang\xi^\mu,
+  \end{equation}
+  uniformly in $s$, with $C$ a seminorm of $q$. This is integrable by the
+  choice of $M$ and $L$. As $s\downarrow0$ every derivative of $\chi(sy)\chi(s\zeta)$ of
+  positive order tends to zero pointwise and $\chi(sy)\chi(s\zeta)\to1$, so by
+  dominated convergence the integrals converge to the right side of
+  \eqref{semiclassical:eq:J-formula}. In particular the limit exists and the
+  formula does not depend on $M$ and $L$.
+
+  (i) The bound \eqref{semiclassical:eq:J-bound} gives
+  $\abs{J(q)}\le C\ang\xi^\mu$. Differentiation under the integral in
+  \eqref{semiclassical:eq:J-formula} is justified by the same bounds, and gives
+  $\pa^\alpha_x\pa^\beta_\xi J(q)=J(\pa^\alpha_x\pa^\beta_\xi q)$. Since
+  $\pa^\alpha_x\pa^\beta_\xi q\in\Qcl{\mu-\abs\beta}{k+\abs\beta,w}$, we get
+  $\abs{\pa^\alpha_x\pa^\beta_\xi J(q)}\le C\ang\xi^{\mu-\abs\beta}$, with $C$ a
+  seminorm of $q$.
+
+  (ii) Note $\zeta^\alpha q\in\Qcl\mu{k+\abs\alpha,w}$. Since
+  $\zeta_je^{-iy\cdot\zeta}=-D_{y_j}e^{-iy\cdot\zeta}$, integration by parts gives
+  \begin{equation*}
+    \int\!\!\int e^{-iy\cdot\zeta}\chi(sy)\chi(s\zeta)\zeta^\alpha q\,dy\,d\zeta
+    =\int\!\!\int e^{-iy\cdot\zeta}\chi(s\zeta)D^\alpha_y\bigl[\chi(sy)q\bigr]\,dy\,d\zeta .
+  \end{equation*}
+  Expanding by Leibniz' formula, the term in which no derivative falls on
+  $\chi(sy)$ tends to $(2\pi)^nJ(D^\alpha_yq)$, and the others are, up to
+  constants, $s^{\abs\gamma}$ times the regularized integrals of
+  $(D^\gamma\chi)(sy)\chi(s\zeta)D^{\alpha-\gamma}_yq$, which are bounded uniformly in
+  $s$ by the argument above (with $\chi$ replaced by $D^\gamma\chi$ in the $y$
+  variable). Hence they tend to zero.
+
+  (iii) If $q=f(x,\xi,y)$, then with
+  $\check\chi(y)=(2\pi)^{-n}\int e^{-iy\cdot\zeta}\chi(\zeta)\,d\zeta\in\cS(\R^n)$,
+  which has integral $\chi(0)=1$,
+  \begin{equation*}
+    (2\pi)^{-n}\int\!\!\int e^{-iy\cdot\zeta}\chi(sy)\chi(s\zeta)f\,dy\,d\zeta
+    =\int\chi(sy)f(x,\xi,y)s^{-n}\check\chi(y/s)\,dy
+    =\int\chi(s^2Y)f(x,\xi,sY)\check\chi(Y)\,dY,
+  \end{equation*}
+  which tends to $f(x,\xi,0)$ by dominated convergence, since
+  $\abs{f(x,\xi,sY)}\le C\ang Y^{\abs w}$. The case of $q$ independent of $y$ is
+  the same with the roles of $y$ and $\zeta$ exchanged.
+
+  (iv) and (v) follow from \eqref{semiclassical:eq:J-formula} by
+  differentiation under the integral and dominated convergence, respectively,
+  using \eqref{semiclassical:eq:J-bound}.
+\end{proof}
+
+\begin{proposition}\label{semiclassical:prop:exact}
+  \begin{enumerate}[label=\textup{(\roman*)}]
+  \item If $p\in\Amp mw(\R^n)$ then the left symbol of $\Op(p)$ is
+    \begin{equation*}
+      \sigma_L(\Op(p))(x,\xi)=J\bigl(p(x,x+y,\xi+\zeta)\bigr)(x,\xi).
+    \end{equation*}
+  \item If $a\in S^m(\R^n;\R^n)$ and $b\in S^{m'}(\R^n;\R^n)$ then
+    \begin{equation*}
+      \sigma_L(\Op(a)\Op(b))(x,\xi)=J\bigl(a(x,\xi+\zeta)b(x+y,\xi)\bigr)(x,\xi).
+    \end{equation*}
+  \end{enumerate}
+\end{proposition}
+
+Formally, these are obtained by inserting $u(y')=\int e^{iy'\cdot\theta}\hat u(\theta)\dbar\theta$
+into the defining integrals and changing variables; the proof justifies this.
+
+\begin{proof}
+  The function $q$ in (i) lies in $\Qcl m{\abs m,\abs w}$ (as in
+  \eqref{semiclassical:eq:Q-examples}, the weight $\ang{x-y'}^w$ of $p$ becoming
+  $\ang y^{\abs w}$), and in (ii) it lies in $\Qcl{m+m'}{\abs m,0}$. So in both
+  cases $J(q)\in S^\mu(\R^n;\R^n)$ with $\mu=m$, resp.\ $m+m'$, and it suffices to
+  show that the operators agree on each $u\in\cS(\R^n)$.
+
+  (i) Suppose first that $p(x,y',\xi)=0$ for $\abs\xi\ge R$. Then for
+  $u\in\cS(\R^n)$ the integral $\Op(p)u(x)=\int\!\!\int e^{i(x-y')\cdot\xi}p(x,y',\xi)u(y')\,dy'\dbar\xi$
+  converges absolutely, so equals the limit as $s\downarrow0$ of the same integral
+  with $u(y')$ replaced by $\chi(sy')u(y')$. In the latter we insert
+  $u(y')=\int e^{iy'\cdot\theta}\hat u(\theta)\dbar\theta$; the resulting triple
+  integral converges absolutely, and after the substitution $y'=x+y$,
+  $\xi=\theta+\zeta$ (so that $(x-y')\cdot\xi+y'\cdot\theta=x\cdot\theta-y\cdot\zeta$) it
+  becomes
+  \begin{equation*}
+    \int e^{ix\cdot\theta}\hat u(\theta)\,F_s(x,\theta)\,\dbar\theta,\qquad
+    F_s(x,\theta)=(2\pi)^{-n}\int\!\!\int e^{-iy\cdot\zeta}\chi(s(x+y))q(x,\theta,y,\zeta)\,dy\,d\zeta .
+  \end{equation*}
+  For fixed $\theta$, $q$ has compact support in $\zeta$, so we may integrate by
+  parts with $(1+\Delta_\zeta)^M$ to gain the factor $\ang y^{-2M}$; dominated
+  convergence (the $\zeta$-integration being over the ball $\abs{\theta+\zeta}\le R$)
+  shows that $F_s(x,\theta)$ is bounded uniformly in $s$ and $\theta$ and converges
+  to the same limit as the regularization in \cref{semiclassical:lem:J}, i.e.\
+  to $J(q)(x,\theta)$. Hence $\Op(p)u(x)=\int e^{ix\cdot\theta}J(q)(x,\theta)\hat u(\theta)\dbar\theta
+  =\Op(J(q))u(x)$, by \eqref{euclidean:eq:left-quant}.
+
+  For general $p$ let $p_l=\chi(\xi/l)p$ (with $\chi$ as in
+  \cref{euclidean:lem:density}). By \cref{euclidean:prop:action-S},
+  $\Op(p_l)u(x)\to\Op(p)u(x)$. The corresponding $q_l=\chi((\xi+\zeta)/l)q$ are
+  bounded in $\Qcl m{\abs m,\abs w}$ and converge with all derivatives locally
+  uniformly to $q$, so by \cref{semiclassical:lem:J}(v) and dominated convergence
+  in $\int e^{ix\cdot\theta}J(q_l)(x,\theta)\hat u(\theta)\dbar\theta$, also
+  $\Op(J(q_l))u(x)\to\Op(J(q))u(x)$. This proves (i).
+
+  (ii) Let $v=\Op(b)u\in\cS(\R^n)$, so
+  $v(x')=\int e^{ix'\cdot\theta}b(x',\theta)\hat u(\theta)\dbar\theta$. If $a$
+  vanishes for $\abs\xi\ge R$, then
+  $\Op(a)v(x)=\int\!\!\int e^{i(x-x')\cdot\xi}a(x,\xi)v(x')\,dx'\dbar\xi$ converges absolutely,
+  and we may again insert $\chi(sx')$ and let $s\downarrow0$. With the cutoff, the
+  triple integral in $(x',\xi,\theta)$ converges absolutely, and the substitution
+  $x'=x+y$, $\xi=\theta+\zeta$ turns it into
+  $\int e^{ix\cdot\theta}\hat u(\theta)F_s(x,\theta)\dbar\theta$ with $F_s$ as before
+  but now with $q=a(x,\theta+\zeta)b(x+y,\theta)$. The same argument gives
+  $\abs{F_s(x,\theta)}\le C\ang\theta^{m'}$ uniformly and $F_s\to J(q)$, hence
+  $\Op(a)\Op(b)u=\Op(J(q))u$. For general $a$, replace $a$ by $a_l=\chi(\xi/l)a$;
+  then $\Op(a_l)v(x)=\int e^{ix\cdot\xi}a_l(x,\xi)\hat v(\xi)\dbar\xi\to\Op(a)v(x)$,
+  and $\Op(J(q_l))u(x)\to\Op(J(q))u(x)$ as in (i).
+\end{proof}
+
+\subsection{The semiclassical calculus}
+We can now prove that semiclassical families form an algebra, with an
+expansion of the composition in powers of $\eps$.
+
+\begin{theorem}[Reduction]\label{semiclassical:thm:reduction}
+  If $p\in\Ssl m(\R^{2n};\R^n)$ then $\Op_\eps(p)=\Op_\eps(c)$, where
+  \begin{equation*}
+    c(\eps,x,\eta)=J\bigl(p(\eps,x,x+y,\eta+\eps\zeta)\bigr)(x,\eta)\in\Ssl m(\R^n),
+  \end{equation*}
+  and for every $N$
+  \begin{equation}\label{semiclassical:eq:reduction}
+    c(\eps,x,\eta)-\sum_{\abs\alpha<N}\frac{\eps^{\abs\alpha}}{\alpha!}
+    \pa^\alpha_\eta D^\alpha_yp(\eps,x,y,\eta)\Big|_{y=x}\in\eps^N\Ssl{m-N}(\R^n).
+  \end{equation}
+  In particular $c(0,x,\eta)=p(0,x,x,\eta)$ and $c-p(\eps,x,x,\eta)\in\eps\Ssl{m-1}(\R^n)$.
+\end{theorem}
+\begin{proof}
+  For $0\le t\le1$ let $q_t(\eps;x,\eta,y,\zeta)=p(\eps,x,x+y,\eta+t\zeta)$. By
+  \eqref{semiclassical:eq:Q-examples}, $\pa^j_\eps\pa^l_tq_t$ is bounded in
+  $\Qcl{m}{\abs m+l,0}$ (each $\pa_t$ produces a factor $\zeta\cdot\pa_\eta$), so by
+  \cref{semiclassical:lem:J}(iv) the function $c(\eps,x,\eta)=J(q_\eps)(x,\eta)$
+  lies in $\Ssl m(\R^n)$. For fixed $\eps>0$, $\Op_\eps(p)=\Op(p_\eps)$ with
+  $p_\eps(x,y',\xi)=p(\eps,x,y',\eps\xi)\in\Amp m0$, and by
+  \cref{semiclassical:prop:exact}(i) its left symbol at $(x,\xi)$ is
+  $J\bigl(p(\eps,x,x+y,\eps\xi+\eps\zeta)\bigr)(x,\xi)=c(\eps,x,\eps\xi)$, since
+  $J$ acts with $\xi$ as a parameter. Hence $\Op_\eps(p)=\Op(c^\flat(\eps))=\Op_\eps(c)$.
+
+  For the expansion, Taylor's formula in the third argument gives
+  \begin{equation*}
+    p(\eps,x,x+y,\eta+\eps\zeta)=\sum_{\abs\alpha<N}\frac{(\eps\zeta)^\alpha}{\alpha!}
+    \pa^\alpha_\eta p(\eps,x,x+y,\eta)
+    +\eps^N\sum_{\abs\alpha=N}\frac{N\zeta^\alpha}{\alpha!}\int_0^1(1-s)^{N-1}
+    \pa^\alpha_\eta p(\eps,x,x+y,\eta+s\eps\zeta)\,ds .
+  \end{equation*}
+  Apply $J$. By \cref{semiclassical:lem:J}(ii),(iii),
+  $J(\zeta^\alpha\pa^\alpha_\eta p(\eps,x,x+y,\eta))=D^\alpha_y\pa^\alpha_\eta p(\eps,x,y,\eta)|_{y=x}$,
+  which gives the sum in \eqref{semiclassical:eq:reduction}. In the remainder,
+  $J(\zeta^\alpha\pa^\alpha_\eta p(\eps,x,x+y,\eta+s\eps\zeta))
+  =J\bigl((D^\alpha_y\pa^\alpha_\eta p)(\eps,x,x+y,\eta+s\eps\zeta)\bigr)$, and
+  $D^\alpha_y\pa^\alpha_\eta p\in\Ssl{m-N}(\R^{2n};\R^n)$; by
+  \cref{semiclassical:lem:J}(iv), with parameters $(\eps,s)$, this is a symbol of
+  order $m-N$ with all $\eps$-derivatives bounded uniformly in $s\in[0,1]$, and
+  integrating in $s$ gives an element of $\Ssl{m-N}$. (We may interchange $J$
+  and $\int_0^1ds$ by Fubini in \eqref{semiclassical:eq:J-formula}.)
+\end{proof}
+
+\begin{theorem}[Composition and adjoints]\label{semiclassical:thm:composition}
+  The families $\Psisl\infty(\R^n)=\bigcup_m\Psisl m(\R^n)$ form an
+  order-filtered $*$-algebra. Precisely, for $a\in\Ssl m(\R^n)$ and
+  $b\in\Ssl{m'}(\R^n)$,
+  \begin{equation*}
+    \Op_\eps(a)\Op_\eps(b)=\Op_\eps(a\#b),\qquad \Op_\eps(a)^*=\Op_\eps(a^*),
+  \end{equation*}
+  where
+  \begin{equation*}
+    (a\#b)(\eps,x,\eta)=J\bigl(a(\eps,x,\eta+\eps\zeta)\,b(\eps,x+y,\eta)\bigr),\qquad
+    a^*(\eps,x,\eta)=J\bigl(\overline{a(\eps,x+y,\eta+\eps\zeta)}\bigr)
+  \end{equation*}
+  lie in $\Ssl{m+m'}(\R^n)$ and $\Ssl m(\R^n)$ respectively, and for every $N$
+  \begin{equation}\label{semiclassical:eq:composition}
+    a\#b-\sum_{\abs\alpha<N}\frac{\eps^{\abs\alpha}}{\alpha!}\,\pa^\alpha_\eta a\,D^\alpha_xb
+    \in\eps^N\Ssl{m+m'-N}(\R^n),\qquad
+    a^*-\sum_{\abs\alpha<N}\frac{\eps^{\abs\alpha}}{\alpha!}\,\pa^\alpha_\eta D^\alpha_x\bar a
+    \in\eps^N\Ssl{m-N}(\R^n).
+  \end{equation}
+  In particular $\eps^N\Psisl m\circ\eps^{N'}\Psisl{m'}\subset\eps^{N+N'}\Psisl{m+m'}$,
+  and $\eps^\infty\Psisl{-\infty}(\R^n)$ is a two-sided ideal in $\Psisl\infty(\R^n)$.
+\end{theorem}
+\begin{proof}
+  The statement about adjoints is \cref{semiclassical:thm:reduction} applied
+  to $p(\eps,x,y,\eta)=\overline{a(\eps,y,\eta)}$: by
+  \cref{euclidean:prop:adjoint}, for each $\eps>0$ the adjoint of $\Op(a^\flat(\eps))$ is
+  the operator with amplitude $\overline{a^\flat(\eps,y,\xi)}$, i.e.\
+  $\Op_\eps(a)^*=\Op_\eps(p)$. For the composite, fix $\eps>0$; by
+  \cref{semiclassical:prop:exact}(ii) the left symbol of
+  $\Op(a^\flat(\eps))\Op(b^\flat(\eps))$ at $(x,\xi)$ is
+  $J\bigl(a(\eps,x,\eps\xi+\eps\zeta)b(\eps,x+y,\eps\xi)\bigr)=(a\#b)(\eps,x,\eps\xi)$.
+  That $a\#b\in\Ssl{m+m'}$ and the expansion follow exactly as in the proof of
+  \cref{semiclassical:thm:reduction}, using
+  \eqref{semiclassical:eq:Q-examples} and Taylor's formula for
+  $a(\eps,x,\eta+\eps\zeta)$, now with
+  $J(\zeta^\alpha\pa^\alpha_\eta a(\eps,x,\eta)b(\eps,x+y,\eta))=\pa^\alpha_\eta a\,D^\alpha_xb$
+  and remainder terms
+  $J\bigl(\pa^\alpha_\eta a(\eps,x,\eta+s\eps\zeta)\,D^\alpha_xb(\eps,x+y,\eta)\bigr)$,
+  $\abs\alpha=N$, which are of order $m+m'-N$ uniformly in $s$.
+
+  If $a\in\eps^N\Ssl m$ and $b\in\eps^{N'}\Ssl{m'}$ then $a\#b\in\eps^{N+N'}\Ssl{m+m'}$
+  since $\#$ is bilinear and $J$ commutes with multiplication by functions of
+  $\eps$. If $b\in\eps^\infty\Ssl{-\infty}$ then $a\#b\in\bigcap_N\eps^N\Ssl{m-N}=
+  \eps^\infty\Ssl{-\infty}$, and similarly in the other order, by
+  \cref{semiclassical:lem:residual-symbols}.
+\end{proof}
+
+Since $\pa^\alpha_\eta=i^{\abs\alpha}D^\alpha_\eta$, \eqref{semiclassical:eq:composition}
+is the rescaled form of the composition formula of \cref{ch:euclidean}:
+formally $a\#b=e^{i\eps D_\eta\cdot D_y}a(\eps,x,\eta)b(\eps,y,\eta)|_{y=x}$. The
+difference is that now the expansion is asymptotic in $\eps$ as well as in the
+order, with uniform remainders. The two leading terms give:
+
+\begin{corollary}\label{semiclassical:cor:commutator}
+  For $a\in\Ssl m(\R^n)$, $b\in\Ssl{m'}(\R^n)$,
+  \begin{equation*}
+    a\#b-ab\in\eps\Ssl{m+m'-1}(\R^n),\qquad
+    a\#b-b\#a-\frac\eps i\{a,b\}\in\eps^2\Ssl{m+m'-2}(\R^n),
+  \end{equation*}
+  where $\{a,b\}=\sum_j(\pa_{\eta_j}a\,\pa_{x_j}b-\pa_{x_j}a\,\pa_{\eta_j}b)$ is
+  the Poisson bracket. In particular
+  $[\Op_\eps(a),\Op_\eps(b)]\in\eps\Psisl{m+m'-1}(\R^n)$.
+\end{corollary}
+\begin{proof}
+  The terms with $\abs\alpha=1$ in \eqref{semiclassical:eq:composition} for
+  $a\#b-b\#a$ are $\eps\sum_j(\pa_{\eta_j}a\,D_{x_j}b-\pa_{\eta_j}b\,D_{x_j}a)
+  =\frac\eps i\{a,b\}$.
+\end{proof}

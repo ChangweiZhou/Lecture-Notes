@@ -9,6 +9,12 @@
 \providecommand{\wind}{\operatorname{wind}}
 \providecommand{\Iso}{\operatorname{Iso}}
 \providecommand{\rank}{\operatorname{rank}}
+\providecommand{\Gres}{G^{-\infty}_{\mathrm{iso}}}
+\providecommand{\Psiisoph}[1]{\Psi^{#1}_{\mathrm{iso,ph}}}
+\providecommand{\OpW}{\operatorname{Op}^{\mathrm{W}}}
+\providecommand{\indiso}{\operatorname{ind}_{\mathrm{iso}}}
+\providecommand{\Indsl}[1]{\operatorname{Ind}^{#1}_{\mathrm{sl}}}
+\providecommand{\ann}{\mathfrak{a}}
 
 In \cref{ch:index} the index of an elliptic operator was shown to be a
 homotopy invariant, the group $\Ginf(Y;E)$ of invertible perturbations of the
@@ -31,14 +37,25 @@ As consequences we obtain:
   $\GinfT\to\GT\to\GT/\GinfT$ for K-theory;
 \item Bott periodicity in its usual form, $\Kc^0(\R^2\times X)\cong K^0(X)$, and the
   homotopy groups of $\Ginf$: $\pi_k(\Ginf)=\Z$ for $k$ odd and $0$ for $k$ even;
+\item a second, independent, realization of the index isomorphism through the
+  isotropic calculus of \cref{ch:isotropic}: the circle at infinity of the phase
+  plane $\R^2$ replaces the circle, the eigenprojections of the harmonic oscillator
+  replace the projections onto Fourier modes, and the annihilation operator replaces
+  the Toeplitz shift;
+\item the \emph{isotropic--semiclassical quantization maps}
+  $\Kc^{-1}(\R^{2n}\times X)\to\Kc^{-1}(X)$ and $\Kc^0(\R^{2n}\times X)\to\Kc^0(X)$,
+  obtained by quantizing compactly supported symbols with values in invertible
+  matrices or in projections, which realize Bott periodicity and are used in
+  \cref{ch:semiclassical-index};
+\item complex and symplectic vector bundles and the Thom isomorphism;
 \item the analytic index map $\Kc^0(T^*Z)\to\Z$, the starting point of the index
   theorem.
 \end{itemize}
 K-theory is defined from scratch in \cref{bott:sec:K}; we follow
-\cite{Atiyah-K} for the topological background. We use Toeplitz operators on the circle
-(an alternative based on the isotropic calculus of \cref{ch:isotropic} is indicated in
-the Notes); compare also \cite{Pressley-Segal} for the relation between
-loop groups and Toeplitz operators.
+\cite{Atiyah-K} for the topological background. The main line uses Toeplitz operators
+on the circle; compare \cite{Pressley-Segal} for the relation between loop groups and
+Toeplitz operators. The isotropic version (\cref{bott:sec:isotropic}) runs parallel to
+it and the two index maps are compared in \cref{bott:prop:iso-toeplitz}.
 
 \section{Conventions and background}\label{bott:sec:background}
 
@@ -312,6 +329,43 @@ $\Omega_0\Ginf(Y;E)$ the loops with $\wind=0$.
   $A$ satisfies $A=\Pi_VA\Pi_V=\Pi_jA\Pi_j$, so the approximation does not change
   the endpoints. The final statements follow, using \cref{bott:lem:rotation}.
 \end{proof}
+
+\begin{remark}[The isotropic model]\label{bott:rem:iso-model}
+  The proof of \cref{bott:lem:stable} uses only the finite rank approximations of
+  \ref{bott:B:finite}. The residual isotropic group
+  $\Gres(\R^n;\C^N)=\{\Id+A;\ A\in\Psiiso{-\infty}(\R^n;\C^N),\ \Id+A\text{ invertible}\}$
+  of \cref{ch:isotropic} has the same property, with $\Pi_k$ the orthogonal projection
+  onto the span of the Hermite functions $u_\alpha$, $|\alpha|\le k$ (tensored with
+  $\C^N$): for every $A\in\Psiiso{-\infty}(\R^n;\C^N)$, $\Pi_kA\Pi_k\to A$ in
+  $\Psiiso{-\infty}$, uniformly on compact families, because the Hermite expansion of a
+  Schwartz kernel converges in $\cS$. Hence smooth homotopy classes of maps into
+  $\Gres(\R^n;\C^N)$ are again the stable classes of maps into the groups $\GL(M,\C)$,
+  and $K^{-1}(X)=[X;\Gres(\R^n;\C^N)]$, $K^{-2}(X)$ can equally be defined with
+  $\Gres(\R^n;\C^N)$ in place of $\Ginf(Y;E)$. We use this model freely below.
+\end{remark}
+
+\begin{lemma}\label{bott:lem:circle-split}
+  For compact $X$ let $\varpi\colon\Sphere\times X\to X$ be the projection and
+  $\iota_1\colon X\to\Sphere\times X$, $x\mapsto(1,x)$. Then $\iota_1^*\varpi^*=\Id$ and
+  forgetting the base point condition identifies $K^{-2}(X)$ with $\ker\iota_1^*$, so
+  \begin{equation*}
+    K^{-1}(\Sphere\times X)\cong K^{-2}(X)\oplus K^{-1}(X),\qquad
+    [f]\longmapsto\bigl([f\cdot\varpi^*\iota_1^*f^{-1}],[\iota_1^*f]\bigr).
+  \end{equation*}
+\end{lemma}
+\begin{proof}
+  If $f\colon\Sphere\times X\to\Ginf$, then $f\cdot\varpi^*\iota_1^*f^{-1}$, i.e.\
+  $(\theta,x)\mapsto f(\theta,x)f(1,x)^{-1}$, is pointed, and it is pointed homotopic
+  to $f$ when $f$ is pointed. A free homotopy $h_t$ between pointed maps gives the
+  pointed homotopy $h_t\cdot\varpi^*\iota_1^*h_t^{-1}$, so the forgetful map
+  $K^{-2}(X)\to\ker\iota_1^*$ is injective, and by the first remark it is surjective.
+  Since $K^{-1}(\Sphere\times X)$ is abelian, $[f]=[f\cdot\varpi^*\iota_1^*f^{-1}]+
+  \varpi^*[\iota_1^*f]$, which gives the splitting.
+\end{proof}
+
+Via \cref{bott:lem:suspension} below, $K^{-2}(X)\cong\Kc^{-1}(\R\times X)$, so the lemma
+says that $K^{-1}(\Sphere\times X)$ combines the odd K-theory of $X$ and the odd
+K-theory of $\R\times X$; the latter will be identified with $K^0(X)$.
 
 \section{Linearization of loops}\label{bott:sec:linearization}
 
@@ -793,6 +847,283 @@ $1=[\C]\in K^0(\mathrm{pt})$, is the \emph{Bott element}: $\beta[\C]=[z^{-1}]$.
   bijectively onto the kernel of the other. The second statement is the case $X=\mathrm{pt}$,
   where $\ind(a)=-\wind(a)$.
 \end{proof}
+
+\section{The isotropic index map}\label{bott:sec:isotropic}
+
+Toeplitz operators are one way to `quantize' loops of matrices. A second way uses the
+isotropic calculus on $\R$ of \cref{ch:isotropic}: the principal symbol of an isotropic
+operator of order $0$ on $\R$ is a function on the circle at infinity of the phase
+plane $\R^2$, so loops are again symbols. The role of the projections $P_k$ onto the
+first Fourier modes is taken by the eigenprojections of the harmonic oscillator, and
+the role of the shift $L$ by the annihilation operator. In this section we carry this
+out and obtain a second proof of \cref{bott:thm:index-iso}; the two index maps are
+compared in \cref{bott:prop:iso-toeplitz}. Unlike the Toeplitz construction, the
+isotropic one extends directly to $\R^n$, which is exploited in
+\cref{bott:sec:quantization}.
+
+\subsection{Conventions}
+The phase plane is $\R^2$ with coordinates $w=(x,\xi)$, oriented by $dx\wedge d\xi$.
+We identify $\Sphere$ with the unit circle by $\theta\mapsto(\cos\theta,\sin\theta)$, so
+that $\Sphere$ is traversed counterclockwise, and on it
+\begin{equation*}
+  z=e^{i\theta}=\frac{x+i\xi}{\abs w};
+\end{equation*}
+the base point $\theta=0$ is $(x,\xi)=(1,0)$. For $A\in\Psiisoph{0}(\R;\C^N)$, a
+polyhomogeneous isotropic operator of order $0$, the principal symbol is
+$\sigma_0(A)\in\CI(\Sphere;M(N,\C))$, and $A$ is elliptic if $\sigma_0(A)$ is invertible.
+Conversely, for $a\in\CI(Z\times\Sphere;M(N,\C))$ the family
+\begin{equation}\label{bott:eq:iso-quantize}
+  \Op_\chi(a)(z)=\Op\bigl(\chi(\abs w)\,a(z,w/\abs w)\bigr),\qquad
+  \chi\in\CI(\R),\ \chi=0\text{ near }0,\ \chi=1\text{ on }[1,\infty),
+\end{equation}
+is a smooth family in $\Psiisoph{0}(\R;\C^N)$ with principal symbol $a(z,\cdot)$, the
+symbol being homogeneous of degree $0$ outside the unit ball. We write
+$u_k$, $k\in\N_0$, for the Hermite functions on $\R$ (the normalized eigenfunctions of
+$H=D_x^2+x^2$, $Hu_k=(2k+1)u_k$) and $\Pi_k$ for the orthogonal projection onto
+$\operatorname{span}\{u_0,\dots,u_k\}\otimes\C^N$.
+
+\subsection{The dictionary}
+The constructions of \cref{bott:sec:families} used the following properties of the
+Toeplitz algebra: the existence of parametrices depending smoothly on parameters,
+the continuity of the inclusion into the bounded operators on $L^2_+$, elliptic
+regularity, the fact that $R\,T\,R'$ is a smoothing operator, continuously in $T$, when
+$R,R'$ are smoothing and $T$ is bounded, and \ref{bott:B:shifts}. Each of these holds
+for the isotropic calculus by the results of \cref{ch:isotropic}:
+\begin{enumerate}[label=(I\arabic*),leftmargin=*]
+\item\label{bott:I:parametrix} An elliptic $A\in\Psiisoph{0}(\R;\C^N)$ has a parametrix
+  $B\in\Psiisoph{0}(\R;\C^N)$, $AB-\Id,\ BA-\Id\in\Psiiso{-\infty}(\R;\C^N)$; the
+  construction is symbolic (inversion of the symbol and asymptotic summation), so for
+  a smooth family $A$ the parametrices may be chosen to form a smooth family.
+\item\label{bott:I:fredholm} An elliptic $A$ is Fredholm on $L^2(\R;\C^N)$ and on
+  $\cS(\R;\C^N)$; the null spaces of $A$ and $A^*$ lie in $\cS$, they are the same on
+  $\cS$, $L^2$ and $\cSp$, and the range on each of these spaces is the annihilator of
+  $\Nul A^*$. The inclusion $\Psiisoph{0}(\R;\C^N)\to\Lin(L^2)$ is continuous.
+\item\label{bott:I:corner} If $R,R'\in\Psiiso{-\infty}(\R;\C^N)$ and $T$ is bounded on
+  $L^2$ then $RTR'\in\Psiiso{-\infty}(\R;\C^N)$, with seminorms bounded by seminorms of
+  $R$, $R'$ times $\norm T$.
+\item\label{bott:I:hermite} For a smooth family $K$ in $\Psiiso{-\infty}(\R;\C^N)$
+  parametrized by a compact manifold, $K\Pi_k\to K$ and $\Pi_kK\to K$ in
+  $\Psiiso{-\infty}$, uniformly, as $k\to\infty$ (the Hermite expansion of a Schwartz
+  kernel converges in $\cS(\R^2)$). Moreover $\Ran\Pi_{k+1}=\Ran\Pi_k\oplus u_{k+1}\C^N$.
+\end{enumerate}
+The dictionary is therefore
+\begin{equation*}
+  \Cp(\Sphere;\C^N)\leadsto\cS(\R;\C^N),\quad L^2_+(\Sphere;\C^N)\leadsto L^2(\R;\C^N),\quad
+  \PsiT{0}\leadsto\Psiisoph{0},\quad\PsiT{-\infty}\leadsto\Psiiso{-\infty},\quad
+  P_k\leadsto\Pi_k,\quad e^{ij\theta}\leadsto u_j,
+\end{equation*}
+with $T_a$ replaced by $\Op_\chi(a)$. Making these replacements in
+\cref{bott:lem:inverse,bott:lem:index-bundle,bott:prop:perturb} and in
+\cref{bott:prop:index-properties}(i)--(iv) we obtain, with the same proofs:
+
+\begin{proposition}\label{bott:prop:iso-families}
+  Let $Z$ be a compact manifold and $A\in\CI(Z;\Psiisoph{0}(\R;\C^N))$ a smooth family
+  of elliptic operators.
+  \begin{enumerate}[label=(\roman*)]
+  \item If each $A(z)$ is invertible then $A^{-1}\in\CI(Z;\Psiisoph{0}(\R;\C^N))$.
+  \item For $k$ large, $\Nul(A(z)(\Id-\Pi_k))=\Ran\Pi_k$ for all $z$; the orthocomplements
+    $F_k(z)\subset\cS(\R;\C^N)$ of the ranges of $A(z)(\Id-\Pi_k)$ form a smooth vector
+    bundle, and
+    \begin{equation*}
+      \indiso(A)=[\Ran\Pi_k]-[F_k]=[\C^{(k+1)N}]-[F_k]\in K^0(Z)
+    \end{equation*}
+    is independent of $k$; $F_k$ may be replaced by any smooth complement of the range of
+    $A(\Id-\Pi_k)$ in $\cS(\R;\C^N)$. For $Z$ a point, $\indiso(A)=\ind A$.
+  \item $\indiso$ is invariant under homotopies of elliptic families, depends only on
+    the homotopy class of $\sigma_0(A)$ in $\CI(Z\times\Sphere;\GL(N,\C))$, is additive
+    under direct sums, unchanged by stabilization $A\mapsto A\oplus\Id$, natural under
+    pull-back, vanishes for invertible families, and $\indiso(bAc)=\indiso(A)$ for
+    $b,c\in\CI(Z;\GL(N,\C))$.
+  \item $\indiso(A)=0$ if and only if $A\oplus\Id_L+B$ is invertible for some $L$ and some
+    smooth family $B$ in $\Psiiso{-\infty}(\R;\C^{N+L})$.
+  \end{enumerate}
+\end{proposition}
+
+In (iii), two families with homotopic symbols are joined by the linear homotopy from
+$A$ to $\Op_\chi(\sigma_0(A))$, which has constant symbol, followed by
+$\Op_\chi(a_t)$ for a homotopy $a_t$ of symbols. The following lemma, valid in both the
+Toeplitz and the isotropic setting, is the most convenient way to compute families
+indices.
+
+\begin{lemma}\label{bott:lem:null-complement}
+  Let $A$ be a smooth elliptic family over a compact manifold $Z$, either of Toeplitz
+  operators on $V=\Cp(\Sphere;\C^N)$ or of isotropic operators on $V=\cS(\R;\C^N)$.
+  Suppose that the null spaces $\Nul A(z)$ form a smooth vector bundle $\mathcal N$
+  (local frames given by smooth maps into $V$) and that $W$ is a smooth vector bundle
+  with $V=A(z)V\oplus W(z)$ for all $z$. Then $\ind(A)=[\mathcal N]-[W]$.
+\end{lemma}
+\begin{proof}
+  Let $P=P_k$, resp.\ $P=\Pi_k$, with $k$ admissible, and $A'=A(\Id-P)$. If
+  $n\in\mathcal N(z)$ and $Pn=0$, then $A'n=An=0$, so $n\in\Nul A'=\Ran P$ and $n=0$.
+  Hence $P$ maps $\mathcal N$ isomorphically onto a smooth subbundle $P\mathcal N$ of
+  the trivial bundle $\Ran P$; let $Y$ be its orthocomplement in $\Ran P$, again a
+  smooth bundle. We claim that $A(V)=A(Y)\oplus A'(V)$ with $A$ injective on $Y$. Indeed,
+  if $y\in Y$ and $Ay=A'v$, then $y-(\Id-P)v\in\mathcal N$, and applying $P$,
+  $y\in P\mathcal N\cap Y=\{0\}$. Conversely, since $V=\Ran P+\Ran(\Id-P)$, every element
+  of $A(V)$ is $Ar+A'v$ with $r\in\Ran P$; writing $r=y+Pn$ with $y\in Y$,
+  $n\in\mathcal N$, we get $Ar=Ay-A'n$. Thus $W\oplus A(Y)$ is a complement for $(A,k)$;
+  it is smooth since $A$ maps local frames of $Y$ to local frames of $A(Y)$. By
+  \cref{bott:lem:index-bundle} (or \cref{bott:prop:iso-families})
+  $\ind(A)=[\Ran P]-[W]-[Y]=[P\mathcal N]-[W]=[\mathcal N]-[W]$.
+\end{proof}
+
+\subsection{The annihilation operator}
+The operator $x+\partial_x=i(D_x-ix)$ is $i$ times the annihilation operator of the
+harmonic oscillator. Its symbol is $x+i\xi$, of order one; we normalize it to order
+$0$.
+
+\begin{lemma}\label{bott:lem:annihilation}
+  Let $B=\frac12\bigl(\Op(\ang w^{-1})+\Op(\ang w^{-1})^*\bigr)$ and
+  $\ann=(x+\partial_x)B$. Then $\ann\in\Psiisoph{0}(\R)$ is elliptic, $\sigma_0(\ann)=z$,
+  and $\ind\ann=1$. Moreover there is a finite rank $K\in\Psiiso{-\infty}(\R)$ such that
+  $\ann'=\ann+K$ is surjective on $\cS(\R)$ and on $L^2(\R)$, with
+  $\Nul\ann'=\C\phi_0$ for some $\phi_0\in\cS(\R)$ with $\norm{\phi_0}=1$; then
+  $\ann'^*$ is injective, with range $\{f;\ (f,\phi_0)=0\}$.
+\end{lemma}
+\begin{proof}
+  $B\in\Psiisoph{-1}(\R)$ is formally self-adjoint with principal symbol $\abs w^{-1}$, so it is
+  elliptic of order $-1$, and $\ann$ is polyhomogeneous of order $0$ with principal symbol
+  $(x+i\xi)/\abs w=z$. By \ref{bott:I:fredholm} (which holds for elliptic operators of any
+  order on $\cS$), $B$ is Fredholm on $\cS(\R)$ with index $\dim\Nul B-\dim\Nul B^*=0$.
+  The operator $x+\partial_x$ is elliptic of order one; $(x+\partial_x)u=0$ means
+  $\partial_x(e^{x^2/2}u)=0$, so $\Nul(x+\partial_x)=\C e^{-x^2/2}$, while the adjoint
+  $x-\partial_x$ has no tempered null space ($e^{x^2/2}$ is not tempered), so
+  $x+\partial_x$ is surjective on $\cS$ and its index is $1$. For linear maps with finite
+  dimensional null spaces and cokernels the index of a composite is the sum of the
+  indices, so $\ind\ann=1$ on $\cS$, and also on $L^2$ by \ref{bott:I:fredholm}.
+
+  Let $N_0=\Nul\ann$, $N_1=\Nul\ann^*$, both in $\cS$, with $\dim N_0=\dim N_1+1$. Choose
+  a unit vector $\phi_0\in N_0$, let $N_0'=N_0\ominus\C\phi_0$, and let $K$ map $N_0'$
+  isomorphically onto $N_1$ and vanish on $(N_0')^\perp$; $K$ has finite rank with range
+  and co-range in $\cS$, so $K\in\Psiiso{-\infty}(\R)$. If $(\ann+K)u=0$, write $u=u'+u''$
+  with $u'\in N_0'$, $u''\perp N_0'$; then $\ann u''\in\Ran\ann\perp N_1\ni Ku'$, so both
+  vanish, $u'=0$ and $u''\in N_0\ominus N_0'=\C\phi_0$. The range of $\ann+K$ contains
+  $\Ran\ann$ and $N_1$, hence everything. The statements about $\ann'^*$ follow from
+  \ref{bott:I:fredholm}.
+\end{proof}
+
+\subsection{Normal forms and Bott periodicity}
+
+\begin{proposition}\label{bott:prop:iso-normal}
+  Let $\pi_-,\pi_0,\pi_+\colon Z\to M(M,\C)$ be smooth commuting idempotents with
+  $\pi_-+\pi_0+\pi_+=\Id$, $V_\bullet=\Ran\pi_\bullet$. The family
+  \begin{equation*}
+    Q=\pi_-\ann'^*+\pi_0+\pi_+\ann',\qquad\sigma_0(Q)=\pi_-z^{-1}+\pi_0+\pi_+z,
+  \end{equation*}
+  has $\Nul Q=\phi_0\otimes V_+$, the bundle $\phi_0\otimes V_-$ is a complement of its
+  range, and
+  \begin{equation*}
+    \indiso(Q)=[V_+]-[V_-]\in K^0(Z).
+  \end{equation*}
+\end{proposition}
+\begin{proof}
+  The matrices act on the factor $\C^M$ of $\cS(\R;\C^M)=\cS(\R)\otimes\C^M$ and commute
+  with $\ann'$, $\ann'^*$, so with respect to
+  $\cS(\R;\C^M)=\cS(\R)\otimes V_-\oplus\cS(\R)\otimes V_0\oplus\cS(\R)\otimes V_+$ the
+  operator $Q$ is $\ann'^*\otimes\Id\oplus\Id\oplus\ann'\otimes\Id$. By
+  \cref{bott:lem:annihilation} the null space is $\phi_0\otimes V_+$ and the range is
+  $\{u\in\cS(\R)\otimes V_-;\ (u,\phi_0)=0\}\oplus\cS(\R)\otimes V_0\oplus\cS(\R)\otimes V_+$,
+  where $(u,\phi_0)\in V_-$ denotes the pairing in the $\R$-variable; so
+  $\phi_0\otimes V_-$ is a complement. Both are smooth bundles, with local frames
+  $\phi_0\otimes\pi_\pm e_j$ (\cref{bott:lem:bundles}). Apply
+  \cref{bott:lem:null-complement}.
+\end{proof}
+
+\begin{corollary}[Index formula for isotropic operators on $\R$]\label{bott:cor:iso-index-formula}
+  If $A\in\Psiisoph{0}(\R;\C^N)$ is elliptic, then
+  \begin{equation*}
+    \ind A=\wind\sigma_0(A)=\frac1{2\pi i}\int_0^{2\pi}\Tr\Big(\sigma_0(A)^{-1}\frac{d\sigma_0(A)}{d\theta}\Big)d\theta,
+  \end{equation*}
+  the circle at infinity being traversed counterclockwise in the $(x,\xi)$-plane.
+\end{corollary}
+\begin{proof}
+  As in the proof of \cref{bott:cor:index-circle} we may assume $\sigma_0(A)$ pointed and,
+  by \cref{bott:thm:linearization} and \cref{bott:prop:iso-families}(iii), in normal form
+  $\pi_-z^{-1}+\pi_0+\pi_+z$ with constant idempotents. Then
+  $\ind A=\rank\pi_+-\rank\pi_-$ by \cref{bott:prop:iso-normal}, and this is the winding
+  number of $\det(\pi_-z^{-1}+\pi_0+\pi_+z)=z^{\rank\pi_+-\rank\pi_-}$.
+\end{proof}
+
+For example $x+\partial_x$, the generator of the index, has symbol of winding number
+one, while the creation operator $x-\partial_x$ has symbol $x-i\xi$ of winding number
+$-1$, in accordance with $\Nul(x-\partial_x)=0$ and $\Nul(x+\partial_x)=\C e^{-x^2/2}$.
+
+For a pointed loop $a\colon X\times\Sphere\to\GL(N,\C)$, $X$ compact, set
+$\indiso(a)=\indiso(\Op_\chi(a))\in K^0(X)$. By \cref{bott:prop:iso-families}(iii) and
+\cref{bott:lem:stable} this defines a homomorphism $\indiso\colon K^{-2}(X)\to K^0(X)$,
+natural under pull-back.
+
+\begin{theorem}[Bott periodicity via the harmonic oscillator]\label{bott:thm:iso-bott}
+  For every compact manifold $X$ the isotropic index map
+  $\indiso\colon K^{-2}(X)\to K^0(X)$ is an isomorphism. Its inverse is
+  \begin{equation}\label{bott:eq:iso-bott-map}
+    \beta_{\mathrm{iso}}([E_+]-[E_-])=\big[\big(p_+z+(\Id-p_+)\big)\oplus\big((\Id-p_-)+p_-z^{-1}\big)\big],
+  \end{equation}
+  where $E_\pm\cong\Ran p_\pm$ for smooth families of projections $p_\pm$. The element
+  $[z]\in K^{-2}(\mathrm{pt})$, the class of the symbol of $\ann$, corresponds to
+  $[\C]\in K^0(\mathrm{pt})$.
+\end{theorem}
+\begin{proof}
+  The loop in \eqref{bott:eq:iso-bott-map} is in normal form with $\pi_+=p_+\oplus0$ and
+  $\pi_-=0\oplus p_-$, so by \cref{bott:prop:iso-normal} its isotropic index is
+  $[E_+]-[E_-]$; thus $\indiso\circ\beta_{\mathrm{iso}}=\Id$ and $\indiso$ is surjective.
+  For injectivity let $\indiso(a)=0$. By \cref{bott:thm:linearization} we may assume
+  $a=\pi_-z^{-1}+\pi_0+\pi_+z$, and then $[V_+]=[V_-]$ by \cref{bott:prop:iso-normal}.
+  The argument of \cref{bott:prop:injective}, which only involves loops (and
+  \cref{bott:lem:normal-trivial}, which is symmetric in $\pi_\pm$), shows that $a$ is
+  stably pointed homotopic to $\Id$.
+\end{proof}
+
+The proof shows that the only analytic input needed for Bott periodicity, besides the
+linearization of loops, is the computation of the index of one operator of index one,
+here $\ann$, and of its twisted versions in \cref{bott:prop:iso-normal}.
+
+\begin{proposition}\label{bott:prop:iso-toeplitz}
+  Let $\rho\colon\Sphere\to\Sphere$, $\theta\mapsto-\theta$. For every pointed loop $a$ over
+  a compact manifold $X$,
+  \begin{equation*}
+    \indiso(a)=\ind(a\circ\rho)=-\ind(a),
+  \end{equation*}
+  where $\ind$ is the Toeplitz index map of \cref{bott:sec:index-iso}. In other words,
+  after the orientation reversing identification of the circle at infinity of the phase
+  plane with the circle $\Sphere_+$ of the Toeplitz calculus, the isotropic and the Toeplitz
+  index maps coincide.
+\end{proposition}
+\begin{proof}
+  All three expressions define homomorphisms $K^{-2}(X)\to K^0(X)$, so by
+  \cref{bott:thm:linearization} it suffices to evaluate them on
+  $a=\pi_-z^{-1}+\pi_0+\pi_+z$. Then $a\circ\rho=\pi_-z+\pi_0+\pi_+z^{-1}$, and by
+  \cref{bott:prop:index-properties}(v), \cref{bott:prop:iso-normal},
+  $\ind(a\circ\rho)=[V_+]-[V_-]=\indiso(a)=-\ind(a)$.
+\end{proof}
+
+\begin{remark}\label{bott:rem:iso-toeplitz-unitary}
+  The comparison can be made at the level of operators. The unitary map
+  $L^2(\R)\to L^2_+(\Sphere)$, $u_k\mapsto e^{ik\theta}$, carries $H$ to $2D_\theta+1$ and
+  $\Psiiso{-\infty}(\R)$ onto $\PsiT{-\infty}(\Sphere)$ (both correspond to the matrices
+  $(c_{jk})_{j,k\ge0}$ with rapidly decreasing entries), and $\ann'$ to an operator
+  which, like $L$, is surjective with one-dimensional null space. The reversal of
+  orientation reflects the fact that the annihilation operator lowers the eigenvalue of
+  $H$, while $L$ lowers the Fourier mode, although their symbols are $z$ and $z^{-1}$.
+\end{remark}
+
+\begin{remark}[The rotation argument]\label{bott:rem:rotation-trick}
+  Injectivity of the index map can also be proved without the linearization of loops,
+  by an argument due to Atiyah. In the present setting it runs as follows. Let $a$ be a
+  loop with $\indiso(a)=0$; by \cref{bott:prop:iso-families}(iv) there is (after
+  stabilization) an \emph{invertible} family $A(x)$ with symbol $a(x,\cdot)$. Clutch $a$
+  to a family of projections $\Pi_a$ on $\R^2\times X$, given by a matrix whose entries
+  are affine in $a$ and $a^{-1}$ (as in \cref{bott:lem:sl-clutching} below). Using a
+  loop $\beta$ of winding number one in a third variable $r$, the family
+  $e=\beta(r)\Pi_a+\Id-\Pi_a$ of loops in $r$ has isotropic index the class of
+  $\Pi_a$, i.e.\ the clutching class of $a$. Rotating the plane of $r$ and the variable
+  of $a$ by a right angle does not change the index, but after the rotation the loop
+  variable is the variable of $a$, and replacing $a$, $a^{-1}$ by $A$, $A^{-1}$ in the
+  entries of $\Pi_a$ gives an invertible quantization; so the index, hence the clutching
+  class of $a$, vanishes. Making this precise requires the families index over the
+  non-compact parameter space $\R^2\times X$ with compact supports, and careful
+  normalization at infinity; we do not pursue it.
+\end{remark}
 
 \section[The classifying sequence]{The stabilized Toeplitz group and the classifying sequence}\label{bott:sec:classifying}
 
