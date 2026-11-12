@@ -528,12 +528,21 @@ d'Alembert's formula $\cos(tD_x)\delta=\frac12(\delta(x-t)+\delta(x+t))$.
 Work in a coordinate chart $U\subset\R^n$ of $X$, and let $q(x,\eta)=|\eta|_{g(x)}$.
 
 \begin{lemma}\label{wave:lem:eikonal}
-Let $W\Subset U$ be open. There exist $t_0>0$ and unique real
+Let $W\Subset U$ be open. There exist $t_0>0$ and real
 $\varphi_\pm\in\CI((-t_0,t_0)\times W\times(\R^n\setminus0))$, homogeneous of degree
 one in $\eta$, with
 \begin{equation}\label{wave:eq:eikonal}
 \pa_t\varphi_\pm=\pm q(x,d_x\varphi_\pm),\qquad \varphi_\pm(0,x,\eta)=x\cdot\eta .
 \end{equation}
+They are unique in the following sense: if $W\Subset U'\subset U$, $U'$ open, and
+$\tilde\varphi_\pm$ are real solutions of \eqref{wave:eq:eikonal} on
+$(-t_1,t_1)\times U'\times(\R^n\setminus0)$, then $\tilde\varphi_\pm=\varphi_\pm$ on
+$(-t_2,t_2)\times W\times(\R^n\setminus0)$, $t_2=\min(t_0,t_1,\operatorname{dist}(W,
+U\setminus U'))$. (Initial data on $W$ alone do not suffice: for $n=1$, flat metric,
+$W=(0,1)$ and $\eta>0$, both $\eta(x+t)$ and $\eta F(x+t)$, with $F(s)=s$ for $s\le1$,
+$F'>0$ and $F(s)\ne s$ for some $s$ slightly larger than $1$, solve the equation with
+sign $+$ and agree at $t=0$ on $W$, but differ at points of $(0,t)\times W$ for every
+$t>0$.)
 Moreover $\varphi_-(t,x,\eta)=\varphi_+(-t,x,\eta)$, $d_x\varphi_\pm\ne0$, and for $y\in W$:
 \begin{equation}\label{wave:eq:critical}
 d_\eta\big(\varphi_\pm(t,x,\eta)-y\cdot\eta\big)=0\iff\big(x,d_x\varphi_\pm(t,x,\eta)\big)=G_{\mp t}(y,\eta),
@@ -553,7 +562,12 @@ $\varphi_+(t,x(t;x_0,\eta),\eta)=x_0\cdot\eta$, extended homogeneously; the Hami
 theorem shows that it solves \eqref{wave:eq:eikonal} and that
 $d_x\varphi_+(t,x(t;x_0,\eta),\eta)=\xi(t)\ne0$ (consistently, $\frac d{dt}\varphi_+(t,x(t),\eta)
 =q-\xi\cdot\pa_\xi q=0$ by Euler's relation). Uniqueness also follows from the
-characteristics. Since $\psi(t)=\varphi_+(-t)$ solves the equation with the sign $-$,
+characteristics: for a solution $\tilde\varphi_+$ on $(-t_1,t_1)\times U'$, the curves
+$\dot x=-\pa_\xi q(x,d_x\tilde\varphi_+)$ have unit speed, so the one through $(t,x)$,
+$x\in W$, $|t|<t_2$, stays in $U'$ back to time $0$; along it $\tilde\varphi_+$ is constant
+and $(x,d_x\tilde\varphi_+)$ satisfies Hamilton's equations, so $(x,d_x\tilde\varphi_+)$ is
+the bicharacteristic $G_{-t}(x_0,\eta)$ with the same initial point as for $\varphi_+$, and
+$\tilde\varphi_+(t,x,\eta)=x_0\cdot\eta=\varphi_+(t,x,\eta)$. Since $\psi(t)=\varphi_+(-t)$ solves the equation with the sign $-$,
 $\varphi_-(t)=\varphi_+(-t)$.
 
 For \eqref{wave:eq:critical}, differentiate $\varphi_+(t,x(t;x_0,\eta),\eta)=x_0\cdot\eta$ in

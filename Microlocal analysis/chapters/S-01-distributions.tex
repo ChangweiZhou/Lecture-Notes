@@ -612,7 +612,7 @@ there are exactly three boundary hypersurfaces. If $k=1$ or $l=1$ they split int
 components.
 
 \emph{Lifting maps.} Let $T(v,u)=(Gv+c,Hu+d)$ with $G\in\GL(V)$, $H\in\GL(U)$, $c\in V$,
-$d\in U$ (this covers translations and linear maps preserving $U$ and $V$). By
+$d\in U$ (this covers translations and linear automorphisms preserving $U$ and $V$). By
 \cref{distributions:prop:affine}, $T_V(v)=Gv+c$ extends to the diffeomorphism
 $\tilde T_V(X)=M_VX/|M_VX|$ of $\Sphere^k_+$, where $M_V(X_0,X')=(X_0,GX'+cX_0)$; in particular
 $\ang{T_Vv}^{-1}=X_0/|M_VX|$, i.e.\ $\ang{T_Vv}=\ang v\,\gamma_V(X)$ with
@@ -628,7 +628,8 @@ is closed and $\iota(W)$ is dense in $M$, $\tilde T(M)\subset M$. The same const
 for $T^{-1}$ gives a smooth map which is inverse to $\tilde T$ on the dense set
 $\iota(W)$, hence on $M$. So $T$ lifts to a diffeomorphism of $\relRC{U,V}{U\times V}$.
 
-\emph{Inclusions.} For $u\in U$, $\iota(0,u)=((1,0),Y,(1,Y_0)/|(1,Y_0)|)$ with
+\emph{Inclusions.} We extend the inclusions $U\to W$, $u\mapsto(0,u)$, and
+$V\to W$. For $u\in U$, $\iota(0,u)=((1,0),Y,(1,Y_0)/|(1,Y_0)|)$ with
 $Y=\mathrm{RC}_U(u)$, because $(\ang u,1)\propto(1,Y_0)$. The right side is smooth in
 $Y\in\Sphere^l_+$ and satisfies $aY_0=bX_0$, so it extends the inclusion to a smooth map
 $\RC U\to M$, an embedding since $Y$ is recovered from the image. The same holds for $V$,
@@ -640,8 +641,11 @@ $\mathrm{RC}_W\circ\iota^{-1}$, which by the formulae above equals
 \[
   (X,Y,a,b)\longmapsto\frac{(X_0b,\ bX',\ aY')}{(1-m)^{1/2}}\in\Sphere^{k+l}_+,
 \]
-smooth on $M$. On $F$ it is $(\omega_V,\omega_U,a,b)\mapsto(0,b\omega_V,a\omega_U)$,
-which maps $F$ onto the sphere at infinity minus $\mathbb{S}V\cup\mathbb{S}U$, and it
+smooth on $M$. On $F$ it is $(\omega_V,\omega_U,a,b)\mapsto(0,b\omega_V,a\omega_U)$.
+The closed face $F$ (with $(a,b)\in\mathcal{Q}$ including the endpoints) is mapped onto the
+whole sphere at infinity: its edges $\{a=0\}$ and $\{b=0\}$ go onto the axial spheres
+$\mathbb{S}V$ and $\mathbb{S}U$, while its relative interior $\{a,b>0\}$ is mapped
+diffeomorphically onto the complement of $\mathbb{S}V\cup\mathbb{S}U$. The map also
 collapses $H_U$ onto $\mathbb{S}U$ (where $b=0$) and $H_V$ onto $\mathbb{S}V$.
 
 \emph{Picture for $k=l=1$.} Then $\Sphere^0=\{\pm1\}$, $H_U$ and $H_V$ each have two

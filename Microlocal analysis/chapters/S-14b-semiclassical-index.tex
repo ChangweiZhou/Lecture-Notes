@@ -179,7 +179,7 @@ $t_j=J^*e_j\in\CI(M;E)$, so that
   T_ku=\sum_{j\le n_k}\inner u{t_j}t_j=J^*P_kJu.
 \end{equation*}
 For $A\in\Psido{-\infty}(M/B;E)$ the family $X_b=J_bA_bJ_b^*$ is a smooth map
-$B\to\Psido{-\infty}(\Torus^N;\C^R)$, so by \ref{bott:B:finite}
+$B\to\Psido{-\infty}(\Torus^N;\C^R)$ (\cref{scindex:lem:mixed}), so by \ref{bott:B:finite}
 $\delta_k=\sup_b\norm{P_kX_bP_k-X_b}\to0$. Since $(\Id-P_k)P_k=0$,
 $(\Id-P_k)X=(\Id-P_k)(X-P_kXP_k)$ and $X(\Id-P_k)=(X-P_kXP_k)(\Id-P_k)$, so both
 have norm at most $\delta_k$. As $J^*J=\Id$ we have $A=J^*XJ$ and
@@ -598,7 +598,9 @@ L^2(\Torus^N;\C^R)$ as in \cref{scindex:rem:schwartz}, independent of $x\in X$:
 \end{equation*}
 $I$ is an isometry, and $T\mapsto ITI^*=J(\Gamma T\Gamma^*)J^*$ maps
 $\Psido{-\infty}(Z;E)$ continuously into $\Psido{-\infty}(\Torus^N;\C^R)$, by the
-first part and the admissibility of $J$. Moreover $I$ maps $\CI(Z;E)$ into
+first part (the kernel of $\Gamma T\Gamma^*$ depends continuously on that of $T$)
+and \cref{scindex:lem:mixed} for $J$ (through \cref{scindex:rem:schwartz}).
+Moreover $I$ maps $\CI(Z;E)$ into
 $\CI(\Torus^N;\C^R)$: if $u\in\CI(Z;E)$, $u\ne0$, the rank one operator
 $u\otimes u^*$ is smoothing, so $I(u\otimes u^*)I^*=(Iu)\otimes(Iu)^*$ has a smooth
 kernel $(Iu)(y)\overline{(Iu)(y')}$; choosing $y_0$ with $(Iu)(y_0)\ne0$ (as a

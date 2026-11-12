@@ -2209,36 +2209,51 @@ setting, together with \cref{product:prop:operator-valued}.
 
 \begin{proposition}\label{product:prop:subalgebras}
 \begin{enumerate}[label=\textup{(\roman*)}]
-\item \textup{(Fibrewise operators)} $\Psido{m'}(M/B;E,F)\subset\Psipt{0,m'}(M;E,F)$;
-for $A\in\Psido{m'}(M/B;E,F)$, $\sigma_{0,m'}(A)=\gamma^*\sigma_{m'}(A)$, where
+\item \textup{(Fibrewise operators)}
+$\Psido{m'}_{\mathrm{ph}}(M/B;E,F)\subset\Psipt{0,m'}(M;E,F)$;
+for $A\in\Psido{m'}_{\mathrm{ph}}(M/B;E,F)$, $\sigma_{0,m'}(A)=\gamma^*\sigma_{m'}(A)$, where
 $\gamma:T^*M\setminus\phi^*T^*B\longrightarrow T^*(M/B)\setminus0$ is the quotient
 map, and $\beta_{0,m'}(A)(b,\eta)=A_b$ for all $\eta\ne0$.
-\item \textup{(Ordinary operators)} $\Psido m(M;E,F)\subset\Psipt{m,m}(M;E,F)$;
-$\sigma_{m,m}(A)$ is the restriction of $\sigma_m(A)$ to $T^*M\setminus\phi^*T^*B$,
+\item \textup{(Ordinary operators)}
+$\Psido m_{\mathrm{ph}}(M;E,F)\subset\Psipt{m,m}(M;E,F)$;
+for $A\in\Psido m_{\mathrm{ph}}(M;E,F)$, $\sigma_{m,m}(A)$ is the restriction of $\sigma_m(A)$ to $T^*M\setminus\phi^*T^*B$,
 and $\beta_{m,m}(A)(b,\eta)$ is the operator of multiplication on $Z_b$ by
 $x\longmapsto\sigma_m(A)(x,\phi^*\eta)$.
 \item \textup{(Compressed base operators)} Let $\pi_1\in\Psido{-\infty}(M/B;E)$ and
 $\pi_2\in\Psido{-\infty}(M/B;F)$ be smooth families of projections. Their ranges
 are finite-dimensional and form vector bundles $\tilde E$, $\tilde F$ over $B$,
-subbundles of $\CI(M/B;E)$, $\CI(M/B;F)$. If $P\in\Psido m(B;\tilde E,\tilde F)$
+subbundles of $\CI(M/B;E)$, $\CI(M/B;F)$. If
+$P\in\Psido m_{\mathrm{ph}}(B;\tilde E,\tilde F)$
 then $\tilde P=\iota_2P\pi_1$, where $\iota_2:\CI(B;\tilde F)\hookrightarrow
 \CI(M;F)$, lies in $\Psipt{m,-\infty}(M;E,F)$, with
 $\beta_{m,-\infty}(\tilde P)(b,\eta)=\sigma_m(P)(b,\eta)\circ\pi_1(b)$ (followed by the
-inclusion $\tilde F_b\subset\CI(Z_b;F_b)$).
+inclusion $\tilde F_b\subset\CI(Z_b;F_b)$), where $\beta_{m,-\infty}$ denotes
+$\beta_{m,m'}$ for any $m'$ \textup{(}the limit \eqref{product:eq:base-limit} does
+not depend on $m'$\textup{)}.
 \end{enumerate}
+All three inclusions fail for non-classical operators
+\textup{(}\cref{product:rem:nonclassical}\textup{)}.
 \end{proposition}
 
 \begin{proof}
 (i) By \cref{product:prop:conormal-props}(iv) with $Y=M^2_\phi$, $Z=\Diag_M$,
-$d=f+b$, $k=f$, $l=b$: an element of $\Ic{m'-b/4}(M^2_\phi,\Diag)$ with values in
-$\Hom(E,F)\otimes\Omega_R(M/B)$ times $\delta_{M^2_\phi}$ (the factor
-$\Omega(N^*M^2_\phi)\cong\phi^*\Omega(T^*B)$ combining with $\Omega_R(M/B)$ to give
-$\Omega_R(M)$) lies in $\Ic{(b-2f-b)/4,\,m'}=\Ic{-f/2,m'}$, i.e.\ in
-$\Psipt{0,m'}$. In local coordinates the symbol $a(z,y,\zeta)$ is independent of
+$d=f+b$, $k=f$, $l=b$: an element of $\Ic{m'-b/4}_{\mathrm{ph}}(M^2_\phi,\Diag)$ with
+values in $\Hom(E,F)\otimes\Omega_R(M/B)$ times $\delta_{M^2_\phi}$ lies in $\Ic{(b-2f-b)/4,\,m'}=\Ic{-f/2,m'}$, i.e.\ in
+$\Psipt{0,m'}$. Here, to apply \cref{product:prop:conormal-props}(iv), which
+requires values in $\Hom(E,F)\otimes\Omega_R(M)\otimes\Omega(N^*M^2_\phi)$, we use
+the canonical isomorphism on the fibre product
+\begin{equation*}
+\Omega_R(M)\otimes\Omega(N^*M^2_\phi)\cong\Omega_R(M/B)\otimes\phi^*\Omega(B)
+\otimes\phi^*\Omega(T^*B)\cong\Omega_R(M/B),
+\end{equation*}
+since $\Omega(M)\cong\Omega(M/B)\otimes\phi^*\Omega(B)$,
+$N^*M^2_\phi\cong\phi^*T^*B$, and $\Omega(T_bB)\otimes\Omega(T^*_bB)$ is
+canonically trivial. In local coordinates the symbol $a(z,y,\zeta)$ is independent of
 $\eta$, so $\sigma_W(a)$ is the pull-back of $\sigma_{m'}(A)$ and $\sigma_V(a)=a$;
 in the operator-valued description $k(y,\eta)=A_y$ is independent of $\eta$.
 
-(ii) The local symbols of $A$ lie in $\Symph m\subset S^{m,m}_{\mathrm{ph}}$ by
+(ii) The local symbols of $A$ lie in $\Symph m\subset S^{m,m}_{\mathrm{ph}}$
+(here classicality is used) by
 \cref{product:prop:symbols}(v), and the kernel is smooth off the diagonal; the
 limit \eqref{product:eq:model-symbols} of $t^{-m}a(z,y,\zeta,t\eta)$ is the
 principal symbol at $(0,\eta)$, independent of $\zeta$, i.e.\ a multiplication
@@ -2252,23 +2267,56 @@ $e_1,\dots,e_r\in\CI(\phi^{-1}(O);E)$ of $\tilde E$ and $f_1,\dots,f_s$ of
 $\tilde F$, and $e^*_j\in\CI(\phi^{-1}(O);E^*\otimes\Omega(M/B))$ with
 $\pi_1u=\sum_je_j\int_{Z_b}e_j^*u$. If $P$ has matrix $(P_{ij})$ in these frames, the
 kernel of $\tilde P$ over $O$ is
-$\sum_{i,j}f_i(z,y)K_{P_{ij}}(y,y')e^*_j(z',y')$, i.e.\ $\tilde P=\Op_y(k)$ with
-$k(y,\eta)=\sum_{ij}f_i\,p_{ij}(y,\eta)\,e_j^*$, a classical symbol of order $m$ with
-values in smoothing operators of finite rank on $Z$ (up to a smoothing term coming
-from the left reduction in $y$). The base symbol is the limit
-\eqref{product:eq:base-limit}.
+$\sum_{i,j}f_i(z,y)K_{P_{ij}}(y,y')e^*_j(z',y')$, where we use
+$\Omega_R(M)=\Omega_R(M/B)\otimes\phi^*\Omega_R(B)$ to combine the density
+factors of $e^*_j$ and $K_{P_{ij}}$. With
+$K_{P_{ij}}(y,y')=\int e^{i(y-y')\cdot\eta}p_{ij}(y,\eta)\,\dbar\eta$,
+$p_{ij}\in\Symph m$, this is $\Op_y$ of an amplitude depending on $(y,y')$, with
+values in smoothing operators of finite rank on $Z$, and reducing it to a left
+symbol as in \cref{ch:euclidean} gives $\tilde P=\Op_y(k)$ with
+\begin{equation*}
+k(y,\eta)\sim\sum_\alpha\frac1{\alpha!}\sum_{i,j}f_i(\cdot,y)\,
+\pa_\eta^\alpha p_{ij}(y,\eta)\,D_{y'}^\alpha e_j^*(\cdot,y')\big|_{y'=y},
+\end{equation*}
+a classical symbol of order $m$ with values in smoothing operators on $Z$, so
+$\tilde P\in\Psipt{m,-\infty}$ by \cref{product:prop:residual}(ii). The terms with
+$\alpha\ne0$ are not smoothing (for $P=D_y$ the term
+$f_i\,D_ye_j^*$ has a $\delta$-kernel in the base), but they are of order $m-1$ in
+$\eta$, so $\tilde P\equiv\Op_y(\sum_{ij}f_ip_{ij}e_j^*)$ modulo
+$\Psipt{m-1,-\infty}(M;E,F)$. The base symbol is the limit
+\eqref{product:eq:base-limit}, which sees only the term $\alpha=0$ and the
+principal part of $p_{ij}$; this gives the stated formula.
 \end{proof}
 
+\begin{remark}\label{product:rem:nonclassical}
+The classical hypotheses in \cref{product:prop:subalgebras} cannot be dropped, and
+correspondingly the base symbols take values in classical operators. Every
+$A\in\Psipt{m,m'}(M)$ has local symbols in $S^{m,m'}_{\mathrm{ph}}$, which are
+weighted smooth on the relative compactification. A fibrewise multiplier $A$ with
+local symbol $\sin(\log\ang\zeta)\in S^0$ is in $\Psido0(M/B)$ but not in
+$\Psido0_{\mathrm{ph}}(M/B)$; it is not in any $\Psipt{m,m'}(M)$, since near the
+interior of $H_W$ its local symbol times $\rho_W^{m'}$ would have to extend smoothly
+to $\rho_W=0$, but $\sin(\log\ang\zeta)$ has no limit along rays. The constant
+family $\beta(b,\eta)=A_b$ is then a homogeneous family of non-classical operators,
+which is not in the range of $\beta_{0,0}$. In the same way an element of
+$\Psido m(M)\setminus\Psido m_{\mathrm{ph}}(M)$, or the compression of a
+non-classical base operator, is not a product-type operator.
+\end{remark}
+
 \begin{remark}\label{product:rem:base-lift}
-For a product $M=Z\times B$ one might expect the lift $\Id_Z\otimes P$ of
+For a product $M=Z\times B$ with $f=\dim Z>0$ one might expect the lift
+$\Id_Z\otimes P$ of
 $P\in\Psido m(B)$ to be a product-type operator, of base order $m$ and fibre
 order $0$; this is not so, which is why the compression in (iii) is needed. Its
 local symbol $p(y,\eta)$ is independent of $\zeta$, and near $H_W$, where
 $|\zeta|\to\infty$ with $q=\eta/\ang\zeta$ bounded, $p(y,\ang\zeta q)$ behaves like
 $\ang\zeta^m|q|^mp_m(y,q/|q|)$, which is not smooth at $q=0$ unless $p_m$ is a
-polynomial. In fact $\Id_Z\otimes P$ is product-type (and then lies in
-$\Psido m(M)\subset\Psipt{m,m}(M)$) only when $P$ is a differential operator
-(\cref{product:ex:base-lift}).
+polynomial. In fact $\Id_Z\otimes P$ is product-type (and then, if $P$ has order
+$k$, lies in $\Diff k(M)\subset\Psido k_{\mathrm{ph}}(M)\subset\Psipt{k,k}(M)$) only
+when $P$ is a differential operator (\cref{product:ex:base-lift}). The hypothesis
+$f>0$ is needed: if $Z$ is a point then $M^2_\phi=\Diag_M$, the main face is
+absent, $\Psipt{m,m'}(M)=\Psido m_{\mathrm{ph}}(M)$, and the lift of any classical
+$P$, for instance a non-zero smoothing operator, is product-type.
 \end{remark}
 
 \subsection{Boundedness, ellipticity and the Fredholm property}

@@ -509,7 +509,9 @@ excludes this example (the Hopf line has no nowhere vanishing section).
   L^2(Y;F)$ has a smooth kernel $k(b,y,y')$ on $B\times Y\times Y'$; in
   particular $b\mapsto J_bA_bJ_b^*$ is a smooth map $B\to\Psido{-\infty}(Y;F)$.
   If $A$ depends smoothly on parameters in a manifold $P'$, then $k$ depends
-  smoothly on them.
+  smoothly on them, and the linear map $A\mapsto k$ is continuous from the
+  kernels in $\CI(M\times_BM;\Hom(E)\otimes\Omega_R)$ supported in $K\times_BK$
+  to $\CI(B\times Y\times Y';\Hom(F',F)\otimes\Omega_R)$.
 \end{lemma}
 \begin{proof}
   Write the kernel of $A$ as $\alpha(m,m')\nu(m')$ with $\alpha$ a smooth
@@ -535,7 +537,10 @@ excludes this example (the Hopf line has no nowhere vanishing section).
   $\sum_if_i(y)\otimes t_i(b,y,y')^*$ (times the density of $Y'$) over $O_Y$, is
   smooth. With
   parameters, replace $B$ by $B\times P'$ and $J$, $J'$ by their pull-backs, which
-  are again admissible.
+  are again admissible. Continuity follows from the closed graph theorem (both
+  spaces are Fréchet): if $A_j\to A$ and $k_j\to k'$ in $\CI$, then for each $b$,
+  $A_{j,b}\to A_b$ in operator norm, hence $J_bA_{j,b}J_b'^*\to J_bA_bJ_b'^*$ in
+  norm, so $k'(b,\cdot,\cdot)$ is the kernel of $J_bA_bJ_b'^*$.
 \end{proof}
 
 \begin{lemma}\label{scindex:lem:embedding}

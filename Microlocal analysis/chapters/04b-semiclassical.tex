@@ -1263,7 +1263,8 @@ $H=F^{-1}$. The canonical identification of cotangent spaces is
   \tilde F:T^*\Omega'\to T^*\Omega,\qquad
   (x',\eta')\mapsto\bigl(H(x'),(DH(x')^T)^{-1}\eta'\bigr),
 \end{equation*}
-so that $\eta'=F^*\xi$ at $x'=F(x)$; for a function $b$ on $T^*\Omega$ we write
+so that $\tilde F(x',\eta')=(x,\xi)$ with $x=H(x')$ and $\xi=F^*\eta'=DF(x)^T\eta'$, the
+pull-back of the covector $\eta'$ at $x'=F(x)$; for a function $b$ on $T^*\Omega$ we write
 $\tilde F^*b=b\circ\tilde F$.
 
 \begin{proposition}\label{semiclassical:prop:invariance}
@@ -1449,7 +1450,7 @@ that adjoints are defined as in \cref{manifolds:prop:adjoint}.
   \item \textup{(Ideal)} Let $A\in\Psisl m(X;F,G)$. If
     $R\in\eps^\infty\Psisl{-\infty}(X;E,F)$ then
     $AR\in\eps^\infty\Psisl{-\infty}(X;E,G)$; similarly
-    $R'A\in\eps^\infty\Psisl{-\infty}(X;E,G)$ if $R'\in\eps^\infty\Psisl{-\infty}(X;G,E)$.
+    $R'A\in\eps^\infty\Psisl{-\infty}(X;F,E)$ if $R'\in\eps^\infty\Psisl{-\infty}(X;G,E)$.
   \item \textup{(Composition and adjoints)}
     $\Psisl m(X;F,G)\circ\Psisl{m'}(X;E,F)\subset\Psisl{m+m'}(X;E,G)$, and
     $A\in\Psisl m(X;E,F)$ implies $A^*\in\Psisl m(X;F,E)$. The same holds for the
@@ -1573,9 +1574,11 @@ $\eps^2\Delta_g+V\in\Psisl2(X)$ has semiclassical symbol $\abs\xi^2_g+V(x)$.
   constant, then the kernels \eqref{semiclassical:eq:smoothing-kernel} written in
   terms of $\eps'$ have $K'(\eps',x,Z)=\lambda^{-n}K(\lambda\eps',x,Z/\lambda)$, so that
   $\ssl'(A)(x,\xi)=\ssl(A)(x,\lambda\xi)$. More generally the class $\Psisl m$ is
-  unchanged if $\eps$ is replaced by $T(\eps)$, $T$ a diffeomorphism of $[0,1]$
-  with $T(0)=0$, and then the semiclassical symbol is dilated by $T'(0)$
-  (\cref{semiclassical:ex:reparametrize}). Thus only the derivative of the
+  unchanged if $\eps$ is replaced by the new parameter $\eps'=T(\eps)$, $T$ a diffeomorphism of $[0,1]$
+  with $T(0)=0$, and then the semiclassical symbol with respect to $\eps'$ is
+  $\ssl'(A)(x,\xi)=\ssl(A)(x,\xi/T'(0))$
+  (\cref{semiclassical:ex:reparametrize}); for $T(\eps)=\eps/\lambda$ this is the
+  formula above. Thus only the derivative of the
   parameter at $\eps=0$ matters, and invariantly $\ssl(A)$ is a function on the
   \emph{semiclassical cotangent bundle}
   \begin{equation*}
