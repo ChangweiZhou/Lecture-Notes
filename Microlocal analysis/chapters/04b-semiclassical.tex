@@ -633,3 +633,515 @@ order, with uniform remainders. The two leading terms give:
   $a\#b-b\#a$ are $\eps\sum_j(\pa_{\eta_j}a\,D_{x_j}b-\pa_{\eta_j}b\,D_{x_j}a)
   =\frac\eps i\{a,b\}$.
 \end{proof}
+
+% ======================================================================
+\section{Residual families and kernels}\label{semiclassical:sec:residual}
+
+\subsection{Off-diagonal behaviour and the residual ideal}
+By \eqref{semiclassical:eq:kernel} the kernel of a semiclassical family is
+determined by the inverse Fourier transform $K(\eps,x,Z)$ of its symbol, which
+is singular only at $Z=0$ and rapidly decreasing as $\abs Z\to\infty$. Away
+from the diagonal the variable $Z=(x-y)/\eps$ tends to infinity as
+$\eps\downarrow0$, and this gives:
+
+\begin{lemma}\label{semiclassical:lem:off-diagonal}
+  Let $a\in\Ssl m(\R^n)$ and $d>0$. The kernel $k(\eps,x,y)$ of
+  $\Op_\eps(a)$, restricted to $\{\abs{x-y}>d\}$, is smooth and extends
+  smoothly to $[0,1]\times\{(x,y);\abs{x-y}>d\}$, with
+  \begin{equation*}
+    \abs{\pa^j_\eps\pa^\alpha_x\pa^\beta_yk(\eps,x,y)}\le C_{j\alpha\beta N}\,\eps^N\ang{x-y}^{-N}
+    \quad\text{for all }N.
+  \end{equation*}
+\end{lemma}
+\begin{proof}
+  Let $K(\eps,x,Z)$ be as in \eqref{semiclassical:eq:kernel}. Since
+  $\Delta_\eta e^{iZ\cdot\eta}=\abs Z^2e^{iZ\cdot\eta}$, for $Z\ne0$ and any $L$,
+  \begin{equation*}
+    \pa^j_\eps\pa^\alpha_x\pa^\gamma_ZK(\eps,x,Z)=\abs Z^{-2L}\int e^{iZ\cdot\eta}
+    \Delta_\eta^L\bigl[(i\eta)^\gamma\pa^j_\eps\pa^\alpha_xa(\eps,x,\eta)\bigr]\,\dbar\eta,
+  \end{equation*}
+  in the sense of distributions; once $m+\abs\gamma-2L<-n$ the integral converges
+  absolutely and uniformly. Hence $K$ is smooth on $[0,1]\times\R^n\times(\R^n\setminus0)$
+  with $\abs{\pa^j_\eps\pa^\alpha_x\pa^\gamma_ZK}\le C_{L}\abs Z^{-2L}$ for
+  $\abs Z\ge1$ and every $L$. Now $k(\eps,x,y)=\eps^{-n}K(\eps,x,(x-y)/\eps)$, and
+  by the chain rule each derivative $\pa_\eps$, $\pa_x$, $\pa_y$ of such an
+  expression is a sum of terms $\eps^{-p}Z^\beta(\pa^{j'}_\eps\pa^{\alpha'}_x\pa^{\gamma'}_ZK)(\eps,x,Z)$
+  at $Z=(x-y)/\eps$ (e.g.\ $\pa_\eps$ produces $-\eps^{-1}Z\cdot\pa_ZK$). On
+  $\abs{x-y}>d$ we have $\abs Z>d/\eps\ge d$, and each term is bounded by
+  \begin{equation*}
+    C\eps^{-n-p}\abs Z^{\abs\beta-2L}=C\eps^{2L-\abs\beta-n-p}\abs{x-y}^{\abs\beta-2L},
+  \end{equation*}
+  which for $L$ large is bounded by $C\eps^N\ang{x-y}^{-N}$. So all derivatives
+  tend to zero as $\eps\downarrow0$, uniformly, and $k$ extends smoothly by zero.
+\end{proof}
+
+We denote by $\dCI([0,1];\Psido{-\infty}(\R^n))$ the space of families of
+operators whose kernels $k(\eps,x,y)$ extend to smooth functions on
+$[0,1]\times\R^{2n}$ satisfying
+\begin{equation}\label{semiclassical:eq:residual-kernel}
+  \abs{\pa^j_\eps\pa^\alpha_x\pa^\beta_yk(\eps,x,y)}\le C_{j\alpha\beta N}\,\eps^N\ang{x-y}^{-N}
+  \quad\text{for all }j,\alpha,\beta,N.
+\end{equation}
+By \cref{euclidean:prop:residual} these are exactly the smooth families of
+elements of $\Psido{-\infty}(\R^n)$ vanishing, with all $\eps$-derivatives and in
+all the seminorms of that proposition, to infinite order at $\eps=0$.
+
+\begin{lemma}\label{semiclassical:lem:residual-ideal}
+  $\eps^\infty\Psisl{-\infty}(\R^n)=\dCI([0,1];\Psido{-\infty}(\R^n))$.
+\end{lemma}
+\begin{proof}
+  If $a\in\eps^\infty\Ssl{-\infty}$ then by \cref{semiclassical:lem:residual-symbols}(iii)
+  the function $K$ of \eqref{semiclassical:eq:kernel} satisfies
+  $\abs{Z^\gamma\pa^j_\eps\pa^\alpha_x\pa^\beta_ZK}\le C\eps^N$ for all indices and
+  $N$, since $Z^\gamma\pa^\beta_ZK$ is the inverse Fourier transform of
+  $(-D_\eta)^\gamma[(i\eta)^\beta a]$. As in the previous proof, derivatives of
+  $k=\eps^{-n}K(\eps,x,(x-y)/\eps)$ are sums of terms $\eps^{-p}Z^\beta\pa K$,
+  and $\ang{x-y}=\ang{\eps Z}\le\ang Z$, so $\ang{x-y}^N\abs{\pa^j_\eps\pa^\alpha_x\pa^\beta_yk}$
+  is bounded by $C\eps^{-n-p}\sup\ang Z^{N+\abs\beta}\abs{\pa K}\le C\eps^{N'}$ for any
+  $N'$. Thus \eqref{semiclassical:eq:residual-kernel} holds.
+
+  Conversely, let $k$ satisfy \eqref{semiclassical:eq:residual-kernel}. As in
+  the proof of \cref{euclidean:prop:residual},
+  $b(\eps,x,\xi)=\int e^{-iz\cdot\xi}k(\eps,x,x-z)\,dz$ satisfies
+  $\abs{\pa^j_\eps\pa^\alpha_x\pa^\beta_\xi b}\le C\eps^N\ang\xi^{-N}$ for all
+  indices and $N$, and the kernel of $\Op(b(\eps))$ is $k(\eps)$. Set
+  $a(\eps,x,\eta)=b(\eps,x,\eta/\eps)$ for $\eps>0$ and $a(0,x,\eta)=0$, so
+  that $\Op_\eps(a)=\Op(b(\eps))$. Since $\ang{\eta/\eps}\ge\ang\eta$,
+  $\abs{\pa^\alpha_x\pa^\beta_\eta a}=\eps^{-\abs\beta}\abs{(\pa^\alpha_x\pa^\beta_\xi b)(\eps,x,\eta/\eps)}
+  \le C\eps^{N-\abs\beta}\ang\eta^{-N}$. By the chain rule,
+  $\pa_\eps a=\bigl(\pa_\eps b-\eps^{-1}\xi\cdot\pa_\xi b\bigr)(\eps,x,\eta/\eps)$,
+  and $\xi\cdot\pa_\xi b$ satisfies the same estimates as $b$; inductively,
+  $\pa^j_\eps\pa^\alpha_x\pa^\beta_\eta a$ is bounded by $C\eps^{N}\ang\eta^{-N}$ for
+  every $N$, for $\eps>0$. Hence $a$ extends smoothly by zero to $\eps=0$ and
+  $a\in\eps^\infty\Ssl{-\infty}$ by \cref{semiclassical:lem:residual-symbols}(iii).
+\end{proof}
+
+\begin{corollary}\label{semiclassical:cor:localization}
+  Let $A\in\Psisl m(\R^n)$ and $\phi,\psi\in\CIb(\R^n)$. Then
+  $\phi A\psi\in\Psisl m(\R^n)$; if $A=\Op_\eps(a)$ then
+  $\phi A\psi=\Op_\eps(c)$ with $c-\phi\psi a\in\eps\Ssl{m-1}(\R^n)$. If the
+  supports of $\phi$ and $\psi$ are at positive distance, then
+  $\phi A\psi\in\eps^\infty\Psisl{-\infty}(\R^n)$.
+\end{corollary}
+\begin{proof}
+  $\phi A\psi=\Op_\eps(p)$ with $p(\eps,x,y,\eta)=\phi(x)a(\eps,x,\eta)\psi(y)\in\Ssl m(\R^{2n};\R^n)$,
+  so the first part is \cref{semiclassical:thm:reduction}. The second follows
+  from \cref{semiclassical:lem:off-diagonal,semiclassical:lem:residual-ideal}.
+\end{proof}
+
+We also record how semiclassical families act on families of functions.
+
+\begin{lemma}\label{semiclassical:lem:action}
+  Let $A=\Op_\eps(a)\in\Psisl m(\R^n)$ and let $f\in\CI([0,1];\cS(\R^n))$,
+  i.e.\ $f\in\CI([0,1]\times\R^n)$ with
+  $\sup\abs{x^\gamma\pa^j_\eps\pa^\beta_xf}<\infty$ for all indices. Then
+  $g(\eps)=A_\eps f(\eps)$, $\eps>0$, extends to an element of
+  $\CI([0,1];\cS(\R^n))$, with $g(0)(x)=a(0,x,0)f(0,x)$, and $f\mapsto g$ is
+  continuous. If $f$ vanishes to infinite order at $\eps=0$, so does $g$.
+\end{lemma}
+\begin{proof}
+  $g(\eps,x)=\int e^{ix\cdot\xi}a(\eps,x,\eps\xi)\hat f(\eps,\xi)\dbar\xi$, and
+  $\hat f\in\CI([0,1];\cS(\R^n))$. By \cref{semiclassical:lem:rescale}(ii),
+  all derivatives in $(\eps,x,\xi)$ of $a(\eps,x,\eps\xi)$ are bounded by
+  powers of $\ang\xi$, uniformly in $\eps\in(0,1]$, so we may differentiate
+  under the integral; moreover $x^\gamma e^{ix\cdot\xi}=D^\gamma_\xi e^{ix\cdot\xi}$ allows
+  us to integrate by parts to show that $x^\gamma\pa^j_\eps\pa^\beta_xg$ is
+  bounded, uniformly in $\eps$, by a Schwartz seminorm of $f$ and finitely
+  many $\eps$-derivatives of it. The integrand is continuous up to
+  $\eps=0$, where it equals $e^{ix\cdot\xi}a(0,x,0)\hat f(0,\xi)$. If $f$ vanishes to
+  infinite order then so do all these bounds.
+\end{proof}
+
+\subsection{Semiclassical smoothing families}
+For the families of order $-\infty$ the description
+\eqref{semiclassical:eq:kernel} of the kernel becomes very explicit, since the
+inverse Fourier transform in $\eta$ is an isomorphism of
+$S^{-\infty}(\R^n;\R^n)=\CIb(\R^n_x;\cS(\R^n_\eta))$ onto
+$\CIb(\R^n_x;\cS(\R^n_Z))$ (the functions with all derivatives bounded by
+$C_N\ang Z^{-N}$). Let $\mathcal K(\R^n)$ denote the space of
+$K\in\CI([0,1]\times\R^n_x\times\R^n_Z)$ such that
+\begin{equation*}
+  \abs{\pa^j_\eps\pa^\alpha_x\pa^\beta_ZK(\eps,x,Z)}\le C_{j\alpha\beta N}\ang Z^{-N}\quad\text{for all }N.
+\end{equation*}
+
+\begin{proposition}\label{semiclassical:prop:smoothing-kernels}
+  A family of operators $A_\eps$ is in $\Psisl{-\infty}(\R^n)$ if and only
+  if its kernels are of the form
+  \begin{equation}\label{semiclassical:eq:smoothing-kernel}
+    K_{A_\eps}(x,y)=\eps^{-n}K\Bigl(\eps,x,\frac{x-y}\eps\Bigr),\qquad K\in\mathcal K(\R^n);
+  \end{equation}
+  then $K$ is uniquely determined, and $A=\Op_\eps(a)$ with
+  $a(\eps,x,\eta)=\int e^{-iZ\cdot\eta}K(\eps,x,Z)\,dZ$. If $B$ has kernel
+  $\eps^{-n}L(\eps,x,(x-y)/\eps)$, $L\in\mathcal K(\R^n)$, then $AB$ has kernel
+  $\eps^{-n}M(\eps,x,(x-y)/\eps)$ with
+  \begin{equation}\label{semiclassical:eq:smoothing-composition}
+    M(\eps,x,Z)=\int_{\R^n}K(\eps,x,t)\,L(\eps,x-\eps t,Z-t)\,dt .
+  \end{equation}
+\end{proposition}
+\begin{proof}
+  The first part is \eqref{semiclassical:eq:kernel} together with the remark
+  preceding the proposition, applied with $\eps$ (and its derivatives) as a
+  parameter. For the composite, for $\eps>0$,
+  \begin{equation*}
+    K_{A_\eps B_\eps}(x,y)=\eps^{-2n}\int K\Bigl(\eps,x,\frac{x-z}\eps\Bigr)L\Bigl(\eps,z,\frac{z-y}\eps\Bigr)dz
+    =\eps^{-n}\int K(\eps,x,t)L\Bigl(\eps,x-\eps t,\frac{x-y}\eps-t\Bigr)dt,
+  \end{equation*}
+  by the substitution $z=x-\eps t$. Peetre's inequality
+  $\ang Z^N\le2^{N/2}\ang t^N\ang{Z-t}^N$ and differentiation under the integral
+  show directly that $M\in\mathcal K(\R^n)$ (the $\eps$-derivatives falling on the
+  first argument of $L$ produce factors of $t$, which are absorbed by the decay of
+  $K$).
+\end{proof}
+
+At $\eps=0$, \eqref{semiclassical:eq:smoothing-composition} is the convolution
+$M(0,x,\cdot)=K(0,x,\cdot)*L(0,x,\cdot)$ in $Z$, with $x$ a parameter. Taking the
+Fourier transform in $Z$ shows once more that the symbol of $AB$ at $\eps=0$ is
+the product of the symbols at $\eps=0$: the semiclassical families
+``become commutative'' in the limit. See \cref{semiclassical:ex:smoothing-expansion}
+for the full expansion from this point of view.
+
+\begin{remark}[The semiclassical double space]\label{semiclassical:rem:double-space}
+  The description \eqref{semiclassical:eq:smoothing-kernel} has a geometric
+  meaning. On $[0,1]\times\R^{2n}$ the kernel $\eps^nK_{A_\eps}(x,y)=K(\eps,x,(x-y)/\eps)$
+  is singular only at $\{0\}\times\Diag$; it becomes smooth after this
+  submanifold is \emph{blown up}, i.e.\ after introducing as new coordinates
+  $(\eps,x,Z)$, $Z=(x-y)/\eps$, near it. Globally, the blown-up space
+  $[[0,1]\times\R^{2n};\{0\}\times\Diag]$ is obtained by replacing $\{0\}\times\Diag$
+  by its inward-pointing spherical normal bundle; the new boundary hypersurface,
+  the \emph{front face}, is a bundle of closed half-spheres over $\Diag$, whose
+  interior is identified with $T\R^n$ through $(\eps,x,y)\mapsto(x,(x-y)/\eps)$. The
+  other boundary face is the lift of $\{\eps=0\}$, i.e.\ $\{\eps=0\}$ away from
+  the diagonal, which is reached as $\abs Z\to\infty$ in the front face. Thus
+  \cref{semiclassical:prop:smoothing-kernels} says: the kernels of the elements
+  of $\Psisl{-\infty}(\R^n)$ are $\eps^{-n}$ times smooth functions on the blown-up
+  space which vanish to infinite order at the lifted face $\{\eps=0\}$ (with the
+  appropriate uniformity as $x\to\infty$), and the semiclassical symbol at $\eps=0$
+  (\cref{semiclassical:def:symbol-maps}) is the fibrewise Fourier transform of the
+  restriction of the kernel to the front face. On a compact manifold $X$ the same
+  description holds with $[[0,1]\times X^2;\{0\}\times\Diag]$, as follows from
+  \cref{semiclassical:prop:invariance}; this is the space used in
+  \cref{ch:semiclassical-index}. The identification of the interior of the front face
+  with $TX$, and hence of the domain of the semiclassical symbol with $T^*X$,
+  depends on the choice of the parameter $\eps$ up to a positive multiple; see
+  \cref{semiclassical:rem:sl-cotangent}.
+\end{remark}
+
+% ======================================================================
+\section{Symbols, ellipticity and boundedness}\label{semiclassical:sec:symbol-maps}
+
+\subsection{The symbol maps}
+\begin{definition}\label{semiclassical:def:symbol-maps}
+  For $A=\Op_\eps(a)\in\Psisl m(\R^n)$ we define
+  \begin{enumerate}[label=\textup{(\roman*)}]
+  \item the \emph{semiclassical symbol} $\ssl(A)=a(0,\cdot,\cdot)\in S^m(\R^n;\R^n)$;
+  \item the \emph{uniform principal symbol}
+    $\tilde\sigma_m(A)=[a]\in\Ssl m(\R^n)/\Ssl{m-1}(\R^n)$;
+  \item the \emph{joint symbol} $\sigma_{\eps,m}(A)=[a]\in\Ssl m(\R^n)/\eps\Ssl{m-1}(\R^n)$.
+  \end{enumerate}
+\end{definition}
+
+For each $\eps>0$ the ordinary principal symbol of $A_\eps\in\Psido m(\R^n)$ is the
+class of $a(\eps,x,\eps\xi)$, so $\tilde\sigma_m(A)$ is the principal symbol of
+$A_\eps$ \emph{rescaled}: $\tilde\sigma_m(A)(\eps,x,\eta)=\sigma_m(A_\eps)(x,\eta/\eps)$,
+and it carries uniform information as $\eps\downarrow0$. The semiclassical
+symbol is not a ``leading part at infinity'' but a full function on the
+cotangent bundle; e.g.\ for the Schr\"odinger operator of
+\cref{semiclassical:ex:differential}, $\ssl(-\eps^2\Delta_{\mathrm{eucl}}+V)=\abs\eta^2+V(x)$
+and $\tilde\sigma_2=[\abs\eta^2]$.
+
+\begin{proposition}\label{semiclassical:prop:symbol-maps}
+  For each $m$ the sequences
+  \begin{gather*}
+    0\longrightarrow\eps\Psisl m(\R^n)\hookrightarrow\Psisl m(\R^n)\xrightarrow{\ \ssl\ }S^m(\R^n;\R^n)\longrightarrow0,\\
+    0\longrightarrow\Psisl{m-1}(\R^n)\hookrightarrow\Psisl m(\R^n)\xrightarrow{\ \tilde\sigma_m\ }
+      \Ssl m(\R^n)/\Ssl{m-1}(\R^n)\longrightarrow0,\\
+    0\longrightarrow\eps\Psisl{m-1}(\R^n)\hookrightarrow\Psisl m(\R^n)\xrightarrow{\ \sigma_{\eps,m}\ }
+      \Ssl m(\R^n)/\eps\Ssl{m-1}(\R^n)\longrightarrow0
+  \end{gather*}
+  are exact, and all three maps are multiplicative and $*$-preserving:
+  $\sigma(AB)=\sigma(A)\sigma(B)$ and $\sigma(A^*)=\overline{\sigma(A)}$ for
+  $\sigma=\ssl$, $\tilde\sigma$, $\sigma_\eps$ (with the appropriate orders).
+  Moreover, the map $[a]\mapsto([a],a(0,\cdot,\cdot))$ identifies
+  $\Ssl m(\R^n)/\eps\Ssl{m-1}(\R^n)$ with the space of pairs
+  \begin{equation*}
+    (\tilde a,b)\in\Ssl m(\R^n)/\Ssl{m-1}(\R^n)\times S^m(\R^n;\R^n)\quad\text{with}\quad
+    \tilde a|_{\eps=0}=[b]\ \text{in }S^m(\R^n;\R^n)/S^{m-1}(\R^n;\R^n);
+  \end{equation*}
+  that is, $\sigma_{\eps,m}=(\tilde\sigma_m,\ssl)$, the two symbols are jointly
+  surjective subject only to this compatibility condition, and the joint null
+  space is $\eps\Psisl{m-1}(\R^n)$.
+\end{proposition}
+\begin{proof}
+  Exactness follows from the bijectivity of $\Op_\eps$ together with
+  \cref{semiclassical:lem:taylor}: $a(0)=0$ if and only if $a\in\eps\Ssl m$.
+  Multiplicativity follows from \cref{semiclassical:cor:commutator}
+  ($a\#b-ab\in\eps\Ssl{m+m'-1}$, which lies both in $\eps\Ssl{m+m'}$ and in
+  $\Ssl{m+m'-1}$) and similarly for adjoints from
+  \eqref{semiclassical:eq:composition}. For the last statement, the map is well
+  defined since $\eps\Ssl{m-1}\subset\Ssl{m-1}$ and elements of $\eps\Ssl{m-1}$
+  vanish at $\eps=0$; its range satisfies the compatibility condition. It is
+  injective: if $a\in\Ssl{m-1}$ and $a(0)=0$ then by
+  \cref{semiclassical:lem:taylor} (applied in $\Ssl{m-1}$) $a\in\eps\Ssl{m-1}$.
+  It is surjective onto compatible pairs: given $(\tilde a,b)$ choose a
+  representative $a_1\in\Ssl m$ of $\tilde a$; then $b-a_1(0)\in S^{m-1}$, and
+  $a=a_1+(b-a_1(0))$, with the second term constant in $\eps$, represents
+  $\tilde a$ and satisfies $a(0)=b$.
+\end{proof}
+
+\begin{remark}\label{semiclassical:rem:classical}
+  If $A\in\Psisl m_{\mathrm{ph}}(\R^n)$, the uniform principal symbol is
+  represented by the leading homogeneous term $a_0$ of
+  \cref{semiclassical:def:classical}, a smooth function on
+  $[0,1]\times\R^n\times(\R^n\setminus0)$ homogeneous of degree $m$ (for
+  $\abs\eta\ge1$, and then extended by homogeneity), and the compatibility
+  condition says that $a_0|_{\eps=0}$ is the leading homogeneous part of the
+  classical symbol $\ssl(A)$. The classical families form a subalgebra: in
+  \eqref{semiclassical:eq:composition} the terms of the expansion are classical,
+  and the remainder after $N$ terms is of order $m+m'-N$, so $a\#b$ is classical
+  by the argument following \cref{semiclassical:def:classical}; similarly for
+  $a^*$ and for the reduction formula \eqref{semiclassical:eq:reduction}.
+\end{remark}
+
+\subsection{Ellipticity and the parametrix}
+\begin{definition}\label{semiclassical:def:elliptic}
+  $A\in\Psisl m(\R^n)$ (or an $N\times N$ matrix of such families) is
+  \emph{elliptic} if its joint symbol is invertible, i.e.\ there exists
+  $b\in\Ssl{-m}(\R^n)$ (matrix valued) with
+  \begin{equation*}
+    a\,b-\Id\in\eps\Ssl{-1}(\R^n),\qquad b\,a-\Id\in\eps\Ssl{-1}(\R^n),
+  \end{equation*}
+  for a representative $a$ of $\sigma_{\eps,m}(A)$.
+\end{definition}
+
+\begin{lemma}\label{semiclassical:lem:elliptic}
+  $A=\Op_\eps(a)\in\Psisl m(\R^n)$ is elliptic if and only if the following two
+  conditions hold:
+  \begin{enumerate}[label=\textup{(\roman*)}]
+  \item $\ssl(A)(x,\eta)=a(0,x,\eta)$ is invertible for \emph{all} $(x,\eta)$, with
+    $\abs{a(0,x,\eta)^{-1}}\le C\ang\eta^{-m}$;
+  \item $A$ is uniformly elliptic: there are $R$ and $C$ such that $a(\eps,x,\eta)$
+    is invertible and $\abs{a(\eps,x,\eta)^{-1}}\le C\ang\eta^{-m}$ for $\abs\eta\ge R$,
+    $\eps\in[0,1]$.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  If $A$ is elliptic, then $a(0)b(0)=\Id=b(0)a(0)$ gives (i). Also
+  $ab=\Id+r$ with $r\in\Ssl{-1}$, so $\abs r\le\frac12$ for $\abs\eta\ge R$, and
+  there $a$ is invertible with $a^{-1}=b(\Id+r)^{-1}$, which gives (ii).
+  Conversely, assume (i) and (ii). Since $a(\eps)-a(0)=\eps r$ with $r\in\Ssl m$, we have
+  $a(\eps)=a(0)(\Id+\eps a(0)^{-1}r)$ with $a(0)^{-1}r$ bounded; so there is
+  $\eps_0>0$ such that $a(\eps)$ is invertible with $\abs{a(\eps)^{-1}}\le C\ang\eta^{-m}$
+  for all $(x,\eta)$ and $\eps\le\eps_0$. Differentiating $a\,a^{-1}=\Id$ repeatedly
+  (as in \cref{euclidean:lem:powers}, whose proof applies verbatim to matrices and
+  to $\eps$-derivatives), $a^{-1}$ satisfies the estimates of $\Ssl{-m}$ on
+  $[0,\eps_0]\times\R^{2n}$. By (ii) and the same argument,
+  $\tilde b=(1-\chi(\eta/R))a^{-1}$, with $\chi\in\CIc(\R^n)$ equal to $1$ on
+  $\{\abs\eta\le2\}$, lies in $\Ssl{-m}$, and $a\tilde b-\Id=\tilde ba-\Id=-\chi(\eta/R)\Id\in\Ssl{-\infty}$. Let $\psi\in\CI([0,1])$
+  equal $1$ on $[0,\frac12\eps_0]$ and $0$ on $[\eps_0,1]$, and set
+  $b=\psi(\eps)a^{-1}+(1-\psi(\eps))\tilde b\in\Ssl{-m}$. Then
+  $ab-\Id=(1-\psi(\eps))(a\tilde b-\Id)$, which lies in $\Ssl{-1}$ and vanishes for
+  $\eps\le\frac12\eps_0$, hence lies in $\eps^N\Ssl{-1}$ for every $N$; similarly
+  for $ba-\Id$.
+\end{proof}
+
+Note that (i) alone implies (ii) for $\eps$ small; condition (ii) is only needed
+to control the family for $\eps$ away from $0$. As usual, one may simply restrict
+attention to $\eps\in(0,\eps_0]$, rescaling the parameter if desired.
+
+\begin{theorem}\label{semiclassical:thm:parametrix}
+  If $A\in\Psisl m(\R^n)$ is elliptic then there exists $B\in\Psisl{-m}(\R^n)$,
+  unique modulo $\eps^\infty\Psisl{-\infty}(\R^n)$, with
+  \begin{equation*}
+    AB-\Id\in\eps^\infty\Psisl{-\infty}(\R^n),\qquad BA-\Id\in\eps^\infty\Psisl{-\infty}(\R^n).
+  \end{equation*}
+  If $A-\Id\in\Psisl{-\infty}(\R^n)$ then $B-\Id\in\Psisl{-\infty}(\R^n)$.
+\end{theorem}
+\begin{proof}
+  Let $b$ be as in \cref{semiclassical:def:elliptic} and $B_0=\Op_\eps(b)$. By
+  \cref{semiclassical:prop:symbol-maps}, $AB_0=\Id-\eps R$ with $R\in\Psisl{-1}$.
+  By \cref{semiclassical:lem:borel}(i) (applied to the symbols) there is
+  $S\in\Psisl0$ with $S-\sum_{j<N}\eps^jR^j\in\eps^N\Psisl{-N}$ for all $N$, and then
+  $B_R=B_0S$ satisfies
+  \begin{equation*}
+    AB_R=(\Id-\eps R)S\equiv(\Id-\eps R)\sum_{j<N}\eps^jR^j=\Id-\eps^NR^N\equiv\Id
+  \end{equation*}
+  modulo $\eps^N\Psisl{-N}$, for every $N$; hence
+  $AB_R-\Id\in\eps^\infty\Psisl{-\infty}$. In the same way there is a left
+  parametrix $B_L$, and as usual $B_L\equiv B_LAB_R\equiv B_R$ modulo
+  $\eps^\infty\Psisl{-\infty}$, which is an ideal. This also gives uniqueness.
+  If $A=\Id+A'$ with $A'\in\Psisl{-\infty}$, then $b$ may be taken with
+  $b-\Id\in\Ssl{-\infty}$ (in the proof of \cref{semiclassical:lem:elliptic}, $\tilde b=\Id$),
+  $R\in\Psisl{-\infty}$, and all the terms stay in $\Id+\Psisl{-\infty}$, using
+  \cref{semiclassical:lem:borel}(ii).
+\end{proof}
+
+\subsection{Uniform boundedness on \texorpdfstring{$L^2$}{L2}}
+\begin{theorem}\label{semiclassical:thm:L2}
+  If $A\in\Psisl0(\R^n)$ then $\sup_{0<\eps\le1}\norm{A_\eps}_{\Lin(L^2(\R^n))}<\infty$.
+  If $A\in\eps^N\Psisl0(\R^n)$ then $\norm{A_\eps}_{\Lin(L^2)}=O(\eps^N)$.
+\end{theorem}
+\begin{proof}
+  First let $A\in\Psisl{-\infty}(\R^n)$, with kernel as in
+  \eqref{semiclassical:eq:smoothing-kernel}. Then
+  $\abs{K(\eps,x,Z)}\le C\ang Z^{-n-1}$, so
+  \begin{equation*}
+    \sup_x\int\abs{K_{A_\eps}(x,y)}\,dy=\sup_x\int\abs{K(\eps,x,Z)}\,dZ\le C',\qquad
+    \sup_y\int\abs{K_{A_\eps}(x,y)}\,dx=\sup_y\int\abs{K(\eps,y+\eps Z,Z)}\,dZ\le C',
+  \end{equation*}
+  and Schur's lemma (\cref{euclidean:lem:schur}) gives $\norm{A_\eps}\le C'$.
+
+  In general, let $A=\Op_\eps(a)$, $a\in\Ssl0$, and $C=2+\sup\abs a^2$, the
+  supremum over $[0,1]\times\R^{2n}$. We follow the proof of
+  \cref{euclidean:thm:L2}, now keeping track of $\eps$. The family
+  $Q=C-A^*A\in\Psisl0$ is self-adjoint and $\sigma_{\eps,0}(Q)=[g]$ with
+  $g=C-\abs a^2\ge2$. Let $b_0=g^{1/2}\in\Ssl0$ (a smooth function of a symbol of
+  order $0$ with values in $[2,\infty)$; the estimates follow from the chain rule)
+  and $B_0=\frac12(\Op_\eps(b_0)+\Op_\eps(b_0)^*)$, so $B_0=B_0^*$ and
+  $\sigma_{\eps,0}(B_0)=[b_0]$. Then $E_1=Q-B_0^2\in\eps\Psisl{-1}$. Suppose
+  inductively that $S_N=B_0+\dots+B_N$ with $B_j=B_j^*\in\eps^j\Psisl{-j}$ has
+  been found with $E_{N+1}=Q-S_N^2\in\eps^{N+1}\Psisl{-N-1}$. Then
+  $E_{N+1}=E_{N+1}^*$, so $E_{N+1}=\eps^{N+1}\Op_\eps(e)$ with $e\in\Ssl{-N-1}$ real
+  modulo $\eps\Ssl{-N-2}$. Let $h=e/(2b_0)\in\Ssl{-N-1}$ and
+  $B_{N+1}=\frac12\eps^{N+1}(\Op_\eps(h)+\Op_\eps(h)^*)$. Then
+  \begin{equation*}
+    Q-S_{N+1}^2=E_{N+1}-S_NB_{N+1}-B_{N+1}S_N-B_{N+1}^2,
+  \end{equation*}
+  and since $S_N-B_0\in\eps\Psisl{-1}$ and $\sigma_\eps(E_{N+1}-B_0B_{N+1}-B_{N+1}B_0)
+  =\eps^{N+1}(e-2b_0h)=0$ modulo $\eps^{N+2}\Ssl{-N-2}$, we get
+  $Q-S_{N+1}^2\in\eps^{N+2}\Psisl{-N-2}$. By \cref{semiclassical:lem:borel}(i) there is
+  $B'\in\Psisl0$ with $B'-S_N\in\eps^{N+1}\Psisl{-N-1}$ for all $N$; replacing $B'$ by
+  $B=\frac12(B'+B'^*)$ we may assume $B=B^*$. As in \cref{euclidean:prop:sqrt},
+  $G=Q-B^2\in\bigcap_N\eps^N\Psisl{-N}=\eps^\infty\Psisl{-\infty}$. For $u\in\cS(\R^n)$,
+  \begin{equation*}
+    \norm{A_\eps u}^2=C\norm u^2-\norm{B_\eps u}^2-\inner{G_\eps u}u\le(C+\norm{G_\eps})\norm u^2,
+  \end{equation*}
+  and $\norm{G_\eps}$ is bounded by the first part. The last statement follows
+  by applying this to $\eps^{-N}A\in\Psisl0$.
+\end{proof}
+
+\begin{corollary}\label{semiclassical:cor:norm}
+  If $A\in\Psisl0(\R^n)$ then
+  $\limsup_{\eps\downarrow0}\norm{A_\eps}_{\Lin(L^2)}\le\sup_{x,\eta}\abs{\ssl(A)(x,\eta)}$.
+\end{corollary}
+\begin{proof}
+  Let $C>\sup\abs{a(0,\cdot,\cdot)}^2$. Since $a(\eps)-a(0)=O(\eps)$ uniformly,
+  $g=C-\abs a^2\ge c_0>0$ for $\eps\le\eps_0$. Let $\psi$ be as in the proof of
+  \cref{semiclassical:lem:elliptic} and
+  $b_0=\psi(\eps)g^{1/2}+(1-\psi(\eps))$, a positive element of $\Ssl0$ bounded
+  below. Then $g-b_0^2$ vanishes for $\eps\le\frac12\eps_0$, so lies in
+  $\eps^\infty\Ssl0=\bigcap_N\eps^N\Ssl0$. Running the construction of the
+  previous proof with this $b_0$, all errors are now in
+  $\eps^{N}\Psisl{-N}+\eps^\infty\Psisl0$, and we obtain $C-A^*A=B^2+G$ with
+  $B=B^*$ and $G\in\eps^\infty\Psisl0$. By \cref{semiclassical:thm:L2},
+  $\norm{G_\eps}=O(\eps^\infty)$, so $\norm{A_\eps}^2\le C+O(\eps^\infty)$.
+\end{proof}
+
+In fact equality holds (\cref{semiclassical:ex:norm}). Together with
+\cref{semiclassical:thm:parametrix} this gives invertibility for small $\eps$:
+if $A\in\Psisl0(\R^n)$ is elliptic and $B$ is a parametrix, then
+$\norm{(AB-\Id)_\eps}+\norm{(BA-\Id)_\eps}=O(\eps^\infty)$, so for $\eps$ small
+$A_\eps$ is invertible on $L^2(\R^n)$ and $\norm{A_\eps^{-1}-B_\eps}=O(\eps^\infty)$.
+On a compact manifold we shall see that the inverse is itself a semiclassical
+family (\cref{semiclassical:thm:invertible}).
+
+\subsection{Oscillatory testing}
+The semiclassical symbol can be recovered from the action of the family on
+rapidly oscillating functions; this gives an invariant description of it.
+
+\begin{proposition}\label{semiclassical:prop:oscillatory}
+  Let $A\in\Psisl m(\R^n)$, let $f\in\CI(\R^n)$ be real with $\pa_jf\in\CIb(\R^n)$
+  for all $j$, and $u\in\cS(\R^n)$. Then
+  \begin{equation*}
+    e^{-if/\eps}A_\eps\bigl(e^{if/\eps}u\bigr)=\Op_\eps(c_f)u,\qquad c_f\in\Ssl m(\R^n),\quad
+    c_f(0,x,\eta)=\ssl(A)(x,\eta+df(x)),
+  \end{equation*}
+  and consequently
+  \begin{equation*}
+    \lim_{\eps\downarrow0}e^{-if/\eps}A_\eps\bigl(e^{if/\eps}u\bigr)=\ssl(A)(x,df(x))\,u
+    \quad\text{in }\cS(\R^n).
+  \end{equation*}
+\end{proposition}
+\begin{proof}
+  Write $f(y)-f(x)=-(x-y)\cdot\Phi(x,y)$ with
+  $\Phi(x,y)=\int_0^1\nabla f(y+s(x-y))\,ds$, so that $\Phi\in\CIb(\R^{2n};\R^n)$ and
+  $\Phi(x,x)=\nabla f(x)$, the coordinate expression of $df$. If $A=\Op_\eps(a)$,
+  the kernel of $u\mapsto e^{-if/\eps}A_\eps(e^{if/\eps}u)$ is
+  \begin{equation*}
+    \int e^{i(x-y)\cdot(\xi-\Phi(x,y)/\eps)}a(\eps,x,\eps\xi)\,\dbar\xi
+    =\int e^{i(x-y)\cdot\xi}a\bigl(\eps,x,\eps\xi+\Phi(x,y)\bigr)\dbar\xi ,
+  \end{equation*}
+  by the change of variables $\xi\mapsto\xi+\Phi(x,y)/\eps$. This is justified
+  when $a$ has compact support in $\eta$, the integrals then being absolutely
+  convergent, and in general by replacing $a$ by $\chi(\eta/l)a$ and letting
+  $l\to\infty$, using \cref{euclidean:prop:osc-int}(ii) on both sides. Thus the
+  operator is $\Op_\eps(p)$ with $p(\eps,x,y,\eta)=a(\eps,x,\eta+\Phi(x,y))$, and
+  $p\in\Ssl m(\R^{2n};\R^n)$ by \eqref{semiclassical:eq:peetre-shift} and the chain
+  rule. By \cref{semiclassical:thm:reduction} it equals $\Op_\eps(c_f)$ with
+  $c_f(0,x,\eta)=p(0,x,x,\eta)=a(0,x,\eta+\nabla f(x))$. The limit follows from
+  \cref{semiclassical:lem:action} applied to the $\eps$-independent function $u$.
+\end{proof}
+
+\subsection{Coordinate invariance}
+Let $F:\Omega\to\Omega'$ be a diffeomorphism between open subsets of $\R^n$ and
+$H=F^{-1}$. The canonical identification of cotangent spaces is
+\begin{equation*}
+  \tilde F:T^*\Omega'\to T^*\Omega,\qquad
+  (x',\eta')\mapsto\bigl(H(x'),(DH(x')^T)^{-1}\eta'\bigr),
+\end{equation*}
+so that $\eta'=F^*\xi$ at $x'=F(x)$; for a function $b$ on $T^*\Omega$ we write
+$\tilde F^*b=b\circ\tilde F$.
+
+\begin{proposition}\label{semiclassical:prop:invariance}
+  Let $A\in\Psisl m(\R^n)$ have kernels supported in $K\times K$ for all $\eps$, where
+  $K\subset\Omega$ is compact. Then the family
+  $A_F=(F^{-1})^*\circ A\circ F^*$, i.e.\ $A_{F,\eps}v=\bigl(A_\eps(v\circ F)\bigr)\circ H$
+  on $\Omega'$ and $0$ outside, is an element of $\Psisl m(\R^n)$ with kernels supported
+  in $F(K)\times F(K)$, and
+  \begin{equation*}
+    \sigma_{\eps,m}(A_F)=\tilde F^*\sigma_{\eps,m}(A),\qquad\text{in particular}\quad
+    \ssl(A_F)=\tilde F^*\ssl(A).
+  \end{equation*}
+  If $A$ is classical so is $A_F$.
+\end{proposition}
+\begin{proof}
+  Let $A=\Op_\eps(a)$; since the kernel vanishes for $x\notin K$, so does
+  $a(\eps,x,\eta)$. The kernel of $A_F$ is
+  $k'(\eps,x',y')=k(\eps,H(x'),H(y'))\abs{\det DH(y')}$, where $k$ is the kernel of
+  $A$. Choose $\chi\in\CIc(\Omega')$ equal to $1$ near $F(K)$ and let $L=\supp\chi$.
+  Write $H(x')-H(y')=G(x',y')(x'-y')$ with $G(x',y')=\int_0^1DH(y'+s(x'-y'))\,ds$.
+  By compactness there is $r>0$ such that for $x',y'\in L$ with $\abs{x'-y'}<r$
+  the segment $[y',x']$ lies in $\Omega'$ and $\abs{\det G(x',y')}\ge c>0$. Let
+  $\rho\in\CIc(\R^n)$ be supported in $\{\abs z<r\}$ and equal to $1$ for
+  $\abs z\le r/2$. Then
+  \begin{equation*}
+    k'=\rho(x'-y')\chi(x')\chi(y')k'+(1-\rho(x'-y'))\chi(x')\chi(y')k'.
+  \end{equation*}
+  On the support of the second term $\abs{x'-y'}\ge r/2$, hence
+  $\abs{H(x')-H(y')}\ge d>0$; by \cref{semiclassical:lem:off-diagonal} this term
+  is smooth, compactly supported and $O(\eps^\infty)$ with all derivatives, so it
+  is the kernel of an element of $\eps^\infty\Psisl{-\infty}$ by
+  \cref{semiclassical:lem:residual-ideal}. In the first term we write
+  $k(\eps,x,y)=\int e^{i(x-y)\cdot\xi}a(\eps,x,\eps\xi)\dbar\xi$ and change variables
+  $\xi=(G(x',y')^T)^{-1}\xi'$, so that $(H(x')-H(y'))\cdot\xi=(x'-y')\cdot\xi'$. (As in
+  the proof of \cref{semiclassical:prop:oscillatory} this is first done for $a$ with
+  compact support in $\eta$ and then justified by a limiting argument.) Since the
+  map $\xi\mapsto\xi'$ is linear it commutes with the rescaling, and the first term
+  becomes the kernel of $\Op_\eps(p)$ with
+  \begin{equation*}
+    p(\eps,x',y',\eta')=\rho(x'-y')\chi(x')\chi(y')\frac{\abs{\det DH(y')}}{\abs{\det G(x',y')}}\,
+    a\bigl(\eps,H(x'),(G(x',y')^T)^{-1}\eta'\bigr).
+  \end{equation*}
+  Here $p\in\Ssl m(\R^{2n};\R^n)$: it is compactly supported in $(x',y')$, and the
+  symbol estimates follow from the chain rule since $(G^T)^{-1}$ is smooth and
+  uniformly invertible on the support, so $\ang{(G^T)^{-1}\eta'}$ and $\ang{\eta'}$ are
+  comparable. By \cref{semiclassical:thm:reduction}, $A_F-\eps^\infty\Psisl{-\infty}\ni\Op_\eps(p)=\Op_\eps(c)$
+  with $c-p(\eps,x',x',\eta')\in\eps\Ssl{m-1}$. Since $G(x',x')=DH(x')$ and $\chi=1$
+  on $F(K)$, which contains the $x'$-support of $a(\eps,H(x'),\cdot)$,
+  $p(\eps,x',x',\eta')=a(\eps,H(x'),(DH(x')^T)^{-1}\eta')=\tilde F^*a$. The
+  statement about supports is clear, and if $a$ is classical then so is $p$ and,
+  by \cref{semiclassical:rem:classical}, so is $c$.
+\end{proof}
+
+The proof shows more precisely that the full symbol of $A_F$ has an expansion
+$\sum_\alpha\eps^{\abs\alpha}(\alpha!)^{-1}\pa^\alpha_{\eta'}D^\alpha_{y'}p|_{y'=x'}$, but
+only the leading term is invariantly meaningful.

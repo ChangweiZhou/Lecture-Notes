@@ -1414,7 +1414,7 @@ plane is the evolute of the parabola, the locus of its centres of curvature
 parabola $(y-1)^3=\frac{27}8x^2$.  For $t<1$, $C_t$ is smooth; at $t=1$ it has a
 single singular point $(0,1)$; for $t>1$ it has two cusps, at
 $x_0=\pm(t^{2/3}-1)^{1/2}$, on the evolute, and a self-intersection on the axis
-$x=0$, at $y=\frac12(t^2+1)$ (\cref{fig:keller}).  The arc of $C_t$ between the
+$x=0$, at $y=\frac12(t^2+1)$ (\cref{hj:fig:keller}).  The arc of $C_t$ between the
 cusps, which contains the vertex $(0,t)$, is curved the opposite way from the
 rest (\cref{hj:ex:keller}).
 
@@ -1435,7 +1435,7 @@ rest (\cref{hj:ex:keller}).
   \end{tikzpicture}
   \caption{The parallel curves $C_t$ of the parabola for $t=0,\,0.6,\,1,\,1.7$
   and the caustic $\mathcal K$ (dashed), projected to the $(x,y)$-plane.}
-  \label{fig:keller}
+  \label{hj:fig:keller}
 \end{figure}
 
 \subsection{A parametrization near the cusp}
@@ -1525,8 +1525,8 @@ So one must expect factors $e^{\pm i\pi/2}$ in passing from one conormal
 description of a Lagrangian distribution to another across a caustic.  These
 are the transition functions of the Keller--Maslov bundle.  (Solutions of
 $Pu\in\CI$ of this form exist: the travelling waves with initial data conormal
-to $C$ constructed in \cref{hj:thm:travelling} continue, by the general theory
-of \cite{Hormander-FIO}, as Lagrangian distributions associated with $\Lambda$
+to $C$ constructed in \cref{hj:thm:travelling} continue, by the theory of
+Fourier integral operators \cite{Hormander-FIO}, as Lagrangian distributions associated with $\Lambda$
 through the caustic, with principal symbol satisfying a transport equation
 along $\Lambda$.)
 
@@ -1595,9 +1595,12 @@ trivializations of $M_\Lambda$ defined by conormal phases for the sheets of the
 front before and after the caustic differ by the factor $e^{\mp i\pi/2}$ found
 in \cref{hj:sec:keller}.  Each component of that $\Lambda$ is contractible, so
 $M_\Lambda$ is trivial there, but no trivialization is compatible with all
-conormal descriptions.  In general $M_\Lambda$ need not be trivial; its first
-Chern class is the image of the Maslov class in $H^1(\Lambda;\Z)$, see
-\cite[Chapter~21]{Hormander-III}.
+conormal descriptions.  In general $M_\Lambda$ need not be trivial: since
+$\sgn\varphi''_{\theta\theta}$ jumps by $\pm2$ when a curve in $\Lambda$ crosses
+the caustic transversally (in the generic situation), the holonomy of $M_\Lambda$
+around a closed curve $\gamma$ is $i^{\pm\mathrm{ind}(\gamma)}$, where
+$\mathrm{ind}(\gamma)$ is the Maslov index of $\gamma$, an integer counting
+these crossings with signs; see \cite[Chapter~21, Section~25.1]{Hormander-III}.
 
 \subsection{The principal symbol}
 
