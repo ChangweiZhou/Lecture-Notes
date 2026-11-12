@@ -1,0 +1,339 @@
+\chapter{Bounded operators on Hilbert space}\label{ch:hilbert}
+
+This appendix collects the properties of bounded operators on complex Hilbert
+spaces which are used throughout the text: elementary facts about the algebra of
+bounded operators, compact operators, Fredholm operators and their index, and the
+Hilbert--Schmidt and trace-class ideals. Proofs are short and standard. Hilbert
+spaces $H$, $H_1$, $H_2,\dots$ are complex; where orthonormal bases are used they are
+assumed separable, so that bases are countable.
+
+\section{Bounded operators}\label{hilbert:sec:bounded}
+
+\begin{proposition}\label{hilbert:prop:bounded}
+A linear map $A:H_1\to H_2$ is continuous if and only if it is bounded, i.e.\
+$\|A\|=\sup_{\|x\|\le1}\|Ax\|<\infty$. The space $\Lin(H_1,H_2)$ of bounded operators is a
+Banach space with this norm, and $\|AB\|\le\|A\|\,\|B\|$ whenever the composite is
+defined. In particular $\Lin(H)=\Lin(H,H)$ is a Banach algebra.
+\end{proposition}
+\begin{proof}
+If $A$ is continuous at $0$ there is $\delta>0$ with $\|Ax\|\le1$ for $\|x\|\le\delta$, so
+$\|A\|\le\delta^{-1}$; conversely $\|Ax-Ay\|\le\|A\|\|x-y\|$. If $(A_k)$ is Cauchy in norm then
+$A_kx$ is Cauchy for each $x$, and the limit $Ax$ is linear with $\|A-A_k\|\to0$. Finally
+$\|ABx\|\le\|A\|\|Bx\|\le\|A\|\|B\|\|x\|$.
+\end{proof}
+
+By the Riesz representation theorem each $A\in\Lin(H_1,H_2)$ has an adjoint
+$A^*\in\Lin(H_2,H_1)$, $\inner{Ax}y=\inner x{A^*y}$, with $(AB)^*=B^*A^*$, $A^{**}=A$ and
+$\|A^*\|=\|A\|$ (since $\|A\|=\sup_{\|x\|,\|y\|\le1}|\inner{Ax}y|$). We also use the open
+mapping theorem: a bounded bijection between Banach spaces has bounded inverse.
+
+\begin{proposition}[$C^*$-identity]\label{hilbert:prop:Cstar}
+For $A\in\Lin(H_1,H_2)$, $\|A^*A\|=\|AA^*\|=\|A\|^2$.
+\end{proposition}
+\begin{proof}
+$\|Ax\|^2=\inner{A^*Ax}x\le\|A^*A\|\|x\|^2$, so $\|A\|^2\le\|A^*A\|\le\|A^*\|\|A\|=\|A\|^2$. Apply this
+to $A^*$ for the other identity.
+\end{proof}
+
+\begin{proposition}[Neumann series]\label{hilbert:prop:neumann}
+If $A\in\Lin(H)$ and $\|A\|<1$ then $\Id-A$ is invertible, with
+$(\Id-A)^{-1}=\sum_{k\ge0}A^k$ and $\|(\Id-A)^{-1}\|\le(1-\|A\|)^{-1}$. Consequently:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $A-\lambda$ is invertible for $|\lambda|>\|A\|$, so the spectrum of $A$ lies in
+$\{|\lambda|\le\|A\|\}$;
+\item the invertible elements of $\Lin(H_1,H_2)$ form an open set: if $A$ is invertible and
+$\|E\|<\|A^{-1}\|^{-1}$ then $A+E=A(\Id+A^{-1}E)$ is invertible; and inversion is continuous.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+The series converges absolutely in the Banach space $\Lin(H)$ since $\|A^k\|\le\|A\|^k$, and
+$(\Id-A)\sum_{k<N}A^k=\sum_{k<N}A^k(\Id-A)=\Id-A^N\to\Id$. For (a) write
+$A-\lambda=-\lambda(\Id-A/\lambda)$. In (b) the inverse is
+$(A+E)^{-1}=\sum_k(-A^{-1}E)^kA^{-1}$, which depends continuously on $E$.
+\end{proof}
+
+The condition in (a) cannot be weakened to $|\lambda|\ge\|A\|$: for $A=\Id$, $\lambda=1$.
+
+\begin{lemma}\label{hilbert:lem:selfadjoint-norm}
+If $T\in\Lin(H)$ is self-adjoint then $\|T\|=\sup_{\|x\|=1}|\inner{Tx}x|$.
+\end{lemma}
+\begin{proof}
+Let $M$ be the supremum; clearly $M\le\|T\|$. By polarization, for $\|x\|=\|y\|=1$,
+$4\operatorname{Re}\inner{Tx}y=\inner{T(x+y)}{x+y}-\inner{T(x-y)}{x-y}\le M(\|x+y\|^2+\|x-y\|^2)=4M$.
+Taking $y=Tx/\|Tx\|$ gives $\|Tx\|\le M$.
+\end{proof}
+
+\section{Compact operators}\label{hilbert:sec:compact}
+
+\begin{definition}\label{hilbert:def:compact}
+An operator $K\in\Lin(H_1,H_2)$ is \emph{compact} if the closure of the image of the
+unit ball is compact; equivalently, if every bounded sequence $(x_n)$ has a
+subsequence along which $Kx_n$ converges. The compact operators form a subspace
+$\Kpt(H_1,H_2)$, and $\Kpt(H)=\Kpt(H,H)$.
+\end{definition}
+
+\begin{proposition}\label{hilbert:prop:compact}
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item If $K$ is compact and $A$, $B$ are bounded, then $AKB$ is compact (when defined);
+$\Kpt(H)$ is a two-sided ideal in $\Lin(H)$.
+\item $K$ is compact if and only if $x_n\rightharpoonup x$ weakly implies $Kx_n\to Kx$ in norm.
+\item $\Kpt(H_1,H_2)$ is the norm closure of the finite-rank operators.
+\item $K$ is compact if and only if $K^*$ is compact, if and only if $K^*K$ is compact.
+\item \textup{(Riesz)} If the closed unit ball of $H$ is compact, $\dim H<\infty$. In particular
+if $K$ is compact, $\Nul(\Id-K)$ is finite-dimensional.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+(a) Bounded operators map bounded sets to bounded sets and convergent sequences to
+convergent sequences.
+
+(b) Suppose $K$ compact and $x_n\rightharpoonup x$. Then $(x_n)$ is bounded and $Kx_n\rightharpoonup Kx$,
+since $\inner{Kx_n}z=\inner{x_n}{K^*z}$. Every subsequence of $(Kx_n)$ has a norm-convergent
+subsequence, whose limit must be $Kx$; hence $Kx_n\to Kx$. Conversely, every bounded sequence
+has a weakly convergent subsequence, which $K$ maps to a convergent sequence.
+
+(c) Finite-rank operators are compact, and a norm limit $K$ of compact operators $K_j$ is
+compact: given $\eps>0$ choose $j$ with $\|K-K_j\|<\eps$; then $K(B)$ lies within $\eps$ of the
+totally bounded set $K_j(B)$, so is totally bounded. Conversely, let $K$ be compact and $\eps>0$.
+Cover the compact set $\overline{K(B)}$ by finitely many balls $B(y_i,\eps)$, and let $P$ be the
+orthogonal projection onto the span of the $y_i$. For $\|x\|\le1$ choose $i$ with
+$\|Kx-y_i\|<\eps$; then $\|Kx-PKx\|\le\|Kx-y_i\|+\|P(y_i-Kx)\|<2\eps$. So $\|K-PK\|\le2\eps$, and
+$PK$ has finite rank.
+
+(d) The adjoint of a finite-rank operator has finite rank and $\|K^*-F^*\|=\|K-F\|$, so the
+first equivalence follows from (c). If $K$ is compact so is $K^*K$, by (a). Conversely,
+suppose $K^*K$ is compact and $x_n\rightharpoonup x$, $\|x_n\|\le M$. Then
+$\|K(x_n-x)\|^2=\inner{K^*K(x_n-x)}{x_n-x}\le2M\|K^*K(x_n-x)\|\to0$ by (b), so $K$ is compact by (b).
+
+(e) If $\dim H=\infty$ an orthonormal sequence $(e_n)$ has $\|e_n-e_m\|=\sqrt2$ for $n\ne m$, so
+has no convergent subsequence. On $\Nul(\Id-K)$, $x=Kx$, so the unit ball of this closed
+subspace is compact.
+\end{proof}
+
+\begin{theorem}[Spectral theorem]\label{hilbert:thm:spectral}
+Let $T\in\Kpt(H)$ be self-adjoint. Then there is an orthonormal sequence $(e_k)$ (finite
+or infinite) of eigenvectors, $Te_k=\lambda_ke_k$, with real eigenvalues
+$|\lambda_1|\ge|\lambda_2|\ge\dots>0$ tending to zero if infinite, such that
+$H=\Nul(T)\oplus\overline{\operatorname{span}}\{e_k\}$ and $Tx=\sum_k\lambda_k\inner x{e_k}e_k$.
+Each non-zero eigenvalue has finite multiplicity.
+\end{theorem}
+\begin{proof}
+If $T\ne0$, by \cref{hilbert:lem:selfadjoint-norm} there are unit vectors $x_n$ with
+$\inner{Tx_n}{x_n}\to\lambda$, $|\lambda|=\|T\|$, $\lambda$ real. Then
+$\|Tx_n-\lambda x_n\|^2=\|Tx_n\|^2-2\lambda\inner{Tx_n}{x_n}+\lambda^2\le2\lambda^2-2\lambda\inner{Tx_n}{x_n}\to0$.
+Passing to a subsequence, $Tx_n\to y$, so $x_n\to y/\lambda$, and $e=y/\|y\|$ satisfies $Te=\lambda e$.
+The orthocomplement of $e$ is invariant under $T$; repeating the argument there gives the
+sequence $(e_k)$ with $|\lambda_k|$ non-increasing, the restriction of $T$ to the orthocomplement
+of $e_1,\dots,e_k$ having norm $|\lambda_{k+1}|$. If infinitely many $|\lambda_k|\ge\eps>0$, then
+$\|Te_k-Te_j\|^2=\lambda_k^2+\lambda_j^2\ge2\eps^2$, contradicting compactness; so $\lambda_k\to0$, and each
+eigenvalue occurs finitely often. On the orthocomplement $W$ of all the $e_k$, which is
+invariant, $\|T|_W\|\le|\lambda_k|$ for all $k$ (or the process would have stopped), so
+$T|_W=0$ and $W\subset\Nul(T)$; the reverse inclusion holds since
+$\inner x{e_k}=\lambda_k^{-1}\inner{x}{Te_k}=\lambda_k^{-1}\inner{Tx}{e_k}$.
+\end{proof}
+
+\section{Fredholm operators}\label{hilbert:sec:fredholm}
+
+\begin{definition}\label{hilbert:def:fredholm}
+An operator $A\in\Lin(H_1,H_2)$ is \emph{Fredholm} if $\Nul(A)$ is finite-dimensional,
+$\Ran(A)$ is closed, and $\Ran(A)^\perp$ is finite-dimensional. Its \emph{index} is
+$\ind(A)=\dim\Nul(A)-\dim\Ran(A)^\perp=\dim\Nul(A)-\dim\Nul(A^*)$.
+\end{definition}
+
+Here $\Ran(A)^\perp=\Nul(A^*)$ for any bounded $A$, and if $\Ran(A)$ is closed it is the
+orthocomplement of $\Nul(A^*)$. Thus $A$ is Fredholm if and only if $A^*$ is, and
+$\ind(A^*)=-\ind(A)$.
+
+\begin{proposition}[Generalized inverse]\label{hilbert:prop:generalized-inverse}
+If $A\in\Lin(H_1,H_2)$ is Fredholm there is a unique $G\in\Lin(H_2,H_1)$ with
+\begin{equation*}
+GA=\Id-\pi_N,\qquad AG=\Id-\pi_C,\qquad G\pi_C=0,
+\end{equation*}
+where $\pi_N$ and $\pi_C$ are the orthogonal projections onto $\Nul(A)$ and $\Nul(A^*)$. $G$ is
+Fredholm with $\ind(G)=-\ind(A)$.
+\end{proposition}
+\begin{proof}
+$A$ restricts to a bounded bijection $\Nul(A)^\perp\to\Ran(A)$ between Hilbert spaces, which has
+bounded inverse $A_0^{-1}$ by the open mapping theorem; set $G=A_0^{-1}(\Id-\pi_C)$. The
+identities are immediate and determine $G$. $\Nul(G)=\Nul(A^*)$ and $\Ran(G)=\Nul(A)^\perp$, so
+$\ind(G)=\dim\Nul(A^*)-\dim\Nul(A)$.
+\end{proof}
+
+\begin{theorem}[Atkinson]\label{hilbert:thm:atkinson}
+$A\in\Lin(H_1,H_2)$ is Fredholm if and only if there exists $B\in\Lin(H_2,H_1)$ such that
+$BA-\Id$ and $AB-\Id$ are compact. One may then take $B$ such that both are of finite rank.
+\end{theorem}
+\begin{proof}
+If $A$ is Fredholm, the generalized inverse is such a $B$, with finite-rank errors.
+Conversely suppose $BA=\Id-K$ and $AB=\Id-K'$ with $K,K'$ compact. Then
+$\Nul(A)\subset\Nul(\Id-K)$, which is finite-dimensional by \cref{hilbert:prop:compact}(e).
+Let $L=\Id-K'$. On $\Nul(L)^\perp$ there is $c>0$ with $\|Lx\|\ge c\|x\|$: otherwise there are unit
+vectors $x_n\in\Nul(L)^\perp$ with $Lx_n\to0$; passing to a subsequence $K'x_n\to y$, so
+$x_n=Lx_n+K'x_n\to y$, with $\|y\|=1$, $y\in\Nul(L)^\perp$ and $Ly=0$, a contradiction. Hence
+$\Ran(L)$ is closed, and $\Ran(L)^\perp=\Nul(\Id-K'^*)$ is finite-dimensional. Since
+$\Ran(A)\supset\Ran(AB)=\Ran(L)$, $\Ran(A)$ is the sum of the closed subspace $\Ran(L)$ and a
+finite-dimensional space, hence closed, and $\Ran(A)^\perp\subset\Ran(L)^\perp$ is
+finite-dimensional.
+\end{proof}
+
+\begin{lemma}\label{hilbert:lem:finite-rank-index}
+If $F\in\Lin(H)$ has finite rank then $\Id-F$ is Fredholm of index zero.
+\end{lemma}
+\begin{proof}
+Let $V=\Ran(F)+\Ran(F^*)$, which is finite-dimensional. Then $F$ maps $V$ into itself and
+vanishes on $V^\perp\subset\Nul(F)$, so $\Id-F=(\Id_V-F|_V)\oplus\Id_{V^\perp}$, and the index is that
+of an endomorphism of a finite-dimensional space, which is zero.
+\end{proof}
+
+\begin{proposition}\label{hilbert:prop:index-product}
+If $B\in\Lin(H_1,H_2)$ and $A\in\Lin(H_2,H_3)$ are Fredholm, then $AB$ is Fredholm and
+$\ind(AB)=\ind(A)+\ind(B)$.
+\end{proposition}
+\begin{proof}
+If $B'$, $A'$ are parametrices as in \cref{hilbert:thm:atkinson} then $B'A'$ is one for $AB$.
+Consider the sequence of finite-dimensional spaces and natural maps
+\begin{equation*}
+0\to\Nul B\hookrightarrow\Nul AB\xrightarrow{B}\Nul A\to H_2/\Ran B\xrightarrow{A}H_3/\Ran AB\to H_3/\Ran A\to0 ,
+\end{equation*}
+where the third map is inclusion followed by the quotient map and the last is the
+quotient map ($\Ran AB\subset\Ran A$). It is exact: the kernel of $B$ on $\Nul AB$ is $\Nul B$; the
+image of $\Nul AB$ under $B$ is $\Nul A\cap\Ran B$, the kernel of the third map; the kernel of
+the map induced by $A$ consists of the classes of $v$ with $Av\in\Ran AB$, i.e.\
+$v\in\Nul A+\Ran B$; and the kernel of the last map is $\Ran A/\Ran AB$. The alternating sum of the
+dimensions in an exact sequence vanishes, and $\dim H_2/\Ran B=\dim\Nul B^*$ etc.\ since the
+ranges are closed; this gives the formula.
+\end{proof}
+
+\begin{theorem}[Stability of the index]\label{hilbert:thm:stability}
+Let $A\in\Lin(H_1,H_2)$ be Fredholm.
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item If $G$ is a generalized inverse of $A$ and $\|E\|<\|G\|^{-1}$, then $A+E$ is Fredholm and
+$\ind(A+E)=\ind(A)$. Thus the Fredholm operators form an open subset of $\Lin(H_1,H_2)$ on
+which the index is locally constant, hence constant along continuous paths.
+\item If $K\in\Kpt(H_1,H_2)$ then $A+K$ is Fredholm and $\ind(A+K)=\ind(A)$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+(a) Since $\|GE\|<1$ and $\|EG\|<1$, $\Id+GE$ and $\Id+EG$ are invertible, and
+\begin{equation*}
+(\Id+GE)^{-1}G(A+E)=\Id-(\Id+GE)^{-1}\pi_N,\qquad (A+E)G(\Id+EG)^{-1}=\Id-\pi_C(\Id+EG)^{-1},
+\end{equation*}
+using $GA=\Id-\pi_N$ and $AG=\Id-\pi_C$. By \cref{hilbert:thm:atkinson}, $A+E$ is Fredholm. The
+first identity, \cref{hilbert:lem:finite-rank-index} and \cref{hilbert:prop:index-product}
+(invertible operators having index zero) give $\ind(G)+\ind(A+E)=0$, and
+$\ind(G)=-\ind(A)$.
+
+(b) A parametrix for $A$ is a parametrix for $A+tK$ modulo compact operators, so $A+tK$ is
+Fredholm for $t\in[0,1]$, and by (a) the index is locally constant, hence constant, in $t$.
+\end{proof}
+
+\begin{theorem}[Riesz theory]\label{hilbert:thm:riesz}
+Let $K\in\Kpt(H)$ and $\mu\in\C\setminus\{0\}$. Then $\mu-K$ is Fredholm of index zero, so $\mu\in\Spec(K)$
+if and only if $\mu$ is an eigenvalue. For each $\eps>0$ there are only finitely many
+eigenvalues with $|\mu|\ge\eps$; thus $\Spec(K)\setminus\{0\}$ is countable and discrete in
+$\C\setminus\{0\}$. For each eigenvalue $\mu\ne0$ the generalized eigenspace
+$\bigcup_N\Nul((\mu-K)^N)$ is finite-dimensional.
+\end{theorem}
+\begin{proof}
+$\mu-K=\mu(\Id-K/\mu)$ is Fredholm of index zero by \cref{hilbert:thm:stability}(b); if it is
+injective it is therefore surjective, hence invertible. Suppose there were infinitely
+many distinct eigenvalues $\mu_k$ with $|\mu_k|\ge\eps$ and eigenvectors $x_k$; these are linearly
+independent. Let $M_k=\operatorname{span}\{x_1,\dots,x_k\}$ and choose unit vectors $y_k\in M_k\ominus M_{k-1}$.
+Since $(K-\mu_k)M_k\subset M_{k-1}$, for $j<k$
+\begin{equation*}
+Ky_k-Ky_j=\mu_ky_k+\big((K-\mu_k)y_k-Ky_j\big),\quad (K-\mu_k)y_k-Ky_j\in M_{k-1},
+\end{equation*}
+so $\|Ky_k-Ky_j\|\ge|\mu_k|\ge\eps$, contradicting compactness. Finally the spaces
+$N_j=\Nul((\mu-K)^j)$ increase; if $N_{j-1}\ne N_j$ for all $j$, choose unit $u_j\in N_j\ominus N_{j-1}$.
+For $i<j$, $Ku_j-Ku_i=\mu u_j-\big((\mu-K)u_j+Ku_i\big)$ with the bracket in $N_{j-1}$, so
+$\|Ku_j-Ku_i\|\ge|\mu|$, again a contradiction. So $N_j=N_{j_0}$ for $j\ge j_0$, and
+$N_{j_0}=\Nul((\mu-K)^{j_0})$ is finite-dimensional because $(\mu-K)^{j_0}=\mu^{j_0}(\Id-K')$ with $K'$
+compact.
+\end{proof}
+
+\section{Hilbert--Schmidt and trace-class operators}\label{hilbert:sec:trace}
+
+\begin{definition}\label{hilbert:def:HS}
+An operator $A\in\Lin(H_1,H_2)$ is \emph{Hilbert--Schmidt} if
+$\|A\|_2^2=\sum_j\|Ae_j\|^2<\infty$ for an orthonormal basis $(e_j)$ of $H_1$.
+\end{definition}
+
+For orthonormal bases $(e_j)$ of $H_1$ and $(f_k)$ of $H_2$,
+$\sum_j\|Ae_j\|^2=\sum_{j,k}|\inner{Ae_j}{f_k}|^2=\sum_k\|A^*f_k\|^2$, so $\|A\|_2$ does not depend on the
+basis and $\|A^*\|_2=\|A\|_2$. The Hilbert--Schmidt operators form a Hilbert space with inner
+product $\langle A,B\rangle_2=\sum_j\inner{Ae_j}{Be_j}$, also independent of the basis, and:
+\begin{itemize}
+\item $\|A\|\le\|A\|_2$ (expand $x$ in a basis and use Cauchy--Schwarz);
+\item $\|SAT\|_2\le\|S\|\,\|A\|_2\,\|T\|$ for bounded $S,T$;
+\item Hilbert--Schmidt operators are compact: if $P_N$ is the projection onto
+$\operatorname{span}\{e_1,\dots,e_N\}$, $\|A-AP_N\|_2^2=\sum_{j>N}\|Ae_j\|^2\to0$.
+\end{itemize}
+
+\begin{proposition}\label{hilbert:prop:HS-kernel}
+Let $(M_i,\mu_i)$, $i=1,2$, be $\sigma$-finite measure spaces with $L^2(M_i)$ separable. An
+operator $A:L^2(M_1)\to L^2(M_2)$ is Hilbert--Schmidt if and only if it is given by a kernel
+$k\in L^2(M_2\times M_1)$, $Au(x)=\int k(x,y)u(y)\,d\mu_1(y)$, and then $\|A\|_2=\|k\|_{L^2}$. The same
+holds for vector-valued functions.
+\end{proposition}
+\begin{proof}
+If $(e_j)$ and $(f_k)$ are orthonormal bases of $L^2(M_1)$ and $L^2(M_2)$, the products
+$f_k(x)\overline{e_j(y)}$ form an orthonormal basis of $L^2(M_2\times M_1)$. If $A$ has kernel
+$k\in L^2$, then $\inner{Ae_j}{f_k}=\langle k,f_k\otimes\bar e_j\rangle$, so
+$\|A\|_2^2=\sum_{j,k}|\inner{Ae_j}{f_k}|^2=\|k\|_{L^2}^2$. Conversely, if $A$ is Hilbert--Schmidt then
+$k=\sum_{j,k}\inner{Ae_j}{f_k}f_k\otimes\bar e_j\in L^2$ is a kernel for $A$, as one checks on the $e_j$.
+\end{proof}
+
+\begin{definition}\label{hilbert:def:trace-class}
+An operator $A\in\Lin(H)$ is of \emph{trace class} if it is a finite sum
+$A=\sum_{k}B_kC_k$ of products of Hilbert--Schmidt operators $C_k:H\to H_k'$, $B_k:H_k'\to H$. The
+trace norm $\|A\|_1$ is the infimum of $\sum_k\|B_k\|_2\|C_k\|_2$ over such representations.
+\end{definition}
+
+The trace-class operators form a two-sided ideal in $\Lin(H)$, contained in the
+compact operators, with $\|SAT\|_1\le\|S\|\,\|A\|_1\|T\|$ and $\|A\|\le\|A\|_1$; $\|\cdot\|_1$ is a norm,
+and the ideal is complete with respect to it. Every finite-rank operator is of trace class.
+(Using the polar decomposition $A=U|A|$ one can show that
+$\|A\|_1=\sum_j\inner{|A|e_j}{e_j}$, the sum of the singular values of $A$.)
+
+\begin{proposition}\label{hilbert:prop:trace}
+If $A\in\Lin(H)$ is of trace class then $\Tr(A)=\sum_j\inner{Ae_j}{e_j}$ converges absolutely, is
+independent of the orthonormal basis $(e_j)$, and $|\Tr(A)|\le\|A\|_1$. Moreover:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $\Tr(XY)=\Tr(YX)$ if $X\in\Lin(H',H)$ and $Y\in\Lin(H,H')$ are Hilbert--Schmidt;
+\item $\Tr(ST)=\Tr(TS)$ if $S$ is of trace class and $T$ is bounded;
+\item for finite-rank $A$, $\Tr(A)$ is the trace of the matrix of $A$ restricted to any
+finite-dimensional space containing $\Ran(A)$ and $\Ran(A^*)$;
+\item if $A=BC$ on $L^2(M)$, with $B$, $C$ Hilbert--Schmidt with kernels $b$, $c$, then
+$\Tr(A)=\int\!\!\int b(x,y)c(y,x)\,d\mu(y)\,d\mu(x)$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+For $A=BC$, $\sum_j\inner{BCe_j}{e_j}=\sum_j\inner{Ce_j}{B^*e_j}=\langle C,B^*\rangle_2$, which converges
+absolutely by Cauchy--Schwarz with modulus at most $\|B\|_2\|C\|_2$, and is independent of the basis.
+Summing over the terms of a representation gives the first statements.
+
+(a) For orthonormal bases $(e_j)$ of $H$ and $(f_k)$ of $H'$,
+\begin{equation*}
+\Tr(XY)=\sum_j\inner{Ye_j}{X^*e_j}=\sum_{j,k}\inner{Ye_j}{f_k}\inner{f_k}{X^*e_j}
+=\sum_{j,k}\inner{Xf_k}{e_j}\inner{e_j}{Y^*f_k}=\Tr(YX),
+\end{equation*}
+the double sum converging absolutely by Cauchy--Schwarz.
+
+(b) It suffices to take $S=BC$; by (a), $\Tr(BCT)=\Tr(CTB)=\Tr(TBC)$.
+
+(c) Take a basis containing an orthonormal basis of that space; $A$ vanishes on its
+orthocomplement.
+
+(d) $\Tr(BC)=\langle C,B^*\rangle_2$, and the kernel of $B^*$ is $\overline{b(y,x)}$, so by
+\cref{hilbert:prop:HS-kernel} this is $\int\!\!\int c(y,x)b(x,y)$.
+\end{proof}
+
+\begin{remark}[Schatten classes]\label{hilbert:rem:schatten}
+For a compact operator $A$ let $s_1\ge s_2\ge\dots\ge0$ be its singular values, the eigenvalues
+of $(A^*A)^{1/2}$. For $1\le p<\infty$ the Schatten class $\mathcal S_p$ consists of those $A$ with
+$\|A\|_p=(\sum_js_j^p)^{1/p}<\infty$. These are two-sided ideals in $\Lin(H)$, Banach spaces under
+$\|\cdot\|_p$, with $\mathcal S_1$ the trace class, $\mathcal S_2$ the Hilbert--Schmidt operators,
+$\mathcal S_p\subset\mathcal S_q$ for $p\le q$, and H\"older's inequality
+$\|AB\|_r\le\|A\|_p\|B\|_q$ for $\frac1r=\frac1p+\frac1q$. By Lidskii's theorem the trace of an operator
+of trace class is the sum of its eigenvalues, counted with algebraic multiplicity.
+\end{remark}
