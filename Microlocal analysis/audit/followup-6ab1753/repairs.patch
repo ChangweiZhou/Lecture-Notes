@@ -1,0 +1,525 @@
+diff --git "a/Microlocal analysis/chapters/03-microlocalization.tex" "b/Microlocal analysis/chapters/03-microlocalization.tex"
+--- a/Microlocal analysis/chapters/03-microlocalization.tex	
++++ b/Microlocal analysis/chapters/03-microlocalization.tex	
+@@ -2825,8 +2825,18 @@
+     \inner{C_kv}w=\inner{G^*C_kv}w+\inner{(\Id-G^*)C_kv}w
+     =\inner{C_kv}{Gw}+\inner{(\Id-G^*)C_kv}w ,
+   \end{equation*}
+-  and in general the right-hand side is the definition of $\inner{C_kv}w$:
+-  the first term pairs $H^{s-m}$ with $H^t\subset H^{m-s}$, and the second
++  and in general the right-hand side is the definition of $\inner{C_kv}w$.
++  To see independence of the cutoff, let $D=G_1-G_2$ for two allowed
++  cutoffs. Then $D^*C_k$ is smoothing by
++  \cref{microlocal:lem:uniform-support}(ii). Choose $G'$ by
++  \cref{microlocal:lem:cutoff-one} for the union of the two cutoff cone
++  supports, so that $G'w\in H^t$ and $D(\Id-G')$ is smoothing.
++  The approximants $w_j=G'w+(\Id-G')\chi(D_x/j)w$, with a frequency cutoff
++  $\chi$ equal to one near zero, belong to $H^t$ and tend to $w$ in $H^{-M}$.
++  Also $Dw_j\to Dw$ in $H^t$ since $D(\Id-G')$ is smoothing. Passing to the
++  limit in $\inner{C_kv}{Dw_j}=\inner{D^*C_kv}{w_j}$ shows that the two
++  changes in the definition cancel.
++  The first term pairs $H^{s-m}$ with $H^t\subset H^{m-s}$, and the second
+   pairs $H^M$ with $H^{-M}$, since $(\Id-G^*)C_k\in\Psido{-2M}$
+   (\cref{microlocal:lem:uniform-support}(ii)) maps $v\in H^{-M}$ into $H^M$.
+   The first term is bounded by $\norm{C_kv}_{H^{s-m}}\norm{Gw}_{H^{m-s}}$, which
+diff --git "a/Microlocal analysis/chapters/04-manifolds.tex" "b/Microlocal analysis/chapters/04-manifolds.tex"
+--- a/Microlocal analysis/chapters/04-manifolds.tex	
++++ b/Microlocal analysis/chapters/04-manifolds.tex	
+@@ -37,8 +37,8 @@
+ \emph{Toeplitz algebra} $P\Psido{}P$ with its own symbol calculus and Fredholm
+ theory, generalizing the Toeplitz operators on the circle used in
+ \cref{ch:index}. Along the way we prove the commutator formula for principal
+-symbols, an $L^2$ bound for operators of order zero in terms of the principal
+-symbol alone, and the analytic Fredholm alternative for holomorphic families of
++symbols, an essential-norm bound on $L^2$ for operators of order zero in
++terms of their principal symbols, and the analytic Fredholm alternative for holomorphic families of
+ smoothing operators. The facts about bounded operators on Hilbert space
+ which are used are collected, with proofs, in \cref{ch:hilbert}.
+ 
+diff --git "a/Microlocal analysis/chapters/04b-semiclassical.tex" "b/Microlocal analysis/chapters/04b-semiclassical.tex"
+--- a/Microlocal analysis/chapters/04b-semiclassical.tex	
++++ b/Microlocal analysis/chapters/04b-semiclassical.tex	
+@@ -360,7 +360,7 @@
+ By \cref{semiclassical:lem:rescale}(i), $A_\eps\in\Psido m(\R^n)$ for each
+ $\eps>0$; but note that, by \cref{semiclassical:lem:rescale}(ii) with $k=0$, the
+ $S^m$ seminorms of its left symbol $a^\flat(\eps)$ (all derivatives in $x$ and $\xi$ included)
+-are uniform in $\eps$ only when $m\ge0$. For $m<0$ they are not: for
++are uniformly bounded in $\eps$ for $m\ge0$. For $m<0$ the bound can fail: for
+ $a(\eta)=\ang\eta^m$ already $\sup_\xi\ang\xi^{-m}\abs{a^\flat(\eps,\xi)}
+ =\sup_\xi\ang\xi^{-m}\ang{\eps\xi}^m$ grows like $\eps^m$ as $\eps\to0$, although the family
+ $a^\flat(\eps)$ is bounded in $S^0=S^{m_+}$. Since $\Op:S^m(\R^n;\R^n)\to\Psido m(\R^n)$ is injective
+diff --git "a/Microlocal analysis/chapters/05-isotropic.tex" "b/Microlocal analysis/chapters/05-isotropic.tex"
+--- a/Microlocal analysis/chapters/05-isotropic.tex	
++++ b/Microlocal analysis/chapters/05-isotropic.tex	
+@@ -805,9 +805,10 @@
+ is separately continuous and hypocontinuous: it is continuous in $F$ uniformly
+ for $u$ in bounded subsets of $\cSp(\R^q)$, and continuous in $u$ (strong
+ topology) uniformly for $F$ in bounded subsets of $\cS$. In particular it maps
+-products of bounded sets to bounded sets. It is \emph{not} jointly continuous:
+-otherwise, taking $p=0$, the pairing $\cSp\times\cS\to\C$ would be jointly
+-continuous for the strong topology, which would give a bounded neighbourhood
++products of bounded sets to bounded sets. For $q>0$ it is \emph{not} jointly
++continuous: testing at any fixed $z$ on inputs $F(z,y)=\chi(z)\phi(y)$ with
++$\chi(z)=1$ there reduces it to the pairing $\cSp(\R^q)\times\cS(\R^q)\to\C$, whose joint
++continuity for the strong topology would give a bounded neighbourhood
+ of zero in $\cS$, impossible since $\cS$ is not normable.
+ \end{lemma}
+ \begin{proof}
+diff --git "a/Microlocal analysis/chapters/06-determinants.tex" "b/Microlocal analysis/chapters/06-determinants.tex"
+--- a/Microlocal analysis/chapters/06-determinants.tex	
++++ b/Microlocal analysis/chapters/06-determinants.tex	
+@@ -784,9 +784,11 @@
+ $\mathcal A^{\Z}$ but is not Fredholm on $L^2$ (its range
+ $\Hiso{2}\oplus L^2$ is not closed). Accordingly
+ \begin{equation*}
+-  \ind:\{a\in\mathcal A^0;\ a\text{ has an inverse in }\mathcal A^0\}\to\Z,\qquad \ind(a)=\ind(A)\ \text{ if }a=[A],
++  \ind:\{a\in\mathcal A^m;\ a\text{ has an inverse in }\mathcal A^{-m}\}\to\Z,\qquad
++  \ind(a)=\ind(A:\Hiso s\to\Hiso{s-m})\ \text{ if }a=[A],
+ \end{equation*}
+-is well defined. We return to it in \cref{determinants:sec:index-formula}.
++is well defined for each integer $m$ by elliptic Fredholm theory and
++invariance under smoothing perturbations. We return to it in \cref{determinants:sec:index-formula}.
+ 
+ \section{Analytic Fredholm theory}\label{determinants:sec:fredholm}
+ 
+@@ -1528,9 +1530,10 @@
+   $A_y+tE_y$, $t\in[0,1]$, is a homotopy of elliptic families, smoothing
+   perturbations do not change it, and an invertible family has families index
+   zero. The determinant line only sees the first Chern class of the families
+-  index. For example, let $Y=\Sphere^4\subset\mathbb H^2=\C^4$ and let $P_y$
+-  be the orthogonal projection of $\C^4$ onto the quaternionic line through
+-  $y$, a smooth family of rank-two projections whose range is the
++  index. For example, let $Y=\mathbb H P^1\cong\Sphere^4$. Each point
++  $y\in Y$ is a quaternionic line in $\mathbb H^2=\C^4$. Let $P_y$ be the
++  orthogonal projection onto this line, so that the ranges of this smooth
++  family of complex rank-two projections form the
+   quaternionic Hopf bundle $\mathcal H$, with $[\mathcal H]-[\C^2]\ne0$ in
+   $K^0(\Sphere^4)$ (its second Chern class generates
+   $H^4(\Sphere^4;\Z)$, and $K^0(\Sphere^4)\cong\Z\oplus\Z$ is torsion
+diff --git "a/Microlocal analysis/chapters/08b-hamilton-jacobi.tex" "b/Microlocal analysis/chapters/08b-hamilton-jacobi.tex"
+--- a/Microlocal analysis/chapters/08b-hamilton-jacobi.tex	
++++ b/Microlocal analysis/chapters/08b-hamilton-jacobi.tex	
+@@ -584,16 +584,18 @@
+   $(x_1,t,y')$ near $\bar x$ with $\tilde G=\{x_1=0\}$, $H=\{t=0\}$, so that
+   $(t,y',\xi_1)$ are coordinates on $N^*\tilde G$ and $\Gamma=\{\xi_1>0\}$.  Let
+   $q$ be a smooth function on $\Gamma$ homogeneous of degree $m'-1$.  Then there
+-  are $\epsilon>0$ and a neighbourhood $U$ of $\bar y'=0$ such that for every
+-  $c\in S^{r+m'-1}$ and $\beta_0\in S^r$ (classes of half-densities on
+-  $\Gamma$, respectively on $\Gamma\cap\{t=0\}$, of the stated orders, supported
+-  in $\xi_1\ge1$) the problem
+-  \begin{equation*}
+-    (-i\mathcal L_{H_p}+q)\beta=c\ \text{ in }\{|t|<\epsilon,\ y'\in U\},\qquad
++  are $\epsilon>0$ and a neighbourhood $U$ of $\bar y'=0$ such that the
++  characteristic curves from $t=0$, $y'\in U$ sweep out a flow tube
++  $\mathcal T$ for $|t|<\epsilon$. For every $c\in S^{r+m'-1}$ on $\mathcal T$
++  and $\beta_0\in S^r$ on its initial slice (symbols of half-densities),
++  the problem
++  \begin{equation*}
++    (-i\mathcal L_{H_p}+q)\beta=c\ \text{ on }\mathcal T,\qquad
+     \beta|_{t=0}=\beta_0
+   \end{equation*}
+   has a unique solution $\beta\in S^r$ there (restriction to $t=0$ taken as in
+-  \eqref{hj:eq:restrict-hd}).  If $\beta_0$ and $c$ are of order $-\infty$ outside
++  \eqref{hj:eq:restrict-hd}). Here and below the estimates on open sets are
++  local in the base variables.  If $\beta_0$ and $c$ are of order $-\infty$ outside
+   closed cones $K_0$, $K$, then $\beta$ is of order $-\infty$ outside the set of points
+   whose $H_p$-integral curve, followed back to $\{t=0\}$, either starts in $K_0$ or
+   meets $K$; in particular outside the $H_p$-flow-out of $K_0\cup K$.  (The forcing
+@@ -626,11 +628,12 @@
+     +\int_0^se^{k(\sigma,y'_0)}\tilde c(\sigma,Y(\sigma,y'_0),\xi_1E(\sigma,y'_0))
+     \,d\sigma\Big),
+   \end{equation*}
+-  $k(s,y'_0)=\int_0^s\kappa(\sigma,Y(\sigma,y'_0))\,d\sigma$, for $|s|<\epsilon$
+-  and $y'_0$ near $0$.  The change of variables $(s,y'_0,\xi_1)\mapsto
+-  (s,Y,\xi_1E)$ is a diffeomorphism near $\{s=0,\ y'_0=0\}$ which is linear and
+-  positive in the fibre variable, so it preserves symbol classes; hence $\beta$ has
+-  order $r$.  The support statement follows from the formula, since the value at
++  $k(s,y'_0)=\int_0^s\kappa(\sigma,Y(\sigma,y'_0))\,d\sigma$.
++  Shrink $\epsilon$ and $U$ so that $(s,y'_0,\xi_1)\mapsto(s,Y,\xi_1E)$ is a
++  diffeomorphism onto $\mathcal T$ for $|s|<\epsilon$, $y'_0\in U$,
++  $\xi_1>0$. Each point of this tube is reached by a unique characteristic
++  segment from the initial slice. The positive linear change in $\xi_1$
++  preserves symbol estimates, so $\beta$ has order $r$.  The support statement follows from the formula, since the value at
+   $(s,Y(s,y_0'),\xi_1E(s,y_0'))$ involves only $\tilde\beta_0$ at the initial point and
+   $\tilde c$ along the segment of the integral curve between it and the given point.
+ \end{proof}
+@@ -654,46 +657,52 @@
+ \end{theorem}
+ \begin{proof}
+   Use the coordinates of \cref{hj:lem:transport-ode}, and choose $\epsilon$, $U$
+-  as there and $\gamma$ so small that, in these coordinates, $j^{-1}(\gamma)$ lies
+-  over $\{y'\in U\}$ and within a cone whose $H_p$-flow-out for $|t|<\epsilon$
+-  stays in $\Gamma$; let $C\subset\Gamma$ be this flow-out (for $|t|<\epsilon$) of the
+-  cone $j^{-1}(\gamma)$, a cone invariant under the $H_p$-flow within the coordinate
+-  region.  Let $O=\{|x_1|<\epsilon',|t|<\epsilon/2,\ y'\in U'\}$ with $U'\Subset U$,
+-  with $\epsilon'$ so small that $\{|x_1|<2\epsilon'\}$ lies in the coordinate chart,
+-  and fix $\phi\in\CIc(\{|x_1|<2\epsilon',|t|<\epsilon,y'\in U\})$ equal to one
+-  near $\bar O$ (possible since $\bar O$ is a compact subset of this open set).  We construct $u_j\in\Ic{m-j}(X,\tilde G;\Omegah)$, with
+-  wavefront sets in $\Gamma$ and supports in $\supp\phi$, such that for
++  as there. Choose a neighbourhood $O_1$ in the coordinate chart of the form
++  $|x_1|<\epsilon'$, $|t|<\epsilon/2$, $y'=Y(t,y'_0)$ with $y'_0\in U'$
++  and $U'\Subset U$. Thus the part of $\Gamma$ over $O_1$ is itself a flow tube.
++  Choose $\gamma$ so small that its intersection with the initial conormal
++  bundle pulls back to a cone in the initial slice of this tube. Let
++  $C\subset\Gamma$ be the flow-out within this tube of a closed conic
++  neighbourhood of that intersection, chosen on the positive branch.
++  We construct $u_j\in\Ic{m-j}(O_1,\tilde G\cap O_1;\Omegah)$ with wavefront
++  sets in $C$, such that for
+   $v_N=u_0'+\dots+u_N$ (we write $u_0'$ for the first term to avoid confusion with
+   the data $u_0$)
+   \begin{equation}\label{hj:eq:travelling-induction}
+-    Pv_N\in\Ic{m+m'-N-2}\ \text{ in }O,\qquad u_0-v_N|_H\in
+-    \Ic{m+\frac14-N-1}(H,G;\Omegah)\ \text{ in } H\cap O.
++    Pv_N\in\Ic{m+m'-N-2}\ \text{ in }O_1,\qquad u_0-v_N|_H\in
++    \Ic{m+\frac14-N-1}(H,G;\Omegah)\ \text{ in } H\cap O_1.
+   \end{equation}
+-  For $N=-1$ (with $v_{-1}=0$) the second condition holds and the first is
+-  vacuous with the convention $Pv_{-1}=0$.  Given $v_{N-1}$, let
+-  $g=-Pv_{N-1}\in\Ic{m+m'-N-1}$ in $O$ and $e=u_0-v_{N-1}|_H\in
+-  \Ic{m+\frac14-N}(H,G;\Omegah)$, with $\WF(g)\cap T^*O\subset C$ (by induction, as
+-  $P$ is microlocal) and $\WF(e)\subset\gamma$.  By \cref{hj:lem:transport-ode} (with $q=p_s|_\Gamma$) solve
++  In this induction $P$ acts on local distributions modulo smooth terms,
++  by multiplying by a cutoff equal to one near the point of interest.
++  Pseudolocality makes the result independent of that choice modulo smooth
++  terms. For $N=-1$ take $v_{-1}=0$. Given $v_{N-1}$, let
++  $g=-Pv_{N-1}\in\Ic{m+m'-N-1}$ in $O_1$ and let
++  $e=u_0-v_{N-1}|_H\in\Ic{m+\frac14-N}$ on $H\cap O_1$. Then
++  $\WF(g)\subset C$ there, and the initial wavefront set of $e$ lies in
++  the initial slice of $C$. Since each backward characteristic segment
++  stays in the tube over $O_1$, the forcing symbol is available along the
++  whole segment. Apply \cref{hj:lem:transport-ode} with $q=p_s|_\Gamma$ to solve
+   \begin{equation*}
+     (-i\mathcal L_{H_p}+p_s)\beta_N=\sigma_{m+m'-N-1}(g),\qquad
+     \beta_N|_{t=0}=(j)^*\sigma_{m+\frac14-N}(e),
+   \end{equation*}
+   with $\beta_N\in S^{m+\frac n4-N}$, of order $-\infty$ outside $C$ (by the support
+   statement of \cref{hj:lem:transport-ode}, since $C$ contains the flow-out of
+-  both $j^{-1}(\gamma)$ and of itself), and let $u_N\in\Ic{m-N}$ be $\phi$ times a distribution with principal
+-  symbol $\beta_N$ (\cref{ch:conormal}).  By \cref{hj:thm:transport},
+-  $\sigma_{m+m'-N-1}(Pu_N)=\sigma_{m+m'-N-1}(g)$ in $O$ (where $\phi=1$ and,
+-  $P$ being pseudolocal, $P(\phi w)-\phi Pw$ is smooth), so $Pv_N=-g+Pu_N\in
+-  \Ic{m+m'-N-2}$ in $O$; and by \cref{hj:prop:restriction},
++  the initial data and of itself). Choose $u_N\in\Ic{m-N}$ on $O_1$ with
++  principal symbol $\beta_N$ and wavefront set in $C$ by conormal
++  quantization. By \cref{hj:thm:transport},
++  $\sigma_{m+m'-N-1}(Pu_N)=\sigma_{m+m'-N-1}(g)$ in $O_1$, so
++  $Pv_N=-g+Pu_N\in\Ic{m+m'-N-2}$ there; and by \cref{hj:prop:restriction},
+   $\sigma_{m+\frac14-N}(u_N|_H)=\sigma_{m+\frac14-N}(e)$, so $e-u_N|_H\in
+   \Ic{m+\frac14-N-1}$.  This proves \eqref{hj:eq:travelling-induction}.
+ 
+-  Let $\tilde u\sim\sum_Nu_N$ be an asymptotic sum in $\Ic{m}(X,\tilde G;\Omegah)$,
+-  with support in $\supp\phi$.  Then $P\tilde u\in\bigcap_N\Ic{m+m'-N}=\CI$ in
+-  $O$, and $u_0-\tilde u|_H\in\bigcap_N\Ic{m+\frac14-N}(H,G)=\CI$ in $H\cap O$,
+-  by \cref{hj:prop:restriction}.  Finally choose $w\in\CI(X;\Omegah)$ with
+-  $w|_H=u_0-\tilde u|_H$ near $H\cap\bar O$ (in coordinates, $w=\chi(t)\times$ the
+-  smooth error, extended constantly in $t$), and set $u=\tilde u+w$.  Then
++  Sum the local conormal expansion asymptotically on $O_1$. Then $P\tilde u$
++  is smooth on $O_1$, and $u_0-\tilde u|_H$ is smooth on $H\cap O_1$ by
++  \cref{hj:prop:restriction}. Choose $O\Subset O_1$ containing $\bar x$.
++  Multiply $\tilde u$ by a cutoff supported in $O_1$ and equal to one near
++  $\bar O$, and extend by zero to $X$. On $H\cap O$ extend the smooth error
++  constantly in $t$ in the coordinate trivialization of half-densities and
++  use another cutoff to obtain $w\in\CI(X;\Omegah)$. Set $u=\tilde u+w$.  Then
+   $u|_{H\cap O}=u_0$, $Pu=P\tilde u+Pw\in\CI(O)$, and $\WF(u)\cap T^*O\subset\Gamma$.
+   In the classical case all symbols above are classical.
+ \end{proof}
+diff --git "a/Microlocal analysis/chapters/12-bott.tex" "b/Microlocal analysis/chapters/12-bott.tex"
+--- a/Microlocal analysis/chapters/12-bott.tex	
++++ b/Microlocal analysis/chapters/12-bott.tex	
+@@ -1579,8 +1579,9 @@
+   compressed uniformly in the $Y$ variables to a finite matrix family, as in Step 1
+   of the proof of \cref{bott:thm:contractible}; its families index would be the
+   nonzero class $[H]-[1]$ by \cref{bott:thm:index-iso}, whereas an invertible
+-  family has index zero. By (iii) the class in $[X;\mathcal Q]\cong\tilde K^0(X)$
+-  is exactly the obstruction to lifting. What the weak contractibility of $\GT$
++  family has index zero. For connected compact $X$, the class in
++  $[X;\mathcal Q]\cong\tilde K^0(X)$ is exactly the obstruction to a
++  smooth lift, as shown below. What the weak contractibility of $\GT$
+   gives is uniqueness: when lifts exist, any two smooth lifting families over a
+   compact manifold are homotopic through families in $\GT$, since $fg^{-1}$ is
+   null-homotopic. If the sequence were a fibration this would give
+@@ -1613,6 +1614,33 @@
+   its winding number is constant, and it is zero exactly when the rank of the index class
+   is zero. By \cref{bott:thm:index-iso} the maps into $\Omega_0\Ginf$ thus correspond to
+   $\{\xi\in K^0(X);\ \rank\xi=0\}=\tilde K^0(X)$.
++
++  \emph{Lifting families.} If a smooth lift exists, (ii) makes its image in
++  $\mathcal Q$ null-homotopic. Conversely, suppose a smooth family of full
++  symbols on a connected compact $X$ has zero class. Borel summation with
++  parameter gives an elliptic family $T=\Id+A$ with these full symbols.
++  For a sufficiently large transverse finite rank projection $\Pi_j$ as
++  in Step 1 of \cref{bott:thm:contractible}, the straight line
++  $T_t=\Id+(1-t)\Pi_jA\Pi_j+tA$ has invertible leading symbols. On the
++  transverse complement the diagonal block $D_t$ is invertible, since it
++  differs from the identity by norm at most $\|A-\Pi_jA\Pi_j\|$ uniformly
++  on $X$. Its inverse belongs to the calculus by
++  \cref{bott:lem:inverse-Y}, applied after adjoining the identity on the
++  finite block. If the other blocks of $T_t$ are $A_t,B_t,C_t$, the Schur
++  complements $A_t-B_tD_t^{-1}C_t$ are finite-matrix Toeplitz families.
++  Their leading symbols are invertible by block elimination. At $t=0$
++  the finite block has the stabilized class of the original leading
++  symbol by the straight-line homotopy. Thus at $t=1$ its families index
++  is zero by homotopy invariance and \cref{bott:thm:index-iso}.
++  The defect bundles of the finite block are then stably trivial by the
++  definition of the families index and are trivial for large truncation,
++  since increasing the truncation adds trivial summands. By
++  \cref{index:cor:toeplitz-perturb} a smooth Toeplitz smoothing correction
++  makes this Schur complement invertible. Add the correction to the
++  finite block of $T$. Its kernel is smoothing in all variables, so the
++  full symbol is preserved, and block elimination gives invertibility
++  of the corrected family. \Cref{bott:lem:inverse-Y} gives the inverse
++  in the calculus, hence a lift in $\GT$.
+ \end{proof}
+ 
+ \begin{remark}
+diff --git "a/Microlocal analysis/chapters/13-product.tex" "b/Microlocal analysis/chapters/13-product.tex"
+--- a/Microlocal analysis/chapters/13-product.tex	
++++ b/Microlocal analysis/chapters/13-product.tex	
+@@ -1945,7 +1945,10 @@
+ $W=N^*\Diag_M$ is $T^*M$, with $V=N^*M^2_\phi|_{\Diag}=\phi^*T^*B$ and
+ $W/V=T^*(M/B)$. The relative compactification (\cref{product:rem:relative-bundle})
+ is a manifold with corners
+-$\RelC{\phi^*T^*B}{T^*M}$ over $M$. Its main face
++$\RelC{\phi^*T^*B}{T^*M}$ over $M$. For $\dim Z_b=0$ the main face
++is empty by the relative product model (Exercise~\ref{product:ex:degenerate}).
++In that case the blow-up notation for the main face below denotes the empty
++face. Otherwise its main face is
+ \begin{equation*}
+ H_W=[S^*M;\phi^*S^*B]
+ \end{equation*}
+diff --git "a/Microlocal analysis/chapters/14-families.tex" "b/Microlocal analysis/chapters/14-families.tex"
+--- a/Microlocal analysis/chapters/14-families.tex	
++++ b/Microlocal analysis/chapters/14-families.tex	
+@@ -266,7 +266,9 @@
+ \item\label{families:P-symbols} There are two symbol maps. The \emph{usual
+   symbol} $\sigma(A)$ is a smooth function on the blow-up
+   $[S^*(\tilde M/B);\Sigma]$, in which $\Sigma$ is replaced by its inward-pointing
+-  spherical normal bundle (\cref{blowup:thm:blowup}). The \emph{base symbol} $\beta(A)$ is a family,
++  spherical normal bundle (\cref{blowup:thm:blowup}). When $Y$ is
++  zero dimensional this main face is empty, as in \cref{ch:product}.
++  The \emph{base symbol} $\beta(A)$ is a family,
+   parametrized by $\eta\in S^*(M/B)$, of operators in $\Psido0(Y_m)$,
+   $Y_m=\tilde\phi^{-1}(m)$, $m$ the base point of $\eta$. Both are
+   multiplicative and compatible with adjoints. Any compatible pair arises, and
+@@ -851,8 +853,10 @@
+ points $(v_1,v_2)$ with $v_1\in K_1$ and $v_2\in K_2$, both over the same
+ point of the compact projection of $K_1$ to $O$; this is a compact set. The
+ class does not depend on the representative of $x_1$, nor on $a_2$ within a
+-homotopy through fibrewise compactly supported triples, by the arguments
+-following \cref{families:def:product}. The two cases used below are: (a)
++homotopy whose non-invertibility set is proper over $[0,1]\times O$, by the
++arguments following \cref{families:def:product}. This means that the
++non-invertibility set over $[0,1]\times L$ is compact for every compact
++$L\subset O$, so the products form a compactly supported homotopy. The two cases used below are: (a)
+ $O\subset Y$ open in a compact manifold, $V_2$ the restriction of a bundle over
+ $Y$ and $a_2$ the restriction to $V_2|_O$ of a representative of a class
+ $x_2\in\Kc(V_2)$ on $Y$; we write $x_1\cdot x_2|_O$ for the resulting class;
+diff --git "a/Microlocal analysis/chapters/14b-semiclassical-index.tex" "b/Microlocal analysis/chapters/14b-semiclassical-index.tex"
+--- a/Microlocal analysis/chapters/14b-semiclassical-index.tex	
++++ b/Microlocal analysis/chapters/14b-semiclassical-index.tex	
+@@ -163,8 +163,8 @@
+ $M$ and $a\in\CI(X;\Hom(\varpi^*E_+,\varpi^*E_-))$ defined everywhere and
+ invertible outside a compact set; we usually drop $\varpi^*$. We also use:
+ \begin{enumerate}[label=(K\arabic*),leftmargin=*]
+-\item\label{scindex:K-Ginf} For a compact manifold $Y$ of positive dimension
+-  (not necessarily connected) and a Hermitian bundle $F\to Y$,
++\item\label{scindex:K-Ginf} For a compact manifold $Y$ (not necessarily
++  connected) and a Hermitian bundle $F\to Y$ with $L^2(Y;F)$ infinite dimensional,
+   $\Ginf(Y;F)\subset\Id+\Psido{-\infty}(Y;F)$ is the group of invertible
+   perturbations of the identity by smoothing operators, and for compact $X$
+   \begin{equation*}
+@@ -474,8 +474,9 @@
+   \begin{equation*}
+     J_b:L^2(W_b;E_b)\longrightarrow L^2(Y;F),\quad W_b=W\cap Z_b,
+   \end{equation*}
+-  where $Y$ is a compact manifold of \emph{positive dimension} and $F\to Y$ a
+-  Hermitian bundle, which is smooth in the following sense: for every manifold
++  where $Y$ is compact and $F\to Y$ is a Hermitian bundle with
++  $L^2(Y;F)$ infinite dimensional. The family is smooth in the following sense:
++  for every manifold
+   $P$ (possibly with boundary), every smooth map $\pi:P\to B$, and every smooth
+   section $u$ of the pull-back of $E$ to
+   \begin{equation*}
+@@ -600,7 +601,10 @@
+ 
+ \begin{remark}\label{scindex:rem:schwartz}
+   Let $\varpi:\mathcal V\to M$ be a real vector bundle with a metric over a
+-  fibration of compact manifolds $M\to B$. Let $\Psido{-\infty}_{\mathcal S}
++  fibration of compact manifolds $M\to B$. Use a Hermitian coefficient
++  bundle pulled back from $M$ and the product of the metric density in
++  the vector directions with the density along $M/B$.
++  Let $\Psido{-\infty}_{\mathcal S}
+   (\mathcal V/B;E)$ denote the families whose kernels are smooth on
+   $\mathcal V\times_B\mathcal V$ and Schwartz in the fibre variables, uniformly
+   with all derivatives (i.e.\ they extend smoothly, vanishing to infinite order at
+@@ -638,8 +642,8 @@
+ \end{definition}
+ Here $\rho_J(g)$ is a smooth map $B\to\Id+\Psido{-\infty}(Y;F)$ by
+ \cref{scindex:lem:mixed}, and $[B;\Ginf(Y;F)]=K^{-1}(B)$ by
+-\ref{scindex:K-Ginf}, which applies because $\dim Y>0$. (For $\dim Y=0$ the
+-group $\Ginf(Y;F)$ is a finite dimensional $\GL(N,\C)$ and homotopy classes of
++\ref{scindex:K-Ginf}, which applies because $L^2(Y;F)$ is infinite dimensional.
++(In the finite-dimensional case the group $\Ginf(Y;F)$ is $\GL(N,\C)$ and homotopy classes of
+ maps into it are not $K^{-1}(B)$: for $Y$ a point and $F=\C$, every map
+ $\Sphere^3\to\C^\times$ is null-homotopic while $K^{-1}(\Sphere^3)\cong\Z$.)
+ Moreover $\rho_J(g)(b)$ is invertible: with respect to $L^2(Y;F)=\Ran J_b\oplus
+@@ -650,7 +654,8 @@
+ 
+ \begin{lemma}\label{scindex:lem:class}
+   \begin{enumerate}[label=(\roman*)]
+-  \item If $I:L^2(Y;F)\to L^2(Y';F')$ is an isometry which maps $\CI(Y;F)$ into
++  \item If $I:L^2(Y;F)\to L^2(Y';F')$ is an isometry between infinite-dimensional
++  spaces which maps $\CI(Y;F)$ into
+     $\CI(Y';F')$ and $\Psido{-\infty}(Y;F)$ continuously into
+     $\Psido{-\infty}(Y';F')$ by $T\mapsto ITI^*$, then the map
+     $h\mapsto IhI^*+\Id-II^*$ induces the canonical identification
+@@ -1904,8 +1909,8 @@
+ algebra. With $n=\dim\tilde Z$ the fibre dimension and $k=\dim Z$ the base
+ dimension, its kernels are of the form
+ \begin{equation*}
+-  \epsilon^{-n-k}\delta^{-k}A\Bigl(\delta,\epsilon,\frac{\tilde z-\tilde z'}
+-  \epsilon,z,\frac{z-z'}{\epsilon\delta}\Bigr)
++  \epsilon^{-n-k}\delta^{-k}A\Bigl(\delta,\epsilon,\tilde z,z,
++  \frac{\tilde z-\tilde z'}{\epsilon},\frac{z-z'}{\epsilon\delta}\Bigr)
+ \end{equation*}
+ near the fibre diagonal, $A$ Schwartz in the two scaled variables, with right
+ density $d\tilde z'\,dz'$. The prefactor is forced by the scaling: the changes of
+@@ -2005,13 +2010,14 @@
+   of differential forms, through the heat kernel and Bismut's superconnection;
+   see \cite{Bismut-Cheeger} and \cref{ch:eta}, where eta forms appear in the
+   index theorem for families with boundary. In that setting one also needs
+-  \emph{spectral sections}. For a smooth family $D_b$ of self-adjoint elliptic
+-  operators (in the application, boundary Dirac operators) on the fibres of a
+-  fibration of compact manifolds, a spectral section is a smooth family $P_b$ of
++  \emph{spectral sections}. For a smooth family $D_b$ of first-order
++  self-adjoint elliptic differential operators on closed fibres over a compact
++  base (in the application, boundary Dirac operators), a spectral section is
++  a smooth family $P_b$ of
+   self-adjoint projections, $P_b\in\Psido0$, for which there is a smooth function
+   $R:B\to(0,\infty)$ such that $D_bu=\lambda u$ implies $P_bu=u$ if
+   $\lambda>R(b)$ and $P_bu=0$ if $\lambda<-R(b)$. Melrose and Piazza
+-  \cite{Melrose-Piazza} prove (their families theorem on spectral sections) that a
++  \cite[Proposition~1]{Melrose-Piazza} prove that a
+   spectral section exists if and only if the odd index of the family $D$ in
+   $K^{1}(B)$ vanishes, and use them to state and prove the families index theorem
+   for manifolds with boundary; this obstruction is the odd counterpart of the
+diff --git "a/Microlocal analysis/chapters/15-eta.tex" "b/Microlocal analysis/chapters/15-eta.tex"
+--- a/Microlocal analysis/chapters/15-eta.tex	
++++ b/Microlocal analysis/chapters/15-eta.tex	
+@@ -185,13 +185,27 @@
+ families on $\Omega$ then $A(s)B(s)$ is a holomorphic family of order $\mu+\nu$.
+ \end{lemma}
+ 
+-\begin{proof}[Sketch] Off the diagonal this follows from the corresponding property of
+-compositions with smoothing operators. Near the diagonal, in local coordinates, the
+-symbol of the composite has the expansion $\sum_\alpha\frac1{\alpha!}\pa_\xi^\alpha a(s)
+-D_z^\alpha b(s)$, each term lying in $\rho^{-\mu(s)-\nu(s)}\CI$ holomorphically, and the
+-remainder after $J$ terms satisfies symbol estimates of order $\Re(\mu+\nu)-J$
+-locally uniformly in $s$; by Cauchy's formula the same holds for its $s$-derivatives,
+-which gives holomorphy of the composite symbol.
++\begin{proof}
++Work in a coordinate chart near the diagonal. On each compact parameter set the
++local composition integral can be made absolutely convergent by integration by
++parts, using fixed upper bounds for $\Re\mu$ and $\Re\nu$. The resulting
++integral is holomorphic in $s$ by locally uniform domination. The same
++argument, with cutoffs separating the kernel variables, gives holomorphy of
++the smooth kernel away from the diagonal and of compositions with smoothing
++families.
++
++The symbol expansion is $\sum_\alpha\frac1{\alpha!}\pa_\xi^\alpha a(s)
++D_z^\alpha b(s)$. After multiplication by $\rho^{\mu(s)+\nu(s)}$ each term is a
++holomorphic smooth function on the compactification vanishing to order
++$|\alpha|$ at the boundary. Sum the normalized expansion by Borel's lemma with
++cutoffs independent of $s$, chosen on an exhaustion by compact parameter
++sets. This produces a holomorphic smooth function of the normalized
++symbol variables. Subtract its unnormalized symbol from the composition
++integral. By the composition remainder estimates the difference has
++arbitrarily negative order uniformly on each compact parameter set. Cauchy's
++formula on a slightly larger compact parameter neighbourhood gives the same
++rapid decay for its parameter derivatives. It therefore gives a holomorphic
++smoothing remainder, as required.
+ \end{proof}
+ 
+ We also need a division property.
+@@ -1405,19 +1419,19 @@
+ variable. Vanishing of their principal symbols would only lower the fibre order by
+ one, so we use the frequency support instead: \emph{$\Pi P(\Id-\Pi)$ and
+ $(\Id-\Pi)P\Pi$ lie in $\Psipteta{0,-\infty}(M\times\Sphere;\C^N)$}. To see this, first
+-let $A\in\Psido{\mu}(\Sphere;\C^N)$ and $e_k=e^{ik\theta}$. Since $D_\theta e_k=ke_k$,
++let $A\in\Psi^\mu_{\mathrm H}(\Sphere;\C^N)$ and $e_k=e^{ik\theta}$. Since $D_\theta e_k=ke_k$,
+ $(j-l)^q\langle Ae_l,e_j\rangle=\langle(\operatorname{ad}D_\theta)^qA\,e_l,e_j\rangle$ and
+-$(\operatorname{ad}D_\theta)^qA\in\Psido{\mu}$ is bounded $H^\mu\to L^2$, so
++$(\operatorname{ad}D_\theta)^qA\in\Psi^\mu_{\mathrm H}$ is bounded $H^\mu\to L^2$, so
+ $\abs{\langle Ae_l,e_j\rangle}\le C_q\ang{j-l}^{-q}\ang l^{\abs\mu}$ with $C_q$ bounded
+-by seminorms of $A$ in $\Psido{\mu}$. For $j\ge0>l$ we have
++by seminorms of $A$ in $\Psi^\mu_{\mathrm H}$. For $j\ge0>l$ we have
+ $\ang{j-l}\ge\frac12(\ang j+\ang l)$, so the matrix entries of $\Pi A(\Id-\Pi)$ (and
+ likewise of $(\Id-\Pi)A\Pi$) are rapidly decreasing in $(j,l)$: $A\mapsto\Pi A(\Id-\Pi)$
+-maps bounded sets of $\Psido{\mu}(\Sphere)$ to bounded sets of $\Psido{-\infty}(\Sphere)$,
++maps bounded sets of $\Psi^\mu_{\mathrm H}(\Sphere)$ to bounded sets of $\Psido{-\infty}(\Sphere)$,
+ continuously. Now locally over $M$, by \cref{product:prop:operator-valued},
+ $P=\Op_y(k)$ with $k\in S^{0,0}_{\mathrm{ph}}$ an operator-valued symbol, and
+ $\Pi P(\Id-\Pi)=\Op_y\bigl(\Pi k(\Id-\Pi)\bigr)$ since $\Pi$ acts in $\theta$ only. By
+ \cref{product:lem:fibre-bounds}, $\ang\eta^{\abs\beta}\pa_y^\gamma\pa_\eta^\beta k$ is
+-bounded in $\Psido{\abs\beta}(\Sphere)$, and $r\mapsto k(y,\hat\eta/r)$ is smooth on
++bounded in $\Psi^{|\beta|}_{\mathrm H}(\Sphere)$, and $r\mapsto k(y,\hat\eta/r)$ is smooth on
+ $[0,1)$ with derivatives bounded in such spaces; applying the continuous map
+ $\Pi(\cdot)(\Id-\Pi)$, $\Pi k(\Id-\Pi)$ is a classical symbol of order $0$ in $\eta$
+ with values in $\Psido{-\infty}(\Sphere)$, uniformly in the remaining variables. By
+@@ -1635,10 +1649,7 @@
+ $A'=(\Id+R)A$ with $\Id+R=A'A^{-1}$, $R=(A'-A)A^{-1}$ smoothing. Thus
+ $\mathcal P=\bigcup_b\mathcal P_b\longrightarrow B$ behaves like a principal bundle, although
+ the structure groups $G^{-\infty}(Z_b;E_-)$ form a bundle of groups rather than a fixed
+-group. (Using exhausting families of smoothing projections, as in the stabilization of the
+-index bundle in \cref{ch:index}, one sees that the components of the space of sections of
+-this bundle of groups are canonically $K^{-1}(B)$, so it is `weakly trivial'.) The
+-Fredholm determinant is a character of each $G^{-\infty}(Z_b;E_-)$, so we may form the
++group. The Fredholm determinant is a character of each $G^{-\infty}(Z_b;E_-)$, so we may form the
+ associated line bundle.
+ 
+ \begin{proposition}\label{eta:prop:det-bundle}
+diff --git "a/Microlocal analysis/preamble.tex" "b/Microlocal analysis/preamble.tex"
+--- a/Microlocal analysis/preamble.tex	
++++ b/Microlocal analysis/preamble.tex	
+@@ -10,6 +10,7 @@
+ \usetikzlibrary{arrows.meta,calc,decorations.pathreplacing}
+ \usepackage{microtype}
+ \usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=green!35!black,urlcolor=blue!50!black]{hyperref}
++\usepackage{aliascnt}
+ \usepackage[capitalise,noabbrev]{cleveref}
+ 
+ \numberwithin{equation}{section}
+@@ -17,15 +18,27 @@
+ % ---------------------------------------------------------------- theorems
+ \theoremstyle{plain}
+ \newtheorem{theorem}{Theorem}[section]
+-\newtheorem{proposition}[theorem]{Proposition}
+-\newtheorem{lemma}[theorem]{Lemma}
+-\newtheorem{corollary}[theorem]{Corollary}
++\newaliascnt{proposition}{theorem}
++\newtheorem{proposition}[proposition]{Proposition}
++\aliascntresetthe{proposition}
++\newaliascnt{lemma}{theorem}
++\newtheorem{lemma}[lemma]{Lemma}
++\aliascntresetthe{lemma}
++\newaliascnt{corollary}{theorem}
++\newtheorem{corollary}[corollary]{Corollary}
++\aliascntresetthe{corollary}
+ \theoremstyle{definition}
+-\newtheorem{definition}[theorem]{Definition}
+-\newtheorem{example}[theorem]{Example}
++\newaliascnt{definition}{theorem}
++\newtheorem{definition}[definition]{Definition}
++\aliascntresetthe{definition}
++\newaliascnt{example}{theorem}
++\newtheorem{example}[example]{Example}
++\aliascntresetthe{example}
+ \newtheorem{exercise}{Exercise}[chapter]
+ \theoremstyle{remark}
+-\newtheorem{remark}[theorem]{Remark}
++\newaliascnt{remark}{theorem}
++\newtheorem{remark}[remark]{Remark}
++\aliascntresetthe{remark}
+ \newtheorem*{discussion}{Discussion}
+ \newtheorem*{question}{Question}
+ \newenvironment{answer}{\begin{proof}[Answer]}{\end{proof}}
