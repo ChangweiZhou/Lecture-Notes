@@ -1690,10 +1690,14 @@ $\ssl(A)$ is invertible at every point and elliptic in the usual sense.
 \begin{proof}
   (i) is proved exactly as \cref{semiclassical:thm:parametrix}, using
   \cref{semiclassical:thm:manifold-calculus}. For (ii), let
-  $R=AB-\Id\in\dCI([0,1];\Psido{-\infty}(X;F))$. Its kernel, and hence its
+  $R=AB-\Id\in\dCI([0,1];\Psido{-\infty}(X;F))$. Its kernel is a smooth function of
+  $(\eps,x,y)$ vanishing to infinite order at $\eps=0$, so $\eps\mapsto R_\eps$ is smooth into the
+  Hilbert--Schmidt operators (whose norm is the $L^2$ norm of the kernel) and its
   Hilbert--Schmidt norm, which bounds the operator norm by
-  \eqref{manifolds:eq:HS-bound}, is a smooth function of
-  $\eps\in[0,1]$ vanishing to infinite order at $0$; choose $\eps_1>0$ with
+  \eqref{manifolds:eq:HS-bound}, is $O(\eps^\infty)$. (The scalar function
+  $\eps\mapsto\norm{R_\eps}_{\mathrm{HS}}$ itself need not be smooth: for
+  $R_\eps=e^{-1/\eps^2}\sin(1/\eps)P$, with $P$ a non-zero smoothing projection of rank one,
+  it has corners at the zeros $\eps=1/(k\pi)$; this is not needed.) Choose $\eps_1>0$ with
   $\norm{R_\eps}_{\Lin(L^2)}\le\frac12$ for $\eps\le\eps_1$. Then $\Id+R_\eps$ is invertible
   on $L^2$, and $T_\eps=(\Id+R_\eps)^{-1}$ depends smoothly on $\eps\in[0,\eps_1]$ in the
   norm topology. As in \cref{manifolds:lem:inverse-smoothing},

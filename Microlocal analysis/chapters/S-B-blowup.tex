@@ -8,6 +8,9 @@
 %----------------------------------------------------------------------
 \subsection*{\Cref{blowup:ex:projective}}
 Idea: everything follows from the chain rule for the substitution $z_1=s$, $z_k=st_k$.
+Throughout $n\ge2$, as in the exercise: the coordinate $t_2$ and the rotation
+$z_1\pa_{z_2}-z_2\pa_{z_1}$ exist only then, and for $n=1$ the chart has no $t$ variables and
+$\pa_{z_1}$ lifts to the smooth field $\pa_s$ (compare \cref{blowup:lem:vf-point}).
 
 (a) On $\{z_1>0\}$ the map $(s,t)\mapsto z=(s,st_2,\dots,st_n)$ is a diffeomorphism onto
 $\{z_1>0\}$, with inverse $s=z_1$, $t_k=z_k/z_1$. A vector field is determined by its
@@ -75,12 +78,26 @@ point where $q(\omega)=0$ this equals $2H(0)\omega$, which is non-zero because $
 Thus $d_\omega U\ne0$ at every point of the compact set $\{r=0,\ U=0\}$, and hence, by continuity,
 $dU\ne0$ on a neighbourhood $\mathcal N$ of it.
 
-The lift of the level set is $\{\beta^*u=u(0)\}=\{r^2U=0\}=\{r=0\}\cup\{U=0\}$. In $\mathcal N$,
+The full inverse image of the level set is
+$\beta^{-1}(\{u=u(0)\})=\{\beta^*u=u(0)\}=\{r^2U=0\}=\{r=0\}\cup\{U=0\}$, the union of the whole
+front face and $\{U=0\}$. In $\mathcal N$,
 $\{U=0\}$ is a smooth hypersurface, and it meets $\{r=0\}$ transversally: at a common point
 $dU$ has a non-zero component along the sphere, while $dr$ has none, so $dr$ and $dU$ are
 independent. (If $H(0)$ is definite, $q\ne0$ on the sphere and near the front face the lifted
 level set is just the front face, reflecting that $0$ is an isolated point of the level set.)
-In other words, after one blow-up the singular level set has normal crossings.
+In other words, after one blow-up the full inverse image of the singular level set has normal
+crossings.
+
+The lift in the sense of \cref{blowup:def:lift} (the strict transform) is different: it is the
+closure of $\beta^{-1}(\{u=u(0)\}\setminus0)=\{r>0,\ U=0\}$. Near the front face this is
+$\{U=0\}\cap\mathcal N$, because $\{U=0\}$ is a hypersurface transversal to $\{r=0\}$, so its
+part with $r>0$ is dense in it; it does not contain the rest of the front face. It is a
+p-submanifold (with $U$ as a normal, interior coordinate) meeting the front face transversally in
+$\{r=0,\ q(\omega)=0\}$, the set of null directions of $H(0)$. For example, for
+$u=z_1^2-z_2^2$ on $\R^2$ the strict transform is the union of the closures of the lifts of the
+four rays $z_2=\pm z_1$, i.e.\ $[0,\infty)\times\{\omega;\ \omega_1=\pm\omega_2\}$, four half-lines meeting
+the front face circle in four points, while the full inverse image also contains the whole
+front face.
 
 %----------------------------------------------------------------------
 \subsection*{\Cref{blowup:ex:diag-not-p}}
