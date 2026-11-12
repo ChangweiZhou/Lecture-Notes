@@ -25,8 +25,8 @@ hochschild:
 
 microlocal:
 	mkdir -p "$(BUILDDIR)/microlocal" "$(PDFDIR)"
-	cd "Microlocal analysis" && $(LATEXMK) $(FLAGS) -outdir="../$(BUILDDIR)/microlocal" "Introduction to microlocal analysis.tex"
-	cp "$(BUILDDIR)/microlocal/Introduction to microlocal analysis.pdf" "$(PDFDIR)/Introduction to microlocal analysis.pdf"
+	cd "Microlocal analysis" && $(LATEXMK) $(FLAGS) -outdir="../$(BUILDDIR)/microlocal" "Microlocal analysis and index theory.tex"
+	cp "$(BUILDDIR)/microlocal/Microlocal analysis and index theory.pdf" "$(PDFDIR)/Microlocal analysis and index theory.pdf"
 
 clean:
 	rm -rf "$(BUILDDIR)"
