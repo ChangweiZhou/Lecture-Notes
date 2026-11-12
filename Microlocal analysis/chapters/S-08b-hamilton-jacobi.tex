@@ -1,1 +1,559 @@
-% solutions for 08b-hamilton-jacobi (in progress)
+% Solutions for chapter 08b-hamilton-jacobi
+\providecommand{\osc}[1]{\mathcal{I}[#1]}
+
+\section{Solutions for \cref{ch:hj}: Lagrangian distributions and Hamilton--Jacobi theory}\label{solutions:hj}
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{hj:ex:transversal}}
+Idea: transversality means that $dt$ and a defining differential of $\tilde G$ are
+independent, so they can be completed to coordinates.
+
+Let $q\in G$. Near $q$ write $\tilde G=\{g=0\}$ with $g$ real and $dg\ne0$; then
+$T_q\tilde G=\ker dg_q$. A covector vanishes on $\ker dg_q$ if and only if it is a multiple
+of $dg_q$, so the hypothesis $dt|_{T_q\tilde G}\ne0$ says exactly that $dg_q$ and $dt_q$ are
+linearly independent. In particular $dt_q\ne0$; since $\{dt\ne0\}$ is open, it contains a
+neighbourhood $O$ of $G$, and $H\cap O=\{t=0\}\cap O$ is a hypersurface by the implicit
+function theorem. Next, complete $(g,t)$ by functions $y'_1,\dots,y'_{n-2}$ to local
+coordinates $(g,t,y')$ near $q$ (possible as $dg_q,dt_q$ are independent). In these
+coordinates $\tilde G=\{g=0\}$, $H=\{t=0\}$ and $G=\tilde G\cap H=\{g=t=0\}$. So, in the
+coordinates $(t,y')$ on $\tilde G$, $G=\{t=0\}$, and in the coordinates $(g,y')$ on $H$,
+$G=\{g=0\}$: $G$ is a submanifold of codimension one in both. This also produces the
+coordinates $(x_1,t,y')=(g,t,y')$ used in \cref{hj:sec:transport}.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{hj:ex:restriction-hd}}
+Idea: a half-density on $T_qX$ is restricted to the hyperplane $T_qH=\ker dt$ by inserting a
+vector $v$ with $dt(v)=1$; the dependence on $dt$ is exactly a $(-\frac12)$-density on
+$N^*_qH=\R\,dt$.
+
+\emph{Linear algebra.} Let $E=T_qX$, $F=T_qH=\ker dt_q$, $\dim E=n$, and $\ell=dt_q\in
+N^*_qH\setminus0$. For $\nu\in\Omegah(E)$ define $\nu_\ell\in\Omegah(F)$ by
+\begin{equation*}
+\nu_\ell(f_1\wedge\dots\wedge f_{n-1})=\nu(v\wedge f_1\wedge\dots\wedge f_{n-1}),\qquad
+\ell(v)=1,
+\end{equation*}
+for a basis $(f_j)$ of $F$. This does not depend on $v$: two choices differ by an element of
+$F$, which does not change the wedge product. It is a half-density on $F$, since replacing
+the basis $(f_j)$ by $(Af_j)$ multiplies $v\wedge f_1\wedge\dots$ by $\det A$ and so the
+value by $|\det A|^{1/2}$. If $\ell$ is replaced by $c\ell$, $c\ne0$, then $v$ is replaced by
+$v/c$ and $\nu_{c\ell}=|c|^{-1/2}\nu_\ell$. Hence the bilinear map
+\begin{equation*}
+\Omegah(E)\times|N^*_qH|^{-\frac12}\to\Omegah(F),\qquad(\nu,\kappa)\mapsto
+\kappa(\ell)\,\nu_\ell,
+\end{equation*}
+where $|N^*_qH|^{-1/2}$ is the line of $(-\frac12)$-densities on $N^*_qH$ (functions with
+$\kappa(c\ell)=|c|^{-1/2}\kappa(\ell)$), is independent of the choice of $\ell$, and it is
+non-zero. So it defines an isomorphism of lines $\Omegah(E)\otimes|N^*_qH|^{-\frac12}\cong
+\Omegah(F)$, canonical (no choices). Varying $q\in H$ we get an isomorphism of line bundles
+$\Omegah_H(X)\otimes|N^*H|^{-\frac12}\cong\Omegah(H)$; smoothness is seen from the formula
+below. The section $|dt|^{-1/2}$ of $|N^*H|^{-1/2}$ (equal to $1$ on $dt$) trivializes
+$|N^*H|^{-1/2}$, and composing gives the restriction map $\nu\mapsto\nu_{dt}=\nu\otimes
+|dt|^{-1/2}$ on smooth sections.
+
+\emph{The coordinate formula.} In coordinates $(t,w)$ with $H=\{t=0\}$, at points of $H$
+we may take $v=\pa_t$ (as $dt(\pa_t)=1$) and $f_j=\pa_{w_j}$; for $\nu=\phi(t,w)|dt\,dw|^{1/2}$,
+\begin{equation*}
+\nu_{dt}(\pa_{w_1}\wedge\dots\wedge\pa_{w_{n-1}})=\phi(0,w)|dt\,dw|^{\frac12}(\pa_t\wedge
+\pa_{w_1}\wedge\dots)=\phi(0,w),
+\end{equation*}
+so $\nu_{dt}=\phi(0,w)|dw|^{1/2}$, which is \eqref{hj:eq:restrict-hd}. Since $\nu_{dt}$ was
+defined without coordinates, \eqref{hj:eq:restrict-hd} is independent of the choice of the
+coordinates $w$ (it depends on $t$ only through $dt|_H$), and it maps $\CI(X;\Omegah)$ to
+$\CI(H;\Omegah)$.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{hj:ex:restriction-direct}}
+Idea: in adapted coordinates a conormal distribution to $\tilde G$ is a continuous function of
+$t$ with values in distributions on the slices $\{t=\text{const}\}$; such a representation of
+a distribution is unique, and changes of coordinates preserving $t$ act on it slice by slice.
+
+\emph{Definition in coordinates.} Let $(x_1,t,y')$ be coordinates with $\tilde G=\{x_1=0\}$,
+$H=\{t=0\}$ (they exist by \cref{hj:ex:transversal}); here $(t,y')$ play the role of the
+variables along $\tilde G$. For $u\in\Ic m(X,\tilde G;\Omegah)$ supported in the chart, write
+$u=(\osc a+f)|dx_1\,dt\,dy'|^{1/2}$ with $a=a(t,y',\xi_1)\in S^M_{\mathrm c}$, $M=m+\frac n4-
+\frac12$, and $f\in\CI$, and define
+\begin{equation*}
+R u=\big(\osc{a(0,\cdot)}+f(\cdot,0,\cdot)\big)|dx_1\,dy'|^{1/2}.
+\end{equation*}
+By \cref{conormal:prop:local-basic}(iii) the full symbol $a$ is determined modulo
+$S^{-\infty}$, and changing it by $c\in S^{-\infty}$ changes $\osc a$ by the smooth function
+$\osc c$, whose restriction is $\osc{c(0,\cdot)}$; so $Ru$ depends only on $u$ and the
+coordinates.
+
+\emph{Slice families.} For each $t$, $V(t)=\osc{a(t,\cdot)}+f(\cdot,t,\cdot)$ is a distribution
+in $(x_1,y')$, with
+\begin{equation*}
+\pair{V(t)}\psi=\int\Big(\iint e^{ix_1\xi_1}a(t,y',\xi_1)\psi(x_1,y')\,dx_1dy'\Big)
+\dbar\xi_1+\iint f(x_1,t,y')\psi\,dx_1dy' .
+\end{equation*}
+Integrating by parts in $x_1$, the inner integral is $O(\ang{\xi_1}^{M-2N})$ uniformly in $t$
+together with its $t$-derivatives, so $t\mapsto V(t)$ is smooth (in particular continuous)
+into $\CmI(\R^{n-1})$, and by Fubini (after the same integration by parts)
+\begin{equation}\label{solhj:eq:slices}
+\pair{v}\phi=\int\pair{V(t)}{\phi(\cdot,t,\cdot)}\,dt\qquad\forall\phi\in\CIc(\R^n),
+\end{equation}
+where $v=\osc a+f$ is the coefficient of $u$. Conversely, a continuous family $t\mapsto V(t)$
+satisfying \eqref{solhj:eq:slices} is determined by $v$: if $\int\pair{V(t)}{\rho(t)\psi}dt
+=0$ for all $\rho\in\CIc(\R)$, $\psi\in\CIc(\R^{n-1})$, then the continuous function
+$t\mapsto\pair{V(t)}\psi$ vanishes identically. Thus $Ru=V(0)|dx_1\,dy'|^{1/2}$, where $V$ is
+the unique continuous slice family representing $v$.
+
+\emph{Independence.} Let $(\tilde x_1,t,\tilde y')$ be other adapted coordinates with the same
+$t$, related by $F(x_1,t,y')=(\kappa_t(x_1,y'),t)$, where $\kappa_t$ is a smooth family of
+diffeomorphisms (of the slices) with $\kappa_t(\{x_1=0\})\subset\{\tilde x_1=0\}$. Then
+$\det F'=J_t:=\det d\kappa_t$, and if $u=v_2|d\tilde x_1\,dt\,d\tilde y'|^{1/2}$ then
+$v=(v_2\circ F)|J|^{1/2}$. Let $V_2$ be the continuous slice family of $v_2$ in the new
+coordinates (constructed from a full symbol there, as above). For $\phi\in\CIc$, by the change
+of variables $F$ and \eqref{solhj:eq:slices} for $v_2$,
+\begin{equation*}
+\pair v\phi=\pair{v_2}{(\phi|J|^{\frac12})\circ F^{-1}\,|\det(F^{-1})'|}
+=\int\pair{V_2(t)}{(\phi(\cdot,t,\cdot)|J_t|^{\frac12})\circ\kappa_t^{-1}\,|\det d\kappa_t^{-1}|}
+\,dt=\int\pair{W(t)}{\phi(\cdot,t,\cdot)}\,dt,
+\end{equation*}
+with $W(t)=(\kappa_t^*V_2(t))\,|J_t|^{1/2}$. The family $W$ is continuous: pairing with
+$\psi$ gives $\pair{V_2(t)}{\psi_t}$ with $\psi_t=(\psi|J_t|^{1/2})\circ\kappa_t^{-1}
+|\det d\kappa_t^{-1}|$ depending continuously on $t$ in $\CIc$ (supports in a fixed compact
+set), and $\pair{V_2(t)}{\psi_t}-\pair{V_2(t_0)}{\psi_{t_0}}=\pair{V_2(t)}{\psi_t-\psi_{t_0}}+
+\pair{V_2(t)-V_2(t_0)}{\psi_{t_0}}\to0$, the first term by the uniform boundedness principle
+(weakly convergent families of distributions are equicontinuous on $\CIc(K)$). By uniqueness,
+$W=V$, so at $t=0$
+\begin{equation*}
+V(0)|dx_1\,dy'|^{\frac12}=\kappa_0^*\big(V_2(0)|d\tilde x_1\,d\tilde y'|^{\frac12}\big),
+\end{equation*}
+i.e.\ the two coordinate definitions of $Ru$ give the same half-density on $H$ ($\kappa_0$
+being the change of coordinates on $H$). For smooth $u$, $Ru=u|_H$ in the sense of
+\eqref{hj:eq:restrict-hd}. By a partition of unity, $R$ is a well-defined map on
+$\Ic m(X,\tilde G;\Omegah)$, which we write $u\mapsto u|_H$.
+
+\emph{The properties of \cref{hj:prop:restriction}.} In the coordinates above, $H$ has
+dimension $n-1$, $G=\{x_1=0\}\cap H$ has codimension $1$ in $H$, and $\osc{a(0,\cdot)}$ has
+amplitude $a(0,y',\xi_1)\in S^M$; with $M=m'+\frac{n-1}4-\frac12$, $u|_H\in\Ic{m'}(H,G;
+\Omegah)$ for $m'=m+\frac14$, and $\Ic{m-l}$ is mapped to $\Ic{m-l+\frac14}$. Its symbol is
+$a(0,y',\xi_1)|dy'\,d\xi_1|^{1/2}$. On the other hand $\sigma_m(u)=a(t,y',\xi_1)|dt\,dy'\,
+d\xi_1|^{1/2}$ on $N^*\tilde G$ with coordinates $(t,y',\xi_1)$; the hypersurface
+$\{\pi^*t=0\}$ of $N^*\tilde G$ is $\{t=0\}$, and restriction of half-densities using
+$|d\pi^*t|^{1/2}$ (\cref{hj:ex:restriction-hd}) gives $a(0,y',\xi_1)|dy'\,d\xi_1|^{1/2}$;
+$j$ is the identity $(0,y';\xi_1)\mapsto(y';\xi_1)$ in these coordinates. So
+$\sigma_{m+\frac14}(u|_H)=(j^{-1})^*(\sigma_m(u)|_{\{\pi^*t=0\}})$, both sides being
+invariantly defined. Finally, by \cref{conormal:prop:WF-local}, $(y';\xi_1)\notin
+\WF(u|_H)$ if $a(0,\cdot,\cdot)$ is of order $-\infty$ near it, which holds if
+$(0,y';\xi_1)\notin\WF(u)$, again by \cref{conormal:prop:WF-local} for $u$; this is
+$\WF(u|_H)\subset j(\WF(u)\cap\pi^{-1}(H))$.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{hj:ex:wave-eikonal}}
+Idea: guess, check, and invoke uniqueness in \cref{hj:thm:HJ}.
+
+Here $p=\tau^2-|\xi|^2$, $H=\{t=0\}$, and $H_p(\pi^*t)=\pa_\tau p=2\tau$, so
+\eqref{hj:eq:transversal} holds at every characteristic point with $\tau\ne0$, i.e.\ every
+point of $\Sigma(P)$ (where $|\tau|=|\xi|\ne0$).
+
+\emph{Plane data.} For $f=\omega\cdot x$, $df=\omega$, and the points $\bar z$ over $0$ with
+$p(\bar z)=0$ and $\bar z|_{TH}=df(0)$ are $\bar z_\pm=(0,0;\pm1,\omega)$. The functions
+\begin{equation*}
+h_\pm(t,x)=\omega\cdot x\pm t
+\end{equation*}
+satisfy $p(dh_\pm)=(\pm1)^2-|\omega|^2=0$ everywhere, $h_\pm|_H=f$ and $dh_\pm(0)=\bar z_\pm$;
+by the uniqueness part of \cref{hj:thm:HJ} they are the solutions given there (near $0$, and
+in fact globally). The corresponding characteristic hypersurfaces $\{h_\pm=c\}$ are the
+planes of \cref{hj:ex:plane}, moving with unit speed in the directions $\mp\omega$.
+
+\emph{Spherical data.} Near $\bar x\ne0$ let $f=|x|$, $df(\bar x)=\hat x=\bar x/|\bar x|$; the
+two points over $(0,\bar x)$ are $(\pm1,\hat x)$, and
+\begin{equation*}
+h_\pm(t,x)=|x|\pm t
+\end{equation*}
+satisfy $d_xh_\pm=x/|x|$, $|d_xh_\pm|=1=(\pa_th_\pm)^2$, so $p(dh_\pm)=0$ on $\{x\ne0\}$,
+$h_\pm|_H=|x|$ and $dh_\pm(0,\bar x)=(\pm1,\hat x)$. Again by uniqueness these are the
+solutions of \cref{hj:thm:HJ}.
+
+\emph{Characteristic hypersurfaces through $G=\{t=0,\ |x|=1\}$.} $G=\{g_0=0\}\subset H$ with
+$g_0=|x|-1$, $dg_0=\hat x$. By \cref{hj:cor:characteristic} (with $f=g_0$, and $\bar z$ any
+characteristic covector with $\bar z_H\in N^*G\setminus0$, i.e.\ $\bar z=c(\pm1,\hat x)$,
+$c\neq0$) the characteristic hypersurfaces through $G$ are $\{\tilde g=0\}$ with
+$\tilde g=|x|-1\pm t$, i.e.
+\begin{equation*}
+\tilde G_+=\{|x|=1+t\},\qquad\tilde G_-=\{|x|=1-t\},\qquad|t|<1,
+\end{equation*}
+the expanding and the contracting sphere. The choices $c$ and $-c$ give the same surface, so
+by the uniqueness in \cref{hj:cor:characteristic} these are the only two characteristic
+hypersurfaces through $G$ (near any point of $G$). They are characteristic on all of
+$N^*\tilde G_\pm\setminus0$, since $p(\lambda\,d\tilde g)=\lambda^2p(d\tilde g)=0$ for
+$\lambda\ne0$.
+
+\emph{The light cone.} Let $h=t^2-|x|^2$; $dh=(2t,-2x)\ne0$ on $\{h=0\}\setminus\{0\}$, and
+$p(dh)=4t^2-4|x|^2=4h=0$ on $\{h=0\}$. So $\{t^2=|x|^2\}\setminus\{0\}$ is a smooth
+hypersurface whose conormal bundle $\{(t,x;\lambda dh)\}$ lies in $\Sigma(P)$: it is
+characteristic away from its vertex (by the eikonal criterion of \cref{hj:ex:plane}). It is the
+union of $\{|x|=t\}$ and $\{|x|=-t\}$, the limits as the radius tends to $0$ of the spheres
+$\tilde G_\pm$ above.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{hj:ex:subprincipal-wave}}
+Idea: compute $b_{m'-1}$ and the correction term in \eqref{hj:eq:subprincipal} directly; for
+the Laplacian the conjugation by $|dg|^{1/2}$ produces exactly the first-order term that
+cancels the correction.
+
+\emph{Flat case.} With the trivialization $|dt\,dx|^{1/2}$, $P=D_t^2-\sum_jD_{x_j}^2$ acts on
+coefficients by the same formula, with full symbol $b=\tau^2-|\xi|^2=p$, so $b_{m'-1}=0$, and
+$p$ does not depend on $(t,x)$, so $\sum\pa^2p/\pa z_j\pa\zeta_j=0$. Hence $p_s=0$.
+
+\emph{Transport for plane waves.} Let $Y=\{t=\omega\cdot x\}$, $|\omega|=1$. Use the
+coordinates $s=t-\omega\cdot x$, $x$ (determinant one), with dual variables $(\sigma,\xi')$;
+from $\tau\,dt+\xi\cdot dx=\tau\,ds+(\xi+\tau\omega)\cdot dx$ we get $\sigma=\tau$,
+$\xi'=\xi+\tau\omega$, so
+\begin{equation*}
+p=\sigma^2-|\xi'-\sigma\omega|^2=-|\xi'|^2+2\sigma\,\omega\cdot\xi' .
+\end{equation*}
+$N^*Y=\{s=0,\ \xi'=0\}$ has coordinates $(x,\sigma)$ ($x$ being the variable along $Y$) and
+$p=0$ there. Since $p$ is independent of $(s,x)$,
+$H_p=\pa_\sigma p\,\pa_s+\pa_{\xi'}p\cdot\pa_x$, and on $N^*Y$, $\pa_\sigma p=2\omega\cdot\xi'=0$,
+$\pa_{\xi'}p=-2\xi'+2\sigma\omega=2\sigma\omega$. Thus
+\begin{equation*}
+H_p|_{N^*Y}=2\sigma\,\omega\cdot\pa_x,
+\end{equation*}
+which has divergence zero with respect to $|dx\,d\sigma|$. By \cref{hj:thm:transport} (with
+$p_s=0$), for $u\in\Ic m(\R^{n+1},Y;\Omegah)$ with $\sigma_m(u)=\beta(x,\sigma)|dx\,d\sigma|
+^{1/2}$,
+\begin{equation*}
+\sigma_{m+1}(Pu)=-i\mathcal L_{H_p}\sigma_m(u)=-2i\sigma\,(\omega\cdot\pa_x\beta)\,|dx\,d\sigma|
+^{\frac12}.
+\end{equation*}
+The transport equation is $\omega\cdot\pa_x\beta=0$: $\beta$ is constant along the
+bicharacteristic directions $\omega$ in $Y$, i.e.\ $\beta(x,\sigma)=\beta_0(x-(\omega\cdot x)
+\omega,\sigma)$, determined by its values on $Y\cap\{t=0\}=\{\omega\cdot x=0\}$ (where
+$x=x-(\omega\cdot x)\omega$). For the plane waves of \cref{hj:ex:plane},
+$u=v(s)|ds\,dx|^{1/2}$ with full symbol $\hat v(\sigma)$, independent of $x$: the transport
+equation holds, consistently with $Pu=0$. More generally $u=v(s,x)|ds\,dx|^{1/2}$ conormal to
+$Y$ solves $Pu\in\Ic{m}$ (one order better than the generic $\Ic{m+1}$) exactly when the
+principal symbol does not vary along $\omega$; the higher transport equations
+$-2i\sigma\,\omega\cdot\pa_x\beta_j=\gamma_j$, with $\gamma_j$ determined by the previous
+terms, are solved by integrating along the lines $x+\R\omega$, as in
+\cref{hj:lem:transport-ode}.
+
+\emph{Riemannian case.} In local coordinates on $X$ let $g=(g_{ij})$, $(g^{ij})=g^{-1}$,
+$\gamma=(\det g_{ij})^{1/2}$, so $|dg|=\gamma|dx|$, and recall
+$\Delta_g=\gamma^{-1}\sum_{i,j}D_{x_i}\gamma g^{ij}D_{x_j}$ (\cref{ch:euclidean}). With
+$u=\phi|dt\,dx|^{1/2}$, the operator acts on the coefficient $\phi$ as
+$D_t^2-L$, where
+\begin{equation*}
+L\phi=\gamma^{\frac12}\Delta_g(\gamma^{-\frac12}\phi)=\gamma^{-\frac12}\sum_{i,j}D_i\big(\gamma
+g^{ij}D_j(\gamma^{-\frac12}\phi)\big).
+\end{equation*}
+Expanding, with $a^{ij}=\gamma g^{ij}$ symmetric,
+\begin{equation*}
+L\phi=\sum_{i,j}g^{ij}D_iD_j\phi+\sum_jc_jD_j\phi+c_0\phi,\qquad
+c_j=\sum_i\gamma^{-\frac12}\Big(D_i(a^{ij}\gamma^{-\frac12})+a^{ij}D_i(\gamma^{-\frac12})\Big).
+\end{equation*}
+Using $\gamma^{-\frac12}D_i\gamma^{-\frac12}=-\frac12\gamma^{-2}D_i\gamma$,
+\begin{equation*}
+c_j=\sum_i\Big(\gamma^{-1}D_i(\gamma g^{ij})-g^{ij}\gamma^{-1}D_i\gamma\Big)=\sum_iD_{x_i}g^{ij}
+=-i\sum_i\pa_{x_i}g^{ij}.
+\end{equation*}
+Hence the full symbol of $D_t^2-L$ is $b=p+b_1+b_0$ with
+\begin{equation*}
+p=\tau^2-\sum_{i,j}g^{ij}\xi_i\xi_j,\qquad b_1=i\sum_{i,j}(\pa_{x_i}g^{ij})\xi_j .
+\end{equation*}
+Since $\pa_{\xi_k}p=-2\sum_jg^{kj}\xi_j$ and $\pa_tp=0$, $\sum_k\pa_{x_k}\pa_{\xi_k}p=
+-2\sum_{k,j}(\pa_{x_k}g^{kj})\xi_j$, and
+\begin{equation*}
+p_s=b_1-\frac1{2i}\sum_k\frac{\pa^2p}{\pa x_k\pa\xi_k}=i\sum_{i,j}(\pa_ig^{ij})\xi_j-i\sum_{k,j}
+(\pa_kg^{kj})\xi_j=0 .
+\end{equation*}
+So the subprincipal symbol of $D_t^2-\Delta_g$, acting on half-densities by conjugation with
+$|dg|^{1/2}$, vanishes. (We checked the expansion of $L$ symbolically for a general metric in
+two dimensions. The vanishing is also forced by symmetry: the operator is formally
+self-adjoint on half-densities, so $p_s$ is real, and it has real coefficients, so
+$p_s(x,-\zeta)=\overline{p_s(x,\zeta)}=p_s(x,\zeta)$, while $p_s$ is homogeneous of the odd
+degree $1$.)
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{hj:ex:add-variables}}
+Idea: the added variables enter through a non-degenerate quadratic form, which changes neither
+the critical set nor the Lagrangian, adds $\sgn B$ to the signature, and is removed by the
+Fresnel integral.
+
+\emph{$\tilde\varphi$ is a phase function.} It is real, smooth on the open cone $\tilde\Gamma=
+\{(x,\theta,\omega);\ (x,\theta)\in\Gamma,\ |\omega|<c|\theta|\}$ and homogeneous of degree one
+in $(\theta,\omega)$. Its differentials are
+\begin{equation*}
+d_x\tilde\varphi=d_x\varphi,\quad d_\theta\tilde\varphi=d_\theta\varphi-\frac{\ang{B\omega,\omega}}
+{2|\theta|^3}\theta,\quad d_\omega\tilde\varphi=\frac{B\omega}{|\theta|}.
+\end{equation*}
+If $\omega\ne0$ then $d_\omega\tilde\varphi\ne0$ ($B$ invertible); if $\omega=0$ then
+$d\tilde\varphi=(d_x\varphi,d_\theta\varphi,0)\ne0$. So $d\tilde\varphi\ne0$, and
+$d_{(\theta,\omega)}\tilde\varphi=0$ if and only if $\omega=0$ and $d_\theta\varphi=0$:
+$C_{\tilde\varphi}=C_\varphi\times\{0\}$.
+
+\emph{Non-degeneracy.} At a point of $C_{\tilde\varphi}$, since the correction terms are
+quadratic or linear in $\omega$,
+\begin{equation*}
+d(\pa_{\theta_j}\tilde\varphi)=d(\pa_{\theta_j}\varphi),\qquad
+d(\pa_{\omega}\tilde\varphi)=|\theta|^{-1}B\,d\omega .
+\end{equation*}
+The first $N$ forms involve only $dx,d\theta$ and are independent by non-degeneracy of
+$\varphi$; the last $q$ involve only $d\omega$ and are independent as $B$ is invertible. So
+all $N+q$ are independent.
+
+\emph{Same Lagrangian.} $j_{\tilde\varphi}(x,\theta,0)=(x,d_x\tilde\varphi)=(x,d_x\varphi)=
+j_\varphi(x,\theta)$, so $j_{\tilde\varphi}$ is $j_\varphi$ composed with the diffeomorphism
+$C_{\tilde\varphi}\to C_\varphi$, $(x,\theta,0)\mapsto(x,\theta)$; it parametrizes the same
+open subset $\Lambda_\varphi$ of $\Lambda$.
+
+\emph{Signature.} At $\omega=0$: $\tilde\varphi''_{\theta\theta}=\varphi''_{\theta\theta}$ (the
+second $\theta$-derivatives of $\ang{B\omega,\omega}/(2|\theta|)$ are $O(|\omega|^2)$),
+$\tilde\varphi''_{\theta\omega}=\pa_\theta(B\omega/|\theta|)=0$, and
+$\tilde\varphi''_{\omega\omega}=B/|\theta|$. Hence $\tilde\varphi''=\operatorname{diag}
+(\varphi''_{\theta\theta},B/|\theta|)$ and $\sgn\tilde\varphi''=\sgn\varphi''_{\theta\theta}+
+\sgn B$.
+
+\emph{Any $N\ge K$.} By \cref{hj:thm:param-exists}, $\Lambda$ is parametrized near
+$\bar\lambda$ by a phase in $K=K(\bar\lambda)$ variables; adding $q=N-K$ variables with $B=\Id$
+gives a parametrization with $N$ variables.
+
+\emph{Direct check of \eqref{hj:eq:symbol-change}.} Let $a\in S^{\mu_N}_\Gamma$ and choose
+$\chi\in\CIc(\R^q)$ supported in $\{|v|<c\}$ and equal to one near $0$. Put
+\begin{equation*}
+\tilde a(x,\theta,\omega)=(2\pi)^{\frac q2}e^{-\frac{i\pi}4\sgn B}|\det B|^{\frac12}\,
+|\theta|^{-\frac q2}\,a(x,\theta)\,\chi(\omega/|\theta|).
+\end{equation*}
+On its support $\ang{(\theta,\omega)}\simeq\ang\theta$, $\chi(\omega/|\theta|)$ and
+$|\theta|^{-q/2}$ (for $|\theta|\ge1$) are symbols of orders $0$ and $-\frac q2$, so
+$\tilde a\in S^{\mu_N-\frac q2}_{\tilde\Gamma}=S^{\mu_{N+q}}_{\tilde\Gamma}$. For $a$ of very
+negative order (the general case follows by the continuity of oscillatory integrals in the
+amplitude, \cref{hj:sec:lagrangian-dist}), Fubini and the substitution $\omega=|\theta|v$ give
+\begin{equation*}
+I_{\tilde\varphi}(\tilde a)(x)=\int e^{i\varphi(x,\theta)}c(\theta)\,a(x,\theta)\,\dbar\theta,
+\quad c(\theta)=(2\pi)^{\frac q2-q}e^{-\frac{i\pi}4\sgn B}|\det B|^{\frac12}|\theta|^{\frac q2}
+\int_{\R^q}e^{\frac i2|\theta|\ang{Bv,v}}\chi(v)\,dv .
+\end{equation*}
+By \eqref{hj:eq:fresnel} with $D=|\theta|B$, $\int e^{\frac i2|\theta|\ang{Bv,v}}dv=(2\pi)^{
+\frac q2}|\theta|^{-\frac q2}|\det B|^{-\frac12}e^{\frac{i\pi}4\sgn B}$, and
+$\int e^{\frac i2\lambda\ang{Bv,v}}(1-\chi(v))\,dv=O(\lambda^{-\infty})$ with all
+$\lambda$-derivatives, by non-stationary phase ($|Bv|\ge c'>0$ on $\supp(1-\chi)$; each
+integration by parts with $(i\lambda)^{-1}|Bv|^{-2}Bv\cdot\nabla_v$ gains $\lambda^{-1}|v|^{-1}$).
+Hence $c(\theta)=1-r(\theta)$ with $r\in S^{-\infty}$ for $|\theta|\ge1$, and
+\begin{equation*}
+I_{\tilde\varphi}(\tilde a)=I_\varphi(a)-I_\varphi(ra)\equiv I_\varphi(a)\mod\CI .
+\end{equation*}
+Now compare the two sides of \eqref{hj:eq:symbol-change} (identifying $C_{\tilde\varphi}$
+with $C_\varphi$). Let $(c,F)$ be coordinates near $C_\varphi$ with $F=\pa_\theta\varphi$ and
+$|dx\,d\theta|=J(c,F)|dc\,dF|$; near $C_{\tilde\varphi}$ use $(c,\tilde F,G)$ with
+$\tilde F=\pa_\theta\tilde\varphi$, $G=\pa_\omega\tilde\varphi=B\omega/|\theta|$. At $\omega=0$
+the Jacobian matrix of $(c,F,\omega)\mapsto(c,\tilde F,G)$ is block triangular with diagonal
+blocks $\Id,\Id,B/|\theta|$ (because $\tilde F-F=O(|\omega|^2)$ and $G$ is linear in $\omega$),
+so $|dx\,d\theta\,d\omega|=J|dc\,dF\,d\omega|=J|\theta|^q|\det B|^{-1}|dc\,d\tilde F\,dG|$
+there, and
+\begin{equation*}
+d_{C_{\tilde\varphi}}=|\theta|^q|\det B|^{-1}d_{C_\varphi}.
+\end{equation*}
+Therefore, on $C_{\tilde\varphi}=C_\varphi$, with $\tilde s=s+\sgn B$,
+\begin{align*}
+(2\pi)^{-\frac{N+q}2}e^{\frac{i\pi}4\tilde s}\,\tilde a\sqrt{d_{C_{\tilde\varphi}}}
+&=(2\pi)^{-\frac{N+q}2}e^{\frac{i\pi}4(s+\sgn B)}(2\pi)^{\frac q2}e^{-\frac{i\pi}4\sgn B}
+|\det B|^{\frac12}|\theta|^{-\frac q2}a\cdot|\theta|^{\frac q2}|\det B|^{-\frac12}
+\sqrt{d_{C_\varphi}}\\
+&=(2\pi)^{-\frac N2}e^{\frac{i\pi}4s}\,a\sqrt{d_{C_\varphi}},
+\end{align*}
+using $\chi(0)=1$. So \eqref{hj:eq:symbol-change} holds exactly (not only modulo lower order)
+for these two representations of the same distribution.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{hj:ex:constant-rank}}
+Idea: $\varphi''_{\theta\theta}=0$ means $K=N$ everywhere, so the projection of $\Lambda$ has
+constant rank and its image is a submanifold, to which $\Lambda$ is conormal because $\alpha$
+vanishes on $\Lambda$.
+
+\emph{Direct statement.} By \cref{hj:lem:rank}, $K(\lambda)=N-\operatorname{rank}\varphi''_{
+\theta\theta}=N$ at every $\lambda\in\Lambda_\varphi$, so $d\pi|_{T\Lambda_\varphi}$ has
+constant rank $n-N$. Let $\bar\lambda\in\Lambda_\varphi$, $\bar y=\pi(\bar\lambda)$. By the
+constant rank theorem there is a neighbourhood $U$ of $\bar\lambda$ in $\Lambda_\varphi$ such
+that $Y=\pi(U)$ is an embedded submanifold of dimension $n-N$ (codimension $N$) near $\bar y$,
+and $d\pi(T_\lambda\Lambda)=T_{\pi(\lambda)}Y$ for $\lambda\in U$. Since $\pi$ is constant on
+the rays, we may replace $U$ by the conic set $\R_+U$, with the same image. For $\lambda=
+(y,\eta)\in\R_+U$ and $v\in T_\lambda\Lambda$, \cref{hj:lem:conic-lagr} gives
+$0=\alpha(v)=\eta(d\pi\,v)$; as $d\pi(T_\lambda\Lambda)=T_yY$, $\eta$ annihilates $T_yY$, i.e.\
+$\lambda\in N^*Y$. Thus $\R_+U\subset N^*Y\setminus0$; both are $n$-dimensional manifolds, so
+$\R_+U$ is an open (conic) subset of $N^*Y\setminus0$. Hence $\Lambda_\varphi$ is locally (near
+each point) an open conic subset of the conormal bundle of a submanifold of codimension $N$.
+
+\emph{Converse.} Let $Y=\{g_1=\dots=g_k=0\}$ with $dg_1,\dots,dg_k$ independent on a
+neighbourhood $O$ of $Y$, and $\varphi(x,\theta)=\sum_j\theta_jg_j(x)$ on $O\times(\R^k\setminus
+0)$. It is real and homogeneous of degree one; $d\varphi=(\sum_j\theta_jdg_j,g)$ is non-zero
+(if $g(x)=0$ then $x\in Y$ and $\sum\theta_jdg_j\ne0$ as $\theta\ne0$). $C_\varphi=\{g=0\}=
+Y\times(\R^k\setminus0)$, and $d(\pa_{\theta_j}\varphi)=dg_j$ are independent, so $\varphi$ is
+non-degenerate. $j_\varphi(y,\theta)=(y,\sum_j\theta_jdg_j(y))$, and $N^*_yY$, the annihilator
+of $T_yY=\bigcap_j\ker dg_j(y)$, is spanned by the $dg_j(y)$; so $j_\varphi$ is a bijection of
+$C_\varphi$ onto $N^*Y\setminus0$, an immersion by \cref{hj:prop:phase-lagrangian}, hence
+(dimensions being equal) a diffeomorphism. So $\varphi$ parametrizes $N^*Y\setminus0$.
+Finally $\varphi''_{\theta\theta}=0$ identically, as $\varphi$ is linear in $\theta$: $\varphi$
+is minimal everywhere (and $K\equiv k$, as it should be).
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{hj:ex:keller}}
+Idea: all formulas follow by direct computation (which we also checked with a computer algebra
+system); the key identity for (c) is $\pa_z^2F=4(t-q^3)/(4+z^2)$ on $\Lambda$.
+
+(a) Parametrize $C$ by $c(x_0)=(x_0,\frac12x_0^2)$; then $c'=(1,x_0)$, $|c'|=w^{-1}$, the unit
+tangent is $T=(1,x_0)w$ and $N=(-x_0,1)w$ is a unit normal. For a regular curve $c$ and a
+continuous unit normal field $N$, the curvature with respect to $N$ is $k=\ang{c'',N}/|c'|^2$,
+which is independent of the parametrization (a reparametrization changes $c''$ by a multiple of
+$c'$, orthogonal to $N$). For $C$, $k=\ang{(0,1),(-x_0,1)w}w^2=w^3=\kappa$. Let $s$ be arc length
+on $C$; then $\frac{dT}{ds}=\kappa N$ and $\frac{dN}{ds}=-\kappa T$ (as $|N|=1$, $\ang{N,T}=0$).
+The parallel curve is $c_t=c+tN$, and
+\begin{equation*}
+\frac{dc_t}{ds}=(1-t\kappa)T,\qquad\frac{d^2c_t}{ds^2}=-t\frac{d\kappa}{ds}T+(1-t\kappa)\kappa N .
+\end{equation*}
+So $N$ is still normal to $C_t$, and where $1-t\kappa\ne0$ the curvature of $C_t$ with
+respect to $N$ is
+\begin{equation*}
+k_t=\frac{\ang{c_t'',N}}{|c_t'|^2}=\frac{(1-t\kappa)\kappa}{(1-t\kappa)^2}=\frac\kappa
+{1-t\kappa}.
+\end{equation*}
+Since $\kappa>0$, $k_t$ has the sign of $1-t\kappa$, and $1-t\kappa<0$ if and only if
+$(1+x_0^2)^{3/2}<t$, i.e.\ $x_0^2<t^{2/3}-1$. For $t>1$ the arc $|x_0|<(t^{2/3}-1)^{1/2}$
+therefore has $k_t<0$ while the rest of $C_t$ has $k_t>0$: it is curved the opposite way. At
+$|x_0|=(t^{2/3}-1)^{1/2}$, $dc_t/ds=0$: these are the two cusps.
+
+(b) On $\Lambda$, by \eqref{hj:eq:keller-Lambda}: $\tau=-\eta/w=-q\eta$, $\xi=-x_0\eta$,
+$x=x_0(1-tw)$, $y=\frac12x_0^2+tw$. Hence $S=y-t=\frac12x_0^2+t(w-1)$, $R=\frac12(y+t)-1=
+\frac14x_0^2+\frac12t(1+w)-1$, $\sigma=\frac12(\eta-\tau)=\frac12\eta(1+q)$, $\rho=\eta+\tau=
+\eta(1-q)$, as stated, and $z=\xi/\sigma=-2x_0/(1+q)$. The map $x_0\mapsto z$ is a decreasing
+bijection $\R\to(-2,2)$ (since $|x_0|<q<1+q$, and $z\to\mp2$ as $x_0\to\pm\infty$). With
+$x_0=-4z/(4-z^2)$,
+\begin{equation*}
+1+x_0^2=\frac{(4-z^2)^2+16z^2}{(4-z^2)^2}=\frac{(4+z^2)^2}{(4-z^2)^2},\quad\text{so}\quad
+q=\frac{4+z^2}{4-z^2},\ w=\frac{4-z^2}{4+z^2},
+\end{equation*}
+and indeed $-2x_0/(1+q)=\frac{8z}{4-z^2}\cdot\frac{4-z^2}8=z$. Next, $1+w=\frac8{4+z^2}$,
+$w-1=-\frac{2z^2}{4+z^2}$, $x_0w=-\frac{4z}{4+z^2}$ and $\frac14x_0^2=\frac{4z^2}{(4-z^2)^2}$, so
+solving the formula for $R$,
+\begin{equation*}
+t=\frac{4+z^2}4\Big(1+R-\frac{4z^2}{(4-z^2)^2}\Big).
+\end{equation*}
+Substituting,
+\begin{align*}
+x&=x_0-t\,x_0w=-\frac{4z}{4-z^2}+z\Big(1+R-\frac{4z^2}{(4-z^2)^2}\Big)=z(1+R)-\frac{16z}
+{(4-z^2)^2},\\
+S&=\frac{8z^2}{(4-z^2)^2}-\frac{z^2}2\Big(1+R-\frac{4z^2}{(4-z^2)^2}\Big)=\frac{2z^2(4+z^2)}
+{(4-z^2)^2}-\frac{z^2}2(1+R),\\
+\frac\rho\sigma&=\frac{2(1-q)}{1+q}=2\cdot\frac{-2z^2}{4-z^2}\cdot\frac{4-z^2}8=-\frac{z^2}2 .
+\end{align*}
+For $F(R,z)=\frac{z^2}2(1+R)-\frac{2z^2}{4-z^2}$: $\pa_zF=z(1+R)-\frac{4z(4-z^2)+4z^3}{(4-z^2)^2}=
+z(1+R)-\frac{16z}{(4-z^2)^2}=x$; $F-z\pa_zF=-\frac{z^2}2(1+R)+\frac{-2z^2(4-z^2)+16z^2}{(4-z^2)^2}
+=S$; and $-\pa_RF=-\frac{z^2}2=\rho/\sigma$. Finally $\frac{2z^2}{4-z^2}=\frac{z^2}2\sum_{k\ge0}
+(z^2/4)^k$, so $F=\frac{z^2}2R-\frac{z^4}8-\frac{z^6}{32}-\cdots$. (With $G=\sigma F(R,\xi/
+\sigma)$ these say $S=\pa_\sigma G$, $x=\pa_\xi G$, $\rho=-\pa_RG$, as in
+\cref{hj:thm:param-exists}.)
+
+(c) \emph{Correction of the statement.} Over a point of the caustic $K=2$
+(\cref{hj:prop:keller}(i)); for a phase in $N=2$ variables \cref{hj:lem:rank} gives
+$\operatorname{rank}\varphi''_{\theta\theta}=N-K=0$ there, so $\varphi''_{\theta\theta}$ cannot
+have rank one over the caustic, as originally stated. The correct statement, now in the
+exercise, is that $\varphi''_{\theta\theta}=0$ over the caustic and has rank one at the
+nearby points of $\Lambda$ off it, the non-zero eigenvalue changing sign across the caustic.
+
+\emph{Proof.} We first note that \eqref{hj:eq:keller-phase} parametrizes all of
+$\Lambda\cap\{\eta>0\}$, so no other base points are needed. Indeed, $\varphi=\sigma h$ with
+$h=S+zx-F(R,z)$, $z=\xi/\sigma$, is smooth on $\{\sigma>0,\ |\xi|<2\sigma\}$; $\pa_\xi\varphi
+=\pa_zh=x-\pa_zF$ and $\pa_\sigma\varphi=h-z\pa_zh$, so $C_\varphi=\{x=\pa_zF,\ S=F-z\pa_zF\}$,
+and on $C_\varphi$, $d(\pa_\sigma\varphi)=dh-z\,d(\pa_zh)$ has $dS$-coefficient $1$ while
+$d(\pa_\xi\varphi)$ has $dS$-coefficient $0$ and $dx$-coefficient $1$; so $\varphi$ is
+non-degenerate ($d_S\varphi=\sigma\ne0$). Further $j_\varphi=(S,x,R;\sigma,\sigma z,-\sigma\pa_R
+F)$, and by (b) the map $(z,R,\sigma)\mapsto j_\varphi$ is the inverse of the coordinates
+$(x_0,t,\eta)\mapsto(z,R,\sigma)$ on $\Lambda\cap\{\eta>0\}$, which is a diffeomorphism onto
+$(-2,2)\times\R\times(0,\infty)$ ($x_0\leftrightarrow z$ bijectively, $\sigma=\frac12\eta(1+q)$,
+and for fixed $x_0$, $R$ is affine in $t$ with slope $\frac12(1+w)>0$). For $\eta<0$ use
+$\sigma<0$.
+
+For $\varphi(\sigma,\xi)=\sigma h(\xi/\sigma)$ one computes
+\begin{equation*}
+\varphi''_{\theta\theta}=\frac{\pa_z^2h}\sigma\begin{pmatrix}z^2&-z\\-z&1\end{pmatrix}
+\quad\text{(order }(\sigma,\xi)),\qquad\pa_z^2h=-\pa_z^2F .
+\end{equation*}
+The matrix has eigenvalues $0$ (eigenvector $(1,z)$, i.e.\ $\theta$, by Euler's relation) and
+$-\pa_z^2F\,(1+z^2)/\sigma$. On $\Lambda$, from $\pa_zF=z(1+R)-16z/(4-z^2)^2$,
+\begin{equation*}
+\pa_z^2F=1+R-\frac{16(4+3z^2)}{(4-z^2)^3}=\frac{4t}{4+z^2}-\frac{4(4+z^2)^2}{(4-z^2)^3}
+=\frac4{4+z^2}\big(t-q^3\big),
+\end{equation*}
+using $1+R=\frac{4z^2}{(4-z^2)^2}+\frac{4t}{4+z^2}$ and $q^3=(4+z^2)^3/(4-z^2)^3$. Since the
+caustic is $\{t=q^3\}=\{t=(1+x_0^2)^{3/2}\}$, we conclude: over the caustic (including over
+$(1,0,1)$) $\varphi''_{\theta\theta}=0$, consistent with $K=2$; at all other points of $\Lambda$
+it has rank one, and
+\begin{equation*}
+\sgn\varphi''_{\theta\theta}=\sgn\big((q^3-t)\sigma\big),
+\end{equation*}
+which at $z=0$ ($q=1$) is \eqref{hj:eq:keller-sign}. On $\Lambda$, in the coordinates
+$(x_0,t,\eta)$, the function $t-q(x_0)^3$ has non-vanishing differential ($dt$-coefficient $1$),
+so the set $\Sigma=\{t=q^3\}$ of points of $\Lambda$ over the caustic is a smooth hypersurface
+of $\Lambda$, and $t-q^3$ changes sign across it. Hence along any curve in $\Lambda$ crossing
+$\Sigma$ transversally, at a point over any point of $\mathcal K$, $\sgn\varphi''_{\theta\theta}$
+jumps from $\sgn\sigma$ to $-\sgn\sigma$ (or back): the jump is $\pm2$, exactly as at the cusp.
+By \cref{hj:cor:signature} the jumps computed with any other parametrization are the same.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{hj:ex:testing-invariant}}
+Idea: only the tangent space of $\Lambda$ at $\bar\lambda$ enters the transversality
+condition, so $\Lambda$ may be replaced by a conormal bundle with the same tangent space; for
+conormal bundles transversality of $\operatorname{graph}(df)$ is non-degeneracy of a critical
+point.
+
+\emph{Existence of $S$.} Use the coordinates of \cref{hj:lem:adapted} and
+\cref{hj:thm:param-exists}: $\bar x=0$, $\bar\xi=dx_1$ (so $\bar\xi'=e_1$, $\bar\xi''=0$), and
+near $\bar\lambda$, $\Lambda=\{x'=\pa_{\xi'}G,\ \xi''=-\pa_{x''}G\}$ with coordinates
+$(\xi',x'')$. Since $dx'$ vanishes on $T_{\bar\lambda}\Lambda$, $\pa^2_{\xi'\xi'}G=0$ and
+$\pa^2_{\xi'x''}G=0$ at $(\bar\xi',0)$, so
+\begin{equation*}
+T_{\bar\lambda}\Lambda=\{\delta x'=0,\ \delta\xi''=-A\,\delta x''\},\qquad A=\pa^2_{x''x''}G(\bar
+\xi',0),
+\end{equation*}
+with $\delta\xi'$, $\delta x''$ arbitrary. Let $Q(x'')=(\frac12\ang{Ax'',x''},0,\dots,0)\in\R^K$
+and $S=\{x'=Q(x'')\}$, a submanifold of codimension $K$ through $0$. Its tangent vectors are
+$(dQ(x'')\delta x'',\delta x'')$, so
+\begin{equation*}
+N^*S=\{(Q(x''),x'';\xi',\xi'');\ \xi''=-\textstyle\sum_j\xi'_j\nabla Q_j(x'')\}=
+\{x'=Q(x''),\ \xi''=-\xi'_1Ax''\}.
+\end{equation*}
+At $\bar\lambda$ ($x''=0$, $\xi'=e_1$, $\xi''=0$) we have $\bar\lambda\in N^*S$, and
+$T_{\bar\lambda}N^*S=\{\delta x'=dQ(0)\delta x''=0,\ \delta\xi''=-A\delta x''\}$ (the term
+$-\delta\xi'_1Ax''$ vanishes at $x''=0$) $=T_{\bar\lambda}\Lambda$.
+
+\emph{The criterion.} Let $L=T_{\bar\lambda}\Lambda=T_{\bar\lambda}N^*S$ and
+$\Gamma_f=\operatorname{graph}(df)$, $df(\bar x)=\bar\xi$. Transversality of $\Gamma_f$ and
+$\Lambda$ at $\bar\lambda$ means $T_{\bar\lambda}\Gamma_f\cap L=0$ (both have dimension $n$ in
+the $2n$-dimensional $T_{\bar\lambda}T^*X$), so it is equivalent to transversality of
+$\Gamma_f$ and $N^*S$ at $\bar\lambda$. Choose coordinates $(u,v)\in\R^K\times\R^{n-K}$ near
+$\bar x$ with $S=\{u=0\}$, and dual variables $(\mu,\nu)$. Then $N^*S=\{u=0,\ \nu=0\}$ and
+$T_{\bar\lambda}N^*S=\{\delta u=0,\ \delta\nu=0\}$. Since $\bar\xi\in N^*_{\bar x}S$,
+$d(f|_S)(\bar x)=\bar\xi|_{T_{\bar x}S}=0$: $\bar x$ is a critical point of $f|_S(v)=f(0,v)$,
+with Hessian $f''_{vv}(\bar x)$. A tangent vector to $\Gamma_f$ is
+$(\delta u,\delta v;f''_{uu}\delta u+f''_{uv}\delta v,\ f''_{vu}\delta u+f''_{vv}\delta v)$; it
+lies in $T_{\bar\lambda}N^*S$ if and only if $\delta u=0$ and $f''_{vv}\delta v=0$. So
+\begin{equation*}
+T_{\bar\lambda}\Gamma_f\cap T_{\bar\lambda}\Lambda\cong\ker f''_{vv}(\bar x)=\ker\operatorname{Hess}
+(f|_S)(\bar x),
+\end{equation*}
+and $\Gamma_f$ is transversal to $\Lambda$ at $\bar\lambda$ if and only if $f|_S$ has a
+non-degenerate critical point at $\bar x$.
+
+\emph{Openness.} Transversality at a point is the condition that $T_\lambda\Gamma\cap
+T_\lambda\Lambda=0$, i.e.\ that the $2n\times2n$ matrix formed by bases of the two tangent
+spaces has non-zero determinant. Let $f_\epsilon=f+\epsilon g$ and suppose
+$\lambda'=(x',df_\epsilon(x'))\in\Lambda$ with $(\epsilon,x')$ close to $(0,\bar x)$. The
+tangent space $T_{\lambda'}\operatorname{graph}(df_\epsilon)$ has the basis
+$(e_j,f''_\epsilon(x')e_j)$, depending continuously on $(\epsilon,x')$, and $T_{\lambda'}\Lambda$
+has a basis depending continuously on $\lambda'\in\Lambda$ (from local coordinates on
+$\Lambda$), with $\lambda'\to\bar\lambda$. The determinant is therefore continuous and non-zero
+at $(0,\bar\lambda)$, hence non-zero for $(\epsilon,\lambda')$ near it: transversality persists.
+This argument uses only the continuity of the tangent spaces, not the submanifold $S$; in
+particular it does not matter that $K(\lambda')$ may be smaller than $K(\bar\lambda)$ (in which
+case the submanifold $S'$ adapted to $\lambda'$ by the first part has smaller codimension, and
+the criterion at $\lambda'$ is non-degeneracy of $f_\epsilon|_{S'}$).
+
+Moreover such points $\lambda'$ exist and are unique near $\bar\lambda$: write $\Lambda=
+\{\Psi=0\}$ near $\bar\lambda$ with $\Psi:T^*X\to\R^n$ a submersion; the intersection points
+correspond to the solutions of $\Psi(x,df_\epsilon(x))=0$, whose differential in $x$ at
+$(0,\bar x)$ is $d\Psi\circ(\Id,f'')$, injective because $\ker d\Psi=T_{\bar\lambda}\Lambda$
+meets $T_{\bar\lambda}\Gamma_f$ only in $0$. By the implicit function theorem there is a unique
+solution $x'(\epsilon)$ near $\bar x$ for small $\epsilon$, depending smoothly on $\epsilon$.

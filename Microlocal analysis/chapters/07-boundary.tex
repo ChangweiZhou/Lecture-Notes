@@ -1226,8 +1226,10 @@ In the dividing case both the range and the null space of $\PiC$ are forced on u
 $b_-(\mathcal N_-)$ orthogonal in $L^2(H;V)$. They are orthogonal ``to leading
 order'': $\sigma_0(\PiC)$ is the orthogonal projection onto an eigenspace of a
 self-adjoint involution, so $\PiC-\PiC^*\in\Psido{-1}(H;V)$. For a manifold with
-boundary only the range is forced, and one can choose the projection to be
-self-adjoint (\cref{boundary:ex:orthogonal-calderon}).
+boundary only the range is forced; the orthogonal projection onto it is a
+pseudodifferential projection with the same range and principal symbol, and it is a
+Calder\'on projector in the strict sense of \cref{boundary:thm:calderon}(ii) exactly when
+$\PiC-\PiC^*$ is smoothing (\cref{boundary:ex:orthogonal-calderon}).
 \end{answer}
 
 \subsection*{The Poisson operator and a right inverse}
@@ -1823,8 +1825,10 @@ Any $\PiC$ with these properties is called a \emph{Calder\'on projector} for $D$
 contrast to the dividing case (\cref{boundary:thm:calderon-dividing}) it is not unique:
 only its range is determined. If $\PiC'$ is another one then $\PiC\PiC'=\PiC'$ and
 $\PiC'\PiC=\PiC$, since each is the identity on the common range, and $\PiC'-\PiC$ is
-smoothing by (ii), but in general $\PiC'\ne\PiC$. A Calder\'on projector can always be chosen to be self-adjoint on
-$L^2(Y;V)$, see \cref{boundary:ex:orthogonal-calderon}, but the orthogonal projection onto
+smoothing by (ii), but in general $\PiC'\ne\PiC$. The orthogonal projection onto the range in $L^2(Y;V)$ is again a classical
+pseudodifferential projection with the same range and principal symbol, but it differs
+from $\PiC$ by a smoothing operator only when $\PiC-\PiC^*$ is smoothing
+(\cref{boundary:ex:orthogonal-calderon}); the orthogonal projection onto
 $\overline{\Cau}$ in $H^{-\frac12}$ is usually not pseudodifferential. From now on we no
 longer distinguish between $\tilde b$ and $b$.
 
