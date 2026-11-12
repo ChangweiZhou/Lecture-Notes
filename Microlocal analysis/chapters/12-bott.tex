@@ -53,7 +53,8 @@ As consequences we obtain:
 \item the \emph{isotropic--semiclassical quantization maps}
   $\Kc^{-1}(\R^{2n}\times X)\to\Kc^{-1}(X)$ and $\Kc^0(\R^{2n}\times X)\to\Kc^0(X)$,
   obtained by quantizing compactly supported symbols with values in invertible
-  matrices or in projections, which realize Bott periodicity and are used in
+  matrices or in projections, which realize Bott periodicity (we prove this for $n=1$
+  and compact $X$; the general case is only sketched) and are used in
   \cref{ch:semiclassical-index};
 \item complex and symplectic vector bundles and the Thom isomorphism;
 \item the analytic index map $\Kc^0(T^*Z)\to\Z$, the starting point of the index
@@ -98,8 +99,12 @@ corresponding Hilbert space.
   inversion, and it is connected.
 \item\label{bott:B:finite} (Finite rank approximation.) Given a finite dimensional
   subspace $V_0\subset\CI(Y;E)$ there is an increasing sequence of finite dimensional
-  subspaces $V_0\subset V_1\subset V_2\subset\dots\subset\CI(Y;E)$ (for instance
-  $V_0$ plus the span of the first $j$ eigensections of a Laplacian) whose orthogonal
+  subspaces $V_0\subset V_1\subset V_2\subset\dots\subset\CI(Y;E)$ (for instance,
+  let $E_j$ be the span of the first $j$ eigensections of a Laplacian, choose
+  $j_0\ge\dim V_0$ and a unitary $W$ with $W-\Id$ of finite rank and smoothing,
+  equal to $\Id$ on $(E_{j_0}+V_0)^\perp$ and mapping $E_{j_0}$ onto a space
+  containing $V_0$, and set $V_j=W(E_{j_0+j})$; simply adjoining $V_0$ to $E_j$
+  need not give convergence in $\Psido{-\infty}$) whose orthogonal
   projections $\Pi_j$ satisfy $\Pi_jA\Pi_j\to A$ in $\Psido{-\infty}(Y;E)$,
   uniformly with all derivatives on smooth families $A$ parametrized by a compact
   manifold. For a finite dimensional subspace $V$ with orthogonal projection $\Pi_V$
@@ -303,9 +308,12 @@ $X\to\{x_0\}$.
 \end{question}
 \begin{answer}
   Because the index is a difference. For one operator, $\dim\Nul A-\dim\Nul A^*$
-  can be negative, so it lives in $\Z$, not in $\N_0$. For a family the null
-  spaces and cokernels become bundles, and the index becomes ``null bundle minus
-  cokernel bundle''. $K^0(X)$ is built from bundles exactly as $\Z$ is built from
+  can be negative, so it lives in $\Z$, not in $\N_0$. For a family the actual
+  null spaces and cokernels need not form bundles, since their dimensions can
+  jump (already for $\Id-tP$, $t\in[0,1]$, with $P$ a fixed rank-one
+  projection). After stabilization, as in \cref{index:lem:stabilized}, they
+  are replaced by bundles, and the index becomes ``stabilized null bundle minus
+  stabilized cokernel bundle''. $K^0(X)$ is built from bundles exactly as $\Z$ is built from
   $\N_0$. The extra bundle $H$ in \cref{bott:def:K0} is needed because
   cancellation can fail for bundles: $E\oplus H\cong F\oplus H$ does not imply
   $E\cong F$.
@@ -604,9 +612,13 @@ $\Ran\pi_-$ and $\Ran\pi_+$ are isomorphic.
   $\det=1$, so winding number zero, and the rotation in the proof joins it to a
   constant matrix. In general the factor $z^{-1}$ on $\Ran\pi_-$ and the factor $z$
   on $\Ran\pi_+$ cancel as soon as the two bundles can be matched by an
-  isomorphism $F$. So a normal form loop carries exactly one piece of
-  information: the pair of bundles $(\Ran\pi_-,\Ran\pi_+)$, up to isomorphism.
-  This is why the index of loops will take values in $K^0$.
+  isomorphism $F$. So, up to stable pointed homotopy, a normal form loop
+  carries exactly one piece of information: the virtual difference of the
+  bundles $\Ran\pi_-$ and $\Ran\pi_+$ in $K^0$. The pair of bundles itself,
+  up to isomorphism, is finer data that is not a homotopy invariant: for
+  instance $\diag(z^{-1},z)$ and $\Id_2$ have different pairs but are pointed
+  homotopic by the lemma. This is why the index of loops will take values in
+  $K^0$.
 \end{discussion}
 
 \section{The index of Toeplitz operators on the circle}\label{bott:sec:circle}
@@ -983,8 +995,12 @@ index is $[E_+]-[E_-]$.}
 \end{discussion}
 
 \begin{remark}
-  The signs matter here: the loop $\pi_-z^{-1}+\pi_0+\pi_+z$ with $\Ran\pi_\pm\cong E_\pm$
-  represents $-\beta([E_+]-[E_-])$, because $\ind U=-1$.
+  The signs matter here. In \eqref{bott:eq:bott-map} and \cref{bott:fig:bott-map} the
+  bundle $E_+$ sits on the block where the loop is $z^{-1}$ and $E_-$ on the block where it
+  is $z$, so the normal form loop $\pi_-z^{-1}+\pi_0+\pi_+z$ represents
+  $\beta([\Ran\pi_-]-[\Ran\pi_+])$. If instead the bundles are labelled by the
+  exponent, $\Ran\pi_\pm\cong E'_\pm$ with $z^{\pm1}$ on $E'_\pm$, the same loop represents
+  $-\beta([E'_+]-[E'_-])$, because $\ind U=-1$ and $\ind L=1$.
 \end{remark}
 
 \begin{corollary}\label{bott:cor:reduced}
@@ -1256,7 +1272,7 @@ here $\ann$, and of its twisted versions in \cref{bott:prop:iso-normal}.
 
 \begin{remark}\label{bott:rem:iso-toeplitz-unitary}
   The comparison can be made at the level of operators. The unitary map
-  $L^2(\R)\to L^2_+(\Sphere)$, $u_k\mapsto e^{ik\theta}$, carries $H$ to $2D_\theta+1$ and
+  $L^2(\R)\to L^2_+(\Sphere)$, $u_k\mapsto(2\pi)^{-1/2}e^{ik\theta}$, carries $H$ to $2D_\theta+1$ and
   $\Psiiso{-\infty}(\R)$ onto $\PsiT{-\infty}(\Sphere)$ (both correspond to the matrices
   $(c_{jk})_{j,k\ge0}$ with rapidly decreasing entries), and $\ann'$ to an operator
   which, like $L$, is surjective with one-dimensional null space. The reversal of
@@ -1264,9 +1280,10 @@ here $\ann$, and of its twisted versions in \cref{bott:prop:iso-normal}.
   $H$, while $L$ lowers the Fourier mode, although their symbols are $z$ and $z^{-1}$.
 \end{remark}
 
-\begin{remark}[The rotation argument]\label{bott:rem:rotation-trick}
-  Injectivity of the index map can also be proved without the linearization of loops,
-  by an argument due to Atiyah. In the present setting it runs as follows. Let $a$ be a
+\begin{remark}[The rotation argument; heuristic sketch, not used]\label{bott:rem:rotation-trick}
+  Injectivity of the index map is proved above by the linearization of loops. It can also
+  be proved by an argument due to Atiyah, which we only outline heuristically; nothing in
+  the text depends on this remark. In the present setting it runs as follows. Let $a$ be a
   loop with $\indiso(a)=0$; by \cref{bott:prop:iso-families}(iv) there is (after
   stabilization) an \emph{invertible} family $A(x)$ with symbol $a(x,\cdot)$. Clutch $a$
   to a family of projections $\Pi_a$ on $\R^2\times X$, given by a matrix whose entries
@@ -1278,8 +1295,10 @@ here $\ann$, and of its twisted versions in \cref{bott:prop:iso-normal}.
   variable is the variable of $a$, and replacing $a$, $a^{-1}$ by $A$, $A^{-1}$ in the
   entries of $\Pi_a$ gives an invertible quantization; so the index, hence the clutching
   class of $a$, vanishes. Making this precise requires the families index over the
-  non-compact parameter space $\R^2\times X$ with compact supports, and careful
-  normalization at infinity; we do not pursue it.
+  non-compact parameter space $\R^2\times X$ with compact supports, a construction of the
+  invertible quantization with the required support and normalization at infinity, and a
+  proof that the rotation is a homotopy through admissible families; we do not supply
+  these, and the argument above is not a proof.
 \end{remark}
 
 \section[The classifying sequence]{The stabilized Toeplitz group and the classifying sequence}\label{bott:sec:classifying}
@@ -1421,8 +1440,9 @@ smooth too, and products of smooth maps are smooth.
   $e^{ij\theta}e_l$, $0\le j\le k$, $1\le l\le M$, and is the identity on $\Ran(\Id-P_k)$.
   Stabilize once more, to $\C^{(k+1)M}$ with orthonormal basis $e_{l,j}$,
   $1\le l\le M$, $0\le j\le k$, where $e_{l,0}=e_l$. For $1\le j\le k$ the pairs
-  $(e^{ij\theta}e_{l,0},e_{l,j})$, the second being a constant function, are orthonormal
-  and span mutually orthogonal planes. Let $\mathcal R_\tau$ be the unitary rotating each
+  $(e^{ij\theta}e_{l,0},e_{l,j})$, the second being a constant function, become orthonormal
+  after multiplication by $(2\pi)^{-1/2}$ (the $L^2$ norm being taken with respect to
+  $d\theta$), and span mutually orthogonal planes. Let $\mathcal R_\tau$ be the unitary rotating each
   of these planes by the angle $\tau$ and fixing their orthocomplement. Then
   $\mathcal R_\tau-\Id$ has finite rank and smooth kernel, so
   $\mathcal R_\tau\in\GinfT(\Sphere;\C^{(k+1)M})$, and conjugation by $\mathcal R_\tau$,
@@ -1547,11 +1567,23 @@ loops of winding number zero.}
   Why is a weakly contractible middle group useful?
 \end{question}
 \begin{answer}
-  It converts operators into topology. A map $X\to\mathcal Q$ is a family of
-  symbols; it lifts to a family of invertible operators in $\GT$, and any two
-  lifts, or any lift of a homotopy, are related through the contractible group
-  $\GT$. The ambiguity in the lift is a map into the subgroup $\GinfT$, which
-  carries odd K-theory. If the sequence were a fibration this would give
+  It converts operators into topology. Each single element of $\mathcal Q$ lifts
+  to an invertible operator in $\GT$ (the surjectivity of $\Phi$), and the
+  ambiguity in the lift is an element of the subgroup $\GinfT$, which carries odd
+  K-theory. A \emph{family} $X\to\mathcal Q$, however, need not lift to a smooth
+  family $X\to\GT$: pointwise surjectivity does not give a global lift. For
+  example, on $X=\Sphere^2$ let $a$ be a pointed loop representing
+  $\beta([H]-[1])$, $H$ the Hopf line bundle; the series with leading coefficient
+  $a-\Id$ and vanishing higher coefficients is a smooth map into $\mathcal Q$,
+  since $a$ has winding number zero on every fibre. An invertible lift could be
+  compressed uniformly in the $Y$ variables to a finite matrix family, as in Step 1
+  of the proof of \cref{bott:thm:contractible}; its families index would be the
+  nonzero class $[H]-[1]$ by \cref{bott:thm:index-iso}, whereas an invertible
+  family has index zero. By (iii) the class in $[X;\mathcal Q]\cong\tilde K^0(X)$
+  is exactly the obstruction to lifting. What the weak contractibility of $\GT$
+  gives is uniqueness: when lifts exist, any two smooth lifting families over a
+  compact manifold are homotopic through families in $\GT$, since $fg^{-1}$ is
+  null-homotopic. If the sequence were a fibration this would give
   $\pi_k(\mathcal Q)\cong\pi_{k-1}(\GinfT)$, i.e.\ the delooping relation
   between even and odd K-theory, as in the remark below.
 \end{answer}
@@ -1567,7 +1599,7 @@ loops of winding number zero.}
 
   (i) $\GinfT(\Sphere\times Y;E)$ is the group of invertible perturbations of the identity
   by smoothing operators on the Hilbert space $L^2_+(\Sphere\times Y;E)$. The orthonormal
-  system $e^{il\theta}\phi_m$, $l\ge0$, with $\phi_m$ the eigensections of
+  system $(2\pi)^{-1/2}e^{il\theta}\phi_m$, $l\ge0$, with $\phi_m$ the eigensections of
   \ref{bott:B:finite}, gives finite rank approximations exactly as in \ref{bott:B:finite}, so
   the proof of \cref{bott:lem:stable} identifies $[X;\GinfT]$ with the stable homotopy
   classes of maps $X\to\GL(N,\C)$, which is $K^{-1}(X)$.
@@ -1844,7 +1876,7 @@ over $\Sphere^2=\mathbb{CP}^1$.}
 \end{proof}
 
 \begin{corollary}\label{bott:cor:homotopy-groups}
-  For every compact $Y$ of positive dimension and every bundle $E$,
+  For every compact $Y$ of positive dimension and every bundle $E$ of positive rank (for $E=0$ the group $\Ginf(Y;0)$ is trivial),
   \begin{equation*}
     \pi_k(\Ginf(Y;E))\cong\begin{cases}\Z&k\text{ odd},\\0&k\text{ even}.\end{cases}
   \end{equation*}
@@ -1953,8 +1985,8 @@ no difference which of the two is used.
   $a(\sqrt\eps\,w)$ varies on the scale $\eps^{-1/2}$, which is large compared
   with the scale $1$ of the uncertainty principle. On this scale quantization is
   almost multiplicative, $q_\eps(a)q_\eps(b)=q_\eps(ab)+O(\eps)$. Hence an
-  invertible symbol is quantized to an almost invertible operator, which can be
-  corrected to an invertible one, and an idempotent symbol to an almost
+  invertible symbol is quantized to an almost invertible operator, which is
+  then already invertible for small $\eps$ (by a Neumann series), and an idempotent symbol to an almost
   idempotent operator, whose spectral projection is an honest projection. This
   is all that the two quantization maps below use.
 \end{discussion}
@@ -2134,8 +2166,10 @@ the index of $p_\infty\colon\Ran Q\to\Ran p_\infty$ when $Q$ is self-adjoint.
   With $r=p-p_\infty$, $p^2=p$ means $p_\infty r+rp_\infty+r^2=r$, so
   $P_\eps^2-P_\eps=q_\eps(r)q_\eps(r)-q_\eps(r^2)=O(\eps)$ uniformly in $x$
   (\cref{bott:lem:sl-product}). For a self-adjoint $P$ with $\norm{P^2-P}\le\frac18$ the
-  spectrum lies in $\{\abs{\lambda^2-\lambda}\le\frac18\}$, which does not meet
-  $\{\abs{\lambda-\frac12}\le\frac12\sqrt{1/2}\}$, so $\Gamma$ is in the resolvent set and
+  spectrum is real and lies in $\{\abs{\lambda^2-\lambda}\le\frac18\}$, i.e.\ in
+  $\{\frac18\le(\lambda-\frac12)^2\le\frac38\}$. The circle $\Gamma$ meets $\R$ only at
+  $\frac12$ and $\frac32$, where $\abs{\lambda^2-\lambda}=\frac14,\frac34>\frac18$, so
+  $\Gamma$ is in the resolvent set and
   $\mathcal R(P)$ is the spectral projection of $(1/2,\infty)$. The proof of
   \cref{bott:lem:relative-class} shows that $Q_\eps-p_\infty\in\Psiiso{-\infty}$ depends
   smoothly on $(\eps,x)$, and $Q_\eps=p_\infty$ where $r(\cdot,x)=0$. Homotopies of $p$,
@@ -2294,19 +2328,28 @@ symbol $z$ of the operator $\ann$ of index one.
 \end{proof}
 
 \begin{theorem}\label{bott:thm:sl-iso}
-  For every manifold $X$ and every $n\ge1$ the maps
+  Let $X$ be compact and $n=1$. Then
+  $\Indsl{even}\colon\Kc^0(\R^{2}\times X)\to K^0(X)$ is an isomorphism, whose inverse is
+  multiplication by $b_{\mathrm{iso}}$. Moreover, for every $n$ and every manifold $M$, the
+  quantization maps commute with clutching in the sense of \cref{bott:lem:sl-clutching}(iii).
+\end{theorem}
+\begin{proof}
+  The first statement is \cref{bott:prop:sl-bott-one} together with \cref{bott:thm:bott}, and
+  the second is \cref{bott:lem:sl-clutching}(iii).
+\end{proof}
+
+\begin{remark}[General $n$, non-compact $X$, quantization in stages: a sketch]\label{bott:rem:sl-iso-general}
+  One expects the following to hold. For every manifold $X$ and every $n\ge1$ the maps
   \begin{equation*}
     \Indsl{odd}\colon\Kc^{-1}(\R^{2n}\times X)\to\Kc^{-1}(X),\qquad
     \Indsl{even}\colon\Kc^0(\R^{2n}\times X)\to\Kc^0(X)
   \end{equation*}
-  are isomorphisms. The inverse of $\Indsl{even}$ is exterior multiplication (as in
+  are isomorphisms, the inverse of $\Indsl{even}$ is exterior multiplication (as in
   \cref{ch:families}) by $b_{\mathrm{iso}}^{\boxtimes n}\in\Kc^0(\R^{2n})$, the coordinates of
-  $\R^{2n}$ being paired as $(x_j,\xi_j)$; the maps commute with clutching (\cref{bott:lem:sl-clutching}), and
-  quantizing in stages, $\R^{2n}=\R^{2n'}\times\R^{2n''}$, gives the same maps.
-\end{theorem}
-\begin{proof}[Sketch of proof]
-  For $n=1$ and compact $X$ the even statement is \cref{bott:prop:sl-bott-one}. The
-  extension to non-compact $X$ uses the index isomorphism with compact supports
+  $\R^{2n}$ being paired as $(x_j,\xi_j)$, and quantizing in stages,
+  $\R^{2n}=\R^{2n'}\times\R^{2n''}$, gives the same maps. \emph{We do not prove this}, and
+  nothing in this book depends on it as proved; we only indicate the intended argument and
+  where it is incomplete. The extension to non-compact $X$ uses the index isomorphism with compact supports
   (\cref{bott:ex:noncompact}) and the same computation, which is local in $X$. Given the
   even statement for all $X$, \cref{bott:lem:sl-clutching}(iii) and the clutching
   isomorphism $\Kc^{-1}(M)\cong\Kc^0(\R\times M)$ (\cref{bott:lem:clutching}, extended to
@@ -2316,9 +2359,20 @@ symbol $z$ of the operator $\ann$ of index one.
   quantizing first in $w''$ (with values in matrices) and then, after a finite rank
   approximation of the result as in \cref{bott:lem:relative-class}, in $w'$, gives a
   family homotopic to the one obtained by quantizing in $w$ at once. Iterating the case
-  $n=1$ gives the general case. Complete proofs of the topological ingredients are in
-  \cite{Atiyah-K}.
-\end{proof}
+  $n=1$ would then give the general case. Two analytic steps are missing. First, the
+  tensor product identity applies only to separated symbols $a'(w')a''(w'')$, while the
+  stage homotopy is needed for general representatives; this requires a uniform
+  approximate multiplicativity, or a comparison of spectral projections, for the
+  operator-valued symbols obtained after the first-stage finite rank reduction, which we
+  have not established. Second, for non-compact $X$ the projection model, the relative
+  class and the clutching must be localized to the supports, uniformly, which we have not
+  written out (\cref{bott:ex:noncompact} supplies the topological input). Complete proofs
+  of the topological ingredients are in \cite{Atiyah-K}. For compact $X$, a left
+  inverse statement of this kind for general $n$ is obtained by a different route in
+  \cref{ch:semiclassical-index} (\cref{scindex:cor:normalization}), through the
+  $n$-dimensional harmonic oscillator, for the semiclassical index defined there; its
+  relation to $\Indsl{even}$ is discussed in \cref{scindex:rem:compare-bott}.
+\end{remark}
 
 \section{Complex and symplectic bundles; the Thom isomorphism}\label{bott:sec:thom}
 
@@ -2399,38 +2453,51 @@ $\beta_{X\times\C^n}=b_{\mathrm{iso}}^{\boxtimes n}$. The class $\lambda_{\mathc
     K^0(X)\ni[E]-[F]\longmapsto\beta_V\cdot[E]-\beta_V\cdot[F]\in\Kc^0(V)
   \end{equation*}
   is an isomorphism; denote its inverse by $\operatorname{Thom}_V\colon\Kc^0(V)\to K^0(X)$. If
-  $V=X\times\C^n$ with the standard structure, then
+  $V=X\times\C$ with the standard structure, then
   $\operatorname{Thom}_V=\Indsl{even}$, the even quantization map of
-  \cref{bott:prop:even-sl} for $\C^n=\R^{2n}$.
+  \cref{bott:prop:even-sl} for $\C=\R^{2}$.
 \end{theorem}
 \begin{proof}[Proof and references]
-  For $V=X\times\C$ this is \cref{bott:prop:sl-bott-one} together with \cref{bott:thm:bott}.
-  For trivial $V$ of rank $n$ it follows from $\beta_V=b_{\mathrm{iso}}^{\boxtimes n}$ and
-  \cref{bott:thm:sl-iso}. For general $V$ choose a complement $V'$, $V\oplus V'\cong X\times\C^m$
-  (\cref{bott:lem:bundles}); multiplicativity of the Bott class and the trivial case,
-  applied over the total space of $V$ (a non-compact base, as in
-  \cref{bott:thm:sl-iso}), show that $\beta_V\cdot$ has a left and a right inverse. We do not
-  give the details, which are standard; see \cite{Atiyah-K}, \S2.7.
+  For $V=X\times\C$ both statements are \cref{bott:thm:sl-iso}, since
+  $\beta_V\cdot[E]=b_{\mathrm{iso}}\cdot[E]$. For $n\ge2$, and for non-trivial $V$, the
+  isomorphism statement is a theorem of topological K-theory which we import without proof:
+  \cite{Atiyah-K}, Corollary~2.7.12. (The standard argument chooses a complement $V'$ with
+  $V\oplus V'\cong X\times\C^m$, \cref{bott:lem:bundles}, and uses the multiplicativity of the
+  Bott class and the trivial case over the non-compact total space of $V$; this needs Bott
+  periodicity over non-compact bases, which we have not proved in this generality.) The
+  identification of $\operatorname{Thom}_V$ with a quantization map for trivial $V$ of
+  rank $n\ge2$ is part of the sketch in \cref{bott:rem:sl-iso-general}, and is not claimed
+  here.
 \end{proof}
 
-\begin{remark}[Thom isomorphism by quantization]\label{bott:rem:thom-quantization}
-  For a symplectic bundle $(V,\omega)$ over $X$, $\operatorname{Thom}_V$ is again given by
-  fibrewise quantization. Choose a compatible complex structure and Hermitian metric
+\begin{remark}[Thom isomorphism by quantization; a sketch]\label{bott:rem:thom-quantization}
+  For a symplectic bundle $(V,\omega)$ over $X$ one expects $\operatorname{Thom}_V$ to be
+  given again by fibrewise quantization. We only sketch the idea; it is \emph{not proved}
+  here and nothing later depends on it. Choose a compatible complex structure and Hermitian metric
   (\cref{bott:lem:complex-symplectic}). Unitary frames identify the fibres symplectically with
   $\R^{2n}$, and two such frames differ by an element $U$ of the unitary group
   $\mathrm U(n)\subset\mathrm{Sp}(2n,\R)$. By the symplectic invariance of the Weyl
   quantization (\cref{ch:isotropic}), $\OpW(a\circ U)=M_U^{-1}\OpW(a)M_U$ for a unitary
   operator $M_U$ determined up to a constant factor; since $\abs w^2\circ U=\abs w^2$, $M_U$
-  commutes with the harmonic oscillator and preserves its eigenspaces. Hence the
-  constructions of \cref{bott:lem:relative-class,bott:prop:even-sl}, carried out in local unitary
-  frames, are compatible on overlaps up to conjugation by such operators, which does not
-  change the finite rank bundles up to isomorphism. They define
+  commutes with the harmonic oscillator and preserves its eigenspaces. The intended
+  conclusion is that the constructions of \cref{bott:lem:relative-class,bott:prop:even-sl},
+  carried out in local unitary frames, patch to maps
   $\operatorname{Ind}^{\mathrm{even}}_{\mathrm{sl},V}\colon\Kc^0(V)\to K^0(X)$ (and similarly an odd map
-  $\Kc^{-1}(V)\to K^{-1}(X)$), and $\operatorname{Ind}^{\mathrm{even}}_{\mathrm{sl},V}(\beta_V\cdot[E])=[E]$ by
-  the computation of \cref{bott:prop:sl-bott-one} in each factor; thus
-  $\operatorname{Ind}^{\mathrm{even}}_{\mathrm{sl},V}=\operatorname{Thom}_V$. To make the patching
-  canonical one uses the Fock space of each fibre, on which $\mathrm U(n)$ acts by a genuine
-  representation; we omit the details.
+  $\Kc^{-1}(V)\to K^{-1}(X)$) with $\operatorname{Ind}^{\mathrm{even}}_{\mathrm{sl},V}(\beta_V\cdot[E])=[E]$, so that
+  $\operatorname{Ind}^{\mathrm{even}}_{\mathrm{sl},V}=\operatorname{Thom}_V$. This is not
+  established by the argument just given. Conjugacy of the local constructions up to phase
+  shows only that the finite rank ranges over different charts are isomorphic fibre by
+  fibre; it does not verify the cocycle condition for the transition maps of the range
+  bundles, because the operators $M_U$ are only determined up to a phase. What is needed
+  is a genuine action of $\mathrm U(n)$ (for instance on the Fock space of each fibre),
+  with the vacuum line specified, which intertwines the local quantizations; one must then
+  check that the bundles of ranges obtained by descent along the unitary frame bundle
+  represent the right class, i.e.\ compute the global twisting, and also that the
+  computation of \cref{bott:prop:sl-bott-one}, done for $n=1$, extends to each factor
+  (\cref{bott:rem:sl-iso-general}). We do not carry this out. For a complexified real bundle,
+  where the structure group reduces to $\mathrm O(k)$ acting honestly on $L^2(\R^k)$, the
+  corresponding statement for the Thom class is proved, by a different argument, in
+  \cref{ch:semiclassical-index}.
 \end{remark}
 
 \section{The analytic index map}\label{bott:sec:analytic-index}
@@ -2601,16 +2668,22 @@ the Weyl operators (\cref{bott:lem:sl-product}), given the relative class of pro
 (\cref{bott:lem:relative-class}), proved that quantization commutes with clutching using a
 simplified clutching projection \eqref{bott:eq:clutch-proj}, and computed the even map for $n=1$
 explicitly by means of the rotation invariance of the harmonic oscillator
-(\cref{bott:prop:sl-bott-one}); the general case and the Thom isomorphism for non-trivial
-bundles are only sketched, with reference to \cite{Atiyah-K}. The source's sections on Chern
+(\cref{bott:prop:sl-bott-one}); the general case ($n\ge2$, non-compact bases,
+quantization in stages; \cref{bott:rem:sl-iso-general}) and the identification of the Thom
+isomorphism for non-trivial bundles with fibrewise quantization
+(\cref{bott:rem:thom-quantization}) are only sketched and are not used later; the topological
+Thom isomorphism itself is imported from \cite{Atiyah-K}, Corollary~2.7.12. The source's sections on Chern
 forms, the Chern character and the Todd class are incorporated in \cref{ch:families}; its
 sections on stabilization, delooping and looping sequences, $C^*$-algebras and the norm closure
 of $\Psido{0}$ are empty and have been omitted. The isotropic proof of Bott periodicity via the
 index of the harmonic oscillator is the approach of M.~F. Atiyah, \emph{Bott periodicity and the
 index of elliptic operators}, Quart. J. Math. Oxford \textbf{19} (1968), 113--140.
 
-The source conjectures that $\GT(\Sphere,Y;E)$ is actually contractible. Since it is an open subset
-of an affine Fr\'echet space (\cref{bott:lem:open}), it has the homotopy type of a CW complex by a
-theorem of R.~Palais (Homotopy theory of infinite dimensional manifolds, Topology 5 (1966)), and a
-weakly contractible CW complex is contractible by Whitehead's theorem; we have not checked the
-details of this argument in the present setting.
+The source conjectures that $\GT(\Sphere,Y;E)$ is actually contractible. This follows from
+\cref{bott:thm:contractible}. By \cref{bott:lem:open} (with $X$ a point), $\GT$ is an open subset
+of the closed affine subspace $\{\Id+A;\ \sigma_0(A)(1)=0\}$ of $\Id+\PsiT{0,-\infty}(\Sphere,Y;E)$
+with its Fr\'echet topology, hence a metrizable manifold modelled on a Fr\'echet space. By the
+corollary to Theorem~15 of R.~Palais, \emph{Homotopy theory of infinite dimensional manifolds},
+Topology \textbf{5} (1966), 1--16, it has the homotopy type of a CW complex, and a weakly
+contractible CW complex is contractible by Whitehead's theorem. Only weak contractibility is used
+in the text.

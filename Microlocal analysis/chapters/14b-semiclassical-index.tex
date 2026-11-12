@@ -290,10 +290,15 @@ the form in which we state them.
   $A-\sum_{k<K}A_k\in\epsilon^K\Psisl{-\infty}$ for all $K$. A smooth bundle
   map $e\in\CI(M;\End E)$, regarded as a multiplication operator, satisfies
   $eA,Ae\in\Psisl{-\infty}$ with symbols $e\sigsl(A)$, $\sigsl(A)e$. If
-  $\sigsl(A)$ is supported in $\varpi^{-1}(K)$, $K\subset M$ compact, then $A$
-  may be chosen (modifying it by an element of $\Psiinf$) with kernel supported
-  in any given neighbourhood of $\Diag\cap K\times_BK$
-  (\cref{semiclassical:cor:localization}). All of this holds with smooth
+  $q\in\Sc(T^*(M/B);\End E)$ is supported in $\varpi^{-1}(K)$, $K\subset M$
+  compact, then there is a \emph{fresh} choice of $A\in\Psisl{-\infty}$ with
+  $\sigsl(A)=q$ and kernel supported in any given neighbourhood of
+  $\Diag\cap K\times_BK$ (quantize $q$ locally and cut off with
+  \cref{semiclassical:cor:localization}). Note that this is a statement about
+  some quantization of $q$, not about a given $A$: a given family with
+  $\sigsl(A)=q$ need not be within $\Psiinf$ of such a choice (for instance
+  $A=\epsilon A_1$ with $\sigsl(A_1)$ supported away from $\varpi^{-1}(K)$ has
+  symbol $0$), and only fresh choices are used below. All of this holds with smooth
   dependence on additional parameters (\cref{semiclassical:rem:parameters}).
 \item\label{scindex:S-invariance} (Naturality;
   \cref{semiclassical:prop:invariance}.) A diffeomorphism $F:M\to M'$ of
@@ -406,8 +411,15 @@ proofs, which apply verbatim to compactly supported families on non-compact fibr
 
 \begin{remark}[The semiclassical cotangent bundle]\label{scindex:rem:slT}
   The symbol $\sigsl(A)$ depends on the parameter $\epsilon$, not only on the
-  family of operators: under a reparametrization $\epsilon'=\epsilon T(\epsilon)$
-  with $T>0$ smooth, the symbol is composed with the fibre dilation by $T(0)$.
+  family of operators. If the same family is reparametrized by
+  $\epsilon'=\epsilon T(\epsilon)$, with $T>0$ smooth, then writing
+  $\epsilon D=\epsilon'D/T(\epsilon)$ shows that its symbol with respect to
+  $\epsilon'$ is $\sigsl'(A)(z,\zeta)=\sigsl(A)(z,\zeta/T(0))$: the symbol is
+  composed with the \emph{inverse} fibre dilation, by $T(0)^{-1}$. In the other
+  direction, the new family $\tilde A(\epsilon)=A(c\epsilon)$, $c>0$ (which is the
+  old family read with $\epsilon'=\epsilon/c$, i.e.\ $T\equiv c^{-1}$), has
+  $\sigsl(\tilde A)(z,\zeta)=\sigsl(A)(z,c\zeta)$
+  (\cref{scindex:ex:oscillatory}).
   Invariantly, $\sigsl(A)$ is a function on a bundle ${}^{\mathrm{sl}}T^*(M/B)$
   which is isomorphic, but not canonically, to $T^*(M/B)$; a covector of
   ${}^{\mathrm{sl}}T^*$ at $z$ is the class of $df/\epsilon$ for a function $f$
@@ -430,9 +442,16 @@ Hermitian bundle. Set
 If $g=\Id+A\in\Ginf_{\mathrm c}$, then $g_b^{-1}=\Id+A'_b$ with $A'$ again in
 $\Psido{-\infty}_{\mathrm c}(M/B;E)$: indeed $A'=-A+A(\Id+A)^{-1}A$, and as in the
 proof of \cref{scindex:lem:invertible} the last term has a smooth kernel
-depending smoothly on $b$, with support in that of $A$. Thus $\Ginf_{\mathrm c}
-(M/B;E)$ is a group, the group of smooth sections of a bundle of groups over $B$
-with fibre $\Ginf_{\mathrm c}(Z_b;E_b)$. We assign to each of its elements a class
+depending smoothly on $b$; if the kernel of $A$ is supported in $K\times_BK$,
+$K\subset M$ compact, so is that of $A(\Id+A)^{-1}A$. (Its support can be larger
+than that of $A$: if $A=u_1\otimes v_1^*+u_2\otimes v_2^*$, where $\supp u_1$,
+$\supp v_1=\supp u_2$ and $\supp v_2$ are pairwise disjoint and
+$\inner{u_2}{v_1}\ne0$, then $A^3=0$ and $A(\Id+A)^{-1}A=A^2=
+\inner{u_2}{v_1}\,u_1\otimes v_2^*$, whose support $\supp u_1\times\supp v_2$
+does not meet $\supp A$.) Thus $\Ginf_{\mathrm c}(M/B;E)$ is a group under
+composition. (We do not need, and do not claim, that it is the group of sections
+of a locally trivial bundle of groups over $B$; for open fibres this would need
+an extra hypothesis.) We assign to each of its elements a class
 in $K^{-1}(B)$. (Melrose does this by showing that the Hilbert bundle with fibres
 $L^2(Z_b;E_b)$ has a smooth orthonormal frame; see \cref{scindex:ex:frame}. The
 following embedding is more elementary.)
@@ -455,12 +474,69 @@ following embedding is more elementary.)
   \begin{equation*}
     J_b:L^2(W_b;E_b)\longrightarrow L^2(Y;F),\quad W_b=W\cap Z_b,
   \end{equation*}
-  where $Y$ is a compact manifold and $F\to Y$ a Hermitian bundle, such that
-  $J_b$ maps $\CIc(W_b;E_b)$ into $\CI(Y;F)$ and, for every
-  $A\in\Psido{-\infty}_{\mathrm c}(M/B;E)$ with kernel supported in
-  $K\times_BK$, the map $b\mapsto J_bA_bJ_b^*$ is a smooth map
-  $B\to\Psido{-\infty}(Y;F)$ (depending continuously on $A$).
+  where $Y$ is a compact manifold of \emph{positive dimension} and $F\to Y$ a
+  Hermitian bundle, which is smooth in the following sense: for every manifold
+  $P$ (possibly with boundary), every smooth map $\pi:P\to B$, and every smooth
+  section $u$ of the pull-back of $E$ to
+  \begin{equation*}
+    P\times_BW=\{(p,m)\in P\times W;\ \pi(p)=\phi(m)\}
+  \end{equation*}
+  which is supported in $P\times_BK_1$ for some compact $K_1\subset W$, the
+  function $(p,y)\mapsto\bigl(J_{\pi(p)}u_p\bigr)(y)$, $u_p=u(p,\cdot)\in
+  \CIc(W_{\pi(p)};E)$, is smooth on $P\times Y$.
 \end{definition}
+
+Taking $P$ a point, $J_b$ maps $\CIc(W_b;E_b)$ into $\CI(Y;F)$; taking $P=B$, it
+maps smooth compactly supported sections of $E$ over $W$ to smooth families. The
+parameter space $P$ is needed for the kernels below. The point of the definition
+is that it is a condition on the family $J$ \emph{itself}, not only on the
+conjugated operators $J_bA_bJ_b^*$. A weaker condition, smoothness of
+$b\mapsto J_bA_bJ_b^*$ for every $A$, does not suffice to make the class
+defined below independent of the embedding: for the degenerate fibration
+$M=B=\Sphere^2\times\Sphere$ with $E=\C$, an embedding $J_b(1)\in L_b$, a unit
+vector chosen (not continuously) in the Hopf line $L_b\subset\C^2\subset
+\CI(Y)$ of the $\Sphere^2$ factor, has $J_bA_bJ_b^*=A_bP_{L_b}$ smooth for
+every smooth scalar $A$, yet for $g(b,z)=z^{-1}$ it gives the loop
+$P_Lz^{-1}+\Id-P_L$, whose Toeplitz index along the $\Sphere$ factor is
+$[L]\ne[\C]$ in $K^0(\Sphere^2)$, whereas a constant unit vector gives $[\C]$.
+Under \cref{scindex:def:admissible}, $b\mapsto J_b(1)$ must be smooth, which
+excludes this example (the Hopf line has no nowhere vanishing section).
+
+\begin{lemma}[Mixed kernels]\label{scindex:lem:mixed}
+  Let $J$ and $J'$ be admissible embeddings of $(M/B,E)$ over $W\supset K$, with
+  targets $(Y,F)$ and $(Y',F')$. For every $A\in\Psido{-\infty}_{\mathrm c}
+  (M/B;E)$ with kernel supported in $K\times_BK$, $J_bA_bJ_b'^*:L^2(Y';F')\to
+  L^2(Y;F)$ has a smooth kernel $k(b,y,y')$ on $B\times Y\times Y'$; in
+  particular $b\mapsto J_bA_bJ_b^*$ is a smooth map $B\to\Psido{-\infty}(Y;F)$.
+  If $A$ depends smoothly on parameters in a manifold $P'$, then $k$ depends
+  smoothly on them.
+\end{lemma}
+\begin{proof}
+  Write the kernel of $A$ as $\alpha(m,m')\nu(m')$ with $\alpha$ a smooth
+  section of $\Hom(E_{m'},E_m)$ over $M\times_BM$, supported in $K\times_BK$.
+  Let $O\subset W$ be open with a frame $e_1,\dots,e_r$ of $E$. Apply
+  \cref{scindex:def:admissible} to $J$ with $P=O$, $\pi=\phi$ and
+  $u_{m'}(m)=\alpha(m,m')e_j(m')$: the functions $(m',y)\mapsto
+  (J_{\phi(m')}u_{m'})(y)$ are smooth, so there is a smooth section $s(m',y)$ of
+  $\Hom(E_{m'},F_y)$ over $W\times Y$, supported in $K\times Y$, with
+  $s(m',\cdot)=J_{\phi(m')}\alpha(\cdot,m')$. Since $A_bu=\int\alpha(\cdot,m')
+  u(m')\nu(m')$ is an $L^2$-valued Bochner integral and $J_b$ is bounded,
+  $J_bA_bu=\int_{Z_b}s(m',\cdot)u(m')\nu(m')$. Hence, for $f\in L^2(Y';F')$ and a
+  orthonormal frame $f_1,\dots,f_R$ of $F$ over an open $O_Y\subset Y$,
+  \begin{equation*}
+    \inner{(J_bA_bJ_b'^*f)(y)}{f_i(y)}_{F_y}=\inner{J_b'^*f}{s(\cdot,y)^*f_i(y)}
+    _{L^2(Z_b)}=\inner f{t_i(b,y,\cdot)}_{L^2(Y')},
+  \end{equation*}
+  where $t_i(b,y,\cdot)=J'_b\bigl(s(\cdot,y)^*f_i(y)\bigr)$. Now apply
+  \cref{scindex:def:admissible} to $J'$ with $P=B\times O_Y$, $\pi(b,y)=b$, and
+  the section $u_{(b,y)}(m')=s(m',y)^*f_i(y)$ of $E$ over $Z_b$, which is smooth
+  on $P\times_BW=O_Y\times W$ and supported in $O_Y\times K$: $t_i$ is smooth on
+  $B\times O_Y\times Y'$. So the kernel of $J_bA_bJ_b'^*$, which is
+  $\sum_if_i(y)\otimes t_i(b,y,y')^*$ (times the density of $Y'$) over $O_Y$, is
+  smooth. With
+  parameters, replace $B$ by $B\times P'$ and $J$, $J'$ by their pull-backs, which
+  are again admissible.
+\end{proof}
 
 \begin{lemma}\label{scindex:lem:embedding}
   For every compact $K\subset M$ there is an admissible embedding of $(M/B,E)$
@@ -475,8 +551,11 @@ following embedding is more elementary.)
   diffeomorphism from $\{(m,v);\ m\in\bar Z_b,\ v\in\mathcal V_m,\ \abs v<\delta\}$
   onto an open set $\Omega_b\subset(0,2\pi)^N\subset\Torus^N$, depending smoothly
   on $b$; let $p_b:\Omega_b\to\bar Z_b$ be the corresponding projection. Choose
-  $h\in\CIc([0,\delta))$ real, not identically zero near $0$, and define
-  $\gamma'(y)=h(\abs v)$ for $y=\Theta(m,v)$, extended by $0$. By the
+  $h\in\CIc((-\delta^2,\delta^2))$ real with $h(0)\ne0$, and define
+  $\gamma'(y)=h(\abs v^2)$ for $y=\Theta(m,v)$, extended by $0$; since
+  $\abs v^2$ is smooth (unlike $\abs v$ at $v=0$), $\gamma'$ is smooth in
+  $(b,y)$, with $\{(b,y);\ \gamma'(b,y)\ne0\}$ contained in a compact subset of
+  $\{(b,y);\ y\in\Omega_b\}$. By the
   coarea formula
   \begin{equation*}
     \int_{\Omega_b}\abs{\gamma'(y)}^2\abs{u(p_b(y))}^2dy=\int_{\bar Z_b}
@@ -494,15 +573,21 @@ following embedding is more elementary.)
     (J_bu)(y)=\gamma(y)\,\kappa\bigl(u(p_b(y))\bigr)\ \text{ if }p_b(y)\in W,
     \qquad(J_bu)(y)=0\ \text{ otherwise}.
   \end{equation*}
-  By construction $\norm{J_bu}=\norm u$. If $u\in\CIc(W_b)$ then $J_bu$ is
-  smooth with compact support in $\Omega_b$. For $A$ with kernel $A(m,m')$
-  supported in $K\times_BK$, $J_bA_bJ_b^*$ has the kernel
+  By construction $\norm{J_bu}=\norm u$. If $P$, $\pi$ and $u$ are as in
+  \cref{scindex:def:admissible}, with $u$ supported in $P\times_BK_1$,
+  $K_1\subset W$ compact, then
   \begin{equation*}
-    \gamma(y)\,\kappa\,A_b(p_b(y),p_b(y'))\,\kappa^*\,\gamma(y')\,j_b(y'),
+    (J_{\pi(p)}u_p)(y)=\gamma(\pi(p),y)\,\kappa\bigl(u(p,p_{\pi(p)}(y))\bigr)
   \end{equation*}
-  where $j_b$ is the smooth positive Jacobian factor relating $\nu$, $dy$ and the
-  measures on the fibres of $p_b$; it is smooth in $(b,y,y')$ with
-  compact support in $\Omega_b\times\Omega_b$.
+  where $\gamma(\pi(p),y)\ne0$, and $0$ elsewhere; here $(b,y)\mapsto p_b(y)$
+  is smooth where $y\in\Omega_b$, and the expression vanishes near the set where
+  $p_{\pi(p)}(y)\in\pa W$ because $u$ is supported over $K_1$. So
+  $(p,y)\mapsto(J_{\pi(p)}u_p)(y)$ is smooth and $J$ is admissible. (For
+  instance, for $A$ with kernel $A(m,m')$ supported in $K\times_BK$, $J_bA_bJ_b^*$
+  has the kernel $\gamma(y)\,\kappa\,A_b(p_b(y),p_b(y'))\,\kappa^*\,\gamma(y')\,
+  j_b(y')$, where $j_b$ is the smooth positive Jacobian factor relating $\nu$,
+  $dy$ and the measures on the fibres of $p_b$, in accordance with
+  \cref{scindex:lem:mixed}.)
 \end{proof}
 
 For a non-compact vector bundle fibre we shall also need kernels which are
@@ -515,13 +600,25 @@ Schwartz, rather than compactly supported, along the fibres.
   $\mathcal V\times_B\mathcal V$ and Schwartz in the fibre variables, uniformly
   with all derivatives (i.e.\ they extend smoothly, vanishing to infinite order at
   the boundary, to the fibrewise radial compactification; see
-  \cref{ch:distributions}). Composing the construction above with the fibre
-  compression $v\mapsto v(1+\abs v^2)^{-1/2}$, which identifies $\mathcal V$ with
-  the open unit ball bundle, and using a function $\gamma$ which is Gaussian in
-  the original variable, one obtains isometries $J_b:L^2(\mathcal V_b)\to
-  L^2(\Torus^N;\C^R)$ with the properties of \cref{scindex:def:admissible} for
-  all elements of $\Psido{-\infty}_{\mathcal S}$; the Jacobian factors grow at
-  most polynomially in $\abs v$ and are absorbed by the rapid decay. Everything
+  \cref{ch:distributions}). Let $c(v)=v(1+\abs v^2)^{-1/2}$, a diffeomorphism
+  of $\mathcal V$ onto the open unit ball bundle $\mathcal V_{<1}$, commuting with
+  the structure group $O(k)$, $k=\operatorname{rank}\mathcal V$, and let $C_bu=\abs{\det dc^{-1}}^{1/2}\,u\circ
+  c^{-1}$, a unitary $L^2(\mathcal V_b)\to L^2((\mathcal V_{<1})_b)$. Since
+  $c^{-1}(w)=w(1-\abs w^2)^{-1/2}$, the map $c^{-1}$ and the Jacobian
+  $\abs{\det dc^{-1}}=(1-\abs w^2)^{-(k+2)/2}$ have derivatives bounded by powers of
+  $(1-\abs w^2)^{-1}\sim\ang v^2$; this polynomial growth is absorbed by the rapid
+  decay. Hence $C$ maps families which are Schwartz along the fibres (uniformly
+  with all derivatives) to smooth families supported in the closed unit ball
+  bundle $K=\mathcal V_{\le1}$, vanishing to infinite order at its boundary, and
+  conjugates $\Psido{-\infty}_{\mathcal S}(\mathcal V/B;E)$ into the families in
+  $\Psido{-\infty}_{\mathrm c}(\mathcal V/B;E)$ with kernels supported in
+  $K\times_BK$. If $J^0$ is an admissible embedding of $\mathcal V$ (an open
+  subset of $S(\mathcal V\oplus\R)$) over $W=\mathcal V_{<2}\supset K$, then
+  $J=J^0C$ is an isometry $L^2(\mathcal V_b)\to L^2(\Torus^N;\C^R)$ which has the
+  property of \cref{scindex:def:admissible} for sections Schwartz along the
+  fibres, and \cref{scindex:lem:mixed} holds for any two embeddings of this form
+  and kernels in $\Psido{-\infty}_{\mathcal S}$, by applying it to $J^0$, $J'^0$
+  and $CAC^*$. We call such $J$ admissible for Schwartz families. Everything
   below applies to such families without change.
 \end{remark}
 
@@ -534,7 +631,13 @@ Schwartz, rather than compactly supported, along the fibres.
   \end{equation*}
   and we set $[g]=[\rho_J(g)]\in[B;\Ginf(Y;F)]=K^{-1}(B)$.
 \end{definition}
-Indeed $\rho_J(g)(b)$ is invertible: with respect to $L^2(Y;F)=\Ran J_b\oplus
+Here $\rho_J(g)$ is a smooth map $B\to\Id+\Psido{-\infty}(Y;F)$ by
+\cref{scindex:lem:mixed}, and $[B;\Ginf(Y;F)]=K^{-1}(B)$ by
+\ref{scindex:K-Ginf}, which applies because $\dim Y>0$. (For $\dim Y=0$ the
+group $\Ginf(Y;F)$ is a finite dimensional $\GL(N,\C)$ and homotopy classes of
+maps into it are not $K^{-1}(B)$: for $Y$ a point and $F=\C$, every map
+$\Sphere^3\to\C^\times$ is null-homotopic while $K^{-1}(\Sphere^3)\cong\Z$.)
+Moreover $\rho_J(g)(b)$ is invertible: with respect to $L^2(Y;F)=\Ran J_b\oplus
 (\Ran J_b)^\perp$ it is $J_bg_bJ_b^*\oplus\Id$, where $g_b$ acts on $L^2(W_b)$ (it
 preserves this space and its complement, being the identity on
 $L^2(Z_b\setminus K)$), and its inverse is $\Id+J_bA'_bJ_b^*$. Note that
@@ -574,9 +677,20 @@ $J^*J=\Id$ implies $\rho_J(gh)=\rho_J(g)\rho_J(h)$.
     L^2(Y';F'),\quad t\in[0,\tfrac\pi2].
   \end{equation*}
   Since the ranges of $(J_b,0)$ and $(0,J'_b)$ are orthogonal, $R_t^*R_t=
-  \cos^2t\,J^*J+\sin^2t\,J'^*J'=\Id$, so each $R_t$ is admissible, and
-  $\rho_{R_t}(g)$ is a homotopy in $\Ginf(Y\sqcup Y')$ from
-  $\rho_J(g)\oplus\Id$ to $\Id\oplus\rho_{J'}(g)$. By (i), applied to the
+  \cos^2t\,J^*J+\sin^2t\,J'^*J'=\Id$. The family $R_{t,b}$ is an admissible
+  embedding of the pulled back fibration over $B\times[0,\frac\pi2]$: for $P$,
+  $\pi=(\pi_B,\pi_t)$ and $u$ as in \cref{scindex:def:admissible},
+  $R_{\pi(p)}u_p=(\cos\pi_t(p)\,J_{\pi_B(p)}u_p,\ \sin\pi_t(p)\,J'_{\pi_B(p)}u_p)$
+  is smooth in $(p,y)$ because $J$ and $J'$ are admissible. Its conjugate
+  \begin{equation*}
+    R_tAR_t^*=\begin{pmatrix}\cos^2t\,JAJ^*&\cos t\sin t\,JAJ'^*\\
+    \cos t\sin t\,J'AJ^*&\sin^2t\,J'AJ'^*\end{pmatrix}
+  \end{equation*}
+  involves the \emph{mixed} terms $JAJ'^*$, $J'AJ^*$, which are smooth families
+  of smoothing operators by \cref{scindex:lem:mixed}; this is where the full
+  strength of \cref{scindex:def:admissible} is used. So $\rho_{R_t}(g)$ is a
+  smooth homotopy in $\Ginf(Y\sqcup Y')$ from $\rho_J(g)\oplus\Id$ to
+  $\Id\oplus\rho_{J'}(g)$. By (i), applied to the
   inclusions of $L^2(Y)$ and $L^2(Y')$ as summands, these represent $[\rho_J(g)]$
   and $[\rho_{J'}(g)]$.
 
@@ -586,7 +700,9 @@ $J^*J=\Id$ implies $\rho_J(gh)=\rho_J(g)\rho_J(h)$.
   admissible embedding of $M$ over $W\subset U$ is one of $U$.
 
   (iv) If $J$ is an admissible embedding for $(M'/B,E')$ over $W'$, then $J\Phi$
-  is one for $(M/B,E)$ over the preimage of $W'$, and since $\Phi$ is unitary,
+  is one for $(M/B,E)$ over the preimage of $W'$ (if $u$ is a smooth family of
+  sections of $E$ as in \cref{scindex:def:admissible}, then $\Phi u$ is one of
+  $E'$), and since $\Phi$ is unitary,
   $J(\Phi A\Phi^{-1})J^*=(J\Phi)A(J\Phi)^*$. Thus $\rho_J(\Phi g\Phi^{-1})=
   \rho_{J\Phi}(g)$, and (ii) applies.
 \end{proof}
@@ -713,11 +829,14 @@ two infinite rank contributions cancel.)
 
 \begin{remark}\label{scindex:rem:relative-projections}
   If $e=P$, $p_0=Q$ are orthogonal projections, then $QP:\Ran P\to\Ran Q$ is a
-  Fredholm family (it differs from the identity of $\Ran Q$ by a compact operator
-  after identifying $\Ran P$ with $\Ran Q$), and $d(P,Q)$ is its index bundle, the
-  \emph{relative index} of the pair. This is Melrose's description of the even
-  semiclassical index (``the formal difference of the pair $P\ominus\pi_\infty$'');
-  we do not need it, but see \cref{scindex:ex:relative}.
+  Fredholm family: $PQ:\Ran Q\to\Ran P$ is a parametrix, since
+  $PQP=P-P(P-Q)P$ and $QPQ=Q+Q(P-Q)Q$ differ from the identities of $\Ran P$ and
+  $\Ran Q$ by compact operators. For $B$ a point its index is $d(P,Q)$, which may
+  have either sign (\cref{scindex:ex:relative}). For general $B$ the index
+  bundle of this Fredholm family, the \emph{relative index} of the pair, is
+  Melrose's description of the even semiclassical index (``the formal difference
+  of the pair $P\ominus\pi_\infty$''); that it equals $d(P,Q)$ for general $B$
+  is not proved here, and is not used.
 \end{remark}
 
 \section{The semiclassical index}\label{scindex:sec:sl-index}
@@ -1158,11 +1277,18 @@ is the semiclassical index (left). This is \cref{scindex:thm:analytic=sl}.}
 \end{proof}
 
 \begin{remark}\label{scindex:rem:index-trace}
-  For $B$ a point, the rank of $d(e_{A,B},p_0)$ is $\Tr(e_{A,B}-p_0)=
-  \Tr(R_+^2)-\Tr(R_-^2)$, which is the formula $\ind A=\Tr(R_+^k)-\Tr(R_-^k)$ of
-  \cref{index:thm:trace-formula} for $k=2$. Indeed, $\Tr$ of the relative index of two
-  idempotents differing by a trace class operator is the difference of their
-  ranks.
+  For $B$ a point, $d(e_{A,B},p_0)\in K^0(\mathrm{pt})=\Z$ equals
+  $\Tr(e_{A,B}-p_0)=\Tr(R_+^2)-\Tr(R_-^2)$, which is the formula
+  $\ind A=\Tr(R_+^k)-\Tr(R_-^k)$ of \cref{index:thm:trace-formula} for $k=2$
+  (\cref{scindex:ex:milnor-trace}). The identity $d(e,p_0)=\Tr(e-p_0)$ for a
+  compactly supported idempotent perturbation $e$ of $p_0$ over a point is
+  \emph{not} a difference of ranks (both $\Ran e$ and $\Ran p_0$ are in general
+  infinite dimensional); it is a winding number computation for the loop
+  $g=g_{e,p_0}$: with $c=p_0z+\Id-p_0$ one finds $g^{-1}\pa_\theta g=
+  -ic^{-1}(e-p_0)c$, so $\frac1{2\pi i}\int_0^{2\pi}\Tr(g^{-1}\pa_\theta g)\,
+  d\theta=-\Tr(e-p_0)$, and on $K^{-2}(\mathrm{pt})$ the Toeplitz index is minus
+  this winding number, by \eqref{scindex:eq:bott-map} for a rank one $p$. The
+  details are in \cref{solsemiclassical-index:lem:d-trace} of the solutions.
 \end{remark}
 
 Next we need parametrices in the semiclassical calculus.
@@ -1612,10 +1738,17 @@ $\beta_N$.
   \emph{The Thom step \eqref{scindex:eq:thom-sl}.} Let $\tilde M=S(\mathcal
   V\oplus\R)\xrightarrow{\tilde\phi}M$ and $\hat k:T^*(\mathcal V/B)
   \hookrightarrow T^*(\tilde M/B)$ the open embedding induced by $k_{\mathcal V}$.
+  First choose, once and for all, a splitting \eqref{families:eq:splitting}
+  $T^*(\tilde M/B)\cong T^*(\tilde M/M)\oplus\tilde\phi^*T^*(M/B)$ over all of
+  $\tilde M$ (for instance from a metric connection on $\mathcal V\oplus\R$,
+  which preserves the sphere bundle), and define $\tau$ using its restriction to
+  $\mathcal V$ through $k_{\mathcal V}$. (Any two splittings are homotopic, so
+  $\tau$ does not depend on this choice; choosing the global splitting first
+  avoids having to extend a splitting given only over $\mathcal V$.)
   The class $b=(k_{\mathcal V})_*\lambda_{\mathcal V}\in\Kc(T^*(\tilde M/M))$ has
   $\inda(b)=1$ by \cref{scindex:cor:TH}. By \cref{families:cor:mult} and
-  \cref{families:lem:natural} (with a splitting of $T^*(\tilde M/B)$ extending the one used to define
-  $\tau$),
+  \cref{families:lem:natural} (with $Y=\tilde M$, $O=k_{\mathcal V}(\mathcal V)$
+  and the chosen global splitting),
   \begin{equation*}
     \inda^{M/B}(x)=\inda^{\tilde M/B}\bigl(b\cdot\tilde\phi^*x\bigr)
     =\inda^{\tilde M/B}\bigl(\hat k_*\tau(x)\bigr).
@@ -1693,6 +1826,14 @@ This section describes, without complete proofs, how the remaining ingredient,
 \eqref{scindex:eq:thom-sl}, and more generally the multiplicativity of the
 semiclassical index, can be obtained by semiclassical methods.
 
+\emph{Status.} Everything in this section is a sketch: the adiabatic and
+adiabatic--semiclassical calculi are described but not constructed, Melrose's
+multiplicativity \eqref{scindex:eq:mult-sl} and his Proposition~12.14 are quoted
+and not proved, and the commutator estimate needed for the Thom tower is not
+established. Nothing in this book depends on this section: the proof of
+\cref{scindex:thm:AS}, including \eqref{scindex:eq:thom-sl}, uses instead the
+analytic multiplicativity of \cref{ch:families} (\cref{families:cor:mult}).
+
 \begin{discussion}
   In an \emph{adiabatic limit} one makes an operator semiclassical in some
   directions only. For a tower $\tilde M\to M\to B$ one lets the kernels
@@ -1715,7 +1856,7 @@ $\tilde\phi^*:{}^{\mathrm{sl}}T^*(M/B)\times_M\tilde M\to{}^{\mathrm{sl}}T^*(M/B
 and quantizes $\tilde x$ semiclassically along its fibres. This gives a class
 $\Indsl{\tilde\phi^*}(\tilde x)\in\Kc(T^*(M/B))$ (compactly supported in the
 parameters). Second, one applies $\Indsl{M/B}$. Melrose's multiplicativity
-theorem (his Proposition~12.15) states that
+theorem (his Proposition~12.15, which we do not prove) states that
 \begin{equation}\label{scindex:eq:mult-sl}
   \Indsl{\psi}=\Indsl{\phi}\circ\Indsl{\tilde\phi^*}.
 \end{equation}
@@ -1725,9 +1866,11 @@ by \cref{scindex:thm:thom} and the module property (applied with parameters in
 $T^*(M/B)$), so \eqref{scindex:eq:mult-sl} contains \eqref{scindex:eq:thom-sl}.
 
 \subsection{The adiabatic calculus}
-To compare the two quantizations one uses two parameters: $\epsilon$, the
-semiclassical parameter in the directions of $M/B$, and $\delta$, an adiabatic
-parameter in the fibres of $\tilde\phi$. For a single fibration
+To compare the two quantizations one uses two parameters: $\epsilon$, a
+semiclassical parameter in all the directions of $\tilde M/B$, and $\delta$, an
+adiabatic parameter which concentrates the kernels further in the directions of
+the base $M/B$ only, leaving the fibres of $\tilde\phi$ at the semiclassical scale
+$\epsilon$. For a single fibration
 $Y\to Z$ with fibre $\tilde Z$ (the case $B=\mathrm{pt}$), an \emph{adiabatic
 family} is a family $A(\delta)$ of smoothing operators on $Y$ whose kernels vanish
 to infinite order as $\delta\downarrow0$ away from the fibre diagonal
@@ -1749,19 +1892,35 @@ cotangent bundle of the base, of smoothing operators on the fibres $\tilde Z$.
 If $a$ is an invertible-at-infinity adiabatic symbol, its adiabatic
 quantizations are invertible for small $\delta$, and this defines an index
 $\Kc^{-1}(T^*Z)\to K^{-1}(\mathrm{pt})$ with \emph{operator-valued} symbols; by
-deforming $a$ to finite rank (\cref{scindex:ex:frame}) one sees that it agrees with
-the semiclassical index (Melrose's Proposition~12.14). Combining the two
-parameters gives the adiabatic--semiclassical algebra, whose kernels are of the
-form $\delta^{-n-k}A(\delta,\epsilon,(\tilde z-\tilde z')/\epsilon,z,
-(z-z')/(\epsilon\delta))$ near the fibre diagonal, with two symbol maps (at
+deforming $a$ to finite rank (\cref{scindex:ex:frame}) one expects that it
+agrees with the semiclassical index (this is Melrose's Proposition~12.14, which we
+do not prove). Combining the two parameters gives the adiabatic--semiclassical
+algebra. With $n=\dim\tilde Z$ the fibre dimension and $k=\dim Z$ the base
+dimension, its kernels are of the form
+\begin{equation*}
+  \epsilon^{-n-k}\delta^{-k}A\Bigl(\delta,\epsilon,\frac{\tilde z-\tilde z'}
+  \epsilon,z,\frac{z-z'}{\epsilon\delta}\Bigr)
+\end{equation*}
+near the fibre diagonal, $A$ Schwartz in the two scaled variables, with right
+density $d\tilde z'\,dz'$. The prefactor is forced by the scaling: the changes of
+variables $\tilde z'=\tilde z-\epsilon\tilde Z$, $z'=z-\epsilon\delta Z$ multiply
+the density by $\epsilon^n(\epsilon\delta)^k=\epsilon^{n+k}\delta^k$, so with this
+prefactor the operators have norms bounded uniformly in $(\epsilon,\delta)$ and
+nontrivial limits, as for the semiclassical--adiabatic families of
+\cref{semiclassical:def:sl-ad} (where the roles of the two groups of variables are
+named the other way round). (A
+prefactor $\delta^{-n-k}$, as in Melrose's Eq.~(12.64), would make the operator
+norm of a family with a fixed Schwartz profile $O(\epsilon^{n+k})$ for fixed
+$\delta>0$, so that the intended nonzero limit at $\epsilon=0$ disappears.) The
+algebra has two symbol maps (at
 $\epsilon=0$ and at $\delta=0$) and a joint symbol; the relevant cotangent
 bundle ${}^{\mathrm{sl\,ad}}T^*\tilde M$ is spanned by $df/\epsilon$ and
 $dg/(\epsilon\delta)$, $f\in\CI(\tilde M)$, $g\in\CI(Z)$, and restricts to
 ${}^{\mathrm{sl}}T^*\tilde M$, to the adiabatic cotangent bundle and to $T^*\tilde M$
-on the three faces. The multiplicativity \eqref{scindex:eq:mult-sl} is then the
-statement that a family in this algebra quantizing $\tilde x$ restricts, at the
-two faces, to the two composite quantizations, and that the index is constant
-along the family.
+on the three faces. The multiplicativity \eqref{scindex:eq:mult-sl} would then
+follow from the statement that a family in this algebra quantizing $\tilde x$
+restricts, at the two faces, to the two composite quantizations, and that the
+index is constant along the family; we do not carry this out.
 
 For the Thom tower the same idea can be made concrete in the language of this
 chapter. Let $A$ be a semiclassical quantization of the symbol of $x$ on $M/B$,
@@ -1770,8 +1929,8 @@ transported, rescaled Koszul operator of \cref{scindex:sec:thom} on the fibres o
 $\mathcal V$, whose null space is spanned by the transported Gaussian at scale
 $\epsilon^{1/2}$ and which is surjective. This is the hypothesis (H) of the
 \cref{families:sec:mult} (\eqref{families:eq:H}), and the Clifford tensor product
-$\mathcal D_\epsilon\otimes A$ formed there has relative index equal to that of
-$A$, by the same linear algebra. The remaining step is to show that the
+$\mathcal D_\epsilon\otimes A$ formed there should have relative index equal to
+that of $A$, by the same linear algebra. The remaining step is to show that the
 idempotent of \cref{scindex:lem:milnor} built from $\mathcal D_\epsilon\otimes A$
 is homotopic, through compactly supported (or Schwartz) idempotent perturbations
 of $p_0$, to a semiclassical quantization on $\mathcal V/B$ of the idempotent of
@@ -1779,7 +1938,8 @@ $\lambda_{\mathcal V}\cdot\varpi^*x$. In the analytic proof this step required t
 product-type calculus; here it requires the estimate that the commutators of the
 lifted operators with $\mathcal D_\epsilon$ are $O(\epsilon^{1/2})$ relative to
 $\mathcal D_\epsilon$, which is what the joint semiclassical--isotropic
-calculus provides. We do not develop that calculus here.
+calculus would provide. We do not develop that calculus here, so this
+paragraph, like the rest of the section, is an outline and not a proof.
 
 \section{The Chern character of the index bundle}\label{scindex:sec:chern}
 
@@ -1808,15 +1968,30 @@ the semiclassical point of view.
 
 \begin{remark}[The Todd class]\label{scindex:rem:todd}
   The derivation shows that $\Ch(\inda x)$ is the fibre integral of
-  $\Ch(x)$ against a class $\mathcal T\in\Hev(M)$ obtained by integrating
-  $\Ch(\lambda_{\mathcal V})$ over the fibres of $T^*(\mathcal V/M)$, where
-  $\mathcal V$ is the normal bundle of an embedding. That $\mathcal T$ does not
-  depend on the embedding follows from \cref{scindex:thm:AS} (for $B$ a point and
-  suitable $x$) or directly: the class is stable under adding trivial bundles,
-  since $\Ch(\lambda_{\R})$ integrates to a constant, and any two normal bundles
-  are stably isomorphic, being stable inverses of $T(M/B)$. Its identification with
-  the Todd class of $T(M/B)\otimes\C$ is the Riemann--Roch computation of Atiyah and
-  Hirzebruch recalled in \cref{ch:families}.
+  $\Ch(x)$ against a class $\mathcal T\in\Hev(M)$,
+  \begin{equation*}
+    \mathcal T=(-1)^N\varpi_*\Ch(\lambda_{\mathcal V}),
+  \end{equation*}
+  where $\mathcal V$ is the normal bundle of an embedding $M\hookrightarrow
+  \R^N\times B$ and $\varpi_*$ is integration over the fibres of
+  $T^*(\mathcal V/M)$; the sign $(-1)^N$ comes from the Bott normalization
+  $\Ch(\beta_N^{-1}z)=(-1)^N\pi_*\Ch(z)$ (\ref{families:C3}). The sign matters:
+  $\varpi_*\Ch(\lambda_{\mathcal V})$ \emph{alone} changes sign when a trivial
+  real line is added to $\mathcal V$, since $\lambda_{\mathcal V\oplus\R}=
+  \lambda_{\mathcal V}\boxtimes\lambda_\R$ and $\int_{T^*\R}\Ch(\lambda_\R)=
+  \int_{T^*I}\Ch(b_1)=-1$; indeed $\varpi_*\Ch(\lambda_{\mathcal V})=
+  (-1)^{\operatorname{rank}\mathcal V}\Td(\mathcal V\otimes\C)^{-1}$
+  (\ref{families:C4}). Adding a trivial line to $\mathcal V$ also replaces $N$ by
+  $N+1$ (embed into $\R^{N+1}\times B$), so the normalized class $\mathcal T$ is
+  unchanged. That $\mathcal T$ does not depend on the embedding follows from
+  \cref{scindex:thm:AS} (for $B$ a point and suitable $x$) or directly from this
+  stability, since any two normal bundles are stably isomorphic, being stable
+  inverses of $T(M/B)$. With $\operatorname{rank}\mathcal V=N-n$,
+  $\mathcal T=(-1)^n\Td(\mathcal V\otimes\C)^{-1}=(-1)^n\Td(T(M/B)\otimes\C)$; the
+  identification of $\varpi_*\Ch(\lambda_{\mathcal V})$ is the Riemann--Roch
+  computation of Atiyah and Hirzebruch recalled in \cref{ch:families}
+  (\ref{families:C4}, \ref{families:C5}), and the factor $(-1)^n$ is the one in
+  the index formula above.
 \end{remark}
 
 \begin{remark}[Dirac families and spectral sections]\label{scindex:rem:dirac}
@@ -1824,12 +1999,19 @@ the semiclassical point of view.
   of differential forms, through the heat kernel and Bismut's superconnection;
   see \cite{Bismut-Cheeger} and \cref{ch:eta}, where eta forms appear in the
   index theorem for families with boundary. In that setting one also needs
-  \emph{spectral sections} (smooth families of projections which differ from the
-  positive spectral projections of a self-adjoint family by smoothing operators;
-  \cite{Melrose-APS}): such a family exists if and only if the odd index of the
-  boundary family vanishes in $K^{1}$ of the base, an obstruction which is the
-  odd counterpart of the even index studied here. These topics are not pursued
-  in this chapter.
+  \emph{spectral sections}. For a smooth family $D_b$ of self-adjoint elliptic
+  operators (in the application, boundary Dirac operators) on the fibres of a
+  fibration of compact manifolds, a spectral section is a smooth family $P_b$ of
+  self-adjoint projections, $P_b\in\Psido0$, for which there is a smooth function
+  $R:B\to(0,\infty)$ such that $D_bu=\lambda u$ implies $P_bu=u$ if
+  $\lambda>R(b)$ and $P_bu=0$ if $\lambda<-R(b)$. Melrose and Piazza
+  \cite{Melrose-Piazza} prove (their families theorem on spectral sections) that a
+  spectral section exists if and only if the odd index of the family $D$ in
+  $K^{1}(B)$ vanishes, and use them to state and prove the families index theorem
+  for manifolds with boundary; this obstruction is the odd counterpart of the
+  even index studied here. We quote this result and do not prove it; these topics
+  are not pursued in this chapter (see also \cite{Melrose-APS} for the case of a
+  single operator).
 \end{remark}
 
 \section{Exercises}
@@ -1856,7 +2038,12 @@ the semiclassical point of view.
   for an orthonormal basis $\{e_j\}$ of $V$; perturb the sections $J^*e_j$ slightly
   so that their restrictions to every fibre are linearly independent, and project
   onto their span.)
-  (b) Alternatively, following Melrose, use \cref{scindex:ex:strong} and the fact
+  (b) Assume now that the fibres have positive dimension, so that the Hilbert
+  spaces $L^2(Z_b;E_b)$ are infinite dimensional. (For zero dimensional fibres
+  the Hilbert bundle is a finite rank vector bundle, which need not be trivial:
+  for the identity fibration of $\Sphere^2$ and $E$ the Hopf line bundle it is
+  the Hopf line bundle itself, which has no global orthonormal frame.)
+  Alternatively to (a), following Melrose, use \cref{scindex:ex:strong} and the fact
   that a fibre bundle with contractible fibre over a compact manifold has a
   section to find continuous sections $e'_i$ of the Hilbert bundle forming an
   orthonormal basis in each fibre; approximate them by smooth sections $e''_i$ with
@@ -1869,8 +2056,13 @@ the semiclassical point of view.
   Let $P$, $Q$ be orthogonal projections on a Hilbert space with $P-Q$ compact.
   Show that $QP:\Ran P\to\Ran Q$ is Fredholm, and that for a pair of smooth
   families as in \cref{scindex:def:d} (with $B$ a point) its index equals
-  $d(P,Q)$. (Reduce, by a homotopy and finite rank approximation, to the case
-  $P=Q+\Pi$ with $\Pi$ of finite rank and $Q\Pi=0$.)
+  $d(P,Q)$. Note that the index can have either sign: $Q$ of rank one and
+  $P=0$ give index $-1$. (Hint: compute both sides as $\Tr(P-Q)$, using
+  \cref{scindex:rem:index-trace} for $d(P,Q)$ and the anticommuting pair
+  $P-Q$, $\Id-P-Q$ for the index. Model cases are $P=Q+\Pi$ with $Q\Pi=\Pi Q=0$,
+  index $\operatorname{rank}\Pi$, and $P=Q-\Pi$ with $Q\Pi=\Pi Q=\Pi$, index
+  $-\operatorname{rank}\Pi$, $\Pi$ a finite rank orthogonal projection; a reduction
+  to these needs both a finite dimensional addition and a removal.)
 \end{exercise}
 
 \begin{exercise}\label{scindex:ex:milnor-trace}
@@ -1891,7 +2083,9 @@ the semiclassical point of view.
   \end{equation*}
   and use this to show that $\sigsl$ is invariant under changes of coordinates,
   in the sense of \ref{scindex:S-invariance}. Discuss what happens if
-  $\epsilon$ is replaced by $2\epsilon$ (\cref{scindex:rem:slT}).
+  $\epsilon$ is replaced by $2\epsilon$ (\cref{scindex:rem:slT}), both for the new
+  family $\tilde A(\epsilon)=A(2\epsilon)$ and for the same family read with the
+  new parameter $\epsilon'=2\epsilon$.
 \end{exercise}
 
 \begin{exercise}\label{scindex:ex:ground-state}

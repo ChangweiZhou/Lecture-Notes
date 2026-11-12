@@ -23,8 +23,8 @@ coordinates $(x_1,t,y')=(g,t,y')$ used in \cref{hj:sec:transport}.
 %----------------------------------------------------------------------
 \subsection*{\Cref{hj:ex:restriction-hd}}
 Idea: a half-density on $T_qX$ is restricted to the hyperplane $T_qH=\ker dt$ by inserting a
-vector $v$ with $dt(v)=1$; the dependence on $dt$ is exactly a $(-\frac12)$-density on
-$N^*_qH=\R\,dt$.
+vector $v$ with $dt(v)=1$; the dependence on $dt$ is inverse to that of a half-density on
+$N^*_qH=\R\,dt$, so tensoring with such a half-density removes it.
 
 \emph{Linear algebra.} Let $E=T_qX$, $F=T_qH=\ker dt_q$, $\dim E=n$, and $\ell=dt_q\in
 N^*_qH\setminus0$. For $\nu\in\Omegah(E)$ define $\nu_\ell\in\Omegah(F)$ by
@@ -38,17 +38,20 @@ the basis $(f_j)$ by $(Af_j)$ multiplies $v\wedge f_1\wedge\dots$ by $\det A$ an
 value by $|\det A|^{1/2}$. If $\ell$ is replaced by $c\ell$, $c\ne0$, then $v$ is replaced by
 $v/c$ and $\nu_{c\ell}=|c|^{-1/2}\nu_\ell$. Hence the bilinear map
 \begin{equation*}
-\Omegah(E)\times|N^*_qH|^{-\frac12}\to\Omegah(F),\qquad(\nu,\kappa)\mapsto
+\Omegah(E)\times|N^*_qH|^{\frac12}\to\Omegah(F),\qquad(\nu,\kappa)\mapsto
 \kappa(\ell)\,\nu_\ell,
 \end{equation*}
-where $|N^*_qH|^{-1/2}$ is the line of $(-\frac12)$-densities on $N^*_qH$ (functions with
-$\kappa(c\ell)=|c|^{-1/2}\kappa(\ell)$), is independent of the choice of $\ell$, and it is
-non-zero. So it defines an isomorphism of lines $\Omegah(E)\otimes|N^*_qH|^{-\frac12}\cong
+where $|N^*_qH|^{1/2}$ is the line of half-densities on $N^*_qH$ (functions with
+$\kappa(c\ell)=|c|^{1/2}\kappa(\ell)$; equivalently $(-\frac12)$-densities on $N_qH=E/F$), is
+independent of the choice of $\ell$, since $\kappa(c\ell)\nu_{c\ell}=|c|^{1/2}|c|^{-1/2}
+\kappa(\ell)\nu_\ell$, and it is non-zero. So it defines an isomorphism of lines
+$\Omegah(E)\otimes|N^*_qH|^{\frac12}\cong
 \Omegah(F)$, canonical (no choices). Varying $q\in H$ we get an isomorphism of line bundles
-$\Omegah_H(X)\otimes|N^*H|^{-\frac12}\cong\Omegah(H)$; smoothness is seen from the formula
-below. The section $|dt|^{-1/2}$ of $|N^*H|^{-1/2}$ (equal to $1$ on $dt$) trivializes
-$|N^*H|^{-1/2}$, and composing gives the restriction map $\nu\mapsto\nu_{dt}=\nu\otimes
-|dt|^{-1/2}$ on smooth sections.
+$\Omegah_H(X)\otimes|N^*H|^{\frac12}\cong\Omegah(H)$; smoothness is seen from the formula
+below. (This is consistent with $\Omega(E)\cong\Omega(F)\otimes\Omega(E/F)$ and
+$\Omega(N_qH)=|N^*_qH|^{-1}$.) The section $|dt|^{1/2}$ of $|N^*H|^{1/2}$ (equal to $1$ on
+$dt$) trivializes $|N^*H|^{1/2}$, and composing gives the restriction map $\nu\mapsto
+\nu_{dt}=\nu\otimes|dt|^{1/2}$ on smooth sections.
 
 \emph{The coordinate formula.} In coordinates $(t,w)$ with $H=\{t=0\}$, at points of $H$
 we may take $v=\pa_t$ (as $dt(\pa_t)=1$) and $f_j=\pa_{w_j}$; for $\nu=\phi(t,w)|dt\,dw|^{1/2}$,

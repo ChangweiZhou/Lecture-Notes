@@ -61,9 +61,15 @@ $O$ is \emph{smooth} if it is the restriction of a smooth map or function on suc
 $O'$. A diffeomorphism is a smooth bijection with smooth inverse.
 
 \begin{remark}\label{blowup:rem:smooth}
-As for manifolds with boundary (\cref{boundary:prop:extension}), $u$ is smooth on $O$ if
-and only if it is smooth on $O\cap(0,\infty)^k\times\R^{n-k}$ and all its derivatives
-are bounded on $K\cap(0,\infty)^k\times\R^{n-k}$ for each compact $K\subset O$. The
+As for manifolds with boundary (\cref{boundary:prop:extension}), a smooth function $v$
+on $O^\circ=O\cap(0,\infty)^k\times\R^{n-k}$ is the restriction of a (necessarily
+unique) smooth function on $O$ if and only if all its derivatives are bounded on
+$K\cap O^\circ$ for each compact $K\subset O$. Consequently a function $u$ on $O$ is
+smooth if and only if $u|_{O^\circ}$ is smooth with these bounds \emph{and} $u$ is
+continuous on $O$, i.e.\ its boundary values are the continuous extension of
+$u|_{O^\circ}$. (Interior bounds alone say nothing about prescribed boundary values:
+on $[0,1)$ the function equal to $0$ on $(0,1)$ and to $1$ at $0$ satisfies them but
+is discontinuous.) The
 proof of \cref{boundary:prop:extension} applies to one boundary coordinate at a time:
 Borel's lemma with parameters extends $u$ across $\{x_1=0\}$, with the same bounds on
 compact sets, and then one continues with $x_2$, and so on. We use this criterion only
@@ -169,7 +175,9 @@ positive near $H$, and it is smooth and positive away from $H$.
 The intersection of any collection of boundary hypersurfaces is, near each of its
 points, of the form $\{x_i=0,\ i\in I\}$; its components are the \emph{boundary faces}
 of $X$, and are manifolds with corners. The product of two manifolds with corners is a
-manifold with corners, with boundary hypersurfaces $H_1\times X_2$ and $X_1\times H_2$.
+manifold with corners, whose boundary hypersurfaces are the connected components of
+the sets $H_1\times X_2$ and $X_1\times H_2$, $H_i\in\mathcal M_1(X_i)$ (these sets are
+disconnected when $X_2$, respectively $X_1$, is).
 Examples: $[0,1]^n$, the closed half-sphere $\RC{\R^n}$ of \cref{ch:distributions},
 and the \emph{corner spheres}
 \begin{equation*}
@@ -179,8 +187,12 @@ which are the unit spheres of the models $\R^{a+b,a}$. Thus $\Sphere^{0,k}=\Sphe
 $\Sphere^{1,k}$ is a closed half-sphere and $\Sphere^{2,0}$ is a quarter circle. Near a
 point $\omega\in\Sphere^{a,b}$ choose $m$ with $\omega_m\ne0$; then the
 $\omega_k$, $k\ne m$, are coordinates, with $\omega_k\ge0$ for $k\le a$, $k\neq m$, so
-$\Sphere^{a,b}$ is a manifold with corners whose boundary hypersurfaces
-$\{\omega_i=0\}$, $i\le a$, have the defining functions $\omega_i$.
+$\Sphere^{a,b}$ is a manifold with corners whose boundary hypersurfaces are the
+connected components of the sets $\{\omega_i=0\}$, $i\le a$, with defining functions
+$\omega_i$ (restricted to a neighbourhood of the component). The set $\{\omega_i=0\}$ is a
+copy of $\Sphere^{a-1,b}$, which is connected except when $(a,b)=(1,1)$: on the closed
+half-circle $\Sphere^{1,1}$, $\{\omega_1=0\}$ consists of two points, each of which is a
+boundary hypersurface.
 
 \subsection{Product-type submanifolds}
 Embedded submanifolds of manifolds with corners can meet the boundary in complicated
@@ -201,8 +213,14 @@ $Y=\{z_i=0,\ i\in A\}$ and $Z=\{z_i=0,\ i\in B\}$ for index sets $A$, $B$; they 
 \end{definition}
 
 A p-submanifold is a manifold with corners, with coordinates $y$; its boundary
-hypersurfaces are the components of the sets $Y\cap H$, $H\in\mathcal M_1(X)$, $Y\not\subset
-H$, with defining functions $\rho_H|_Y$. Every boundary face $F$ of codimension $a$ is a
+hypersurfaces are the components of the sets $Y'\cap H$, where $Y'$ runs over the
+connected components of $Y$ and $H\in\mathcal M_1(X)$ over the boundary hypersurfaces with
+$Y'\not\subset H$, with defining functions $\rho_H|_{Y'}$. (The containment must be tested
+componentwise: for $Y=\{0,1\}\times\R\subset[0,\infty)\times\R$ and $H=\{x=0\}$ one has
+$Y\not\subset H$, but the component $\{0\}\times\R$ lies in $H$ and has no boundary. For a
+connected component $Y'$, the set of points of $Y'$ near which $Y'\subset H$ is open and,
+by the adapted charts, closed, so $Y'\not\subset H$ means that near each point of
+$Y'\cap H$ the hypersurface $H$ is $\{y_j=0\}$ for a boundary coordinate $y_j$ of $Y'$.) Every boundary face $F$ of codimension $a$ is a
 p-submanifold of normal type $(a,0)$. In an adapted chart the boundary hypersurfaces
 through $p$ are the coordinate hyperplanes of boundary coordinates; those containing
 $Y$ are $\{x_i=0\}$, $i\le a$.
@@ -218,9 +236,12 @@ sphere bundle $SNY=(NY\setminus0)/\R^+$.
 
 \begin{example}
 The diagonal of $[0,1]^2$ is an embedded submanifold but not a p-submanifold
-(\cref{blowup:fig:corners}(c), \cref{blowup:ex:diag-not-p}). The curve $\{x_2=x_1^2\}$ in
-$\R^{2,1}=[0,\infty)\times\R$ is not a p-submanifold at $0$ either: it is tangent to the
-boundary there.
+(\cref{blowup:fig:corners}(c), \cref{blowup:ex:diag-not-p}). The curve $\{x_1=x_2^2\}$ in
+$\R^{2,1}=[0,\infty)\times\R$ (with boundary coordinate $x_1$) is not a p-submanifold
+at $0$ either: it is tangent to the boundary there, and near $0$ it is a curve without
+boundary through a boundary point, which is impossible in an adapted chart. By contrast,
+the curve $\{x_2=x_1^2\}$ is transversal to the boundary and is a p-submanifold: it is
+$\{x_2-x_1^2=0\}$ in the chart $(x_1,x_2-x_1^2)$.
 \end{example}
 
 \subsection{b-vector fields and b-maps}
@@ -241,17 +262,27 @@ $V(\rho_Ha)=\rho_HVa+aV\rho_H$.
 
 \begin{definition}\label{blowup:def:bmap}
 A smooth map $f:X\to X'$ between manifolds with corners is an \emph{interior b-map} if
-for each $H'\in\mathcal M_1(X')$
+there are integers $e(H,H')\in\N_0$, $H\in\mathcal M_1(X)$, $H'\in\mathcal M_1(X')$, such that
+for each $H'\in\mathcal M_1(X')$ and each $p\in X$, near $p$
 \begin{equation}\label{blowup:eq:bmap}
-  f^*\rho_{H'}=a_{H'}\prod_{H\in\mathcal M_1(X)}\rho_H^{e(H,H')},\qquad
-  0<a_{H'}\in\CI(X),\ e(H,H')\in\N_0.
+  f^*\rho_{H'}=a_{H'}\prod_{H\in\mathcal M_1(X),\ p\in H}\rho_H^{e(H,H')},\qquad
+  a_{H'}\ \text{smooth and positive near }p.
 \end{equation}
 The integers $e(H,H')$ form the \emph{exponent matrix}. A \emph{b-map} is a map which,
 for each $H'$, either satisfies \eqref{blowup:eq:bmap} or has $f^*\rho_{H'}\equiv0$.
 \end{definition}
 
-By \cref{blowup:lem:bdf} the condition does not depend on the choice of defining
-functions. An interior b-map maps $X^\circ$ into $X'^\circ$, and $f(H)\subset H'$ when
+The product in \eqref{blowup:eq:bmap} is finite, since only finitely many boundary
+hypersurfaces pass through $p$ (\cref{blowup:lem:bdf}), and by that lemma the condition
+does not depend on the choice of defining functions. If $\mathcal M_1(X)$ is finite (for
+instance if $X$ is compact) the local factors $a_{H'}$ patch, and
+$f^*\rho_{H'}=a_{H'}\prod_{H\in\mathcal M_1(X)}\rho_H^{e(H,H')}$ globally with $0<a_{H'}\in\CI(X)$.
+In general such a global product need not converge: on a countable disjoint union of
+half-lines mapped to one half-line by the identity coordinate, a defining function for one
+of the hypersurfaces may equal $2$ on all the other components. The global form holds if
+each $\rho_H$ is chosen equal to $1$ outside a neighbourhood $U_H$ of $H$, the $U_H$ forming
+a locally finite family (possible because the boundary hypersurfaces form a locally finite
+family of closed sets). An interior b-map maps $X^\circ$ into $X'^\circ$, and $f(H)\subset H'$ when
 $e(H,H')>0$. Composites of interior b-maps are interior b-maps: substitute
 \eqref{blowup:eq:bmap} into itself. Diffeomorphisms, projections
 $X_1\times X_2\to X_1$, and (\cref{blowup:prop:props}) blow-down maps are interior
@@ -310,8 +341,10 @@ $(0,\infty)\times\Sphere^{n-1}$,
 \end{equation}
 where $W_j$ is the orthogonal projection of $e_j$ onto $T_\omega\Sphere^{n-1}$, a
 smooth vector field on the sphere. The lifts span $\Vb([0,\infty)\times\Sphere^{n-1})$
-over $\CI([0,\infty)\times\Sphere^{n-1})$. On the other hand
-$\pa_{z_j}=\omega_j\pa_r+r^{-1}W_j$ does not lift smoothly.
+over $\CI([0,\infty)\times\Sphere^{n-1})$. On the other hand, if $n\ge2$,
+$\pa_{z_j}=\omega_j\pa_r+r^{-1}W_j$ does not lift smoothly. \textup{(}For $n=1$,
+$\Sphere^0=\{\pm1\}$, $W_1=0$, and $\pa_z$ lifts to the smooth vector field $\pm\pa_r$ on the two
+half-lines, which is transversal to the front face.\textup{)}
 \end{lemma}
 \begin{proof}
 For $r>0$, $z_i\pa_{z_j}r=z_iz_j/r=r\omega_i\omega_j$ and
@@ -319,7 +352,7 @@ $z_i\pa_{z_j}\omega_k=z_i(\delta_{jk}r^{-1}-z_jz_kr^{-3})=\omega_i(\delta_{jk}-\
 which gives \eqref{blowup:eq:lin-lift}; it is smooth up to $r=0$ and tangent to it. A
 vector field $V=\sum_jc_j\pa_{z_j}$ vanishing at $0$ has, by Taylor's formula,
 $c_j=\sum_iz_ic_{ij}$ with $c_{ij}$ smooth, so $V=\sum c_{ij}z_i\pa_{z_j}$, and its lift
-is $\sum(\beta^*c_{ij})\,\omega_i\omega_jr\pa_r+\omega_iW_j$, which is smooth. The lift
+is $\sum_{i,j}(\beta^*c_{ij})\,(\omega_i\omega_jr\pa_r+\omega_iW_j)$, which is smooth. The lift
 is unique because $\beta$ is a diffeomorphism on the dense set $r>0$. Summing
 \eqref{blowup:eq:lin-lift} over $i=j$ gives $\sum_iz_i\pa_{z_i}=r\pa_r$, and the
 rotations lift to $z_i\pa_{z_j}-z_j\pa_{z_i}=\omega_iW_j-\omega_jW_i$, whose value at
@@ -327,8 +360,9 @@ $\omega$ is $\omega_ie_j-\omega_je_i$. For $v\perp\omega$,
 $\sum_{i,j}\omega_iv_j(\omega_ie_j-\omega_je_i)=v-(\omega\cdot v)\omega=v$, so the rotations
 span $T_\omega\Sphere^{n-1}$ at every point. Since $\Vb([0,\infty)\times\Sphere^{n-1})$
 is spanned locally by $r\pa_r$ and vector fields on the sphere, the lifts span it.
-Finally $\pa_{z_j}=\omega_j\pa_r+r^{-1}W_j$ by the same computation, and $W_j\ne0$ at
-points with $\omega_j\ne\pm1$.
+Finally $\pa_{z_j}=\omega_j\pa_r+r^{-1}W_j$ by the same computation, and, when $n\ge2$,
+$W_j\ne0$ at the points with $\omega_j\ne\pm1$, which exist on $\Sphere^{n-1}$; there
+$r^{-1}W_j$ is unbounded as $r\downarrow0$.
 \end{proof}
 
 \subsection{Invariance}
@@ -392,9 +426,10 @@ The proof uses only that $F$ maps the centre $\{x=0\}$ to itself. Taylor's formu
 says that, to first order, $F$ acts on the normal variables by the invertible matrix
 $A(x,y)$, and a linear map acts smoothly on directions. Note that the action on the
 front face is through the \emph{normal differential} $A(y)$; this is what makes the
-front face canonically the spherical normal bundle in \cref{blowup:thm:blowup}. With
-$a=b=0$ in the parameter-free case, and $F$ a change of coordinates fixing $0$, the
-theorem is the statement of \cref{distributions:ex:polar}.
+front face canonically the spherical normal bundle in \cref{blowup:thm:blowup}. For
+the ordinary blow-up of a point of $\R^n$ (normal type $a=0$, $b=n$, and no tangential
+variables, $m=c=0$), with $F$ a change of coordinates fixing $0$, the theorem is the
+statement of \cref{distributions:ex:polar}.
 \end{discussion}
 
 \subsection{Projective coordinates}
@@ -439,7 +474,11 @@ particular the Euler field $\sum_lx_l\pa_{x_l}$ lifts to $s\pa_s$.
 \section{Blow-up of p-submanifolds}\label{blowup:sec:psub}
 
 \subsection{The construction}
-Let $Y$ be a closed p-submanifold of a manifold with corners $X$. As a set, the
+Let $Y$ be a closed p-submanifold of a manifold with corners $X$. Throughout we assume
+that $Y$ has positive codimension at each of its points, i.e.\ $a+b\ge1$ in
+\eqref{blowup:eq:adapted}, so that no component of $Y$ is a component of $X$. (For such a
+component the spherical normal bundle would be empty and the construction below would
+simply delete it; we exclude this degenerate case.) As a set, the
 blow-up of $X$ along $Y$ is
 \begin{equation*}
   [X;Y]=(X\setminus Y)\sqcup S^+NY,
@@ -476,8 +515,11 @@ onto open sets. It is Hausdorff: points of $X\setminus Y$ and of $S^+NY$ with di
 images in $X$ are separated by preimages of disjoint open sets of $X$, and points of
 $S^+_pY$ by a polar chart. It is second countable since countably many charts cover it.
 In the charts $\beta$ is $(r,\omega,y)\mapsto(r\omega,y)$ or the identity, hence smooth,
-and $\beta^{-1}$ of a compact set is compact (it is so in each polar chart since
-$\Sphere^{a,b}$ is compact). In polar charts $\mathrm{ff}=\{r=0\}$ and $r$ is a boundary
+and $\beta$ is proper: a compact $K\subset X$ is covered by finitely many compact sets
+$K_1,\dots,K_N$ each lying in $X\setminus Y$ or in the domain $U$ of an adapted chart, and
+$\beta^{-1}(K_i)$ is compact, being $K_i$ itself in the first case and, in the second, the
+preimage of the compact set $\phi(K_i)$ under $(r,\omega,y)\mapsto(r\omega,y)$, which is a closed
+subset of the compact set $[0,R]\times\Sphere^{a,b}\times\{y;\ (x,y)\in\phi(K_i)\}$ for large $R$. In polar charts $\mathrm{ff}=\{r=0\}$ and $r$ is a boundary
 coordinate, so the front face is a union of boundary hypersurfaces, and the charts
 exhibit it as a bundle over $Y$ with fibre $\Sphere^{a,b}$.
 
@@ -494,14 +536,22 @@ each point of $Y$, in an adapted chart, $q_Y=x^TB(x,y)x$ with $B$ smooth and
 positive definite. Then $\rho_{\mathrm{ff}}=(\beta^*q_Y)^{1/2}$ is a smooth defining
 function for the front face; in a polar chart it is $r$ times a positive smooth function.
 \item For $H\in\mathcal M_1(X)$ let $H'$ be the closure of $\beta^{-1}(H\setminus Y)$, the
-\emph{lift} of $H$. Then
+\emph{lift} of $H$. Let $F$ run over the connected components of the front face, with
+defining functions $\rho_F$ (equal to $\rho_{\mathrm{ff}}$ near $F$ and to $1$ outside a
+small neighbourhood of $F$, these neighbourhoods forming a locally finite family), and
+note that $\beta(F)$ is a connected component of $Y$. Then
 \begin{equation*}
-  \beta^*\rho_H=\rho_{\mathrm{ff}}^{\,e_H}\rho_{H'},\qquad e_H=\begin{cases}1,&Y\subset H\\
-  0,&Y\not\subset H,\end{cases}
+  \beta^*\rho_H=\rho_{H'}\prod_F\rho_F^{\,e(F,H)},\qquad e(F,H)=\begin{cases}1,&\beta(F)\subset H,\\
+  0,&\beta(F)\not\subset H,\end{cases}
 \end{equation*}
-with $\rho_{H'}$ a defining function for $H'$. The boundary hypersurfaces of $[X;Y]$
-are the components of the front face and of the lifts $H'$; in particular $[X;Y]$ is a
-manifold with corners and $\beta$ is an interior b-map. \textup{(}If $Y=H$ is itself a
+with $\rho_{H'}$ a defining function for $H'$ (which may itself be a union of several
+boundary hypersurfaces). Thus the exponent is determined separately for each component of
+the front face. The boundary hypersurfaces of $[X;Y]$ are the components of the front face
+and of the lifts $H'$; in particular $[X;Y]$ is a manifold with corners and $\beta$ is an
+interior b-map. \textup{(}For example, if $Y=\{(0,0),(1,0)\}\subset[0,\infty)\times\R$ and
+$H=\{x=0\}$, the pull-back of $x$ vanishes to first order at the front face over $(0,0)$
+and is non-zero at the front face over $(1,0)$; no single exponent for the whole front
+face is correct.\textup{)} \textup{(}If $Y=H$ is itself a
 boundary hypersurface, $\Sphere^{1,0}$ is a point and $[X;H]=X$.\textup{)}
 \item Every diffeomorphism $F:X\to X'$ with $F(Y)=Y'$ lifts to a unique diffeomorphism
 $[X;Y]\to[X';Y']$, acting on the front face by the projectivized normal differential
@@ -523,11 +573,14 @@ coordinates $\beta^*q_Y=r^2\,\omega^TB(r\omega,y)\omega$ with $\omega^TB\omega>0
 $(\beta^*q_Y)^{1/2}=r(\omega^TB\omega)^{1/2}$ is smooth; away from the front face
 $\beta^*q_Y>0$.
 
-(ii) If $Y\subset H$ then near $p\in Y$ we may take $H=\{x_i=0\}$, $i\le a$, and by
+(ii) The statement is local near each component $F$ of the front face, and near $F$ only
+the factor $\rho_F$ is different from $1$, so it suffices to work near a point $p$ of the
+component $Y_0=\beta(F)$ of $Y$. If $Y_0\subset H$ then near $p$ we may take $H=\{x_i=0\}$, $i\le a$, and by
 \cref{blowup:lem:bdf} $\rho_H=x_ig$, $g>0$; so $\beta^*\rho_H=r\omega_i\,\beta^*g$, and
 $\rho_{H'}=\beta^*\rho_H/\rho_{\mathrm{ff}}$ is a positive multiple of $\omega_i$, the
 defining function of the face $\{\omega_i=0\}$ of $\Sphere^{a,b}$, which is $H'$ near
-$\mathrm{ff}$. If $Y\not\subset H$ but $p\in H$, then $H$ is $\{y_l=0\}$ for a boundary
+$\mathrm{ff}$. If $Y_0\not\subset H$ but $p\in H$, then (as explained after
+\cref{blowup:def:psub}) $H$ is $\{y_l=0\}$ for a boundary
 coordinate $y_l$, and $\beta^*\rho_H$ is a positive multiple of $y_l$, which is a
 coordinate on $[X;Y]$. Away from $\mathrm{ff}$ there is nothing to prove. Thus all the
 codimension-one points of $[X;Y]$ lie in $\mathrm{ff}$ or in some $H'$, and each of these
@@ -549,7 +602,11 @@ a curve $\gamma$ in $X\setminus Y$ with $\gamma(t)\to p\in Y$ and $\gamma'(0)\no
 lifts to a curve ending at the point $[\gamma'(0)]$ of $S^+_pY$. Functions which have
 different limits along different directions, such as $x_1/\abs x$, become continuous ---
 indeed smooth--- after the blow-up. Functions on $X$ always lift to smooth functions,
-so $\beta^*:\CI(X)\to\CI([X;Y])$ is injective, but not surjective.
+so $\beta^*:\CI(X)\to\CI([X;Y])$ is injective. It is not surjective as soon as some fibre
+$S^+_pY\cong\Sphere^{a,b}$ has more than one point, since a pull-back is constant on the
+fibres of $\beta$; this is the case unless $(a,b)=(1,0)$ at every point, i.e.\ unless $Y$
+is a union of boundary hypersurfaces, when $\beta$ is a diffeomorphism
+(\cref{blowup:prop:props}(ii)) and $\beta^*$ is onto.
 \end{discussion}
 
 \begin{question}
@@ -703,9 +760,12 @@ Let $\Omega\subset\R^n$ be open and set
 \end{equation*}
 In the coordinates $(\eps,x,w=x-y,p)$, $\mathcal Y=\{\eps=0,\ w=0\}$ is a p-submanifold of
 normal type $(1,n)$, so the front face is a bundle of closed half-spheres $\Sphere^{1,n}$
-over $\Diag_\Omega\times P$. Besides the front face and the lift of $\{\eps=1\}$, $\mathcal D$
-has one more boundary hypersurface, the lift $\mathrm{sf}$ of $\{\eps=0\}$ (the \emph{side
-face}).
+over $\Diag_\Omega\times P$. Besides the front face and the lift of $\{\eps=1\}$, the
+boundary of $\mathcal D$ consists of the lift $\mathrm{sf}$ of $\{\eps=0\}$ (the \emph{side
+face}). The side face need not be connected (for $n=1$ and $\Omega$ an interval, the two
+signs of $x-y$ give two components), so it is in general a union of boundary
+hypersurfaces; this plays no role below, where only its defining function $\omega_0$
+enters.
 
 \begin{question}
 Why blow up, instead of simply using the rescaled variable $Z=(x-y)/\eps$?
@@ -829,7 +889,10 @@ is $\{s=0\}$ and the lifted edge $\{x'=0\}$ is $\{t=0\}$.}
 \end{figure}
 
 \begin{corollary}\label{blowup:cor:sc-manifold}
-Let $X$ be a compact manifold of dimension $n$, $\mathcal D_X=[[0,1]\times X^2;\{0\}\times\Diag]$,
+Let $X$ be a compact manifold without boundary, of dimension $n$, and
+$\mathcal D_X=[[0,1]\times X^2;\{0\}\times\Diag]$ \textup{(}$\{0\}\times\Diag$ is then an
+interior p-submanifold of the boundary face $\{0\}\times X^2$; if $X$ had boundary it would
+in general not be a p-submanifold, compare \cref{blowup:fig:corners}(c)\textup{)},
 and $k\in\CI((0,1]\times X^2)$. Then $\beta^*k$ extends to an element of $\CI(\mathcal
 D_X)$ vanishing to infinite order at the lift of $\{\eps=0\}$ if and only if
 \textup{(a)} $k$ extends smoothly to $[0,1]\times(X^2\setminus\Diag)$, vanishing to
@@ -861,10 +924,15 @@ $Y^2$ (since $\phi\times\phi$ is a submersion), and the adiabatic double space i
 $[[0,1]\times Y^2;\{0\}\times Y^2_\phi]$. In fibred coordinates $(z,\tilde z)$, with
 $\tilde z$ the base coordinates, $Y^2_\phi=\{\tilde z=\tilde z'\}$, so this is the space
 $\mathcal D$ above with $\Omega$ a base chart and parameters $p=(z,z')$. Thus, by
-\cref{blowup:prop:sc-kernels}, kernels $B(\delta,z,z',\tilde z,(\tilde z-\tilde z')/\delta)$
-with $B\in\mathcal K_{\mathrm{ad}}$ (\cref{semiclassical:def:adiabatic}), cut off to compact
-sets, are exactly the smooth functions on the adiabatic double space vanishing to infinite
-order at the side face. The interior of its front face is the bundle
+\cref{blowup:prop:sc-kernels}, for an adiabatic family $B_\delta$ with $B\in\mathcal K_{\mathrm{ad}}$
+(\cref{semiclassical:def:adiabatic}) the \emph{normalized} kernels
+\begin{equation*}
+  \delta^{\dim Z}K_{B_\delta}=B\bigl(\delta,z,z',\tilde z,(\tilde z-\tilde z')/\delta\bigr),
+\end{equation*}
+cut off to compact sets, are exactly the smooth functions on the adiabatic double space
+vanishing to infinite order at the side face (which, as above, may have several
+components); the raw kernel $K_{B_\delta}$ carries the additional singular factor
+$\delta^{-\dim Z}$ of \cref{semiclassical:def:adiabatic}. The interior of its front face is the bundle
 $Y^2_\phi\times_ZTZ$, on which the adiabatic symbol is the fibrewise Fourier transform.
 \end{remark}
 
@@ -874,11 +942,23 @@ $Y^2_\phi\times_ZTZ$, on which the adiabatic symbol is the fibrewise Fourier tra
 To blow up twice we must know what the second centre becomes after the first blow-up.
 
 \begin{definition}\label{blowup:def:lift}
-Let $\beta:[X;Y]\to X$ and $Z\subset X$ closed. If $Z\subset Y$, the \emph{lift} of $Z$ is
-$\beta^{-1}(Z)$. If $Z\setminus Y$ is dense in $Z$, the lift is
-$\beta^\#Z=\overline{\beta^{-1}(Z\setminus Y)}$. We write $[X;Y;Z]=[[X;Y];\text{lift of }Z]$
-when the lift is a p-submanifold.
+Let $\beta:[X;Y]\to X$ and let $Z\subset X$ be closed, with connected components $Z'$
+forming a locally finite family. The lift is defined componentwise. If $Z'\subset Y$, the
+\emph{lift} of $Z'$ is $\beta^{-1}(Z')$. If $Z'\setminus Y$ is dense in $Z'$, the lift of
+$Z'$ is $\beta^\#Z'=\overline{\beta^{-1}(Z'\setminus Y)}$. If every component of $Z$ is of
+one of these two kinds, the \emph{lift} of $Z$ is the union of the lifts of its
+components. If $Z\subset Y$ or $Z\setminus Y$ is dense in $Z$, we also write
+$\beta^{-1}(Z)$, respectively $\beta^\#Z$, for the lift. We write
+$[X;Y;Z]=[[X;Y];\text{lift of }Z]$ when the lift is a p-submanifold.
 \end{definition}
+
+The componentwise rule matters: in $\R^2$, with $Y=\{(0,0)\}$ and $Z=\{(0,0),(1,0)\}$,
+neither $Z\subset Y$ nor is $Z\setminus Y$ dense in $Z$, but the lift of $Z$ is
+$\beta^{-1}(0,0)\cup\{(1,0)\}$, the whole front face together with the point $(1,0)$. For
+joint p-submanifolds every component is of one of the two kinds: in a joint chart
+$Y=\{z_A=0\}$, $Z=\{z_B=0\}$, and $Z\subset Y$ near the point if $A\subset B$, while
+$Z\setminus Y$ is dense in $Z$ near the point otherwise; so the set of points of a component
+$Z'$ near which $Z'\subset Y$ is open and closed in $Z'$.
 
 \begin{proposition}\label{blowup:prop:lift}
 Let $Y,Z\subset X$ be closed joint p-submanifolds.
@@ -889,6 +969,9 @@ contained in the front face.
 and $\beta$ restricts to the blow-down map of $[Z;Y\cap Z]$, i.e.\ $\beta^\#Z=[Z;Y\cap Z]$.
 In particular, if $Y\subset Z$ then $\beta^\#Z=[Z;Y]$, and if $Y\cap Z=\emptyset$ then
 $\beta^\#Z=\beta^{-1}(Z)\cong Z$.
+\item In general, the lift of $Z$ \textup{(}\cref{blowup:def:lift}\textup{)} is defined,
+and is a p-submanifold of $[X;Y]$: it is the disjoint union of the lifts of the components
+of $Z$, each of which is described by \textup{(i)} or \textup{(ii)}.
 \end{enumerate}
 \end{proposition}
 \begin{proof}
@@ -911,6 +994,11 @@ a p-submanifold. The remaining coordinates $(s,t_{A\setminus(B\cup\{j\})},z_{\te
 $\beta^\#Z$ are exactly projective coordinates for the blow-up of $Y\cap Z=\{z_{A\cup B}=0\}$
 in $Z$, whose normal coordinates in $Z$ are $z_{A\setminus B}$; so $\beta|_{\beta^\#Z}$ is the
 blow-down map of $[Z;Y\cap Z]$ in each chart.
+
+(iii) By the remark after \cref{blowup:def:lift}, (i) or (ii) applies to each component
+$Z'$ of $Z$. The lifts of distinct components are disjoint closed sets, lying over the
+disjoint sets $Z'$, and they form a locally finite family, so their union is a closed
+p-submanifold.
 \end{proof}
 
 \begin{proposition}\label{blowup:prop:commute}
@@ -934,14 +1022,18 @@ $[0,\infty)\times\Sphere_u\times[0,\infty)\times\Sphere_v\times W$, with the int
 map $(u,v,w)\mapsto(\abs u,u/\abs u,\abs v,v/\abs v,w)$; here $\Sphere_u$, $\Sphere_v$ are
 the corner spheres of the normal models.
 
-\emph{Nested.} Let $Y\subset Z$, with $Z=\{u=0\}$, $Y=\{u=0,\ v=0\}$, $u\in\R^{a_1+b_1,a_1}$,
-$v\in\R^{a_2+b_2,a_2}$, and let $H=\Sphere^{1+a_2,b_2}=\{(\alpha,\phi);\ \alpha\ge0,\ \phi\in
+\emph{Nested.} Let $Y\subset Z$. If $Y$ and $Z$ coincide near the point, then in either
+order the second centre is a union of components of the first front face, hence (having
+normal type $(1,0)$) a union of boundary hypersurfaces, whose blow-up changes nothing
+(\cref{blowup:prop:props}(ii)); both spaces are $[X;Y]$ there. Otherwise take
+coordinates with $Z=\{u=0\}$, $Y=\{u=0,\ v=0\}$, $u\in\R^{a_1+b_1,a_1}$,
+$v\in\R^{a_2+b_2,a_2}$, $a_2+b_2\ge1$, and let $H=\Sphere^{1+a_2,b_2}=\{(\alpha,\phi);\ \alpha\ge0,\ \phi\in
 \R^{a_2+b_2,a_2},\ \alpha^2+\abs\phi^2=1\}$. We show that both spaces are identified with
 \begin{equation*}
   [0,\infty)\times H\times\Sphere^{a_1,b_1}\times W\quad\text{by}\quad
   (u,v,w)\longmapsto\Big(\abs{(u,v)},\ \frac{(\abs u,v)}{\abs{(u,v)}},\ \frac u{\abs u},\ w\Big).
 \end{equation*}
-First blow up $Z$: $[X;Z]=[0,\infty)_\rho\times\Sphere^{a_1,b_1}_\theta\times\R_v\times W$ with
+First blow up $Z$: $[X;Z]=[0,\infty)_\rho\times\Sphere^{a_1,b_1}_\theta\times\R^{a_2+b_2,a_2}_v\times W$ with
 $\rho=\abs u$, and $\beta_Z^{-1}(Y)=\{\rho=0,\ v=0\}$ has normal variables $(\rho,v)\in
 \R^{1+a_2+b_2,1+a_2}$. Blowing it up introduces $\sigma=\abs{(\rho,v)}=\abs{(u,v)}$ and
 $(\rho,v)/\sigma\in H$, as claimed. Now blow up $Y$ first: $[X;Y]=[0,\infty)_R\times
@@ -958,8 +1050,9 @@ and in these coordinates the map is $(\abs\mu,\mu/\abs\mu,\nu')\mapsto((\abs\mu,
 \end{proof}
 
 \begin{discussion}
-The proof shows what goes wrong in general: for joint $Y$ and $Z$ the lifts are
-p-submanifolds whatever their relative position, but the two iterated blow-ups introduce different
+The proof shows what goes wrong in general: for joint $Y$ and $Z$ the lifts, defined
+componentwise as in \cref{blowup:def:lift}, are p-submanifolds whatever their relative
+position (\cref{blowup:prop:lift}(iii)), but the two iterated blow-ups introduce different
 ``rates'' at which points approach $Y\cap Z$. In \cref{blowup:ex:noncommute} the function
 $z_2/\abs{(z_1,z_2)}$ is continuous on one of the two spaces but not on the other. The
 commonest cure is to blow up $Y\cap Z$ first.
@@ -987,7 +1080,10 @@ elements $w=(\zeta,\eta)$. The relative compactification of $W$ with respect to 
   \relRC VW=\RC U\times\RC V,\qquad W\ni(\zeta,\eta)\longmapsto(\zeta,q)\in U\times V,\quad
   q=\eta/\ang\zeta,
 \end{equation*}
-with boundary hypersurfaces $H_W=\pa\RC U\times\RC V$ and $H_V=\RC U\times\pa\RC V$, and
+with boundary faces $H_W=\pa\RC U\times\RC V$ and $H_V=\RC U\times\pa\RC V$ (each a boundary
+hypersurface, except that $H_W$, respectively $H_V$, consists of two boundary hypersurfaces
+when $k=1$, respectively $l=1$, since then $\pa\RC U$, respectively $\pa\RC V$, is two
+points), and
 $\Sphere V=\pa\RC V\subset\pa\RC W=\Sphere W$ is the sphere at infinity of $V$.
 
 \begin{theorem}\label{blowup:thm:relative}
@@ -1029,7 +1125,8 @@ interior it is the identity. Near a point of $H_W\setminus H_V$ use the coordina
 $(x',\theta',v')=(1/\abs\zeta,\zeta/\abs\zeta,\eta/\abs\zeta)$ on $\RC W$ near $\Sphere W\setminus\Sphere V$
 (the analogue of $(x,v,\theta)$ with $U$ and $V$ exchanged) and $(s_U,\theta',q)$ on
 $\RC U\times V$, with $s_U=1/\abs\zeta$. Since $q=\eta/\ang\zeta=v'(1+x'^2)^{-1/2}$, the
-map is $(x',\theta',v')\mapsto(x',\theta',v'(1+x'^2)^{-1/2})$, a diffeomorphism. It is bijective
+inverse $\varpi^{-1}$ is, in these coordinates, $(x',\theta',v')\mapsto(x',\theta',v'(1+x'^2)^{-1/2})$,
+a diffeomorphism, and hence so is $\varpi$. It is bijective
 from $H_W\setminus H_V$ onto $\Sphere W\setminus\Sphere V$ (both are parametrized by
 $(\theta',v')\in\Sphere U\times V$), hence a diffeomorphism.
 
@@ -1380,7 +1477,7 @@ b-submersion is a submersion in the logarithmic coordinates $\log x_i$, which is
 matters for integration along the fibres of functions with expansions in powers and logarithms
 of boundary defining functions. b-normality prevents a whole boundary hypersurface from
 being squeezed into a corner, where the expansions of different faces would collide.
-Melrose's push-forward theorem (see the Notes) makes this precise.
+Melrose's push-forward theorem \cite{Melrose-pushforward}, which we do not prove or use, makes this precise.
 \end{discussion}
 
 %======================================================================
@@ -1426,7 +1523,7 @@ $[[0,1]\times X^2;\{0\}\times\Diag]$ and $[[0,1]\times Y^2;\{0\}\times Y^2_\phi]
 \end{enumerate}
 
 \begin{example}\label{blowup:exa:b-double}
-Let $X$ be a manifold with boundary. The diagonal of $X^2$ is not a p-submanifold
+Let $X$ be a manifold with non-empty boundary. The diagonal of $X^2$ is not a p-submanifold
 (\cref{blowup:ex:diag-not-p}), but it lifts to one in the \emph{b-double space}
 $X^2_{\mathrm b}=[X^2;(\pa X)^2]$ (for $\pa X$ connected; in general one blows up the
 products $H_i\times H_i$ of the boundary components). In coordinates $(x,y)$, $(x',y')$
@@ -1446,15 +1543,17 @@ Other calculi of pseudodifferential operators on manifolds with boundary arise i
 same way, by resolving the diagonal together with a Lie algebra of vector fields: the
 $0$-calculus of Mazzeo and Melrose (vector fields vanishing at $\pa X$, double space
 $[X^2;\pa\Diag]$), the scattering calculus (double space $[X^2_{\mathrm b};\pa\Diag_{\mathrm b}]$),
-and the cusp and fibred-boundary calculi. We do not use them; see \cite{Melrose-APS} for
-the b-calculus and the Notes for further references.
+and the cusp and fibred-boundary calculi. We do not use them, and we do not prove the
+statements of this remark; see \cite{Melrose-APS} for the b-calculus,
+\cite{Mazzeo-Melrose} for the $0$-calculus, \cite{Melrose-scattering} for the scattering
+calculus, and the Notes for further references.
 \end{remark}
 
 %======================================================================
 \section{Exercises}\label{blowup:sec:exercises}
 
 \begin{exercise}\label{blowup:ex:projective}
-In the projective coordinates $s=z_1$, $t_k=z_k/z_1$ ($k\ge2$) on
+Let $n\ge2$. In the projective coordinates $s=z_1$, $t_k=z_k/z_1$ ($k\ge2$) on
 $\{\omega_1>0\}\subset[\R^n;\{0\}]$: (a) verify \eqref{blowup:eq:proj-lifts}; (b) show that the
 Euler field lifts to $s\pa_s$ and the rotation $z_1\pa_{z_2}-z_2\pa_{z_1}$ to
 $(1+t_2^2)\pa_{t_2}-t_2s\pa_s+t_2\sum_{r\ge3}t_r\pa_{t_r}$; (c) show that $\pa_{z_1}$ lifts to
@@ -1473,9 +1572,13 @@ $\beta$ restricts to the polar map $(r,\theta)\mapsto r(1,\theta)/\sqrt2$ on it.
 Let $u\in\CI(\R^n)$ have a non-degenerate critical point at $0$, so that
 $u(z)=u(0)+z^TH(z)z$ with $H$ smooth, symmetric, and $H(0)$ invertible. Show that on
 $[\R^n;\{0\}]$, $\beta^*u=u(0)+r^2U$ with $U(r,\omega)=\omega^TH(r\omega)\omega$, and that
-$dU\ne0$ near $\{r=0,\ U=0\}$. Conclude that near the front face the lift of the level set
-$\{u=u(0)\}$ is the union of the front face and the hypersurface $\{U=0\}$, which meet
-transversally.
+$dU\ne0$ near $\{r=0,\ U=0\}$, indeed that the restriction of $dU$ to the front face is non-zero
+there. Conclude that near the front face the full inverse image $\beta^{-1}(\{u=u(0)\})$ of the
+level set is the union of the whole front face and the hypersurface $\{U=0\}$, which meet
+transversally, while the lift (strict transform) $\beta^\#\{u=u(0)\}$, the closure of
+$\beta^{-1}(\{u=u(0)\}\setminus0)$, is the hypersurface $\{U=0\}$ alone, a p-submanifold
+meeting the front face transversally. \textup{(}For $u=z_1^2-z_2^2$ on $\R^2$ the strict
+transform consists of the closures of the lifts of the four rays in the null directions.\textup{)}
 \end{exercise}
 
 \begin{exercise}\label{blowup:ex:diag-not-p}
@@ -1532,8 +1635,7 @@ surjective differential between manifolds with corners is a fibration; the half-
 this is false, and \cref{blowup:prop:fibration} gives a correct criterion. The
 identifications of the relative and doubly-relative compactifications, the semiclassical
 criterion and the sphere fibration lemma were added for use in the book. Real blow-up is
-developed systematically in Melrose's unpublished book \emph{Differential analysis on
-manifolds with corners}; b-fibrations and the push-forward theorem for polyhomogeneous
-functions are in R.~B. Melrose, \emph{Calculus of conormal distributions on manifolds with
-corners}, Int.\ Math.\ Res.\ Notices 1992; the b-calculus is in \cite{Melrose-APS}; the
-$0$-calculus is in R.~Mazzeo and R.~B. Melrose, J.\ Funct.\ Anal.\ 75 (1987).
+developed systematically in Melrose's unpublished book \cite{Melrose-corners}; b-fibrations
+and the push-forward theorem for polyhomogeneous functions, which we only mention, are in
+\cite{Melrose-pushforward}; the b-calculus is in \cite{Melrose-APS}; the $0$-calculus is in
+\cite{Mazzeo-Melrose}; the scattering calculus is in \cite{Melrose-scattering}.

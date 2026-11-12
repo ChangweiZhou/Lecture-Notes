@@ -244,16 +244,19 @@ which is $\mathcal{C}^1$ on each closed half-space with matching derivatives is
 $\mathcal{C}^1$, by the mean value theorem, and one iterates). A linear continuous
 extension with the stated bounds is Seeley's extension operator $Eu(x,y)=
 \sum_k a_k\psi(-b_kx)u(-b_kx,y)$ for $x<0$, with $b_k=2^k$, $\psi$ a cut-off and
-$a_k$ chosen with $\sum_ka_k(-b_k)^j=1$ for all $j$ and $\sum_k|a_k|b_k^j<\infty$; see
-the Notes.
+$a_k$ chosen with $\sum_ka_k(-b_k)^j=1$ for all $j$ and $\sum_k|a_k|b_k^j<\infty$. The
+existence of such $a_k$ and the resulting estimates are imported from Seeley's paper
+(Proc.\ Amer.\ Math.\ Soc.\ \textbf{15} (1964), 625--626; see the Notes) and are not
+proved here; nothing below uses the linearity or the estimates.
 \end{proof}
 
 For a manifold $X$ with boundary, $\CI(X)$ is the space of functions whose
 coordinate representations are smooth in this sense; it suffices to check this for
 one covering by coordinate systems. As for manifolds without boundary, $\CI(X)$ admits
 partitions of unity, and its topology is given by the seminorms $\sup_K|D^\alpha
-(\Phi^{-1})^*(u|_U)|$, $K\Subset O$, of which a countable subset suffices; for $X$
-compact $\CI(X)$ is a Fr\'echet space. The restriction map $\CI(X)\ni u\mapsto
+(\Phi^{-1})^*(u|_U)|$, $K\Subset O$, of which a countable subset suffices when $X$ is
+second countable (for instance compact; a disjoint union of uncountably many half-lines
+needs uncountably many); for $X$ compact $\CI(X)$ is a Fr\'echet space. The restriction map $\CI(X)\ni u\mapsto
 u|_{\pa X}\in\CI(\pa X)$ is surjective: using a collar, extend $v\in\CI(\pa X)$ to be
 independent of $\rho$ and cut off.
 
@@ -867,9 +870,16 @@ exactly, as follows by differentiating under the integral sign.
 \subsection*{Rational symbols}
 Suppose now that $W$ carries a Riemannian metric with dual metric $g(z,\zeta)=
 \sum g^{jk}(z)\zeta_j\zeta_k$ and Hermitian structures, and that $\tau(z,\zeta)$ is
-linear in $\zeta$, with $\sigma\tau=g$ and $\tau\sigma=g$ for $z\in K$. (If $D$ is of
-Dirac type on $K$, take $\tau=\sigma^*$ computed with respect to the Hermitian
-structures; outside $K$ the identities need not hold.)
+linear in $\zeta$, with $\sigma\tau=g$ and $\tau\sigma=g$ for $z\in K$, \emph{together
+with all their $z$-derivatives}: $D_z^\alpha(\sigma\tau-g)=0=D_z^\alpha(\tau\sigma-g)$ on
+$K$ for all $\alpha$. This is automatic if the identities hold on $K$ and $K$ is the
+closure of its interior, by continuity of derivatives; this is the case for the
+half-spaces used below. (If $D$ is of Dirac type on $K$, take $\tau=\sigma^*$ computed
+with respect to the Hermitian structures; outside $K$ the identities need not hold.
+Pointwise identities on an arbitrary closed $K$ do not suffice: for $K=\{0\}\subset\R$,
+$D=(1+x)D_x$, $g=\xi^2$ and $\tau=(1+x)\xi$ the actual parametrix symbol has leading
+part $(1+x)^{-1}\xi^{-1}$ while $\tau/g=(1+x)\xi^{-1}$, and their first $x$-derivatives
+differ by $-2\xi^{-1}$ at $0$.)
 
 \begin{definition}
 For $r\in\Z$, $\Rat{r}$ is the space of finite sums of matrix-valued functions
@@ -909,14 +919,18 @@ and over $K$
 d\circ\frac{\tau e_k}{1+g}=e_k-\frac{e_k}{1+g}+A'\frac{\tau e_k}{1+g}+\sum_jA_j
 D_{z_j}\frac{\tau e_k}{1+g},
 \end{equation*}
-so $d\circ\rho_{k+1}=1-e_{k+1}$ with $e_{k+1}\in\Rat{-k-1}$. (The identity
-$\sigma\tau=g$ is used only pointwise; the derivatives fall on the smooth functions
-$\tau,g$.)
+so $d\circ\rho_{k+1}=1-e_{k+1}$ with $e_{k+1}\in\Rat{-k-1}$. (Here ``over $K$''
+means that $d\circ\rho_k-1+e_k$ vanishes at every point of $K$ together with all its
+$z$-derivatives, so that it lies in $S^{-\infty}(K)$; this is where the identities
+$\sigma\tau=g$ \emph{with their derivatives} on $K$ are used. The derivatives of
+$\tau/(1+g)$ themselves fall on the smooth functions $\tau,g$.)
 
 Now let $e=q-\rho_N\in S^{-1}(L')$. Then $d\circ e=(d\circ q-1)+e_N\in S^{-N}(L')$.
 Suppose $e\in S^{-k}(L'')$ for a compact neighbourhood $L''\subset L'$ of $L$, $k\le
 N$. Then $\sigma e=d\circ e-A'e-\sum_jA_jD_{z_j}e\in S^{-k}(L'')$ and
-$e=(1-\phi)\tau g^{-1}\sigma e+\phi e\in S^{-k-1}(L'')$. Starting from $k=1$ we
+$e=(1-\phi)\tau g^{-1}\sigma e+\phi e\in S^{-k-1}(L'')$ (the identity $\tau\sigma=g$
+holds with all $z$-derivatives on $L''\subset K$, so $z$-derivatives of this identity
+may be taken). Starting from $k=1$ we
 reach $e\in S^{-N-1}(L)$ (the neighbourhoods may be fixed in advance, since only
 derivatives at points of $L''$ are involved). The homogeneous version is proved in
 the same way: writing $q_{-l}=p_lg^{1-2l}$, the terms of order $-l$ in
@@ -979,7 +993,10 @@ $G^-_\rho(z',x,\eta)=-i\operatorname{Res}_{\xi=\xi_-}(e^{ix\xi}\rho)$ for $x\le0
 Let $\rho\in\Rat{r}$, $r\le-1$, and let $L\subset W$ be compact.
 \begin{enumerate}[label=(\roman*)]
 \item For fixed $(z',\eta)$ the inverse Fourier transform of $\xi\mapsto\rho(z',\xi,
-\eta)$ (an $L^2$ function) is $H(x)G^+_\rho(z',x,\eta)-H(-x)G^-_\rho(z',x,\eta)$.
+\eta)$ (an $L^2$ function) is $H(x)G^+_\rho(z',x,\eta)+H(-x)G^-_\rho(z',x,\eta)$.
+(The minus sign from the clockwise orientation of the lower contour is already built
+into $G^-_\rho$; e.g.\ for $\rho=(1+\xi^2)^{-1}$, $G^+_\rho=\tfrac12e^{-x}$, $G^-_\rho=
+\tfrac12e^{x}$, giving $\tfrac12e^{-|x|}$.)
 \item For $z'\in L$, $x\ge0$ and all $\alpha,k,\beta$,
 $|D^\alpha_{z'}D^k_xD^\beta_\eta G^+_\rho(z',x,\eta)|\le C\ang{\eta}^{r+1+k-|\beta|}$.
 In particular $G^+_\rho(z',0,\eta)\in S^{r+1}(L)$ (as a symbol in $\eta$).
@@ -998,7 +1015,7 @@ $\operatorname{Im}\xi_+>0$) we get $\cF^{-1}[(\xi-\xi_+)^{-1}]=iH(x)e^{ix\xi_+}$
 differentiating in $\xi_+$, $\cF^{-1}[(\xi-\xi_+)^{-k}]=iH(x)(ix)^{k-1}e^{ix\xi_+}/
 (k-1)!=iH(x)\operatorname{Res}_{\xi_+}\big(e^{ix\xi}(\xi-\xi_+)^{-k}\big)$; similarly
 $\cF^{-1}[(\xi-\xi_-)^{-k}]=-iH(-x)\operatorname{Res}_{\xi_-}(e^{ix\xi}(\xi-
-\xi_-)^{-k})$. Summing gives (i).
+\xi_-)^{-k})=H(-x)G^-_{(\xi-\xi_-)^{-k}}$. Summing gives (i).
 
 (ii) Near a given $(z_0,\eta_0)$ we may fix $\gamma$ to be the circle with centre
 $\xi_+(z_0,\eta_0)$ and radius $c'\ang{\eta_0}$, $c'$ small; it encloses
@@ -1063,7 +1080,9 @@ and $\phi Q\psi(w\delta(x))=\phi Q(w\delta(x))$. Moreover, by
 +[D,\phi]Q\psi-DR$; the commutator is multiplication by a matrix function vanishing
 on $\{\phi=1\}^\circ$, so over the compact set $K'=L'\cap\{x\ge0\}$, for
 $L'\subset\{\phi=1\}^\circ$ a compact neighbourhood of $L_0$, we have $d\circ q-1\in
-S^{-\infty}(K')$. \Cref{boundary:lem:rational} applies with $K=\{x\ge0\}$ and gives
+S^{-\infty}(K')$. \Cref{boundary:lem:rational} applies with $K=W\cap\{x\ge0\}$ (the
+closure in $W$ of its interior, on which $D$ is of Dirac type, so the identities
+$\sigma\sigma^*=g=\sigma^*\sigma$ hold there with all derivatives) and gives
 $q=\rho_N+e$ with $e\in S^{-N-1}(L)$, $L=L_0\cap\{x\ge0\}$.
 
 Let $\phi_1\in\CIc(W)$ equal $1$ near $L_0$. For $z\in L$, $\Op(q)f(z)=
@@ -1087,7 +1106,7 @@ S^{-N-1-|\beta|}(L)$, $t_N\in S^{-N}$.
 \emph{The main term.} $\phi_1\rho_N$ is a finite sum of terms $\phi_1\rho$, $\rho\in
 \Rat{-1}$. By \cref{boundary:lem:contour}(i), $\int e^{ix\xi}\rho(z,\xi,\eta)\hat
 \varphi(\epsilon\xi)\dbar\xi$ is the convolution in $x$ of
-$H(x)G^+_\rho-H(-x)G^-_\rho$ with $\varphi_\epsilon$; for $x>0$ and $\epsilon$ small
+$H(x)G^+_\rho+H(-x)G^-_\rho$ with $\varphi_\epsilon$; for $x>0$ and $\epsilon$ small
 it converges to $G^+_\rho(z,x,\eta)$, with error at most $C\epsilon\ang\eta^{r+2}$
 uniformly for $x\ge2\epsilon$ by (ii) of that lemma. Hence for $z\in L$ with $x>0$,
 \begin{equation*}
@@ -1441,7 +1460,9 @@ or $D^*$ has null space. When every component of $X$ meets $\pa X$ it holds for
 operators of Dirac type: since $D^*D$ and $DD^*$ have scalar principal symbol
 $|\zeta|^2$, this follows from the unique continuation theorem of Aronszajn for such
 second-order operators, applied after extending the Dirac structure a little across
-the boundary near a boundary point; see the Notes. We simply assume it.
+the boundary near a boundary point; see the Notes. This deduction is not carried out
+here: we simply assume \eqref{boundary:eq:UC}, as part of the standing hypotheses
+of this section.
 \end{remark}
 
 \begin{discussion}
@@ -1831,8 +1852,19 @@ $\PiC'\PiC=\PiC$, since each is the identity on the common range, and $\PiC'-\Pi
 smoothing by (ii), but in general $\PiC'\ne\PiC$. The orthogonal projection onto the range in $L^2(Y;V)$ is again a classical
 pseudodifferential projection with the same range and principal symbol, but it differs
 from $\PiC$ by a smoothing operator only when $\PiC-\PiC^*$ is smoothing
-(\cref{boundary:ex:orthogonal-calderon}); the orthogonal projection onto
-$\overline{\Cau}$ in $H^{-\frac12}$ is usually not pseudodifferential. From now on we no
+(\cref{boundary:ex:orthogonal-calderon}). The orthogonal projection onto
+$\overline{\Cau}$ in $H^{-\frac12}(Y;V)$, for the inner product of
+\cref{manifolds:def:sobolev}, is also a classical pseudodifferential projection: that
+inner product is $\inner{\Lambda u}{v}$ with $\Lambda=\sum_i\rho_i\kappa_i^*\ang{D}^{-1}
+\kappa_{i*}\rho_i$ (up to the density factors), a positive elliptic classical operator of
+order $-1$, invertible as $\Hs{-\frac12}\to\Hs{\frac12}$; the $H^{-\frac12}$-adjoint of
+$\PiC$ is $\Lambda^{-1}\PiC^*\Lambda\in\Psido0$, and the construction of
+\cref{boundary:ex:orthogonal-calderon} with this adjoint gives the orthogonal projection
+$\PiC(\PiC+\Lambda^{-1}\PiC^*\Lambda-\Id)^{-1}$, whose second factor is the inverse of an
+elliptic operator (its principal symbol is $\pi+\pi^{*}-\Id$, with $\pi^*$ the adjoint of
+$\pi=\sigma_0(\PiC)$ in the fibre metric defined by $\sigma_{-1}(\Lambda)$, which is
+invertible by part (a) of that exercise applied pointwise). For an arbitrary equivalent
+Hilbert norm on $H^{-\frac12}$ no such statement holds. From now on we no
 longer distinguish between $\tilde b$ and $b$.
 
 \begin{remark}\label{boundary:rem:calderon-cases}
@@ -1967,8 +1999,12 @@ condition also asks that the modes $N\le k<0$ vanish, which solutions satisfy
 automatically, so the condition is $|N|$ conditions too many (cokernel of dimension
 $|N|$). The Dirichlet condition $\Pi=\Id$ asks infinitely many conditions too many,
 and $\Pi=0$ infinitely many too few. A good boundary condition must therefore be
-``as large as'' $\Id-\PiC$, at least at the level of principal symbols; this is the
-symbolic criterion below.
+``of the same size as'' $\PiC$ and transverse to the free data, at least at the level of
+principal symbols: $\pi=\sigma_0(\Pi)$ should have the same rank as $p=\sigma_0(\PiC)$
+and restrict to an isomorphism on $\Ran p$; this is the symbolic criterion below. (It
+is \emph{not} a comparison with $\Id-\PiC$: in the disc example $\Pi_N$ and $\PiC$
+have the same symbol, the projection onto the modes $k>0$ for large $|k|$, and it is
+$\Id-\PiC$ whose symbol differs.)
 \end{discussion}
 
 \subsection*{A symbolic criterion}
@@ -2050,10 +2086,13 @@ do not pursue this here, see the Notes.
 This is the case for $\Pi=\PiC$, and for the boundary condition of Atiyah, Patodi and
 Singer when $D$ has product form near the boundary: there $\Pi$ is the spectral projection
 onto the non-negative eigenspaces of a self-adjoint elliptic operator on $Y$, whose
-symbol is the projection appearing in \eqref{boundary:eq:calderon-symbol}; see
-\cite{Melrose-APS}.
+symbol is the projection appearing in \eqref{boundary:eq:calderon-symbol}. We do not
+prove this identification of the APS projection or the Fredholm theory of the APS
+problem here; both are imported from \cite{Melrose-APS}.
 
-(2) \emph{Local boundary conditions.} Suppose $\Pi$ is a bundle projection, i.e.\
+(2) \emph{Local boundary conditions.} Suppose $\dim X\ge2$ and $Y=\pa X\ne\emptyset$,
+so that the fibres of $T^*Y\setminus0$ are nonempty, and suppose $\Pi$ is a bundle
+projection, i.e.\
 multiplication by a smooth $\pi\in\CI(Y;\End(V))$ with $\pi^2=\pi$; then $\sigma_0(\Pi)
 (y,\eta)=\pi(y)$ does not depend on $\eta$. If \eqref{boundary:eq:symbolic} holds then
 $\operatorname{rank}p(y,\eta)=\operatorname{rank}V-\dim\Nul\pi(y)=\operatorname{rank}\pi(y)$
@@ -2063,7 +2102,9 @@ for all $\eta$, so by \cref{boundary:rem:calderon-cases}(2)
 2\operatorname{rank}\pi(y).
 \end{equation*}
 Thus a local elliptic boundary condition can only exist if $\operatorname{rank}V_1$ is
-even. For instance the Cauchy--Riemann operator $D_x+iD_y$ acting on scalar functions on
+even. (The hypothesis $\dim X\ge2$ is needed: on an interval $Y$ is a finite set,
+\eqref{boundary:eq:symbolic} is vacuous, and $D_x$ acting on scalar functions on $[0,1]$
+with the condition $u(0)=0$ is Fredholm, indeed invertible, although the rank is one.) For instance the Cauchy--Riemann operator $D_x+iD_y$ acting on scalar functions on
 a surface with boundary has no local elliptic boundary condition, although it has many
 pseudodifferential ones; see \cref{boundary:ex:disc,boundary:ex:local-bc}.
 \end{remark}
@@ -2168,8 +2209,12 @@ and R.~T.~Seeley (\emph{Singular integrals and boundary value problems}, Amer.\ 
 elliptic operators; the extension operator in \cref{boundary:prop:extension} is from
 R.~T.~Seeley, \emph{Extension of $\CI$ functions defined in a half space}, Proc.\ Amer.\
 Math.\ Soc.\ \textbf{15} (1964). The unique continuation theorem used to justify
-\eqref{boundary:eq:UC} is that of N.~Aronszajn (J.\ Math.\ Pures Appl.\ \textbf{36}
-(1957)) for second-order operators with scalar principal symbol. For operators of Dirac
+\eqref{boundary:eq:UC} is that of N.~Aronszajn, \emph{A unique continuation theorem for
+solutions of elliptic partial differential equations or inequalities of second order},
+J.\ Math.\ Pures Appl.\ \textbf{36} (1957), 235--249, for second-order operators with
+scalar principal symbol (its differential-inequality form applies componentwise to
+systems with diagonal principal part such as $D^*D$ and $DD^*$); see also
+\cite[Section~17.2]{Hormander-III}. For operators of Dirac
 type a thorough account, including the invertible double, the gluing formula, local
 boundary conditions and the Atiyah--Patodi--Singer condition, is B.~Boo{\ss}-Bavnbek and
 K.~P.~Wojciechowski, \emph{Elliptic boundary problems for Dirac operators}

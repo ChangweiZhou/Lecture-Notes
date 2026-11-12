@@ -4,8 +4,11 @@
 \providecommand{\relRC}[2]{{}^{#1}\overline{#2}}    % compactification relative to a subspace
 
 Why do we need distributions at all? A linear differential equation $Pu=f$ usually has
-solutions that are not smooth, and the fundamental solutions of the simplest operators
-(the Laplacian, the wave operator) are not even functions. Distributions give a space
+solutions that are not smooth. The fundamental solutions of the simplest operators are
+singular: that of the Laplacian is a multiple of $\abs x$, $\log\abs x$ or
+$\abs x^{2-n}$ in dimension $1$, $2$ or $n\ge3$, which is still locally integrable, but
+the forward fundamental solution of the wave operator in three space dimensions is a
+measure on the light cone and is not a function at all. Distributions give a space
 large enough to contain all such solutions while still allowing us to differentiate,
 multiply by smooth functions and take Fourier transforms. The Fourier transform turns
 differentiation into multiplication by a polynomial. This simple fact is the seed of
@@ -295,8 +298,8 @@ pattern: find the transpose on test functions, check that it is continuous, and 
 
 Similarly, the exterior product extends to distributions. For $u\in\cSp(\R^n)$ and
 $v\in\cSp(\R^m)$ there is a unique $u\boxtimes v\in\cSp(\R^{n+m})$ with
-$(u\boxtimes v)(\phi\boxtimes\psi)=u(\phi)v(\psi)$. We only need the special case
-$1\boxtimes v$, which is constructed directly in \cref{distributions:sec:little}. The
+$(u\boxtimes v)(\phi\boxtimes\psi)=u(\phi)v(\psi)$. We only need the special cases
+$1\boxtimes v$ and $v\boxtimes1$ (a distribution constant in some of the variables), which are constructed directly in \cref{distributions:sec:little}. The
 general case follows from the kernel theorem in \cref{distributions:sec:big}
 (\cref{distributions:ex:exterior}).
 
@@ -363,22 +366,25 @@ Differentiating under the integral and using $\ang{x'}^p\le\ang{x}^p$ gives
 $\norm{I\phi}_k\le C\norm{\phi}_{k+2}$, so $I$ is continuous. For
 $v\in\cSp(\R^{n-1})$ we may therefore define
 \begin{equation}\label{distributions:eq:one-tensor}
-  (1\boxtimes v)(\phi)=v(I\phi),\qquad\phi\in\cS(\R^n).
+  (v\boxtimes1)(\phi)=v(I\phi),\qquad\phi\in\cS(\R^n).
 \end{equation}
-Then $1\boxtimes v\in\cSp(\R^n)$, and
-$(1\boxtimes v)(\phi'\boxtimes\phi_n)=v(\phi')\int\phi_n$. This is the
-``distribution $v(x')$ regarded as a function of $x$ independent of $x_n$''. (In the
+Then $v\boxtimes1\in\cSp(\R^n)$, and
+$(v\boxtimes1)(\phi'\boxtimes\phi_n)=v(\phi')\int\phi_n$. This is the
+``distribution $v(x')$ regarded as a function of $x$ independent of $x_n$''; the order of the factors
+follows the variables, $v$ acting in the first variables $x'$ and $1$ in the last
+variable $x_n$. When the integrated variables come first, as in
+\cref{distributions:cor:Dju} below, the same construction is written $1\boxtimes v$. (In the
 original notes it is written $\pi^*v$, with $\pi(x)=x'$.) Since
 $I(\theta\boxtimes\rho)=\theta$ whenever $\int\rho=1$, the map $I$ is surjective and
-$v\mapsto1\boxtimes v$ is injective.
+$v\mapsto v\boxtimes1$ is injective.
 
 \begin{lemma}\label{distributions:lem:Dju}
-Let $u\in\cSp(\R^n)$. Then $D_nu=0$ if and only if $u=1\boxtimes v$ for some
+Let $u\in\cSp(\R^n)$. Then $D_nu=0$ if and only if $u=v\boxtimes1$ for some
 $v\in\cSp(\R^{n-1})$, and then $v$ is unique.
 \end{lemma}
 \begin{proof}
 If $\psi\in\cS(\R^n)$ then $I(D_n\psi)=0$, since $\psi\to0$ as $|x_n|\to\infty$. Hence
-$D_n(1\boxtimes v)(\psi)=v(I(-D_n\psi))=0$.
+$D_n(v\boxtimes1)(\psi)=v(I(-D_n\psi))=0$.
 
 For the converse, fix $\rho\in\cS(\R)$ with $\int\rho=1$. We claim that every
 $\phi\in\cS(\R^n)$ can be written
@@ -407,8 +413,8 @@ Now suppose $D_nu=0$. Then $u(D_n\psi)=-(D_nu)(\psi)=0$, so by
 \eqref{distributions:eq:decomp-D}
 $u(\phi)=u((I\phi)\boxtimes\rho)$. The map $\theta\mapsto\theta\boxtimes\rho$ is
 continuous $\cS(\R^{n-1})\to\cS(\R^n)$, so $v(\theta)=u(\theta\boxtimes\rho)$ defines
-$v\in\cSp(\R^{n-1})$, and $u(\phi)=v(I\phi)$, that is $u=1\boxtimes v$. Uniqueness
-follows from the injectivity of $v\mapsto1\boxtimes v$.
+$v\in\cSp(\R^{n-1})$, and $u(\phi)=v(I\phi)$, that is $u=v\boxtimes1$. Uniqueness
+follows from the injectivity of $v\mapsto v\boxtimes1$.
 \end{proof}
 
 Applying the lemma repeatedly gives the version we need. For $x\in\R^k$ and
@@ -927,9 +933,12 @@ $K=(A_xA_y)^tk$ is of the stated form.
 
 \subsection{Examples of kernels}
 Amongst tempered distributions, $\cS(\R^n)$ consists of the ``trivial'' examples, and
-studying the singularities of tempered distributions amounts to studying the quotient
-$\cSp(\R^n)/\cS(\R^n)$. This could reasonably be called the space of \emph{tempered
-microfunctions}. A typical singular distribution is $\delta$. Its definition says that
+the quotient $\cSp(\R^n)/\cS(\R^n)$ could reasonably be called the space of
+\emph{tempered microfunctions}. Note that this quotient records two kinds of
+non-triviality: local singularities, and behaviour at infinity. For example the
+constant function $1$ is smooth but not in $\cS(\R^n)$, so it is non-zero in the
+quotient; local singularities alone are measured by the quotient by $\CI$, a theme
+taken up in \cref{ch:microlocal}. A typical singular distribution is $\delta$. Its definition says that
 $\delta$ is the Schwartz kernel of the map $\cS(\R^n)\ni\phi\mapsto\phi(0)\in\C=\cS(\R^0)$.
 More generally, $\phi\mapsto D^\alpha\phi(0)$ has kernel $(-D)^\alpha\delta$, since
 $(-D)^\alpha\delta(\phi)=\delta(D^\alpha\phi)$. For the identity operator on $\cS(\R^n)$,
@@ -969,7 +978,8 @@ The second expression is an oscillatory integral, interpreted via
 \caption{Supports and singularities of Schwartz kernels in the $(y,x)$-plane. A
 differential operator, such as $\Id$ or $P(x,D)$, has kernel supported on the diagonal
 $\{x=y\}$ (left). A pseudodifferential operator of \cref{ch:euclidean} has a kernel that
-is still singular only on the diagonal, but is no longer supported there: it is smooth
+is still singular only on the diagonal, but whose support can extend off the diagonal
+(differential operators are the special case in which it does not): it is smooth
 off the diagonal and decays rapidly as $|x-y|\to\infty$ (right; the shading indicates
 where the kernel is concentrated).}
 \label{distributions:fig:kernels}
@@ -980,7 +990,10 @@ Where does the Fourier transform enter the proof of the kernel theorem, which is
 statement about operators and not about frequencies?
 \end{question}
 \begin{answer}
-Only in \cref{distributions:lem:basic-est}. The Schwartz norms $\norm{\cdot}_k$ are not
+Mainly in \cref{distributions:lem:basic-est} and
+\cref{distributions:lem:representation}, which work on the Fourier side; Fourier
+series also enter the density of exterior products
+(\cref{distributions:lem:tensor-dense}). The Schwartz norms $\norm{\cdot}_k$ are not
 Hilbert norms, so Riesz representation cannot be applied to them directly. After
 applying $A_{N,M}^{-1}$, a Schwartz-norm estimate becomes a bound by
 $\norm{\ang{\xi}^{-n}\hat\psi}_{L^2}$, a Hilbert norm. In that Hilbert space the point
@@ -1034,8 +1047,10 @@ General linear transformations do not.
 \begin{proposition}\label{distributions:prop:one-point}
 $G\in\GL(n,\R)$ extends to a $\mathcal{C}^1$ map of $\oRC{\R^n}$ fixing $\infty$ if and
 only if $G$ is conformal, that is $G=cO$ with $c>0$ and $O\in\mathrm{O}(n)$. In
-particular, for $n\ge2$ the scaling $(z_1,z')\mapsto(sz_1,z')$, $s\ne1$, does not
-extend.
+particular, for $n\ge2$ the scaling $(z_1,z')\mapsto(sz_1,z')$ with $s\in\R$,
+$\abs s\ne0,1$, does not extend to a $\mathcal{C}^1$ map \textup{(}it does extend
+continuously, as every $G\in\GL(n,\R)$ does, since $\abs{Gz}\to\infty$ as
+$\abs z\to\infty$\textup{)}; for $s=-1$ it is orthogonal.
 \end{proposition}
 \begin{proof}
 In the coordinate $w=\iota(z)$ near $\infty$, $G$ becomes
@@ -1439,8 +1454,10 @@ $[\RC{W},\mathbb{S}V]$ of \cref{distributions:rem:blowup}.}
 \end{figure}
 
 \begin{proposition}\label{distributions:prop:relative}
-Every affine map of $W$ whose linear part maps $V$ into itself extends to a
-diffeomorphism of $\relRC{V}{W}$. In particular $\relRC{V}{W}$ does not depend on the
+Every affine automorphism of $W$ \textup{(}affine map with invertible linear
+part\textup{)} whose linear part maps $V$ into, hence onto, itself extends to a
+diffeomorphism of $\relRC{V}{W}$. \textup{(}A non-invertible affine map, such as a
+constant map, may preserve $V$ but cannot extend to a diffeomorphism.\textup{)} In particular $\relRC{V}{W}$ does not depend on the
 choice of complement $U$ or of the metrics. The short exact sequence
 $0\to V\to W\to W/V\to0$ extends to smooth maps
 \[
@@ -1450,7 +1467,7 @@ If $A\colon V\to W$ is any linear map with null space $N$, then $A$ extends to a
 map $\relRC{N}{V}\to\RC{W}$.
 \end{proposition}
 \begin{proof}
-An affine map preserving the direction $V$ has the form
+An affine automorphism preserving the direction $V$ has the form
 $T(v,u)=(Gv+Su+a,\,Hu+b)$, with $G\in\GL(V)$, $H\in\GL(U)$, $S\colon U\to V$ linear,
 $a\in V$ and $b\in U$. In the coordinates $(\nu,u)=(v/\ang{u},u)$ it becomes
 \[
@@ -1480,8 +1497,13 @@ In the trivial cases $V=\{0\}$ and $V=W$ the relative compactification reduces t
 $\RC{W}$ (\cref{distributions:ex:trivial}). For a non-trivial subspace, $\relRC{V}{W}$
 is canonically the blow-up $[\RC{W},\mathbb{S}V]$ of $\RC{W}$ along the sphere at
 infinity of $V$, which is a submanifold of the boundary. Similarly, for a product
-$W=V\times U$ the identity map extends to neither $\RC{V}\times\RC{U}\to\RC{W}$ nor its
-inverse. However, the doubly-relative compactification
+$W=V\times U$ with $\dim V>0$ and $\dim U>0$, the identity map extends to neither
+$\RC{V}\times\RC{U}\to\RC{W}$ nor its inverse, even continuously. (Let $e\in U$, $d\in V$ be unit vectors and $c\in V$, and
+write points of $W$ as $(v,u)$. As $t\to\infty$ the curves $(c,te)$ have the same limit
+in $\RC{W}$ for all $c$ but different limits in $\RC{V}\times\RC{U}$; the curves
+$(td,te)$ and $(td,t^2e)$ have the same limit in $\RC{V}\times\RC{U}$ but different
+limits in $\RC{W}$. If one factor is zero, both
+spaces are $\RC{W}$.) However, the doubly-relative compactification
 (\cref{distributions:ex:doubly}) is canonically both $[\RC{V\times U};\mathbb{S}U,\mathbb{S}V]$
 and $[\RC{V}\times\RC{U};\mathbb{S}V\times\mathbb{S}U]$. These identifications are
 proved in \cref{ch:blowup}: the first in \cref{blowup:thm:relative} (where $\mathbb{S}V$
@@ -1619,8 +1641,9 @@ consider
 Show that this is a diffeomorphism onto its image, and that the closure of the image is
 a compact manifold with corners. It has three boundary hypersurfaces if
 $\dim U,\dim V\ge2$. Denote it by $\relRC{U,V}{U\times V}$. Show that translations, and
-linear maps preserving both $U$ and $V$, lift to diffeomorphisms. Show that the
-inclusions of $\RC{U}$ and $\RC{V}$ extend smoothly, and that the identity of $W$
+linear automorphisms preserving both $U$ and $V$, lift to diffeomorphisms. Show that the
+inclusions $U\to W$ and $V\to W$ extend to smooth maps
+$\RC{U}\to\relRC{U,V}{U\times V}$ and $\RC{V}\to\relRC{U,V}{U\times V}$, and that the identity of $W$
 extends to smooth maps from $\relRC{U,V}{U\times V}$ to both $\RC{U\times V}$ and
 $\RC{U}\times\RC{V}$. Draw a picture for $\dim U=\dim V=1$. (The identification of this
 space with two iterated blow-ups is \cref{blowup:prop:doubly}; compare
@@ -1628,9 +1651,11 @@ space with two iterated blow-ups is \cref{blowup:prop:doubly}; compare
 \end{exercise}
 
 \begin{exercise}\label{distributions:ex:polar}
-Show that a change of local coordinates fixing $0\in\R^n$ induces a diffeomorphism of
-$[0,\epsilon)\times\Sphere^{n-1}$, for some $\epsilon>0$, under polar coordinates
-$(r,\omega)\mapsto r\omega$. (Treat linear changes first, using
+Show that a change of local coordinates fixing $0\in\R^n$ induces, under polar
+coordinates $(r,\omega)\mapsto r\omega$, a diffeomorphism between two neighbourhoods of
+$\{0\}\times\Sphere^{n-1}$ in $[0,\infty)\times\Sphere^{n-1}$ (that is, of germs of
+neighbourhoods of the front face; it need not map a fixed collar
+$[0,\epsilon)\times\Sphere^{n-1}$ onto itself, as $z\mapsto2z$ shows). (Treat linear changes first, using
 \cref{distributions:prop:affine}. Then reduce to the case where the Jacobian at $0$ is
 the identity.) Conclude that the blow-up of a point is well defined. (The general form of
 this statement, for submanifolds and with the action on the front face, is

@@ -393,9 +393,11 @@ i.e.\ $A-\Op_W(a_0)=\Op(b-\sigma_L(\Op_W(a_0)))\in\Psido{-\infty}$. By the previ
 $A-\Op_W(a_0)=\Op_W(e')$ with $e'\in S^{-\infty}$, so $A=\Op_W(a_0+e')$ with
 $a_0+e'\in S^m$. Thus $\Op_W:S^m(\R^n;\R^n)\to\Psido m(\R^n)$ is a bijection.
 
-As a check, for $n=1$ and $a=x\xi$ the formula gives
-$\sigma_L(\Op_W(a))=x\xi+\frac i2D_\xi D_x(x\xi)=x\xi-\frac i2$, and indeed
-$\frac12(xD+Dx)=xD+\frac12[D,x]=xD-\frac i2$.
+As a check, for $n=1$ and $a=f(x)\xi$ with $f\in\CIb(\R)$ real (so that $a\in S^1$;
+the tempting example $a=x\xi$ is not a symbol in the uniform class, as its
+$x$-derivatives are not bounded) the formula gives
+$\sigma_L(\Op_W(a))=f\xi+\frac i2D_\xi D_x(f\xi)=f\xi-\frac i2f'$, and indeed
+$\frac12(fD+Df)=fD+\frac12[D,f]=fD-\frac i2f'$.
 
 % ----------------------------------------------------------------------
 \subsection*{\Cref{euclidean:ex:ph-smooth}}
@@ -663,7 +665,7 @@ holomorphic into $\Symph{-j}$ and $s\mapsto\chi(\eps\xi)a_j(s)$ into $S^{-\infty
 also that $S^{-\infty}\hookrightarrow\Symph{-M}$ is continuous for every $M$ (all normalized
 terms vanish, and the norms are symbol norms).
 
-\emph{Choice of $\eps_j$.} Let $K_1\subset K_2\subset\cdots$ be compact subsets of $U$ with
+\emph{Choice of $\eps_j$.} Let $K_0\subset K_1\subset K_2\subset\cdots$ be compact subsets of $U$ with
 $K_l\subset\operatorname{int}K_{l+1}$ and $\bigcup_lK_l=U$. A holomorphic map is continuous,
 so $B_{N,j}=\sup_{s\in K_j}\norm{a_j(s)}_{N,-j}<\infty$. Choose $\eps_j\in(0,1]$
 decreasing to $0$ with $C_N\eps_jB_{N,j}\le2^{-j}$ for all $N\le j$. Put
@@ -835,7 +837,8 @@ $ab_0-1$ is a smooth family in $S^{-\infty}$.
 $c_j\in\CI(U;S^{\mu-j}(\R^n;\R^n))$, $j\in\N_0$. We claim there is
 $c\in\CI(U;S^\mu)$ with $c-\sum_{j<N}c_j\in\CI(U;S^{\mu-N})$ for all $N$. With $\phi$,
 $\chi=1-\phi$ and $C_N$ as in \eqref{soleuclidean:eq:borel-gain}, and an exhaustion
-$K_1\subset K_2\subset\cdots$ of $U$ as in the previous solution, choose $\eps_j\in(0,1]$
+$K_0\subset K_1\subset\cdots$ of $U$ as in the previous solution (indexed from $0$, so
+that the condition below makes sense for $j=0$), choose $\eps_j\in(0,1]$
 decreasing to $0$ with
 \begin{equation*}
   C_N\eps_j\sup_{t\in K_j}\norm{\pa^\gamma_tc_j(t)}_{N,\mu-j}\le2^{-j}\qquad
@@ -857,8 +860,8 @@ and each of the finitely many remaining terms with $j\ge M$ satisfies
 $\sum_{j\ge M}\phi(\eps_j\xi)c_j$ satisfies \eqref{euclidean:eq:smooth-symbol-est} of order
 $\mu-M$, and is in $\CI(U;S^{\mu-M})$ by \cref{euclidean:lem:smooth-symbols}. Finally
 $c-\sum_{j<M}c_j=-\sum_{j<M}\chi(\eps_j\xi)c_j+\sum_{j\ge M}\phi(\eps_j\xi)c_j$, and the
-first sum is a smooth family in $S^{-\infty}$ (it vanishes for $\abs\xi\ge2/\eps_{M-1}$ and
-has locally uniformly bounded derivatives).
+first sum is a smooth family in $S^{-\infty}$: for $M=0$ it is empty, and for $M\ge1$ it
+vanishes for $\abs\xi\ge2/\eps_{M-1}$ and has locally uniformly bounded derivatives.
 
 \emph{Step 3: the Neumann series.} Let $B_1(t)=\Op(b_0(t))$, a smooth family in
 $\Psido{-m}$. By \cref{euclidean:prop:smooth-families}(ii), $E(t)=A(t)B_1(t)-\Id$ is a
@@ -1127,11 +1130,13 @@ absolutely. Put $x'=Tx$, substitute $y'=Ty$ ($dy'=\abs{\det L}\,dy$) and $\xi=M\
 \emph{General amplitudes.} Let $c\in\Amp mw$, and with $\chi$ as in
 \cref{euclidean:lem:density} let $c_\eps=\chi(\eps\xi)c$. Then
 $(c_\eps)_T=\chi(\eps M\eta)c_T$. The function $\chi_M=\chi\circ M$ is in $\CIc(\R^n)$
-and $D^\beta[\chi_M(\eps\eta)]=\eps^{\abs\beta}(D^\beta\chi_M)(\eps\eta)$ is supported where
-$1\le\abs{M\eps\eta}\le2$, i.e.\ where $c_1\le\eps\abs\eta\le c_2$ with
+and $\abs{\chi_M(\eps\eta)}\le\sup\abs\chi$. For $\abs\beta\ge1$,
+$D^\beta[\chi_M(\eps\eta)]=\eps^{\abs\beta}(D^\beta\chi_M)(\eps\eta)$ is supported where
+$1\le\abs{M\eps\eta}\le2$ (as $\chi$ is constant in $\abs\xi\le1$ and in $\abs\xi\ge2$),
+hence where $c_1\le\eps\abs\eta\le c_2$ with
 $c_1=\norm{M}^{-1}$, $c_2=2\norm{M^{-1}}$. There $\ang\eta\le(1+c_2)/\eps$, so
 $\abs{D^\beta[\chi_M(\eps\eta)]}\le C_\beta\ang\eta^{-\abs\beta}$ uniformly in
-$\eps\in(0,1]$: the family $\chi_M(\eps\eta)$ is bounded in $S^0(\R^n)$. Hence
+$\eps\in(0,1]$, for every $\beta$ (for $\beta=0$ by the sup bound): the family $\chi_M(\eps\eta)$ is bounded in $S^0(\R^n)$. Hence
 $(c_\eps)_T$ is bounded in $\Amp mw$; and $c_T-(c_\eps)_T$ vanishes for
 $\abs\eta<c_1/\eps$, so, as in the proof of \cref{euclidean:lem:density},
 $(c_\eps)_T\to c_T$ in $\Amp{m'}w$ for every $m'>m$. By

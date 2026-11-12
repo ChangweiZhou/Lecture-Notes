@@ -99,7 +99,10 @@ operators).
 \caption{Semiclassical symbols as functions of $\eps$ and the rescaled
 frequency $\eta=\eps\xi$ (the $\eta$-axis compactified, $x$ suppressed). At
 fixed $\eps>0$ (vertical line) we see an ordinary operator $A_\eps$, whose
-principal symbol is read off at $\abs\eta=\infty$. A fixed classical
+principal symbol is read off at $\abs\eta=\infty$. (Literally so for classical
+symbols, which have boundary values there; for general symbols the edges at
+$\abs\eta=\infty$ stand for the symbolic quotient modulo one lower order, since e.g.\
+$\sin(\log\ang\eta)\in S^0$ has no radial limit.) A fixed classical
 frequency $\xi$ moves along a ray (dashed) into $\eta=0$ as $\eps\downarrow0$,
 so the semiclassical regime is $\abs\xi\sim1/\eps$. The semiclassical symbol
 lives on the left edge $\eps=0$, the uniform principal symbol on the top and
@@ -355,9 +358,12 @@ symbol of a composite, from which the expansion in powers of $\eps$ follows.
 \end{definition}
 
 By \cref{semiclassical:lem:rescale}(i), $A_\eps\in\Psido m(\R^n)$ for each
-$\eps>0$; but note that the estimates on its left symbol $a^\flat(\eps)$ in
-$S^m$ are uniform in $\eps$ only if $m\le0$ and the derivatives in $\xi$ are
-not counted. Since $\Op:S^m(\R^n;\R^n)\to\Psido m(\R^n)$ is injective
+$\eps>0$; but note that, by \cref{semiclassical:lem:rescale}(ii) with $k=0$, the
+$S^m$ seminorms of its left symbol $a^\flat(\eps)$ (all derivatives in $x$ and $\xi$ included)
+are uniform in $\eps$ only when $m\ge0$. For $m<0$ they are not: for
+$a(\eta)=\ang\eta^m$ already $\sup_\xi\ang\xi^{-m}\abs{a^\flat(\eps,\xi)}
+=\sup_\xi\ang\xi^{-m}\ang{\eps\xi}^m$ grows like $\eps^m$ as $\eps\to0$, although the family
+$a^\flat(\eps)$ is bounded in $S^0=S^{m_+}$. Since $\Op:S^m(\R^n;\R^n)\to\Psido m(\R^n)$ is injective
 (\cref{euclidean:cor:reduction}), $A$ determines $a(\eps,\cdot,\cdot)$ for every
 $\eps>0$, hence by continuity also for $\eps=0$: \emph{the map
 $\Op_\eps:\Ssl m(\R^n)\to\Psisl m(\R^n)$ is a bijection}. This justifies the
@@ -899,8 +905,9 @@ for the full expansion from this point of view.
   by its inward-pointing spherical normal bundle (\cref{blowup:thm:blowup}); the new boundary hypersurface,
   the \emph{front face}, is a bundle of closed half-spheres over $\Diag$, whose
   interior is identified with $T\R^n$ through $(\eps,x,y)\mapsto(x,(x-y)/\eps)$. The
-  other boundary face is the lift of $\{\eps=0\}$, i.e.\ $\{\eps=0\}$ away from
-  the diagonal, which is reached as $\abs Z\to\infty$ in the front face. Thus
+  other boundary faces are the lift of $\{\eps=0\}$, i.e.\ $\{\eps=0\}$ away from
+  the diagonal, which is reached as $\abs Z\to\infty$ in the front face, and the
+  face $\{\eps=1\}$, which is unaffected by the blow-up. Thus
   \cref{semiclassical:prop:smoothing-kernels} says: the kernels of the elements
   of $\Psisl{-\infty}(\R^n)$ are $\eps^{-n}$ times smooth functions on the blown-up
   space which vanish to infinite order at the lifted face $\{\eps=0\}$ (with the
@@ -961,11 +968,13 @@ for the full expansion from this point of view.
 \end{tikzpicture}
 \caption{The semiclassical double space, in a two-dimensional slice transverse
 to the diagonal. Left: the kernel $\eps^{-n}K(\eps,x,(x-y)/\eps)$ is singular only
-at $\{0\}\times\Diag$ (dot); it is constant along the dashed rays
-$x-y=\eps Z$. Right: after blowing up, the rays are separated and end at
+at $\{0\}\times\Diag$ (dot); the coordinate $Z$ is constant along the dashed rays
+$x-y=\eps Z$ (the kernel itself is not: for $K=e^{-\abs Z^2}$ the coefficient
+$\eps^{-n}K$ varies along each ray and diverges as $\eps\to0$). Right: after blowing up, the rays are separated and end at
 different points of the front face ff, whose interior is parametrized by
-$Z=(x-y)/\eps\in\R^n$. Semiclassical smoothing kernels are smooth here,
-vanish to infinite order at the lifted face $\{\eps=0\}$, and their
+$Z=(x-y)/\eps\in\R^n$. The normalized kernels $\eps^nK_{A_\eps}=K(\eps,x,Z)$ (equivalently, the
+kernels expressed in the rescaled density $\abs{dZ}$) of semiclassical smoothing
+families are smooth here, vanish to infinite order at the lifted face $\{\eps=0\}$, and their
 restriction to ff is the inverse Fourier transform of the semiclassical
 symbol (\cref{blowup:prop:sc-kernels,blowup:cor:sc-manifold}).}
 \label{semiclassical:fig:double-space}
@@ -1036,7 +1045,12 @@ and $\tilde\sigma_2=[\abs\eta^2]$.
 In terms of \cref{semiclassical:fig:regimes}, the joint symbol records a
 representative on the left edge $\eps=0$ together with the leading behaviour
 along the top and bottom edges $\abs\eta=\infty$, and the compatibility
-condition is that the two agree at the corners where these edges meet.
+condition is that the two agree at the corners where these edges meet. For general
+(non-classical) symbols this is to be read symbolically: the ``leading behaviour at
+$\abs\eta=\infty$'' is the class modulo $S^{m-1}$, not a restriction to an actual
+boundary (for instance $\sin(\log\ang\eta)\in S^0$ has a non-trivial class modulo $S^{-1}$
+but no limit along rays). For classical symbols, \cref{semiclassical:rem:classical}
+below, these are genuine boundary values.
 
 \begin{remark}\label{semiclassical:rem:classical}
   If $A\in\Psislph{m}(\R^n)$, the uniform principal symbol is

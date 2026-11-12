@@ -79,8 +79,9 @@ $S^{m+\frac n4-1}$, then $Au\notin\CI$: there are no conormal solutions of
 $Au\in\CI$.  Suppose instead that $P\in\Psido{m'}(X;\Omegah)$ is not elliptic,
 with homogeneous principal symbol $p$, and that we look for
 $u\in\Ic{m}(X,Y;\Omegah)$ which is genuinely singular, say with
-$\sigma_m(u)$ elliptic (bounded below by $c\ang{\xi}^{m+\frac n4}|dy\,d\xi|^{1/2}$
-for large $\xi$), and $Pu\in\CI$.  By \cref{hj:thm:psido-conormal},
+$\sigma_m(u)$ elliptic (bounded below by $c\ang{\xi}^{m+\frac n4-\frac k2}|dy\,d\xi|^{1/2}$
+for large $\xi$; the frame $|dy\,d\xi|^{1/2}$ is itself homogeneous of degree $\frac k2$
+under fibre dilations, so this is ellipticity of order $m+\frac n4$), and $Pu\in\CI$.  By \cref{hj:thm:psido-conormal},
 $p|_{N^*Y}\sigma_m(u)=0$ modulo lower order, so $p$ must vanish on $N^*Y$.
 
 \begin{definition}\label{hj:def:characteristic}
@@ -96,7 +97,10 @@ $p|_{N^*Y}\sigma_m(u)=0$ modulo lower order, so $p$ must vanish on $N^*Y$.
 A conormal distribution to $Y$ oscillates only in the directions conormal to $Y$:
 locally it is a superposition of plane waves $e^{ix\cdot\xi}$ with $\xi\in N^*Y$. For
 $Pu$ to be smoother than expected, $P$ must annihilate these plane waves to leading
-order at high frequency, i.e.\ $p$ must vanish on $N^*Y$. For the wave operator this
+order at high frequency, i.e.\ $p$ must vanish on those directions of $N^*Y$ in which
+$u$ is actually singular (on all of $N^*Y$ if $\sigma_m(u)$ is elliptic, as above; in
+general only on the cone where the symbol of $u$ is not rapidly decreasing, as in
+\cref{hj:cor:char-lower}). For the wave operator this
 says that a singular wave front must move at the speed of light; for an elliptic
 operator it never happens.
 \end{discussion}
@@ -135,7 +139,7 @@ singular solutions do exist.
   $v\in\Ic{m_0}(\R,\{0\})$ (a conormal distribution at a point, in one variable),
   \begin{equation*}
     u=v(t-\omega\cdot x)\,|dt\,dx|^{1/2}\in\Ic{m_0-\frac n4}(\R^{n+1},H;\Omegah),
-    \qquad Pu=(1-|\omega|^2)v''(t-\omega\cdot x)|dt\,dx|^{1/2}=0.
+    \qquad Pu=(|\omega|^2-1)v''(t-\omega\cdot x)|dt\,dx|^{1/2}=0.
   \end{equation*}
   (The order follows from the linear change of coordinates $s=t-\omega\cdot x$,
   $x'=x$, of determinant one, and the relation $M=m+\frac{n+1}4-\frac12$ between
@@ -590,8 +594,12 @@ to a transversal hypersurface.  We first solve the transport equations.
   \end{equation*}
   has a unique solution $\beta\in S^r$ there (restriction to $t=0$ taken as in
   \eqref{hj:eq:restrict-hd}).  If $\beta_0$ and $c$ are of order $-\infty$ outside
-  closed cones $K_0$, $K$, then $\beta$ is of order $-\infty$ outside the union of
-  $K$ and the $H_p$-flow-out of $K_0$.
+  closed cones $K_0$, $K$, then $\beta$ is of order $-\infty$ outside the set of points
+  whose $H_p$-integral curve, followed back to $\{t=0\}$, either starts in $K_0$ or
+  meets $K$; in particular outside the $H_p$-flow-out of $K_0\cup K$.  (The forcing
+  term propagates: for $H_p=\pa_t$, $q=0$, $\beta_0=0$ and $c=\chi(t)b(\xi_1)$ with
+  $0\le\chi$ supported in a slab $0<t_1\le t\le t_2$, the solution $\beta=ib\int_0^t\chi$
+  is not rapidly decreasing for $t>t_2$, outside $K$.)
 \end{lemma}
 \begin{proof}
   Since $H_p$ is tangent to $\Gamma$ and homogeneous of degree $m'-1$, in the
@@ -622,7 +630,9 @@ to a transversal hypersurface.  We first solve the transport equations.
   and $y'_0$ near $0$.  The change of variables $(s,y'_0,\xi_1)\mapsto
   (s,Y,\xi_1E)$ is a diffeomorphism near $\{s=0,\ y'_0=0\}$ which is linear and
   positive in the fibre variable, so it preserves symbol classes; hence $\beta$ has
-  order $r$, and the support statement is clear from the formula.
+  order $r$.  The support statement follows from the formula, since the value at
+  $(s,Y(s,y_0'),\xi_1E(s,y_0'))$ involves only $\tilde\beta_0$ at the initial point and
+  $\tilde c$ along the segment of the integral curve between it and the given point.
 \end{proof}
 
 \begin{theorem}[Travelling waves]\label{hj:thm:travelling}
@@ -646,9 +656,12 @@ to a transversal hypersurface.  We first solve the transport equations.
   Use the coordinates of \cref{hj:lem:transport-ode}, and choose $\epsilon$, $U$
   as there and $\gamma$ so small that, in these coordinates, $j^{-1}(\gamma)$ lies
   over $\{y'\in U\}$ and within a cone whose $H_p$-flow-out for $|t|<\epsilon$
-  stays in $\Gamma$.  Let $O=\{|x_1|<\epsilon',|t|<\epsilon,\ y'\in U'\}$ with
-  $U'\Subset U$, and fix $\phi\in\CIc(\{|t|<\epsilon,y'\in U\})$ equal to one
-  near $\bar O$.  We construct $u_j\in\Ic{m-j}(X,\tilde G;\Omegah)$, with
+  stays in $\Gamma$; let $C\subset\Gamma$ be this flow-out (for $|t|<\epsilon$) of the
+  cone $j^{-1}(\gamma)$, a cone invariant under the $H_p$-flow within the coordinate
+  region.  Let $O=\{|x_1|<\epsilon',|t|<\epsilon/2,\ y'\in U'\}$ with $U'\Subset U$,
+  with $\epsilon'$ so small that $\{|x_1|<2\epsilon'\}$ lies in the coordinate chart,
+  and fix $\phi\in\CIc(\{|x_1|<2\epsilon',|t|<\epsilon,y'\in U\})$ equal to one
+  near $\bar O$ (possible since $\bar O$ is a compact subset of this open set).  We construct $u_j\in\Ic{m-j}(X,\tilde G;\Omegah)$, with
   wavefront sets in $\Gamma$ and supports in $\supp\phi$, such that for
   $v_N=u_0'+\dots+u_N$ (we write $u_0'$ for the first term to avoid confusion with
   the data $u_0$)
@@ -659,14 +672,15 @@ to a transversal hypersurface.  We first solve the transport equations.
   For $N=-1$ (with $v_{-1}=0$) the second condition holds and the first is
   vacuous with the convention $Pv_{-1}=0$.  Given $v_{N-1}$, let
   $g=-Pv_{N-1}\in\Ic{m+m'-N-1}$ in $O$ and $e=u_0-v_{N-1}|_H\in
-  \Ic{m+\frac14-N}(H,G;\Omegah)$, both with wavefront sets in the appropriate
-  cones.  By \cref{hj:lem:transport-ode} (with $q=p_s|_\Gamma$) solve
+  \Ic{m+\frac14-N}(H,G;\Omegah)$, with $\WF(g)\cap T^*O\subset C$ (by induction, as
+  $P$ is microlocal) and $\WF(e)\subset\gamma$.  By \cref{hj:lem:transport-ode} (with $q=p_s|_\Gamma$) solve
   \begin{equation*}
     (-i\mathcal L_{H_p}+p_s)\beta_N=\sigma_{m+m'-N-1}(g),\qquad
     \beta_N|_{t=0}=(j)^*\sigma_{m+\frac14-N}(e),
   \end{equation*}
-  with $\beta_N\in S^{m+\frac n4-N}$, of order $-\infty$ outside the flow-out
-  cone, and let $u_N\in\Ic{m-N}$ be $\phi$ times a distribution with principal
+  with $\beta_N\in S^{m+\frac n4-N}$, of order $-\infty$ outside $C$ (by the support
+  statement of \cref{hj:lem:transport-ode}, since $C$ contains the flow-out of
+  both $j^{-1}(\gamma)$ and of itself), and let $u_N\in\Ic{m-N}$ be $\phi$ times a distribution with principal
   symbol $\beta_N$ (\cref{ch:conormal}).  By \cref{hj:thm:transport},
   $\sigma_{m+m'-N-1}(Pu_N)=\sigma_{m+m'-N-1}(g)$ in $O$ (where $\phi=1$ and,
   $P$ being pseudolocal, $P(\phi w)-\phi Pw$ is smooth), so $Pv_N=-g+Pu_N\in
@@ -958,11 +972,16 @@ is a submanifold of dimension $n-1$ near $(\bar x,\bar z)$.
     \varphi(x,\theta)=\theta_0\,h(x,\theta'/\theta_0).
   \end{equation*}
   Then $\varphi$ is a non-degenerate phase function near $C_\varphi$,
-  $C_\varphi=\{(x,\theta_0,\theta_0z);\ (x,z)\in C_H,\ \theta_0>0\}$, and the
-  Lagrangian it parametrizes is
+  $C_\varphi=\{(x,\theta_0,\theta_0z);\ (x,z)\in C_H,\ \theta_0>0\}$, and the map
+  $j_\varphi$ is a conic Lagrangian immersion with image
   \begin{equation*}
     \Lambda_H=\{(x,\tau\,d_xh(x,z));\ (x,z)\in C_H,\ \tau>0\}.
   \end{equation*}
+  Thus $\varphi$ parametrizes $\Lambda_H$ \emph{locally}: near each point of
+  $C_\varphi$ it parametrizes an open piece of $\Lambda_H$ which is an embedded conic
+  Lagrangian submanifold.  Globally $j_\varphi$ need not be injective: for $n=k=1$ and
+  $h(x,z)=x-(z^2-1)^2$, $H$ is non-degenerate at the two points $(0,\pm1)\in C_H$, which
+  both map to the covectors $(0,\tau\,dx)$.
   Conversely, every phase function on a cone $\Gamma$ on which, after a linear
   change of the $\theta$ variables, $\theta_0>0$, is of this form with
   $h(x,z)=\varphi(x,1,z)$.
@@ -1276,20 +1295,38 @@ for the amplitude order corresponding to order $m$; for the conormal phase of
   fibre-preserving diffeomorphism between open cones and $\varphi_2\circ\kappa=
   \varphi_1$, then $I_{\varphi_2}(a)=I_{\varphi_1}(a\circ\kappa\,|\det
   \pa_\theta\Theta|)$ for $a\in S^\mu_{\Gamma_2}$, and
-  $a\circ\kappa|\det\pa_\theta\Theta|\in S^\mu_{\Gamma_1}$.
+  $a\circ\kappa|\det\pa_\theta\Theta|=a_1+r$ with $a_1\in S^\mu_{\Gamma_1}$ and $r$
+  smooth with compact support, so that $I_{\varphi_2}(a)=I_{\varphi_1}(a_1)$ modulo
+  $\CI$.  (The hard cut-off $|\theta|\le1$ in the definition of $S^\mu_\Gamma$ is not
+  invariant under $\kappa$: for $\Theta=2\theta$ the transformed amplitude may be
+  nonzero for $\frac12<|\theta|\le1$.)
   (ii) If $F:X'\to X$ is a diffeomorphism of open sets then
   $F^*(I_\varphi(a)|dx|^{1/2})=I_{\varphi\circ F}(a\circ F\,|\det F'|^{1/2})
   |dx'|^{1/2}$, where $\varphi\circ F(x',\theta)=\varphi(F(x'),\theta)$
   parametrizes $(F^\sharp)^{-1}(\Lambda_\varphi)$, $F^\sharp$ being the induced
   map $T^*X'\to T^*X$.
-  (iii) If $a\in S^\mu_\Gamma$ and $a|_{C_\varphi}\in S^{\mu-1}$ (that is, $a$
+  (iii) Suppose $\varphi$ is non-degenerate on a conic neighbourhood of
+  $C_\varphi\cap\operatorname{cone\,supp}a$.  If $a\in S^\mu_\Gamma$ and
+  $a|_{C_\varphi}\in S^{\mu-1}$ (that is, $a$
   coincides on $C_\varphi$ with an element of $S^{\mu-1}_\Gamma$) then
   $I_\varphi(a)=I_\varphi(a')+\CI$ with $a'\in S^{\mu-1}_\Gamma$.
 \end{lemma}
 \begin{proof}
   (i) and (ii) are changes of variables (first for $a$ of very negative order,
   then by continuity); composition with a homogeneous diffeomorphism preserves
-  symbol classes, and $\det\pa_\theta\Theta$ is homogeneous of degree $0$.
+  symbol classes, and $\det\pa_\theta\Theta$ is homogeneous of degree $0$.  In (i),
+  $a\circ\kappa$ vanishes where $|\Theta(x,\theta)|\le1$, which contains $\{|\theta|\le
+  c\}$ over the compact $x$-support for some $c>0$, so it extends smoothly by zero;
+  with $\psi\in\CIc(\R^N)$ equal to one on $\{|\theta|\le1\}$ put
+  $a_1=(1-\psi)a\circ\kappa|\det\pa_\theta\Theta|$ and $r=\psi a\circ\kappa|\det
+  \pa_\theta\Theta|$; $I_{\varphi_1}(r)$ is an integral over a compact set of $\theta$
+  of a smooth integrand, hence smooth.  In (iii) the non-degeneracy is what makes
+  $F=\pa_\theta\varphi$ part of a coordinate system below; without it the conclusion
+  fails, e.g.\ for the degenerate phase $\theta_0(x+z^3)$, $z=\theta_1/\theta_0$, an
+  amplitude $z\theta_0^\mu$ vanishes on $C_\varphi=\{x=0,\ z=0\}$, but integrating
+  out $\theta_1=\theta_0z$ (rescale $z=\theta_0^{-1/3}w$) gives the effective
+  amplitude $c\,\theta_0^{\mu+\frac13}$ in $\theta_0$, with $c=\int e^{iw^3}w\,dw\ne0$,
+  whereas amplitudes of order $\mu-1$ give at most order $\mu-\frac13$.
   (iii) Subtract an element of $S^{\mu-1}_\Gamma$ equal to $a$ on $C_\varphi$; so we
   may assume $a=0$ on $C_\varphi$.  Let $\chi$ be homogeneous of degree zero for
   $|\theta|\ge1$, equal to one near $C_\varphi$ and supported in a conic
@@ -1347,7 +1384,7 @@ as an oscillatory integral \cite[Section~7.6]{Hormander-I}.
   \cite[Theorem~7.7.5]{Hormander-I}, applied with symbol amplitudes (the
   derivatives in $w$ of $a(x,\theta',\Theta+|\theta'|w)$ are $O(|\theta'|^{\mu})$
   and each term of the expansion gains a factor $|\theta'|^{-1}$; see
-  \cite[Section~25.1]{Hormander-III}), shows that
+  H\"ormander~IV, Section~25.1, cited in the Notes), shows that
   \begin{equation*}
     \int e^{i\varphi(x,\theta',\theta'')}\chi a(x,\theta',\theta'')\,\dbar\theta''
     =e^{i\varphi_0(x,\theta')}b(x,\theta')
@@ -1417,7 +1454,8 @@ that \emph{every} parametrization can be used.
   integrals $I_{\varphi_j}(a_j)|dx|^{1/2}$ plus a smooth half-density, and that
   properly supported pseudodifferential operators of order $m'$ map
   $\Ic{m}(X,\Lambda;\Omegah)$ into $\Ic{m+m'}(X,\Lambda;\Omegah)$; see
-  \cite[Chapter~25]{Hormander-III}, \cite{Hormander-FIO}.  We shall only need
+  H\"ormander~IV, Chapter~25 (cited in the Notes), and \cite{Hormander-FIO}.  These
+  global statements are imported, not proved here.  We shall only need
   the special case in the proof of the next theorem.
 \end{remark}
 
@@ -1450,8 +1488,13 @@ conormal bundles, with the same orders.
   $\Gamma_j=\Gamma_{\bar\lambda_j}$ cover $N^*_{y}Y\setminus0$ for $y$ in a
   neighbourhood $U$ of $\bar y$.  Choose properly supported $B_j\in\Psido0(X)$
   with $\WF'(B_j)\subset\Gamma_j$ and $\sum_jB_j=\Id$ microlocally near
-  $N^*Y\cap T^*U$, i.e.\ $\sum_j\sigma_0(B_j)=1$ on a conic neighbourhood of
-  $N^*Y\cap T^*U$ (\cref{ch:microlocal}).  For $\phi\in\CIc(U)$, since
+  $N^*Y\cap T^*U$, in the sense that $\WF'(\Id-\sum_jB_j)$ is disjoint from a conic
+  neighbourhood of $N^*Y\cap T^*U$: quantize a partition of unity $b_j$, homogeneous
+  of degree $0$ for large $|\zeta|$, with $\supp b_j\subset\Gamma_j$ and \emph{full}
+  symbol $\sum_jb_j=1$ on such a neighbourhood (\cref{ch:microlocal}).  (Equality of
+  principal symbols alone, $\sum_j\sigma_0(B_j)=1$, would only make $\Id-\sum_jB_j$ of
+  order $-1$ there, which does not make the error below smooth.)  For
+  $\phi\in\CIc(U)$, since
   $\WF(\phi u)\subset N^*Y$,
   \begin{equation*}
     \phi u\equiv\sum_jB_j(\phi u)\equiv\sum_jB_j\big(\phi\osc{a_j}|dz|^{\frac12}\big)
@@ -1784,7 +1827,8 @@ $\sgn\varphi''_{\theta\theta}$ jumps by $\pm2$ when a curve in $\Lambda$ crosses
 the caustic transversally (in the generic situation), the holonomy of $M_\Lambda$
 around a closed curve $\gamma$ is $i^{\pm\mathrm{ind}(\gamma)}$, where
 $\mathrm{ind}(\gamma)$ is the Maslov index of $\gamma$, an integer counting
-these crossings with signs; see \cite[Chapter~21, Section~25.1]{Hormander-III}.
+these crossings with signs; see \cite[Chapter~21]{Hormander-III} and
+H\"ormander~IV, Section~25.1 (cited in the Notes).
 
 \subsection{The principal symbol}
 
@@ -1827,7 +1871,8 @@ these crossings with signs; see \cite[Chapter~21, Section~25.1]{Hormander-III}.
 
 The normalizing constant $(2\pi)^{\frac n4-\frac N2}$ is chosen so that
 \eqref{hj:eq:lagrangian-symbol} is the symbol of \cite{Hormander-FIO} and
-\cite[Section~25.1]{Hormander-III}, where oscillatory integrals are normalized
+H\"ormander~IV, Section~25.1 (cited in the Notes), where oscillatory integrals are
+normalized
 by the factor $(2\pi)^{-\frac{n+2N}4}$ instead of our $(2\pi)^{-N}$.  Since the
 relation between the two symbols in \eqref{hj:eq:symbol-conormal} depends on
 $k$, no normalization makes it the identity for all submanifolds at once.
@@ -1868,13 +1913,29 @@ $k$, no normalization makes it the identity for all submanifolds at once.
   $a\in S^\mu$, $a'\in S^{\mu-1}$, then $a|_{C_\varphi}\in S^{\mu-1}$ near the
   point over $\bar\lambda$.  By (a), \cref{hj:thm:equivalence} and
   \cref{hj:lem:osc-change}(ii) we may take $\varphi=x'\cdot\theta-G(\theta,x'')$
-  as in \cref{hj:thm:param-exists}.  Since $C_\varphi=\{x'=\pa_\theta G\}$,
-  \cref{hj:lem:osc-change}(iii) allows us to replace $a$ and $a'$ by their
-  restrictions to $C_\varphi$, regarded as functions of $(x'',\theta)$
-  independent of $x'$ (a cut-off in $x'$ is unnecessary: for $|x'|$ large
-  $|d_\theta\varphi|\ge|x'|/2$, and integration by parts shows that the
-  resulting integrals are rapidly decreasing in $x'$ with all derivatives).
-  Then, for $c=a-a'$ cut off to a small conic neighbourhood of
+  as in \cref{hj:thm:param-exists}.  Since $C_\varphi=\{x'=\pa_\theta G\}$, every
+  amplitude $b\in S^\mu$ can be \emph{fully reduced}: by Taylor's formula
+  $b(x',x'',\theta)=b(\pa_\theta G,x'',\theta)+\sum_j(x'_j-\pa_{\theta_j}G)b_j$, and
+  $(x'_j-\pa_{\theta_j}G)e^{i\varphi}=D_{\theta_j}e^{i\varphi}$, so integration by parts
+  gives $I_\varphi(b)=I_\varphi(r_0)+I_\varphi(b^{(1)})$ with $r_0=b|_{C_\varphi}$,
+  regarded as a function of $(x'',\theta)$ independent of $x'$, and
+  $b^{(1)}=-\sum_jD_{\theta_j}b_j\in S^{\mu-1}$.  Repeating with $b^{(1)}$, and so on,
+  gives $r_k\in S^{\mu-k}$ independent of $x'$ with $I_\varphi(b)-I_\varphi(r_0+\dots+
+  r_{K-1})=I_\varphi(b^{(K)})$, $b^{(K)}\in S^{\mu-K}$; if $r\sim\sum_kr_k$ is an
+  asymptotic sum, then $I_\varphi(b)-I_\varphi(r)$ is the oscillatory integral of an
+  amplitude of order $\mu-K$ for every $K$, hence is smooth.  (A cut-off in $x'$ is
+  unnecessary: for $|x'|$ large $|d_\theta\varphi|\ge|x'|/2$, and integration by parts
+  shows that the resulting integrals are rapidly decreasing in $x'$ with all
+  derivatives.)  Apply this to $b=a-a'$: we get $c=r$ independent of $x'$, with
+  $I_\varphi(c)\equiv I_\varphi(a)-I_\varphi(a')$ modulo $\CI$, so
+  $\bar\lambda\notin\WF(I_\varphi(c))$, and with
+  $c\equiv(a-a')|_{C_\varphi}\equiv a|_{C_\varphi}$ modulo $S^{\mu-1}$.  (It is
+  essential to reduce \emph{fully}: replacing $a-a'$ by its restriction to $C_\varphi$
+  alone changes $I_\varphi(a-a')$ by an oscillatory integral of order $\mu-1$, which
+  need not be microlocally smooth; e.g.\ for $\varphi=x\theta$ and $a=\chi(x)\big(x
+  b(\theta)+D_\theta b(\theta)\big)$ one has $I_\varphi(a)=0$, while $a|_{C_\varphi}=
+  \chi(0)D_\theta b$ need not be rapidly decreasing.)
+  Then, for $c$ cut off to a small conic neighbourhood of
   $(\bar x'',\bar\theta)$,
   \begin{equation*}
     v(x',x'')=\int e^{ix'\cdot\theta}\big(e^{-iG(\theta,x'')}c(x'',\theta)\big)\,\dbar\theta
@@ -1890,7 +1951,7 @@ $k$, no normalization makes it the identity for all submanifolds at once.
   transform $\psi(x'')e^{-iG}c(x'',\theta)$ is rapidly decreasing, with all
   derivatives, for $\theta$ in that cone.  Since the derivatives of $e^{iG}$ grow
   only polynomially, $c\in S^{-\infty}$ near $(\bar x'',\bar\theta)$; hence
-  $a|_{C_\varphi}\in S^{\mu-1}$ there.
+  $a|_{C_\varphi}\equiv c$ is in $S^{\mu-1}$ there.
 
   \emph{(d) Conclusion.}  By (a)--(c) the local expressions
   \eqref{hj:eq:lagrangian-symbol} are well defined modulo $S^{m+\frac n4-1}$ and
@@ -1915,7 +1976,8 @@ $k$, no normalization makes it the identity for all submanifolds at once.
 
 \begin{remark}\label{hj:rem:lagrangian-ops}
   The results of \cref{hj:sec:psido,hj:sec:transport} extend to Lagrangian
-  distributions \cite[Chapter~25]{Hormander-III}, \cite{Hormander-FIO}: if
+  distributions (H\"ormander~IV, Chapter~25, cited in the Notes, and
+  \cite{Hormander-FIO}; these extensions are imported, not proved here): if
   $A\in\Psido{m'}(X;\Omegah)$ is properly supported then
   $\sigma_{m+m'}(Au)=\sigma_{m'}(A)|_\Lambda\,\sigma_m(u)$; and if
   $\Lambda\subset\Sigma(P)$, so that $H_p$ is tangent to $\Lambda$
@@ -2071,9 +2133,10 @@ transformation law \eqref{hj:eq:symbol-change}.
 
 \begin{exercise}\label{hj:ex:restriction-hd}
   Assuming $dt\ne0$ on $H=\{t=0\}$, show that $dt$ gives an isomorphism of line
-  bundles $\Omegah(H)\cong\Omegah_H(X)\otimes|N^*H|^{-1/2}$, where
-  $\Omegah_H(X)$ is the restriction to $H$ of $\Omegah(X)$ and $|N^*H|^{-1/2}$ is
-  trivialized by $|dt|^{-1/2}$, and hence that \eqref{hj:eq:restrict-hd} defines a
+  bundles $\Omegah(H)\cong\Omegah_H(X)\otimes|N^*H|^{1/2}$, where
+  $\Omegah_H(X)$ is the restriction to $H$ of $\Omegah(X)$ and $|N^*H|^{1/2}$, the
+  bundle of half-densities on the fibres of the conormal line bundle $N^*H$
+  (equivalently $|NH|^{-1/2}$), is trivialized by $|dt|^{1/2}$, and hence that \eqref{hj:eq:restrict-hd} defines a
   coordinate-independent restriction map $\CI(X;\Omegah)\to\CI(H;\Omegah)$.
 \end{exercise}
 
@@ -2150,12 +2213,18 @@ transformation law \eqref{hj:eq:symbol-change}.
   quadratic) and that, for real $f$ with $df(\bar x)=\bar\lambda$,
   $\operatorname{graph}(df)$ is transversal to $\Lambda$ at $\bar\lambda$ if and
   only if $f|_S$ has a non-degenerate critical point at $\bar x$.  Deduce that
-  transversality is an open condition: it persists at $\lambda'=(x',df(x'))$ for
-  small perturbations $f+\epsilon g$ with $\lambda'\in\Lambda$, even though
+  transversality is an open condition: it persists at $\lambda'=(x',d(f+\epsilon
+  g)(x'))$ for small perturbations $f+\epsilon g$ with $\lambda'\in\Lambda$, even though
   $K(\lambda')$ may differ from $K(\bar\lambda)$.
 \end{exercise}
 
 \section*{Notes}
+Throughout the chapter, ``H\"ormander~IV'' denotes L.~H\"ormander, \emph{The analysis
+of linear partial differential operators~IV: Fourier integral operators}, Grundlehren
+Math.\ Wiss.\ \textbf{275}, Springer, Berlin, 1985; Chapter~25 there (Sections~25.1 and
+25.2) contains the general calculus of Lagrangian distributions and Fourier integral
+operators, whereas Sections~18.1 and 21.2 cited below are in \cite{Hormander-III}.
+
 This chapter is a rewriting of the second half of the conormal/wave kernel
 chapter of the 1998 notes.  The section on Riemann metrics and quantization
 there was only a heading and has been omitted.  The Hamilton--Jacobi theorem is
@@ -2163,8 +2232,8 @@ proved here in full (the original only sketched the strategy), the transport
 equation is derived for submanifolds of any codimension with the zeroth order
 term identified as the subprincipal symbol, the restriction theorem (an exercise
 in the original) is proved, and the construction of travelling waves is made
-precise.  For the general theory see \cite[Sections~18.1, 25.2]{Hormander-III}
-and \cite{Hormander-FIO}, where the analogue of \eqref{hj:eq:transport} is
+precise.  For the general theory see \cite[Section~18.1]{Hormander-III},
+H\"ormander~IV, Section~25.2, and \cite{Hormander-FIO}, where the analogue of \eqref{hj:eq:transport} is
 proved on any Lagrangian submanifold contained in $\Sigma(P)$.
 
 The sections on Lagrangian parametrization, Lagrangian distributions, Keller's
@@ -2182,7 +2251,7 @@ non-minimal phases is done by stationary phase, which we only sketch.  The
 principal symbol, its Maslov factor and the exact sequence, left by the source
 for a later section, are stated precisely, with the analytic steps of the
 proof sketched; for complete proofs see \cite{Hormander-FIO},
-\cite[Sections~21.2, 25.1]{Hormander-III}.  In Keller's example we have
+\cite[Section~21.2]{Hormander-III} and H\"ormander~IV, Section~25.1.  In Keller's example we have
 corrected and completed the computations: the caustic is
 $\{x=-x_0^3,\ y=1+\frac32x_0^2\}$ (the same set as in the source), the
 generating function is $F(R,z)=\frac{z^2}2(1+R)-\frac{2z^2}{4-z^2}$ (the

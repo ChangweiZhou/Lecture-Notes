@@ -49,10 +49,14 @@ Injectivity: if $\psi(t,p)=\psi(t',p')$ then $t=\rho_0(\psi(t,p))=t'$, and the c
 $\gamma_p,\gamma_{p'}$ agree at time $t$, hence, by uniqueness of integral curves
 (run backwards), on $[0,t]$, so $p=p'$.
 
-\emph{Step 3: choice of $\epsilon$.} Let $f\in\CI(X)$ be a proper function
-($f\ge0$, $f^{-1}([0,c])$ compact for all $c$; such functions exist on any paracompact
-manifold, e.g.\ $f=\sum_jj\chi_j$ for a partition of unity $\chi_j$ with compact
-supports). The set $\mathcal O'=\{(t,p)\in\mathcal O;\ |f(\psi(s,p))-f(p)|<1\ \forall
+\emph{Step 3: choice of $\epsilon$.} Let $f\in\CI(X)$, $f\ge0$, be proper on each
+connected component: $f^{-1}([0,c])\cap X_\alpha$ is compact for every $c$ and every
+component $X_\alpha$ of $X$. Such $f$ exists: a connected paracompact manifold (with
+boundary) is second countable, so on each $X_\alpha$ there is a countable partition of
+unity $\chi_j$ with compact supports and $f_\alpha=\sum_jj\chi_j$ is proper on $X_\alpha$;
+set $f=f_\alpha$ on $X_\alpha$. (A globally proper function need not exist: if $X$ has
+uncountably many components, the compact sets $f^{-1}([0,c])$, $c\in\N$, meet only
+countably many of them.) The set $\mathcal O'=\{(t,p)\in\mathcal O;\ |f(\psi(s,p))-f(p)|<1\ \forall
 s\in[0,t]\}$ is still open and contains $\{0\}\times\pa X$. Each $p\in\pa X$ has an open
 neighbourhood $U_p\subset\pa X$ and $\delta_p\in(0,1]$ with $[0,\delta_p)\times U_p
 \subset\mathcal O'$ (compactness of $[0,\delta]\times\{p\}$ and openness). Choose a locally
@@ -73,8 +77,10 @@ the second component of $\Psi^{-1}$.
 
 \emph{Step 4: a global boundary defining function.} The set
 $A=\Psi([0,\frac12]\times\pa X)$ is closed in $X$. Indeed, let $q_k=\Psi(s_k,p_k)\to q$
-with $s_k\le\frac12$. By the choice of $\mathcal O'$, $f(p_k)\le f(q_k)+1$ is bounded, so
-the $p_k$ lie in the compact set $\pa X\cap f^{-1}([0,c])$; passing to a subsequence,
+with $s_k\le\frac12$. The limit $q$ lies in a component $X_\alpha$, which is open, so
+$q_k\in X_\alpha$ for large $k$, and then $p_k\in X_\alpha$ too, since $p_k$ and $q_k$ are
+joined by the curve $\gamma_{p_k}$. By the choice of $\mathcal O'$, $f(p_k)\le f(q_k)+1$
+is bounded, so the $p_k$ lie in the compact set $\pa X\cap X_\alpha\cap f^{-1}([0,c])$; passing to a subsequence,
 $(s_k,p_k)\to(s,p)\in[0,\frac12]\times\pa X$ and $q=\Psi(s,p)\in A$. Let
 $\chi\in\CI([0,\infty))$ be non-decreasing with $\chi(s)=4s$ for $s\le\frac14$ and
 $\chi(s)=2$ for $s\ge\frac12$, and define $\rho=\chi(\rho')$ on $C$ and $\rho=2$ on
@@ -181,7 +187,9 @@ P\in\Diff k(X)\}$ and the equivalence of $\norm u_{H^k(X)}$ with $\sum_j\norm{P_
 %----------------------------------------------------------------------
 \subsection*{\Cref{boundary:ex:calderon-bvp}}
 Idea: $R_Df$ has boundary values in the null space of $\PiC$, because $D^{-1}(f_c)$
-continues smoothly across $H$ as a solution on $M_-$.
+has smooth one-sided restrictions to $M_\pm$ with the same trace on $H$, and its
+restriction to $M_-$ is a solution there. (It need not be smooth across $H$: $f_c$ may
+jump there.)
 
 \emph{Claim: $\PiC b_+R_Df=0$ for $f\in\CI(M_+;V_2)$.} Let $w=D^{-1}(f_c)\in\CmI(M;V_1)$. As in
 the proof of \cref{boundary:lem:RD}, choose by \cref{boundary:lem:formal}(i)

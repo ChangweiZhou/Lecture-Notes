@@ -6,8 +6,8 @@ In \cref{ch:determinants} we met the residue trace, a trace on the algebra
 of polyhomogeneous operators modulo smoothing operators, and we noted that
 it is essentially the only one. Why is there exactly one trace, and are
 there ``higher'' invariants of the same kind? Hochschild homology is the
-tool that answers such questions: its degree-zero part is dual to the space
-of traces, and its higher parts are the natural higher analogues. For
+tool that answers such questions: the space of traces is the dual of its
+degree-zero part, and its higher parts are the natural higher analogues. For
 symbol algebras it turns out to be computable, and the answer is purely
 topological.
 
@@ -16,9 +16,14 @@ integral order on a compact manifold $X$, studied in \cref{ch:manifolds}, is
 a non-commutative deformation of a commutative algebra: modulo
 $\Psido{-\infty}(X)$ it is, via the full symbol, the algebra of formal sums of
 homogeneous functions on $T^*X\setminus0$, with a product whose leading term
-is pointwise multiplication and whose first correction is the Poisson bracket.
-Hochschild homology is the basic homological invariant of an associative
-algebra; in degree zero it is the dual of the space of traces. The aim of this
+is pointwise multiplication and whose first correction (for left symbols) is
+$\sum_j\partial_{\xi_j}a\,D_{x_j}b$; the antisymmetrization of this
+correction is $-i\{a,b\}$, a multiple of the Poisson bracket (see
+\cref{hochschild:sec:symbols}). Hochschild homology is the basic homological
+invariant of an associative algebra; the traces on the algebra are exactly the
+linear functionals on its degree-zero Hochschild homology
+$\HH_0=\cA/[\cA,\cA]$ (for the algebraic complex; for the completed complex
+used below one speaks of continuous traces). The aim of this
 chapter is to compute the Hochschild homology of the algebra
 $\Psido{\Z}(X)/\Psido{-\infty}(X)$ of formal symbols, following
 Brylinski--Getzler \cite{Brylinski-Getzler} and Wodzicki
@@ -213,7 +218,9 @@ $b'=\sum_{i=0}^{k}(-1)^id_i$) is $\cA^e$-linear, and by
   \qquad m(a_0\otimes a_1)=a_0a_1,
   \label{hochschild:eq:bar-res}
 \end{equation}
-is exact: it is a free resolution of $\cA$ as an $\cA^e$-module. Applying
+is exact: it is a free resolution of $\cA$ as an $\cA^e$-module. In the
+balanced tensor product below, $\cA$ is regarded as a \emph{right}
+$\cA^e$-module by $c\cdot(a\otimes a')=a'ca$. Applying
 $\cA\otimes_{\cA^e}(\cdot)$ and using the isomorphism
 \begin{equation*}
   \cA\otimes_{\cA^e}P_k\longrightarrow C_k(\cA),\quad
@@ -250,8 +257,9 @@ by density of the algebraic tensor product. The resulting homology is the
 
 For $\cA=\CI(X)$, $X$ compact, a theorem of Grothendieck identifies
 $\CI(X)\hat\otimes\CI(Y)$ with $\CI(X\times Y)$ (this rests on the nuclearity
-of $\CI(X)$; the algebraic tensor product is in any case dense in
-$\CI(X\times Y)$). We shall simply \emph{define} the chain spaces for $\CI(X)$
+of $\CI(X)$, see \cite[Chapter~51]{Treves}). We do not need this theorem:
+the algebraic tensor product is in any case dense in $\CI(X\times Y)$, and we
+shall simply \emph{define} the chain spaces for $\CI(X)$
 to be $\CI(X^{k+1})$, see \cref{hochschild:sec:smooth}; for the symbol
 algebras the completion used is specified in \cref{hochschild:def:chains-comm,hochschild:def:chains-full}.
 
@@ -282,8 +290,11 @@ two neighbouring points coincide. A cycle is therefore a function whose
 alternating sum of diagonal restrictions vanishes, and only the behaviour of
 chains infinitely near the full diagonal $z_0=\dots=z_k$ can survive in
 homology. Near the diagonal a function of $k+1$ points that vanishes when
-any two neighbours meet looks, to first order, like a $k$-linear expression
-in the differences $z_j-z_{j-1}$; the cycle condition makes it alternating.
+any two neighbours meet has leading Taylor term of total order $k$ in the
+differences $z_j-z_{j-1}$, and this term is $k$-linear, with one factor from
+each difference; for a normalized cycle (one in the subcomplex $N_\bullet$ of
+\cref{hochschild:prop:normalized} below) the cycle condition makes it
+alternating.
 This is why Hochschild homology of a commutative algebra of functions
 consists of differential forms. The map $\varepsilon$ below extracts
 exactly this first-order part.
@@ -425,8 +436,10 @@ computes $\HH_\bullet(\cA)$?
 \end{question}
 \begin{answer}
 The bar resolution is enormous: $P_k=\cA^{\otimes(k+2)}$ in every degree,
-and the complex $C_\bullet(\cA)$ it produces has non-zero differential
-everywhere. The Koszul resolution has length $n$ and finite rank over
+and the complex $C_\bullet(\cA)$ it produces is non-zero in every
+degree, with differentials that have to be computed. (For commutative $\cA$
+the first one, $b:C_1\to C_0$, $a\otimes a'\mapsto aa'-a'a$, vanishes, but the
+higher ones do not.) The Koszul resolution has length $n$ and finite rank over
 $\cA^e$, and after tensoring with $\cA$ its differential vanishes
 identically, because $x_i-y_i$ acts as zero. So the homology can be read off
 with no computation; the comparison theorem transfers the answer back to the
@@ -502,11 +515,13 @@ so that $d_iu$ is essentially the restriction of $u$ to $D_i$, and set
 \begin{equation*}
 \begin{gathered}
   N_k=\{u\in C_k;\ u|_{D_i}=0,\ 0\le i\le k-1\},\qquad
-  M_k=\{u\in N_k;\ u|_{D_k}=0\},\\
+  M_k=\{u\in N_k;\ u|_{D_k}=0\}\ (k\ge1),\\
   B_k=d_{k+1}(N_{k+1})=\{v(z_0,\dots,z_k,z_0);\ v\in N_{k+1}\}.
 \end{gathered}
 \end{equation*}
-Note $N_0=C_0$, $M_0=C_0$, and $B_k\subset M_k$: a $v\in N_{k+1}$ vanishes on
+For $k=0$ the set $D_0=X$ would give $M_0=0$, so we set instead $N_0=C_0$
+and $M_0=C_0$ (the normalization condition is empty in degree zero). Note that
+ $B_k\subset M_k$: a $v\in N_{k+1}$ vanishes on
 $\{z_k=z_{k+1}\}$, so $v(z_0,\dots,z_k,z_0)$ vanishes when $z_k=z_0$.
 If $u\in N_k$ then $d_iu=0$ for $i<k$, so $bu=(-1)^kd_ku$; and $d_ku$ vanishes
 on the diagonals $\{z_i=z_{i+1}\}$, $i\le k-2$, of $X^k$. Thus $(N_\bullet,b)$
@@ -821,10 +836,12 @@ the Hochschild complexes of $\CI(S^*X)$ (\cref{hochschild:sec:smooth}) and of
 $\C[r^{\pm1}]$. With the degeneracies $s_i$ (insertion of the identity in
 position $i+1$) the Hochschild complex of a unital algebra is a simplicial
 vector space, and the complex above is the diagonal of the tensor product of
-two simplicial vector spaces. By the Eilenberg--Zilber theorem, the shuffle
+two simplicial vector spaces. By the Eilenberg--Zilber theorem (which we
+import; see \cite[Section~8.5]{Weibel}), the shuffle
 map $\mathrm{sh}$ from the tensor product complex
 $C_\bullet(\CI(S^*X))\otimes C_\bullet(\C[r^{\pm1}])$ to the diagonal complex
-is a quasi-isomorphism, and by the K\"unneth formula over $\C$ the homology of
+is a quasi-isomorphism, and by the K\"unneth formula over the field $\C$
+(see \cite[Section~3.6]{Weibel}) the homology of
 the tensor product complex is $\HH_\bullet(\CI(S^*X))\otimes\HH_\bullet(\C[r^{\pm1}])$.
 A direct computation from the definition of the shuffle map shows
 $\varepsilon(\mathrm{sh}(\alpha\otimes\beta))=\varepsilon(\alpha)\wedge\varepsilon(\beta)$
@@ -1368,8 +1385,20 @@ $(p,k)$ to $(p-r,k-1)$, off that line; hence $d^r=0$.}
 \end{figure}
 
 \begin{remark}[The residue trace]\label{hochschild:rem:residue}
-In degree $0$, $\HH_0(\cA)=\cA/b(\cB^{(1)})$, the quotient by (the closure of)
-the commutators, and its dual is the space of traces on $\cA$. By
+In degree $0$, $\HH_0(\cA)=\cA/b(\cB^{(1)})$, the quotient by the image of
+the completed chain space $\cB^{(1)}$, which contains the commutators
+$[\cA,\cA]=b(\cA_0^{\otimes2})$ as a dense subspace (degree by degree). Its
+dual is therefore the space of linear functionals on $\cA$ vanishing on
+$b(\cB^{(1)})$. Every such functional is a trace, and conversely a trace
+$\tau$ on $\cA$ vanishes on $b(\cB^{(1)})$ provided it is \emph{continuous}
+in the following sense: for each $M$ its restriction to
+$\Psido{M}(X)/\Psido{-\infty}(X)$ depends only on the homogeneous terms of
+the full symbol of degrees in a finite range $[N,M]$, and is continuous in the
+$\CI$ topology of those terms. Indeed $u\mapsto\tau(bu)$ is then continuous
+on each of the finitely many relevant $C_{m,1}$ and vanishes on the dense
+subspace of algebraic tensors. (Whether \emph{every} trace on $\cA$ vanishes
+on $b(\cB^{(1)})$ is a purely algebraic question, which this argument does not
+answer; see the end of this remark.) By
 \cref{hochschild:thm:main}, $\HH_0(\cA)\cong H^{2n-1}(S^*X)$, and the
 isomorphism is computed as follows. Every $A\in\Psido{\Z}(X)$ is congruent
 modulo $b(\cB^{(1)})$ to some $A'\in\Psido{-n}(X)$. The class of the function
@@ -1387,10 +1416,19 @@ This is the noncommutative residue of Wodzicki and Guillemin
 \cite{Wodzicki-residue,Guillemin-residue}: up to normalization it is
 $\int_{S^*X}\sigma_{-n}(A)\,\iota_E(\omega^n/n!)$, computed for general $A$
 in local coordinates from the term of homogeneity $-n$ of the full symbol.
-Thus, for $n\ge2$ and $X$ connected, the residue is the unique trace on
-$\Psido{\Z}(X)/\Psido{-\infty}(X)$ up to a multiple. For $n=1$, $S^*X$ has
-two components over each component of $X$, and there are correspondingly
-two independent residue traces, one for each direction of $\xi$.
+Thus, for $n\ge2$ and $X$ connected, the residue is the unique continuous
+trace on $\Psido{\Z}(X)/\Psido{-\infty}(X)$ up to a multiple. For $n=1$,
+$S^*X$ has two components over each component of $X$, and there are
+correspondingly two independent residue traces, one for each direction of
+$\xi$.
+
+The stronger statement that the residue is, up to a multiple, the only trace
+on $\Psido{\Z}(X)/\Psido{-\infty}(X)$ with no continuity assumption at all
+(for $X$ connected and $n\ge2$) is also true, but it requires a separate
+algebraic argument: one shows that every symbol in the kernel of the residue
+is a \emph{finite} sum of commutators. We do not prove this here; see
+Wodzicki \cite{Wodzicki-residue} and, for a complete published proof,
+Lesch and Neira Jim\'enez \cite{Lesch-Neira}.
 \end{remark}
 
 \section{Exercises}

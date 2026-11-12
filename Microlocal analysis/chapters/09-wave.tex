@@ -47,8 +47,10 @@ lengths of closed geodesics. \Cref{wave:fig:roadmap} summarizes the logic.
 
 \begin{discussion}
 Why should the wave equation say anything about eigenvalues? The wave trace
-$T(t)=\sum_j\cos(t\lambda_j)$ is, up to a factor, the Fourier transform of the
-counting measure $\sum_j\delta_{\lambda_j}$. Large-$\lambda$ behaviour of the counting
+$T(t)=\sum_j\cos(t\lambda_j)$ is the Fourier transform of the \emph{evenized}
+counting measure $\frac12\sum_j(\delta_{\lambda_j}+\delta_{-\lambda_j})$ (since
+$\cos(t\lambda)=\frac12(e^{it\lambda}+e^{-it\lambda})$), which on $[0,\infty)$ carries the
+same information as $\sum_j\delta_{\lambda_j}$. Large-$\lambda$ behaviour of the counting
 measure corresponds to the singularities of $T$ in $t$, and the strongest
 singularity sits at $t=0$. On the other hand, by finite propagation speed the wave
 kernel for small $|t|$ only depends on the geometry of $X$ near the diagonal, where
@@ -418,7 +420,14 @@ constructs $E$ from a local parametrix $E'$ with $PE'=\Id+F$, where $F$ has a
 smooth kernel supported in $t\ge t'$; $\Id+F$ is then inverted by the Volterra
 (Neumann) series $\sum_k(-F)^{\circ k}$ for the $t$-convolution, which converges
 because the $k$-fold composition gains a factor $|t-t'|^{k-1}/(k-1)!$ (see
-\cref{wave:ex:volterra}).
+\cref{wave:ex:volterra}). On a non-compact manifold the bound by $\vol(X)$ used in
+that exercise must be replaced by uniform geometric control: one needs $F$ to be
+uniformly bounded with kernel supported within a fixed distance of the diagonal
+(finite propagation speed for the parametrix), and a uniform bound on the volumes of
+balls of fixed radius; then each $z$-integration contributes at most
+$\sup_x\vol(B(x,R))$ in place of $\vol(X)$, and the supports of the iterates grow
+only linearly in $k$ over bounded times. This is only an outline and is not used
+below.
 \end{remark}
 
 \section{The short-time structure of the wave kernel}\label{wave:sec:parametrix}
@@ -430,8 +439,12 @@ K_{\cos}(t,x,y)=\sum_j\cos(t\lambda_j)\phi_j(x)\phi_j(y),\qquad K_{\sin}(t,x,y)=
 of $\cos(t\Lambda)$ and $\Lambda^{-1}\sin(t\Lambda)$ for small $|t|$. For fixed
 $y$, $K_{\cos}$ solves $PK_{\cos}=0$ with $K_{\cos}(0)=\delta_y$,
 $D_tK_{\cos}(0)=0$, and $K_{\sin}$ solves $PK_{\sin}=0$ with $K_{\sin}(0)=0$,
-$\pa_tK_{\sin}(0)=\delta_y$. Both series converge in
-$\CI(\R;\Hs{-M}(X\times X))$ for $M$ large, by \cref{wave:lem:apriori}.
+$\pa_tK_{\sin}(0)=\delta_y$. For each $k\in\N_0$ both series converge in
+$\mathcal C^k(\R;\Hs{-M_k}(X\times X))$ for $M_k$ large (depending on $k$), by
+\cref{wave:lem:apriori}, since each $t$-derivative brings down a factor $\lambda_j$;
+hence they converge in $\CI(\R;\CmI(X\times X))$. (No single $M$ works for all $k$:
+on the circle the $2k$-th $t$-derivative of $K_{\cos}$ at $t=0$ has diagonal spectral
+coefficients of size $|j|^{2k}$.)
 
 \subsection{Plane waves}
 
@@ -650,7 +663,9 @@ the commutator term because $d\zeta_k=0$ on the $\delta_0$-neighbourhood of
 $\supp\chi_k$, while $S$ is smooth where $d(x,y)>|t|$ and $|t|<t_0<\delta_0$. Also
 $w(0)=\chi_k(y)(K_{\Id}-\zeta_k(x)S(0))$ and $D_tw(0)$ are smooth, since
 $\zeta_k(x)=1$ near the support of $\chi_k(y)\delta(x-y)$. Both $K_{\cos}$ and $S$ lie
-in $\CI((-t_0,t_0);\Hs{-M}(X\times X))$ for $M$ large, so by \cref{wave:prop:param}
+in $\mathcal C^2((-t_0,t_0);\Hs{-M}(X\times X))$ for $M$ large (only two time
+derivatives are needed, and each costs a fixed number of Sobolev orders), so by
+\cref{wave:prop:param}
 (with $Y=X$ the $y$-factor) $w\in\CI$. Summing over $k$ proves the claim for
 $K_{\cos}$, and the same argument applies to $K_{\sin}$.
 \end{proof}

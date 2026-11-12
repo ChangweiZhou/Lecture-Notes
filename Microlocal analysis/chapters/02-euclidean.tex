@@ -3,8 +3,9 @@
 \usetikzlibrary{patterns}
 
 Differential operators form an algebra, but it is too small for most purposes: the
-inverse of an elliptic differential operator, such as $(1+\Delta)^{-1}$, is never a
-differential operator. On the Fourier side, $1+\Delta$ is multiplication by
+inverse of an elliptic differential operator of positive order, such as
+$(1+\Delta)^{-1}$, is never a differential operator (in order zero the identity is
+its own inverse). On the Fourier side, $1+\Delta$ is multiplication by
 $\ang\xi^2$, and its inverse is multiplication by $\ang\xi^{-2}$, a smooth function
 that behaves like a polynomial of negative degree. Pseudodifferential operators are
 what we get by allowing all such ``polynomial-like'' multipliers, with coefficients
@@ -62,7 +63,7 @@ depend on each other; a first reading can stop after \cref{euclidean:sec:sobolev
   \node[box] (osc) at (4.2,0) {amplitudes,\\oscillatory integral $I(a)$};
   \node[box] (op)  at (8.6,0) {$\Op(a)$ continuous\\on $\cS$ and $\cSp$};
   \node[box] (red) at (4.2,-1.9) {reduction to\\the left symbol};
-  \node[box] (res) at (0,-1.9) {residual operators\\$=$ smooth kernels};
+  \node[box] (res) at (0,-1.9) {residual operators\\$=$ smooth kernels,\\rapid off-diagonal decay};
   \node[box] (comp) at (8.6,-1.9) {composition\\and adjoints};
   \node[box] (prin) at (8.6,-3.8) {principal symbol,\\exact sequence};
   \node[box] (ell) at (4.2,-3.8) {ellipticity,\\parametrix};
@@ -330,9 +331,9 @@ $\abs a\ge\eps\ang\xi^m-\eps\ang C\ang\xi^{m-1}$ everywhere.
   Let $C$ be as in \eqref{euclidean:eq:elliptic-symbol} and choose
   $\psi\in\CI(\R^n)$ with $\psi(\xi)=0$ for $\abs\xi\le C+1$ and
   $\psi(\xi)=1$ for $\abs\xi\ge C+2$; then $\psi\in S^0(\R^n)$. Set
-  $b=\psi/a$ where $\psi\ne0$ and $b=0$ elsewhere; $b$ is smooth since it
-  vanishes on a neighbourhood of $\{\abs\xi\le C+1\}$ and $a\neq 0$ on
-  $\abs\xi>C$. Applying \cref{euclidean:lem:powers} on
+  $b=\psi/a$ on $\{\abs\xi>C\}$, where $a\ne0$, and $b=0$ on
+  $\{\abs\xi<C+1\}$. On the overlap $C<\abs\xi<C+1$ both formulas give $0$, and
+  the two open sets cover $\R^p\times\R^n$, so $b$ is well defined and smooth. Applying \cref{euclidean:lem:powers} on
   $U=\{\abs\xi>C\}$ and Leibniz' formula shows $b\in S^{-m}$, and
   $ab-1=\psi-1$ is smooth, independent of $z$ and supported in
   $\abs\xi\le C+2$, hence residual.
@@ -430,7 +431,8 @@ formally.
 
 \begin{lemma}\label{euclidean:lem:asymptotic-manip}
   \begin{enumerate}[label=\textup{(\roman*)}]
-  \item If $T$ is a linear map with $T(S^{k}(\R^p;\R^n))\subset S^{k+\mu}(\R^{p'};\R^{n})$ for all
+  \item If $T$ is an additive \textup{(}e.g.\ linear or conjugate-linear\textup{)} map
+    with $T(S^{k}(\R^p;\R^n))\subset S^{k+\mu}(\R^{p'};\R^{n})$ for all
     $k$ \textup{(}e.g.\ multiplication by an element of $S^\mu$,
     differentiation, complex conjugation, restriction to a linear subspace of
     $\R^p$\textup{)} and $a\sim\sum_ja_j$, then $Ta\sim\sum_jTa_j$.
@@ -1134,7 +1136,13 @@ depends on choices (left, right or Weyl quantization) and it transforms in a
 complicated way under composition and changes of variables. The principal symbol
 forgets everything except the leading behaviour as $\abs\xi\to\infty$. In exchange it
 is multiplicative \eqref{euclidean:eq:principal-mult}, and on manifolds it will be an
-invariantly defined function on the cotangent bundle (\cref{euclidean:sec:coordinates}).
+invariantly defined class of symbols on the cotangent bundle, modulo symbols of one
+order lower (\cref{euclidean:sec:coordinates}). For the general symbols of this
+chapter one cannot do better than such a class: the order-zero symbol
+$\cos(\log\ang\xi)$ has no representative which is homogeneous for large $\abs\xi$
+(compare \cref{euclidean:ex:ph-not-dense}). Only for the classical operators of
+\cref{euclidean:sec:polyhomogeneous} is there a preferred representative, a
+homogeneous function.
 Many qualitative questions, above all ellipticity, are decided by the principal symbol
 alone.
 \end{discussion}
@@ -1144,7 +1152,12 @@ know that the order is at most $m$ before it is defined. If $A=\Op(a)$ with
 $a\in\Amp mw$, then $\sigma_m(A)=[a(x,x,\xi)]$ by
 \cref{euclidean:thm:reduction}. For a differential operator
 $P=\sum_{\abs\alpha\le m}p_\alpha D^\alpha\in\Diff m_{\mathrm b}(\R^n)$,
-$\sigma_m(P)$ is represented by $\sum_{\abs\alpha=m}p_\alpha(x)\xi^\alpha$.
+$m\in\N_0$, $\sigma_m(P)$ is represented by $\sum_{\abs\alpha=m}p_\alpha(x)\xi^\alpha$.
+If $P$ is only regarded as an element of $\Psido{m'}(\R^n)$ for some real
+$m'\ge m$, then $\sigma_{m'}(P)$ is represented by the sum of the terms
+$p_\alpha(x)\xi^\alpha$ with $\abs\alpha>m'-1$; for instance the identity, as an
+element of $\Psido{1/2}(\R^n)$, has $\sigma_{1/2}(\Id)=[1]\ne0$ in
+$S^{1/2}/S^{-1/2}$.
 
 \begin{proposition}\label{euclidean:prop:symbol-sequence}
   For every $m\in\R$ the sequence
@@ -1430,8 +1443,10 @@ trick of using an approximate square root.
 
 \begin{discussion}
 The idea of the square-root trick is simple. If $A\in\Psido0$ and $C>\sup\abs{\sigma_L(A)}^2$,
-then the symbol of $C-A^*A$ is positive. A positive symbol has a square root in the
-symbol calculus, so $C-A^*A=B^*B+G$ with $G$ residual. Then
+then the principal symbol of $C-A^*A$ has the positive representative
+$C-\abs{\sigma_L(A)}^2$ (the full left symbol of $C-A^*A$ need not even be real; it is
+real only modulo $S^{-1}$). A positive symbol has a square root in the
+symbol calculus, and correcting the square root order by order, so $C-A^*A=B^*B+G$ with $G$ residual. Then
 $\norm{A\phi}^2=C\norm\phi^2-\norm{B\phi}^2-\inner{G\phi}\phi\le C\norm\phi^2+\abs{\inner{G\phi}\phi}$.
 Positivity of a symbol becomes positivity of an operator, up to a residual error which
 Schur's lemma controls.
@@ -1717,9 +1732,16 @@ in $\abs\xi>1$, hence by continuity in $\abs\xi\ge1$, so for $\abs\xi\ge1$
 while for $\abs\xi\le1$ the estimates are given by
 \eqref{euclidean:eq:uniform-regular}. Conversely
 \eqref{euclidean:eq:uniform-regular} holds for any symbol. A function
-homogeneous of degree $\mu$ in $\abs\xi\ge1$ which lies in $S^{\mu-1}$
-vanishes in $\abs\xi\ge1$, since
-$\abs{a(z,\xi)}=t^{-\mu}\abs{a(z,t\xi)}\le Ct^{-1}\ang{\xi}^{\mu-1}$ for all $t\ge1$.
+homogeneous of degree $\mu$ in $\abs\xi\ge1$ which lies in $S^{\nu}$ for some
+$\nu<\mu$ (for instance $\nu=\mu-1$) vanishes in $\abs\xi\ge1$, since
+$\abs{a(z,\xi)}=t^{-\mu}\abs{a(z,t\xi)}\le Ct^{\nu-\mu}\ang{\xi}^{\nu}$ for all $t\ge1$.
+More generally, if $h_1,\dots,h_r$ are homogeneous in $\abs\xi\ge1$ of
+\emph{distinct} real degrees $\mu_1>\dots>\mu_r$ and
+$h_1+\dots+h_r\in S^\nu$ with $\nu<\mu_r$, then every $h_i$ vanishes in
+$\abs\xi\ge1$: for fixed $z$ and $\abs\theta=1$ the function
+$t\mapsto\sum_it^{\mu_i}h_i(z,\theta)$, $t\ge1$, is $O(t^\nu)$, and dividing by
+$t^{\mu_1}$ and letting $t\to\infty$ gives $h_1(z,\theta)=0$; then proceed by
+induction on $r$.
 
 \begin{definition}\label{euclidean:def:polyhomogeneous}
   For $m\in\R$, the space $\Symph m(\R^p;\R^n)\subset S^m(\R^p;\R^n)$ of
@@ -1755,9 +1777,12 @@ in $\xi$, uniformly in $z$, so is residual.
     subspaces of $\R^p$ preserve polyhomogeneity.
   \item If $b_j\in\Symph{m-j}(\R^p;\R^n)$ and $b\sim\sum_jb_j$ then
     $b\in\Symph m(\R^p;\R^n)$.
-  \item Polynomials in $\xi$ with $\CIb$ coefficients are polyhomogeneous, and
+  \item A polynomial of degree at most $k\in\N_0$ in $\xi$ with $\CIb$ coefficients
+    lies in $\Symph k$, and
     $\ang\xi^s\in\Symph s(\R^n)$ for all $s\in\R$; multiplication by
     $\ang\xi^{s}$ is an isomorphism $\Symph m\to\Symph{m+s}$.
+  \item $\Symph{m-k}\subset\Symph m$ for $k\in\N_0$, and
+    $\Symph m\cap S^{m-1}=\Symph{m-1}$.
   \end{enumerate}
 \end{lemma}
 \begin{proof}
@@ -1772,7 +1797,8 @@ in $\xi$, uniformly in $z$, so is residual.
   \cref{euclidean:lem:asymptotic-manip}(iii).
 
   (iii) A polynomial $\sum_{\abs\alpha\le k}p_\alpha(z)\xi^\alpha$ is the finite sum
-  of its homogeneous parts. For $\ang\xi^s$, let $\rho$ be as above. For
+  of its homogeneous parts $\sum_{\abs\alpha=k-j}p_\alpha\xi^\alpha$, of degrees $k-j$,
+  $0\le j\le k$, so it lies in $\Symph k$. For $\ang\xi^s$, let $\rho$ be as above. For
   $\abs\xi\ge1$, $\ang\xi^s=\abs\xi^s(1+\abs\xi^{-2})^{s/2}$, and by the binomial
   series, for $K\in\N$,
   \begin{equation*}
@@ -1785,7 +1811,24 @@ in $\xi$, uniformly in $z$, so is residual.
   estimates of order $0$ in $\abs\xi\ge2$; so the left side is in
   $S^{s-2K}$. Thus $\ang\xi^s\sim\sum_k\binom{s/2}k\rho(\xi)\abs\xi^{s-2k}$. The
   last statement follows from (i), with inverse multiplication by $\ang\xi^{-s}$.
+
+  (iv) If $a\sim\sum_ja_{m-k-j}$, put $a'_{m-j}=0$ for $j<k$ and
+  $a'_{m-j}=a_{m-j}$ for $j\ge k$; then $a\sim\sum_ja'_{m-j}$. The second
+  statement was shown after \cref{euclidean:def:polyhomogeneous}.
 \end{proof}
+
+Only \emph{integer} shifts of the order are allowed in (iv). If $a\in\Symph m$,
+the homogeneous terms of $a$ have degrees in $m-\N_0$, and by the remark on
+distinct degrees above they are determined by $a$ even if one allows expansions
+in homogeneous terms of arbitrary decreasing degrees. Hence
+$\Symph m\not\subset\Symph{m'}$ unless $m'-m\in\N_0$ (for example
+$1\in\Symph0\setminus\Symph{1/2}$), and the union $\bigcup_{m\in\R}\Symph m$ is
+not closed under addition: $1+\ang\xi^{1/2}$ has an expansion
+$1+\sum_k\binom{1/2}k\rho\abs\xi^{1/2-2k}$ (\cref{euclidean:lem:ph-basic}(iii)) with
+nonzero terms of the degrees $0$ and $\frac12$. If it lay in $\Symph m$, subtracting
+the two expansions up to a sufficiently negative order and applying the remark on
+distinct degrees would force both $0$ and $\frac12$ to lie in $m-\N_0$, which is
+impossible. Thus it lies in no $\Symph m$.
 
 \begin{definition}\label{euclidean:def:psi-ph}
   For $m\in\R$, $\Psido m_{\mathrm{ph}}(\R^n)$ is the space of operators
@@ -1794,15 +1837,31 @@ in $\xi$, uniformly in $z$, so is residual.
 \end{definition}
 
 \begin{proposition}\label{euclidean:prop:ph-algebra}
-  An operator $A\in\Psido m(\R^n)$ lies in $\Psido m_{\mathrm{ph}}(\R^n)$ if and
-  only if $\sigma_L(A)\in\Symph m(\R^n;\R^n)$. The spaces
-  $\Psido m_{\mathrm{ph}}(\R^n)$ form an order-filtered $*$-subalgebra of
-  $\Psido\infty(\R^n)$ containing $\Psido{-\infty}(\R^n)$ and
-  $\Diff m_{\mathrm b}(\R^n)$, and for every $A\in\Psido m_{\mathrm{ph}}(\R^n)$
-  also $\sigma_R(A)\in\Symph m(\R^n;\R^n)$.
+  Let $m,m'\in\R$.
+  \begin{enumerate}[label=\textup{(\roman*)}]
+  \item An operator $A\in\Psido m(\R^n)$ lies in $\Psido m_{\mathrm{ph}}(\R^n)$ if
+    and only if $\sigma_L(A)\in\Symph m(\R^n;\R^n)$, and then also
+    $\sigma_R(A)\in\Symph m(\R^n;\R^n)$.
+  \item $\Psido m_{\mathrm{ph}}(\R^n)$ is a linear subspace of $\Psido m(\R^n)$
+    containing $\Psido{-\infty}(\R^n)$, and
+    $\Psido{m-k}_{\mathrm{ph}}(\R^n)\subset\Psido m_{\mathrm{ph}}(\R^n)$ for
+    $k\in\N_0$.
+  \item $\Psido m_{\mathrm{ph}}(\R^n)\circ\Psido{m'}_{\mathrm{ph}}(\R^n)\subset
+    \Psido{m+m'}_{\mathrm{ph}}(\R^n)$ and
+    $\bigl(\Psido m_{\mathrm{ph}}(\R^n)\bigr)^*=\Psido m_{\mathrm{ph}}(\R^n)$.
+  \item $\Diff k_{\mathrm b}(\R^n)\subset\Psido k_{\mathrm{ph}}(\R^n)$ for
+    $k\in\N_0$, and $\ang D^s\in\Psido s_{\mathrm{ph}}(\R^n)$ for $s\in\R$.
+  \end{enumerate}
+  In particular the classical operators of integer order,
+  $\Psido{\Z}_{\mathrm{ph}}(\R^n)=\bigcup_{k\in\Z}\Psido k_{\mathrm{ph}}(\R^n)$,
+  form an order-filtered $*$-subalgebra of $\Psido\infty(\R^n)$ containing
+  $\Psido{-\infty}(\R^n)$ and all $\Diff k_{\mathrm b}(\R^n)$; more generally,
+  for each $\mu\in\R$ the spaces $\Psido{\mu+k}_{\mathrm{ph}}(\R^n)$, $k\in\Z$,
+  increase with $k$ and their union is a filtered bimodule over
+  $\Psido{\Z}_{\mathrm{ph}}(\R^n)$.
 \end{proposition}
 \begin{proof}
-  If $\sigma_L(A)\in\Symph m$ then $A=\Op(\sigma_L(A))$ is of the required form
+  (i) If $\sigma_L(A)\in\Symph m$ then $A=\Op(\sigma_L(A))$ is of the required form
   with $w=0$. Conversely let $A=\Op(a)$, $a=\ang{x-y}^w\tilde a$. By
   Leibniz' formula
   \begin{equation*}
@@ -1812,32 +1871,138 @@ in $\xi$, uniformly in $z$, so is residual.
   \end{equation*}
   so by \cref{euclidean:lem:ph-basic}(i) each term in
   \eqref{euclidean:eq:reduction} is polyhomogeneous, of order $m-\abs\alpha$,
-  and $\sigma_L(A)\in\Symph m$ by \cref{euclidean:lem:ph-basic}(ii).
-  The formulas \eqref{euclidean:eq:adjoint-symbol},
-  \eqref{euclidean:eq:composition-symbol} and \eqref{euclidean:eq:right-left},
-  together with \cref{euclidean:lem:ph-basic}, show that $A^*$, $AB$ and
-  $\sigma_R(A)$ are polyhomogeneous when $A$ and $B$ are. The remaining
-  statements follow from $S^{-\infty}\subset\Symph{m}$ and
-  \cref{euclidean:lem:ph-basic}(iii).
+  and $\sigma_L(A)\in\Symph m$ by \cref{euclidean:lem:ph-basic}(ii). The formula
+  \eqref{euclidean:eq:right-left} expresses $\sigma_R(A)$ as an asymptotic sum
+  of the terms $\frac{1}{\alpha!}D_\xi^\alpha D_x^\alpha\sigma_L(A)\in\Symph{m-\abs\alpha}$, so
+  $\sigma_R(A)\in\Symph m$ by \cref{euclidean:lem:ph-basic}(i),(ii).
+
+  (ii) By (i), $\Psido m_{\mathrm{ph}}$ is the image of the linear space
+  $\Symph m(\R^n;\R^n)$ under the linear map $\Op$, and it contains
+  $\Psido{-\infty}=\Op(S^{-\infty})$ since $S^{-\infty}\subset\Symph m$. The inclusion
+  follows from \cref{euclidean:lem:ph-basic}(iv).
+
+  (iii) In \eqref{euclidean:eq:composition-symbol}, with $\sigma_L(A)\in\Symph m$
+  and $\sigma_L(B)\in\Symph{m'}$, the $\alpha$-th term lies in
+  $\Symph{m+m'-\abs\alpha}$ by \cref{euclidean:lem:ph-basic}(i), so
+  $\sigma_L(AB)\in\Symph{m+m'}$ by \cref{euclidean:lem:ph-basic}(ii); the same
+  argument applies to \eqref{euclidean:eq:adjoint-symbol}, which gives
+  $(\Psido m_{\mathrm{ph}})^*\subset\Psido m_{\mathrm{ph}}$, and equality follows
+  from $A=(A^*)^*$.
+
+  (iv) The left symbol of $P\in\Diff k_{\mathrm b}$ is its characteristic
+  polynomial (\cref{euclidean:ex:diff-ops}) and that of $\ang D^s$ is $\ang\xi^s$;
+  apply \cref{euclidean:lem:ph-basic}(iii).
+
+  The final statements follow from (ii) and (iii), since sums of elements of
+  $\Psido{\mu+k}_{\mathrm{ph}}$ and $\Psido{\mu+k'}_{\mathrm{ph}}$ lie in
+  $\Psido{\mu+\max(k,k')}_{\mathrm{ph}}$.
 \end{proof}
 
-This subalgebra is often denoted simply $\Psido m(\R^n)$, its elements being
-called \emph{classical} pseudodifferential operators. For
-$A\in\Psido m_{\mathrm{ph}}(\R^n)$ the principal symbol has a preferred
-representative, the leading term $a_m$ in the expansion of $\sigma_L(A)$, and it
-is natural to identify $\sigma_m(A)$ with the function $a_m$, homogeneous of
-degree $m$ on $\abs\xi\ge1$ (or by extension on $\R^n\times(\R^n\setminus0)$).
-Conversely, if $A\in\Psido m(\R^n)$ and $\sigma_m(A)$ has a representative
-$a_m$ homogeneous of degree $m$ in $\abs\xi\ge1$, then
-$A-\Op(a_m)\in\Psido{m-1}(\R^n)$; that is,
+\begin{remark}\label{euclidean:rem:ph-orders}
+  The restriction to \emph{integer} differences of order in
+  \cref{euclidean:prop:ph-algebra} is essential. By the discussion after
+  \cref{euclidean:lem:ph-basic}, $\Id\in\Psido0_{\mathrm{ph}}(\R^n)$ does not lie
+  in $\Psido{1/2}_{\mathrm{ph}}(\R^n)$, although it lies in $\Psido{1/2}(\R^n)$,
+  and $\Id+\ang D^{1/2}$ lies in no $\Psido\mu_{\mathrm{ph}}(\R^n)$, although both
+  summands are classical. Thus $\bigcup_{m\in\R}\Psido m_{\mathrm{ph}}(\R^n)$ is
+  closed under composition and adjoints but is not a vector space, and the
+  order of a classical operator is part of the data: ``$A$ is classical of order
+  $m$'' means $A\in\Psido m_{\mathrm{ph}}(\R^n)$, which is stronger than
+  $A\in\Psido m(\R^n)\cap\bigcup_\mu\Psido\mu_{\mathrm{ph}}(\R^n)$. On the other hand
+  $\Psido m_{\mathrm{ph}}(\R^n)\subset\Psido{m'}(\R^n)$ for all real $m'\ge m$, so
+  any finite collection of classical operators lies in one of the general spaces
+  $\Psido{m'}(\R^n)$, where the full calculus of the previous sections applies.
+\end{remark}
+
+\subsection*{The principal symbol of a classical operator}
+
+The principal symbol of a classical operator has a canonical representative, and
+it is convenient to use a separate target space for it. For $m\in\R$ let
+$S^{[m]}(\R^p;\R^n)$ be the space of functions
+$h\in\CI(\R^p\times(\R^n\setminus0))$ which are homogeneous of degree $m$,
+$h(z,t\xi)=t^mh(z,\xi)$ for all $t>0$, and satisfy
+\begin{equation*}
+  \sup_{z\in\R^p,\ \abs\xi=1}\abs{D^\alpha_zD^\beta_\xi h(z,\xi)}<\infty
+  \quad\text{for all }\alpha,\beta.
+\end{equation*}
+Restriction to $\abs\xi=1$ identifies $S^{[m]}(\R^p;\R^n)$ with the space of smooth
+functions on $\R^p\times\Sphere^{n-1}$ which are bounded with all derivatives. If
+$\rho\in\CI(\R^n)$ vanishes near $0$ and equals $1$ in $\abs\xi\ge1$, then
+$h\mapsto\rho h$ maps $S^{[m]}$ into $\Symph m$ (by the discussion at the beginning of
+this section), and conversely each term $a_{m-j}$ of an element of $\Symph m$ is,
+in $\abs\xi\ge1$, the restriction of a unique element of $S^{[m-j]}$. We write
+\begin{equation*}
+  \sigma^{\mathrm{ph}}_m:\Symph m(\R^p;\R^n)\longrightarrow S^{[m]}(\R^p;\R^n)
+\end{equation*}
+for the map taking $a$ to (the homogeneous extension of) its leading term $a_m$.
+
+\begin{proposition}\label{euclidean:prop:ph-symbol}
+  For $m\in\R$ define
+  $\sigma_m(A)=\sigma^{\mathrm{ph}}_m(\sigma_L(A))\in S^{[m]}(\R^n;\R^n)$ for
+  $A\in\Psido m_{\mathrm{ph}}(\R^n)$. Then $\sigma_m(A)=\sigma^{\mathrm{ph}}_m(\sigma_R(A))$,
+  the sequence
+  \begin{equation*}
+    0\longrightarrow\Psido{m-1}_{\mathrm{ph}}(\R^n)\hookrightarrow
+    \Psido m_{\mathrm{ph}}(\R^n)\xrightarrow{\ \sigma_m\ }S^{[m]}(\R^n;\R^n)
+    \longrightarrow0
+  \end{equation*}
+  is exact, $\sigma_{m+m'}(AB)=\sigma_m(A)\sigma_{m'}(B)$ and
+  $\sigma_m(A^*)=\overline{\sigma_m(A)}$ for $A\in\Psido m_{\mathrm{ph}}$,
+  $B\in\Psido{m'}_{\mathrm{ph}}$, and $\sigma_{m+m'-1}([A,B])=\frac1i\{\sigma_m(A),\sigma_{m'}(B)\}$.
+  The map $h\mapsto[\rho h]$ is an injection
+  $S^{[m]}(\R^n;\R^n)\hookrightarrow S^m(\R^n;\R^n)/S^{m-1}(\R^n;\R^n)$, independent
+  of $\rho$, and it carries the classical principal symbol of
+  \textup{(}this proposition\textup{)} to the principal symbol of
+  \cref{euclidean:def:principal-symbol} of $A$ regarded as an element of
+  $\Psido m(\R^n)$. It is not surjective.
+\end{proposition}
+\begin{proof}
+  By \eqref{euclidean:eq:right-left}, $\sigma_R(A)-\sigma_L(A)\in\Symph{m-1}$ (by the
+  proof of \cref{euclidean:prop:ph-algebra}(i)), so the leading terms agree.
+  Surjectivity: $\sigma_m(\Op(\rho h))=h$. The null space of $\sigma_m$ consists of
+  the $A$ with $\sigma_L(A)\in\Symph m\cap S^{m-1}=\Symph{m-1}$
+  (\cref{euclidean:lem:ph-basic}(iv)), that is, $\Psido{m-1}_{\mathrm{ph}}$. The
+  multiplicative properties follow from \eqref{euclidean:eq:composition-symbol} and
+  \eqref{euclidean:eq:adjoint-symbol}, since all terms with $\abs\alpha\ge1$ lie in
+  $\Symph{m+m'-1}$, respectively $\Symph{m-1}$; and the leading term of a product of
+  classical symbols is the product of the leading terms. For the commutator,
+  $[A,B]\in\Psido{m+m'-1}_{\mathrm{ph}}$ by what was just said, and its leading
+  term is that of the $\abs\alpha=1$ terms, computed as in
+  \cref{euclidean:prop:symbol-sequence}. Two choices of $\rho$ differ by a compactly
+  supported function, so $[\rho h]$ is independent of $\rho$; it equals $[\sigma_L(A)]$
+  since $\sigma_L(A)-\rho a_m\in S^{m-1}$. If $[\rho h]=0$ then $\rho h\in S^{m-1}$
+  is homogeneous of degree $m$ in $\abs\xi\ge1$, so $h=0$. Finally
+  $[\ang\xi^m\cos(\log\ang\xi)]$ is not in the image, since if
+  $\ang\xi^m\cos(\log\ang\xi)-\rho h\in S^{m-1}$ then
+  $\cos(\log\ang{r\theta})=\ang{r\theta}^{-m}r^mh(\theta)+O(r^{-1})$ would converge as
+  $r\to\infty$.
+\end{proof}
+
+Accordingly, two \emph{different} symbol targets are used in this book, and the
+notation always indicates which. For the general class $\Psido m$ the principal
+symbol takes values in the quotient $S^m/S^{m-1}$
+(\cref{euclidean:prop:symbol-sequence}); for the classical class
+$\Psido m_{\mathrm{ph}}$ it takes values in the homogeneous functions $S^{[m]}$
+(\cref{euclidean:prop:ph-symbol}), and these are compatible through the injection
+$h\mapsto[\rho h]$. Statements in later chapters that assign to an operator a
+\emph{homogeneous} principal symbol, or that require an operator with a prescribed
+homogeneous symbol, refer to the classical calculus. On a compact manifold $X$
+the two targets become $S^{m}(T^*X)/S^{m-1}(T^*X)$ and the space
+$\CI_{[m]}(T^*X\setminus0)=\CI(S^*X;N_m)$ of smooth functions on $T^*X\setminus0$
+homogeneous of degree $m$ (\cref{ch:manifolds}); the uniform bounds in the
+definition of $S^{[m]}$ are then automatic. If
+$A\in\Psido m(\R^n)$ and $\sigma_m(A)$ has a representative $a_m$ homogeneous of
+degree $m$ in $\abs\xi\ge1$, then $A-\Op(\rho a_m)\in\Psido{m-1}(\R^n)$; that is,
 \begin{equation*}
   \sigma_m(A)\text{ has a homogeneous representative}\iff
   A\in\Psido m_{\mathrm{ph}}(\R^n)+\Psido{m-1}(\R^n).
 \end{equation*}
+The classical spaces are often denoted simply $\Psido m(\R^n)$, their elements being
+called \emph{classical} pseudodifferential operators; we keep the subscript.
 
-It is usually the case that a construction in $\Psido\infty(\R^n)$ applied
-to elements of $\Psido\infty_{\mathrm{ph}}(\R^n)$ yields elements of
-$\Psido\infty_{\mathrm{ph}}(\R^n)$. As an illustration:
+It is usually the case that a construction in the general calculus applied
+to classical operators of given orders yields classical operators of the
+expected orders. As an illustration:
 
 \begin{proposition}\label{euclidean:prop:ph-parametrix}
   If $A\in\Psido m_{\mathrm{ph}}(\R^n)$ is elliptic, then every parametrix of
@@ -1853,7 +2018,11 @@ $\Psido\infty_{\mathrm{ph}}(\R^n)$. As an illustration:
   $\abs{a_m(x,\theta)}=R'^{-m}\abs{a_m(x,R'\theta)}\ge\frac\eps2(\ang{R'}/R')^m\ge c>0$
   for $\abs\theta=1$, so $\abs{a_m}\ge c\abs\xi^m$ in $\abs\xi\ge1$. As
   $\nabla_\xi a_m$ is bounded on $\abs\xi\le2$, uniformly in $x$, there is
-  $\delta\in(0,\frac12)$ with $\abs{a_m}\ge\frac c2$ on $\abs\xi\ge1-\delta$. Choose $\rho\in\CI(\R^n)$
+  $\delta\in(0,\frac12)$ with $\abs{a_m}\ge\frac c2$ on the annulus
+  $1-\delta\le\abs\xi\le1$. Since $\ang\xi^m$ is bounded above and below by positive
+  constants on that annulus, and $\abs\xi^m\ge2^{-\abs m/2}\ang\xi^m$ in $\abs\xi\ge1$,
+  the two bounds together give $\abs{a_m}\ge c'\ang\xi^m$ on $\abs\xi\ge1-\delta$ for
+  some $c'>0$. Choose $\rho\in\CI(\R^n)$
   vanishing in $\abs\xi\le1-\delta$ and equal to $1$ in $\abs\xi\ge1$, and set
   $b=\rho/a_m$. By \cref{euclidean:lem:powers} (applied on
   $\{\abs\xi>1-\delta\}$) $b\in S^{-m}$, and $b$ is homogeneous of degree $-m$ in
@@ -1918,8 +2087,9 @@ $a_{m-j}$ are again unique in $\abs\xi\ge1$.
   an expansion starting with $a_{m-1}+a_m$.
 \end{proof}
 
-With these facts the proofs of \cref{euclidean:prop:ph-algebra} and
-\cref{euclidean:prop:ph-parametrix} apply verbatim to complex orders. Thus
+With these facts the proofs of \cref{euclidean:prop:ph-algebra},
+\cref{euclidean:prop:ph-symbol} and \cref{euclidean:prop:ph-parametrix} apply
+verbatim to complex orders. Thus
 $\Psido m_{\mathrm{ph}}(\R^n)\subset\Psido{\Re m}(\R^n)$, an operator
 $A\in\Psido{\Re m}(\R^n)$ lies in $\Psido m_{\mathrm{ph}}(\R^n)$ if and only if
 $\sigma_L(A)\in\Symph m(\R^n;\R^n)$, and for all $m,m'\in\C$
@@ -1928,12 +2098,17 @@ $\sigma_L(A)\in\Symph m(\R^n;\R^n)$, and for all $m,m'\in\C$
   \Psido{m+m'}_{\mathrm{ph}}(\R^n),\qquad
   \bigl(\Psido m_{\mathrm{ph}}(\R^n)\bigr)^*=\Psido{\bar m}_{\mathrm{ph}}(\R^n).
 \end{equation*}
-The principal symbol $\sigma_m(A)$ of $A\in\Psido m_{\mathrm{ph}}(\R^n)$ is
-the leading term $a_m$ of $\sigma_L(A)$, a function homogeneous of degree $m$
-in $\abs\xi\ge1$; then $\sigma_{m+m'}(AB)=\sigma_m(A)\sigma_{m'}(B)$,
+As for real orders, $\Psido{m-k}_{\mathrm{ph}}\subset\Psido m_{\mathrm{ph}}$ only
+for integers $k\ge0$ (\cref{euclidean:rem:ph-orders}); in particular
+$\bigcup_{m\in\C}\Psido m_{\mathrm{ph}}(\R^n)$ is closed under composition and
+adjoints but not under addition. For $m\in\C$ let $S^{[m]}(\R^p;\R^n)$ be defined as
+for real $m$, with $h(z,t\xi)=t^mh(z,\xi)$ for $t>0$. The principal symbol
+$\sigma_m(A)\in S^{[m]}(\R^n;\R^n)$ of $A\in\Psido m_{\mathrm{ph}}(\R^n)$ is
+the (homogeneous extension of the) leading term $a_m$ of $\sigma_L(A)$; then $\sigma_{m+m'}(AB)=\sigma_m(A)\sigma_{m'}(B)$,
 $\sigma_{\bar m}(A^*)=\overline{\sigma_m(A)}$, and by
 \cref{euclidean:lem:ph-complex}(iii) the null space of $\sigma_m$ on
-$\Psido m_{\mathrm{ph}}(\R^n)$ is $\Psido{m-1}_{\mathrm{ph}}(\R^n)$. If
+$\Psido m_{\mathrm{ph}}(\R^n)$ is $\Psido{m-1}_{\mathrm{ph}}(\R^n)$, and $\sigma_m$ maps
+$\Psido m_{\mathrm{ph}}(\R^n)$ onto $S^{[m]}(\R^n;\R^n)$. If
 $\abs{\sigma_m(A)}\ge c\abs\xi^{\Re m}$ in $\abs\xi\ge1$ for some $c>0$, $A$ is
 elliptic as an element of $\Psido{\Re m}(\R^n)$ and all its parametrices
 lie in $\Psido{-m}_{\mathrm{ph}}(\R^n)$. For example
@@ -2721,9 +2896,13 @@ linear map this is the operator $A_T$ of \cref{euclidean:sec:invariance}.
   $(A_F)_G=A$.
 \end{proof}
 
-Thus, after cutting off to compact sets, the principal symbol transforms as
-a function on the cotangent bundle: $(x,\xi)\mapsto(F(x),(DF(x)^t)^{-1}\xi)$
-is the inverse of the cotangent map of $F$. This is the basis of the
+Thus, after cutting off to compact sets, the principal symbol transforms
+under the cotangent map: $(x,\xi)\mapsto(F(x),(DF(x)^t)^{-1}\xi)$ is the inverse
+of the cotangent map of $F$, and $\sigma_m(A_F)$ is the pull-back of $\sigma_m(A)$
+as a class modulo $S^{m-1}$. For classical operators the homogeneous principal
+symbol of \cref{euclidean:prop:ph-symbol} is pulled back as an actual function
+on the complement of the zero section, since the cotangent map is linear on the
+fibres and so preserves homogeneity. This is the basis of the
 definition of pseudodifferential operators on manifolds in
 \cref{ch:manifolds}.
 

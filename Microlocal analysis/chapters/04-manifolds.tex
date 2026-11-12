@@ -68,13 +68,18 @@ is a homeomorphism onto an open subset of $\R^n$ and every $f\in\mathcal F$
 satisfies $f|_{\Omega}=g\circ\kappa$ for some $g\in\CI(\kappa(\Omega))$. The map
 $\kappa$ is then called a \emph{coordinate system} (or chart) near $\bar x$.
 Two $\CI$ structures $\mathcal F_1$, $\mathcal F_2$ are \emph{compatible} if
-$\mathcal F_1\cup\mathcal F_2$ is also a $\CI$ structure and every coordinate system
-for $\mathcal F_1$, and every coordinate system for $\mathcal F_2$, is also a
-coordinate system for $\mathcal F_1\cup\mathcal F_2$.
+the sum $\mathcal F_1+\mathcal F_2=\{f_1+f_2;\ f_i\in\mathcal F_i\}$ is also a
+$\CI$ structure and every coordinate system for $\mathcal F_1$, and every
+coordinate system for $\mathcal F_2$, is also a coordinate system for
+$\mathcal F_1+\mathcal F_2$.
 \end{definition}
 
-Compatibility is an equivalence relation, and each equivalence class contains a
-unique maximal element, the union of the class (\cref{manifolds:ex:compatible}).
+(The sum, not the union, is used here: the union of two subspaces is in
+general not a subspace. For instance on $\R$ the subspaces spanned by
+$\{1,x\}$ and by $\{x,x^2\}$ both contain the global coordinate $x$, but their
+union omits $1+x^2$.) Compatibility is an equivalence relation, and each
+equivalence class contains a unique maximal element, the sum (the linear span
+of the union) of all members of the class (\cref{manifolds:ex:compatible}).
 
 \begin{definition}\label{manifolds:def:manifold}
 A \emph{$\CI$ manifold} is a paracompact Hausdorff space $X$ with a maximal
@@ -191,8 +196,8 @@ whose sections are the $k$-forms. If $E\to Y$ is a vector bundle and
 $G:X\to Y$ is smooth, the \emph{pull-back bundle} $G^*E=\bigcup_{x\in X}E_{G(x)}$
 is a smooth vector bundle over $X$; if $\phi\in\CI(Y;E)$ then $G^*\phi\in\CI(X;G^*E)$
 and $\CI(X;G^*E)$ is spanned over $\CI(X)$ by $G^*\CI(Y;E)$. If $E\to X$ and
-$F\to Y$ are bundles, the \emph{exterior tensor product} $F\boxtimes E\to X\times Y$
-has fibre $(F\boxtimes E)_{(x,y)}=F_x\otimes E_y$. On $X^2$ we use the projections
+$F\to Y$ are bundles, the \emph{exterior tensor product} $E\boxtimes F\to X\times Y$
+has fibre $(E\boxtimes F)_{(x,y)}=E_x\otimes F_y$. On $X^2$ we use the projections
 $\pi_L(x,y)=x$ and $\pi_R(x,y)=y$, and the ``big'' homomorphism bundle
 \begin{equation}\label{manifolds:eq:big-hom}
 \Hom(E,F)=\pi_L^*F\otimes\pi_R^*E'=F\boxtimes E',\qquad \Hom(E,F)_{(x,y)}=\hom(E_y,F_x),
@@ -326,8 +331,14 @@ with $\sigma_m(\Op(a))=[a]$.
 \item\label{manifolds:E5} (Asymptotic completeness) If $A_j\in\Psido{m-j}(\R^n)$
 there exists $A\in\Psido m(\R^n)$ with $A-\sum_{j<N}A_j\in\Psido{m-N}(\R^n)$ for all
 $N$. If the kernels of the $A_j$ have support in a fixed compact set $K$, $A$ may
-be chosen with kernel supported in any given neighbourhood of $K$ (replace $A$ by
-$\chi A\chi$ with $\chi\in\CIc(\R^n)$ equal to one near both projections of $K$).
+be chosen with kernel supported in any given neighbourhood $U$ of $K$: multiply the
+kernel of $A$ by a function $\tilde\chi\in\CIc(U)$ on $\R^{2n}$ equal to one near $K$.
+Since $\tilde\chi$ is one on the supports of the $A_j$, the new remainder is $\tilde\chi$
+times the old one, and multiplying an amplitude of order $m-N$ by
+$\tilde\chi(x,y)$ gives again an amplitude of order $m-N$. (A product cutoff
+$\chi(x)\chi(y)$ equal to one near both projections of $K$ would not do: if $K$ contains
+neighbourhoods of two separated diagonal points, $\chi\otimes\chi$ is also one on the
+`cross' regions between them, which need not lie in $U$.)
 \item\label{manifolds:E6} (Sobolev boundedness) Each $A\in\Psido m(\R^n)$ is bounded
 $\Hs s(\R^n)\to\Hs{s-m}(\R^n)$ for every $s\in\R$; in particular $\Psido0(\R^n)$
 acts boundedly on $L^2(\R^n)$, and multiplication by $\phi\in\CIb(\R^n)$ is bounded on
@@ -348,8 +359,10 @@ amplitude $c(x,y,\eta)=a(G(x),T(x,y)^{-T}\eta)\,|\det dG(y)|\,|\det T(x,y)|^{-1}
 since $T(x,x)=dG(x)$ its value on the diagonal is $a(G(x),(dG_x)^{-T}\eta)$, which
 is \eqref{manifolds:eq:symbol-invariance} because $(dG_{\Phi(x')})^{-T}=(d\Phi_{x'})^T$.
 Formula \eqref{manifolds:eq:symbol-invariance} says precisely that the principal
-symbol is invariantly a function on the cotangent bundle: it is the pull-back
-under the induced map $T^*\Omega'\to T^*\Omega$.
+symbol is invariantly a class of functions on the cotangent bundle, modulo symbols
+of one lower order: it is the pull-back under the induced map $T^*\Omega'\to T^*\Omega$.
+For classical operators it is an actual homogeneous function on
+$T^*\Omega\setminus0$.
 
 \begin{discussion}
 Why is it the \emph{cotangent} bundle? The frequency variable $\xi$ is paired
@@ -429,8 +442,14 @@ in $(w',z)$. We set
 $u|_Z=\int e^{iz\cdot\zeta}a(w',0,\zeta)\dbar\zeta+v|_{t=0}$; this agrees with the
 restriction if $a\in S^{-\infty}$, and in general is the limit of the restrictions of
 the smooth functions obtained by replacing $a$ by $a(w',t,\zeta)\chi(\zeta/R)$,
-$\chi\in\CIc(\R^k)$ equal to one near $0$, as $R\to\infty$; hence it is independent
-of choices. Since $\dim Z=N-q$, the order $m''$ of $u|_Z$ is fixed by
+$\chi\in\CIc(\R^k)$ equal to one near $0$, as $R\to\infty$. Convergence of smooth
+approximants in distributions alone does not show that the limit is independent of the
+adapted coordinates, since restriction to $Z$ is not continuous on $\CmI(M)$. The
+independence follows from a trace estimate: the approximants converge in a Sobolev
+space with additional regularity under vector fields tangent to $Y$ (in particular
+those normal to $Z$), on which restriction to $Z$ is continuous, and such spaces are
+the same in all coordinate systems. This comparison is carried out in the solution
+of \cref{manifolds:ex:restriction}, Step 4, and we use it here. Since $\dim Z=N-q$, the order $m''$ of $u|_Z$ is fixed by
 $m+\frac N4-\frac k2=m''+\frac{N-q}4-\frac k2$, i.e.\ $m''=m+\frac q4$.
 \end{proof}
 
@@ -547,8 +566,14 @@ The space of \emph{smoothing operators} is
 \Psido{-\infty}(X;E,F)=\bigcap_m\Psido m(X;E,F)=\CI(X^2;\Hom(E,F)\otimes\Omega_R),
 \end{equation}
 by \ref{manifolds:C1}. Such an operator, $Au(x)=\int_XA(x,y)u(y)$, extends to a
-continuous map $\CmI(X;E)\to\CI(X;F)$, by letting the distribution $u$ act in
-the variable $y$.
+linear map $\CmI(X;E)\to\CI(X;F)$, by letting the distribution $u$ act in
+the variable $y$; this extension is \emph{sequentially} continuous: weakly convergent
+sequences are mapped to sequences converging in $\CI$
+(\cref{manifolds:ex:smoothing-char}). It is not continuous for the weak topology on
+$\CmI(X;E)$ unless it has finite rank: continuity at $0$ for a single seminorm
+$\sup\abs{Au}$ would force $A$ to vanish on the common null space of finitely many test
+sections, while for instance on the circle the heat operator $e^{-\Delta}$ has a smooth
+kernel and infinite rank.
 
 \subsection{Local description}
 We now connect \cref{manifolds:def:psido} with the calculus on $\R^n$. If
@@ -589,14 +614,22 @@ function in $\CIc(\R^{2n})$. By \ref{manifolds:E2} and \ref{manifolds:E1} these
 are kernels of elements of $\Psido m(\R^n)$.
 
 Conversely suppose (i) holds and (ii) holds for the charts $\kappa_i:W_i\to\kappa_i(W_i)$ of
-a finite cover. By (i), near any point $(\bar x,\bar y)$ with $\bar x\ne\bar y$ the
-kernel of $A$ coincides with that of $\phi A\psi$, where $\phi=1$ near $\bar x$,
-$\psi=1$ near $\bar y$ and $\supp\phi\cap\supp\psi=\emptyset$; so $K_A$ is smooth off
-the diagonal. Near $(\bar x,\bar x)$, with $\bar x\in W_i$ and $\psi\in\CIc(W_i)$ equal
-to one near $\bar x$, $K_A$ coincides with the kernel of $\psi A\psi$, whose local
-representative is $\int e^{i(x-y)\cdot\xi}a(x,\xi)\dbar\xi$ with $a\in S^m$: this is
-of the form \eqref{manifolds:eq:conormal-local} in the coordinates $(x,x-y)$. Since
-conormality is a local property, $K_A\in\Ic m(X^2,\Diag;\Hom(E,F)\otimes\Omega_R)$.
+a finite cover. Here $A$ is only assumed to be a linear map, so we first construct its
+kernel. Let $\{\phi_a\}$ be a partition of unity as in \cref{manifolds:lem:good-partition}
+for the cover $\{W_i\}$; then $A=\sum_{a,b}\phi_aA\phi_b$, a finite sum. If
+$\supp\phi_a\cap\supp\phi_b=\emptyset$, then by (i) $\phi_aA\phi_b$ has a kernel in
+$\CI(X^2;\Hom(E,F)\otimes\Omega_R)$. Otherwise, by \eqref{manifolds:eq:good-partition},
+$\supp\phi_a\cup\supp\phi_b\subset W_i$ for some $i$; choose $\psi\in\CIc(W_i)$ equal to one
+on $\supp\phi_a\cup\supp\phi_b$. Then $\phi_aA\phi_b=\phi_a(\psi A\psi)\phi_b$, and by (ii)
+the local representative $\kappa_{i*}(\psi A\psi)$ has a kernel which is a matrix of elements
+of $\Psido m(\R^n)$ with compact support, of the form $\int e^{i(x-y)\cdot\xi}a(x,\xi)\dbar\xi$
+with $a\in S^m$ modulo $\CIc$. This is of the form \eqref{manifolds:eq:conormal-local} in the
+coordinates $(x,x-y)$, so pulling back by $\kappa_i\times\kappa_i$ (and reinstating the right
+density factor) shows that $\phi_aA\phi_b$ has kernel
+$\phi_a(x)K_{\psi A\psi}(x,y)\phi_b(y)\in\Ic m(X^2,\Diag;\Hom(E,F)\otimes\Omega_R)$, by
+\ref{manifolds:C1}. Summing, $A$ is given by the kernel
+$K_A=\sum_{a,b}K_{\phi_aA\phi_b}\in\Ic m(X^2,\Diag;\Hom(E,F)\otimes\Omega_R)$, and
+$Au=(\pi_L)_*(K_A\cdot\pi_R^*u)$ for $u\in\CI(X;E)$, since this holds for each term.
 In particular (ii) then holds for all trivializing charts.
 \end{proof}
 
@@ -613,6 +646,12 @@ from $p$, satisfies (ii) for every chart that does not meet both $p$ and
 $\supp f$ (for those $\psi A\psi=0$), hence for the charts of a suitable finite
 cover; but its kernel
 $f(x)\delta_p(y)$ is singular at points $(x,p)$ far from the diagonal.
+So (i) cannot be dropped from the version of the theorem in which (ii) is tested
+only on one finite cover (or only on charts with connected domains). If instead
+(ii) is required for \emph{every} trivializing chart and chart domains are allowed
+to be disconnected, then (ii) alone does imply (i): two small disjoint coordinate
+balls around $x$ and $y$ form a single chart domain $W$, and (ii) for it forces the
+kernel to be smooth near $(x,y)$, which is off the diagonal of $\kappa(W)^2$.
 \end{answer}
 
 The second half of the proof, combined with the first, shows again that the
@@ -648,7 +687,7 @@ K_A=\int e^{i(x-y)\cdot\xi}a_L(x,\xi)\,\dbar\xi
 \end{equation}
 with $a_L,a_R,a_W\in S^m$ (classical if $A$ is): the first two exist by
 \ref{manifolds:E2}, and the Weyl symbol is obtained in the same way by Taylor
-expansion of an amplitude about $x=y$ (see \cite[Section~18.5]{Hormander-III}).
+expansion of an amplitude about $x=y$ (see \cite[Section~18.5, in particular pp.~150--151 and~159]{Hormander-III}, where the Weyl (midpoint) quantization and the passage between the three forms are discussed).
 All three have the same principal symbol, and they may be taken to have compact
 support in the base variable.
 
@@ -876,10 +915,17 @@ $\pi_S^{-1}(\Diag)=\{x=y\}$, of order $m-\frac n4$ by the behaviour of conormal
 distributions under pull-back by submersions (\cref{ch:conormal}), the product with
 the smooth section $\pi_F^*R$ preserves this, and the fibres of $\pi_C$ (on
 which $y$ varies) are transversal to $\{x=y\}$, so the push-forward is smooth
-by \cref{manifolds:prop:pushforward}. For general $A$ and $B$, however, the
-corresponding product $\pi_S^*A\cdot\pi_F^*B$ is not defined in this simple
-way, since both factors are singular at the triple diagonal; this is why the
-proof above localizes.
+by \cref{manifolds:prop:pushforward}. For general $A$ and $B$ the
+product $\pi_S^*A\cdot\pi_F^*B$ is still defined as a distribution, although both
+factors are singular at the triple diagonal: the wavefront sets are contained in
+the conormal bundles of $\{x=y\}$ and $\{y=z\}$, whose fibres consist of covectors
+of the forms $(\xi,-\xi,0)$ and $(0,\eta,-\eta)$, and these sum to zero only if
+$\xi=\eta=0$, so the criterion of \cref{microlocal:thm:products} (applied locally)
+permits the product. What this global argument does not give directly is that the
+push-forward is conormal to the diagonal of order $m+m'$, with the expected
+principal symbol: this requires an analysis of the product of two transversally
+intersecting conormal distributions. The proof above localizes precisely to obtain
+this order and symbol information from the Euclidean calculus.
 \end{remark}
 
 \subsection{Symbols and the principal symbol}
@@ -945,7 +991,8 @@ the chart $\kappa$ has principal symbol zero by \ref{manifolds:E3}. The operator
 $\psi_i\psi A\psi\psi_i=\psi(\psi_iA\psi_i)\psi$ has kernel supported in
 $(W\cap W_i)^2$; in the chart $\kappa_i$ its principal symbol is $\psi^2$ times that
 of $\kappa_{i*}(\psi_iA\psi_i)$, and by \ref{manifolds:E7} its principal symbol in
-the chart $\kappa$ is the same invariant function on $T^*X$, namely $\psi^2a_i$.
+the chart $\kappa$ is the same invariant class of functions on $T^*X$ modulo
+$S^{m-1}$, namely $\psi^2a_i$.
 Summing over $i$ gives $\sigma_m(\kappa_*(\psi A\psi))=\psi^2\sigma_m(A)$. Uniqueness
 follows by applying the property to the $\psi_i$: two such maps differ by $b$ with
 $\psi_i^2b\in S^{m-1}$ for all $i$, so $b=\sum_i\psi_i^2b\in S^{m-1}$.
@@ -954,7 +1001,8 @@ $\psi_i^2b\in S^{m-1}$ for all $i$, so $b=\sum_i\psi_i^2b\in S^{m-1}$.
 trivializing chart and $\psi\in\CIc(W)$, $\kappa_*(\psi A\psi)$ has vanishing
 principal symbol, so lies in $\Psido{m-1}(\R^n)$ by \ref{manifolds:E4}; by
 \cref{manifolds:thm:local}, $A\in\Psido{m-1}(X;E,F)$. For surjectivity define, with
-the notation above, the \emph{quantization map}
+the notation above, the \emph{quantization map} on (full) symbols
+$a\in S^m(T^*X;\hom(E,F))$,
 \begin{equation}\label{manifolds:eq:quantization}
 q(a)=\sum_i\kappa_i^*\circ\big(\tilde\chi_i\Op(a_i)\tilde\chi_i\big)\circ(\kappa_i^{-1})^*,
 \end{equation}
@@ -963,8 +1011,11 @@ by zero outside $\kappa_i(W_i)$) and $\tilde\chi_i\in\CIc(\kappa_i(W_i))$ is equ
 one near the support of $\psi_i\circ\kappa_i^{-1}$. By
 \cref{manifolds:cor:local-ops}, $q(a)\in\Psido m(X;E,F)$, and applying the defining
 property in an arbitrary chart, using \ref{manifolds:E7} as above, gives
-$\sigma_m(q(a))=\sum_i\psi_i^2a=a$. Note that $q$ is linear and maps
-$S^{-\infty}$ into $\Psido{-\infty}$.
+$\sigma_m(q(a))=\big[\sum_i\psi_i^2a\big]=[a]$, the class of $a$ in $\Symq m$. Note that
+$q$ is linear and maps $S^{-\infty}$ into $\Psido{-\infty}$. It is defined on $S^m$, not on
+the quotient $\Symq m$: a representative of order $m-1$ is in general quantized to a
+non-zero operator (of order $m-1$). A linear right inverse of $\sigma_m$ on the quotient
+is obtained by composing $q$ with any linear section $\Symq m\to S^m$ of the quotient map.
 
 (b) Let $\psi\in\CIc(W)$ and $\chi\in\CIc(W)$ equal to one near $\supp\psi$. Then
 $\psi AB\psi-(\psi A\chi)(\chi B\psi)=\psi A(1-\chi^2)B\psi$ is smoothing, by the
@@ -984,13 +1035,15 @@ since the quantization of a classical symbol is classical.
 \begin{tikzcd}[column sep=large,row sep=large]
 0\arrow[r]&\Psido{m-1}\arrow[r,hook]
 &\Psido m\arrow[r,"\sigma_m"]
-&\Symq m(T^*X;\hom(E,F))\arrow[r]\arrow[l,bend left=30,dashed,"q"]&0
+&\Symq m(T^*X;\hom(E,F))\arrow[r]&0\\
+&&&S^m(T^*X;\hom(E,F))\arrow[u,two heads]\arrow[ul,dashed,"q"]&
 \end{tikzcd}
 \caption{The symbol exact sequence of
 \cref{manifolds:prop:principal-symbol}(a), with the bundles $E$, $F$
 suppressed from the notation for the operator spaces. The quantization map $q$ of
-\eqref{manifolds:eq:quantization} (dashed) is a linear right inverse of
-$\sigma_m$, built from charts and a partition of unity. It is not
+\eqref{manifolds:eq:quantization} (dashed) acts on full symbols and satisfies
+$\sigma_m(q(a))=[a]$, the class of $a$ under the vertical quotient map; it is built from
+charts and a partition of unity. It is not
 canonical and not multiplicative, but $\sigma_m$ is: this is what makes
 symbolic inversion work.}
 \label{manifolds:fig:exact-sequence}
@@ -1010,8 +1063,10 @@ The full symbol of an operator on $\R^n$ determines the operator. Why does
 \begin{answer}
 Under a change of coordinates the full symbol transforms by a formula
 involving all derivatives of the coordinate change (see the proof of
-coordinate invariance in \cref{ch:euclidean}). Only the leading term
-transforms simply, as a function on $T^*X$; the lower-order terms mix with
+coordinate invariance in \cref{ch:euclidean}). Only the leading part
+transforms simply, as a class of functions on $T^*X$ modulo symbols of one
+lower order (for classical operators, an actual homogeneous function on
+$T^*X\setminus0$); the lower-order terms mix with
 derivatives of the leading one. So there is no invariant full symbol, unless
 one fixes extra structure such as a connection or a choice of quantization
 map $q$.
@@ -1271,8 +1326,14 @@ unity in the base) gives
 A:\CIc(X;E)\longrightarrow\CI(X;F).
 \end{equation*}
 \Cref{manifolds:thm:local} and its proof hold verbatim, with ``finite cover''
-replaced by ``locally finite cover''; for $X$ open in $\R^n$ this recovers the
-operators of \cref{ch:euclidean} with kernels conormal to the diagonal.
+replaced by ``locally finite cover''. For $X$ open in $\R^n$ this recovers the
+\emph{local} Euclidean calculus: $A\in\Psido m(X)$ if and only if $\phi A\psi$ lies in
+the calculus of \cref{ch:euclidean} for all $\phi,\psi\in\CIc(X)$. It does not recover the
+operators of \cref{ch:euclidean} themselves, whose symbols satisfy estimates uniform
+in $x\in\R^n$: an arbitrary kernel conormal to the diagonal need not obey them. For
+example the smooth kernel $e^{\abs x^2+\abs y^2}$ is a smoothing operator on the
+non-compact manifold $X=\R^n$ in the present sense, but it does not have a uniformly
+bounded symbol.
 Since $A$ need not map $\CIc$ into $\CIc$, and need not act on $\CI(X;E)$, two
 such operators cannot in general be composed. This is remedied by restricting
 the supports.
@@ -1660,9 +1721,10 @@ $N$ and range $\{f\in\Hs{s-m}(X;F);\ \inner fv=0\ \forall v\in N^*\}$.
 $N^*$: $\CI(X;F)=A\,\CI(X;E)\oplus N^*$, an $L^2$-orthogonal sum.
 \item $\ind(A)=\dim N-\dim N^*$ is the index on $\CI$ and on every $\Hs s$. It
 depends only on $\sigma_m(A)$; moreover $\ind(A^*)=-\ind(A)$, $\ind(AB)=\ind(A)+\ind(B)$
-for elliptic $B\in\Psido{m'}(X;G,E)$, and the index is constant on any family of
+for elliptic $B\in\Psido{m'}(X;G,E)$, and the index is locally constant on any family of
 elliptic operators which is continuous in the norm of
-$\Lin(\Hs s(X;E),\Hs{s-m}(X;F))$ for some $s$.
+$\Lin(\Hs s(X;E),\Hs{s-m}(X;F))$ for some $s$, hence constant if the parameter space is
+connected.
 \end{enumerate}
 \end{theorem}
 \begin{proof}
@@ -1696,8 +1758,14 @@ $N^*$ being linearly independent functionals on $\Hs{s-m}$; similarly on $\CI$ b
 $\Hs{s-m+1}$), so $\ind(A+B')=\ind(A)$ by the stability of the index under compact
 perturbations (\cref{hilbert:thm:stability}). The formula for $A^*$ is clear from
 (a), the product formula follows from \cref{hilbert:prop:index-product} applied to
-$\Hs{s}\to\Hs{s-m'}\to\Hs{s-m'-m}$, and the constancy along continuous families is
-\cref{hilbert:thm:stability} again.
+$\Hs{s}\to\Hs{s-m'}\to\Hs{s-m'-m}$, and the local constancy along continuous families is
+\cref{hilbert:thm:stability} again; a locally constant integer-valued function is constant
+on connected sets. Connectedness is needed: over a parameter space consisting of two
+points, any two elliptic operators of different index (for instance the identity and
+an elliptic operator of non-zero index, e.g.\ on the circle
+$e^{i\theta}\Pi+(\Id-\Pi)$ with $\Pi$ the Szeg\H o projection onto the span of the
+$e^{ik\theta}$, $k\ge0$, which is injective with range orthogonal to the constants, so of
+index $-1$) form a continuous family.
 \end{proof}
 
 In particular, for $R\in\Psido{-\infty}(X;E)$ the operator $\Id+R$ is Fredholm of
@@ -1733,7 +1801,8 @@ $\CI(X^2;\Hom(E,G)\otimes\Omega_R)$, on $T$ in the operator norm.
 \end{lemma}
 \begin{proof}
 The kernel of $R_1TR_2$ is $K(x,z)=\big(R_1\,T\,k_z\big)(x)$, where $k_z=K_{R_2}(\cdot,z)$
-(with the fibre of $E'_z\otimes\Omega_z$ trivialized locally in $z$). The map $z\mapsto k_z$
+(with the input fibre $E_z$, the dual of which appears in
+$\Hom(E,E')_{(x,z)}=\hom(E_z,E'_x)$, and the density factor $\Omega_z$ trivialized locally in $z$). The map $z\mapsto k_z$
 is smooth into $\Hs t(X;E')$, so $z\mapsto Tk_z$ is smooth into $\Hs{t'}(X;G')$ with
 derivatives bounded by $\|T\|$ times those of $k_z$, and
 $R_1:\Hs{t'}(X;G')\to\CI(X;G)$ is continuous, with $D^\alpha_x(R_1g)(x)$ the pairing of $g$
@@ -1808,8 +1877,9 @@ $\Psido{-m}$.
 \begin{theorem}\label{manifolds:thm:eigen}
 Let $A\in\Psido m(X;E)$, $m>0$, be elliptic and formally self-adjoint. Then
 $L^2(X;E)$ has an orthonormal basis of eigenfunctions $Ae_j=\lambda_je_j$ with
-$e_j\in\CI(X;E)$, $\lambda_j\in\R$, each eigenvalue of finite multiplicity, and
-$|\lambda_j|\to\infty$.
+$e_j\in\CI(X;E)$, $\lambda_j\in\R$, each eigenvalue of finite multiplicity. If
+$L^2(X;E)$ is infinite-dimensional, i.e.\ $\dim X>0$ and $E$ has positive rank, the
+basis is infinite and $|\lambda_j|\to\infty$.
 \end{theorem}
 \begin{proof}
 The generalized inverse $G\in\Psido{-m}(X;E)$ of $A$ is self-adjoint (the
@@ -1819,9 +1889,10 @@ taking adjoints, since $N=N^*$) and compact on $L^2$ by
 self-adjoint operators (\cref{hilbert:thm:spectral}), $L^2$ is the orthogonal sum of
 $\Nul(G)=N$ and the eigenspaces of $G$ for non-zero eigenvalues $\mu_j\to0$, each
 finite-dimensional. If $Gu=\mu u$ with $\mu\ne0$ then $u\perp N$ and
-$u=AGu/\mu=Au/\mu$, so $Au=\mu^{-1}u$ and $u$ is smooth by elliptic regularity. Taking
+$u=u-\pi_{N}u=AGu=\mu Au$ (since $N^*=N$), so $Au=\mu^{-1}u$ and $u$ is smooth by elliptic regularity. Taking
 orthonormal bases of $N$ (eigenvalue $0$) and of these eigenspaces gives the result,
-with $\lambda_j=\mu_j^{-1}$.
+with $\lambda_j=\mu_j^{-1}$. In the infinite-dimensional case there are infinitely many
+non-zero $\mu_j$ (as $N$ is finite-dimensional), and $\mu_j\to0$ gives $|\lambda_j|\to\infty$.
 \end{proof}
 
 \section{Smoothing operators}\label{manifolds:sec:smoothing}
@@ -1976,7 +2047,9 @@ for a compact manifold $X$ set
 K^{-1}(X)=[X;\Gsm(Y;E)],
 \end{equation}
 the set of smooth homotopy classes of smooth maps $X\to\Gsm(Y;E)$, where $Y$ is any
-compact manifold of positive dimension and $E$ any vector bundle over $Y$. Here a
+compact manifold of positive dimension and $E$ any vector bundle of positive rank over
+$Y$, so that $L^2(Y;E)$ is infinite-dimensional. (For the zero bundle $\Gsm(Y;E)$ is the
+trivial group.) Here a
 smooth map is an element
 \begin{equation*}
 K\in\CI(X\times Y^2;\Hom(E)\otimes\Omega_R)\ \text{ with }\ \Id+K(x,\cdot)\ \text{invertible for every } x\in X,
@@ -1987,7 +2060,8 @@ the group structure is induced by that of $\Gsm$, and the relation with the usua
 definition by stable homotopy classes of maps into $\GL(N,\C)$ is visible in the proof.
 
 \begin{proposition}\label{manifolds:prop:K1}
-For any two choices $(Y,E)$, $(Z,F)$ with $\dim Y,\dim Z>0$ there is a natural
+For any two choices $(Y,E)$, $(Z,F)$ with $\dim Y,\dim Z>0$ and $E$, $F$ of positive
+rank there is a natural
 bijection $[X;\Gsm(Y;E)]\cong[X;\Gsm(Z;F)]$.
 \end{proposition}
 \begin{proof}[Sketch of proof]
@@ -2009,7 +2083,8 @@ to the basis does not change $\tilde A$; and increasing $N$ changes $A_{(N)}$ on
 the convex neighbourhoods used above. So the class of $\tilde A$ is well defined, and
 applying the construction to $X\times[0,1]$ shows it depends only on the homotopy class
 of $A$. Reversing the roles, using an orthonormal set of smooth sections of $E$ over $Y$
-(which exists in any finite number since $\dim Y>0$) gives the inverse map.
+(which exists in any finite number since $\dim Y>0$ and $E\ne0$, i.e.\ since $L^2(Y;E)$
+is infinite-dimensional) gives the inverse map.
 \end{proof}
 
 \subsection{The trace}
@@ -2099,8 +2174,8 @@ operators (\cref{hilbert:thm:riesz}). If $(z-A)^Nu=0$ with $z\ne0$, expanding by
 theorem gives $z^Nu=Ap(A)u$ for a polynomial $p$, so $u\in\Ran(A)\subset\CI(X;E)$.
 \end{proof}
 
-Alternatively, $\Spec(A)\setminus\{0\}$ is the zero set of the entire function
-$z\mapsto\det(\Id-A/z)$ on $\C\setminus\{0\}$, which tends to one as $|z|\to\infty$.
+Alternatively, $\Spec(A)\setminus\{0\}$ is the zero set of the function
+$z\mapsto\det(\Id-A/z)$, holomorphic on $\C\setminus\{0\}$, which tends to one as $|z|\to\infty$.
 
 \subsection{The analytic Fredholm alternative}
 The same reasoning applies to holomorphic families. Let $\Omega\subset\C$ be open.
@@ -2377,11 +2452,16 @@ $H^i\to H^i_{-\infty}$ is natural, although the harmonic spaces through which it
 proved depend on the choice of density and metrics.
 
 \subsection{Spectral decomposition}
-The complex also splits along the spectrum of the Laplacians. By
+The complex also splits along the spectrum of the Laplacians. Suppose the order $k$
+of the complex is positive. By
 \cref{manifolds:thm:eigen}, each $\Delta_i$ (elliptic, formally self-adjoint, of positive
-order) has discrete spectrum $0\le\lambda_0<\lambda_1<\cdots\to\infty$ with finite-dimensional
+order $2k$) has discrete spectrum $0\le\lambda_0<\lambda_1<\cdots\to\infty$ with finite-dimensional
 eigenspaces $E^i_\lambda=\Nul(\Delta_i-\lambda)\subset\CI(X;E_i)$; non-negativity follows from
-$\inner{\Delta_iu}u=\|P_iu\|^2+\|P_{i-1}^*u\|^2$.
+$\inner{\Delta_iu}u=\|P_iu\|^2+\|P_{i-1}^*u\|^2$. (If the sequence of eigenvalues is
+finite, i.e.\ $\CI(X;E_i)$ is finite-dimensional, the statement about $\lambda_j\to\infty$ is
+void.) Positivity of the order is needed: the order-zero elliptic complex
+$0\to\CI(X;E)\xrightarrow{\Id}\CI(X;E)\to0$ has $\Delta_0=\Delta_1=\Id$, whose eigenvalue
+$1$ has infinite multiplicity when $\dim X>0$ and $E\ne0$.
 
 \begin{proposition}\label{manifolds:prop:eigen-complex}
 For an elliptic complex, $P_i\Delta_i=\Delta_{i+1}P_i$ and $P_i^*\Delta_{i+1}=\Delta_iP_i^*$. Hence
@@ -2391,7 +2471,7 @@ $(\mathcal H^{i+1})^\perp$, the complex
 0\to(\mathcal H^0)^\perp\xrightarrow{P_0}(\mathcal H^1)^\perp\xrightarrow{P_1}\cdots
 \xrightarrow{P_{N-1}}(\mathcal H^N)^\perp\to0
 \end{equation*}
-is exact, and for each $\lambda>0$ the finite-dimensional complex
+is exact, and, if $k>0$, for each $\lambda>0$ the finite-dimensional complex
 \begin{equation*}
 0\to E^0_\lambda\xrightarrow{P_0}E^1_\lambda\xrightarrow{P_1}\cdots\xrightarrow{P_{N-1}}E^N_\lambda\to0
 \end{equation*}
@@ -2414,9 +2494,14 @@ orthogonal as in \cref{manifolds:thm:hodge}(b). The alternating sum of the
 dimensions of an exact sequence of finite-dimensional spaces vanishes.
 \end{proof}
 
-Thus, although $D=P+P^*$ mixes the degrees, each of its non-zero eigenspaces
-decomposes into pieces of pure degree, and the contributions of the non-zero
-eigenvalues to $\sum_i(-1)^i\dim E^i_\lambda$ cancel. Combined with the heat kernel (not
+Thus, although $D=P+P^*$ mixes the degrees, each eigenspace of
+$D^2=\bigoplus_i\Delta_i$ for a non-zero eigenvalue $\lambda$ is the sum
+$\bigoplus_iE^i_\lambda$ of pieces of pure degree, and the contributions of the
+non-zero eigenvalues to $\sum_i(-1)^i\dim E^i_\lambda$ cancel. This decomposition is
+one of the eigenspaces of $D^2$, not of $D$: the eigenvectors of $D$ itself are in
+general of mixed degree. For instance on the circle, for the de~Rham complex with the
+standard metric, $D(e^{ix}(1+i\,dx))=e^{ix}(1+i\,dx)$, while neither $e^{ix}$ nor
+$ie^{ix}\,dx$ is an eigenvector of $D$. Combined with the heat kernel (not
 treated here) this cancellation gives the McKean--Singer formula
 $\sum_i(-1)^i\Tr e^{-t\Delta_i}=\sum_i(-1)^i\dim H^i$ for all $t>0$.
 
@@ -2597,11 +2682,19 @@ Three examples play a role later: the Szeg\H{o} projector onto the Hardy space o
 the circle, for which $p$ is $1$ on the positive and $0$ on the negative half of
 $S^*\Sphere^1$ (\cref{ch:index}); the Calder\'on projector onto the boundary values of
 solutions of an elliptic equation (\cref{ch:boundary}); and the projection onto the
-sum of the eigenspaces with positive eigenvalue of a self-adjoint elliptic operator
-$A\in\Psido1(X;E)$, whose symbol is the projection onto the positive eigenspaces of
-$\sigma_1(A)$ (that it is pseudodifferential follows from the theory of complex powers,
-$\Pi_+=\frac12(\Id+A|A|^{-1})$ modulo finite rank, see \cite{Seeley}; it gives the
-boundary condition of Atiyah, Patodi and Singer, see \cite{Melrose-APS}). The
+sum of the eigenspaces with positive eigenvalue of a \emph{classical} self-adjoint
+elliptic operator $A\in\Psido1_{\mathrm{ph}}(X;E)$, whose symbol is the projection onto the
+positive eigenspaces of the homogeneous principal symbol $\sigma_1(A)$. That it is
+pseudodifferential is not proved here; it follows from Seeley's theory of complex powers
+\cite{Seeley}, which shows that $\abs A=(A^2)^{1/2}$ is a classical elliptic operator of
+order one: with $\abs A^{-1}$ defined as the inverse of $\abs A$ on the orthocomplement
+of $\Nul(A)$ and as $0$ on $\Nul(A)$, one has $\Pi_+=\frac12(\Id+A\abs A^{-1})$ modulo
+finite rank (see G.~Grubb, \emph{The sectorial projection defined from logarithms},
+Math.\ Scand.\ \textbf{111} (2012), 118--126). The projection gives the boundary condition
+of Atiyah, Patodi and Singer, see \cite{Melrose-APS}. The classical hypothesis is used:
+for a general elliptic self-adjoint $A\in\Psido1$ the symbol $\sigma_1(A)$ is only a
+class modulo $S^0$ and need not have a homogeneous leading part, so the description of
+the symbol of $\Pi_+$ has to be modified. The
 following result characterizes the possible ranges.
 
 \begin{proposition}\label{manifolds:prop:range-projection}
@@ -2676,7 +2769,9 @@ $B'=\Lambda_s^{-1}\tilde B'\Lambda_s$ has the required properties.
 The functional calculus of elliptic operators, through the heat kernel
 $e^{-tA}$, the resolvent $(A-\lambda)^{-1}$ with parameter, and the complex powers $A^z$
 of a positive elliptic operator, is not developed here; for these see
-\cite{Seeley} and \cite{Shubin}.
+\cite{Seeley} and \cite{Shubin}. In particular the statement above that the positive
+spectral projection of a classical self-adjoint elliptic operator is pseudodifferential
+is imported from this theory.
 \end{remark}
 
 \section{The Toeplitz algebra of a pseudodifferential projection}\label{manifolds:sec:toeplitz}
@@ -2757,8 +2852,9 @@ Let $A\in\mathcal T^m_P$ be elliptic. Then:
 $\Nul_P(A)=\{u\in\CI_P;\ Au=0\}$ and range $\{f\in\Hs{s-m}_P;\ \inner fv=0\ \forall v\in\Nul_P(A^*)\}$,
 where $A^*\in\mathcal T^m_P$ is elliptic; the same holds for $A:\CI_P\to\CI_P$;
 \item the Toeplitz index $\ind_P(A)=\dim\Nul_P(A)-\dim\Nul_P(A^*)$ is independent of $s$,
-depends only on $\sigma^P_m(A)$, and is constant along families of elliptic elements of
-$\mathcal T^m_P$ which are continuous in $\Lin(\Hs s_P,\Hs{s-m}_P)$ for some $s$.
+depends only on $\sigma^P_m(A)$, and is locally constant along families of elliptic elements of
+$\mathcal T^m_P$ which are continuous in $\Lin(\Hs s_P,\Hs{s-m}_P)$ for some $s$, hence
+constant along such families with connected parameter space.
 \end{enumerate}
 \end{theorem}
 
@@ -2829,7 +2925,8 @@ description of the range. That $A^*\in\mathcal T^m_P$ is elliptic follows from
 (d) By (c), the codimension of the range is $\dim\Nul_P(A^*)$ for every $s$. If $A'\in\mathcal T^m_P$
 has the same Toeplitz symbol then $A'-A\in\mathcal T^{m-1}_P$ is compact
 $\Hs s_P\to\Hs{s-m}_P$, and the last two statements follow from the stability of the
-index (\cref{hilbert:thm:stability}).
+index (\cref{hilbert:thm:stability}), which gives local constancy, and hence constancy
+on connected parameter spaces (compare \cref{manifolds:thm:fredholm}(d)).
 \end{proof}
 
 The operator $\tilde A$ in the proof shows a little more: for $m=0$ one may take
@@ -2841,8 +2938,11 @@ the form
 \begin{equation*}
 T_a=PaP,\qquad a\in\CI(X;\End(E)),
 \end{equation*}
-with $\sigma^P_0(T_a)=p\,a\,p|_V$; $T_a$ is elliptic if $a$ is invertible, but more
-generally if only the compression of $a$ to $V$ is invertible.
+with $\sigma^P_0(T_a)=p\,a\,p|_V$. Thus $T_a$ is elliptic exactly when the compression
+$p\,a\,p|_V$ of $a$ to $V$ is invertible. Invertibility of $a$ itself suffices when $a$
+commutes with $p$, but not in general: on a trivial rank-two bundle let $P$ be
+multiplication by $\operatorname{diag}(1,0)$ and let $a$ swap the two coordinates; then $a$
+is invertible but $PaP=0$ on the non-zero space $\Ran P$.
 
 \begin{example}\label{manifolds:example:szego}
 For $X=\Sphere^1$, $E=\C^N$ and $P=S$ the Szeg\H{o} projector onto the Hardy space of
@@ -2935,7 +3035,9 @@ For $s\in\C$ and $\omega\in\Sphere^{n-1}$ let $N_{s,\omega}$ be the one-dimensio
 functions $f$ on the ray $\R^+\omega$ with $f(r\omega)=r^sf(\omega)$. Show that
 $N_s=\bigcup_\omega N_{s,\omega}$ is a smooth line bundle over $\Sphere^{n-1}$ whose smooth
 sections are the smooth functions on $\R^n\setminus0$ positively homogeneous of degree $s$,
-and that it is trivial (any norm $|\cdot|$ gives the non-vanishing section $|z|^s$). Show
+and that it is trivial (any norm $|\cdot|$ which is smooth on $\R^n\setminus0$, e.g.\ the
+Euclidean norm, gives the smooth non-vanishing section $|z|^s$; an arbitrary norm gives
+only a continuous one). Show
 that there is a non-vanishing section invariant under all of $\GL(n,\R)$ only if $s=0$,
 so that $N_s$ is not canonically trivial for $s\ne0$. Deduce the corresponding facts for
 the bundles $N_m$ over $S^*X$ used in \cref{manifolds:prop:principal-symbol}.
@@ -2945,7 +3047,7 @@ the bundles $N_m$ over $S^*X$ used in \cref{manifolds:prop:principal-symbol}.
 Let $A\in\Psido0_{\mathrm{ph}}(X;E,F)$ and let $(\bar x,\bar\xi)\in T^*X\setminus0$,
 $v\in E_{\bar x}$. In local coordinates near $\bar x$, trivializing $E$, set
 $u_t(x)=t^{n/4}\phi\big(t^{1/2}(x-\bar x)\big)e^{itx\cdot\bar\xi}v$ with $\phi\in\CIc(\R^n)$,
-$\|\phi\|_{L^2}=1$. Show that, as $t\to\infty$, $u_t\to0$ weakly in $L^2$, $\|u_t\|_{L^2}$
+$\|\phi\|_{L^2}=1$, and assume $v\ne0$. Show that, as $t\to\infty$, $u_t\to0$ weakly in $L^2$, $\|u_t\|_{L^2}$
 converges to a positive limit, and
 $\|Au_t\|_{L^2}/\|u_t\|_{L^2}\to\|\sigma_0(A)(\bar x,\bar\xi)v\|/\|v\|$ (the norms on the fibres being
 those of the coordinate trivialization, adjusted by the density and the metrics). Deduce
@@ -2954,7 +3056,7 @@ that $\|A+K\|\ge M(A)$ for every compact $K$, so that the inequality in
 \end{exercise}
 
 \begin{exercise}\label{manifolds:ex:rapidly-decreasing}
-Let $\dim X>0$ and let $\Lambda\in\Psido1(X;E)$ be elliptic, self-adjoint and positive, with an
+Let $\dim X>0$, let $E$ have positive rank, and let $\Lambda\in\Psido1(X;E)$ be elliptic, self-adjoint and positive, with an
 orthonormal basis of eigenfunctions $e_j$, $\Lambda e_j=\lambda_je_j$, $0<\lambda_1\le\lambda_2\le\cdots$
 (\cref{manifolds:thm:eigen,manifolds:cor:invertible}).
 \begin{enumerate}[label=(\alph*)]
@@ -2970,14 +3072,15 @@ rapidly decreasing matrices
 $\{(a_{jk})_{j,k\in\N};\ \sup_{j,k}(jk)^N|a_{jk}|<\infty\ \forall N\}$.
 \item Using the eigenfunctions of the harmonic oscillator, show similarly that
 $\Psiiso{-\infty}(\R^n)$ (\cref{ch:isotropic}) is isomorphic to the same algebra.
-Conclude that the smoothing algebras of all compact manifolds of positive dimension are
+Conclude that the smoothing algebras $\Psido{-\infty}(X;E)$ of all compact manifolds of positive
+dimension, with bundles of positive rank, are
 isomorphic to each other and to $\Psiiso{-\infty}(\R^n)$, although there is no natural
 isomorphism.
 \end{enumerate}
 \end{exercise}
 
 \begin{exercise}\label{manifolds:ex:boundary-smoothing}
-Let $M$ be a compact manifold with boundary, such as the radial compactification
+Let $M$ be a compact manifold with non-empty boundary, such as the radial compactification
 $\RC{\R^n}$ of \cref{ch:distributions}, and let $\nu$ be a smooth positive density on $M$.
 Show that the operators $Au(x)=\int_MA(x,y)u(y)\nu(y)$ with $A\in\CI(M^2)$ form an algebra
 under composition, and that those with kernels vanishing to infinite order at

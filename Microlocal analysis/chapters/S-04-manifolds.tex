@@ -6,27 +6,45 @@
 \section{Solutions for \cref{ch:manifolds}: Pseudodifferential operators on manifolds}\label{solutions:manifolds}
 
 \subsection*{\Cref{manifolds:ex:compatible}}
-\emph{A correction.} In an earlier version of \cref{manifolds:def:structure} two
-$\CI$ structures were called compatible as soon as $\mathcal F_1\cup\mathcal F_2$ is a
-$\CI$ structure. With that definition the exercise is false. On $X=\R$ let, for odd
+\emph{Two corrections.} (a) In an earlier version of \cref{manifolds:def:structure} two
+$\CI$ structures were called compatible if the literal union $\mathcal F_1\cup\mathcal F_2$ is
+a $\CI$ structure. Since a $\CI$ structure is a linear subspace, and the union of two
+subspaces is a subspace only when one contains the other, this relation is not
+transitive. On $\R$ let $\mathcal F_1=\operatorname{span}\{1,x\}$,
+$\mathcal F_2=\operatorname{span}\{x\}$, $\mathcal F_3=\operatorname{span}\{x,x^2\}$; each is a
+$\CI$ structure with the global coordinate $x$ as a coordinate system. The unions
+$\mathcal F_1\cup\mathcal F_2=\mathcal F_1$ and $\mathcal F_2\cup\mathcal F_3=\mathcal F_3$ are
+$\CI$ structures (with all the coordinate systems in question), but
+$\mathcal F_1\cup\mathcal F_3$ is not a subspace, since it omits $1+x^2$. The definition
+therefore now uses the sum $\mathcal F_1+\mathcal F_2$.
+
+(b) Even with sums, the bare requirement that $\mathcal F_1+\mathcal F_2$ be a $\CI$ structure
+does not give a transitive relation. On $X=\R$ let, for odd
 $k\in\N$,
 \begin{equation*}
 \mathcal F_k=\{g(x^{1/k});\ g\in\CI(\R)\},
 \end{equation*}
 $x^{1/k}$ being the real root, a homeomorphism of $\R$. Each $\mathcal F_k$ is a $\CI$
-structure with global coordinate $x^{1/k}$. The union $\mathcal F_1\cup\mathcal F_3$ is a
+structure with global coordinate $x^{1/k}$ (and a vector space). Since
+$\mathcal F_1\subset\mathcal F_3\cap\mathcal F_5$, the sum $\mathcal F_1+\mathcal F_3=\mathcal F_3$ is a
 $\CI$ structure, with coordinate $y=x^{1/3}$: every $g(x)=g(y^3)$ is a smooth function
-of $y$. Likewise $\mathcal F_1\cup\mathcal F_5$ is a $\CI$ structure. But
-$\mathcal F_3\cup\mathcal F_5$ is not. Suppose $f\in\mathcal F_3\cup\mathcal F_5$ were a
-coordinate near $0$ for it, say $f=h(y)$ with $y=x^{1/3}$ and $h$ smooth (the case
-$f\in\mathcal F_5$ is the same with $3$ and $5$ exchanged). Since $y$ belongs to the
-structure, $y=g(f)=g(h(y))$ near $0$ with $g$ smooth, so $h'(0)\ne0$ and $f$ is a
-smooth coordinate change of $y$. Then $x^{1/5}=y^{3/5}$, which also belongs to the
-structure, would be a smooth function of $y$ near $0$, and it is not. So the old
-relation was not transitive. Note also that $\mathcal F_1\subset\mathcal F_3$, so a
-structure could be contained in two different ``maximal'' structures. For this reason
-\cref{manifolds:def:structure} now also requires that every coordinate system of
-$\mathcal F_1$ and of $\mathcal F_2$ remain a coordinate system for $\mathcal F_1\cup\mathcal F_2$.
+of $y$. Likewise $\mathcal F_1+\mathcal F_5$ is a $\CI$ structure. But
+$\mathcal F_3+\mathcal F_5$ is not. Suppose $f\in\mathcal F_3+\mathcal F_5$ were a
+coordinate near $0$ for it, with $t_0=f(0)$. Since $y=x^{1/3}$ and $z=x^{1/5}$ belong to the
+structure, $y=g(f)$ and $z=\tilde g(f)$ near $0$ with $g,\tilde g$ smooth near $t_0$ and
+$g(t_0)=\tilde g(t_0)=0$. As $f$ is a homeomorphism near $0$, $g^3=\tilde g^5$ on a
+neighbourhood of $t_0$, and $g$ is not identically zero near $t_0$. If $g$ vanishes to
+finite order $p$ at $t_0$, comparing orders of vanishing gives $3p=5q$ with $q$ the order
+of $\tilde g$, so $p\ge5$ and $q\ge3$; otherwise both vanish to infinite order. In either case
+$|y|\le C|f-t_0|^5$ and $|z|\le C|f-t_0|^3$ near $0$. On the other hand
+$f=h(y)+k(z)$ with $h,k$ smooth, so
+$|f-t_0|=|h(y)-h(0)+k(z)-k(0)|\le C'(|y|+|z|)\le C''|f-t_0|^3$. Since $f(x)\ne t_0$ for
+$x\ne0$ close to $0$, this gives $1\le C''|f(x)-t_0|^2\to0$, a contradiction. So the
+relation without the extra condition on coordinate systems is not transitive. Note also
+that $\mathcal F_1\subset\mathcal F_3\cap\mathcal F_5$, so a structure could be contained in two
+different ``maximal'' structures. For this reason \cref{manifolds:def:structure} also
+requires that every coordinate system of $\mathcal F_1$ and of $\mathcal F_2$ remain a coordinate
+system for $\mathcal F_1+\mathcal F_2$.
 The last sentence of the exercise has been rephrased to match. We prove the
 corrected statement.
 
@@ -38,7 +56,7 @@ $\Omega$ has a neighbourhood $\Omega_1$ with $f|_{\Omega_1}=g_1\circ\kappa$ and 
 $f=g\circ\kappa$ on $\Omega$ with $g=f\circ\kappa^{-1}$. The function $g$ agrees near each
 point of $\kappa(\Omega)$ with a smooth function, so it is smooth.
 
-\emph{Reflexivity and symmetry.} $\mathcal F\cup\mathcal F=\mathcal F$, and every coordinate
+\emph{Reflexivity and symmetry.} $\mathcal F+\mathcal F=\mathcal F$, and every coordinate
 system for $\mathcal F$ is a coordinate system for $\mathcal F$. The definition is
 symmetric in $\mathcal F_1$ and $\mathcal F_2$.
 
@@ -46,28 +64,31 @@ symmetric in $\mathcal F_1$ and $\mathcal F_2$.
 Let $\kappa:\Omega\to\kappa(\Omega)$ be a coordinate system for $\mathcal F_1$ and
 $x\in\Omega$. Choose a coordinate system $\kappa_2:\Omega_2\to\kappa_2(\Omega_2)$ for $\mathcal F_2$
 near $x$. Since $\mathcal F_1\sim\mathcal F_2$, both $\kappa$ and $\kappa_2$ are coordinate
-systems for $\mathcal F_1\cup\mathcal F_2$. The components of $\kappa_2$ lie in this union, so
-$\kappa_2=h\circ\kappa$ on $\Omega$, with $h$ smooth. Since
-$\mathcal F_2\sim\mathcal F_3$, $\kappa_2$ is a coordinate system for $\mathcal F_2\cup\mathcal F_3$.
+systems for $\mathcal F_1+\mathcal F_2$. The components of $\kappa_2$ lie in $\mathcal F_2\subset\mathcal F_1+\mathcal F_2$, so
+$\kappa_2=h\circ\kappa$ on $\Omega\cap\Omega_2$, with $h$ smooth. Since
+$\mathcal F_2\sim\mathcal F_3$, $\kappa_2$ is a coordinate system for $\mathcal F_2+\mathcal F_3$.
 Hence every $f\in\mathcal F_3$ satisfies $f=g\circ\kappa_2=g\circ h\circ\kappa$ on
 $\Omega\cap\Omega_2$, with $g$ smooth. By (P2), $f|_\Omega$ is a smooth function of $\kappa$.
 Elements of $\mathcal F_1$ are smooth functions of $\kappa$ by assumption. So $\kappa$ is a
-coordinate system for $\mathcal F_1\cup\mathcal F_3$. By symmetry the same holds for every
+coordinate system for $\mathcal F_1+\mathcal F_3$, since a sum of smooth functions of $\kappa$ is
+a smooth function of $\kappa$. By symmetry the same holds for every
 coordinate system of $\mathcal F_3$. Each point has a coordinate system for $\mathcal F_1$, so
-$\mathcal F_1\cup\mathcal F_3$ is a $\CI$ structure. Hence $\mathcal F_1\sim\mathcal F_3$.
+$\mathcal F_1+\mathcal F_3$ is a $\CI$ structure. Hence $\mathcal F_1\sim\mathcal F_3$.
 
 \emph{Maximal elements.} Let $\mathcal C$ be an equivalence class, $\mathcal F_0\in\mathcal C$ and
-$\mathcal U=\bigcup_{\mathcal F\in\mathcal C}\mathcal F$. Let $\kappa:\Omega\to\kappa(\Omega)$ be any
+$\mathcal U=\sum_{\mathcal F\in\mathcal C}\mathcal F$, the space of finite sums of elements of members
+of $\mathcal C$ (the linear span of their union). Let $\kappa:\Omega\to\kappa(\Omega)$ be any
 coordinate system for $\mathcal F_0$. For $\mathcal F\in\mathcal C$, $\kappa$ is a coordinate
-system for $\mathcal F_0\cup\mathcal F$, so each element of $\mathcal F$ is a smooth function of
-$\kappa$ on $\Omega$. Hence $\kappa$ is a coordinate system for $\mathcal U$, and $\mathcal U$ is a
-$\CI$ structure. It is compatible with $\mathcal F_0$: $\mathcal F_0\cup\mathcal U=\mathcal U$,
+system for $\mathcal F_0+\mathcal F$, so each element of $\mathcal F$ is a smooth function of
+$\kappa$ on $\Omega$, and hence so is each finite sum of such elements. Thus $\kappa$ is a
+coordinate system for $\mathcal U$, and $\mathcal U$ is a
+$\CI$ structure. It is compatible with $\mathcal F_0$: $\mathcal F_0+\mathcal U=\mathcal U$,
 coordinate systems for $\mathcal U$ trivially remain such, and we have just seen that those
 for $\mathcal F_0$ do too. So $\mathcal U\in\mathcal C$. If $\mathcal M\in\mathcal C$ is maximal for
 inclusion within $\mathcal C$, then $\mathcal M\subset\mathcal U$, so $\mathcal M=\mathcal U$. Thus
 $\mathcal U$ is the unique maximal element of $\mathcal C$, and it contains every member of
 $\mathcal C$. In particular every $\CI$ structure $\mathcal F$ is contained in a unique
-maximal structure compatible with it, namely the union of its class.
+maximal structure compatible with it, namely the sum of the members of its class.
 
 \subsection*{\Cref{manifolds:ex:maximal}}
 We use the definition of compatibility as amended in \cref{manifolds:def:structure}
@@ -85,7 +106,8 @@ $\mathcal M$ is the maximal structure compatible with $\mathcal F$.
 components of $\kappa_a$ lie in $\mathcal F\subset\mathcal M$, and every element of $\mathcal M$
 is a smooth function of $\kappa_a$ on $O_a$ by definition.
 
-(iii) $\mathcal M\sim\mathcal F$. Since $\mathcal F\cup\mathcal M=\mathcal M$, it remains to show
+(iii) $\mathcal M\sim\mathcal F$. Since $\mathcal M$ is a vector space containing $\mathcal F$,
+$\mathcal F+\mathcal M=\mathcal M$, and it remains to show
 that every coordinate system $\kappa:\Omega\to\kappa(\Omega)$ for $\mathcal F$ is one for
 $\mathcal M$. Let $x\in\Omega$ and $x\in O_a$. The components of $\kappa_a$ are in $\mathcal F$, so
 $\kappa_a=h\circ\kappa$ on $\Omega\cap O_a$ with $h$ smooth. For $u\in\mathcal M$ we then have
@@ -93,10 +115,10 @@ $u=g_a\circ h\circ\kappa$ on $\Omega\cap O_a$. By (P2) of the previous solution,
 is a smooth function of $\kappa$.
 
 (iv) If $\mathcal F'\sim\mathcal F$ then $\mathcal F'\subset\mathcal M$. Each $\kappa_a$ is a
-coordinate system for $\mathcal F$, hence for $\mathcal F\cup\mathcal F'$. So every $f\in\mathcal F'$
+coordinate system for $\mathcal F$, hence for $\mathcal F+\mathcal F'$. So every $f\in\mathcal F'$
 is a smooth function of $\kappa_a$ on $O_a$, for every $a$, that is, $f\in\mathcal M$.
 
-By (iii) and (iv), $\mathcal M$ lies in the class of $\mathcal F$ and contains its union. By the
+By (iii) and (iv), $\mathcal M$ lies in the class of $\mathcal F$ and contains every member of it. By the
 previous exercise it is the maximal $\CI$ structure compatible with $\mathcal F$; in
 particular it does not depend on the covering. It is an algebra: if
 $u=g_a\circ\kappa_a$ and $v=h_a\circ\kappa_a$ on $O_a$, then $u+v=(g_a+h_a)\circ\kappa_a$ and
@@ -359,8 +381,9 @@ $\tilde B\subset\kappa(W)$ around $\kappa(\bar x)$ with $c\le\abs{\nabla \tilde 
 $\phi\in\CIc(\kappa^{-1}(\tilde B))$ with $\phi=1$ near $\bar x$. Then
 $u=\phi u+(1-\phi)u$. Let $\phi'=1$ near $\bar x$ with $\supp\phi'$ inside the interior of
 $\{\phi=1\}$. Then $A((1-\phi)e^{itf}u)(\bar x)=\big(\phi'A(1-\phi)\big)(e^{itf}u)(\bar x)$, and
-$\phi'A(1-\phi)$ has a smooth kernel $K$ by \cref{manifolds:thm:local}(i). So this term is
-$\int_Xe^{itf(y)}K(\bar x,y)(1-\phi(y))u(y)$. The integrand is supported in $\supp u$, where
+$\phi'A(1-\phi)$ has a smooth kernel $K(x,y)=\phi'(x)K_A(x,y)(1-\phi(y))$ by
+\cref{manifolds:thm:local}(i); the cutoff $1-\phi(y)$ is part of $K$. So this term is
+$\int_Xe^{itf(y)}K(\bar x,y)u(y)$. The integrand is supported in $\supp u$, where
 $df\ne0$, so the term is $O(t^{-\infty})$. For the other term choose $\psi\in\CIc(W)$ equal to one
 near $\supp\phi$. Then $A(e^{itf}\phi u)(\bar x)=(\psi A\psi)(e^{itf}\phi u)(\bar x)$. In the chart,
 $\psi A\psi$ is a matrix $\Op(a)$ with $a\in S^m_{\mathrm{ph}}$ (\cref{manifolds:thm:local},
@@ -526,8 +549,9 @@ bundle whose smooth sections are exactly the smooth homogeneous functions of deg
 This structure is intrinsic. Any other trivialization with the same smooth sections,
 for instance $\norm z^s$ for a norm which is smooth on $\R^n\setminus0$, differs from $\Theta$ by
 multiplication by the smooth non-vanishing function $\norm\omega^s$ on the sphere. A general
-norm gives a non-vanishing continuous section, which shows triviality as a topological
-bundle.
+norm (not smooth away from $0$, such as the $\ell^1$ or $\ell^\infty$ norm) gives only a
+non-vanishing continuous section, which shows triviality as a topological bundle; this
+is why the exercise asks for a norm which is smooth on $\R^n\setminus0$.
 
 \emph{No invariant section unless $s=0$.} $g\in\GL(n,\R)$ acts on $\Sphere^{n-1}$ by
 $\omega\mapsto g\omega/\abs{g\omega}$, and on $N_s$ by $(g_*f)(z)=f(g^{-1}z)$. This maps $N_{s,\omega}$
@@ -546,8 +570,9 @@ fibre, in local coordinates where $T^*X|_W\cong W\times\R^n$, shows that $N_m$ i
 line bundle. A Riemannian metric on $X$ gives the global non-vanishing smooth section
 $\abs\xi^m_g$, so $N_m\cong S^*X\times\C$, and a section $a$ corresponds to
 $a/\abs\xi_g^m\in\CI(S^*X)$. For $m\ne0$ no trivialization is natural. The dilations
-$\xi\mapsto\lambda\xi$ of $T^*X$ act on $N_m$ covering the identity of $S^*X$, by multiplication
-by $\lambda^m$, so they fix no non-vanishing section. More generally, a section invariant
+$\xi\mapsto\lambda\xi$ of $T^*X$ act on $N_m$ covering the identity of $S^*X$, with the convention
+$(g_*f)(z)=f(g^{-1}z)$ used above, by multiplication by $\lambda^{-m}$, so for $\lambda\ne1$ they fix
+no non-vanishing section. More generally, a section invariant
 under the fibrewise linear action of $\GL(T^*_xX)$ is constant on each fibre, which forces
 $m=0$ as above. Different metrics give different trivializations, related by
 multiplication by $(\abs\xi_{g'}/\abs\xi_g)^m$.
@@ -708,7 +733,7 @@ $1+\abs\alpha+\abs\beta\le(1+\abs\alpha)(1+\abs\beta)\le(1+\abs\alpha+\abs\beta)
 $1+\abs\alpha+\abs\beta$ is equivalent to rapid decrease in $jk$. So $A\mapsto(\inner{Au_{\alpha(k)}}{u_{\alpha(j)}})$ is a
 bijection of $\Psiiso{-\infty}(\R^n)$ onto $\mathcal R$, and as in (b) a $*$-algebra
 isomorphism. Consequently every $\Psido{-\infty}(X;E)$, for any compact $X$ of positive
-dimension and any bundle $E$, and every $\Psiiso{-\infty}(\R^n)$, $n\ge1$, is isomorphic to
+dimension and any bundle $E$ of positive rank, and every $\Psiiso{-\infty}(\R^n)$, $n\ge1$, is isomorphic to
 $\mathcal R$, hence to each other. The isomorphisms depend on the choice of $\Lambda$, of the
 orthonormal eigenbasis, and of its enumeration, so none of them is natural.
 
@@ -753,9 +778,11 @@ $s'=0$. By Taylor's formula in $s$ and in $s'$ on the compact region, $\abs{QF}\
 so $x^\alpha\pa^\beta_xy^\gamma\pa^\delta_yK$ is bounded there. The other regions are similar and
 simpler. Hence $K\in\cS(\R^{2n})$.
 
-Finally, the Lebesgue density is $dy=\ang y^{-n-1}\nu_0$ with $\nu_0$ a smooth positive density
-on $\RC{\R^n}$. In the collar $dy=s^{-n-1}ds\,d\omega$ and $\ang y^{-1}=s(1+s^2)^{-1/2}$. So
-$K(x,y)\,dy=\tilde K(x,y)\nu_0(y)$ with $\tilde K=\ang y^{-n-1}K$, and multiplication by $\ang y^{\pm(n+1)}$
+Finally, the Lebesgue density is $dy=\ang y^{n+1}\nu_0$, where $\nu_0=\ang y^{-(n+1)}dy$ is a
+smooth positive density on $\RC{\R^n}$. Indeed in the collar $dy=s^{-n-1}ds\,d\omega$ and
+$\ang y^{-1}=s(1+s^2)^{-1/2}$, so $\ang y^{-(n+1)}dy=(1+s^2)^{-(n+1)/2}ds\,d\omega$, which is smooth and
+positive up to $s=0$. So
+$K(x,y)\,dy=\tilde K(x,y)\nu_0(y)$ with $\tilde K=\ang y^{n+1}K$, and multiplication by $\ang y^{\pm(n+1)}$
 preserves $\cS(\R^{2n})$. Thus the operators $u\mapsto\int K(x,y)u(y)\,dy$ with
 $K\in\dCI(\RC{\R^n}\times\RC{\R^n})$ are exactly those with kernel in $\cS(\R^{2n})$, which by
 \cref{isotropic:lem:residual-kernels} are exactly the elements of $\Psiiso{-\infty}(\R^n)$. They are

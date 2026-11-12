@@ -23,8 +23,9 @@ In the first three sections we define fibrations, the space
 $\Psido m(M/B;E,F)$ of pseudodifferential operators acting on the fibres, and
 the index bundle $\ind_a(A)\in K^0(B)$ of an elliptic family. The rest of the
 chapter constructs a larger algebra, the \emph{product-type} pseudodifferential
-operators $\Psipt{m,m'}(M;E,F)$, which contains both the ordinary
-pseudodifferential operators on the total space $M$ and the fibrewise families.
+operators $\Psipt{m,m'}(M;E,F)$, which contains both the classical
+pseudodifferential operators on the total space $M$ and the classical fibrewise
+families.
 Their kernels are conormal, in a `product' sense, to the nested pair of
 submanifolds $\Diag_M\subset M^2_\phi\subset M^2$, where $M^2_\phi$ is the fibre
 product. Following the pattern of \cref{ch:conormal}, these kernels are
@@ -43,6 +44,22 @@ We use freely the radial compactification of a vector space
 their Fredholm properties (\cref{ch:manifolds}), and the elementary $K$-theory
 of \cref{ch:index} and \cref{ch:bott}. All manifolds are without boundary unless
 otherwise stated, and all vector bundles are complex.
+
+\emph{Symbol conventions.} As in \cref{ch:euclidean,ch:manifolds}, $\Psido m$ and
+$\Ic m$ denote the general spaces, defined by symbol estimates, and
+$\Psido m_{\mathrm{ph}}$, $\Ic m_{\mathrm{ph}}$ the classical (one-step
+polyhomogeneous) subspaces. The fibrewise families of
+\cref{product:sec:families,product:sec:index-bundle} are treated in the general
+class, the homogeneous principal symbol being available only for the classical
+subclass. The product-type calculus of
+\cref{product:sec:symbols,product:sec:conormal,product:sec:operators} is built from
+\emph{weighted smooth} symbols on the relative compactification, so it is a
+classical calculus: it contains the classical ordinary and fibrewise operators, but
+not the general ones (\cref{product:rem:nonclassical}). Classical spaces of real
+order are nested only under integer shifts of the order:
+$\Psido m_{\mathrm{ph}}\subset\Psido{m+j}_{\mathrm{ph}}$ for $j\in\N_0$, but for
+instance $\Id\notin\Psido{1/2}_{\mathrm{ph}}$; the same holds, in each of the two
+orders, for the product-type spaces.
 
 \section{Fibrations}\label{product:sec:fibrations}
 
@@ -69,14 +86,17 @@ replacement is the notion of a b-fibration (\cref{blowup:def:bfib}, see
 Let $\phi:M\longrightarrow B$ be a fibration.
 \begin{enumerate}[label=\textup{(\arabic*)}]
 \item Each fibre $Z_b$ is a compact embedded submanifold of $M$ of dimension
-$\dim M-\dim B$; if $B$ is connected all fibres are diffeomorphic to a fixed
+$\dim M-\dim B$; the fibres over each connected component of $B$ are all
+diffeomorphic, so if $B$ is connected all fibres are diffeomorphic to a fixed
 compact manifold $Z$.
 \item Each $b\in B$ has an open neighbourhood $U_b$ with a diffeomorphism
-$f_b:\phi^{-1}(U_b)\longrightarrow Z\times U_b$ such that
-$\pi_{U}\circ f_b=\phi$, where $\pi_U:Z\times U_b\longrightarrow U_b$ is the
-projection.
-\item For two such trivializations, $f_{b'}\circ f_b^{-1}$ is a diffeomorphism of
-$Z\times(U_b\cap U_{b'})$ of the form $(z,c)\longmapsto(f_{b'b}(c)(z),c)$ where
+$f_b:\phi^{-1}(U_b)\longrightarrow Z_b\times U_b$ such that
+$\pi_{U}\circ f_b=\phi$, where $\pi_U:Z_b\times U_b\longrightarrow U_b$ is the
+projection. If $B$ is connected, $Z_b$ may be replaced by the fixed fibre $Z$.
+\item Suppose $B$ is connected \textup{(}in general, apply this on each component,
+with the fibre $Z$ of that component\textup{)}. For two trivializations as in
+\textup{(2)} with values in $Z\times U_b$, $Z\times U_{b'}$, $f_{b'}\circ f_b^{-1}$
+is a diffeomorphism of $Z\times(U_b\cap U_{b'})$ of the form $(z,c)\longmapsto(f_{b'b}(c)(z),c)$ where
 $f_{b'b}:U_b\cap U_{b'}\longrightarrow\Dfm(Z)$ is a smooth family of
 diffeomorphisms of $Z$ \textup{(}meaning that $(z,c)\mapsto f_{b'b}(c)(z)$ is
 smooth\textup{)}, and the cocycle condition
@@ -107,10 +127,13 @@ time-one flow. By smooth dependence of solutions of ordinary differential
 equations on parameters, $F:Z_b\times U_b\longrightarrow\phi^{-1}(U_b)$ is smooth,
 and $\phi(F(z,c))=c$. It is a bijection with smooth inverse
 $m\longmapsto(\exp(-\tilde v_{\phi(m)})(m),\phi(m))$, so $f_b=F^{-1}$ is a
-diffeomorphism as in (2), with $Z$ replaced by $Z_b$. In particular the fibres
-over $U_b$ are all diffeomorphic to $Z_b$; since $B$ is connected, the set of
-$c\in B$ with $Z_c$ diffeomorphic to a given fibre is open and closed, which
-proves (1) and (2) with a fixed $Z$. Part (3) is immediate from (2): $f_{b'}\circ
+diffeomorphism as in (2). In particular the fibres
+over $U_b$ are all diffeomorphic to $Z_b$, so the set of
+$c\in B$ with $Z_c$ diffeomorphic to a given fibre is open and closed; this
+proves (1), and (2) with a fixed $Z$ when $B$ is connected (composing $f_b$ with
+a diffeomorphism $Z_b\cong Z$). Without connectedness the fibre type may change
+between components: for $B$ two points, one fibre may be a circle and the other
+two circles. Part (3) is immediate from (2): $f_{b'}\circ
 f_b^{-1}$ commutes with the projections to $U_b\cap U_{b'}$, so has the stated
 form, and the cocycle condition is just associativity of composition.
 \end{proof}
@@ -138,9 +161,11 @@ form, and the cocycle condition is just associativity of composition.
 \node[font=\footnotesize,align=left,anchor=west] at (7.1,2.1)
   {shaded: $\phi^{-1}(U_b)\cong Z\times U_b$};
 \end{tikzpicture}
-\caption{A fibration $\phi:M\to B$. Each fibre $Z_b=\phi^{-1}(b)$ is a compact
-manifold diffeomorphic to a fixed $Z$, and over a small open set $U_b$ the total
-space is a product (\cref{product:thm:local-triviality}). Globally the fibres may
+\caption{A fibration $\phi:M\to B$ over a connected base. Each fibre
+$Z_b=\phi^{-1}(b)$ is a compact manifold diffeomorphic to a fixed $Z$, and over a
+small open set $U_b$ the total space is a product $Z\times U_b$
+(\cref{product:thm:local-triviality}; over a disconnected base the fibre type is
+fixed on each component). Globally the fibres may
 be glued together by diffeomorphisms, so $M$ need not be $Z\times B$.}
 \label{product:fig:fibration}
 \end{figure}
@@ -275,7 +300,8 @@ it says that $N^*M^2_\phi$ is spanned by the $dy_j-dy'_j$.
 \section{Families of pseudodifferential operators}\label{product:sec:families}
 
 Throughout, $\phi:M\longrightarrow B$ is a fibration with typical fibre $Z$, and
-we set $f=\dim Z$, $b=\dim B$. One could define operators on the fibres by
+we set $f=\dim Z$, $b=\dim B$. (If $B$ is disconnected, $Z$ and $f$ may depend on
+the component; all statements are then componentwise.) One could define operators on the fibres by
 patching together, using \cref{product:thm:local-triviality}, smooth families of
 operators on $Z$, relying on the invariance of pseudodifferential operators under
 diffeomorphisms. It is more direct to use conormal distributions on the fibre
@@ -291,6 +317,11 @@ from sections of $E$ to sections of $F$, is
 \begin{equation*}
 \Psido m(M/B;E,F)=\Ic{m-\frac b4}(M^2_\phi,\Diag_M;\Hom(E,F)\otimes\Omega_R).
 \end{equation*}
+The subspace of \emph{classical} families, $\Psido m_{\mathrm{ph}}(M/B;E,F)$, is
+defined in the same way using $\Ic{m-\frac b4}_{\mathrm{ph}}$. An element acts on
+$u\in\CI(M;E)$ by $Au=(\pi_L)_*(A\cdot\pi_R^*u)$, where now
+$\pi_L,\pi_R:M^2_\phi\longrightarrow M$ and the push-forward is fibre integration
+along the right factor, using the density factor $\Omega_R=\pi_R^*\Omega(M/B)$.
 \end{definition}
 
 The shift in order is such that the symbols have order $m$: $\dim M^2_\phi=2f+b$
@@ -318,7 +349,8 @@ since $U$ is contractible). Then restriction of kernels gives an identification
 \Psido m(M/B;E,F)\big|_U\cong\CI(U;\Psido m(Z;E_0,F_0)),
 \end{equation*}
 where $\Psido m(Z;E_0,F_0)$ carries its Fréchet topology and the right side
-consists of the smooth maps into it.
+consists of the smooth maps into it; similarly
+$\Psido m_{\mathrm{ph}}(M/B;E,F)|_U\cong\CI(U;\Psido m_{\mathrm{ph}}(Z;E_0,F_0))$.
 \end{lemma}
 
 \begin{proof}
@@ -331,7 +363,8 @@ locally the inverse Fourier transform in the normal variables of a symbol
 depending smoothly on the variables in $Z$ and $U$; that is, it is a smooth
 family, parametrized by $U$, of elements of $\Ic{m''+\frac b4}(Z^2,\Diag_Z)$
 (the shift by $\frac b4$ comes from the change of dimension). With
-$m''=m-\frac b4$ this is $\CI(U;\Psido m(Z;E_0,F_0))$.
+$m''=m-\frac b4$ this is $\CI(U;\Psido m(Z;E_0,F_0))$; the symbol is classical
+in the normal variables if and only if each member of the family is.
 \end{proof}
 
 In particular $\Psido m(M/B;E,F)$ does not depend on choices, and its elements are
@@ -364,11 +397,20 @@ $\Psido{-\infty}(M/B;E,F)=\bigcap_m\Psido m(M/B;E,F)=\CI(M^2_\phi;\Hom(E,F)\otim
 sequence
 \begin{equation*}
 \Psido{m-1}(M/B;E,F)\hookrightarrow\Psido m(M/B;E,F)\overset{\sigma_m}
-\longrightarrow\CI_{[m]}(T^*(M/B)\setminus0;\hom(E,F)),
+\longrightarrow\Symq m(T^*(M/B);\hom(E,F)),
+\end{equation*}
+where $\Symq m=S^m/S^{m-1}$ is the quotient of the symbol spaces on the vector
+bundle $T^*(M/B)\longrightarrow M$ (as in \cref{ch:manifolds}); $\sigma_m(A)$
+restricts on $T^*Z_b$ to $\sigma_m(A_b)$. For classical families the principal
+symbol has a homogeneous representative and there is a short exact sequence
+\begin{equation*}
+\Psido{m-1}_{\mathrm{ph}}(M/B;E,F)\hookrightarrow\Psido m_{\mathrm{ph}}(M/B;E,F)
+\overset{\sigma_m}\longrightarrow\CI_{[m]}(T^*(M/B)\setminus0;\hom(E,F)),
 \end{equation*}
 where $\CI_{[m]}$ denotes smooth sections, homogeneous of degree $m$, of the
-pull-back of $\hom(E,F)$ to $T^*(M/B)\setminus0$; $\sigma_m(A)$ restricts on
-$T^*Z_b\setminus0$ to $\sigma_m(A_b)$.
+pull-back of $\hom(E,F)$ to $T^*(M/B)\setminus0$. (For a general family no
+homogeneous representative need exist: a constant family of fibrewise multipliers
+with local symbol $\sin(\log\ang\zeta)$ is of order $0$ but not classical.)
 \item \textup{(Composition)} If $A\in\Psido m(M/B;F,G)$ and
 $B'\in\Psido{m'}(M/B;E,F)$ then $AB'\in\Psido{m+m'}(M/B;E,G)$, $(AB')_b=A_bB'_b$
 and $\sigma_{m+m'}(AB')=\sigma_m(A)\sigma_{m'}(B')$.
@@ -380,14 +422,22 @@ for $j\in\N_0$, then there exists an element $A\in\Psido m(M/B;E,F)$, unique
 modulo $\Psido{-\infty}(M/B;E,F)$, such that
 $A-\sum_{j<N}A_j\in\Psido{m-N}(M/B;E,F)$ for all $N$.
 \end{enumerate}
+Parts \textup{(1)}, \textup{(2)}, \textup{(4)}, \textup{(5)} and \textup{(6)} hold
+equally for the classical families $\Psido\cdot_{\mathrm{ph}}(M/B)$.
 \end{proposition}
 
 \begin{proof}
 All statements are local in $B$, since the kernels are supported in $M^2_\phi$.
 Choose a finite cover of $B$ by balls $U_i$ as in \cref{product:lem:local-families}
-and a partition of unity $\chi_i\in\CIc(U_i)$. Multiplication by $\phi^*\chi_i$
-commutes with $A$ because the kernel of $A$ is supported in $M^2_\phi$, on which
-$\phi^*\chi_i(m)=\phi^*\chi_i(m')$. So $A=\sum_i\phi^*\chi_i\,A$ and each term is,
+and a partition of unity $\chi_i\in\CIc(U_i)$. Multiplication by $\phi^*\chi$,
+$\chi\in\CI(B)$, commutes with $A$: by the definition of the action,
+$A(\phi^*\chi\,u)=(\pi_L)_*\big(A\cdot\pi_R^*(\phi^*\chi)\,\pi_R^*u\big)$, and
+$\pi_R^*\phi^*\chi=\pi_L^*\phi^*\chi$ as functions on $M^2_\phi$, since
+$\phi\circ\pi_L=\phi\circ\pi_R$ there; so the factor comes out of the
+push-forward along the right factor. (The support of the kernel alone would not
+suffice: a derivative of $\delta(y-y')$ has the same support but does not commute
+with $\phi^*\chi$; it is excluded because $A$ is a distribution on $M^2_\phi$, not
+on $M^2$.) So $A=\sum_i\phi^*\chi_i\,A$ and each term is,
 by \cref{product:lem:local-families}, a smooth family over $U_i$ of
 pseudodifferential operators on $Z$, with compact support in $U_i$.
 
@@ -396,22 +446,31 @@ in the Fréchet topologies involved: the action $\Psido m(Z)\times\CI(Z)
 \longrightarrow\CI(Z)$, composition, the symbol map, adjoints, and the
 quantization of symbols. Hence each of them maps smooth families to smooth
 families, and (1), (3), (4), (5) follow from the corresponding statements for
-a single compact manifold in \cref{ch:manifolds}. For (1) note also that a smooth
+a single compact manifold in \cref{ch:manifolds} (and the classical statements
+from the classical calculus there). For (1) note also that a smooth
 family $u\in\CI(U\times Z;E_0)$ is mapped to a smooth family, i.e.\ to an element
-of $\CI(U\times Z;F_0)$. In (3) the homogeneous symbols of the local families
-patch together because the symbol is invariant under the diffeomorphisms
-$f_{b'b}(c)$, and its restriction to $T^*Z_b$ is the symbol of $A_b$; the null
-space of $\sigma_m$ is $\Psido{m-1}(M/B)$ by the corresponding property of
-conormal distributions, and surjectivity follows by quantizing
-$\chi_i\sigma$ in each $U_i$ and summing. Part (2) is the definition of
+of $\CI(U\times Z;F_0)$. In (3) the principal symbols of the local families
+(classes modulo $S^{m-1}$, respectively homogeneous functions in the classical
+case) patch together because the principal symbol is invariant under the
+diffeomorphisms $f_{b'b}(c)$, and its restriction to $T^*Z_b$ is the symbol of
+$A_b$; the null space of $\sigma_m$ is $\Psido{m-1}(M/B)$, respectively
+$\Psido{m-1}_{\mathrm{ph}}(M/B)$, by the corresponding property of conormal
+distributions, and surjectivity follows by quantizing $\chi_i\sigma$ in each $U_i$
+and summing. Part (2) is the definition of
 conormal distributions of order $-\infty$, and (6) follows from asymptotic
 completeness of conormal distributions on $M^2_\phi$ (or locally from the
 parameter version of Borel's lemma) together with the partition of unity.
 \end{proof}
 
 \begin{definition}\label{product:def:family-elliptic}
-$A\in\Psido m(M/B;E,F)$ is \emph{elliptic} if $\sigma_m(A)$ is invertible at
-each point of $T^*(M/B)\setminus0$, i.e.\ if each $A_b$ is elliptic.
+$A\in\Psido m(M/B;E,F)$ is \emph{elliptic} if a representative $a$ of
+$\sigma_m(A)$ is invertible for $|\zeta|\ge R$, with $|a^{-1}|\le C\ang\zeta^{-m}$
+there (for some metric on $T^*(M/B)$ and constants $R$, $C$), as in
+\cref{manifolds:def:elliptic,manifolds:lem:elliptic}; for classical $A$ this means
+that the homogeneous principal symbol is invertible at each point of
+$T^*(M/B)\setminus0$. Equivalently each $A_b$ is elliptic: the constants for $A_b$
+can be chosen locally uniformly in $b$, since $|a(b',\zeta)-a(b,\zeta)|\le
+C|b-b'|\ang\zeta^m$ in a local trivialization, and $B$ is compact.
 \end{definition}
 
 \begin{proposition}\label{product:prop:family-parametrix}
@@ -428,7 +487,9 @@ The construction of a parametrix in \cref{ch:manifolds} --- quantize the inverse
 of the principal symbol to get $Q_0$ with $Q_0A=\Id-R$, $R$ of order $-1$, then
 take $Q\sim\sum_jR^jQ_0$ --- uses only operations continuous in the
 Fréchet topologies together with asymptotic summation, which can be carried out
-with smooth dependence on parameters. So there are $Q_i\in\CI(U_i;\Psido{-m}(Z))$
+with smooth dependence on parameters (and which stays in the classical calculus if
+$A$ is classical, \cref{manifolds:thm:parametrix}). So there are
+$Q_i\in\CI(U_i;\Psido{-m}(Z))$
 with $Q_iA-\Id$ and $AQ_i-\Id$ smoothing families over $U_i$. Set
 $Q=\sum_i\phi^*\chi_i\,Q_i\in\Psido{-m}(M/B;F,E)$. Since multiplication by
 $\phi^*\chi_i$ commutes with fibre operators,
@@ -436,7 +497,7 @@ $\phi^*\chi_i$ commutes with fibre operators,
 QA=\sum_i\phi^*\chi_i\,Q_iA=\Id_E-\sum_i\phi^*\chi_i(\Id-Q_iA),\\
 AQ=\sum_i\phi^*\chi_i\,AQ_i=\Id_F-\sum_i\phi^*\chi_i(\Id-AQ_i),
 \end{gather*}
-and the error terms are smoothing families.
+and the error terms are smoothing families. If $A$ is classical, so is $Q$.
 \end{proof}
 
 Unlike the case of a single operator, the partition of unity on $B$ introduces
@@ -574,8 +635,9 @@ Let $A\in\Psido m(M/B;E,F)$ be elliptic.
 \item If $A_t$, $t\in[0,1]$, is a smooth family of elliptic elements of
 $\Psido m(M/B;E,F)$ then $\ind_a(A_0)=\ind_a(A_1)$. Consequently $\ind_a(A)$
 depends only on the homotopy class of $\sigma_m(A)$ through elliptic symbols.
-\item If $\dim\Nul(A_b)$ is independent of $b$, then $\Nul(A)$ and $\Nul(A^*)$ are
-smooth vector bundles and $\ind_a(A)=[\Nul(A)]-[\Nul(A^*)]$. In particular for
+\item If $\dim\Nul(A_b)$ is a locally constant function of $b$, then $\Nul(A)$ and
+$\Nul(A^*)$ are smooth vector bundles \textup{(}of locally constant rank\textup{)} and
+$\ind_a(A)=[\Nul(A)]-[\Nul(A^*)]$. In particular for
 $B$ a point, $\ind_a(A)=\ind(A)\in\Z=K^0(\mathrm{pt})$.
 \item $\ind_a(A_1\oplus A_2)=\ind_a(A_1)+\ind_a(A_2)$.
 \end{enumerate}
@@ -602,15 +664,17 @@ symbols, quantizing it with smooth dependence on $t$ gives a family $A'_t$ with
 $\sigma_m(A'_t)=\sigma_t$; if $\sigma_m(A)=\sigma_m(A')$ then $(1-t)A+tA'$ is
 elliptic for all $t$. Together these show the second statement.
 
-(iii) Suppose $\dim\Nul(A_b)=r$ for all $b$. Fix $b_0$, work in a
+(iii) Suppose $\dim\Nul(A_b)$ is locally constant, equal to $r$ near $b_0$. Fix
+$b_0$, work in a
 trivialization near $b_0$, let $P$ be a projection of $H^m(Z;E_0)$ onto
 $K_0=\Nul(A(b_0))$ and $Q$ the projection of $L^2(Z;F_0)$ onto $\Ran(A(b_0))$
 along $\Nul(A(b_0)^*)$. Then $T(c)=(QA(c),P):H^m\longrightarrow
 \Ran(A(b_0))\oplus K_0$ is invertible at $b_0$, hence for $c$ near $b_0$, and
-$\Nul(QA(c))=T(c)^{-1}(\{0\}\oplus K_0)$ has dimension $r$. Since
+$\Nul(QA(c))=T(c)^{-1}(\{0\}\oplus K_0)$ has dimension $r$ for such $c$. Since
 $\Nul(A(c))\subset\Nul(QA(c))$ and both have dimension $r$ they are equal, so as
 in the proof of \cref{product:prop:null-bundle} $\Nul(A)$ is a smooth bundle.
-The same applies to $A^*$, since $\dim\Nul(A^*_b)=r-\ind(A_b)$ is also constant.
+The same applies to $A^*$, since $\dim\Nul(A^*_b)=\dim\Nul(A_b)-\ind(A_b)$ is
+also locally constant, the index being locally constant (\cref{ch:index}).
 Now choose a bundle $G$ with $\Nul(A^*)\oplus G\cong\C^N$ and let
 $S_b:\C^N\longrightarrow\CI(Z_b;F_b)$ be the inclusion on $\Nul(A^*_b)$ and zero
 on $G_b$; this is given by $N$ smooth sections of $F$. Since
@@ -624,10 +688,16 @@ bundle $\Nul(\tilde A_1)\oplus\Nul(\tilde A_2)$.
 \end{proof}
 
 \begin{remark}\label{product:rem:K-index}
-The principal symbol of an elliptic family, $\sigma_m(A)$, is an isomorphism
+For a classical elliptic family $A\in\Psido m_{\mathrm{ph}}(M/B;E,F)$ the
+homogeneous principal symbol $\sigma_m(A)$ is an isomorphism
 $\pi^*E\longrightarrow\pi^*F$ off the zero section of
 $\pi:T^*(M/B)\longrightarrow M$, so defines a class $[\sigma_m(A)]\in
-K^0_c(T^*(M/B))$. By \cref{product:thm:index-bundle}(ii) the index depends
+K^0_c(T^*(M/B))$. For a general elliptic family one uses instead a representative
+$a$ of the class $\sigma_m(A)\in\Symq m$, invertible for $|\zeta|\ge R$; its
+restriction to the sphere bundle $\{|\zeta|=R\}$, extended homogeneously, defines
+the class, which is independent of $R$ and of the representative (two
+representatives differ by $S^{m-1}$, so the linear homotopy between them is
+invertible for $|\zeta|$ large). By \cref{product:thm:index-bundle}(ii) the index depends
 only on the homotopy class of the symbol; arguing exactly as for a single
 operator in \cref{ch:index} (stabilization by adding trivial bundles,
 invariance under bundle isomorphisms, and the fact that every compactly supported
@@ -658,11 +728,19 @@ one which `remembers' $V$.
   $a=\ang\zeta^\mu$. Near a point of $SV\subset\pa\RC W$ use the coordinates
   $x=1/|\eta|$ and $v=\zeta/|\eta|$, in which $SV=\{x=0,\ v=0\}$. Then
   $\ang w^{-\mu}a$ is $(x^2+|v|^2)^{\mu/2}$ times a smooth positive function, which
-  is not smooth in $(x,v)$ unless $\mu\in2\N_0$. It is, however, smooth in polar
-  coordinates around $\{x=v=0\}$. The relative compactification introduces
-  exactly these polar coordinates: it inserts a whole face $H_V$ over $SV$
-  (\cref{product:fig:relative,product:ex:blow-up}), and on the result such symbols
-  are smooth.
+  is not smooth in $(x,v)$ unless $\mu\in2\N_0$. Polar coordinates
+  $R=(x^2+|v|^2)^{1/2}$, $(x,v)/R$ around $\{x=v=0\}$ alone do not cure this:
+  $\ang w^{-\mu}a$ becomes $R^\mu$ times a smooth function, and $R^\mu$ is still not
+  smooth at $R=0$ unless $\mu\in\N_0$. But $R^\mu$ is a power of the defining
+  function of the new face $\{R=0\}$, so the quotient $R^{-\mu}\ang w^{-\mu}a$ is
+  smooth. The relative compactification introduces exactly these polar
+  coordinates: it inserts a whole face $H_V$ over $SV$
+  (\cref{product:fig:relative,product:ex:blow-up}), with its own defining function
+  $\rho_V$, and allows a separate weight at each face. On the result such symbols
+  are smooth after multiplication by the appropriate power of each defining
+  function; here $\rho_W^\mu\ang\zeta^\mu=1$, so $a\in\rho_W^{-\mu}\CI$ is a
+  classical product-type symbol of orders $(0,\mu)$
+  (\cref{product:def:symbols}).
 \end{answer}
 
 Recall from \cref{ch:distributions} that the radial compactification of a real
@@ -752,8 +830,10 @@ given by
 \item near the corner: $1/|\zeta|$, $|\zeta|/|\eta|$, $\zeta/|\zeta|$ and
 $\eta/|\eta|$,
 \end{enumerate}
-where the first one, respectively the first two in \textup{(iii)}, are local
-boundary defining functions.
+where $1/|\zeta|$ in \textup{(i)}, $1/|\eta|$ in \textup{(ii)}, and
+$1/|\zeta|$, $|\zeta|/|\eta|$ in \textup{(iii)} are local boundary defining
+functions \textup{(}of $H_W$, of $H_V$, and of $H_W$, $H_V$
+respectively\textup{)}.
 \end{proposition}
 
 \begin{proof}
@@ -987,7 +1067,11 @@ for classical symbols.
 \item $\pa_\zeta:S^{M,M'}\longrightarrow S^{M,M'-1}$ and
 $\pa_\eta:S^{M,M'}\longrightarrow S^{M-1,M'-1}$, and the same for classical
 symbols. Moreover $S^{M,M'}\subset S^{M+1,M'}\cap S^{M,M'+1}$ and
-$S^{M-1,M'-1}\subset S^{M,M'-1}$.
+$S^{M-1,M'-1}\subset S^{M,M'-1}$, and the same inclusions hold for classical
+symbols. More generally $S^{M,M'}\subset S^{M+s,M'+s'}$ for all real $s,s'\ge0$,
+but $S^{M,M'}_{\mathrm{ph}}\subset S^{M+s,M'+s'}_{\mathrm{ph}}$ only for
+$s,s'\in\N_0$: for instance $1\in S^{0,0}_{\mathrm{ph}}$ is not in
+$S^{1/2,0}_{\mathrm{ph}}$, since $\rho_V^{1/2}$ is not smooth.
 \item The standard symbols on $W$ are included: $\Sym\mu(\Omega;W)\subset
 S^{\mu,\mu}(\Omega;W,V)$ and $\Symph\mu(\Omega;W)\subset
 S^{\mu,\mu}_{\mathrm{ph}}(\Omega;W,V)$; more precisely
@@ -1042,7 +1126,11 @@ Leibniz' formula.
 formula, and for classical symbols from the fact that $L'_j$, $Q'_i$, and hence
 $\rho_W^{-1}\pa_{\zeta_j}=L_j$ and $(\rho_W\rho_V)^{-1}\pa_{\eta_i}=Q_i$ (in the
 original coordinates), are smooth vector fields on $\RelC VW$ tangent to the
-boundary; the inclusions in (iv) hold because $\ang q\ge1$ and $\ang\zeta\ge1$.
+boundary; the inclusions in (iv) hold because $\ang q\ge1$ and $\ang\zeta\ge1$,
+and in the classical case because $\rho_V^{-M}\rho_W^{-M'}b=
+\rho_V^{-M-j}\rho_W^{-M'-k}(\rho_V^j\rho_W^kb)$ for $j,k\in\N_0$. If
+$1=\rho_V^{-1/2}b$ with $b$ smooth then $b=\rho_V^{1/2}$ near the interior of
+$H_V$, which is not smooth.
 
 (v) For $a\in\Sym\mu(W)$, $|\pa^\alpha_\zeta\pa^\beta_\eta a|\le
 C\ang{\zeta,\eta}^{\mu-|\alpha|-|\beta|}\le C\ang\zeta^{-|\alpha|}
@@ -1121,13 +1209,32 @@ $[0,1)\times H_W$, and Borel's lemma (with parameters in $\Omega\times H_W$) giv
 $b\in\CI(\Omega\times\RelC VW)$ with $b-\sum_{j<N}\rho_W^jb_j\in\rho_W^N\CI$ for
 all $N$: take $b=\sum_j\chi(\rho_W/\eps_j)\rho_W^jb_j$ with $\chi\in\CIc([0,1))$
 equal to $1$ near $0$ and $\eps_j\downarrow0$ so fast that the $j$-th term has
-$C^j$ norm on the $j$-th set of an exhaustion of $\Omega$ at most $2^{-j}$. Then
-$a=\rho_V^{-M}\rho_W^{-M'}b$. Uniqueness holds since the difference of two
-choices vanishes to infinite order at $H_W$. Case (ii) is the same with $\rho_V$
-in place of $\rho_W$, and case (iii) the same with $\rho=\rho_V\rho_W$: since
-$|\pa^\alpha(\chi(\rho/\eps))|\le C_\alpha\eps^{-|\alpha|}$ on $\{\rho\le\eps\}$,
-the $C^k$ norm of $\rho^j\chi(\rho/\eps)b_j$ is $O(\eps^{j-k})$, and the
-construction goes through. For non-classical symbols one uses instead the usual
+$C^{j-1}$ norm at most $2^{-j}$ on $K_j\times\RelC VW$, where $K_1\subset
+K_2\subset\cdots$ is an exhaustion of $\Omega$ by compact sets. This is possible:
+since $|\pa^\alpha(\chi(\rho_W/\eps))|\le C_\alpha\eps^{-|\alpha|}$ and
+$\rho_W\le\eps$ on the support, each derivative of order $k$ of
+$\chi(\rho_W/\eps)\rho_W^jb_j$ is $O(\eps^{j-k})$, which is small for $k\le j-1$.
+(One cannot ask for smallness in $C^j$: $\pa_{\rho_W}^j(\chi(\rho_W/\eps)\rho_W^jb_j)
+=j!\,b_j$ at $\rho_W=0$, whatever $\eps$.) For each $k$ the terms with $j>k$ are
+then summable in $C^k$ on each $K_i\times\RelC VW$, so the series converges in
+$\CI$. Given $N$,
+\begin{equation*}
+b-\sum_{j<N}\rho_W^jb_j=\sum_{j<N}(\chi(\rho_W/\eps_j)-1)\rho_W^jb_j
++\sum_{j\ge N}\chi(\rho_W/\eps_j)\rho_W^jb_j.
+\end{equation*}
+The first sum vanishes near $H_W$. Each term of the second vanishes to order $N$
+at $H_W$, i.e.\ its derivatives of order $<N$ in the collar variable $\rho_W$
+vanish at $\rho_W=0$; by convergence in $\CI$ the same holds for the sum, which
+is therefore $\rho_W^N$ times a smooth function by Taylor's formula with integral
+remainder in the collar. Then $a=\rho_V^{-M}\rho_W^{-M'}b$. Uniqueness holds since
+the difference of two choices vanishes to infinite order at $H_W$. Case (ii) is
+the same with $\rho_V$ in place of $\rho_W$, and case (iii) the same with
+$\rho=\rho_V\rho_W$ in the cut-offs: the $C^k$ norm of $\rho^j\chi(\rho/\eps)b_j$
+is again $O(\eps^{j-k})$, and the tail $g=\sum_{j\ge N}\chi(\rho/\eps_j)\rho^jb_j$
+vanishes to order $N$ at both faces. By the one-face argument $g=\rho_W^Ng_1$ with
+$g_1$ smooth; $g_1=\rho_W^{-N}g$ vanishes to order $N$ at $H_V\setminus H_W$, where
+$\rho_W>0$, hence by continuity of its derivatives at all of $H_V$, so
+$g_1=\rho_V^Ng_2$ and $g\in\rho^N\CI$. For non-classical symbols one uses instead the usual
 cut-offs $1-\chi(\ang\zeta/R_j)$, $1-\chi(\ang q/R_j)$, respectively
 $1-\chi(\ang{\zeta,\eta}/R_j)$, with $R_j\to\infty$ rapidly, exactly as for
 standard symbols.
@@ -1188,8 +1295,12 @@ $\tilde c_V(x,\zeta,q)=\chi(\rho_V)c_V(x,\zeta,q/|q|)$ and
 b=\tilde c_V+\chi(\rho_W)\big(c_W-\tilde c_V|_{H_W}\big)(x,\zeta/|\zeta|,q).
 \end{equation*}
 Then $b|_{H_V}=c_V$, since $c_W-\tilde c_V|_{H_W}$ vanishes at the corner, and
-$b|_{H_W}=c_W$. Taking $c_W=0$ or $c_V=0$ (and dropping the compatibility) gives
-surjectivity of the separate maps. The computation of the limits above shows
+$b|_{H_W}=c_W$. This construction needs the compatibility: if, say, $c_V$ is
+non-zero at the corner then no $b$ has $b|_{H_V}=c_V$ and $b|_{H_W}=0$. For the
+separate maps no compatibility is needed: given $c_V$ alone, $\tilde c_V$ restricts
+to $c_V$ on $H_V$ (its restriction to $H_W$ being whatever it is), and given $c_W$
+alone, $\chi(\rho_W)c_W(x,\zeta/|\zeta|,q)$ restricts to $c_W$ on $H_W$. So the
+separate maps are surjective. The computation of the limits above shows
 that the compatibility of $b|_{H_W}$ and $b|_{H_V}$ at the corner is
 \eqref{product:eq:compatibility}.
 \end{proof}
@@ -1245,7 +1356,16 @@ partial Fourier transform in the normal variables. Set
 M=m+\frac n4-\frac l2,\qquad M'=m'+\frac n4-\frac{k+l}2;
 \end{equation}
 these are the symbol orders corresponding, with the normalization of
-\cref{ch:conormal}, to conormal order $m$ at $Y$ and $m'$ at $Z$. Recall from
+\cref{ch:conormal}, to conormal order $m$ at $Y$ and $m'$ at $Z$.
+
+\emph{Convention.} Since product-type symbols are weighted smooth functions, the
+spaces of conormal distributions which they contain are the classical ones.
+\emph{In this section, $\Ic m(\Omega,Y)$, $\Ic{m'}(\Omega,Z)$, $\Ic m(X,Y;E)$, etc.\
+denote the classical spaces $\Ic m_{\mathrm{ph}}$ of \cref{ch:conormal}}; the
+corresponding statements for the general spaces are false (for instance a
+non-classical element of $\Ic m(X,Y)$ is not in any $\Ic{m,m'}(X,Y,Z)$).
+
+Recall from
 \cref{ch:conormal} that, in these coordinates, $u\in\Ic m(\Omega,Y)$ if and only
 if for each $\chi\in\CIc(\Omega)$ the partial Fourier transform of $\chi u$ in $y$
 alone is a classical symbol of order $M$ in $\eta$, depending smoothly on $(w,z)$,
@@ -1560,26 +1680,79 @@ $\sigma_W(u)$ at $N^*Y|_Z$), with null space $\Ic{m-1,m'-1}(X,Y,Z;E)$.
 Away from $Z$, \eqref{product:eq:Y-symbol} is the usual principal symbol, by the
 computation in the proof of \cref{product:prop:model-properties}(iii) (the term
 $j=0$ there). Near $Z$ consider a change of adapted coordinates as in the proof of
-\cref{product:prop:conormal-invariance}. In the expansion
-\eqref{product:eq:amplitude-expansion} of the new symbol, the terms involving
-$\pa_y$ lie in $S^{M-1,M'}$ and do not contribute to $\sigma_V$; the terms
-involving only $\pa_z$ are exactly the terms of the expansion of
-\cref{product:lem:amplitude} applied, on $Y$, to the amplitude
-$\lim_{t\to\infty}t^{-M}r(w,z,0,\zeta,t\eta)$. Now
+\cref{product:prop:conormal-invariance}, so that $\chi F^*u=v$ is given by the
+oscillatory integral of \cref{product:lem:amplitude} with amplitude
+$r(x,\xi')=\chi(x)a(F_w(x),L(x)\xi')|\det\Phi(x)|^{-1}$. The asymptotic expansion
+\eqref{product:eq:amplitude-expansion} is not enough here: it determines $\hat v$
+only modulo $S^{M,-\infty}_{\mathrm{ph}}$, and elements of this space can have
+non-zero $\sigma_V$ (for instance $e^{-|\zeta|^2}\ang\eta^M$), namely the part of
+the $Y$-symbol which is smoothing in the variables normal to $Z$. Instead we take
+the limit defining $\sigma_V$ directly in the exact formula from the proof of
+\cref{product:lem:amplitude},
+\begin{equation*}
+t^{-M}\hat v(w,\zeta,t\eta)=\int t^{-M}\tilde r(w,\theta;\zeta-\theta_z,
+t\eta-\theta_y)\,\dbar\theta,\qquad\theta=(\theta_z,\theta_y),
+\end{equation*}
+where $\tilde r$ is the Fourier transform of $r$ in $(z,y)$. Fix $(w,\zeta,\eta)$
+with $\eta\ne0$. For fixed $\theta$, write $t\eta-\theta_y=t(\eta-\theta_y/t)$;
+since $\tilde r(w,\theta;\cdot)=\rho_V^{-M}\rho_W^{-M'}b_\theta$ with $b_\theta$
+continuous up to $H_V$, the integrand converges as $t\to\infty$ to
+$\sigma_V(\tilde r(w,\theta;\cdot))(\zeta-\theta_z,\eta)$, which does not depend on
+$\theta_y$ beyond the first argument of $\tilde r$. By the rapid decay of $\tilde r$
+in $\theta$ with values in $S^{M,M'}_{\mathrm{ph}}$ and Peetre's inequality
+(\cref{product:lem:peetre}), the integrand is bounded by
+\begin{equation*}
+C_L\ang\theta^{-L}t^{-M}w_{M,M'}(\zeta-\theta_z,t\eta-\theta_y)\le
+C'_L\ang\theta^{K-L}\,t^{-M}\ang{\zeta,t\eta}^M\ang\zeta^{M'-M}\le
+C''\ang\theta^{K-L}
+\end{equation*}
+uniformly for $t\ge1$, so by dominated convergence
+\begin{equation*}
+\sigma_V(\hat v)(w,\zeta,\eta)=\int\sigma_V\big(\tilde r(w,\theta;\cdot)\big)
+(\zeta-\theta_z,\eta)\,\dbar\theta.
+\end{equation*}
+In the same way (dominated convergence in the Fourier integral over the compact
+$(z,y)$-support) $\sigma_V(\tilde r(w,\theta;\cdot))$ is the Fourier transform in
+$(z,y)$ of $\sigma_V(r(w,z,y;\cdot))$, a smooth compactly supported function of
+$(z,y)$. Integrating first in $\theta_y$ and using Fourier inversion in $y$ at $y=0$,
+\begin{equation*}
+\sigma_V(\hat v)(w,\zeta,\eta)=\int\tilde g(w,\theta_z;\zeta-\theta_z,\eta)
+\,\dbar\theta_z,\qquad g(w,z;\zeta,\eta)=\sigma_V\big(r(w,z,0;\cdot)\big)(\zeta,\eta),
+\end{equation*}
+$\tilde g$ the Fourier transform of $g$ in $z$. By the first step of the proof of
+\cref{product:lem:amplitude}, applied on $Y$ in the variables $(w,z)$ with $\eta$ as
+a parameter, this says exactly that
+\begin{equation*}
+\sigma_V(v)(w,z,\eta)=\int e^{iz\cdot\zeta}\sigma_V(\hat v)(w,\zeta,\eta)\,\dbar\zeta
+=\int e^{iz\cdot\zeta}g(w,z;\zeta,\eta)\,\dbar\zeta,
+\end{equation*}
+an identity of distributions in $(w,z)$, with no remainder. Now compute $g$. At
+$y=0$,
 \begin{equation*}
 L(\zeta,t\eta)=\big(A^{-t}\zeta,\ tC^{-t}\eta-C^{-t}B^tA^{-t}\zeta\big),
 \end{equation*}
-and the second term is a bounded translation in $\eta$ for fixed $\zeta$, which
-does not affect the limit in \eqref{product:eq:model-symbols} (it is invisible at
-$H_V$). Hence
+with $A,B,C$ evaluated at $(w,z,0)$, and the second term is a bounded translation
+in $\eta$ for fixed $\zeta$, which does not affect the limit in
+\eqref{product:eq:model-symbols} (it is invisible at $H_V$). Hence
+$g(w,z;\zeta,\eta)=\chi|\det\Phi|^{-1}\sigma_V(a)(F_w(w,z,0),A^{-t}\zeta,C^{-t}\eta)$,
+and changing variables $\zeta\mapsto A^t\zeta$ in the last integral (which
+multiplies by $|\det A|$, and $|\det\Phi|=|\det A||\det C|$),
 \begin{equation*}
-\sigma_V(F^*u)(\cdot,\cdot,\eta)=|\det C|^{-1}\,(F|_Y)^*\big[\sigma_V(u)(\cdot,
-\cdot,C^{-t}\eta)\big],
+\sigma_V(\chi F^*u)(w,z,\eta)=\chi(w,z,0)\,|\det C|^{-1}
+\int e^{i(Az)\cdot\zeta}\sigma_V(\hat u)\big(F_w(w,z,0),\zeta,C^{-t}\eta\big)
+\,\dbar\zeta,
 \end{equation*}
-where the pull-back of the distribution in $(w,z)$ by the diffeomorphism
-$F|_Y:(w,z)\mapsto(F_w(w,z,0),A(w,z,0)z)$ is computed, as in the standard
-invariance proof for $\Ic{\cdot}(Y,Z)$, by the same Kuranishi argument
-($F_z|_Y=Az$, so $z\cdot\zeta$ becomes $z\cdot A^t\zeta$). This is the transformation
+with $A$, $C$ evaluated at $(w,z,0)$; that is,
+\begin{equation*}
+\sigma_V(\chi F^*u)(w,z,\eta)=\chi(w,z,0)\,|\det C|^{-1}\,
+\sigma_V(u)\big(F|_Y(w,z),C^{-t}\eta\big),\qquad
+F|_Y(w,z)=(F_w(w,z,0),A(w,z,0)z),
+\end{equation*}
+where the right side is understood as the oscillatory integral just written (the
+pull-back of the conormal distribution $\sigma_V(u)$ by the diffeomorphism $F|_Y$,
+computed by the same Kuranishi argument as in the invariance of $\Ic{\cdot}(Y,Z)$).
+In particular the part of $\sigma_V$ which is smoothing in the variables normal to
+$Z$ transforms correctly as well. This is the transformation
 law of a distribution on $N^*Y$ with values in $\Omega_\fib(N^*Y)$ under the map
 induced by $F$, so $\sigma_V(u)$ is invariantly defined. The exact sequences and
 surjectivity of the joint symbol follow from \cref{product:lem:model-symbol-maps},
@@ -1610,8 +1783,10 @@ the Schwartz kernel theorem.
 With this normalization the symbol orders \eqref{product:eq:orders} are exactly
 $(m,m')$: $M=m-\frac f2+\frac{f+b}2-\frac b2=m$ and $M'=m'$. The first order $m$
 is the order at the fibre diagonal $M^2_\phi$; we call it the \emph{base order}.
-The second, $m'$, is the order at the diagonal, the \emph{fibre order}. As we shall
-see, $\Psido m(M)\subset\Psipt{m,m}(M)$, $\Psido{m'}(M/B)\subset\Psipt{0,m'}(M)$,
+The second, $m'$, is the order at the diagonal, the \emph{fibre order}. Here
+$\Ic{\cdot,\cdot}$ is the (classical) space of \cref{product:def:conormal}. As we
+shall see, $\Psido m_{\mathrm{ph}}(M)\subset\Psipt{m,m}(M)$,
+$\Psido{m'}_{\mathrm{ph}}(M/B)\subset\Psipt{0,m'}(M)$,
 and compressions of operators of order $m$ on the base lie in
 $\Psipt{m,-\infty}(M)$.
 
@@ -1642,7 +1817,8 @@ the orders above, $a\in S^{m,m'}_{\mathrm{ph}}(\Omega)$. Conversely the kernel o
 $\Op(a)\chi'$ is of model form near $\Diag$ and, by
 \cref{product:prop:model-properties}(iii), conormal to $M^2_\phi$ away from it; it
 is smooth and rapidly decreasing away from $\{y=y'\}$, so extends by zero. The last
-statement is \cref{product:prop:model-properties}(iii).
+statement is \cref{product:prop:model-properties}(iii) (with the classical
+conormal space, as there).
 \end{proof}
 
 Away from the diagonal the kernels are conormal to $M^2_\phi$ but extend across
@@ -1711,8 +1887,11 @@ $\Psido{m'-m+|m|+j}(Z;E_0,F_0)$. In particular
 \begin{equation}\label{product:eq:base-limit}
 \beta(k)(y,\eta)=\lim_{t\to\infty}t^{-m}k(y,t\eta)
 \end{equation}
-exists in $\Psido{m'-m+|m|+1}(Z;E_0,F_0)$, and lies in $\Psido{m'-m}(Z;E_0,F_0)$;
-its local symbols are $\sigma_V(a)$ of \eqref{product:eq:model-symbols}.
+exists in $\Psido{m'-m+|m|+1}(Z;E_0,F_0)$, and lies in the classical space
+$\Psido{m'-m}_{\mathrm{ph}}(Z;E_0,F_0)$; its local symbols are $\sigma_V(a)$ of
+\eqref{product:eq:model-symbols}, which are classical symbols of order $m'-m$ in
+$\zeta$. (Part \textup{(i)} uses the general, non-classical, spaces of
+\cref{ch:manifolds}, in which the seminorm estimates are formulated.)
 \end{enumerate}
 \end{lemma}
 
@@ -1730,7 +1909,8 @@ where $|q|$ is bounded we have $r\ang\zeta\ge c>0$ and
 $|\pa_rq|=|q|/r\le C\ang\zeta$. In either case each $r$-derivative produces at
 most a factor $\ang\zeta$ (also when it falls on $(1+r^2\ang\zeta^2)^{m/2}$), which
 gives the stated bounds; setting $r=0$ gives $\ang\zeta^{m'-m}b(\zeta,\infty\hat\eta)$,
-which is the symbol $\sigma_V(a)(\cdot,\hat\eta)$ of order $m'-m$. The smooth parts are classical in $\eta$ by
+which is the symbol $\sigma_V(a)(\cdot,\hat\eta)$ of order $m'-m$, classical since
+$b$ is smooth on $\RC U\times SV$. The smooth parts are classical in $\eta$ by
 (a).
 \end{proof}
 
@@ -1789,9 +1969,12 @@ $|\zeta|$ denote the length of the image of $\xi\in T^*_xM$ in $T^*_x(M/B)$.
 restricted to $S^*M\setminus\phi^*S^*B$, extends to a smooth function on
 $[S^*M;\phi^*S^*B]$.
 \item $\mathcal B^{m,m'}_\phi(M;E,F)$ is the space of smooth families
-$P(b,\eta)\in\Psido{m'-m}(Z_b;E_b,F_b)$, $(b,\eta)\in T^*B\setminus0$, which are
-homogeneous of degree $m$, $P(b,t\eta)=t^mP(b,\eta)$ for $t>0$; that is, the
-homogeneous elements of $\Psido{m'-m}(\pi^*M/(T^*B\setminus0);E,F)$.
+$P(b,\eta)\in\Psido{m'-m}_{\mathrm{ph}}(Z_b;E_b,F_b)$, $(b,\eta)\in
+T^*B\setminus0$, of \emph{classical} operators, which are homogeneous of degree $m$,
+$P(b,t\eta)=t^mP(b,\eta)$ for $t>0$; that is, the homogeneous elements of
+$\Psido{m'-m}_{\mathrm{ph}}(\pi^*M/(T^*B\setminus0);E,F)$. The classical space is
+the right target: a family with values in non-classical operators is never a base
+symbol (\cref{product:rem:nonclassical}).
 \end{itemize}
 
 \begin{theorem}[Symbol maps]\label{product:thm:symbols}
@@ -2007,7 +2190,8 @@ limit is $\beta(A)\beta(A')$.
 \item $\bigcap_j\Psipt{m-j,m'-j}(M;E,F)=\Psido{-\infty}(M;E,F)$, the smoothing
 operators.
 \item $\Psipt{m,-\infty}(M;E,F)=\bigcap_{m'}\Psipt{m,m'}(M;E,F)$ consists of the
-operators whose kernels are conormal to $M^2_\phi$ of order $m-\frac f2$; locally
+operators whose kernels are classical conormal distributions at $M^2_\phi$, i.e.\ in
+$\Ic{m-\frac f2}_{\mathrm{ph}}(M^2,M^2_\phi)$; locally
 in $B$ these are the $\Op_y(k)$ with $k$ a classical symbol of order $m$ with
 values in smoothing operators on $Z$.
 \item Asymptotic completeness holds for $\Psipt{m,m'}$ in the three forms of

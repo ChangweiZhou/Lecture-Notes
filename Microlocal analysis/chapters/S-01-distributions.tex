@@ -314,20 +314,62 @@ As $R$ is arbitrary, $a_\alpha\in\CI$, and $\supp a_\alpha\subset K$. Hence
 $P=\sum_{|\alpha|\le N}a_\alpha\pa^\alpha$, a differential operator with
 $\CIc$ coefficients.
 
-\emph{Without continuity (sketch, as requested).} Peetre's theorem does not assume
-continuity, and the work lies in proving an a priori bound on the order. The key lemma
-is: for each $x_0$ there are a neighbourhood $U$ and $C,k$ with
-$\sup|Pu|\le C\sum_{|\alpha|\le k}\sup|\pa^\alpha u|$ for all $u\in\CIc(U\setminus\{x_0\})$.
-If it failed, one could choose $u_j$ supported in disjoint balls shrinking to $x_0$, with
-$\sum_{|\alpha|\le j}\sup|\pa^\alpha u_j|\le2^{-j}$ but $\sup|Pu_j|\ge j$ (normalize a
-violating function). Then $u=\sum u_j$ is smooth (for fixed $\alpha$ the series of
-$\pa^\alpha u_j$ converges uniformly), and by locality $Pu=Pu_j$ near $\supp u_j$, so
-$Pu$ would be unbounded near $x_0$, contradicting $Pu\in\cS$. Covering $K$ by finitely
-many such $U$, the lemma together with locality and
-\cref{distributions:thm:point-support} (applied to $u\mapsto Pu(x)$, $x\neq x_0$) shows
-that $P$ is a differential operator of bounded order away from finitely many points;
-a second application of the same argument at those points gives a global order, and the
-smoothness of the coefficients follows as above.
+\emph{Without continuity.} Peetre's theorem does not assume continuity, and the work
+lies in proving an a priori bound on the order. We now carry this out.
+
+\emph{Step 1: a local estimate.} For each $x_0$ there are a ball $U$ about $x_0$ and
+$C,k$ with
+\begin{equation*}
+  \sup|Pu|\le C\sum_{|\alpha|\le k}\sup|\pa^\alpha u|\qquad\text{for all }
+  u\in\CIc(U\setminus\{x_0\}).
+\end{equation*}
+Suppose not. Then for every $j$ and every ball $B$ about $x_0$ there is
+$u\in\CIc(B\setminus\{x_0\})$ violating the estimate with $C=j2^j$, $k=j$; rescaling
+$u$, we may assume $\sum_{|\alpha|\le j}\sup|\pa^\alpha u|=2^{-j}$ and $\sup|Pu|>j$. Choose
+inductively radii $r_1>r_2>\dots$ and such $u_j$ with $\supp u_j$ in the ball
+$B(x_0,r_j)$: having chosen $u_j$, its support is a compact set not containing $x_0$,
+so it has a positive distance $d_j<r_j$ from $x_0$; take $r_{j+1}<d_j$ (and
+$r_{j+1}<r_j/2$). Then $\supp u_j\subset\{d_j\le|x-x_0|<r_j\}$, these annuli are
+disjoint, and $\supp u_j$ lies in the open annulus
+$A_j=\{r_{j+1}<|x-x_0|<d_{j-1}\}$ ($d_0=\infty$), which meets no $\supp u_l$, $l\ne j$.
+For each $\alpha$ the series $\sum_j\pa^\alpha u_j$ converges uniformly (its terms with
+$j\ge|\alpha|$ are bounded by $2^{-j}$), so $u=\sum_ju_j$ is smooth, with support in
+$\overline{B(x_0,r_1)}$, also near $x_0$; thus $u\in\CIc(\R^n)\subset\cS(\R^n)$. On
+$A_j$ we have $u-u_j=0$, so by locality $Pu=Pu_j$ on $A_j$; and $\supp Pu_j\subset
+\supp u_j\subset A_j$. Hence $\sup|Pu|\ge\sup|Pu_j|>j$ for every $j$, contradicting
+$Pu\in\cS$.
+
+\emph{Step 2: $P$ is a differential operator near $x_0$.} Let $U,C,k$ be as in Step~1
+and let $x\in U\setminus\{x_0\}$. Choose $\chi_x\in\CIc(U\setminus\{x_0\})$ equal to $1$
+near $x$. By locality $P((1-\chi_x)u)$ vanishes near $x$, so
+$Pu(x)=P(\chi_xu)(x)$ for $u\in\cS$, and by Step~1
+$|Pu(x)|\le C\sum_{|\alpha|\le k}\sup|\pa^\alpha(\chi_xu)|\le C_x\norm u_k$. Thus
+$u\mapsto Pu(x)$ is a tempered distribution of order $k$; it is supported in $\{x\}$
+(if $x\notin\supp u$ then $x\notin\supp Pu$, and $Pu$ is continuous). As in the
+continuous case, \cref{distributions:thm:point-support} gives
+\begin{equation*}
+  Pu(x)=\sum_{|\alpha|\le k}a_\alpha(x)\pa^\alpha u(x),\qquad x\in U\setminus\{x_0\},
+\end{equation*}
+with $k$ independent of $x$ and unique coefficients. Let $U'$ be a smaller concentric
+ball and $\chi\in\CIc(\R^n)$ equal to $1$ near $\overline U$. Applying this to the fixed
+polynomial tests $u_\beta=\chi(x-x_0)^\beta/\beta!$, $|\beta|\le k$, gives for
+$x\in U\setminus\{x_0\}$
+\begin{equation*}
+  Pu_\beta(x)=\sum_{\alpha\le\beta}a_\alpha(x)\frac{(x-x_0)^{\beta-\alpha}}{(\beta-\alpha)!},
+\end{equation*}
+and by induction on $|\beta|$ each $a_\beta$ equals, on $U\setminus\{x_0\}$, a polynomial
+expression in the functions $Pu_\gamma\in\cS$ and the coordinates. These expressions
+are smooth on all of $U$, so the $a_\alpha$ extend smoothly across $x_0$. Now for
+$u\in\cS$ both $Pu$ and $\sum_{|\alpha|\le k}a_\alpha\pa^\alpha u$ are continuous on $U$
+and agree on $U\setminus\{x_0\}$, hence also at $x_0$. So $P$ is a differential operator
+of order at most $k$ on $U$.
+
+\emph{Step 3: globalization.} For $x_0\notin K$ Step~2 holds trivially with all
+$a_\alpha=0$ near $x_0$ (as $Pu=0$ off $K$). Cover the compact set $K$ by finitely many
+balls $U_1,\dots,U_r$ as in Step~2, with orders $k_1,\dots,k_r$, and let $k=\max k_i$. By
+uniqueness of the coefficients at each point they agree on overlaps and vanish off
+$K$, so they define $a_\alpha\in\CIc(\R^n)$, $|\alpha|\le k$, with
+$Pu=\sum_{|\alpha|\le k}a_\alpha\pa^\alpha u$ for all $u\in\cS(\R^n)$.
 
 %----------------------------------------------------------------------
 \subsection*{\Cref{distributions:ex:delta-rep}}

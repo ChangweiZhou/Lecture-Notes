@@ -141,8 +141,15 @@ $\ind(A)=\dim\Nul(A)-\dim\Ran(A)^\perp=\dim\Nul(A)-\dim\Nul(A^*)$.
 \end{definition}
 
 Here $\Ran(A)^\perp=\Nul(A^*)$ for any bounded $A$, and if $\Ran(A)$ is closed it is the
-orthocomplement of $\Nul(A^*)$. Thus $A$ is Fredholm if and only if $A^*$ is, and
-$\ind(A^*)=-\ind(A)$.
+orthocomplement of $\Nul(A^*)$. If $\Ran(A)$ is closed then so is $\Ran(A^*)$, and in fact
+$\Ran(A^*)=\Nul(A)^\perp$. Indeed $A$ restricts to a bounded bijection
+$A_0:\Nul(A)^\perp\to\Ran(A)$ between Hilbert spaces, which has a bounded inverse by the open
+mapping theorem. For $y\in\Ran(A)$, $\inner{A^*y}{x}=\inner{y}{Ax}$ vanishes for $x\in\Nul(A)$ and
+equals $\inner{y}{A_0x}$ for $x\in\Nul(A)^\perp$; so $A^*$ maps $\Ran(A)$ into $\Nul(A)^\perp$ and
+restricts there to the Hilbert space adjoint $A_0^*$, which is invertible with inverse
+$(A_0^{-1})^*$. Since $A^*$ vanishes on $\Ran(A)^\perp=\Nul(A^*)$, it follows that
+$\Ran(A^*)=\Ran(A_0^*)=\Nul(A)^\perp$. Thus $A$ is Fredholm if and only if $A^*$ is (apply this
+to $A^*$ for the converse, using $A^{**}=A$), and $\ind(A^*)=-\ind(A)$.
 
 \begin{discussion}
 Fredholm operators are the operators that are ``invertible up to finite
@@ -229,7 +236,7 @@ parametrix characterization and the stability of the index rely on.
 \begin{theorem}[Stability of the index]\label{hilbert:thm:stability}
 Let $A\in\Lin(H_1,H_2)$ be Fredholm.
 \begin{enumerate}[label=\textup{(\alph*)}]
-\item If $G$ is a generalized inverse of $A$ and $\|E\|<\|G\|^{-1}$, then $A+E$ is Fredholm and
+\item If $G$ is a generalized inverse of $A$ and $\|G\|\,\|E\|<1$, then $A+E$ is Fredholm and
 $\ind(A+E)=\ind(A)$. Thus the Fredholm operators form an open subset of $\Lin(H_1,H_2)$ on
 which the index is locally constant, hence constant along continuous paths.
 \item If $K\in\Kpt(H_1,H_2)$ then $A+K$ is Fredholm and $\ind(A+K)=\ind(A)$.
@@ -314,8 +321,34 @@ trace norm $\|A\|_1$ is the infimum of $\sum_k\|B_k\|_2\|C_k\|_2$ over such repr
 The trace-class operators form a two-sided ideal in $\Lin(H)$, contained in the
 compact operators, with $\|SAT\|_1\le\|S\|\,\|A\|_1\|T\|$ and $\|A\|\le\|A\|_1$; $\|\cdot\|_1$ is a norm,
 and the ideal is complete with respect to it. Every finite-rank operator is of trace class.
-(Using the polar decomposition $A=U|A|$ one can show that
-$\|A\|_1=\sum_j\inner{|A|e_j}{e_j}$, the sum of the singular values of $A$.)
+Moreover $\|A\|_1=\sum_js_j$, the sum of the singular values of $A$ (the eigenvalues of
+$|A|=(A^*A)^{1/2}$, repeated according to multiplicity), and an operator is of trace class if and only
+if it is compact with $\sum_js_j<\infty$.
+
+\begin{proof}[Proof of the singular-value formula and of completeness]
+Let $A$ be compact. By \cref{hilbert:thm:spectral} applied to $A^*A$ there is an orthonormal basis
+$(e_j)$ of $\Nul(A)^\perp$ with $A^*Ae_j=s_j^2e_j$, $s_j>0$; set $|A|^{\alpha}x=\sum_js_j^{\alpha}\inner
+x{e_j}e_j$ for $\alpha>0$. Since $\||A|x\|^2=\inner{A^*Ax}x=\|Ax\|^2$, the map $U|A|x=Ax$ extends to a
+partial isometry $U$ (zero on $\Nul(A)$) with $A=U|A|$ and $U^*A=|A|$. If $\sum_js_j<\infty$ then
+$A=(U|A|^{1/2})\,|A|^{1/2}$ with $\||A|^{1/2}\|_2^2=\sum_js_j$ and $\|U|A|^{1/2}\|_2\le\||A|^{1/2}\|_2$,
+so $A$ is of trace class with $\|A\|_1\le\sum_js_j$. Conversely, if $A=\sum_kB_kC_k$ is any
+representation as in \cref{hilbert:def:trace-class} (so $A$ is compact), then
+\begin{equation*}
+\sum_js_j=\sum_j\inner{U^*Ae_j}{e_j}=\sum_k\sum_j\inner{C_ke_j}{B_k^*Ue_j}
+\le\sum_k\|C_k\|_2\,\|B_k^*U\|_2\le\sum_k\|B_k\|_2\|C_k\|_2
+\end{equation*}
+by Cauchy--Schwarz, so $\sum_js_j\le\|A\|_1$.
+
+For completeness, let $(A_n)$ be Cauchy for $\|\cdot\|_1$. Since $\|\cdot\|\le\|\cdot\|_1$ it
+converges in norm to some $A$, and it suffices to show that a subsequence converges to $A$ in
+$\|\cdot\|_1$; so assume $\sum_n\|D_n\|_1<\infty$, $D_n=A_{n+1}-A_n$. By the first part write
+$D_n=B_nC_n$ with $\|B_n\|_2^2,\|C_n\|_2^2\le\|D_n\|_1$. For fixed $N$ let
+$H'=\bigoplus_{n\ge N}H$ (Hilbert direct sum) and define $C:H\to H'$, $Cx=(C_nx)_{n\ge N}$, and
+$B:H'\to H$, $B(y_n)=\sum_nB_ny_n$. Computing Hilbert--Schmidt norms in an orthonormal basis of $H'$
+formed from bases of the summands, $\|C\|_2^2=\sum_{n\ge N}\|C_n\|_2^2$ and
+$\|B\|_2^2=\sum_{n\ge N}\|B_n\|_2^2$, both at most $\sum_{n\ge N}\|D_n\|_1$. Since $BC=\sum_{n\ge N}D_n=A-A_N$,
+$A-A_N$ is of trace class with $\|A-A_N\|_1\le\sum_{n\ge N}\|D_n\|_1\to0$.
+\end{proof}
 
 \begin{proposition}\label{hilbert:prop:trace}
 If $A\in\Lin(H)$ is of trace class then $\Tr(A)=\sum_j\inner{Ae_j}{e_j}$ converges absolutely, is
@@ -357,5 +390,8 @@ $\|A\|_p=(\sum_js_j^p)^{1/p}<\infty$. These are two-sided ideals in $\Lin(H)$, B
 $\|\cdot\|_p$, with $\mathcal S_1$ the trace class, $\mathcal S_2$ the Hilbert--Schmidt operators,
 $\mathcal S_p\subset\mathcal S_q$ for $p\le q$, and H\"older's inequality
 $\|AB\|_r\le\|A\|_p\|B\|_q$ for $\frac1r=\frac1p+\frac1q$. By Lidskii's theorem the trace of an operator
-of trace class is the sum of its eigenvalues, counted with algebraic multiplicity.
+of trace class is the sum of its eigenvalues, counted with algebraic multiplicity. We do not prove
+these facts, which are used only in remarks; see Simon \cite{Simon-trace} (the ideal and H\"older
+properties are in its first two chapters and Lidskii's theorem in its third) or
+\cite[Section~VI.6]{Reed-Simon-I} for the cases $p=1,2$.
 \end{remark}

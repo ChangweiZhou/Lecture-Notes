@@ -174,14 +174,16 @@ the integral is a linearly invariant map $\Ic m(W,\{0\};\Omega W)\to\C$.
 \emph{Correction of the statement.} If the homogeneity relation is only required for
 $z\ne0$, as originally stated, then $u$ is not controlled at the origin and the order is not
 determined: $u=D^\alpha\delta_0$ is smooth (zero) outside $0$ and satisfies the relation on
-$z\ne0$ with $F=0$ for \emph{every} $h$, while $\chi u=D^\alpha\delta_0\in\Ic{\frac n4+
-|\alpha|}_{\mathrm{ph}}$ has order $\frac n4+|\alpha|$; and for $h=-n$, a distribution $u$
+$z\ne0$ with $F=0$ for \emph{every} $h$, while for $\chi=1$ near $0$,
+$\chi u=D^\alpha\delta_0\in\Ic{\frac n4+|\alpha|}_{\mathrm{ph}}$ has exact order
+$\frac n4+|\alpha|$; and for $h=-n$, a distribution $u$
 equal to $|z|^{-n}$ on $z\ne0$ has Fourier transform $c\log|\zeta|+c'$ outside $0$, which is
 not a classical symbol. The statement has therefore been corrected to require the relation as
 distributions on $\R^n$. We prove: \emph{$\chi u\in\Ic{-h-\frac{3n}4}_{\mathrm{c},
-\mathrm{ph}}(\R^n,\{0\})$}; this is the order (it is not lower unless the part $T$ below is a
-polynomial, in which case $\chi u$ is smooth). For $\delta_0$, $h=-n$ gives the order
-$\frac n4$, as it should.
+\mathrm{ph}}(\R^n,\{0\})$ for every $\chi\in\CIc(\R^n)$, and if $\chi(0)\ne0$ the
+principal symbol of order $-h-\frac{3n}4$ is non-zero unless $u$ is smooth near $0$.} For
+$\delta_0$, $h=-n$ gives the order $\frac n4$, as it should. (The exact-order statement needs
+$\chi(0)\ne0$: for $u=\delta_0$ and $\chi(0)=0$, $\chi u=0$.)
 
 Idea: the relation says $(E-h)u$ is smooth, $E=z\cdot\pa_z$ the Euler field; solving this
 modulo smooth functions splits $u$ into a smooth part and a homogeneous (or log-homogeneous)
@@ -243,9 +245,15 @@ $\chi\in\CIc(\R^n)$,
 with $\chi(z)(1-\psi(\zeta))\hat T(\zeta)\in\Symph\mu(\R^n;\R^n)$ (as in
 \cref{conormal:rem:point-local}). By \cref{conormal:def:local} with $k=n$, $M=m-\frac n4$,
 $\chi u\in\Ic m_{\mathrm c,\mathrm{ph}}(\R^n,\{0\})$ with $m=\mu+\frac n4=-h-\frac{3n}4$. Its
-principal symbol is $\chi(0)$ times the homogeneous function $\hat T|_{\R^n\setminus0}$, which
-vanishes only if $\hat T$ is supported at $0$, i.e.\ $T$ is a polynomial; then $\chi u$ is
-smooth.
+principal symbol is $\chi(0)$ times the homogeneous function $\hat T|_{\R^n\setminus0}$ (the
+amplitude $\chi(z)(1-\psi(\zeta))\hat T(\zeta)$ may be replaced by its value at $z=0$ modulo
+lower order, by \cref{conormal:lem:reduction} with $k=n$). Suppose $\chi(0)\ne0$. If
+$\hat T|_{\R^n\setminus0}=0$, then $\hat T$ is supported at $0$, $T$ is a polynomial and
+$u=T+w+v$ is smooth. Conversely, if $u$ is smooth near $0$, take $\chi'\in\CIc$ supported
+where $u$ is smooth with $\chi'(0)\ne0$: then $\chi'u\in\CIc$ has principal symbol $0$, so
+$\chi'(0)\hat T$, homogeneous of degree $\mu$ and of order $\mu-1$, vanishes outside $0$.
+Hence for $\chi(0)\ne0$ the principal symbol is non-zero unless $u$ is smooth near $0$, and
+the order $-h-\frac{3n}4$ is then exact.
 
 %----------------------------------------------------------------------
 \subsection*{\Cref{conormal:ex:supported}}
@@ -255,8 +263,10 @@ smooth, and the full symbol is then a polynomial in $\xi$.
 
 Work in an adapted chart, $X\supset U\cong\Omega\subset\R^k_x\times\R^d_y$, $Y=\{x=0\}$, and
 let $\phi\in\CIc(\Omega)$; it suffices to treat $\phi u\in\Ic m_{\mathrm c}(\Omega,Y)$, which is
-supported in $Y$. By the structure theorem for distributions supported in a subspace
-\cite[Theorem~2.3.5]{Hormander-I}, there are $q\in\N_0$ and $u_\alpha\in\CmIc(\R^d)$ with
+supported in $Y$. Since $\phi u$ has compact support it has finite order $q$. We now import,
+without proof, the structure theorem for distributions of finite order supported in a linear
+subspace \cite[Theorem~2.3.5]{Hormander-I} (this is the only external step in this solution):
+there are $q\in\N_0$ and $u_\alpha\in\CmIc(\R^d)$ with
 \begin{equation*}
 \phi u=\sum_{|\alpha|\le q}u_\alpha(y)\otimes D_x^\alpha\delta(x).
 \end{equation*}

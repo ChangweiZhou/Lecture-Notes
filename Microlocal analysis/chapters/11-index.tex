@@ -222,8 +222,11 @@ finite rank projections.
   \end{align*}
   The first two terms lie in $\Psido{-m}(X;F,E)$. The kernel of $RBR'$ is
   smooth. The map $y\mapsto R'(\cdot,y)$ is smooth from $X$ into $\CI(X;F)$,
-  hence into $L^2$. Then $B$ is bounded on $L^2$, and $R:L^2\to\CI$ is
-  continuous. So $y\mapsto RBR'(\cdot,y)$ is a smooth map into $\CI(X;E)$.
+  hence into $L^2$. Then $B:L^2(X;F)\to\Hs m(X;E)$ is bounded (for $m<0$ it
+  need not be bounded on $L^2$), and $R:\Hs m\to\CI$ is continuous since
+  $R$ is smoothing. So $y\mapsto RBR'(\cdot,y)$ is a smooth map into
+  $\CI(X;E)$. (The identities above hold as maps on $L^2(X;F)$, with values
+  in $\Hs m(X;E)$.)
   Thus $B\in\Psido{-m}(X;F,E)$. Finally $\Tr(\pi)=\dim\Nul(A)$ and
   $\Tr(\pi')=\dim\Nul(A^*)=\dim\CI(X;F)/A\CI(X;E)$ by
   \cref{index:lem:proj-trace} and \eqref{index:eq:range}.
@@ -267,9 +270,12 @@ generalized inverse is a parametrix in the sense of \eqref{index:eq:parametrix}.
 \end{answer}
 
 \begin{remark}\label{index:rem:sign}
-  The right side of \eqref{index:eq:trace-formula} is $\Tr([A,B])$ in a formal
-  sense: $\Id-BA$ and $\Id-AB$ are individually trace class, but $AB$ and $BA$
-  are not. The formula shows that the index measures how far the trace
+  If $E=F$, the difference $AB-BA=(\Id-BA)-(\Id-AB)$ is smoothing, and the
+  right side of \eqref{index:eq:trace-formula} is literally $\Tr([A,B])$,
+  although $AB$ and $BA$ are not individually trace class. If $E\ne F$, then
+  $AB$ and $BA$ act on sections of different bundles, and the right side is
+  only formally a trace of a commutator: $\Id_E-BA$ and $\Id_F-AB$ are
+  individually trace class, but their traces are taken on different spaces. The formula shows that the index measures how far the trace
   identity $\Tr(AB)=\Tr(BA)$ fails when the operators are not smoothing.
 \end{remark}
 
@@ -292,8 +298,15 @@ trivializations near the diagonal they are of the form
 \end{equation*}
 where $K$ is smooth in all variables and $a$ is a classical symbol of order
 $m$ depending smoothly on $z$. That is, every $z$-derivative of $a$ satisfies
-the symbol estimates locally uniformly in $z$, and the homogeneous terms of
-the expansion of $a$ are smooth in $z$. For $m=-\infty$ this simply means
+the symbol estimates locally uniformly in $z$, the homogeneous terms
+$a_{m-j}$ of the expansion of $a$ are smooth in $z$, and for every $N$ every
+$z$-derivative of the remainder $a-\sum_{j<N}(1-\chi(\xi))a_{m-j}$ (with a
+fixed cut-off $\chi$ near $\xi=0$) satisfies the symbol estimates of order
+$m-N$ locally uniformly in $z$. (This last condition does not follow from the
+others: a family that is smoothing for each fixed $z$, with all homogeneous
+terms zero, can be bounded in order $m$ but unbounded in order $m-1$ near a
+point of $Z$. It is needed below, for instance to conclude that $\Id-B'A$ is
+a smooth family of order $-1$.) For $m=-\infty$ this simply means
 $A\in\CI(Z\times X^2;\Hom(E,F)\otimes\Omega_R)$.
 
 All the constructions of \cref{ch:conormal,ch:manifolds} (composition,
@@ -464,7 +477,7 @@ perturbations of the identity contains all the groups $\GL(N,\C)$, nested inside
 each other, so it performs this stabilization automatically.
 
 \subsection{Odd K-theory}
-Let $Y$ be a compact manifold of positive dimension and $E$ a vector bundle
+Let $Y$ be a compact manifold of positive dimension and $E$ a vector bundle of positive rank
 over $Y$. Let $X$ be a compact manifold, possibly with boundary or corners. A
 \emph{smooth map} $f:X\to\Ginf(Y;E)$ is a map such that
 $f-\Id\in\CI(X;\Psido{-\infty}(Y;E))=\CI(X\times Y^2;\Hom(E)\otimes\Omega_R)$
@@ -545,19 +558,23 @@ $s\in[0,1]$ once $N$ is large.
 \end{answer}
 
 \begin{remark}\label{index:rem:pi-k}
-  In terms of homotopy groups, the assertion that \eqref{index:eq:K1} is odd
-  K-theory, i.e.\ that $\Ginf$ is a classifying space for $K^{-1}$, amounts
-  to Bott periodicity in the form
+  The assertion that \eqref{index:eq:K1} is odd K-theory, i.e.\ that $\Ginf$
+  is a classifying space for $K^{-1}$, is the statement that the functor
+  $X\mapsto[X;\Ginf(Y;E)]$ agrees with the topological one. In the standard
+  topological treatment $K^{-1}(X)$ is defined by stabilizing maps into
+  $\GL(N,\C)$ as $N\to\infty$ \cite{Atiyah-K}. The group $\Ginf$ makes the
+  stabilization automatic: by \eqref{index:eq:finite-rank} every map and
+  every homotopy is stably a map into some $\GL(N,\C)$, and the rotation
+  argument above is the usual proof that the stabilized product is
+  commutative. It is this finite-rank comparison of maps and homotopies that
+  identifies the two functors. Taking $X$ to be spheres, the coefficient
+  groups are then given by Bott periodicity in the form
   \begin{equation}\label{index:eq:homotopy-groups}
-    \pi_k(\Ginf(Y;E))=\begin{cases}0&k\text{ even},\\ \Z&k\text{ odd}.
+    \pi_k(\Ginf(Y;E))=\begin{cases}0&k\text{ even},\\ \Z&k\text{ odd},
     \end{cases}
   \end{equation}
-  This is proved in \cref{ch:bott}. In the standard topological treatment
-  $K^{-1}(X)$ is defined by stabilizing maps into $\GL(N,\C)$ as
-  $N\to\infty$ \cite{Atiyah-K}. The group $\Ginf$ makes the stabilization
-  automatic: by \eqref{index:eq:finite-rank} every map is stably a map into
-  some $\GL(N,\C)$, and the rotation argument above is the usual proof that
-  the stabilized product is commutative.
+  which is proved in \cref{ch:bott}. The list of homotopy groups by itself
+  determines only these coefficient groups, not the functor.
 \end{remark}
 
 \subsection{Even K-theory}
@@ -843,9 +860,13 @@ is
   matrix trace. With suitable normalizing constants $c_k$ the combination
   $\sum_kc_kU_{2k-1}:K^{-1}(X)\to H^{\mathrm{odd}}_{\mathrm{dR}}(X;\C)$ is the
   \emph{odd Chern character}; the constants are fixed in \cref{ch:families}.
-  It is a standard result of topology that its range spans
-  $H^{\mathrm{odd}}(X;\C)$ and that its null space is the torsion subgroup of
-  $K^{-1}(X)$ (see \cite{Atiyah-K}). We do not use this.
+  It is a theorem of Atiyah and Hirzebruch that, for $X$ compact (a finite
+  CW complex), its range spans $H^{\mathrm{odd}}(X;\C)$ and its null space is
+  the torsion subgroup of $K^{-1}(X)$; equivalently the Chern character is an
+  isomorphism $K^*(X)\otimes\mathbb Q\to H^*(X;\mathbb Q)$ (M.~F. Atiyah and
+  F.~Hirzebruch, \emph{Vector bundles and homogeneous spaces}, Proc.\ Sympos.\
+  Pure Math.\ \textbf{3} (1961), 7--38; see also \cite{Atiyah-K}). This is
+  imported from topology and is not proved here; we do not use it.
 \end{remark}
 
 \subsection{Even Chern forms}
@@ -1309,7 +1330,9 @@ mechanism.
 \caption{The shifts on the Hardy space, acting on the Fourier modes
 $e^{ik\theta}$, $k\ge0$. The forward shift $U$ is injective but misses the
 constants. The backward shift $L$ is surjective but kills the constants. On the
-full space $\CI(\Sphere^1)$, where $k$ runs over $\Z$, both are invertible.}
+full space $\CI(\Sphere^1)$, where $k$ runs over $\Z$, the uncompressed
+multiplications by $e^{\pm i\theta}$ are invertible (the compressions
+$Se^{\pm i\theta}S$ still vanish on the negative modes).}
 \label{index:fig:shifts}
 \end{figure}
 
@@ -1434,7 +1457,8 @@ rank smoothing operators of rank $(2r+1)N$.
   By \cref{index:lem:pi-r}, $R(x)(\Id-\pi_r)\to0$ uniformly in
   $\CI(X;\Psido{-\infty})$, hence in $L^2$ norm. So for $r\ge r_0$ the
   operator $\Id-R(x)(\Id-\pi_r)$ is invertible, with inverse $\Id-S_r(x)$
-  depending smoothly on $x$ in $\Psido{-\infty}$ by (vi). With
+  depending smoothly on $x$ in $\Psido{-\infty}$ by the identity
+  $b=-a+a^2+aba$ for inverses in $\Ginf$ (\cref{index:sec:K}). With
   $Q'_r=(\Id-S_r)Q$ this gives
   \begin{equation}\label{index:eq:Qprime}
     Q'_r(x)A'_r(x)=\Id-\pi_r.
@@ -1459,9 +1483,10 @@ rank smoothing operators of rank $(2r+1)N$.
   Since also $\Ran P\subset\Ran A'_r$, $P(x)$ is the orthogonal projection
   onto $\Ran(A'_r(x))$. Thus $\Id-P(x)$ is the orthogonal projection onto $F_r(x)$. It
   is a smooth family in $\Psido0$ whose values are smoothing (finite rank with
-  range in $\CI$). Its full symbol is therefore residual for each $x$, which
-  for a smooth family of classical symbols means the family lies in
-  $\CI(X;\Psido{-\infty})$. If $v_1,\dots,v_d$ is a basis of $F_r(x_0)$, then
+  range in $\CI$). Its full symbol is therefore residual for each $x$, so
+  all its homogeneous terms vanish, and the locally uniform remainder
+  estimates in the definition of smooth families then show that the family
+  lies in $\CI(X;\Psido{-\infty})$. If $v_1,\dots,v_d$ is a basis of $F_r(x_0)$, then
   $(\Id-P(x))v_i$ are smooth sections of $F_r$ which remain a basis near
   $x_0$. So $F_r$ is a smooth vector bundle.
 \end{proof}
@@ -1486,8 +1511,8 @@ null spaces and the bundle $F_r$ complementary to the range is the
   Let $A\in\CI(X;\Psido0(\Sphere^1;\C^N))$ be a smooth family of elliptic
   operators. There is a smooth family $B\in\CI(X;\Psido{-\infty}(\Sphere^1;\C^N))$
   such that $A(x)+B(x)$ is invertible for every $x\in X$ if and only if, for
-  some (equivalently every) $r\ge r_0$, the bundle $F_r$ of
-  \cref{index:lem:stabilized} is isomorphic to the trivial bundle
+  some (equivalently, for all sufficiently large) $r\ge r_0$, the bundle
+  $F_r$ of \cref{index:lem:stabilized} is isomorphic to the trivial bundle
   $X\times\C^{(2r+1)N}$.
 \end{theorem}
 \begin{proof}
@@ -1518,13 +1543,40 @@ null spaces and the bundle $F_r$ complementary to the range is the
   triviality for one $r\ge r_0$ implies triviality for all large $r$.
 \end{proof}
 
+\begin{remark}\label{index:rem:perturb-family-large-r}
+  ``All sufficiently large $r$'' cannot be replaced by ``every $r\ge r_0$''.
+  Triviality of $F_r$ is only a stable property. For $r'\ge r\ge r_0$,
+  $A(x)$ is injective on $\Ran(\Id-\pi_r)$ by
+  \cref{index:lem:stabilized}(a), so
+  $\Ran A'_r(x)=\Ran A'_{r'}(x)\oplus A(x)\Ran(\pi_{r'}-\pi_r)$ and hence
+  $F_{r'}\cong F_r\oplus(X\times\C^{2(r'-r)N})$; and a nontrivial bundle can become trivial after adding
+  a trivial one. For example, let $X=\Sphere^5\subset\C^3$ and $N=2$, and let
+  $W\subset L^2(\Sphere^1;\C^2)$ be the three-dimensional space spanned by
+  the two constant modes and one mode of frequency $1$, identified with
+  $\C^3$. Let $A_x$ be the map $W\ni v\mapsto(v\cdot e_3)\,x$ on $W$
+  (with $e_3$ the third basis vector), and $\Id$ on $W^\perp$. Then
+  $A-\Id$ is a smooth family of finite rank smoothing operators, so $B=\Id-A$
+  is an invertible smoothing perturbation, and $A_x^*A_x=\Id-\pi_0$ (with
+  $\pi_0$ the projection onto the constants). The proof of
+  \cref{index:lem:stabilized} works with $r_0=0$ (take $Q=A^*$, $R=\pi_0$),
+  but $F_0(x)$ is the orthogonal complement of $x$ in $W\cong\C^3$, a
+  rank-two bundle over $\Sphere^5$ whose unitary frame bundle is
+  $U(3)\to\Sphere^5$. Its clutching class is the image of a generator of
+  $\pi_5(\Sphere^5)$ under the connecting map to $\pi_4(U(2))\cong\Z/2$,
+  which is onto because $\pi_4(U(3))=0$; so $F_0$ is not trivial, although
+  $F_0\oplus\C\cong\Sphere^5\times\C^3$ is.
+\end{remark}
+
 In particular a necessary condition is that $\ind A(x)=0$, and when $X$ is a
 point the theorem reduces to the statement of \cref{ch:manifolds} that an
 elliptic operator has an invertible smoothing perturbation if and only if its
 index vanishes. The proofs extend to any compact manifold in place of the
 circle (and to fibrations by compact manifolds) once a sequence of finite rank
 smoothing projections with the property of \cref{index:lem:pi-r} is
-available. They also pass unchanged to the Toeplitz algebra if $\pi_r$ is
+available, depending smoothly on the base point in the case of a fibration;
+their ranges then form a vector bundle, which replaces the trivial bundle
+$\Ran(\pi_r)$ (and in the criterion of \cref{index:thm:perturb-family} $F_r$
+must be isomorphic to that range bundle rather than to a trivial bundle). They also pass unchanged to the Toeplitz algebra if $\pi_r$ is
 replaced by the projection $\pi^+_r$ onto $\operatorname{span}\{e^{ik\theta};\
 0\le k\le r\}$. This projection commutes with $S$, lies in $\PsiT{-\infty}$,
 and has rank $(r+1)N$.

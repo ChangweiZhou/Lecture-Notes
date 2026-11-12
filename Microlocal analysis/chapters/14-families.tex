@@ -202,7 +202,23 @@ bilinear. This is the standard product in K-theory (\cite{Atiyah-K}, \S2.6).
 
 \subsection{Fibrewise families and the analytic index}
 Let $\phi:M\to B$ be a fibration of compact manifolds with typical fibre $Z$,
-$Z_b=\phi^{-1}(b)$. From \cref{ch:product} we use:
+$Z_b=\phi^{-1}(b)$.
+
+\emph{Convention.} In this chapter all pseudodifferential operators are
+\emph{classical}: $\Psido m$ stands for the classical (one-step
+polyhomogeneous) subspace $\Psido m_{\mathrm{ph}}$ of \cref{ch:manifolds}, and
+$\Psido m(M/B)$ for its families version $\Psido m_{\mathrm{ph}}(M/B)$ of
+\cref{ch:product}; all orders occurring are integers. This is no restriction for index theory,
+since every class in $\Kc(T^*(M/B))$ is the class of the homogeneous principal
+symbol of a classical family (\ref{families:F-symbol} below), and it is
+necessary for the product-type calculus: the inclusions
+\ref{families:P-fibre}, \ref{families:P-ordinary} and \ref{families:P-base}
+below are only valid for classical operators, because the product-type
+calculus of \cref{ch:product} is built on classical product-type symbols. All
+operators we construct are quantizations of homogeneous symbols, hence
+classical.
+
+From \cref{ch:product} we use:
 \begin{enumerate}[label=(F\arabic*)]
 \item\label{families:F-calculus} The algebra $\Psido{m}(M/B;E_+,E_-)$ of
   smooth families of pseudodifferential operators on the fibres, with principal
@@ -253,15 +269,30 @@ from \cref{ch:product}, in the families version and for order $(0,0)$.
   spherical normal bundle (\cref{blowup:thm:blowup}). The \emph{base symbol} $\beta(A)$ is a family,
   parametrized by $\eta\in S^*(M/B)$, of operators in $\Psido0(Y_m)$,
   $Y_m=\tilde\phi^{-1}(m)$, $m$ the base point of $\eta$. Both are
-  multiplicative and compatible with adjoints. The two symbols determine $A$
-  modulo $\Psido{-\infty}(\tilde M/B)$, and any compatible pair arises.
+  multiplicative and compatible with adjoints. Any compatible pair arises, and
+  the null space of the joint symbol map $A\mapsto(\sigma(A),\beta(A))$ is
+  $\Psiptfam{-1,-1}(\tilde M/B)$ (\cref{product:thm:symbols}). This null space
+  is \emph{not} contained in the smoothing families: for instance, compressing a
+  classical family of order $-1$ on $M/B$ by a rank-one smoothing projection on
+  the fibres $Y$ as in \ref{families:P-base} gives an element with both
+  symbols of order $(0,0)$ equal to zero whose kernel is singular along the
+  fibre diagonal $\tilde M\times_M\tilde M$. Its elements are compact on
+  $L^2$, but they are not trace class in general and their kernels are not
+  smooth. Nothing below uses more than this: we never replace an operator by
+  another with the same two symbols, and only the parametrix of
+  \ref{families:P-ellipticity}, whose error \emph{is} smoothing, enters.
 \item\label{families:P-ellipticity} $A$ is \emph{fully elliptic} if $\sigma(A)$
   and $\beta(A)$ are invertible. A fully elliptic family has a parametrix
-  modulo smoothing families, so it is Fredholm on $L^2(\tilde M_b)$ for each
+  modulo smoothing families (\cref{product:thm:parametrix}, with parameters in
+  $B$: inverting the two symbols leaves an error in $\Psiptfam{-1,-1}$, which
+  is removed by an asymptotically summed Neumann series, using that
+  $\bigcap_j\Psiptfam{-j,-j}$ consists of smoothing families,
+  \cref{product:prop:residual}), so it is Fredholm on $L^2(\tilde M_b)$ for each
   $b$; its null space consists of smooth sections. In a local trivialization of
   $\tilde M\to B$ it is a norm-smooth family of bounded operators.
 \item\label{families:P-fibre} A family $P\in\Psido0(\tilde M/M;E_+,E_-)$ on
-  the fibres of $\tilde\phi$ lies in $\Psiptfam{0,0}(\tilde M/B)$, with
+  the fibres of $\tilde\phi$ (classical, by our convention) lies in
+  $\Psiptfam{0,0}(\tilde M/B)$ (\cref{product:prop:subalgebras}(i)), with
   $\sigma(P)=\gamma^*\sigma_0(P)$ and $\beta(P)(\eta)=P_m$. Here
   $\gamma:[S^*(\tilde M/B);\Sigma]\to S^*(\tilde M/M)$ is the extension to the
   blow-up of the radial projection of the restriction map
@@ -271,7 +302,7 @@ from \cref{ch:product}, in the families version and for order $(0,0)$.
   smooth fibre bundle whose fibres are the radial compactifications of the fibres
   of $\tilde\phi^*T^*(M/B)$.
 \item\label{families:P-ordinary} $\Psido0(\tilde M/B)\subset\Psiptfam{0,0}(\tilde
-  M/B)$; $\sigma(A)$ is the pull-back of $\sigma_0(A)$ under the blow-down map,
+  M/B)$ for classical families (\cref{product:prop:subalgebras}(ii)); $\sigma(A)$ is the pull-back of $\sigma_0(A)$ under the blow-down map,
   and $\beta(A)(\eta)$ is multiplication by the restriction of $\sigma_0(A)$ to
   $\Sigma$, i.e.\ to $\tilde\phi^*S^*(M/B)$, at $\eta$. For such $A$ full
   ellipticity is ellipticity.
@@ -282,8 +313,14 @@ from \cref{ch:product}, in the families version and for order $(0,0)$.
     A_\Pi:u\longmapsto e\otimes A\bigl(\langle u,e\rangle\bigr),\quad
     \langle u,e\rangle(m)=\int_{Y_m}(u,e)\,\nu,
   \end{equation*}
-  lies in $\Psiptfam{-\infty,0}(\tilde M/B;E_+\otimes F_+,E_+\otimes F_-)$, with
-  $\sigma(A_\Pi)=0$ and $\beta(A_\Pi)(\eta)=\Pi\otimes\sigma_0(A)(\eta)$.
+  lies in $\Psiptfam{0,-\infty}(\tilde M/B;E_+\otimes F_+,E_+\otimes F_-)$
+  (base order $0$, fibre order $-\infty$, in the order convention of
+  \cref{product:def:product-type}; this is the families version of
+  \cref{product:prop:subalgebras}(iii) for the fibration $\tilde M\to M$), with
+  $\sigma(A_\Pi)=0$ and $\beta(A_\Pi)(\eta)=\Pi\otimes\sigma_0(A)(\eta)$. The
+  full local symbol of $A_\Pi$ is only determined modulo
+  $\Psiptfam{-1,-\infty}$ by that of $A$, which does not affect the two
+  symbols.
 \end{enumerate}
 Here $\nu$ is the fibre density on $\tilde M/M$ used to define adjoints, and
 the bundles $F_\pm$ over $M$ are lifted to $\tilde M$ without change of
@@ -733,10 +770,14 @@ homogeneously.
     \tilde A_+&(1-t)P^*+t\tilde P_-^*\end{pmatrix},
   \end{equation*}
   so $R_0=Q_1$ and $R_1=\tilde A_P$. Its usual symbol is
-  $m(1-t\chi_2,\chi_2)$ formed with $\gamma^*p$ and $\chi_2\alpha$ (recall
-  $1-t+t\chi_1=1-t\chi_2$). Where $\chi_2<1$ the first coefficient is positive
-  and $p$ is invertible; where $\chi_2=1$ the second coefficient is positive and
-  $\alpha$ is invertible. So $\sigma(R_t)$ is invertible. Since $\chi_1=0$ near
+  $m(1-t\chi_2,\chi_2)$ formed with $\gamma^*p$ and $\alpha$, i.e.\ the
+  matrix \eqref{families:eq:clifford} with diagonal entries
+  $(1-t\chi_2)\gamma^*p$, $(1-t\chi_2)\gamma^*p^*$ and off-diagonal entries
+  $\mp\chi_2\alpha^{(*)}$ (recall $1-t+t\chi_1=1-t\chi_2$; the cut-off $\chi_2$
+  appears once, and $\chi_2\alpha$ is smooth because $\chi_2=0$ near
+  $\Sigma_2$, where $\alpha$ is undefined). Where $\chi_2<1$ the first
+  coefficient is positive and $p$ is invertible; where $\chi_2=1$ the second
+  coefficient is positive and $\alpha$ is invertible. So $\sigma(R_t)$ is invertible. Since $\chi_1=0$ near
   $\Sigma_1$, $\beta(\tilde P_\pm)=0$, and
   \begin{equation*}
     \beta(R_t)(\eta)=\begin{pmatrix}(1-t)P_m&-\alpha^*\\\alpha&(1-t)P_m^*
@@ -776,11 +817,50 @@ homogeneously.
 \begin{remark}\label{families:rem:mult-degenerate}
   The degenerate case $M=B$ is included: then $A$ is a bundle map $a$ over $B$,
   $\Sigma_1=\emptyset$, and the corollary says $\inda(b\cdot x)=x$ for $x\in
-  K^0(B)=\Kc(B)$.
+  K^0(B)=\Kc(B)$. In this case the base cosphere bundle $S^*(M/B)$ is empty,
+  so there is no base symbol and full ellipticity is ordinary ellipticity on
+  the fibres of $\tilde M\to B$; moreover $\chi_2=0$, so $\tilde A_\pm$ may be
+  taken to be $0$, $A_\Pi$ is a family of finite rank smoothing operators, and
+  $a_P=\operatorname{diag}(p\otimes\Id_{F_+},p^*\otimes\Id_{F_-})$. Both
+  homotopies in the proof of \cref{families:thm:mult} then have usual symbol
+  $\operatorname{diag}(\gamma^*p,\gamma^*p^*)$, and their ellipticity rests on
+  the invertibility of $p$ alone.
 \end{remark}
 
-The product is also natural with respect to open embeddings, in the
-following sense.
+The product is also natural with respect to open embeddings. Here some care
+is needed, because the restriction of a compactly supported class to an open
+set is in general \emph{not} compactly supported: if the set where a
+representative of $x_2\in\Kc(V_2)$ fails to be invertible meets the boundary
+of $O$, the restricted triple is not invertible outside any compact subset of
+$V_2|_O$. We therefore only restrict representatives, inside a product whose
+support is controlled by the other factor.
+
+\begin{definition}\label{families:def:restricted-product}
+  Let $V_1$, $V_2$ be vector bundles over a manifold $O$ (not necessarily
+  compact), $x_1\in\Kc(V_1)$, and let $(F_+,F_-,a_2)$ be a triple on $V_2$,
+  $a_2\in\CI(V_2;\Hom(F_+,F_-))$, which is \emph{fibrewise compactly
+  supported}: the set $K_2$ where $a_2$ is not invertible meets the part of
+  $V_2$ over any compact subset of $O$ in a compact set. Choose a representative
+  $(E_+,E_-,a_1)$ of $x_1$ with $a_1$ extended to $V_1$ and invertible outside a
+  compact $K_1\subset V_1$, and let $x_1\cdot[a_2]\in\Kc(V_1\oplus V_2)$ be the
+  class of $m(1,1)$ formed with $p=a_1$, $\alpha=a_2$.
+\end{definition}
+
+By \cref{families:lem:clifford}, $m(1,1)$ fails to be invertible only at
+points $(v_1,v_2)$ with $v_1\in K_1$ and $v_2\in K_2$, both over the same
+point of the compact projection of $K_1$ to $O$; this is a compact set. The
+class does not depend on the representative of $x_1$, nor on $a_2$ within a
+homotopy through fibrewise compactly supported triples, by the arguments
+following \cref{families:def:product}. The two cases used below are: (a)
+$O\subset Y$ open in a compact manifold, $V_2$ the restriction of a bundle over
+$Y$ and $a_2$ the restriction to $V_2|_O$ of a representative of a class
+$x_2\in\Kc(V_2)$ on $Y$; we write $x_1\cdot x_2|_O$ for the resulting class;
+and (b) $O=\mathcal V$ the total space of a vector bundle $\varpi:\mathcal
+V\to M$ over a compact manifold and $a_2=\varpi^*a$ for a representative $a$
+of a class $x\in\Kc(T^*(M/B))$; we write $x_1\cdot\varpi^*x$. In both cases
+$K_2$ is the preimage of a compact set under a map which is proper over
+compact subsets of $O$, so $a_2$ is fibrewise compactly supported. If $O$ is
+compact, $x_1\cdot[a_2]$ is the product of \cref{families:def:product}.
 
 \begin{lemma}\label{families:lem:natural}
   Let $V_1$, $V_2$ be vector bundles over a compact manifold $Y$, $O\subset Y$
@@ -788,12 +868,15 @@ following sense.
   \hookrightarrow V_1\oplus V_2$ the inclusions. For $x_1\in\Kc(V_1|_O)$ and
   $x_2\in\Kc(V_2)$,
   \begin{equation*}
-    k_*(x_1)\cdot x_2=k'_*\bigl(x_1\cdot x_2|_O\bigr)\in\Kc(V_1\oplus V_2).
+    k_*(x_1)\cdot x_2=k'_*\bigl(x_1\cdot x_2|_O\bigr)\in\Kc(V_1\oplus V_2),
   \end{equation*}
+  where $x_1\cdot x_2|_O$ is the class of \cref{families:def:restricted-product}(a).
 \end{lemma}
 \begin{proof}
-  The product $x_1\cdot x_2|_O$ is compactly supported since $x_1$ is
-  supported over a compact subset of $O$. By \ref{families:K-open} represent
+  The class $x_1\cdot x_2|_O\in\Kc((V_1\oplus V_2)|_O)$ is defined by
+  \cref{families:def:restricted-product}, using the restriction to $O$ of a
+  representative $a_2$ of $x_2$ (extended to all of $V_2$ and invertible
+  outside a compact set). By \ref{families:K-open} represent
   $x_1$ by $(E_+,E_-,a_1)$ with $E_\pm$ trivialized and $a_1=\Id$ outside a
   compact set $C\subset V_1|_O$, and let $a_2$ (extended) represent $x_2$.
   Then $k_*x_1\cdot x_2$ is represented by $m(1,1)$ formed with the extension
@@ -852,7 +935,15 @@ $T^*(U/B)$ is well defined, and $i_j$ induce open embeddings $T^*(U/B)
 \begin{proof}
   \emph{Step 1: normal form.} Let $\varpi:T^*(U/B)\to U$ be the projection.
   Let $x\in\Kc(T^*(U/B))$ be represented by $(E_+,E_-,a)$ with $a$ invertible
-  outside a compact set $K\subset T^*(U/B)$. Since $T^*(U/B)$ retracts onto $U$
+  outside a compact set $K\subset T^*(U/B)$; a priori $a$ is only given on
+  $T^*(U/B)\setminus K$. Choose $\chi\in\CI(T^*(U/B))$ with $\chi=0$ near $K$
+  and $\chi=1$ outside a compact neighbourhood $K^\sharp$ of $K$. Then $\chi a$
+  extends by zero to a smooth section on all of $T^*(U/B)$ which agrees with
+  $a$ outside $K^\sharp$; changing $a$ on a compact set does not change the
+  class, so, replacing $a$ by $\chi a$ and $K$ by $K^\sharp$, we may assume
+  that $a\in\CI(T^*(U/B);\Hom(E_+,E_-))$ is defined everywhere and invertible
+  outside the compact set $K$. All evaluations of $a$ below are of this
+  extended section. Since $T^*(U/B)$ retracts onto $U$
   we may assume $E_\pm=\varpi^*E_\pm$ for bundles $E_\pm$ over $U$. The image
   $K'=\varpi(K)$ is compact, and over $U\setminus K'$ the map $a$ is defined
   and invertible on the whole fibres of $T^*(U/B)$. Choose $\rho\in\CIc(U)$,
@@ -865,8 +956,15 @@ $T^*(U/B)$ is well defined, and $i_j$ induce open embeddings $T^*(U/B)
   \ref{families:K-open}, we arrive at a representative of the following form:
   bundles $E_\pm$ over $U$ with an isomorphism $\tau:E_+\to E_-$ over
   $U\setminus C$, $C\subset U$ compact, both trivialized there, and a symbol
-  $a$, homogeneous of degree $0$ for $\abs\xi\ge1$, with $a=\tau$ over
-  $U\setminus C$. Then $(i_j)_*x$ is represented by the bundles $\tilde
+  $a$, defined on all of $T^*(U/B)$ and homogeneous of degree $0$ for
+  $\abs\xi\ge1$, with $a=\tau$ over $U\setminus C$. (For the homogeneity,
+  choose $R$ with $K\subset\{\abs\xi<R\}$ and deform $a(u,\xi)$ to
+  $a(u,g_s(\abs\xi)\xi/\abs\xi)$, where $g_s(r)=(1-s)r+s\,h(r)$ and $h$ is
+  smooth, increasing, with $h(r)=r$ for $r\le R$ and $h=2R$ for $r\ge 3R$;
+  for $\abs\xi\ge R$ the argument stays outside $K$, so this is a homotopy of
+  triples, and it does not change $a$ where $a=\tau$, which is independent of
+  $\xi$. Then rescale $\xi$ by $3R$. The compact set $C$ may have to be
+  enlarged during these steps.) Then $(i_j)_*x$ is represented by the bundles $\tilde
   E^j_\pm$ over $M_j$ obtained by extending $E_\pm$ trivially, with the
   symbol $\tilde a^j$ extended by $\tau=\Id$.
 
@@ -944,15 +1042,23 @@ B$; and read off the index on the torus by Bott periodicity.
   $(0,2\pi)^N\times B$.
 \end{lemma}
 \begin{proof}
-  Let $\iota:M\to\R^N$ be an embedding (Whitney) and $e=(\iota,\phi)$; it is an
+  Let $\iota:M\to\R^N$ be an embedding; its existence for $N\ge2\dim M+1$ is
+  Whitney's embedding theorem, which we import (see the Notes). The rest of the
+  proof is self-contained. Let $e=(\iota,\phi)$; it is an
   injective immersion of a compact manifold, hence an embedding, and
   $\pi_B\circ e=\phi$. Define $\mathcal V_m=(d\iota(T_m(M/B)))^\perp\subset\R^N$
   and $\Theta(m,v)=(\iota(m)+v,\phi(m))$. At the zero section $d\Theta(w,v)=
   (d\iota(w)+v,d\phi(w))$; if this vanishes then $w$ is vertical, and
   $d\iota(w)+v=0$ with $v\perp d\iota(w)$ forces $w=0$, $v=0$. Since
   $\dim M+k=N+\dim B$, $\Theta$ is a local diffeomorphism near the zero
-  section, injective on it, hence (by the usual compactness argument) a
-  diffeomorphism from $\{\abs v<\delta\}$ onto an open set. Composing with
+  section, injective on it, hence a
+  diffeomorphism from $\{\abs v<\delta\}$ onto an open set for small
+  $\delta>0$. (By the inverse function theorem and compactness of $M$, $\Theta$ is a
+  local diffeomorphism on $\{\abs v<\delta_0\}$. If $\Theta$ were not injective
+  on $\{\abs v<1/j\}$ for every $j$, there would be $(m_j,v_j)\ne(m'_j,v'_j)$
+  with $\abs{v_j},\abs{v'_j}<1/j$ and equal images; passing to a subsequence,
+  $m_j\to m$, $m'_j\to m'$ and $e(m)=e(m')$, so $m=m'$, contradicting the
+  injectivity of $\Theta$ on a neighbourhood of $(m,0)$.) Composing with
   $v\mapsto\delta v/(1+\abs v^2)^{1/2}$ gives $\Theta$. Translating and scaling
   $\iota$ puts everything inside $(0,2\pi)^N\times B$.
 \end{proof}
@@ -1032,8 +1138,16 @@ the \emph{Thom homomorphism}
   \tau:\Kc(T^*(M/B))\longrightarrow\Kc(T^*(\mathcal V/B)),\quad
   \tau(x)=\lambda_{\mathcal V}\cdot\varpi^*x.
 \end{equation*}
-(The product is compactly supported because $\lambda_{\mathcal V}$ is supported
-in the zero section, i.e.\ over a compact set.)
+Here the product is that of \cref{families:def:restricted-product}(b) with
+$O=\mathcal V$, $V_1=T^*(\mathcal V/M)$, $V_2=\varpi^*T^*(M/B)$: the class
+$\varpi^*x$ is not compactly supported on the non-compact space $\mathcal V$,
+but the product is, because $\lambda_{\mathcal V}$ is supported in the zero
+section, i.e.\ over a compact set. The class $\tau(x)$ does not depend on the
+splitting: two connections for $\mathcal V\to M$ are joined by the straight
+line of connections, along which the product triples form a homotopy with
+non-invertibility set in a fixed compact set (the zero section of
+$T^*(\mathcal V/M)$ times the compact non-invertibility set of a representative of
+$x$ over $M$).
 Since $T^*(\mathcal V/M)\cong\mathcal V\otimes\C$ is a complex (equivalently, by
 \cref{ch:bott}, symplectic) vector bundle, $\lambda_{\mathcal V}$ is its Bott class and, by the
 Thom isomorphism theorem of \cref{ch:bott}, $\tau$ is an isomorphism; we shall not need
@@ -1213,8 +1327,17 @@ $\tilde M$ to the torus, and the normalization to evaluate the index there.
   M/B)$ be the open embedding induced by $k_{\mathcal V}$. By \ref{families:TH}
   the class $b=(k_{\mathcal V})_*\lambda_{\mathcal V}$ has $\inda(b)=1$, so by
   \cref{families:cor:mult} and \cref{families:lem:natural} (with $Y=\tilde M$,
-  $O=\mathcal V$; a splitting of $T^*(\tilde M/B)$ restricting to the one
-  used for $\tau$ over $\mathcal V$ is chosen)
+  $O=k_{\mathcal V}(\mathcal V)$, $V_1=T^*(\tilde M/M)$,
+  $V_2=\tilde\phi^*T^*(M/B)$, $x_1=\lambda_{\mathcal V}$, $x_2=\tilde\phi^*x$)
+  we get the identity below. Here the splitting \eqref{families:eq:splitting}
+  of $T^*(\tilde M/B)$ is chosen first, from a connection for the fibration
+  $\tilde M\to M$ of compact manifolds, and its restriction to the open set
+  $k_{\mathcal V}(\mathcal V)$ is used to compute $\tau(x)$; this is allowed
+  because $\tau$ is independent of the splitting. (A splitting chosen on
+  $\mathcal V$ first need not extend smoothly over the section at infinity.)
+  Since $\tilde\phi\circ k_{\mathcal V}=\varpi$, the restriction of
+  $\tilde\phi^*x$ to $O$ is $\varpi^*x$ in the sense of
+  \cref{families:def:restricted-product}(b), so
   \begin{equation*}
     \inda(x)=\inda\bigl(b\cdot\tilde\phi^*x\bigr)=\inda\bigl(\hat k_*\tau(x)
     \bigr).
@@ -1341,16 +1464,20 @@ The fibre trace extends to $\tr:\CI(X;\Lambda^j\otimes\End E)\to\CI(X;
     \in\CI(X;\Lambda^{\mathrm{ev}}).
   \end{equation*}
 \end{definition}
-The sum is finite since $\omega^k=0$ for $2k>\dim X$. Even forms commute, so
-$\exp$ has its usual properties. The normalization $i/2\pi$ makes the classes
+The sum is finite since $\omega^k=0$ for $2k>\dim X$. Only powers of the
+single form $\omega_\nabla$ occur, so no commutation is needed to define the
+exponential. (Matrix-valued forms of even degree need \emph{not} commute; where
+the identity $e^{a+b}=e^ae^b$ is used below, $a$ and $b$ commute for a specific
+reason, which is stated each time.) The normalization $i/2\pi$ makes the classes
 rational, as recalled below.
 
 \begin{discussion}
   Why $\tr\exp$? The Chern character must be additive for $\oplus$ and
   multiplicative for $\otimes$. The curvature of $E\oplus F$ is block diagonal,
   and the trace of a block diagonal matrix is the sum of the traces; the curvature
-  of $E\otimes F$ is $\omega_E\otimes\Id+\Id\otimes\omega_F$, and the exponential
-  turns this sum of commuting terms into a tensor product, whose trace is the
+  of $E\otimes F$ is $\omega_E\otimes\Id+\Id\otimes\omega_F$, two terms which
+  commute because they act in different tensor factors and have even form
+  degree, and the exponential turns this sum into a tensor product, whose trace is the
   product of the traces. Closedness of $\Ch(\nabla)$ and independence of $\nabla$
   both come from the Bianchi identity and the graded cyclicity of $\tr$.
 \end{discussion}
@@ -1389,8 +1516,9 @@ rational, as recalled below.
   $[0,1]\times X$ and integrate the $dt$-component.)
 
   (iii) The curvature of a direct sum is block diagonal, so the traces add. For
-  the tensor product, $\omega_E\otimes\Id$ and $\Id\otimes\omega_F$ commute,
-  so $e^{c\omega_{E\otimes F}}=e^{c\omega_E}\otimes e^{c\omega_F}$ and
+  the tensor product, $\omega_E\otimes\Id$ and $\Id\otimes\omega_F$ commute:
+  their endomorphism parts act on different tensor factors, and their form parts
+  have even degree, so they can be moved past each other without sign. Hence $e^{c\omega_{E\otimes F}}=e^{c\omega_E}\otimes e^{c\omega_F}$ and
   $\tr_{E\otimes F}=\tr_E\otimes\tr_F$. Naturality follows from
   $\omega_{f^*\nabla}=f^*\omega_\nabla$, and invariance under isomorphism from
   $\tr(a\omega^ka^{-1})=\tr(\omega^k)$.
@@ -1489,7 +1617,11 @@ on homotopy classes of such symbols normalized by $a(b,0)=\Id$. Our sign
 convention is that of \cref{ch:index}: the lowering operator
 $L=T_{e^{-i\theta}}$ has index $1$. For a form $\mu=d\theta\wedge\mu_1+\mu_2$
 on $B\times\Sphere$, with $\mu_1$, $\mu_2$ not containing $d\theta$, set
-$\int_\Sphere\mu=\int_0^{2\pi}\mu_1\,d\theta$; this commutes with $d$.
+$\int_\Sphere\mu=\int_0^{2\pi}\mu_1\,d\theta$. This \emph{anticommutes}
+with $d$: the $d\theta$-component of $d\mu$ is $d\theta\wedge(-d_B\mu_1+
+\partial_\theta\mu_2)$, and $\int_0^{2\pi}\partial_\theta\mu_2\,d\theta=0$, so
+$\int_\Sphere d\mu=-d\int_\Sphere\mu$. In particular $\int_\Sphere$ maps closed
+forms to closed forms and exact forms to exact forms, which is all we use.
 
 \begin{proposition}\label{families:prop:toeplitz-chern}
   For any $a\in\CI(B\times\Sphere;\GL(N,\C))$ with $a(\cdot,0)=\Id$,
@@ -1502,7 +1634,7 @@ $\int_\Sphere\mu=\int_0^{2\pi}\mu_1\,d\theta$; this commutes with $d$.
 \begin{proof}
   Both sides depend only on $[a]\in K^{-2}(B)$ and are additive: the right
   side by \eqref{families:eq:odd-transgression} and since $\int_\Sphere$
-  commutes with $d$, the left side because $\ind_{\mathcal T}$ is a
+  maps exact forms to exact forms, the left side because $\ind_{\mathcal T}$ is a
   homomorphism and $\Ch$ is additive. Since $\ind_{\mathcal T}$ is injective
   (\cref{ch:bott}) and every class in $K^0(B)$ has the form $[E]-[F]$ with
   $E=\pi_E\C^{N_1}$, $F=\pi_F\C^{N_2}$ for families of projections, it
@@ -1600,14 +1732,19 @@ cohomology of the complex of pairs
   D(\mu,\nu)=(d\mu,\iota^*\mu-d\nu),
 \end{equation*}
 and the isomorphism is induced by $\mu\mapsto(\mu,0)$ for compactly supported
-$\mu$. A closed pair is $(\mu,\nu)$ with $d\mu=0$ and $\iota^*\mu=d\nu$. The
+$\mu$. A closed pair is $(\mu,\nu)$ with $d\mu=0$ and $\iota^*\mu=d\nu$. If
+$X$ is oriented, the
 pairing with absolute classes,
 \begin{equation}\label{families:eq:rel-pairing}
   \langle[(\mu,\nu)],[\varphi]\rangle=\int_X\mu\wedge\varphi-\int_{\partial
   X}\nu\wedge\iota^*\varphi,\quad d\varphi=0,
 \end{equation}
 is well defined (by Stokes' theorem, $\partial X$ carrying the boundary
-orientation), and for $\nu=0$ it is $\int_X\mu\wedge\varphi$.
+orientation, outward normal first), and for $\nu=0$ it is $\int_X\mu\wedge\varphi$.
+For a fibration of manifolds with boundary with oriented fibres, such as the
+radially compactified $T^*(M/B)$ over $B$ oriented as in
+\cref{families:sec:cohomology}, the same formula with $\int_X$, $\int_{\partial X}$
+replaced by integration over the fibres defines the push-forward to $\Hev(B)$.
 
 \subsection{The Chern form of a triple}
 Let $(E_+,E_-,a)$ be a $\Kc$-triple on $\operatorname{int}X$. As in the proof
@@ -1681,7 +1818,7 @@ $\nabla_+\gamma=a^{-1}\omega_-a-\omega_+-\gamma^2$.
     \Bigl(\tr e^{c\omega_+}-\tr e^{c\omega_-},\ -c\,\iota^*\int_0^1\tr\bigl(
     \gamma\,e^{c\Omega(s)}\bigr)ds\Bigr),\qquad c=\frac{i}{2\pi}.
   \end{equation*}
-  Equivalently, for every closed form $\varphi$ on $X$,
+  Equivalently, if $X$ is oriented, for every closed form $\varphi$ on $X$,
   \begin{equation*}
     \int_X\lambda_\rho\wedge\varphi=\int_X\bigl(\tr e^{c\omega_+}-\tr
     e^{c\omega_-}\bigr)\wedge\varphi+c\int_{\partial X}\iota^*\Bigl(\int_0^1
@@ -1760,12 +1897,30 @@ $\partial X=S^*(M/B)$.}
   term tends to $\tr e^{c\omega_+}$ boundedly almost everywhere. In the second,
   $d\rho=\epsilon^{-1}\chi'(x/\epsilon)dx$; replacing the coefficients by
   their boundary values (with an error that tends to zero) and substituting
-  $s=1-\chi(x/\epsilon)$ shows that it converges, as a current, to a multiple of
-  $\delta(x)dx$ times $\iota^*\int_0^1\tr(\gamma e^{c\Omega(s)})ds$. The limit is
-  the ``conormal'' representative $\mu+\delta(x)dx\wedge\nu$ of the relative
-  class; such a current is closed (on forms smooth up to the boundary) exactly
-  when $d\mu=0$ and $\iota^*\mu=\pm d\nu$, which is the closedness of the pair
-  in \cref{families:thm:fedosov}. The proof given above avoids distributions.
+  $s=1-\chi(x/\epsilon)$ shows that it converges, as a current, to
+  $\delta(x)dx\wedge\nu$ with $\nu=-c\,\iota^*\int_0^1\tr(\gamma e^{c\Omega(s)})ds$
+  (here $\int\epsilon^{-1}\chi'(x/\epsilon)f(1-\chi(x/\epsilon))\,dx=\int_0^1f(s)\,ds$).
+  To make sense of currents supported at the boundary we use the following
+  convention: $x$ increases into $X$, forms on $X$ and on $\partial X$ are
+  extended by zero across $\partial X$ to a collar $(-1,1)_x\times\partial X$
+  in a slightly larger manifold (or to the double of $X$), and $\nu$ is
+  extended to the collar independently of $x$. The limit is then the
+  ``conormal'' current
+  \begin{equation*}
+    1_{x>0}\,\mu+\delta(x)dx\wedge\nu,\qquad\mu=\tr e^{c\omega_+}-\tr e^{c\omega_-},
+  \end{equation*}
+  with $(\mu,\nu)$ exactly the pair of \cref{families:thm:fedosov}. Since
+  $d(1_{x>0})=\delta(x)dx$ and $d(\delta(x)dx\wedge\nu)=-\delta(x)dx\wedge d\nu$,
+  \begin{equation*}
+    d\bigl(1_{x>0}\,\mu+\delta(x)dx\wedge\nu\bigr)=1_{x>0}\,d\mu
+    +\delta(x)dx\wedge(\iota^*\mu-d\nu)
+  \end{equation*}
+  (only the tangential part $\iota^*\mu$ survives next to $\delta(x)dx$). So the
+  current is closed exactly when $d\mu=0$ and $\iota^*\mu=d\nu$, which is the
+  closedness of the pair in \cref{families:thm:fedosov}; and pairing it with a
+  closed form $\varphi$ on an oriented $X$ (extended smoothly into the collar) gives \eqref{families:eq:rel-pairing},
+  since $\int_X\delta(x)dx\wedge\beta=-\int_{\partial X}\iota^*\beta$ for the
+  boundary orientation (the outward normal is $-\partial_x$). The proof given above avoids distributions.
   Note the analogy with \cref{families:prop:toeplitz-chern}, where the index
   class is also given by an integral of the odd forms of the symbol over a
   boundary circle.
@@ -1810,8 +1965,11 @@ the clutching isomorphism $K^{-1}(X)\cong\Kc(\R\times X)$ of \cref{ch:bott}. We 
 $\R\times X$ as the interior of a compact manifold with boundary by compactifying $\R$ to
 a closed interval, so that \cref{families:prop:relative-chern} applies, and for a
 compactly supported form $\mu=dt\wedge\mu_1+\mu_2$ on $\R\times X$ ($\mu_1$, $\mu_2$
-without $dt$) set $\int_\R\mu=\int_{\R}\mu_1\,dt$; this commutes with $d$, as does
-$\int_\Sphere$ in \cref{families:sec:toeplitz}.
+without $dt$) set $\int_\R\mu=\int_{\R}\mu_1\,dt$. As for $\int_\Sphere$ in
+\cref{families:sec:toeplitz}, this anticommutes with $d$, $\int_\R d\mu=-d\int_\R\mu$,
+because the $dt$-component of $d\mu$ is $dt\wedge(-d_X\mu_1+\partial_t\mu_2)$ and
+$\partial_t\mu_2$ integrates to zero by compact support; so it maps closed forms to
+closed forms and exact forms to exact forms, and induces a map in cohomology.
 
 \begin{proposition}\label{families:prop:Chodd-clutching}
   For compact $X$ and $g\in\CI(X;\GL(N,\C))$,
@@ -1832,7 +1990,10 @@ $\int_\Sphere$ in \cref{families:sec:toeplitz}.
   \begin{equation*}
     \omega=d(\chi\theta)+\chi^2\theta^2=d\chi\wedge\theta+(\chi^2-\chi)\theta^2 .
   \end{equation*}
-  The two terms commute (the second is an even form) and $(d\chi\wedge\theta)^2=0$, so
+  The two terms commute, because both are built from powers of the same
+  matrix-valued $1$-form $\theta$ with scalar coefficients: both products equal
+  $(\chi^2-\chi)\,d\chi\wedge\theta^3$ (moving the scalar $1$-form $d\chi$ past
+  $\theta^2$ produces no sign). Moreover $(d\chi\wedge\theta)^2=0$, so
   $\tr e^{c\omega}=\tr e^{c(\chi^2-\chi)\theta^2}+c\,d\chi\wedge\tr\bigl(\theta e^{c(\chi^2-\chi)\theta^2}\bigr)$.
   Hence $\lambda_\rho=\tr e^{c\omega}-N$ is supported in $1\le t\le2$, and
   \begin{equation*}
@@ -1882,11 +2043,15 @@ for a line bundle $L$.
   $A$, $\Ch(\ind A)=(-1)^n\int_{T^*(M/B)/B}\Ch(\sigma_0(A))\Td(T(M/B)\otimes\C)$.
 \end{theorem}
 
-This is \cite{Atiyah-Singer-IV}, Theorem~5.1. Since the sign depends on the
+This is \cite{Atiyah-Singer-IV}, Theorem~5.1, and we do not give a
+self-contained proof of it. Since the sign depends on the
 orientation convention, it is often absorbed into it, as in the form
 $\Ch(\ind A)=\int\Td\cdot\Ch(\sigma(A))$. We explain how the theorem follows
-from \cref{families:thm:AS-K}; the topological inputs (C1) and (C4) below are
-not proved here.
+from \cref{families:thm:AS-K}; the two topological inputs used, the
+multiplicativity \ref{families:C1} for compactly supported classes and the
+Riemann--Roch identity \ref{families:C4} for non-trivial $\mathcal V$, are
+imported (see the Notes); everything else in the derivation is proved in
+this chapter.
 
 \begin{discussion}
   Where does the Todd class come from? Apply $\Ch$ to each arrow of
@@ -1925,7 +2090,8 @@ not proved here.
     $\varpi_*\Ch(\lambda_{\mathcal V})=(-1)^k\Td(\mathcal V\otimes\C)^{-1}$.
     For trivial $\mathcal V$ this is \ref{families:C3} with $B=M$ and
     \cref{families:rem:bott-generator}; in general it is the classical
-    computation of Atiyah and Hirzebruch (see the Notes).
+    Riemann--Roch computation of Atiyah and Hirzebruch, in the form proved in
+    \S2 of Atiyah--Singer~III (see the Notes), which we import.
   \item\label{families:C5} $\Td$ is multiplicative and
     $T(M/B)\oplus\mathcal V$ is trivial, so $\Td(\mathcal V\otimes\C)^{-1}=
     \Td(T(M/B)\otimes\C)$.
@@ -1973,7 +2139,14 @@ not proved here.
   $\mathcal T(V)=(-1)^{\operatorname{rank}W}\varpi_*\Ch(\beta_W)$, which is the definition of the Todd class
   as the fibre integral of the Chern character of the Bott element of a complement used in
   the source. The identification of $\mathcal T(\mathcal V\otimes\C)$ with
-  $\Td(\mathcal V\otimes\C)$ is \ref{families:C4}.
+  $\Td(\mathcal V\otimes\C)$ is \ref{families:C4}, which is imported and not
+  proved here; the only parts of this remark proved in the text are the
+  projection formula and the normalization of the degree zero part (from
+  \ref{families:C3}), while the multiplicativity of $\mathcal T$ uses
+  \ref{families:C1}, also imported, and the Thom isomorphism of
+  \cref{ch:bott}. The orientation is the complex one on the fibres of $V$,
+  which for $V=\mathcal V\otimes\C$ is the orientation by products of oriented
+  two-planes $dv_j\wedge d\eta_j$ used in \ref{families:C4}.
 \end{remark}
 
 \section{Exercises}
@@ -2054,7 +2227,20 @@ excision and multiplicativity, goes back to M.~F. Atiyah and I.~M. Singer,
 and Bott periodicity see \cite{Atiyah-K}. The Riemann--Roch identity
 \ref{families:C4} and the theorem that the Chern character is a rational
 isomorphism are due to M.~F. Atiyah and F. Hirzebruch, \emph{Vector bundles
-and homogeneous spaces}, Proc. Sympos. Pure Math. \textbf{3} (1961), 7--38.
+and homogeneous spaces}, Proc. Sympos. Pure Math. \textbf{3} (1961), 7--38,
+and M.~F. Atiyah and F. Hirzebruch, \emph{Riemann--Roch theorems for
+differentiable manifolds}, Bull. Amer. Math. Soc. \textbf{65} (1959),
+276--281; the form \ref{families:C4} of the identity, for the Thom class of
+$\mathcal V\otimes\C$ with the orientation used here, is derived in \S2 of
+M.~F. Atiyah and I.~M. Singer, \emph{The index of elliptic operators~III},
+Ann. of Math. \textbf{87} (1968), 546--604, where the cohomological formula is
+deduced from the K-theoretic one in the same way as above. The
+multiplicativity \ref{families:C1} of the Chern character on compactly
+supported K-theory is standard (\cite{Atiyah-K} and the same \S2). The
+existence of the embedding in \cref{families:lem:embedding} is Whitney's
+theorem (H. Whitney, \emph{Differentiable manifolds}, Ann. of Math.
+\textbf{37} (1936), 645--680; see e.g. J.~M. Lee, \emph{Introduction to smooth
+manifolds}, 2nd ed., Springer, New York, 2013, Theorem~6.15).
 The explicit formula of \cref{families:thm:fedosov} is of the type used by
 B.~V. Fedosov in his work on index formulas.
 

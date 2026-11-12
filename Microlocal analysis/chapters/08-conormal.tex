@@ -6,12 +6,20 @@
 
 After smooth functions, the simplest distributions are those whose
 singularities are as regular as possible: they sit on a smooth submanifold
-$Y$, point only in the directions normal to $Y$, and look the same at all
-small scales up to a power. In \cref{ch:microlocal} we met examples: the
+$Y$, point only in the directions normal to $Y$, and are given by symbols in
+the normal frequency variables (for classical symbols they look the same at
+all small scales up to a power). In \cref{ch:microlocal} we met examples: the
 Heaviside function $H(x_1)$, the delta function and the kernel of a
 pseudodifferential operator, whose wavefront sets lie in the conormal bundle
 of a submanifold (\cref{microlocal:fig:wf-examples,microlocal:fig:kernel}).
-This chapter builds the class of all such distributions.
+This chapter builds the class of all such distributions. The condition
+$\WF(u)\subset N^*Y$ alone is necessary but not sufficient: a cutoff of
+$e^{i/x}$ on $\R$ is bounded and smooth off $Y=\{0\}$, so its wavefront set
+lies in $N^*\{0\}$, but it is not conormal of any order $m$: by
+\cref{conormal:lem:point-basic}(i),(ii) below, $x^Lu$ would be of class
+$\mathcal C^r$ whenever $L>m+\frac34+r$, whereas the $r$-th derivative of
+$x^Le^{i/x}$ has size $\sim x^{L-2r}$ near $0$, unbounded if $L<2r$ (take $r$
+large and $L=r+C$ with $C>m+\frac34$).
 
 The Dirac delta function, the Schwartz kernels of pseudodifferential operators
 and the travelling-wave solutions of hyperbolic equations are all examples of
@@ -196,33 +204,49 @@ $\CI_{(m)}(W\setminus0)$ the space of smooth functions homogeneous of degree $m$
   collar $[0,1)_r\times\pa X$ and a partition of unity this reduces to the
   following form of Borel's lemma: given $u_j\in\CI(\pa X)$ there is
   $u\in\CIc([0,1)\times\pa X)$ with $\pa_r^ju(0,\cdot)=u_j$ for all $j$.  (Indeed,
-  write $b_j=\sum_{l}r^{j+l}c_{jl}(\omega)/(j+l)!+O(r^\infty)$ near the boundary and
-  take the $u$ with $u_p=\sum_{j\le p}c_{j,p-j}$; then $b-\sum_{j<N}b_j$
-  vanishes to order $N$ at $r=0$.)  Choose $\chi\in\CIc(\R)$ with $\chi=1$ on
-  $|r|<\frac12$, $\chi=0$ on $|r|>1$, and set
+  let $c_{jl}=\pa_r^{j+l}b_j(0,\cdot)\in\CI(\pa X)$, so that $b_j$ has the
+  formal Taylor series $\sum_lr^{j+l}c_{jl}(\omega)/(j+l)!$ at $r=0$, and
+  take the $u$ with $u_p=\sum_{j\le p}c_{j,p-j}$, cut off away from the
+  boundary; then $b-\sum_{j<N}b_j$ has vanishing Taylor coefficients of order
+  $<N$ at $r=0$, hence lies in $\rho^N\CI(X)$ by Taylor's formula.)  Choose
+  $\chi\in\CIc(\R)$ with $\chi=1$ on $|r|<\frac12$, $\chi=0$ on $|r|>1$, and set
   \begin{equation*}
     u(r,\omega)=\sum_j \frac{r^j}{j!}u_j(\omega)\chi(r/\epsilon_j),\qquad
-    0<\epsilon_j\le1.
+    0<\epsilon_j\le\tfrac12.
   \end{equation*}
-  Each term vanishes for $r>\epsilon_j$, and for $l\le j$ and any differential
-  operator $Q$ of order $q$ on $\pa X$,
-  $|\pa_r^l Q(r^ju_j\chi(r/\epsilon_j)/j!)|\le C_{j,l,Q}\,\epsilon_j^{j-l}$,
-  with $C_{j,l,Q}$ independent of $\epsilon_j$, since
+  Each term vanishes for $r>\epsilon_j$, so $u$ will be supported in
+  $[0,\frac12]\times\pa X$. Fix a finite cover of $\pa X$ by coordinate
+  charts and a subordinate partition of unity, and let $\norm f_q$ be the
+  maximum over the charts of the suprema of all coordinate derivatives of
+  order $\le q$ of the localized pieces of $f\in\CI(\pa X)$; this is an
+  increasing sequence of norms defining the topology of $\CI(\pa X)$. For
+  $l\le j$ and every $q$,
+  $\sup_r\norm{\pa_r^l(r^ju_j\chi(r/\epsilon_j)/j!)}_q\le C_{j,l,q}\,\epsilon_j^{j-l}$,
+  with $C_{j,l,q}$ independent of $\epsilon_j$, since
   $\pa_r^p[\chi(r/\epsilon_j)]=\epsilon_j^{-p}\chi^{(p)}(r/\epsilon_j)$ and
-  $r\le\epsilon_j$ on the support.  Fix an exhausting sequence
-  $Q_1,Q_2,\dots$ of differential operators on $\pa X$.  Choosing
-  $\epsilon_j\le 2^{-j}/(1+\max_{l+q\le j-1}C_{j,l,Q_q})$ imposes only finitely
-  many conditions on each $\epsilon_j$, and makes every differentiated series
-  converge uniformly.  Hence $u$ is smooth and, since only the term $j$
+  $r\le\epsilon_j$ on the support.  Put $\epsilon_0=\frac12$ and, for $j\ge1$,
+  $\epsilon_j=\min\bigl(\frac12,\,2^{-j}/(1+\max_{l+q\le j-1}C_{j,l,q})\bigr)$:
+  this is a finite maximum. For $l+q\le j-1$ we have $l<j$, so
+  $\epsilon_j^{j-l}\le\epsilon_j$ and the $j$-th term has
+  $\sup_r\norm{\pa_r^l(\cdot)}_q\le2^{-j}$. Thus, for fixed $l$ and $q$, all
+  but finitely many terms of the series differentiated $l$ times in $r$ are
+  bounded by $2^{-j}$ in $\norm\cdot_q$, and every differentiated series
+  converges uniformly.  Hence $u$ is smooth and, since only the term $j$
   contributes to $\pa_r^j u(0,\cdot)$, $\pa_r^ju(0,\cdot)=u_j$.  Parameters are
-  handled by including the parameter derivatives among the $Q_q$.
+  handled by including the parameter derivatives in the norms $\norm\cdot_q$.
 \end{proof}
 
 The symbol estimates \eqref{conormal:eq:symbol-est} do not imply that $a$ is
-classical: $\Symph{m}(W)$ is a closed subspace of $S^m(W)$ in the topology of
-$\rho^{-m}\CI(\RC W)$, and $\cS(W)$ is not dense in it in that topology, though
-by \cref{conormal:lem:density} it is dense in the weaker topology of
-$S^{m'}$, $m'>m$.  The relation between the two classes is explored in
+classical: $\Symph{m}(W)\subset S^m(W)$ carries its own, stronger, Fréchet
+topology, that of $\rho^{-m}\CI(\RC W)$, in which it is complete and in
+which $\cS(W)$ is not dense. It is \emph{not} closed in $S^m(W)$ for the
+topology of $S^m$: with $\rho=\ang\xi^{-1}$, the symbol
+$a=\ang\xi^{m-1/2}\in S^{m-1/2}$ is not classical of order $m$ (as
+$\rho^ma=\rho^{1/2}$ is not smooth up to the boundary), but by
+\cref{conormal:lem:density} its compactly supported cutoffs, which lie in
+$\cS(W)\subset\Symph{m}(W)$, converge to it in $S^m$. More generally, by
+\cref{conormal:lem:density} every element of $S^m(W)$ is a limit of elements
+of $\cS(W)$ in the topology of $S^{m'}$, $m'>m$.  The relation between the two classes is explored in
 \cref{conormal:ex:Vkl,conormal:ex:Ab}.  For symbols depending on parameters
 $z\in\R^p$ we write $\Symph{m}(\R^p;\R^k)$ for those $a\in S^m(\R^p;\R^k)$
 having an expansion \eqref{conormal:eq:ph-expansion} with
@@ -350,13 +374,15 @@ of \cref{conormal:thm:invariance} below.
 
 \subsection{Homogeneity and conormality}
 For classical conormal distributions the singularity at the origin can be
-described quite explicitly.  We use two facts about homogeneous distributions
-\cite[Theorems~3.2.3, 7.1.16, 7.1.18]{Hormander-I}: if $f\in\CI(\R^n\setminus0)$
+described quite explicitly.  We use, without proof, the following facts about
+homogeneous distributions from \cite{Hormander-I}: if $f\in\CI(\R^n\setminus0)$
 is homogeneous of degree $\mu$ and $\mu\notin\{-n,-n-1,\dots\}$, then $f$ has a
 unique extension to a distribution $\tilde f\in\cSp(\R^n)$ homogeneous of degree
-$\mu$; and the Fourier transform of a homogeneous distribution of degree $\mu$
-which is smooth outside $0$ is homogeneous of degree $-n-\mu$ and smooth outside
-$0$.
+$\mu$ \cite[Theorem~3.2.3]{Hormander-I}; the Fourier transform of a tempered
+distribution homogeneous of degree $\mu$ is homogeneous of degree $-n-\mu$
+\cite[Theorem~7.1.16]{Hormander-I}; and if moreover it is smooth outside $0$,
+so is its Fourier transform \cite[Theorem~7.1.18]{Hormander-I}. These are the
+only imported steps in \cref{conormal:prop:homogeneous}.
 
 \begin{proposition}\label{conormal:prop:homogeneous}
   Let $u\in\Ic{m}_{\cS,\mathrm{ph}}(\R^n,\{0\})$, so $\hat u\in\Symph{\mu}(\R^n)$
@@ -381,11 +407,22 @@ $0$.
   distinguished by their degrees.
 \end{proof}
 
-When $\mu$ is an integer the expansion of $\hat u$ is unchanged, but the
-expansion of $u$ may contain terms $p(z)\log|z|$ with $p$ a homogeneous
-polynomial (for $\mu\le-n$), coming from the homogeneous terms of degree
-$-n-l$, $l\in\N_0$, which have no homogeneous extension; and for
-$\mu\in\N_0$ the polynomial part of $\hat u$ corresponds to derivatives of the
+When $\mu$ is an integer the expansion of $\hat u$ is unchanged, but its
+degrees $\mu-j$ run through all integers $\le\mu$, so (for every integer
+$\mu$) some terms $\hat u_{\mu-j}$ have an exceptional degree $-n-l$,
+$l\in\N_0$. A function $f\in\CI(\R^n\setminus0)$ homogeneous of degree
+$-n-l$ has a homogeneous extension to $\R^n$ if and only if its moments
+$\int_{\Sphere^{n-1}}f(\omega)\omega^\alpha\,d\omega$ vanish for all
+$|\alpha|=l$ \cite[Section~3.2]{Hormander-I}; for example on $\R$ the
+principal value $\operatorname{pv}(1/\xi)$ is a homogeneous extension of
+$1/\xi$ (here $l=0$ and $f(1)+f(-1)=0$). When the moment condition fails,
+the inverse Fourier transform of a homogeneous-modulo-compact-support
+extension of $(1-\chi)\hat u_{\mu-j}$ contains a term $p(z)\log|z|$ with $p$
+a homogeneous polynomial of degree $l$, so the expansion of $u$ may contain
+such terms. This can happen whatever the integer $\mu$: for $\mu=0$ and
+$\hat u=1+(1-\chi)|\xi|^{-n}$, $u$ is $\delta_0$ plus a function with a
+logarithmic singularity $c\log|z|$, $c\ne0$, at $0$. Finally, polynomial terms
+in $\hat u$ (possible for $\mu\in\N_0$) correspond to derivatives of the
 delta function at $0$, invisible in $z\neq0$.
 
 \subsection{Blow-up of the origin}
@@ -826,14 +863,16 @@ nature:
 \end{tikzcd}
 \end{equation*}
 The fibre-linear part acts on the symbol by a linear change of variables, and
-the remaining part, which is the identity to first order on $Y$, only changes
-lower order terms.
+the remaining part, which fixes $Y$ pointwise and induces the identity on the
+normal spaces $T_yX/T_yY$, only changes lower order terms. (Its full
+differential along $Y$ need not be the identity: the block $\pa_xH''(0,y)$
+may be non-zero.)
 
 \begin{lemma}\label{conormal:lem:fibre-linear}
   Let $V\subset\R^d$ be open, let $g$ be a diffeomorphism of $V$ onto $g(V)$
   and let $A\in\CI(V;\GL(k,\R))$.  Set $F_0(x,y)=(A(y)x,g(y))$, a diffeomorphism
-  of $\R^k\times V$ onto $\R^k\times g(V)$.  If $a\in S^M_{\mathrm c}(\R^d;\R^k)$ has
-  support in $g(V)\times\R^k$ then
+  of $\R^k\times V$ onto $\R^k\times g(V)$.  If $a\in S^M_{\mathrm c}(\R^d;\R^k)$
+  vanishes for $y$ outside a compact subset $K$ of $g(V)$ then
   \begin{equation*}
     F_0^*\osc{a}=\osc{a_{F}},\qquad
     a_{F}(y,\eta)=|\det A(y)|^{-1}a\big(g(y),A(y)^{-t}\eta\big)
@@ -845,7 +884,12 @@ lower order terms.
   For fixed $y$ this is the linear change of variables
   $\xi=A(y)^{-t}\eta$ in $\int e^{iA(y)x\cdot\xi}a(g(y),\xi)\,\dbar\xi$.  That
   $a_F$ is a symbol follows from the invariance of symbol estimates under
-  smooth families of linear maps, the support of $a_F$ in $y$ being compact.
+  smooth families of linear maps: $a_F$ vanishes for $y\notin g^{-1}(K)$, a
+  compact subset of $V$, on which $A$, $A^{-1}$, $g$ and all their
+  derivatives are bounded.  (Merely requiring $\supp a\subset g(V)\times\R^k$
+  would not suffice: the support could approach $\pa g(V)$ as
+  $|\xi|\to\infty$, where $A^{-1}$ may be unbounded, and then $a_F$ need not
+  be a symbol.)
 \end{proof}
 
 \begin{lemma}\label{conormal:lem:tangent-lower}
@@ -866,8 +910,12 @@ We also need conormal distributions depending smoothly on a parameter
 $s\in[0,1]$.  A \emph{smooth family} $u(s)\in\Ic{m}_{\mathrm c}(\Omega,Y)$ is
 one of the form $u(s)=\osc{c(s)}+f(s)$ with $c\in S^M(\R_s\times\R^n;\R^k)$
 and $f\in\CI(\R\times\R^n)$, the supports of $u(s)$ lying in a fixed compact
-subset of $\Omega$; that is, $u$ is an element of $\Ic{m}_{\mathrm c}$ on
-$\R_s\times\R^n$ with respect to $\R_s\times Y$, restricted to $[0,1]$.  By
+subset of $\Omega$; that is, $u$ is an element of $\Ic{m-\frac14}_{\mathrm c}$ on
+$\R_s\times\R^n$ with respect to $\R_s\times Y$, restricted to $[0,1]$. (The
+amplitude order $M=m+\frac n4-\frac k2$ is the same; adding the variable $s$
+raises the dimension by one and leaves the codimension $k$ unchanged, whence
+the shift by $\frac14$, which is the same for all families and so plays no
+role in comparing their orders.)  By
 \cref{conormal:prop:local-basic} applied in $n+1$ variables, $\pa_su(s)$ and
 $\int_s^1u(s')\,ds'$ are smooth families of order $m$, $V_su(s)$ is a smooth
 family of order $m-1$ if $V_s$ is of the form \eqref{conormal:eq:V-form} with
@@ -884,8 +932,8 @@ coefficients smooth in $s$, and families of orders $m-j$ have asymptotic sums.
 \begin{discussion}
   The method is Moser's homotopy trick. Join $H$ to the identity by the family
   $H_s$. The derivative $\frac d{ds}H_s^*$ is $H_s^*$ composed with a vector field
-  $V_s$, and because $H$ agrees with the identity to first order on $Y$, $V_s$
-  has the special form \eqref{conormal:eq:V-form}, which lowers the conormal
+  $V_s$, and because $H$ fixes $Y$ and $\pa_xH'=\Id$ on $Y$ (the block
+  $\pa_xH''$ need not vanish), $V_s$ has the special form \eqref{conormal:eq:V-form}, which lowers the conormal
   order by one (\cref{conormal:lem:tangent-lower}). Instead of integrating
   $\frac d{ds}H_s^*u$ directly, we solve the transport equation
   $\pa_su(s)+V_su(s)\approx0$ with $u(1)=u$; then $H_s^*u(s)$ is almost constant
@@ -966,7 +1014,8 @@ coefficients smooth in $s$, and families of orders $m-j$ have asymptotic sums.
   Then $H(0,y)=(0,y)$ and $\pa_xH'(0,y)=A(y)^{-1}\pa_xF'(0,y)=\Id$, so
   \cref{conormal:prop:moser} applies to $H$.  With $u=\osc{a}+f$ we have, by
   \cref{conormal:lem:fibre-linear}, $F_0^*u=\osc{a_F}+F_0^*f$ (after cutting
-  off), and $F^*u=H^*(F_0^*u)\in F_0^*u+\Ic{m-1}_{\mathrm c}$.
+  off $a$ in $y$ to a compact subset of $g(Y\cap\Omega')$, which changes $u$
+  only by a smooth function near $F(\bar z)$), and $F^*u=H^*(F_0^*u)\in F_0^*u+\Ic{m-1}_{\mathrm c}$.
 \end{proof}
 
 \section{Conormality at the zero section of a vector bundle}\label{conormal:sec:bundle}
@@ -1023,9 +1072,12 @@ and in the classical case the corresponding sequence onto the smooth fibre
 densities on $W'\setminus0$ homogeneous of degree $M+k$.  For a product
 $W=Y\times\R^k$ the definition says that $\Ic{m}(Y\times\R^k,Y\times\{0\})$
 consists of smooth functions of $y\in Y$ with values in
-$\Ic{m-\frac d4}(\R^k,\{0\})$ (up to smooth terms), the topology of
-$\CI(Y;\rho^{-M}\CI(\RC{\R^k}))=\rho^{-M}\CI(Y\times\RC{\R^k})$ making precise
-what it means for a conormal distribution to depend smoothly on parameters.
+$\Ic{m+\frac d4}(\R^k,\{0\})$ (up to smooth terms; here $d=\dim Y$, $n=d+k$,
+and the fibre order $m'$ is determined by $M=m'-\frac k4=m+\frac n4-\frac k2$).
+In the classical case the topology of
+$\CI(Y;\rho^{-M}\CI(\RC{\R^k}))=\rho^{-M}\CI(Y\times\RC{\R^k})$ makes precise
+what it means for a classical conormal distribution to depend smoothly on
+parameters.
 
 Bundle isomorphisms, possibly covering a diffeomorphism of the base, act on
 $\Ic{m}(W,0_W)$ by \cref{conormal:lem:fibre-linear}.  For the extension to
@@ -1052,13 +1104,28 @@ $T_yW/T_y0_W=W_y$.
 \begin{proposition}\label{conormal:prop:bundle-invariance}
   Let $Y$ be compact and $h:N\to N'$ a diffeomorphism between open
   neighbourhoods of $0_W$ which is the identity on $0_W$ and induces the
-  identity on $W_y$ for all $y\in Y$.  If $u\in\Ic{m}(W,0_W)$ has support in $N'$
-  then $h^*u-u\in\Ic{m-1}(W,0_W)$; in particular $\sigma_m(h^*u)=\sigma_m(u)$.
-  Combined with \cref{conormal:lem:factor}, every diffeomorphism $h$ between
-  neighbourhoods of $0_W$ mapping $0_W$ to itself acts on conormal distributions
-  supported in its range, with $\sigma_m(h^*u)=h_0^*\sigma_m(u)$.
+  identity on $W_y$ for all $y\in Y$.  If $u\in\Ic{m}(W,0_W)$ has compact
+  support contained in $N'$, then $h^*u$, extended by zero from $N$ to $W$,
+  satisfies $h^*u-u\in\Ic{m-1}(W,0_W)$; in particular
+  $\sigma_m(h^*u)=\sigma_m(u)$.  Combined with \cref{conormal:lem:factor},
+  every diffeomorphism $h$ between neighbourhoods of $0_W$ mapping $0_W$ to
+  itself acts on conormal distributions with compact support in its range,
+  with $\sigma_m(h^*u)=h_0^*\sigma_m(u)$.
 \end{proposition}
-\begin{proof}
+\begin{remark}
+  Compactness of $\supp u$ in $N'$ cannot be dropped: for $W=\R$ over a
+  point, $N=(-1,1)$, $N'=\R$, $h(t)=t/(1-t^2)$ and $u(x)=e^{x^2}$ (smooth, so
+  in every $\Ic{m}(W,0_W)$), $h^*u=e^{h(t)^2}$ on $N$ grows so fast as
+  $t\to1$ that it has no extension to a distribution on $W$. Without the
+  support condition the statement holds for germs at $0_W$, which is all that
+  is used below.
+\end{remark}
+\begin{proof}[Proof of \cref{conormal:prop:bundle-invariance}]
+  Since $\supp u$ is compact in $N'$, $h^*u$ has compact support in $N$ and
+  its extension by zero is a distribution on $W$; away from $0_W$ both $u$
+  and $h^*u$ are smooth, so it suffices to treat $\chi u$ for a cutoff $\chi$
+  supported in a small neighbourhood of $0_W$, $(1-\chi)u$ contributing a
+  compactly supported smooth function.
   Cover $Y$ by finitely many open sets over which $W$ is trivial, take a
   partition of unity $\phi_j$ of a neighbourhood of $0_W$ subordinate to their
   preimages and apply \cref{conormal:prop:moser} (in the form of the proof of
@@ -1313,11 +1380,14 @@ equally for the classical spaces.
   If one works with functions rather than half-densities, the computation in the
   proof of \cref{conormal:thm:symbol} shows that the full symbol transforms by
   \eqref{conormal:eq:symbol-transform}, i.e.\ $a|d\xi|$ transforms as a fibre
-  density on $N^*Y$: the principal symbol of $u\in\Ic{m}(X,Y)$ is then a
-  section of $\Omega_{\mathrm{fib}}(N^*Y)$ with coefficient of order $M$, as in
+  density on $N^*Y$: the principal symbol of $u\in\Ic{m}(X,Y)$ is then the
+  class, modulo symbols of order $M-1$, of a symbol-valued section of
+  $\Omega_{\mathrm{fib}}(N^*Y)$ with coefficient of order $M$, as in
   \eqref{conormal:eq:bundle-exact}.  Half-densities make the symbol a
-  half-density on the symplectic manifold $N^*Y$, which is the form used in
-  \cref{ch:hj}.
+  half-density on $N^*Y$, which is a Lagrangian submanifold of the symplectic
+  manifold $T^*X$ (the tautological one-form vanishes on $N^*Y$, since its
+  covectors annihilate $TY$, hence so does the symplectic form); this is the
+  form used in \cref{ch:hj}.
 \end{remark}
 
 \section{Iterated regularity}\label{conormal:sec:iterated}
@@ -1390,7 +1460,7 @@ The key analytic step converts weighted $L^2$ bounds on all derivatives into
 symbol estimates.
 
 \begin{lemma}\label{conormal:lem:L2-sup}
-  Let $t\in\R$, $j\in\N_0$, $L>j+\frac k2$, and let $b\in\CI(\R^k)$ satisfy
+  Let $t\in\R$, $j\in\N_0$, $L\in\N_0$ with $L>j+\frac k2$, and let $b\in\CI(\R^k)$ satisfy
   $\ang\xi^{t+|\alpha|}D^\alpha b\in L^2(\R^k)$ for $|\alpha|\le L$.  Then
   \begin{equation*}
     |D^\beta b(\xi)|\le C\ang\xi^{-t-\frac k2-|\beta|},\quad |\beta|\le j,
@@ -1402,7 +1472,11 @@ symbol estimates.
 \begin{proof}
   The converse is immediate since $\ang\xi^{t+\mu}\in L^2$ if $2(t+\mu)<-k$.
   For the direct statement, let $A=\{\frac12<|\zeta|<2\}$ and $\chi\in\CIc(A)$
-  equal to one on $|\zeta|=1$.  For $R\ge1$ set $b_R(\zeta)=b(R\zeta)$.  On
+  equal to one on a neighbourhood of the sphere $|\zeta|=1$ (so that
+  $D^\beta(\chi b_R)=D^\beta b_R$ there).  Since $L$ is an integer, the norm of
+  $H^L$ is controlled by the $L^2$ norms of derivatives of order $\le L$,
+  which is what we estimate; for non-integral $L$ the hypothesis, involving
+  only derivatives of integral order $\le L$, would not suffice.  For $R\ge1$ set $b_R(\zeta)=b(R\zeta)$.  On
   $RA$ we have $R/2\le\ang\xi\le3R$, so
   \begin{equation*}
     \norm{D^\alpha b_R}^2_{L^2(A)}=R^{2|\alpha|-k}\int_{RA}|D^\alpha b|^2d\xi
@@ -1601,7 +1675,10 @@ symbol estimates.
   degree $h$: $u(tz)=t^hu(z)+F(t,z)$ for $t>0$, as distributions in $z\in\R^n$
   ($u(t\,\cdot)$ being the pull-back of $u$ by the dilation), with
   $F\in\CI((0,\infty)\times\R^n)$.  Show that $\chi u$ is a classical conormal
-  distribution at $0$ for $\chi\in\CIc(\R^n)$, and determine its order.
+  distribution at $0$ for $\chi\in\CIc(\R^n)$, and determine its order: find
+  $m$ with $\chi u\in\Ic{m}_{\mathrm{ph}}$ for every $\chi$, and show that if
+  $\chi(0)\ne0$ the principal symbol of order $m$ is non-zero unless $u$ is
+  smooth near $0$.
 \end{exercise}
 
 \begin{exercise}\label{conormal:ex:supported}

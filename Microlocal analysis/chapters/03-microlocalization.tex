@@ -49,7 +49,7 @@ are uniform on bounded families of operators, and
 bicharacteristics of an operator with real homogeneous principal symbol. In
 \cref{microlocal:sec:propagation} we prove, by a positive commutator argument,
 that for such an operator $P$ the set $\WF(u)\setminus\WF(Pu)$ is a union of
-maximal null bicharacteristics (\cref{microlocal:thm:propagation}). This
+maximally extended null bicharacteristics in $\Sigma(P)\setminus\WF(Pu)$ (\cref{microlocal:thm:propagation}). This
 result is coordinate invariant and so holds on manifolds; it is used for the
 wave equation in \cref{ch:wave}.
 
@@ -75,9 +75,10 @@ the elementary inequality
 \begin{equation}\label{microlocal:eq:angle}
   \abs{se-tf}\ge\tfrac12\abs{e-f}\,(s+t),\qquad s,t\ge0,\ \abs e=\abs f=1,
 \end{equation}
-which follows from
-$\abs{se-tf}^2=(s-t)^2+st\abs{e-f}^2\ge\frac12\abs{e-f}^2(s^2+t^2)$ (note
-$\abs{e-f}\le2$), and the inequality
+which follows from $\abs{se-tf}^2=(s-t)^2+st\abs{e-f}^2$ and
+$(s+t)^2=(s-t)^2+4st$: indeed
+$\abs{se-tf}^2-\frac14\abs{e-f}^2(s+t)^2=\bigl(1-\frac14\abs{e-f}^2\bigr)(s-t)^2\ge0$
+since $\abs{e-f}\le2$; and the inequality
 $\bigl|\frac v{\abs v}-\frac w{\abs w}\bigr|\le\frac{2\abs{v-w}}{\abs w}$ for
 $v,w\ne0$.
 
@@ -342,7 +343,10 @@ support.
 \begin{answer}
   Locality concerns supports, pseudolocality concerns singular supports. The
   kernel of $\ang D^{-2}$ on $\R$ is $\frac12e^{-\abs{x-y}}$, which vanishes
-  nowhere, so $\ang D^{-2}$ moves supports everywhere. But this kernel is
+  nowhere, so $\ang D^{-2}$ can enlarge supports: for $u=\delta_0$, or for any
+$u\ge0$ with $u\ne0$, $\ang D^{-2}u$ is positive everywhere. (It does not do
+so for every input: if $u=(1+D^2)\phi$ with $\phi\in\CIc(\R)$, then
+$\ang D^{-2}u=\phi$.) But this kernel is
   smooth off the diagonal, so what $A$ adds far from $\supp u$ is smooth. The
   proof above splits $u$ into a piece near $\bar x$ and a piece far away, and
   the far piece only meets the smooth part of the kernel.
@@ -755,7 +759,11 @@ an operator whose essential support does not contain $z$
 To use pseudodifferential operators on manifolds we must know that a change
 of coordinates turns them into pseudodifferential operators, and how their
 symbols transform. The answer is that the principal symbol behaves like a
-function on the cotangent bundle. We first set up pull-backs of compactly
+function on the cotangent bundle: in general it is a class of symbols modulo
+$S^{m-1}$, and the transformation rule holds for representatives modulo
+$S^{m-1}$; only for classical operators is it represented by a single
+homogeneous function, which then transforms exactly as a function on
+$\Tz{\R^n}$. We first set up pull-backs of compactly
 supported distributions by diffeomorphisms.
 
 For an open set $\Omega\subset\R^n$ let $\CIc(\Omega)$ be the smooth functions
@@ -951,8 +959,16 @@ $F^*:T^*_{F(x)}\Omega'\to T^*_x\Omega$, $\eta\mapsto DF(x)^t\eta$.)
   statement about characteristic varieties follows from that about principal
   symbols, since $\chi_F$ is homogeneous of degree one in the fibres and
   satisfies $c^{-1}\abs\xi\le\abs{(DF(x)^t)^{-1}\xi}\le c\abs\xi$ locally
-  uniformly in $x$; so it maps the sets $\Gamma_\eps(z)\cap\{\abs\xi\ge
-  1/\eps\}$ into and onto sets of the same type.
+  uniformly in $x$. It need not map a set $\Gamma_\eps(z)\cap\{\abs\xi\ge
+  1/\eps\}$ onto a set of the same shape (already a linear $F$ maps balls to
+  ellipsoids), but, being a homeomorphism commuting with the dilations in the
+  fibres, it maps conic neighbourhoods of $z$ onto conic neighbourhoods of
+  $\chi_F(z)$; hence the image of $\Gamma_\eps(z)\cap\{\abs\xi\ge1/\eps\}$
+  contains some $\Gamma_{\eps'}(\chi_F(z))\cap\{\abs\eta\ge1/\eps'\}$, and
+  conversely with $\chi_F^{-1}$. The two families of sets are thus mutually
+  cofinal, and the lower bound defining ellipticity (with a new constant,
+  using the comparability of $\abs\xi$ and $\abs\eta$) transfers in both
+  directions.
 \end{proof}
 
 This invariance shows that the principal symbol, essential support and
@@ -1192,8 +1208,14 @@ is unchanged by the Fourier multipliers $\ang D^s$.
 We now give the more classical characterization of the wavefront set, in
 terms of the Fourier transform. We use the following standard facts about
 $u\in\CmIc(\R^n)$, which follow from \eqref{microlocal:eq:finite-order} and
-the Fourier inversion formula by approximating the integrals below by
-Riemann sums in $\cS(\R^n)$: $\hat u(\xi)=u(e^{-ix\cdot\xi})$ is a smooth
+the Fourier inversion formula $\phi(x)=\int e^{ix\cdot\xi}\hat\phi(\xi)\,\dbar\xi$:
+fix $\psi\in\CIc(\R^n)$ equal to $1$ near $L$, so that $u(\phi)=u(\psi\phi)$;
+the Riemann sums of $\int\psi(x)e^{ix\cdot\xi}\hat\phi(\xi)\,\dbar\xi$ (truncated
+to large balls in $\xi$) converge to $\psi\phi$ in the $C^k$ norm on $L$, which
+by \eqref{microlocal:eq:finite-order} suffices, while $u$ applied to each
+summand is a multiple of $\hat u$ at a point. (The plane waves themselves are
+not in $\cS(\R^n)$; the cutoff $\psi$ is what makes this legitimate.) Thus
+$\hat u(\xi)=u(e^{-ix\cdot\xi})$ is a smooth
 function with $\abs{\hat u(\xi)}\le C\ang\xi^k$; for $\phi\in\cS(\R^n)$,
 \begin{equation}\label{microlocal:eq:parseval}
   u(\phi)=\int\hat u(\xi)\,\hat\phi(-\xi)\,\dbar\xi,\qquad
@@ -1430,7 +1452,12 @@ essential supports of the operators.
     k(x,y)=\phi(x)\mu(x-y)K_A(x,y)\in\CmIc(\R^{2n}),\qquad
     w=L^*k,\quad L(x,z)=(x,x-z),
   \end{equation*}
-  so $w(x,z)=\phi(x)\mu(z)K_A(x,x-z)$, and $k=K_A$ near $(\bar x,\bar x)$.
+  so $w(x,z)=\phi(x)\mu(z)K_A(x,x-z)$, and $k=\phi(x)K_A$ near $(\bar
+  x,\bar x)$. Since $\phi(x)\ne0$ near $(\bar x,\bar x)$, applying
+  \cref{microlocal:prop:wf-local}(i) on $\R^{2n}$ (with the multiplier
+  $\phi(x)\mu'(y)$, $\mu'\in\CIc$ equal to $1$ near $\bar x$) at each point
+  near $(\bar x,\bar x)$ shows that $\WF(k)$ and $\WF(K_A)$ coincide over a
+  neighbourhood of $(\bar x,\bar x)$.
   Since $K_{A_\mu}=\int e^{i(x-y)\cdot\xi}a_\mu(x,\xi)\,\dbar\xi$, the
   distribution $L^*K_{A_\mu}$ is the inverse Fourier transform of
   $a_\mu(x,\xi)$ in $\xi$, and so
@@ -1549,7 +1576,9 @@ a serious restriction.
 \caption[The calculus of wavefront sets]{How the operations of
 \cref{microlocal:sec:pairing,microlocal:sec:elementary,microlocal:sec:products,microlocal:sec:pullback,microlocal:sec:pushforward,microlocal:sec:relation}
 are built from each other. Products and pull-backs are restrictions, after a
-linear change of variables, of exterior products; push-forward is a
+change of variables, of exterior products (the linear map
+$L(x,y)=(x,x+y)$ for products; the diffeomorphism $H(x,y)=(x,y+F(x))$,
+linear only when $F$ is, for pull-backs); push-forward is a
 projection of the pull-back of $u\boxtimes\delta$; and the action of a
 general kernel is a projection of a product.}
 \label{microlocal:fig:operations}
@@ -1658,10 +1687,21 @@ $\WFp(A)\cap\WF(u_1)=\emptyset=\WFp(\Id-A)\cap\WF(u_2)$.
   removes the singular directions of $u_1$, and $\Id-A$ those of $u_2$; in
   each of the two terms one factor is smooth, so the pairing makes sense. The
   condition \eqref{microlocal:eq:pairing-cond} is what allows such a split.
-  The minus sign has a Fourier explanation: $\int u_1u_2\,dx$ is
-  $\int\hat u_1(\xi)\hat u_2(-\xi)\,\dbar\xi$ by \eqref{microlocal:eq:parseval},
-  so trouble arises only if $\hat u_1$ is large at $\xi$ and $\hat u_2$ is large
-  at $-\xi$. For example $\int\delta_0\cdot\delta_0$ is meaningless, and indeed
+  The minus sign has a Fourier explanation: for smooth $u_1,u_2$,
+  $\int u_1u_2\,dx$ is $\int\hat u_1(\xi)\hat u_2(-\xi)\,\dbar\xi$ by
+  \eqref{microlocal:eq:parseval}, so trouble arises only if $\hat u_1$ is large
+  at $\xi$ and $\hat u_2$ is large at $-\xi$. This is a heuristic: under the
+  local condition \eqref{microlocal:eq:pairing-cond} the Fourier integral need
+  not converge for distributions. For instance $\delta_0$ and $\delta_1$ have
+  disjoint singular supports and their pairing is $0$, but
+  $\hat\delta_0(\xi)\hat\delta_1(-\xi)=e^{i\xi}$ is not integrable. The
+  Fourier formula does hold (with an absolutely convergent integral) under
+  the global condition
+  $\Sigma_{\mathrm{fr}}(u_1)\cap(-\Sigma_{\mathrm{fr}}(u_2))=\emptyset$: it is
+  the value at $\xi=0$ of the convolution formula of
+  \cref{microlocal:rem:product-fourier}, combined with
+  \cref{microlocal:ex:pairing-product}; in general one localizes first by a
+  partition of unity, which is what the operator $A$ does. For example $\int\delta_0\cdot\delta_0$ is meaningless, and indeed
   $\WF(\delta_0)$ contains both $\xi$ and $-\xi$.
 \end{discussion}
 
@@ -1839,10 +1879,15 @@ $\iota^*w=\cF^{-1}g_w\in\cSp(\R^p)$.
   \cref{microlocal:prop:fourier-char}, $(\bar x,\bar\xi)\notin\WF(\iota^*u)$.
 \end{proof}
 
-One can picture this as follows: of $\WF(u)$ only the part over $Y$
-survives, and the covector $(\xi,\eta)$ is projected to its component $\xi$
+One can picture this as follows: of $\WF(u)$ only the part over $Y$ can
+survive, and a covector $(\xi,\eta)$ is projected to its component $\xi$
 along $Y$; the hypothesis guarantees that no non-zero covector is projected
-to zero (\cref{microlocal:fig:restriction}).
+to zero (\cref{microlocal:fig:restriction}). The projected covectors are only
+candidates: the theorem is an upper bound, and singularities may disappear
+on restriction. For example, if $\chi\in\CIc(\R^2)$ equals $1$ near $0$ and
+$u=y\chi(x,y)\delta(x)$ on $\R^2$, then $\WF(u)\cap N^*\{y=0\}=\emptyset$ and
+$(0,0;1,0)\in\WF(u)$ (by closedness, from the points with $y\ne0$), yet
+$u|_{y=0}=0$.
 
 \begin{figure}[htbp]
 \centering
@@ -1855,7 +1900,7 @@ to zero (\cref{microlocal:fig:restriction}).
   \draw[->,very thick] (0,0)--(2.4,2.2) node[above right=-2pt]{$(\xi,\eta)\in\WF(u)$};
   \draw[dashed] (2.4,2.2)--(2.4,0);
   \draw[->,very thick] (0,0)--(2.4,0);
-  \node[below,font=\footnotesize] at (2.4,0) {$\xi\in\WF(\iota^*u)$};
+  \node[below,font=\footnotesize,align=center] at (2.4,0) {$\xi$: candidate\\ for $\WF(\iota^*u)$};
   \draw[->,thick,gray] (0,0)--(0,2.6);
   \node[font=\footnotesize,anchor=west] at (0.15,3.15) {$N^*Y$};
 \end{tikzpicture}
@@ -2277,10 +2322,15 @@ We regard $\WFp(K)$ as a relation: for $W\subset\Tz{\Omega_2}$,
 
 \begin{discussion}
   The simplest example is a translation, $Au(x)=u(x-a)$, with kernel
-  $K=\delta(x-y-a)$ (cut off to have compact support). As for $\delta$ composed
-  with a linear map, $\WF(K)=\{(x,x-a;\xi,-\xi)\}$, so
-  $\WFp(K)=\{((x,\xi),(x-a,\xi))\}$, and the theorem says that a singularity of
-  $u$ at $(y,\eta)$ can only produce a singularity of $Au$ at $(y+a,\eta)$. The
+  $\delta(x-y-a)$. This kernel has proper support, so by
+  \cref{microlocal:rem:relation-proper} we may use it directly. (If instead
+  one cuts it off to $\rho(x,y)\delta(x-y-a)$ with $\rho\in\CIc$, the
+  following statements hold only over the region where $\rho=1$, since the
+  cutoff removes the points of the graph outside $\supp\rho$.) As for
+  $\delta$ composed with a linear map, $\WF(K)=\{(x,x-a;\xi,-\xi);\ \xi\ne0\}$,
+  so $\WFp(K)=\{((x,\xi),(x-a,\xi))\}$, and the theorem says that a
+  singularity of $u$ at $(y,\eta)$ can only produce a singularity of $Au$ at
+  $(y+a,\eta)$. The
   sign change in the definition of $\WFp(K)$ is what makes this the graph of a
   map, and not of its composition with $\xi\mapsto-\xi$. The second set in the
   theorem, coming from covectors $(\xi,0)$ in $\WF(K)$, is empty here.
@@ -2334,7 +2384,7 @@ solution operators of hyperbolic equations, have kernels whose wavefront
 sets are well-behaved relations, and \cref{microlocal:thm:relation} then
 describes how they propagate singularities.
 
-\begin{remark}
+\begin{remark}\label{microlocal:rem:relation-proper}
   The restriction to compactly supported kernels is only for simplicity. If
   $K$ is a distribution on $\Omega_1\times\Omega_2$ with \emph{proper}
   support, i.e.\ both projections $\supp K\to\Omega_i$ are proper, then $A$
@@ -2485,9 +2535,11 @@ consistent with \cref{microlocal:def:wf-s-compact}.
   $\WF_s(u)=\bigcup_{\phi\in\CIc(\R^n)}\WF_s(\phi u)\subset\Tz{\R^n}$.
 \end{definition}
 
-Notice that one could not simply use the definition for compactly supported
-distributions here: $Au\in H^s(\R^n)$ also requires decay of $u$ at infinity,
-whereas $\WF_s(u)$ is meant to measure local regularity only.
+One might worry that the formula of \cref{microlocal:def:wf-s-compact},
+applied directly to $u\in\cSp(\R^n)$, would also measure decay of $u$ at
+infinity. It does not: a probe may contain a compactly supported cutoff, and
+the two definitions agree (\cref{microlocal:rem:wf-s-global} below). We use
+the localized form because it makes the local nature of $\WF_s$ evident.
 
 \begin{proposition}\label{microlocal:prop:wf-s}
   Let $u,v\in\cSp(\R^n)$ and $s,t\in\R$.
@@ -2564,6 +2616,22 @@ whereas $\WF_s(u)$ is meant to measure local regularity only.
   conic neighbourhood of $z$ meets some $\WF_s(u)$, by what we have just shown.
 \end{proof}
 
+\begin{remark}\label{microlocal:rem:wf-s-global}
+  For every $u\in\cSp(\R^n)$,
+  $\WF_s(u)=\bigcap\{\Char_0(A);\ A\in\Psido0(\R^n),\ Au\in H^s(\R^n)\}$,
+  i.e.\ the formula of \cref{microlocal:def:wf-s-compact} remains valid
+  without localization. Indeed, if $A\in\Psido0$ is elliptic at $z$ and
+  $Au\in H^s$, then $\WF_s(Au)=\emptyset$ by
+  \cref{microlocal:prop:wf-s}(ii), so $z\notin\WF_s(u)$ by
+  \cref{microlocal:prop:wf-s}(iv). Conversely, if $z=(\bar x,\bar\xi)\notin
+  \WF_s(u)$, take $\phi\in\CIc$ equal to $1$ near $\bar x$; by
+  \cref{microlocal:prop:wf-s}(i) and \cref{microlocal:def:wf-s-compact} there
+  is $A\in\Psido0$ elliptic at $z$ with $A(\phi u)\in H^s$. For
+  $\psi\in\CIc$ equal to $1$ near $\bar x$, the operator $A'=\psi A\phi\in
+  \Psido0$ has $\sigma_L(A')-\psi\phi\,\sigma_L(A)\in S^{-1}$, so it is
+  elliptic at $z$, and $A'u=\psi\,(A(\phi u))\in H^s$.
+\end{remark}
+
 The inclusion $\bigcup_s\WF_s(u)\subset\WF(u)$ may be strict
 (\cref{microlocal:ex:wf-s-union}); this is why the passage from Sobolev
 regularity to smoothness in \cref{microlocal:sec:propagation} needs an argument
@@ -2628,8 +2696,11 @@ defined by that theorem.
   $\phi\in\cS$, and by density $T=\Op(c)$. The graph is closed, so the map is
   continuous.
 
-  \emph{Step 3: adjoints.} Let $\tau(c)=\sigma_L(\Op(c)^*)$, a linear map
-  $S^m\to S^m$. If $c_k\to c$ and $\tau(c_k)\to d$ in $S^m$, then for
+  \emph{Step 3: adjoints.} Let $\tau(c)=\sigma_L(\Op(c)^*)$, a map
+  $S^m\to S^m$ which is conjugate-linear, hence linear when $S^m$ is regarded
+  as a real Fréchet space; we apply the closed graph theorem over $\R$, and
+  continuity does not depend on the choice of scalars. Likewise the maps in
+  (ii) involving $\bar c$ are real-linear. If $c_k\to c$ and $\tau(c_k)\to d$ in $S^m$, then for
   $\phi,\psi\in\cS$, by Step 1,
   \begin{equation*}
     \inner{\Op(d)\phi}\psi=\lim\inner{\Op(\tau(c_k))\phi}\psi
@@ -2732,6 +2803,13 @@ $k$, then $(\Op(c_k))$ is uniformly supported in $K$.
   \item If moreover $\Gamma\cap\WF_t(w)=\emptyset$ and $s+t\ge m$, then the
     sequence $\inner{C_kv}w$ is bounded.
   \end{enumerate}
+  In (ii), if each $C_k\in\Psido{-\infty}$ (the case used in
+  \cref{microlocal:sec:propagation}) then $C_kv\in H^\infty$ and
+  $\inner{C_kv}w$ is the usual pairing. In general $C_kv$ and $w$ need not lie
+  in dual Sobolev spaces, and $\inner{C_kv}w$ is \emph{defined} as
+  $\inner{C_kv}{Gw}+\inner{(\Id-G^*)C_kv}w$, with $G$ as in the proof; both
+  terms are defined, and by \eqref{microlocal:eq:sobolev-adjoint} this
+  agrees with the usual pairing whenever the latter is defined.
 \end{lemma}
 \begin{proof}
   Let $g$ be as in \cref{microlocal:lem:cutoff-one} and $G=\Op(g)$. By
@@ -2742,11 +2820,15 @@ $k$, then $(\Op(c_k))$ is uniformly supported in $K$.
   \cref{microlocal:lem:continuity}, and so is the second, by
   \cref{microlocal:lem:uniform-support}(ii) with $N\ge M+s-m$.
 
-  (ii) By \eqref{microlocal:eq:sobolev-adjoint},
+  (ii) If $C_k\in\Psido{-\infty}$ then, by \eqref{microlocal:eq:sobolev-adjoint},
   \begin{equation*}
     \inner{C_kv}w=\inner{G^*C_kv}w+\inner{(\Id-G^*)C_kv}w
-    =\inner{C_kv}{Gw}+\inner{(\Id-G^*)C_kv}w .
+    =\inner{C_kv}{Gw}+\inner{(\Id-G^*)C_kv}w ,
   \end{equation*}
+  and in general the right-hand side is the definition of $\inner{C_kv}w$:
+  the first term pairs $H^{s-m}$ with $H^t\subset H^{m-s}$, and the second
+  pairs $H^M$ with $H^{-M}$, since $(\Id-G^*)C_k\in\Psido{-2M}$
+  (\cref{microlocal:lem:uniform-support}(ii)) maps $v\in H^{-M}$ into $H^M$.
   The first term is bounded by $\norm{C_kv}_{H^{s-m}}\norm{Gw}_{H^{m-s}}$, which
   is bounded by (i) since $t\ge m-s$. The second is bounded by
   $\norm{(\Id-G^*)C_kv}_{H^M}\norm w_{H^{-M}}$, which is bounded by
@@ -3035,7 +3117,7 @@ follows.
      \draw[<->] (\x,-0.55)--(\x,0.55);
   \node[font=\footnotesize] at (2.7,-1.4) {$\WF(Pu)$};
   \node[font=\footnotesize] at (7.3,-1.4) {$\WF(Pu)$};
-  \node[font=\footnotesize,align=center] at (5.1,1.35) {$\WF(u)\setminus\WF(Pu)$: one null\\[-1pt] bicharacteristic, $x_1\in(a,b)$};
+  \node[font=\footnotesize,align=center] at (5.1,1.35) {$\WF(u)\setminus\WF(Pu)$ over $x_1\in(a,b)$: for each\\[-1pt] $\abs{\xi_2}$, two null bicharacteristics ($\pm\xi_2$)};
   \draw[->,thick] (4.4,-1.3)--(5.8,-1.3) node[midway,below,font=\footnotesize]{$\Ham p=\pa_{x_1}$};
   \node[font=\footnotesize] at (2,-0.8) {$a'$};
   \node[font=\footnotesize] at (3.4,-0.8) {$a$};
@@ -3239,10 +3321,11 @@ wish to read first.
   \caption[The commutant in the propagation proof]{The symbol $a_0$ of Step 3
   along the bicharacteristic through $z_0$ (where $g=1$). The weight
   $h(\tau)=e^{-1/(\tau+\delta')}$ increases so fast that $\Ham pa_0+qa_0>0$
-  wherever $\chi_0(\tau)=1$; this gives the square $b^2$, which controls $u$
-  at $z_0$. The cut-off $\chi_0$ makes $a_0$ decrease on
-  $[\delta/2,\delta]$, producing the error $e_0$ of the wrong sign, but there
-  $u$ is already known to be in $H^s$.}
+  wherever $h>0$ and $\chi_0(\tau)=1$; this gives the square $b^2$, which
+  controls $u$ at $z_0$. The cut-off $\chi_0$ brings $a_0$ down to $0$ on
+  $[\delta/2,\delta]$ (not necessarily monotonically: near $\delta/2$ it may
+  still increase), producing an error term $e_0$ supported there, which may
+  have the wrong sign; but there $u$ is already known to be in $H^s$.}
   \label{microlocal:fig:commutator}
   \end{figure}
 
@@ -3608,7 +3691,10 @@ bicharacteristics to pass from $\WF_s$ to $\WF$.
   \cref{microlocal:thm:restriction} (with $F=\iota$) and
   \cref{microlocal:thm:products} (with $F=\Delta$, $\Delta(x)=(x,x)$, applied to
   $u_1\boxtimes u_2$): show that the definitions agree, using the limit
-  formulas, and that the wavefront set bounds coincide.
+  formulas; that the wavefront set bounds coincide for restriction; and that
+  for products the pull-back bound, combined with the estimate of
+  \cref{microlocal:prop:exterior} for $\WF(u_1\boxtimes u_2)$, recovers the
+  bound of \cref{microlocal:thm:products}.
 \end{exercise}
 
 \begin{exercise}\label{microlocal:ex:wf-s-union}
