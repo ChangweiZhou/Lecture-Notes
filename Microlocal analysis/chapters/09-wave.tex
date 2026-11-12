@@ -1073,8 +1073,11 @@ Combining with Step 2 proves the theorem.
   $\Sphere^n$ the eigenvalues $k(k+n-1)$ of $\Delta$ have multiplicities of order $k^{n-1}$,
   so $N$ has jumps of order $\lambda^{n-1}$ (\cref{wave:ex:sphere}). The remainder is
   $o(\lambda^{n-1})$ if the set of periodic points of the geodesic flow on the unit
-  cosphere bundle has measure zero (Duistermaat--Guillemin, Ivrii); this uses the
-  structure of $T$ at the non-zero periods. The weaker formula
+  cosphere bundle has measure zero (J.~J.~Duistermaat and V.~W.~Guillemin, \emph{The
+  spectrum of positive elliptic operators and periodic bicharacteristics}, Invent.\
+  Math.\ \textbf{29} (1975), 39--79; V.~Ya.~Ivrii, Funct.\ Anal.\ Appl.\ \textbf{14}
+  (1980), 98--106); this uses the structure of $T$ at the non-zero periods, which
+  requires Fourier integral operators, and is not proved here. The weaker formula
   $N(\lambda)\sim C_W\lambda^n$ can also be obtained from the heat kernel or, as in
   \cite{Guillemin-Weyl}, from residues of the zeta function of $\Delta$.
 \item For $n=1$ each component of $X$ is a circle and everything is explicit
@@ -1110,9 +1113,13 @@ behaviour of $T$ is governed by closed geodesics.
 The trace $T$ is obtained by restricting the wave kernel to the diagonal $x=y$ and
 integrating. A singularity of $K_{\cos}(t,\cdot,y)$ starting at $y$ travels along a
 geodesic, so it can be on the diagonal at time $t\ne0$ only if that geodesic returns
-to its starting point at time $|t|$ with the same direction, i.e.\ is closed of
-length dividing $|t|$ (\cref{wave:fig:wavefront}). After integration in $x$ only these
-returns can produce singularities of $T$. Propagation of singularities makes this
+to its starting point at time $|t|$. Restriction to the diagonal only identifies the
+two points; it is the \emph{integration} in $x$ which eliminates the returns with a
+non-zero residual covector $\xi-\eta$ (returned minus initial direction), so that after
+integration only geodesics returning with the same direction, i.e.\ closed geodesics of
+length dividing $|t|$, can produce singularities of $T$ (\cref{wave:fig:wavefront}).
+(Returning to the same point with a different direction does happen, e.g.\ on a flat
+Klein bottle.) Propagation of singularities makes this
 argument rigorous for all times.
 \end{discussion} The full theory requires Fourier
 integral operators \cite{Hormander-FIO} and the propagation theorem for operators of
@@ -1137,7 +1144,18 @@ $\tau=\pm|\eta|$). At $t=t'$, $\WF(H(t-t'))$ consists of covectors $(\sigma,0;-\
 $\WF(K_{\sin}(t-t',x,x'))$ of covectors $(\tau,\xi;-\tau,-\xi)$ with $x=x'$, $\tau=\pm|\xi|$; their sum
 is never zero, so the product is defined \cite[Section~8.2]{Hormander-I}, and all
 resulting points over $\{t=t',x=x'\}$ have the form $(\zeta,-\zeta)$ with $\zeta\ne0$, i.e.\ lie in
-$\Delta^*$ in the primed notation. The last claim follows from the same description.
+$\Delta^*$ in the primed notation. At points with $t=t'$ and $x\ne x'$, $E$ vanishes
+identically nearby, by finite propagation speed (\cref{wave:thm:finite-speed}: the
+kernel is supported in $d(x,x')\le t-t'$), so the wavefront set of the factor $H(t-t')$
+there plays no role. This proves the first claim, and also the absence of zero
+covectors for $|t-t'|<t_0$. For the last claim at all times, note that $E$ is a function
+of $(t-t',x,x')$, so $(D_t+D_{t'})E=0$, and that for $t>t'$, $E=-K_{\sin}(t-t',x,x')$
+satisfies the wave equation both in $(t,x)$ and in $(t',x')$; for $t<t'$, $E=0$. By
+microlocal elliptic regularity, at $(t,x,\tau,\xi;t',x',\tau',\xi')\in\WF(E)$ with
+$t\ne t'$ we have $\tau+\tau'=0$, $\tau^2=|\xi|^2$ and $\tau'^2=|\xi'|^2$; if
+$(\tau,\xi)=0$ this forces $\tau'=0$ and then $\xi'=0$, which is impossible for a point
+of the wavefront set, and symmetrically. Together with the case $t=t'$ treated above
+this proves the last claim.
 \end{proof}
 
 \begin{theorem}[Propagation of singularities]\label{wave:thm:propagation}

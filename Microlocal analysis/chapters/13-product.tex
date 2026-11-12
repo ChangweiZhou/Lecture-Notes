@@ -2471,20 +2471,48 @@ elliptic.
 \begin{proof}
 Sufficiency is \cref{product:cor:fredholm}. Conversely suppose $A$ is Fredholm on
 $L^2$; then there are a bounded $Q$ and a compact $K$ with $QA=\Id+K$, and the
-same holds for $A^*$. We sketch the construction of approximate null sequences.
+same holds for $A^*$. We construct approximate null sequences.
 Suppose first that $(x_0,\xi_0)\in T^*M$, $\xi_0\notin\phi^*T^*B$, and $e\in E_{x_0}$.
-In local coordinates let
-$u_t(x)=t^{n/4}\chi(t^{1/2}(x-x_0))e^{itx\cdot\xi_0}e$, $n=\dim M$, $\chi\in\CIc$.
-Then $\norm{u_t}$ is bounded below, $u_t\to0$ weakly, and a direct computation
-with the local form $\Op(a)$ (Taylor expanding $a$ at $(x_0,t\xi_0)$) shows that
-$Au_t-\sigma_{0,0}(A)(x_0,\xi_0)u_t\to0$ in $L^2$. Since $Ku_t\to0$,
+In fibred coordinates $x=(z,y)$ near $x_0=(z_0,y_0)$, with $\xi_0=(\zeta_0,\eta_0)$,
+$\zeta_0\ne0$, let
+$u_t(x)=t^{n/4}\chi(t^{1/2}(x-x_0))e^{itx\cdot\xi_0}e$, $n=\dim M$, $\chi\in\CIc$
+supported in a small ball. Then $\norm{u_t}$ is bounded below and $u_t\to0$
+weakly. Choose $\psi'$, $\psi\in\CIc$ of the chart with $\psi'=1$ near
+$\supp\chi(t^{1/2}(\cdot-x_0))$ for $t\ge1$ and $\psi=1$ near $\supp\psi'$, and
+decompose $Au_t=\psi A\psi'u_t+(1-\psi)A\psi'u_t$. A direct computation with the
+local form $\psi A\psi'=\Op(a)$ (Taylor expanding $a$ at $(x_0,t\xi_0)$, a point which
+tends to the interior of $H_W$) shows that
+$\psi A\psi u_t-\sigma_{0,0}(A)(x_0,\xi_0)u_t\to0$ in $L^2$. The remaining term
+needs a separate estimate, since the kernel of $(1-\psi)A\psi'$ need not be smooth:
+its left and right points lie in disjoint sets, but it is conormal to $M^2_\phi$
+(the left point may lie elsewhere on the same fibre). Using a partition of unity
+on $B$ as in the proof of \cref{product:prop:mapping}, up to a smoothing operator,
+which maps the weakly null sequence $u_t$ to a sequence tending to $0$ in norm,
+$(1-\psi)A\psi'$ is a finite sum of operators $\Op_y(k)$ in local
+trivializations, where, since the supports of $1-\psi$ and $\psi'$ are disjoint,
+$k(y,\eta)$ is by condition (a) of \cref{product:def:operator-symbols} a classical
+symbol of order $0$ in $\eta$ with values in smooth kernels $k(y,\eta;z,z')$ on
+$Z^2$. On
+$\supp\chi(t^{1/2}(\cdot-x_0))$ write $e^{itz'\cdot\zeta_0}=
+L^Ne^{itz'\cdot\zeta_0}$ with $L=(t|\zeta_0|^2)^{-1}\zeta_0\cdot D_{z'}$ and
+integrate by parts in $z'$. Each application of the transpose of $L$ gives a factor
+$t^{-1}$ and a derivative, which falls either on the smooth kernel (no loss) or on
+$\chi(t^{1/2}\cdot)$ (a loss of $t^{1/2}$). So $(1-\psi)A\psi u_t$ is a sum of terms
+$t^{-N+j/2}\Op_y(k_{j})w_{t,j}$, $j\le N$, where $k_j$ are symbols of the same
+kind and $w_{t,j}$ are packets of the same form as $u_t$, with derivatives of
+$\chi$ in place of $\chi$, bounded in $L^2$. The operators $\Op_y(k_j)$ are bounded
+on $L^2$ by the proof of \cref{product:prop:L2}, so this term is $O(t^{-N/2})$,
+and $Au_t-\sigma_{0,0}(A)(x_0,\xi_0)u_t\to0$ in $L^2$. Since $Ku_t\to0$,
 $\norm{u_t}\le\norm Q\norm{Au_t}+o(1)$, so
 $|\sigma_{0,0}(A)(x_0,\xi_0)e|\ge\norm Q^{-1}|e|$. By continuity this lower bound
 extends to all of $[S^*M;\phi^*S^*B]$, and applying the same argument to $A^*$ shows
 that $\sigma_{0,0}(A)$ is invertible. Next, for $(b_0,\eta_0)\in T^*B\setminus0$ and
 $v\in\CI(Z_{b_0};E_{b_0})$, in a trivialization let
-$u_t(z,y)=t^{b/4}\chi(t^{1/2}(y-y_0))e^{ity\cdot\eta_0}v(z)$. The same computation,
-now using the operator-valued form $\Op_y(k)$ and
+$u_t(z,y)=t^{b/4}\chi(t^{1/2}(y-y_0))e^{ity\cdot\eta_0}v(z)$. This packet is spread
+over whole fibres, so no localization in the fibre is needed: up to a smoothing
+term (which tends to $0$ in norm on $u_t$) $A$ acts on $u_t$ through the
+operator-valued form $\Op_y(k)$ over a trivializing neighbourhood of $b_0$. The
+same computation, now using
 \cref{product:lem:fibre-bounds}, shows $Au_t-(\beta_{0,0}(A)(b_0,\eta_0)v)\otimes
 t^{b/4}\chi(t^{1/2}(y-y_0))e^{ity\cdot\eta_0}\to0$, using the homogeneity of degree
 $0$ of $\beta_{0,0}(A)$. Hence $\norm{\beta_{0,0}(A)(b_0,\eta_0)v}\ge\norm Q^{-1}

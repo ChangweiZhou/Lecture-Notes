@@ -261,9 +261,12 @@ $\frac\eps2\sum_j\pa_{\eta_j}D_{x_j}a=-\frac{i\eps}2\sum_j\pa_{\eta_j}\pa_{x_j}a
 c=a-\frac{i\eps}2\sum_{j=1}^n\frac{\pa^2a}{\pa\eta_j\pa x_j}\mod\eps^2\Ssl{m-2}(\R^n).
 \end{equation*}
 If $a=a_0+\eps a_1+O(\eps^2)$, the coefficient of $\eps$ in the left symbol is
-$a_1-\frac i2\sum_j\pa_{\eta_j}\pa_{x_j}a_0$. For example, for $n=1$ and $a=x\eta$,
-$\Op^W_\eps(x\eta)=\frac12(x\,\eps D+\eps D\,x)=x\,\eps D-\frac{i\eps}2$, whose left symbol is
-$x\eta-\frac{i\eps}2$, in agreement with the formula.
+$a_1-\frac i2\sum_j\pa_{\eta_j}\pa_{x_j}a_0$. For example, for $n=1$ let $\chi\in\CIc(\R)$ be equal
+to $x$ near a given point (the symbol $x\eta$ itself is not in $\Ssl1$, since the symbol
+estimates are uniform in $x$), and $a=\chi(x)\eta\in\Ssl1(\R)$. Then
+$\Op^W_\eps(\chi\eta)=\frac12(\chi\,\eps D+\eps D\,\chi)=\chi\,\eps D-\frac{i\eps}2\chi'$, since
+$\eps D(\chi u)=\chi\,\eps Du-i\eps\chi'u$. Its left symbol is $\chi\eta-\frac{i\eps}2\chi'$, in
+agreement with the formula, and equal to $x\eta-\frac{i\eps}2$ near the given point.
 
 \emph{Adjoint.} Fix $\eps>0$. $\Op_\eps(p)=\Op(p^\flat)$ with $p^\flat(x,y,\xi)=p(\eps,x,y,\eps\xi)\in\Amp m0$. By
 \cref{euclidean:prop:adjoint}, $\Op(p^\flat)^*=\Op(\overline{p^\flat(y,x,\xi)})$, that is,
