@@ -263,8 +263,9 @@ $\phi_1,\dots,\phi_k$ suffice, and $\Phi=\sum_i\abs{\phi_i}^2>0$ on an open set
 $W\supset K\times\Sphere^{n-1}$. By compactness of $\Sphere^{n-1}$ there is an open
 $V\supset K$ with $\overline V$ compact and $\overline V\times\Sphere^{n-1}\subset W$;
 choose $\chi_K\in\CIc(V)$ equal to $1$ on $K$ and $\kappa\in\CIc((\frac12,2))$ with
-$\kappa(1)=1$, and let $\theta_i(z,\xi)=\kappa(\abs\xi)\chi_K(z)\overline{\phi_i(z,\xi)}/\Phi(z,\xi)$
-(zero where $\chi_K\kappa=0$), an element of $\CIc(\R^p\times\R^n)$. On
+$\kappa(1)=1$, and let $\theta_i(z,\xi)=\kappa(\abs\xi)\chi_K(z)\overline{\phi_i(z,\xi/\abs\xi)}/\Phi(z,\xi/\abs\xi)$
+(zero where $\chi_K\kappa=0$), an element of $\CIc(\R^p\times\R^n)$; it is smooth
+because $\Phi(z,\xi/\abs\xi)>0$ when $z\in V$. On
 $\R^p\times\Sphere^{n-1}$, $\sum_i\theta_i\phi_i=\chi_K$, so
 \begin{equation*}
   \sum_ic_{\theta_i}\,(c_{\phi_i}a)=\chi_K(z)(1-\psi)^2a=(1-\psi)^2a\in S^{-\infty},
@@ -325,7 +326,9 @@ and reduction formulas apply directly; the bijectivity follows by inverting the
 reduction formula asymptotically and treating the residual part through the kernel.
 
 \emph{$\Op_W(a)\in\Psido m$.} Let $c(x,y,\xi)=a(\frac{x+y}2,\xi)$. By the chain rule,
-$D^\alpha_xD^\beta_yD^\gamma_\xi c=2^{-\abs\alpha-\abs\beta}(D^{\alpha+\beta}_zD^\gamma_\xi a)(\frac{x+y}2,\xi)$,
+\begin{equation*}
+  D^\alpha_xD^\beta_yD^\gamma_\xi c=2^{-\abs\alpha-\abs\beta}(D^{\alpha+\beta}_zD^\gamma_\xi a)\bigl(\tfrac{x+y}2,\xi\bigr),
+\end{equation*}
 which is bounded by $C\ang\xi^{m-\abs\gamma}$. Hence $c\in\Amp m0(\R^n)$ and
 $\Op_W(a)=\Op(c)\in\Psido m(\R^n)$.
 
@@ -448,8 +451,9 @@ derivatives on $\R^p\times\mathcal O$. By homogeneity (with $t=1/r\ge1$),
 $a_{m-j}(z,\Psi(\omega,r))=r^{-m+j}h_j^\sharp(z,\omega)$, so for every $N$
 \begin{equation*}
   F^\sharp(z,\omega,r)=\sum_{j<N}r^jh_j^\sharp(z,\omega)+E_N,\qquad
-  E_N=r^mR_N(z,\Psi(\omega,r)),\quad R_N=a-\sum_{j<N}a_{m-j}\in S^{m-N}.
+  E_N=r^mR_N(z,\Psi(\omega,r)),
 \end{equation*}
+where $R_N=a-\sum_{j<N}a_{m-j}\in S^{m-N}$.
 By \eqref{soleuclidean:eq:polar-est} with $\mu=m-N$ and Leibniz' formula
 ($\pa_r^ir^m=m(m-1)\cdots(m-i+1)r^{m-i}$),
 $\abs{\pa^\alpha_z\pa^\gamma_\omega\pa^j_rE_N}\le Cr^{N-j}$ on $\R^p\times\mathcal O\times(0,1]$.
@@ -472,10 +476,10 @@ $a_{m-j}(z,\xi)=\rho(\xi)\abs\xi^{m-j}h_j^\sharp(z,\xi)$. This is smooth, homoge
 degree $m-j$ in $\abs\xi\ge1$, and satisfies \eqref{euclidean:eq:uniform-regular}, so
 $a_{m-j}\in S^{m-j}$ by the discussion before \cref{euclidean:def:polyhomogeneous}. By
 Taylor's formula in $r$, for $N\ge1$,
-\begin{equation*}
-  F^\sharp(z,\omega,r)-\sum_{j<N}r^jh^\sharp_j(z,\omega)=r^NG_N(z,\omega,r),\quad
+\begin{gather*}
+  F^\sharp(z,\omega,r)-\sum_{j<N}r^jh^\sharp_j(z,\omega)=r^NG_N(z,\omega,r),\\
   G_N=\frac1{(N-1)!}\int_0^1(1-\tau)^{N-1}\pa^N_rF^\sharp(z,\omega,\tau r)\,d\tau,
-\end{equation*}
+\end{gather*}
 and $G_N$ is smooth with all derivatives bounded (differentiate under the integral); put
 $G_0=F^\sharp$. For $\abs\xi\ge1$ take $\omega=\xi/\abs\xi$, $r=1/\abs\xi$, so that
 $\Psi(\omega,r)=\xi$; then $a(z,\xi)=\abs\xi^mF^\sharp(z,\omega,r)$ and
@@ -502,7 +506,7 @@ homogeneous terms restricted to the unit sphere,
   \frac1{j!}\pa^j_rF(z,\theta,0)=a_{m-j}(z,\theta),\qquad\abs\theta=1,
 \end{equation*}
 so that $F(z,\theta,r)\sim\sum_jr^ja_{m-j}(z,\theta)$ as $r\to0$. The Taylor series need not
-converge, and if it does, its sum need not be $F$; the difference is a residual symbol.
+converge.
 
 % ----------------------------------------------------------------------
 \subsection*{\Cref{euclidean:ex:ph-complete}}
@@ -614,11 +618,11 @@ We use two general facts.
     \lambda\bigl(Q_hv(s)-Q_{h'}v(s)\bigr)=\frac{h-h'}{2\pi i}\oint
     \frac{\lambda(v(t))\,dt}{(t-s-h)(t-s-h')(t-s)},
   \end{equation*}
-  so $\abs{\lambda(Q_hv(s)-Q_{h'}v(s))}\le16r^{-2}\abs{h-h'}\sup_{\abs{t-s_0}=2r}p(v(t))$. By
+  so $\abs{\lambda(Q_hv(s)-Q_{h'}v(s))}\le8r^{-2}\abs{h-h'}\sup_{\abs{t-s_0}=2r}p(v(t))$. By
   the Hahn--Banach theorem, $p(x)=\sup\{\abs{\lambda(x)};\lambda\in E',\abs\lambda\le p\}$,
   so the same bound holds for $p(Q_hv(s)-Q_{h'}v(s))$. Apply this to $v=u_k$ and let
   $k\to\infty$ (for fixed $h,h'$, $Q_hu_k(s)\to Q_hu(s)$ in $E$):
-  $p(Q_hu(s)-Q_{h'}u(s))\le16r^{-2}\abs{h-h'}\sup_{\abs{t-s_0}=2r}p(u(t))$. Thus
+  $p(Q_hu(s)-Q_{h'}u(s))\le8r^{-2}\abs{h-h'}\sup_{\abs{t-s_0}=2r}p(u(t))$. Thus
   $(Q_hu(s))$ is Cauchy as $h\to0$ in every seminorm, and converges since $E$ is
   complete.
 \end{proof}
@@ -943,7 +947,9 @@ the first sum being smooth with bounded derivatives and compactly supported in $
 asymptotic sum is unique modulo $S^{-\infty}$, as in \cref{euclidean:prop:borel}.
 
 \emph{The reduction theorem.} Define amplitudes $\Amp m{w;\rho,\delta}(\R^n)$ by
-$\abs{D^\alpha_xD^\beta_yD^\gamma_\xi a}\le C\ang{x-y}^w\ang\xi^{m-\rho\abs\gamma+\delta(\abs\alpha+\abs\beta)}$.
+\begin{equation*}
+  \abs{D^\alpha_xD^\beta_yD^\gamma_\xi a}\le C\ang{x-y}^w\ang\xi^{m-\rho\abs\gamma+\delta(\abs\alpha+\abs\beta)}.
+\end{equation*}
 The statement to be proved is: for $a\in\Amp m{w;\rho,\delta}$ there is a unique
 $\sigma_L\in S^m_{\rho,\delta}(\R^n;\R^n)$ with $\Op(a)=\Op(\sigma_L)$, and
 \begin{equation*}
@@ -1219,9 +1225,9 @@ preimage under $T$ contains a weak neighbourhood
 $\{u;\abs{u(\phi_j)}<\eps,\ j=1,\dots,p\}$ with $\phi_j\in\cS(\R^n)$. If $u(\phi_j)=0$ for
 all $j$, then $tu$ lies in this neighbourhood for every $t>0$, so $\norm{Tu}_0<1/t$ for all
 $t$, and $Tu=0$. Thus $T$ vanishes on the joint null space of the functionals
-$\ev_j:u\mapsto u(\phi_j)$, and therefore factors through the linear map
-$\ev=(\ev_1,\dots,\ev_p):\cSp\to\C^p$: there is a linear map $\Lambda:\ev(\cSp)\to\cS$
-with $T=\Lambda\circ\ev$. Extend $\Lambda$ linearly to $\C^p$ and put
+$u\mapsto u(\phi_j)$, and therefore factors through the linear map
+$e:\cSp\to\C^p$, $e(u)=(u(\phi_1),\dots,u(\phi_p))$: there is a linear map
+$\Lambda:e(\cSp)\to\cS$ with $T=\Lambda\circ e$. Extend $\Lambda$ linearly to $\C^p$ and put
 $\psi_j=\Lambda(e_j)\in\cS(\R^n)$. Then
 \begin{equation*}
   Tu=\sum_{j=1}^pu(\phi_j)\,\psi_j,\qquad u\in\cSp(\R^n).
@@ -1233,9 +1239,9 @@ As $T$ restricted to $\cS$ is a continuous map $\cS\to\cSp$, its Schwartz kernel
 (\cref{distributions:thm:kernel}), so the Schwartz kernel of $T$ is
 $K\in\cS(\R^{2n})$.
 
-\emph{Remark (strong topology).} If $\cSp$ carries the strong topology, there are
-operators of infinite rank, e.g.\ $Tu=\sum_k2^{-k}c_k^{-1}u(\phi_k)\psi_k$ for suitable
-normalizing constants. The statement remains true, by the following argument. A
+\emph{Remark (strong topology).} If $\cSp$ carries the strong topology (uniform
+convergence on bounded subsets of $\cS$), more operators are continuous, and the statement
+remains true. We sketch the argument. A
 continuous linear map from $\cSp$ with the strong topology is bounded on weakly bounded
 sets (these are strongly bounded, by the uniform boundedness principle for the Fr\'echet
 space $\cS$) and maps weakly convergent sequences to convergent sequences (weakly

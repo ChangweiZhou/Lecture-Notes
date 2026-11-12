@@ -1,1 +1,374 @@
-% solutions for 15-eta (in progress)
+% Solutions for chapters/15-eta.tex
+\providecommand{\Chodd}{\operatorname{Ch}_{\mathrm{odd}}}
+\providecommand{\Trbar}{\overline{\operatorname{Tr}}}
+\providecommand{\TrR}{\operatorname{Tr}_{\mathrm{R}}}
+\providecommand{\wind}{\operatorname{wind}}
+\providecommand{\HardyL}{\mathcal{H}}
+\providecommand{\GTeta}{G_{\mathcal{T}}}
+\providecommand{\PsiT}[1]{\Psi^{#1}_{\mathcal{T}}}
+
+\section{Solutions for \cref{ch:eta}: Eta forms and the index of product-type families}\label{solutions:eta}
+
+Throughout, $e_k=e^{ik\theta}$ (so $\norm{e_k}^2=2\pi$), $D=D_\theta$, and on the
+circle $E(s)$ is the family \eqref{eta:eq:circle-E}. A Fourier multiplier
+$e_k\mapsto m(k)e_k$ with $m$ a classical symbol of order $\mu$ on $\R$ is in
+$\Psido{\mu}(\Sphere)$ with full symbol $m(\xi)$ modulo $\Sym{-\infty}$ (Poisson summation, as for $E(s)$
+in \cref{eta:sec:circle}).
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{eta:ex:defect-shift}}
+
+\emph{Idea:} both sides are computed explicitly; the left side by
+\cref{eta:lem:circle}(iii), the right side from one homogeneous symbol term.
+
+\emph{The commutator.} As operators on $L^2(\Sphere)$ (zero on $\HardyL^\perp$),
+$Ue_k=e_{k+1}$ and $Le_k=e_{k-1}$ for $k\ge1$, $Le_0=0$, and both vanish on $e_k$,
+$k<0$. Hence $LUe_k=e_k$ for $k\ge0$, so $LU=\Pi$, while $ULe_k=e_k$ for $k\ge1$ and
+$ULe_0=0$, so $UL=\Pi-\pi_0$ with $\pi_0$ the orthogonal projection onto the
+constants. Thus $[L,U]=\pi_0$.
+
+\emph{The left side.} $\pi_0$ is smoothing, so $\Trbar([L,U])=\Tr\pi_0=1$. As a
+check, by \cref{eta:lem:circle}(iii), $\Trbar(LU)-\Trbar(UL)=\Trbar(\Pi)-
+\Trbar(\Pi)+\Tr(\pi_0)=1$.
+
+\emph{The right side.} $\Pi$ and $E(s)$ are Fourier multipliers, so they commute,
+$[E(s),\Pi]=0$ and $D_E\Pi=0$. Since $D_E$ is a derivation,
+$D_EL=\Pi\,(D_Ee^{-i\theta})\,\Pi$, and by \cref{eta:lem:circle}(ii)
+$D_Ee^{-i\theta}\in\Psido{-1}$ has principal symbol $-i\xi^{-1}\pa_\theta e^{-i\theta}
+=-\xi^{-1}e^{-i\theta}$. The principal symbol of $\Pi$ is $1$ on $\xi>0$ and $0$ on
+$\xi<0$. By multiplicativity, $(D_EL)U\in\Psido{-1}$ has homogeneous term of degree
+$-1$
+\begin{equation*}
+  \sigma_{-1}\bigl((D_EL)U\bigr)(\theta,\xi)=\begin{cases}-\xi^{-1}&\xi>0,\\0&\xi<0,\end{cases}
+\end{equation*}
+so by \cref{eta:lem:circle}(i)
+\begin{equation*}
+  \TrR\bigl((D_EL)U\bigr)=-\frac1{2\pi}\int_0^{2\pi}\bigl(-1+0\bigr)\,d\theta=1 .
+\end{equation*}
+(Directly: $[E(s),e^{-i\theta}]e_k=(\lambda_{k-1}^s-\lambda_k^s)e_{k-1}$, so
+$(D_EL)U$ is the multiplier $e_k\mapsto(\log\lambda_k-\log\lambda_{k+1})e_k$ on
+$k\ge0$, and $0$ on $k<0$; its symbol $\log\ang\xi-\log\ang{\xi+1}=-\xi^{-1}+O(\xi^{-2})$
+for $\xi>0$ gives the same result.) Hence
+$\Trbar([L,U])=\TrR((D_EL)U)=1$, as \cref{eta:lem:trace-defect} predicts.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{eta:ex:not-inner}}
+
+\emph{Idea:} an inner derivation $[C,\cdot]$ acts on multiplication operators
+through $\pa_\xi\sigma(C)$, while $D_E$ acts through $\pa_\xi\log\abs\xi=\xi^{-1}$;
+no classical symbol has this derivative.
+
+Suppose $D_EA=[C,A]$ for all $A\in\Psido{\Z}(\Sphere)$, with $C\in\Psido{\Z}(\Sphere)$.
+Test on $A=f$, multiplication by $f\in\CI(\Sphere)$, and take $f=e^{i\theta}$ when a
+nowhere vanishing $f'$ is needed. By \cref{eta:lem:circle}(ii), $D_Ef\in\Psido{-1}$
+with $\sigma_{-1}(D_Ef)=-i\xi^{-1}f'(\theta)$, which is non-zero for $f=e^{i\theta}$.
+
+If $C$ is smoothing, $[C,f]$ is smoothing and cannot equal $D_Ef$. Otherwise let
+$k\in\Z$ be its order, i.e.\ $C\in\Psido{k}$ with $c_k=\sigma_k(C)\ne0$. The
+symbol of $\Op(c)\circ f$ is $cf-i\pa_\xi c\,f'+\dots$ and that of $f\circ\Op(c)$ is
+$fc$, so $[C,f]\in\Psido{k-1}$ with
+\begin{equation*}
+  \sigma_{k-1}([C,f])=-i\,\pa_\xi c_k\,f'(\theta).
+\end{equation*}
+Now $c_k$ is homogeneous of degree $k$ in $\xi\in\R\setminus0$; in one variable this
+means $c_k(\theta,\xi)=c^\pm(\theta)\abs\xi^k$ on $\pm\xi>0$.
+\begin{itemize}
+\item If $k\ge1$: $[C,f]=D_Ef\in\Psido{-1}$ and $k-1\ge0>-1$, so
+  $\sigma_{k-1}([C,f])=0$, i.e.\ $\pa_\xi c_k=0$ (with $f=e^{i\theta}$). But
+  $\pa_\xi c_k=\pm kc^\pm\abs\xi^{k-1}$ on $\pm\xi>0$, so $c^\pm=0$, a contradiction.
+\item If $k\le-1$: $[C,f]\in\Psido{-2}$, so $\sigma_{-1}([C,f])=0\ne\sigma_{-1}(D_Ef)$
+  for $f=e^{i\theta}$, a contradiction.
+\item If $k=0$: comparing symbols of order $-1$, $-i\pa_\xi c_0\,f'=-i\xi^{-1}f'$, so
+  $\pa_\xi\sigma_0(C)=\xi^{-1}$ on $\xi\ne0$. But $\sigma_0(C)=c^\pm(\theta)$ is
+  constant in $\xi$ on each half line, so $\pa_\xi\sigma_0(C)=0$, a contradiction.
+\end{itemize}
+Hence $D_E$ is not inner. (The would-be $C$ is $\log Q$ for $E(s)=Q^s$, with
+symbol $\log\abs\xi$, which is not a classical symbol of any integral order.)
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{eta:ex:change-eta}}
+
+\emph{Idea:} by \cref{eta:lem:reg-dependence} the change of regularization is a
+residue trace, which only sees the homogeneous term of degree $-1$, i.e.\ the
+principal symbols of $(B^{-1}dB)^{2k+1}$ and of $D$.
+
+Let $\alpha=B^{-1}dB$ and $Q=\alpha^{2k+1}$, a form with coefficients in
+$\PsiT{0}(\Sphere;\C^N)$. By \cref{eta:lem:reg-dependence}, applied coefficientwise,
+\begin{equation*}
+  \eta'_{2k+1}(B)=\Trbar_{E'}(Q)=\Trbar_E(Q)+\TrR(QD)=\eta_{2k+1}(B)+\TrR(QD).
+\end{equation*}
+Since $D\in\Psido{-1}$, $QD$ has order $-1$ and its homogeneous term of degree $-1$
+is $\sigma_0(Q)\,\delta$. Here $\sigma_0(Q)=\sigma_0(\alpha)^{2k+1}$; at $\xi=+1$,
+$\sigma_0(\alpha)=\sigma_0(B^{-1})d_X\sigma_0(B)=b^{-1}d_Xb=\nu$ (the symbol of
+$B^{-1}$ on $\xi>0$ is $b^{-1}$ because $\sigma_0(B^{-1})\sigma_0(B)=\sigma_0(\Pi)=1$
+there), while at $\xi=-1$ it vanishes, because elements of $\PsiT{0}$ have full
+symbols rapidly decreasing as $\xi\to-\infty$. By \cref{eta:lem:circle}(i) (recall
+that $\TrR$ does not depend on the admissible family,
+\cref{eta:prop:residue}),
+\begin{equation*}
+  \TrR(QD)=-\frac1{2\pi}\int_0^{2\pi}\tr\bigl(\nu^{2k+1}\bigr)\,\delta(\theta,1)\,d\theta .
+\end{equation*}
+Multiplying by $c_k$ and summing,
+\begin{equation*}
+  \eta'(B)=\eta(B)+\lambda(b),\qquad
+  \lambda(b)=-\frac1{2\pi}\sum_kc_k\int_0^{2\pi}\tr(\nu^{2k+1})\,\delta(\theta,1)\,d\theta,
+\end{equation*}
+which is the asserted formula; $\lambda(b)$ is a form on $X$ determined by the
+principal symbol $b$ of $B$ (and by $\delta$), i.e.\ local in the symbol. (If $D$ is
+matrix-valued, $\tr(\nu^{2k+1})\delta$ is to be read as $\tr(\nu^{2k+1}\delta)$.)
+
+\emph{The index formula.} Put $\gamma'(b)=\gamma(b)-\lambda(b)$. Then for every
+family $\beta\in\CI(S^*M;\GTeta(\Sphere;\C^N))$ with symbol $b$,
+\begin{equation*}
+  \eta'(\beta)+\gamma'(b)=\eta(\beta)+\lambda(b)+\gamma(b)-\lambda(b)=\eta(\beta)+\gamma(b).
+\end{equation*}
+So the right side of \eqref{eta:eq:I} is unchanged when $(\eta,\gamma)$ is replaced
+by $(\eta',\gamma')$, and \cref{eta:thm:index} holds in the new form. (For the same
+reason the variation formula \eqref{eta:eq:variation-total} holds for
+$\eta'+\gamma'$.)
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{eta:ex:chodd-product}}
+
+\emph{Idea:} rotate $g\oplus\Id$ into $\Id\oplus g$; the transgression formula
+integrates the change of $\Chodd$ along the rotation.
+
+Let $R_t=\begin{psmallmatrix}\cos t&-\sin t\\ \sin t&\cos t\end{psmallmatrix}\otimes
+\Id_N$, constant on $W$, and
+\begin{equation*}
+  a_t=R_t(g\oplus\Id)R_t^{-1}(\Id\oplus h)\in\CI(W;\GL(2N,\C)),\quad t\in[0,\tfrac\pi2].
+\end{equation*}
+Then $a_0=g\oplus h$, and since $R_{\pi/2}=\begin{psmallmatrix}0&-1\\1&0\end{psmallmatrix}$
+gives $R_{\pi/2}(g\oplus\Id)R_{\pi/2}^{-1}=\Id\oplus g$, $a_{\pi/2}=\Id\oplus gh$. For a
+block diagonal map, $(a^{-1}da)^{2k+1}$ is block diagonal and its trace is the sum
+of the traces of the blocks; $\Chodd(\Id)=0$. Hence
+$\Chodd(a_0)=\Chodd(g)+\Chodd(h)$ and $\Chodd(a_{\pi/2})=\Chodd(gh)$. By
+\cref{eta:lem:transgression} (after the change of variable $t=\frac\pi2s$),
+$\pa_t\Chodd(a_t)=d\Theta(a_t)$, so
+\begin{equation*}
+  \Chodd(gh)-\Chodd(g)-\Chodd(h)=\int_0^{\pi/2}\pa_t\Chodd(a_t)\,dt
+  =d\int_0^{\pi/2}\Theta(a_t)\,dt
+\end{equation*}
+is exact. Its degree-one part is
+$c_0\bigl(\tr((gh)^{-1}d(gh))-\tr(g^{-1}dg)-\tr(h^{-1}dh)\bigr)$, and
+$\tr((gh)^{-1}d(gh))=\tr(h^{-1}g^{-1}dg\,h)+\tr(h^{-1}dh)=\tr(g^{-1}dg)+\tr(h^{-1}dh)$,
+so it vanishes. (Equivalently: the degree-zero part of $\Theta(a_t)$ is
+$c_0\tr(a_t^{-1}\pa_ta_t)=c_0\pa_t\log\det a_t=0$, since $\det a_t=\det g\det h$.)
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{eta:ex:circle-AS}}
+
+\emph{Idea:} split $L^2=\HardyL\oplus\HardyL^\perp$; the two diagonal blocks are
+Toeplitz operators (the second after a reflection), and each contributes one
+component of $S^*\Sphere$.
+
+Let $p=\sigma_0(P)$ and $p_\pm(\theta)=p(\theta,\pm1)$. The two components
+$\Sphere\times\{\pm1\}$ of $S^*\Sphere$ carry the Liouville orientations $\pm d\theta$
+(\cref{eta:ex:orientation} with $M=\Sphere$). Only the degree-one term
+$c_0\tr(p^{-1}dp)$ of $\Chodd(p)$ contributes, $c_0=\frac i{2\pi}$, and
+$\tr(q^{-1}\pa_\theta q)=\pa_\theta\log\det q$ locally, so
+$\frac i{2\pi}\int_0^{2\pi}\tr(q^{-1}\pa_\theta q)\,d\theta=\frac i{2\pi}\cdot2\pi i\,
+\wind\det q=-\wind\det q$. Hence
+\begin{equation*}
+  \int_{S^*\Sphere}\Chodd(p)=-\wind\det p_++\wind\det p_- .
+\end{equation*}
+
+\emph{The splitting.} Write $P=P'+K$, $P'=\Pi P\Pi+(\Id-\Pi)P(\Id-\Pi)$,
+$K=\Pi P(\Id-\Pi)+(\Id-\Pi)P\Pi$. The principal symbol of $\Pi$ is the scalar $1$ on
+$\xi>0$ and $0$ on $\xi<0$, so the principal symbols of both terms of $K$ vanish;
+$K\in\Psido{-1}(\Sphere;\C^N)$ is compact. So $P'$ is Fredholm with $\ind P'=\ind P$.
+$P'$ is block diagonal for $L^2=(\HardyL\oplus\HardyL^\perp)\otimes\C^N$, so its
+blocks are Fredholm and
+\begin{equation*}
+  \ind P=\ind\bigl(\Pi P\Pi\text{ on }\HardyL\otimes\C^N\bigr)
+  +\ind\bigl((\Id-\Pi)P(\Id-\Pi)\text{ on }\HardyL^\perp\otimes\C^N\bigr).
+\end{equation*}
+
+\emph{Positive part.} $\Pi P\Pi\in\PsiT{0}$ has principal symbol $p_+$ at $\xi=+1$,
+which is invertible, so by \eqref{eta:eq:toeplitz-index} its index is
+$-\wind\det p_+$.
+
+\emph{Negative part.} Let $\mathcal J=e^{-i\theta}R$, $(Ru)(\theta)=u(-\theta)$. It is
+unitary, $\mathcal Je_k=e_{-k-1}$, so $\mathcal J^2=\Id$, $\mathcal J$ exchanges
+$\HardyL$ and $\HardyL^\perp$, $\mathcal J(\Id-\Pi)\mathcal J^{-1}=\Pi$, and its restriction
+to $\HardyL^\perp$ is the unitary $J$ of the proof of \cref{eta:prop:full}. Hence
+$(\Id-\Pi)P(\Id-\Pi)$ on $\HardyL^\perp\otimes\C^N$ is unitarily equivalent to
+\begin{equation*}
+  T_-=\mathcal J(\Id-\Pi)P(\Id-\Pi)\mathcal J^{-1}=\Pi\bigl(\mathcal JP\mathcal J^{-1}\bigr)\Pi
+  \quad\text{on }\HardyL\otimes\C^N .
+\end{equation*}
+The reflection $\theta\mapsto-\theta$ has cotangent lift $(\theta,\xi)\mapsto(-\theta,-\xi)$,
+so $RPR\in\Psido0$ has principal symbol $p(-\theta,-\xi)$ (invariance of the
+principal symbol, \cref{ch:manifolds}), and conjugation by the multiplication operator
+$e^{-i\theta}$ does not change principal symbols. So $T_-\in\PsiT0$ has principal
+symbol $p(-\theta,-1)=p_-(-\theta)$ at $\xi=+1$, and by
+\eqref{eta:eq:toeplitz-index}, $\ind T_-=-\wind\det p_-(-\cdot)=\wind\det p_-$.
+
+Adding, $\ind P=-\wind\det p_++\wind\det p_-=\int_{S^*\Sphere}\Chodd(\sigma_0(P))$.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{eta:ex:orientation}}
+
+\emph{Idea:} compute interior products of the Liouville volume form with the
+outward normals.
+
+Let $x$ be an oriented local coordinate on $M$ ($n=1$), $\xi$ the dual coordinate.
+The Liouville form is $\omega=d\xi\wedge dx$, which orients $T^*M$. The unit ball
+bundle is $\{\abs\xi\le1\}$ with boundary $\{\xi=\pm1\}$, where the outward normal
+is $\pm\pa_\xi$. With the convention ``outward normal first'', the boundary is
+oriented by $\iota_{\pm\pa_\xi}(d\xi\wedge dx)=\pm dx$: the Liouville orientation of
+$S^*M\cong M\times\{\pm1\}$ is $\pm dx$.
+
+On $M\times\Sphere$ use coordinates $(x,\theta,\xi,\tau)$. Then
+$\omega=d\xi\wedge dx+d\tau\wedge d\theta$ and $\omega^2/2=d\xi\wedge dx\wedge d\tau\wedge
+d\theta$. The outward normal of the unit ball bundle is $\rho=\xi\pa_\xi+\tau\pa_\tau$
+on $\xi^2+\tau^2=1$, so $S^*(M\times\Sphere)$ is oriented by
+\begin{equation*}
+  \iota_\rho\Bigl(\frac{\omega^2}2\Bigr)=\xi\,dx\wedge d\tau\wedge d\theta+\tau\,d\xi\wedge
+  dx\wedge d\theta .
+\end{equation*}
+Parametrize the fibre circle by $(\xi,\tau)=(\cos\varphi,\sin\varphi)$; then
+$d\xi=-\sin\varphi\,d\varphi$, $d\tau=\cos\varphi\,d\varphi$ and the form becomes
+\begin{equation*}
+  \cos^2\varphi\,dx\wedge d\varphi\wedge d\theta-\sin^2\varphi\,d\varphi\wedge dx\wedge d\theta
+  =dx\wedge d\varphi\wedge d\theta .
+\end{equation*}
+$S^*_+=\{\tau\ge0\}=\{0\le\varphi\le\pi\}$ has boundary $\varphi=0$ ($\xi=1$) and
+$\varphi=\pi$ ($\xi=-1$), with outward normals $-\pa_\varphi$ and $+\pa_\varphi$. Since
+$\iota_{\pa_\varphi}(dx\wedge d\varphi\wedge d\theta)=-dx\wedge d\theta$, the boundary
+orientation is $+dx\wedge d\theta$ on $\{\xi=1\}$ and $-dx\wedge d\theta$ on
+$\{\xi=-1\}$, i.e.\ $(\pm dx)\wedge d\theta$: the Liouville orientation of $S^*M$
+followed by $d\theta$, in agreement with \cref{eta:lem:orientation}.
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{eta:ex:relative}}
+
+\emph{Idea:} use the collar to move the boundary datum $\tau$ into the interior, and
+then the radial homotopy of the collar to make the form vanish near the boundary.
+(The hint of the original statement claimed that $u-d(\chi\tau)$ already vanishes
+near $\pa Z$; this is false in general, e.g.\ for $Z=[0,1]$, $u=dx$, $\tau=0$, and
+the statement has been amended.)
+
+With $f=0$, $Y=\pa Z$ and $\psi_*=\Id$, $C^k(Z,\psi)=\CI(Z;\Lambda^k)\oplus
+\CI(\pa Z;\Lambda^{k-1})$ and $\mathcal D(u,\tau)=(du,\iota^*u-d\tau)$. We realize
+$H^k(Z,\pa Z)=H^k_c(Z\setminus\pa Z)$ as the cohomology of the complex
+$\Omega_c^\bullet$ of forms on $Z$ vanishing near $\pa Z$ (these are the compactly
+supported forms on the interior, $Z$ being compact).
+
+\emph{Collar tools.} Fix a collar $\pa Z\times[0,1)_r\cong U\subset Z$, with
+projection $\pi:U\to\pa Z$, and $h_s(y,r)=(y,sr)$, $s\in[0,1]$, so $h_1=\Id$,
+$h_0=\iota\circ\pi$. The homotopy formula gives, for forms $w$ on $U$ (or on
+$\pa Z\times[0,r_0)$, which $h_s$ preserves),
+\begin{equation*}
+  w-\pi^*\iota^*w=dKw+Kdw,\qquad Kw=\int_0^1\iota_{\pa_s}(H^*w)\,ds,\quad
+  H(q,s)=h_s(q).
+\end{equation*}
+At $r=0$, $H(y,0,s)=(y,0)$ for all $s$, so $dH(\pa_s)=0$ there and $Kw$ vanishes at
+$r=0$; in particular $\iota^*Kw=0$. Let $\chi=\chi_0(r)$, with $\chi_0=1$ near $0$ and
+$\supp\chi_0\subset[0,\frac12)$, extended by $0$ to $Z$; for a form $\tau$ on $\pa Z$,
+$\chi\tau$ denotes the form $\chi\,\pi^*\tau$ on $Z$, so that $\iota^*(\chi\tau)=\tau$.
+
+\emph{The map.} Define $\Phi:H^k_c(Z\setminus\pa Z)\to H^k(Z,\psi)$ by
+$\Phi[w]=[(w,0)]$. For closed $w\in\Omega^k_c$, $\mathcal D(w,0)=(dw,\iota^*w)=0$; and if
+$w=dv$ with $v\in\Omega_c^{k-1}$ then $(w,0)=(dv,\iota^*v)=\mathcal D(v,0)$. So
+$\Phi$ is well defined. It is natural (compatible with diffeomorphisms of $Z$ and
+with the obvious maps of both complexes).
+
+\emph{Surjectivity.} Let $(u,\tau)$ be closed: $du=0$, $d\tau=\iota^*u$. Then
+\begin{equation*}
+  (u,\tau)-\mathcal D(\chi\tau,0)=\bigl(u-d(\chi\tau),\ \tau-\iota^*(\chi\tau)\bigr)
+  =(w,0),\qquad w=u-d(\chi\tau),
+\end{equation*}
+with $dw=0$ and $\iota^*w=\iota^*u-d\tau=0$. On $U$ the homotopy formula gives
+$w=\pi^*\iota^*w+dKw=dKw$. Let $\tilde\chi$ be another cut-off of the same kind.
+Then $(w,0)-\mathcal D(\tilde\chi Kw,0)=(w-d(\tilde\chi Kw),-\iota^*Kw)=(w',0)$ with
+$w'=w-d(\tilde\chi Kw)$, which equals $w-dKw=0$ where $\tilde\chi=1$. So $w'$ is a
+closed form vanishing near $\pa Z$, and $[(u,\tau)]=\Phi[w']$.
+
+\emph{Injectivity.} Let $w\in\Omega^k_c$ be closed, vanishing on $\{r<r_0\}$, and
+suppose $(w,0)=\mathcal D(v,\sigma)=(dv,\iota^*v-d\sigma)$. Put
+$v_1=v-d(\chi\sigma)$; then $dv_1=w$ and $\iota^*v_1=\iota^*v-d\sigma=0$. On
+$\pa Z\times[0,r_0)$ we have $dv_1=0$, so $v_1=\pi^*\iota^*v_1+dKv_1=dKv_1$ there. With
+$\tilde\chi$ equal to $1$ near $r=0$ and supported in $r<r_0$, put
+$v_2=v_1-d(\tilde\chi Kv_1)$. Then $dv_2=w$, and $v_2=v_1-dKv_1=0$ near $\pa Z$. So
+$w=dv_2$ with $v_2\in\Omega^{k-1}_c$, i.e.\ $[w]=0$ in $H^k_c(Z\setminus\pa Z)$.
+
+Hence $\Phi$ is an isomorphism $H^k_c(Z\setminus\pa Z)=H^k(Z,\pa Z)\cong H^k(Z,\psi)$.
+(The same collar argument shows that the complex of forms $u$ with $\iota^*u=0$, the
+other usual model of relative cohomology, has the same cohomology.)
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{eta:ex:les}}
+
+\emph{Idea:} $C^\bullet(Z,\psi)$ is an extension of the de Rham complex of $Z$ by a
+shifted de Rham complex of $Y$; the long exact sequence is the zig-zag sequence,
+and all three exactness statements can be checked by hand.
+
+\emph{$\mathcal D^2=0$.} Since $\iota^*$ and $\psi_*$ commute with $d$,
+\begin{equation*}
+  \mathcal D^2(u,\tau)=\mathcal D(du,\psi_*\iota^*u-d\tau)
+  =\bigl(d^2u,\ \psi_*\iota^*du-d\psi_*\iota^*u+d^2\tau\bigr)=0 .
+\end{equation*}
+
+\emph{The short exact sequence.} Let $A^k=\CI(Y;\Lambda^{k-f-1})$ with differential
+$-d$, and $i:A^k\to C^k(Z,\psi)$, $i(\tau)=(0,\tau)$; $p:C^k(Z,\psi)\to
+\CI(Z;\Lambda^k)$, $p(u,\tau)=u$. Then $\mathcal Di(\tau)=(0,-d\tau)=i(-d\tau)$ and
+$p\mathcal D(u,\tau)=du=dp(u,\tau)$, so $i$, $p$ are chain maps; $i$ is injective,
+$p$ surjective and $\ker p=\Ran i$. The complexes $(A,-d)$ and $(A,d)$ have the same
+cocycles and coboundaries, so $H^k(A)=H^{k-f-1}(Y)$.
+
+\emph{The maps.} $i_*[\tau]=[(0,\tau)]$ for closed $\tau\in\CI(Y;\Lambda^{k-f-1})$,
+$p_*[(u,\tau)]=[u]$, and the connecting map is computed by the usual recipe: lift a
+closed $u\in\CI(Z;\Lambda^k)$ to $(u,0)$, apply $\mathcal D$ to get
+$(0,\psi_*\iota^*u)=i(\psi_*\iota^*u)$, and set
+$\delta[u]=[\psi_*\iota^*u]\in H^{k+1}(A)=H^{k-f}(Y)$. Here $\psi_*\iota^*u$ is closed
+since $d\psi_*\iota^*u=\psi_*\iota^*du=0$, and if $u=dv$ then
+$\psi_*\iota^*u=d(\psi_*\iota^*v)$, so $\delta$ is well defined and induced by
+$\psi_*\iota^*$, as claimed.
+
+\emph{Exactness} of $H^{k-f-1}(Y)\xrightarrow{i_*}H^k(Z,\psi)\xrightarrow{p_*}H^k(Z)
+\xrightarrow{\delta}H^{k-f}(Y)\xrightarrow{i_*}H^{k+1}(Z,\psi)$:
+\begin{itemize}
+\item At $H^k(Z,\psi)$: $p_*i_*=0$. If $[(u,\tau)]$ has $u=dv$, then
+  $(u,\tau)-\mathcal D(v,0)=(0,\tau-\psi_*\iota^*v)$, and $\tau-\psi_*\iota^*v$ is
+  closed because $d\tau=\psi_*\iota^*u=d\psi_*\iota^*v$; so
+  $[(u,\tau)]=i_*[\tau-\psi_*\iota^*v]$.
+\item At $H^k(Z)$: $[u]$ is in the image of $p_*$ iff there is $\tau$ with
+  $d\tau=\psi_*\iota^*u$, i.e.\ iff $\delta[u]=0$.
+\item At $H^{k-f}(Y)$: $i_*\delta[u]=[(0,\psi_*\iota^*u)]=[\mathcal D(u,0)]=0$.
+  Conversely, if $i_*[\sigma]=0$, i.e.\ $(0,\sigma)=\mathcal D(v,\rho)=
+  (dv,\psi_*\iota^*v-d\rho)$, then $v$ is closed and $[\sigma]=[\psi_*\iota^*v]=
+  \delta[v]$.
+\end{itemize}
+Repeating for all $k$ gives the long exact sequence of
+\cref{eta:prop:psi-cohomology}(i).
+
+%----------------------------------------------------------------------
+\subsection*{\Cref{eta:ex:det-section}}
+
+\emph{Idea:} use the local section $b\mapsto P_0$ of $\mathcal P$ in the formula for
+$s$.
+
+In the local trivialization, $P_0$ is invertible with $P_0^{-1}\in\Psido0$ (the
+inverse of an invertible elliptic operator is its generalized inverse,
+\cref{index:prop:generalized-inverse}), and $P_0=P_b+(-K_b)$ with $-K_b$ smoothing.
+So $P_0\in\mathcal P_b$ for every $b$ in the trivializing set, $b\mapsto P_0$ is a
+smooth local section of $\mathcal P$, and $z\mapsto[P_0,z]$ is the corresponding
+trivialization of $\operatorname{Det}$ (\cref{eta:prop:det-bundle}). Taking $A=P_0$
+in the definition of $s$,
+\begin{equation*}
+  s(b)=\bigl[P_0,\det(P_0^{-1}P_b)\bigr]=\bigl[P_0,\det(\Id+P_0^{-1}K_b)\bigr],
+\end{equation*}
+since $P_0^{-1}P_b=\Id+P_0^{-1}K_b$ with $P_0^{-1}K_b$ smoothing. So in this
+trivialization $s$ is the function $b\mapsto\det(\Id+P_0^{-1}K_b)$, which is smooth
+(the Fredholm determinant is smooth on smooth families in $\Id+\Psido{-\infty}$,
+\cref{ch:index}).
+
+If every $P_b$ is invertible, then (again by
+\cref{index:prop:generalized-inverse}) $P_b^{-1}\in\Psido0$, so $P_b\in\mathcal P_b$
+and $b\mapsto P_b$ is a global smooth section of $\mathcal P$ (smooth because in
+any local trivialization it is $P_0+K_b$). Then
+$s(b)=[P_b,\det(P_b^{-1}P_b)]=[P_b,1]$ is a smooth section of $\operatorname{Det}$
+which vanishes nowhere (by \cref{eta:prop:det-bundle} it vanishes exactly where $P_b$
+is not invertible). A line bundle with a nowhere vanishing section is trivial:
+$z\mapsto zs(b)$ is an isomorphism $B\times\C\cong\operatorname{Det}$.

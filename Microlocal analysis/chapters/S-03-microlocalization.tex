@@ -411,8 +411,9 @@ $q_{A,R,k}(u_\eps-u)\to0$. Hence $u_\eps\to u$, and $\CIc(\R^n)$ is dense.
 
 \subsection*{\Cref{microlocal:ex:parametrix-direct}}
 By \cref{microlocal:def:elliptic} there is $\eps_0\in(0,1)$ with $\abs a\ge\eps_0\abs\xi^m$ on
-$\Gamma_{\eps_0}(z)\cap\{\abs\xi\ge1/\eps_0\}$. Let $\eps=\eps_0/2$ and $\gamma_\eps=\gamma_{z,\eps}$.
-Then $\supp\gamma_\eps\subset\overline{\Gamma_\eps(z)}\cap\{\abs\xi\ge1/(2\eps)\}$ is contained in the
+$\Gamma_{\eps_0}(z)\cap\{\abs\xi\ge1/\eps_0\}$. Let $\eps=\eps_0/4$ and $\gamma_\eps=\gamma_{z,\eps}$.
+Then $\supp\gamma_\eps\subset\overline{\Gamma_\eps(z)}\cap\{\abs\xi\ge1/(2\eps)\}=\overline{\Gamma_{\eps_0/4}(z)}\cap
+\{\abs\xi\ge2/\eps_0\}$ is contained in the
 open set $U=\Gamma_{\eps_0}(z)\cap\{\abs\xi>1/\eps_0\}$, on which $\abs a\ge\eps_0\abs\xi^m\ge c\ang\xi^m$
 ($c=\eps_0 2^{-\abs m/2}$, as $\abs\xi\ge1$).
 
@@ -543,8 +544,8 @@ covector $-\xi\ne0$; points of the third have second covector $0$ only if $\eta=
   \WF(\gamma)\subset\WFp(A)\cap\WF(u),
 \end{equation*}
 which is microlocality (\cref{microlocal:thm:microlocality}), now derived from the elementary
-operations. Note that $\WF(\kappa)$ can contain points off the diagonal (the first set), but these
-are conormal to the fibres of $\pi_1$ only in the trivial direction and disappear under projection.
+operations. Note that $\WF(\kappa)$ can contain points off the diagonal (the first set), but their first
+covector component is $0$, so they do not contribute after projection.
 
 \subsection*{\Cref{microlocal:ex:projection-noncompact}}
 Let $\mathcal E=\{u\in\cSp(\R^{p+k});\ \supp u\cap(K\times\R^k)\text{ compact for all compact }K\}$.
@@ -722,9 +723,8 @@ $c(\sgn t)^{k+1}\abs t^{-1/2}$, $t=x-1/k$, $c=\prod_{i=0}^{k}(k+\frac12-i)\ne0$,
 $1/k\in\singsupp u$ for all $k$, and since the singular support is closed, $0\in\singsupp u$. By
 \cref{microlocal:prop:wf-local}(ii) some $(0,\xi)$ lies in $\WF(u)$, and as $u$ is real
 (\cref{microlocal:cor:wf-conj}) both $(0,1)$ and $(0,-1)$ do. So
-$\bigcup_s\WF_s(u)\subsetneq\WF(u)$; in accordance with \cref{microlocal:prop:wf-s}(vi), $(0,\pm1)$ lie in
-the closure of $\bigcup_s\WF_s(u)$, which contains $(1/k,\pm1)\in\WF_{k+1}(u)$ (a point where $\eps_kv_k$, and so $u$,
-fails to be in $H^{k+1}$ locally is a point of $\singsupp$ for the $H^{k+1}$ scale).
+$\bigcup_s\WF_s(u)\subsetneq\WF(u)$. In accordance with \cref{microlocal:prop:wf-s}(vi), $(0,\pm1)$ lie in
+the closure of $\bigcup_s\WF_s(u)$ (which is $\WF(u)$), although not in the union itself.
 
 \subsection*{\Cref{microlocal:ex:Dx1}}
 \emph{Characteristic set and bicharacteristics.} $\sigma_L(P)=\xi_1=p$ is real and homogeneous of
@@ -754,8 +754,8 @@ $\bar\xi=(0,\bar\xi_2)$. The null bicharacteristic $\gamma(t)=(\bar x_1+t,\bar x
 meets $\WF_{s+\eps}(u)$ at $t=0$, but $\gamma(t)\notin\WF_{s+\eps}(u)$ for $t<-1-\bar x_1$, since $u$ vanishes
 near $\{x_1<-1\}$. Yet $\gamma(\R)\cap\WF_s(Pu)=\emptyset$. With $m=1$ and order $s'=s+\eps$ in
 \cref{microlocal:thm:propagation}(ii), the hypothesis there is
-$\gamma\cap\WF_{s'-m+1}(Pu)=\gamma\cap\WF_{s+\eps}(Pu)=\emptyset$, which fails; and the example shows that it cannot
-be weakened to $\gamma\cap\WF_{s'-m+1-\eps}(Pu)=\gamma\cap\WF_s(Pu)=\emptyset$. On the elliptic set, $Pu\in H^s$
+$\gamma\cap\WF_{s'-m+1}(Pu)=\gamma\cap\WF_{s+\eps}(Pu)=\emptyset$, which we do not know here, and the example shows
+that it cannot be weakened to $\gamma\cap\WF_{s'-m+1-\eps}(Pu)=\gamma\cap\WF_s(Pu)=\emptyset$. On the elliptic set, $Pu\in H^s$
 would give $u\in H^{s+1}$ (\cref{microlocal:prop:wf-s}(iv)); along $\Sigma(P)$ one only gets
 $u\in H^{s}$, propagated from where it is known: one derivative is lost.
 

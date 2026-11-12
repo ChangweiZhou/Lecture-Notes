@@ -96,8 +96,10 @@ $k\in\N$, then by (i) $x^\alpha D^\beta u\in L^2$ for all $\alpha,\beta$; by the
 $\sup|f|\le C\sum_{|\gamma|\le n+1}\norm{D^\gamma f}_{L^2}$ (proved below) applied to $f=x^\alpha D^\beta u$,
 all Schwartz seminorms of $u$ are finite, so $u\in\cS$.
 
-The embedding: $\sup|f|\le(2\pi)^{-n}\norm{\hat f}_{L^1}\le(2\pi)^{-n}\norm{\ang{\xi}^{-n-1}}_{L^2}
-\norm{\ang{\xi}^{n+1}\hat f}_{L^2}$ and $\ang\xi^{2(n+1)}\le C\sum_{|\gamma|\le n+1}\xi^{2\gamma}$.
+The embedding follows from $\ang\xi^{2(n+1)}\le C\sum_{|\gamma|\le n+1}\xi^{2\gamma}$ and
+\begin{equation*}
+  \sup|f|\le(2\pi)^{-n}\norm{\hat f}_{L^1}\le(2\pi)^{-n}\norm{\ang{\xi}^{-n-1}}_{L^2}\norm{\ang{\xi}^{n+1}\hat f}_{L^2}.
+\end{equation*}
 
 (vi) $\bigcup_s\Hs{s}_{\mathrm{iso}}=\cSp$. Let $u\in\cSp$. There are $C,k$ with
 $|\pair u\phi|\le C\sum_{|\alpha|+|\beta|\le k}\sup|x^\alpha D^\beta\phi|$ for $\phi\in\cS$. By the
@@ -194,8 +196,8 @@ Let $B_0\in\Psiisoph{-m}$ be a parametrix, $AB_0=\Id+E$, $B_0A=\Id+E'$, $E,E'$ r
 \ref{determinants:I:elliptic}.
 
 \emph{Right inverse up to finite rank.} By \cref{determinants:ex:finite-rank-inverse} there is a
-residual $F$ with $(\Id+E)(\Id+F)=\Id+G$, $G$ of finite rank. Then $B_R=B_0(\Id+F)\in\Psiisoph{-m}$
-(as $B_0F$ is residual) and $AB_R=\Id+G$.
+residual $F$ with $(\Id+E)(\Id+F)=\Id+G$, $G$ of finite rank. Then
+$B_R=B_0(\Id+F)\in\Psiisoph{-m}$ (as $B_0F$ is residual) and $AB_R=\Id+G$.
 
 \emph{Left inverse.} Apply \cref{determinants:ex:finite-rank-inverse} to $E'^*$: $(\Id+E'^*)(\Id+F')=\Id+G'$,
 and take adjoints: $(\Id+F'^*)(\Id+E')=\Id+G'^*$. So $B_L=(\Id+F'^*)B_0\in\Psiisoph{-m}$ satisfies
@@ -231,7 +233,7 @@ so $H\in\Psiisoph2$ with principal symbol $1$ on $\Sphere^{2n-1}$: $H$ is ellipt
 \emph{Identities.} Since $[D_j,x_k]=-i\delta_{jk}$ and the $D$'s, resp.\ the $x$'s, commute,
 \begin{gather*}
   C_jA_j=D_j^2+x_j^2+i[x_j,D_j]=D_j^2+x_j^2-1,\qquad A_jC_j=D_j^2+x_j^2+i[D_j,x_j]=D_j^2+x_j^2+1,\\
-  [A_l,C_j]=i[D_l,x_j]-i[x_l,D_j]=2\delta_{lj},\quad [C_l,C_j]=i[D_l,x_j]+i[x_l,D_j]=0,\quad
+  [A_l,C_j]=i[D_l,x_j]-i[x_l,D_j]=2\delta_{lj},\qquad [C_l,C_j]=i[D_l,x_j]+i[x_l,D_j]=0,\\
   [A_l,A_j]=-i[D_l,x_j]-i[x_l,D_j]=0 .
 \end{gather*}
 Summing the first line gives $H=\sum C_jA_j+n=\sum A_jC_j-n$. Then
@@ -280,14 +282,17 @@ Expanding $a_j=\sum_iA_{ij}e_i$ by multilinearity,
   =f(\Id)\sum_\sigma\sgn(\sigma)\prod_jA_{\sigma(j)j},
 \end{equation*}
 since non-injective $\phi$ give repeated columns. Replacing $\sigma$ by $\sigma^{-1}$ (same sign),
-$\sum_\sigma\sgn\sigma\prod_jA_{\sigma(j)j}=\sum_\sigma\sgn\sigma\prod_iA_{i\sigma(i)}$. This proves
+\begin{equation*}
+  \textstyle\sum_\sigma\sgn\sigma\prod_jA_{\sigma(j)j}=\sum_\sigma\sgn\sigma\prod_iA_{i\sigma(i)} .
+\end{equation*}
+This proves
 uniqueness, and that every such $f$ is $f(\Id)\det$.
 
 \emph{Existence.} $\det A=\sum_\sigma\sgn\sigma\prod_iA_{i\sigma(i)}$ is linear in each column (each
 product contains exactly one entry from each column) and $\det\Id=1$. If columns $k\neq l$ are equal,
-let $\tau$ be the transposition of $k,l$; the map $\sigma\mapsto\tau\circ\sigma$ (which in the form
-$\prod_jA_{\sigma(j)j}$ just swaps the factors from columns $k$ and $l$) pairs terms with equal
-products and opposite signs, so $\det A=0$.
+let $\tau$ be the transposition of $k,l$. The map $\sigma\mapsto\tau\circ\sigma$ pairs the terms of
+$\sigma$ and $\tau\circ\sigma$; since columns $k$ and $l$ agree, $A_{i\tau\sigma(i)}=A_{i\sigma(i)}$ for all $i$, so
+the two products are equal while the signs are opposite. Hence $\det A=0$.
 
 \emph{Multiplicativity.} Fix $A$. The columns of $AB$ are $Ab_j$, so $B\mapsto\det(AB)$ is linear in
 each column of $B$ and vanishes if two columns of $B$ coincide. By the first step
@@ -476,10 +481,11 @@ invertible on the sphere and $D+D^*$ is elliptic.
 
 \emph{The square.} $(D+D^*)^2=DD^*+D^*D$ since $D^2=0$ and $(D^*)^2=\sum C_jC_l\otimes\iota_j\iota_l=0$.
 Using $A_jC_l=C_lA_j+2\delta_{jl}$,
-\begin{equation*}
-  DD^*+D^*D=\sum_{j,l}\bigl(A_jC_l\,\eps_j\iota_l+C_lA_j\,\iota_l\eps_j\bigr)
-  =\sum_{j,l}C_lA_j(\eps_j\iota_l+\iota_l\eps_j)+2\sum_j\eps_j\iota_j=\sum_jC_jA_j+2\mathcal N=H-n+2\mathcal N .
-\end{equation*}
+\begin{align*}
+  DD^*+D^*D&=\sum_{j,l}\bigl(A_jC_l\,\eps_j\iota_l+C_lA_j\,\iota_l\eps_j\bigr)
+  =\sum_{j,l}C_lA_j(\eps_j\iota_l+\iota_l\eps_j)+2\sum_j\eps_j\iota_j\\
+  &=\sum_jC_jA_j+2\mathcal N=H-n+2\mathcal N .
+\end{align*}
 
 \emph{Null space.} If $(D+D^*)u=0$, $u\in\cSp(\R^n;\Lambda^*)$, then $(H-n+2\mathcal N)u=0$, i.e.\
 $Hu_I=(n-2k)u_I$ for each coefficient of degree $k$. By \cref{determinants:ex:oscillator} the eigenvalues
@@ -605,7 +611,9 @@ $1$), so it has a parametrix $P'$, $P'P=\Id-R_0$ with $R_0$ residual. With $Q=\O
   Qu=QP'A^*(Au)+QP'\Op(q_{1-\psi_1})u+QR_0u .
 \end{equation*}
 The first term is in $\cS$ since $Au\in\cS$; the last since $QR_0$ is residual; and
-$\WFiso'(QP'\Op(q_{1-\psi_1}))\subset\widetilde{\supp\psi}\cap\widetilde{\supp(1-\psi_1)}=\emptyset$
+\begin{equation*}
+  \WFiso'(QP'\Op(q_{1-\psi_1}))\subset\widetilde{\supp\psi}\cap\widetilde{\supp(1-\psi_1)}=\emptyset
+\end{equation*}
 (\cref{determinants:ex:ess-supp}, \eqref{soldeterminants:eq:cutoff}; $\supp(1-\psi_1)$ misses a neighbourhood of
 $\supp\psi$), so the middle operator is residual too. Hence $Qu\in\cS$.
 
@@ -633,7 +641,10 @@ $|\tr(TX)|\le\norm T\norm X_1$. For residual $X$, $\Tr X=\tr X$ (remark after
 by \eqref{determinants:eq:trace-symbol}, a continuous seminorm since $m<-2n$.
 
 \emph{(b) Trace norm.} If $\mu<-n$ and $c\in\Gs\mu$, Plancherel in $\xi$ gives
-$\norm{\Op(c)}_2=(2\pi)^{-n/2}\norm c_{L^2(\R^{2n})}\le C\sup|\ang Z^{-\mu}c|$. Let $\mu=m'/2$, let
+\begin{equation*}
+  \norm{\Op(c)}_2=(2\pi)^{-n/2}\norm c_{L^2(\R^{2n})}\le C\sup|\ang Z^{-\mu}c| .
+\end{equation*}
+Let $\mu=m'/2$, let
 $\Lambda=\Lambda_\mu$ with parametrix $G\in\Psiisoph{-\mu}$, $\Id-\Lambda G=R$ residual. For $X\in\Psiiso{m'}$,
 \begin{equation*}
   X=\Lambda(GX)+H^{-n}(H^nRX),
@@ -675,10 +686,10 @@ Suppose first $\Id+E$ invertible, $M=2\norm{(\Id+E)^{-1}}$. For $k,l\ge k_0$ we 
 $\norm{X_k-E},\norm{X_l-E}<1/M$, so for $s\in[0,1]$ the operators $\sigma(s)=\Id+X_k+s(X_l-X_k)$ are
 invertible with $\norm{\sigma(s)^{-1}}\le M$ (Neumann series). The segment $\sigma$ is a path in
 $\Giso{-\infty}$, so by \eqref{determinants:eq:det-variation}
-\begin{equation*}
-  \detFr(\Id+X_l)=\detFr(\Id+X_k)\exp\delta_{kl},\qquad
+\begin{gather*}
+  \detFr(\Id+X_l)=\detFr(\Id+X_k)\exp\delta_{kl},\\
   |\delta_{kl}|=\Bigl|\int_0^1\tr\bigl(\sigma(s)^{-1}(X_l-X_k)\bigr)ds\Bigr|\le M\norm{X_l-X_k}_1 .
-\end{equation*}
+\end{gather*}
 Since $\delta_{kl}\to0$, $(\detFr(\Id+X_k))$ is Cauchy and bounded away from $0$, hence converges to a
 non-zero limit. If $\Id+E$ is not invertible, let $F'$ be as in (c), $G=\Id+E+F'$, $G_k=\Id+X_k+F'$
 (invertible for large $k$, with $G_k^{-1}\to G^{-1}$ in norm). Then $\Id+X_k=G_k(\Id+R_k)$ with

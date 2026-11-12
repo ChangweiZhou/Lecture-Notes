@@ -2893,14 +2893,15 @@ the coordinates used, and that $(\phi u)|_Z=\phi|_Z\,u|_Z$ for $\phi\in\CI(M)$.
 
 \begin{exercise}\label{manifolds:ex:smoothing-char}
 Show that a continuous linear map $A:\CI(X;E)\to\CI(X;F)$ is smoothing if and only if
-it extends to a continuous linear map $\CmI(X;E)\to\CI(X;F)$. Show that smoothing operators are \emph{not}
+it extends to a sequentially continuous linear map $\CmI(X;E)\to\CI(X;F)$. Show that smoothing operators are \emph{not}
 characterized as the bounded operators $L^2(X)\to\CI(X)$, by considering
 $Au=\inner ug\cdot1$ with $g\in L^2(X)\setminus\CI(X)$.
 \end{exercise}
 
 \begin{exercise}\label{manifolds:ex:oscillatory}
 Let $A\in\Psido m_{\mathrm{ph}}(X;E,F)$ and let $f\in\CI(X)$ be real-valued with
-$df(\bar x)\ne0$. Show that for $u\in\CI(X;E)$, as $t\to+\infty$,
+$df(\bar x)\ne0$. Show that for $u\in\CI(X;E)$ with $df\ne0$ on $\supp u$ (for instance $u$
+supported near $\bar x$), as $t\to+\infty$,
 $e^{-itf}A(e^{itf}u)(\bar x)=t^m\sigma_m(A)(\bar x,df(\bar x))u(\bar x)+O(t^{m-1})$, where
 $\sigma_m(A)$ is the homogeneous principal symbol. (Use the left-reduced form in local
 coordinates and Taylor's formula for $f$.) Conclude that this gives an invariant
