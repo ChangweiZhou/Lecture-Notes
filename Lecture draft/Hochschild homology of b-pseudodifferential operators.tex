@@ -171,10 +171,10 @@ in \(H^{2n-2}(Y)\) after restriction to \(Z\), write
 case \(n=1\) is treated in Remark~\ref{rem:n1}.
 
 \begin{theorem}[Hochschild homology of the b-calculus]\label{thm:full}
-Assume the standing hypotheses, hypothesis~\textup{(C)} of
-Section~\ref{sec:Is}, and the inputs listed in
-Section~\ref{subsec:status}. Parts (i)--(iii) and (ix) hold for every
-\(n\geq1\). Parts (iv)--(viii) are stated for \(n\geq2\).
+Assume the standing hypotheses and the inputs listed in
+Section~\ref{subsec:status}. Parts (i)--(vii) and (ix) hold for every \(n\geq1\).
+Part (viii) is stated for \(n\geq2\), with the \(n=1\) formula in
+Remark~\ref{rem:n1}.
 \begin{enumerate}
 \item[(i)] \(\HH_0(\Ib)\cong\C\), with dual basis the trace, and
 \(\HH_k(\Ib)=0\) for \(k>0\).
@@ -194,11 +194,12 @@ H^{2n-k}(Y\times S_\sigma)\oplus H^{2n-k-1}(Z\times S_\sigma)\).
 S_\partial)\).
 \item[(vii)] \(\HH_k(\Adb)\cong\HH_k(\Adsb)\) for \(k\neq1,2\). For
 \(k=1,2\), \(\HH_k(\Adb)\) is the kernel of a surjection
-\(\HH_k(\Adsb)\to\C^N\). For \(k=1\) the surjection is
-\(\beta\mapsto(\int_{Z_H}\beta_\partial)_H\), where \(\beta_\partial\) is
-the coefficient of \(d\theta_\partial\). For \(k=2\) it is
-\(\beta\mapsto(\int_{Z_H}\beta_0)_H\), where \(\beta_0\) is the component
-free of both circle factors.
+\(\HH_k(\Adsb)\to\C^N\). In the coordinates dual to the traces and
+cocycles of (ii), the surjections are
+\(-i(2\pi)^{-n}(\int_{Z_H}\beta_\partial)_H\) for \(k=1\)
+and \((2\pi)^{-n}(\int_{Z_H}\beta_0)_H\) for \(k=2\).
+Here \(\beta_\partial\) is the coefficient of \(d\theta_\partial\)
+written on the left, and \(\beta_0\) is free of both circle factors.
 \item[(viii)] \(\HH_k(\Ab)\cong\HH_k(\Asb)\) for \(k\neq1,2\). Moreover
 \begin{align*}
  \HH_1(\Ab)&\cong\C\oplus H^{2n-1}(Y\times S_\sigma)\oplus
@@ -206,12 +207,11 @@ free of both circle factors.
  \HH_2(\Ab)&\cong\ker\Bigl(H^{2n-2}(Y)\xrightarrow{(\int_{Z_H})_H}\C^N
  \Bigr)\oplus H^{2n-3}(Y)\oplus H^{2n-3}(Z\times S_\sigma).
 \end{align*}
-The topological map \(H^{2n-2}(Y)\to\C^N\) has rank \(N-1\), by Stokes'
-theorem and Lefschetz duality. The rank of \(\partial^{\mathcal A}_2\) is
-\(\leq N-1\), which is proved given (ii). That \(\partial^{\mathcal A}_2\)
-equals the topological map, and the explicit kernels in (vii), depend on (C)
-and on the sketch (S2) (Remark~\ref{rem:description}). If \(N=1\), then
-\(\HH_2(\Ab)\cong\HH_2(\Asb)\).
+The connecting map \(\partial^{\mathcal A}_2\) is
+\((2\pi)^{-n}\) times the displayed period map on \(H^{2n-2}(Y)\)
+and vanishes on the other summands of \(\HH_2(\Asb)\).
+Its rank is \(N-1\) (Remark~\ref{rem:MNcomponents}). In particular,
+if \(N=1\) then \(\HH_2(\Ab)\cong\HH_2(\Asb)\).
 \item[(ix)] The index functional, which is the image of the trace under
 \(\partial:\HH_1(\Ab)\to\HH_0(\Ib)\), is nonzero. Hence
 \(\HH_k(x^{-\Z}\Psi_b^{\Z}(X))\cong\HH_k(\Ab)\) for \(k\neq1\), and
@@ -220,9 +220,10 @@ and on the sketch (S2) (Remark~\ref{rem:description}). If \(N=1\), then
 \end{enumerate}
 \end{theorem}
 
-The direct-sum decompositions in (v), (vii) and (viii) depend on choices
-(a collar and the splittings of Proposition~\ref{prop:face}); the groups do
-not. Remark~\ref{rem:choices} discusses how the generators depend on \(x\)
+The displayed decompositions use a collar and the face splitting of
+Proposition~\ref{prop:face}. The formula for \(\HH_1(\Ab)\) also uses
+a linear splitting of its short exact sequence.
+Remark~\ref{rem:choices} discusses how the generators depend on \(x\)
 and on the collar. If \(X\) has \(c\) components, each with nonempty boundary, the rank
 in (viii) becomes \(N-c\), and the summand \(\C\) in \(\HH_1(\Ab)\)
 becomes \(\C^{c}\) (Remark~\ref{rem:MNcomponents}). Components without
@@ -290,9 +291,8 @@ part (v) is the b-groupoid case of the Benameur--Nistor theorem
 \cite{BNsymbols,BNfamilies}.
 
 \subsection{Status of the proofs}\label{subsec:status}
-We separate what is proved here from what is quoted, sketched, or
-assumed. Melrose--Nistor \cite{MN} are cited only for comparison; no
-result of theirs is used as an input.
+The proofs use the inputs listed below. The references to
+Melrose--Nistor \cite{MN} are comparisons with the cusp calculus.
 
 \emph{Proved in these notes.}
 \begin{itemize}
@@ -311,40 +311,44 @@ part (i), which also uses the kernel theorem (C3).
 nonvanishing, and their independence of choices.
 \item The b-trace defect formula on \(x^{-\Z}\Psi_b^{-\infty}\)
 (Theorem~\ref{thm:defect}) and the connecting map in (iii).
-\item The de Rham lemmas for flat and formal Laurent forms, and, given
-(C-HKR), the \(E^2\)-pages of \(\Isb\) and \(\Adsb\)
-(Section~\ref{sec:Is}).
-\item The shift-defect formula for the extended boundary trace, and its
-role as connecting cocycle given (Q1) (Proposition~\ref{prop:omega}). The
-residue formula (Lemma~\ref{lem:rhohat}), and the top-order formulas
-(Lemma~\ref{lem:top}); part (b) assumes (C-HKR).
-\item The algebraic convergence and degeneration theorem
-(Proposition~\ref{prop:algconv}).
-\item For every \(n\), the surjectivity of the boundary connecting maps,
-given (C), (ii) (hence (Q1), (Q2), (S1)) and (Q1). The proof uses
-\(\delta_b\)-closed test forms built from the divergence-free field
-\(\zeta|\zeta|^{-n}\) (Proposition~\ref{prop:dict}). Their explicit
-description is the sketch (S2).
+\item Continuous HKR for the strip-Schwartz algebra \(\cE\)
+(Proposition~\ref{prop:HKRE}) and for smooth Laurent, flat, and formal
+Laurent symbol coefficients (Lemma~\ref{lem:smooth-HKR}
+and Proposition~\ref{prop:E1}).
+\item The de Rham lemmas, the \(E^2\)-pages, and the leading-symbol
+isomorphisms for the three symbol algebras
+(Sections~\ref{sec:collapse} and~\ref{sec:Is}). The convergence proof
+uses the mixed complexes of Lemmas~\ref{lem:mixed-symbols}
+and~\ref{lem:mixed-lifts}. The flat case also uses (Q1)
+(Lemma~\ref{lem:mixed-flat}).
+\item The shift defect, its connecting cocycle given (Q1), and the
+residue and top-order formulas (Proposition~\ref{prop:omega} and
+Lemmas~\ref{lem:rhohat} and~\ref{lem:top}).
+\item Surjectivity and the boundary-period descriptions of the connecting
+maps, with their constants in trace-dual coordinates
+(Propositions~\ref{prop:dict} and~\ref{rem:description}). These use
+the inputs of (ii) and (Q1). In particular,
+\(\operatorname{rank}\partial^{\mathcal A}_2=N-1\) for connected
+\(X\) and \(n\geq2\) (Remark~\ref{rem:MNcomponents}).
 \item For \(n=1\), the surjectivity of both boundary connecting maps of
 \(\Adb\) and of \(\partial^{\mathcal A}_1\), by explicit test cycles. The
 identification of connecting maps uses (Q1).
 \item The fibre-product description of \(\Ab\), and the bound \(N-1\) on the
 rank of \(\partial^{\mathcal A}_2\). The bound uses
-\(\dim\HH_1(\Idb)=N\) from (ii), and so inherits (Q1), (Q2) and (S1).
+\(\dim\HH_1(\Idb)=N\) from (ii), and so inherits (Q1) and (Q2).
 \item The invertibility criterion (Lemmas~\ref{lem:autoinv}
 and~\ref{lem:invertible}).
 \item The Wiener--Hopf index formula for residual perturbations of the
 identity (Theorem~\ref{thm:WH}), and the nonvanishing of the index
 functional. Part (ix) uses in addition (i), (Q0), (Q1) and (C3).
 \item The general index formula for fully elliptic operators of positive
-order (Theorem~\ref{thm:indexgeneral}), with its ingredients: the reduction
-lemma (Lemma~\ref{lem:reduction}), the b-trace defect formula on the
+order (Theorem~\ref{thm:indexgeneral}) is pending independent referee
+review. The section includes the reduction lemma (Lemma~\ref{lem:reduction}), the b-trace defect formula on the
 class \(\mathcal K_\delta\) (Theorem~\ref{thm:defectK}), the resolvent and
 complex powers (Propositions~\ref{prop:resolvent} and~\ref{prop:cp}), the
 b-zeta function and its heat form (Theorem~\ref{thm:bzeta}), and the
-b-eta function (Lemma~\ref{lem:etaH}). The arguments are those of
-\cite[Chs.~2--8]{LoyaThesis}, specialized to codimension one, which is used
-as a source of proofs and not as an input. These results use (Q0) and (C3)
+b-eta function (Lemma~\ref{lem:etaH}). The section adapts the arguments of
+\cite[Chs.~2--8]{LoyaThesis} to codimension one. These results use (Q0) and (C3)
 only, including the (C3) items marked there for Section~\ref{sec:zeta}. The
 sign of the boundary term differs from the printed form of
 \cite[Thm.~8.6]{LoyaThesis}; see Remark~\ref{rem:thesis-sign} and the explicit
@@ -369,8 +373,10 @@ proved.
 \item[(C3)] Standard analysis and topology. This includes: nuclearity of
 \(\cE\), \(B_H\), \(B'_{H,N}\) and of the pieces of the b-calculus; the
 facts that \(\widehat\otimes_\pi\) commutes with countable products and is
-exact on nuclear Fréchet spaces \cite{Treves}; the Schwartz kernel theorem
-\(\dot C^\infty(X^2)=\dot C^\infty(X)\widehat\otimes\dot C^\infty(X)\); Taylor
+exact on nuclear Fréchet spaces \cite{Treves}; the smooth Schwartz kernel theorem, including
+\(\dot C^\infty(X^2)=\dot C^\infty(X)\widehat\otimes\dot C^\infty(X)\);
+Borel extension of smooth jets, classical symbol quantization and
+asymptotic summation; Taylor
 expansion and asymptotic summation of conormal kernels at a face meeting the
 conormal set transversally; the suspended calculus on strips; the identity
 \(\Tr(PQ)=\Tr(QP)\) when \(\operatorname{ord}P+\operatorname{ord}Q<-\dim H\);
@@ -385,48 +391,19 @@ Hilbert--Schmidt property of the inclusions
 \(x^bH^N_b\hookrightarrow x^{b'}H^{N'}_b\) for \(b>b'\) and \(N-N'>n/2\).
 \end{enumerate}
 
-\emph{Hypothesis.}
-\begin{enumerate}
-\item[(C)] For \(\Asb\), \(\Isb\) and \(\Adsb\): (C-HKR), the continuous HKR
-identification of \(E^1\), and (C-stage), the completeness of the order
-filtration in the chain model (Section~\ref{subsec:conv}). The algebraic
-convergence and degeneration theorem is now proved
-(Proposition~\ref{prop:algconv}), and the \(E^2\)-pages are computed here,
-given (C-HKR).
-For \(\Asb\), (C) is part of the Benameur--Nistor theorem
-(Theorem~\ref{thm:BN-conv}); for \(\Isb\) and \(\Adsb\) it is a hypothesis.
-\end{enumerate}
+\emph{Auxiliary arguments.} The optional \v Cech route
+(Section~\ref{sec:cech}) assumes the localization statement in
+Lemma~\ref{lem:cech-descent}. The Rees--Fedosov discussion
+(Section~\ref{sec:rees}) is heuristic.
 
-\emph{Sketched.} The general index formula, item (S3) of earlier
-versions, is now proved in Section~\ref{sec:zeta}. Two sketched items
-remain.
-\begin{enumerate}
-\item[(S1)] The continuous HKR theorem for the algebra \(\cE\) of entire
-functions that are Schwartz on strips. We prove the division lemma and the
-exactness of the Koszul complex, but only sketch the comparison of the
-Koszul and bar complexes for this non-unital algebra
-(Proposition~\ref{prop:HKRE}). The proof of Connes' theorem in
-\cite{MelroseMicro} does not transfer: its normalization step inserts the
-unit (dummy variables), and its local-to-global step uses partitions of
-unity. Neither is available for entire functions.
-\item[(S2)] The explicit description of the boundary connecting maps as
-\((\int_{Z_H}\cdot)_H\) under \(*_b\) (Remark~\ref{rem:description}). It
-requires the exact constants and the cancellation of the equatorial
-logarithmic divergences. The surjectivity of these maps is proved; their
-description, the explicit kernels in (vii)--(viii), and the equality
-\(\operatorname{rank}\partial^{\mathcal A}_2=N-1\) depend on (S2).
-\end{enumerate}
-
-Dependencies: (i) uses (C3). (ii) and (iii) use (Q0)--(Q2), (C3) and
-(S1). (iv)--(vi) use (C). (vii) and (viii) inherit (Q1), (Q2) and (S1)
-from (ii), and (C) from (iv)--(vi). The surjectivity of the connecting
-maps is proved (Propositions~\ref{prop:n1}, \ref{prop:dict}
-and~\ref{prop:connA}). The explicit kernels in (vii)--(viii), and the
-exact rank of \(\partial^{\mathcal A}_2\), use (S2) in addition. (ix) uses
-(i), (Q0), (Q1) and (C3), together with Theorem~\ref{thm:WH}. The general
-index formula (Theorem~\ref{thm:indexgeneral}) uses (Q0) and (C3) only. It
-does not use (Q1), (Q2), (C), (S1) or (S2), and it is not needed for
-(i)--(ix).
+Dependencies: (i) uses (C3). (ii) and (iii) use (Q0)--(Q2) and (C3).
+Parts (v) and (vi) use the complete-symbol calculus (Q0), (C3), and
+the fixed coefficient stage argument. Part (iv) also uses (Q1).
+Parts (vii) and (viii) use (ii), the symbol calculations for
+\(\Asb\) and \(\Adsb\), and excision (Q1).
+Part (ix) uses (i), (Q0), (Q1) and (C3) together with
+Theorem~\ref{thm:WH}. The index formula
+(Theorem~\ref{thm:indexgeneral}) uses (Q0) and (C3).
 
 \subsection{Organization}
 Part~\ref{part:symbols} keeps the computation for the symbol algebra
@@ -450,17 +427,12 @@ for which the homology has a finite-dimensional geometric description.
 It is the b-groupoid specialization of the Laurent symbol algebras studied in
 \cite{BNsymbols,BNfamilies}.
 
-\emph{Status of the result.} Theorem~\ref{thm:main} below is the
-b-groupoid case of the Benameur--Nistor theorem on Laurent complete symbols
-\cite{BNsymbols,BNfamilies}; it is not a new theorem. What these notes add
-is a self-contained computation of the \(E^1\)- and \(E^2\)-pages of the
-order spectral sequence in the b-setting
-(Sections~\ref{sec:graded}--\ref{sec:laurent}), an elementary proof that
-the spectral sequence degenerates at \(E^2\) (Section~\ref{sec:collapse}),
-and a check of the hypotheses for the b-groupoid. Two inputs are quoted
-from Benameur--Nistor: convergence of the order spectral sequence for the
-completed continuous Hochschild complex, and the continuous, globalized
-Hochschild--Kostant--Rosenberg theorem identifying \(E^1\).
+\emph{Status of the result.} Theorem~\ref{thm:main} is the
+b-groupoid specialization of the Benameur--Nistor calculation
+\cite{BNsymbols,BNfamilies}. We give the scalar calculation
+in the chain model of Section~\ref{subsec:chainmodel}. The
+global HKR proof is in Lemma~\ref{lem:smooth-HKR}. The fixed coefficient
+stages in Section~\ref{subsec:conv} give convergence.
 
 For one boundary hypersurface, the standard b-groupoid has underlying set
 \[
@@ -514,9 +486,7 @@ denoted \(S^1_\sigma\).
 
 \begin{theorem}[Hochschild homology; b-groupoid case of
 Benameur--Nistor]\label{thm:main}
-Assume the Benameur--Nistor convergence theorem for the order spectral
-sequence of \(\cA_{b,L}(X;E)\) (Section~\ref{sec:collapse}). Then for every
-\(k\geq0\) the induced filtration of
+For every \(k\geq0\) the induced filtration of
 \(\HH_k^{\mathrm{cont}}(\cA_{b,L}(X;E))\) has exactly one nonzero graded
 piece, and there is a canonical isomorphism
 \begin{equation}\label{eq:main}
@@ -537,7 +507,7 @@ where a cohomology group in negative degree is zero. In particular the
 homology vanishes for \(k>2n\).
 \end{theorem}
 
-The isomorphism \eqref{eq:main} is canonical once convergence is granted;
+The isomorphism \eqref{eq:main} is canonical, and
 the K\"unneth decomposition for \(S^1_\sigma\) is canonical as well. The
 four-summand formula \eqref{eq:expanded} uses one choice: a splitting of
 the Laurent face sequence (a collar, defining function, and cutoff;
@@ -579,7 +549,7 @@ present proof does not use it. Here \(S^1_\sigma\) is the circle
 the filtered noncommutative algebra to its commutative associated graded
 (\(E^1\)), then from Poisson homology to Laurent de Rham cohomology
 (\(E^2\)). Only the weight-zero part survives, which forces
-\(E^2=E^\infty\); convergence is the quoted input.}
+\(E^2=E^\infty\). The fixed coefficient stages give convergence.}
 \end{figure}
 
 \section{Continuous chains and the two filtrations}
@@ -624,11 +594,10 @@ fixed piece in \eqref{eq:BN-chains}, filter elementary tensors by
 take the projective closure there, and then pass through the same
 projective/inductive limits.  Denote the resulting subspace by
 \(\mathcal F_pC_k\).
-Then \(b(\mathcal F_pC_k)\subseteq\mathcal F_pC_{k-1}\). Exhaustivity,
-completeness, and the convergence hypotheses are those verified in the
-Benameur--Nistor topologically filtered theorem. Borel quantization explains
-asymptotic completeness of symbols, but it is not by itself a convergence
-proof for an arbitrarily completed Hochschild complex.
+Then \(b(\mathcal F_pC_k)\subseteq\mathcal F_pC_{k-1}\). The
+filtration is exhaustive. Section~\ref{subsec:conv} proves convergence
+by summing the decreasing-order corrections at fixed pole and order
+bounds in a mixed coefficient complex.
 
 \begin{discussion}
 \textbf{Why divide by smoothing operators?}
@@ -800,6 +769,197 @@ field \(\mathcal E\), and put
 homogeneous of degree \(m_i\), then \(a_0\,da_1\wedge\cdots\wedge da_j\)
 has weight \(m_0+\cdots+m_j\), since \(d\) commutes with dilation.
 
+\begin{lemma}[Continuous HKR for the coefficient kernels]\label{lem:smooth-HKR}
+Let \(V\) be a compact smooth manifold with boundary \(W\), with a
+boundary defining function \(x\) and a collar. Consider any of
+\[
+ C^\infty(V),\qquad
+ \dot C^\infty(V),\qquad
+ C^\infty(V)[x^{-1}],\qquad
+ C^\infty(W)[[x]],\qquad
+ C^\infty(W)[[x]][x^{-1}].
+\]
+Adjoin a polynomial variable \(t\) of weight \(-1\), or a Laurent
+polynomial variable \(r\) of weight \(1\). Use the chains with completed
+smooth coefficient tensors, products for the Taylor coefficients, and a
+finite bound on the poles in each slot in the localized cases. At each
+fixed total weight take the direct sum over slot weights. Then
+\[
+ \chi_k(a_0\otimes\cdots\otimes a_k)
+    =\frac{1}{k!}a_0\,da_1\wedge\cdots\wedge da_k
+\]
+identifies the chain homology with the forms with the indicated
+coefficient behaviour and total weight, where \(dt\) has weight \(-1\)
+and \(dr\) has weight \(1\). In the formal power-series case the normal
+one-form is \(dx\), with formal differentiation in \(x\). The maps
+commute with Taylor restriction in the chosen collar. For a free
+rank-one coefficient bimodule with both actions given by
+multiplication, placing its generator in a prescribed weight shifts
+both the chain complex and this answer by that weight.
+\end{lemma}
+
+\begin{proof}
+Write \(M=V\) for smooth coefficients and \(M=W\) for formal
+coefficients. By the smooth kernel theorem the coefficient tensors
+are kernels on products of \(M\). For flat coefficients they are
+kernels flat at the boundary in each slot: apply nuclear tensor
+exactness successively to the kernel of the Taylor map
+\(C^\infty(V)\to C^\infty(W)[[x]]\), using Borel's lemma for its
+surjectivity. For formal coefficients the Taylor variables in the
+slots are independent, since the completed tensor product commutes
+with the countable products of coefficients. For Laurent coefficients
+one multiplies such kernels by finite negative powers in the
+individual slots. These identifications apply with two endpoint
+variables and any finite number of middle variables.
+
+Use the augmented bar complex with two endpoints. On an open set
+\(U\subset M^2\) of endpoint pairs, write \(P_q(U)\) for kernels with
+the two endpoints in \(U\) and the \(q\) middle variables in \(M^q\).
+There is a polynomial or Laurent polynomial variable in each slot
+and, in the formal cases, a Taylor variable in each slot. The bar
+differential is the alternating sum of the \(q+1\) restrictions that
+identify adjacent slots, including their polynomial and Taylor
+variables. The augmentation from \(P_0\) identifies the endpoints.
+We use the sheaves of these kernels, allowing bounds on the finite
+sets of slot weights and on poles to hold locally in the endpoints.
+A finite cover of the compact base supplies global bounds for global
+sections. The augmented bar complex is exact on stalks. Indeed,
+multiply a germ cycle by a smooth cutoff of the endpoints supported
+where it is a cycle, extend by zero, and contract the resulting global
+bar cycle. Endpoint multiplication commutes with the bar faces
+since they retain the endpoints. In the unital cases the global
+contraction is insertion of \(1\) in the first slot, including the
+augmentation degree.
+
+For flat kernels, take \(\kappa\in C^\infty([0,\infty))\) with
+\(\kappa=0\) on \([0,1/2]\) and \(\kappa=1\) on \([3/4,\infty)\).
+Replace insertion of \(1\) by
+\[
+ (hF)(z_0,z_1,\ldots)=
+   \kappa\bigl(x(z_0)/x(z_1)\bigr)F(z_1,\ldots),
+\]
+with the new polynomial or Laurent polynomial slot of weight zero.
+The formula is extended to the boundary by smoothness. On its
+support \(x(z_1)\le 2x(z_0)\), and derivatives of the cutoff cost at
+most powers of \(x(z_1)^{-1}\). Flatness of \(F\) in \(z_1\) absorbs
+these powers and any prescribed powers of \(x(z_0)^{-1}\), while
+flatness in the other slots is preserved. Taylor's integral formula
+bounds the resulting weighted seminorms by higher smooth seminorms
+of \(F\), so the map of flat kernels is continuous. The
+first face of \(hF\) is \(F\), since \(\kappa(1)=1\), and every
+subsequent face is \(h\) applied to the preceding face of \(F\).
+Thus \(b'h+hb'=1\) for the augmented bar differential \(b'\).
+
+Near an endpoint pair on the diagonal, choose a product of two copies
+of a coordinate box, using a half-box with normal coordinate \(x\)
+at the boundary of \(V\). The endpoint ring \(R\) is the term in
+bar degree zero with its two independent slot variables,
+using smooth coefficients in the flat case. Let \(K\) be the
+Koszul complex over \(R\) for the differences of the endpoint
+coordinates. The coordinates include the independent Taylor
+variable \(x\) in the formal cases and the adjoined variable \(t\)
+or \(r\) in all cases. Assign a Koszul generator the weight of the
+coordinate defining it. For flat coefficients set \(K'=R_{\mathrm f}
+\otimes_R K\), with \(R_{\mathrm f}\) the ideal of kernels flat in
+both endpoints. Set \(K'=K\) in the other cases.
+
+For \(P_q\), \(R\), and \(R_{\mathrm f}\), the Koszul complex
+with these coefficients has zero positive homology and degree-zero
+homology given by identifying the endpoints. Here are the division
+details. Impose the coordinate equalities one at a time. In a smooth
+coordinate the difference is injective as a multiplier on the
+previous restriction, by density of the complement of its zero
+set. A kernel vanishing at that equality is divisible by the
+difference using integration of the coordinate derivative along
+the segment between the two coordinate values. Substitution of
+one coordinate for the other gives a right inverse to restriction.
+The other variables are parameters. For flat kernels in a half-box
+do the tangential equalities before the normal equality. In the
+normal coordinate the quotient of a vanishing kernel is smooth
+by the same integral formula. Along the open part of either
+individual boundary face the normal difference is nonzero, so the
+quotient is flat there by ordinary division. Continuity of all its
+derivatives gives flatness up to the corner. A flat kernel \(G\) on
+the normal diagonal extends to a separately flat kernel by
+\(\kappa(x_R/x_L)G(x_L,\ldots)\), with \(L,R\) the endpoints, by
+the ratio estimate above. In a formal normal variable the
+replacement \(x_R=x_L+u\) is an invertible change of variables
+of formal series. Multiplication by \(u\) is injective, with
+cokernel restriction to \(u=0\). For the polynomial difference,
+division by \(t_R-t_L\) gives the same two conclusions, and
+for the Laurent polynomial difference one first clears negative
+powers. These polynomial operations use finite sums. Localizing
+the smooth or formal calculation at the boundary variables in
+the slots preserves exactness, by clearing a finite common
+denominator. After endpoint identification the two endpoint
+denominators use the same boundary variable. These divisions and
+restrictions respect the smooth seminorms, Taylor product topology
+and weight decomposition. The Koszul assertion follows by
+induction, viewing the addition of each generator as the mapping
+cone of multiplication by its difference on the preceding
+Koszul complex.
+
+Extend each coordinate of the box to a global function \(f_i\)
+by a cutoff equal to one on a smaller box. The Taylor and
+polynomial coordinates are already global. There is a local
+endpoint-linear chain map \(\Phi:K'\to P_\bullet\), given by
+\[
+ \Phi_q\bigl(a\,e_{i_1}\wedge\cdots\wedge e_{i_q}\bigr)
+   =a\sum_{\sigma\in S_q}\operatorname{sgn}(\sigma)
+       \prod_{j=1}^q f_{i_{\sigma(j)}}(z_j),
+\]
+where \(z_1,\ldots,z_q\) are the middle variables. In the flat
+case multiply the right side by
+\[
+ W_q(z_0,\ldots,z_{q+1})
+     =\prod_{j=0}^{q}\kappa\bigl(x(z_{j+1})/x(z_j)\bigr),
+\]
+with endpoints \(z_0,z_{q+1}\). This product restricts on each
+bar face to \(W_{q-1}\). On its support \(x(z_0)\le 2^{q+1}x(z_j)\)
+for every \(j\); derivatives of active cutoff factors cost at most
+powers of \(x(z_0)^{-1}\). The endpoint flatness of \(a\) in \(z_0\)
+therefore makes the whole expression separately flat. The middle
+bar faces of the antisymmetrization cancel in pairs, and the end
+faces give the Koszul differential with differences \(f_i(L)-f_i(R)\).
+Both maps augment to the identity on the diagonal (in the flat
+case \(W_0=1\) there). Exactness of the two augmented complexes
+makes \(\Phi\) a quasi-isomorphism locally.
+
+To justify passing to the diagonal, compare the total complexes
+of \(K'\otimes_R K\) and \(P_\bullet\otimes_R K\). In the first
+direction \(\Phi\otimes 1\) is a quasi-isomorphism since the terms
+of \(K\) are finite free. In the other direction the Koszul
+calculation with coefficients in each term shows that the map on
+homology is the restriction of \(\Phi\) obtained by identifying
+endpoints. Both comparisons use the first-quadrant double complexes
+with finite Koszul direction. After endpoint identification the
+Koszul differential of \(K'\) is zero. The bar differential
+becomes the Hochschild differential, including the cyclic face.
+The image of \(a\,e_{i_1}\wedge\cdots\wedge e_{i_q}\) under \(\chi_q\Phi_q\)
+is \(a|_\Delta\,df_{i_1}\wedge\cdots\wedge df_{i_q}\). In the flat case the
+cutoff equals one near the full interior diagonal, so it has no
+effect on this calculation, and the resulting flat forms extend
+to the boundary. The chain identity \(\chi b=0\) follows by the
+Leibniz rule, first on elementary tensors and then on kernels
+by continuity. Thus \(\chi\) induces the stated local isomorphism.
+
+After endpoint identification the base is \(M\), the distinguished
+first variable of the Hochschild chains. Its smooth functions
+act on that variable and commute with \(b\) and \(\chi\).
+A global cycle with zero HKR form has local boundary lifts by
+the local calculation. A finite partition of unity in the
+distinguished variable, supported in the sets where the lifts
+are defined, extends the lifts by zero and sums them to a global
+boundary lift. The same construction glues local antisymmetric
+cycle lifts of a form. The finite gluing preserves a finite
+pole bound and finite slot-weight support. The local coordinate
+formula for a cycle lift, with the diagonal extensions used above,
+is continuous on each fixed pole bound, and so is the finite gluing.
+The explicit formula
+for \(\chi\) commutes with Taylor restriction and with the
+identification of a shifted coefficient copy with its algebra.
+\end{proof}
+
 \begin{proposition}[The \(E^1\)-page]\label{prop:E1}
 The HKR map identifies the first page of the order spectral sequence with
 homogeneous Laurent differential forms on \(\Tbstar\setminus0\), the fiber
@@ -807,28 +967,24 @@ weight being the total symbol order:
 \[
  E^1_{p,q}\cong\Omega_L^{p+q}(\Tbstar\setminus0)_{(p)} .
 \]
+For \(\Isb\) and \(\Adsb\) the coefficients are flat and formal
+Laurent, respectively.
 \end{proposition}
 
 \begin{proof}
-On each b-cotangent chart the associated graded product is ordinary
-multiplication of scalar homogeneous symbols. Antisymmetrization gives the
-inverse to \(\chi\) on Hochschild homology:
-\[
- a_0\,da_1\wedge\cdots\wedge da_j
- \longmapsto
- \sum_{\tau\in S_j}\operatorname{sgn}(\tau)
- a_0\otimes a_{\tau(1)}\otimes\cdots\otimes a_{\tau(j)}.
-\]
-The displayed antisymmetrization is not a literal chain-level inverse;
-the two composites become inverse after the Koszul homotopy. For the
-topologically filtered Laurent groupoid algebra, continuity, completion,
-and globalization are the HKR proposition used by Benameur--Nistor
-\cite{BNsymbols,BNfamilies}. It may be proved through the sheaf of local
-Koszul resolutions and its fine resolution, but a bare partition of unity
-does not patch chain homotopies. Fiber dilation commutes with the published
-quasi-isomorphism, so it retains homogeneity. A chain of total order \(p\)
-in Hochschild degree \(k=p+q\) is sent to a \(k\)-form of weight \(p\),
-which is the displayed indexing.
+A fibre norm identifies the homogeneous functions of order \(m\) with
+\(r^m\) times functions on \(Y\). A graded chain at order \(p\)
+has finitely many radial multidegrees \(m_0+\cdots+m_k=p\), since in
+a fixed stage each \(m_j\) has a fixed upper bound. Every finite
+set of such multidegrees occurs at a sufficiently large stage.
+The three coefficient spaces are the smooth Laurent functions on
+\(Y\), the flat functions on \(Y\), and the formal Laurent functions
+over \(Z\). In the formal case use a norm constant in the collar
+coordinate. The associated graded product is multiplication in all
+three cases, so Lemma~\ref{lem:smooth-HKR} applies with \(r\).
+Its differential forms agree with the stated Laurent, flat and
+formal Laurent forms, respectively. In particular the identification
+commutes with taking the boundary Taylor series.
 \end{proof}
 
 \section{The first differential is Poisson homology}\label{sec:poisson}
@@ -860,8 +1016,9 @@ commutator terms combine to \eqref{eq:poisson-boundary}.
 
 Let \(N=2n\) be the dimension of \(\Tbstar\), put
 \(\mu_b=\omega_b^n/n!\), and let
-\(\pi_b^\sharp:\Omega^j\to\Lambda^jT\) be contraction of every covector
-with \(\pi_b\). Symplectic duality is the map
+\(\pi_b^\sharp\alpha\) be defined on covectors by
+\(\beta(\pi_b^\sharp\alpha)=\pi_b(\beta,\alpha)\), and extend by exterior
+powers. For multivectors we use \(\iota_{U\wedge V}=\iota_V\iota_U\). Symplectic duality is the map
 \[
  *_b:\Omega_L^j(\Tbstar\setminus0)
  \longrightarrow
@@ -1136,9 +1293,8 @@ formula is not used elsewhere in these notes.
 \section{Collapse and assembly of the computation}\label{sec:collapse}
 
 Combining HKR, the Poisson differential, symplectic duality, and homogeneity
-gives the second page. The new point of this section is that the
-degeneration of the spectral sequence is then a matter of bidegrees; the
-only global input that remains is convergence.
+gives the second page. Its support in a single row gives degeneration.
+The convergence argument is in Section~\ref{subsec:conv}.
 
 \begin{proposition}[The \(E^2\)-page and degeneration]\label{prop:E2}
 For the order spectral sequence of
@@ -1168,26 +1324,8 @@ The differential \(d^r\) maps \(E^r_{p,q}\) to \(E^r_{p-r,q+r-1}\). For
 source and target vanishes, and \(d^r=0\).
 \end{proof}
 
-The degeneration is therefore a consequence of degree counting once the
-weight bookkeeping \eqref{eq:weight-shift} is in place. What is not
-automatic, and what we quote, is that the spectral sequence computes the
-continuous Hochschild homology at all.
-
-\begin{theorem}[Benameur--Nistor convergence theorem; quoted]
-\label{thm:BN-conv}
-For the topologically filtered Laurent complete-symbol algebra of a
-differential groupoid satisfying the hypotheses of
-\cite{BNsymbols,BNfamilies}, the continuous HKR map identifies the
-\(E^1\)-page as in Proposition~\ref{prop:E1}, and the order spectral
-sequence of the continuous Hochschild complex converges to
-\(\HH_*^{\mathrm{cont}}\): the induced filtration
-\(\mathcal F_p\HH_k\) (the image of the homology of \(\mathcal F_pC_k\)) is
-exhaustive and Hausdorff, and
-\(E^\infty_{p,q}\cong\mathcal F_p\HH_{p+q}/\mathcal F_{p-1}\HH_{p+q}\).
-\end{theorem}
-
-Benameur and Nistor also prove degeneration at \(E^2\); in the present
-setting this is Proposition~\ref{prop:E2} and need not be quoted.
+The bidegree argument gives degeneration. Convergence to homology
+is proved in Section~\ref{subsec:conv}.
 
 \begin{proposition}[Source dictionary]\label{prop:hypotheses}
 The algebra \(\cA_{b,L}(X;E)\) is the one-face b-groupoid specialization of
@@ -1222,58 +1360,32 @@ kind of local model their hypotheses require; we have not compared it with
 their precise formulation beyond this. The global Morita lemma removes the
 coefficient bundle \(E\).
 
-\emph{Spectral sequence.} Their filtered HKR theorem identifies \(E^1\)
-(Proposition~\ref{prop:E1}) and their convergence theorem identifies
-\(E^\infty\) with the graded continuous Hochschild homology
-(Theorem~\ref{thm:BN-conv}). The \(E^2\)-page and the degeneration are
-computed independently here (Proposition~\ref{prop:E2}).
+\emph{Spectral sequence.} The Laurent HKR identification and the
+convergent order spectral sequence of \cite{BNsymbols,BNfamilies}
+give the same cohomology groups as the calculation here.
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:main}]
-By Proposition~\ref{prop:E2}, \(E^\infty_{p,q}=E^2_{p,q}\) vanishes unless
-\(q=n\). Fix \(k\). By Theorem~\ref{thm:BN-conv},
-\(\mathcal F_p\HH_k/\mathcal F_{p-1}\HH_k=0\) for \(p\neq k-n\). Hence
-\(\mathcal F_p\HH_k=\mathcal F_{k-n}\HH_k\) for all \(p\geq k-n\), and
-exhaustiveness gives \(\mathcal F_{k-n}\HH_k=\HH_k\). Likewise
-\(\mathcal F_p\HH_k=\mathcal F_{k-n-1}\HH_k\) for all \(p\leq k-n-1\), and
-the Hausdorff property gives \(\mathcal F_{k-n-1}\HH_k=0\). Therefore
+By Proposition~\ref{prop:E2}, \(E^2_{p,q}\) vanishes unless \(q=n\).
+Section~\ref{subsec:conv} proves that every class in degree \(k\)
+has a representative of order at most \(k-n\) and identifies the
+class by its leading HKR form at order \(k-n\). Hence
 \[
  \HH_k^{\mathrm{cont}}(\cA_{b,L})
  =\mathcal F_{k-n}\HH_k
- \cong E^\infty_{k-n,n}=E^2_{k-n,n}
- \cong H_L^{2n-k}(Y\times S^1_\sigma),
+ \cong E^2_{k-n,n}\cong H_L^{2n-k}(Y\times S^1_\sigma).
 \]
-with no choices involved: every map in this chain is canonical, and the
-identification \eqref{eq:order-circle} does not depend on the fiber norm.
-A Borel quantization, which splits the symbol filtration on the algebra
-only noncanonically, is not needed. Finally,
-Proposition~\ref{prop:face} and K\"unneth for \(S^1_\sigma\) give the four
-summands in \eqref{eq:expanded}; here the choice of collar splitting
-enters.
+The filtration below \(k-n\) is zero. The leading-symbol map and
+the identification \eqref{eq:order-circle} are independent of the
+full-symbol splitting and the fibre norm. Proposition~\ref{prop:face}
+and the K\"unneth formula give \eqref{eq:expanded}.
 \end{proof}
-
-\begin{discussion}
-\textbf{Why is convergence not automatic?}
-For a merely algebraic union of symbol orders, an infinite correction can
-escape the complex and an \(E^\infty\)-class need not lift to a chain.
-Borel summation and the strict Laurent inductive limit are ingredients in
-the topologically filtered axioms: the former realizes asymptotic symbols
-and the latter keeps every individual chain at finite pole order.  They do
-not by themselves prove convergence.  Convergence to Hochschild homology is
-the quoted Theorem~\ref{thm:BN-conv}. The bidegree argument of
-Proposition~\ref{prop:E2} shows that no higher differentials occur, but by
-itself says nothing about whether \(E^\infty\) is the associated graded of
-\(\HH_*^{\mathrm{cont}}\).
-\end{discussion}
 
 \section{A \v Cech--de Rham route (conditional)}\label{sec:cech}
 
-This section sketches an alternative organization of the proof, which
-replaces the global HKR assertion by a local calculation followed by
-descent. It is \emph{not} self-contained: it depends on a quoted
-localization theorem for continuous Hochschild chains
-(Lemma~\ref{lem:cech-descent}), and it still uses the Benameur--Nistor
-convergence theorem; \v Cech descent alone computes the \(E^2\)-page, not
+This optional route uses local HKR and \v Cech descent to compute the
+\(E^2\)-page. It assumes the chain localization statement of
+Lemma~\ref{lem:cech-descent}. Section~\ref{subsec:conv} supplies
 the abutment.
 
 Choose a finite good cover \(\mathcal U=\{U_i\}\) of
@@ -1303,8 +1415,7 @@ Form the double complex
 The total degree is \(q-p\), since \(b\) lowers Hochschild degree and the
 \v Cech differential raises \(p\).
 
-\begin{lemma}[Localization of continuous Hochschild chains; quoted
-input]\label{lem:cech-descent}
+\begin{lemma}[Localization for the optional \v Cech argument; hypothesis]\label{lem:cech-descent}
 The augmentation
 \[
  C_\bullet^{\mathrm{cont}}(\cA_{b,L})
@@ -1417,12 +1528,9 @@ unlike the residue filtration, is not canonical.
 
 Finally, Lemma~\ref{lem:cech-descent} identifies the abutment of the order
 filtration on \eqref{eq:cech-double} with
-\(\HH_*^{\mathrm{cont}}(\cA_{b,L})\), compatibly with filtrations, so
-Theorem~\ref{thm:BN-conv} applies to it; the proposition identifies its
-second page, and the bidegree argument of Proposition~\ref{prop:E2} gives
-\(E^2=E^\infty\). This recovers Theorem~\ref{thm:main}, conditionally on
-the localization input. Descent replaces the globalization part of the
-HKR step, but it does not manufacture convergence.
+\(\HH_*^{\mathrm{cont}}(\cA_{b,L})\), compatibly with filtrations. The proposition identifies its second
+page, the bidegree argument of Proposition~\ref{prop:E2} gives
+\(E^2=E^\infty\), and Section~\ref{subsec:conv} proves convergence.
 
 \section{A Rees--Fedosov reorganization}\label{sec:rees}
 
@@ -1602,11 +1710,8 @@ bound by a classical symbol, uniquely modulo smoothing; thus
 \]
 The statement is false without the pole bound: an element of
 \(\varprojlim_NF_m/F_{m-N-1}\) may need pole orders \(\ell_N\to\infty\) as
-\(N\to\infty\), and so need not come from \(F_m\). This asymptotic
-completeness does not, by itself,
-prove that Hochschild homology commutes with the projective/inductive limits;
-that separate convergence assertion is exactly the topologically filtered
-theorem quoted in Section~\ref{sec:collapse}.
+\(N\to\infty\), and so need not come from \(F_m\). Section~\ref{subsec:conv} uses this asymptotic completeness at fixed
+bounds after passing to the mixed coefficient complex.
 \end{proof}
 
 \begin{remark}[Scope of the Rees--Fedosov picture]\label{rem:rees-scope}
@@ -1647,8 +1752,7 @@ Theorem~\ref{thm:main}.
 \end{tikzcd}
 \caption[Two alternative organizations of the calculation]{Top row: the
 \v Cech route globalizes the filtered HKR--Poisson calculation; it depends
-on the quoted localization Lemma~\ref{lem:cech-descent} and on the quoted
-convergence theorem. Bottom row (dashed): the Rees--Fedosov picture, a
+on the localization hypothesis of Lemma~\ref{lem:cech-descent}. Bottom row (dashed): the Rees--Fedosov picture, a
 heuristic only (Remark~\ref{rem:rees-scope}). Finite Rees jets compare
 classical symbols with the formal star product at each finite order, but
 the formal Hochschild homology lives over \(\C((\hbar))\), on all of
@@ -2416,7 +2520,7 @@ diagonal action of \(\alpha\).
 \cE(\C^2)\to\cE\to0\), whose last map is restriction to the diagonal, is
 exact. Restriction has the continuous right inverse
 \(f\mapsto f(\lambda_0)e^{-(\lambda_0-\lambda_1)^2}\).
-\item[(d)] \emph{(Sketch, (S1).)} \(\chi\) is a quasi-isomorphism. Thus
+\item[(d)] \(\chi\) is a quasi-isomorphism. Thus
 \(\HH_0(\cE)=\cE\), \(\HH_1(\cE)=\cE\,d\lambda\), and \(\HH_q(\cE)=0\) for
 \(q\geq2\).
 \end{enumerate}
@@ -2446,17 +2550,42 @@ estimated in the same way.
 functions; exactness in the middle is (b); and the stated map is a right
 inverse.
 
-(d) For a unital algebra, (c) is a resolution of the diagonal bimodule by
-free bimodules. The comparison theorem then makes the Hochschild complex
-homotopy equivalent to \(\cE\otimes_{\cE^e}(\text{Koszul})=(\cE\xleftarrow0
-\cE)\), and \(\chi\) realizes this equivalence. The algebra \(\cE\) is not
-unital. Its bar complex is still exact, by H-unitality
-(Lemma~\ref{lem:Hunital}), but the modules \(\cE(\C^{k+2})\) are not free
-bimodules, and the comparison homotopy has to be built by hand, using the
-coupled unit \(\phi(\lambda_0-\lambda_1)\) of Lemma~\ref{lem:Hunital}(b) in
-place of \(1\otimes1\). We have not written this construction out. What is
-proved is that \(\HH_0(\cE)=\cE\), which is immediate since \(b=0\) on
-\(C_1\), and that \(\chi_1\) maps \(\HH_1(\cE)\) onto \(\cE\,d\lambda\).
+(d) Put \(A=\cE\) and \(M=A\widehat\otimes A\), with the right
+action on the first variable \(u\) and the left action on the second
+variable \(v\). Multiplication by \(u-v\) and diagonal restriction are
+bimodule maps. Tensor the split short exact sequence in (c) with
+\(A^{\widehat\otimes k}\). This gives a short exact sequence of
+coefficient complexes
+\[
+ 0\longrightarrow C_\bullet(A,M)\xrightarrow{u-v}C_\bullet(A,M)
+ \xrightarrow{\mathrm{diag}} C_\bullet(A,A)\longrightarrow 0 .
+\]
+Here \(C_k(A,M)=M\widehat\otimes A^{\widehat\otimes k}\).
+Order the variables of this complex as
+\((u,\lambda_1,\ldots,\lambda_k,v)\). The first Hochschild face
+multiplies on the right of \(M\), and the last face multiplies on its
+left. In the displayed order these are the first and last adjacent
+multiplications. Thus the differential agrees with \(b'\) on
+\(C_{k+1}(A)\). The map \(F\mapsto e^{-(\mu-u)^2}F\) inserts the new
+first variable \(\mu\) and contracts the full \(b'\)-complex by the
+same face identities as in Lemma~\ref{lem:Hunital}(b), with all
+exponents zero. Hence \(H_k(C_\bullet(A,M))=0\) for \(k>0\).
+In degree zero the homology identifies with \(A\) by diagonal
+restriction, by exactness of the full bar complex at \(C_1(A)\) and
+\(C_0(A)\). Under this identification multiplication by \(u-v\)
+induces zero.
+
+The long exact sequence gives zero homology in degrees \(k\geq2\)
+and an isomorphism \(\HH_1(A)\to A\) by its connecting map.
+For \(F\in C_1(A,A)\), choose the lift
+\(e^{-(u-v)^2}F(u,w)\), with middle variable \(w\). Its boundary is
+\[
+ e^{-(u-v)^2}\bigl(F(u,u)-F(u,v)\bigr).
+\]
+Dividing by \(u-v\) and restricting to \(u=v=\lambda\) gives
+\((\partial_2F)(\lambda,\lambda)\). This identifies the connecting
+map with \(\chi_1\) after adjoining \(d\lambda\). In degree zero
+\(\chi_0\) is the identity, since \(A\) is commutative.
 \end{proof}
 
 \subsection{Coinvariants of the shift}
@@ -2579,7 +2708,7 @@ normalize \(c\). The components \(H'\neq H\) do not see these elements.
 \begin{theorem}\label{thm:Id}
 \(\HH_k(\Idb)\cong\C^N\) for \(k=0,1\), and \(\HH_k(\Idb)=0\) for
 \(k\geq2\). The functionals \(\Tr_{\partial,H}\) and \(\varphi_H\) are dual
-bases in degrees \(0\) and \(1\). This uses (Q1), (Q2) and (S1).
+bases in degrees \(0\) and \(1\). This uses (Q1) and (Q2).
 \end{theorem}
 
 \begin{proof}
@@ -2798,42 +2927,314 @@ It yields \(e_p\in F_{p+1}C_{k+1}\), \(p=k-n,k-n-1,\dots\), with
 \(r\geq2\).
 \end{proof}
 
-By Propositions~\ref{prop:E2}, \ref{prop:Is} and~\ref{prop:Ads} below,
-the \(E^2\)-hypothesis holds for \(\Asb\), \(\Isb\) and \(\Adsb\) as soon as
-the \(E^1\)-page is identified. The analytic input is therefore:
+The full chain complex fails the completeness condition of
+Proposition~\ref{prop:algconv}. For example,
+\(r^j\otimes r^{-2j}\) has total order \(-j\), and the sum over
+\(j\geq1\) has unbounded first-slot order. The per-factor stages are
+also unstable under the boundary. Take an element
+\(a\) with scalar principal symbol of order \(N>0\) whose square is
+nonzero. At the associated graded level the boundary of \(a^{\otimes3}\)
+has components \(2a^2\otimes a\) and \(-a\otimes a^2\) of respective
+multidegrees \((2N,N)\) and \((N,2N)\). Thus no enlargement of the
+per-factor stage makes it a subcomplex. For flat symbols one can take
+the principal symbol supported in the interior. We instead use a chain
+complex with a separate bound on the coefficient slot.
 
-\begin{quote}
-\textbf{Hypothesis (C).} For \(\mathfrak S\in\{\Asb,\Isb,\Adsb\}\):
-\begin{enumerate}
-\item[(C-HKR)] the continuous HKR map identifies \(E^1\) with the
-homogeneous forms whose coefficients have the corresponding boundary
-behaviour (Laurent, flat, or formal Laurent); and
-\item[(C-stage)] for every \(k\) and every stage \(N\) there is a stage
-\(N'\geq N\), depending only on \((k,N)\), such that the chains of stage
-\(N'\) in degrees \(k\) and \(k\pm1\) form a subcomplex that is stable under
-step (P). That is, if \(c\) has stage \(N'\), then the corrections \(x,y\)
-can again be chosen of stage \(N'\). Then every iterate in the proof of
-Proposition~\ref{prop:algconv} lies in stage \(N'\), and the filtration is
-complete there.
-\end{enumerate}
-\end{quote}
+\begin{lemma}[A mixed complex for Laurent complete symbols]
+\label{lem:mixed-symbols}
+Let \(A\) be either \(\Asb\) or \(\Adsb\), and let \(B\subset A\)
+be its subalgebra of symbols of order at most zero and without
+boundary poles. For \(L,M\geq0\) write \(A_{L,M}\) for the subspace
+of pole order at most \(L\) and symbol order at most \(M\). The
+natural inclusion
+\[
+ C_k(B,A)=\varinjlim_{L,M} A_{L,M}\widehat\otimes B^{\widehat\otimes k}
+ \longrightarrow C_k(A)
+\]
+is a quasi-isomorphism. Here \(C(B,A)\) uses the Hochschild differential
+with coefficients in the \(B\)-bimodule \(A\). Every
+\(A_{L,M}\widehat\otimes B^{\widehat\otimes k}\) is a subcomplex in all
+degrees and is complete for sums of decreasing total order.
+\end{lemma}
 
-Within a fixed stage \(N\), each component \(C_{p,k}\) is a finite sum of
-multihomogeneous pieces, because each factor has order \(\leq N\). The
-stage itself is the countable product over \(p\leq(k+1)N\) (since
-\(\widehat\otimes_\pi\) commutes with countable products, (C3)). So series
-with bounded stage converge, and (C-stage) is exactly the requirement that
-iterating (P) does not leave the direct limit. The de Rham homotopies used
-at \(E^2\) all preserve pole bounds: the fibre Euler contraction, the
-\(x\)-weight contraction of Lemma~\ref{lem:formal}, the Laurent
-Poincar\'e lemma, and \(*_b\). The faces of \(b\), however, add the orders
-of adjacent factors. In the model of formal sums of multihomogeneous
-functions without a per-factor bound (as in \cite{BG,MelroseMicro}),
-completeness holds tautologically. In that model, Proposition~\ref{prop:algconv}
-proves convergence given (C-HKR). We have not compared that model with
-ours, which is needed for the excision sequences. For \(\Asb\), (C) is
-part of the Benameur--Nistor theorem (Theorem~\ref{thm:BN-conv}). For
-\(\Isb\) and \(\Adsb\), (C) is a hypothesis.
+\begin{proof}
+Use full-symbol coordinates obtained by left quantization in
+b-coordinate charts. A partition of unity in the left variable
+and cutoffs equal to one at the diagonal give a quantization of
+each homogeneous symbol that commutes with left multiplication
+by scalar base functions. Use product charts and cutoffs near the
+boundary. Successively subtracting the quantized principal symbols
+extracts the sequence of homogeneous terms. Asymptotic summation
+realizes any such sequence modulo smoothing, with continuous
+coordinate maps at each finite order quotient. The complete-symbol
+topology at fixed pole bound is the product topology of these
+terms. The same construction in the collar commutes with Taylor
+expansion at the boundary. We use (Q0) and (C3) for this calculus.
+Put \(t=r^{-1}\). Take an elliptic complete symbol
+\(T\) of order \(-1\), without poles, with principal symbol \(t\).
+The symbolic parametrix is an inverse in the complete-symbol algebra
+and has order \(1\) and no poles. For \(\Adsb\) take the Taylor
+image of this construction. Conjugation by \(x^L\) preserves order and
+smooth coefficients for every integer \(L\), by the b-composition
+formula. Thus with \(u_{L,M}=x^{-L}T^{-M}\) one has
+\[
+ A_{L,M}=u_{L,M}B=B u_{L,M}.
+\]
+Indeed multiplication by \(u_{L,M}\) has the asserted bounds, and its
+inverse on each side takes a symbol with those bounds into \(B\).
+The right inverse calculation uses conjugation by \(x^L\). All these
+maps are continuous on fixed stages by (C3). In particular each
+\(A_{L,M}\) is a \(B\)-bimodule. The mixed Hochschild boundary preserves
+the fixed coefficient stage. On this stage the full-symbol splitting
+writes the chain space as a product of homogeneous tensor components,
+using commutation of completed nuclear tensor products with countable
+products. At each total order there are finitely many multidegrees,
+since the coefficient has order at most \(M\) and every other slot
+has order at most zero. Thus sums tending to minus infinity in total
+order converge there, and the boundary commutes with them since it
+does not increase total order.
+
+For the comparison, use the augmented bar bimodule complexes
+\[
+ P_k=A\widehat\otimes B^{\widehat\otimes k}\widehat\otimes A,
+ \qquad
+ Q_k=A\widehat\otimes A^{\widehat\otimes k}\widehat\otimes A,
+\]
+where every appearance of \(A\) is completed on bounded stages
+before taking their algebraic union. Their differentials multiply
+consecutive slots, without the cyclic face, and the augmentation in
+degree zero is multiplication. On the subcomplex of \(P\) whose
+rightmost slot lies in \(Bu\) for a fixed \(u=u_{L,M}\), leave the
+leftmost slot unrestricted. There is a contraction
+\[
+ h_k(a\otimes\beta\otimes b u)
+   =(-1)^{k+1}a\otimes\beta\otimes b\otimes u,
+ \qquad h_{-1}(a)=a u^{-1}\otimes u.
+\]
+Here \(\beta\) denotes the middle slots. The face that multiplies the
+last two slots of \(h_k\) gives the identity. All earlier faces
+cancel against \(h_{k-1}d\), including the augmentation when \(k=0\).
+These identities extend from elementary tensors by continuity. The
+rightmost-slot bound is preserved and each fixed bound on the
+leftmost slot is sent into a bounded stage. In \(Q\) the same
+contraction uses \(u=1\) with middle slots in \(A\).
+
+For clarity, the augmented comparison is valid on the completions as
+follows. The diagonal stages \(A_{N,N}\) split continuously inside
+\(A_{N+1,N+1}\). In full-symbol coordinates first remove the top
+order and then remove the lowest boundary coefficient of every
+remaining symbol by extending that coefficient in a collar with a
+cutoff. This gives a continuous projection on the smaller stage.
+For formal boundary symbols remove that coefficient in the formal
+series. The procedure uses only one boundary jet per homogeneous
+coefficient, continuously in the product topology. It does not
+require a continuous section for the entire Taylor map. Tensor
+powers of these projections give splittings of the corresponding
+nested generator stages of \(Q_k\), and the generator space is
+their algebraic direct sum of successive increments.
+
+The inclusion \(P\to Q\) is the identity on the augmentation.
+Construct an inverse chain map recursively on the free generators
+\(1\otimes\beta\otimes1\) of \(Q\) and extend \(A\)-bilinearly.
+In degree zero use the identity. In degree \(k\), the already
+constructed image of the differential of a generator is a cycle
+in \(P_{k-1}\). On each generator increment that image has a common
+rightmost bound, so apply the displayed contraction for that bound
+to lift the cycle. Extend the resulting map by linearity on the
+sum of increments. Each original stage involves finitely many
+increments, hence has continuous image in a bounded stage. The
+bilinear extension is continuous into a bounded stage by the
+continuity of multiplication and the projective tensor property.
+For either composite, construct a homotopy to the identity by the
+same recursion: on generators subtract the homotopy already
+applied to the differential from the difference of the two maps,
+and lift the resulting cycle. For generators of \(P\) the entire
+middle tensor power is a single Fr\'echet stage. This gives
+stagewise continuous bimodule comparison maps and homotopies.
+
+Finally send \(a\otimes\beta\otimes a'\) to
+\(\tau(a\otimes\beta\otimes a')=a'a\otimes\beta\), and write
+\(s(a\otimes\beta)=a\otimes\beta\otimes1\). For every
+bimodule map \(D\) just constructed, \(\tau D=\tau D s\tau\):
+move \(a'\) from the right to the left under \(\tau\), first on
+elementary tensors and then by density. The bar boundary descends
+under \(\tau\) to the Hochschild boundary, its last face becoming the
+cyclic face. Thus the comparison and both homotopies descend, and
+the induced map of the inclusion is the claimed mixed inclusion.
+\end{proof}
+
+\begin{lemma}[Lifts in a fixed coefficient stage]
+\label{lem:mixed-lifts}
+Let \(A\) and \(B\) be as in Lemma~\ref{lem:mixed-symbols}.
+Fix \(L\geq1\) and \(M\geq0\). In the mixed stage
+\(A_{L,M}\widehat\otimes B^{\widehat\otimes k}\), step (P) of
+Proposition~\ref{prop:algconv} stays in that stage whenever
+\(p\leq M-2\) and \(p\neq k-n\).
+\end{lemma}
+
+\begin{proof}
+The graded algebra of \(B\) is \(C^\infty(Y)[t]\) in the smooth
+case and \(C^\infty(Z)[[x]][t]\) in the formal case, with
+\(\deg t=-1\). The graded coefficient module of the mixed stage
+is the free symmetric module generated by \(x^{-L}t^{-M}\).
+Apply Lemma~\ref{lem:smooth-HKR} to the graded stage, with that
+generator shifting the weight by \(M\). In weights \(q\leq M-1\)
+the resulting forms are exactly homogeneous forms of weight
+\(q\) in
+\[
+ L_L^k=x^{-L}\Omega^k
+ \quad\subset\quad W_L^k=x^{-L}\Omega_b^k.
+\]
+In the formal case ordinary forms and b-forms are interpreted by
+their Taylor series. To see the radial bound, write a form as
+\(r^q(\alpha+d\log t\wedge\beta)\) with \(\alpha,\beta\) on
+the sphere bundle. The term involving \(d\log t\) uses
+\(t^{-q-1}dt\), whose coefficient order is \(q+1\), while the
+first term uses coefficient order \(q\). There is no additional
+bound for either term if \(q\leq M-1\). The ordinary boundary
+differential is \(dx\), so in the b-frame the coefficient of
+\(dx/x\) must have one extra power of \(x\).
+
+The first differential is \(i\delta_b\) by the same antisymmetrization
+as in Section~\ref{sec:poisson}, with the first entry allowed in the
+symmetric graded coefficient module. Both \(L_L\) and \(W_L\) are
+preserved by \(\delta_b\). For the former this follows directly
+from \eqref{eq:poisson-boundary}: the b-Poisson bracket is smooth
+on ordinary smooth functions and sends
+\(x^{-L}C^\infty\times C^\infty\) into \(x^{-L}C^\infty\).
+For the latter use the smooth b-frame and
+\eqref{eq:symplectic-duality}.
+
+The quotient \(W_L/L_L\) consists of the leading \(x^{-L}\)
+coefficient of the \(dx/x\) component at the boundary. It is
+acyclic in the homogeneous Poisson complex. In a collar let
+\(\xi\) be the homogeneous coefficient of \(dx/x\) in the
+tautological form. Exterior multiplication by \(d\xi\) preserves
+both spaces, and with the convention of
+\eqref{eq:poisson-boundary} one has
+\[
+ \delta_b(d\xi\wedge\cdot)+(d\xi\wedge\cdot)\delta_b
+    =\mathcal L_{x\partial_x}.
+\]
+Indeed \([\iota_{\pi_b},d\xi\wedge\cdot]=-\iota_{x\partial_x}\);
+use \(d(d\xi)=0\) and Cartan's identity. In the smooth case a
+collar cutoff equal to one near the boundary makes the exterior
+multiplication global and does not affect the identity on the
+quotient. The Lie derivative is multiplication by \(-L\) there.
+The resulting contraction raises fiber weight by one.
+
+Suppose now that \(\theta\in L_L^k\) has fiber weight \(p\) and
+\(\delta_b\theta=0\), with \(p\neq k-n\). In \(W_L\) apply
+\(*_b\), contract with the fiber Euler field, and divide by the
+nonzero weight \(p+n-k\). By
+\eqref{eq:symplectic-duality}, with its degree sign, this gives a
+primitive \(\eta\) of weight \(p+1\) in \(W_L^{k+1}\).
+Its quotient class is closed and thus has a quotient primitive of
+weight \(p+2\), by the preceding contraction. Lift this primitive
+in \(W_L\) at weight \(p+2\) by extending its boundary coefficient
+in the collar (or inserting its formal coefficient), and subtract
+its \(\delta_b\) from \(\eta\). The resulting primitive lies in
+\(L_L^{k+1}\) and has weight \(p+1\). The temporary lift is in
+the form complex \(W_L\) and is not a chain-stage lift.
+
+In step (P), the HKR class of \(c_p\) is \(\delta_b\)-closed by
+the equation at order \(p-1\). The primitive just constructed,
+divided by \(i\), is the class of a \(b_0\)-cycle \(x\) in the
+same stage at order \(p+1\), since \(p+1\leq M-1\).
+The difference \(c_p-b_1x\) is a \(b_0\)-boundary in the same
+stage at order \(p\), again by the fixed-stage HKR calculation.
+This gives \(y\) at that order. The fixed stage is a subcomplex,
+so the remainder stays there.
+\end{proof}
+
+These two lemmas imply the convergence conclusion of
+Proposition~\ref{prop:algconv} for the full mixed complexes. In
+the direct limit, the \(E^1\)-page is the full Laurent or formal
+Laurent form complex, since each homogeneous form belongs to some
+\(L_L\) with arbitrarily large radial bound. Its \(E^2\) is
+concentrated at \(p=k-n\) by Propositions~\ref{prop:E2}
+and~\ref{prop:Ads}. The finite order reductions in the proof of
+Proposition~\ref{prop:algconv} require no completeness and can be
+done in the direct limit. For injectivity, perform the initial
+step (P) at \(p=k-n\) there and choose a stage containing the
+remainder, enlarging \(M\) so that all subsequent orders are
+\(\leq M-2\) and taking \(L\geq1\). For surjectivity, choose the
+initial two terms in the direct limit, then choose the coefficient
+stage containing them and enlarge \(M\) in the same way. All
+subsequent steps are off the critical row and stay in the one
+stage by Lemma~\ref{lem:mixed-lifts}. The infinite sums converge
+there by Lemma~\ref{lem:mixed-symbols}. The mixed inclusions
+preserve total order and give the same HKR map on leading
+symbols. The finite well-definedness argument of
+Proposition~\ref{prop:algconv} applies in the ordinary chain
+model as well, by its \(E^1\)- and \(E^2\)-calculations.
+Consequently the isomorphism with \(E^2\) in the ordinary model
+is also the leading-symbol map. This construction is natural
+under the Taylor map from the smooth to the formal symbols.
+
+\begin{lemma}[The flat symbol ideal]
+\label{lem:mixed-flat}
+The same leading-symbol isomorphism holds for \(J=\Isb\).
+\end{lemma}
+
+\begin{proof}
+First \(J\) is topologically H-unital in the chain model.
+Choose a smooth locally finite partition of unity \((\psi_j)\)
+on the interior of \(X\), using a dyadic decomposition of a
+boundary collar and one compactly supported interior term.
+For collar terms \(x\asymp 2^{-j}\) on the support. Choose
+\(\phi_j\) supported in a slightly larger comparable region
+and equal to one on \(\operatorname{supp}\psi_j\).
+On the cofinal stages of nonnegative upper symbol order define
+\[
+ E(a_0\otimes c)=\sum_j\phi_j\otimes(\psi_j a_0)\otimes c .
+\]
+The smooth multiplication operators \(\phi_j,\psi_j\) have
+order zero and are supported in the interior. In the full-symbol
+topology, each fixed seminorm of \(\phi_j\) grows at most as a
+power of \(2^j\). Each fixed flat-symbol seminorm of
+\(\psi_j a_0\) is bounded by \(O(2^{-jK})\) times a stronger
+flat-symbol seminorm of \(a_0\), for arbitrary \(K\). Indeed
+the cutoff derivatives cost fixed powers of \(2^j\), and
+flatness gives an arbitrarily high power of \(x\) on the
+support. These estimates give convergence and continuity in
+each projective tensor stage, without increasing order.
+Associativity and \(\sum_j\phi_j\psi_j=1\) on the interior
+give \(d_0 E=1\) and \(d_{i+1}E=Ed_i\), hence
+\(b'E+Eb'=1\). By excision (Q1), \(C(J)\) maps
+quasi-isomorphically to the kernel of the ordinary Taylor
+map on chains.
+
+Take also the kernel of the Taylor map between the two mixed
+complexes. These Taylor maps are surjective on chains on
+every fixed pair of coefficient bounds, since Taylor is
+surjective on the fixed symbol stages and completed nuclear
+tensor products preserve the quotients. They are surjective
+also on associated graded pieces, by the homogeneous
+coefficient description. The mixed inclusions give a
+quasi-isomorphism between the mixed kernel and the ordinary
+kernel by their homology exact sequences. At each fixed
+mixed stage the \(b_0\)-homology of the kernel is the kernel
+of Taylor on the fixed-stage HKR forms: the Taylor map
+on those forms is surjective, by coefficientwise Borel
+extension. This kernel consists of flat forms, and for
+weights \(q\leq M-1\) it is the full space of flat forms of
+weight \(q\). The Poisson primitive obtained from \(*_b\)
+and the fiber Euler contraction is flat and needs no
+boundary correction. Thus the same fixed-stage descent
+applies to the mixed kernel. The \(E^2\)-page is as in
+Proposition~\ref{prop:Is}. On associated graded complexes
+the inclusion of \(C(J)\) into the ordinary kernel is the
+flat HKR identification, by the exact sequence on graded
+chains and the surjectivity on forms. These filtered maps
+therefore identify the leading-symbol maps as well.
+Equivalently, the finite reduction and well-definedness
+arguments of Proposition~\ref{prop:algconv} apply directly
+to \(C(J)\), and its homology is identified via the two
+kernel comparisons with the homology computed by fixed
+stages. This gives the asserted isomorphism in the
+original flat chain model.
+\end{proof}
 
 \subsection{Two de Rham lemmas}
 
@@ -2889,7 +3290,7 @@ d\alpha_1\).
 
 \begin{proposition}[Interior ideal]\label{prop:Is}
 \(E^2_{p,q}(\Isb)=H^{2n-p-q}(Y\times S_\sigma,Z\times S_\sigma)\) for
-\(q=n\), and \(E^2_{p,q}(\Isb)=0\) otherwise, under (C-HKR). Under (C),
+\(q=n\), and \(E^2_{p,q}(\Isb)=0\) otherwise. Moreover,
 \(\HH_k(\Isb)\cong H^{2n-k}(Y\times S_\sigma,Z\times S_\sigma)\). The ideal
 \(\Isb\) is the same algebra for the b- and cusp calculi.
 \end{proposition}
@@ -2903,11 +3304,12 @@ computes its cohomology. The rows \(q\neq n\) vanish as in
 Proposition~\ref{prop:E2}, so the spectral sequence degenerates. Kernels
 conormal to the diagonal that vanish to infinite order at \(\partial(X^2)\)
 do not depend on the blow-up, so \(x^\infty\Psi_b^{\Z}=x^\infty\Psi_c^{\Z}\).
+Lemma~\ref{lem:mixed-flat} identifies this page with homology.
 \end{proof}
 
 \begin{proposition}[Boundary symbol algebra]\label{prop:Ads}
 \(E^2_{p,q}(\Adsb)=H^{2n-p-q}(Z\times S_\sigma\times S_\partial)\) for
-\(q=n\), and \(E^2_{p,q}(\Adsb)=0\) otherwise, under (C-HKR). Under (C),
+\(q=n\), and \(E^2_{p,q}(\Adsb)=0\) otherwise. Moreover,
 \(\HH_k(\Adsb)\cong H^{2n-k}(Z\times S_\sigma\times S_\partial)\).
 \end{proposition}
 
@@ -2924,16 +3326,17 @@ The fibre Euler field kills the nonzero fibre weights
 \(S_\sigma\). Lemma~\ref{lem:formal}, with \(W=Z\times S_\sigma\), kills
 the nonzero \(x\)-degrees and produces \(S_\partial\). The row argument of
 Proposition~\ref{prop:E2} gives degeneration.
+The fixed coefficient stages of Lemmas~\ref{lem:mixed-symbols}
+and~\ref{lem:mixed-lifts} give the leading-symbol isomorphism.
 \end{proof}
 
 \begin{remark}[\(n=1\)]\label{rem:n1}
 Let \(n=1\). Then \(Y\) is two copies of \(X\) (\(\xi=\pm1\)), and each
 \(Z_H\) is two points with the orientation of \(\partial Y\).
-Parts (iv)--(vi) of Theorem~\ref{thm:full} hold as stated. In (vii) and
-(viii), \(H^{2n-2}(Z)=H^0(Z)\cong\C^{2N}\), and the summand \(H^{2n-2}(Z)\)
-must be replaced by the kernel of
-\(\beta\mapsto(\int_{Z_H}\beta)_H\in\C^N\), where \(\int_{Z_H}\) is the signed
-sum over the two points. Concretely:
+Parts (iv)--(vii) of Theorem~\ref{thm:full} hold as stated, with
+\(\int_{Z_H}\) the signed sum over the two points. In (viii) the
+kernel of the signed-sum map from \(H^0(Z)\cong\C^{2N}\) gives an
+additional summand in degree one. Concretely:
 \begin{itemize}
 \item \(\HH_1(\Ab)\cong\C\oplus H^1(Y\times S_\sigma)\oplus
 \ker\bigl(H^0(Z)\to\C^N\bigr)\);
@@ -2944,16 +3347,15 @@ sum over the two points. Concretely:
 \end{itemize}
 For \(n=1\) the surjectivity of the connecting maps of \(\Adb\) and of
 \(\partial^{\mathcal A}_1\) is proved by explicit test cycles
-(Propositions~\ref{prop:n1} and~\ref{prop:connA}(d)), without (C).
-For \(X=[0,1]\), write \(Y=Y_+\sqcup Y_-\) (\(\xi=\pm1\)), with the
-symplectic orientation, so that \(Y_-\) is oriented by \(-dx\). Then
-\(H^0(Y)=\C^2\), and the map to \(\C^2\) is, up to an overall sign,
-\((c_+,c_-)\mapsto(c_--c_+,\,c_+-c_-)\). This agrees with the difference
-\(g(1)-g(-1)\) in \(\hat\rho_H\). Its kernel is the constants; for example,
-the cycle \(x^{-1}\otimes h\otimes x-x^{-1}\otimes x\otimes h\) represents
-\((1,1)\), and \(\Omega_H\) vanishes on it. The rank is \(1=N-c\), so
-\(\HH_2(\Ab)\cong\C\neq0\). Identifying \(\partial^{\mathcal A}_2\) with this
-map uses (C) and the sketch of Remark~\ref{rem:description}.
+(Propositions~\ref{prop:n1} and~\ref{prop:connA}(d)).
+For \(X=[0,1]\) with global coordinate \(s\), label the two copies
+\(Y_\pm\) by the sign of the covector relative to \(ds\). They have
+orientations \(\pm ds\). The map from \(H^0(Y)=\C^2\) to \(\C^2\)
+of oriented periods is
+\((c_+,c_-)\mapsto(c_--c_+,\,c_+-c_-)\) in endpoint order.
+By Proposition~\ref{rem:description}, the trace-dual connecting
+map is \((2\pi)^{-1}\) times this map. It has rank one and kernel
+the constants, so \(\HH_2(\Ab)\cong\C\).
 \end{remark}
 
 \section{\texorpdfstring{The indicial algebra \(\Adb\)}{The indicial algebra}}\label{sec:Ad}
@@ -3154,7 +3556,7 @@ part of a form \(\theta\).
 On \(1\)-chains of total order \(\leq1-n\),
 \(\omega_H(c)=-i\,\hat\rho_H\bigl(\chi(c_{1-n})_x\bigr)\).
 \item[(b)] \(\Omega_H\) vanishes on \(2\)-chains of total order
-\(\leq1-n\). Assume (C-HKR). For \(2\)-chains \(c\) of total order
+\(\leq1-n\). For \(2\)-chains \(c\) of total order
 \(\leq2-n\) with \(b_0c_{2-n}=0\),
 \(\Omega_H(c)=-\hat\rho_H\bigl(\chi(c_{2-n})_{\xi x}\bigr)\).
 \end{enumerate}
@@ -3172,20 +3574,22 @@ in total order \(1-n\), and \(0\) below. On the other hand
 (b) The derivation \(D\) lowers order by one, so \(\Omega_H(A,B,C)=
 -\omega_H(AD(B),C)\) is computed by (a). On elementary tensors this gives
 \(\Omega_H(a\otimes b\otimes c)=-\sum m\,\hat\rho_H(a_j\partial_\xi b_lc_m)\),
-summed over \(j+l+m=0\). Because \(\Omega_H\) is a cocycle and vanishes in
-lower order, it vanishes on \(b_0\)-boundaries of top components. By
-(C-HKR), a top \(b_0\)-cycle is \(b_0\)-homologous to the
-antisymmetrization of its HKR form, and on
-\(a\otimes b\otimes c-a\otimes c\otimes b\), whose HKR form is
-\(a\,db\wedge dc\), a direct comparison gives
-\(-\hat\rho_H((a\,db\wedge dc)_{\xi x})\).
+summed over \(j+l+m=0\). Put \(P=\partial_\xi\), \(E=x\partial_x\),
+and \(\ell=\hat\rho_H\circ[x^0]\) on symbols of order \(1-n\).
+On a top elementary tensor \(a\otimes b\otimes c\), the difference
+between \(\Omega_H\) and \(-\ell(\chi_2(\cdot)_{\xi x})\) is
+\(-\tfrac12\ell(a(Pb\,Ec+Eb\,Pc))\). Set \(L(a,b)=\ell(aPEb)\).
+The derivation rules for \(P,E\) and commutativity of the graded
+product give \(b_0L(a,b,c)=-\ell(a(Pb\,Ec+Eb\,Pc))\).
+Thus the difference is \(\tfrac12 b_0L\), which vanishes on
+top \(b_0\)-cycles. These identities extend to completed chains by
+continuity on the fixed graded pieces.
 \end{proof}
 
 \begin{proposition}[The boundary connecting maps]
 \label{prop:dict}
-Let \(n\geq1\), and assume (C) for \(\Adsb\), part (ii) of
-Theorem~\ref{thm:full} (hence (Q1), (Q2), (S1)), and
-Lemma~\ref{lem:conn} (hence (Q1)). Then both connecting maps
+Let \(n\geq1\), and assume the inputs of Theorem~\ref{thm:full}(ii)
+and (Q1) for the indicial extension. Then both connecting maps
 \(\HH_1(\Adsb)\to\HH_0(\Idb)\) and \(\HH_2(\Adsb)\to\HH_1(\Idb)\) are
 surjective onto \(\C^N\). They are given on \(E^2\) by the functionals
 \(\theta\mapsto-i\hat\rho_H(\theta_x)\) and
@@ -3231,34 +3635,86 @@ So \(\theta_1\) and \(\theta_2\) define
 This proves surjectivity.
 \end{proof}
 
-\begin{remark}[Description of the connecting maps; sketch (S2)]
-\label{rem:description}
-The identification of these functionals with
-\(\beta\mapsto(\int_{Z_H}\beta_\partial)_H\) and
-\(\beta\mapsto(\int_{Z_H}\beta_0)_H\) is only sketched. Write
-\(\varpi_H=d\eta\wedge dy\) for the symplectic form of \(T^*H\). Then
-\(\pi_b^\sharp(dx/x)\) is a multiple of \(\partial_\xi\), and
-\(\mu_b=d\xi\wedge\frac{dx}{x}\wedge\varpi_H^d/d!\). Hence
-\(*_b(g\,dx/x)\) and \(*_b(g\,d\xi\wedge dx/x)\) are, up to signs, \(g\,
-\frac{dx}{x}\wedge\varpi_H^d/d!\) and \(g\,\varpi_H^d/d!\), while the
-\(dy_j\)-components are carried to forms containing \(d\xi\). The integrals
-over the hyperplanes \(\xi=\pm1\) should then be compared with the
-integral over \(Z_H\) by radial projection. The hyperplanes are not compact.
-The two integrals separately diverge logarithmically near the equator
-\(\xi=0\), and only the difference \(g(\eta,1)-g(\eta,-1)\) in
-\(\hat\rho_H\) converges. A precise proof needs this cancellation and the
-exact signs and constants; we have not written it out. The surjectivity in
-Proposition~\ref{prop:dict} does not depend on this remark. The exact rank
-\(N-1\) of \(\partial^{\mathcal A}_2\), and the explicit kernels in
-Theorem~\ref{thm:full}(vii)--(viii), do.
-\end{remark}
+\begin{proposition}[Boundary periods]\label{rem:description}
+Use the trace and cocycle coordinates of Theorem~\ref{thm:full}(ii).
+Under the hypotheses of Proposition~\ref{prop:dict}, the two boundary
+connecting maps are
+\[
+ \beta\longmapsto -i(2\pi)^{-n}\Bigl(\int_{Z_H}\beta_\partial\Bigr)_H,
+ \qquad
+ \beta\longmapsto (2\pi)^{-n}\Bigl(\int_{Z_H}\beta_0\Bigr)_H .
+\]
+Here the boundary generator is written on the left, as in
+Lemma~\ref{lem:formal}. The orientations of \(Y\) and \(Z_H\) are
+given by \(\iota_{\mathcal E}\mu_b\) on \(r=1\) and the induced
+boundary orientation, respectively.
+\end{proposition}
+
+\begin{proof}
+On the component \(H\) write \(\vartheta=dx/x\) and
+\(v=(d\eta\wedge dy)^d/d!\), where the power is that of the tangential
+symplectic form. Thus \(\mu_b=d\xi\wedge\vartheta\wedge v\).
+We have \(\pi_b^\sharp\vartheta=-\partial_\xi\) and
+\(\pi_b^\sharp d\xi=x\partial_x\). Take the \(x\)-weight-zero
+part of the HKR form \(\theta\), as allowed by Lemma~\ref{lem:formal}.
+In degree one put \(g=\theta_x\) and let \(\alpha\) be the
+coefficient of \(\vartheta\) in \(*_b\theta\). In degree two put
+\(g=\theta_{\xi x}\) and let \(\alpha\) be the part of \(*_b\theta\)
+free of \(\vartheta\). The form \(\alpha\) on
+\((T^*H\times\mathbb R_\xi)\setminus0\) has degree \(2d\) and is
+closed and invariant under radial dilation. Indeed, the star takes
+Poisson cycles to closed forms of weight zero, and the two parts
+of the formal \(x\)-weight-zero complex are closed separately.
+The star sends \(g\vartheta\) to \(-g\vartheta\wedge v\) and
+\(g\,d\xi\wedge\vartheta\) to \(gv\). In the chosen part of the
+star all other terms contain \(d\xi\), since their contracting
+multivector does not contain \(\partial_\xi\). Thus
+\[
+ \alpha|_{\xi=\pm1}=s\,g(y,\eta,\pm1)v,qquad
+ s=-1\ \text{in degree one},\quad s=1\ \text{in degree two}.
+\]
+
+Choose \(r^2=\xi^2+|\eta|^2\) in the collar and let \(t=\xi/r\)
+on \(Z_H\). In radial coordinates write
+\(\alpha=\gamma+d\log r\wedge\gamma_\sigma\), with both coefficients
+pulled back from \(Z_H\) and closed there. The class of \(\gamma\)
+is \(\beta_\partial\) in degree one and \(\beta_0\) in degree two.
+The radial map from \(\xi=\pm1\) identifies
+\(|\eta|\leq(\varepsilon^{-2}-1)^{1/2}\) with the cap
+\(\pm t\geq\varepsilon\). The inverse map pulls \(\alpha\) back to
+\(\gamma-d\log|t|\wedge\gamma_\sigma\), since \(r=1/|t|\) on
+that hyperplane. On either cap the integral of the second term is
+\[
+ -\int_{\partial\{\pm t\geq\varepsilon\}}
+            \log|t|\,\gamma_\sigma
+ =-\log\varepsilon\int_{\partial\{\pm t\geq\varepsilon\}}
+             \gamma_\sigma=0
+\]
+by Stokes and \(d\gamma_\sigma=0\). This controls the logarithmic
+term before taking the limit. The paired hyperplane integrand also
+converges absolutely: homogeneity gives
+\(g(y,\eta,1)-g(y,\eta,-1)=\int_{-1}^1\partial_\xi
+g(y,\eta,\xi)\,d\xi=O(|\eta|^{-n})\).
+
+At the boundary the contraction in the outward normal direction gives
+\(\iota_{-x\partial_x}\iota_{\mathcal E}\mu_b
+=-\iota_{\mathcal E}(d\xi\wedge v)\).
+The radial projection pulls \(\iota_{\mathcal E}(d\xi\wedge v)\)
+on \(r=1\) back to \(r^{-n}\xi v\) on \(\xi=\pm1\). The
+positive cap therefore has orientation \(-v\) in its hyperplane
+coordinates and the negative cap has orientation \(v\). Adding the
+oriented cap integrals and letting \(\varepsilon\downarrow0\) gives
+\(\int_{Z_H}\gamma=-s(2\pi)^n\hat\rho_H(g)\).
+Combining this with Lemma~\ref{lem:top} gives the stated constants.
+\end{proof}
 
 \begin{theorem}\label{thm:Ad}
-Assume (C) and Theorem~\ref{thm:full}(ii). Then
+Under the inputs of Theorem~\ref{thm:full}(ii) and (Q1) for the
+indicial extension,
 \(\HH_k(\Adb)\cong\HH_k(\Adsb)\) for \(k\neq1,2\). For \(k=1,2\), the group
 \(\HH_k(\Adb)\) is the kernel of the surjection of
 Proposition~\ref{prop:n1} (\(n=1\)), resp.\ Proposition~\ref{prop:dict}.
-Its explicit description in Theorem~\ref{thm:full}(vii) uses (S2).
+Proposition~\ref{rem:description} identifies the maps with the boundary periods.
 \end{theorem}
 
 \begin{proof}
@@ -3311,24 +3767,38 @@ exactness, and the second map followed by the connecting map of (b) is
 \(-\sum\varphi_H\).
 
 (d) Choose \(P_H\in\Psi_b^0(X)\), supported near \(H\), with full symbol
-\(\chi_H(x)1_{\xi>0}\) and with no lower-order terms. Then \(x^{-1}P_Hx-P_H\)
+\(\chi_H(x)1_{\xi>0}\) and with no lower-order terms and with \(\chi_H=1\) near \(H\).
+Then \(x^{-1}P_Hx-P_H\)
 is smoothing, because the full symbol of \(x^{-1}Px\) is
 \(\sum_k\frac{(-i)^k}{k!}\partial_\xi^kp\), by Lemma~\ref{lem:conj} applied
 to symbols, and \(\partial_\xi p=0\) for \(\xi\neq0\). Hence
 \(x^{-1}P_H\otimes x\) is a cycle in \(\Asb\). Its image under \(p\)
-differs from \(c_H\) of Proposition~\ref{prop:n1} only by elements of
-\(\Idb\). Indeed, the b-covariable \(\xi\) is the symbol of \(xD_x\), whose
-indicial family is \(\lambda\), so \(I_H(P_H)-\pi_+\in\cE\). Thus
+is the cycle \(c_H\) of Proposition~\ref{prop:n1} in the quotient:
+the full Taylor symbol is constant in \(x\) near \(H\), and its
+constant term is the complete symbol of \(\pi_+(\lambda)\). Here
+\(\xi\) is the symbol of \(xD_x\), whose indicial family is \(\lambda\). Thus
 \(\Tr_{\partial,H'}\partial^{\mathcal A}_1[x^{-1}P_H\otimes x]=
 -\frac{i}{2\pi}\delta_{HH'}\).
 \end{proof}
 
 \begin{remark}[Several boundary components]\label{rem:MNcomponents}
-Assume (C) and (S2). By Proposition~\ref{prop:dict},
-Remark~\ref{rem:description}, the naturality of \(\Theta\),
-and the identity part of
-\(p_*\), the map \(\partial^{\mathcal A}_2\) is
-\(\beta\mapsto(\int_{Z_H}\beta)_H\) on the summand \(H^{2n-2}(Y)\) of
+Take compatible collars and fibre norms in the symbol algebras.
+On associated graded chains \(p\) takes the boundary Taylor series
+in each slot and commutes with HKR and symplectic duality.
+In the face splitting of Proposition~\ref{prop:face} the smooth
+summand contributes its tangential restriction: a factor \(dx\)
+has positive \(x\)-weight in the b-frame. The residue summand is
+represented near the face by \(dx/x\) wedged on the left with its
+boundary form. Thus after the contraction of the nonzero
+\(x\)-weights the map in degree \(j=2n-k\) is
+\[
+ (a,b)\longmapsto a|_{Z\times S_\sigma}+d\theta_\partial\wedge b
+ \quad\text{for }(a,b)\in H^j(Y\times S_\sigma)\oplus
+ H^{j-1}(Z\times S_\sigma).
+\]
+By Proposition~\ref{prop:connA}(a), Proposition~\ref{rem:description},
+and the naturality of \(\Theta\), the map \(\partial^{\mathcal A}_2\) is
+\(\beta\mapsto(2\pi)^{-n}(\int_{Z_H}\beta)_H\) on the summand \(H^{2n-2}(Y)\) of
 \(\HH_2(\Asb)\), and it vanishes on the other summands. By Stokes' theorem,
 \(\sum_H\int_{Z_H}\beta=\int_Yd\beta=0\), which recovers the bound of
 Proposition~\ref{prop:connA}(c). Exactness of
@@ -3351,14 +3821,12 @@ sum over all \(H\) does. We mention this only for comparison.
 Theorem~\ref{thm:Laurentres}. (iv) and (vi) are
 Propositions~\ref{prop:Is} and~\ref{prop:Ads}, and (v) is
 Theorem~\ref{thm:main}. (vii) is Theorem~\ref{thm:Ad}, with the components
-identified by Proposition~\ref{prop:dict}. For (viii), insert
+identified by Proposition~\ref{rem:description}. For (viii), insert
 \(\partial^{\mathcal A}_1=\partial^\partial_1\circ p_*\) and
 \(\partial^{\mathcal A}_2\) into the long exact sequence. By
-Proposition~\ref{prop:dict}, Remark~\ref{rem:description} (S2), the
-naturality of the top-component map \(\Theta\) (on \(E^2\), \(p_*\) is
-restriction to the boundary), and the identity part of \(p_*\),
-\(\partial^{\mathcal A}_1\) is
-\(\beta\mapsto(\int_{Z_H}\beta)_H\) on the summand
+Proposition~\ref{rem:description} and the naturality of the top-component
+map \(\Theta\), \(\partial^{\mathcal A}_1\) is
+\(\beta\mapsto-i(2\pi)^{-n}(\int_{Z_H}\beta)_H\) on the summand
 \(H^{2n-2}(Z)\cong\C^N\) of \(\HH_1(\Asb)\) and vanishes on the other
 summands. The rank of \(\partial^{\mathcal A}_2\) is \(N-1\)
 (Remark~\ref{rem:MNcomponents}). Use also \(\HH_*(\Idb)\). This gives \(\HH_0(\Ab)\cong\HH_0(\Asb)\),
@@ -3520,6 +3988,9 @@ term is absent, and the formula reduces to Theorem~\ref{thm:WH}
 (Remark~\ref{rem:WHconsistency}).
 
 \section{Complex powers, b-zeta functions and the index}\label{sec:zeta}
+
+\emph{Status.} This section is pending independent referee review.
+Its analytic inputs are listed under (C3) in Section~\ref{subsec:status}.
 
 This section proves the index formula for fully elliptic operators of
 positive order. The arguments are those of Loya's thesis
