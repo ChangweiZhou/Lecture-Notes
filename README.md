@@ -52,11 +52,17 @@ A November 2026 audit pass fixed several kinds of problems:
 - duplicated passages;
 - figure layout.
 
-The original diagrams
-were audited against the surrounding arguments. The strongest original
-blow-up, cylindrical, conormal, Mellin, parametrix, and heat-cutoff figures are
-retained; new vector diagrams supplement them for symbolic, spectral, and
-proof-dependency arguments where no comparable original figure existed.
+All figures are now vector TikZ drawings in the notation of the text.
+
+- Each of the roughly 100 hand-drawn figures from 2018 was reviewed against
+  the current argument.
+- Those still relevant have been redrawn, including the projective charts,
+  the b-fibration, the normal operator, the strip of holomorphy, the model
+  kernel, the b-trace and analytic continuation.
+- Several originals mislabelled the regularity of kernels or decay signs.
+  These are corrected in the redraws.
+- Pictures that duplicated others or illustrated material no longer in the
+  text were not carried over.
 
 ## Build
 

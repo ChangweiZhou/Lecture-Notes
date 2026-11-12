@@ -652,7 +652,70 @@ On $X_b^2$ this kernel is conormal to $\Delta_b$, smooth across the
 front face away from $\Delta_b$, and vanishes to order $\epsilon$ at
 $\mathrm{lb}$ and $\mathrm{rb}$. This model explains why the
 $b$-calculus resolves the simultaneous limit $x,x'\to0$ while retaining
-the translation-invariant variable $\log(x/x')$.
+the translation-invariant variable $\log(x/x')$; see
+Figure~\ref{fig:model-kernel}.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,thick,font=\small]
+ % ---------- (a) the kernel on X_b^2 ----------
+ \begin{scope}
+  \def\R{1.1}\def\W{3.4}
+  \fill[gray!8] (0,\R) arc[start angle=90,end angle=0,radius=\R]
+    --(\W,0)--(\W,\W)--(0,\W)--cycle;
+  \foreach \a in {10,22,34,56,68,80}
+    \draw[gray!55,thin] (\a:\R)--({\a}:{min(\W/cos(\a),\W/sin(\a))});
+  \draw (0,\R)--(0,\W) (\R,0)--(\W,0);
+  \draw[red!70!black,line width=1.4pt] (0,\R) arc[start angle=90,end angle=0,radius=\R];
+  \draw[blue!70!black,very thick] (45:\R)--(\W,\W)
+    node[above right,inner sep=1pt] {\(\Delta_b\)};
+  \fill[blue!70!black] (45:\R) circle (1.6pt);
+  \draw[->,gray] (\W,0)--(\W+.3,0) node[right,black] {\(x\)};
+  \draw[->,gray] (0,\W)--(0,\W+.3) node[above,black] {\(x'\)};
+  \node[anchor=east] at (-.05,2.4) {\(\mathrm{lb}\)};
+  \node[anchor=north] at (2.4,-.05) {\(\mathrm{rb}\)};
+  \node[red!70!black,anchor=north east,inner sep=1pt] at (45:{\R-.05}) {\(\mathrm{ff}\)};
+  \node[fill=gray!8,inner sep=1pt,font=\footnotesize] at (1.0,2.75)
+    {\(\tfrac1{2\epsilon}\bigl(\tfrac{x}{x'}\bigr)^{\epsilon}\)};
+  \node[fill=gray!8,inner sep=1pt,font=\footnotesize] at (2.75,.95)
+    {\(\tfrac1{2\epsilon}\bigl(\tfrac{x'}{x}\bigr)^{\epsilon}\)};
+  \node at (1.7,-.85) {(a) \(K_{P^{-1}}\) on \(X_b^2\)};
+ \end{scope}
+ % ---------- (b) restriction to ff ----------
+ \begin{scope}[xshift=7.6cm,yshift=.35cm]
+  \draw[->,gray] (-3,0)--(3.1,0) node[right,black] {\(z\)};
+  \draw[->,gray] (0,0)--(0,2.4);
+  \draw[red!70!black,very thick,domain=-2.9:0,samples=40]
+    plot (\x,{1.8*exp(.8*\x)});
+  \draw[red!70!black,very thick,domain=0:2.9,samples=40]
+    plot (\x,{1.8*exp(-.8*\x)});
+  \fill[blue!70!black] (0,1.8) circle (1.8pt);
+  \node[anchor=east,font=\footnotesize] at (-.08,1.95) {\(\tfrac1{2\epsilon}\)};
+  \draw[blue!70!black,thin] (0,-.08)--(0,.08);
+  \node[blue!70!black,below,font=\footnotesize] at (0,-.05) {\(0\)};
+  \draw[<-,thin] (.07,1.82)--(.55,2.15) node[right,font=\footnotesize,inner sep=1pt] {kink at \(\Delta_b\)};
+  \node[font=\footnotesize] at (-1.6,1.05) {\(\tfrac{e^{\epsilon z}}{2\epsilon}\)};
+  \node[font=\footnotesize] at (1.6,1.05) {\(\tfrac{e^{-\epsilon z}}{2\epsilon}\)};
+  \node[font=\footnotesize,below] at (-2.5,-.05) {\(\to\mathrm{lb}\)};
+  \node[font=\footnotesize,below] at (2.5,-.05) {\(\to\mathrm{rb}\)};
+  \node at (0,-1.2) {(b) \(e^{-\epsilon|z|}/(2\epsilon)\) along \(\mathrm{ff}\)};
+ \end{scope}
+\end{tikzpicture}
+\caption[The model kernel on the b-double space]{The inverse of
+\(P=-\partial_u^2+\epsilon^2\) as a kernel on \(X_b^2\).  (a) The kernel
+depends only on \(z=\log(x/x')\), so it is constant on the grey level sets
+of \(z\); it equals \((x/x')^\epsilon/(2\epsilon)\) on the side
+\(x\leq x'\) of \(\Delta_b\) containing \(\mathrm{lb}\) and
+\((x'/x)^\epsilon/(2\epsilon)\) on the side containing \(\mathrm{rb}\).
+Hence it is \(O(\rho_{\mathrm{lb}}^\epsilon)\) at \(\mathrm{lb}\) and
+\(O(\rho_{\mathrm{rb}}^\epsilon)\) at \(\mathrm{rb}\).  (b) Its restriction
+to \(\mathrm{ff}\), as a function of \(z\in\mathbb R\), is
+\(e^{-\epsilon|z|}/(2\epsilon)\): smooth away from \(z=0\), and Lipschitz
+with a kink (a jump of \(\partial_z\)) at \(z=0\), where \(\Delta_b\) meets
+\(\mathrm{ff}\).  Thus the kernel is conormal to \(\Delta_b\) and smooth up
+to \(\mathrm{ff}\) away from \(\Delta_b\).}
+\label{fig:model-kernel}
+\end{figure}
 
 \begin{figure}[htbp]
 \centering
@@ -750,7 +813,58 @@ On their overlap,
  s'=s^{-1},\qquad x'=sx.
 \]
 These transition functions are smooth where \(s,s'>0\), and the front
-face is \(x=0\) in the first chart and \(x'=0\) in the second.
+face is \(x=0\) in the first chart and \(x'=0\) in the second; see
+Figure~\ref{fig:proj-charts}.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,thick,font=\small]
+ \def\R{1.2}\def\W{4.2}
+ \pgfmathsetmacro{\ta}{atan(3)}  % s = 3
+ \pgfmathsetmacro{\tb}{atan(1/3)}% s' = 3
+ % U_x : x' <= 3x
+ \fill[blue!70!black,opacity=.13] (\R,0) arc[start angle=0,end angle=\ta,radius=\R]
+   --({\W/3},\W)--(\W,\W)--(\W,0)--cycle;
+ % U_{x'} : x <= 3x'
+ \fill[red!70!black,opacity=.13] (0,\R) arc[start angle=90,end angle=\tb,radius=\R]
+   --(\W,{\W/3})--(\W,\W)--(0,\W)--cycle;
+ % level sets of s
+ \foreach \a in {8,18.43,30,45,60,71.57,82}
+   \draw[gray!70,thin] (\a:\R)--({\a}:{min(\W/cos(\a),\W/sin(\a))});
+ \draw[blue!70!black,thin,dashed] (\ta:\R)--({\W/3},\W);
+ \draw[red!70!black,thin,dashed] (\tb:\R)--(\W,{\W/3});
+ \node[blue!70!black,font=\footnotesize,anchor=south] at ({\W/3},\W) {\(s=C\)};
+ \node[red!70!black,font=\footnotesize,anchor=west] at (\W,{\W/3}) {\(s'=C\)};
+ % faces
+ \draw (0,\R)--(0,\W) (\R,0)--(\W,0);
+ \draw[line width=1.4pt] (0,\R) arc[start angle=90,end angle=0,radius=\R];
+ \node[anchor=east] at (-.05,2.7) {\(\mathrm{lb}\)};
+ \node[anchor=north] at (2.7,-.05) {\(\mathrm{rb}\)};
+ \node[anchor=north east,inner sep=1pt] at (45:{\R-.05}) {\(\mathrm{ff}\)};
+ \draw[->,gray] (\W,0)--(\W+.35,0) node[right,black] {\(x\)};
+ \draw[->,gray] (0,\W)--(0,\W+.35) node[above,black] {\(x'\)};
+ % chart labels
+ \node[blue!70!black,fill=white,inner sep=1.5pt,align=left,font=\footnotesize]
+   at (3.35,.75) {\(U_x\colon(x,s)\)};
+ \node[red!70!black,fill=white,inner sep=1.5pt,align=left,font=\footnotesize]
+   at (.95,3.45) {\(U_{x'}\colon(s',x')\)};
+ \node[fill=white,inner sep=1.5pt,font=\footnotesize] at (2.65,2.2)
+   {\(U_x\cap U_{x'}\)};
+\end{tikzpicture}
+\caption[Projective charts on the b-double space]{The two projective
+charts near the corner of \(X_b^2\) (tangential variables suppressed),
+with \(C>1\) fixed.  The chart \(U_x=\{x'\leq Cx\}\) (blue), with
+coordinates \((x,s=x'/x)\), contains \(\mathrm{rb}\) and the part of
+\(\mathrm{ff}\) where \(s\leq C\), but not \(\mathrm{lb}\); the chart
+\(U_{x'}=\{x\leq Cx'\}\) (red), with coordinates \((s'=x/x',x')\),
+contains \(\mathrm{lb}\) but not \(\mathrm{rb}\).  The grey curves are the
+level sets of \(s\); each meets \(\mathrm{ff}\) transversally in one
+point, so \(s\) restricts to a coordinate on \(\mathrm{ff}\).  In \(U_x\),
+\(\mathrm{ff}=\{x=0\}\) and \(\mathrm{rb}=\{s=0\}\); in \(U_{x'}\),
+\(\mathrm{ff}=\{x'=0\}\) and \(\mathrm{lb}=\{s'=0\}\); on the overlap
+\(s'=s^{-1}\).}
+\label{fig:proj-charts}
+\end{figure}
 
 \[
 \begin{tikzcd}[column sep=huge,row sep=large]
@@ -1156,6 +1270,72 @@ middle of the arc \(Y=0\) (dashed).  A small-calculus kernel is conormal to
 infinite order at \(\mathrm{lb}\) and \(\mathrm{rb}\).}
 \end{figure}
 
+The symbol of a conormal distribution lives on the conormal bundle of the
+submanifold, so the symbol of \(K_A\) lives on \(N^*\Delta_b\).  On \(X^2\)
+the map \(\alpha\mapsto\pi_L^*\alpha-\pi_R^*\alpha=(\alpha,-\alpha)\)
+identifies \(T^*X\) with \(N^*\Delta\).  Near the front face,
+\(\Delta_b=\{z=0,\ Y=0\}\) in the coordinates \((r,z,y,Y)\) introduced
+above, so \(N^*\Delta_b\) is spanned by \(dz\) and \(dY\).  In the interior
+\(dz=\pi_L^*(dx/x)-\pi_R^*(dx/x)\) and \(dY=\pi_L^*dy-\pi_R^*dy\); hence the
+same map, applied to the b-covectors \(dx/x\) and \(dy\), extends smoothly up
+to \(\mathrm{ff}\) and gives a canonical isomorphism
+\(N^*\Delta_b\cong{}^bT^*X\), under the identification
+\(\Delta_b\cong X\) (see Figure~\ref{fig:bconormal}).
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,thick,font=\small]
+ % ---------- left: X^2 ----------
+ \begin{scope}
+  \def\W{3.3}
+  \fill[gray!8] (0,0) rectangle (\W,\W);
+  \draw[->,gray] (0,0)--(\W+.3,0) node[right,black] {\(x\)};
+  \draw[->,gray] (0,0)--(0,\W+.3) node[above,black] {\(x'\)};
+  \draw[blue!70!black,very thick] (0,0)--(\W-.2,\W-.2)
+    node[above right,inner sep=1pt] {\(\Delta\)};
+  \foreach \t in {.8,1.6,2.4}
+    \draw[->,red!70!black] (\t,\t)--++(.5,-.5);
+  \node[red!70!black,font=\footnotesize,anchor=north west,inner sep=1pt]
+    at (2.9,1.9) {\((\alpha,-\alpha)\)};
+  \fill[black] (0,0) circle (2pt);
+  \node at (1.65,-.75) {\(N^*\Delta\cong T^*X\)};
+ \end{scope}
+ \draw[->] (4.3,1.6)--(5.4,1.6) node[midway,above,font=\footnotesize] {blow up};
+ % ---------- right: X_b^2 ----------
+ \begin{scope}[xshift=6.5cm]
+  \def\R{1.1}\def\W{3.3}
+  \fill[gray!8] (0,\R) arc[start angle=90,end angle=0,radius=\R]
+    --(\W,0)--(\W,\W)--(0,\W)--cycle;
+  \draw (0,\R)--(0,\W) (\R,0)--(\W,0);
+  \draw[red!70!black,line width=1.4pt] (0,\R) arc[start angle=90,end angle=0,radius=\R];
+  \draw[blue!70!black,very thick] (45:\R)--(\W-.2,\W-.2)
+    node[above right,inner sep=1pt] {\(\Delta_b\)};
+  \fill[blue!70!black] (45:\R) circle (1.6pt);
+  \foreach \t in {0,.8,1.6}
+    \draw[->,red!70!black] ($(45:\R)+(\t,\t)$)--++(.5,-.5);
+  \node[red!70!black,font=\footnotesize,anchor=north west,inner sep=1pt]
+    at (2.75,1.9) {\(dz\)};
+  \node[red!70!black,anchor=north east,inner sep=1pt] at (45:{\R-.05}) {\(\mathrm{ff}\)};
+  \node[anchor=east] at (-.05,2.4) {\(\mathrm{lb}\)};
+  \node[anchor=north] at (2.4,-.05) {\(\mathrm{rb}\)};
+  \draw[->,gray] (\W,0)--(\W+.3,0) node[right,black] {\(x\)};
+  \draw[->,gray] (0,\W)--(0,\W+.3) node[above,black] {\(x'\)};
+  \node at (1.65,-.75) {\(N^*\Delta_b\cong{}^bT^*X\)};
+ \end{scope}
+\end{tikzpicture}
+\caption[Conormal bundle of the lifted diagonal]{Left: on \(X^2\) the
+conormal bundle of the diagonal consists of the covectors
+\((\alpha,-\alpha)=\pi_L^*\alpha-\pi_R^*\alpha\), \(\alpha\in T^*X\)
+(red arrows; tangential directions suppressed).  Right: on \(X_b^2\) the
+lifted diagonal meets \(\mathrm{ff}\) transversally, and its conormal
+bundle is spanned by \(dz\) and \(dY\), where \(dz=\pi_L^*(dx/x)-\pi_R^*(dx/x)\)
+in the interior.  The conormal covectors therefore extend smoothly up to
+the endpoint \(\Delta_b\cap\mathrm{ff}\) of the lifted diagonal, and
+\(N^*\Delta_b\) is canonically \({}^bT^*X\): this is where the b-principal
+symbol of \(A\in\Psi_b^m\) lives.}
+\label{fig:bconormal}
+\end{figure}
+
 The principal symbol is a homogeneous bundle map on
 \({}^bT^*X\setminus0\),
 \[
@@ -1183,6 +1363,59 @@ b-fibrations
  \pi_{12},\pi_{23},\pi_{13}:X_b^3\longrightarrow X_b^2
 \]
 lifting the three coordinate projections.
+
+The simplest instance of this phenomenon is already visible on the double
+space.  The left projection \(X^2\to X\), \((x,x')\mapsto x\), lifts to a
+smooth map \(\pi_L:X_b^2\to X\) with \(\pi_L^*x=\rho_{\mathrm{lb}}
+\rho_{\mathrm{ff}}\) for suitable defining functions.  Its fibre over
+\(x>0\) is a copy of \(X\), while its fibre over \(x=0\) is
+\(\mathrm{lb}\cup\mathrm{ff}\), which has a corner; so \(\pi_L\) is not a
+fibration.  It is, however, a b-fibration: it is a b-submersion, and no
+boundary hypersurface is mapped into a corner of the base; see
+Figure~\ref{fig:bfibration}.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,thick,font=\small]
+ \def\R{1.1}\def\W{3.6}
+ \fill[gray!8] (0,\R) arc[start angle=90,end angle=0,radius=\R]
+   --(\W,0)--(\W,\W)--(0,\W)--cycle;
+ % fibres x = c : (R cos t + c, R sin t + c tan t)
+ \begin{scope}
+  \clip (0,0) rectangle (\W,\W);
+  \foreach \c in {.15,.4,.85,1.5,2.2}
+    \draw[blue!70!black,thin,domain=0:89,samples=60]
+      plot ({\R*cos(\x)+\c},{\R*sin(\x)+\c*tan(\x)});
+ \end{scope}
+ \draw (\R,0)--(\W,0);
+ \draw[red!70!black,line width=1.6pt] (0,\W)--(0,\R)
+   arc[start angle=90,end angle=0,radius=\R];
+ \node[red!70!black,anchor=east] at (-.05,2.5) {\(\mathrm{lb}\)};
+ \node[red!70!black,anchor=north east,inner sep=1pt] at (45:{\R-.05}) {\(\mathrm{ff}\)};
+ \node[anchor=north] at (2.9,-.05) {\(\mathrm{rb}\)};
+ \node[anchor=south east,inner sep=2pt] at (\W,\W) {\(X_b^2\)};
+ % projection
+ \draw[->] (\W+.5,1.8)--(\W+1.6,1.8) node[midway,above] {\(\pi_L\)};
+ \begin{scope}[xshift=\W cm+2.1cm,yshift=1.8cm]
+  \draw (0,0)--(3.2,0) node[right] {\([0,1)_x\)};
+  \fill[red!70!black] (0,0) circle (2.2pt);
+  \node[red!70!black,below,font=\footnotesize] at (0,-.08) {\(0\)};
+  \foreach \c in {.15,.4,.85,1.5,2.2}{
+    \fill[blue!70!black] ({.2+\c*1.15},0) circle (1.4pt);}
+  \node[blue!70!black,above,font=\footnotesize] at (1.6,.08) {\(x=c>0\)};
+ \end{scope}
+\end{tikzpicture}
+\caption[The lifted projection as a b-fibration]{The lifted left
+projection \(\pi_L:X_b^2\to X\) near the corner (tangential variables
+suppressed).  The blue curves are the fibres \(\{x=c\}\), \(c>0\): each is
+a segment that starts on \(\mathrm{rb}\) and does not meet
+\(\mathrm{lb}\cup\mathrm{ff}\).  As \(c\downarrow0\) they collapse onto
+\(\mathrm{lb}\cup\mathrm{ff}\) (red), the fibre over \(x=0\), which has a
+corner at \(\mathrm{lb}\cap\mathrm{ff}\).  So \(\pi_L\) is not a fibration;
+it is a b-fibration, with \(\pi_L^*x=\rho_{\mathrm{lb}}\rho_{\mathrm{ff}}\)
+and \(\mathrm{rb}\) mapped onto the base.}
+\label{fig:bfibration}
+\end{figure}
 
 Their roles in composition are displayed by
 \[
@@ -1318,7 +1551,70 @@ multiplicative:
  N(AB)=N(A)N(B).
 \]
 It follows either from restriction of the composition formula to the front
-face or from Fourier transformation in \(u\).
+face or from Fourier transformation in \(u\).  Figure~\ref{fig:normal-op}
+shows the front face opened out to the line \(\mathbb R_z\).
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,thick,font=\small]
+ % ---------- left: X_b^2 ----------
+ \begin{scope}
+  \def\R{1.5}\def\W{3.4}
+  \fill[gray!8] (0,\R) arc[start angle=90,end angle=0,radius=\R]
+    --(\W,0)--(\W,\W)--(0,\W)--cycle;
+  \draw (0,\R)--(0,\W) (\R,0)--(\W,0);
+  \draw[red!70!black,line width=2pt] (0,\R) arc[start angle=90,end angle=0,radius=\R];
+  \draw[blue!70!black,very thick] (45:\R)--(\W,\W)
+    node[above right,inner sep=1pt] {\(\Delta_b\)};
+  \fill[blue!70!black] (45:\R) circle (1.8pt);
+  \node[blue!70!black,anchor=north east,font=\footnotesize,inner sep=1pt]
+    at (45:{\R-.04}) {\(z=0\)};
+  \node[red!70!black,anchor=east,font=\footnotesize,inner sep=2pt]
+    at (0,\R) {\(z\to-\infty\)};
+  \node[red!70!black,anchor=south west,font=\footnotesize,inner sep=1pt]
+    at (\R,0) {\(z\to+\infty\)};
+  \node[red!70!black,font=\footnotesize] at (66:{\R+.3}) {\(\mathrm{ff}\)};
+  \node[anchor=east] at (-.05,2.6) {\(\mathrm{lb}\)};
+  \node[anchor=north] at (2.6,-.05) {\(\mathrm{rb}\)};
+  \draw[->,gray] (\W,0)--(\W+.3,0) node[right,black] {\(x\)};
+  \draw[->,gray] (0,\W)--(0,\W+.3) node[above,black] {\(x'\)};
+ \end{scope}
+ \draw[->] (4.2,1.7)--(5.5,1.7) node[midway,above,font=\footnotesize]
+   {restrict}
+   node[midway,below,font=\footnotesize] {to \(\mathrm{ff}\)};
+ % ---------- right: ff opened out ----------
+ \begin{scope}[xshift=8.6cm,yshift=.9cm]
+  \draw[red!70!black,line width=2pt] (-2.8,0)--(2.8,0);
+  \draw[->,gray] (2.8,0)--(3.2,0) node[right,black] {\(z\)};
+  \node[red!70!black,font=\footnotesize,below] at (-2.4,-.05) {\(-\infty\leftarrow\)};
+  \node[red!70!black,font=\footnotesize,below] at (2.4,-.05) {\(\to+\infty\)};
+  \draw[blue!70!black,thin] (0,-.1)--(0,2.5);
+  \node[blue!70!black,font=\footnotesize,below] at (0,-.08) {\(0\)};
+  \draw[black,very thick,domain=-2.8:-.02,samples=80]
+    plot (\x,{.45*exp(-.9*\x*\x)/(sqrt(abs(\x))+.2)});
+  \draw[black,very thick,domain=.02:2.8,samples=80]
+    plot (\x,{.45*exp(-.9*\x*\x)/(sqrt(abs(\x))+.2)});
+  \node[anchor=west,font=\footnotesize] at (.3,1.4) {\(k_A(z;y,y')\)};
+  \node[font=\footnotesize] at (0,-.75)
+    {\(\mathrm{ff}^\circ\cong\partial X\times\partial X\times\mathbb R_z\)};
+  \draw[->] (1.9,-1.1)--(1.9,-1.75) node[midway,right,font=\footnotesize]
+    {Fourier in \(z\)};
+  \node at (1.9,-2.05) {\(I(A,\lambda)=\widehat{k_A}(\lambda)\)};
+ \end{scope}
+\end{tikzpicture}
+\caption[Front-face restriction and the normal operator]{Left: in
+\(X_b^2\) the interior of the front face \(\mathrm{ff}\) (red) is
+parametrized, together with \(y,y'\), by \(z=\log(x/x')\), which tends to
+\(-\infty\) at \(\mathrm{lb}\) and to \(+\infty\) at \(\mathrm{rb}\); the
+lifted diagonal \(\Delta_b\) meets \(\mathrm{ff}\) at \(z=0\).  Right: the
+restriction of \(K_A\) to \(\mathrm{ff}\), written on
+\(\partial X\times\partial X\times\mathbb R_z\), is the convolution kernel
+\(k_A(z;y,y')\) of the normal operator \(N(A)\).  It is singular at
+\(z=0\) and, away from \(z=0\), smooth and rapidly decreasing as
+\(|z|\to\infty\).  Its Fourier transform in \(z\) is the indicial family
+\(I(A,\lambda)\).}
+\label{fig:normal-op}
+\end{figure}
 
 For a b-differential operator
 \[
@@ -1365,7 +1661,77 @@ integral converges for all complex \(\lambda\). On every strip
 (parameter-dependent) family of order \(m\). For differential operators it
 is polynomial in \(\lambda\). Holomorphy only in a strip, or
 meromorphy, occurs for operators of the full calculus, whose kernels have
-finite-order expansions at the side faces.
+finite-order expansions at the side faces.  For instance, if the kernel is
+\(O(\rho_{\mathrm{lb}}^\alpha)\) and \(O(\rho_{\mathrm{rb}}^\alpha)\) with
+\(\alpha>0\), then near the front face \(\rho_{\mathrm{lb}}=x/x'=e^{z}\) as
+\(z\to-\infty\) and \(\rho_{\mathrm{rb}}=x'/x=e^{-z}\) as \(z\to+\infty\), so
+\(k_A(z)=O(e^{-\alpha|z|})\) away from \(z=0\).  Since
+\(|e^{-iz\lambda}|=e^{z\operatorname{Im}\lambda}\), the Fourier integral
+then converges, and \(I(A,\lambda)\) is holomorphic, at least in the strip
+\(|\operatorname{Im}\lambda|<\alpha\); see Figure~\ref{fig:strip}.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,thick,font=\small]
+ % ---------- (a) X_b^2 ----------
+ \begin{scope}
+  \def\R{1.0}\def\W{3.0}
+  \fill[gray!8] (0,\R) arc[start angle=90,end angle=0,radius=\R]
+    --(\W,0)--(\W,\W)--(0,\W)--cycle;
+  \draw[blue!70!black,line width=1.3pt] (0,\R)--(0,\W) (\R,0)--(\W,0);
+  \draw[red!70!black,line width=1.4pt] (0,\R) arc[start angle=90,end angle=0,radius=\R];
+  \node[red!70!black,anchor=north east,inner sep=1pt] at (45:{\R-.05}) {\(\mathrm{ff}\)};
+  \node[blue!70!black,anchor=east,align=right,font=\footnotesize] at (-.05,2.1)
+    {\(\mathrm{lb}\):\\\(O(\rho_{\mathrm{lb}}^{\alpha})\)};
+  \node[blue!70!black,anchor=north,font=\footnotesize] at (2.0,-.05)
+    {\(\mathrm{rb}\): \(O(\rho_{\mathrm{rb}}^{\alpha})\)};
+  \node[font=\footnotesize] at (2.2,2.75) {\(X_b^2\)};
+  \node at (1.5,-1.1) {(a) side-face orders};
+ \end{scope}
+ % ---------- (b) k(z) ----------
+ \begin{scope}[xshift=6.0cm,yshift=.2cm]
+  \draw[->,gray] (-2.1,0)--(2.2,0) node[right,black] {\(z\)};
+  \draw[gray,thin,dashed,domain=-2.0:-.35,samples=40]
+    plot (\x,{1.6*exp(-1.1*abs(\x))});
+  \draw[gray,thin,dashed,domain=.35:2.0,samples=40]
+    plot (\x,{1.6*exp(-1.1*abs(\x))});
+  \draw[black,thick,domain=-2.0:-.01,samples=80]
+    plot (\x,{.5*exp(-1.1*abs(\x))/(sqrt(abs(\x))+.15)});
+  \draw[black,thick,domain=.01:2.0,samples=80]
+    plot (\x,{.5*exp(-1.1*abs(\x))/(sqrt(abs(\x))+.15)});
+  \draw[blue!70!black,thin] (0,-.1)--(0,.1);
+  \node[blue!70!black,font=\footnotesize,below] at (0,-.08) {\(0\)};
+  \node[font=\footnotesize,anchor=south east] at (-.75,.75) {\(e^{\alpha z}\)};
+  \node[font=\footnotesize,anchor=south west] at (.75,.75) {\(e^{-\alpha z}\)};
+  \node[font=\footnotesize,below] at (-1.7,-.05) {\(\mathrm{lb}\leftarrow\)};
+  \node[font=\footnotesize,below] at (1.7,-.05) {\(\to\mathrm{rb}\)};
+  \node at (0,-1.3) {(b) \(|k_A(z)|\lesssim e^{-\alpha|z|}\)};
+ \end{scope}
+ % ---------- (c) strip ----------
+ \begin{scope}[xshift=10.6cm,yshift=.2cm]
+  \fill[gray!22] (-1.6,-.6) rectangle (1.6,.6);
+  \draw[gray,thin,dashed] (-1.6,.6)--(1.6,.6) (-1.6,-.6)--(1.6,-.6);
+  \draw[->,gray] (-1.7,0)--(1.8,0) node[right,black] {\(\operatorname{Re}\lambda\)};
+  \draw[->,gray] (0,-.75)--(0,1.4) node[above,black] {\(\operatorname{Im}\lambda\)};
+  \node[font=\footnotesize,anchor=south west,inner sep=1pt] at (.05,.6) {\(\alpha\)};
+  \node[font=\footnotesize,anchor=north west,inner sep=1pt] at (.05,-.6) {\(-\alpha\)};
+  \node at (0,-1.3) {(c) \(I(A,\lambda)\) holomorphic};
+ \end{scope}
+\end{tikzpicture}
+\caption[Side-face orders and strips of holomorphy]{(a) A kernel
+vanishing to order \(\alpha>0\) at \(\mathrm{lb}\) and at
+\(\mathrm{rb}\).  (b) On the front face \(\rho_{\mathrm{lb}}=e^{z}\) as
+\(z\to-\infty\) and \(\rho_{\mathrm{rb}}=e^{-z}\) as \(z\to+\infty\), so
+away from \(z=0\) the restriction \(k_A(z)\) is bounded by a multiple of
+\(e^{\alpha z}\) at the left end and \(e^{-\alpha z}\) at the right end,
+that is, by \(e^{-\alpha|z|}\) (dashed).  (c) With
+\(\widehat k(\lambda)=\int e^{-iz\lambda}k(z)\,dz\), the integrand is
+bounded by \(e^{z\operatorname{Im}\lambda-\alpha|z|}\), so \(I(A,\lambda)\)
+is holomorphic in the strip \(|\operatorname{Im}\lambda|<\alpha\) (shaded).
+Infinite-order vanishing at both side faces, as in the small calculus,
+gives this for every \(\alpha\), so \(I(A,\lambda)\) is entire.}
+\label{fig:strip}
+\end{figure}
 
 If \(x'=e^\phi x\), then
 \[
@@ -1539,8 +1905,51 @@ where \(T\) is invertible, hence on the whole overlap by the identity
 theorem.  This continues the inverse to \(U_N\).  Continuations along two
 paths agree by the same overlap argument (equivalently, by uniqueness in the
 meromorphic sheaf), so the local inverses assemble to one meromorphic inverse
-on the domain.
+on the domain; see Figure~\ref{fig:continuation}.
 \end{proof}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,thick,font=\small]
+ \fill[gray!8,draw=gray] plot[smooth cycle,tension=.8]
+   coordinates {(-.6,.2) (.4,1.9) (3,2.5) (6.2,2.4) (8.4,1.3) (8.2,-.6)
+     (5.6,-1.2) (2.8,-1.0) (.6,-1.1)};
+ \node[gray!60!black] at (6.9,-.8) {\(\Omega\)};
+ % path
+ \coordinate (p0) at (.5,.3);
+ \coordinate (p1) at (7.3,.6);
+ \foreach \c/\r in {(.5,.3)/.75,(1.65,.95)/.8,(2.95,1.15)/.75,
+   (4.25,.75)/.8,(5.45,.2)/.75,(6.5,.3)/.75,(7.3,.6)/.7}
+   \fill[blue!70!black,opacity=.10] \c circle (\r);
+ \foreach \c/\r in {(.5,.3)/.75,(1.65,.95)/.8,(2.95,1.15)/.75,
+   (4.25,.75)/.8,(5.45,.2)/.75,(6.5,.3)/.75,(7.3,.6)/.7}
+   \draw[blue!70!black,thin] \c circle (\r);
+ \draw[blue!70!black,very thick] plot[smooth,tension=.7] coordinates
+   {(.5,.3) (1.65,.95) (2.95,1.15) (4.25,.75) (5.45,.2) (6.5,.3) (7.3,.6)};
+ \fill (p0) circle (2pt) node[below left,inner sep=2pt] {\(\lambda_0\)};
+ \fill (p1) circle (2pt) node[below right,inner sep=2pt] {\(\lambda_*\)};
+ \node[blue!70!black,font=\footnotesize] at (.3,-.75) {\(U_0\)};
+ \node[blue!70!black,font=\footnotesize] at (1.65,1.95) {\(U_1\)};
+ \node[blue!70!black,font=\footnotesize] at (2.95,2.1) {\(U_2\)};
+ \node[blue!70!black,font=\footnotesize] at (4.3,-.3) {\(\cdots\)};
+ \node[blue!70!black,font=\footnotesize] at (7.55,1.5) {\(U_N\)};
+ % poles
+ \foreach \p in {(1.0,-.45),(2.3,-.55),(3.6,1.75),(4.4,.05),(5.55,-.55),
+   (6.2,1.45),(7.75,-.3),(2.25,1.6)}
+   \node[red!70!black,font=\normalsize] at \p {\(\times\)};
+\end{tikzpicture}
+\caption[Meromorphic continuation along a path]{Continuation of the
+inverse in the analytic Fredholm theorem.  A path in the connected domain
+\(\Omega\) joins the point \(\lambda_0\), where \(T(\lambda_0)\) is
+invertible, to \(\lambda_*\); it is covered by finitely many block
+neighbourhoods \(U_0,\ldots,U_N\) (blue discs) with connected nonempty
+successive overlaps.  On each \(U_j\), Cramer's rule gives a meromorphic
+inverse; its poles (\(\times\)) are discrete, so each overlap
+\(U_j\cap U_{j+1}\) contains a nonempty open set where \(T\) is invertible,
+and the inverses on \(U_j\) and \(U_{j+1}\) agree on the overlap by the
+identity theorem.}
+\label{fig:continuation}
+\end{figure}
 
 Applied to \(I(P,\lambda)\), this theorem yields a discrete set
 \[
@@ -2465,6 +2874,64 @@ Equivalently, if the cylinder is truncated at \(u=-T\), then
 \]
 \end{definition}
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,thick,font=\small]
+ % ---------- left: Delta_b in X_b^2 ----------
+ \begin{scope}
+  \def\R{1.1}\def\W{3.2}
+  \fill[gray!8] (0,\R) arc[start angle=90,end angle=0,radius=\R]
+    --(\W,0)--(\W,\W)--(0,\W)--cycle;
+  \draw (0,\R)--(0,\W) (\R,0)--(\W,0);
+  \draw[red!70!black,line width=1.4pt] (0,\R) arc[start angle=90,end angle=0,radius=\R];
+  \draw[blue!70!black,very thick] (45:\R)--(\W-.2,\W-.2)
+    node[above right,inner sep=1pt] {\(\Delta_b\)};
+  \fill[blue!70!black] (45:\R) circle (2pt);
+  \draw[->,thin] (2.3,1.55)--(1.4,.65);
+  \node[font=\footnotesize,anchor=west] at (2.3,1.55) {\(x\to0\)};
+  \draw[<-,thin] ($(45:\R)+(-.08,-.08)$)--(-.2,-.35)
+    node[below,font=\footnotesize,align=center]
+    {\(f_0(y)=\operatorname{tr}k_A(0;y,y)\)};
+  \node[red!70!black,font=\footnotesize] at (18:{\R+.3}) {\(\mathrm{ff}\)};
+  \node[anchor=east] at (-.05,2.3) {\(\mathrm{lb}\)};
+  \node[anchor=north] at (2.3,-.05) {\(\mathrm{rb}\)};
+ \end{scope}
+ % ---------- right: truncated cylinder ----------
+ \begin{scope}[xshift=9.3cm,yshift=1.6cm]
+  \fill[blue!6] (-3.6,-.8) rectangle (0,.8);
+  \draw (-4.4,.8)--(0,.8) (-4.4,-.8)--(0,-.8);
+  \draw[dashed] (-5.0,.8)--(-4.4,.8) (-5.0,-.8)--(-4.4,-.8);
+  \draw[fill=gray!8]
+    (0,.8) .. controls (.8,.8) and (1.0,1.0) .. (1.4,1.0)
+    .. controls (2.2,.9) and (2.2,-.9) .. (1.4,-1.0)
+    .. controls (1.0,-1.0) and (.8,-.8) .. (0,-.8);
+  \draw[red!70!black,thick] (-3.6,.8) arc[start angle=90,end angle=270,
+    x radius=.22,y radius=.8];
+  \draw[red!70!black,thick,densely dashed] (-3.6,-.8) arc[start angle=-90,
+    end angle=90,x radius=.22,y radius=.8];
+  \node[red!70!black,above,font=\footnotesize] at (-3.6,.8) {\(u=-T\)};
+  \node[font=\footnotesize] at (-4.6,0) {\(u\to-\infty\)};
+  \node[font=\footnotesize] at (-1.7,0) {\(\{u\geq-T\}\)};
+  \node[font=\footnotesize,align=center] at (-1.6,-1.6)
+    {\(\displaystyle\int_{\{u\geq-T\}}f\,d\mu_b=cT+C+o(1)\)};
+  \node[font=\footnotesize,align=center] at (-1.6,-2.45)
+    {\(c=\int_{\partial X}f_0\,d\mu_{\partial X},\qquad
+      {}^b\!\int_Xf\,d\mu_b=C\)};
+ \end{scope}
+\end{tikzpicture}
+\caption[The b-integral and the b-trace]{Left: the diagonal value
+\(f=\operatorname{tr}K_A(p,p)\) is the restriction of the kernel to
+\(\Delta_b\), which ends on \(\mathrm{ff}\).  As \(x\to0\) it tends to the
+value at the endpoint \(\Delta_b\cap\mathrm{ff}\), which is
+\(f_0(y)=\operatorname{tr}k_A(0;y,y)\), the normal-operator kernel at
+\(z=0\).  Right: on the cylindrical end, where \(d\mu_b=du\,d\mu_{\partial X}\),
+the integral over the part \(\{u\geq-T\}\) (shaded) grows linearly in
+\(T\), with slope \(c=\int_{\partial X}f_0\,d\mu_{\partial X}\); the
+b-integral, and for \(f=\operatorname{tr}K_A(p,p)\) the b-trace, is the
+constant term \(C\).}
+\label{fig:btrace}
+\end{figure}
+
 More generally, if the diagonal is a polyhomogeneous b-density
 \[
  \omega\sim
@@ -2477,7 +2944,12 @@ the special case needed for the trace-defect calculation; the density and
 the full diagonal index family must be specified in the general case.
 
 The constant \(c\) is determined by the translation-invariant normal
-operator.  Thus the same boundary model that obstructs trace class also
+operator.  Indeed, the leading term gives \(c=\int_{\partial X}f_0\,
+d\mu_{\partial X}\); when \(f=\operatorname{tr}K_A(p,p)\) is the diagonal
+value of a kernel, \(f_0(y)\) is the value of
+\(\operatorname{tr}K_A\) at the point of \(\Delta_b\cap\mathrm{ff}\) over
+\(y\), namely \(\operatorname{tr}k_A(0;y,y)\), the convolution kernel of
+\(N(A)\) at \(z=0\); see Figure~\ref{fig:btrace}.  Thus the same boundary model that obstructs trace class also
 determines the regularization.  The finite part depends on the defining
 function, but the change is compensated by the trace-defect term below.
 
