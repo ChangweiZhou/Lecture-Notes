@@ -741,6 +741,14 @@ in all variables) the same argument applies to non-compact $X$.
 
 \section{The commutative symbol algebra}\label{hochschild:sec:commutative}
 
+Before deforming, we compute the Hochschild homology of the commutative
+algebra whose product is the leading term of the symbol product: formal sums
+of homogeneous functions on $T^*X\setminus0$ with pointwise multiplication.
+Polar coordinates in $\xi$ split such a function into a function on the
+cosphere bundle and a power of the radial variable, and the answer is
+assembled from Connes' theorem for $S^*X$ and the Laurent polynomial
+computation of \cref{hochschild:rem:Laurent}.
+
 From now on $X$ is compact, $n=\dim X\ge1$, and
 \begin{equation*}
   Y=T^*X\setminus0,\qquad \rho_t(x,\xi)=(x,t\xi),\ t>0,\qquad
@@ -971,6 +979,18 @@ $d^r:E^r_{p,k}\to E^r_{p-r,k-1}$, will not be needed explicitly. By
 \end{equation}
 the isomorphism being induced by $\varepsilon$.
 
+\begin{discussion}
+In plain words, we try to solve the cycle equation $bu=0$ one order at a
+time. The top-order part of the equation is $b_0u_p=0$, a problem for the
+\emph{commutative} algebra, whose solutions modulo $b_0$-boundaries form
+$E^1$, the homogeneous differential forms. The next order adds the first
+correction $b_1$ of the product, and passing to $E^2$ amounts to keeping only
+those leading parts that survive this correction. In
+\cref{hochschild:rem:semiclassical} this is the expansion in powers of
+$h$: $E^1$ is the classical limit, and $d^1$ is the first quantum
+correction, governed by the Poisson bracket.
+\end{discussion}
+
 \subsection{Degeneration and convergence}
 The following purely algebraic statement reduces the computation of
 $\HH_\bullet(\cA)$ to that of $E^2$. It applies to any complex of the form
@@ -1135,7 +1155,23 @@ In particular $\delta^2=0$, which can also be checked directly. The complex
 $(\Omega^\bullet(Y),\delta)$ is the \emph{canonical} (or Koszul--Brylinski)
 complex of the Poisson manifold $Y$.
 
+\begin{discussion}
+Why does the Poisson bracket appear? The symmetric part of $P_1$ can be
+removed by a change of the symbol map and does not affect homology, as the
+cancellation in the proof shows; only the antisymmetric part
+$-\frac i2\{a,b\}$ is intrinsic. On forms, the operation built from a
+bracket of functions in the way $d$ is built from the product is exactly the
+Koszul--Brylinski operator $\delta$ (\cref{hochschild:lem:delta}).
+\end{discussion}
+
 \section{The \texorpdfstring{$E^2$}{E2} term}\label{hochschild:sec:E2}
+
+To compute the homology of $\delta$ we convert it into the de Rham
+differential. In Riemannian geometry the Hodge star turns $d$ into (a
+multiple of) its adjoint $d^*$; on a symplectic manifold an analogous star
+operator, built from $\omega$ instead of a metric, turns $\delta$ into
+$\pm d$. The homology of $\delta$ is then de Rham cohomology, restricted to
+forms of a fixed homogeneity.
 
 \subsection{The symplectic star operator}
 Fix $\zeta\in Y$ and let $V=T_\zeta Y$, of dimension $2n$. The bilinear form
@@ -1237,6 +1273,20 @@ by $aR$, $a\in\CI(S^*X)$ positive, changes $\alpha'$ by $\alpha''\wedge
 d\log a$, which does not change the induced map on cohomology from the
 second summand, nor the subspace given by the first.
 
+\begin{question}
+Why does the final answer involve only the cohomology of $S^*X$, and not
+that of the bigger space $Y=T^*X\setminus0$?
+\end{question}
+\begin{answer}
+As a manifold $Y\cong S^*X\times(0,\infty)$ has the same cohomology as
+$S^*X$. But we only see forms that are homogeneous, and the dilation
+$\rho_t$ acts on each homogeneity class by a fixed power of $t$. Cartan's
+formula shows that a closed form of non-zero homogeneity is exact, while a
+form of homogeneity $0$ is $\alpha'+\alpha''\wedge dr/r$ with $\alpha'$,
+$\alpha''$ forms on $S^*X$. The extra $dr/r$ is responsible for the second
+summand $H^{j-1}(S^*X)$.
+\end{answer}
+
 \begin{theorem}\label{hochschild:thm:E2}
 For the spectral sequence of \cref{hochschild:sec:spectral},
 \begin{equation*}
@@ -1280,7 +1330,40 @@ The degeneration of the spectral sequence at $E^2$, part of
 \cref{hochschild:prop:convergence}, thus comes down to the observation that
 the $E^2$ term is concentrated on the line $p=k-n$, where the order of a
 chain is tied to its degree; differentials $d^r$, $r\ge2$, would have to
-connect different such lines.
+connect different such lines (\cref{hochschild:fig:E2}).
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,scale=0.85]
+  % grid of E^1 positions, n=2, 0<=k<=4
+  \foreach \p in {-4,...,3}{
+    \foreach \k in {0,...,4}{
+      \fill[gray!55] (\p,\k) circle (1.6pt);
+    }
+  }
+  \draw[->] (-4.6,-0.6) -- (3.8,-0.6) node[right] {\small $p$ (order)};
+  \draw[->] (-4.6,-0.6) -- (-4.6,5.0) node[above] {\small $k$ (degree)};
+  \foreach \p in {-4,...,3} \node[below] at (\p,-0.6) {\scriptsize $\p$};
+  \foreach \k in {0,...,4} \node[left] at (-4.6,\k) {\scriptsize $\k$};
+  % the line p=k-n
+  \draw[thick] (-2.5,-0.5) -- (2.5,4.5) node[above right] {\small $p=k-n$};
+  \foreach \k in {0,...,4} \fill (\k-2,\k) circle (3pt);
+  % d^1 along a parallel diagonal
+  \draw[->,thick,gray!40!black] (1,2) -- node[below right=-2pt] {\small $d^1$} (0.12,1.12);
+  % d^2 leaving the line
+  \draw[->,thick,densely dashed] (2,4) -- node[above=1pt] {\small $d^2=0$} (0.12,3.06);
+  \draw[->,thick,densely dashed] (1,3) .. controls (0,3.2) .. (-1.88,2.06);
+  \node[above] at (-0.6,3.15) {\small $d^3=0$};
+\end{tikzpicture}
+\caption[The spectral sequence for the symbol algebra]{The spectral
+sequence of \cref{hochschild:sec:spectral} for $n=\dim X=2$. Gray dots are
+the positions $(p,k)$ where $E^1_{p,k}=\Omega^k_{(p)}(Y)$ can be non-zero
+($0\le k\le2n$). The differential $d^1:E^1_{p,k}\to E^1_{p-1,k-1}$ moves
+along lines parallel to $p=k-n$. By \cref{hochschild:thm:E2} the $E^2$ term
+lives only on the line $p=k-n$ (black dots), while $d^r$, $r\ge2$, maps
+$(p,k)$ to $(p-r,k-1)$, off that line; hence $d^r=0$.}
+\label{hochschild:fig:E2}
+\end{figure}
 
 \begin{remark}[The residue trace]\label{hochschild:rem:residue}
 In degree $0$, $\HH_0(\cA)=\cA/b(\cB^{(1)})$, the quotient by (the closure of)
