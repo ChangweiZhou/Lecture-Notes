@@ -7,6 +7,7 @@
 \providecommand{\Ampl}[1]{\mathcal{A}^{#1}}
 \providecommand{\rc}{\operatorname{RC}}
 \providecommand{\Hsph}[1]{\mathbb{S}^{#1}_{+}}
+\providecommand{\Psiscph}[1]{\Psi^{#1}_{\mathrm{sc,ph}}}
 \providecommand{\OpW}{\operatorname{Op}^{\mathrm{W}}}
 
 In this chapter two \emph{global} calculi of pseudodifferential operators on
@@ -140,7 +141,7 @@ Here $m$ is the order in the fibre variables and $l$ the order in the base
 variables.
 \end{definition}
 
-Clearly $S^{m,l}\cdot S^{m',l'}\subset S^{m+m',l+l'}$,
+The following properties are clear: $S^{m,l}\cdot S^{m',l'}\subset S^{m+m',l+l'}$,
 $D_z:S^{m,l}\to S^{m,l-1}$, $D_\xi:S^{m,l}\to S^{m-1,l}$,
 $S^{m,l}(\R^p;\R^n)\subset\ang{z}^lS^m(\R^p;\R^n)$, and
 $\bigcap_{m,l}S^{m,l}(\R^n;\R^n)=\cS(\R^{2n})$.
@@ -247,8 +248,8 @@ order $j$ of $f\circ\rc^{-1}$ in $(\rho,\theta)$ is $\rho^{-j}$ times a
 combination of at most $j$-fold products of the $V_j$ applied to $f$; this
 gives (iii), since such products applied to $f\in\Gs{-k}$ are
 $O(\ang{w}^{-k})=O(\rho^k)$, and also (ii), since for $f\in\cS$ these are
-$O(\rho^K)$ for every $K$ (the converse inclusion in (ii) follows from the
-first argument with $\rho^{-K}F$, $F\in\dCI$).
+$O(\rho^K)$ for every $K$ (conversely, $F\in\dCI$ can be written $F=\rho^KF_K$ with $F_K$ smooth for every $K$,
+so $\rc^*F\in\bigcap_K\Gs{-K}=\cS$ by the first argument).
 
 For (i), if $F\in\CI(\Hsph{N})$, Taylor's formula in $\rho$ gives
 $F=\sum_{j<K}\rho^jF_j(\theta)+\rho^KR_K$ near the boundary. Since
@@ -355,10 +356,10 @@ with $|\gamma_1'|+|\gamma_2'|=|\gamma'|$. Using
 $\ang{(x,\xi)}^{-1}\le\ang{\xi}^{-1}$ we get
 $|D_x^\alpha D_\xi^{\gamma_1}a|\le C\ang{(x,\xi)}^{m-|\alpha'|-|\gamma_1'|}\ang{\xi}^{-|\gamma_1-\gamma_1'|}$,
 and similarly, followed by \eqref{isotropic:eq:peetre} with $v=(y-x,0)$,
-\begin{equation*}
-  |D_y^\beta D_\xi^{\gamma_2}b(y,\xi)|\le C\ang{(y,\xi)}^{m'-|\beta'|-|\gamma_2'|}\ang{\xi}^{-|\gamma_2-\gamma_2'|}
-  \le C'\ang{(x,\xi)}^{m'-|\beta'|-|\gamma_2'|}\ang{x-y}^{|m'|+|\beta'|+|\gamma_2'|}\ang{\xi}^{-|\gamma_2-\gamma_2'|}.
-\end{equation*}
+\begin{align*}
+  |D_y^\beta D_\xi^{\gamma_2}b(y,\xi)|&\le C\ang{(y,\xi)}^{m'-|\beta'|-|\gamma_2'|}\ang{\xi}^{-|\gamma_2-\gamma_2'|}\\
+  &\le C'\ang{(x,\xi)}^{m'-|\beta'|-|\gamma_2'|}\ang{x-y}^{|m'|+|\beta'|+|\gamma_2'|}\ang{\xi}^{-|\gamma_2-\gamma_2'|}.
+\end{align*}
 Multiplying gives \eqref{isotropic:eq:ampl} with $w=|m'|$. (ii) With
 $\bar x=x+\lambda(y-x)$ the derivative is a constant times
 $(\pa^{\alpha+\beta}_xD_\xi^\gamma a)(\bar x,\xi)$, bounded by
@@ -390,17 +391,19 @@ derivatives used for decay, and $\ang{x-y}=1$ at $y=x$, shows
 $c_\alpha\in\Gs{m-2|\alpha|}(\R^{2n})$.
 
 Taylor's formula in $y$ around $x$ gives
-\begin{equation*}
-  a(x,y,\xi)=\sum_{|\alpha|<N}\frac{(y-x)^\alpha}{\alpha!}(\pa_y^\alpha a)(x,x,\xi)
+\begin{multline*}
+  a(x,y,\xi)=\sum_{|\alpha|<N}\frac{(y-x)^\alpha}{\alpha!}(\pa_y^\alpha a)(x,x,\xi)\\
   +\sum_{|\alpha|=N}\frac{N(y-x)^\alpha}{\alpha!}\int_0^1(1-t)^{N-1}(\pa_y^\alpha a)(x,x+t(y-x),\xi)\,dt .
-\end{equation*}
+\end{multline*}
 Since $(y-x)^\alpha e^{i(x-y)\cdot\xi}=(-D_\xi)^\alpha e^{i(x-y)\cdot\xi}$,
 integration by parts in $\xi$ (legitimate for these oscillatory integrals, as
 in \cref{ch:euclidean}) gives
 \begin{equation}\label{isotropic:eq:taylor-remainder}
-  \Op(a)=\sum_{|\alpha|<N}\Op(c_\alpha)+\Op(r_N),\quad
+\begin{gathered}
+  \Op(a)=\sum_{|\alpha|<N}\Op(c_\alpha)+\Op(r_N),\\
   r_N(x,y,\xi)=\sum_{|\alpha|=N}\frac{N i^N}{\alpha!}\int_0^1(1-t)^{N-1}
   \bigl(D_\xi^\alpha D_y^\alpha a\bigr)(x,x+t(y-x),\xi)\,dt .
+\end{gathered}
 \end{equation}
 We estimate $r_N$. A derivative $D_x^\mu D_y^\nu D_\xi^\gamma$ of the
 integrand is, by the chain rule, a combination with bounded coefficients of
@@ -453,7 +456,10 @@ $B=\Op(b)\in\Psiiso{m'}(\R^n)$ then
   \end{equation}
 \item the subspaces $\Psiisoph{m}(\R^n)$ form a $*$-subalgebra;
 \item the bilinear maps $\Gs{m}\times\Gs{m'}\ni(a,b)\mapsto a\#b\in\Gs{m+m'}$
-  and $(a,b)\mapsto a\#b-\sum_{|\alpha|<N}\frac1{\alpha!}\pa_\xi^\alpha a\,D_x^\alpha b\in\Gs{m+m'-2N}$
+  and
+  \begin{equation*}
+    \Gs{m}\times\Gs{m'}\ni(a,b)\mapsto a\#b-\sum_{|\alpha|<N}\frac1{\alpha!}\pa_\xi^\alpha a\,D_x^\alpha b\in\Gs{m+m'-2N}
+  \end{equation*}
   are continuous.
 \end{enumerate}
 \end{theorem}
@@ -612,8 +618,8 @@ $S^{m,l}_{\mathrm{ph}}(\R^p;\R^n)=\ang{z}^l\ang{\xi}^m(\rc\times\rc)^*\CI(\Hsph{
 By \cref{isotropic:prop:rc} applied in each factor these are scattering
 symbols, and they are preserved by $D_z$, $D_\xi$ (which lower the respective
 orders) and by products. If
-$\Psisc{m,l}_{\mathrm{ph}}(\R^n)=\Op(S^{m,l}_{\mathrm{ph}})$ then
-$\Psisc{m,l}_{\mathrm{ph}}\circ\Psisc{m',l'}_{\mathrm{ph}}\subset\Psisc{m+m',l+l'}_{\mathrm{ph}}$:
+$\Psiscph{m,l}(\R^n)=\Op(S^{m,l}_{\mathrm{ph}})$ then
+$\Psiscph{m,l}\circ\Psiscph{m',l'}\subset\Psiscph{m+m',l+l'}$:
 the terms of the composition formula are polyhomogeneous, an asymptotic sum
 $\sum_j c_j$ with $c_j\in S^{m-j,l-j}_{\mathrm{ph}}$ can be realized by a
 polyhomogeneous symbol using Borel's lemma for the series
@@ -647,7 +653,9 @@ The map $z\mapsto F(z,\cdot)\in\cS(\R^q)$ is smooth, by Taylor's formula with
 remainder and the uniform Schwartz bounds on the derivatives of $F$. The
 distribution $u$ has finite order:
 $|\pair{u}{\phi}|\le C\sum_{|\beta|+|\gamma|\le k}\sup|y^\beta D^\gamma\phi|$. Hence
-$|z^\delta\pa_z^\alpha f(z)|\le C\sum_{|\beta|+|\gamma|\le k}\sup_y|z^\delta y^\beta D_y^\gamma\pa_z^\alpha F(z,y)|$,
+\begin{equation*}
+  |z^\delta\pa_z^\alpha f(z)|\le C\sum_{|\beta|+|\gamma|\le k}\sup_y|z^\delta y^\beta D_y^\gamma\pa_z^\alpha F(z,y)|,
+\end{equation*}
 which is bounded.
 \end{proof}
 
@@ -857,9 +865,9 @@ $\exp$ contains the neighbourhood $\{\Id+A;\ \norm{A}_{\Lin(L^2)}<1\}$ of $\Id$
 in $\Id+\Psiiso{-\infty}(\R^n)$.
 \end{proposition}
 \begin{proof}
-For $j\ge2$, $A^j=A\,A^{j-2}A$ (with $A^0=\Id$), so by
+For $j\ge2$ we write $A^j=A\,A^{j-2}A$ (with $A^0=\Id$); then by
 \eqref{isotropic:eq:corner-est}
-$p_k(K_{A^j})\le C\,p_{k'}(K_A)^2\norm{A}^{j-2}_{\Lin(L^2)}$. Thus both series
+$p_k(K_{A^j})\le C\,p_{k'}(K_A)^2\,\norm{A}^{j-2}_{\Lin(L^2)}$. Thus both series
 converge absolutely in every seminorm, uniformly for $A$ in sets on which
 $p_{k'}(K_A)$ and $\norm{A}$ are bounded (respectively $\norm{A}\le r<1$), which by
 \cref{isotropic:prop:compact} include neighbourhoods of each point. The
@@ -1021,7 +1029,9 @@ $a\in\Gs{0}(\R^{2n};M(N,\C))$
 By \eqref{isotropic:eq:phase-translation} the norm in question is
 $\norm{\Op(b_k)(u_0v)}$ with $b_k(w)=a(w+w_k)-a(w_k)$. All derivatives of $b_k$
 are bounded uniformly in $k$ (as $\Gs{0}\subset\CIb$), and
-$|b_k(w)|\le|w|\sup_{t\in[0,1]}|\nabla a(w_k+tw)|\le C|w|\sup_t\ang{w_k+tw}^{-1}\to0$
+\begin{equation*}
+  |b_k(w)|\le|w|\sup_{t\in[0,1]}|\nabla a(w_k+tw)|\le C|w|\sup_{t\in[0,1]}\ang{w_k+tw}^{-1}\to0
+\end{equation*}
 for each $w$. Now $\Op(b_k)u_0(x)=\int e^{ix\cdot\xi}b_k(x,\xi)\hat u_0(\xi)\,\dbar\xi$;
 integrating by parts,
 $x^\beta\Op(b_k)u_0=\int e^{ix\cdot\xi}(-D_\xi)^\beta(b_k\hat u_0)\,\dbar\xi$, so
@@ -1364,8 +1374,8 @@ with the norm $\norm{u}_{s}^2=\norm{\Lambda_su}_{L^2}^2+\norm{P_su}_{L^2}^2$.
   $\Hiso{k}(\R^n)=\{u\in L^2;\ x^\alpha D^\beta u\in L^2\ \forall\,|\alpha|+|\beta|\le k\}$
   with equivalent norm $\bigl(\sum_{|\alpha|+|\beta|\le k}\norm{x^\alpha D^\beta u}^2\bigr)^{1/2}$.
 \item The $L^2$ pairing extends to a non-degenerate pairing
-  $\Hiso{s}\times\Hiso{-s}\to\C$ identifying $\Hiso{-s}$ with the (anti)dual of
-  $\Hiso{s}$.
+  $\Hiso{s}\times\Hiso{-s}\to\C$ identifying $\Hiso{-s}$ with the dual of
+  $\Hiso{s}$ (via $v\mapsto(\cdot,v)$, an antilinear isomorphism).
 \item Each $A\in\Psiiso{m}(\R^n)$ is bounded $\Hiso{s}\to\Hiso{s-m}$ for all $s$.
 \item $\bigcap_s\Hiso{s}=\cS(\R^n)$, $\bigcup_s\Hiso{s}=\cSp(\R^n)$, and for $s>t$
   the inclusion $\Hiso{s}\to\Hiso{t}$ is compact.
@@ -1401,9 +1411,9 @@ $ABD^\beta x^\alpha\in\Psiiso{0}$. The norm equivalence follows as in (i).
 (iv) For $u\in\cS$, $v\in\Hiso{-s}$:
 $(u,v)=(G_s\Lambda_su+P_su,v)=(\Lambda_su,G_s^*v)+(u,P_sv)$, and $G_s^*\in\Psiiso{-s}$,
 so $|(u,v)|\le C\norm{u}_s\norm{v}_{-s}$; the pairing extends by density.
-Conversely a continuous antilinear functional $\ell$ on $\Hiso{s}$ is, by the
-Riesz theorem, $\ell(u)=\overline{\inner{w}{u}_s}$ for some $w\in\Hiso{s}$, i.e.\
-$\ell(u)=\overline{(u,v)}$ with $v=\Lambda_s^*\Lambda_sw+P_sw$, and $v\in\Hiso{-s}$
+Conversely a continuous linear functional $\ell$ on $\Hiso{s}$ is, by the
+Riesz theorem, $\ell(u)=\inner{u}{w}_s$ for some $w\in\Hiso{s}$, i.e.\
+$\ell(u)=(u,v)$ with $v=\Lambda_s^*\Lambda_sw+P_sw$, and $v\in\Hiso{-s}$
 since $A\Lambda_s^*\in\Psiiso{0}$ for $A\in\Psiiso{-s}$. Non-degeneracy follows
 from the density of $\cS$.
 
@@ -1733,7 +1743,7 @@ $X_j=w_j\ang{w}^{-1}$ and $V_j$ smooth on $\Hsph{2n}$, so
 $\ang{w}^{-h-g}$ times each term of the sum is $\rc^*$ of a holomorphic family
 in $\CI(\Hsph{2n})$, while $\ang{w}^{-h-g}R_N(z)$ is holomorphic into
 $\Gs{3M-2N}$, hence, by \cref{isotropic:prop:rc}(iii), into
-$\mathcal C^{k}(\Hsph{2n})$ for $2N>3M+k$. Thus $\rho^{h+g}c(z)$ (pushed forward
+$\mathcal C^{k}(\Hsph{2n})$ for $2N>3M+k+1$. Thus $\rho^{h+g}c(z)$ (pushed forward
 by $\rc$) is holomorphic into $\mathcal C^k(\Hsph{2n})$ for every $k$, which
 means that it is given by an element of $\CI(\Omega'\times\Hsph{2n})$
 holomorphic in $z$.
@@ -1764,7 +1774,7 @@ $L^2(\R^n)$.
 \end{exercise}
 
 \begin{exercise}\label{isotropic:ex:finite-rank-parametrix}
-Show that if $E\in\Psiiso{-\infty}(\R^n)$ there exists
+Let $E\in\Psiiso{-\infty}(\R^n)$. Show that there is an operator
 $F\in\Psiiso{-\infty}(\R^n)$ such that $(\Id+E)(\Id+F)=\Id+G$ with
 $G\in\Psiiso{-\infty}(\R^n)$ of finite rank. Deduce that an elliptic
 $A\in\Psiiso{m}(\R^n)$ has a parametrix $B\in\Psiiso{-m}(\R^n)$ up to finite
@@ -1841,9 +1851,9 @@ and that $\WFiso(\hat u)=\{(\xi,-x);\ (x,\xi)\in\WFiso(u)\}$.
 \end{exercise}
 
 \begin{exercise}\label{isotropic:ex:sc-fourier}
-Verify in detail that $\cF\,\Psisc{m,l}(\R^n)\,\cF^{-1}=\Psisc{l,m}(\R^n)$, and that
-an elliptic element of $\Psisc{m,l}(\R^n)$ with $l\ne0$ cannot be an element of
-$\Psiiso{\infty}(\R^n)$ unless it is elliptic there of order $m=l$.
+Verify in detail that $\cF\,\Psisc{m,l}(\R^n)\,\cF^{-1}=\Psisc{l,m}(\R^n)$, and
+compute the left symbol of $\cF A\cF^{-1}$ in terms of that of $A\in\Psisc{m,l}(\R^n)$
+modulo $S^{l-1,m-1}$.
 \end{exercise}
 
 \section*{Notes}
@@ -1853,7 +1863,7 @@ The general (non-classical) isotropic class $\Gs{m}$ is the symbol class
 introduced by Shubin \cite{Shubin}, where much of the material here (in
 particular the harmonic oscillator and the isotropic Sobolev spaces) can be
 found; the Weyl calculus and its symplectic invariance are treated in
-\cite[Chapter~18.5]{Hormander-III}. The scattering calculus on $\R^n$ is the
+\cite[Section~18.5]{Hormander-III}. The scattering calculus on $\R^n$ is the
 model for Melrose's scattering calculus on asymptotically Euclidean manifolds
 (R.~B.~Melrose, \emph{Spectral and scattering theory for the Laplacian on
 asymptotically Euclidean spaces}, 1994); see also the work of H.~O.~Cordes and
