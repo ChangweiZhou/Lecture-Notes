@@ -93,15 +93,17 @@ maps it to $\Ssl{m-1}$.
 \begin{lemma}\label{semiclassical:lem:taylor}
   Let $a\in\Ssl m(\R^p;\R^n)$ and $N\in\N$. Then
   \begin{equation*}
-    a(\eps,z,\eta)=\sum_{k<N}\eps^ka_k(z,\eta)+\eps^Nr_N(\eps,z,\eta),\qquad
-    a_k=\frac1{k!}\pa_\eps^ka(0,\cdot,\cdot)\in S^m(\R^p;\R^n),\ r_N\in\Ssl m(\R^p;\R^n).
+    a(\eps,z,\eta)=\sum_{k<N}\eps^ka_k(z,\eta)+\eps^Nr_N(\eps,z,\eta),
   \end{equation*}
+  with $a_k=\frac1{k!}\pa_\eps^ka(0,\cdot,\cdot)\in S^m(\R^p;\R^n)$ and $r_N\in\Ssl m(\R^p;\R^n)$.
   In particular $a\in\eps^N\Ssl m$ if and only if $\pa^k_\eps a(0,\cdot,\cdot)=0$
   for $k<N$.
 \end{lemma}
 \begin{proof}
   Taylor's formula gives the expansion with
-  $r_N(\eps,z,\eta)=\frac1{(N-1)!}\int_0^1(1-s)^{N-1}(\pa_\eps^Na)(s\eps,z,\eta)\,ds$,
+  \begin{equation*}
+    r_N(\eps,z,\eta)=\frac1{(N-1)!}\int_0^1(1-s)^{N-1}(\pa_\eps^Na)(s\eps,z,\eta)\,ds,
+  \end{equation*}
   and differentiating under the integral shows that $r_N$ satisfies
   \eqref{semiclassical:eq:symbol-est}, since $\pa_\eps^k$ of the integrand is
   $s^k(\pa_\eps^{N+k}a)(s\eps,z,\eta)$. Conversely, if $a=\eps^Nb$ then the first
@@ -442,11 +444,11 @@ by seminorms of $p$. Fix $\chi\in\CIc(\R^n)$ with $\chi=1$ near $0$.
   (iii) If $q=f(x,\xi,y)$, then with
   $\check\chi(y)=(2\pi)^{-n}\int e^{-iy\cdot\zeta}\chi(\zeta)\,d\zeta\in\cS(\R^n)$,
   which has integral $\chi(0)=1$,
-  \begin{equation*}
+  \begin{align*}
     (2\pi)^{-n}\int\!\!\int e^{-iy\cdot\zeta}\chi(sy)\chi(s\zeta)f\,dy\,d\zeta
-    =\int\chi(sy)f(x,\xi,y)s^{-n}\check\chi(y/s)\,dy
-    =\int\chi(s^2Y)f(x,\xi,sY)\check\chi(Y)\,dY,
-  \end{equation*}
+    &=\int\chi(sy)f(x,\xi,y)s^{-n}\check\chi(y/s)\,dy\\
+    &=\int\chi(s^2Y)f(x,\xi,sY)\check\chi(Y)\,dY,
+  \end{align*}
   which tends to $f(x,\xi,0)$ by dominated convergence, since
   $\abs{f(x,\xi,sY)}\le C\ang Y^{\abs w}$. The case of $q$ independent of $y$ is
   the same with the roles of $y$ and $\zeta$ exchanged.
@@ -550,12 +552,12 @@ expansion of the composition in powers of $\eps$.
   $J$ acts with $\xi$ as a parameter. Hence $\Op_\eps(p)=\Op(c^\flat(\eps))=\Op_\eps(c)$.
 
   For the expansion, Taylor's formula in the third argument gives
-  \begin{equation*}
+  \begin{multline*}
     p(\eps,x,x+y,\eta+\eps\zeta)=\sum_{\abs\alpha<N}\frac{(\eps\zeta)^\alpha}{\alpha!}
-    \pa^\alpha_\eta p(\eps,x,x+y,\eta)
+    \pa^\alpha_\eta p(\eps,x,x+y,\eta)\\
     +\eps^N\sum_{\abs\alpha=N}\frac{N\zeta^\alpha}{\alpha!}\int_0^1(1-s)^{N-1}
     \pa^\alpha_\eta p(\eps,x,x+y,\eta+s\eps\zeta)\,ds .
-  \end{equation*}
+  \end{multline*}
   Apply $J$. By \cref{semiclassical:lem:J}(ii),(iii),
   $J(\zeta^\alpha\pa^\alpha_\eta p(\eps,x,x+y,\eta))=D^\alpha_y\pa^\alpha_\eta p(\eps,x,y,\eta)|_{y=x}$,
   which gives the sum in \eqref{semiclassical:eq:reduction}. In the remainder,
@@ -624,11 +626,11 @@ order, with uniform remainders. The two leading terms give:
 \begin{corollary}\label{semiclassical:cor:commutator}
   For $a\in\Ssl m(\R^n)$, $b\in\Ssl{m'}(\R^n)$,
   \begin{equation*}
-    a\#b-ab\in\eps\Ssl{m+m'-1}(\R^n),\qquad
-    a\#b-b\#a-\frac\eps i\{a,b\}\in\eps^2\Ssl{m+m'-2}(\R^n),
+    a\#b-ab\in\eps\Ssl{m+m'-1},\qquad
+    a\#b-b\#a-\frac\eps i\{a,b\}\in\eps^2\Ssl{m+m'-2},
   \end{equation*}
-  where $\{a,b\}=\sum_j(\pa_{\eta_j}a\,\pa_{x_j}b-\pa_{x_j}a\,\pa_{\eta_j}b)$ is
-  the Poisson bracket. In particular
+  where $\{a,b\}$ is the Poisson bracket,
+  $\{a,b\}=\sum_j(\pa_{\eta_j}a\,\pa_{x_j}b-\pa_{x_j}a\,\pa_{\eta_j}b)$. In particular
   $[\Op_\eps(a),\Op_\eps(b)]\in\eps\Psisl{m+m'-1}(\R^n)$.
 \end{corollary}
 \begin{proof}
@@ -693,8 +695,8 @@ all the seminorms of that proposition, to infinite order at $\eps=0$.
   $\eps^\infty\Psisl{-\infty}(\R^n)=\dCI([0,1];\Psido{-\infty}(\R^n))$.
 \end{lemma}
 \begin{proof}
-  If $a\in\eps^\infty\Ssl{-\infty}$ then by \cref{semiclassical:lem:residual-symbols}(iii)
-  the function $K$ of \eqref{semiclassical:eq:kernel} satisfies
+  Let $a\in\eps^\infty\Ssl{-\infty}$. By part (iii) of
+  \cref{semiclassical:lem:residual-symbols}, the function $K$ of \eqref{semiclassical:eq:kernel} satisfies
   $\abs{Z^\gamma\pa^j_\eps\pa^\alpha_x\pa^\beta_ZK}\le C\eps^N$ for all indices and
   $N$, since $Z^\gamma\pa^\beta_ZK$ is the inverse Fourier transform of
   $(-D_\eta)^\gamma[(i\eta)^\beta a]$. As in the previous proof, derivatives of
@@ -785,10 +787,10 @@ $K\in\CI([0,1]\times\R^n_x\times\R^n_Z)$ such that
   The first part is \eqref{semiclassical:eq:kernel} together with the remark
   preceding the proposition, applied with $\eps$ (and its derivatives) as a
   parameter. For the composite, for $\eps>0$,
-  \begin{equation*}
-    K_{A_\eps B_\eps}(x,y)=\eps^{-2n}\int K\Bigl(\eps,x,\frac{x-z}\eps\Bigr)L\Bigl(\eps,z,\frac{z-y}\eps\Bigr)dz
-    =\eps^{-n}\int K(\eps,x,t)L\Bigl(\eps,x-\eps t,\frac{x-y}\eps-t\Bigr)dt,
-  \end{equation*}
+  \begin{align*}
+    K_{A_\eps B_\eps}(x,y)&=\eps^{-2n}\int K\Bigl(\eps,x,\frac{x-z}\eps\Bigr)L\Bigl(\eps,z,\frac{z-y}\eps\Bigr)dz\\
+    &=\eps^{-n}\int K(\eps,x,t)L\Bigl(\eps,x-\eps t,\frac{x-y}\eps-t\Bigr)dt,
+  \end{align*}
   by the substitution $z=x-\eps t$. Peetre's inequality
   $\ang Z^N\le2^{N/2}\ang t^N\ang{Z-t}^N$ and differentiation under the integral
   show directly that $M\in\mathcal K(\R^n)$ (the $\eps$-derivatives falling on the
@@ -987,10 +989,10 @@ attention to $\eps\in(0,\eps_0]$, rescaling the parameter if desired.
   First let $A\in\Psisl{-\infty}(\R^n)$, with kernel as in
   \eqref{semiclassical:eq:smoothing-kernel}. Then
   $\abs{K(\eps,x,Z)}\le C\ang Z^{-n-1}$, so
-  \begin{equation*}
-    \sup_x\int\abs{K_{A_\eps}(x,y)}\,dy=\sup_x\int\abs{K(\eps,x,Z)}\,dZ\le C',\qquad
+  \begin{gather*}
+    \sup_x\int\abs{K_{A_\eps}(x,y)}\,dy=\sup_x\int\abs{K(\eps,x,Z)}\,dZ\le C',\\
     \sup_y\int\abs{K_{A_\eps}(x,y)}\,dx=\sup_y\int\abs{K(\eps,y+\eps Z,Z)}\,dZ\le C',
-  \end{equation*}
+  \end{gather*}
   and Schur's lemma (\cref{euclidean:lem:schur}) gives $\norm{A_\eps}\le C'$.
 
   In general, let $A=\Op_\eps(a)$, $a\in\Ssl0$, and $C=2+\sup\abs a^2$, the
@@ -1145,9 +1147,11 @@ $\tilde F^*b=b\circ\tilde F$.
   by \cref{semiclassical:rem:classical}, so is $c$.
 \end{proof}
 
-The proof shows more precisely that the full symbol of $A_F$ has an expansion
-$\sum_\alpha\eps^{\abs\alpha}(\alpha!)^{-1}\pa^\alpha_{\eta'}D^\alpha_{y'}p|_{y'=x'}$, but
-only the leading term is invariantly meaningful.
+The proof shows more precisely that the full symbol of $A_F$ has the expansion
+\begin{equation*}
+  \sum_\alpha\frac{\eps^{\abs\alpha}}{\alpha!}\pa^\alpha_{\eta'}D^\alpha_{y'}p(\eps,x',y',\eta')\big|_{y'=x'},
+\end{equation*}
+but only the leading term is invariantly meaningful.
 
 % ======================================================================
 \section{Semiclassical families on manifolds}\label{semiclassical:sec:manifolds}
@@ -1162,7 +1166,9 @@ away from the diagonal, which is dictated by \cref{semiclassical:lem:off-diagona
 
 We write $\dCI([0,1];\Psido{-\infty}(X;E,F))$ for the space of families whose
 kernels are given by sections of $\Hom(E,F)\otimes\Omega_R$ over $[0,1]\times X^2$
-which are smooth and vanish to infinite order at $\eps=0$. By
+which are smooth and vanish to infinite order at $\eps=0$; we also denote this
+space by $\eps^\infty\Psisl{-\infty}(X;E,F)$, a notation justified by
+\cref{semiclassical:thm:manifold-calculus}(e) below. By
 \cref{semiclassical:lem:residual-ideal}, if such a family has kernel supported in
 $W\times W$ for a coordinate chart $W$, then its local representative is in
 $\eps^\infty\Psisl{-\infty}(\R^n)$.
@@ -1264,18 +1270,19 @@ that adjoints are defined as in \cref{manifolds:prop:adjoint}.
 \begin{theorem}\label{semiclassical:thm:manifold-calculus}
   Let $X$ be compact.
   \begin{enumerate}[label=\textup{(\alph*)}]
-  \item \textup{(Ideal)} If $A\in\Psisl m(X;F,G)$ and $R\in\dCI([0,1];\Psido{-\infty}(X;E,F))$
-    then $AR\in\dCI([0,1];\Psido{-\infty}(X;E,G))$, and similarly $R'A$ for
-    $R'\in\dCI([0,1];\Psido{-\infty}(X;G,E))$.
+  \item \textup{(Ideal)} Let $A\in\Psisl m(X;F,G)$. If
+    $R\in\eps^\infty\Psisl{-\infty}(X;E,F)$ then
+    $AR\in\eps^\infty\Psisl{-\infty}(X;E,G)$; similarly
+    $R'A\in\eps^\infty\Psisl{-\infty}(X;E,G)$ if $R'\in\eps^\infty\Psisl{-\infty}(X;G,E)$.
   \item \textup{(Composition and adjoints)}
     $\Psisl m(X;F,G)\circ\Psisl{m'}(X;E,F)\subset\Psisl{m+m'}(X;E,G)$, and
     $A\in\Psisl m(X;E,F)$ implies $A^*\in\Psisl m(X;F,E)$. The same holds for the
     classical families.
   \item \textup{(Symbols)} There are linear maps
-    \begin{equation*}
-      \ssl:\Psisl m(X;E,F)\to S^m(T^*X;\hom(E,F)),\qquad
+    \begin{gather*}
+      \ssl:\Psisl m(X;E,F)\to S^m(T^*X;\hom(E,F)),\\
       \sigma_{\eps,m}:\Psisl m(X;E,F)\to\Ssl m(T^*X;\hom(E,F))/\eps\Ssl{m-1}(T^*X;\hom(E,F)),
-    \end{equation*}
+    \end{gather*}
     and $\tilde\sigma_m$ with values in $\Ssl m/\Ssl{m-1}$, uniquely determined by
     the requirement that for every trivializing chart and $\psi\in\CIc(W)$ the
     corresponding symbol of $\kappa_*(\psi A\psi)$ is the local expression of
@@ -1375,8 +1382,7 @@ that adjoints are defined as in \cref{manifolds:prop:adjoint}.
   following \cref{semiclassical:def:symbol-maps}.
 \end{proof}
 
-We write $\eps^\infty\Psisl{-\infty}(X;E,F)=\dCI([0,1];\Psido{-\infty}(X;E,F))$ in view
-of (e). Differential families
+Differential families
 $P_\eps=\sum_{\abs\alpha\le m}p_\alpha(\eps,x)(\eps D)^\alpha$, with $p_\alpha$ smooth
 on $[0,1]\times X$ (in local coordinates and trivializations, the form being
 preserved under changes of coordinates), are elements of $\Psislph{m}(X;E,F)$
@@ -1446,7 +1452,7 @@ in \cref{ch:semiclassical-index}.
       \xrightarrow{\ \ssl\ }\cS(T^*X;\hom(E))\longrightarrow0 .
     \end{equation*}
   \item Every element of $\Psisl{-\infty}(X;E)$ is the sum of an element of
-    $\eps^\infty\Psisl{-\infty}(X;E)=\dCI([0,1];\Psido{-\infty}(X;E))$ and finitely many
+    $\eps^\infty\Psisl{-\infty}(X;E)$, i.e.\ of $\dCI([0,1];\Psido{-\infty}(X;E))$, and finitely many
     families supported in coordinate charts, of the form
     $\kappa^*B(\kappa^{-1})^*$ with $B$ a matrix of elements of $\Psisl{-\infty}(\R^n)$
     with kernels supported in a fixed compact subset of $\kappa(W)^2$.
@@ -1464,8 +1470,8 @@ in \cref{ch:semiclassical-index}.
   \end{enumerate}
 \end{proposition}
 \begin{proof}
-  (i) and (iv) are special cases of \cref{semiclassical:thm:manifold-calculus},
-  using $S^{-\infty}(T^*X;\hom(E))=\cS(T^*X;\hom(E))$; (ii) is
+  Parts (i) and (iv) are special cases of
+  \cref{semiclassical:thm:manifold-calculus}, using $S^{-\infty}(T^*X;\hom(E))=\cS(T^*X;\hom(E))$; (ii) is
   \cref{semiclassical:lem:structure}(iii). For (iii), the conditions are necessary
   by (ii), \cref{semiclassical:prop:smoothing-kernels} and
   \cref{semiclassical:lem:off-diagonal}. Conversely, if the kernel has these
@@ -1504,7 +1510,8 @@ $\ssl(A)$ is invertible at every point and elliptic in the usual sense.
   (i) is proved exactly as \cref{semiclassical:thm:parametrix}, using
   \cref{semiclassical:thm:manifold-calculus}. For (ii), let
   $R=AB-\Id\in\dCI([0,1];\Psido{-\infty}(X;F))$. Its kernel, and hence its
-  Hilbert--Schmidt norm (\eqref{manifolds:eq:HS-bound}), is a smooth function of
+  Hilbert--Schmidt norm, which bounds the operator norm by
+  \eqref{manifolds:eq:HS-bound}, is a smooth function of
   $\eps\in[0,1]$ vanishing to infinite order at $0$; choose $\eps_1>0$ with
   $\norm{R_\eps}_{\Lin(L^2)}\le\frac12$ for $\eps\le\eps_1$. Then $\Id+R_\eps$ is invertible
   on $L^2$, and $T_\eps=(\Id+R_\eps)^{-1}$ depends smoothly on $\eps\in[0,\eps_1]$ in the
@@ -1635,7 +1642,8 @@ defined using a smooth positive density.
   $PE=P^3-P^2=EP$. Using this, and $(\Id-2P)^2=\Id+4E$,
   \begin{align*}
     P'^2-P'&=P^2+2P(\Id-2P)E+(\Id-2P)^2E^2-P-(\Id-2P)E\\
-    &=E+(2P-4P^2-\Id+2P)E+(\Id+4E)E^2=E-(4E+\Id)E+E^2+4E^3=4E^3-3E^2 .\qedhere
+    &=E+(2P-4P^2-\Id+2P)E+(\Id+4E)E^2\\
+    &=E-(4E+\Id)E+E^2+4E^3=4E^3-3E^2 .\qedhere
   \end{align*}
 \end{proof}
 
@@ -1891,13 +1899,16 @@ with
     \qquad B\in\mathcal K_{\mathrm{sl,ad}}.
   \end{equation*}
   Its \emph{semiclassical} and \emph{adiabatic symbols} are
-  \begin{gather*}
+  \begin{equation*}
     \ssl(B)(\delta,z,\tilde z,\zeta,\tilde\zeta)=\int\!\!\int e^{-iZ\cdot\zeta-i\tilde Z\cdot\tilde\zeta}
-    B(0,\delta,z,Z,\tilde z,\tilde Z)\,dZ\,d\tilde Z,\\
-    \sad(B)(\tilde z,\tilde\zeta)=\text{the family in }\Psisl{-\infty}(\R^n)\text{ with kernel }
-    \eps^{-n}b\Bigl(\eps,z,\frac{z-z'}\eps,\tilde z,\tilde\zeta\Bigr),\quad
+    B(0,\delta,z,Z,\tilde z,\tilde Z)\,dZ\,d\tilde Z,
+  \end{equation*}
+  and, for $(\tilde z,\tilde\zeta)\in T^*\R^{\tilde n}$, $\sad(B)(\tilde z,\tilde\zeta)$ is the family in
+  $\Psisl{-\infty}(\R^n)$ with kernel
+  \begin{equation*}
+    \eps^{-n}b\Bigl(\eps,z,\frac{z-z'}\eps,\tilde z,\tilde\zeta\Bigr),\qquad
     b=\int e^{-i\tilde Z\cdot\tilde\zeta}B(\eps,0,z,Z,\tilde z,\tilde Z)\,d\tilde Z .
-  \end{gather*}
+  \end{equation*}
 \end{definition}
 
 Thus $\ssl(B)\in\CI([0,1]_\delta;S^{-\infty}(\R^{n+\tilde n};\R^{n+\tilde n}))$ and

@@ -873,10 +873,10 @@ polyhomogeneous isotropic operator of order $0$, the principal symbol is
 $\sigma_0(A)\in\CI(\Sphere;M(N,\C))$, and $A$ is elliptic if $\sigma_0(A)$ is invertible.
 Conversely, for $a\in\CI(Z\times\Sphere;M(N,\C))$ the family
 \begin{equation}\label{bott:eq:iso-quantize}
-  \Op_\chi(a)(z)=\Op\bigl(\chi(\abs w)\,a(z,w/\abs w)\bigr),\qquad
+  \Op_\chi(a)(y)=\Op\bigl(\chi(\abs w)\,a(y,w/\abs w)\bigr),\qquad y\in Z,\qquad
   \chi\in\CI(\R),\ \chi=0\text{ near }0,\ \chi=1\text{ on }[1,\infty),
 \end{equation}
-is a smooth family in $\Psiisoph{0}(\R;\C^N)$ with principal symbol $a(z,\cdot)$, the
+is a smooth family in $\Psiisoph{0}(\R;\C^N)$ with principal symbol $a(y,\cdot)$, the
 symbol being homogeneous of degree $0$ outside the unit ball. We write
 $u_k$, $k\in\N_0$, for the Hermite functions on $\R$ (the normalized eigenfunctions of
 $H=D_x^2+x^2$, $Hu_k=(2k+1)u_k$) and $\Pi_k$ for the orthogonal projection onto
@@ -1051,7 +1051,10 @@ $-1$, in accordance with $\Nul(x-\partial_x)=0$ and $\Nul(x+\partial_x)=\C e^{-x
 
 For a pointed loop $a\colon X\times\Sphere\to\GL(N,\C)$, $X$ compact, set
 $\indiso(a)=\indiso(\Op_\chi(a))\in K^0(X)$. By \cref{bott:prop:iso-families}(iii) and
-\cref{bott:lem:stable} this defines a homomorphism $\indiso\colon K^{-2}(X)\to K^0(X)$,
+\cref{bott:lem:stable} this defines a homomorphism
+\begin{equation*}
+  \indiso\colon K^{-2}(X)\longrightarrow K^0(X),
+\end{equation*}
 natural under pull-back.
 
 \begin{theorem}[Bott periodicity, isotropic form]\label{bott:thm:iso-bott}

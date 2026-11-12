@@ -44,8 +44,14 @@ Chern character on $K^0$ (\cref{families:sec:chern}). It then defines the odd
 Chern character and computes the Chern character of the index bundle of a
 family of Toeplitz operators (\cref{families:sec:toeplitz}). The relative Chern
 character of a compactly supported K-class is given by an explicit formula of
-Fedosov type (\cref{families:sec:relative}). Finally the cohomological form of
-the families index theorem is stated (\cref{families:sec:cohomology}).
+Fedosov type (\cref{families:sec:relative}); its boundary term is an odd Chern
+form of the symbol, and the odd Chern character itself is the fibre integral of the
+Chern character of the clutched class (\cref{families:prop:Chodd-clutching}), which
+explains its normalization independently of Toeplitz operators. Finally the
+cohomological form of the families index theorem is stated
+(\cref{families:sec:cohomology}), and the Todd class is related to the Chern
+character of the Bott class through the Thom isomorphism
+(\cref{families:rem:todd-thom}).
 
 \section{Conventions and the index bundle}\label{families:sec:prelim}
 
@@ -1303,7 +1309,7 @@ $\int_\Sphere\mu=\int_0^{2\pi}\mu_1\,d\theta$; this commutes with $d$.
   \begin{equation*}
     \Ch\bigl(\ind_{\mathrm{iso}}[a]\bigr)=-\int_\Sphere\Chodd(a),
   \end{equation*}
-  whose degree zero part is $-\frac{i}{2\pi}\int\tr(a^{-1}\partial_\theta a)\,d\theta=\wind(a)$, the
+  whose degree zero part is $-\frac{i}{2\pi}\int\tr(a^{-1}\partial_\theta a)\,d\theta$, the winding number of $\det a$: this is the
   index formula for isotropic operators on $\R$; for the symbol $z=e^{i\theta}$ of the
   normalized annihilation operator it gives $1$.
 \end{remark}
@@ -1527,10 +1533,10 @@ $\int_\Sphere$ in \cref{families:sec:toeplitz}.
 \begin{remark}\label{families:rem:Chodd-fedosov}
   More generally, for a bundle isomorphism $a\colon F\to F'$ and connections on $F$, $F'$, the
   form
-  \begin{equation*}
-    \Chodd(a;\nabla_F,\nabla_{F'})=c\int_0^1\tr\bigl(\gamma\,e^{c\Omega(s)}\bigr)ds,\qquad
-    \gamma=a^{-1}\nabla a,\quad\Omega(s)=(1-s)\omega_F+s\,a^{-1}\omega_{F'}a+s(s-1)\gamma^2,
-  \end{equation*}
+  \begin{gather*}
+    \Chodd(a;\nabla_F,\nabla_{F'})=c\int_0^1\tr\bigl(\gamma\,e^{c\Omega(s)}\bigr)ds,\\
+    \gamma=a^{-1}\nabla a,\qquad\Omega(s)=(1-s)\omega_F+s\,a^{-1}\omega_{F'}a+s(s-1)\gamma^2,
+  \end{gather*}
   reduces to \cref{families:lem:Chodd-integral} for trivial bundles and connections. It is
   the Chern--Simons form of the path $\nabla_F+s\gamma$ from $\nabla_F$ to $a^{-1}\nabla_{F'}a$, so
   $d\Chodd(a;\nabla_F,\nabla_{F'})=\Ch(\nabla_{F'})-\Ch(\nabla_F)$, and
@@ -1639,7 +1645,7 @@ not proved here.
   \end{equation*}
   Since $\beta_{V\oplus W}=\beta_V\cdot\beta_W$ and $\beta$ is natural, $\mathcal T$ is a multiplicative
   characteristic class with $\mathcal T(\C^n)=1$; if $V\oplus W$ is trivial of rank $m$, then
-  $\mathcal T(V)=(-1)^{\rank W}\varpi_*\Ch(\beta_W)$, which is the definition of the Todd class
+  $\mathcal T(V)=(-1)^{\operatorname{rank}W}\varpi_*\Ch(\beta_W)$, which is the definition of the Todd class
   as the fibre integral of the Chern character of the Bott element of a complement used in
   the source. The identification of $\mathcal T(\mathcal V\otimes\C)$ with
   $\Td(\mathcal V\otimes\C)$ is \ref{families:C4}.
@@ -1726,3 +1732,20 @@ isomorphism are due to M.~F. Atiyah and F. Hirzebruch, \emph{Vector bundles
 and homogeneous spaces}, Proc. Sympos. Pure Math. \textbf{3} (1961), 7--38.
 The explicit formula of \cref{families:thm:fedosov} is of the type used by
 B.~V. Fedosov in his work on index formulas.
+
+The material on Chern forms, the odd Chern character, and the Todd class in the K-theory
+chapter of the 2008 revision of the lectures (\emph{From microlocal to global analysis})
+has been merged here. There the odd Chern character is derived from a connection on the
+bundle over $\Sphere\times X$ clutched by $g$, which yields the integral formula of
+\cref{families:lem:Chodd-integral}; the source leaves its constants open (and, with an
+unnormalized even Chern character $\tr e^{\omega}$, warns of possible sign errors). With the
+normalization $\tr e^{i\omega/2\pi}$ the clutching computation
+(\cref{families:prop:Chodd-clutching}) reproduces exactly the constants $c_k$ of
+\eqref{families:eq:Chodd} that were fixed by the Toeplitz index, a non-trivial consistency
+check, and the source's general formula for an isomorphism of bundles with connections is the
+boundary term of \cref{families:thm:fedosov} (\cref{families:rem:Chodd-fedosov}). The source
+states the Chern character of the isotropic index as $-\frac1{2\pi i}\int\Chodd$ for
+unnormalized forms and its own orientation of the circle; in our conventions it is
+\cref{families:rem:iso-chern}. The source defines the Todd class of $E$ as the fibre integral
+of the Chern character of the Bott element of a complement; \cref{families:rem:todd-thom}
+shows how this follows from the Thom isomorphism, with the signs made explicit.
