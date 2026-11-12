@@ -1,0 +1,656 @@
+\chapter{Hamilton--Jacobi theory and transport equations}\label{ch:hj}
+\providecommand{\osc}[1]{\mathcal{I}[#1]}
+
+Elliptic operators have no singular solutions: if $P$ is elliptic and
+$Pu\in\CI$ then $u\in\CI$ (\cref{ch:manifolds}).  For non-elliptic operators,
+such as the wave operator, singular solutions do exist, and the simplest of them
+are conormal distributions.  In this chapter we find out when, and how, one can
+solve $Pu\in\CI$ with $u\in\Ic{m}(X,Y;\Omegah)$ conormal to a hypersurface $Y$.
+The principal symbol of $Pu$ vanishes exactly when $Y$ is \emph{characteristic};
+characteristic hypersurfaces are found by solving the eikonal equation
+$p(x,dh)=0$, which we do by the Hamilton--Jacobi method, i.e.\ by symplectic
+geometry on $T^*X$.  The next term in the symbol of $Pu$ is then given by a
+first-order differential operator along the Hamilton vector field of $p$ on
+$N^*Y$, and requiring it to vanish leads to the \emph{transport equations}.
+Solving these iteratively produces solutions of $Pu\in\CI$ with prescribed
+restriction to a transversal hypersurface (``travelling waves''); this is used in
+\cref{ch:wave} to construct a parametrix for the wave equation.
+
+We use the conormal distributions of \cref{ch:conormal} (whose notation and
+normalization of orders we follow) and the pseudodifferential operators on
+manifolds of \cref{ch:manifolds}.  Throughout, $X$ is a manifold of dimension
+$n$, $\pi:T^*X\to X$ is the projection, and operators act on half-densities.
+
+\section{Pseudodifferential operators on conormal distributions}\label{hj:sec:psido}
+
+\begin{theorem}\label{hj:thm:psido-conormal}
+  Let $Y\subset X$ be a closed embedded submanifold and
+  $A\in\Psido{m'}(X;\Omegah)$ properly supported.  Then
+  \begin{equation*}
+    A:\Ic{m}(X,Y;\Omegah)\longrightarrow\Ic{m+m'}(X,Y;\Omegah),\qquad
+    \sigma_{m+m'}(Au)=\sigma_{m'}(A)|_{N^*Y}\,\sigma_m(u),
+  \end{equation*}
+  and $A$ preserves the classical subspaces if it has a polyhomogeneous symbol.
+  The product on the right makes sense since $\sigma_{m'}(A)\in
+  S^{m'-[1]}(T^*X)$ restricts to a class in $S^{m'-[1]}(N^*Y)$.
+\end{theorem}
+\begin{proof}
+  By a partition of unity we may assume $u$ has compact support in an adapted
+  chart.  Since $A$ is properly supported and its kernel is smooth off the
+  diagonal, $\phi Au$ is smooth if $\phi\in\CI$ vanishes near $\supp u$, and for
+  $\phi\in\CIc$ of the chart, $\phi A\chi$ (with $\chi=1$ near $\supp u$) is, in
+  the chart, $\Op(b)$ plus a smoothing operator, with $b\in S^{m'}(\R^n;\R^n)$
+  compactly supported in $z$ (\cref{ch:manifolds}).  The result therefore follows
+  from the local computation of \cref{ch:conormal}: if $u=(\osc{a}+f)|dz|^{1/2}$
+  then $\Op(b)u$ has full symbol congruent to $b(0,y,\xi,0)a(y,\xi)$ modulo
+  $S^{M+m'-1}$, and $b(0,y,\xi,0)$ represents $\sigma_{m'}(A)$ at
+  $(0,y;\xi,0)\in N^*Y$.  Here and below $\osc{a}(x,y)=\int e^{ix\cdot\xi}
+  a(y,\xi)\,\dbar\xi$ in adapted coordinates $(x,y)\in\R^k\times\R^d$, and
+  $M=m+\frac n4-\frac k2$.
+\end{proof}
+
+In particular, if $A$ is elliptic and $\sigma_m(u)$ is not in
+$S^{m+\frac n4-1}$, then $Au\notin\CI$: there are no conormal solutions of
+$Au\in\CI$.  Suppose instead that $P\in\Psido{m'}(X;\Omegah)$ is not elliptic,
+with homogeneous principal symbol $p$, and that we look for
+$u\in\Ic{m}(X,Y;\Omegah)$ which is genuinely singular, say with
+$\sigma_m(u)$ elliptic (bounded below by $c\ang{\xi}^{m+\frac n4}|dy\,d\xi|^{1/2}$
+for large $\xi$), and $Pu\in\CI$.  By \cref{hj:thm:psido-conormal},
+$p|_{N^*Y}\sigma_m(u)=0$ modulo lower order, so $p$ must vanish on $N^*Y$.
+
+\begin{definition}\label{hj:def:characteristic}
+  Let $P\in\Psido{m'}(X;\Omegah)$ have principal symbol $p$, homogeneous of degree
+  $m'$ on $T^*X\setminus0$, and characteristic variety
+  $\Sigma(P)=\{p=0\}\subset T^*X\setminus0$.  A closed embedded submanifold $Y$ is
+  \emph{characteristic} for $P$ if $N^*Y\setminus0\subset\Sigma(P)$, and
+  characteristic on an open cone $\Gamma\subset N^*Y\setminus0$ if
+  $\Gamma\subset\Sigma(P)$.
+\end{definition}
+
+\begin{corollary}\label{hj:cor:char-lower}
+  If $Y$ is characteristic for $P$ on the open cone $\Gamma$, and
+  $u\in\Ic{m}(X,Y;\Omegah)$ has $\WF(u)\subset\Gamma$, then
+  $Pu\in\Ic{m+m'-1}(X,Y;\Omegah)$.
+\end{corollary}
+\begin{proof}
+  By \cref{ch:conormal} (the characterization of the wavefront set of a
+  conormal distribution by its full symbol), locally the full symbol $a$ of $u$
+  is of order $-\infty$ outside any conic neighbourhood of the closed cone
+  $\WF(u)$; choosing a cut-off $\psi$ homogeneous of degree $0$, equal to one near
+  $\WF(u)$ and supported in $\Gamma$, $a=\psi a$ modulo $S^{-\infty}$, and
+  $p\psi=0$ for large $\xi$.  Hence $\sigma_{m+m'}(Pu)=p|_{N^*Y}\sigma_m(u)=0$ and
+  $Pu\in\Ic{m+m'-1}$ by the exact sequence of \cref{ch:conormal}.
+\end{proof}
+
+So for characteristic $Y$ we only gain one order; we return to this in
+\cref{hj:sec:transport}.  First we note that characteristic hypersurfaces and
+singular solutions do exist.
+
+\begin{example}[Plane waves]\label{hj:ex:plane}
+  Let $P=D_t^2-\sum_{j=1}^nD_{x_j}^2=D_t^2-\Delta$ be the wave operator on
+  $\R^{n+1}=\R_t\times\R^n_x$, acting on half-densities via the trivialization
+  $|dt\,dx|^{1/2}$, so $p(t,x;\tau,\xi)=\tau^2-|\xi|^2$.  A hypersurface
+  $H=\{h(t,x)=0\}$ with $dh\ne0$ on $H$ has $N^*H=\{(t,x;\lambda\,dh(t,x));\
+  h(t,x)=0,\ \lambda\ne0\}$, so $H$ is characteristic if and only if $h$ satisfies
+  the \emph{eikonal equation}
+  \begin{equation*}
+    \Big(\frac{\pa h}{\pa t}\Big)^2=|d_xh|^2\quad\text{on } \{h=0\}.
+  \end{equation*}
+  Linear solutions are $h=at+b\cdot x$ with $a^2=|b|^2$; up to scaling these are
+  the planes $t=\omega\cdot x$, $\omega\in\Sphere^{n-1}$.  For
+  $v\in\Ic{m_0}(\R,\{0\})$ (a conormal distribution at a point, in one variable),
+  \begin{equation*}
+    u=v(t-\omega\cdot x)\,|dt\,dx|^{1/2}\in\Ic{m_0-\frac n4}(\R^{n+1},H;\Omegah),
+    \qquad Pu=(1-|\omega|^2)v''(t-\omega\cdot x)|dt\,dx|^{1/2}=0.
+  \end{equation*}
+  (The order follows from the linear change of coordinates $s=t-\omega\cdot x$,
+  $x'=x$, of determinant one, and the relation $M=m+\frac{n+1}4-\frac12$ between
+  the order of $u$ and that of its symbol, which is $m_0-\frac14$.)  For instance
+  $\delta(t-\omega\cdot x)$ is a travelling wave.  We shall find all characteristic
+  hypersurfaces locally, by the Hamilton--Jacobi method.
+\end{example}
+
+\section{Symplectic geometry}\label{hj:sec:symplectic}
+
+\subsection{The canonical forms}
+The cotangent bundle carries a canonical one-form $\alpha$, defined by
+\begin{equation*}
+  \alpha_{(x,\zeta)}(v)=\zeta(\pi_*v),\qquad v\in T_{(x,\zeta)}(T^*X).
+\end{equation*}
+If $x_1,\dots,x_n$ are local coordinates on $X$ and $\zeta=\sum_j\xi_jdx_j$, then
+$(x,\xi)$ are coordinates on $T^*X$ and $\alpha=\sum_j\xi_j\,dx_j$.  The
+\emph{symplectic form} is
+\begin{equation*}
+  \omega=d\alpha=\sum_{j=1}^nd\xi_j\wedge dx_j .
+\end{equation*}
+A section $\theta:X\to T^*X$ is the same thing as a one-form on $X$, and the
+defining property of $\alpha$ gives $\theta^*\alpha=\theta$, hence
+$\theta^*\omega=d\theta$.
+
+A \emph{symplectic manifold} is a manifold $S$ with a closed two-form $\omega$
+which is non-degenerate at each point; then $\dim S=2n$ is even and
+$\omega^{\wedge n}\neq0$.  A \emph{symplectic vector space} is a real vector space
+$E$ with a non-degenerate antisymmetric bilinear form $\omega$; non-degeneracy
+means that $\tilde\omega:E\to E'$, $\tilde\omega(v)(w)=\omega(v,w)$, is an
+isomorphism.  Each tangent space $T_zS$ of a symplectic manifold is a symplectic
+vector space.  For a subspace $W\subset E$ set
+$W^\omega=\{v\in E;\ \omega(v,w)=0\ \forall\ w\in W\}$.  A subspace is
+\emph{Lagrangian} if $\omega|_{W\times W}=0$ and $2\dim W=\dim E$.
+
+\begin{lemma}\label{hj:lem:lagrangian-linear}
+  If $W$ is a subspace of a symplectic vector space $E$ then $\dim W+\dim
+  W^\omega=\dim E$, and $W$ is Lagrangian if and only if $W^\omega=W$.
+\end{lemma}
+\begin{proof}
+  Let $W^0\subset E'$ be the annihilator of $W$, of dimension $\dim E-\dim W$.
+  By definition $v\in W^\omega$ if and only if $\tilde\omega(v)\in W^0$, so
+  $\tilde\omega$ restricts to an isomorphism $W^\omega\to W^0$ and the dimension
+  formula follows.  If $W$ is Lagrangian then $W\subset W^\omega$ and the two
+  have the same dimension, so they are equal.  Conversely if $W=W^\omega$ then
+  $\omega$ vanishes on $W$, and $2\dim W=\dim E$ by the dimension formula.
+\end{proof}
+
+A submanifold $\Lambda$ of a symplectic manifold is \emph{Lagrangian} if
+$T_\lambda\Lambda$ is a Lagrangian subspace of $T_\lambda S$ for every
+$\lambda\in\Lambda$, i.e.\ $\dim\Lambda=\frac12\dim S$ and the pull-back of
+$\omega$ to $\Lambda$ vanishes.
+
+\begin{lemma}\label{hj:lem:examples}
+  The fibres $T^*_xX$ and, for a submanifold $Y\subset X$, the conormal bundle
+  $N^*Y$ are Lagrangian submanifolds of $T^*X$.
+\end{lemma}
+\begin{proof}
+  On a fibre $\pi_*v=0$ for tangent vectors, so $\alpha$ pulls back to zero, hence
+  so does $\omega=d\alpha$.  On $N^*Y$, if $v$ is tangent at $(y,\zeta)$ then
+  $\pi_*v\in T_yY$ and $\zeta$ annihilates $T_yY$, so again $\alpha$ pulls back to
+  zero.  Both have dimension $n$.
+\end{proof}
+
+\begin{lemma}\label{hj:lem:graph}
+  Let $\Lambda\subset T^*X$ be a submanifold of dimension $n$ such that
+  $\pi|_\Lambda$ is a local diffeomorphism near $\bar\lambda\in\Lambda$.  Then
+  near $\bar\lambda$, $\Lambda=\{(x,dh(x))\}$ for some $h$ defined near
+  $\pi(\bar\lambda)$, unique up to an additive constant, if and only if $\Lambda$
+  is Lagrangian near $\bar\lambda$.
+\end{lemma}
+\begin{proof}
+  Near $\bar\lambda$, $\Lambda$ is the image of a section $\theta$ of $T^*X$ over a
+  neighbourhood $U$ of $\pi(\bar\lambda)$, and $\theta:U\to\Lambda$ is a
+  diffeomorphism with $\theta^*\omega=d\theta$.  So $\Lambda$ is Lagrangian if and
+  only if the one-form $\theta$ is closed, which on a ball is equivalent to
+  $\theta=dh$.
+\end{proof}
+
+\subsection{Hamilton vector fields}
+On a symplectic manifold the isomorphism $\tilde\omega$ associates to each
+function $f$ its \emph{Hamilton vector field} $H_f$, defined by
+\begin{equation*}
+  \omega(v,H_f)=df(v)\quad\forall\ v\in T_zS.
+\end{equation*}
+On $T^*X$, in canonical coordinates,
+\begin{equation}\label{hj:eq:Hamilton}
+  H_f=\sum_{j=1}^n\Big(\frac{\pa f}{\pa\xi_j}\frac{\pa}{\pa x_j}
+  -\frac{\pa f}{\pa x_j}\frac{\pa}{\pa\xi_j}\Big).
+\end{equation}
+By antisymmetry $H_ff=df(H_f)=\omega(H_f,H_f)=0$: $f$ is constant along the
+integral curves of $H_f$.  The flow $\exp(sH_f)$ preserves $\omega$, since by
+Cartan's formula $\mathcal L_{H_f}\omega=d\iota_{H_f}\omega+\iota_{H_f}d\omega
+=-d\,df=0$.  If $f$ is real, $H_f$ is a real vector field; if $f$ is homogeneous of
+degree $\mu$ in the fibre variables then by \eqref{hj:eq:Hamilton} $H_f$ is
+homogeneous of degree $\mu-1$ (its $\pa_x$-components are homogeneous of degree
+$\mu-1$ and its $\pa_\xi$-components of degree $\mu$), and its flow commutes with
+the dilations of the fibres up to reparametrization.  The condition
+$d_{\mathrm{fib}}f\ne0$, i.e.\ $(\pa f/\pa\xi_1,\dots,\pa f/\pa\xi_n)\ne0$,
+means precisely that $\pi_*H_f\ne0$, i.e.\ $H_f$ is transversal to the fibres
+of $T^*X$.
+
+\begin{lemma}\label{hj:lem:tangent}
+  If $\Lambda\subset S$ is Lagrangian and $f\in\CI(S)$ vanishes on $\Lambda$,
+  then $H_f$ is tangent to $\Lambda$.
+\end{lemma}
+\begin{proof}
+  For $v\in T_\lambda\Lambda$, $\omega(v,H_f)=df(v)=0$; so
+  $H_f(\lambda)\in(T_\lambda\Lambda)^\omega=T_\lambda\Lambda$ by
+  \cref{hj:lem:lagrangian-linear}.
+\end{proof}
+
+In particular, if $Y$ is characteristic for $P$ on $\Gamma\subset N^*Y$, then
+$H_p$ is tangent to $\Gamma$: a characteristic conormal bundle is a union of
+integral curves of $H_p$ (bicharacteristics).  We use this to construct
+characteristic hypersurfaces.
+
+\section{Hamilton--Jacobi theory}\label{hj:sec:HJ}
+
+Let $p\in\CI(W)$ be a real-valued function on an open set $W\subset T^*X$.  We
+seek solutions of the \emph{eikonal equation}
+\begin{equation}\label{hj:eq:eikonal}
+  p(x,dh(x))=0
+\end{equation}
+in a neighbourhood of a point $\bar x$, with $h$ prescribed on a hypersurface
+through $\bar x$.  Note that \eqref{hj:eq:eikonal} is required on an open set,
+not only on $\{h=0\}$.  By \cref{hj:lem:graph}, solving it amounts to finding a
+Lagrangian submanifold $\Lambda\subset p^{-1}(0)$ which projects
+diffeomorphically to a neighbourhood of $\bar x$; by \cref{hj:lem:tangent} such
+a $\Lambda$ must be a union of integral curves of $H_p$.
+
+\begin{theorem}[Hamilton--Jacobi]\label{hj:thm:HJ}
+  Let $p\in\CI(W)$ be real, $\bar z\in W$ with $p(\bar z)=0$, $\bar x=\pi(\bar
+  z)$, and let $H=\{t=0\}$ be a hypersurface through $\bar x$, $t\in\CI(X)$ real
+  with $dt\neq0$, such that
+  \begin{equation}\label{hj:eq:transversal}
+    H_p(\pi^*t)(\bar z)\neq0.
+  \end{equation}
+  Let $f\in\CI(H)$ satisfy $df(\bar x)=\bar z|_{T_{\bar x}H}$.  Then there are a
+  neighbourhood $O$ of $\bar x$ and $h\in\CI(O)$ such that
+  \begin{equation*}
+    p(x,dh(x))=0\ \text{ in } O,\qquad h|_{H\cap O}=f|_{H\cap O},\qquad
+    dh(\bar x)=\bar z,
+  \end{equation*}
+  and any other such solution coincides with $h$ near $\bar x$.  Moreover the
+  graph of $dh$ is the union of the integral curves of $H_p$ through the
+  submanifold $\Lambda_0$ defined in \eqref{hj:eq:Lambda0} below.
+\end{theorem}
+\begin{proof}
+  Choose coordinates $(t,x')$ near $\bar x=0$, $x'\in\R^{n-1}$, with dual
+  coordinates $(\tau,\xi')$; then $H=\{t=0\}$, $\bar z=(0,0;\bar\tau,\bar\xi')$
+  with $\bar\xi'=d_{x'}f(0)$, and \eqref{hj:eq:transversal} says
+  $\pa_\tau p(\bar z)\neq0$.
+
+  \emph{Initial manifold.}  By the implicit function theorem there is a unique
+  smooth function $\tau(x')$, defined near $0$, with $\tau(0)=\bar\tau$ and
+  $p(0,x';\tau(x'),d_{x'}f(x'))=0$.  Set
+  \begin{equation}\label{hj:eq:Lambda0}
+    \Lambda_0=\{(0,x';\tau(x'),d_{x'}f(x'))\},
+  \end{equation}
+  an $(n-1)$-dimensional submanifold of $p^{-1}(0)$.  It consists exactly of the
+  points of $p^{-1}(0)$ near $\bar z$ lying over $H$ whose restriction to $TH$ is
+  $df$.  The pull-back of $\omega$ to $\Lambda_0$ is $d\tau\wedge dt+\sum
+  d\xi'_j\wedge dx'_j$ restricted, which is $0+d(d_{x'}f)=0$ since $dt=0$ on
+  $\Lambda_0$.
+
+  \emph{Flow-out.}  Let $\Phi_s=\exp(sH_p)$ and $\Psi(s,x')=\Phi_s(0,x';\tau(x'),
+  d_{x'}f(x'))$ for $|s|<\epsilon$ and $x'$ near $0$.  At $(0,0)$, $\pa_s\Psi=
+  H_p(\bar z)$, whose projection to $X$ has $\pa_t$-component $\pa_\tau
+  p(\bar z)\neq0$, while $\pa_{x'_j}\Psi$ projects to $\pa_{x'_j}$.  Hence
+  $\pi\circ\Psi$ has invertible differential at $(0,0)$, so, shrinking the
+  domain, $\Psi$ is an embedding onto an $n$-dimensional submanifold $\Lambda$
+  and $\pi|_\Lambda$ is a diffeomorphism onto a neighbourhood $O$ of $\bar x$.
+  Since $H_pp=0$, $\Lambda\subset p^{-1}(0)$.
+
+  \emph{$\Lambda$ is Lagrangian.}  At a point $z\in\Lambda_0$,
+  $T_z\Lambda=T_z\Lambda_0\oplus\R H_p(z)$; $\omega$ vanishes on
+  $T_z\Lambda_0\times T_z\Lambda_0$, $\omega(H_p,H_p)=0$, and for $v\in
+  T_z\Lambda_0$, $\omega(v,H_p)=dp(v)=0$ because $\Lambda_0\subset p^{-1}(0)$.
+  So $T_z\Lambda$ is Lagrangian.  Since $\Psi(s+s',x')=\Phi_s\Psi(s',x')$, the
+  differential of $\Phi_s$ maps $T_z\Lambda$ onto $T_{\Phi_s(z)}\Lambda$, and
+  $\Phi_s$ preserves $\omega$; so every tangent space of $\Lambda$ is Lagrangian.
+
+  \emph{Conclusion.}  By \cref{hj:lem:graph}, $\Lambda$ is the graph of $dh$ for
+  some $h\in\CI(O)$, and $p(x,dh)=0$.  The points of $\Lambda$ over $H$ are those
+  of $\Lambda_0$ (as $\pi|_\Lambda$ is injective and $\pi(\Lambda_0)=H\cap O$), so
+  $d(h|_H)=d_{x'}f$; adjusting the constant, $h|_H=f$, and $dh(\bar x)=\bar z$
+  since $\bar z\in\Lambda_0$.
+
+  \emph{Uniqueness.}  If $h'$ is another solution, its graph $\Lambda'$ is
+  Lagrangian and contained in $p^{-1}(0)$, so $H_p$ is tangent to $\Lambda'$ by
+  \cref{hj:lem:tangent}.  The points $(0,x';\pa_th'(0,x'),d_{x'}f(x'))$ of
+  $\Lambda'$ over $H$ satisfy $p=0$ and are close to $\bar z$, so by the uniqueness
+  in the implicit function theorem $\pa_th'(0,x')=\tau(x')$, i.e.\
+  $\Lambda_0\subset\Lambda'$.  The integral curves of $H_p$ starting on
+  $\Lambda_0$ therefore stay in $\Lambda'$, so $\Lambda\subset\Lambda'$ near
+  $\bar z$.  Both are graphs over a neighbourhood of $\bar x$, hence $dh=dh'$
+  there, and $h=h'$ since they agree on $H$.
+\end{proof}
+
+Note that \eqref{hj:eq:transversal} implies $d_{\mathrm{fib}}p(\bar z)\ne0$;
+conversely, if $d_{\mathrm{fib}}p(\bar z)\neq0$ then $\pi_*H_p(\bar z)\neq0$ and
+hypersurfaces $H$ satisfying \eqref{hj:eq:transversal} exist.
+
+For homogeneous $p$ we obtain characteristic hypersurfaces with prescribed
+intersection with $H$.  If $G\subset H$ is a hypersurface in $H$ and $\bar
+x\in G$, write $N^*_{\bar x}G\subset T^*_{\bar x}H$ for its conormal space in
+$H$; and for $\bar z\in T^*_{\bar x}X$ write $\bar z_H=\bar z|_{T_{\bar x}H}\in
+T^*_{\bar x}H$.
+
+\begin{corollary}\label{hj:cor:characteristic}
+  Let $p\in\CI(T^*X\setminus0)$ be real and homogeneous of degree $m'$, $\bar z\in
+  T^*X\setminus0$ with $p(\bar z)=0$, $H=\{t=0\}$ a hypersurface through $\bar
+  x=\pi(\bar z)$ satisfying \eqref{hj:eq:transversal}, and $G\subset H$ a
+  hypersurface of $H$ through $\bar x$ with $\bar z_H\in N^*_{\bar x}G\setminus0$.
+  Then there is a hypersurface $\tilde G$ of $X$, defined near $\bar x$, with
+  $\tilde G\cap H=G$ near $\bar x$, $\bar z\in N^*\tilde G$, and
+  \begin{equation*}
+    \Gamma=\{(x,\lambda\,d\tilde g(x));\ x\in\tilde G,\ \lambda>0\}\subset\Sigma(p),
+  \end{equation*}
+  where $\tilde g$ is a defining function of $\tilde G$ with $d\tilde g(\bar
+  x)=\bar z$; that is, $\tilde G$ is characteristic on the half $\Gamma$ of
+  $N^*\tilde G\setminus0$ containing $\bar z$.  Moreover $\tilde G$ is unique near
+  $\bar x$.
+\end{corollary}
+\begin{proof}
+  Write $G=\{g_0=0\}$ near $\bar x$ with $g_0\in\CI(H)$, $dg_0\ne0$; since
+  $\bar z_H$ is a nonzero multiple of $dg_0(\bar x)$ we may rescale $g_0$ so that
+  $dg_0(\bar x)=\bar z_H$.  \Cref{hj:thm:HJ} with $f=g_0$ gives $\tilde g$ with
+  $p(x,d\tilde g)=0$, $\tilde g|_H=g_0$ and $d\tilde g(\bar x)=\bar z\ne0$.  Then
+  $\tilde G=\{\tilde g=0\}$ is a hypersurface near $\bar x$, $\tilde G\cap
+  H=\{g_0=0\}=G$, and $p(x,\lambda d\tilde g(x))=\lambda^{m'}p(x,d\tilde g(x))=0$
+  for $\lambda>0$.
+
+  For uniqueness, let $\tilde G'$ be another such hypersurface, with half-conormal
+  bundle $\Gamma'\subset\Sigma(p)$ containing $\bar z$.  Over $G$, the points of
+  $\Gamma$ and of $\Gamma'$ near $\bar z$ are covectors in $\Sigma(p)$ whose
+  restrictions to $TH$ lie in $N^*G$; by \eqref{hj:eq:transversal} and the
+  implicit function theorem (as for $\Lambda_0$ above, now with the extra
+  dilation parameter) these sets coincide near $\bar z$; call this
+  $(n-1)$-dimensional manifold $\Gamma_0$.  Since $\Gamma,\Gamma'$ are Lagrangian
+  (\cref{hj:lem:examples}) and contained in $p^{-1}(0)$, $H_p$ is tangent to both,
+  so both contain the flow-out of $\Gamma_0$ by $H_p$.  This flow-out is
+  $n$-dimensional near $\bar z$: $H_p(\bar z)$ is not tangent to $\Gamma_0$ since
+  $\pi_*H_p(\bar z)\notin T_{\bar x}H\supset\pi_*T\Gamma_0$.  So it is an open
+  subset of both $\Gamma$ and $\Gamma'$, and $\tilde G=\pi(\Gamma)=\pi(\Gamma')=
+  \tilde G'$ near $\bar x$.
+\end{proof}
+
+\section{The transport equation}\label{hj:sec:transport}
+
+\subsection{The symbol of $Pu$ for characteristic $Y$}
+We now compute the next term in the symbol of $Pu$ when $Y$ is characteristic.
+We assume that $P\in\Psido{m'}(X;\Omegah)$ is properly supported and has a
+polyhomogeneous symbol: in local coordinates, acting on coefficients with
+respect to $|dz|^{1/2}$, $P=\Op(b)$ modulo smoothing operators, with
+\begin{equation*}
+  b\sim b_{m'}+b_{m'-1}+\cdots,\qquad b_{m'-j}\text{ homogeneous of degree }
+  m'-j\text{ in }|\zeta|\ge1 .
+\end{equation*}
+Differential operators are the main examples.  The principal symbol is
+$p=b_{m'}$, and the \emph{subprincipal symbol} is
+\begin{equation}\label{hj:eq:subprincipal}
+  p_s=b_{m'-1}-\frac1{2i}\sum_{j=1}^n\frac{\pa^2p}{\pa z_j\pa\zeta_j}.
+\end{equation}
+For operators on half-densities $p_s$ is an invariantly defined function on
+$T^*X\setminus0$, homogeneous of degree $m'-1$ \cite[Theorem~18.1.33]{Hormander-III};
+we shall only use its restriction to $N^*Y$, whose invariance follows from the
+next theorem.  Recall that the Lie derivative acts on half-densities on a
+manifold with coordinates $w$ by
+$\mathcal L_V(\beta|dw|^{1/2})=(V\beta+\frac12(\operatorname{div}V)\beta)|dw|^{1/2}$,
+$\operatorname{div}V=\sum\pa_{w_j}V_j$.
+
+\begin{theorem}\label{hj:thm:transport}
+  Let $P$ be as above, $Y\subset X$ a closed embedded submanifold and
+  $\Gamma\subset N^*Y\setminus0$ an open cone on which $p=0$, so that $H_p$ is
+  tangent to $\Gamma$.  If $u\in\Ic{m}(X,Y;\Omegah)$ and $\WF(u)\subset\Gamma$,
+  then $Pu\in\Ic{m+m'-1}(X,Y;\Omegah)$ and
+  \begin{equation}\label{hj:eq:transport}
+    \sigma_{m+m'-1}(Pu)=\big(-i\mathcal L_{H_p}+p_s\big)\sigma_m(u).
+  \end{equation}
+\end{theorem}
+Here $\sigma_m(u)\in S^{m+\frac n4}(N^*Y;\Omegah)$ is, modulo $S^{-\infty}$,
+supported in a closed cone contained in $\Gamma$, and $\mathcal L_{H_p}$ (with
+$H_p$ restricted to $\Gamma$) and multiplication by $p_s$ map
+$S^r(\Gamma;\Omegah)$ to $S^{r+m'-1}(\Gamma;\Omegah)$, since $H_p$ and $p_s$
+are homogeneous of degree $m'-1$; so the right side of \eqref{hj:eq:transport}
+is well defined in $S^{m+\frac n4+m'-1-[1]}(N^*Y;\Omegah)$.
+\begin{proof}
+  That $Pu\in\Ic{m+m'-1}$ is \cref{hj:cor:char-lower}.  The formula is local; in
+  adapted coordinates $(x,y)$ with $u=(\osc{a}+f)|dz|^{1/2}$, the full symbol
+  $a'$ of $Pu$ is given by the expansion of \cref{ch:conormal},
+  \begin{equation*}
+    a'\sim\sum_{\alpha,\gamma}\frac1{\alpha!\gamma!}(-D_\xi)^\alpha\pa_x^\alpha
+    \Big(\pa_\eta^\gamma b(x,y,\xi,0)D_y^\gamma a(y,\xi)\Big)\Big|_{x=0}.
+  \end{equation*}
+  Each $\alpha$ or $\gamma$ lowers the order by one, so modulo $S^{M+m'-2}$
+  only the terms with $|\alpha|+|\gamma|\le1$ and the two leading terms of $b$
+  contribute.  Since $p(0,y,\xi,0)=0$ where $a$ is not of order $-\infty$,
+  \begin{align*}
+    a'&\equiv b_{m'-1}a+\sum_l\pa_{\eta_l}p\,D_{y_l}a
+       -\sum_jD_{\xi_j}\big(\pa_{x_j}p\,a\big)\\
+      &=-i\Big(\sum_l\pa_{\eta_l}p\,\pa_{y_l}a-\sum_j\pa_{x_j}p\,\pa_{\xi_j}a\Big)
+       +\Big(b_{m'-1}+i\sum_j\pa_{x_j}\pa_{\xi_j}p\Big)a,
+  \end{align*}
+  all functions of $(y,\xi)$ evaluated at $x=0$, $\eta=0$.  On $N^*Y=\{x=0,\
+  \eta=0\}$ we have $\pa_\xi p=0$ and $\pa_yp=0$ (as $p$ vanishes there), so by
+  \eqref{hj:eq:Hamilton}
+  \begin{equation*}
+    H_p|_{N^*Y}=\sum_l\pa_{\eta_l}p\,\pa_{y_l}-\sum_j\pa_{x_j}p\,\pa_{\xi_j},
+  \end{equation*}
+  which is the first-order operator above.  With respect to the half-density
+  $|dy\,d\xi|^{1/2}$ its divergence is $\sum_l\pa_{y_l}\pa_{\eta_l}p-\sum_j
+  \pa_{\xi_j}\pa_{x_j}p$, so
+  \begin{equation*}
+    -iH_pa=-i\mathcal L_{H_p}a+\frac i2\Big(\sum_l\pa_{y_l}\pa_{\eta_l}p-
+    \sum_j\pa_{x_j}\pa_{\xi_j}p\Big)a,
+  \end{equation*}
+  where $\mathcal L_{H_p}a$ denotes the coefficient of
+  $\mathcal L_{H_p}(a|dy\,d\xi|^{1/2})$.  Substituting,
+  \begin{equation*}
+    a'\equiv-i\mathcal L_{H_p}a+\Big(b_{m'-1}+\frac i2\sum_{j=1}^n
+    \frac{\pa^2p}{\pa z_j\pa\zeta_j}\Big)a=-i\mathcal L_{H_p}a+p_sa
+  \end{equation*}
+  modulo $S^{M+m'-2}$, since $\frac i2=-\frac1{2i}$.  This is
+  \eqref{hj:eq:transport}.
+\end{proof}
+
+Thus, to obtain $Pu\in\Ic{m+m'-2}$ we must solve the \emph{transport equation}
+$(-i\mathcal L_{H_p}+p_s)\sigma_m(u)=0$, a first-order ordinary differential
+equation along the integral curves of $H_p$ in $\Gamma$; the lower order terms
+are then removed by solving inhomogeneous transport equations.  To set up the
+initial value problem we need restriction to a transversal hypersurface.
+
+\subsection{Restriction to a transversal hypersurface}
+Let $t\in\CI(X)$ be real with $dt\neq0$ on $H=\{t=0\}$.  Restriction of
+half-densities to $H$ is defined using $|dt|^{1/2}$: in coordinates $(t,w)$,
+\begin{equation}\label{hj:eq:restrict-hd}
+  \big(\phi(t,w)|dt\,dw|^{1/2}\big)\big|_H=\phi(0,w)|dw|^{1/2};
+\end{equation}
+this is independent of the coordinates $w$ (\cref{hj:ex:restriction-hd}).  Let
+$\tilde G\subset X$ be a hypersurface transversal to $H$, i.e.\ $dt|_{T\tilde
+G}\ne0$ at each point of $G=\tilde G\cap H$; then $G$ is a hypersurface in $H$
+(\cref{hj:ex:transversal}).  Near any point of $G$ there are coordinates
+$(x_1,t,y')$, $y'\in\R^{n-2}$, with $\tilde G=\{x_1=0\}$ and $H=\{t=0\}$.  The
+restriction map $j:N^*\tilde G|_G\to N^*G$, $\zeta\mapsto\zeta|_{TH}$, is an
+isomorphism, in coordinates $(t=0,y';\xi_1)\mapsto(y';\xi_1)$.  The set
+$N^*\tilde G|_G=N^*\tilde G\cap\pi^{-1}(H)$ is the hypersurface
+$\{\pi^*t=0\}$ of $N^*\tilde G$, so half-densities on $N^*\tilde G$ restrict to
+it as in \eqref{hj:eq:restrict-hd}, using $|d\pi^*t|^{1/2}$.
+
+\begin{proposition}\label{hj:prop:restriction}
+  With $H$, $\tilde G$, $G$ as above, restriction to $H$ defines a map
+  \begin{equation*}
+    \Ic{m}(X,\tilde G;\Omegah)\ni u\longmapsto u|_H\in\Ic{m+\frac14}(H,G;\Omegah),
+    \qquad \sigma_{m+\frac14}(u|_H)=(j^{-1})^*\big(\sigma_m(u)|_{\{\pi^*t=0\}}\big),
+  \end{equation*}
+  mapping $\Ic{m-l}$ to $\Ic{m-l+\frac14}$, and $\WF(u|_H)\subset
+  j(\WF(u)\cap\pi^{-1}(H))$.
+\end{proposition}
+\begin{proof}
+  Since $\WF(u)\subset N^*\tilde G$ and $N^*\tilde G\cap N^*H=0$ by
+  transversality, the restriction (pull-back by the inclusion) of $u$ to $H$ is
+  well defined \cite[Theorem~8.2.4]{Hormander-I}; for half-densities we combine it
+  with \eqref{hj:eq:restrict-hd}.  In coordinates as above,
+  $u=(\osc{a}+f)|dx_1\,dt\,dy'|^{1/2}$ with $a=a(t,y',\xi_1)\in S^M$,
+  $M=m+\frac n4-\frac12$, and $\osc{a}$ is a smooth function of $t$ with values in
+  distributions in $(x_1,y')$; so
+  \begin{equation*}
+    u|_H=(\osc{a(0,\cdot)}+f(\cdot,0,\cdot))|dx_1\,dy'|^{1/2}.
+  \end{equation*}
+  Now $H$ has dimension $n-1$ and $G$ codimension one in it, so this is an element
+  of $\Ic{m'}(H,G;\Omegah)$ with $M=m'+\frac{n-1}4-\frac12$, i.e.\
+  $m'=m+\frac14$.  Its symbol is $a(0,y',\xi_1)|dy'\,d\xi_1|^{1/2}$, which is the
+  stated formula since $\sigma_m(u)=a|dt\,dy'\,d\xi_1|^{1/2}$.  The wavefront set
+  statement follows from the characterization of $\WF$ by the full symbol
+  (\cref{ch:conormal}).
+\end{proof}
+
+\subsection{Travelling waves}
+We now construct conormal solutions of $Pu\in\CI$ with prescribed restriction
+to a transversal hypersurface.  We first solve the transport equations.
+
+\begin{lemma}\label{hj:lem:transport-ode}
+  Under the hypotheses of \cref{hj:cor:characteristic}, use coordinates
+  $(x_1,t,y')$ near $\bar x$ with $\tilde G=\{x_1=0\}$, $H=\{t=0\}$, so that
+  $(t,y',\xi_1)$ are coordinates on $N^*\tilde G$ and $\Gamma=\{\xi_1>0\}$.  Let
+  $q$ be a smooth function on $\Gamma$ homogeneous of degree $m'-1$.  Then there
+  are $\epsilon>0$ and a neighbourhood $U$ of $\bar y'=0$ such that for every
+  $c\in S^{r+m'-1}$ and $\beta_0\in S^r$ (classes of half-densities on
+  $\Gamma$, respectively on $\Gamma\cap\{t=0\}$, of the stated orders, supported
+  in $\xi_1\ge1$) the problem
+  \begin{equation*}
+    (-i\mathcal L_{H_p}+q)\beta=c\ \text{ in }\{|t|<\epsilon,\ y'\in U\},\qquad
+    \beta|_{t=0}=\beta_0
+  \end{equation*}
+  has a unique solution $\beta\in S^r$ there (restriction to $t=0$ taken as in
+  \eqref{hj:eq:restrict-hd}).  If $\beta_0$ and $c$ are of order $-\infty$ outside
+  closed cones $K_0$, $K$, then $\beta$ is of order $-\infty$ outside the union of
+  $K$ and the $H_p$-flow-out of $K_0$.
+\end{lemma}
+\begin{proof}
+  Since $H_p$ is tangent to $\Gamma$ and homogeneous of degree $m'-1$, in the
+  coordinates $(t,y',\xi_1)$
+  \begin{equation*}
+    H_p=\xi_1^{m'-1}\Big(e_0(t,y')\pa_t+\sum_le_l(t,y')\pa_{y'_l}
+    +e_{n}(t,y')\xi_1\pa_{\xi_1}\Big),
+  \end{equation*}
+  and $e_0(0,0)\neq0$ by \eqref{hj:eq:transversal}.  Writing
+  $\beta=\tilde\beta|dt\,dy'\,d\xi_1|^{1/2}$ and dividing by
+  $-i\xi_1^{m'-1}e_0$, the equation becomes
+  \begin{equation*}
+    \Big(\pa_t+\sum_l\frac{e_l}{e_0}\pa_{y'_l}+\frac{e_n}{e_0}\xi_1\pa_{\xi_1}\Big)\tilde\beta
+    +\kappa(t,y')\tilde\beta=\tilde c,
+  \end{equation*}
+  with $\kappa$ smooth (the divergence of $H_p$ and $q$ both being $\xi_1^{m'-1}$
+  times functions of $(t,y')$) and $\tilde c=i\xi_1^{1-m'}e_0^{-1}c'$, $c'$ the
+  coefficient of $c$, of the same order as $\tilde\beta$.  The vector field in
+  parentheses has integral curves $s\mapsto(s,Y(s,y'_0),\xi_1E(s,y'_0))$ with
+  $E>0$ smooth, the $\xi_1$-component being linear in $\xi_1$ because its
+  coefficient is.  Hence the solution is given explicitly by
+  \begin{equation*}
+    \tilde\beta(s,Y(s,y'_0),\xi_1E(s,y'_0))=e^{-k(s,y'_0)}\Big(\tilde\beta_0(y'_0,\xi_1)
+    +\int_0^se^{k(\sigma,y'_0)}\tilde c(\sigma,Y(\sigma,y'_0),\xi_1E(\sigma,y'_0))
+    \,d\sigma\Big),
+  \end{equation*}
+  $k(s,y'_0)=\int_0^s\kappa(\sigma,Y(\sigma,y'_0))\,d\sigma$, for $|s|<\epsilon$
+  and $y'_0$ near $0$.  The change of variables $(s,y'_0,\xi_1)\mapsto
+  (s,Y,\xi_1E)$ is a diffeomorphism near $\{s=0,\ y'_0=0\}$ which is linear and
+  positive in the fibre variable, so it preserves symbol classes; hence $\beta$ has
+  order $r$, and the support statement is clear from the formula.
+\end{proof}
+
+\begin{theorem}[Travelling waves]\label{hj:thm:travelling}
+  Let $P\in\Psido{m'}(X;\Omegah)$ be properly supported with polyhomogeneous
+  symbol and real principal symbol $p$.  Let $\bar z\in T^*X\setminus0$ with
+  $p(\bar z)=0$, $\bar x=\pi(\bar z)$, let $H=\{t=0\}$ be a hypersurface through
+  $\bar x$ with $H_p(\pi^*t)(\bar z)\neq0$, let $G\subset H$ be a hypersurface of
+  $H$ with $\bar z_H\in N^*_{\bar x}G\setminus0$, and let $\tilde G$ be the
+  characteristic hypersurface of \cref{hj:cor:characteristic}.  Then there are a
+  neighbourhood $O$ of $\bar x$ and an open conic neighbourhood $\gamma$ of
+  $\bar z_H$ in $T^*H\setminus0$ such that for every
+  $u_0\in\Ic{m+\frac14}(H,G;\Omegah)$ with $\WF(u_0)\subset\gamma$ there exists
+  $u\in\Ic{m}(X,\tilde G;\Omegah)$ with
+  \begin{equation*}
+    u|_{H\cap O}=u_0|_{H\cap O},\qquad Pu\in\CI(O;\Omegah),
+  \end{equation*}
+  and $\WF(u)\cap T^*O\subset\Gamma$.  If $P$ and $u_0$ are classical, $u$ can be
+  taken classical.
+\end{theorem}
+\begin{proof}
+  Use the coordinates of \cref{hj:lem:transport-ode}, and choose $\epsilon$, $U$
+  as there and $\gamma$ so small that, in these coordinates, $j^{-1}(\gamma)$ lies
+  over $\{y'\in U\}$ and within a cone whose $H_p$-flow-out for $|t|<\epsilon$
+  stays in $\Gamma$.  Let $O=\{|x_1|<\epsilon',|t|<\epsilon,\ y'\in U'\}$ with
+  $U'\Subset U$, and fix $\phi\in\CIc(\{|t|<\epsilon,y'\in U\})$ equal to one
+  near $\bar O$.  We construct $u_j\in\Ic{m-j}(X,\tilde G;\Omegah)$, with
+  wavefront sets in $\Gamma$ and supports in $\supp\phi$, such that for
+  $v_N=u_0'+\dots+u_N$ (we write $u_0'$ for the first term to avoid confusion with
+  the data $u_0$)
+  \begin{equation}\label{hj:eq:travelling-induction}
+    Pv_N\in\Ic{m+m'-N-2}\ \text{ in }O,\qquad u_0-v_N|_H\in
+    \Ic{m+\frac14-N-1}(H,G;\Omegah)\ \text{ in } H\cap O.
+  \end{equation}
+  For $N=-1$ (with $v_{-1}=0$) the second condition holds and the first is
+  vacuous with the convention $Pv_{-1}=0$.  Given $v_{N-1}$, let
+  $g=-Pv_{N-1}\in\Ic{m+m'-N-1}$ in $O$ and $e=u_0-v_{N-1}|_H\in
+  \Ic{m+\frac14-N}(H,G;\Omegah)$, both with wavefront sets in the appropriate
+  cones.  By \cref{hj:lem:transport-ode} (with $q=p_s|_\Gamma$) solve
+  \begin{equation*}
+    (-i\mathcal L_{H_p}+p_s)\beta_N=\sigma_{m+m'-N-1}(g),\qquad
+    \beta_N|_{t=0}=(j)^*\sigma_{m+\frac14-N}(e),
+  \end{equation*}
+  with $\beta_N\in S^{m+\frac n4-N}$, of order $-\infty$ outside the flow-out
+  cone, and let $u_N\in\Ic{m-N}$ be $\phi$ times a distribution with principal
+  symbol $\beta_N$ (\cref{ch:conormal}).  By \cref{hj:thm:transport},
+  $\sigma_{m+m'-N-1}(Pu_N)=\sigma_{m+m'-N-1}(g)$ in $O$ (where $\phi=1$ and,
+  $P$ being pseudolocal, $P(\phi w)-\phi Pw$ is smooth), so $Pv_N=-g+Pu_N\in
+  \Ic{m+m'-N-2}$ in $O$; and by \cref{hj:prop:restriction},
+  $\sigma_{m+\frac14-N}(u_N|_H)=\sigma_{m+\frac14-N}(e)$, so $e-u_N|_H\in
+  \Ic{m+\frac14-N-1}$.  This proves \eqref{hj:eq:travelling-induction}.
+
+  Let $\tilde u\sim\sum_Nu_N$ be an asymptotic sum in $\Ic{m}(X,\tilde G;\Omegah)$,
+  with support in $\supp\phi$.  Then $P\tilde u\in\bigcap_N\Ic{m+m'-N}=\CI$ in
+  $O$, and $u_0-\tilde u|_H\in\bigcap_N\Ic{m+\frac14-N}(H,G)=\CI$ in $H\cap O$,
+  by \cref{hj:prop:restriction}.  Finally choose $w\in\CI(X;\Omegah)$ with
+  $w|_H=u_0-\tilde u|_H$ near $H\cap\bar O$ (in coordinates, $w=\chi(t)\times$ the
+  smooth error, extended constantly in $t$), and set $u=\tilde u+w$.  Then
+  $u|_{H\cap O}=u_0$, $Pu=P\tilde u+Pw\in\CI(O)$, and $\WF(u)\cap T^*O\subset\Gamma$.
+  In the classical case all symbols above are classical.
+\end{proof}
+
+The transport equation \eqref{hj:eq:transport} for the leading symbol, and its
+inhomogeneous versions for the lower order terms, are thus solved by integration
+along the bicharacteristics (Duhamel's principle).  In \cref{ch:wave} this
+construction, applied to the wave operator with $H=\{t=0\}$, gives a
+parametrix for the Cauchy problem.
+
+\section{Exercises}\label{hj:sec:exercises}
+
+\begin{exercise}\label{hj:ex:transversal}
+  Let $\tilde G\subset X$ be a hypersurface and $t\in\CI(X)$ real with
+  $dt|_{T_q\tilde G}\neq0$ for all $q\in G=\tilde G\cap\{t=0\}$.  Show that
+  $H=\{t=0\}$ is a hypersurface near $G$ and that $G=H\cap\tilde G$ is a
+  submanifold of codimension one in both $H$ and $\tilde G$.
+\end{exercise}
+
+\begin{exercise}\label{hj:ex:restriction-hd}
+  Assuming $dt\ne0$ on $H=\{t=0\}$, show that $dt$ gives an isomorphism of line
+  bundles $\Omegah(H)\cong\Omegah_H(X)\otimes|N^*H|^{-1/2}$, where
+  $\Omegah_H(X)$ is the restriction to $H$ of $\Omegah(X)$ and $|N^*H|^{-1/2}$ is
+  trivialized by $|dt|^{-1/2}$, and hence that \eqref{hj:eq:restrict-hd} defines a
+  coordinate-independent restriction map $\CI(X;\Omegah)\to\CI(H;\Omegah)$.
+\end{exercise}
+
+\begin{exercise}
+  Prove \cref{hj:prop:restriction} directly from the coordinate formula: show that
+  the restriction defined in adapted coordinates is independent of the choice of
+  coordinates $(x_1,t,y')$ with $t$ fixed.
+\end{exercise}
+
+\begin{exercise}
+  For the wave operator $P=D_t^2-\Delta$ on $\R^{n+1}$, $H=\{t=0\}$ and
+  $f(x)=\omega\cdot x$, $|\omega|=1$, find the two solutions $h_\pm$ of the
+  eikonal equation $p(x,dh)=0$ with $h|_H=f$ given by \cref{hj:thm:HJ} (one for
+  each choice of $\bar z$ over $0$).  Do the same with $f(x)=|x|$ near a point
+  $x\ne0$, and describe the characteristic hypersurfaces through
+  $\{t=0,\ |x|=1\}$.  Show that the light cone $\{t^2=|x|^2\}$ is characteristic
+  away from its vertex.
+\end{exercise}
+
+\begin{exercise}
+  Show that the subprincipal symbol of $D_t^2-\Delta$ on $\R^{n+1}$, acting on
+  half-densities via $|dt\,dx|^{1/2}$, vanishes, and solve the transport equation
+  for the plane waves of \cref{hj:ex:plane}.  For a Riemannian metric $g$ on $X$
+  compute the subprincipal symbol of $D_t^2-\Delta_g$ acting on half-densities by
+  $u\mapsto(D_t^2-\Delta_g)(u\,|dg|^{-1/2})\,|dg|^{1/2}$, $|dg|$ the Riemannian
+  density.
+\end{exercise}
+
+\section*{Notes}
+This chapter is a rewriting of the second half of the conormal/wave kernel
+chapter of the 1998 notes.  The section on Riemann metrics and quantization
+there was only a heading and has been omitted.  The Hamilton--Jacobi theorem is
+proved here in full (the original only sketched the strategy), the transport
+equation is derived for submanifolds of any codimension with the zeroth order
+term identified as the subprincipal symbol, the restriction theorem (an exercise
+in the original) is proved, and the construction of travelling waves is made
+precise.  For the general theory see \cite[Sections~18.1, 25.2]{Hormander-III}
+and \cite{Hormander-FIO}, where conormal distributions are replaced by
+Lagrangian distributions and the analogue of \eqref{hj:eq:transport} holds on
+any Lagrangian submanifold contained in $\Sigma(P)$.

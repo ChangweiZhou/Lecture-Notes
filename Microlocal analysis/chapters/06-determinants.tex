@@ -1,0 +1,1486 @@
+\chapter{Traces, determinants and the index}\label{ch:determinants}
+\providecommand{\Siso}[1]{S^{#1}_{\mathrm{iso}}}
+\providecommand{\Psiisoinf}[1]{\Psi^{#1}_{\mathrm{iso},\infty}}
+\providecommand{\detFr}{\operatorname{det}_{\mathrm{Fr}}}
+\providecommand{\TrRes}{\operatorname{Tr}_{\mathrm{R}}}
+\providecommand{\TrReg}[1]{\overline{\operatorname{Tr}}_{#1}}
+\providecommand{\Giso}[1]{G^{#1}_{\mathrm{iso}}}
+\providecommand{\FP}{\operatorname*{FP}}
+\providecommand{\Ell}{\operatorname{Ell}}
+
+In this chapter we use the isotropic calculus of \cref{ch:isotropic} as a
+laboratory for three closely related constructions: traces, determinants and
+the index. On the residual algebra $\Psiiso{-\infty}(\R^n)$, whose elements
+have Schwartz kernels, there is a unique trace, and it gives rise to the
+Fredholm determinant on $\Id+\Psiiso{-\infty}(\R^n)$; the determinant leads
+directly to analytic Fredholm theory and so to the meromorphy of the
+resolvent of an elliptic operator. On the full algebra of polyhomogeneous
+operators of integral order the trace no longer extends, but complex powers
+allow us to define the \emph{residue trace}, a genuine trace which only sees
+one term of the symbol expansion, and the \emph{regularized trace}, which
+extends the trace but fails to be a trace; the failure is measured by the
+residue trace and an exterior derivation. These ingredients give a formula for
+the index of an elliptic operator, an obstruction to inverting families of
+elliptic operators by smoothing perturbations, and finally the determinant
+line bundle of such a family, together with a natural connection whose
+curvature is that obstruction.
+
+\section{Setup}\label{determinants:sec:setup}
+
+We recall from \cref{ch:isotropic} what we need, and fix notation. Write
+$Z=(x,\xi)\in\R^{2n}$. For $m\in\R$ the space of \emph{isotropic symbols} of
+order $m$ is
+\begin{equation*}
+  \Siso{m}(\R^{2n})=\bigl\{a\in\CI(\R^{2n});\ \abs{D_Z^\alpha a(Z)}\le
+  C_\alpha\ang{Z}^{m-\abs{\alpha}}\ \forall\,\alpha\bigr\},
+\end{equation*}
+a Fr\'echet space with the best constants $C_\alpha$ as seminorms, and
+$\Psiisoinf{m}(\R^n)=\Op(\Siso{m}(\R^{2n}))$, with the left quantization of
+the Introduction. The polyhomogeneous subspace $\Psiiso{m}(\R^n)$ consists of
+the operators whose left symbol has an expansion $a\sim\sum_{j\ge0}a_{m-j}$
+with $a_{m-j}$ homogeneous of degree $m-j$ in $\abs{Z}\ge1$; equivalently,
+$\ang{Z}^{-m}a$ is smooth on the radial compactification $\RC{\R^{2n}}$, i.e.\
+in polar coordinates $Z=\theta/t$, $t=\abs{Z}^{-1}$, it is smooth up to $t=0$.
+The same definition with $m$ replaced by $z\in\C$ gives the operators
+$\Psiiso{z}(\R^n)\subset\Psiisoinf{\Re z}(\R^n)$ of complex order. We write
+$\Psiiso{\Z}(\R^n)=\bigcup_{m\in\Z}\Psiiso{m}(\R^n)$. The \emph{residual}
+operators are
+\begin{equation*}
+  \Psiiso{-\infty}(\R^n)=\bigcap_m\Psiisoinf{m}(\R^n)=\bigcap_m\Psiiso{m}(\R^n),
+\end{equation*}
+which are exactly the operators with Schwartz kernels in $\cS(\R^{2n})$; we
+identify $\Psiiso{-\infty}(\R^n)$ with $\cS(\R^{2n})$, including its
+topology.
+
+All of this applies to operators on $\C^N$-valued functions:
+$\Psiiso{m}(\R^n;\C^N)$ consists of $N\times N$ matrices of elements of
+$\Psiiso{m}(\R^n)$ (see \cref{determinants:ex:bundles}). Everything below
+holds in this generality, with $\tr$ denoting the trace of matrices; to keep
+the notation light we often suppress $\C^N$.
+
+We use the following results from \cref{ch:isotropic}.
+\begin{enumerate}[label=(I\arabic*)]
+\item\label{determinants:I:algebra} \emph{Algebra.} Composition maps
+  $\Psiisoinf{m}\times\Psiisoinf{m'}$ to $\Psiisoinf{m+m'}$ continuously for
+  the symbol topologies, and $\Psiiso{z}\times\Psiiso{z'}$ to
+  $\Psiiso{z+z'}$; the left symbol of a composite is given by
+  $\sigma_L(AB)\sim\sum_\alpha\frac1{\alpha!}\pa_\xi^\alpha a\,D_x^\alpha b$.
+  Adjoints and transposes of elements of $\Psiisoinf{m}$ (resp.\ $\Psiiso{z}$)
+  lie in the same space. In particular $\Psiiso{-\infty}$ is a two-sided ideal.
+  The principal symbol is multiplicative.
+\item\label{determinants:I:bounded} \emph{Boundedness.} Every element of
+  $\Psiisoinf{m}$ is continuous on $\cS(\R^n)$ and on $\cSp(\R^n)$; elements
+  of $\Psiisoinf{0}$ are bounded on $L^2(\R^n)$, with norm bounded by a symbol
+  seminorm; elements of negative order are compact on $L^2$, and residual
+  operators map $\cSp(\R^n)$ continuously into $\cS(\R^n)$.
+\item\label{determinants:I:elliptic} \emph{Ellipticity.} An element
+  $A\in\Psiiso{z}(\R^n;\C^N)$ is elliptic if its principal symbol is invertible
+  on the sphere. It then has a parametrix $B\in\Psiiso{-z}$, with $AB-\Id$ and
+  $BA-\Id$ residual; any two parametrices differ by a residual operator.
+  If $Au\in\cS$ for some $u\in\cSp$, then $u\in\cS$. There is a
+  \emph{generalized inverse} $B\in\Psiiso{-z}$ with
+  \begin{equation}\label{determinants:eq:gen-inverse}
+    AB=\Id-\Pi_1,\quad BA=\Id-\Pi_0,
+  \end{equation}
+  where $\Pi_0$, $\Pi_1$ are the $L^2$-orthogonal projections onto the finite
+  dimensional spaces $\Nul A\subset\cS$ and $\Nul A^*\subset\cS$ (null spaces
+  on $\cSp$). Replacing $B$ by $(\Id-\Pi_0)B(\Id-\Pi_1)$, which changes
+  neither identity since $A\Pi_0=0$ and $\Pi_1A=0$, we may and do assume
+  $\Pi_0B=0=B\Pi_1$. In particular an elliptic $A$ which is a bijection on
+  $\cSp$ (we then say $A$ is \emph{invertible}) has inverse in $\Psiiso{-z}$.
+  For order $0$, $A$ is invertible in this sense if and only if it is
+  invertible on $L^2$.
+\item\label{determinants:I:residual} \emph{The residual algebra.} If
+  $E\in\Psiiso{-\infty}(\R^n)$ then $\Id+E$ is Fredholm on $L^2$ of index
+  zero; if it is invertible on $L^2$ its inverse is $\Id+F$ with
+  $F\in\Psiiso{-\infty}$. If $\Nul(\Id+E)\ne\{0\}$ there is a finite rank
+  $F'\in\Psiiso{-\infty}$, mapping $\Nul(\Id+E)$ isomorphically onto
+  $\Nul(\Id+E^*)$ and vanishing on its orthocomplement, such that $\Id+E+sF'$
+  is invertible for all $s\ne0$. (This is also the special case
+  $A=\Id+E$ of \cref{determinants:prop:invertible-perturbation} below.) The
+  series $\exp E=\sum_k E^k/k!$ converges in $\Id+\Psiiso{-\infty}$.
+\item\label{determinants:I:oscillator} \emph{The harmonic oscillator.} The
+  eigenfunctions $u_\alpha=c_\alpha C^\alpha e^{-\abs{x}^2/2}$,
+  $\alpha\in\N_0^n$, of $H=\abs{D}^2+\abs{x}^2$ (with $C_j=D_j+ix_j$ and
+  normalizing constants $c_\alpha>0$) are real-valued and form an orthonormal
+  basis of $L^2(\R^n)$; $Hu_\alpha=(n+2\abs{\alpha})u_\alpha$; and each Schwartz
+  seminorm of $u_\alpha$ is bounded by a polynomial in $\abs{\alpha}$. See
+  also \cref{determinants:ex:oscillator}.
+\end{enumerate}
+
+\begin{definition}\label{determinants:def:families}
+  Let $Y$ be a manifold and $\Omega\subset\C$ open.
+  \begin{enumerate}[label=(\alph*)]
+  \item A family $E_y\in\Psiiso{-\infty}(\R^n)$, $y\in Y$, is \emph{smooth}
+    if its kernel $E(y,x,x')$ is in $\CI(Y\times\R^{2n})$ and, in local
+    coordinates, $\ang{(x,x')}^k\pa_y^\gamma\pa_{x,x'}^\alpha E$ is bounded on
+    $K\times\R^{2n}$ for every compact $K$ and all $k,\gamma,\alpha$. A family
+    $E(z)$, $z\in\Omega$, is \emph{holomorphic} if it is smooth and $E$ is
+    holomorphic in $z$.
+  \item Let $h$ be holomorphic on $\Omega$. A family $A(z)=\Op(a(z))$,
+    $z\in\Omega$, is a \emph{holomorphic family of order $h(z)$} if $a\in\CI(\Omega\times\R^{2n})$ is holomorphic in $z$ and
+    \begin{equation}\label{determinants:eq:hol-family}
+      a(z;r\theta)=r^{h(z)}\,b(z;1/r,\theta),\quad r\ge1,\ \theta\in\Sphere^{2n-1},
+    \end{equation}
+    with $b\in\CI(\Omega\times[0,1]\times\Sphere^{2n-1})$ holomorphic in $z$.
+    Then $A(z)\in\Psiiso{h(z)}$, and the term of homogeneity $h(z)-j$ in the
+    expansion of $a(z)$ is $\abs{Z}^{h(z)-j}b_j(z;Z/\abs{Z})$, with
+    $b_j(z;\theta)=\frac1{j!}\pa_t^jb(z;0,\theta)$. Families of fixed order
+    $m$ depending smoothly on $y\in Y$ are defined in the same way, with $b$
+    smooth in $(y,t,\theta)$.
+  \end{enumerate}
+\end{definition}
+
+\begin{enumerate}[resume*]
+\item\label{determinants:I:families} \emph{Families.} Composites of
+  holomorphic (or smooth) families are holomorphic (or smooth), with orders
+  adding; this includes composites with residual families. If $A(z)$ is a
+  holomorphic family of elliptic operators of order $h(z)$, then near each
+  point of $\Omega$ there is a holomorphic family $B(z)$ of order $-h(z)$ such
+  that $A(z)B(z)-\Id$ and $B(z)A(z)-\Id$ are holomorphic families in
+  $\Psiiso{-\infty}$ (the parametrix construction of \cref{ch:isotropic}, with
+  Borel's lemma applied in the variable $t$ uniformly in $z$); the same holds
+  for smooth families. Finally
+  \begin{equation}\label{determinants:eq:standard-regularizer}
+    H(z)=\Op(\ang{Z}^z)\,\Id_N
+  \end{equation}
+  is an entire holomorphic family of order $z$ with $H(0)=\Id$.
+\end{enumerate}
+
+We complete these facts with three elementary lemmas about residual
+operators. Fix seminorms on $\cS(\R^{2n})$ by
+\begin{equation*}
+  \norm{K}_{(k)}=\sum_{\abs{\alpha}+\abs{\beta}+\abs{\gamma}+\abs{\delta}\le k}
+  \sup_{x,x'}\abs{x^\alpha D_x^\beta x'^\gamma D_{x'}^\delta K(x,x')}.
+\end{equation*}
+For $E\in\Psiiso{-\infty}$ we have $\norm{E}_{\Lin(L^2)}\le\norm{E}_{L^2(\R^{2n})}\le C\norm{E}_{(2n+1)}$.
+
+\begin{lemma}\label{determinants:lem:trilinear}
+  If $E_1,E_2\in\Psiiso{-\infty}(\R^n)$ and $T\in\Lin(L^2(\R^n))$, then
+  $E_1TE_2\in\Psiiso{-\infty}(\R^n)$ and for each $k$ there are $C$ and $k'$
+  such that $\norm{E_1TE_2}_{(k)}\le C\norm{T}_{\Lin(L^2)}\norm{E_1}_{(k')}\norm{E_2}_{(k')}$.
+\end{lemma}
+\begin{proof}
+  The map $x'\mapsto E_2(\cdot,x')$ is smooth into $L^2(\R^n)$, so the kernel
+  of $E_1TE_2$ is $K(x,x')=\int E_1(x,w)\,(TE_2(\cdot,x'))(w)\,dw$, and we may
+  differentiate under $T$:
+  $x^\alpha D_x^\beta x'^\gamma D_{x'}^\delta K(x,x')=\int x^\alpha D_x^\beta E_1(x,w)\,\bigl(T[x'^\gamma D_{x'}^\delta E_2(\cdot,x')]\bigr)(w)\,dw$.
+  By Cauchy--Schwarz this is bounded by $\norm{T}$ times
+  $\sup_x\norm{x^\alpha D_x^\beta E_1(x,\cdot)}_{L^2}\sup_{x'}\norm{x'^\gamma D_{x'}^\delta E_2(\cdot,x')}_{L^2}$,
+  and each factor is bounded by a seminorm $\norm{\cdot}_{(k')}$.
+\end{proof}
+
+\begin{lemma}[Finite rank approximation]\label{determinants:lem:approx}
+  Let $\pi_N$ be the orthogonal projection onto
+  $L_N=\operatorname{span}\{u_\alpha;\abs{\alpha}\le N\}$. For
+  $E\in\Psiiso{-\infty}(\R^n)$, $\pi_NE\pi_N\to E$ in $\Psiiso{-\infty}(\R^n)$
+  as $N\to\infty$. If $E_y$ is a smooth family, the convergence holds locally
+  uniformly in $y$ together with all $y$-derivatives.
+\end{lemma}
+\begin{proof}
+  The functions $u_\alpha\otimes u_\beta$ form an orthonormal basis of
+  $L^2(\R^{2n})$ of eigenfunctions of the harmonic oscillator
+  $H_{2n}=H_x+H_{x'}$ with eigenvalues $2n+2\abs{\alpha}+2\abs{\beta}$. Thus
+  the coefficients $e_{\alpha\beta}=\inner{E}{u_\alpha\otimes u_\beta}$ satisfy
+  $(2n+2\abs{\alpha}+2\abs{\beta})^k\abs{e_{\alpha\beta}}=\abs{\inner{H_{2n}^kE}{u_\alpha\otimes u_\beta}}\le\norm{H_{2n}^kE}_{L^2}$,
+  a continuous seminorm of $E$. Since the seminorms of $u_\alpha\otimes u_\beta$
+  grow only polynomially, $\sum e_{\alpha\beta}u_\alpha\otimes u_\beta$
+  converges absolutely to $E$ in $\cS(\R^{2n})$, and its partial sum over
+  $\abs{\alpha},\abs{\beta}\le N$ is the kernel of $\pi_NE\pi_N$. For a smooth
+  family the same estimates hold for $\pa_y^\gamma E_y$, locally uniformly.
+\end{proof}
+
+\begin{lemma}\label{determinants:lem:residual-inverse}
+  The set $\Giso{-\infty}(\R^n)$ of $\Id+E$, $E\in\Psiiso{-\infty}(\R^n)$,
+  which are invertible on $L^2$ is a group, open in $\Id+\Psiiso{-\infty}(\R^n)$.
+  The inverse is $\Id+F$ with
+  \begin{equation}\label{determinants:eq:residual-inverse}
+    F=-E+E(\Id+E)^{-1}E\in\Psiiso{-\infty}(\R^n),
+  \end{equation}
+  and $F$ depends continuously on $E$. If $E_y$ is a smooth (holomorphic)
+  family with $\Id+E_y$ invertible for all $y$, then $F_y$ is a smooth
+  (holomorphic) family.
+\end{lemma}
+\begin{proof}
+  From $(\Id+E)(\Id+F)=\Id=(\Id+F)(\Id+E)$ we get $F=-E-EF$ and
+  $F=-E-FE$, so $F=-E+E^2+EFE=-E+E(\Id+E)^{-1}E$, which is residual by
+  \cref{determinants:lem:trilinear}. Openness holds because invertibility in
+  $\Lin(L^2)$ is open and $\norm{E}_{\Lin(L^2)}\le C\norm{E}_{(2n+1)}$. Inversion
+  is smooth (indeed analytic) on the invertible elements of the Banach algebra
+  $\Lin(L^2)$, so $y\mapsto(\Id+E_y)^{-1}$ is smooth (holomorphic) in norm; the
+  trilinear estimate of \cref{determinants:lem:trilinear} and the product rule
+  then show that $F_y$ is smooth (holomorphic), and continuity follows in the
+  same way.
+\end{proof}
+
+\begin{lemma}[Local inversion]\label{determinants:lem:local-inversion}
+  Let $A(z)$ be a holomorphic family of elliptic operators of order $h(z)$ on
+  $\Omega$, and suppose $A(p)$ is invertible. Then $A(z)$ is invertible for $z$
+  near $p$ and $A(z)^{-1}$ is a holomorphic family of order $-h(z)$ near $p$.
+  The same holds for smooth families of fixed order.
+\end{lemma}
+\begin{proof}
+  Let $B(z)$ be a holomorphic parametrix near $p$,
+  $B(z)A(z)=\Id+E(z)$, $A(z)B(z)=\Id+E'(z)$. Set
+  $B'(z)=B(z)-E(p)A(p)^{-1}$; then $B'(z)A(z)=\Id+E_1(z)$ with
+  $E_1(z)=E(z)-E(p)A(p)^{-1}A(z)$ a holomorphic residual family vanishing at
+  $p$. By \cref{determinants:lem:residual-inverse}, $\Id+E_1(z)$ is invertible
+  near $p$ with holomorphic inverse $\Id+S(z)$, so $L(z)=(\Id+S(z))B'(z)$ is a
+  holomorphic family of order $-h(z)$ with $L(z)A(z)=\Id$. In the same way,
+  with $B''(z)=B(z)-A(p)^{-1}E'(p)$, we find a right inverse $R(z)$. Then
+  $L=LAR=R$ is a two-sided inverse.
+\end{proof}
+
+\section{Traces on the residual algebra}\label{determinants:sec:traces}
+
+\subsection*{Matrices}
+On the algebra $M(N;\C)$ of $N\times N$ matrices, $\tr A=\sum_iA_{ii}$
+satisfies $\tr(AB)=\sum_{i,k}A_{ik}B_{ki}=\tr(BA)$, that is,
+\begin{equation*}
+  \tr([A,B])=0\quad\forall\,A,B\in M(N;\C),
+\end{equation*}
+and the normalization $\tr\Id=N$. These properties characterize it.
+
+\begin{lemma}\label{determinants:lem:matrix-trace}
+  If $F:M(N;\C)\to\C$ is linear and $F([A,B])=0$ for all $A,B$, then
+  $F=F(E_{11})\tr$.
+\end{lemma}
+\begin{proof}
+  Let $E_{jk}$ be the matrix units, $E_{jk}E_{pq}=\delta_{kp}E_{jq}$. For
+  $j\ne k$, $E_{jk}=[E_{jj},E_{jk}]$, so $F(E_{jk})=0$; and
+  $E_{jj}-E_{11}=[E_{j1},E_{1j}]$, so $F(E_{jj})=F(E_{11})$. Hence
+  $F(A)=\sum_{j,k}A_{jk}F(E_{jk})=F(E_{11})\tr A$.
+\end{proof}
+
+\subsection*{The trace on residual operators}
+For $A\in\Psiiso{-\infty}(\R^n;\C^N)$ with kernel $A(x,x')$ we set
+\begin{equation}\label{determinants:eq:trace}
+  \Tr(A)=\int_{\R^n}\tr A(x,x)\,dx .
+\end{equation}
+This is a continuous linear functional on $\Psiiso{-\infty}$. It extends to
+operators of sufficiently negative order. If $a\in\Siso{m}(\R^{2n})$ with
+$m<-2n$, then $\int\abs{a(x,\xi)}\,d\xi\le C\ang{x}^{m+n}$, so the kernel
+$K(x,x')=\int e^{i(x-x')\cdot\xi}a(x,\xi)\,\dbar\xi$ of $\Op(a)$ is continuous,
+$\abs{K(x,x)}\le C\ang{x}^{m+n}$ is integrable, and we define
+\begin{equation}\label{determinants:eq:trace-symbol}
+  \Tr(\Op(a))=\int K(x,x)\,dx=(2\pi)^{-n}\int_{\R^{2n}}\tr a(x,\xi)\,dx\,d\xi,
+  \qquad a\in\Siso{m}(\R^{2n}),\ m<-2n.
+\end{equation}
+This is continuous on $\Psiisoinf{m}$ for the symbol topology and agrees with
+\eqref{determinants:eq:trace} on residual operators. In particular $\Tr$ is
+defined on $\Psiiso{z}$ for $\Re z<-2n$.
+
+\begin{lemma}\label{determinants:lem:trace-property}
+  If $A\in\Psiisoinf{p}(\R^n;\C^N)$, $B\in\Psiisoinf{q}(\R^n;\C^N)$ and
+  $p+q<-2n$, then $\Tr(AB)=\Tr(BA)$. In particular this holds if one of $A$,
+  $B$ is residual and the other is arbitrary.
+\end{lemma}
+\begin{proof}
+  For residual $A$ and $B$ this is Fubini's theorem,
+  \begin{equation*}
+    \Tr(AB)=\iint\tr\bigl(A(x,w)B(w,x)\bigr)\,dw\,dx=\Tr(BA).
+  \end{equation*}
+  In general, let
+  $\chi\in\CIc(\R^{2n})$ equal $1$ near $0$, and let $a_k(Z)=\chi(Z/k)a(Z)$,
+  $b_k(Z)=\chi(Z/k)b(Z)$. Then $a-a_k$ is supported in $\abs{Z}\ge k$, where
+  $\ang{Z}^{-\eps}\le k^{-\eps}$, and the derivatives of $\chi(Z/k)$ are
+  bounded by $C\ang{Z}^{-\abs{\beta}}$ uniformly in $k$; hence $a_k\to a$ in
+  $\Siso{p+\eps}$ for every $\eps>0$, and similarly $b_k\to b$ in
+  $\Siso{q+\eps}$. Choose $\eps$ with $p+q+2\eps<-2n$. The operators
+  $A_k=\Op(a_k)$, $B_k=\Op(b_k)$ are residual, so $\Tr(A_kB_k)=\Tr(B_kA_k)$,
+  and by the continuity of composition (see \ref{determinants:I:algebra}) and of
+  the trace on $\Psiisoinf{p+q+2\eps}$ we may let $k\to\infty$.
+\end{proof}
+
+\begin{lemma}\label{determinants:lem:finite-trace}
+  Let $L\subset\cS(\R^n;\C^N)$ be a finite dimensional subspace and $\Pi$ the
+  $L^2$-orthogonal projection onto $L$. Then $\Pi\in\Psiiso{-\infty}$. If
+  $T\in\Psiiso{-\infty}$ satisfies $T=\Pi T\Pi$, then $\Tr(T)=\tr(T|_L)$, the
+  trace of $T$ as an endomorphism of $L$. More generally
+  $\Tr(\Pi T)=\Tr(\Pi T\Pi)=\tr(\Pi T|_L)$ for all $T\in\Psiisoinf{m}$.
+\end{lemma}
+\begin{proof}
+  If $\varphi_1,\dots,\varphi_l$ is an orthonormal basis of $L$, the kernel of
+  $\Pi$ is $\sum_i\varphi_i(x)\overline{\varphi_i(x')}$ (a matrix-valued
+  function when $N>1$) and that of $T=\Pi T\Pi$ is
+  $\sum_{i,j}t_{ij}\varphi_i(x)\overline{\varphi_j(x')}$, $t_{ij}=\inner{T\varphi_j}{\varphi_i}$.
+  Thus $\Tr(T)=\sum_{i,j}t_{ij}\inner{\varphi_i}{\varphi_j}=\sum_it_{ii}$.
+  Finally $\Tr(\Pi T(\Id-\Pi))=\Tr(T(\Id-\Pi)\Pi)=0$ by
+  \cref{determinants:lem:trace-property}.
+\end{proof}
+
+Taking $L=L_N$ in \cref{determinants:lem:finite-trace} and using
+\cref{determinants:lem:approx}, we see that
+$\Tr(A)=\lim_N\sum_{\abs{\alpha}\le N}\inner{Au_\alpha}{u_\alpha}$, so $\Tr$
+coincides with the trace of $A$ as a trace-class operator on $L^2$. The trace
+is essentially the only continuous trace on the residual algebra.
+
+\begin{proposition}\label{determinants:prop:trace-unique}
+  If $F:\Psiiso{-\infty}(\R^n)\to\C$ is continuous, linear and satisfies
+  $F([A,B])=0$ for all $A,B\in\Psiiso{-\infty}(\R^n)$, then $F=c\Tr$ for some
+  $c\in\C$. Consequently $F([A,B])=0$ also for all $A\in\Psiiso{-\infty}(\R^n)$
+  and $B\in\Psiisoinf{m}(\R^n)$, $m\in\R$.
+\end{proposition}
+\begin{proof}
+  For a finite dimensional $L\subset\cS(\R^n)$ with orthonormal basis
+  $\varphi_1,\dots,\varphi_l$, the operators $P_{ij}$ with kernels
+  $\varphi_i(x)\overline{\varphi_j(x')}$ satisfy $P_{ij}P_{kl}=\delta_{jk}P_{il}$,
+  so they span a subalgebra of $\Psiiso{-\infty}$ isomorphic to $M(l;\C)$, on
+  which $\Tr$ is the matrix trace by \cref{determinants:lem:finite-trace}. By
+  \cref{determinants:lem:matrix-trace}, $F=F(P_{11})\Tr$ on this subalgebra.
+  Applying this to $L=\operatorname{span}\{\varphi,\psi\}$ for two unit vectors
+  $\varphi,\psi\in\cS$ shows that $c=F(\varphi\otimes\overline\varphi)$ is
+  independent of $\varphi$. Every finite rank $A\in\Psiiso{-\infty}$ has range,
+  and range of $A^*$, in $\cS$, and so lies in the subalgebra associated with
+  $L=\Ran A+\Ran A^*$; thus $F=c\Tr$ on finite rank operators, and hence
+  everywhere by \cref{determinants:lem:approx} and continuity. The last
+  statement then follows from \cref{determinants:lem:trace-property}.
+\end{proof}
+
+\section{The Fredholm determinant}\label{determinants:sec:determinant}
+
+For matrices, $\det:M(N;\C)\to\C$ is multiplicative, $\det\Id=1$, and
+$\GL(N;\C)=\{A;\det A\ne0\}$. Multiplicativity and normalization do not
+determine $\det$ (consider $(\det)^k$), but they do together with the
+derivative condition $\frac{d}{ds}\det(\Id+sA)|_{s=0}=\tr A$, and for any
+smooth curve $A_s$ in $\GL(N;\C)$ one has Jacobi's formula
+\begin{equation}\label{determinants:eq:jacobi}
+  \frac{d}{ds}\det A_s=\det A_s\,\tr\Bigl(A_s^{-1}\frac{dA_s}{ds}\Bigr)
+\end{equation}
+(\cref{determinants:ex:matrix-det}). Locally along such a curve this reads
+$d\log\det A=\tr(A^{-1}dA)$; the right side is a closed $1$-form on
+$\GL(N;\C)$, independent of any choice of logarithm. We use the analogous
+$1$-form
+\begin{equation*}
+  \alpha=\Tr(A^{-1}dA)\ \text{ on }\ \Giso{-\infty}(\R^n),
+\end{equation*}
+where, at $A=\Id+E$, $dA$ is the identification of tangent vectors with
+elements of $\Psiiso{-\infty}$ (so $A^{-1}dA$ takes values in
+$\Psiiso{-\infty}$ and $\Tr$ applies). To avoid the differential geometry of
+Fr\'echet manifolds we only integrate $\alpha$ along paths. A
+\emph{path} in $\Giso{-\infty}$ is a continuous map
+$\gamma:[s_0,s_1]\to\Giso{-\infty}$, $\gamma(s)=\Id+E(s)$, which is
+piecewise a smooth family in the sense of
+\cref{determinants:def:families}, and we set
+\begin{equation*}
+  \int_\gamma\alpha=\int_{s_0}^{s_1}\Tr\bigl(\gamma(s)^{-1}\gamma'(s)\bigr)\,ds .
+\end{equation*}
+That $\alpha$ is closed is the content of \cref{determinants:ex:closed}; we
+shall not need it, since the following lemma, which compares $\alpha$ with its
+finite dimensional analogue, gives path independence directly.
+
+\begin{lemma}\label{determinants:lem:connected}
+  $\Giso{-\infty}(\R^n)$ is path connected: if $\Id+E\in\Giso{-\infty}$ there is
+  a path in $\Giso{-\infty}$ from $\Id$ to $\Id+E$.
+\end{lemma}
+\begin{proof}
+  $E$ is compact on $L^2$, so its non-zero spectrum consists of isolated
+  eigenvalues accumulating only at $0$. For $c\ne0$, $\Id+cE$ is invertible
+  unless $-1/c$ is an eigenvalue, so the set $\Lambda$ of $c$ with
+  $\abs{c}\le2$ and $\Id+cE$ not invertible is finite, and $0,1\notin\Lambda$.
+  If $c:[0,1]\to\{\abs{c}\le2\}\setminus\Lambda$ is a smooth path from $0$ to
+  $1$, then $\Id+c(s)E$ is the required path.
+\end{proof}
+
+\begin{lemma}\label{determinants:lem:path-limit}
+  Let $\gamma(s)=\Id+E(s)$, $s\in[0,1]$, be a path in $\Giso{-\infty}(\R^n)$
+  with $E(0)=0$. Then
+  \begin{equation*}
+    \exp\Bigl(\int_\gamma\alpha\Bigr)=\lim_{N\to\infty}
+    \det\bigl(\Id+\pi_NE(1)|_{L_N}\bigr),
+  \end{equation*}
+  where $\pi_NE(1)|_{L_N}$ is regarded as an endomorphism of the finite
+  dimensional space $L_N$. In particular the left side depends only on
+  $\gamma(1)$.
+\end{lemma}
+\begin{proof}
+  Set $E_N(s)=\pi_NE(s)\pi_N$ and $\gamma_N=\Id+E_N$. By
+  \cref{determinants:lem:approx}, $E_N\to E$ and $E_N'\to E'$ in
+  $\Psiiso{-\infty}$, uniformly on each interval of smoothness. Let
+  $M=\sup_s\norm{\gamma(s)^{-1}}_{\Lin(L^2)}<\infty$. For $N$ large,
+  $\norm{E_N(s)-E(s)}_{\Lin(L^2)}<1/(2M)$ for all $s$, so $\gamma_N(s)$ is
+  invertible with $\gamma_N(s)^{-1}\to\gamma(s)^{-1}$ uniformly in norm. By
+  \eqref{determinants:eq:residual-inverse} and
+  \cref{determinants:lem:trilinear}, $\gamma_N^{-1}-\Id\to\gamma^{-1}-\Id$
+  uniformly in $\Psiiso{-\infty}$, hence
+  $\gamma_N^{-1}\gamma_N'\to\gamma^{-1}\gamma'$ uniformly in
+  $\Psiiso{-\infty}$, and, $\Tr$ being continuous,
+  $\int_{\gamma_N}\alpha\to\int_\gamma\alpha$.
+
+  Now $\gamma_N(s)$ preserves the decomposition $L^2=L_N\oplus L_N^\perp$,
+  acting as $g_N(s)=\Id+\pi_NE(s)|_{L_N}$ on $L_N$ and as the identity on
+  $L_N^\perp$. Hence $\gamma_N^{-1}\gamma_N'=\pi_N\gamma_N^{-1}\gamma_N'\pi_N$
+  acts as $g_N^{-1}g_N'$ on $L_N$, and by
+  \cref{determinants:lem:finite-trace} and Jacobi's formula
+  \eqref{determinants:eq:jacobi},
+  \begin{equation*}
+    \int_{\gamma_N}\alpha=\int_0^1\tr\bigl(g_N^{-1}g_N'\bigr)\,ds,\qquad
+    \exp\int_{\gamma_N}\alpha=\frac{\det g_N(1)}{\det g_N(0)}=\det g_N(1).
+  \end{equation*}
+  Letting $N\to\infty$ proves the lemma.
+\end{proof}
+
+\begin{definition}\label{determinants:def:det}
+  The \emph{Fredholm determinant} $\detFr:\Id+\Psiiso{-\infty}(\R^n;\C^N)\to\C$ is
+  \begin{equation*}
+    \detFr(\Id+E)=\begin{cases}
+      \exp\bigl(\int_\gamma\alpha\bigr) & \text{if }\Id+E\in\Giso{-\infty},\\
+      0&\text{otherwise,}
+    \end{cases}
+  \end{equation*}
+  where $\gamma$ is any path in $\Giso{-\infty}$ from $\Id$ to $\Id+E$.
+\end{definition}
+
+By \cref{determinants:lem:connected,determinants:lem:path-limit} this is well
+defined. Concatenating a path from $\Id$ to $G_1$ with a path $\delta$ in
+$\Giso{-\infty}$ from $G_1$ to $G_2$ gives
+\begin{equation}\label{determinants:eq:det-variation}
+  \detFr(G_2)=\detFr(G_1)\exp\Bigl(\int_\delta\alpha\Bigr).
+\end{equation}
+In particular, if $G_y$ is a smooth family in $\Giso{-\infty}$, then
+$\detFr(G_y)$ is smooth and $d\log\detFr(G_y)=\Tr(G_y^{-1}dG_y)$: applying
+\eqref{determinants:eq:det-variation} along curves shows that the directional
+derivatives are $\detFr(G)\Tr(G^{-1}\pa G)$, which are continuous, and
+iterating gives smoothness. For a holomorphic family the Cauchy--Riemann
+equations follow in the same way, so $\detFr(G(z))$ is holomorphic. Also
+$\detFr$ is continuous on $\Giso{-\infty}$, since for $G'$ close to $G$ the
+segment from $G$ to $G'$ lies in $\Giso{-\infty}$.
+
+\begin{proposition}\label{determinants:prop:det-basic}
+  The Fredholm determinant has the following properties.
+  \begin{enumerate}[label=(\roman*)]
+  \item\label{determinants:it:mult} $\detFr(AB)=\detFr(A)\detFr(B)$ for
+    $A,B\in\Id+\Psiiso{-\infty}$, and $\detFr(\Id)=1$.
+  \item $\detFr(A)\ne0$ if and only if $A$ is invertible.
+  \item\label{determinants:it:explog} $\detFr(\exp E)=\exp\Tr(E)$ for all
+    $E\in\Psiiso{-\infty}$; if $\norm{E}_{\Lin(L^2)}<1$, then
+    $\log(\Id+E)=\sum_{k\ge1}(-1)^{k+1}E^k/k$ converges in $\Psiiso{-\infty}$
+    and $\detFr(\Id+E)=\exp\Tr\log(\Id+E)$.
+  \item\label{determinants:it:conj} If $A\in\Psiiso{m}(\R^n;\C^N)$ is
+    invertible (with inverse in $\Psiiso{-m}$) and $B\in\Id+\Psiiso{-\infty}$,
+    then $ABA^{-1}\in\Id+\Psiiso{-\infty}$ and $\detFr(ABA^{-1})=\detFr(B)$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  (i) If $A$ and $B$ are invertible, let $\gamma_1$, $\gamma_2$ be paths from
+  $\Id$ to $A$ and $B$; then $\gamma=\gamma_1\gamma_2$ is a path from $\Id$ to
+  $AB$ and
+  $\gamma^{-1}\gamma'=\gamma_2^{-1}(\gamma_1^{-1}\gamma_1')\gamma_2+\gamma_2^{-1}\gamma_2'$.
+  By \cref{determinants:lem:trace-property},
+  $\Tr(\gamma_2^{-1}X\gamma_2)=\Tr(X\gamma_2\gamma_2^{-1})=\Tr(X)$ for residual
+  $X$, so $\int_\gamma\alpha=\int_{\gamma_1}\alpha+\int_{\gamma_2}\alpha$. If
+  $AB$ is invertible then $A$ is surjective and $B$ is injective, so both are
+  invertible since they have index zero \ref{determinants:I:residual}. Hence
+  if one of $A,B$ is not invertible, neither is $AB$, and both sides vanish.
+
+  (ii) is immediate from the definition.
+
+  (iii) The path $s\mapsto\exp(sE)$ has $\gamma^{-1}\gamma'=E$. If
+  $\norm{E}<1$, the path $\Id+sE$, $s\in[0,1]$, lies in $\Giso{-\infty}$, and
+  $(\Id+sE)^{-1}E=\sum_{k\ge0}(-s)^kE^{k+1}$, the series converging in
+  $\Psiiso{-\infty}$ uniformly for $s\in[0,1]$ because, by
+  \cref{determinants:lem:trilinear},
+  $\norm{E^{k+2}}_{(j)}=\norm{E\,E^{k}E}_{(j)}\le C\norm{E}_{\Lin(L^2)}^k\norm{E}_{(j')}^2$.
+  Integrating term by term gives
+  $\int_\gamma\alpha=\sum_{k\ge0}(-1)^k\Tr(E^{k+1})/(k+1)=\Tr\log(\Id+E)$.
+
+  (iv) $ABA^{-1}-\Id=A(B-\Id)A^{-1}$ is residual and $ABA^{-1}$ is invertible
+  if and only if $B$ is. If $\gamma$ is a path from $\Id$ to $B$, then
+  $A\gamma A^{-1}$ is a path from $\Id$ to $ABA^{-1}$ and
+  $\Tr\bigl(A\gamma^{-1}\gamma'A^{-1}\bigr)=\Tr(\gamma^{-1}\gamma')$ by
+  \cref{determinants:lem:trace-property}.
+\end{proof}
+
+\begin{lemma}[Finite dimensional reduction]\label{determinants:lem:reduction}
+  Let $\Pi$ be the orthogonal projection onto a finite dimensional subspace
+  $L\subset\cS(\R^n;\C^N)$, and let $R\in\Psiiso{-\infty}$ satisfy $R=R\Pi$.
+  Then $\Id+R$ is invertible if and only if $\Id_L+\Pi R|_L$ is invertible, and
+  \begin{equation*}
+    \detFr(\Id+R)=\det\bigl(\Id_L+\Pi R|_L\bigr).
+  \end{equation*}
+  The same holds if $R=\Pi R$.
+\end{lemma}
+\begin{proof}
+  With respect to $L^2=L\oplus L^\perp$ (columns corresponding to the
+  domain), $\Id+cR=\begin{pmatrix}\Id+cr&0\\c\rho&\Id\end{pmatrix}$ with
+  $r=\Pi R|_L$ and $\rho=(\Id-\Pi)R|_L$. This is invertible if and only if
+  $q(c)=\det(\Id_L+cr)\ne0$, which proves the first statement for $c=1$. If
+  $q(1)=0$ both sides vanish. Otherwise, since the polynomial $q$ has
+  $q(0)=1$, it has finitely many zeros, and we may choose a smooth path $c(s)$
+  from $0$ to $1$ avoiding them; $\gamma(s)=\Id+c(s)R$ is then a path in
+  $\Giso{-\infty}$. From the triangular form,
+  $T=\gamma^{-1}\gamma'=\begin{pmatrix}(\Id+cr)^{-1}c'r&0\\ *&0\end{pmatrix}$,
+  so $T=T\Pi$ and, by \cref{determinants:lem:finite-trace} and
+  \cref{determinants:lem:trace-property},
+  $\Tr(T)=\Tr(\Pi T\Pi)+\Tr((\Id-\Pi)T\Pi)=\tr\bigl((\Id+cr)^{-1}c'r\bigr)+\Tr(\Pi(\Id-\Pi)T)$.
+  The last term vanishes and by Jacobi's formula the first is
+  $\frac{d}{ds}\log q(c(s))$, so $\exp\int_\gamma\alpha=q(1)/q(0)=\det(\Id_L+r)$.
+  The case $R=\Pi R$ follows by taking adjoints, or by the same argument with
+  upper triangular matrices.
+\end{proof}
+
+In particular, for finite rank residual operators the Fredholm determinant is
+an ordinary determinant, and $\detFr(\Id+\pi_NE\pi_N)=\det(\Id+\pi_NE|_{L_N})$.
+
+\begin{theorem}\label{determinants:thm:det-entire}
+  The Fredholm determinant is continuous on $\Id+\Psiiso{-\infty}(\R^n;\C^N)$.
+  If $E_y$ is a smooth (resp.\ holomorphic) family in $\Psiiso{-\infty}$, then
+  $\detFr(\Id+E_y)$ is a smooth (resp.\ holomorphic) function. Moreover, for
+  every $E\in\Psiiso{-\infty}$,
+  \begin{equation}\label{determinants:eq:det-limit}
+    \detFr(\Id+E)=\lim_{N\to\infty}\det\bigl(\Id+\pi_NE|_{L_N}\bigr).
+  \end{equation}
+\end{theorem}
+\begin{proof}
+  Near invertible points this was shown above. Let $\Id+E_0$ be
+  non-invertible, let $\Pi_0$ be the projection onto $\Nul(\Id+E_0)\subset\cS$,
+  and let $F$ be as in \ref{determinants:I:residual}, so that
+  $G_0=\Id+E_0+F$ is invertible and $F=F\Pi_0$. For $E$ near $E_0$ the operator
+  $G_0+E-E_0$ is invertible; let $K(E)=(G_0+E-E_0)^{-1}$, which lies in
+  $\Giso{-\infty}$ and depends continuously on $E$
+  (\cref{determinants:lem:residual-inverse}). Then
+  \begin{equation*}
+    \Id+E=K(E)^{-1}\bigl(\Id-K(E)F\bigr),\qquad
+    \detFr(\Id+E)=\detFr(K(E))^{-1}\det\bigl(\Id-\Pi_0K(E)F|_{L}\bigr),
+  \end{equation*}
+  using \cref{determinants:prop:det-basic}\ref{determinants:it:mult} and
+  \cref{determinants:lem:reduction} with $L=\Ran\Pi_0$ and $R=-K(E)F=R\Pi_0$.
+  The first factor is continuous and non-vanishing, and the second is a
+  polynomial in the matrix entries $\inner{K(E)Fe_j}{e_i}$ for an orthonormal
+  basis $e_i$ of $L$, which are continuous in $E$. If $E=E_y$ is a smooth or
+  holomorphic family, both factors are smooth or holomorphic. Finally
+  \eqref{determinants:eq:det-limit} follows from
+  $\detFr(\Id+\pi_NE\pi_N)=\det(\Id+\pi_NE|_{L_N})$, the convergence
+  $\pi_NE\pi_N\to E$ and continuity.
+\end{proof}
+
+\begin{remark}\label{determinants:rem:det-entire}
+  Thus $\detFr$ is an entire function on $\Id+\Psiiso{-\infty}$: holomorphic
+  along every holomorphic family, and in particular $c\mapsto\detFr(\Id+cE)$
+  is entire. In view of \cref{determinants:prop:det-basic}, $\Giso{-\infty}$
+  is the complement of the (singular) hypersurface
+  $\{\Id+E;\ \detFr(\Id+E)=0\}$. The trace and the determinant extend further,
+  to operators of order less than $-2n$; see \cref{determinants:ex:extend}.
+\end{remark}
+
+\section{Index and invertible perturbations}\label{determinants:sec:index}
+
+For an elliptic $A\in\Psiiso{m}(\R^n;\C^N)$ the null spaces of $A$ and $A^*$
+on $\cSp$ are finite dimensional subspaces of $\cS$, and the \emph{index} is
+\begin{equation*}
+  \ind(A)=\dim\Nul(A)-\dim\Nul(A^*).
+\end{equation*}
+For $m=0$ this is the index of $A$ as a Fredholm operator on $L^2$, since
+$\Ran(A)$ is closed with orthocomplement $\Nul(A^*)$ there.
+
+\begin{proposition}\label{determinants:prop:index-trace}
+  If $A\in\Psiiso{m}(\R^n;\C^N)$ is elliptic and $B$ is any parametrix, then
+  $[A,B]=(AB-\Id)-(BA-\Id)\in\Psiiso{-\infty}$ and
+  \begin{equation}\label{determinants:eq:index-trace}
+    \ind(A)=\Tr([A,B]).
+  \end{equation}
+  Consequently $\ind(A+E)=\ind(A)$ for $E\in\Psiiso{-\infty}$, and if $A(z)$
+  is a holomorphic (or smooth) family of elliptic operators on a connected set,
+  then $\ind A(z)$ is constant.
+\end{proposition}
+\begin{proof}
+  For the generalized inverse, \eqref{determinants:eq:gen-inverse} and
+  \cref{determinants:lem:finite-trace} give
+  $\ind(A)=\Tr\Pi_0-\Tr\Pi_1=\Tr(\Id-BA)-\Tr(\Id-AB)=\Tr([A,B])$. Any other
+  parametrix is $B'=B+E'$ with $E'$ residual, and
+  $\Tr([A,B'])-\Tr([A,B])=\Tr([A,E'])=0$ by
+  \cref{determinants:lem:trace-property}. A parametrix of $A$ is also one of
+  $A+E$, and $\Tr([E,B])=0$. For a family, choose locally a holomorphic
+  parametrix $B(z)$ \ref{determinants:I:families}; then $[A(z),B(z)]$ is a
+  holomorphic residual family, so $\ind A(z)$ is continuous, hence locally
+  constant, hence constant.
+\end{proof}
+
+\begin{proposition}\label{determinants:prop:invertible-perturbation}
+  Let $A\in\Psiiso{m}(\R^n;\C^N)$ be elliptic with $\ind(A)=0$. Then there is
+  a finite rank $F\in\Psiiso{-\infty}(\R^n;\C^N)$ such that $A+sF$ is
+  invertible for every $s\ne0$; its inverse lies in $\Psiiso{-m}$.
+\end{proposition}
+\begin{proof}
+  Let $e_1,\dots,e_p$ and $f_1,\dots,f_p$ be orthonormal bases of $\Nul(A)$ and
+  $\Nul(A^*)$, both in $\cS$. Let $F$ and $G$ be the operators with kernels
+  $\sum_jf_j(x)\overline{e_j(x')}$ and $\sum_je_j(x)\overline{f_j(x')}$, so
+  $F=\Pi_1F=F\Pi_0$, $G=\Pi_0G=G\Pi_1$, $FG=\Pi_1$, $GF=\Pi_0$. With $B$ the
+  generalized inverse, normalized as in \ref{determinants:I:elliptic}, and
+  using $A\Pi_0=0$, $\Pi_1A=0$, $\Pi_0B=0$, $B\Pi_1=0$,
+  \begin{gather*}
+    (A+sF)(B+s^{-1}G)=AB+s^{-1}A\Pi_0G+sF\Pi_0B+FG=\Id-\Pi_1+\Pi_1=\Id,\\
+    (B+s^{-1}G)(A+sF)=BA+sB\Pi_1F+s^{-1}G\Pi_1A+GF=\Id .
+  \end{gather*}
+  Thus $A+sF$ is invertible with inverse $B+s^{-1}G\in\Psiiso{-m}$.
+\end{proof}
+
+Write $\Ell^0_{\mathrm{iso}}(\R^n;\C^N)\subset\Psiiso{0}(\R^n;\C^N)$ for the
+elliptic elements, $\Ell^0_{\mathrm{iso},k}$ for those of index $k$, and
+$\Giso{0}(\R^n;\C^N)$ for the group of invertible elements (on $L^2$, or
+equivalently in $\Psiiso{0}$). Then
+$\Giso{0}\subset\Ell^0_{\mathrm{iso},0}\subset\Ell^0_{\mathrm{iso}}\subset\Psiiso{0}$.
+
+\begin{corollary}\label{determinants:cor:dense}
+  $\Giso{0}(\R^n;\C^N)$ is dense in $\Ell^0_{\mathrm{iso},0}(\R^n;\C^N)$ for
+  the topology of $\Psiiso{0}$: indeed $A+sF\to A$ as $s\to0$.
+\end{corollary}
+
+By \cref{determinants:prop:index-trace} the index is defined on the quotient.
+Let
+\begin{equation*}
+  \mathcal A^m=\Psiiso{m}(\R^n;\C^N)/\Psiiso{-\infty}(\R^n;\C^N);
+\end{equation*}
+then $\mathcal A^{\Z}=\bigcup_m\mathcal A^m$ is an algebra, $A$ is elliptic if and
+only if its class $a=[A]$ is invertible in $\mathcal A^{\Z}$ (the inverse
+being the class of a parametrix), and
+\begin{equation*}
+  \ind:\{a\in\mathcal A^0\text{ invertible}\}\to\Z,\qquad \ind(a)=\ind(A)\ \text{ if }a=[A],
+\end{equation*}
+is well defined. We return to it in \cref{determinants:sec:index-formula}.
+
+\section{Analytic Fredholm theory}\label{determinants:sec:fredholm}
+
+A family $M(z)$ with values in $\Psiiso{-\infty}$ is \emph{meromorphic} near
+$p$ if $M(z)=\sum_{k=1}^K(z-p)^{-k}M_{-k}+M_0(z)$ with $M_{-k}\in\Psiiso{-\infty}$
+and $M_0$ a holomorphic family; we say it has \emph{finite rank singular part}
+if the $M_{-k}$ have finite rank.
+
+\begin{lemma}[Fredholm alternative]\label{determinants:lem:fredholm-alt}
+  Let $\Omega\subset\C$ be open and connected and let $A(z)$ be a holomorphic
+  family in $\Psiiso{-\infty}(\R^n;\C^N)$. Then either $\Id+A(z)$ is invertible
+  for no $z\in\Omega$, or it is invertible outside a discrete set
+  $D\subset\Omega$; in the latter case $(\Id+A(z))^{-1}=\Id+B(z)$ where $B$ is
+  meromorphic in $\Psiiso{-\infty}$ with finite rank singular parts.
+\end{lemma}
+\begin{proof}
+  By \cref{determinants:thm:det-entire}, $f(z)=\detFr(\Id+A(z))$ is
+  holomorphic on $\Omega$, so either $f\equiv0$ or its zero set $D$ is
+  discrete; and $\Id+A(z)$ is invertible exactly when $f(z)\ne0$. Away from
+  $D$, $B(z)$ is holomorphic by \cref{determinants:lem:residual-inverse}.
+  Near $p\in D$ we proceed as in the proof of
+  \cref{determinants:thm:det-entire}: with $L=\Nul(\Id+A(p))$, $\Pi_0$ the
+  projection onto $L$ and $G_0=\Id+A(p)+F$ invertible, $F=F\Pi_0$ of finite
+  rank, the family $K(z)=(G_0+A(z)-A(p))^{-1}$ is holomorphic in
+  $\Giso{-\infty}$ near $p$ and $\Id+A(z)=K(z)^{-1}(\Id+R(z))$ with
+  $R(z)=-K(z)F=R(z)\Pi_0$. The matrix $\Id_L+\Pi_0R(z)|_L$ has determinant
+  $\detFr(\Id+R(z))=f(z)\detFr(K(z))\not\equiv0$, so its inverse $M(z)$ is a
+  meromorphic matrix (Cramer's rule). A direct computation, using
+  $R=R\Pi_0$ and $(\Id_L+\Pi_0R\Pi_0)M=\Id_L$, shows
+  $(\Id+R)(\Id-RM\Pi_0)=\Id+R-R\Pi_0=\Id$, so
+  \begin{equation*}
+    (\Id+A(z))^{-1}=K(z)-\sum_{i,j}m_{ij}(z)\,R(z)P_{ij}K(z),
+  \end{equation*}
+  where $P_{ij}$ are the matrix units with respect to an orthonormal basis of
+  $L$ and $m_{ij}$ the entries of $M$. Each $R(z)P_{ij}K(z)$ is a holomorphic
+  family of residual operators of rank at most one, whose Taylor coefficients
+  therefore have finite rank; multiplying by the meromorphic scalars $m_{ij}$
+  gives a singular part of finite rank.
+\end{proof}
+
+This result for smoothing operators, which really follows from the
+corresponding result for matrices, implies the analogous statement for
+holomorphic families of elliptic operators.
+
+\begin{proposition}\label{determinants:prop:analytic-fredholm}
+  Let $\Omega\subset\C$ be open and connected, $h$ holomorphic on $\Omega$, and
+  $A(z)$ a holomorphic family of elliptic operators of order $h(z)$. If $A(z_0)$
+  is invertible for some $z_0\in\Omega$, then $A(z)$ is invertible outside a
+  discrete set $D\subset\Omega$, and near each $p\in\Omega$
+  \begin{equation*}
+    A(z)^{-1}=B(z)+H(z),
+  \end{equation*}
+  with $B(z)$ a holomorphic family of order $-h(z)$ and $H(z)$ meromorphic in
+  $\Psiiso{-\infty}$ with finite rank singular part ($H=0$ if $p\notin D$).
+\end{proposition}
+\begin{proof}
+  By \cref{determinants:prop:index-trace}, $\ind A(z)=\ind A(z_0)=0$ for all
+  $z$. Fix $p\in\Omega$. By \cref{determinants:prop:invertible-perturbation}
+  there is a finite rank residual $F$ with $A(p)+F$ invertible, so by
+  \cref{determinants:lem:local-inversion} $A(z)+F$ is invertible on a disc
+  $U_p$ around $p$, with inverse $C(z)$ a holomorphic family of order $-h(z)$.
+  Then $A(z)=(A(z)+F)(\Id-C(z)F)$, so on $U_p$, $A(z)$ is invertible exactly
+  where $g_p(z)=\detFr(\Id-C(z)F)\ne0$.
+
+  Let $W$ be the set of $p\in\Omega$ such that $A(z)$ is invertible at points
+  arbitrarily close to $p$. If $p\in W$ then $g_p\not\equiv0$ on the disc
+  $U_p$, so its zeros are isolated, and every point of $U_p$ is in $W$; thus
+  $W$ is open. Its complement is the interior of the set of non-invertible
+  points, also open. Since $z_0\in W$ and $\Omega$ is connected, $W=\Omega$,
+  and the non-invertible points form a discrete set.
+
+  Near $p$, \cref{determinants:lem:fredholm-alt} gives
+  $(\Id-C(z)F)^{-1}=\Id+M(z)$ with $M=\sum_{k=1}^K(z-p)^{-k}M_{-k}+M_0(z)$ as
+  above, so $A(z)^{-1}=(\Id+M(z))C(z)$. Set $B=C+M_0C$, a holomorphic family of
+  order $-h(z)$, and $H=\sum_k(z-p)^{-k}M_{-k}C(z)$. Each $M_{-k}C(z)$ is a
+  holomorphic residual family with range in the finite dimensional space
+  $\Ran M_{-k}$, so the singular part of $H$ has finite rank.
+\end{proof}
+
+\section{Resolvent and spectrum}\label{determinants:sec:resolvent}
+
+One direct application of analytic Fredholm theory is to the resolvent of an
+elliptic operator of positive order. For simplicity we take the order to be a
+positive integer $m$, so that $A-\lambda\in\Psiiso{m}$ for $\lambda\in\C$; the
+case of non-integral order needs only notational changes, replacing
+$\Psiiso{m}$ by the class of operators with symbols in $\Siso{m}$ having an
+expansion in terms of homogeneous functions of degrees $m-j$ and $-j$.
+
+\begin{proposition}\label{determinants:prop:resolvent}
+  Let $A\in\Psiiso{m}(\R^n;\C^N)$, $m\in\N$, be elliptic, and suppose that for
+  some $\lambda'\in\C$ both $A-\lambda'$ and $A^*-\overline{\lambda'}$ have
+  trivial null space. Then the set $\Spec(A)$ of $\lambda\in\C$ for which
+  $A-\lambda$ is not invertible is discrete, and $(A-\lambda)^{-1}$ is a
+  meromorphic family in $\Psiiso{-m}$ with finite rank residual singular
+  parts. At $\tilde\lambda\in\Spec(A)$ the generalized eigenspace
+  \begin{equation*}
+    E_{\tilde\lambda}=\{u\in\cSp(\R^n;\C^N);\ (A-\tilde\lambda)^pu=0\text{ for some }p\in\N\}
+  \end{equation*}
+  is a finite dimensional subspace of $\cS$, and
+  \begin{equation*}
+    (A-\lambda)^{-1}=-\sum_{j=1}^k(\lambda-\tilde\lambda)^{-j}(A-\tilde\lambda)^{j-1}P+(\text{holomorphic near }\tilde\lambda),
+  \end{equation*}
+  where $P$ is a projection (not necessarily orthogonal) onto $E_{\tilde\lambda}$
+  commuting with $A$, and $k$ is the least integer with $(A-\tilde\lambda)^kP=0$.
+\end{proposition}
+\begin{proof}
+  Since $m>0$, $A-\lambda$ is, for every $\lambda$, elliptic with the same
+  principal symbol as $A$, and $\lambda\mapsto A-\lambda$ is an entire family
+  of order $m$. The hypothesis says $\ind(A-\lambda')=0$ and $A-\lambda'$ is
+  invertible, so \cref{determinants:prop:analytic-fredholm} applies with
+  $\Omega=\C$. Replacing $A$ by $A-\tilde\lambda$ we may take $\tilde\lambda=0$
+  and write $(A-\lambda)^{-1}=\sum_{j\ge-k}\lambda^jS_j$, with $S_{-1},\dots,S_{-k}$
+  finite rank residual. Comparing coefficients in
+  $(A-\lambda)(A-\lambda)^{-1}=\Id=(A-\lambda)^{-1}(A-\lambda)$ gives
+  $AS_j-S_{j-1}=\delta_{j0}\Id=S_jA-S_{j-1}$, so with $R_j=S_{-j}$,
+  \begin{equation*}
+    R_{j+1}=AR_j=R_jA\ (1\le j\le k),\quad R_{k+1}=0,\qquad\text{hence } R_j=A^{j-1}R_1,\ A^kR_1=0.
+  \end{equation*}
+  Thus $\Ran R_1\subset E_0$ and $R_1$ commutes with $A$. Conversely, if $A^pu=0$,
+  then $(A-\lambda)\bigl(-\sum_{j=0}^{p-1}\lambda^{-j-1}A^ju\bigr)=u$, so
+  $(A-\lambda)^{-1}u=-\sum_{j<p}\lambda^{-j-1}A^ju$ and comparing the
+  coefficients of $\lambda^{-1}$, $R_1u=-u$. Hence $P=-R_1$ is a projection
+  with range exactly $E_0$, which is therefore finite dimensional and contained
+  in $\cS$.
+\end{proof}
+
+Note also that $\Ran R_k\subset\Ran R_{k-1}\subset\dots\subset\Ran R_1$ and
+$\Nul R_k\supset\dots\supset\Nul R_1$; precisely, $u\in\Ran R_p$, $p\ge1$, if
+and only if $u=A^{p-1}u_1$ for some $u_1\in\Ran R_1$.
+
+\section{The residue trace}\label{determinants:sec:residue}
+
+We have shown that there is a unique trace on the residual algebra. Following
+ideas of Seeley \cite{Seeley}, Guillemin \cite{Guillemin-Weyl,Guillemin-residue}
+and Wodzicki \cite{Wodzicki-residue,Wodzicki-cyclic}, we now look for traces on
+the algebra $\Psiiso{\Z}(\R^n)$. For $A\in\Psiiso{-\infty}$, by
+\eqref{determinants:eq:trace-symbol}, $\Tr(A)=(2\pi)^{-n}\int a_L(x,\xi)\,dx\,d\xi$
+is the integral of the left symbol; this is also true for any amplitude: if
+$A=\Op(a)$ with $a(x,x',\xi)$ an amplitude of order $-\infty$, then
+$\Tr(A)=(2\pi)^{-n}\int a(x,x,\xi)\,dx\,d\xi$. The integral extends to
+$\Psiisoinf{m}$ for $m<-2n$, as we saw, but not beyond. To go further we
+regularize it by embedding operators in holomorphic families, which moves us
+from the symbol classes $\Siso{m}$ to the polyhomogeneous operators.
+
+\begin{lemma}\label{determinants:lem:meromorphic}
+  Let $\Omega\subset\C$ be open and connected, $m\in\C$, and $A(z)$ a
+  holomorphic family of order $m+z$ on $\Omega$, with $b$, $b_j$ as in
+  \eqref{determinants:eq:hol-family}. Suppose $\Omega$ contains points with
+  $\Re z<-2n-\Re m$. Then $\Tr(A(z))$, defined where $\Re z<-2n-\Re m$, extends
+  to a meromorphic function on $\Omega$ with at most simple poles, at the
+  points $z_j=j-2n-m\in\Omega$, $j\in\N_0$, and
+  \begin{equation}\label{determinants:eq:residues}
+    \Res_{z=z_j}\Tr(A(z))=-(2\pi)^{-n}\int_{\Sphere^{2n-1}}\tr b_j(z_j;\theta)\,d\theta .
+  \end{equation}
+  If $A(z)=A_y(z)$ depends smoothly on a parameter $y$, so do the residues and
+  the coefficients of the Laurent expansions.
+\end{lemma}
+\begin{proof}
+  For $\Re z<-2n-\Re m$ we have $\Tr(A(z))=f_1(z)+f_2(z)$ with
+  \begin{gather*}
+    f_1(z)=(2\pi)^{-n}\int_{\abs{Z}\le1}\tr a(z;Z)\,dZ,\\
+    f_2(z)=(2\pi)^{-n}\int_{\Sphere^{2n-1}}\int_1^\infty r^{m+z+2n-1}\tr b(z;1/r,\theta)\,dr\,d\theta .
+  \end{gather*}
+  The first is holomorphic on $\Omega$. Write
+  $b(z;t,\theta)=\sum_{j<k}t^jb_j(z;\theta)+t^kb_{(k)}(z;t,\theta)$, with
+  $b_{(k)}$ smooth and holomorphic in $z$ (Taylor's formula with integral
+  remainder). Since $\int_1^\infty r^{m+z+2n-1-j}\,dr=(j-2n-m-z)^{-1}$ for
+  $\Re z<j-2n-\Re m$,
+  \begin{equation*}
+    f_2(z)=(2\pi)^{-n}\sum_{j<k}\frac{1}{j-2n-m-z}\int_{\Sphere^{2n-1}}\tr b_j(z;\theta)\,d\theta+f_2^{(k)}(z),
+  \end{equation*}
+  where $f_2^{(k)}(z)=(2\pi)^{-n}\int_{\Sphere^{2n-1}}\int_1^\infty r^{m+z+2n-1-k}\tr b_{(k)}(z;1/r,\theta)\,dr\,d\theta$
+  is holomorphic in $\Re z<k-2n-\Re m$, the integral converging locally
+  uniformly there. This identity holds pointwise for $\Re z<-2n-\Re m$, and its
+  right side is meromorphic on $\Omega_k=\{z\in\Omega;\Re z<k-2n-\Re m\}$; the
+  right sides for $k$ and $k+1$ agree on $\Omega_k$ (the difference is the
+  $j=k$ term, computed by the same integral). Since $\Omega$ is connected, these
+  define the meromorphic continuation, with the stated poles and residues. All
+  the expressions depend smoothly on parameters if $b$ does.
+\end{proof}
+
+We continue to write $\Tr(A(z))$ for the meromorphic continuation. By
+uniqueness of continuation, any identity between such functions which holds
+for $\Re z\ll0$ holds on $\Omega$. For a holomorphic family $A(z)$ of order
+$m+z$ we have $b_j(0;\theta)$ equal to the coefficient of the term of
+homogeneity $m-j$ in the symbol of $A(0)$. Taking $j=2n+m$, the residue at
+$z=0$ only depends on $A(0)$, and it vanishes unless $m\in\Z$, $m\ge-2n$.
+
+\begin{definition}\label{determinants:def:residue-trace}
+  For $A\in\Psiiso{m}(\R^n;\C^N)$, $m\in\C$, the \emph{residue trace} is
+  \begin{equation*}
+    \TrRes(A)=-\Res_{z=0}\Tr(A(z)),
+  \end{equation*}
+  where $A(z)$ is any holomorphic family of order $m+z$, on a connected
+  neighbourhood of $0$ containing points with $\Re z<-2n-\Re m$, with
+  $A(0)=A$; for instance $A(z)=AH(z)$, with $H(z)$ from
+  \eqref{determinants:eq:standard-regularizer}.
+\end{definition}
+
+\begin{proposition}\label{determinants:prop:residue-trace}
+  The residue trace is well defined, and
+  \begin{equation}\label{determinants:eq:residue-formula}
+    \TrRes(A)=(2\pi)^{-n}\int_{\Sphere^{2n-1}}\tr a_{-2n}(\theta)\,d\theta,
+  \end{equation}
+  where $a_{-2n}$ is the term of homogeneity $-2n$ in the expansion of the
+  left symbol of $A$ (so $\TrRes$ vanishes unless $m\in\Z$, $m\ge-2n$; in
+  particular on $\Psiiso{-2n-1}$). It is a trace on $\Psiiso{\Z}$:
+  \begin{equation}\label{determinants:eq:residue-trace-property}
+    \TrRes([A,B])=0\quad\forall\,A,B\in\Psiiso{\Z}(\R^n;\C^N).
+  \end{equation}
+\end{proposition}
+\begin{proof}
+  The formula is \eqref{determinants:eq:residues} with $j=2n+m$, and shows that
+  $\TrRes(A)$ is independent of the family. If $A\in\Psiiso{m_1}$,
+  $B\in\Psiiso{m_2}$, then $C(z)=[AH(z),B]$ is an entire family of order
+  $m_1+m_2+z$ with $C(0)=[A,B]$. For $\Re z<-2n-m_1-m_2$,
+  $\Tr(C(z))=\Tr(AH(z)B)-\Tr(BAH(z))=0$ by
+  \cref{determinants:lem:trace-property}, since $AH(z)\in\Psiisoinf{m_1+\Re z}$.
+  Hence the continuation vanishes identically and $\TrRes([A,B])=0$.
+\end{proof}
+
+\begin{remark}\label{determinants:rem:residue-other-symbols}
+  The left symbol in \eqref{determinants:eq:residue-formula} may be replaced
+  by the right symbol (or the Weyl symbol). Indeed the right symbol of $A$ has
+  the expansion $a_R\sim\sum_\alpha\frac1{\alpha!}(-D_\xi)^\alpha\pa_x^\alpha a_L$,
+  and each term with $\alpha\ne0$ is a derivative $\pa_{Z_k}g$ of a
+  polyhomogeneous function. If $g$ is homogeneous of degree $1-2n$ then,
+  integrating $\pa_{Z_k}g$ over $1\le\abs{Z}\le R$ and using the divergence
+  theorem,
+  \begin{equation*}
+    \log R\int_{\Sphere^{2n-1}}\pa_{Z_k}g\,d\theta
+    =\int_{\Sphere^{2n-1}}\bigl(R^{1-2n}R^{2n-1}-1\bigr)g(\theta)\theta_k\,d\theta=0,
+  \end{equation*}
+  so the homogeneous term of degree $-2n$ of each such derivative integrates to
+  zero over the sphere. The residue trace is, up to a constant multiple, the
+  unique trace on $\Psiiso{\Z}(\R^n)$; this is the isotropic analogue of
+  Wodzicki's theorem \cite{Wodzicki-residue}, and we shall neither prove nor
+  use it.
+\end{remark}
+
+\section{Exterior derivation}\label{determinants:sec:derivation}
+
+\begin{definition}\label{determinants:def:regularizer}
+  A \emph{regularizing family} is an entire holomorphic family $A(z)$ of order
+  $z$, with values in $\Psiiso{z}(\R^n;\C^N)$, with scalar principal symbol and
+  $A(0)=\Id$. Its derivative at $0$ is denoted $\dot A=\frac{d}{dz}A(z)|_{z=0}$.
+\end{definition}
+
+If $\sigma_L(A(z))=\ang{Z}^z\tilde a(z;Z)$ with $\tilde a$ holomorphic in $z$
+with values in $\CI(\RC{\R^{2n}})$, then $A(0)=\Id$ means $\tilde a(0)=1$, so
+\begin{equation*}
+  \dot A=\Op\bigl(\log\ang{Z}+c\bigr),\qquad c=\pa_z\tilde a(0)\in\Symph{0}(\R^{2n})\text{ with scalar leading term.}
+\end{equation*}
+Thus $\dot A\in\Psiisoinf{\eps}$ for every $\eps>0$, but $\dot A\notin\Psiiso{\Z}$
+because of the logarithm. For the standard family $H(z)$ of
+\eqref{determinants:eq:standard-regularizer}, $\dot H=\Op(\log\ang{Z})=\Op(\tfrac12\log(1+\abs{x}^2+\abs{\xi}^2))$.
+
+\begin{proposition}\label{determinants:prop:derivation}
+  For a regularizing family $A(z)$, the map
+  \begin{equation*}
+    D_AB=[\dot A,B]
+  \end{equation*}
+  is a derivation of $\Psiiso{\Z}(\R^n;\C^N)$ with
+  $D_A:\Psiiso{m}\to\Psiiso{m-1}$ and $D_A(\Psiiso{-\infty})\subset\Psiiso{-\infty}$.
+  Equivalently, $D_AB=\frac{d}{dz}\bigl(A(z)BA(z)^{-1}\bigr)\big|_{z=0}$. For two
+  regularizing families, $D_{A_2}-D_{A_1}=[\dot A_2-\dot A_1,\cdot\,]$ is an
+  inner derivation, given by commutation with an element of $\Psiiso{0}$.
+  Moreover
+  \begin{equation}\label{determinants:eq:res-derivation}
+    \TrRes(D_AB)=0\quad\forall\,B\in\Psiiso{\Z}(\R^n;\C^N).
+  \end{equation}
+\end{proposition}
+\begin{proof}
+  A commutator is a derivation. For $B\in\Psiiso{m}$, $K(z)=[A(z),B]/z$ is an
+  entire holomorphic family of order $m+z$ (the numerator is a holomorphic
+  family vanishing at $z=0$, and dividing its normalized symbol by $z$
+  preserves holomorphy), with $K(0)=[\dot A,B]$; hence $D_AB\in\Psiiso{m}$.
+  Since the principal symbol of $A(z)$ is scalar, $[A(z),B]$ has order
+  $m+z-1$, so in fact $D_AB\in\Psiiso{m-1}$. Residual operators form an ideal
+  in $\bigcup_m\Psiisoinf{m}$, so $D_A$ preserves them. Near $z=0$, $A(z)$ is invertible
+  with holomorphic inverse by \cref{determinants:lem:local-inversion}, and
+  $\frac{d}{dz}(A(z)BA(z)^{-1})|_{z=0}=\dot AB-B\dot A$ by the product rule.
+  The statement about two families follows since
+  $\dot A_2-\dot A_1=\Op(c_2-c_1)\in\Psiiso{0}$. Finally, $K(z)$ has value
+  $D_AB$ at $0$ and $\Tr(K(z))=z^{-1}\bigl(\Tr(A(z)B)-\Tr(BA(z))\bigr)=0$ for
+  $\Re z\ll0$ by \cref{determinants:lem:trace-property}, so the residue at
+  $0$ vanishes.
+\end{proof}
+
+\begin{remark}\label{determinants:rem:exterior}
+  $D_H$ is not an inner derivation of $\Psiiso{\Z}$, which is why we call it
+  an \emph{exterior} derivation. Suppose $[\dot H-P,B]=0$ for all
+  $B\in\Psiiso{\Z}$, for some $P\in\Psiiso{\Z}$, and let $c$ be the left symbol
+  of $C=\dot H-P$. The composition formula is exact when one factor has
+  polynomial symbol, and gives $[C,x_j]=\Op(-i\pa_{\xi_j}c)$ and
+  $[C,D_j]=\Op(-D_{x_j}c)$; hence $c$ is constant, which is impossible since
+  $c-\log\ang{Z}$ is polyhomogeneous while $\log\ang{Z}$ is not.
+\end{remark}
+
+\section{The regularized trace}\label{determinants:sec:regularized}
+
+Let $A(z)$ be a regularizing family. For $B\in\Psiiso{\Z}(\R^n;\C^N)$ the
+function $\Tr(BA(z))$ is meromorphic on $\C$ with at most a simple pole at $0$,
+with residue $-\TrRes(B)$. We define the \emph{regularized trace} as the
+finite part at $z=0$, the constant term of the Laurent expansion:
+\begin{equation}\label{determinants:eq:regularized-trace}
+  \TrReg{A}(B)=\FP_{z=0}\Tr(BA(z))=\lim_{z\to0}\Bigl(\Tr(BA(z))+\frac{\TrRes(B)}{z}\Bigr).
+\end{equation}
+If $B$ has order less than $-2n$ (in particular if $B$ is residual), then
+$\Tr(BA(z))$ is holomorphic near $0$ and $\TrReg{A}(B)=\Tr(B)$; thus $\TrReg{A}$
+extends the trace. By \cref{determinants:lem:meromorphic}, if $B_y$ is a
+smooth family then $\TrReg{A}(B_y)$ is smooth in $y$ and
+$d\,\TrReg{A}(B_y)=\TrReg{A}(dB_y)$. In contrast with the residue trace,
+$\TrReg{A}$ depends on the choice of regularizing family, though only through
+$\dot A$.
+
+\begin{lemma}\label{determinants:lem:regularizer-change}
+  If $A_1(z)$, $A_2(z)$ are regularizing families, then for
+  $B\in\Psiiso{\Z}(\R^n;\C^N)$,
+  \begin{equation*}
+    \TrReg{A_2}(B)-\TrReg{A_1}(B)=-\TrRes\bigl(B(\dot A_2-\dot A_1)\bigr).
+  \end{equation*}
+\end{lemma}
+\begin{proof}
+  $L(z)=(A_2(z)-A_1(z))/z$ is an entire family of order $z$ with
+  $L(0)=\dot A_2-\dot A_1\in\Psiiso{0}$, and
+  $\Tr(BA_2(z))-\Tr(BA_1(z))=z\Tr(BL(z))$. The function $\Tr(BL(z))$ has at
+  most a simple pole at $0$ with residue $-\TrRes(BL(0))$, which is therefore
+  the value at $0$ of $z\Tr(BL(z))$.
+\end{proof}
+
+In particular, if $B$ has non-integral order, $\TrReg{A}(B)$ is independent of
+$A$. The regularized trace is \emph{not} a trace; its failure to be one is
+measured by the residue trace and the exterior derivation.
+
+\begin{proposition}[Trace defect formula]\label{determinants:prop:trace-defect}
+  For a regularizing family $A(z)$ and $B_1,B_2\in\Psiiso{\Z}(\R^n;\C^N)$,
+  \begin{equation}\label{determinants:eq:trace-defect}
+    \TrReg{A}([B_1,B_2])=\TrRes(B_1D_AB_2)=-\TrRes(B_2D_AB_1).
+  \end{equation}
+\end{proposition}
+\begin{proof}
+  For $\Re z\ll0$, \cref{determinants:lem:trace-property} gives
+  $\Tr(B_2B_1A(z))=\Tr(B_1A(z)B_2)$, so
+  \begin{equation*}
+    \Tr([B_1,B_2]A(z))=\Tr\bigl(B_1[B_2,A(z)]\bigr)=-z\Tr(B_1K(z)),
+  \end{equation*}
+  where $K(z)=[A(z),B_2]/z$ is the entire family of order $m_2+z$ with
+  $K(0)=D_AB_2$ used in the proof of \cref{determinants:prop:derivation}. By
+  continuation this holds for all $z$; since $\Tr(B_1K(z))$ has at most a
+  simple pole at $0$ with residue $-\TrRes(B_1D_AB_2)$, the right side is
+  regular at $0$ with value $\TrRes(B_1D_AB_2)$. The second equality follows
+  from \eqref{determinants:eq:res-derivation} and the trace property:
+  $0=\TrRes(D_A(B_1B_2))=\TrRes(B_2D_AB_1)+\TrRes(B_1D_AB_2)$.
+\end{proof}
+
+\begin{corollary}\label{determinants:cor:reg-conjugation}
+  If $G\in\Giso{-\infty}(\R^n;\C^N)$ and $B\in\Psiiso{\Z}(\R^n;\C^N)$, then
+  $\TrReg{A}(G^{-1}BG)=\TrReg{A}(B)$.
+\end{corollary}
+\begin{proof}
+  $\TrReg{A}(G^{-1}BG)-\TrReg{A}(BGG^{-1})=\TrReg{A}([G^{-1},BG])=-\TrRes(BG\,D_A(G^{-1}))$,
+  which vanishes since $D_A(G^{-1})=D_A(G^{-1}-\Id)$ is residual and $\TrRes$
+  vanishes on residual operators.
+\end{proof}
+
+\section{The index formula}\label{determinants:sec:index-formula}
+
+Let $D_H$ be the exterior derivation of the standard family
+\eqref{determinants:eq:standard-regularizer}. It preserves $\Psiiso{-\infty}$,
+and $\TrRes$ vanishes there, so both descend to the quotient algebra
+$\mathcal A^{\Z}=\Psiiso{\Z}/\Psiiso{-\infty}$:
+$D_H:\mathcal A^m\to\mathcal A^{m-1}$ and $\TrRes:\mathcal A^{\Z}\to\C$.
+
+\begin{theorem}\label{determinants:thm:index-formula}
+  If $A\in\Psiiso{m}(\R^n;\C^N)$, $m\in\Z$, is elliptic with parametrix $B$, then
+  \begin{equation}\label{determinants:eq:index-residue}
+    \ind(A)=\TrRes(AD_HB)=-\TrRes(BD_HA).
+  \end{equation}
+  Thus, for invertible $a\in\mathcal A^{\Z}$, $\ind(a)=\TrRes(a\,D_H(a^{-1}))$.
+  The index is locally constant along smooth families of elliptic operators,
+  and $\ind(a_1a_2)=\ind(a_1)+\ind(a_2)$.
+\end{theorem}
+\begin{proof}
+  Since $[A,B]$ is residual,
+  $\ind(A)=\Tr([A,B])=\TrReg{H}([A,B])=\TrRes(AD_HB)$ by
+  \eqref{determinants:eq:index-trace} and
+  \eqref{determinants:eq:trace-defect}. If $A_t$ is a smooth family with smooth
+  family of parametrices $B_t$ \ref{determinants:I:families}, the right side
+  of \eqref{determinants:eq:index-residue} is an integral of finitely many
+  terms of the symbol expansions, so it is continuous in $t$; being
+  integer-valued it is locally constant. (Alternatively, $[A_t,B_t]$ is a
+  smooth residual family.) For additivity,
+  \begin{equation*}
+    a_1a_2\,D_H(a_2^{-1}a_1^{-1})=a_1\bigl(a_2D_H(a_2^{-1})\bigr)a_1^{-1}+a_1D_H(a_1^{-1}),
+  \end{equation*}
+  and the residue trace of the first term is $\TrRes(a_2D_H(a_2^{-1}))$ by
+  the trace property.
+\end{proof}
+
+Both properties hold for general Fredholm operators, but the point here is
+that they follow from a simple algebraic formula.
+
+\section{The variation $1$-form}\label{determinants:sec:variation}
+
+The index is the obstruction to perturbing a single elliptic operator, by a
+smoothing operator, to be invertible. We now derive a closely related
+obstruction for families. Let $Y$ be a manifold and
+\begin{equation}\label{determinants:eq:family}
+  Y\ni y\longmapsto A_y\in\Ell^0_{\mathrm{iso},0}(\R^n;\C^N)
+\end{equation}
+a smooth family of elliptic operators of order $0$ and index $0$. The
+\emph{families perturbative invertibility question} asks whether there is a
+smooth family
+\begin{equation}\label{determinants:eq:perturbation}
+  Y\ni y\longmapsto E_y\in\Psiiso{-\infty}(\R^n;\C^N)\quad\text{with}\quad A_y+E_y\in\Giso{0}(\R^n;\C^N)\ \forall\,y.
+\end{equation}
+Since the index vanishes, such $E_y$ exists for each fixed $y$
+(\cref{determinants:prop:invertible-perturbation}), and also locally: if
+$A_{y_0}+F$ is invertible then so is $A_y+F$ for $y$ near $y_0$, with inverse
+a smooth family in $\Psiiso{0}$ by \cref{determinants:lem:local-inversion}.
+The issue is the global existence of a smooth (or even continuous) choice.
+
+Operator-valued differential forms are handled in the obvious way: if
+$\omega=\sum\omega_j\,dy_j$ and $\eta=\sum\eta_k\,dy_k$ in local coordinates,
+$\omega\wedge\eta=\sum_{j,k}\omega_j\eta_k\,dy_j\wedge dy_k$, and $\TrRes$ and
+$\TrReg{H}$ are applied coefficientwise. Let $a_y=[A_y]\in\mathcal A^0$ and let
+$B_y$ be a smooth family of parametrices, so $a_y^{-1}=[B_y]$. We set
+\begin{equation*}
+  \theta=a^{-1}da,\qquad \varphi=a^{-1}D_Ha,
+\end{equation*}
+represented by $B_y\,dA_y$ and $B_yD_HA_y$, and define
+\begin{equation}\label{determinants:eq:beta}
+  \beta=\tfrac12\TrRes\bigl(a^{-1}da\wedge a^{-1}da\;a^{-1}D_Ha\bigr)=\tfrac12\TrRes(\theta\wedge\theta\,\varphi),\qquad
+  \gamma=\tfrac12\TrRes(\theta\varphi).
+\end{equation}
+These are smooth forms on $Y$ of degrees $2$ and $1$; they depend only on
+$a_y$, since $\TrRes$ vanishes on residual operators.
+
+\begin{proposition}\label{determinants:prop:variation}
+  The $2$-form $\beta$ is closed. If there is a smooth family $E_y$ as in
+  \eqref{determinants:eq:perturbation}, then, with $\tilde A_y=A_y+E_y$ and
+  \begin{equation}\label{determinants:eq:alpha-bar}
+    \bar\alpha=\TrReg{H}\bigl(\tilde A_y^{-1}d\tilde A_y\bigr),
+  \end{equation}
+  we have $d\bar\alpha=-\beta+d\gamma$. In particular $\beta$ is exact, so its
+  de Rham class $[\beta]\in H^2(Y;\C)$ is an obstruction to the existence of
+  a smooth invertible perturbation.
+\end{proposition}
+\begin{proof}
+  Suppose first that $\tilde A=A+E$ is invertible on $Y$, and compute with
+  $\theta=\tilde A^{-1}d\tilde A$ and $\varphi=\tilde A^{-1}D_H\tilde A$,
+  which represent the classes above. Since $d(\tilde A^{-1})=-\tilde A^{-1}d\tilde A\,\tilde A^{-1}$,
+  \begin{equation*}
+    d\theta=-\theta\wedge\theta=-\tfrac12\sum_{j,k}[\theta_j,\theta_k]\,dy_j\wedge dy_k .
+  \end{equation*}
+  Since $d$ commutes with $\TrReg{H}$, the trace defect formula
+  \eqref{determinants:eq:trace-defect} gives
+  \begin{equation*}
+    d\bar\alpha=-\tfrac12\sum_{j,k}\TrRes(\theta_jD_H\theta_k)\,dy_j\wedge dy_k=-\tfrac12\TrRes(\theta\wedge D_H\theta).
+  \end{equation*}
+  As $D_H$ is a derivation commuting with $d$ (it is commutation with the fixed
+  operator $\dot H$), $D_H(\tilde A^{-1})=-\tilde A^{-1}(D_H\tilde A)\tilde A^{-1}$
+  and
+  \begin{equation*}
+    D_H\theta=-\varphi\theta+\tilde A^{-1}d(D_H\tilde A)=d\varphi+\theta\varphi-\varphi\theta .
+  \end{equation*}
+  By the trace property, $\TrRes(\theta\wedge\varphi\theta)=\sum\TrRes(\theta_k\theta_j\varphi)\,dy_j\wedge dy_k=-\TrRes(\theta\wedge\theta\varphi)$,
+  so $\TrRes(\theta\wedge D_H\theta)=\TrRes(\theta\wedge d\varphi)+2\TrRes(\theta\wedge\theta\varphi)$.
+  On the other hand $d(\theta\varphi)=d\theta\,\varphi-\theta\wedge d\varphi$, so
+  $2\,d\gamma=-\TrRes(\theta\wedge\theta\varphi)-\TrRes(\theta\wedge d\varphi)$.
+  Combining,
+  \begin{equation*}
+    \TrRes(\theta\wedge D_H\theta)=2\beta-2\,d\gamma,\qquad d\bar\alpha=-\beta+d\gamma .
+  \end{equation*}
+  Thus $\beta=d(\gamma-\bar\alpha)$ is exact. In general, invertible
+  perturbations exist locally on $Y$, as noted above, so $\beta$ is locally
+  exact and hence closed.
+\end{proof}
+
+The form $\gamma$ is defined on all of $Y$ for any family
+\eqref{determinants:eq:family}, so $[\beta]=[\beta-d\gamma]$. On $\Giso{0}$,
+$\bar\alpha$ extends the $1$-form $d\log\detFr=\Tr(A^{-1}dA)$ from
+$\Giso{-\infty}$, but it is not closed in general, because the regularized
+trace is not a trace. To explain the topological meaning of $[\beta]$ we now
+construct the determinant line bundle.
+
+\section{The determinant bundle}\label{determinants:sec:det-bundle}
+
+The determinant bundle was introduced by Quillen \cite{Quillen} for families of
+Cauchy--Riemann operators. Recall that $\detFr$ is a character of
+$\Giso{-\infty}$: $\detFr(AB)=\detFr(A)\detFr(B)$. Instead of trying to extend
+it multiplicatively to $\Giso{0}$ (see \cref{determinants:rem:no-extension}),
+we consider all its possible values at once. Write
+$G^0=\Giso{0}(\R^n;\C^N)$ and $G^{-\infty}=\Giso{-\infty}(\R^n;\C^N)$; the
+latter is a normal subgroup of $G^0$, and $\mathcal G=G^0/G^{-\infty}$ is the
+set of classes $a=[A]\in\mathcal A^0$ of invertible operators, which by
+\cref{determinants:prop:invertible-perturbation} are exactly the invertible
+elements of $\mathcal A^0$ of index zero. On $G^0\times\C$ define
+\begin{equation}\label{determinants:eq:det-equivalence}
+  (A,z)\sim(A',z')\iff A'=A(\Id+E),\ z'=\detFr(\Id+E)\,z\ \text{ for some }\Id+E\in G^{-\infty}.
+\end{equation}
+
+\begin{lemma}\label{determinants:lem:det-line}
+  \eqref{determinants:eq:det-equivalence} is an equivalence relation. Let
+  $\mathcal D=(G^0\times\C)/{\sim}$ and $\pi:\mathcal D\to\mathcal G$,
+  $\pi[(A,z)]=[A]$. Each fibre $\mathcal D_a=\pi^{-1}(a)$ is a one-dimensional
+  complex vector space with the operations
+  $[(A,z)]+[(A,w)]=[(A,z+w)]$, $\lambda[(A,z)]=[(A,\lambda z)]$.
+\end{lemma}
+\begin{proof}
+  Reflexivity, symmetry and transitivity follow from $\detFr(\Id)=1$,
+  $\detFr((\Id+E)^{-1})=\detFr(\Id+E)^{-1}$ and multiplicativity. If
+  $[A]=[A_0]=a$ then $A_0^{-1}A\in G^0\cap(\Id+\Psiiso{-\infty})=G^{-\infty}$,
+  so every element of $\mathcal D_a$ has a representative $(A_0,w)$, and $w$
+  is unique since $(A_0,w)\sim(A_0,w')$ forces $\Id+E=\Id$. Thus
+  $[(A_0,w)]\mapsto w$ is a bijection $\mathcal D_a\to\C$. The operations
+  above are well defined because the relation is linear in $z$, and they
+  correspond to those of $\C$ under this bijection.
+\end{proof}
+
+Now let $y\mapsto A_y$ be a smooth family \eqref{determinants:eq:family} over a
+manifold $Y$ and $a_y=[A_y]$. Set $\mathcal D_Y=\bigsqcup_{y\in Y}\mathcal D_{a_y}$.
+A \emph{local invertible lift} on $U\subset Y$ open is a smooth family
+$\tilde A_y=A_y+E_y\in G^0$, $y\in U$, with $E_y$ residual; it defines the
+section $s_{\tilde A}(y)=[(\tilde A_y,1)]$ of $\mathcal D_Y$ over $U$. Local
+invertible lifts exist near every point of $Y$.
+
+\begin{proposition}\label{determinants:prop:det-bundle}
+  $\mathcal D_Y$ has a unique structure of smooth complex line bundle over $Y$
+  for which the sections $s_{\tilde A}$ are smooth. If $\tilde A'=\tilde A(\Id+X)$
+  is another local invertible lift, then $X_y$ is a smooth residual family and
+  \begin{equation}\label{determinants:eq:transition}
+    s_{\tilde A'}=\detFr(\Id+X)^{-1}s_{\tilde A}.
+  \end{equation}
+  If \eqref{determinants:eq:perturbation} has a solution, $\mathcal D_Y$ is
+  trivial.
+\end{proposition}
+\begin{proof}
+  $\Id+X=\tilde A^{-1}\tilde A'=\Id+\tilde A^{-1}(E'-E)$, and $\tilde A^{-1}$
+  is a smooth family in $\Psiiso{0}$ by
+  \cref{determinants:lem:local-inversion}, so $X$ is a smooth residual family.
+  By \eqref{determinants:eq:det-equivalence},
+  $(\tilde A,\detFr(\Id+X)^{-1})\sim(\tilde A(\Id+X),1)$, which is
+  \eqref{determinants:eq:transition}. The transition functions
+  $\detFr(\Id+X_y)^{-1}$ are smooth and non-vanishing by
+  \cref{determinants:thm:det-entire}, and the cocycle condition holds
+  automatically since all sections live in the same space $\mathcal D_Y$.
+  Hence the local trivializations $s_{\tilde A}$ define a smooth line bundle
+  structure, clearly unique. A global invertible lift gives a global
+  non-vanishing section.
+\end{proof}
+
+The projection to $\mathcal G$ and the quotient map fit into the commutative
+diagram
+\begin{equation*}
+  \begin{tikzcd}
+    G^0\times\C\arrow[r,"/\sim"]\arrow[d] & \mathcal D\arrow[d,"\pi"]\\
+    G^0\arrow[r,"/G^{-\infty}"] & \mathcal G,
+  \end{tikzcd}
+\end{equation*}
+and the pull-back of $\mathcal D$ to $G^0$ is canonically trivial, with the
+section $A\mapsto[(A,1)]$. Over $Y$, the form $\bar\alpha$ of
+\eqref{determinants:eq:alpha-bar} defines a connection on $\mathcal D_Y$.
+
+\begin{theorem}\label{determinants:thm:connection}
+  There is a unique connection $\nabla$ on $\mathcal D_Y$ such that, for every
+  local invertible lift $\tilde A$,
+  \begin{equation*}
+    \nabla s_{\tilde A}=-\TrReg{H}(\tilde A^{-1}d\tilde A)\otimes s_{\tilde A}.
+  \end{equation*}
+  Its curvature is the globally defined $2$-form $\beta-d\gamma$ of
+  \eqref{determinants:eq:beta}.
+\end{theorem}
+\begin{proof}
+  Write $\bar\alpha_{\tilde A}=\TrReg{H}(\tilde A^{-1}d\tilde A)$. We must check
+  that the local definitions agree. With $\tilde A'=\tilde A(\Id+X)$,
+  \begin{equation*}
+    \tilde A'^{-1}d\tilde A'=(\Id+X)^{-1}\bigl(\tilde A^{-1}d\tilde A\bigr)(\Id+X)+(\Id+X)^{-1}dX,
+  \end{equation*}
+  so by \cref{determinants:cor:reg-conjugation}, and since $\TrReg{H}=\Tr$ on
+  residual operators,
+  \begin{equation*}
+    \bar\alpha_{\tilde A'}=\bar\alpha_{\tilde A}+\Tr((\Id+X)^{-1}dX)=\bar\alpha_{\tilde A}+d\log\detFr(\Id+X).
+  \end{equation*}
+  With $f=\detFr(\Id+X)^{-1}$, the Leibniz rule and
+  \eqref{determinants:eq:transition} give
+  \begin{equation*}
+    \nabla s_{\tilde A'}=\nabla(fs_{\tilde A})=(d\log f-\bar\alpha_{\tilde A})\,s_{\tilde A'}=-\bar\alpha_{\tilde A'}\,s_{\tilde A'},
+  \end{equation*}
+  as required. The curvature is $-d\bar\alpha_{\tilde A}=\beta-d\gamma$ by
+  \cref{determinants:prop:variation}.
+\end{proof}
+
+Thus $\beta-d\gamma$ is a curvature form, and by Chern--Weil theory the
+class $\frac{i}{2\pi}[\beta]$ represents the first Chern class of
+$\mathcal D_Y$ in $H^2(Y;\C)$; in particular it is the image of an integral
+class. This is the topological origin of the obstruction in
+\cref{determinants:prop:variation}: the family $A_y$ admits a smooth invertible
+perturbation only if $\mathcal D_Y$ is trivial.
+
+\begin{remark}\label{determinants:rem:no-extension}
+  If $f:G^0\to\C^*$ were a multiplicative extension of $\detFr$ which is smooth
+  along smooth families, then the map $[(A,z)]\mapsto z/f(A)$ would be well
+  defined on $\mathcal D$, since
+  \begin{equation*}
+    \detFr(\Id+E)\,z/f(A(\Id+E))=z/f(A),
+  \end{equation*}
+  and would give a smooth non-vanishing
+  linear functional on each $\mathcal D_Y$; hence every $\mathcal D_Y$ would be
+  trivial and every $[\beta]$ would vanish. So any family with $[\beta]\ne0$
+  shows that no such extension exists.
+\end{remark}
+
+\section{Exercises}\label{determinants:sec:exercises}
+
+These exercises cover both this chapter and \cref{ch:isotropic}.
+
+\begin{exercise}[Isotropic Sobolev spaces]\label{determinants:ex:sobolev}
+  For $k\in\N_0$ define
+  \begin{gather*}
+    \Hs{k}_{\mathrm{iso}}(\R^n)=\{u\in L^2(\R^n);\ x^\alpha D_x^\beta u\in L^2(\R^n)\ \forall\,\abs{\alpha}+\abs{\beta}\le k\},\\
+    \Hs{-k}_{\mathrm{iso}}(\R^n)=\Bigl\{u\in\cSp(\R^n);\ u=\sum_{\abs{\alpha}+\abs{\beta}\le k}x^\alpha D_x^\beta u_{\alpha\beta},\ u_{\alpha\beta}\in L^2(\R^n)\Bigr\}.
+  \end{gather*}
+  Show that if $A\in\Psiiso{p}(\R^n)$, $p\in\Z$, then
+  $A:\Hs{k}_{\mathrm{iso}}\to\Hs{k-p}_{\mathrm{iso}}$ for all $k\in\Z$. Deduce,
+  using elliptic isotropic operators, that the definition
+  \begin{equation*}
+    \Hs{s}_{\mathrm{iso}}(\R^n)=\{u\in\cSp(\R^n);\ Au\in L^2(\R^n)\ \forall\,A\in\Psiiso{-s}(\R^n)\},\quad s\in\R,
+  \end{equation*}
+  is consistent with the previous one, and that
+  \begin{gather*}
+    A\in\Psiiso{M}(\R^n)\implies A:\Hs{s}_{\mathrm{iso}}\to\Hs{s-M}_{\mathrm{iso}},\qquad
+    \bigcap_s\Hs{s}_{\mathrm{iso}}=\cS(\R^n),\quad\bigcup_s\Hs{s}_{\mathrm{iso}}=\cSp(\R^n),\\
+    A\in\Psiiso{m}(\R^n)\text{ elliptic},\ u\in\cSp(\R^n),\ Au\in\Hs{s}_{\mathrm{iso}}\implies u\in\Hs{s+m}_{\mathrm{iso}}.
+  \end{gather*}
+\end{exercise}
+
+\begin{exercise}\label{determinants:ex:compact-inclusion}
+  Show that if $\eps>0$ then
+  $\Hs{\eps}_{\mathrm{iso}}(\R^n)\subset\ang{x}^{-\eps}L^2(\R^n)\cap\Hs{\eps}(\R^n)$,
+  and deduce that the inclusion $\Hs{\eps}_{\mathrm{iso}}(\R^n)\hookrightarrow L^2(\R^n)$
+  is compact.
+\end{exercise}
+
+\begin{exercise}\label{determinants:ex:compact}
+  Using \cref{determinants:ex:compact-inclusion}, or otherwise, show that each
+  element of $\Psiiso{-\eps}(\R^n)$, $\eps>0$, is compact on $L^2(\R^n)$.
+\end{exercise}
+
+\begin{exercise}\label{determinants:ex:finite-rank-inverse}
+  Without using the Fredholm theory of \ref{determinants:I:residual}, show that
+  if $E\in\Psiiso{-\infty}(\R^n)$ there is $F\in\Psiiso{-\infty}(\R^n)$ such
+  that $(\Id+E)(\Id+F)=\Id+G$ with $G\in\Psiiso{-\infty}(\R^n)$ of finite rank,
+  i.e.\ $G\cdot\cS(\R^n)$ is finite dimensional. (Hint: write $E=E_1+E_2$ with
+  $E_1$ of finite rank and $\norm{E_2}_{\Lin(L^2)}<1$, and use
+  \cref{determinants:lem:residual-inverse}.)
+\end{exercise}
+
+\begin{exercise}\label{determinants:ex:fredholm}
+  Using \cref{determinants:ex:finite-rank-inverse}, show that an elliptic
+  $A\in\Psiiso{m}(\R^n)$ has a parametrix $B\in\Psiiso{-m}(\R^n)$ up to finite
+  rank error, i.e.\ $AB-\Id$ and $BA-\Id$ are finite rank elements of
+  $\Psiiso{-\infty}(\R^n)$. Deduce that $A$ is Fredholm as an operator
+  $\Hs{M}_{\mathrm{iso}}(\R^n)\to\Hs{M-m}_{\mathrm{iso}}(\R^n)$ for every $M$.
+  (An operator between Hilbert spaces is Fredholm if it is bounded, with finite
+  dimensional null space and closed range of finite codimension.)
+\end{exercise}
+
+\begin{exercise}[The harmonic oscillator]\label{determinants:ex:oscillator}
+  Show that $H=\abs{D}^2+\abs{x}^2=\sum_j(D_j^2+x_j^2)$ is an elliptic element of
+  $\Psiiso{2}(\R^n)$. With the creation and annihilation operators
+  $C_j=D_j+ix_j$ and $A_j=D_j-ix_j=C_j^*$, show that
+  \begin{gather*}
+    H=\sum_{j=1}^nC_jA_j+n=\sum_{j=1}^nA_jC_j-n,\\
+    [A_j,H]=2A_j,\quad[C_j,H]=-2C_j,\quad[C_l,C_j]=0,\quad[A_l,A_j]=0,\quad[A_l,C_j]=2\delta_{lj}\Id .
+  \end{gather*}
+  Knowing that $(H-\lambda)u=0$ with $u\in\cSp(\R^n)$ implies $u\in\cS(\R^n)$
+  (why?), show that
+  \begin{gather*}
+    E_\lambda=\{u\in\cSp(\R^n);\ (H-\lambda)u=0\}\ne\{0\}\iff\lambda\in n+2\N_0,\\
+    E_{n+2k}=\Bigl\{\sum_{\abs{\alpha}=k}c_\alpha C^\alpha e^{-\abs{x}^2/2};\ c_\alpha\in\C\Bigr\},\quad k\in\N_0 .
+  \end{gather*}
+\end{exercise}
+
+\begin{exercise}[Determinants of matrices]\label{determinants:ex:matrix-det}
+  Show that there is a unique function $\det:M(N;\C)\to\C$ which is linear in
+  each column, vanishes when two columns are equal, and satisfies
+  $\det\Id=1$, and that
+  $\det A=\sum_{\sigma}\sgn(\sigma)\prod_iA_{i\sigma(i)}$. Show that
+  $\det(AB)=\det A\det B$ (consider $A\mapsto\det(AB)$ for fixed $B$), that $A$
+  is invertible if and only if $\det A\ne0$, that
+  $\frac{d}{ds}\det(\Id+sA)|_{s=0}=\tr A$, and deduce Jacobi's formula
+  \eqref{determinants:eq:jacobi}. Show also that $\det$ is the unique
+  multiplicative polynomial function on $M(N;\C)$ with
+  $\frac{d}{ds}\det(\Id+sA)|_{s=0}=\tr A$.
+\end{exercise}
+
+\begin{exercise}[The $1$-form $\alpha$ is closed]\label{determinants:ex:closed}
+  Let $A(s,t)$ be a smooth two-parameter family in $\Giso{-\infty}(\R^n)$ and
+  $\alpha=\Tr(A^{-1}\pa_sA)\,ds+\Tr(A^{-1}\pa_tA)\,dt$ the pull-back of
+  $\Tr(A^{-1}dA)$. Show that
+  \begin{equation*}
+    d\alpha=\Tr\bigl([A^{-1}\pa_tA,A^{-1}\pa_sA]\bigr)\,ds\wedge dt,
+  \end{equation*}
+  and hence that $d\alpha=0$. Explain why this implies that
+  $\Tr(A^{-1}dA)$ is closed on $\Giso{-\infty}$, and show directly, using
+  \cref{determinants:lem:path-limit}, that its integral over any closed path
+  lies in $2\pi i\Z$.
+\end{exercise}
+
+\begin{exercise}[Bundle coefficients]\label{determinants:ex:bundles}
+  If $V$ and $W$ are finite dimensional complex vector spaces, show that the
+  space $\Psiiso{m}(\R^n;V,W)$ of operators from $\cS(\R^n;V)$ to
+  $\cSp(\R^n;W)$ given by matrices with entries in $\Psiiso{m}(\R^n)$, with
+  respect to bases of $V$ and $W$, is independent of the choice of bases.
+  Extend the results of \cref{ch:isotropic} to these spaces.
+\end{exercise}
+
+\begin{exercise}[Ellipticity is necessary for the Fredholm property]\label{determinants:ex:necessity}
+  Let $A\in\Psiiso{m}(\R^n;\C^N)$ be Fredholm as an operator
+  $\Hs{s}_{\mathrm{iso}}\to\Hs{s-m}_{\mathrm{iso}}$ for some $s$. Show that $A$
+  is elliptic, as follows.
+  \begin{enumerate}
+  \item Reduce to the case $m=s=0$, using invertible elliptic operators of
+    appropriate orders.
+  \item If the principal symbol of $A$ is not invertible at
+    $\theta\in\Sphere^{2n-1}$, construct a sequence $u_k\in\cS$ with
+    $\norm{u_k}_{L^2}=1$, $u_k\to0$ weakly and $Au_k\to0$ in $L^2$ (consider
+    $u_k=e^{ik^2x\cdot\xi_0}\phi(x/k-kx_0)v$, suitably normalized, with
+    $(x_0,\xi_0)=\theta$ and $v$ in the null space of the principal symbol at
+    $\theta$).
+  \item Show that a Fredholm operator satisfies $\norm{u}\le C\norm{Au}+C\norm{\Pi u}$ with $\Pi$ the
+    projection onto its finite dimensional null space, and derive a
+    contradiction.
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}[The Koszul complex]\label{determinants:ex:koszul}
+  Let $\Lambda^k=\Lambda^k\C^n$ with basis $dx^\alpha=dx^{\alpha_1}\wedge\dots\wedge dx^{\alpha_k}$,
+  $\alpha_1<\dots<\alpha_k$, declared orthonormal, and let
+  $\cSp(\R^n;\Lambda^k)$ be the space of $u=\sum_\alpha u_\alpha\,dx^\alpha$,
+  $u_\alpha\in\cSp(\R^n)$. Using the annihilation operators of
+  \cref{determinants:ex:oscillator} define
+  \begin{equation*}
+    D:\cSp(\R^n;\Lambda^k)\to\cSp(\R^n;\Lambda^{k+1}),\qquad Du=\sum_{j=1}^n\sum_\alpha A_ju_\alpha\,dx^j\wedge dx^\alpha .
+  \end{equation*}
+  Show that $D^2=0$, and that the formal adjoint of $D$ with respect to the
+  $L^2$ pairing is $D^*u=\sum_{j,\alpha}C_ju_\alpha\,\iota_j dx^\alpha$, where
+  $\iota_j$ is contraction with $e_j$, the adjoint of $dx^j\wedge$. Show that
+  $D+D^*\in\Psiiso{1}(\R^n;\Lambda^*)$ is elliptic and that
+  \begin{equation*}
+    (D+D^*)^2=DD^*+D^*D=H-n+2\mathcal N,
+  \end{equation*}
+  where $\mathcal N=k$ on $\Lambda^k$. Deduce that the null space of $D+D^*$
+  on $\cSp(\R^n;\Lambda^*)$ is spanned by $e^{-\abs{x}^2/2}\in\cS(\R^n;\Lambda^0)$,
+  and that
+  \begin{gather*}
+    \{u\in\cSp(\R^n);\ Du=0\}=\C e^{-\abs{x}^2/2},\\
+    \{u\in\cSp(\R^n;\Lambda^k);\ Du=0\}=D\,\cSp(\R^n;\Lambda^{k-1}),\ k\ge1 .
+  \end{gather*}
+  Conclude that $D+D^*$, as an elliptic element of
+  $\Psiiso{1}(\R^n;\Lambda^{\mathrm{even}},\Lambda^{\mathrm{odd}})$, has index
+  $1$ (and as an operator from odd to even forms, index $-1$).
+\end{exercise}
+
+\begin{exercise}[Isotropic essential support]\label{determinants:ex:ess-supp}
+  For $A\in\Psiiso{m}(\R^n)$ with left symbol $a$, define the isotropic
+  essential support (operator wavefront set) $\WFiso'(A)\subset\R^{2n}\setminus\{0\}$
+  as the complement of the set of $Z_0\ne0$ having a conic neighbourhood
+  $\Gamma$ in which $a$ is of order $-\infty$:
+  $\abs{D^\alpha a(Z)}\le C_{\alpha,k}\ang{Z}^{-k}$ for $Z\in\Gamma$ and all
+  $\alpha,k$. Show that $\WFiso'(A)$ is closed and conic, that it is unchanged if
+  the left symbol is replaced by the right or Weyl symbol, and that
+  \begin{gather*}
+    \WFiso'(A+B)\subset\WFiso'(A)\cup\WFiso'(B),\qquad\WFiso'(AB)\subset\WFiso'(A)\cap\WFiso'(B),\\
+    \WFiso'(A)=\emptyset\iff A\in\Psiiso{-\infty}(\R^n).
+  \end{gather*}
+\end{exercise}
+
+\begin{exercise}[Isotropic partition of unity]\label{determinants:ex:partition}
+  Let $U_i$ be a finite open cover of $\Sphere^{2n-1}$ and
+  $\tilde U_i=\{Z\in\R^{2n}\setminus\{0\};\ Z/\abs{Z}\in U_i\}$ the
+  corresponding conic cover of $\R^{2n}\setminus\{0\}$. Show that there are
+  $A_i\in\Psiiso{0}(\R^n)$ with $\WFiso'(A_i)\subset\tilde U_i$ and
+  $\Id-\sum_iA_i\in\Psiiso{-\infty}(\R^n)$.
+\end{exercise}
+
+\begin{exercise}\label{determinants:ex:perturbation-sobolev}
+  Suppose $A\in\Psiiso{m}(\R^n)$ is elliptic and has index zero. Show that the
+  operator $A+F$ of \cref{determinants:prop:invertible-perturbation} is an
+  isomorphism of $\cS(\R^n)$, of $\cSp(\R^n)$, and from
+  $\Hs{s}_{\mathrm{iso}}(\R^n)$ to $\Hs{s-m}_{\mathrm{iso}}(\R^n)$ for every
+  $s$.
+\end{exercise}
+
+\begin{exercise}[Isotropic wavefront set]\label{determinants:ex:wf}
+  For $A\in\Psiiso{0}(\R^n)$ let
+  $\Char_{\mathrm{iso}}(A)=\{Z\ne0;\ \sigma_0(A)(Z/\abs{Z})=0\}$, where
+  $\sigma_0(A)$ is the principal symbol. For $u\in\cSp(\R^n)$ define
+  \begin{equation*}
+    \WFiso(u)=\bigcap\bigl\{\Char_{\mathrm{iso}}(A);\ A\in\Psiiso{0}(\R^n),\ Au\in\cS(\R^n)\bigr\}.
+  \end{equation*}
+  Show that $\WFiso(u)$ is a closed cone, that $\WFiso(u)=\emptyset$ if and only
+  if $u\in\cS(\R^n)$, and that $\WFiso(Bu)\subset\WFiso(u)\cap\WFiso'(B)$ for
+  $B\in\Psiiso{m}(\R^n)$. (Use \cref{determinants:ex:ess-supp,determinants:ex:partition}.)
+\end{exercise}
+
+\begin{exercise}[Traces and determinants of lower regularity]\label{determinants:ex:extend}
+  Let $m<-2n$. Show that $\Tr$ is continuous on $\Psiisoinf{m}(\R^n)$, that
+  $\Id+E$ with $E\in\Psiisoinf{m}(\R^n)$ invertible on $L^2$ has inverse
+  $\Id+F$ with $F\in\Psiisoinf{m}(\R^n)$, and that the definition of $\detFr$
+  by integration of $\Tr(A^{-1}dA)$ along paths extends to
+  $\Id+\Psiisoinf{m}(\R^n)$ with the properties of
+  \cref{determinants:prop:det-basic} and \cref{determinants:thm:det-entire}.
+  (Hint: approximate $E$ by $\Op(\chi(Z/k)e)$ as in the proof of
+  \cref{determinants:lem:trace-property}, which converges in
+  $\Psiisoinf{m+\eps}$, and show that the corresponding determinants converge.)
+\end{exercise}
+
+\section*{Notes}
+
+The main departures from the original notes are as follows. The Fredholm
+determinant is constructed by integrating $\Tr(A^{-1}dA)$ along paths and
+comparing with finite dimensional determinants via the harmonic oscillator
+basis (\cref{determinants:lem:path-limit}); this gives path independence and
+the limit formula \eqref{determinants:eq:det-limit} at once, and the
+holomorphy across non-invertible operators is reduced, via
+\cref{determinants:lem:reduction}, to a finite dimensional determinant. The
+residue trace is normalized as $-\Res_{z=0}$, so that
+\eqref{determinants:eq:residue-formula} holds with a positive sign; this agrees
+with the usual convention for Wodzicki's residue \cite{Wodzicki-residue},
+since $z$ here corresponds to $-s$ in the zeta-function regularization
+$\Tr(AQ^{-s})$. The exterior derivation is defined directly as commutation
+with $\dot A$, which avoids inverting the regularizing family away from $z=0$.
+The determinant line bundle is constructed over finite dimensional families,
+where it is an honest smooth line bundle, and we have added the connection of
+\cref{determinants:thm:connection}, whose curvature is the obstruction form of
+\cref{determinants:prop:variation}.
+
+For the residue trace on compact manifolds see
+\cite{Wodzicki-residue,Guillemin-residue}; for the isotropic (Shubin) calculus
+and its spectral theory see \cite{Shubin}; the determinant bundle originates in
+\cite{Quillen}. The Chern--Weil description of the first Chern class used at
+the end of \cref{determinants:sec:det-bundle} can be found, for instance, in
+Appendix~C of J.~Milnor and J.~Stasheff, \emph{Characteristic classes}.
