@@ -7,10 +7,15 @@
 \providecommand{\Giso}[1]{G^{#1}_{\mathrm{iso}}}
 \providecommand{\FP}{\operatorname*{FP}}
 \providecommand{\Ell}{\operatorname{Ell}}
+\providecommand{\Hiso}[1]{H^{#1}_{\mathrm{iso}}}
 
-For a linear map between finite-dimensional spaces three numbers are
+For a linear map of a finite-dimensional space to itself three numbers are
 always available: the trace, the determinant, and the index
-$\dim(\text{domain})-\dim(\text{target})$. The trace vanishes on
+$\dim(\text{domain})-\dim(\text{target})$. (For a map between
+two different spaces the index is still a number, but trace and determinant
+are not: a map between spaces of equal dimension has a determinant only as a
+map of their determinant lines, which is the point of view of
+\cref{determinants:sec:det-bundle}.) The trace vanishes on
 commutators, the determinant is multiplicative and detects invertibility,
 and the index of a square matrix is zero. This chapter asks how much of this
 survives for operators on $L^2(\R^n)$, and finds that the failures are as
@@ -131,9 +136,14 @@ We use the following results from \cref{ch:isotropic}.
   $A=\Id+E$ of \cref{determinants:prop:invertible-perturbation} below.) The
   series $\exp E=\sum_k E^k/k!$ converges in $\Id+\Psiiso{-\infty}$.
 \item\label{determinants:I:oscillator} \emph{The harmonic oscillator.} The
-  eigenfunctions $u_\alpha=c_\alpha C^\alpha e^{-\abs{x}^2/2}$,
-  $\alpha\in\N_0^n$, of $H=\abs{D}^2+\abs{x}^2$ (with $C_j=D_j+ix_j$ and
-  normalizing constants $c_\alpha>0$) are real-valued and form an orthonormal
+  eigenfunctions $u_\alpha=c_\alpha(-i)^{\abs{\alpha}}C^\alpha e^{-\abs{x}^2/2}$,
+  $\alpha\in\N_0^n$, of $H=\abs{D}^2+\abs{x}^2$ (with $C_j=D_j+ix_j=-i(\pa_j-x_j)$
+  and normalizing constants $c_\alpha>0$, so that
+  $u_\alpha=c_\alpha\prod_jH_{\alpha_j}(x_j)e^{-\abs{x}^2/2}$ with $H_k$ the
+  Hermite polynomials; these are the Hermite functions
+  \eqref{isotropic:eq:hermite} multiplied by the phase $(-i)^{\abs{\alpha}}$,
+  which is needed for reality since
+  $C_je^{-\abs{x}^2/2}=2ix_je^{-\abs{x}^2/2}$) are real-valued and form an orthonormal
   basis of $L^2(\R^n)$; $Hu_\alpha=(n+2\abs{\alpha})u_\alpha$; and each Schwartz
   seminorm of $u_\alpha$ is bounded by a polynomial in $\abs{\alpha}$. See
   also \cref{determinants:ex:oscillator}.
@@ -217,7 +227,11 @@ For $E\in\Psiiso{-\infty}$ we have $\norm{E}_{\Lin(L^2)}\le\norm{E}_{L^2(\R^{2n}
   a continuous seminorm of $E$. Since the seminorms of $u_\alpha\otimes u_\beta$
   grow only polynomially, $\sum e_{\alpha\beta}u_\alpha\otimes u_\beta$
   converges absolutely to $E$ in $\cS(\R^{2n})$, and its partial sum over
-  $\abs{\alpha},\abs{\beta}\le N$ is the kernel of $\pi_NE\pi_N$. For a smooth
+  $\abs{\alpha},\abs{\beta}\le N$ is the kernel of $\pi_NE\pi_N$: since the
+  $u_\alpha$ are real, $\pi_N$ has kernel $\sum_{\abs{\alpha}\le N}u_\alpha(x)u_\alpha(x')$
+  and $\inner{Eu_\beta}{u_\alpha}=e_{\alpha\beta}$. (Without the phase
+  normalization of \ref{determinants:I:oscillator} one must use
+  $u_\alpha\otimes\bar u_\beta$ here.) For a smooth
   family the same estimates hold for $\pa_y^\gamma E_y$, locally uniformly.
 \end{proof}
 
@@ -532,7 +546,12 @@ Why not simply define $\detFr(\Id+E)=\prod_j(1+\lambda_j)$, the product
 over the eigenvalues $\lambda_j$ of $E$?
 \end{question}
 \begin{answer}
-This is in fact correct for trace class $E$ (a theorem of Lidskii), but
+This is in fact correct for trace class $E$, with eigenvalues counted with
+algebraic multiplicity: it is the product formula for the trace-class
+determinant, which follows from Lidskii's trace theorem applied to exterior
+powers (see \cite[Chapter~3]{Simon-trace}; that determinant agrees with
+$\detFr$ since both are limits of the determinants of finite rank
+truncations), but
 proving it requires a good deal of spectral theory of non-self-adjoint
 compact operators, and the product formula is awkward for proving
 multiplicativity or holomorphy. The path definition uses only the trace
@@ -752,11 +771,20 @@ Let
 \begin{equation*}
   \mathcal A^m=\Psiisoph{m}(\R^n;\C^N)/\Psiiso{-\infty}(\R^n;\C^N);
 \end{equation*}
-then $\mathcal A^{\Z}=\bigcup_m\mathcal A^m$ is an algebra, $A$ is elliptic if and
-only if its class $a=[A]$ is invertible in $\mathcal A^{\Z}$ (the inverse
-being the class of a parametrix), and
+then $\mathcal A^{\Z}=\bigcup_m\mathcal A^m$ is a filtered algebra, and
+$A\in\Psiisoph{m}$ is elliptic if and only if its class $a=[A]\in\mathcal A^m$
+has an inverse in $\mathcal A^{-m}$ (the inverse being the class of a
+parametrix; conversely $ab=1$ with $b\in\mathcal A^{-m}$ gives
+$\sigma_m(A)\sigma_{-m}(B)=1$). Invertibility in the union $\mathcal A^{\Z}$
+alone is weaker: for $N=2$ and $H$ the harmonic oscillator,
+$A=\operatorname{diag}(H,\Id)\in\Psiisoph{2}$ has inverse
+$[\operatorname{diag}(H^{-1},\Id)]$ in $\mathcal A^{\Z}$, but its principal
+symbol $\operatorname{diag}(\abs{w}^2,0)$ of order $2$ is singular, and
+$\operatorname{diag}(H^{-1},\Id)\in\Psiisoph{0}$ is invertible in
+$\mathcal A^{\Z}$ but is not Fredholm on $L^2$ (its range
+$\Hiso{2}\oplus L^2$ is not closed). Accordingly
 \begin{equation*}
-  \ind:\{a\in\mathcal A^0\text{ invertible}\}\to\Z,\qquad \ind(a)=\ind(A)\ \text{ if }a=[A],
+  \ind:\{a\in\mathcal A^0;\ a\text{ has an inverse in }\mathcal A^0\}\to\Z,\qquad \ind(a)=\ind(A)\ \text{ if }a=[A],
 \end{equation*}
 is well defined. We return to it in \cref{determinants:sec:index-formula}.
 
@@ -764,8 +792,10 @@ is well defined. We return to it in \cref{determinants:sec:index-formula}.
 
 The determinant turns questions about invertibility of operators into
 questions about zeros of a scalar function. For a holomorphic family
-$\Id+A(z)$ that function is holomorphic, so its zeros are isolated, and the
-inverse can only blow up at isolated points.
+$\Id+A(z)$ on a connected open set that function is holomorphic, so either it
+vanishes identically, and $\Id+A(z)$ is nowhere invertible (as for the
+constant family $\Id-P$ with $P$ a rank-one residual projection), or its zeros
+are isolated and the inverse can only blow up at isolated points.
 
 A family $M(z)$ with values in $\Psiiso{-\infty}$ is \emph{meromorphic} near
 $p$ if $M(z)=\sum_{k=1}^K(z-p)^{-k}M_{-k}+M_0(z)$ with $M_{-k}\in\Psiiso{-\infty}$
@@ -1043,7 +1073,12 @@ $z=0$ only depends on $A(0)$, and it vanishes unless $m\in\Z$, $m\ge-2n$.
   zero over the sphere. The residue trace is, up to a constant multiple, the
   unique trace on $\Psiisoph{\Z}(\R^n)$; this is the isotropic analogue of
   Wodzicki's theorem \cite{Wodzicki-residue}, and we shall neither prove nor
-  use it.
+  use it. For the quotient by residual operators it is proved for the
+  Shubin calculus by Lopes (see the Notes); the statement on the full algebra
+  follows because every Schwartz symbol is a sum of derivatives of symbols in
+  the classical calculus, and both $x$- and $\xi$-derivatives of left symbols
+  are commutators (with $D_j$ and $x_j$), so every trace vanishes on
+  $\Psiiso{-\infty}$.
 \end{remark}
 
 \begin{discussion}
@@ -1227,7 +1262,8 @@ $D_H:\mathcal A^m\to\mathcal A^{m-1}$ and $\TrRes:\mathcal A^{\Z}\to\C$.
   \begin{equation}\label{determinants:eq:index-residue}
     \ind(A)=\TrRes(AD_HB)=-\TrRes(BD_HA).
   \end{equation}
-  Thus, for invertible $a\in\mathcal A^{\Z}$, $\ind(a)=\TrRes(a\,D_H(a^{-1}))$.
+  Thus, for $a\in\mathcal A^m$ with an inverse in $\mathcal A^{-m}$,
+  $\ind(a)=\TrRes(a\,D_H(a^{-1}))$.
   The index is locally constant along smooth families of elliptic operators,
   and $\ind(a_1a_2)=\ind(a_1)+\ind(a_2)$.
 \end{theorem}
@@ -1282,8 +1318,11 @@ choices can be compared only through the group $\Giso{-\infty}$, by
 $A_y+F_2=(A_y+F_1)(\Id+X_y)$, and the obstruction to patching them lives in
 the topology of the transition functions $\Id+X_y$. Taking determinants of
 these turns them into $\C^*$-valued functions, that is, into the transition
-functions of a line bundle, and the obstruction becomes its first Chern
-class (\cref{determinants:sec:det-bundle}).
+functions of a line bundle, and its first Chern class is \emph{one}
+obstruction to patching (\cref{determinants:sec:det-bundle}). It is not the
+only one: taking determinants forgets most of the topology of the
+transition functions, and a family can have a trivial determinant line and
+still admit no invertible perturbation (\cref{determinants:rem:not-sufficient}).
 \end{answer}
 
 Operator-valued differential forms are handled coefficientwise: if
@@ -1364,9 +1403,12 @@ to $A(\Id+E)$ with $\Id+E\in G^{-\infty}$, the ``determinant'' ought to be
 multiplied by $\detFr(\Id+E)$. The relation
 \eqref{determinants:eq:det-equivalence} below records exactly this rule.
 Over each class $a=[A]$ the possible values then form a complex line, not a
-number. As $a$ varies these lines fit together into a line bundle, and the
-question whether a multiplicative determinant exists becomes the question
-whether this bundle is trivial.
+number. As $a$ varies these lines fit together into a line bundle, and a
+multiplicative determinant would trivialize this bundle
+(\cref{determinants:rem:no-extension}). The converse needs more than
+triviality as a line bundle: a multiplicative determinant amounts to a
+trivialization compatible with the multiplication of $G^0$, and an arbitrary
+nowhere-vanishing section can have a nontrivial multiplicative cocycle.
 \end{discussion}
 
 Write
@@ -1476,7 +1518,39 @@ class $\frac{i}{2\pi}[\beta]$ represents the first Chern class of
 $\mathcal D_Y$ in $H^2(Y;\C)$; in particular it is the image of an integral
 class. This is the topological origin of the obstruction in
 \cref{determinants:prop:variation}: the family $A_y$ admits a smooth invertible
-perturbation only if $\mathcal D_Y$ is trivial.
+perturbation only if $\mathcal D_Y$ is trivial. The converse is false.
+
+\begin{remark}\label{determinants:rem:not-sufficient}
+  Triviality of $\mathcal D_Y$ does not imply the existence of a solution of
+  \eqref{determinants:eq:perturbation}. A finer obstruction is the
+  \emph{families index} of $A_y$ in $K^0(Y)$, defined (as in
+  \cref{ch:index}) after stabilizing the null spaces; since
+  $A_y+tE_y$, $t\in[0,1]$, is a homotopy of elliptic families, smoothing
+  perturbations do not change it, and an invertible family has families index
+  zero. The determinant line only sees the first Chern class of the families
+  index. For example, let $Y=\Sphere^4\subset\mathbb H^2=\C^4$ and let $P_y$
+  be the orthogonal projection of $\C^4$ onto the quaternionic line through
+  $y$, a smooth family of rank-two projections whose range is the
+  quaternionic Hopf bundle $\mathcal H$, with $[\mathcal H]-[\C^2]\ne0$ in
+  $K^0(\Sphere^4)$ (its second Chern class generates
+  $H^4(\Sphere^4;\Z)$, and $K^0(\Sphere^4)\cong\Z\oplus\Z$ is torsion
+  free). On $\R^1$ let $H=D^2+x^2$ and $T=H^{-1}(D-ix)^2\in\Psiisoph{0}(\R)$,
+  an elliptic operator (its principal symbol is
+  $(\xi-ix)^2/(\xi^2+x^2)$) with null space
+  $\Nul(D-ix)^2=\operatorname{span}\{e^{-x^2/2},xe^{-x^2/2}\}$ and with
+  $T^*=(D+ix)^2H^{-1}$ injective on $\cSp$ (the null space of $D+ix$ in $\cSp$
+  is zero, since $e^{x^2/2}$ is not tempered), so $\ind T=2$. Then
+  \begin{equation*}
+    A_y=\bigl(T\otimes P_y+\Id\otimes(\Id-P_y)\bigr)\oplus\bigl(T^*\otimes\Id_{\C^2}\bigr)\in\Ell^0_{\mathrm{iso}}(\R;\C^4\oplus\C^2)
+  \end{equation*}
+  is a smooth family of elliptic operators of order $0$ with
+  $\Nul A_y=\Nul T\otimes\operatorname{Ran}P_y$ and
+  $\Nul A_y^*=\Nul T\otimes\C^2$, both of dimension $4$, so $\ind A_y=0$, and
+  the families index is $[\Nul T\otimes\mathcal H]-[\Nul T\otimes\C^2]
+  =2([\mathcal H]-[\C^2])\ne0$: no smooth (or continuous) family $E_y$ makes
+  $A_y+E_y$ invertible. Nevertheless $\mathcal D_Y$ is trivial, because
+  $H^2(\Sphere^4;\Z)=0$.
+\end{remark}
 
 \begin{remark}\label{determinants:rem:no-extension}
   If $f:G^0\to\C^*$ were a multiplicative extension of $\detFr$ which is smooth
@@ -1723,3 +1797,8 @@ and its spectral theory see \cite{Shubin}; the determinant bundle originates in
 \cite{Quillen}. The Chern--Weil description of the first Chern class used at
 the end of \cref{determinants:sec:det-bundle} can be found, for instance, in
 Appendix~C of J.~Milnor and J.~Stasheff, \emph{Characteristic classes}.
+The uniqueness of the residue trace for the isotropic (Shubin) calculus is
+Theorem~23 of P.~T.~P.~Lopes, \emph{The regularity of the eta function for the
+Shubin calculus}, arXiv:1209.1206. The relation between the determinant line
+and the families index (\cref{determinants:rem:not-sufficient}) is discussed
+in \cref{ch:index,ch:eta}.

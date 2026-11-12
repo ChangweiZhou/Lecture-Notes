@@ -126,8 +126,10 @@ are bounded on $L^2$.} Let $b=\sigma_L(B)\in\Gs{-\eps}$. By
 $b\in S^{0,-\eps}\cap S^{-\eps,0}$. Since $\ang x^\eps\in S^{0,\eps}$ (a function
 of $x$ alone), $\ang x^\eps B=\Op(\ang x^\eps b)$ with
 $\ang x^\eps b\in S^{0,0}\subset S^0(\R^n;\R^n)$, so $\ang x^\eps B\in\Psido{0}$ is
-bounded on $L^2$ by \cref{euclidean:thm:L2}. Also $B\in\Psido{-\eps}$ (as
-$S^{-\eps,0}=S^{-\eps}$) and $\ang D^\eps=\Op(\ang\xi^\eps)\in\Psido{\eps}$, so
+bounded on $L^2$ by \cref{euclidean:thm:L2}. Also $B\in\Psido{-\eps}$, since
+$S^{-\eps,0}\subset S^{-\eps}(\R^n;\R^n)$ (the inclusion is strict: $e^{ix_1}\ang\xi^{-\eps}$
+lies in $S^{-\eps}$ but its $x$-derivatives do not decay, so it is not in
+$S^{-\eps,0}$; only the inclusion is needed), and $\ang D^\eps=\Op(\ang\xi^\eps)\in\Psido{\eps}$, so
 $\ang D^\eps B\in\Psido{0}$ by \cref{euclidean:thm:composition}, and it is
 bounded on $L^2$.
 

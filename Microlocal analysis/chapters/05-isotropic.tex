@@ -404,9 +404,17 @@ Since $\Op(x^\beta\xi^\alpha)=x^\beta D^\alpha$, every differential operator
 with polynomial coefficients,
 $P=\sum_{|\alpha|+|\beta|\le m}c_{\alpha\beta}x^\beta D^\alpha$, lies in
 $\Psiisoph{m}(\R^n)$. Conversely, a differential operator lies in
-$\Psiiso{\infty}(\R^n)$ only if its coefficients are polynomials (a smooth
-function with all derivatives of order $k$ bounded by $C\ang{x}^{m-k}$ for all
-$k$ is a polynomial). The basic example is the \emph{harmonic oscillator}
+$\Psiiso{\infty}(\R^n)$ only if its coefficients are polynomials. Indeed, if
+$P=\sum_{|\alpha|\le k}a_\alpha(x)D^\alpha=\Op(a)$ with
+$a(x,\xi)=\sum_\alpha a_\alpha(x)\xi^\alpha\in\Gs{m}(\R^{2n})$, then for
+$|\beta|>m$ and fixed $x$ the function $\xi\mapsto\pa_x^\beta a(x,\xi)$ is a
+polynomial bounded by $C_\beta\ang{(x,\xi)}^{m-|\beta|}$, which tends to zero as
+$|\xi|\to\infty$; so it vanishes identically, i.e.\ $\pa^\beta a_\alpha=0$ for
+all $\alpha$ and all $|\beta|>m$, and each $a_\alpha$ is a polynomial of degree
+at most $m$. (The joint estimates are essential here: bounds on the
+$x$-derivatives of the coefficients alone, such as
+$|\pa^\beta a_\alpha(x)|\le C\ang{x}^{m-|\beta|}$, are satisfied by
+$e^{-|x|^2}$, which is not a polynomial.) The basic example is the \emph{harmonic oscillator}
 $H=\sum_j(D_j^2+x_j^2)$, with symbol $|x|^2+|\xi|^2$, studied in
 \cref{isotropic:sec:harmonic}.
 \end{example}
@@ -653,7 +661,13 @@ If $E$ and $F$ are finite-dimensional vector spaces, $\Psiiso{m}(\R^n;E,F)$
 denotes the operators from $\cS(\R^n;E)$ to $\cS(\R^n;F)$ given, after a choice
 of bases, by matrices of elements of $\Psiiso{m}(\R^n)$; equivalently their
 left symbols are in $\Gs{m}(\R^{2n};\Hom(E,F))$. All results of this chapter
-extend to this setting with only notational changes, and we use them freely; in
+extend to this setting with only notational changes, and we use them freely,
+with one exception: statements that use the commutativity of scalar symbols,
+such as the gain in order of commutators in \cref{isotropic:rem:principal}
+and the discussion above, hold for matrix-valued operators only when the
+principal symbols commute (e.g.\ when one of them is scalar). For instance two
+noncommuting constant matrices are operators of order $0$ whose commutator is
+a nonzero constant matrix, again of order exactly $0$. In
 \cref{isotropic:sec:L2} we work with $\C^N$-valued operators explicitly.
 \end{remark}
 
@@ -787,18 +801,32 @@ uniform convergence on bounded subsets of $\cS$.
 \begin{lemma}\label{isotropic:lem:partial-pairing}
 If $u\in\cSp(\R^q)$ and $F\in\cS(\R^p\times\R^q)$ then
 $f(z)=\pair{u}{F(z,\cdot)}$ lies in $\cS(\R^p)$, with
-$\pa_z^\alpha f=\pair{u}{\pa_z^\alpha F(z,\cdot)}$, and $(u,F)\mapsto f$ is continuous
-(hypocontinuous) and bounded on products of bounded sets.
+$\pa_z^\alpha f=\pair{u}{\pa_z^\alpha F(z,\cdot)}$. The bilinear map $(u,F)\mapsto f$
+is separately continuous and hypocontinuous: it is continuous in $F$ uniformly
+for $u$ in bounded subsets of $\cSp(\R^q)$, and continuous in $u$ (strong
+topology) uniformly for $F$ in bounded subsets of $\cS$. In particular it maps
+products of bounded sets to bounded sets. It is \emph{not} jointly continuous:
+otherwise, taking $p=0$, the pairing $\cSp\times\cS\to\C$ would be jointly
+continuous for the strong topology, which would give a bounded neighbourhood
+of zero in $\cS$, impossible since $\cS$ is not normable.
 \end{lemma}
 \begin{proof}
 The map $z\mapsto F(z,\cdot)\in\cS(\R^q)$ is smooth, by Taylor's formula with
 remainder and the uniform Schwartz bounds on the derivatives of $F$. The
 distribution $u$ has finite order:
-$|\pair{u}{\phi}|\le C\sum_{|\beta|+|\gamma|\le k}\sup|y^\beta D^\gamma\phi|$. Hence
+$|\pair{u}{\phi}|\le C\sum_{|\beta|+|\gamma|\le k}\sup|y^\beta D^\gamma\phi|$, and if
+$u$ ranges over a bounded subset of $\cSp(\R^q)$ the constants $C$ and $k$ can
+be chosen uniformly, since strongly bounded subsets of the dual of the
+Fréchet space $\cS$ are equicontinuous (Banach--Steinhaus). Hence
 \begin{equation*}
   |z^\delta\pa_z^\alpha f(z)|\le C\sum_{|\beta|+|\gamma|\le k}\sup_y|z^\delta y^\beta D_y^\gamma\pa_z^\alpha F(z,y)|,
 \end{equation*}
-which is bounded.
+which is bounded, and the right side is a Schwartz seminorm of $F$, uniformly
+for $u$ in a bounded set. Conversely, for $F$ in a bounded subset $B$ of
+$\cS(\R^p\times\R^q)$ the set $\{z^\delta\pa_z^\alpha F(z,\cdot);\ z\in\R^p,\ F\in B\}$ is
+bounded in $\cS(\R^q)$, so
+$\sup_z|z^\delta\pa_z^\alpha f(z)|$ is bounded by the strong seminorm of $u$
+defined by that bounded set, uniformly for $F\in B$.
 \end{proof}
 
 \begin{proposition}\label{isotropic:prop:S'-S}
@@ -1903,7 +1931,10 @@ measure $\nu$. Then
 defines an associative product on $\cS(W)$. For any Lagrangian decomposition
 $W=U_1\oplus U_2$ and Darboux coordinates as above, $(\cS(W),\#)$ is isomorphic,
 via the Weyl quantization, to $(\Psiiso{-\infty}(\R^n),\circ)$. The product
-extends uniquely to continuous bilinear maps $\Gs{m}(W)\times\Gs{m'}(W)\to\Gs{m+m'}(W)$,
+extends uniquely to a family of continuous bilinear maps
+$\Gs{m}(W)\times\Gs{m'}(W)\to\Gs{m+m'}(W)$, $m,m'\in\R$, compatible with the
+inclusions $\Gs{m}\subset\Gs{m''}$ for $m\le m''$ (that is, to a single
+product on $\Gs{\infty}(W)$ continuous on each pair of filtration levels),
 which in any Darboux coordinates correspond to composition in $\Psiiso{\infty}(\R^n)$,
 and for every $F\in\mathrm{Sp}(W)$
 \begin{equation}\label{isotropic:eq:symplectic-inv}
@@ -1921,9 +1952,18 @@ the Weyl product of symbols in $\Gs{m}$, $\Gs{m'}$ is continuous into
 $\Gs{m+m'}$: it is the composite of the continuous maps $a\mapsto\sigma_L(\OpW(a))$,
 its inverse (both continuous by the closed graph theorem, as in
 \cref{isotropic:thm:algebra}(iv)) and the product of
-\cref{isotropic:thm:algebra}(iv). Since $\cS$ is dense in $\Gs{m}$ for the
-topology of $\Gs{m+\eps}$ (\cref{isotropic:lem:Gamma-basic}(iv)) and $\eps>0$ is
-arbitrary, the extension is unique, and \eqref{isotropic:eq:symplectic-inv}
+\cref{isotropic:thm:algebra}(iv). For uniqueness, let $\#'$ be another family
+of continuous products compatible with the inclusions and agreeing with $\#$ on
+$\cS$. For $a\in\Gs{m}$, $b\in\Gs{m'}$ and $\eps>0$, compatibility gives
+$a\#'b$ as the value of the continuous map
+$\Gs{m+\eps}\times\Gs{m'+\eps}\to\Gs{m+m'+2\eps}$ at $(a,b)$; since $\cS$ is
+dense in $\Gs{m}$ for the topology of $\Gs{m+\eps}$
+(\cref{isotropic:lem:Gamma-basic}(iv)), $a\#'b=a\#b$ in
+$\Gs{m+m'+2\eps}$, hence as functions. (Compatibility across orders is
+needed: at a fixed order $\cS$ is not dense in $\Gs{m}$, since for instance
+$\ang{w}^m$ has distance at least one from $\cS$ in the weighted supremum
+seminorm, so continuity at a single pair of orders would not determine the
+extension.) Similarly \eqref{isotropic:eq:symplectic-inv}
 extends by continuity because $F^*$ is continuous on each $\Gs{m}(W)$. In
 particular, since two Darboux coordinate systems differ by an element of
 $\mathrm{Sp}(W)$, the extended product does not depend on the choice.
@@ -2769,8 +2809,16 @@ One can show that $\mathrm{Mp}(2n,\R)$, with the topology of strong
 convergence, is a connected Lie group and that \eqref{isotropic:eq:double-cover}
 is its unique connected double covering of $\mathrm{Sp}(2n,\R)$ (the
 fundamental group of $\mathrm{Sp}(2n,\R)$ being $\Z$, generated by the loop
-$R_t$, $t\in[0,2\pi]$); see \cite[Section~18.5]{Hormander-III}. We do not use
-these facts. Note also that the operator
+$R_t$, $t\in[0,2\pi]$). Here \cite[Section~18.5]{Hormander-III} (Theorem~18.5.9)
+supplies only the implementation of $\mathrm{Sp}(2n,\R)$ by unitary operators
+determined up to a phase, i.e.\ the circle extension; the computation of the
+fundamental group with its generator, and the structure of the metaplectic
+double cover with its local charts, are taken from the papers of Rawnsley and
+of de~Gosson listed in the Notes at the end of the chapter. That the strong
+topology is the Lie group topology can be checked from local metaplectic
+representatives, using a continuous branch of the phase of the Gaussian
+integrals and strong continuity on the dense span of the Hermite functions.
+We do not use these facts. Note also that the operator
 $P=\OpW(q)$ of \cref{isotropic:prop:exponentials} is in general not elliptic
 (e.g.\ for $q=x\cdot\xi$), so $\exp(-itP)$ is not obtained from the spectral
 theory of elliptic operators; the construction above uses the group structure
@@ -2780,8 +2828,16 @@ instead, and avoids any discussion of self-adjoint extensions.
 \subsection{Conjugation and symplectic invariance}
 
 \Cref{isotropic:thm:conjugation} gives a second proof of the symplectic
-invariance of the Weyl product, and shows that all the structures of this
-chapter are invariant under the metaplectic group.
+invariance of the Weyl product, and shows that all the structures of the
+\emph{isotropic} calculus are invariant under the metaplectic group. This
+fails for the scattering calculus of \cref{isotropic:sec:scattering}: already
+the Fourier transform interchanges the two scattering orders, and the shear
+$S(x,\xi)=(x+\xi,\xi)$ (with $n=1$) conjugates multiplication by a nonzero
+$f\in\CIc(\R)$ to the operator with Weyl symbol $f(x+\xi)$, whose left symbol
+is $g(x+\xi)$ with $\hat g(t)=e^{it^2/2}\hat f(t)$ (quantize $e^{it(x+\xi)}$ and
+superpose). Choosing $s$ with $g^{(j)}(s)\ne0$ for some $j>m+l$ and letting
+$|x|\to\infty$ along $x+\xi=s$ shows that this left symbol lies in no
+scattering class $S^{m,l}$.
 
 \begin{corollary}\label{isotropic:cor:conj-calculus}
 Let $U\in\mathcal M(2n)$ and $S=\pi(U)$.
@@ -2794,8 +2850,12 @@ Let $U\in\mathcal M(2n)$ and $S=\pi(U)$.
   $\Psiiso{\infty}(\R^n)$ preserving each $\Psiiso{m}(\R^n)$, $\Psiisoph{m}(\R^n)$
   and $\Psiiso{-\infty}(\R^n)$, and the group $\Gres(\R^n)$. If $A$ has Weyl
   symbol $a$ then $U^{-1}AU$ has Weyl symbol $a\circ S$; in particular
-  $\sigma_m(U^{-1}AU)=\sigma_m(A)\circ S$, and $U^{-1}AU$ is elliptic if and only
-  if $A$ is.
+  $\sigma_m(U^{-1}AU)=\sigma_m(A)\circ S$ as classes in $\Gs{m}/\Gs{m-1}$, and
+  $U^{-1}AU$ is elliptic if and only if $A$ is. For $A\in\Psiisoph{m}$, with
+  principal symbols identified with functions on $\Sphere^{2n-1}$, this reads
+  $\sigma_m(U^{-1}AU)(\theta)=|S\theta|^m\,\sigma_m(A)(S\theta/|S\theta|)$: the
+  principal symbol is first extended homogeneously of degree $m$ and then
+  pulled back.
 \item $U$ is an isomorphism of $\Hiso{s}(\R^n)$ for every $s\in\R$.
 \end{enumerate}
 \end{corollary}
@@ -2843,18 +2903,21 @@ The identification $\Gph{0}(\R^{2n})=\rc^*\CI(\Hsph{2n})$ of
 order. For $z\in\C$ set
 \begin{equation*}
   \Gph{z}(\R^N)=\ang{w}^z\,\Gph{0}(\R^N)=\rc^*\bigl(\rho^{-z}\CI(\Hsph{N})\bigr),\qquad
-  \Psiiso{z}(\R^n)=\Op\bigl(\Gph{z}(\R^{2n})\bigr).
+  \Psiisoph{z}(\R^n)=\Op\bigl(\Gph{z}(\R^{2n})\bigr).
 \end{equation*}
-For real $z$ this agrees with $\Gph{z}$ as defined before, since $\ang{w}^z\in\Gph{z}$.
+For real $z$ this agrees with $\Gph{z}$ as defined before, since $\ang{w}^z\in\Gph{z}$,
+so $\Psiisoph{z}$ agrees with the space of \cref{isotropic:def:Psiiso}; we
+keep the subscript `ph' also for complex orders, since for real $z=m$ the
+space $\Psiisoph{m}$ is strictly smaller than $\Psiiso{m}$.
 Since $|\pa^\alpha\ang{w}^z|\le C_\alpha\ang{w}^{\operatorname{Re}z-|\alpha|}$,
-$\Gph{z}\subset\Gs{\operatorname{Re}z}$ and $\Psiiso{z}\subset\Psiiso{\operatorname{Re}z}$. The
+$\Gph{z}\subset\Gs{\operatorname{Re}z}$ and $\Psiisoph{z}\subset\Psiiso{\operatorname{Re}z}$. The
 definition does not depend on the choice of boundary defining function: if
 $\rho'=f\rho$ with $0<f\in\CI(\Hsph{N})$ then $f^{z}=e^{z\log f}$ is smooth, so
 $\rho'^{-z}\CI=\rho^{-z}\CI$.
 
 \begin{proposition}\label{isotropic:prop:complex-order}
-For $z,z'\in\C$, $\Psiiso{z}(\R^n)\circ\Psiiso{z'}(\R^n)\subset\Psiiso{z+z'}(\R^n)$
-and $\Psiiso{z}(\R^n)^*=\Psiiso{\bar z}(\R^n)$.
+For $z,z'\in\C$, $\Psiisoph{z}(\R^n)\circ\Psiisoph{z'}(\R^n)\subset\Psiisoph{z+z'}(\R^n)$
+and $\Psiisoph{z}(\R^n)^*=\Psiisoph{\bar z}(\R^n)$.
 \end{proposition}
 \begin{proof}
 Differentiation maps $\ang{w}^z\Gph{0}$ into $\ang{w}^z\Gph{-1}$, since
@@ -2871,7 +2934,7 @@ same way.
 Even more useful are holomorphic families. A map $\Omega\to\CI(\Hsph{N})$, with
 $\Omega\subset\C$ open, is \emph{holomorphic} if it is given by an element of
 $\CI(\Omega\times\Hsph{N})$ satisfying the Cauchy--Riemann equation in the first
-variable. If $h:\Omega\to\C$ is holomorphic, a family $A(z)\in\Psiiso{h(z)}(\R^n)$,
+variable. If $h:\Omega\to\C$ is holomorphic, a family $A(z)\in\Psiisoph{h(z)}(\R^n)$,
 $z\in\Omega$, is a \emph{holomorphic family of order $h$} if
 $\sigma_L(A(z))=\ang{w}^{h(z)}\rc^*F(z)$ with $F:\Omega\to\CI(\Hsph{2n})$
 holomorphic.
@@ -3106,4 +3169,9 @@ shown to be a character by a differentiation argument
 generation by exponentials of quadratic forms and the explicit
 generating-function form (\cref{isotropic:prop:mp-fio}) at once. For other
 treatments see \cite[Section~18.5]{Hormander-III} and G.~B.~Folland,
-\emph{Harmonic analysis in phase space} (1989), Chapter~4.
+\emph{Harmonic analysis in phase space} (1989), Chapter~4. For the topology of
+$\mathrm{Mp}(2n,\R)$ and the fundamental group of $\mathrm{Sp}(2n,\R)$
+(\cref{isotropic:rem:mp-topology}) see J.~H.~Rawnsley, \emph{On the universal
+covering group of the real symplectic group}, J.~Geom.\ Phys.\ \textbf{62}
+(2012), 2044--2058, and M.~de~Gosson, \emph{Maslov indices on the metaplectic
+group $\mathrm{Mp}(n)$}, Ann.\ Inst.\ Fourier \textbf{40} (1990), 537--555.
