@@ -440,9 +440,10 @@ trivialization over a ball $U\ni b_0$ consider
 T(c):H^m(Z;E_0)\oplus\C^p\longrightarrow L^2(Z;F_0),\quad
 T(c)(u,a)=A(c)u+\sum_ja_js_j|_{Z_c}.
 \end{equation*}
-The $v_j$ also span a complement to the range of $A_{b_0}$ on $H^m$, since this
-range is $\Nul(A^*_{b_0})^\perp$ and has codimension $\dim\Nul(A_{b_0}^*)$, which
-is the codimension of the range on $\CI$. Thus $T(b_0)$ is surjective. By
+The $v_j$ also span a complement to the range of $A_{b_0}$ on $H^m$: this
+range is $\Nul(A^*_{b_0})^\perp$, of codimension $\dim\Nul(A_{b_0}^*)=p$, and if
+$\sum_jc_jv_j=A_{b_0}u$ with $u\in H^m$ then $u\in\CI$ by elliptic regularity, so
+$c=0$. Thus $T(b_0)$ is surjective. By
 \cref{product:lem:norm-continuity}, $T(c)$ depends continuously on $c$ in norm,
 and surjectivity is an open condition (a surjective bounded operator has a
 bounded right inverse, and small perturbations of an operator with a bounded
@@ -937,9 +938,10 @@ itself a product-type symbol in the sense of (i), so (ii) follows from (i) and
 Leibniz' formula.
 
 (iii) and (iv) follow directly from \eqref{product:eq:symbol-est} and Leibniz'
-formula, and for classical symbols from the fact that $L'$, $Q'$, and
-$\rho_W\pa_\zeta$, $\rho_W\rho_V\pa_\eta$ (in the original coordinates) are smooth
-on $\RelC VW$; the inclusions in (iv) hold because $\ang q\ge1$ and $\ang\zeta\ge1$.
+formula, and for classical symbols from the fact that $L'_j$, $Q'_i$, and hence
+$\rho_W^{-1}\pa_{\zeta_j}=L_j$ and $(\rho_W\rho_V)^{-1}\pa_{\eta_i}=Q_i$ (in the
+original coordinates), are smooth vector fields on $\RelC VW$ tangent to the
+boundary; the inclusions in (iv) hold because $\ang q\ge1$ and $\ang\zeta\ge1$.
 
 (v) For $a\in\Sym\mu(W)$, $|\pa^\alpha_\zeta\pa^\beta_\eta a|\le
 C\ang{\zeta,\eta}^{\mu-|\alpha|-|\beta|}\le C\ang\zeta^{-|\alpha|}

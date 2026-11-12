@@ -7,10 +7,10 @@
 \providecommand{\res}{\operatorname{res}}
 \providecommand{\FP}{\operatorname{FP}}
 \providecommand{\wind}{\operatorname{wind}}
-\providecommand{\Hardy}{\mathcal{H}}
-\providecommand{\GT}{G_{\mathcal{T}}}
+\providecommand{\HardyL}{\mathcal{H}}
+\providecommand{\GTeta}{G_{\mathcal{T}}}
 \providecommand{\PsiT}[1]{\Psi^{#1}_{\mathcal{T}}}
-\providecommand{\Psipt}[1]{\Psi^{#1}_{\mathrm{pt}}}
+\providecommand{\Psipteta}[1]{\Psi^{#1}_{\mathrm{pt}}}
 \providecommand{\PsiptT}[1]{\Psi^{#1}_{\mathrm{pt},\mathcal{T}}}
 
 The index formula for product-type operators involves, besides the familiar
@@ -480,28 +480,28 @@ $\TrR((D_EA)B)=-\frac1{2\pi}\int_0^{2\pi}1\,d\theta=-1$, as it must be by
 \section{Odd Chern forms and the Toeplitz index}\label{eta:sec:chern}
 
 \subsection{Toeplitz operators} We recall from \cref{ch:index}. The Szeg\H{o} projector
-$\Pi\in\Psido{0}(\Sphere)$ projects onto the span $\Hardy$ of the $e^{ik\theta}$,
+$\Pi\in\Psido{0}(\Sphere)$ projects onto the span $\HardyL$ of the $e^{ik\theta}$,
 $k\ge0$; its symbol is $1$ on $\xi>0$ and its full symbol is rapidly decreasing as
 $\xi\to-\infty$. The Toeplitz algebra
 \[
 \PsiT{m}(\Sphere;\C^N)=\Pi\Psido{m}(\Sphere;\C^N)\Pi
 \]
-acts on $\Hardy\otimes\C^N$, with identity $\Pi$; the full symbols of its elements are
+acts on $\HardyL\otimes\C^N$, with identity $\Pi$; the full symbols of its elements are
 rapidly decreasing as $\xi\to-\infty$, and we write $\sigma_0(A)(\theta)$ for the
 principal symbol at $(\theta,+1)$. An element of $\PsiT{0}$ is Fredholm on
-$\Hardy\otimes\C^N$ if and only if $\sigma_0(A)$ is invertible, and then
+$\HardyL\otimes\C^N$ if and only if $\sigma_0(A)$ is invertible, and then
 \begin{equation}\label{eta:eq:toeplitz-index}
 \ind(A)=\frac{i}{2\pi}\int_0^{2\pi}\tr\bigl(\sigma_0(A)^{-1}\pa_\theta\sigma_0(A)\bigr)d\theta
 =-\wind\det\sigma_0(A).
 \end{equation}
 For instance the shift $U=\Pi e^{i\theta}\Pi$ has index $-1$. Let
 \[
-\GT(\Sphere;\C^N)=\{B\in\PsiT{0}(\Sphere;\C^N);\ B\text{ invertible on }\Hardy\otimes\C^N,
+\GTeta(\Sphere;\C^N)=\{B\in\PsiT{0}(\Sphere;\C^N);\ B\text{ invertible on }\HardyL\otimes\C^N,
 \ B^{-1}\in\PsiT{0}(\Sphere;\C^N)\}
 \]
-and $G^{-\infty}_{\mathcal T}=\GT\cap(\Pi+\PsiT{-\infty})$. Symbols of elements of
-$\GT$ are loops in $\GL(N,\C)$ with winding number $0$. Products of operators on
-$\Hardy\otimes\C^N$ are products in $\Psido{\Z}(\Sphere;\C^N)$, so $\Trbar$ and $\TrR$
+and $G^{-\infty}_{\mathcal T}=\GTeta\cap(\Pi+\PsiT{-\infty})$. Symbols of elements of
+$\GTeta$ are loops in $\GL(N,\C)$ with winding number $0$. Products of operators on
+$\HardyL\otimes\C^N$ are products in $\Psido{\Z}(\Sphere;\C^N)$, so $\Trbar$ and $\TrR$
 apply to elements of $\PsiT{\Z}$.
 
 \subsection{Odd Chern forms} For a manifold $W$ and $a\in\CI(W;\GL(N,\C))$ set
@@ -606,7 +606,7 @@ case $W=\{\mathrm{pt}\}$ of \eqref{eta:eq:toeplitz-index}--\eqref{eta:eq:toeplit
 
 \section{Eta forms}\label{eta:sec:eta}
 
-Let $X$ be a manifold and $B\in\CI(X;\GT(\Sphere;\C^N))$ a smooth family of invertible
+Let $X$ be a manifold and $B\in\CI(X;\GTeta(\Sphere;\C^N))$ a smooth family of invertible
 Toeplitz operators. Then
 \[
 \alpha=B^{-1}dB\in\CI(X;\Lambda^1\otimes\PsiT{0}(\Sphere;\C^N))
@@ -634,10 +634,10 @@ The $\gamma$-forms are local in the symbol $b$; they vanish if $b$ is independen
 $\theta$. If $B\in\CI(X;G^{-\infty}_{\mathcal T})$ then $B^{-1}dB$ is smoothing, so
 $\Trbar=\Tr$ and $\eta(B)=\Chodd(B)$, while $b=\Id$ and $\gamma(b)=0$. Thus $\eta$
 \emph{extends the odd Chern character from the normal subgroup $G^{-\infty}_{\mathcal T}$
-to the whole group} $\GT$, at the expense of no longer being closed.
+to the whole group} $\GTeta$, at the expense of no longer being closed.
 
 \begin{theorem}\label{eta:thm:variation}
-For every smooth family $B\in\CI(X;\GT(\Sphere;\C^N))$ with symbol $b$,
+For every smooth family $B\in\CI(X;\GTeta(\Sphere;\C^N))$ with symbol $b$,
 \begin{equation}\label{eta:eq:variation}
 d\bigl(\eta_{2k+1}(B)+\gamma_{2k+1}(b)\bigr)=\frac{i}{4\pi(2k+3)}\int_\Sphere
 \tr\bigl((b^{-1}d'b)^{2k+3}\bigr)
@@ -697,7 +697,7 @@ on the smoothing part of $B$. The situation can be summarized in the diagram
 \[
 \begin{tikzcd}[column sep=small]
 \Chodd & \eta\arrow[l,"\text{restrict}"']\arrow[r,"d(\cdot+\gamma)"] & -\int_\Sphere\Chodd\\
-G^{-\infty}_{\mathcal T}(\Sphere;\C^N)\arrow[r] & \GT(\Sphere;\C^N)\arrow[r,"\sigma_0"] &
+G^{-\infty}_{\mathcal T}(\Sphere;\C^N)\arrow[r] & \GTeta(\Sphere;\C^N)\arrow[r,"\sigma_0"] &
 \CI(\Sphere;\GL(N,\C))_0
 \end{tikzcd}
 \]
@@ -710,7 +710,7 @@ the transgression only involves the principal symbol is a higher analogue of the
 `miracle of the loop group' of Pressley and Segal \cite{Pressley-Segal}.
 
 \begin{proposition}\label{eta:prop:eta-det}
-Let $B\in\CI(X;\GT(\Sphere;\C^N))$ and $g\in\CI(X;G^{-\infty}_{\mathcal T})$. Then
+Let $B\in\CI(X;\GTeta(\Sphere;\C^N))$ and $g\in\CI(X;G^{-\infty}_{\mathcal T})$. Then
 \begin{enumerate}[label=(\roman*)]
 \item $\eta_1(g)=\Tr(g^{-1}dg)=d\log\det g$;
 \item $\eta_1(Bg)=\eta_1(B)+d\log\det g$ and $\eta_1(gB)=\eta_1(B)+d\log\det g$;
@@ -734,10 +734,10 @@ $\Tr(B^{-1}(g^{-1}dg)B)=\Tr(g^{-1}dg)$ because $g^{-1}dg$ is of trace class.
 \end{proof}
 
 \begin{remark}\label{eta:rem:determinant-connection}
-Consider the principal bundle $\GT\longrightarrow\GT/G^{-\infty}_{\mathcal T}$ and the line
+Consider the principal bundle $\GTeta\longrightarrow\GTeta/G^{-\infty}_{\mathcal T}$ and the line
 bundle $L$ associated to it by the character $\det:G^{-\infty}_{\mathcal T}\longrightarrow\C^*$.
 By (ii), and since $\gamma_1(\sigma_0(Bg))=\gamma_1(\sigma_0(B))$, the $1$-form
-$\eta_1+\gamma_1$ on $\GT$ is a connection form for $L$ (its restriction to the
+$\eta_1+\gamma_1$ on $\GTeta$ is a connection form for $L$ (its restriction to the
 fibres is $d\log\det$ and it transforms correctly); by (iii) its curvature is the
 $2$-form $\frac{i}{12\pi}\int_\Sphere\tr((b^{-1}d'b)^3)$, which depends only on the
 symbol and so descends. The first Chern form $\frac{i}{2\pi}d(\eta_1+\gamma_1)$ of $L$
@@ -754,7 +754,7 @@ $\eta_1$ is a regularized form of $d\log\det$ on the Toeplitz group; see also
 \subsection{The product-type calculus on $M\times\Sphere$} Let $M$ be a compact
 manifold without boundary of dimension $n\ge1$ and consider the trivial fibration
 $\pi:M\times\Sphere\longrightarrow M$. We use the following facts from
-\cref{ch:product} about the product-type operators $\Psipt{0,0}(M\times\Sphere;\C^N)$
+\cref{ch:product} about the product-type operators $\Psipteta{0,0}(M\times\Sphere;\C^N)$
 associated to this fibration.
 
 \begin{enumerate}[label=(P\arabic*)]
@@ -788,12 +788,12 @@ $h(m,\cdot)$.
 \end{enumerate}
 
 Since the Szeg\H{o} projector $\Pi$, acting in $\theta$, is a fibrewise operator, it is in
-$\Psipt{0,0}$ with $\sigma(\Pi)=1$ on $S^*_+$, $\sigma(\Pi)=0$ on $S^*_-$, and
+$\Psipteta{0,0}$ with $\sigma(\Pi)=1$ on $S^*_+$, $\sigma(\Pi)=0$ on $S^*_-$, and
 $\beta(\Pi)=\Pi$. The \emph{product-type Toeplitz algebra} is
 \[
-\PsiptT{0,0}(M\times\Sphere;\C^N)=\Pi\,\Psipt{0,0}(M\times\Sphere;\C^N)\,\Pi,
+\PsiptT{0,0}(M\times\Sphere;\C^N)=\Pi\,\Psipteta{0,0}(M\times\Sphere;\C^N)\,\Pi,
 \]
-acting on $\Hardy(M\times\Sphere;\C^N)=\Pi\CI(M\times\Sphere;\C^N)$ (or its $L^2$
+acting on $\HardyL(M\times\Sphere;\C^N)=\Pi\CI(M\times\Sphere;\C^N)$ (or its $L^2$
 closure), with identity $\Pi$. For $A$ in this algebra the principal symbol vanishes
 on $S^*_-$; we set
 \begin{gather*}
@@ -801,9 +801,9 @@ a=\sigma(A)|_{S^*_+}\in\CI(S^*_+;M(N,\C)),\\
 \beta=\beta(A)\in\CI(S^*M;\PsiT{0}(\Sphere;\C^N)),\quad b=a|_{\pa S^*_+}=\sigma_0(\beta).
 \end{gather*}
 $A$ is \emph{fully elliptic} if $a$ takes values in $\GL(N,\C)$ and
-$\beta\in\CI(S^*M;\GT(\Sphere;\C^N))$; then $A$ is Fredholm on $\Hardy$ (apply
+$\beta\in\CI(S^*M;\GTeta(\Sphere;\C^N))$; then $A$ is Fredholm on $\HardyL$ (apply
 \ref{eta:P4} to $A+\Id-\Pi$) and its index has the properties in \ref{eta:P4}. We
-write $\ind(A)$ for the index on $\Hardy$.
+write $\ind(A)$ for the index on $\HardyL$.
 
 \subsection{Geometry and orientations} Fix a metric on $M$ and use the product metric
 on $M\times\Sphere$. In each fibre of $S^*_+\to M\times\Sphere$, stereographic
@@ -941,7 +941,7 @@ $a=\Id$).
 
 \begin{lemma}\label{eta:lem:base-multiplication}
 If $h\in\CI(M;\GL(N,\C))$ and $H$ denotes multiplication by $h$ on
-$\Hardy(M\times\Sphere;\C^N)$, then $H$ is fully elliptic and $\ind(H)=I(H)=0$.
+$\HardyL(M\times\Sphere;\C^N)$, then $H$ is fully elliptic and $\ind(H)=I(H)=0$.
 \end{lemma}
 
 \begin{proof} $H$ is invertible, so $\ind(H)=0$. Its symbols are $a=h$ (pulled back to
@@ -964,7 +964,7 @@ $\Pi P\Pi\in\PsiptT{0,0}$ is fully elliptic with $a=p|_{S^*_+}$, $\beta=\Pi$, an
 
 \begin{proof} By \ref{eta:P5}, $\beta(P)$ is multiplication by $p|_{\tau=0}=\Id$, so
 $\beta(\Pi P\Pi)=\Pi$ and $\sigma(\Pi P\Pi)=p$ on $S^*_+$. With respect to
-$L^2=\Hardy\oplus\Hardy^\perp$ write $P=\Pi P\Pi+(\Id-\Pi)P(\Id-\Pi)+K$,
+$L^2=\HardyL\oplus\HardyL^\perp$ write $P=\Pi P\Pi+(\Id-\Pi)P(\Id-\Pi)+K$,
 $K=\Pi P(\Id-\Pi)+(\Id-\Pi)P\Pi$. Both symbols of $K$ vanish ($\sigma(\Pi)\sigma(\Id-\Pi)=0$
 and $\Pi\,\Id\,(\Id-\Pi)=0$), and both symbols of $(\Id-\Pi)P(\Id-\Pi)-(\Id-\Pi)$ vanish
 (on $S^*_-$, $p=\Id$). By \ref{eta:P3} these are compact, so $\ind(P)=\ind(\Pi P\Pi)
@@ -976,10 +976,10 @@ $M\times\Sphere$ gives $\ind(P)=I(\Pi P\Pi)$.
 \end{proof}
 
 We also need the weak contractibility of the normalized Toeplitz group from
-\cref{ch:bott}, in the following form. If $\beta'\in\CI(X;\GT(\Sphere;\C^N))$, $X$
+\cref{ch:bott}, in the following form. If $\beta'\in\CI(X;\GTeta(\Sphere;\C^N))$, $X$
 compact, satisfies the normalization $\sigma_0(\beta')(x,1)=\Id$ (at $\theta=0$), then
 after stabilization $\C^N\subset\C^K$, $\beta'\oplus\Pi$ is smoothly homotopic through
-$\CI(X;\GT(\Sphere;\C^K))$ to the constant family $\Pi$. Indeed \cref{ch:bott} gives
+$\CI(X;\GTeta(\Sphere;\C^K))$ to the constant family $\Pi$. Indeed \cref{ch:bott} gives
 such a homotopy in the group stabilized by the smoothing operators on an auxiliary
 manifold $Y$, with $\C^N$ embedded as the span of the first $N$ eigenfunctions of a
 Laplacian on $Y$; compressing the homotopy by the spectral projection onto the first
@@ -1000,12 +1000,12 @@ a_t(q,r)=b_{t(1-\phi(r))}(q)\,b_0(q)^{-1}a(q,r)\ \text{in the collar},\qquad
 a_t=a\ \text{elsewhere},
 \]
 is a smooth homotopy of $a$ through invertible symbols with $a_t|_{\pa S^*_+}=b_t$. So any
-smooth homotopy $\beta_t$ of $\beta$ through $\CI(X;\GT)$ extends to a homotopy of fully
+smooth homotopy $\beta_t$ of $\beta$ through $\CI(X;\GTeta)$ extends to a homotopy of fully
 elliptic compatible pairs $(a_t,\beta_t)$, which does not change $\Delta$
 (\cref{eta:prop:homotopy}).
 
 \emph{Step 1: $\beta$ constant in $\theta$.} Let $g(x)=b(x,1)\in\GL(N,\C)$ and
-$\beta'=g^{-1}\beta$ (the matrix $g(x)^{-1}$ acting on $\Hardy\otimes\C^N$, which
+$\beta'=g^{-1}\beta$ (the matrix $g(x)^{-1}$ acting on $\HardyL\otimes\C^N$, which
 commutes with $\Pi$). Then $\beta'$ is normalized, so after stabilization there is a
 homotopy $\beta'_t$ from $\beta'$ to $\Pi$, and $\beta_t=g\beta'_t$ is a homotopy from $\beta$
 to $\Pi g\Pi$. After extending it as above we may assume that $\beta(x)=\Pi g(x)\Pi$
@@ -1074,7 +1074,7 @@ without $\gamma$ cannot hold for all $t$.
 
 The formula extends to the full product-type calculus, where both halves $S^*_\pm$ of the
 blown-up cosphere bundle carry symbols. For a fully elliptic
-$P\in\Psipt{0,0}(M\times\Sphere;\C^N)$ write $a_\pm=\sigma(P)|_{S^*_\pm}$,
+$P\in\Psipteta{0,0}(M\times\Sphere;\C^N)$ write $a_\pm=\sigma(P)|_{S^*_\pm}$,
 $\beta=\beta(P)\in\CI(S^*M;\Psido{0}(\Sphere;\C^N))$ and $b_\pm=a_\pm|_{\pa S^*_\pm}$, regarded as
 functions on $S^*M\times\Sphere$. The eta form $\eta(\beta)$ is defined exactly as before, with
 $\Trbar$ on $\Psido{0}(\Sphere;\C^N)$. For a map $c\in\CI(S^*M\times\Sphere;\GL(N,\C))$ let
@@ -1082,7 +1082,7 @@ $\langle\Chodd(c)\rangle=\frac1{2\pi}\int_0^{2\pi}\Chodd(c(\cdot,\theta))\,d\the
 $\theta$-average of the odd Chern forms of the maps $c(\cdot,\theta)$ on $S^*M$.
 
 \begin{proposition}\label{eta:prop:full}
-For every fully elliptic $P\in\Psipt{0,0}(M\times\Sphere;\C^N)$,
+For every fully elliptic $P\in\Psipteta{0,0}(M\times\Sphere;\C^N)$,
 \begin{multline*}
 \ind(P)=\int_{S^*M}\Td(M)\wedge\bigl(\eta(\beta)+\langle\Chodd(b_-)\rangle+\gamma(b_+)-\gamma(b_-)\bigr)\\
 +\int_{S^*_+}\Td(M)\wedge\Chodd(a_+)+\int_{S^*_-}\Td(M)\wedge\Chodd(a_-),
@@ -1091,10 +1091,10 @@ with $S^*_\pm$ oriented as subsets of $S^*(M\times\Sphere)$ and $S^*M$ Liouville
 oriented.
 \end{proposition}
 
-\begin{proof} Let $J:\Hardy^\perp\longrightarrow\Hardy$ be the unitary
+\begin{proof} Let $J:\HardyL^\perp\longrightarrow\HardyL$ be the unitary
 $(Ju)(\theta)=e^{-i\theta}u(-\theta)$, mapping $e^{-i(k+1)\theta}$ to $e^{ik\theta}$, and
 \[
-\mathcal U:L^2(M\times\Sphere;\C^N)\longrightarrow\Hardy(M\times\Sphere;\C^{2N}),\quad
+\mathcal U:L^2(M\times\Sphere;\C^N)\longrightarrow\HardyL(M\times\Sphere;\C^{2N}),\quad
 \mathcal Uu=\bigl(\Pi u,J(\Id-\Pi)u\bigr).
 \]
 The reflection $\theta\mapsto-\theta$ is a fibre-preserving diffeomorphism, so it
@@ -1173,7 +1173,7 @@ Consider now a compound fibration of compact manifolds
 \[
 M\xrightarrow{\ \psi\ }Y\xrightarrow{\ \Phi\ }B,\qquad\phi=\Phi\circ\psi,
 \]
-and the families $A\in\Psipt{0,0}(M/B;\mathbb E)$ of operators on the fibres of $\phi$
+and the families $A\in\Psipteta{0,0}(M/B;\mathbb E)$ of operators on the fibres of $\phi$
 which are of product type with respect to the fibration (over $\Phi^{-1}(b)$) induced by
 $\psi$. Such a family has two symbols,
 \[
@@ -1334,7 +1334,7 @@ equivalence relation one obtains the dual line bundle.
 \section{Exercises}\label{eta:sec:exercises}
 
 \begin{exercise}\label{eta:ex:defect-shift}
-Let $U=\Pi e^{i\theta}\Pi$ and $L=\Pi e^{-i\theta}\Pi$ be the shifts on $\Hardy$. Show
+Let $U=\Pi e^{i\theta}\Pi$ and $L=\Pi e^{-i\theta}\Pi$ be the shifts on $\HardyL$. Show
 that $[L,U]$ is the projection onto the constants, and verify the trace-defect formula
 $\Trbar([L,U])=\TrR((D_EL)U)=1$ directly from \cref{eta:lem:circle}.
 \end{exercise}

@@ -1,6 +1,6 @@
 \chapter{Traces, determinants and the index}\label{ch:determinants}
-\providecommand{\Siso}[1]{S^{#1}_{\mathrm{iso}}}
-\providecommand{\Psiisoinf}[1]{\Psi^{#1}_{\mathrm{iso},\infty}}
+\providecommand{\Gs}[1]{\Gamma^{#1}}
+\providecommand{\Psiisoph}[1]{\Psi^{#1}_{\mathrm{iso,ph}}}
 \providecommand{\detFr}{\operatorname{det}_{\mathrm{Fr}}}
 \providecommand{\TrRes}{\operatorname{Tr}_{\mathrm{R}}}
 \providecommand{\TrReg}[1]{\overline{\operatorname{Tr}}_{#1}}
@@ -31,54 +31,54 @@ We recall from \cref{ch:isotropic} what we need, and fix notation. Write
 $Z=(x,\xi)\in\R^{2n}$. For $m\in\R$ the space of \emph{isotropic symbols} of
 order $m$ is
 \begin{equation*}
-  \Siso{m}(\R^{2n})=\bigl\{a\in\CI(\R^{2n});\ \abs{D_Z^\alpha a(Z)}\le
+  \Gs{m}(\R^{2n})=\bigl\{a\in\CI(\R^{2n});\ \abs{D_Z^\alpha a(Z)}\le
   C_\alpha\ang{Z}^{m-\abs{\alpha}}\ \forall\,\alpha\bigr\},
 \end{equation*}
 a Fr\'echet space with the best constants $C_\alpha$ as seminorms, and
-$\Psiisoinf{m}(\R^n)=\Op(\Siso{m}(\R^{2n}))$, with the left quantization of
-the Introduction. The polyhomogeneous subspace $\Psiiso{m}(\R^n)$ consists of
+$\Psiiso{m}(\R^n)=\Op(\Gs{m}(\R^{2n}))$, with the left quantization of
+the Introduction. The polyhomogeneous subspace $\Psiisoph{m}(\R^n)$ consists of
 the operators whose left symbol has an expansion $a\sim\sum_{j\ge0}a_{m-j}$
 with $a_{m-j}$ homogeneous of degree $m-j$ in $\abs{Z}\ge1$; equivalently,
 $\ang{Z}^{-m}a$ is smooth on the radial compactification $\RC{\R^{2n}}$, i.e.\
 in polar coordinates $Z=\theta/t$, $t=\abs{Z}^{-1}$, it is smooth up to $t=0$.
 The same definition with $m$ replaced by $z\in\C$ gives the operators
-$\Psiiso{z}(\R^n)\subset\Psiisoinf{\Re z}(\R^n)$ of complex order. We write
-$\Psiiso{\Z}(\R^n)=\bigcup_{m\in\Z}\Psiiso{m}(\R^n)$. The \emph{residual}
+$\Psiisoph{z}(\R^n)\subset\Psiiso{\Re z}(\R^n)$ of complex order. We write
+$\Psiisoph{\Z}(\R^n)=\bigcup_{m\in\Z}\Psiisoph{m}(\R^n)$. The \emph{residual}
 operators are
 \begin{equation*}
-  \Psiiso{-\infty}(\R^n)=\bigcap_m\Psiisoinf{m}(\R^n)=\bigcap_m\Psiiso{m}(\R^n),
+  \Psiiso{-\infty}(\R^n)=\bigcap_m\Psiiso{m}(\R^n)=\bigcap_m\Psiisoph{m}(\R^n),
 \end{equation*}
 which are exactly the operators with Schwartz kernels in $\cS(\R^{2n})$; we
 identify $\Psiiso{-\infty}(\R^n)$ with $\cS(\R^{2n})$, including its
 topology.
 
 All of this applies to operators on $\C^N$-valued functions:
-$\Psiiso{m}(\R^n;\C^N)$ consists of $N\times N$ matrices of elements of
-$\Psiiso{m}(\R^n)$ (see \cref{determinants:ex:bundles}). Everything below
+$\Psiisoph{m}(\R^n;\C^N)$ consists of $N\times N$ matrices of elements of
+$\Psiisoph{m}(\R^n)$ (see \cref{determinants:ex:bundles}). Everything below
 holds in this generality, with $\tr$ denoting the trace of matrices; to keep
 the notation light we often suppress $\C^N$.
 
 We use the following results from \cref{ch:isotropic}.
 \begin{enumerate}[label=(I\arabic*)]
 \item\label{determinants:I:algebra} \emph{Algebra.} Composition maps
-  $\Psiisoinf{m}\times\Psiisoinf{m'}$ to $\Psiisoinf{m+m'}$ continuously for
-  the symbol topologies, and $\Psiiso{z}\times\Psiiso{z'}$ to
-  $\Psiiso{z+z'}$; the left symbol of a composite is given by
+  $\Psiiso{m}\times\Psiiso{m'}$ to $\Psiiso{m+m'}$ continuously for
+  the symbol topologies, and $\Psiisoph{z}\times\Psiisoph{z'}$ to
+  $\Psiisoph{z+z'}$; the left symbol of a composite is given by
   $\sigma_L(AB)\sim\sum_\alpha\frac1{\alpha!}\pa_\xi^\alpha a\,D_x^\alpha b$.
-  Adjoints and transposes of elements of $\Psiisoinf{m}$ (resp.\ $\Psiiso{z}$)
+  Adjoints and transposes of elements of $\Psiiso{m}$ (resp.\ $\Psiisoph{z}$)
   lie in the same space. In particular $\Psiiso{-\infty}$ is a two-sided ideal.
   The principal symbol is multiplicative.
 \item\label{determinants:I:bounded} \emph{Boundedness.} Every element of
-  $\Psiisoinf{m}$ is continuous on $\cS(\R^n)$ and on $\cSp(\R^n)$; elements
-  of $\Psiisoinf{0}$ are bounded on $L^2(\R^n)$, with norm bounded by a symbol
+  $\Psiiso{m}$ is continuous on $\cS(\R^n)$ and on $\cSp(\R^n)$; elements
+  of $\Psiiso{0}$ are bounded on $L^2(\R^n)$, with norm bounded by a symbol
   seminorm; elements of negative order are compact on $L^2$, and residual
   operators map $\cSp(\R^n)$ continuously into $\cS(\R^n)$.
 \item\label{determinants:I:elliptic} \emph{Ellipticity.} An element
-  $A\in\Psiiso{z}(\R^n;\C^N)$ is elliptic if its principal symbol is invertible
-  on the sphere. It then has a parametrix $B\in\Psiiso{-z}$, with $AB-\Id$ and
+  $A\in\Psiisoph{z}(\R^n;\C^N)$ is elliptic if its principal symbol is invertible
+  on the sphere. It then has a parametrix $B\in\Psiisoph{-z}$, with $AB-\Id$ and
   $BA-\Id$ residual; any two parametrices differ by a residual operator.
   If $Au\in\cS$ for some $u\in\cSp$, then $u\in\cS$. There is a
-  \emph{generalized inverse} $B\in\Psiiso{-z}$ with
+  \emph{generalized inverse} $B\in\Psiisoph{-z}$ with
   \begin{equation}\label{determinants:eq:gen-inverse}
     AB=\Id-\Pi_1,\quad BA=\Id-\Pi_0,
   \end{equation}
@@ -87,7 +87,7 @@ We use the following results from \cref{ch:isotropic}.
   on $\cSp$). Replacing $B$ by $(\Id-\Pi_0)B(\Id-\Pi_1)$, which changes
   neither identity since $A\Pi_0=0$ and $\Pi_1A=0$, we may and do assume
   $\Pi_0B=0=B\Pi_1$. In particular an elliptic $A$ which is a bijection on
-  $\cSp$ (we then say $A$ is \emph{invertible}) has inverse in $\Psiiso{-z}$.
+  $\cSp$ (we then say $A$ is \emph{invertible}) has inverse in $\Psiisoph{-z}$.
   For order $0$, $A$ is invertible in this sense if and only if it is
   invertible on $L^2$.
 \item\label{determinants:I:residual} \emph{The residual algebra.} If
@@ -123,7 +123,7 @@ We use the following results from \cref{ch:isotropic}.
       a(z;r\theta)=r^{h(z)}\,b(z;1/r,\theta),\quad r\ge1,\ \theta\in\Sphere^{2n-1},
     \end{equation}
     with $b\in\CI(\Omega\times[0,1]\times\Sphere^{2n-1})$ holomorphic in $z$.
-    Then $A(z)\in\Psiiso{h(z)}$, and the term of homogeneity $h(z)-j$ in the
+    Then $A(z)\in\Psiisoph{h(z)}$, and the term of homogeneity $h(z)-j$ in the
     expansion of $a(z)$ is $\abs{Z}^{h(z)-j}b_j(z;Z/\abs{Z})$, with
     $b_j(z;\theta)=\frac1{j!}\pa_t^jb(z;0,\theta)$. Families of fixed order
     $m$ depending smoothly on $y\in Y$ are defined in the same way, with $b$
@@ -258,20 +258,20 @@ For $A\in\Psiiso{-\infty}(\R^n;\C^N)$ with kernel $A(x,x')$ we set
   \Tr(A)=\int_{\R^n}\tr A(x,x)\,dx .
 \end{equation}
 This is a continuous linear functional on $\Psiiso{-\infty}$. It extends to
-operators of sufficiently negative order. If $a\in\Siso{m}(\R^{2n})$ with
+operators of sufficiently negative order. If $a\in\Gs{m}(\R^{2n})$ with
 $m<-2n$, then $\int\abs{a(x,\xi)}\,d\xi\le C\ang{x}^{m+n}$, so the kernel
 $K(x,x')=\int e^{i(x-x')\cdot\xi}a(x,\xi)\,\dbar\xi$ of $\Op(a)$ is continuous,
 $\abs{K(x,x)}\le C\ang{x}^{m+n}$ is integrable, and we define
 \begin{equation}\label{determinants:eq:trace-symbol}
   \Tr(\Op(a))=\int K(x,x)\,dx=(2\pi)^{-n}\int_{\R^{2n}}\tr a(x,\xi)\,dx\,d\xi,
-  \qquad a\in\Siso{m}(\R^{2n}),\ m<-2n.
+  \qquad a\in\Gs{m}(\R^{2n}),\ m<-2n.
 \end{equation}
-This is continuous on $\Psiisoinf{m}$ for the symbol topology and agrees with
+This is continuous on $\Psiiso{m}$ for the symbol topology and agrees with
 \eqref{determinants:eq:trace} on residual operators. In particular $\Tr$ is
-defined on $\Psiiso{z}$ for $\Re z<-2n$.
+defined on $\Psiisoph{z}$ for $\Re z<-2n$.
 
 \begin{lemma}\label{determinants:lem:trace-property}
-  If $A\in\Psiisoinf{p}(\R^n;\C^N)$, $B\in\Psiisoinf{q}(\R^n;\C^N)$ and
+  If $A\in\Psiiso{p}(\R^n;\C^N)$, $B\in\Psiiso{q}(\R^n;\C^N)$ and
   $p+q<-2n$, then $\Tr(AB)=\Tr(BA)$. In particular this holds if one of $A$,
   $B$ is residual and the other is arbitrary.
 \end{lemma}
@@ -285,11 +285,11 @@ defined on $\Psiiso{z}$ for $\Re z<-2n$.
   $b_k(Z)=\chi(Z/k)b(Z)$. Then $a-a_k$ is supported in $\abs{Z}\ge k$, where
   $\ang{Z}^{-\eps}\le k^{-\eps}$, and the derivatives of $\chi(Z/k)$ are
   bounded by $C\ang{Z}^{-\abs{\beta}}$ uniformly in $k$; hence $a_k\to a$ in
-  $\Siso{p+\eps}$ for every $\eps>0$, and similarly $b_k\to b$ in
-  $\Siso{q+\eps}$. Choose $\eps$ with $p+q+2\eps<-2n$. The operators
+  $\Gs{p+\eps}$ for every $\eps>0$, and similarly $b_k\to b$ in
+  $\Gs{q+\eps}$. Choose $\eps$ with $p+q+2\eps<-2n$. The operators
   $A_k=\Op(a_k)$, $B_k=\Op(b_k)$ are residual, so $\Tr(A_kB_k)=\Tr(B_kA_k)$,
   and by the continuity of composition (see \ref{determinants:I:algebra}) and of
-  the trace on $\Psiisoinf{p+q+2\eps}$ we may let $k\to\infty$.
+  the trace on $\Psiiso{p+q+2\eps}$ we may let $k\to\infty$.
 \end{proof}
 
 \begin{lemma}\label{determinants:lem:finite-trace}
@@ -297,7 +297,7 @@ defined on $\Psiiso{z}$ for $\Re z<-2n$.
   $L^2$-orthogonal projection onto $L$. Then $\Pi\in\Psiiso{-\infty}$. If
   $T\in\Psiiso{-\infty}$ satisfies $T=\Pi T\Pi$, then $\Tr(T)=\tr(T|_L)$, the
   trace of $T$ as an endomorphism of $L$. More generally
-  $\Tr(\Pi T)=\Tr(\Pi T\Pi)=\tr(\Pi T|_L)$ for all $T\in\Psiisoinf{m}$.
+  $\Tr(\Pi T)=\Tr(\Pi T\Pi)=\tr(\Pi T|_L)$ for all $T\in\Psiiso{m}$.
 \end{lemma}
 \begin{proof}
   If $\varphi_1,\dots,\varphi_l$ is an orthonormal basis of $L$, the kernel of
@@ -319,7 +319,7 @@ is essentially the only continuous trace on the residual algebra.
   If $F:\Psiiso{-\infty}(\R^n)\to\C$ is continuous, linear and satisfies
   $F([A,B])=0$ for all $A,B\in\Psiiso{-\infty}(\R^n)$, then $F=c\Tr$ for some
   $c\in\C$. Consequently $F([A,B])=0$ also for all $A\in\Psiiso{-\infty}(\R^n)$
-  and $B\in\Psiisoinf{m}(\R^n)$, $m\in\R$.
+  and $B\in\Psiiso{m}(\R^n)$, $m\in\R$.
 \end{proposition}
 \begin{proof}
   For a finite dimensional $L\subset\cS(\R^n)$ with orthonormal basis
@@ -456,8 +456,8 @@ segment from $G$ to $G'$ lies in $\Giso{-\infty}$.
     $E\in\Psiiso{-\infty}$; if $\norm{E}_{\Lin(L^2)}<1$, then
     $\log(\Id+E)=\sum_{k\ge1}(-1)^{k+1}E^k/k$ converges in $\Psiiso{-\infty}$
     and $\detFr(\Id+E)=\exp\Tr\log(\Id+E)$.
-  \item\label{determinants:it:conj} If $A\in\Psiiso{m}(\R^n;\C^N)$ is
-    invertible (with inverse in $\Psiiso{-m}$) and $B\in\Id+\Psiiso{-\infty}$,
+  \item\label{determinants:it:conj} If $A\in\Psiisoph{m}(\R^n;\C^N)$ is
+    invertible (with inverse in $\Psiisoph{-m}$) and $B\in\Id+\Psiiso{-\infty}$,
     then $ABA^{-1}\in\Id+\Psiiso{-\infty}$ and $\detFr(ABA^{-1})=\detFr(B)$.
   \end{enumerate}
 \end{proposition}
@@ -565,7 +565,7 @@ an ordinary determinant, and $\detFr(\Id+\pi_NE\pi_N)=\det(\Id+\pi_NE|_{L_N})$.
 
 \section{Index and invertible perturbations}\label{determinants:sec:index}
 
-For an elliptic $A\in\Psiiso{m}(\R^n;\C^N)$ the null spaces of $A$ and $A^*$
+For an elliptic $A\in\Psiisoph{m}(\R^n;\C^N)$ the null spaces of $A$ and $A^*$
 on $\cSp$ are finite dimensional subspaces of $\cS$, and the \emph{index} is
 \begin{equation*}
   \ind(A)=\dim\Nul(A)-\dim\Nul(A^*).
@@ -574,7 +574,7 @@ For $m=0$ this is the index of $A$ as a Fredholm operator on $L^2$, since
 $\Ran(A)$ is closed with orthocomplement $\Nul(A^*)$ there.
 
 \begin{proposition}\label{determinants:prop:index-trace}
-  If $A\in\Psiiso{m}(\R^n;\C^N)$ is elliptic and $B$ is any parametrix, then
+  If $A\in\Psiisoph{m}(\R^n;\C^N)$ is elliptic and $B$ is any parametrix, then
   $[A,B]=(AB-\Id)-(BA-\Id)\in\Psiiso{-\infty}$ and
   \begin{equation}\label{determinants:eq:index-trace}
     \ind(A)=\Tr([A,B]).
@@ -597,9 +597,9 @@ $\Ran(A)$ is closed with orthocomplement $\Nul(A^*)$ there.
 \end{proof}
 
 \begin{proposition}\label{determinants:prop:invertible-perturbation}
-  Let $A\in\Psiiso{m}(\R^n;\C^N)$ be elliptic with $\ind(A)=0$. Then there is
+  Let $A\in\Psiisoph{m}(\R^n;\C^N)$ be elliptic with $\ind(A)=0$. Then there is
   a finite rank $F\in\Psiiso{-\infty}(\R^n;\C^N)$ such that $A+sF$ is
-  invertible for every $s\ne0$; its inverse lies in $\Psiiso{-m}$.
+  invertible for every $s\ne0$; its inverse lies in $\Psiisoph{-m}$.
 \end{proposition}
 \begin{proof}
   Let $e_1,\dots,e_p$ and $f_1,\dots,f_p$ be orthonormal bases of $\Nul(A)$ and
@@ -612,24 +612,24 @@ $\Ran(A)$ is closed with orthocomplement $\Nul(A^*)$ there.
     (A+sF)(B+s^{-1}G)=AB+s^{-1}A\Pi_0G+sF\Pi_0B+FG=\Id-\Pi_1+\Pi_1=\Id,\\
     (B+s^{-1}G)(A+sF)=BA+sB\Pi_1F+s^{-1}G\Pi_1A+GF=\Id .
   \end{gather*}
-  Thus $A+sF$ is invertible with inverse $B+s^{-1}G\in\Psiiso{-m}$.
+  Thus $A+sF$ is invertible with inverse $B+s^{-1}G\in\Psiisoph{-m}$.
 \end{proof}
 
-Write $\Ell^0_{\mathrm{iso}}(\R^n;\C^N)\subset\Psiiso{0}(\R^n;\C^N)$ for the
+Write $\Ell^0_{\mathrm{iso}}(\R^n;\C^N)\subset\Psiisoph{0}(\R^n;\C^N)$ for the
 elliptic elements, $\Ell^0_{\mathrm{iso},k}$ for those of index $k$, and
 $\Giso{0}(\R^n;\C^N)$ for the group of invertible elements (on $L^2$, or
-equivalently in $\Psiiso{0}$). Then
-$\Giso{0}\subset\Ell^0_{\mathrm{iso},0}\subset\Ell^0_{\mathrm{iso}}\subset\Psiiso{0}$.
+equivalently in $\Psiisoph{0}$). Then
+$\Giso{0}\subset\Ell^0_{\mathrm{iso},0}\subset\Ell^0_{\mathrm{iso}}\subset\Psiisoph{0}$.
 
 \begin{corollary}\label{determinants:cor:dense}
   $\Giso{0}(\R^n;\C^N)$ is dense in $\Ell^0_{\mathrm{iso},0}(\R^n;\C^N)$ for
-  the topology of $\Psiiso{0}$: indeed $A+sF\to A$ as $s\to0$.
+  the topology of $\Psiisoph{0}$: indeed $A+sF\to A$ as $s\to0$.
 \end{corollary}
 
 By \cref{determinants:prop:index-trace} the index is defined on the quotient.
 Let
 \begin{equation*}
-  \mathcal A^m=\Psiiso{m}(\R^n;\C^N)/\Psiiso{-\infty}(\R^n;\C^N);
+  \mathcal A^m=\Psiisoph{m}(\R^n;\C^N)/\Psiiso{-\infty}(\R^n;\C^N);
 \end{equation*}
 then $\mathcal A^{\Z}=\bigcup_m\mathcal A^m$ is an algebra, $A$ is elliptic if and
 only if its class $a=[A]$ is invertible in $\mathcal A^{\Z}$ (the inverse
@@ -721,17 +721,17 @@ holomorphic families of elliptic operators.
 
 One direct application of analytic Fredholm theory is to the resolvent of an
 elliptic operator of positive order. For simplicity we take the order to be a
-positive integer $m$, so that $A-\lambda\in\Psiiso{m}$ for $\lambda\in\C$; the
+positive integer $m$, so that $A-\lambda\in\Psiisoph{m}$ for $\lambda\in\C$; the
 case of non-integral order needs only notational changes, replacing
-$\Psiiso{m}$ by the class of operators with symbols in $\Siso{m}$ having an
+$\Psiisoph{m}$ by the class of operators with symbols in $\Gs{m}$ having an
 expansion in terms of homogeneous functions of degrees $m-j$ and $-j$.
 
 \begin{proposition}\label{determinants:prop:resolvent}
-  Let $A\in\Psiiso{m}(\R^n;\C^N)$, $m\in\N$, be elliptic, and suppose that for
+  Let $A\in\Psiisoph{m}(\R^n;\C^N)$, $m\in\N$, be elliptic, and suppose that for
   some $\lambda'\in\C$ both $A-\lambda'$ and $A^*-\overline{\lambda'}$ have
   trivial null space. Then the set $\Spec(A)$ of $\lambda\in\C$ for which
   $A-\lambda$ is not invertible is discrete, and $(A-\lambda)^{-1}$ is a
-  meromorphic family in $\Psiiso{-m}$ with finite rank residual singular
+  meromorphic family in $\Psiisoph{-m}$ with finite rank residual singular
   parts. At $\tilde\lambda\in\Spec(A)$ the generalized eigenspace
   \begin{equation*}
     E_{\tilde\lambda}=\{u\in\cSp(\R^n;\C^N);\ (A-\tilde\lambda)^pu=0\text{ for some }p\in\N\}
@@ -773,14 +773,14 @@ and only if $u=A^{p-1}u_1$ for some $u_1\in\Ran R_1$.
 We have shown that there is a unique trace on the residual algebra. Following
 ideas of Seeley \cite{Seeley}, Guillemin \cite{Guillemin-Weyl,Guillemin-residue}
 and Wodzicki \cite{Wodzicki-residue,Wodzicki-cyclic}, we now look for traces on
-the algebra $\Psiiso{\Z}(\R^n)$. For $A\in\Psiiso{-\infty}$, by
+the algebra $\Psiisoph{\Z}(\R^n)$. For $A\in\Psiiso{-\infty}$, by
 \eqref{determinants:eq:trace-symbol}, $\Tr(A)=(2\pi)^{-n}\int a_L(x,\xi)\,dx\,d\xi$
 is the integral of the left symbol; this is also true for any amplitude: if
 $A=\Op(a)$ with $a(x,x',\xi)$ an amplitude of order $-\infty$, then
 $\Tr(A)=(2\pi)^{-n}\int a(x,x,\xi)\,dx\,d\xi$. The integral extends to
-$\Psiisoinf{m}$ for $m<-2n$, as we saw, but not beyond. To go further we
+$\Psiiso{m}$ for $m<-2n$, as we saw, but not beyond. To go further we
 regularize it by embedding operators in holomorphic families, which moves us
-from the symbol classes $\Siso{m}$ to the polyhomogeneous operators.
+from the symbol classes $\Gs{m}$ to the polyhomogeneous operators.
 
 \begin{lemma}\label{determinants:lem:meromorphic}
   Let $\Omega\subset\C$ be open and connected, $m\in\C$, and $A(z)$ a
@@ -827,7 +827,7 @@ homogeneity $m-j$ in the symbol of $A(0)$. Taking $j=2n+m$, the residue at
 $z=0$ only depends on $A(0)$, and it vanishes unless $m\in\Z$, $m\ge-2n$.
 
 \begin{definition}\label{determinants:def:residue-trace}
-  For $A\in\Psiiso{m}(\R^n;\C^N)$, $m\in\C$, the \emph{residue trace} is
+  For $A\in\Psiisoph{m}(\R^n;\C^N)$, $m\in\C$, the \emph{residue trace} is
   \begin{equation*}
     \TrRes(A)=-\Res_{z=0}\Tr(A(z)),
   \end{equation*}
@@ -844,18 +844,18 @@ $z=0$ only depends on $A(0)$, and it vanishes unless $m\in\Z$, $m\ge-2n$.
   \end{equation}
   where $a_{-2n}$ is the term of homogeneity $-2n$ in the expansion of the
   left symbol of $A$ (so $\TrRes$ vanishes unless $m\in\Z$, $m\ge-2n$; in
-  particular on $\Psiiso{-2n-1}$). It is a trace on $\Psiiso{\Z}$:
+  particular on $\Psiisoph{-2n-1}$). It is a trace on $\Psiisoph{\Z}$:
   \begin{equation}\label{determinants:eq:residue-trace-property}
-    \TrRes([A,B])=0\quad\forall\,A,B\in\Psiiso{\Z}(\R^n;\C^N).
+    \TrRes([A,B])=0\quad\forall\,A,B\in\Psiisoph{\Z}(\R^n;\C^N).
   \end{equation}
 \end{proposition}
 \begin{proof}
   The formula is \eqref{determinants:eq:residues} with $j=2n+m$, and shows that
-  $\TrRes(A)$ is independent of the family. If $A\in\Psiiso{m_1}$,
-  $B\in\Psiiso{m_2}$, then $C(z)=[AH(z),B]$ is an entire family of order
+  $\TrRes(A)$ is independent of the family. If $A\in\Psiisoph{m_1}$,
+  $B\in\Psiisoph{m_2}$, then $C(z)=[AH(z),B]$ is an entire family of order
   $m_1+m_2+z$ with $C(0)=[A,B]$. For $\Re z<-2n-m_1-m_2$,
   $\Tr(C(z))=\Tr(AH(z)B)-\Tr(BAH(z))=0$ by
-  \cref{determinants:lem:trace-property}, since $AH(z)\in\Psiisoinf{m_1+\Re z}$.
+  \cref{determinants:lem:trace-property}, since $AH(z)\in\Psiiso{m_1+\Re z}$.
   Hence the continuation vanishes identically and $\TrRes([A,B])=0$.
 \end{proof}
 
@@ -873,7 +873,7 @@ $z=0$ only depends on $A(0)$, and it vanishes unless $m\in\Z$, $m\ge-2n$.
   \end{equation*}
   so the homogeneous term of degree $-2n$ of each such derivative integrates to
   zero over the sphere. The residue trace is, up to a constant multiple, the
-  unique trace on $\Psiiso{\Z}(\R^n)$; this is the isotropic analogue of
+  unique trace on $\Psiisoph{\Z}(\R^n)$; this is the isotropic analogue of
   Wodzicki's theorem \cite{Wodzicki-residue}, and we shall neither prove nor
   use it.
 \end{remark}
@@ -882,7 +882,7 @@ $z=0$ only depends on $A(0)$, and it vanishes unless $m\in\Z$, $m\ge-2n$.
 
 \begin{definition}\label{determinants:def:regularizer}
   A \emph{regularizing family} is an entire holomorphic family $A(z)$ of order
-  $z$, with values in $\Psiiso{z}(\R^n;\C^N)$, with scalar principal symbol and
+  $z$, with values in $\Psiisoph{z}(\R^n;\C^N)$, with scalar principal symbol and
   $A(0)=\Id$. Its derivative at $0$ is denoted $\dot A=\frac{d}{dz}A(z)|_{z=0}$.
 \end{definition}
 
@@ -891,7 +891,7 @@ with values in $\CI(\RC{\R^{2n}})$, then $A(0)=\Id$ means $\tilde a(0)=1$, so
 \begin{equation*}
   \dot A=\Op\bigl(\log\ang{Z}+c\bigr),\qquad c=\pa_z\tilde a(0)\in\Symph{0}(\R^{2n})\text{ with scalar leading term.}
 \end{equation*}
-Thus $\dot A\in\Psiisoinf{\eps}$ for every $\eps>0$, but $\dot A\notin\Psiiso{\Z}$
+Thus $\dot A\in\Psiiso{\eps}$ for every $\eps>0$, but $\dot A\notin\Psiisoph{\Z}$
 because of the logarithm. For the standard family $H(z)$ of
 \eqref{determinants:eq:standard-regularizer}, $\dot H=\Op(\log\ang{Z})=\Op(\tfrac12\log(1+\abs{x}^2+\abs{\xi}^2))$.
 
@@ -900,37 +900,37 @@ because of the logarithm. For the standard family $H(z)$ of
   \begin{equation*}
     D_AB=[\dot A,B]
   \end{equation*}
-  is a derivation of $\Psiiso{\Z}(\R^n;\C^N)$ with
-  $D_A:\Psiiso{m}\to\Psiiso{m-1}$ and $D_A(\Psiiso{-\infty})\subset\Psiiso{-\infty}$.
+  is a derivation of $\Psiisoph{\Z}(\R^n;\C^N)$ with
+  $D_A:\Psiisoph{m}\to\Psiisoph{m-1}$ and $D_A(\Psiiso{-\infty})\subset\Psiiso{-\infty}$.
   Equivalently, $D_AB=\frac{d}{dz}\bigl(A(z)BA(z)^{-1}\bigr)\big|_{z=0}$. For two
   regularizing families, $D_{A_2}-D_{A_1}=[\dot A_2-\dot A_1,\cdot\,]$ is an
-  inner derivation, given by commutation with an element of $\Psiiso{0}$.
+  inner derivation, given by commutation with an element of $\Psiisoph{0}$.
   Moreover
   \begin{equation}\label{determinants:eq:res-derivation}
-    \TrRes(D_AB)=0\quad\forall\,B\in\Psiiso{\Z}(\R^n;\C^N).
+    \TrRes(D_AB)=0\quad\forall\,B\in\Psiisoph{\Z}(\R^n;\C^N).
   \end{equation}
 \end{proposition}
 \begin{proof}
-  A commutator is a derivation. For $B\in\Psiiso{m}$, $K(z)=[A(z),B]/z$ is an
+  A commutator is a derivation. For $B\in\Psiisoph{m}$, $K(z)=[A(z),B]/z$ is an
   entire holomorphic family of order $m+z$ (the numerator is a holomorphic
   family vanishing at $z=0$, and dividing its normalized symbol by $z$
-  preserves holomorphy), with $K(0)=[\dot A,B]$; hence $D_AB\in\Psiiso{m}$.
+  preserves holomorphy), with $K(0)=[\dot A,B]$; hence $D_AB\in\Psiisoph{m}$.
   Since the principal symbol of $A(z)$ is scalar, $[A(z),B]$ has order
-  $m+z-1$, so in fact $D_AB\in\Psiiso{m-1}$. Residual operators form an ideal
-  in $\bigcup_m\Psiisoinf{m}$, so $D_A$ preserves them. Near $z=0$, $A(z)$ is invertible
+  $m+z-1$, so in fact $D_AB\in\Psiisoph{m-1}$. Residual operators form an ideal
+  in $\bigcup_m\Psiiso{m}$, so $D_A$ preserves them. Near $z=0$, $A(z)$ is invertible
   with holomorphic inverse by \cref{determinants:lem:local-inversion}, and
   $\frac{d}{dz}(A(z)BA(z)^{-1})|_{z=0}=\dot AB-B\dot A$ by the product rule.
   The statement about two families follows since
-  $\dot A_2-\dot A_1=\Op(c_2-c_1)\in\Psiiso{0}$. Finally, $K(z)$ has value
+  $\dot A_2-\dot A_1=\Op(c_2-c_1)\in\Psiisoph{0}$. Finally, $K(z)$ has value
   $D_AB$ at $0$ and $\Tr(K(z))=z^{-1}\bigl(\Tr(A(z)B)-\Tr(BA(z))\bigr)=0$ for
   $\Re z\ll0$ by \cref{determinants:lem:trace-property}, so the residue at
   $0$ vanishes.
 \end{proof}
 
 \begin{remark}\label{determinants:rem:exterior}
-  $D_H$ is not an inner derivation of $\Psiiso{\Z}$, which is why we call it
+  $D_H$ is not an inner derivation of $\Psiisoph{\Z}$, which is why we call it
   an \emph{exterior} derivation. Suppose $[\dot H-P,B]=0$ for all
-  $B\in\Psiiso{\Z}$, for some $P\in\Psiiso{\Z}$, and let $c$ be the left symbol
+  $B\in\Psiisoph{\Z}$, for some $P\in\Psiisoph{\Z}$, and let $c$ be the left symbol
   of $C=\dot H-P$. The composition formula is exact when one factor has
   polynomial symbol, and gives $[C,x_j]=\Op(-i\pa_{\xi_j}c)$ and
   $[C,D_j]=\Op(-D_{x_j}c)$; hence $c$ is constant, which is impossible since
@@ -939,7 +939,7 @@ because of the logarithm. For the standard family $H(z)$ of
 
 \section{The regularized trace}\label{determinants:sec:regularized}
 
-Let $A(z)$ be a regularizing family. For $B\in\Psiiso{\Z}(\R^n;\C^N)$ the
+Let $A(z)$ be a regularizing family. For $B\in\Psiisoph{\Z}(\R^n;\C^N)$ the
 function $\Tr(BA(z))$ is meromorphic on $\C$ with at most a simple pole at $0$,
 with residue $-\TrRes(B)$. We define the \emph{regularized trace} as the
 finite part at $z=0$, the constant term of the Laurent expansion:
@@ -956,14 +956,14 @@ $\dot A$.
 
 \begin{lemma}\label{determinants:lem:regularizer-change}
   If $A_1(z)$, $A_2(z)$ are regularizing families, then for
-  $B\in\Psiiso{\Z}(\R^n;\C^N)$,
+  $B\in\Psiisoph{\Z}(\R^n;\C^N)$,
   \begin{equation*}
     \TrReg{A_2}(B)-\TrReg{A_1}(B)=-\TrRes\bigl(B(\dot A_2-\dot A_1)\bigr).
   \end{equation*}
 \end{lemma}
 \begin{proof}
   $L(z)=(A_2(z)-A_1(z))/z$ is an entire family of order $z$ with
-  $L(0)=\dot A_2-\dot A_1\in\Psiiso{0}$, and
+  $L(0)=\dot A_2-\dot A_1\in\Psiisoph{0}$, and
   $\Tr(BA_2(z))-\Tr(BA_1(z))=z\Tr(BL(z))$. The function $\Tr(BL(z))$ has at
   most a simple pole at $0$ with residue $-\TrRes(BL(0))$, which is therefore
   the value at $0$ of $z\Tr(BL(z))$.
@@ -974,7 +974,7 @@ $A$. The regularized trace is \emph{not} a trace; its failure to be one is
 measured by the residue trace and the exterior derivation.
 
 \begin{proposition}[Trace defect formula]\label{determinants:prop:trace-defect}
-  For a regularizing family $A(z)$ and $B_1,B_2\in\Psiiso{\Z}(\R^n;\C^N)$,
+  For a regularizing family $A(z)$ and $B_1,B_2\in\Psiisoph{\Z}(\R^n;\C^N)$,
   \begin{equation}\label{determinants:eq:trace-defect}
     \TrReg{A}([B_1,B_2])=\TrRes(B_1D_AB_2)=-\TrRes(B_2D_AB_1).
   \end{equation}
@@ -995,7 +995,7 @@ measured by the residue trace and the exterior derivation.
 \end{proof}
 
 \begin{corollary}\label{determinants:cor:reg-conjugation}
-  If $G\in\Giso{-\infty}(\R^n;\C^N)$ and $B\in\Psiiso{\Z}(\R^n;\C^N)$, then
+  If $G\in\Giso{-\infty}(\R^n;\C^N)$ and $B\in\Psiisoph{\Z}(\R^n;\C^N)$, then
   $\TrReg{A}(G^{-1}BG)=\TrReg{A}(B)$.
 \end{corollary}
 \begin{proof}
@@ -1009,11 +1009,11 @@ measured by the residue trace and the exterior derivation.
 Let $D_H$ be the exterior derivation of the standard family
 \eqref{determinants:eq:standard-regularizer}. It preserves $\Psiiso{-\infty}$,
 and $\TrRes$ vanishes there, so both descend to the quotient algebra
-$\mathcal A^{\Z}=\Psiiso{\Z}/\Psiiso{-\infty}$:
+$\mathcal A^{\Z}=\Psiisoph{\Z}/\Psiiso{-\infty}$:
 $D_H:\mathcal A^m\to\mathcal A^{m-1}$ and $\TrRes:\mathcal A^{\Z}\to\C$.
 
 \begin{theorem}\label{determinants:thm:index-formula}
-  If $A\in\Psiiso{m}(\R^n;\C^N)$, $m\in\Z$, is elliptic with parametrix $B$, then
+  If $A\in\Psiisoph{m}(\R^n;\C^N)$, $m\in\Z$, is elliptic with parametrix $B$, then
   \begin{equation}\label{determinants:eq:index-residue}
     \ind(A)=\TrRes(AD_HB)=-\TrRes(BD_HA).
   \end{equation}
@@ -1058,7 +1058,7 @@ smooth family
 Since the index vanishes, such $E_y$ exists for each fixed $y$
 (\cref{determinants:prop:invertible-perturbation}), and also locally: if
 $A_{y_0}+F$ is invertible then so is $A_y+F$ for $y$ near $y_0$, with inverse
-a smooth family in $\Psiiso{0}$ by \cref{determinants:lem:local-inversion}.
+a smooth family in $\Psiisoph{0}$ by \cref{determinants:lem:local-inversion}.
 The issue is the global existence of a smooth (or even continuous) choice.
 
 Operator-valued differential forms are handled in the obvious way: if
@@ -1178,7 +1178,7 @@ invertible lifts exist near every point of $Y$.
 \end{proposition}
 \begin{proof}
   $\Id+X=\tilde A^{-1}\tilde A'=\Id+\tilde A^{-1}(E'-E)$, and $\tilde A^{-1}$
-  is a smooth family in $\Psiiso{0}$ by
+  is a smooth family in $\Psiisoph{0}$ by
   \cref{determinants:lem:local-inversion}, so $X$ is a smooth residual family.
   By \eqref{determinants:eq:det-equivalence},
   $(\tilde A,\detFr(\Id+X)^{-1})\sim(\tilde A(\Id+X),1)$, which is
@@ -1262,17 +1262,17 @@ These exercises cover both this chapter and \cref{ch:isotropic}.
     \Hs{k}_{\mathrm{iso}}(\R^n)=\{u\in L^2(\R^n);\ x^\alpha D_x^\beta u\in L^2(\R^n)\ \forall\,\abs{\alpha}+\abs{\beta}\le k\},\\
     \Hs{-k}_{\mathrm{iso}}(\R^n)=\Bigl\{u\in\cSp(\R^n);\ u=\sum_{\abs{\alpha}+\abs{\beta}\le k}x^\alpha D_x^\beta u_{\alpha\beta},\ u_{\alpha\beta}\in L^2(\R^n)\Bigr\}.
   \end{gather*}
-  Show that if $A\in\Psiiso{p}(\R^n)$, $p\in\Z$, then
+  Show that if $A\in\Psiisoph{p}(\R^n)$, $p\in\Z$, then
   $A:\Hs{k}_{\mathrm{iso}}\to\Hs{k-p}_{\mathrm{iso}}$ for all $k\in\Z$. Deduce,
   using elliptic isotropic operators, that the definition
   \begin{equation*}
-    \Hs{s}_{\mathrm{iso}}(\R^n)=\{u\in\cSp(\R^n);\ Au\in L^2(\R^n)\ \forall\,A\in\Psiiso{-s}(\R^n)\},\quad s\in\R,
+    \Hs{s}_{\mathrm{iso}}(\R^n)=\{u\in\cSp(\R^n);\ Au\in L^2(\R^n)\ \forall\,A\in\Psiisoph{-s}(\R^n)\},\quad s\in\R,
   \end{equation*}
   is consistent with the previous one, and that
   \begin{gather*}
-    A\in\Psiiso{M}(\R^n)\implies A:\Hs{s}_{\mathrm{iso}}\to\Hs{s-M}_{\mathrm{iso}},\qquad
+    A\in\Psiisoph{M}(\R^n)\implies A:\Hs{s}_{\mathrm{iso}}\to\Hs{s-M}_{\mathrm{iso}},\qquad
     \bigcap_s\Hs{s}_{\mathrm{iso}}=\cS(\R^n),\quad\bigcup_s\Hs{s}_{\mathrm{iso}}=\cSp(\R^n),\\
-    A\in\Psiiso{m}(\R^n)\text{ elliptic},\ u\in\cSp(\R^n),\ Au\in\Hs{s}_{\mathrm{iso}}\implies u\in\Hs{s+m}_{\mathrm{iso}}.
+    A\in\Psiisoph{m}(\R^n)\text{ elliptic},\ u\in\cSp(\R^n),\ Au\in\Hs{s}_{\mathrm{iso}}\implies u\in\Hs{s+m}_{\mathrm{iso}}.
   \end{gather*}
 \end{exercise}
 
@@ -1285,7 +1285,7 @@ These exercises cover both this chapter and \cref{ch:isotropic}.
 
 \begin{exercise}\label{determinants:ex:compact}
   Using \cref{determinants:ex:compact-inclusion}, or otherwise, show that each
-  element of $\Psiiso{-\eps}(\R^n)$, $\eps>0$, is compact on $L^2(\R^n)$.
+  element of $\Psiisoph{-\eps}(\R^n)$, $\eps>0$, is compact on $L^2(\R^n)$.
 \end{exercise}
 
 \begin{exercise}\label{determinants:ex:finite-rank-inverse}
@@ -1299,7 +1299,7 @@ These exercises cover both this chapter and \cref{ch:isotropic}.
 
 \begin{exercise}\label{determinants:ex:fredholm}
   Using \cref{determinants:ex:finite-rank-inverse}, show that an elliptic
-  $A\in\Psiiso{m}(\R^n)$ has a parametrix $B\in\Psiiso{-m}(\R^n)$ up to finite
+  $A\in\Psiisoph{m}(\R^n)$ has a parametrix $B\in\Psiisoph{-m}(\R^n)$ up to finite
   rank error, i.e.\ $AB-\Id$ and $BA-\Id$ are finite rank elements of
   $\Psiiso{-\infty}(\R^n)$. Deduce that $A$ is Fredholm as an operator
   $\Hs{M}_{\mathrm{iso}}(\R^n)\to\Hs{M-m}_{\mathrm{iso}}(\R^n)$ for every $M$.
@@ -1309,7 +1309,7 @@ These exercises cover both this chapter and \cref{ch:isotropic}.
 
 \begin{exercise}[The harmonic oscillator]\label{determinants:ex:oscillator}
   Show that $H=\abs{D}^2+\abs{x}^2=\sum_j(D_j^2+x_j^2)$ is an elliptic element of
-  $\Psiiso{2}(\R^n)$. With the creation and annihilation operators
+  $\Psiisoph{2}(\R^n)$. With the creation and annihilation operators
   $C_j=D_j+ix_j$ and $A_j=D_j-ix_j=C_j^*$, show that
   \begin{gather*}
     H=\sum_{j=1}^nC_jA_j+n=\sum_{j=1}^nA_jC_j-n,\\
@@ -1351,14 +1351,14 @@ These exercises cover both this chapter and \cref{ch:isotropic}.
 
 \begin{exercise}[Bundle coefficients]\label{determinants:ex:bundles}
   If $V$ and $W$ are finite dimensional complex vector spaces, show that the
-  space $\Psiiso{m}(\R^n;V,W)$ of operators from $\cS(\R^n;V)$ to
-  $\cSp(\R^n;W)$ given by matrices with entries in $\Psiiso{m}(\R^n)$, with
+  space $\Psiisoph{m}(\R^n;V,W)$ of operators from $\cS(\R^n;V)$ to
+  $\cSp(\R^n;W)$ given by matrices with entries in $\Psiisoph{m}(\R^n)$, with
   respect to bases of $V$ and $W$, is independent of the choice of bases.
   Extend the results of \cref{ch:isotropic} to these spaces.
 \end{exercise}
 
 \begin{exercise}[Ellipticity is necessary for the Fredholm property]\label{determinants:ex:necessity}
-  Let $A\in\Psiiso{m}(\R^n;\C^N)$ be Fredholm as an operator
+  Let $A\in\Psiisoph{m}(\R^n;\C^N)$ be Fredholm as an operator
   $\Hs{s}_{\mathrm{iso}}\to\Hs{s-m}_{\mathrm{iso}}$ for some $s$. Show that $A$
   is elliptic, as follows.
   \begin{enumerate}
@@ -1388,7 +1388,7 @@ These exercises cover both this chapter and \cref{ch:isotropic}.
   Show that $D^2=0$, and that the formal adjoint of $D$ with respect to the
   $L^2$ pairing is $D^*u=\sum_{j,\alpha}C_ju_\alpha\,\iota_j dx^\alpha$, where
   $\iota_j$ is contraction with $e_j$, the adjoint of $dx^j\wedge$. Show that
-  $D+D^*\in\Psiiso{1}(\R^n;\Lambda^*)$ is elliptic and that
+  $D+D^*\in\Psiisoph{1}(\R^n;\Lambda^*)$ is elliptic and that
   \begin{equation*}
     (D+D^*)^2=DD^*+D^*D=H-n+2\mathcal N,
   \end{equation*}
@@ -1400,12 +1400,12 @@ These exercises cover both this chapter and \cref{ch:isotropic}.
     \{u\in\cSp(\R^n;\Lambda^k);\ Du=0\}=D\,\cSp(\R^n;\Lambda^{k-1}),\ k\ge1 .
   \end{gather*}
   Conclude that $D+D^*$, as an elliptic element of
-  $\Psiiso{1}(\R^n;\Lambda^{\mathrm{even}},\Lambda^{\mathrm{odd}})$, has index
+  $\Psiisoph{1}(\R^n;\Lambda^{\mathrm{even}},\Lambda^{\mathrm{odd}})$, has index
   $1$ (and as an operator from odd to even forms, index $-1$).
 \end{exercise}
 
 \begin{exercise}[Isotropic essential support]\label{determinants:ex:ess-supp}
-  For $A\in\Psiiso{m}(\R^n)$ with left symbol $a$, define the isotropic
+  For $A\in\Psiisoph{m}(\R^n)$ with left symbol $a$, define the isotropic
   essential support (operator wavefront set) $\WFiso'(A)\subset\R^{2n}\setminus\{0\}$
   as the complement of the set of $Z_0\ne0$ having a conic neighbourhood
   $\Gamma$ in which $a$ is of order $-\infty$:
@@ -1422,12 +1422,12 @@ These exercises cover both this chapter and \cref{ch:isotropic}.
   Let $U_i$ be a finite open cover of $\Sphere^{2n-1}$ and
   $\tilde U_i=\{Z\in\R^{2n}\setminus\{0\};\ Z/\abs{Z}\in U_i\}$ the
   corresponding conic cover of $\R^{2n}\setminus\{0\}$. Show that there are
-  $A_i\in\Psiiso{0}(\R^n)$ with $\WFiso'(A_i)\subset\tilde U_i$ and
+  $A_i\in\Psiisoph{0}(\R^n)$ with $\WFiso'(A_i)\subset\tilde U_i$ and
   $\Id-\sum_iA_i\in\Psiiso{-\infty}(\R^n)$.
 \end{exercise}
 
 \begin{exercise}\label{determinants:ex:perturbation-sobolev}
-  Suppose $A\in\Psiiso{m}(\R^n)$ is elliptic and has index zero. Show that the
+  Suppose $A\in\Psiisoph{m}(\R^n)$ is elliptic and has index zero. Show that the
   operator $A+F$ of \cref{determinants:prop:invertible-perturbation} is an
   isomorphism of $\cS(\R^n)$, of $\cSp(\R^n)$, and from
   $\Hs{s}_{\mathrm{iso}}(\R^n)$ to $\Hs{s-m}_{\mathrm{iso}}(\R^n)$ for every
@@ -1435,27 +1435,27 @@ These exercises cover both this chapter and \cref{ch:isotropic}.
 \end{exercise}
 
 \begin{exercise}[Isotropic wavefront set]\label{determinants:ex:wf}
-  For $A\in\Psiiso{0}(\R^n)$ let
+  For $A\in\Psiisoph{0}(\R^n)$ let
   $\Char_{\mathrm{iso}}(A)=\{Z\ne0;\ \sigma_0(A)(Z/\abs{Z})=0\}$, where
   $\sigma_0(A)$ is the principal symbol. For $u\in\cSp(\R^n)$ define
   \begin{equation*}
-    \WFiso(u)=\bigcap\bigl\{\Char_{\mathrm{iso}}(A);\ A\in\Psiiso{0}(\R^n),\ Au\in\cS(\R^n)\bigr\}.
+    \WFiso(u)=\bigcap\bigl\{\Char_{\mathrm{iso}}(A);\ A\in\Psiisoph{0}(\R^n),\ Au\in\cS(\R^n)\bigr\}.
   \end{equation*}
   Show that $\WFiso(u)$ is a closed cone, that $\WFiso(u)=\emptyset$ if and only
   if $u\in\cS(\R^n)$, and that $\WFiso(Bu)\subset\WFiso(u)\cap\WFiso'(B)$ for
-  $B\in\Psiiso{m}(\R^n)$. (Use \cref{determinants:ex:ess-supp,determinants:ex:partition}.)
+  $B\in\Psiisoph{m}(\R^n)$. (Use \cref{determinants:ex:ess-supp,determinants:ex:partition}.)
 \end{exercise}
 
 \begin{exercise}[Traces and determinants of lower regularity]\label{determinants:ex:extend}
-  Let $m<-2n$. Show that $\Tr$ is continuous on $\Psiisoinf{m}(\R^n)$, that
-  $\Id+E$ with $E\in\Psiisoinf{m}(\R^n)$ invertible on $L^2$ has inverse
-  $\Id+F$ with $F\in\Psiisoinf{m}(\R^n)$, and that the definition of $\detFr$
+  Let $m<-2n$. Show that $\Tr$ is continuous on $\Psiiso{m}(\R^n)$, that
+  $\Id+E$ with $E\in\Psiiso{m}(\R^n)$ invertible on $L^2$ has inverse
+  $\Id+F$ with $F\in\Psiiso{m}(\R^n)$, and that the definition of $\detFr$
   by integration of $\Tr(A^{-1}dA)$ along paths extends to
-  $\Id+\Psiisoinf{m}(\R^n)$ with the properties of
+  $\Id+\Psiiso{m}(\R^n)$ with the properties of
   \cref{determinants:prop:det-basic} and \cref{determinants:thm:det-entire}.
   (Hint: approximate $E$ by $\Op(\chi(Z/k)e)$ as in the proof of
   \cref{determinants:lem:trace-property}, which converges in
-  $\Psiisoinf{m+\eps}$, and show that the corresponding determinants converge.)
+  $\Psiiso{m+\eps}$, and show that the corresponding determinants converge.)
 \end{exercise}
 
 \section*{Notes}

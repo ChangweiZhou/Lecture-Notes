@@ -8,7 +8,7 @@
 \providecommand{\indt}{\operatorname{ind}_{\mathrm{t}}}
 \providecommand{\Hev}{H^{\mathrm{ev}}}
 \providecommand{\Hodd}{H^{\mathrm{odd}}}
-\providecommand{\Psipt}[1]{\Psi^{#1}_{\tilde\phi\text{-}\mathrm{pt}}}
+\providecommand{\Psiptfam}[1]{\Psi^{#1}_{\tilde\phi\text{-}\mathrm{pt}}}
 \providecommand{\Torus}{\mathbb{T}}
 \providecommand{\Hardy}{\mathcal{C}^\infty_{+}}
 \providecommand{\Ginf}{G^{-\infty}}
@@ -183,7 +183,7 @@ Consider a tower of fibrations of compact manifolds
 \end{equation}
 so $\tilde M\to B$ is a fibration with fibre $\tilde M_b=(\phi\tilde\phi)^{-1}(b)$,
 itself fibred over $M_b=Z_b$ by $\tilde\phi$ with fibre $Y$. The space
-$\Psipt{m,m'}(\tilde M/B;E_+,E_-)$ of \emph{product-type families} consists of
+$\Psiptfam{m,m'}(\tilde M/B;E_+,E_-)$ of \emph{product-type families} consists of
 smooth families, parametrized by $b\in B$, of product-type operators on
 $\tilde M_b$ with respect to $\tilde\phi:\tilde M_b\to M_b$, as defined in
 \cref{ch:product}; their kernels are product-type conormal distributions on the
@@ -210,13 +210,13 @@ from \cref{ch:product}, in the families version and for order $(0,0)$.
   $b$; its null space consists of smooth sections. In a local trivialization of
   $\tilde M\to B$ it is a norm-smooth family of bounded operators.
 \item\label{families:P-fibre} A family $P\in\Psido0(\tilde M/M;E_+,E_-)$ on
-  the fibres of $\tilde\phi$ lies in $\Psipt{0,0}(\tilde M/B)$, with
+  the fibres of $\tilde\phi$ lies in $\Psiptfam{0,0}(\tilde M/B)$, with
   $\sigma(P)=\gamma^*\sigma_0(P)$ and $\beta(P)(\eta)=P_m$. Here
   $\gamma:[S^*(\tilde M/B);\Sigma]\to S^*(\tilde M/M)$ is the extension to the
   blow-up of the radial projection of the restriction map
   $T^*(\tilde M/B)\to T^*(\tilde M/M)$, which vanishes exactly on
   $\tilde\phi^*T^*(M/B)$.
-\item\label{families:P-ordinary} $\Psido0(\tilde M/B)\subset\Psipt{0,0}(\tilde
+\item\label{families:P-ordinary} $\Psido0(\tilde M/B)\subset\Psiptfam{0,0}(\tilde
   M/B)$; $\sigma(A)$ is the pull-back of $\sigma_0(A)$ under the blow-down map,
   and $\beta(A)(\eta)$ is multiplication by the restriction of $\sigma_0(A)$ to
   $\Sigma$, i.e.\ to $\tilde\phi^*S^*(M/B)$, at $\eta$. For such $A$ full
@@ -228,7 +228,7 @@ from \cref{ch:product}, in the families version and for order $(0,0)$.
     A_\Pi:u\longmapsto e\otimes A\bigl(\langle u,e\rangle\bigr),\quad
     \langle u,e\rangle(m)=\int_{Y_m}(u,e)\,\nu,
   \end{equation*}
-  lies in $\Psipt{-\infty,0}(\tilde M/B;E_+\otimes F_+,E_+\otimes F_-)$, with
+  lies in $\Psiptfam{-\infty,0}(\tilde M/B;E_+\otimes F_+,E_+\otimes F_-)$, with
   $\sigma(A_\Pi)=0$ and $\beta(A_\Pi)(\eta)=\Pi\otimes\sigma_0(A)(\eta)$.
 \end{enumerate}
 Here $\nu$ is the fibre density on $\tilde M/M$ used to define adjoints, and
@@ -244,7 +244,7 @@ different families below, and for product-type families, an equivalent and
 more flexible construction is convenient: one stabilizes the \emph{range}
 rather than the domain. In the next lemma, $A$ is either an elliptic family in
 $\Psido0(M/B;E_+,E_-)$ or a fully elliptic family in
-$\Psipt{0,0}(\tilde M/B;E_+,E_-)$; to treat both cases at once we write $M$
+$\Psiptfam{0,0}(\tilde M/B;E_+,E_-)$; to treat both cases at once we write $M$
 for the total space and $M_b$ for its fibres. Sections $v_1,\dots,v_N\in
 \CI(M;E_-)$ define $S\in\CI(M;\Hom(\C^N,E_-))$ and the operators
 \begin{equation*}
@@ -478,7 +478,7 @@ Under \eqref{families:eq:H}, and for any elliptic $A\in\Psido0(M/B;F_+,F_-)$,
 define the \emph{Clifford tensor product}
 \begin{equation}\label{families:eq:PA}
   P\otimes A=\begin{pmatrix}P&0\\A_\Pi&P^*\end{pmatrix}\in
-  \Psipt{0,0}(\tilde M/B;G_+,G_-),
+  \Psiptfam{0,0}(\tilde M/B;G_+,G_-),
 \end{equation}
 acting from $G_+=E_+\otimes F_+\oplus E_-\otimes F_-$ to
 $G_-=E_-\otimes F_+\oplus E_+\otimes F_-$, with $A_\Pi$ as in
@@ -554,7 +554,7 @@ homogeneously.
   \emph{First homotopy.} For $t\in[0,1]$ let
   \begin{equation*}
     Q_t=\begin{pmatrix}P&-t\tilde A_-^*\\(1-t)A_\Pi+t\tilde A_+&P^*\end{pmatrix}
-    \in\Psipt{0,0}(\tilde M/B;G_+,G_-),
+    \in\Psiptfam{0,0}(\tilde M/B;G_+,G_-),
   \end{equation*}
   so $Q_0=P\otimes A$. On the blow-up of $\Sigma=\Sigma_1$ the functions
   $\gamma^*p$ and $\chi_2\alpha$ are smooth, and by
