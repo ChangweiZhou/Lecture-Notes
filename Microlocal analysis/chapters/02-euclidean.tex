@@ -112,7 +112,9 @@ We shall use repeatedly the following elementary inequality.
   \begin{enumerate}[label=\textup{(\roman*)}]
   \item $\ang\xi^m\in S^m(\R^p;\R^n)$.
   \item Multiplication defines a continuous bilinear map
-    $S^m(\R^p;\R^n)\times S^{m'}(\R^p;\R^n)\to S^{m+m'}(\R^p;\R^n)$.
+    \begin{equation*}
+      S^m(\R^p;\R^n)\times S^{m'}(\R^p;\R^n)\to S^{m+m'}(\R^p;\R^n).
+    \end{equation*}
   \item $D^\alpha_z$ maps $S^m(\R^p;\R^n)$ continuously into itself and
     $D^\beta_\xi$ maps it continuously into $S^{m-\abs\beta}(\R^p;\R^n)$.
   \item $S^m(\R^p;\R^n)$ is a Fr\'echet space.
@@ -376,7 +378,7 @@ for weighted estimates.
 
 \begin{lemma}\label{euclidean:lem:amplitude-char}
   Multiplication by $\ang{x-y}^w$ is an isomorphism of Fr\'echet spaces
-  $S^m(\R^{2n}_{(x,y)};\R^n_\xi)\to\Amp mw(\R^n)$. More generally, call
+  from $S^m(\R^{2n}_{(x,y)};\R^n_\xi)$ onto $\Amp mw(\R^n)$. More generally, call
   $f\in\CI(\R^{2n})$ \emph{of weight $w'$} if
   $\abs{D^\alpha_xD^\beta_yf}\le C_{\alpha\beta}\ang{x-y}^{w'}$ for all
   $\alpha,\beta$; then multiplication by such $f$ maps $\Amp mw(\R^n)$
@@ -1054,3 +1056,861 @@ loss of information. Still, many problems can be solved using it; it says
 that the principal symbol gives a homomorphism from the filtered algebra
 $\Psido0(\R^n)$ onto the \emph{commutative} algebra
 $S^0(\R^n;\R^n)/S^{-1}(\R^n;\R^n)$.
+
+% ======================================================================
+\section{Ellipticity and parametrices}\label{euclidean:sec:ellipticity}
+
+\begin{definition}\label{euclidean:def:elliptic}
+  An operator $A\in\Psido m(\R^n)$ is \emph{elliptic} if it is invertible
+  modulo $\Psido{-\infty}(\R^n)$ with an approximate inverse of order $-m$,
+  i.e.\ if there exists $B\in\Psido{-m}(\R^n)$ with
+  \begin{equation}\label{euclidean:eq:right-parametrix}
+    AB-\Id\in\Psido{-\infty}(\R^n).
+  \end{equation}
+  Such a $B$ is called a (right) \emph{parametrix} of $A$.
+\end{definition}
+
+Thus ellipticity is invertibility in the quotient algebra
+$\Psido\infty(\R^n)/\Psido{-\infty}(\R^n)$, with the inverse in
+$\Psido{-m}(\R^n)/\Psido{-\infty}(\R^n)$. The point is that it is a property
+of the principal symbol alone. Both at the level of symbols and of operators
+we use the following Neumann series argument.
+
+\begin{lemma}\label{euclidean:lem:neumann}
+  If $e\in S^{-1}(\R^p;\R^n)$ there is $f\in S^{-1}(\R^p;\R^n)$ with
+  $(1+e)(1+f)-1\in S^{-\infty}(\R^p;\R^n)$. If $E\in\Psido{-1}(\R^n)$ there is
+  $F\in\Psido{-1}(\R^n)$ with
+  $(\Id+E)(\Id+F)-\Id\in\Psido{-\infty}(\R^n)$ and
+  $(\Id+F)(\Id+E)-\Id\in\Psido{-\infty}(\R^n)$.
+\end{lemma}
+\begin{proof}
+  We give the operator version; the symbol version is identical, with
+  \cref{euclidean:prop:borel} in place of \cref{euclidean:cor:reduction}(iii).
+  By \cref{euclidean:thm:composition}, $(-E)^j\in\Psido{-j}$, so by
+  \cref{euclidean:cor:reduction}(iii) there is $F\in\Psido{-1}$ with
+  $F-\sum_{j=1}^N(-E)^j\in\Psido{-N-1}$ for all $N$. Since
+  $(\Id+E)\sum_{j=0}^N(-E)^j=\Id-(-E)^{N+1}=\sum_{j=0}^N(-E)^j(\Id+E)$,
+  \begin{equation*}
+    (\Id+E)(\Id+F)-\Id=-(-E)^{N+1}+(\Id+E)\Bigl(F-\sum_{j=1}^N(-E)^j\Bigr)
+    \in\Psido{-N-1}(\R^n)
+  \end{equation*}
+  for every $N$, and similarly for $(\Id+F)(\Id+E)-\Id$.
+\end{proof}
+
+\begin{theorem}\label{euclidean:thm:elliptic}
+  For $A\in\Psido m(\R^n)$ the following conditions are equivalent:
+  \begin{enumerate}[label=\textup{(\alph*)}]
+  \item $A$ is elliptic;
+  \item there exists $b\in S^{-m}(\R^n;\R^n)$ such that
+    $\sigma_m(A)\cdot[b]=1$ in $S^0(\R^n;\R^n)/S^{-1}(\R^n;\R^n)$;
+  \item there exists $b\in S^{-m}(\R^n;\R^n)$ such that
+    $\sigma_L(A)\,b-1\in S^{-\infty}(\R^n;\R^n)$;
+  \item $\sigma_L(A)$ is an elliptic symbol: there is $\eps>0$ such that
+    $\abs{\sigma_L(A)(x,\xi)}\ge\eps\ang\xi^m$ for $\abs\xi\ge1/\eps$.
+  \end{enumerate}
+  Condition \textup{(d)} holds for one representative of $\sigma_m(A)$ if and
+  only if it holds for all of them \textup{(}with different $\eps$\textup{)}.
+\end{theorem}
+\begin{proof}
+  The last statement follows from the equivalent form
+  $\abs a\ge\eps\ang\xi^m-C\ang\xi^{m-1}$ of ellipticity noted after
+  \cref{euclidean:def:elliptic-symbol}. We prove
+  (a)$\Rightarrow$(b)$\Rightarrow$(c)$\Leftrightarrow$(d) and
+  (c)$\Rightarrow$(a).
+
+  (a)$\Rightarrow$(b): since $\Id=\Op(1)$, $\sigma_0(\Id)=1$; applying
+  \eqref{euclidean:eq:principal-mult} to \eqref{euclidean:eq:right-parametrix}
+  gives $\sigma_m(A)\sigma_{-m}(B)=1$.
+
+  (b)$\Rightarrow$(c): (b) means that $\sigma_L(A)b=1+e$ with
+  $e\in S^{-1}$. With $f$ as in \cref{euclidean:lem:neumann},
+  $\sigma_L(A)\,b(1+f)=(1+e)(1+f)\in1+S^{-\infty}$, and $b(1+f)\in S^{-m}$.
+
+  (c)$\Leftrightarrow$(d) is \cref{euclidean:lem:elliptic-symbol}.
+
+  (c)$\Rightarrow$(a): let $B_1=\Op(b)$. By
+  \eqref{euclidean:eq:composition-symbol},
+  $\sigma_L(AB_1)-\sigma_L(A)b\in S^{-1}$, so
+  $E=AB_1-\Id\in\Psido{-1}(\R^n)$. With $F$ as in \cref{euclidean:lem:neumann},
+  $B=B_1(\Id+F)\in\Psido{-m}(\R^n)$ satisfies
+  $AB-\Id=(\Id+E)(\Id+F)-\Id\in\Psido{-\infty}(\R^n)$.
+\end{proof}
+
+In \cref{euclidean:def:elliptic} we took $B$ to be a right parametrix. We
+could equally well have taken a left parametrix:
+
+\begin{lemma}\label{euclidean:lem:left-parametrix}
+  $A\in\Psido m(\R^n)$ is elliptic if and only if there exists
+  $B'\in\Psido{-m}(\R^n)$ with $B'A-\Id\in\Psido{-\infty}(\R^n)$. If $B$ is a
+  right and $B'$ a left parametrix then $B-B'\in\Psido{-\infty}(\R^n)$.
+\end{lemma}
+\begin{proof}
+  If $B'A-\Id\in\Psido{-\infty}$ then
+  $\sigma_{-m}(B')\sigma_m(A)=1$, and since multiplication of symbols is
+  commutative, (b) of \cref{euclidean:thm:elliptic} holds, so $A$ is
+  elliptic. Conversely, if $A$ is elliptic, let $b$ be as in
+  \cref{euclidean:thm:elliptic}(c) and $B_1=\Op(b)$. As in the proof above,
+  $B_1A=\Id+E'$ with $E'\in\Psido{-1}$, and with $F'$ as in
+  \cref{euclidean:lem:neumann} (for $E'$), $B'=(\Id+F')B_1$ satisfies
+  $B'A-\Id\in\Psido{-\infty}$. Finally, if $AB=\Id+E$ and $B'A=\Id+E'$ with
+  $E,E'\in\Psido{-\infty}$, then
+  $B'+B'E=B'(AB)=(B'A)B=B+E'B$, so $B-B'=B'E-E'B\in\Psido{-\infty}$.
+\end{proof}
+
+Thus a parametrix of an elliptic operator is automatically two-sided, and it
+is unique modulo $\Psido{-\infty}(\R^n)$.
+
+\subsection{Elliptic regularity}
+
+One of the main reasons that residual operators are ``residual'' is that they
+are smoothing.
+
+\begin{lemma}\label{euclidean:lem:smoothing}
+  Let $E\in\Psido{-\infty}(\R^n)$ have kernel $K$. For $u\in\cSp(\R^n)$, $Eu$
+  is the smooth function $x\mapsto u\bigl(K(x,\cdot)\bigr)$, and all its
+  derivatives are polynomially bounded. In particular
+  $E:\cSp(\R^n)\to\cSp(\R^n)\cap\CI(\R^n)$.
+\end{lemma}
+\begin{proof}
+  Write $k_x=K(x,\cdot)$. By \eqref{euclidean:eq:residual-kernel} and
+  Peetre's inequality $\ang y^N\le2^{N/2}\ang x^N\ang{x-y}^N$,
+  \begin{equation*}
+    \sup_y\abs{y^\gamma D^\beta_yD^\alpha_xK(x,y)}\le C_{\alpha\beta\gamma}\ang x^{\abs\gamma}.
+  \end{equation*}
+  Hence $x\mapsto k_x$ is a smooth map into $\cS(\R^n)$ with
+  $D^\alpha_xk_x=(D^\alpha_xK)(x,\cdot)$ and $\norm{D^\alpha_xk_x}_j\le C\ang x^j$:
+  for instance
+  $t^{-1}(k_{x+te_l}-k_x)-(\pa_{x_l}K)(x,\cdot)
+  =\int_0^1\bigl((\pa_{x_l}K)(x+ste_l,\cdot)-(\pa_{x_l}K)(x,\cdot)\bigr)ds$,
+  whose $\cS$-norms are $O(\abs t)$ by the bounds on the second derivatives.
+  Since $\abs{u(\phi)}\le C\norm\phi_j$ for some $j$, the function
+  $f(x)=u(k_x)$ is smooth with $D^\alpha f(x)=u(D^\alpha_xk_x)$ and
+  $\abs{D^\alpha f(x)}\le C_\alpha\ang x^j$. Finally, by
+  \eqref{euclidean:eq:S'-action} and \cref{euclidean:prop:adjoint},
+  $(Eu)(\phi)=u(E^t\phi)$ with
+  $E^t\phi=\int\phi(x)k_x\,dx$; this integral converges in $\cS(\R^n)$
+  (the integrand is continuous with norms bounded by
+  $C\abs{\phi(x)}\ang x^j$), so $u(E^t\phi)=\int\phi(x)u(k_x)\,dx$, i.e.\
+  $Eu=f$.
+\end{proof}
+
+Directly from the existence of parametrices we deduce the regularity of
+solutions of elliptic equations.
+
+\begin{proposition}\label{euclidean:prop:elliptic-regularity}
+  If $A\in\Psido m(\R^n)$ is elliptic and $u\in\cSp(\R^n)$ satisfies
+  $Au\in\cS(\R^n)$ \textup{(}e.g.\ $Au=0$\textup{)}, then $u\in\CI(\R^n)$.
+\end{proposition}
+\begin{proof}
+  Let $B\in\Psido{-m}(\R^n)$ be a left parametrix, $BA=\Id+E$ with
+  $E\in\Psido{-\infty}$. Then $u=B(Au)-Eu$, where $B(Au)\in\cS(\R^n)$ and
+  $Eu\in\CI(\R^n)$ by \cref{euclidean:lem:smoothing}.
+\end{proof}
+
+A more precise, quantitative version is given in
+\cref{euclidean:prop:elliptic-sobolev}; a local version requires the
+microlocal methods of \cref{ch:microlocal}.
+
+\subsection{The Laplacian}
+
+Let $g_{ij}\in\CIb(\R^n)$, $i,j=1,\dots,n$, be the components of a
+\emph{uniformly positive} Riemannian metric on $\R^n$: $g_{ij}=g_{ji}$ and,
+for some $\eps>0$,
+\begin{equation}\label{euclidean:eq:metric}
+  \sum_{i,j=1}^ng_{ij}(x)\xi_i\xi_j\ge\eps\abs\xi^2\quad\text{for all }x,\xi\in\R^n.
+\end{equation}
+Let $g(x)=\det\bigl(g_{ij}(x)\bigr)$ and let $(g^{ij}(x))$ be the inverse
+matrix. Since the $g_{ij}$ are bounded, the eigenvalues of $(g_{ij})$ lie in
+$[\eps,C]$; hence $\eps^n\le g\le C^n$, and by Cramer's rule
+$g^{ij},\sqrt g\in\CIb(\R^n)$, with
+$\sum g^{ij}\xi_i\xi_j\ge C^{-1}\abs\xi^2$. The \emph{Laplacian} of the metric
+is the differential operator
+\begin{equation*}
+  \Delta_g=\sum_{i,j=1}^n\frac1{\sqrt g}D_{x_i}g^{ij}\sqrt g\,D_{x_j}
+  =\sum_{i,j}g^{ij}D_{x_i}D_{x_j}+\sum_{i,j}\frac1{\sqrt g}
+  \bigl(D_{x_i}(g^{ij}\sqrt g)\bigr)D_{x_j}.
+\end{equation*}
+It is characterized by the integration by parts formula
+\begin{equation*}
+  \int_{\R^n}\sum_{i,j}g^{ij}(x)\,D_{x_j}\phi\,\overline{D_{x_i}\psi}\,dg
+  =\int_{\R^n}\Delta_g\phi\,\overline\psi\,dg\quad\text{for all }\phi,\psi\in\cS(\R^n),
+  \qquad dg=\sqrt g\,dx,
+\end{equation*}
+which follows from $\int D_{x_i}f\,\bar h\,dx=\int f\,\overline{D_{x_i}h}\,dx$.
+In particular $\Delta_g$ is formally self-adjoint and non-negative with
+respect to the measure $dg$.
+
+\begin{proposition}\label{euclidean:prop:laplacian}
+  $\Delta_g\in\Diff2_{\mathrm b}(\R^n)\subset\Psido2(\R^n)$ is elliptic, with
+  $\sigma_2(\Delta_g)=\bigl[\sum_{i,j}g^{ij}(x)\xi_i\xi_j\bigr]$. Hence there
+  is $B\in\Psido{-2}(\R^n)$ with $\Delta_gB-\Id$,
+  $B\Delta_g-\Id\in\Psido{-\infty}(\R^n)$, and if $u\in\cSp(\R^n)$ satisfies
+  $\Delta_gu=0$ then $u\in\CI(\R^n)$.
+\end{proposition}
+\begin{proof}
+  The coefficients are in $\CIb$ by the remarks above, and the principal symbol
+  satisfies $\sum g^{ij}\xi_i\xi_j\ge C^{-1}\abs\xi^2\ge(2C)^{-1}\ang\xi^2$
+  for $\abs\xi\ge1$. The rest follows from \cref{euclidean:thm:elliptic},
+  \cref{euclidean:lem:left-parametrix} and
+  \cref{euclidean:prop:elliptic-regularity}.
+\end{proof}
+
+Note that the upper bound on the $g_{ij}$, which comes from the assumption
+$g_{ij}\in\CIb$, is needed to obtain the lower bound on the principal symbol
+$\sum g^{ij}\xi_i\xi_j$.
+
+% ======================================================================
+\section{Boundedness on \texorpdfstring{$L^2$}{L2}}\label{euclidean:sec:L2}
+
+So far pseudodifferential operators have been considered as continuous
+operators on $\cS(\R^n)$ and on $\cSp(\R^n)$. Using the composition theorem we
+can now prove ``finite order'' regularity results, the basic one being:
+
+\begin{theorem}\label{euclidean:thm:L2}
+  Every $A\in\Psido0(\R^n)$ extends by continuity from $\cS(\R^n)$ to a
+  bounded linear operator $A:L^2(\R^n)\to L^2(\R^n)$, which coincides with the
+  restriction to $L^2(\R^n)\subset\cSp(\R^n)$ of the action
+  \eqref{euclidean:eq:S'-action} on $\cSp(\R^n)$.
+\end{theorem}
+
+The proof is in two stages: residual operators are handled by direct
+estimation, and the general case is reduced to that one by H\"ormander's
+trick of using an approximate square root.
+
+\begin{lemma}[Schur]\label{euclidean:lem:schur}
+  If $K$ is a measurable function on $\R^{2n}$ such that
+  \begin{equation*}
+    M_1=\sup_{x\in\R^n}\int_{\R^n}\abs{K(x,y)}\,dy<\infty,\qquad
+    M_2=\sup_{y\in\R^n}\int_{\R^n}\abs{K(x,y)}\,dx<\infty,
+  \end{equation*}
+  then $T\phi(x)=\int K(x,y)\phi(y)\,dy$ defines a bounded operator on
+  $L^2(\R^n)$ with $\norm T\le\sqrt{M_1M_2}$.
+\end{lemma}
+\begin{proof}
+  By the Cauchy--Schwarz inequality applied to
+  $\abs K^{1/2}\cdot\abs K^{1/2}\abs\phi$,
+  \begin{equation*}
+    \abs{T\phi(x)}^2\le\int\abs{K(x,y)}\,dy\int\abs{K(x,y)}\abs{\phi(y)}^2\,dy
+    \le M_1\int\abs{K(x,y)}\abs{\phi(y)}^2\,dy,
+  \end{equation*}
+  and integrating in $x$ (Tonelli) gives
+  $\norm{T\phi}^2\le M_1M_2\norm\phi^2$.
+\end{proof}
+
+By \cref{euclidean:prop:residual}, the kernel of $G\in\Psido{-\infty}(\R^n)$
+satisfies $\abs{K(x,y)}\le C\ang{x-y}^{-n-1}$, and
+$\int\ang z^{-n-1}dz<\infty$. Hence every $G\in\Psido{-\infty}(\R^n)$ is
+bounded on $L^2(\R^n)$.
+
+We say that a real symbol $a\in S^m(\R^n;\R^n)$ is \emph{positive elliptic}
+if $a\ge\eps\ang\xi^m$ for some $\eps>0$. By
+\cref{euclidean:lem:powers}, $a^{s}\in S^{sm}$ for all $s\in\R$.
+
+\begin{proposition}\label{euclidean:prop:sqrt}
+  Let $A\in\Psido m(\R^n)$ be self-adjoint, $A=A^*$, and suppose that
+  $\sigma_m(A)$ has a positive elliptic representative. Then there exists
+  $B\in\Psido{m/2}(\R^n)$ with $B=B^*$ and
+  \begin{equation*}
+    A=B^2+G,\qquad G\in\Psido{-\infty}(\R^n).
+  \end{equation*}
+\end{proposition}
+\begin{proof}
+  Let $a$ be a positive elliptic representative of $\sigma_m(A)$ and
+  $b_0=a^{1/2}\in S^{m/2}(\R^n;\R^n)$. Let $B_0=\frac12(\Op(b_0)+\Op(b_0)^*)$;
+  then $B_0=B_0^*$ and $\sigma_{m/2}(B_0)=[b_0]$ since $b_0$ is real. By
+  \eqref{euclidean:eq:principal-mult}, $\sigma_m(B_0^2)=[b_0^2]=[a]$, so
+  $E_1=A-B_0^2\in\Psido{m-1}(\R^n)$.
+
+  We proceed inductively. Suppose $B_j\in\Psido{m/2-j}(\R^n)$, $B_j=B_j^*$,
+  have been chosen for $j\le N$ such that, with $S_N=\sum_{j=0}^NB_j$,
+  \begin{equation*}
+    E_{N+1}=A-S_N^2\in\Psido{m-N-1}(\R^n);
+  \end{equation*}
+  this has been done for $N=0$. Note $E_{N+1}^*=E_{N+1}$. For
+  $B_{N+1}\in\Psido{m/2-N-1}(\R^n)$,
+  \begin{equation*}
+    A-(S_N+B_{N+1})^2=E_{N+1}-S_NB_{N+1}-B_{N+1}S_N-B_{N+1}^2.
+  \end{equation*}
+  Since $S_N-B_0\in\Psido{m/2-1}$, all terms on the right are of order
+  $m-N-2$ except $E_{N+1}-B_0B_{N+1}-B_{N+1}B_0\in\Psido{m-N-1}$, whose
+  principal symbol is
+  \begin{equation*}
+    \sigma_{m-N-1}(E_{N+1})-2b_0\,\sigma_{m/2-N-1}(B_{N+1}).
+  \end{equation*}
+  Let $e$ represent $\sigma_{m-N-1}(E_{N+1})$; by \cref{euclidean:lem:powers},
+  $e/(2b_0)\in S^{m/2-N-1}$. Let
+  $B_{N+1}=\frac12\bigl(\Op(e/2b_0)+\Op(e/2b_0)^*\bigr)$. Since
+  $E_{N+1}$ is self-adjoint, $[e]=[\bar e]$ and so
+  $\sigma_{m/2-N-1}(B_{N+1})=[e/(2b_0)]$. Then
+  $A-S_{N+1}^2\in\Psido{m-N-2}$, completing the induction.
+
+  By \cref{euclidean:cor:reduction}(iii) choose $B'\in\Psido{m/2}$ with
+  $B'-S_N\in\Psido{m/2-N-1}$ for all $N$, and set $B=\frac12(B'+B'^*)$. Since
+  $S_N=S_N^*$, also $B-S_N=\frac12\bigl((B'-S_N)+(B'-S_N)^*\bigr)\in\Psido{m/2-N-1}$.
+  Writing $B=S_N+R_N$,
+  \begin{equation*}
+    A-B^2=E_{N+1}-S_NR_N-R_NS_N-R_N^2\in\Psido{m-N-1}(\R^n)
+  \end{equation*}
+  for every $N$. Thus $G=A-B^2\in\Psido{-\infty}(\R^n)$.
+\end{proof}
+
+\begin{proof}[Proof of \cref{euclidean:thm:L2}]
+  Let $a=\sigma_L(A)\in S^0$ and $C=1+\sup\abs a^2$. Then $C-A^*A\in\Psido0$ is
+  self-adjoint and by \eqref{euclidean:eq:principal-mult} its principal symbol
+  is represented by $C-\abs a^2\ge1$, which is positive elliptic of order
+  $0$. By \cref{euclidean:prop:sqrt}, $C-A^*A=B^2+G$ with $B=B^*\in\Psido0$
+  and $G\in\Psido{-\infty}$; $G$ is bounded on $L^2$ by Schur's lemma. For
+  $\phi\in\cS(\R^n)$,
+  \begin{equation*}
+    \norm{A\phi}^2=\inner{A^*A\phi}\phi=C\norm\phi^2-\norm{B\phi}^2-\inner{G\phi}\phi
+    \le\bigl(C+\norm G_{L^2\to L^2}\bigr)\norm\phi^2.
+  \end{equation*}
+  Since $\cS(\R^n)$ is dense in $L^2(\R^n)$ (\cref{euclidean:ex:density-L2}),
+  $A$ extends uniquely to a bounded operator on $L^2$. If $\phi_k\to u$ in
+  $L^2$ then $\phi_k\to u$ in $\cSp$, so $A\phi_k\to Au$ in $\cSp$ by the
+  continuity of \eqref{euclidean:eq:S'-action}; hence the two extensions agree.
+\end{proof}
+
+% ======================================================================
+\section{Sobolev spaces}\label{euclidean:sec:sobolev}
+
+Recall that for $k\in\N_0$ the Sobolev space $H^k(\R^n)$ consists of the
+$u\in L^2(\R^n)$ with $D^\alpha u\in L^2(\R^n)$ for all $\abs\alpha\le k$. By
+Plancherel's theorem this means $\xi^\alpha\hat u\in L^2$ for $\abs\alpha\le k$,
+and since
+\begin{equation}\label{euclidean:eq:multinomial}
+  \ang\xi^{2k}=(1+\xi_1^2+\dots+\xi_n^2)^k=\sum_{\abs\beta\le k}c_{\beta}\,\xi^{2\beta},
+  \qquad c_{\beta}>0,
+\end{equation}
+these finitely many conditions are equivalent to the single condition
+$\ang\xi^k\hat u\in L^2$, i.e.\ $\ang D^ku\in L^2(\R^n)$, where
+$\ang D^s=\Op(\ang\xi^s)\in\Psido s(\R^n)$ as in \cref{euclidean:ex:diff-ops}.
+For negative integers $-k$, one defines
+\begin{equation*}
+  H^{-k}(\R^n)=\Bigl\{u\in\cSp(\R^n);\ u=\sum_{\abs\beta\le k}D^\beta u_\beta,\
+  u_\beta\in L^2(\R^n)\Bigr\},
+\end{equation*}
+and again $u\in H^{-k}(\R^n)$ if and only if $\ang D^{-k}u\in L^2$. Indeed, if
+$u=\sum D^\beta u_\beta$ then $\ang\xi^{-k}\hat u=\sum\xi^\beta\ang\xi^{-k}\hat u_\beta\in L^2$
+since $\abs{\xi^\beta}\le\ang\xi^k$. Conversely, if $\ang\xi^{-k}\hat u\in L^2$,
+\eqref{euclidean:eq:multinomial} gives $u=\sum_{\abs\beta\le k}D^\beta u_\beta$
+with $\hat u_\beta=c_\beta\xi^\beta\ang\xi^{-2k}\hat u$, and
+$\abs{\hat u_\beta}\le c_\beta\ang\xi^{-k}\abs{\hat u}$, so $u_\beta\in L^2$.
+In view of this we define:
+
+\begin{definition}\label{euclidean:def:sobolev}
+  For $s\in\R$, the Sobolev space of order $s$ is
+  \begin{equation*}
+    H^s(\R^n)=\{u\in\cSp(\R^n);\ \ang D^su\in L^2(\R^n)\},\qquad
+    \norm u_{H^s}^2=\norm{\ang D^su}_{L^2}^2=\int\ang\xi^{2s}\abs{\hat u(\xi)}^2\,\dbar\xi.
+  \end{equation*}
+  For $q\in\R$, the weighted Sobolev space is
+  $\ang x^qH^s(\R^n)=\{u\in\cSp(\R^n);\ \ang x^{-q}u\in H^s(\R^n)\}$, with norm
+  $\norm u_{\ang x^qH^s}=\norm{\ang x^{-q}u}_{H^s}$.
+\end{definition}
+
+$H^s(\R^n)$ is a Hilbert space, isometric via $\ang D^s$ to $L^2(\R^n)$, and
+$H^{s'}(\R^n)\subset H^s(\R^n)$ for $s'\ge s$. Unfortunately these spaces get
+\emph{smaller} as $s$ increases, whereas $\Psido m(\R^n)$ gets bigger with
+$m$. We set
+\begin{equation*}
+  H^\infty(\R^n)=\bigcap_sH^s(\R^n),\qquad H^{-\infty}(\R^n)=\bigcup_sH^s(\R^n).
+\end{equation*}
+Then $\cS\subsetneq H^\infty\subsetneq H^{-\infty}\subsetneq\cSp$: for
+instance $\ang x^{-n}\in H^\infty\setminus\cS$ (all its derivatives are
+$O(\ang x^{-n})$, hence square integrable), $\delta_0\in H^{-\infty}\setminus H^\infty$
+(as $\hat\delta_0=1$), and $1\notin H^{-\infty}$ (as $\hat 1=(2\pi)^n\delta_0$).
+In particular $H^{-\infty}$ does not capture all tempered distributions; the
+weighted spaces remedy this (\cref{euclidean:lem:S'-union}). Note also the
+Sobolev embedding: if $s>n/2$ then $H^s(\R^n)$ is contained in the bounded
+continuous functions, since
+$\int\abs{\hat u}\,\dbar\xi\le\bigl(\int\ang\xi^{-2s}\dbar\xi\bigr)^{1/2}\norm u_{H^s}$.
+
+\begin{theorem}\label{euclidean:thm:sobolev}
+  For all $q,s,M\in\R$, each $A\in\Psido M(\R^n)$ defines a continuous linear
+  map
+  \begin{equation*}
+    A:\ang x^qH^s(\R^n)\longrightarrow\ang x^qH^{s-M}(\R^n).
+  \end{equation*}
+\end{theorem}
+\begin{proof}
+  First let $q=0$. The operator $\ang D^{s'}$ is an isometric isomorphism
+  $H^{t}\to H^{t-s'}$ for all $t$, with inverse $\ang D^{-s'}$. By the
+  composition theorem $B=\ang D^{s-M}A\ang D^{-s}\in\Psido0(\R^n)$, which is
+  bounded on $L^2$ by \cref{euclidean:thm:L2}. For $u\in H^s$, $v=\ang D^su\in
+  L^2$ and $Au=\ang D^{M-s}Bv$ (as operators on $\cSp$), so
+  $\norm{Au}_{H^{s-M}}=\norm{Bv}_{L^2}\le\norm B\norm u_{H^s}$.
+  \[
+  \begin{tikzcd}
+    H^s(\R^n)\arrow[r,"A"]\arrow[d,"\ang D^s"'] & H^{s-M}(\R^n)\arrow[d,"\ang D^{s-M}"]\\
+    L^2(\R^n)\arrow[r,"B"] & L^2(\R^n)
+  \end{tikzcd}
+  \]
+
+  For general $q$, multiplication by $\ang x^{q}$ is by definition an isometry
+  of $H^s$ onto $\ang x^qH^s$, so it suffices to show that
+  $Q=\ang x^{-q}A\ang x^q\in\Psido M(\R^n)$. Write $A=\Op(a)$ with
+  $a\in S^M(\R^n;\R^n)$. Then the kernel of $Q$ is $fI(a)$ with
+  $f(x,y)=\ang x^{-q}\ang y^q$. Now
+  $D^\alpha_xD^\beta_yf=(D^\alpha\ang x^{-q})(D^\beta\ang y^q)$ is bounded by
+  $C\ang x^{-q}\ang y^q\le C2^{\abs q/2}\ang{x-y}^{\abs q}$, by
+  \cref{euclidean:lem:symbol-basic}(i) and Peetre's inequality; so $f$ has weight
+  $\abs q$, and by \cref{euclidean:lem:kernel-identities},
+  $fI(a)=I(fa)$ with $fa\in\Amp M{\abs q}(\R^n)$. Hence $Q=\Op(fa)\in\Psido M(\R^n)$.
+\end{proof}
+
+This is a typical instance where amplitudes of non-zero weight are useful;
+the left symbol of $Q$ is of course given by \cref{euclidean:thm:reduction}.
+
+\begin{lemma}\label{euclidean:lem:S'-union}
+  $\cSp(\R^n)=\bigcup_{M\in\N_0}\ang x^MH^{-M}(\R^n)$.
+\end{lemma}
+\begin{proof}
+  Let $u\in\cSp(\R^n)$. There are $C$ and $k$ with
+  $\abs{u(\phi)}\le C\max_{\abs\alpha,\abs\beta\le k}\sup\abs{x^\alpha D^\beta\phi}$.
+  For $\abs\alpha,\abs\beta\le k$ the operator
+  $x^\alpha D^\beta\ang x^{-k}$ is a differential operator of order $\le k$
+  with coefficients in $\CIb(\R^n)$ (by Leibniz' formula, as
+  $x^\alpha D^\gamma\ang x^{-k}$ is bounded with all derivatives for
+  $\abs\alpha\le k$), so it maps $H^{n+k}$ to $H^n$ boundedly by
+  \cref{euclidean:thm:sobolev}. With the Sobolev embedding this gives
+  $\sup\abs{x^\alpha D^\beta\phi}\le C\norm{\ang x^k\phi}_{H^{N}}$, $N=n+k$. Hence
+  $\psi\mapsto u(\ang x^{-k}\ang D^{-N}\psi)$, $\psi\in\cS(\R^n)$, is bounded in
+  the $L^2$ norm, and by the Riesz representation theorem there is
+  $h\in L^2(\R^n)$ with $u(\ang x^{-k}\ang D^{-N}\psi)=\int h\psi\,dx$. Since
+  $\ang x^{-k}\ang D^{-N}$ is an isomorphism of $\cS(\R^n)$ with inverse
+  $\ang D^N\ang x^k$, and $\ang D^N$ is its own transpose,
+  \begin{equation*}
+    u(\phi)=\int h\,\ang D^N(\ang x^k\phi)\,dx=\bigl(\ang x^k\ang D^Nh\bigr)(\phi),
+  \end{equation*}
+  i.e.\ $u=\ang x^k\ang D^Nh\in\ang x^kH^{-N}\subset\ang x^MH^{-M}$ with
+  $M=N$. Here we used that $\ang x^kH^{-N}\subset\ang x^{M}H^{-M}$ for $k\le M$,
+  $N\le M$, which holds because multiplication by
+  $\ang x^{k-M}\in\CIb(\R^n)$ preserves $H^{-N}$ by \cref{euclidean:thm:sobolev}.
+\end{proof}
+
+Alternatively this follows from the structure theorem for tempered
+distributions: every $u\in\cSp(\R^n)$ is a finite sum
+$\sum x^\alpha D^\beta u_{\alpha\beta}$ with $u_{\alpha\beta}$ bounded and
+continuous, and bounded continuous functions lie in $\ang x^{n}L^2(\R^n)$.
+
+The elliptic regularity result can now be refined.
+
+\begin{proposition}\label{euclidean:prop:elliptic-sobolev}
+  Let $A\in\Psido m(\R^n)$ be elliptic. If $u\in\ang x^{p'}H^{s'}(\R^n)$ and
+  $Au\in\ang x^pH^s(\R^n)$, then $u\in\ang x^{p''}H^{s+m}(\R^n)$ with
+  $p''=\max(p,p')$. In particular, if $Au\in\ang x^{p}H^\infty$ then $u\in\ang x^{p''}H^\infty$.
+\end{proposition}
+\begin{proof}
+  Let $B\in\Psido{-m}$ be a parametrix, $BA=\Id+G$ with $G\in\Psido{-\infty}$.
+  Then by \cref{euclidean:thm:sobolev}
+  \begin{equation*}
+    u=B(Au)-Gu\in\ang x^pH^{s+m}(\R^n)+\ang x^{p'}H^{\infty}(\R^n)
+    \subset\ang x^{p''}H^{s+m}(\R^n),
+  \end{equation*}
+  using that $\ang x^{p}H^t\subset\ang x^{p''}H^t$ for $p\le p''$ (as in the
+  proof of \cref{euclidean:lem:S'-union}).
+\end{proof}
+
+% ======================================================================
+\section{Polyhomogeneous operators}\label{euclidean:sec:polyhomogeneous}
+
+So far we have considered operators whose amplitudes satisfy the symbol
+estimates. Some weakenings of these estimates are indicated in
+\cref{euclidean:ex:rho-delta}. Here instead we consider a restriction, to
+symbols with asymptotic expansions in homogeneous functions; this is the
+most commonly used class of pseudodifferential operators.
+
+A function $a\in\CI(\R^p\times\R^n)$ is \emph{homogeneous of degree
+$\mu\in\R$ in $\abs\xi\ge1$} if
+\begin{equation*}
+  a(z,t\xi)=t^\mu a(z,\xi)\quad\text{for all }z,\ t\ge1,\ \abs\xi\ge1.
+\end{equation*}
+If such a function also satisfies the uniform regularity estimates
+\begin{equation}\label{euclidean:eq:uniform-regular}
+  \sup_{z\in\R^p,\ \abs\xi\le2}\abs{D^\alpha_zD^\beta_\xi a(z,\xi)}<\infty
+  \quad\text{for all }\alpha,\beta,
+\end{equation}
+then $a\in S^\mu(\R^p;\R^n)$. Indeed, differentiating the homogeneity relation
+shows that $D^\alpha_zD^\beta_\xi a$ is homogeneous of degree $\mu-\abs\beta$
+in $\abs\xi>1$, hence by continuity in $\abs\xi\ge1$, so for $\abs\xi\ge1$
+\begin{equation*}
+  \abs{D^\alpha_zD^\beta_\xi a(z,\xi)}=\abs\xi^{\mu-\abs\beta}
+  \abs{D^\alpha_zD^\beta_\xi a(z,\xi/\abs\xi)}\le C\ang\xi^{\mu-\abs\beta},
+\end{equation*}
+while for $\abs\xi\le1$ the estimates are given by
+\eqref{euclidean:eq:uniform-regular}. Conversely
+\eqref{euclidean:eq:uniform-regular} holds for any symbol. A function
+homogeneous of degree $\mu$ in $\abs\xi\ge1$ which lies in $S^{\mu-1}$
+vanishes in $\abs\xi\ge1$, since
+$\abs{a(z,\xi)}=t^{-\mu}\abs{a(z,t\xi)}\le Ct^{-1}\ang{\xi}^{\mu-1}$ for all $t\ge1$.
+
+\begin{definition}\label{euclidean:def:polyhomogeneous}
+  For $m\in\R$, the space $\Symph m(\R^p;\R^n)\subset S^m(\R^p;\R^n)$ of
+  \emph{\textup{(}one-step\textup{)} polyhomogeneous} or \emph{classical}
+  symbols consists of those $a$ for which there exist
+  $a_{m-j}\in S^{m-j}(\R^p;\R^n)$, homogeneous of degree $m-j$ in $\abs\xi\ge1$,
+  $j\in\N_0$, such that
+  \begin{equation*}
+    a\sim\sum_{j=0}^\infty a_{m-j}.
+  \end{equation*}
+\end{definition}
+
+By the remark preceding the definition, the terms $a_{m-j}$ are uniquely
+determined by $a$ in $\abs\xi\ge1$ (if $\sum_{j<N}(a_{m-j}-a'_{m-j})\in S^{m-N}$
+then inductively each difference is homogeneous and of lower order, so vanishes
+in $\abs\xi\ge1$). Clearly $S^{-\infty}\subset\Symph m$ for every $m$ (take all
+$a_{m-j}=0$), and $\Symph m\cap S^{m-1}=\Symph{m-1}$: if $a\in\Symph m\cap
+S^{m-1}$ then $a_m\in S^{m-1}$ vanishes in $\abs\xi\ge1$, so $a_m\in S^{-\infty}$ and
+$a\sim a_{m-1}'+\sum_{j\ge2}a_{m-j}$ with $a'_{m-1}=a_{m-1}+a_m$, which is homogeneous
+of degree $m-1$ in $\abs\xi\ge1$. The choice of $1$ in
+``$\abs\xi\ge1$'' is immaterial: if $h$ is homogeneous of degree $\mu$ in
+$\abs\xi\ge R$, then
+$h'(z,\xi)=\rho(\xi)\abs\xi^\mu R^{-\mu}h(z,R\xi/\abs\xi)$, with
+$\rho\in\CI$ vanishing near $0$ and equal to $1$ in $\abs\xi\ge1$, is
+homogeneous of degree $\mu$ in $\abs\xi\ge1$ and $h-h'$ has compact support
+in $\xi$, uniformly in $z$, so is residual.
+
+\begin{lemma}\label{euclidean:lem:ph-basic}
+  \begin{enumerate}[label=\textup{(\roman*)}]
+  \item $\Symph m(\R^p;\R^n)\cdot\Symph{m'}(\R^p;\R^n)\subset\Symph{m+m'}(\R^p;\R^n)$;
+    $D_{z_j}$ preserves $\Symph m$, $D_{\xi_j}$ maps $\Symph m$ into
+    $\Symph{m-1}$, and complex conjugation and restriction to linear
+    subspaces of $\R^p$ preserve polyhomogeneity.
+  \item If $b_j\in\Symph{m-j}(\R^p;\R^n)$ and $b\sim\sum_jb_j$ then
+    $b\in\Symph m(\R^p;\R^n)$.
+  \item Polynomials in $\xi$ with $\CIb$ coefficients are polyhomogeneous, and
+    $\ang\xi^s\in\Symph s(\R^n)$ for all $s\in\R$; multiplication by
+    $\ang\xi^{s}$ is an isomorphism $\Symph m\to\Symph{m+s}$.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  (i) Homogeneity is preserved by products, $D_z$, conjugation and
+  restriction, and $D_\xi$ lowers the degree of homogeneity by one (in
+  $\abs\xi>1$, hence by continuity in $\abs\xi\ge1$). The asymptotic
+  expansions are then given by \cref{euclidean:lem:asymptotic-manip}(i),(ii).
+
+  (ii) Write $b_j\sim\sum_kb_{j,k}$ with $b_{j,k}$ homogeneous of degree
+  $m-j-k$. Then $c_l=\sum_{j+k=l}b_{j,k}$ is homogeneous of degree $m-l$
+  in $\abs\xi\ge1$, and $b\sim\sum_lc_l$ by
+  \cref{euclidean:lem:asymptotic-manip}(iii).
+
+  (iii) A polynomial $\sum_{\abs\alpha\le k}p_\alpha(z)\xi^\alpha$ is the finite sum
+  of its homogeneous parts. For $\ang\xi^s$, let $\rho$ be as above. For
+  $\abs\xi\ge1$, $\ang\xi^s=\abs\xi^s(1+\abs\xi^{-2})^{s/2}$, and by the binomial
+  series, for $K\in\N$,
+  \begin{equation*}
+    \ang\xi^s-\sum_{k<K}\binom{s/2}k\rho(\xi)\abs\xi^{s-2k}
+    =\abs\xi^{s-2K}h_K(\abs\xi^{-2})\quad\text{in }\abs\xi\ge2,
+  \end{equation*}
+  where $h_K$ is real-analytic on $[0,\frac14]$. Since $\abs\xi^{-2}$ is
+  homogeneous of degree $-2$ in $\abs\xi\ge1$, hence a symbol of order $-2$
+  there, the chain rule shows that $h_K(\abs\xi^{-2})$ satisfies symbol
+  estimates of order $0$ in $\abs\xi\ge2$; so the left side is in
+  $S^{s-2K}$. Thus $\ang\xi^s\sim\sum_k\binom{s/2}k\rho(\xi)\abs\xi^{s-2k}$. The
+  last statement follows from (i), with inverse multiplication by $\ang\xi^{-s}$.
+\end{proof}
+
+\begin{definition}\label{euclidean:def:psi-ph}
+  For $m\in\R$, $\Psido m_{\mathrm{ph}}(\R^n)$ is the space of operators
+  $\Op(a)$ with $a=\ang{x-y}^w\tilde a$, $\tilde a\in\Symph m(\R^{2n};\R^n)$, for
+  some $w\in\R$.
+\end{definition}
+
+\begin{proposition}\label{euclidean:prop:ph-algebra}
+  An operator $A\in\Psido m(\R^n)$ lies in $\Psido m_{\mathrm{ph}}(\R^n)$ if and
+  only if $\sigma_L(A)\in\Symph m(\R^n;\R^n)$. The spaces
+  $\Psido m_{\mathrm{ph}}(\R^n)$ form an order-filtered $*$-subalgebra of
+  $\Psido\infty(\R^n)$ containing $\Psido{-\infty}(\R^n)$ and
+  $\Diff m_{\mathrm b}(\R^n)$, and for every $A\in\Psido m_{\mathrm{ph}}(\R^n)$
+  also $\sigma_R(A)\in\Symph m(\R^n;\R^n)$.
+\end{proposition}
+\begin{proof}
+  If $\sigma_L(A)\in\Symph m$ then $A=\Op(\sigma_L(A))$ is of the required form
+  with $w=0$. Conversely let $A=\Op(a)$, $a=\ang{x-y}^w\tilde a$. By
+  Leibniz' formula
+  \begin{equation*}
+    D^\alpha_ya(x,y,\xi)\big|_{y=x}=\sum_{\gamma\le\alpha}\binom\alpha\gamma
+    c_\gamma\,D^{\alpha-\gamma}_y\tilde a(x,y,\xi)\big|_{y=x},\qquad
+    c_\gamma=D^\gamma_y\ang{x-y}^w\big|_{y=x}\in\C,
+  \end{equation*}
+  so by \cref{euclidean:lem:ph-basic}(i) each term in
+  \eqref{euclidean:eq:reduction} is polyhomogeneous, of order $m-\abs\alpha$,
+  and $\sigma_L(A)\in\Symph m$ by \cref{euclidean:lem:ph-basic}(ii).
+  The formulas \eqref{euclidean:eq:adjoint-symbol},
+  \eqref{euclidean:eq:composition-symbol} and \eqref{euclidean:eq:right-left},
+  together with \cref{euclidean:lem:ph-basic}, show that $A^*$, $AB$ and
+  $\sigma_R(A)$ are polyhomogeneous when $A$ and $B$ are. The remaining
+  statements follow from $S^{-\infty}\subset\Symph{m}$ and
+  \cref{euclidean:lem:ph-basic}(iii).
+\end{proof}
+
+This subalgebra is often denoted simply $\Psido m(\R^n)$, its elements being
+called \emph{classical} pseudodifferential operators. For
+$A\in\Psido m_{\mathrm{ph}}(\R^n)$ the principal symbol has a preferred
+representative, the leading term $a_m$ in the expansion of $\sigma_L(A)$, and it
+is natural to identify $\sigma_m(A)$ with the function $a_m$, homogeneous of
+degree $m$ on $\abs\xi\ge1$ (or by extension on $\R^n\times(\R^n\setminus0)$).
+Conversely, if $A\in\Psido m(\R^n)$ and $\sigma_m(A)$ has a representative
+$a_m$ homogeneous of degree $m$ in $\abs\xi\ge1$, then
+$A-\Op(a_m)\in\Psido{m-1}(\R^n)$; that is,
+\begin{equation*}
+  \sigma_m(A)\text{ has a homogeneous representative}\iff
+  A\in\Psido m_{\mathrm{ph}}(\R^n)+\Psido{m-1}(\R^n).
+\end{equation*}
+
+It is usually the case that a construction in $\Psido\infty(\R^n)$ applied
+to elements of $\Psido\infty_{\mathrm{ph}}(\R^n)$ yields elements of
+$\Psido\infty_{\mathrm{ph}}(\R^n)$. As an illustration:
+
+\begin{proposition}\label{euclidean:prop:ph-parametrix}
+  If $A\in\Psido m_{\mathrm{ph}}(\R^n)$ is elliptic, then every parametrix of
+  $A$ lies in $\Psido{-m}_{\mathrm{ph}}(\R^n)$.
+\end{proposition}
+\begin{proof}
+  Since parametrices are unique modulo
+  $\Psido{-\infty}(\R^n)\subset\Psido{-m}_{\mathrm{ph}}(\R^n)$, it suffices to
+  construct one in $\Psido{-m}_{\mathrm{ph}}$. Let $a_m$ be the leading term
+  of $\sigma_L(A)$. By \cref{euclidean:thm:elliptic}(d),
+  $\abs{\sigma_L(A)}\ge\eps\ang\xi^m$ for $\abs\xi\ge R$, hence
+  $\abs{a_m}\ge\frac\eps2\ang\xi^m$ for $\abs\xi\ge R'$; by homogeneity
+  $\abs{a_m(x,\theta)}=R'^{-m}\abs{a_m(x,R'\theta)}\ge\frac\eps2$ for
+  $\abs\theta=1$, so $\abs{a_m}\ge\frac\eps2\abs\xi^m$ in $\abs\xi\ge1$. As
+  $\nabla_\xi a_m$ is bounded on $\abs\xi\le2$, there is $\delta\in(0,\frac12)$
+  with $\abs{a_m}\ge\frac\eps4$ on $\abs\xi\ge1-\delta$. Choose $\rho\in\CI(\R^n)$
+  vanishing in $\abs\xi\le1-\delta$ and equal to $1$ in $\abs\xi\ge1$, and set
+  $b=\rho/a_m$. By \cref{euclidean:lem:powers} (applied on
+  $\{\abs\xi>1-\delta\}$) $b\in S^{-m}$, and $b$ is homogeneous of degree $-m$ in
+  $\abs\xi\ge1$, so $b\in\Symph{-m}$. Let $B_0=\Op(b)\in\Psido{-m}_{\mathrm{ph}}$.
+  Then $E=AB_0-\Id\in\Psido0_{\mathrm{ph}}$ and
+  $\sigma_L(E)\equiv a_mb-1=\rho-1\equiv0$ modulo $S^{-1}$, so
+  $\sigma_L(E)\in\Symph0\cap S^{-1}=\Symph{-1}$. The operator $F$ of
+  \cref{euclidean:lem:neumann} has
+  $\sigma_L(F)\sim\sum_{j\ge1}\sigma_L((-E)^j)$, which is polyhomogeneous by
+  \cref{euclidean:lem:ph-basic}(ii) and \cref{euclidean:prop:ph-algebra}.
+  Hence $B=B_0(\Id+F)\in\Psido{-m}_{\mathrm{ph}}(\R^n)$ is a parametrix.
+\end{proof}
+
+As a subspace, $\Symph m(\R^p;\R^n)$ is not closed in $S^m(\R^p;\R^n)$: since
+it contains $S^{-\infty}$, its closure contains $S^{m'}(\R^p;\R^n)$ for every
+$m'<m$, by \cref{euclidean:lem:density}. To capture its properties one
+strengthens the topology: in addition to the symbol norms
+$\norm a_{N,m}$ one uses the norms
+\begin{equation*}
+  \sup_{z\in\R^p,\ 1\le\abs\xi\le2}\abs{D^\alpha_zD^\beta_\xi a_{m-j}(z,\xi)}
+  \quad\text{and}\quad
+  \Bigl\|a-\sum_{j=0}^{k}a_{m-j}\Bigr\|_{N,m-k-1},\qquad j,k,N\in\N_0,\ \alpha,\beta,
+\end{equation*}
+on the terms of the expansion. With the corresponding metric topology,
+$\Symph m(\R^p;\R^n)$ is complete (\cref{euclidean:ex:ph-complete}). When
+$\Psido m_{\mathrm{ph}}(\R^n)$ needs to be topologized, it is this topology which is
+transferred by the identification
+$\sigma_L:\Psido m_{\mathrm{ph}}(\R^n)\to\Symph m(\R^n;\R^n)$.
+
+% ======================================================================
+\section{Affine invariance}\label{euclidean:sec:invariance}
+
+The algebra $\Psido\infty(\R^n)$ is invariant under affine changes of
+coordinates. Let $T:\R^n\to\R^n$, $Tx=Lx+c$, with $L\in\GL(n,\R)$ and
+$c\in\R^n$, and let $T^*f=f\circ T$, an isomorphism of $\cS(\R^n)$ and of
+$\cSp(\R^n)$.
+
+\begin{proposition}\label{euclidean:prop:affine}
+  If $A\in\Psido m(\R^n)$ then $A_T=T^*A(T^*)^{-1}\in\Psido m(\R^n)$, and
+  \begin{equation}\label{euclidean:eq:affine-symbol}
+    \sigma_L(A_T)(x,\xi)=\sigma_L(A)\bigl(Tx,(L^t)^{-1}\xi\bigr),
+  \end{equation}
+  where $L^t$ is the transpose of $L$. The same holds for
+  $\Psido m_{\mathrm{ph}}(\R^n)$.
+\end{proposition}
+\begin{proof}
+  Let $a=\sigma_L(A)$, $f\in\cS(\R^n)$ and $g=(T^*)^{-1}f=f\circ T^{-1}$.
+  Substituting $y=Ly'+c$,
+  $\hat g(\xi)=\abs{\det L}e^{-ic\cdot\xi}\hat f(L^t\xi)$. Hence, by
+  \eqref{euclidean:eq:left-quant},
+  \begin{align*}
+    A_Tf(x)=Ag(Tx)&=\int e^{i(Lx+c)\cdot\xi}a(Tx,\xi)\abs{\det L}
+    e^{-ic\cdot\xi}\hat f(L^t\xi)\,\dbar\xi\\
+    &=\int e^{ix\cdot\eta}a\bigl(Tx,(L^t)^{-1}\eta\bigr)\hat f(\eta)\,\dbar\eta,
+  \end{align*}
+  with $\eta=L^t\xi$. The function $a(Tx,(L^t)^{-1}\eta)$ is in
+  $S^m(\R^n;\R^n)$, since
+  $C^{-1}\ang\eta\le\ang{(L^t)^{-1}\eta}\le C\ang\eta$ and derivatives
+  transform linearly; so $A_T=\Op\bigl(a(Tx,(L^t)^{-1}\eta)\bigr)$. If $a$ is
+  polyhomogeneous, so is $a(Tx,(L^t)^{-1}\eta)$: its terms are homogeneous in
+  $\abs{(L^t)^{-1}\eta}\ge1$, which contains $\abs\eta\ge R$ for some $R$, and by
+  the remark after \cref{euclidean:def:polyhomogeneous} this suffices.
+\end{proof}
+
+In particular, for a translation $Tx=x+c$ we get
+$\sigma_L(A_T)(x,\xi)=\sigma_L(A)(x+c,\xi)$, and for a linear map there is no
+Jacobian factor in \eqref{euclidean:eq:affine-symbol}. This invariance means
+that the spaces $\Psido m(V)$ and $\Psido m_{\mathrm{ph}}(V)$ of operators on
+$\cS(V)$ are well defined for any finite-dimensional real vector space (or
+affine space) $V$, with symbols defined on $V\times V^*$. Invariance under
+general changes of coordinates, which is needed to define pseudodifferential
+operators on manifolds, is considerably more subtle and is discussed in
+\cref{ch:microlocal,ch:manifolds}.
+
+% ======================================================================
+\section{Exercises}\label{euclidean:sec:exercises}
+
+\begin{exercise}\label{euclidean:ex:japanese}
+  Show in detail that $\ang\xi^m\in S^m(\R^p;\R^n)$ for every $m\in\R$ and
+  every $p$, and deduce that
+  $S^m(\R^p;\R^n)\cdot S^{m'}(\R^p;\R^n)=S^{m+m'}(\R^p;\R^n)$.
+\end{exercise}
+
+\begin{exercise}\label{euclidean:ex:winding}
+  Let $n=2$ and identify $\R^2_\xi$ with $\C$ via $\zeta=\xi_1+i\xi_2$. Let
+  $a\in S^1(\R^2)$ (a symbol in $\xi$ alone) be elliptic. Show that for $r>0$
+  sufficiently large
+  \begin{equation*}
+    \frac1{2\pi}\int_0^{2\pi}\frac1{a(re^{i\theta})}\frac{d}{d\theta}a(re^{i\theta})\,d\theta
+  \end{equation*}
+  exists, is an integer, and is independent of $r$. Conclude that there is an
+  elliptic symbol $a\in S^1(\R^2)$ such that there is no $b\in S^1(\R^2)$
+  with $b\ne0$ on all of $\R^2$ and $b(\xi)=a(\xi)$ for $\abs\xi>r$, for any $r$.
+  \emph{Hint:} consider $a$ equal to $\xi_1+i\xi_2$ for $\abs\xi\ge1$.
+\end{exercise}
+
+\begin{exercise}\label{euclidean:ex:interpolation}
+  Show that a symbol $a\in S^m(\R^p;\R^n)$ which satisfies
+  $\abs{a(z,\xi)}\le C\ang\xi^{m'}$ for some $m'<m$ is necessarily in
+  $S^{m'+\eps}(\R^p;\R^n)$ for every $\eps>0$. \emph{Hint:} use the
+  interpolation inequality
+  $\sup_I\abs{f'}^2\le C\sup_I\abs f\bigl(\sup_I\abs{f''}+\delta^{-2}\sup_I\abs f\bigr)$
+  for functions on an interval $I$ of length $\delta$, on balls of radius
+  comparable to $\ang\xi$ in $\xi$ and of radius $1$ in $z$, and iterate.
+\end{exercise}
+
+\begin{exercise}\label{euclidean:ex:cone-support}
+  Let $\psi\in\CIc(\R^n)$ with $\psi(\xi)=1$ in $\abs\xi<1$. Show that if
+  $\phi\in\CIc(\R^p\times\R^n)$ then
+  $c_\phi(z,\xi)=\phi(z,\xi/\abs\xi)(1-\psi(\xi))\in S^0(\R^p;\R^n)$. For
+  $a\in S^m(\R^p;\R^n)$ define the \emph{cone support} of $a$ by its
+  complement: $(\bar z,\bar\xi)\in\R^p\times(\R^n\setminus0)$ is \emph{not} in
+  $\operatorname{cone\,supp}(a)$ if there exists $\phi\in\CIc(\R^p\times\R^n)$
+  with $\phi(\bar z,\bar\xi/\abs{\bar\xi})\ne0$ such that
+  $c_\phi a\in S^{-\infty}(\R^p;\R^n)$. Show that for $a\in S^m$ and $b\in S^{m'}$
+  \begin{equation*}
+    \operatorname{cone\,supp}(ab)\subset\operatorname{cone\,supp}(a)\cap
+    \operatorname{cone\,supp}(b).
+  \end{equation*}
+  If $\operatorname{cone\,supp}(a)=\emptyset$, does it follow that
+  $a\in S^{-\infty}(\R^p;\R^n)$? (Consider $p=n=1$ and
+  $a(z,\xi)=\chi(\xi/(1+z^2))$ with $\chi\in\CIc(\R)$ supported in
+  $1\le\abs t\le2$.)
+\end{exercise}
+
+\begin{exercise}\label{euclidean:ex:off-diagonal}
+  Show that the Schwartz kernel of any $A\in\Psido\infty(\R^n)$ is smooth
+  away from the diagonal $\{x=y\}$, and that it is rapidly decreasing, with all
+  derivatives, as $\abs{x-y}\to\infty$. \emph{Hint:} by
+  \cref{euclidean:lem:kernel-identities}, $(x-y)^\alpha K_A$ becomes
+  increasingly smooth as $\abs\alpha$ increases.
+\end{exercise}
+
+\begin{exercise}\label{euclidean:ex:weyl}
+  For $a\in S^m(\R^n;\R^n)$ let $\Op_W(a)=\Op\bigl(a(\tfrac{x+y}2,\xi)\bigr)$ be
+  its \emph{Weyl quantization}. Show that $\Op_W(a)\in\Psido m(\R^n)$, that
+  $\Op_W(a)^*=\Op_W(\bar a)$, and that
+  $\sigma_L(\Op_W(a))\sim\sum_\alpha\frac{(i/2)^{\abs\alpha}}{\alpha!}D^\alpha_\xi D^\alpha_xa$.
+  Deduce that $\Op_W:S^m(\R^n;\R^n)\to\Psido m(\R^n)$ is a bijection.
+\end{exercise}
+
+\begin{exercise}\label{euclidean:ex:ph-smooth}
+  (Polyhomogeneous symbols as smooth functions.) Show that
+  $a\in\CI(\R^p\times\R^n)$ is in $\Symph m(\R^p;\R^n)$ if and only if
+  $a$ satisfies \eqref{euclidean:eq:uniform-regular} and the function
+  $(z,\theta,r)\mapsto r^ma(z,\theta/r)$ on
+  $\R^p\times\Sphere^{n-1}\times(0,1]$ extends to a smooth function on
+  $\R^p\times\Sphere^{n-1}\times[0,1]$ all of whose derivatives are bounded.
+  Relate the Taylor series at $r=0$ to the terms $a_{m-j}$.
+\end{exercise}
+
+\begin{exercise}\label{euclidean:ex:ph-complete}
+  Show that $\Symph m(\R^p;\R^n)$ is complete with respect to the norms
+  introduced at the end of \cref{euclidean:sec:polyhomogeneous}, that it is
+  not closed in $S^m(\R^p;\R^n)$, and that its closure in $S^m(\R^p;\R^n)$
+  contains $S^{m'}(\R^p;\R^n)$ for every $m'<m$.
+\end{exercise}
+
+\begin{exercise}\label{euclidean:ex:rho-delta}
+  For $0\le\delta<\rho\le1$ let $S^m_{\rho,\delta}(\R^p;\R^n)$ be the space of
+  $a\in\CI(\R^p\times\R^n)$ with
+  $\abs{D^\alpha_zD^\beta_\xi a}\le C_{\alpha\beta}\ang\xi^{m-\rho\abs\beta+\delta\abs\alpha}$.
+  Show that these spaces are closed under multiplication (orders adding),
+  that $D^\beta_\xi D^\alpha_z$ maps $S^m_{\rho,\delta}$ into
+  $S^{m-\rho\abs\beta+\delta\abs\alpha}_{\rho,\delta}$, and that series
+  $\sum_ja_j$ with $a_j\in S^{m-j(\rho-\delta)}_{\rho,\delta}$ have asymptotic
+  sums. The symbols of this chapter are those of type $(1,0)$. Which of the
+  steps in the proof of \cref{euclidean:thm:reduction} use $\rho=1$, $\delta=0$,
+  and how must they be modified? (See \cite[Section~7.8]{Hormander-I} and
+  \cite[Section~18.1]{Hormander-III}.)
+\end{exercise}
+
+\begin{exercise}\label{euclidean:ex:not-compact}
+  Show that for any $s\ge0$ the unit ball in $H^s(\R^n)$ is \emph{not}
+  precompact in $L^2(\R^n)$, i.e.\ there is a sequence $f_j\in H^s(\R^n)$ with
+  $\norm{f_j}_{H^s}\le1$ and no subsequence convergent in $L^2(\R^n)$.
+\end{exercise}
+
+\begin{exercise}\label{euclidean:ex:rellich}
+  Show that for any $R>0$ and $N>0$ the subspace
+  $\{u\in H^N(\R^n);\ u(x)=0\text{ in }\abs x>R\}$ of $H^N(\R^n)$ is compactly
+  included in $L^2(\R^n)$, i.e.\ the intersection of the unit ball of
+  $H^N(\R^n)$ with this subspace is precompact in $L^2(\R^n)$. \emph{Hint:}
+  for $N>n/2$ one can use the Sobolev embedding and the Arzel\`a--Ascoli
+  theorem; in general, with $\phi\in\CIc(\R^n)$ equal to $1$ on
+  $\abs x\le R$, write $\hat u=\widehat{\phi u}=(2\pi)^{-n}\hat\phi*\hat u$
+  to see that the Fourier transforms are equicontinuous.
+\end{exercise}
+
+\begin{exercise}\label{euclidean:ex:weighted-compact}
+  Using \cref{euclidean:ex:rellich}, or otherwise, show that for any $\eps>0$
+  the inclusion $\ang x^{-\eps}H^\eps(\R^n)\hookrightarrow L^2(\R^n)$ is
+  compact, i.e.\ any sequence $f_j$ such that $\ang x^\eps f_j$ is bounded in
+  $H^\eps(\R^n)$ has a subsequence convergent in $L^2(\R^n)$. \emph{Hint:}
+  choose $\phi\in\CIc(\R^n)$ with $\phi(x)=1$ in $\abs x<1$ and, for each $k$,
+  consider the sequence $\phi(x/k)f_j$. Show that its Fourier transforms are
+  equicontinuous and bounded in $\ang\xi^{-\eps}L^2$, deduce that it has a
+  subsequence convergent in $L^2(\R^n)$, and estimate
+  $\norm{(1-\phi(x/k))f_j}_{L^2}\le C\ang k^{-\eps}$. Conclude by
+  diagonalization.
+\end{exercise}
+
+\begin{exercise}\label{euclidean:ex:affine}
+  Prove \eqref{euclidean:eq:affine-symbol} directly from the definition of
+  $\Op(a)$ via amplitudes, and show that the right symbol transforms in the
+  same way:
+  $\sigma_R(A_T)(y,\xi)=\sigma_R(A)\bigl(Ty,(L^t)^{-1}\xi\bigr)$.
+  \emph{Hint:} show that $(A_T)^*=(A^*)_T$.
+\end{exercise}
+
+\begin{exercise}\label{euclidean:ex:density-L2}
+  Show that $\cS(\R^n)$, and even $\CIc(\R^n)$, is dense in $L^2(\R^n)$.
+\end{exercise}
+
+\begin{exercise}\label{euclidean:ex:S'-to-S}
+  Show that any continuous linear operator $\cSp(\R^n)\to\cS(\R^n)$ has
+  Schwartz kernel in $\cS(\R^{2n})$.
+\end{exercise}
+
+\section*{Notes}
+
+The main departures from Melrose's original text are as follows. The
+oscillatory integral $I(a)$ is defined directly by the integration by parts
+formula \eqref{euclidean:eq:I-def} rather than by extension by continuity, and
+all identities between kernels are derived from
+\cref{euclidean:lem:kernel-identities}. The composition theorem is proved
+right after the reduction theorem, with the passage from right to left
+symbols in \eqref{euclidean:eq:composition-symbol} carried out explicitly.
+The residual characterization (\cref{euclidean:prop:residual}) takes into
+account that the weight of the amplitudes may depend on the order. The
+weighted Sobolev estimates use the weight $\ang x^{-q}\ang y^q$ as a
+multiplier of amplitudes, avoiding a case distinction. We have also added the
+commutator formula \eqref{euclidean:eq:commutator}. The treatment of
+$L^2$ boundedness via an approximate square root is due to H\"ormander; for
+alternative treatments of the calculus see \cite{Hormander-III},
+\cite{Shubin} and \cite{Seeley}.

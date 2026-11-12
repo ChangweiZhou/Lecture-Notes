@@ -1,4 +1,5 @@
 \chapter{Homotopy invariance of the index and Toeplitz operators}\label{ch:index}
+\chaptermark{Index and Toeplitz operators}
 \providecommand{\Ginf}{G^{-\infty}}
 \providecommand{\Gloop}{G^{-\infty}_{(1)}}
 \providecommand{\PsiT}[1]{\Psi^{#1}_{\mathcal T}}
@@ -137,8 +138,11 @@ finite rank projections.
   \begin{equation}\label{index:eq:gen-inverse}
     BA=\Id_E-\pi,\quad AB=\Id_F-\pi',\quad \pi B=0,\quad B\pi'=0.
   \end{equation}
-  The projections $\pi,\pi'$ are self-adjoint finite rank smoothing operators,
-  and $\ind(A)=\dim\Nul(A)-\dim\Nul(A^*)=\Tr(\pi)-\Tr(\pi')$.
+  The projections $\pi,\pi'$ are self-adjoint finite rank smoothing
+  operators, and
+  \begin{equation*}
+    \ind(A)=\dim\Nul(A)-\dim\Nul(A^*)=\Tr(\pi)-\Tr(\pi').
+  \end{equation*}
 \end{proposition}
 \begin{proof}
   Let $B_0$, $R$, $R'$ be as in \eqref{index:eq:parametrix}. As a bounded map
@@ -165,10 +169,11 @@ finite rank projections.
   is bounded, and \eqref{index:eq:gen-inverse} holds on $L^2$. These four
   identities clearly determine $B$. Substituting
   $\Id=AB_0+R'$ on the right and $\Id=B_0A+R$ on the left,
-  \begin{equation*}
-    B=B(AB_0+R')=(\Id-\pi)B_0+BR'
-     =(\Id-\pi)B_0+(B_0A+R)BR'=(\Id-\pi)B_0+B_0(\Id-\pi')R'+RBR'.
-  \end{equation*}
+  \begin{align*}
+    B&=B(AB_0+R')=(\Id-\pi)B_0+BR'
+     =(\Id-\pi)B_0+(B_0A+R)BR'\\
+     &=(\Id-\pi)B_0+B_0(\Id-\pi')R'+RBR'.
+  \end{align*}
   The first two terms lie in $\Psido{-m}(X;F,E)$. The kernel of $RBR'$ is
   smooth. The map $y\mapsto R'(\cdot,y)$ is smooth from $X$ into $\CI(X;F)$,
   hence into $L^2$. Then $B$ is bounded on $L^2$, and $R:L^2\to\CI$ is
@@ -267,13 +272,13 @@ record the consequences we need.
   $z\mapsto G_z$ is smooth into the bounded operators, being the inverse of a
   smooth family of invertible bounded operators. With $B$ from (a) and
   $R=\Id-BA$, $R'=\Id-AB$, the argument in the proof of
-  \cref{index:prop:generalized-inverse} gives
+  \cref{index:prop:generalized-inverse} (with $\pi=\pi'=0$) gives
   \begin{equation*}
-    G=B+R G R'.
+    G=G(AB+R')=B+GR'=B+(BA+R)GR'=B+BR'+RGR'.
   \end{equation*}
   Since $R_z$, $R'_z$ are smooth families of smoothing operators and $G_z$ is
   smooth in operator norm, the kernel of $RGR'$ is smooth in all variables.
-  Hence $G=B+RGR'$ is a smooth family.
+  Hence $G$ is a smooth family.
 \end{proof}
 
 \subsection{Invariance}
@@ -307,9 +312,11 @@ symbol and so is elliptic. Hence $\ind(A)=\ind(A')$. More precisely, we have
 the following.
 
 \begin{corollary}\label{index:cor:symbol}
-  Let $A_0,A_1\in\Psido m(X;E,F)$ be elliptic. Suppose
-  $a\in\CI([0,1]\times S^*X;\hom(\pi^*E,\pi^*F))$ is invertible at every point
-  with $a_0=\sigma_m(A_0)$ and $a_1=\sigma_m(A_1)$. Then
+  Let $A_0,A_1\in\Psido m(X;E,F)$ be elliptic. Suppose that
+  \begin{equation*}
+    a\in\CI([0,1]\times S^*X;\hom(\pi^*E,\pi^*F))
+  \end{equation*}
+  is invertible at every point, with $a_0=\sigma_m(A_0)$ and $a_1=\sigma_m(A_1)$. Then
   $\ind(A_0)=\ind(A_1)$. Thus the index of an elliptic operator depends only
   on the homotopy class of its principal symbol in
   $\CI(S^*X;\Iso(\pi^*E,\pi^*F))$.
@@ -557,7 +564,7 @@ $X\times\{1\}$. Such maps are naturally Schwartz functions on $X\times\R$.
   leads to a \emph{classifying sequence}
   \begin{equation}\label{index:eq:classifying}
     \Ginf(\Sphere^1\times Y;E)\longrightarrow G\longrightarrow
-    \Gloop_{,0}(Y;E),
+    G^{-\infty}_{(1),0}(Y;E),
   \end{equation}
   in which $G$ is a weakly contractible group of invertible Toeplitz
   perturbations of the identity, and the subscript $0$ denotes the identity
@@ -579,10 +586,12 @@ Products of such forms are defined by composition of the values combined with
 antisymmetrization, and $\Tr$ is applied to the values. Explicitly, the
 \emph{(unnormalized) odd Chern forms} are
 \begin{equation}\label{index:eq:chern-forms}
-  u_{2k-1}=\Tr\bigl((A^{-1}dA)^{2k-1}\bigr),\quad
+  \begin{gathered}
+  u_{2k-1}=\Tr\bigl((A^{-1}dA)^{2k-1}\bigr),\\
   u_{2k-1}(b_1,\dots,b_{2k-1})=\sum_{\sigma\in\Sigma_{2k-1}}\sgn(\sigma)
   \Tr\bigl(A^{-1}b_{\sigma(1)}A^{-1}b_{\sigma(2)}\cdots A^{-1}b_{\sigma(2k-1)}
   \bigr),
+  \end{gathered}
 \end{equation}
 for $k=1,2,\dots$. They are smooth by the smoothness of composition, inversion
 and the trace.
@@ -827,9 +836,8 @@ By \cref{index:thm:det} the determinant agrees with the matrix determinant
 under any finite rank embedding $\GL(N,\C)\hookrightarrow\Ginf$. It is the
 same function as the Fredholm determinant constructed for the residual
 isotropic algebra in \cref{ch:determinants}; the characterizing properties
-are identical. In the
-source the extension to non-invertible elements was left as an exercise; we
-carry it out.
+are identical. It extends to all smoothing perturbations of the identity,
+vanishing exactly on the non-invertible ones.
 
 \begin{theorem}\label{index:thm:det-extension}
   The function $a\mapsto\det(\Id+a)$, defined on
@@ -864,10 +872,14 @@ carry it out.
 
   Next we show that $\{a\in\mathcal U;\ \Id+a\in\Ginf\}$ is dense in $\mathcal
   U$. Let $\pi_W$ be the orthogonal projection onto $W$, a finite rank
-  smoothing operator. Replacing $a$ by
-  $a+\epsilon\pi_W(\Id+a-p_0)$ and $p_0$ by
-  $p_0+\epsilon\pi_W(\Id+a-p_0)$ leaves $r$ unchanged and replaces $g(a)$ by
-  $g(a)+\epsilon\Id_W$. This is invertible for all small $\epsilon\ne0$.
+  smoothing operator, and for $a\in\mathcal U$ set
+  $a_\epsilon=a+\epsilon\pi_W(\Id+r)$, $r=a-p_0$. Then
+  \begin{equation*}
+    \Id+a_\epsilon=\bigl(\Id+p_0(\Id+r)^{-1}+\epsilon\pi_W\bigr)(\Id+r),
+  \end{equation*}
+  and the first factor is $\Id$ plus an operator with range in $W$, whose
+  restriction to $W$ is $g(a)+\epsilon\Id_W$. This is invertible for all
+  small $\epsilon\ne0$, and $a_\epsilon\to a$.
   Two continuous functions agreeing on a dense set agree. So the local
   definitions agree on overlaps and define a global extension, which is
   unique for the same reason. Finally
@@ -1112,12 +1124,14 @@ $L^k=T_{e^{-ik\theta}}$ has index $k$.
 \end{proof}
 
 \begin{remark}\label{index:rem:toeplitz-K}
-  \Cref{index:thm:toeplitz-index} says that the Toeplitz index defines a
-  homomorphism $K^{-1}(\text{pt}\times\Sphere^1)\supset K^{-2}(\text{pt})\to\Z$,
-  given by $-U_1/2\pi i$, and under the identifications of \cref{index:sec:K}
-  this is $-u_0/2\pi i$. It is an isomorphism once we know
-  \eqref{index:eq:homotopy-groups}. This is the prototype of the index
-  formula.
+  Via finite rank embeddings $\GL(N,\C)\hookrightarrow\Ginf$,
+  \cref{index:thm:toeplitz-index} says that the Toeplitz index is the
+  homomorphism $-U_1/2\pi i:K^{-1}(\Sphere^1)\to\Z$. It vanishes on the
+  classes of constant maps, so by \cref{index:lem:K1-split} it factors through
+  $K^{-2}(\mathrm{pt})$. By \cref{index:prop:K2-loop} it is there given by
+  $-u_0/2\pi i$ on $\pi_0(\Gloop)$. That it is an isomorphism is the case
+  $k=1$ of \eqref{index:eq:homotopy-groups}. This is the prototype of the
+  index formula.
 \end{remark}
 
 \section{Smoothing perturbations of elliptic families}\label{index:sec:families}
@@ -1157,9 +1171,11 @@ rank smoothing operators of rank $(2r+1)N$.
   $r\ge r_0$ and $x\in X$:
   \begin{enumerate}[label=(\alph*)]
   \item $\Nul(A'_r(x))=\Ran(\pi_r)$, of dimension $(2r+1)N$;
-  \item the range of $A'_r(x)$ is closed with complement
-    $F_r(x)=\Nul\bigl((\Id-\pi_r)A(x)^*\bigr)=\Ran(A'_r(x))^\perp$, of dimension
-    $(2r+1)N-\ind A(x)$;
+  \item the range of $A'_r(x)$ is closed, with complement
+    \begin{equation*}
+      F_r(x)=\Nul\bigl((\Id-\pi_r)A(x)^*\bigr)=\Ran(A'_r(x))^\perp
+    \end{equation*}
+    of dimension $(2r+1)N-\ind A(x)$;
   \item the $F_r(x)$ form a smooth vector bundle $F_r\to X$.
   \end{enumerate}
 \end{lemma}
@@ -1191,11 +1207,12 @@ rank smoothing operators of rank $(2r+1)N$.
   $\norm{A'_ru}^2+\norm{\pi_ru}^2=0$, so $u\in\Ran(\pi_r)\cap\Nul(\pi_r)=\{0\}$.
   It is therefore invertible by \eqref{index:eq:range}, and
   $G(x)=T(x)^{-1}$ is a smooth family by
-  \cref{index:lem:family-parametrix}(b). Since $A'_r\pi_r=0$ one checks
-  directly that $P(x)=A'_rGA_r'^*$ is the orthogonal projection onto
-  $\Ran(A'_r(x))$. We have $G\pi_r=\pi_r$, so
-  $GA_r'^*A'_r=\Id-\pi_r$ on the relevant spaces, whence $P^2=P=P^*$ and
-  $PA'_r=A'_r$. Thus $\Id-P(x)$ is the orthogonal projection onto $F_r(x)$. It
+  \cref{index:lem:family-parametrix}(b). Set $P(x)=A'_rGA_r'^*$. Since
+  $A'_r\pi_r=0$ we have $T\pi_r=\pi_r$, hence $G\pi_r=\pi_r$ and
+  $GA_r'^*A'_r=G(T-\pi_r)=\Id-\pi_r$. Therefore
+  $P^2=A'_r(\Id-\pi_r)GA_r'^*=P$, $P^*=P$ and $PA'_r=A'_r(\Id-\pi_r)=A'_r$.
+  Since also $\Ran P\subset\Ran A'_r$, $P(x)$ is the orthogonal projection
+  onto $\Ran(A'_r(x))$. Thus $\Id-P(x)$ is the orthogonal projection onto $F_r(x)$. It
   is a smooth family in $\Psido0$ whose values are smoothing (finite rank with
   range in $\CI$). Its full symbol is therefore residual for each $x$, which
   for a smooth family of classical symbols means the family lies in
@@ -1350,7 +1367,10 @@ $g\mapsto\left(\begin{smallmatrix}g&0\\0&\Id_N\end{smallmatrix}\right)$.
   \begin{equation*}
     \begin{pmatrix}f_k\\h_{k-1}\end{pmatrix}=
     \begin{pmatrix}\cos\tau&\sin\tau\,g\\-\sin\tau\,g^{-1}&\cos\tau\end{pmatrix}
-    \begin{pmatrix}u_k\\v_{k-1}\end{pmatrix},\quad
+    \begin{pmatrix}u_k\\v_{k-1}\end{pmatrix},
+  \end{equation*}
+  and
+  \begin{equation*}
     \begin{pmatrix}\cos\tau&\sin\tau\,g\\-\sin\tau\,g^{-1}&\cos\tau\end{pmatrix}
     =\begin{pmatrix}1&0\\0&g^{-1}\end{pmatrix}R_\tau
     \begin{pmatrix}1&0\\0&g\end{pmatrix},
@@ -1506,4 +1526,3 @@ the pairing of the odd Chern form $u_{2n-1}$ with the fundamental class. This
 is a theorem of L.~Boutet de Monvel (\emph{On the index of Toeplitz operators
 of several complex variables}, Invent.\ Math.\ 50 (1979)). Theorem
 \ref{index:thm:toeplitz-index} is the case $n=1$.
-\end{content>
