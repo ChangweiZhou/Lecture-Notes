@@ -21,8 +21,12 @@ Three proof-focused manuscripts are maintained:
 
   Proofs are written out explicitly. A "Status of the proofs" section lists the quoted
   standard inputs: b-composition, Wodzicki excision, crossed products and
-  functional analysis. It also lists one convergence hypothesis and three
-  remaining sketches.
+  functional analysis. With those inputs, every step of the main theorem
+  and the general index formula is proved, including continuous HKR,
+  convergence of the order spectral sequences, and the boundary periods.
+  The general index formula follows the arguments of Loya's 1998 thesis.
+  The optional Čech route and the Rees–Fedosov discussion are auxiliary;
+  the main proof does not use them.
 
 Compiled releases, with stable contents and figure lists, are available here:
 
