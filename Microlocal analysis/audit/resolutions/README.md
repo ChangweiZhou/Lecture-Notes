@@ -41,3 +41,22 @@ Every audit claim was re-verified (including all counterexamples) before fixing.
   Palais, …).
 - Rebuild after the fixes: 787 pages, 0 errors, 0 undefined or multiply defined references; mixed
   cross-references print their correct types (e.g. "Proposition B.4.4 and Corollary B.4.5").
+
+## Follow-up (`../followup-6ab1753/`)
+
+The follow-up review of 6ab1753 found residual defects; its repair patch was reviewed and applied
+unchanged. It fixes:
+- the reference-type defect (alias counters, so cleveref prints the correct environment name with
+  the shared numbering);
+- uniqueness in Lemma 10.4.3 / Theorem 10.4.4 (solve on a characteristic flow tube);
+- the quaternionic-line example in Remark 8.12.4 (Y = ℍP¹);
+- the converse in the Chapter 13 lifting obstruction (now proved);
+- properness of the restricted-product homotopy in Chapter 15;
+- the holomorphic-composition proof (Lemma 17.2.2) and the Hörmander-class seminorms in the doubling
+  argument;
+- the hypotheses of the Melrose–Piazza statement in Chapter 16.
+
+It also makes smaller precision edits in Chapters 3–8, 13, 14 and 16.
+
+The rebuild after applying the patch has 787 pages and no errors, undefined references or multiply
+defined references.

@@ -584,16 +584,18 @@ to a transversal hypersurface.  We first solve the transport equations.
   $(x_1,t,y')$ near $\bar x$ with $\tilde G=\{x_1=0\}$, $H=\{t=0\}$, so that
   $(t,y',\xi_1)$ are coordinates on $N^*\tilde G$ and $\Gamma=\{\xi_1>0\}$.  Let
   $q$ be a smooth function on $\Gamma$ homogeneous of degree $m'-1$.  Then there
-  are $\epsilon>0$ and a neighbourhood $U$ of $\bar y'=0$ such that for every
-  $c\in S^{r+m'-1}$ and $\beta_0\in S^r$ (classes of half-densities on
-  $\Gamma$, respectively on $\Gamma\cap\{t=0\}$, of the stated orders, supported
-  in $\xi_1\ge1$) the problem
+  are $\epsilon>0$ and a neighbourhood $U$ of $\bar y'=0$ such that the
+  characteristic curves from $t=0$, $y'\in U$ sweep out a flow tube
+  $\mathcal T$ for $|t|<\epsilon$. For every $c\in S^{r+m'-1}$ on $\mathcal T$
+  and $\beta_0\in S^r$ on its initial slice (symbols of half-densities),
+  the problem
   \begin{equation*}
-    (-i\mathcal L_{H_p}+q)\beta=c\ \text{ in }\{|t|<\epsilon,\ y'\in U\},\qquad
+    (-i\mathcal L_{H_p}+q)\beta=c\ \text{ on }\mathcal T,\qquad
     \beta|_{t=0}=\beta_0
   \end{equation*}
   has a unique solution $\beta\in S^r$ there (restriction to $t=0$ taken as in
-  \eqref{hj:eq:restrict-hd}).  If $\beta_0$ and $c$ are of order $-\infty$ outside
+  \eqref{hj:eq:restrict-hd}). Here and below the estimates on open sets are
+  local in the base variables.  If $\beta_0$ and $c$ are of order $-\infty$ outside
   closed cones $K_0$, $K$, then $\beta$ is of order $-\infty$ outside the set of points
   whose $H_p$-integral curve, followed back to $\{t=0\}$, either starts in $K_0$ or
   meets $K$; in particular outside the $H_p$-flow-out of $K_0\cup K$.  (The forcing
@@ -626,11 +628,12 @@ to a transversal hypersurface.  We first solve the transport equations.
     +\int_0^se^{k(\sigma,y'_0)}\tilde c(\sigma,Y(\sigma,y'_0),\xi_1E(\sigma,y'_0))
     \,d\sigma\Big),
   \end{equation*}
-  $k(s,y'_0)=\int_0^s\kappa(\sigma,Y(\sigma,y'_0))\,d\sigma$, for $|s|<\epsilon$
-  and $y'_0$ near $0$.  The change of variables $(s,y'_0,\xi_1)\mapsto
-  (s,Y,\xi_1E)$ is a diffeomorphism near $\{s=0,\ y'_0=0\}$ which is linear and
-  positive in the fibre variable, so it preserves symbol classes; hence $\beta$ has
-  order $r$.  The support statement follows from the formula, since the value at
+  $k(s,y'_0)=\int_0^s\kappa(\sigma,Y(\sigma,y'_0))\,d\sigma$.
+  Shrink $\epsilon$ and $U$ so that $(s,y'_0,\xi_1)\mapsto(s,Y,\xi_1E)$ is a
+  diffeomorphism onto $\mathcal T$ for $|s|<\epsilon$, $y'_0\in U$,
+  $\xi_1>0$. Each point of this tube is reached by a unique characteristic
+  segment from the initial slice. The positive linear change in $\xi_1$
+  preserves symbol estimates, so $\beta$ has order $r$.  The support statement follows from the formula, since the value at
   $(s,Y(s,y_0'),\xi_1E(s,y_0'))$ involves only $\tilde\beta_0$ at the initial point and
   $\tilde c$ along the segment of the integral curve between it and the given point.
 \end{proof}
@@ -654,46 +657,52 @@ to a transversal hypersurface.  We first solve the transport equations.
 \end{theorem}
 \begin{proof}
   Use the coordinates of \cref{hj:lem:transport-ode}, and choose $\epsilon$, $U$
-  as there and $\gamma$ so small that, in these coordinates, $j^{-1}(\gamma)$ lies
-  over $\{y'\in U\}$ and within a cone whose $H_p$-flow-out for $|t|<\epsilon$
-  stays in $\Gamma$; let $C\subset\Gamma$ be this flow-out (for $|t|<\epsilon$) of the
-  cone $j^{-1}(\gamma)$, a cone invariant under the $H_p$-flow within the coordinate
-  region.  Let $O=\{|x_1|<\epsilon',|t|<\epsilon/2,\ y'\in U'\}$ with $U'\Subset U$,
-  with $\epsilon'$ so small that $\{|x_1|<2\epsilon'\}$ lies in the coordinate chart,
-  and fix $\phi\in\CIc(\{|x_1|<2\epsilon',|t|<\epsilon,y'\in U\})$ equal to one
-  near $\bar O$ (possible since $\bar O$ is a compact subset of this open set).  We construct $u_j\in\Ic{m-j}(X,\tilde G;\Omegah)$, with
-  wavefront sets in $\Gamma$ and supports in $\supp\phi$, such that for
+  as there. Choose a neighbourhood $O_1$ in the coordinate chart of the form
+  $|x_1|<\epsilon'$, $|t|<\epsilon/2$, $y'=Y(t,y'_0)$ with $y'_0\in U'$
+  and $U'\Subset U$. Thus the part of $\Gamma$ over $O_1$ is itself a flow tube.
+  Choose $\gamma$ so small that its intersection with the initial conormal
+  bundle pulls back to a cone in the initial slice of this tube. Let
+  $C\subset\Gamma$ be the flow-out within this tube of a closed conic
+  neighbourhood of that intersection, chosen on the positive branch.
+  We construct $u_j\in\Ic{m-j}(O_1,\tilde G\cap O_1;\Omegah)$ with wavefront
+  sets in $C$, such that for
   $v_N=u_0'+\dots+u_N$ (we write $u_0'$ for the first term to avoid confusion with
   the data $u_0$)
   \begin{equation}\label{hj:eq:travelling-induction}
-    Pv_N\in\Ic{m+m'-N-2}\ \text{ in }O,\qquad u_0-v_N|_H\in
-    \Ic{m+\frac14-N-1}(H,G;\Omegah)\ \text{ in } H\cap O.
+    Pv_N\in\Ic{m+m'-N-2}\ \text{ in }O_1,\qquad u_0-v_N|_H\in
+    \Ic{m+\frac14-N-1}(H,G;\Omegah)\ \text{ in } H\cap O_1.
   \end{equation}
-  For $N=-1$ (with $v_{-1}=0$) the second condition holds and the first is
-  vacuous with the convention $Pv_{-1}=0$.  Given $v_{N-1}$, let
-  $g=-Pv_{N-1}\in\Ic{m+m'-N-1}$ in $O$ and $e=u_0-v_{N-1}|_H\in
-  \Ic{m+\frac14-N}(H,G;\Omegah)$, with $\WF(g)\cap T^*O\subset C$ (by induction, as
-  $P$ is microlocal) and $\WF(e)\subset\gamma$.  By \cref{hj:lem:transport-ode} (with $q=p_s|_\Gamma$) solve
+  In this induction $P$ acts on local distributions modulo smooth terms,
+  by multiplying by a cutoff equal to one near the point of interest.
+  Pseudolocality makes the result independent of that choice modulo smooth
+  terms. For $N=-1$ take $v_{-1}=0$. Given $v_{N-1}$, let
+  $g=-Pv_{N-1}\in\Ic{m+m'-N-1}$ in $O_1$ and let
+  $e=u_0-v_{N-1}|_H\in\Ic{m+\frac14-N}$ on $H\cap O_1$. Then
+  $\WF(g)\subset C$ there, and the initial wavefront set of $e$ lies in
+  the initial slice of $C$. Since each backward characteristic segment
+  stays in the tube over $O_1$, the forcing symbol is available along the
+  whole segment. Apply \cref{hj:lem:transport-ode} with $q=p_s|_\Gamma$ to solve
   \begin{equation*}
     (-i\mathcal L_{H_p}+p_s)\beta_N=\sigma_{m+m'-N-1}(g),\qquad
     \beta_N|_{t=0}=(j)^*\sigma_{m+\frac14-N}(e),
   \end{equation*}
   with $\beta_N\in S^{m+\frac n4-N}$, of order $-\infty$ outside $C$ (by the support
   statement of \cref{hj:lem:transport-ode}, since $C$ contains the flow-out of
-  both $j^{-1}(\gamma)$ and of itself), and let $u_N\in\Ic{m-N}$ be $\phi$ times a distribution with principal
-  symbol $\beta_N$ (\cref{ch:conormal}).  By \cref{hj:thm:transport},
-  $\sigma_{m+m'-N-1}(Pu_N)=\sigma_{m+m'-N-1}(g)$ in $O$ (where $\phi=1$ and,
-  $P$ being pseudolocal, $P(\phi w)-\phi Pw$ is smooth), so $Pv_N=-g+Pu_N\in
-  \Ic{m+m'-N-2}$ in $O$; and by \cref{hj:prop:restriction},
+  the initial data and of itself). Choose $u_N\in\Ic{m-N}$ on $O_1$ with
+  principal symbol $\beta_N$ and wavefront set in $C$ by conormal
+  quantization. By \cref{hj:thm:transport},
+  $\sigma_{m+m'-N-1}(Pu_N)=\sigma_{m+m'-N-1}(g)$ in $O_1$, so
+  $Pv_N=-g+Pu_N\in\Ic{m+m'-N-2}$ there; and by \cref{hj:prop:restriction},
   $\sigma_{m+\frac14-N}(u_N|_H)=\sigma_{m+\frac14-N}(e)$, so $e-u_N|_H\in
   \Ic{m+\frac14-N-1}$.  This proves \eqref{hj:eq:travelling-induction}.
 
-  Let $\tilde u\sim\sum_Nu_N$ be an asymptotic sum in $\Ic{m}(X,\tilde G;\Omegah)$,
-  with support in $\supp\phi$.  Then $P\tilde u\in\bigcap_N\Ic{m+m'-N}=\CI$ in
-  $O$, and $u_0-\tilde u|_H\in\bigcap_N\Ic{m+\frac14-N}(H,G)=\CI$ in $H\cap O$,
-  by \cref{hj:prop:restriction}.  Finally choose $w\in\CI(X;\Omegah)$ with
-  $w|_H=u_0-\tilde u|_H$ near $H\cap\bar O$ (in coordinates, $w=\chi(t)\times$ the
-  smooth error, extended constantly in $t$), and set $u=\tilde u+w$.  Then
+  Sum the local conormal expansion asymptotically on $O_1$. Then $P\tilde u$
+  is smooth on $O_1$, and $u_0-\tilde u|_H$ is smooth on $H\cap O_1$ by
+  \cref{hj:prop:restriction}. Choose $O\Subset O_1$ containing $\bar x$.
+  Multiply $\tilde u$ by a cutoff supported in $O_1$ and equal to one near
+  $\bar O$, and extend by zero to $X$. On $H\cap O$ extend the smooth error
+  constantly in $t$ in the coordinate trivialization of half-densities and
+  use another cutoff to obtain $w\in\CI(X;\Omegah)$. Set $u=\tilde u+w$.  Then
   $u|_{H\cap O}=u_0$, $Pu=P\tilde u+Pw\in\CI(O)$, and $\WF(u)\cap T^*O\subset\Gamma$.
   In the classical case all symbols above are classical.
 \end{proof}

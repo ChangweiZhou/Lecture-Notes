@@ -784,9 +784,11 @@ $\operatorname{diag}(H^{-1},\Id)\in\Psiisoph{0}$ is invertible in
 $\mathcal A^{\Z}$ but is not Fredholm on $L^2$ (its range
 $\Hiso{2}\oplus L^2$ is not closed). Accordingly
 \begin{equation*}
-  \ind:\{a\in\mathcal A^0;\ a\text{ has an inverse in }\mathcal A^0\}\to\Z,\qquad \ind(a)=\ind(A)\ \text{ if }a=[A],
+  \ind:\{a\in\mathcal A^m;\ a\text{ has an inverse in }\mathcal A^{-m}\}\to\Z,\qquad
+  \ind(a)=\ind(A:\Hiso s\to\Hiso{s-m})\ \text{ if }a=[A],
 \end{equation*}
-is well defined. We return to it in \cref{determinants:sec:index-formula}.
+is well defined for each integer $m$ by elliptic Fredholm theory and
+invariance under smoothing perturbations. We return to it in \cref{determinants:sec:index-formula}.
 
 \section{Analytic Fredholm theory}\label{determinants:sec:fredholm}
 
@@ -1528,9 +1530,10 @@ perturbation only if $\mathcal D_Y$ is trivial. The converse is false.
   $A_y+tE_y$, $t\in[0,1]$, is a homotopy of elliptic families, smoothing
   perturbations do not change it, and an invertible family has families index
   zero. The determinant line only sees the first Chern class of the families
-  index. For example, let $Y=\Sphere^4\subset\mathbb H^2=\C^4$ and let $P_y$
-  be the orthogonal projection of $\C^4$ onto the quaternionic line through
-  $y$, a smooth family of rank-two projections whose range is the
+  index. For example, let $Y=\mathbb H P^1\cong\Sphere^4$. Each point
+  $y\in Y$ is a quaternionic line in $\mathbb H^2=\C^4$. Let $P_y$ be the
+  orthogonal projection onto this line, so that the ranges of this smooth
+  family of complex rank-two projections form the
   quaternionic Hopf bundle $\mathcal H$, with $[\mathcal H]-[\C^2]\ne0$ in
   $K^0(\Sphere^4)$ (its second Chern class generates
   $H^4(\Sphere^4;\Z)$, and $K^0(\Sphere^4)\cong\Z\oplus\Z$ is torsion

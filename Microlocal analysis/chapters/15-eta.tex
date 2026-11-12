@@ -185,13 +185,27 @@ If $A(s)\in\Psido{\mu(s)}(Z;F,G)$ and $B(s)\in\Psido{\nu(s)}(Z;E,F)$ are holomor
 families on $\Omega$ then $A(s)B(s)$ is a holomorphic family of order $\mu+\nu$.
 \end{lemma}
 
-\begin{proof}[Sketch] Off the diagonal this follows from the corresponding property of
-compositions with smoothing operators. Near the diagonal, in local coordinates, the
-symbol of the composite has the expansion $\sum_\alpha\frac1{\alpha!}\pa_\xi^\alpha a(s)
-D_z^\alpha b(s)$, each term lying in $\rho^{-\mu(s)-\nu(s)}\CI$ holomorphically, and the
-remainder after $J$ terms satisfies symbol estimates of order $\Re(\mu+\nu)-J$
-locally uniformly in $s$; by Cauchy's formula the same holds for its $s$-derivatives,
-which gives holomorphy of the composite symbol.
+\begin{proof}
+Work in a coordinate chart near the diagonal. On each compact parameter set the
+local composition integral can be made absolutely convergent by integration by
+parts, using fixed upper bounds for $\Re\mu$ and $\Re\nu$. The resulting
+integral is holomorphic in $s$ by locally uniform domination. The same
+argument, with cutoffs separating the kernel variables, gives holomorphy of
+the smooth kernel away from the diagonal and of compositions with smoothing
+families.
+
+The symbol expansion is $\sum_\alpha\frac1{\alpha!}\pa_\xi^\alpha a(s)
+D_z^\alpha b(s)$. After multiplication by $\rho^{\mu(s)+\nu(s)}$ each term is a
+holomorphic smooth function on the compactification vanishing to order
+$|\alpha|$ at the boundary. Sum the normalized expansion by Borel's lemma with
+cutoffs independent of $s$, chosen on an exhaustion by compact parameter
+sets. This produces a holomorphic smooth function of the normalized
+symbol variables. Subtract its unnormalized symbol from the composition
+integral. By the composition remainder estimates the difference has
+arbitrarily negative order uniformly on each compact parameter set. Cauchy's
+formula on a slightly larger compact parameter neighbourhood gives the same
+rapid decay for its parameter derivatives. It therefore gives a holomorphic
+smoothing remainder, as required.
 \end{proof}
 
 We also need a division property.
@@ -1405,19 +1419,19 @@ product-type unless $\Pi P(\Id-\Pi)$ and $(\Id-\Pi)P\Pi$ are smoothing in the fi
 variable. Vanishing of their principal symbols would only lower the fibre order by
 one, so we use the frequency support instead: \emph{$\Pi P(\Id-\Pi)$ and
 $(\Id-\Pi)P\Pi$ lie in $\Psipteta{0,-\infty}(M\times\Sphere;\C^N)$}. To see this, first
-let $A\in\Psido{\mu}(\Sphere;\C^N)$ and $e_k=e^{ik\theta}$. Since $D_\theta e_k=ke_k$,
+let $A\in\Psi^\mu_{\mathrm H}(\Sphere;\C^N)$ and $e_k=e^{ik\theta}$. Since $D_\theta e_k=ke_k$,
 $(j-l)^q\langle Ae_l,e_j\rangle=\langle(\operatorname{ad}D_\theta)^qA\,e_l,e_j\rangle$ and
-$(\operatorname{ad}D_\theta)^qA\in\Psido{\mu}$ is bounded $H^\mu\to L^2$, so
+$(\operatorname{ad}D_\theta)^qA\in\Psi^\mu_{\mathrm H}$ is bounded $H^\mu\to L^2$, so
 $\abs{\langle Ae_l,e_j\rangle}\le C_q\ang{j-l}^{-q}\ang l^{\abs\mu}$ with $C_q$ bounded
-by seminorms of $A$ in $\Psido{\mu}$. For $j\ge0>l$ we have
+by seminorms of $A$ in $\Psi^\mu_{\mathrm H}$. For $j\ge0>l$ we have
 $\ang{j-l}\ge\frac12(\ang j+\ang l)$, so the matrix entries of $\Pi A(\Id-\Pi)$ (and
 likewise of $(\Id-\Pi)A\Pi$) are rapidly decreasing in $(j,l)$: $A\mapsto\Pi A(\Id-\Pi)$
-maps bounded sets of $\Psido{\mu}(\Sphere)$ to bounded sets of $\Psido{-\infty}(\Sphere)$,
+maps bounded sets of $\Psi^\mu_{\mathrm H}(\Sphere)$ to bounded sets of $\Psido{-\infty}(\Sphere)$,
 continuously. Now locally over $M$, by \cref{product:prop:operator-valued},
 $P=\Op_y(k)$ with $k\in S^{0,0}_{\mathrm{ph}}$ an operator-valued symbol, and
 $\Pi P(\Id-\Pi)=\Op_y\bigl(\Pi k(\Id-\Pi)\bigr)$ since $\Pi$ acts in $\theta$ only. By
 \cref{product:lem:fibre-bounds}, $\ang\eta^{\abs\beta}\pa_y^\gamma\pa_\eta^\beta k$ is
-bounded in $\Psido{\abs\beta}(\Sphere)$, and $r\mapsto k(y,\hat\eta/r)$ is smooth on
+bounded in $\Psi^{|\beta|}_{\mathrm H}(\Sphere)$, and $r\mapsto k(y,\hat\eta/r)$ is smooth on
 $[0,1)$ with derivatives bounded in such spaces; applying the continuous map
 $\Pi(\cdot)(\Id-\Pi)$, $\Pi k(\Id-\Pi)$ is a classical symbol of order $0$ in $\eta$
 with values in $\Psido{-\infty}(\Sphere)$, uniformly in the remaining variables. By
@@ -1635,10 +1649,7 @@ $G^{-\infty}(Z_b;E_-)$ acting on the left: if $A,A'\in\mathcal P_b$ then
 $A'=(\Id+R)A$ with $\Id+R=A'A^{-1}$, $R=(A'-A)A^{-1}$ smoothing. Thus
 $\mathcal P=\bigcup_b\mathcal P_b\longrightarrow B$ behaves like a principal bundle, although
 the structure groups $G^{-\infty}(Z_b;E_-)$ form a bundle of groups rather than a fixed
-group. (Using exhausting families of smoothing projections, as in the stabilization of the
-index bundle in \cref{ch:index}, one sees that the components of the space of sections of
-this bundle of groups are canonically $K^{-1}(B)$, so it is `weakly trivial'.) The
-Fredholm determinant is a character of each $G^{-\infty}(Z_b;E_-)$, so we may form the
+group. The Fredholm determinant is a character of each $G^{-\infty}(Z_b;E_-)$, so we may form the
 associated line bundle.
 
 \begin{proposition}\label{eta:prop:det-bundle}

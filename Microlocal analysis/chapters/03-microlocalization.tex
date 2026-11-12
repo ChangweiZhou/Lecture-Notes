@@ -2825,8 +2825,18 @@ $k$, then $(\Op(c_k))$ is uniformly supported in $K$.
     \inner{C_kv}w=\inner{G^*C_kv}w+\inner{(\Id-G^*)C_kv}w
     =\inner{C_kv}{Gw}+\inner{(\Id-G^*)C_kv}w ,
   \end{equation*}
-  and in general the right-hand side is the definition of $\inner{C_kv}w$:
-  the first term pairs $H^{s-m}$ with $H^t\subset H^{m-s}$, and the second
+  and in general the right-hand side is the definition of $\inner{C_kv}w$.
+  To see independence of the cutoff, let $D=G_1-G_2$ for two allowed
+  cutoffs. Then $D^*C_k$ is smoothing by
+  \cref{microlocal:lem:uniform-support}(ii). Choose $G'$ by
+  \cref{microlocal:lem:cutoff-one} for the union of the two cutoff cone
+  supports, so that $G'w\in H^t$ and $D(\Id-G')$ is smoothing.
+  The approximants $w_j=G'w+(\Id-G')\chi(D_x/j)w$, with a frequency cutoff
+  $\chi$ equal to one near zero, belong to $H^t$ and tend to $w$ in $H^{-M}$.
+  Also $Dw_j\to Dw$ in $H^t$ since $D(\Id-G')$ is smoothing. Passing to the
+  limit in $\inner{C_kv}{Dw_j}=\inner{D^*C_kv}{w_j}$ shows that the two
+  changes in the definition cancel.
+  The first term pairs $H^{s-m}$ with $H^t\subset H^{m-s}$, and the second
   pairs $H^M$ with $H^{-M}$, since $(\Id-G^*)C_k\in\Psido{-2M}$
   (\cref{microlocal:lem:uniform-support}(ii)) maps $v\in H^{-M}$ into $H^M$.
   The first term is bounded by $\norm{C_kv}_{H^{s-m}}\norm{Gw}_{H^{m-s}}$, which

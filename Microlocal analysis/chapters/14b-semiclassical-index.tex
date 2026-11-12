@@ -163,8 +163,8 @@ represented by a triple $(\varpi^*E_+,\varpi^*E_-,a)$ with $E_\pm$ bundles over
 $M$ and $a\in\CI(X;\Hom(\varpi^*E_+,\varpi^*E_-))$ defined everywhere and
 invertible outside a compact set; we usually drop $\varpi^*$. We also use:
 \begin{enumerate}[label=(K\arabic*),leftmargin=*]
-\item\label{scindex:K-Ginf} For a compact manifold $Y$ of positive dimension
-  (not necessarily connected) and a Hermitian bundle $F\to Y$,
+\item\label{scindex:K-Ginf} For a compact manifold $Y$ (not necessarily
+  connected) and a Hermitian bundle $F\to Y$ with $L^2(Y;F)$ infinite dimensional,
   $\Ginf(Y;F)\subset\Id+\Psido{-\infty}(Y;F)$ is the group of invertible
   perturbations of the identity by smoothing operators, and for compact $X$
   \begin{equation*}
@@ -474,8 +474,9 @@ following embedding is more elementary.)
   \begin{equation*}
     J_b:L^2(W_b;E_b)\longrightarrow L^2(Y;F),\quad W_b=W\cap Z_b,
   \end{equation*}
-  where $Y$ is a compact manifold of \emph{positive dimension} and $F\to Y$ a
-  Hermitian bundle, which is smooth in the following sense: for every manifold
+  where $Y$ is compact and $F\to Y$ is a Hermitian bundle with
+  $L^2(Y;F)$ infinite dimensional. The family is smooth in the following sense:
+  for every manifold
   $P$ (possibly with boundary), every smooth map $\pi:P\to B$, and every smooth
   section $u$ of the pull-back of $E$ to
   \begin{equation*}
@@ -600,7 +601,10 @@ Schwartz, rather than compactly supported, along the fibres.
 
 \begin{remark}\label{scindex:rem:schwartz}
   Let $\varpi:\mathcal V\to M$ be a real vector bundle with a metric over a
-  fibration of compact manifolds $M\to B$. Let $\Psido{-\infty}_{\mathcal S}
+  fibration of compact manifolds $M\to B$. Use a Hermitian coefficient
+  bundle pulled back from $M$ and the product of the metric density in
+  the vector directions with the density along $M/B$.
+  Let $\Psido{-\infty}_{\mathcal S}
   (\mathcal V/B;E)$ denote the families whose kernels are smooth on
   $\mathcal V\times_B\mathcal V$ and Schwartz in the fibre variables, uniformly
   with all derivatives (i.e.\ they extend smoothly, vanishing to infinite order at
@@ -638,8 +642,8 @@ Schwartz, rather than compactly supported, along the fibres.
 \end{definition}
 Here $\rho_J(g)$ is a smooth map $B\to\Id+\Psido{-\infty}(Y;F)$ by
 \cref{scindex:lem:mixed}, and $[B;\Ginf(Y;F)]=K^{-1}(B)$ by
-\ref{scindex:K-Ginf}, which applies because $\dim Y>0$. (For $\dim Y=0$ the
-group $\Ginf(Y;F)$ is a finite dimensional $\GL(N,\C)$ and homotopy classes of
+\ref{scindex:K-Ginf}, which applies because $L^2(Y;F)$ is infinite dimensional.
+(In the finite-dimensional case the group $\Ginf(Y;F)$ is $\GL(N,\C)$ and homotopy classes of
 maps into it are not $K^{-1}(B)$: for $Y$ a point and $F=\C$, every map
 $\Sphere^3\to\C^\times$ is null-homotopic while $K^{-1}(\Sphere^3)\cong\Z$.)
 Moreover $\rho_J(g)(b)$ is invertible: with respect to $L^2(Y;F)=\Ran J_b\oplus
@@ -650,7 +654,8 @@ $J^*J=\Id$ implies $\rho_J(gh)=\rho_J(g)\rho_J(h)$.
 
 \begin{lemma}\label{scindex:lem:class}
   \begin{enumerate}[label=(\roman*)]
-  \item If $I:L^2(Y;F)\to L^2(Y';F')$ is an isometry which maps $\CI(Y;F)$ into
+  \item If $I:L^2(Y;F)\to L^2(Y';F')$ is an isometry between infinite-dimensional
+  spaces which maps $\CI(Y;F)$ into
     $\CI(Y';F')$ and $\Psido{-\infty}(Y;F)$ continuously into
     $\Psido{-\infty}(Y';F')$ by $T\mapsto ITI^*$, then the map
     $h\mapsto IhI^*+\Id-II^*$ induces the canonical identification
@@ -1904,8 +1909,8 @@ do not prove). Combining the two parameters gives the adiabatic--semiclassical
 algebra. With $n=\dim\tilde Z$ the fibre dimension and $k=\dim Z$ the base
 dimension, its kernels are of the form
 \begin{equation*}
-  \epsilon^{-n-k}\delta^{-k}A\Bigl(\delta,\epsilon,\frac{\tilde z-\tilde z'}
-  \epsilon,z,\frac{z-z'}{\epsilon\delta}\Bigr)
+  \epsilon^{-n-k}\delta^{-k}A\Bigl(\delta,\epsilon,\tilde z,z,
+  \frac{\tilde z-\tilde z'}{\epsilon},\frac{z-z'}{\epsilon\delta}\Bigr)
 \end{equation*}
 near the fibre diagonal, $A$ Schwartz in the two scaled variables, with right
 density $d\tilde z'\,dz'$. The prefactor is forced by the scaling: the changes of
@@ -2005,13 +2010,14 @@ the semiclassical point of view.
   of differential forms, through the heat kernel and Bismut's superconnection;
   see \cite{Bismut-Cheeger} and \cref{ch:eta}, where eta forms appear in the
   index theorem for families with boundary. In that setting one also needs
-  \emph{spectral sections}. For a smooth family $D_b$ of self-adjoint elliptic
-  operators (in the application, boundary Dirac operators) on the fibres of a
-  fibration of compact manifolds, a spectral section is a smooth family $P_b$ of
+  \emph{spectral sections}. For a smooth family $D_b$ of first-order
+  self-adjoint elliptic differential operators on closed fibres over a compact
+  base (in the application, boundary Dirac operators), a spectral section is
+  a smooth family $P_b$ of
   self-adjoint projections, $P_b\in\Psido0$, for which there is a smooth function
   $R:B\to(0,\infty)$ such that $D_bu=\lambda u$ implies $P_bu=u$ if
   $\lambda>R(b)$ and $P_bu=0$ if $\lambda<-R(b)$. Melrose and Piazza
-  \cite{Melrose-Piazza} prove (their families theorem on spectral sections) that a
+  \cite[Proposition~1]{Melrose-Piazza} prove that a
   spectral section exists if and only if the odd index of the family $D$ in
   $K^{1}(B)$ vanishes, and use them to state and prove the families index theorem
   for manifolds with boundary; this obstruction is the odd counterpart of the

@@ -1579,8 +1579,9 @@ loops of winding number zero.}
   compressed uniformly in the $Y$ variables to a finite matrix family, as in Step 1
   of the proof of \cref{bott:thm:contractible}; its families index would be the
   nonzero class $[H]-[1]$ by \cref{bott:thm:index-iso}, whereas an invertible
-  family has index zero. By (iii) the class in $[X;\mathcal Q]\cong\tilde K^0(X)$
-  is exactly the obstruction to lifting. What the weak contractibility of $\GT$
+  family has index zero. For connected compact $X$, the class in
+  $[X;\mathcal Q]\cong\tilde K^0(X)$ is exactly the obstruction to a
+  smooth lift, as shown below. What the weak contractibility of $\GT$
   gives is uniqueness: when lifts exist, any two smooth lifting families over a
   compact manifold are homotopic through families in $\GT$, since $fg^{-1}$ is
   null-homotopic. If the sequence were a fibration this would give
@@ -1613,6 +1614,33 @@ loops of winding number zero.}
   its winding number is constant, and it is zero exactly when the rank of the index class
   is zero. By \cref{bott:thm:index-iso} the maps into $\Omega_0\Ginf$ thus correspond to
   $\{\xi\in K^0(X);\ \rank\xi=0\}=\tilde K^0(X)$.
+
+  \emph{Lifting families.} If a smooth lift exists, (ii) makes its image in
+  $\mathcal Q$ null-homotopic. Conversely, suppose a smooth family of full
+  symbols on a connected compact $X$ has zero class. Borel summation with
+  parameter gives an elliptic family $T=\Id+A$ with these full symbols.
+  For a sufficiently large transverse finite rank projection $\Pi_j$ as
+  in Step 1 of \cref{bott:thm:contractible}, the straight line
+  $T_t=\Id+(1-t)\Pi_jA\Pi_j+tA$ has invertible leading symbols. On the
+  transverse complement the diagonal block $D_t$ is invertible, since it
+  differs from the identity by norm at most $\|A-\Pi_jA\Pi_j\|$ uniformly
+  on $X$. Its inverse belongs to the calculus by
+  \cref{bott:lem:inverse-Y}, applied after adjoining the identity on the
+  finite block. If the other blocks of $T_t$ are $A_t,B_t,C_t$, the Schur
+  complements $A_t-B_tD_t^{-1}C_t$ are finite-matrix Toeplitz families.
+  Their leading symbols are invertible by block elimination. At $t=0$
+  the finite block has the stabilized class of the original leading
+  symbol by the straight-line homotopy. Thus at $t=1$ its families index
+  is zero by homotopy invariance and \cref{bott:thm:index-iso}.
+  The defect bundles of the finite block are then stably trivial by the
+  definition of the families index and are trivial for large truncation,
+  since increasing the truncation adds trivial summands. By
+  \cref{index:cor:toeplitz-perturb} a smooth Toeplitz smoothing correction
+  makes this Schur complement invertible. Add the correction to the
+  finite block of $T$. Its kernel is smoothing in all variables, so the
+  full symbol is preserved, and block elimination gives invertibility
+  of the corrected family. \Cref{bott:lem:inverse-Y} gives the inverse
+  in the calculus, hence a lift in $\GT$.
 \end{proof}
 
 \begin{remark}
