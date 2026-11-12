@@ -11,3 +11,6 @@
 
 # Release PDFs are deliberately versioned.
 !output/pdf/*.pdf
+
+# Build directory
+tmp/

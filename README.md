@@ -15,18 +15,44 @@ Three proof-focused manuscripts are maintained:
   de Rham model, face decomposition, residual-operator caveat, and carefully
   scoped alternative reconstructions by Čech--de Rham descent and
   Rees--Fedosov Hochschild-chain formality.
+
 Compiled releases, with stable contents and figure lists, are available here:
 
 - [Heat Kernels and Index Theory](<output/pdf/Atiyah-Singer index theorem.pdf>)
 - [Notes on the b-Calculus and the APS Index Theorem](<output/pdf/Lecture draft.pdf>)
 - [Hochschild Homology of the b-Pseudodifferential Symbol Algebra](<output/pdf/Hochschild homology of b-pseudodifferential operators.pdf>)
 
-The July 2026 revision is a line-by-line mathematical edit of the original
-lecture transcriptions. Relevant classroom discussion is retained as concise
-Discussion and Question/Answer interludes; speaker attributions, unresolved
-chatter, duplicated chapters, generated files, and unrelated archive material
-are omitted. Definitions precede use, theorem hypotheses are explicit, and
-proof gaps are filled or identified as standard input. The original diagrams
+## Origin
+
+The two lecture-note manuscripts come from graduate courses taught by
+Paul Loya. The index-theory notes (2013) were scribed by Mauricio and
+transcribed by Changwei Zhou. Changwei Zhou scribed the b-calculus notes.
+Attendees included Kunal Sharma, Huang Binbin and Adam Weisblatt.
+
+The July 2026 revision has three parts:
+
+- It edits the lecture transcriptions line by line.
+- It adds new material that was never transcribed: the eta-invariant and
+  heat-kernel proof of the APS theorem (original lectures 20--24 were empty
+  headings) and the K-theoretic proof sketches.
+- It adds the Hochschild homology manuscript, which is new 2026 work. Its
+  main theorem is the b-groupoid case of a theorem of Benameur and Nistor.
+
+Relevant classroom discussion is retained as concise Discussion and
+Question/Answer interludes. Unresolved chatter, duplicated chapters,
+generated files and unrelated archive material are omitted.
+
+A November 2026 audit pass fixed several kinds of problems:
+
+- mathematical errors;
+- missing hypotheses and definitions;
+- unflagged gaps, which are now either proved or marked as quoted input with
+  citations;
+- coordinate and curvature conventions;
+- duplicated passages;
+- figure layout.
+
+The original diagrams
 were audited against the surrounding arguments. The strongest original
 blow-up, cylindrical, conormal, Mellin, parametrix, and heat-cutoff figures are
 retained; new vector diagrams supplement them for symbolic, spectral, and
