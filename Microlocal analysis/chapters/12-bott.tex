@@ -16,6 +16,14 @@
 \providecommand{\Indsl}[1]{\operatorname{Ind}^{#1}_{\mathrm{sl}}}
 \providecommand{\ann}{\mathfrak{a}}
 
+The index of an elliptic operator depends only on the homotopy class of its
+symbol. To compute it we need to understand such homotopy classes, and the
+simplest non-trivial case already contains the key idea: loops of invertible
+matrices, which are the symbols of Toeplitz operators on the circle. This chapter
+shows that every such loop can be deformed into an explicit \emph{normal form},
+reads off the index from the normal form, and deduces Bott periodicity, the
+basic theorem of K-theory, from the resulting index formula.
+
 In \cref{ch:index} the index of an elliptic operator was shown to be a
 homotopy invariant, the group $\Ginf(Y;E)$ of invertible perturbations of the
 identity by smoothing operators was introduced as a model for odd K-theory, and
@@ -64,7 +72,7 @@ $[0,1]\times X$), and all maps and homotopies are smooth. The circle is
 $\Sphere=\R/2\pi\Z$ with variable $\theta$; we write $z=e^{i\theta}$, so that
 $\Sphere$ is also the unit circle in $\C$, and we use the point $1\in\Sphere$
 ($\theta=0$) as base point. $M(N,\C)$ is the algebra of $N\times N$ matrices.
-For maps from a product we use the obvious notion of smoothness; a smooth map
+For maps from a product we use the usual notion of smoothness; a smooth map
 into a Fr\'echet space $F$ (such as $\Psido{0}(\Sphere)$ with its standard topology,
 see \cref{ch:conormal,ch:manifolds}) is one all of whose derivatives exist and
 are continuous.
@@ -153,6 +161,14 @@ homotopy is a smooth family of pointed loops. Loops are \emph{stabilized} by
 $a\mapsto a\oplus\Id_{M-N}$, and $a,b$ are \emph{stably pointed homotopic},
 $a\sim b$, if $a\oplus\Id$ and $b\oplus\Id$ are pointed homotopic in some
 $\GL(M,\C)$. The following three lemmas are used constantly.
+
+\begin{discussion}
+  Stabilization is what makes loops manageable. In a fixed $\GL(N,\C)$ two loops
+  $a$, $b$ need not commute, and there is no direct reason for $ab$ and $ba$
+  to be homotopic. After adding a block of identity matrices there is room to rotate
+  one loop into the new block (\cref{bott:lem:rotation}), where it commutes with
+  the other. All the deformations below use this freedom to add blocks.
+\end{discussion}
 
 \begin{lemma}\label{bott:lem:normalize}
   Let $h\colon[0,1]\times X\times\Sphere\to\GL(N,\C)$ be smooth and set
@@ -282,6 +298,19 @@ $\tilde K^0(X)=\ker\big(K^0(X)\to K^0(\{x_0\})\big)$ is the \emph{reduced} group
 $K^0(X)=\Z\oplus\tilde K^0(X)$, the splitting being given by pull-back along
 $X\to\{x_0\}$.
 
+\begin{question}
+  Why use formal differences $[E_+]-[E_-]$ rather than bundles themselves?
+\end{question}
+\begin{answer}
+  Because the index is a difference. For one operator, $\dim\Nul A-\dim\Nul A^*$
+  can be negative, so it lives in $\Z$, not in $\N_0$. For a family the null
+  spaces and cokernels become bundles, and the index becomes ``null bundle minus
+  cokernel bundle''. $K^0(X)$ is built from bundles exactly as $\Z$ is built from
+  $\N_0$. The extra bundle $H$ in \cref{bott:def:K0} is needed because
+  cancellation can fail for bundles: $E\oplus H\cong F\oplus H$ does not imply
+  $E\cong F$.
+\end{answer}
+
 \subsection{Odd K-theory and pointed loops}
 
 Odd K-theory is $K^{-1}(X)=[X;\Ginf(Y;E)]$, see \ref{bott:B:K1}. The loops in
@@ -369,7 +398,11 @@ K-theory of $\R\times X$; the latter will be identified with $K^0(X)$.
 
 \section{Linearization of loops}\label{bott:sec:linearization}
 
-The following normal form is due to Atiyah \cite{Atiyah-K}.
+A loop of invertible matrices can be complicated. We now show that, up to
+stabilization and pointed homotopy, it can be replaced by the simplest possible
+loop: on each of three complementary subspaces it is $z^{-1}$, $1$ or $z$. For
+such a loop the index of the Toeplitz operator can be read off by counting
+dimensions. The following normal form is due to Atiyah \cite{Atiyah-K}.
 
 \begin{theorem}\label{bott:thm:linearization}
   Let $a\colon X\times\Sphere\to\GL(N,\C)$ be a pointed loop, $X$ compact. Then for
@@ -385,7 +418,33 @@ The following normal form is due to Atiyah \cite{Atiyah-K}.
 Note that \eqref{bott:eq:normal-form} is invertible, with inverse
 $\pi_-z+\pi_0+\pi_+z^{-1}$, and is automatically pointed. We call it a loop in
 \emph{normal form}. The proof occupies the rest of this section and proceeds through
-Laurent polynomials, polynomials and linear loops.
+Laurent polynomials, polynomials and linear loops (\cref{bott:fig:linearization}).
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[
+  box/.style={draw,rounded corners,align=center,font=\small,inner sep=4pt,
+    text width=3.1cm},
+  lab/.style={font=\footnotesize,align=center},
+  >=Stealth]
+\node[box] (a) at (0,0) {pointed loop\\ $a(x,z)$};
+\node[box] (b) at (5.3,0) {Laurent polynomial\\ $z^{-q}\sum_{j=0}^{2q}b_jz^j$};
+\node[box] (c) at (10.6,0) {polynomial loop\\ $b\oplus z^{-1}\Id_{qN}$};
+\node[box] (d) at (10.6,-2.6) {linear loop\\ $\Id+(z-1)A$};
+\node[box] (e) at (5.3,-2.6) {$(\Id-\pi)+z\pi$,\\ $\pi$ a Riesz projection};
+\node[box] (f) at (0,-2.6) {normal form\\ $\pi_-z^{-1}+\pi_0+\pi_+z$};
+\draw[->] (a)--node[above,lab]{Fourier}node[below,lab]{\cref{bott:lem:laurent}}(b);
+\draw[->] (b)--node[above,lab]{rotation}node[below,lab]{\cref{bott:lem:rotation}}(c);
+\draw[->] (c)--node[left,lab]{block matrices,\\ \cref{bott:lem:poly-linear}}(d);
+\draw[->] (d)--node[above,lab]{spectrum}node[below,lab]{\cref{bott:lem:linear}}(e);
+\draw[->] (e)--node[above,lab]{collect}node[below,lab]{blocks}(f);
+\end{tikzpicture}
+\caption{The steps in the linearization of loops
+(\cref{bott:thm:linearization}). Each arrow is a stable pointed homotopy. The
+degree in $z$ is first made finite, then reduced to one by enlarging the
+matrices, and finally the linear loop is straightened by its spectral projection.}
+\label{bott:fig:linearization}
+\end{figure}
 
 \begin{lemma}\label{bott:lem:laurent}
   A pointed loop $a$ is pointed homotopic to a pointed Laurent polynomial
@@ -454,7 +513,7 @@ with the polynomial loop $b$.
     \frac1{1-e^{i\theta}}=\frac12+\frac i2\cot\frac\theta2
   \end{equation*}
   runs over the whole line $\Re w=\frac12$; at $z=1$, $\ell=\Id$. This proves the first
-  statement. Now the set $\{(x,\lambda);\ \det(\lambda-A(x))=0\}$ is compact and
+  statement (see \cref{bott:fig:linear}). Now the set $\{(x,\lambda);\ \det(\lambda-A(x))=0\}$ is compact and
   disjoint from $X\times\{\Re\lambda=\frac12\}$, so there is $\delta>0$ such that all
   eigenvalues satisfy $|\Re\lambda-\frac12|\ge\delta$. Let $\Gamma$ be the positively
   oriented boundary of the rectangle
@@ -472,6 +531,32 @@ with the polynomial loop $b$.
   first part $\Id+(z-1)A_t$ is a pointed homotopy, and it ends at
   $\Id+(z-1)\pi=(\Id-\pi)+z\pi$.
 \end{proof}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.1,>=Stealth]
+\fill[gray!12] (1.5,-1.6) rectangle (3.4,1.6);
+\draw[->,gray] (-1.6,0)--(3.6,0) node[right]{\small$\Re\lambda$};
+\draw[->,gray] (0,-1.7)--(0,1.8) node[above]{\small$\Im\lambda$};
+\draw[very thick] (1.5,-1.6)--(1.5,1.6) node[above,font=\footnotesize]{$\Re\lambda=\frac12$};
+\fill (0,0) circle (1.3pt) node[above left,font=\footnotesize]{$0$};
+\fill (3,0) circle (1.3pt) node[below,font=\footnotesize]{$1$};
+\foreach \x/\y in {-1.1/0.9,0.6/-1.1,-0.5/-0.4}{
+  \fill (\x,\y) circle (2pt);
+  \draw[->,dashed,shorten >=2pt] (\x,\y)--(0,0);}
+\foreach \x/\y in {2.2/1.2,3.1/-1.0,2.5/0.4}{
+  \fill (\x,\y) circle (2pt);
+  \draw[->,dashed,shorten >=2pt] (\x,\y)--(3,0);}
+\node[font=\footnotesize,align=center] at (-0.9,1.45) {$\Nul\pi$};
+\node[font=\footnotesize,align=center] at (2.75,1.4) {$\Ran\pi$};
+\end{tikzpicture}
+\caption{The proof of \cref{bott:lem:linear}. As $z$ runs over the circle, the
+loop $\Id+(z-1)A$ fails to be invertible exactly when an eigenvalue of $A$ lies
+on the line $\Re\lambda=\frac12$. The homotopy $A_t=(1-t)A+t\pi$ moves the
+eigenvalues on the right of the line to $1$ and those on the left to $0$,
+without crossing the line.}
+\label{bott:fig:linear}
+\end{figure}
 
 \begin{proof}[Proof of \cref{bott:thm:linearization}]
   By \cref{bott:lem:laurent} and the reduction following it, $a\oplus\Id$ is stably
@@ -514,7 +599,23 @@ $\Ran\pi_-$ and $\Ran\pi_+$ are isomorphic.
   \cref{bott:lem:normalize}, $\hat h_\tau$ is a pointed homotopy from $h_0$ to $\Id$.
 \end{proof}
 
+\begin{discussion}
+  The scalar case explains the lemma. The loop $\diag(z^{-1},z)$ has
+  $\det=1$, so winding number zero, and the rotation in the proof joins it to a
+  constant matrix. In general the factor $z^{-1}$ on $\Ran\pi_-$ and the factor $z$
+  on $\Ran\pi_+$ cancel as soon as the two bundles can be matched by an
+  isomorphism $F$. So a normal form loop carries exactly one piece of
+  information: the pair of bundles $(\Ran\pi_-,\Ran\pi_+)$, up to isomorphism.
+  This is why the index of loops will take values in $K^0$.
+\end{discussion}
+
 \section{The index of Toeplitz operators on the circle}\label{bott:sec:circle}
+
+We now quantize the normal form: replace $z^{-1}$ by the backward shift $L$ and
+$z$ by the forward shift $U$. The resulting operator acts on each Fourier mode by
+an explicit matrix, so its null space and range can be computed directly. Together
+with the linearization this gives a second proof of
+\cref{index:thm:toeplitz-index}, and one that extends to families.
 
 For commuting smooth idempotents $\pi_-,\pi_0,\pi_+$ on $\C^M$ with sum $\Id$
 consider the family of Toeplitz operators on $\Cp(\Sphere;\C^M)$
@@ -707,6 +808,21 @@ If $k$ is admissible then so is every $k'\ge k$, since $\Ran(\Id-P_{k'})\subset\
   index} of the elliptic family $A$.
 \end{definition}
 
+\begin{question}
+  Why is the families index a class in $K^0(Z)$ and not just an integer?
+\end{question}
+\begin{answer}
+  The integer $\ind A(z)$ is the rank of $\ind(A)$ at $z$, and it is constant on
+  each component of $Z$. But the null spaces and the cokernels can twist as $z$
+  moves. For the normal form operator $Q$ of \eqref{bott:eq:normal-op}, the null
+  space is the bundle $\Ran\pi_-$ and the cokernel is $\Ran\pi_+$
+  (\cref{bott:lem:normal-op}). If $\Ran\pi_-$ is a non-trivial line bundle and
+  $\Ran\pi_+=0$, the integer index is $1$ at every point, yet
+  $\ind(Q)=[\Ran\pi_-]$ differs from $[\C]$ whenever this line bundle is not
+  stably trivial, as for the tautological line bundle over $\Sphere^2$. The class
+  in $K^0(Z)$ records this twisting.
+\end{answer}
+
 For $Z$ a point this is the numerical index, since $(k+1)N-\dim W=\ind A$. In the
 notation of \cref{ch:index}, $F_k=\Nul((\Id-P_k)A^*)$, and \cref{bott:lem:index-bundle}
 shows that the bundle considered there represents, together with the trivial bundle
@@ -769,6 +885,13 @@ up to stabilization.
 
 \section[The index isomorphism]{The index isomorphism and Bott periodicity, first form}\label{bott:sec:index-iso}
 
+We can now assemble the pieces. Quantizing a loop gives a family of Toeplitz
+operators, and its families index is a class in $K^0(X)$. The main theorem says
+that this is a bijection between loops (up to stable pointed homotopy) and
+$K^0(X)$. Injectivity comes from the linearization and
+\cref{bott:lem:normal-trivial}; surjectivity from an explicit inverse, the Bott
+map, which turns a pair of bundles into a normal form loop.
+
 For a pointed loop $a\colon X\times\Sphere\to\GL(N,\C)$, $T_a(x)=Sa(x,\cdot)S$ is a
 smooth elliptic family of Toeplitz operators with symbol $a$; set
 \begin{equation*}
@@ -828,6 +951,36 @@ Concretely, for the operator with symbol \eqref{bott:eq:bott-map}, namely
 $(p_+L+\Id-p_+)\oplus(\Id-p_-+p_-U)$, the null space is the bundle $E_+$ of constant
 sections and the null space of the adjoint is $E_-$. The Toeplitz operator $L$, of index
 $1=[\C]\in K^0(\mathrm{pt})$, is the \emph{Bott element}: $\beta[\C]=[z^{-1}]$.
+\Cref{bott:fig:bott-map} summarizes the construction.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzcd}[column sep=3.2em,row sep=2.6em,ampersand replacement=\&,
+  every label/.append style={font=\footnotesize}]
+  {[E_+]-[E_-]}\in K^0(X)
+    \arrow[r,"\beta"]
+  \& {\big[(p_+z^{-1}+\Id-p_+)\oplus(\Id-p_-+p_-z)\big]}\in K^{-2}(X)
+    \arrow[d,"{\text{quantize: }z^{-1}\mapsto L,\ z\mapsto U}"] \\
+  \& (p_+L+\Id-p_+)\oplus(\Id-p_-+p_-U)
+    \arrow[ul,bend left=12,"{\ind=[\Nul]-[\text{coker}]}"]
+\end{tikzcd}
+\caption{The Bott map $\beta$ and the index. A pair of bundles $E_\pm=\Ran p_\pm$
+is turned into a loop in normal form, with $z^{-1}$ on $E_+$ and $z$ on $E_-$.
+The corresponding Toeplitz family has null bundle $E_+$ (the constant sections
+killed by $L$) and cokernel $E_-$ (the constants missed by $U$), so its families
+index is $[E_+]-[E_-]$.}
+\label{bott:fig:bott-map}
+\end{figure}
+
+\begin{discussion}
+  Why ``periodicity''? Each step from $K^0$ to $K^{-1}$ to $K^{-2}$ adds one
+  real variable: by clutching, $K^{-1}(X)\cong\Kc^0(\R\times X)$
+  (\cref{bott:lem:clutching}), and $K^{-2}(X)\cong\Kc^{-1}(\R\times X)$
+  (\cref{bott:lem:suspension}). \Cref{bott:thm:index-iso} says that after two
+  such steps we are back at $K^0(X)$. So the K-groups repeat with period two;
+  in terms of homotopy groups, $\pi_{k+2}(\Ginf)\cong\pi_k(\Ginf)$, which is
+  proved in \cref{bott:cor:homotopy-groups}.
+\end{discussion}
 
 \begin{remark}
   The signs matter here: the loop $\pi_-z^{-1}+\pi_0+\pi_+z$ with $\Ran\pi_\pm\cong E_\pm$
@@ -1134,6 +1287,14 @@ here $\ann$, and of its twisted versions in \cref{bott:prop:iso-normal}.
 We now pass from matrices to operators with values in the smoothing operators on
 $Y$, to obtain groups which contain all the $\GL(N,\C)$ at once.
 
+The aim is a short exact sequence of groups
+$\GinfT\to\GT\to\GT/\GinfT$ in which the middle group is weakly contractible.
+In topology, a contractible space $EG$ with a free action of a group $G$ has
+quotient $BG$ with $\pi_k(BG)=\pi_{k-1}(G)$, a ``delooping'' of $G$. Here the
+subgroup classifies odd K-theory, so the quotient, which is a space of symbols,
+classifies even K-theory (\cref{bott:fig:classifying}). This is the analytic
+form of the passage from $K^{-1}$ to $K^0$.
+
 \subsection{Toeplitz operators with values in smoothing operators}
 Let $Y$, $E$ be as in \cref{bott:sec:background}. On $\Psido{0}(\Sphere)$ we use the Fr\'echet
 topology of \cref{ch:conormal,ch:manifolds}: an element is a conormal distribution at the
@@ -1356,6 +1517,44 @@ $A(y,y')$ gives, for $\PsiT{0,-\infty}(\Sphere,Y;E)$, the exact sequence
   Thus $\GinfT$ classifies odd K-theory, $\GT$ is weakly contractible, and $\mathcal Q$
   classifies reduced even K-theory.
 \end{theorem}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[
+  box/.style={draw,rounded corners,align=center,inner sep=5pt,minimum height=1.1cm},
+  note/.style={font=\footnotesize,align=center,text width=3.6cm},
+  >=Stealth]
+\node[box] (a) at (0,0) {$\GinfT(\Sphere\times Y;E)$\\ \footnotesize$\Id+{}$smoothing};
+\node[box] (b) at (4.7,0) {$\GT(\Sphere,Y;E)$\\ \footnotesize invertible Toeplitz};
+\node[box] (c) at (9.4,0) {$\mathcal Q$\\ \footnotesize full symbols};
+\draw[{Hooks[right]}->] (a)--(b);
+\draw[->>] (b)--node[above]{$\Phi$}(c);
+\node[note] at (0,-1.4) {$[X;\GinfT]=K^{-1}(X)$};
+\node[note] at (4.7,-1.4) {weakly contractible};
+\node[note] at (9.4,-1.4) {$[X;\mathcal Q]=\tilde K^0(X)$\\ ($X$ connected)};
+\node[note] at (0,1.2) {kernel of the symbol};
+\node[note] at (9.4,1.2) {leading term: loop in $\Ginf(Y;E)$ of winding $0$};
+\end{tikzpicture}
+\caption{The classifying sequence of \cref{bott:thm:classifying}, a group-level
+version of the symbol sequence $\Psi^{-\infty}\to\Psi^0\to$ symbols. Ellipticity
+and invertibility are built into the middle group, so the index obstruction of
+\eqref{index:eq:group-sequence} has been removed by restricting the quotient to
+loops of winding number zero.}
+\label{bott:fig:classifying}
+\end{figure}
+
+\begin{question}
+  Why is a weakly contractible middle group useful?
+\end{question}
+\begin{answer}
+  It converts operators into topology. A map $X\to\mathcal Q$ is a family of
+  symbols; it lifts to a family of invertible operators in $\GT$, and any two
+  lifts, or any lift of a homotopy, are related through the contractible group
+  $\GT$. The ambiguity in the lift is a map into the subgroup $\GinfT$, which
+  carries odd K-theory. If the sequence were a fibration this would give
+  $\pi_k(\mathcal Q)\cong\pi_{k-1}(\GinfT)$, i.e.\ the delooping relation
+  between even and odd K-theory, as in the remark below.
+\end{answer}
 \begin{proof}
   By \eqref{bott:eq:full-symbol} the kernel of $\Phi$ on $\GT$ is $\GinfT(\Sphere\times Y;E)$
   (an element of $\GT$ with $A$ smoothing has inverse $\Id+B$ with
@@ -1393,6 +1592,13 @@ $A(y,y')$ gives, for $\PsiT{0,-\infty}(\Sphere,Y;E)$, the exact sequence
 \end{remark}
 
 \section[Compactly supported K-theory]{Compactly supported K-theory and Bott periodicity}\label{bott:sec:Kc}
+
+The symbol of an elliptic operator on $Z$ lives on $T^*Z$, which is not compact,
+and it is invertible only outside a compact set (the zero section). The natural
+K-group for such data is K-theory with compact supports: pairs of bundles
+together with an isomorphism between them away from a compact set. This section
+defines these groups, relates them to the loop models by clutching, and proves
+Bott periodicity in its usual form, $\Kc^0(\R^2\times X)\cong K^0(X)$.
 
 \subsection{Definitions}
 Let $M$ be a manifold, not necessarily compact. We write $K\Subset M$ for a compact subset.
@@ -1538,6 +1744,16 @@ $K^{-1}(\Sphere^0\times X,X)=K^{-1}(X)$ and $K^{-1}(\Sphere\times X,X)=K^{-2}(X)
   $(\varpi^*E,\varpi^*E,\bar w/|w|)$.
 \end{proof}
 
+\begin{discussion}
+  The Bott class $b$ is the simplest compactly supported class on $\R^2$: the
+  trivial line bundle, compared with itself by multiplication by $\bar w/|w|$
+  outside the unit disc. Restricted to the circle at infinity, this is a loop of
+  winding number $-1$, the symbol of the Toeplitz operator $L$ of index $1$.
+  The theorem says that every compactly supported class on $\R^2\times X$ is
+  obtained from a class on $X$ by ``twisting'' with this one loop, so the plane
+  $\R^2$ contributes nothing but a shift.
+\end{discussion}
+
 \begin{remark}
   Periodicity can also be deduced from the chain
   $\Kc^0(\R^2\times X)\cong\Kc^{-1}(\R\times X)\cong\Kc^{-2}(X)\cong\Kc^0(X)$, which uses the
@@ -1555,12 +1771,38 @@ Spheres need one more form of the clutching construction.
 \begin{lemma}\label{bott:lem:sphere-clutching}
   For $m\ge1$, $\tilde K^0(\Sphere^m)\cong\pi_{m-1}(\Ginf(Y;E))$.
 \end{lemma}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[>=Stealth]
+\shade[ball color=gray!4] (0,0) circle (1.8);
+\draw[thick] (0,0) circle (1.8);
+\draw[very thick] (-1.8,0) arc (180:360:1.8 and 0.45);
+\draw[very thick,densely dashed] (1.8,0) arc (0:180:1.8 and 0.45);
+\fill (1.8,0) circle (1.6pt) node[right,font=\footnotesize]{$e$};
+\node at (0,1.0) {$U_+$};
+\node at (0,-1.1) {$U_-$};
+\node[font=\footnotesize] at (-2.85,0.95) {$U_+\times\C^N$};
+\node[font=\footnotesize] at (-2.85,-0.95) {$U_-\times\C^N$};
+\draw[->] (-2.3,0.75)--(-1.15,0.6);
+\draw[->] (-2.3,-0.75)--(-1.15,-0.65);
+\draw[->] (2.0,-0.9) node[right,font=\footnotesize,align=left]
+  {equator $\Sphere^{m-1}$:\\ $(y,v)_-\sim(y,g(y)v)_+$}--(1.05,-0.4);
+\end{tikzpicture}
+\caption{The clutching construction. Over the two hemispheres $U_\pm$ of
+$\Sphere^m$ (both contractible) a bundle is trivial; it is determined by how the
+two trivializations are glued along the equator, i.e.\ by a map
+$g:\Sphere^{m-1}\to\GL(N,\C)$. For $m=2$ the equator is a circle and $g$ is a
+loop; the loop $g(z)=z$ gives, up to conjugation, the tautological line bundle
+over $\Sphere^2=\mathbb{CP}^1$.}
+\label{bott:fig:clutching}
+\end{figure}
 \begin{proof}
   Let $U_\pm=\{\pm x_{m+1}>-\epsilon\}\subset\Sphere^m\subset\R^{m+1}$, so that $U_\pm$ are
   diffeomorphic to $\R^m$ and $U_+\cap U_-$ retracts, by a map $r$, onto the equator
   $\Sphere^{m-1}$, which carries the base point $e$. For pointed $g\colon\Sphere^{m-1}\to\GL(N,\C)$
   let $E_g$ be the bundle obtained from $U_+\times\C^N$ and $U_-\times\C^N$ by identifying
-  $(y,v)_-$ with $(y,g(r(y))v)_+$ over $U_+\cap U_-$, and set $\Psi(g)=[E_g]-[\C^N]$, an
+  $(y,v)_-$ with $(y,g(r(y))v)_+$ over $U_+\cap U_-$ (\cref{bott:fig:clutching}), and set $\Psi(g)=[E_g]-[\C^N]$, an
   element of $\tilde K^0(\Sphere^m)$. A pointed homotopy $g_t$ defines a bundle over
   $[0,1]\times\Sphere^m$, so $E_{g_0}\cong E_{g_1}$ by \cref{bott:lem:bundle-homotopy};
   $E_{g\oplus\Id}=E_g\oplus\C$ and $E_{\diag(g,h)}=E_g\oplus E_h$. By \cref{bott:lem:stable}
@@ -1705,6 +1947,17 @@ no difference which of the two is used.
   clear from the kernel of $\OpW(a_\eps)$, a Schwartz function depending smoothly on
   $(\eps,x)$.
 \end{proof}
+
+\begin{discussion}
+  The parameter $\eps$ is a semiclassical parameter. The rescaled symbol
+  $a(\sqrt\eps\,w)$ varies on the scale $\eps^{-1/2}$, which is large compared
+  with the scale $1$ of the uncertainty principle. On this scale quantization is
+  almost multiplicative, $q_\eps(a)q_\eps(b)=q_\eps(ab)+O(\eps)$. Hence an
+  invertible symbol is quantized to an almost invertible operator, which can be
+  corrected to an invertible one, and an idempotent symbol to an almost
+  idempotent operator, whose spectral projection is an honest projection. This
+  is all that the two quantization maps below use.
+\end{discussion}
 
 \subsection{The odd quantization map}
 

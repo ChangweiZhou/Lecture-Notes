@@ -1,6 +1,16 @@
 \chapter{Pseudodifferential operators on manifolds}\label{ch:manifolds}
 \providecommand{\Gsm}{G^{-\infty}}
 \providecommand{\Symq}[1]{S^{#1-[1]}}
+\usetikzlibrary{patterns}
+
+The index theorem is a statement about elliptic operators on compact
+manifolds: the Laplacian on forms, the signature operator, Dirac operators.
+To handle such operators, and their parametrices, we need a calculus of
+pseudodifferential operators that does not depend on coordinates. The good
+news is that almost no new analysis is required. The Euclidean calculus is
+local and coordinate invariant, so it can be glued together with partitions
+of unity; the only genuinely global ingredient is compactness, which turns
+smoothing errors into compact operators and hence gives the Fredholm property.
 
 In this chapter pseudodifferential operators are transferred from $\R^n$ to a
 compact manifold $X$, acting between sections of vector bundles. Two definitions
@@ -37,6 +47,10 @@ manifold of dimension $n$; the changes needed for non-compact manifolds are
 described in \cref{manifolds:sec:noncompact}.
 
 \section{Smooth manifolds}\label{manifolds:sec:manifolds}
+We begin by fixing conventions. The reader who is comfortable with manifolds,
+vector bundles and densities can skim this section and the next one; the only
+non-standard item is the partition of unity of
+\cref{manifolds:lem:good-partition}, which is used to localize operators.
 
 \subsection{$\CI$ structures}
 Let $X$ be a paracompact Hausdorff topological space. We describe the smooth
@@ -212,6 +226,16 @@ Different choices give the same space with equivalent norms. On $X^2$ we use the
 $\Hom(E,F)\otimes\Omega_R$ is in local coordinates and trivializations a matrix
 $k(x,y)|dy|$.
 
+\begin{discussion}
+Why carry densities around? An operator is to be written as
+$Au(x)=\int_XA(x,y)u(y)$, and on a manifold there is no preferred measure
+to integrate against. Letting the kernel itself carry a density factor in
+$y$ makes the integral meaningful without choices, and makes the
+correspondence between operators and kernels coordinate free. Once a smooth
+positive density $\nu$ is fixed, $A(x,y)=k(x,y)\nu(y)$ and we are back to
+ordinary functions; we do this whenever $L^2$ norms are needed.
+\end{discussion}
+
 \subsection{Distributional sections}
 The topology on $\CI(X;E)$ is given by the seminorms
 $\sup|D^\alpha(\kappa_i^{-1})^*(\phi_iu)|$, $\alpha\in\N_0^n$, for a finite cover
@@ -266,6 +290,11 @@ local and invariant under multiplication by smooth functions, such as the
 conormal spaces below, can be extended to sections of bundles by tensoring.
 
 \section{Euclidean and conormal preliminaries}\label{manifolds:sec:recall}
+Everything in this chapter is built from two earlier ingredients: the
+calculus on $\R^n$, which supplies the local analysis, and conormal
+distributions, which supply the invariant language for kernels. We list
+exactly what is used, so that the rest of the chapter can refer to it by
+number.
 
 \subsection{The calculus on $\R^n$}
 We collect the results from \cref{ch:euclidean,ch:microlocal} which are used
@@ -319,6 +348,17 @@ is \eqref{manifolds:eq:symbol-invariance} because $(dG_{\Phi(x')})^{-T}=(d\Phi_{
 Formula \eqref{manifolds:eq:symbol-invariance} says precisely that the principal
 symbol is invariantly a function on the cotangent bundle: it is the pull-back
 under the induced map $T^*\Omega'\to T^*\Omega$.
+
+\begin{discussion}
+Why is it the \emph{cotangent} bundle? The frequency variable $\xi$ is paired
+with $x-y$ in the phase $(x-y)\cdot\xi$. A change of coordinates acts on
+$x-y$, to first order near the diagonal, by the Jacobian $d\Phi$; to keep the
+phase unchanged, $\xi$ must transform by the inverse transpose. That is
+exactly the transformation law \eqref{manifolds:eq:cotangent-change} of
+covectors. The higher terms in the Taylor expansion of $\Phi$ only produce
+terms of lower order in the symbol, which is why only the principal part is
+invariant.
+\end{discussion}
 
 \subsection{Conormal distributions}\label{manifolds:sec:conormal}
 We recall the definition from \cref{ch:conormal}. Let $M$ be a manifold of
@@ -424,10 +464,55 @@ $\int e^{iz'\cdot\zeta}dz'=(2\pi)^k\delta(\zeta)$ and $\phi_*u(b)=\int a(b,z'',0
 
 \section{Pseudodifferential operators on a compact manifold}\label{manifolds:sec:definition}
 
+On $\R^n$ a pseudodifferential operator was defined through its symbol, but
+the full symbol depends on coordinates. Its Schwartz kernel, on the other
+hand, is an honest distribution on $X\times X$, and the two characteristic
+properties of the Euclidean kernels make sense on any manifold: they are
+smooth away from the diagonal (pseudolocality) and, near the diagonal, they
+are inverse Fourier transforms of symbols in the directions normal to it.
+These are exactly the properties of a distribution conormal to the diagonal,
+and we take them as the definition (\cref{manifolds:fig:kernel}).
+
 \subsection{Definition}
 Let $E$ and $F$ be complex vector bundles over the compact manifold $X$. The
 diagonal $\Diag=\{(x,x)\}\subset X^2$ is an embedded submanifold of codimension
 $n$, and the fibres $\{x\}\times X$ of $\pi_L$ are transversal to it.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.15,>=Stealth]
+  % the square X x X
+  \draw[thick] (0,0) rectangle (4,4);
+  \node[below] at (2,0) {$y$};
+  \node[left] at (0,2) {$x$};
+  % smooth region shading
+  \fill[gray!12] (0,0.9) -- (0,4) -- (3.1,4) -- cycle;
+  \fill[gray!12] (0.9,0) -- (4,0) -- (4,3.1) -- cycle;
+  \node[font=\small] at (0.8,3.45) {smooth};
+  \node[font=\small] at (3.35,1.3) {smooth};
+  % diagonal
+  \draw[very thick] (0,0) -- (4,4);
+  \node[font=\small,rotate=45] at (2.55,2.2) {$\Diag$};
+  % fibre of pi_L
+  \draw[dashed] (0,2.9) -- (4,2.9);
+  \node[right,font=\small] at (4,2.9) {$\{x\}\times X$};
+  % normal direction at a point
+  \fill (1.4,1.4) circle (1.3pt);
+  \draw[->] (1.4,1.4) -- (0.85,1.95);
+  \draw[->] (1.4,1.4) -- (1.95,0.85);
+  \node[font=\small,right] at (1.95,0.85) {$x-y$};
+  % disjoint supports block
+  \draw[pattern=north east lines,pattern color=gray] (2.6,0.2) rectangle (3.6,0.75);
+\end{tikzpicture}
+\caption{The kernel of $A\in\Psido m(X;E,F)$ lives on $X\times X$. It is
+smooth off the diagonal $\Diag$ (shaded); near $\Diag$ it oscillates in the
+normal variable $x-y$ with frequency $\xi$, i.e.\ it is conormal to
+$\Diag$. Integrating along the fibres $\{x\}\times X$ of $\pi_L$ (dashed),
+which are transversal to $\Diag$, defines the action $u\mapsto Au$. The hatched
+box is the support of $\phi(x)\psi(y)$ for $\phi$, $\psi$ with disjoint
+supports: there the kernel of $\phi A\psi$ is smooth.}
+\label{manifolds:fig:kernel}
+\end{figure}
 
 \begin{definition}\label{manifolds:def:psido}
 For $m\in\R$, the space of pseudodifferential operators of order $m$ from
@@ -512,6 +597,21 @@ of the form \eqref{manifolds:eq:conormal-local} in the coordinates $(x,x-y)$. Si
 conormality is a local property, $K_A\in\Ic m(X^2,\Diag;\Hom(E,F)\otimes\Omega_R)$.
 In particular (ii) then holds for all trivializing charts.
 \end{proof}
+
+\begin{question}
+Why is condition (i) needed? Does (ii) not already say everything?
+\end{question}
+\begin{answer}
+Condition (ii) only sees the kernel on sets $W\times W$, for coordinate
+patches $W$. If $x$ and $y$ are far apart, there may be no chart containing
+both, and then (ii) says nothing about the kernel near $(x,y)$. Condition (i)
+fills this gap: it is pseudolocality, imposed globally. For instance the
+operator $u\mapsto u(p)\,f$, with $p\in X$ fixed and $f\in\CI(X)$ supported far
+from $p$, satisfies (ii) for every chart that does not meet both $p$ and
+$\supp f$ (for those $\psi A\psi=0$), hence for the charts of a suitable finite
+cover; but its kernel
+$f(x)\delta_p(y)$ is singular at points $(x,p)$ far from the diagonal.
+\end{answer}
 
 The second half of the proof, combined with the first, shows again that the
 compactly supported elements of $\Psido m(\R^n)$ are invariant under
@@ -600,6 +700,11 @@ $\xi\ne0$. For example, for the exterior derivative
 $d(e^{itf}u)=e^{itf}(it\,df\wedge u+du)$, so $\sigma_1(d)(x,\xi)=i\,\xi\wedge$.
 
 \section{The calculus}\label{manifolds:sec:calculus}
+We now show that the operators just defined form an algebra with a principal
+symbol, exactly as on $\R^n$. All proofs follow one pattern: cut the
+operator into pieces supported in coordinate patches, plus a smoothing error;
+apply the Euclidean result to each piece; and check that the smoothing errors
+are harmless because they form an ideal.
 
 \subsection{Localization}
 \begin{lemma}\label{manifolds:lem:localization}
@@ -617,6 +722,43 @@ vanishes near the diagonal, so is smooth. Otherwise
 $\supp\phi_a\cup\supp\phi_b\subset U_i$ for some $i$, and the term has kernel
 supported in $U_i\times U_i$. Collecting terms gives \eqref{manifolds:eq:localization}.
 \end{proof}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.1]
+  \draw[thick] (0,0) rectangle (5,5);
+  \node[below] at (2.5,-0.1) {$y$};
+  \node[left] at (-0.1,3.4) {$x$};
+  % near-diagonal blocks: supp phi_a x supp phi_b meeting
+  \foreach \a/\b/\c/\d in {0/1.3/0/1.3, 0/1.3/1.1/2.4, 1.1/2.4/0/1.3, 1.1/2.4/1.1/2.4,
+     1.1/2.4/2.2/3.5, 2.2/3.5/1.1/2.4, 2.2/3.5/2.2/3.5, 2.2/3.5/3.3/5,
+     3.3/5/2.2/3.5, 3.3/5/3.3/5}{
+    \fill[gray!25,opacity=0.8] (\c,\a) rectangle (\d,\b);
+  }
+  % chart squares U_i x U_i
+  \draw[thick,dashed] (-0.1,-0.1) rectangle (2.55,2.55);
+  \draw[thick,dashed] (1.0,1.0) rectangle (3.65,3.65);
+  \draw[thick,dashed] (2.1,2.1) rectangle (5.1,5.1);
+  \node[font=\small,left] at (-0.1,1.2) {$U_1\times U_1$};
+  \node[font=\small,fill=white,inner sep=1pt] at (4.35,1.7) {$U_2\times U_2$};
+  \draw[->,>=Stealth] (4.35,1.95) -- (3.55,2.45);
+  \draw[very thick] (0,0) -- (5,5);
+  \node[font=\small,align=center] at (3.9,0.7) {$\phi_aA\phi_b$\\smoothing};
+  \node[font=\small,align=center] at (0.9,4.2) {$\phi_aA\phi_b$\\smoothing};
+\end{tikzpicture}
+\caption{Localization (\cref{manifolds:lem:localization}). The kernel of
+$A=\sum_{a,b}\phi_aA\phi_b$ is cut into the pieces
+$\phi_a(x)A(x,y)\phi_b(y)$. Pieces whose supports meet the diagonal (shaded)
+lie, by \cref{manifolds:lem:good-partition}, inside a single product
+$U_i\times U_i$ of a chart with itself (dashed), where the Euclidean calculus
+applies. All other pieces vanish near the diagonal and are smoothing.}
+\label{manifolds:fig:localization}
+\end{figure}
+
+\Cref{manifolds:fig:localization} shows why the stronger property
+\eqref{manifolds:eq:good-partition} of the partition of unity is useful: an
+ordinary partition of unity would produce pieces $\phi_aA\phi_b$ which meet the
+diagonal but are not contained in any single chart.
 
 Taking the $U_i$ to be trivializing charts, each $A_i$ in
 \eqref{manifolds:eq:localization} is given by a matrix of compactly supported
@@ -835,6 +977,44 @@ proved in \cref{manifolds:prop:adjoint}.
 since the quantization of a classical symbol is classical.
 \end{proof}
 
+\begin{figure}[ht]
+\centering
+\begin{tikzcd}[column sep=large,row sep=large]
+0\arrow[r]&\Psido{m-1}\arrow[r,hook]
+&\Psido m\arrow[r,"\sigma_m"]
+&\Symq m(T^*X;\hom(E,F))\arrow[r]\arrow[l,bend left=30,dashed,"q"]&0
+\end{tikzcd}
+\caption{The symbol exact sequence of
+\cref{manifolds:prop:principal-symbol}(a), with the bundles $E$, $F$
+suppressed from the notation for the operator spaces. The quantization map $q$ of
+\eqref{manifolds:eq:quantization} (dashed) is a linear right inverse of
+$\sigma_m$, built from charts and a partition of unity. It is not
+canonical and not multiplicative, but $\sigma_m$ is: this is what makes
+symbolic inversion work.}
+\label{manifolds:fig:exact-sequence}
+\end{figure}
+
+The exact sequence (\cref{manifolds:fig:exact-sequence}) is the basic tool
+of the chapter. It says that the principal symbol captures an operator up to
+an error of one order lower, and that every symbol arises. Combined with
+multiplicativity, it lets us solve operator equations one order at a time:
+solve the equation for symbols, quantize, and pass the error, now one order
+better, to the next step.
+
+\begin{question}
+The full symbol of an operator on $\R^n$ determines the operator. Why does
+\cref{manifolds:prop:principal-symbol} only define a principal symbol on $X$?
+\end{question}
+\begin{answer}
+Under a change of coordinates the full symbol transforms by a formula
+involving all derivatives of the coordinate change (see the proof of
+coordinate invariance in \cref{ch:euclidean}). Only the leading term
+transforms simply, as a function on $T^*X$; the lower-order terms mix with
+derivatives of the leading one. So there is no invariant full symbol, unless
+one fixes extra structure such as a connection or a choice of quantization
+map $q$.
+\end{answer}
+
 \begin{remark}\label{manifolds:rem:high-road}
 Since $\Psido m(X)=\Ic m(X^2,\Diag;\Omega_R)$ is a $\CI(X^2)$-module,
 \eqref{manifolds:eq:def-psido} may be written
@@ -943,6 +1123,11 @@ symbol of $A$, which is not invariantly defined, contributes $[a_{m-1},b]$ to
 the symbol of order $m+m'-1$ of $[A,B]$.
 
 \section{Ellipticity and parametrices}\label{manifolds:sec:elliptic}
+An operator cannot be inverted by inverting its symbol, but it can be inverted
+\emph{up to smoothing errors}, provided the principal symbol is invertible at
+infinity. Such an approximate inverse, a parametrix, is the main output of the
+calculus. It immediately gives elliptic regularity, and, after Sobolev spaces
+are introduced, the Fredholm property.
 
 \begin{definition}\label{manifolds:def:elliptic}
 An operator $A\in\Psido m(X;E,F)$ is \emph{elliptic} if there is a symbol
@@ -981,6 +1166,32 @@ BA=\Id_E-R_E,\quad AB=\Id_F-R_F,\qquad R_E\in\Psido{-\infty}(X;E),\ R_F\in\Psido
 \end{equation}
 If $A$ is classical, so is $B$.
 \end{theorem}
+
+The proof has three steps: quantize an inverse of the symbol to get $B_0$,
+with error $S=\Id-AB_0$ of order $-1$; sum the Neumann series
+$B_0\sum_jS^j$ asymptotically to push the error to order $-\infty$; and
+compare left and right parametrices. \Cref{manifolds:fig:parametrix} shows
+the logic.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzcd}[column sep=huge,row sep=large]
+A\arrow[r,"\sigma_m"]
+&a\arrow[r,"\text{invert at }\infty"]
+&b\approx a^{-1}\arrow[d,"q"]\\
+\text{Fredholm on }\Hs s
+&B\sim B_0\textstyle\sum_jS^j\arrow[l,"\text{Rellich}"']
+&B_0=q(b)\arrow[l,"\text{Neumann series}"',"\text{asymptotic sum}"]
+\end{tikzcd}
+\caption{The logic of the parametrix construction
+(\cref{manifolds:thm:parametrix}). Ellipticity is used only once, to invert
+the symbol; all other steps are the symbol calculus. Elliptic regularity
+(\cref{manifolds:cor:regularity}) follows directly from $B$. The Fredholm
+property (\cref{manifolds:thm:fredholm}) uses in addition that smoothing
+operators are compact (Rellich's theorem), which needs compactness of $X$.}
+\label{manifolds:fig:parametrix}
+\end{figure}
+
 \begin{proof}
 With $b$ as in \cref{manifolds:def:elliptic} let $B_0=q(b)\in\Psido{-m}(X;F,E)$.
 By \cref{manifolds:prop:principal-symbol},
@@ -1012,6 +1223,17 @@ By \eqref{manifolds:eq:parametrix}, $u=BAu+R_Eu$; here $BAu\in\CI$ by
 \cref{manifolds:prop:continuity} and $R_Eu\in\CI$ since $R_E$ is smoothing.
 \end{proof}
 
+\begin{discussion}
+Elliptic regularity is the prototype of a microlocal argument. Since
+$u=BAu+R_Eu$, any singularity of $u$ must already be visible in $Au$: the
+parametrix $B$ cannot create singularities, and $R_E$ destroys them all.
+Without ellipticity this fails. For the wave operator $\pa_t^2-\pa_x^2$ on the
+torus $\mathbb T^2$, the function $u(t,x)=f(t-x)$ with $f$ singular is a
+non-smooth solution of $Pu=0$; its singularities sit exactly where the
+principal symbol $\xi^2-\tau^2$ vanishes. The characteristic set, studied in
+\cref{ch:microlocal}, is where regularity can be lost.
+\end{discussion}
+
 The parametrix reduces the study of $A$ to that of operators $\Id+R$ with $R$
 smoothing: $\Nul(A)\subset\Nul(\Id-R_E)$ and $\Ran(A)\supset\Ran(\Id-R_F)$. In
 \cref{manifolds:sec:fredholm} we use this to show that elliptic operators are
@@ -1027,6 +1249,11 @@ is the content of the Atiyah--Singer index theorem, the subject of
 \cref{ch:index} and the following chapters.
 
 \section{Non-compact manifolds and properly supported operators}\label{manifolds:sec:noncompact}
+On a non-compact manifold the local theory is unchanged, but there is a new
+problem: an operator with a kernel spread out to infinity need not map
+compactly supported functions to compactly supported ones, so two operators
+cannot always be composed. The cure is to cut the kernel off near the
+diagonal, which changes the operator only by a smoothing error.
 In this section $X$ is an arbitrary (paracompact, not necessarily compact)
 manifold, and $E$, $F$, $G$ are vector bundles over it. The definition
 \begin{equation*}
@@ -1140,6 +1367,13 @@ $\Hs s_{\mathrm c}\to\Hs{s-m}_{\mathrm c}$. The global Fredholm theory below, ho
 depends on the compactness of $X$.
 
 \section{Sobolev spaces}\label{manifolds:sec:sobolev}
+To turn the parametrix into a statement about kernels and ranges we need
+Hilbert spaces on which pseudodifferential operators act boundedly and on
+which smoothing operators are compact. These are the Sobolev spaces, defined
+by patching together the Euclidean ones. The key facts are boundedness
+(\cref{manifolds:thm:sobolev-bounded}) and Rellich's compactness theorem
+(\cref{manifolds:prop:sobolev}(d)); the latter is where compactness of $X$
+enters.
 
 \subsection{Local facts}
 \begin{lemma}\label{manifolds:lem:sobolev-local}
@@ -1339,6 +1573,13 @@ finite-rank smoothing operator $K$ with $\|A-K\|_{\Lin(L^2)}\le M(A)+\eps$. In
 particular the essential norm satisfies
 $\inf\{\|A+K\|;\ K\in\Kpt(L^2(X;E),L^2(X;F))\}\le M(A)$.
 \end{proposition}
+
+The idea is that \eqref{manifolds:eq:square-root} immediately gives
+$\|Au\|^2=C\|u\|^2-\|Bu\|^2-\inner{Gu}u\le C\|u\|^2+|\inner{Gu}u|$, so it
+suffices to bound the smoothing operator $G$. To find $B$ we take a square
+root of the positive symbol $C-a^*a$ and then correct it order by order,
+solving at each step a linear equation for the next term of the symbol.
+
 \begin{proof}
 Let $a$ represent $\sigma_0(A)$, and choose $\eps>0$ and $R$ with
 $\|a(x,\xi)\|^2\le C-2\eps$ for $|\xi|\ge R$, so that $a^*a\le(C-2\eps)\Id$ there (here
@@ -1400,6 +1641,11 @@ $L^2$-boundedness of $\Psido0$, for which \cref{manifolds:prop:L2-bound} provide
 proof independent of the Euclidean theory.
 
 \section{Fredholm theory of elliptic operators}\label{manifolds:sec:fredholm}
+We now combine the parametrix with Sobolev spaces. Since the parametrix
+inverts an elliptic operator up to smoothing operators, and smoothing
+operators are compact on a compact manifold, Atkinson's theorem applies: an
+elliptic operator is Fredholm. The duality between $\Hs s$ and $\Hs{-s}$ then
+identifies the cokernel with the null space of the adjoint.
 
 \begin{theorem}\label{manifolds:thm:fredholm}
 Let $A\in\Psido m(X;E,F)$ be elliptic, and let $A^*\in\Psido m(X;F,E)$ be its adjoint.
@@ -1458,6 +1704,21 @@ $\Id+tR$, $t\in[0,1]$, is a continuous family connecting it to the identity. Not
 also that the range in (c) is closed in $\CI(X;F)$ and has a finite-dimensional
 complement; closedness of the range is part of the Fredholm property, and is not
 implied by the finite codimension of its closure.
+
+\begin{question}
+Where exactly was compactness of $X$ used, and what goes wrong without it?
+\end{question}
+\begin{answer}
+Only in the fact that the parametrix errors $R_E$, $R_F$ are compact on
+Sobolev spaces, through Rellich's theorem. On $\R^n$ this fails: convolution
+with a Schwartz function $\phi\ne0$ is smoothing but commutes with
+translations, so it is not compact on $L^2(\R^n)$. Accordingly, elliptic
+operators on $\R^n$ need not be Fredholm. The Laplacian
+$\Delta:\Hs2(\R^n)\to L^2(\R^n)$ is injective with dense range, but $0$ lies in
+its spectrum, so the range is not closed. Recovering a Fredholm theory on
+non-compact spaces requires control at infinity, as in the isotropic calculus
+of \cref{ch:isotropic}.
+\end{answer}
 
 \subsection{Generalized inverses}
 We need a lemma on composites with smoothing operators.
@@ -1624,10 +1885,15 @@ $B=-A+A(\Id+A)^{-1}A$ depends continuously on $A$ by \cref{manifolds:lem:sandwic
 since $A\mapsto(\Id+A)^{-1}$ is continuous into $\Lin(L^2)$.
 \end{proof}
 
+\begin{discussion}
 One should think of $\Gsm(X;E)$ as the group of invertible operators on $L^2(X;E)$
 which differ from the identity by an operator with smooth kernel; it plays the
 role of an infinite-dimensional general linear group, as the following results
-show.
+show. A smoothing operator is close, in every sense that matters, to a finite
+matrix (\cref{manifolds:lem:density}), so $\Gsm$ behaves like the union
+$\bigcup_N\GL(N,\C)$. This is why it is connected, why it carries a trace and a
+determinant, and why its homotopy classes of maps compute odd K-theory.
+\end{discussion}
 
 \subsection{Finite-rank approximation}
 \begin{lemma}\label{manifolds:lem:finite-rank}
@@ -1853,6 +2119,14 @@ B(z)=\sum_{j=1}^N(z-p)^{-j}B_j+B'(z),
 \end{equation*}
 with $B_j\in\Psido{-\infty}(X;E)$ of finite rank and $B'$ holomorphic near $p$.
 \end{proposition}
+
+The idea of the proof is to reduce to linear algebra. Near any point,
+$A(z)$ is a small perturbation of a finite-rank operator $F$. The small part
+can be inverted by a Neumann series, and what remains is an $N\times N$
+matrix $M(z)$ depending holomorphically on $z$. Invertibility of $\Id+A(z)$ is
+then the non-vanishing of the holomorphic function $\det M(z)$, whose zeros
+are isolated unless it vanishes identically.
+
 \begin{proof}
 Fix $p\in\Omega$. By \cref{manifolds:lem:density} and \eqref{manifolds:eq:HS-bound}
 there is a finite-rank smoothing operator $F$, $Fu=\sum_{i=1}^N\inner u{e_i}f_i$ with
@@ -1910,6 +2184,12 @@ points is described as the zero set of a Fredholm determinant, which could be do
 here too using \cref{manifolds:rem:determinant}.
 
 \section{Elliptic complexes and the Hodge theorem}\label{manifolds:sec:hodge}
+The first application of the Fredholm theory is to cohomology. The de~Rham
+complex is not made of elliptic operators ($d$ has a large null space), but
+it is elliptic as a \emph{complex}: its symbol sequence is exact. The
+Laplacians of such a complex are elliptic, and their null spaces, the
+harmonic sections, give canonical finite-dimensional representatives of the
+cohomology.
 
 \subsection{Elliptic complexes}
 Let $E_0,E_1,\dots,E_N$ be vector bundles over $X$ and $P_i\in\Diff k(X;E_i,E_{i+1})$
@@ -1979,6 +2259,47 @@ and $P_{i-1}\CI(X;E_{i-1})=\Nul(P_i)\cap(\mathcal H^i)^\perp$ is closed in $\CI$
 $L^2$ meets $\CI$ in itself). The map $\mathcal H^i\to H^i$ is therefore surjective, and it is
 injective since $\mathcal H^i\perp P_{i-1}\CI(X;E_{i-1})$.
 \end{proof}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.2,>=Stealth]
+  % three orthogonal directions
+  \coordinate (O) at (0,0);
+  % the plane Nul(P_i)
+  \fill[gray!20,opacity=0.7] (-1.6,-1.3) -- (1.6,-1.3) -- (3.2,0) -- (0,0) -- cycle;
+  \draw[->,thick] (O) -- (3.2,0) node[right] {$P_{i-1}\CI(X;E_{i-1})$};
+  \draw[->,thick] (O) -- (0,2.6) node[above] {$P_i^*\CI(X;E_{i+1})$};
+  \draw[->,thick] (O) -- (-1.6,-1.3) node[below left] {$\mathcal H^i$};
+  \node[font=\small] at (0.9,-0.75) {$\Nul(P_i)$};
+  % a vector and its components
+  \coordinate (U) at (1.5,1.4);
+  \draw[->,very thick] (O) -- (U) node[above right] {$u$};
+  \draw[dashed] (U) -- (1.5,0);
+  \fill (1.5,0) circle (1.2pt);
+  \node[below,font=\small] at (1.6,0) {$P_{i-1}P_{i-1}^*G_iu$};
+  \draw[dashed] (U) -- (0,1.4);
+  \fill (0,1.4) circle (1.2pt);
+  \node[left,font=\small] at (0,1.4) {$P_i^*P_iG_iu$};
+  % complex row
+  \node at (0.6,-2.3) {$\cdots\xrightarrow{\ P_{i-1}\ }\CI(X;E_i)\xrightarrow{\ P_i\ }\cdots$};
+\end{tikzpicture}
+\caption{The Hodge decomposition \eqref{manifolds:eq:hodge-decomposition} of
+$\CI(X;E_i)$ into three mutually orthogonal pieces: harmonic sections, the
+range of $P_{i-1}$, and the range of $P_i^*$. The closed sections,
+$\Nul(P_i)$, form the shaded ``plane'' spanned by the first two, so each
+cohomology class $[u]\in H^i$ has exactly one harmonic representative
+$\pi_iu$. In the picture, $u$ has no harmonic component.}
+\label{manifolds:fig:hodge}
+\end{figure}
+
+\begin{discussion}
+The harmonic representative has a variational meaning. If $P_iu=0$, the
+elements of the class $u+P_{i-1}\CI(X;E_{i-1})$ differ from $\pi_iu$ by
+elements orthogonal to $\mathcal H^i$, so $\pi_iu$ is the unique element of the
+class with smallest $L^2$ norm (\cref{manifolds:fig:hodge}). Ellipticity of the
+complex is what makes $\Delta_i$ elliptic, and hence what makes the minimizer
+smooth and the space of minimizers finite-dimensional.
+\end{discussion}
 
 \subsection{The rolled-up complex}
 The Laplacians can be combined into a single operator. On
@@ -2184,6 +2505,19 @@ $Q$ may be taken classical. If $Q_0$ is self-adjoint so are all $Q_k$, and
 $\frac12(Q+Q^*)$ has the same properties as $Q$.
 \end{proof}
 
+\begin{question}
+Why use Newton's iteration? Would it not be enough to correct one order at a
+time, as for the parametrix?
+\end{question}
+\begin{answer}
+Correcting one order at a time also works, since only asymptotic summation is
+needed in the end. But the equation $Q^2=Q$ is non-linear, and a one-order
+correction requires solving a linear symbol equation at each step. Newton's
+iteration avoids this: each $Q_k$ is an explicit polynomial in $Q_0$, so all
+the $Q_k$ commute and inherit classicality and self-adjointness for free, and
+the order of the error doubles at each step.
+\end{answer}
+
 \begin{proposition}\label{manifolds:prop:projection}
 If $P\in\Psido0(X;E)$ satisfies $P^2-P\in\Psido{-\infty}(X;E)$ then there exists
 $\Pi\in\Psido0(X;E)$ with $\Pi^2=\Pi$ and $\Pi-P\in\Psido{-\infty}(X;E)$.
@@ -2344,6 +2678,13 @@ of a positive elliptic operator, is not developed here; for these see
 \end{remark}
 
 \section{The Toeplitz algebra of a pseudodifferential projection}\label{manifolds:sec:toeplitz}
+Some natural operators act not on all sections of a bundle but on a closed
+subspace cut out by a projection: the Hardy space of the circle is the model
+example. If the projection $P$ is pseudodifferential, the compressed operators
+$PAP$ inherit a symbol calculus, with symbols now restricted to the range of
+the principal symbol of $P$. This gives a Fredholm theory for operators which
+are not elliptic in the usual sense.
+
 Let $E$ be a hermitian bundle over the compact manifold $X$, with $L^2$ defined by a
 positive density, and let $P\in\Psido0_{\mathrm{ph}}(X;E)$ be an orthogonal projection,
 $P^2=P=P^*$; such projections exist with any prescribed self-adjoint projection-valued
@@ -2418,6 +2759,34 @@ depends only on $\sigma^P_m(A)$, and is constant along families of elliptic elem
 $\mathcal T^m_P$ which are continuous in $\Lin(\Hs s_P,\Hs{s-m}_P)$ for some $s$.
 \end{enumerate}
 \end{theorem}
+
+The proof reduces everything to the ordinary elliptic theory by a trick:
+extend $A$ from the range of $P$ to all sections by putting an invertible
+elliptic operator on the complementary range of $\Id-P$
+(\cref{manifolds:fig:toeplitz}). The extended operator $\tilde A$ is elliptic
+in the usual sense and does not mix the two ranges.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[>=Stealth,box/.style={draw,minimum width=3.0cm,minimum height=0.9cm}]
+  \node[box,fill=gray!15] (L1) at (0,0.45) {$P\,\Hs s$};
+  \node[box] (L2) at (0,-0.45) {$(\Id-P)\Hs s$};
+  \node[box,fill=gray!15] (R1) at (7.4,0.45) {$P\,\Hs{s-m}$};
+  \node[box] (R2) at (7.4,-0.45) {$(\Id-P)\Hs{s-m}$};
+  \draw[->,thick] (L1.east) -- node[above,font=\small] {$A=PAP$} (R1.west);
+  \draw[->,thick] (L2.east) -- node[below,font=\small] {$(\Id-P)\Lambda_m(\Id-P)$} (R2.west);
+  \node at (3.7,1.4) {$\tilde A=A+(\Id-P)\Lambda_m(\Id-P)$};
+  \node[font=\small] at (3.7,-1.7)
+    {$\sigma_m(\tilde A)=\sigma^P_m(A)\oplus|\xi|^m\Id_{V^\perp}$ on $\pi^*E=V\oplus V^\perp$};
+\end{tikzpicture}
+\caption{A Toeplitz operator $A=PAP$ acts only on the range of $P$ (shaded).
+Adding an elliptic operator on the range of $\Id-P$ gives a block-diagonal
+operator $\tilde A$ whose principal symbol is invertible exactly when the
+Toeplitz symbol $\sigma^P_m(A)$ is. The ordinary theory applied to $\tilde A$
+yields the Toeplitz parametrix and Fredholm property.}
+\label{manifolds:fig:toeplitz}
+\end{figure}
+
 \begin{proof}
 Fix a metric on $T^*X$ and let $\Lambda_m\in\Psido m_{\mathrm{ph}}(X;E)$ be self-adjoint and
 invertible, with principal symbol $|\xi|^m\Id_E$; it is constructed as in

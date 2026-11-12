@@ -5,6 +5,13 @@
 \providecommand{\fib}{\mathrm{fib}}
 \providecommand{\Sigmapt}[1]{\Sigma^{#1}_{\phi}}
 
+Many problems in index theory involve two kinds of operators at once: operators
+acting along the fibres of a fibration, and operators acting on its total space.
+The proof of the index theorem in \cref{ch:families} deforms an operator built
+from both kinds, and needs a single algebra in which such deformations make sense.
+Neither the ordinary pseudodifferential operators on $M$ nor the fibrewise
+families are large enough. This chapter builds the algebra and its two symbols.
+
 The families version of the Atiyah--Singer index theorem concerns elliptic
 operators on the fibres of a fibration $\phi:M\longrightarrow B$; rather than a
 family $A_b\in\Psido m(Z;E,F)$ simply parametrized by $b\in B$, the manifold on
@@ -101,6 +108,36 @@ proves (1) and (2) with a fixed $Z$. Part (3) is immediate from (2): $f_{b'}\cir
 f_b^{-1}$ commutes with the projections to $U_b\cap U_{b'}$, so has the stated
 form, and the cocycle condition is just associativity of composition.
 \end{proof}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[>=Stealth]
+\fill[gray!12] (2.2,0.95) rectangle (3.8,3.05);
+\draw[thick] plot[smooth] coordinates {(0,3.0) (1.5,3.2) (3,2.9) (4.5,3.15) (6,3.0)};
+\draw[thick] plot[smooth] coordinates {(0,1.0) (1.5,0.8) (3,1.1) (4.5,0.85) (6,1.0)};
+\foreach \x/\yt/\yb in {0/3.0/1.0, 0.75/3.12/0.88, 1.5/3.2/0.8, 2.25/3.05/0.95,
+  3.75/3.02/0.97, 4.5/3.15/0.85, 5.25/3.07/0.93, 6/3.0/1.0}{
+  \draw[gray] (\x,\yb) .. controls (\x+0.25,{(\yt+\yb)/2-0.5}) and
+    (\x-0.25,{(\yt+\yb)/2+0.5}) .. (\x,\yt);}
+\draw[very thick] (3,1.1) .. controls (3.3,1.5) and (2.7,2.5) .. (3,2.9);
+\node[right,font=\small] at (3.05,2.1) {$Z_b$};
+\node[font=\small] at (6.5,2.1) {$M$};
+\draw[thick] (0,-0.3)--(6,-0.3);
+\node[font=\small] at (6.5,-0.3) {$B$};
+\fill (3,-0.3) circle (1.8pt) node[below,font=\small]{$b$};
+\draw[decorate,decoration={brace,mirror,amplitude=4pt}] (2.2,-0.55)--(3.8,-0.55)
+  node[midway,below=5pt,font=\footnotesize]{$U_b$};
+\draw[->] (-0.5,2.0)--node[left,font=\small]{$\phi$}(-0.5,-0.2);
+\draw[densely dashed] (3,0.95)--(3,-0.25);
+\node[font=\footnotesize,align=left,anchor=west] at (7.1,2.1)
+  {shaded: $\phi^{-1}(U_b)\cong Z\times U_b$};
+\end{tikzpicture}
+\caption{A fibration $\phi:M\to B$. Each fibre $Z_b=\phi^{-1}(b)$ is a compact
+manifold diffeomorphic to a fixed $Z$, and over a small open set $U_b$ the total
+space is a product (\cref{product:thm:local-triviality}). Globally the fibres may
+be glued together by diffeomorphisms, so $M$ need not be $Z\times B$.}
+\label{product:fig:fibration}
+\end{figure}
 
 Conversely, $M$ is recovered from the trivializations and the transition maps
 $f_{b'b}$; thus a fibration is a fibre bundle with fibre $Z$ and structure group

@@ -13,6 +13,14 @@
 \providecommand{\Hardy}{\mathcal{C}^\infty_{+}}
 \providecommand{\Ginf}{G^{-\infty}}
 
+An elliptic operator on a compact manifold has an index, the dimension of its
+null space minus the codimension of its range. For a family of elliptic operators
+parametrized by a base $B$, the null spaces jump, but their formal difference
+is a well-defined K-class on $B$, the index bundle. The index theorem says that
+this analytic object can be computed from the principal symbol alone, by a
+sequence of purely topological operations. This chapter proves that statement
+and then turns it into an integral formula in cohomology.
+
 In \cref{ch:product} the analytic index of a family of elliptic
 pseudodifferential operators on the fibres of a fibration $\phi:M\to B$ of
 compact manifolds was defined as a homomorphism
@@ -37,7 +45,8 @@ $\Torus^N\times B\to B$. There the index is computed by multiplicativity and
 Bott periodicity. This gives the equality of the analytic and topological
 index maps (\cref{families:thm:AS-K}). One ingredient, the index of the Thom
 class of a non-trivial normal bundle, is not proved here; we say exactly what
-is used.
+is used. (It is proved in \cref{ch:semiclassical-index}.) The logic of the proof
+is summarized in \cref{families:fig:roadmap}.
 
 The second half of the chapter reviews Chern--Weil theory and defines the
 Chern character on $K^0$ (\cref{families:sec:chern}). It then defines the odd
@@ -52,6 +61,29 @@ cohomological form of the families index theorem is stated
 (\cref{families:sec:cohomology}), and the Todd class is related to the Chern
 character of the Bott class through the Thom isomorphism
 (\cref{families:rem:todd-thom}).
+
+\begin{figure}[ht]
+\centering
+\begin{tikzcd}[column sep=9em,row sep=5em]
+  \Kc(T^*(M/B))\arrow[r,"\tau"]
+    \arrow[r,"\text{\small multiplicativity + (TH)}"',draw=none]
+    \arrow[d,"\inda"']
+  &\Kc(T^*(\mathcal V/B))\arrow[d,"j_*\Theta_*"']
+    \arrow[d,"\text{\small excision}",draw=none]\\
+  K^0(B)
+  &\Kc(T^*I^N\times B)\arrow[l,"\beta_N^{-1}"']
+    \arrow[l,"\text{\small normalization (Bott)}",draw=none]
+\end{tikzcd}
+\caption[Roadmap of the K-theoretic index theorem]{Roadmap of the proof of
+\cref{families:thm:AS-K}. The composite of the top, right and bottom arrows is
+the topological index $\indt$. Each arrow preserves the analytic index, for the
+reason written next to it: multiplicativity
+(\cref{families:thm:mult}) together with the index of the Thom class
+\ref{families:TH}; excision (\cref{families:thm:excision}); and the
+normalization on the torus (\cref{families:prop:normalization}). Hence the
+square commutes, which is the statement $\inda=\indt$.}
+\label{families:fig:roadmap}
+\end{figure}
 
 \section{Conventions and the index bundle}\label{families:sec:prelim}
 
@@ -132,6 +164,18 @@ spaces (or bounded operators between Hilbert spaces) and $c_1,c_2\ge0$. Set
   bounded below by a positive constant, so they are invertible, and then $m$ is
   injective with closed range and surjective.
 \end{proof}
+
+\begin{discussion}
+  The matrix $m(c_1,c_2)$ is the familiar trick for ``adding'' two elliptic
+  problems. For the Dirac-type operator $\bigl(\begin{smallmatrix}0&p^*\\p&0
+  \end{smallmatrix}\bigr)$ the square is $p^*p\oplus pp^*$; the graded tensor
+  product of two such operators squares to the \emph{sum} of the two squares,
+  because the cross terms anticommute and cancel. This is exactly what
+  \cref{families:lem:clifford} says, and it is why one invertible factor is
+  enough to make the product invertible. Every product of K-classes and every
+  deformation in the multiplicativity proof below is built from this single
+  identity.
+\end{discussion}
 
 \begin{definition}\label{families:def:product}
   Let $x_i=[(E^i_+,E^i_-,a_i)]\in\Kc(X_i)$, $i=1,2$, and extend $a_i$ (after
@@ -244,6 +288,17 @@ $E_\pm\otimes F$ as $P\otimes\Id_F$, since $F$ is constant on the fibres of
 $\tilde\phi$; we keep writing $P$.
 
 \subsection{Stabilization and the index bundle}
+\begin{discussion}
+  Why is a construction needed at all? For a single operator the index is
+  $\dim\Nul A-\dim\Nul A^*$. In a family, $\dim\Nul A_b$ can jump up at special
+  values of $b$, so the null spaces do not form a vector bundle. The jumps in
+  $\Nul A_b$ and $\Nul A_b^*$ are equal, and the remedy is to add a fixed
+  finite-dimensional space to one side so that the operators become surjective
+  for every $b$. Then the null spaces have constant dimension and form a bundle,
+  and subtracting the added trivial bundle gives a K-class that does not depend
+  on the choices.
+\end{discussion}
+
 The index bundle of a fibrewise elliptic family was constructed in
 \cref{ch:product} using finite rank projections. For the comparison of
 different families below, and for product-type families, an equivalent and
@@ -360,6 +415,28 @@ $\inda$.
 
 \section{Multiplicativity}\label{families:sec:mult}
 
+Multiplicativity is the analytic heart of the proof. Suppose that on the fibres
+$Y$ of $\tilde M\to M$ we have a family $P$ whose index is the trivial line
+bundle, and on the fibres $Z$ of $M\to B$ an arbitrary elliptic family $A$.
+Heuristically, an operator on $\tilde M_b$ built from $P$ and $A$ has null space
+``$\Nul P\otimes\Nul A$'', and since $\Nul P$ is one-dimensional this should have
+the same index as $A$. The difficulty is to make this into an honest statement
+about an ordinary elliptic family on $\tilde M/B$.
+
+\begin{discussion}
+  The plan has three steps. (1) Form the \emph{Clifford tensor product}
+  $P\otimes A$ (\eqref{families:eq:PA}). It is not an ordinary pseudodifferential
+  family, because $A$ acts only in the base directions; but it is a fully elliptic
+  product-type family, and its index is computed directly to be $\ind(A)$
+  (\cref{families:prop:PA}). (2) Deform $P\otimes A$, through fully elliptic
+  product-type families, to an ordinary elliptic family $\tilde A_P$
+  (\cref{families:thm:mult}). The index does not change along the deformation.
+  (3) Identify the symbol class of $\tilde A_P$ with the K-theory product of the
+  symbol classes of $P$ and $A$ (\cref{families:lem:aP-product}). The
+  product-type calculus of \cref{ch:product} is used only to have a common home
+  for both ends of the deformation.
+\end{discussion}
+
 Throughout this section we consider the tower \eqref{families:eq:tower}, a
 superbundle $\mathbb E=(E_+,E_-)$ over $\tilde M$, a superbundle
 $\mathbb F=(F_+,F_-)$ over $M$ (also lifted to $\tilde M$), and
@@ -403,7 +480,40 @@ and define, with $m$ as in \eqref{families:eq:clifford},
 It is smooth since each coefficient vanishes near the set where its factor is
 undefined. By \cref{families:lem:clifford} it is invertible at every point,
 since $\chi_1>0$ or $\chi_2>0$ everywhere. So $a_P$, extended as a homogeneous
-function of degree $0$, is an elliptic symbol on $\tilde M/B$.
+function of degree $0$, is an elliptic symbol on $\tilde M/B$
+(\cref{families:fig:cutoffs}).
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.6,>=Latex]
+  \draw[->,gray] (-1.7,0)--(1.8,0) node[right,black]{\small$T^*(\tilde M/M)\cong H^\circ$};
+  \draw[->,gray] (0,-1.5)--(0,1.6) node[above,black]{\small$\tilde\phi^*T^*(M/B)$};
+  \draw[thick] (0,0) circle (1);
+  % region where chi_1 = 1 (near Sigma_2): arcs around left and right
+  \draw[line width=3.2pt,gray!45] (-35:1) arc (-35:35:1);
+  \draw[line width=3.2pt,gray!45] (145:1) arc (145:215:1);
+  % region where chi_2 = 1 (near Sigma_1): arcs around top and bottom
+  \draw[line width=3.2pt,black!70] (65:1) arc (65:115:1);
+  \draw[line width=3.2pt,black!70] (245:1) arc (245:295:1);
+  \fill (0,1) circle (1.3pt); \fill (0,-1) circle (1.3pt);
+  \fill[white,draw=black] (1,0) circle (1.3pt); \fill[white,draw=black] (-1,0) circle (1.3pt);
+  \node[above left] at (0,1) {$\Sigma_1$};
+  \node[below left] at (0,-1) {$\Sigma_1$};
+  \node[below right] at (1,0) {$\Sigma_2$};
+  \node[below left] at (-1,0) {$\Sigma_2$};
+  \node[right] at (38:1.08) {\small$\chi_1=1$: $a_P\approx p$};
+  \node[above right] at (75:1.05) {\small$\chi_2=1$: $a_P\approx\alpha$};
+  \node[right] at (-50:1.1) {\small both $\chi_j>0$};
+\end{tikzpicture}
+\caption[The cut-offs in the product symbol]{One fibre of
+$S^*(\tilde M/B)$ when the fibre and base directions are one-dimensional. The
+fibre symbol $p$ is undefined at the points $\Sigma_1$ of pure base covectors,
+and the base symbol $\alpha$ is undefined at the points $\Sigma_2$ of pure fibre
+covectors. The product symbol $a_P=m(\chi_1,\chi_2)$ uses $p$ near $\Sigma_2$
+(light arcs), $\alpha$ near $\Sigma_1$ (dark arcs), and a Clifford combination of
+both in between; by \cref{families:lem:clifford} it is invertible everywhere.}
+\label{families:fig:cutoffs}
+\end{figure}
 
 \begin{lemma}\label{families:lem:aP-product}
   The class of $a_P$ in $\Kc(T^*(\tilde M/B))$ is the product
@@ -529,6 +639,19 @@ $G_-=E_-\otimes F_+\oplus E_+\otimes F_-$, with $A_\Pi$ as in
   stabilized indices coincide.
 \end{proof}
 
+\begin{question}
+  Since $\ind(P\otimes A)=\ind(A)$ is so easy, why not stop here?
+\end{question}
+\begin{answer}
+  Because $P\otimes A$ is not an ordinary elliptic family on $\tilde M/B$, so it
+  does not define a class in $\Kc(T^*(\tilde M/B))$. Its usual symbol is
+  $\operatorname{diag}(p,p^*)$, which is undefined on $\Sigma_1$; all the
+  information about $A$ sits in the base symbol $\beta$. The two homotopies in
+  the proof of \cref{families:thm:mult} move this information from $\beta$ into
+  the usual symbol, until the base symbol is the multiplication operator
+  determined by an ordinary symbol, $a_P$.
+\end{answer}
+
 \subsection{Deformation to an ordinary family}
 Now choose families
 \begin{equation*}
@@ -554,8 +677,16 @@ homogeneously.
 \begin{proof}
   That $\sigma_0(\tilde A_P)=a_P$ is immediate, so $\tilde A_P$ is elliptic.
   We connect $P\otimes A$ to $\tilde A_P$ by two homotopies of fully elliptic
-  product-type families; by \cref{families:prop:PA} and
-  \cref{families:lem:stabilization}(iii) this proves the theorem.
+  product-type families,
+  \begin{equation*}
+    P\otimes A=Q_0\ \xrightarrow{\ Q_t\ }\ Q_1=R_0\ \xrightarrow{\ R_t\ }\
+    R_1=\tilde A_P;
+  \end{equation*}
+  the first switches on the lifted base family $\tilde A_\pm$ and switches off
+  $A_\Pi$, the second replaces $P$ by $\tilde P_\pm$. By \cref{families:prop:PA}
+  and \cref{families:lem:stabilization}(iii) this proves the theorem. In each
+  step we check that both symbols stay invertible, always by
+  \cref{families:lem:clifford}.
 
   \emph{First homotopy.} For $t\in[0,1]$ let
   \begin{equation*}
@@ -676,6 +807,12 @@ following sense.
 
 \section{Excision}\label{families:sec:excision}
 
+The index is a global quantity: elements of the null space are sections over the
+whole fibre. Excision says that it is nevertheless \emph{local in the symbol}:
+if the symbol class is trivial outside an open set $U$, the index can be
+computed on any compact manifold containing $U$. This is what allows us to move
+the problem from $M$ into a torus.
+
 Let $\phi_j:M_j\to B$, $j=1,2$, be fibrations of compact manifolds and
 $U$ a manifold with open embeddings $i_j:U\hookrightarrow M_j$ such that
 \begin{equation}\label{families:eq:excision-setting}
@@ -696,6 +833,18 @@ $T^*(U/B)$ is well defined, and $i_j$ induce open embeddings $T^*(U/B)
     \inda\circ(i_1)_*=\inda\circ(i_2)_*:\Kc(T^*(U/B))\longrightarrow K^0(B).
   \end{equation*}
 \end{theorem}
+
+\begin{discussion}
+  The idea of the proof is simple. Choose the operators $P_1$ on $M_1$ and $P_2$
+  on $M_2$ so that they are a bundle isomorphism $\tau$ outside a compact subset
+  of $U$, and agree on $U$. Then an equation $P_ju=g$ can be solved outside $U$
+  pointwise, by $u=\tau^{-1}g$, and inside $U$ the two equations are the same.
+  So the stabilized null spaces live inside $U$ and can be transplanted from
+  $M_1$ to $M_2$. The proof has three steps: a normal form for the symbol
+  (Step~1), operators with the locality properties (a), (b) (Step~2), and a
+  stabilization supported in $U$ that works for both manifolds (Step~3).
+\end{discussion}
+
 \begin{proof}
   \emph{Step 1: normal form.} Let $\varpi:T^*(U/B)\to U$ be the projection.
   Let $x\in\Kc(T^*(U/B))$ be represented by $(E_+,E_-,a)$ with $a$ invertible
@@ -771,6 +920,14 @@ $T^*(U/B)$ is well defined, and $i_j$ induce open embeddings $T^*(U/B)
 
 \section{The families index theorem in K-theory}\label{families:sec:AS-K}
 
+We now assemble the proof. The strategy, due to Atiyah and Singer, is to
+transport the symbol class from $T^*(M/B)$ to the cotangent bundle of a
+\emph{trivial} fibration, where the index can be computed by hand. The transport
+has three stages (\cref{families:fig:roadmap,families:fig:embedding}): embed
+$M$ in $\R^N\times B$ and push the symbol into a tubular neighbourhood by the
+Thom homomorphism; extend it by the identity to $I^N\times B\subset\Torus^N\times
+B$; and read off the index on the torus by Bott periodicity.
+
 \subsection{Embedding the fibration}
 \begin{lemma}\label{families:lem:embedding}
   Let $\phi:M\to B$ be a fibration of compact manifolds with fibres of
@@ -803,6 +960,52 @@ extension
 $j_*:\Kc(T^*(\Omega/B))\to\Kc(T^*(I^N\times B/B))=\Kc(T^*I^N\times B)$; note
 $T^*I^N\cong\R^{2N}$.
 
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.15,>=Latex]
+\begin{scope}
+  \draw[dashed] (0,0) rectangle (4,4);
+  \draw[->] (1.9,0)--(2.1,0); \draw[->] (1.9,4)--(2.1,4);
+  \draw[->>] (0,1.9)--(0,2.1); \draw[->>] (4,1.9)--(4,2.1);
+  \node[below] at (2,0) {\small$I=(0,2\pi)$};
+  % tubular neighbourhood
+  \fill[gray!25,even odd rule]
+    plot[smooth cycle,tension=0.8] coordinates {(0.85,2.0) (1.4,3.2) (2.6,3.25) (3.25,2.2) (2.7,0.9) (1.5,0.75)}
+    plot[smooth cycle,tension=0.8] coordinates {(1.35,2.0) (1.7,2.75) (2.4,2.8) (2.75,2.15) (2.45,1.3) (1.7,1.25)};
+  \draw[thick] plot[smooth cycle,tension=0.8] coordinates {(1.1,2.0) (1.55,2.97) (2.5,3.02) (3.0,2.17) (2.58,1.1) (1.6,1.0)};
+  % normal fibres
+  \draw (0.85,2.0)--(1.35,2.0);
+  \draw (2.7,0.9)--(2.45,1.3);
+  \draw (2.6,3.25)--(2.4,2.8);
+  \node at (3.35,3.45) {$\Omega$};
+  \node at (2.05,2.05) {\small$e(Z_b)$};
+  \node[left] at (0.85,2.0) {\small$\mathcal V_m$};
+  \node at (2,-0.75) {\small fibre over $b$ of $\Omega\subset I^N\times B\subset\Torus^N\times B$};
+\end{scope}
+\begin{scope}[shift={(6.6,1.9)}]
+  \draw[thick] (0,0) circle (1.1);
+  \draw[->,gray] (-2.0,-1.1)--(2.0,-1.1) node[right,black]{\small$\mathcal V_m$};
+  \fill (0,-1.1) circle (1.4pt) node[below]{\small$0$};
+  \fill (0,1.1) circle (1.4pt) node[above]{\small$\infty$};
+  \draw[gray] (0,1.1)--(1.8,-1.1);
+  \fill (1.078,-0.218) circle (1.1pt); \fill (1.8,-1.1) circle (1.1pt);
+  \draw[line width=2.5pt,gray] (-0.45,-1.1)--(0.45,-1.1);
+  \node at (0,-1.9) {\small$\Sphere^k=S(\mathcal V_m\oplus\R)$};
+  \node[align=center] at (0,0.05) {\small Thom class\\[-2pt]\small near $0$};
+\end{scope}
+\end{tikzpicture}
+\caption[Embedding, tubular neighbourhood and Thom class]{Left: the fibre
+$Z_b$ embedded in the box $I^N$ ($N=2$), with its tubular neighbourhood
+$\Omega\cong\mathcal V$; identifying opposite sides of the box gives the torus
+$\Torus^N$. Right: a normal fibre $\mathcal V_m\cong\R^k$ ($k=1$) compactified
+to the sphere $\Sphere^k$ by inverse stereographic projection. The Thom class
+$\lambda_{\mathcal V}$ is concentrated near the zero section, so it can be
+extended by the identity both to the sphere bundle $\tilde M$ (where its index is
+computed by \ref{families:TH}) and, via $\Theta$, to the torus (where it is
+computed by Bott periodicity). Excision says the two computations agree.}
+\label{families:fig:embedding}
+\end{figure}
+
 \subsection{The Thom class}
 Consider $\mathcal V$ as a fibration over $M$. Its vertical cotangent bundle
 is $T^*(\mathcal V/M)=\varpi^*\mathcal V^*$, whose total space is
@@ -831,6 +1034,18 @@ Since $T^*(\mathcal V/M)\cong\mathcal V\otimes\C$ is a complex (equivalently, by
 \cref{ch:bott}, symplectic) vector bundle, $\lambda_{\mathcal V}$ is its Bott class and, by the
 Thom isomorphism theorem of \cref{ch:bott}, $\tau$ is an isomorphism; we shall not need
 this.
+
+\begin{discussion}
+  On a single fibre $\mathcal V_m\cong\R^k$, with coordinates $(v,\eta)$ on its
+  cotangent bundle, the Thom symbol is Clifford multiplication by $v+i\eta$. For
+  $k=1$ this is the scalar symbol $x+i\xi$, the symbol of the annihilation operator
+  of the harmonic oscillator (\cref{families:rem:bott-generator}). It is invertible
+  except at the origin, so it defines a compactly supported class concentrated
+  at the zero section. Multiplying a symbol $x$ on $M/B$ by it does not change
+  where $x$ lives on $M$; it only adds the normal directions in the most economical
+  way. That this costs nothing at the level of the index is the content of
+  \ref{families:TH} below.
+\end{discussion}
 
 \subsection{The Bott element and the trivial fibration}
 Let $\Sphere=\R/2\pi\Z$, so that $I=(0,2\pi)\subset\Sphere$. Let $\Pi_>$ be the
@@ -965,7 +1180,27 @@ is not determined by its restrictions to points. The standard proof shows that
 the index of the Bott operator on $\Sphere^k$ is the trivial one-dimensional
 representation of $O(k)$, and then constructs the family over $M$ from the
 orthonormal frame bundle of $\mathcal V$; see the Notes and
-\cite{Atiyah-Singer-IV}.
+\cite{Atiyah-Singer-IV}. A short proof, based on the harmonic oscillator, is given in
+\cref{scindex:cor:TH}.
+
+\begin{question}
+  Each fibre of $\tilde M\to M$ is a sphere on which the index is $1$. Why is it
+  not automatic that the index bundle is the trivial line bundle?
+\end{question}
+\begin{answer}
+  A line bundle over $M$ whose restriction to every point is $\C$ can still be
+  non-trivial; and a class in $K^0(M)$ is not even determined by its rank. What
+  is needed is a \emph{canonical} identification of the one-dimensional index
+  spaces of the operators on the fibres $\Sphere^k$, compatible with the
+  structure group $O(k)$ of $\mathcal V$. The classical argument checks that
+  $O(k)$ acts trivially on the index; in \cref{ch:semiclassical-index} the index
+  space is spanned by an $O(k)$-invariant Gaussian, which makes the triviality
+  visible.
+\end{answer}
+
+The proof follows \cref{families:fig:roadmap} arrow by arrow: multiplicativity
+and \ref{families:TH} for the Thom step, excision to move from the sphere bundle
+$\tilde M$ to the torus, and the normalization to evaluate the index there.
 
 \begin{proof}[Proof of \cref{families:thm:AS-K}]
   Let $x\in\Kc(T^*(M/B))$. Consider the tower $\tilde M\xrightarrow{\tilde
@@ -1009,7 +1244,12 @@ orthonormal frame bundle of $\mathcal V$; see the Notes and
 
 \section{Chern--Weil theory and the Chern character}\label{families:sec:chern}
 
-To pass from K-theory to cohomology we use the Chern character. We work with
+The K-theoretic index theorem identifies two maps but does not, by itself,
+produce a number one can compute. To obtain an integral formula we map K-theory
+to de~Rham cohomology by the Chern character. It is built from the curvature of a
+connection, so it is given by explicit differential forms, and it is a ring
+homomorphism, so it turns the products of K-classes used above into wedge
+products of forms. We work with
 de~Rham cohomology with complex coefficients; $\Hev(X;\C)$ denotes the
 cohomology in even degrees.
 
@@ -1100,6 +1340,16 @@ The fibre trace extends to $\tr:\CI(X;\Lambda^j\otimes\End E)\to\CI(X;
 The sum is finite since $\omega^k=0$ for $2k>\dim X$. Even forms commute, so
 $\exp$ has its usual properties. The normalization $i/2\pi$ makes the classes
 rational, as recalled below.
+
+\begin{discussion}
+  Why $\tr\exp$? The Chern character must be additive for $\oplus$ and
+  multiplicative for $\otimes$. The curvature of $E\oplus F$ is block diagonal,
+  and the trace of a block diagonal matrix is the sum of the traces; the curvature
+  of $E\otimes F$ is $\omega_E\otimes\Id+\Id\otimes\omega_F$, and the exponential
+  turns this sum of commuting terms into a tensor product, whose trace is the
+  product of the traces. Closedness of $\Ch(\nabla)$ and independence of $\nabla$
+  both come from the Bianchi identity and the graded cyclicity of $\tr$.
+\end{discussion}
 
 \begin{proposition}\label{families:prop:chern}
   \begin{enumerate}[label=(\roman*)]
@@ -1208,6 +1458,20 @@ family and $\varphi=a_t^{-1}\partial_ta_t$ then
 The normalization \eqref{families:eq:Chodd} is chosen so that the Chern character
 of the index of a Toeplitz family is the push-forward of the odd Chern
 character of its symbol, as we now show.
+
+\begin{question}
+  The constants $c_k$ look arbitrary. Are they?
+\end{question}
+\begin{answer}
+  No. Each form $\tr((a^{-1}da)^{2k+1})$ is closed on its own, so closedness says
+  nothing about the relative weights. They are fixed by requiring that the odd
+  character be compatible with the even one. There are two independent ways to
+  express this requirement, and both give the same $c_k$: the Toeplitz index
+  (\cref{families:prop:toeplitz-chern}), and clutching
+  (\cref{families:prop:Chodd-clutching}), where $\Chodd(g)$ is the integral over
+  $\R$ of the even Chern character of the bundle clutched by $g$. The factorials
+  come from the Beta integral $\int_0^1s^k(1-s)^kds$.
+\end{answer}
 
 \subsection{The Chern character of the Toeplitz index}
 Recall from \cref{ch:index,ch:bott} that a smooth family of elliptic Toeplitz
@@ -1435,6 +1699,50 @@ $\nabla_+\gamma=a^{-1}\omega_-a-\omega_+-\gamma^2$.
   statement is \eqref{families:eq:rel-pairing}.
 \end{proof}
 
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.25]
+  \fill[gray!15] (0,0) circle (1.6);
+  \fill[gray!40] (0,0) circle (0.75);
+  \draw[very thick] (0,0) circle (1.6);
+  \draw[dashed] (0,0) circle (0.75);
+  \draw[dashed] (0,0) circle (1.25);
+  \node at (0,0) {\small$K_a$};
+  \node at (0,-1.0) {\small$a$ invertible};
+  \node[right,align=left] at (1.75,0.6) {\small$\partial X$: boundary term\\
+    \small$-\iota^*\Chodd(a;\nabla_+,\nabla_-)$};
+  \node[right,align=left] at (1.75,-0.7) {\small interior term\\
+    \small$\Ch(\nabla_+)-\Ch(\nabla_-)$ on $X$};
+  \draw[->] (1.8,0.35)--(1.45,0.2);
+  \draw[->] (1.8,-0.95)--(0.85,-0.75);
+  \node[left,align=right] at (-1.75,0.9) {\small$\rho=0$ between the\\
+    \small outer circles};
+  \draw[->] (-1.8,0.7)--(-1.3,0.55);
+\end{tikzpicture}
+\caption[The relative Chern character]{A fibre of the radially compactified
+cotangent bundle $X$. The symbol $a$ fails to be invertible only in the compact set
+$K_a$. The representative $\lambda_\rho$ of \eqref{families:eq:lambda-rho} is a
+compactly supported form, obtained by bending the connection on $E_+$ into
+$a^{-1}\nabla_-a$ before reaching $\partial X$. The Fedosov-type formula
+(\cref{families:thm:fedosov}) instead keeps the two given connections up to the
+boundary and pays for it with an odd Chern--Simons form of the symbol on
+$\partial X=S^*(M/B)$.}
+\label{families:fig:relative}
+\end{figure}
+
+\begin{discussion}
+  The two representatives in \cref{families:fig:relative} correspond to the two
+  descriptions of $H^*_{\mathrm c}(\operatorname{int}X)=H^*(X,\partial X)$: a
+  compactly supported closed form, or a closed form on $X$ together with a
+  primitive of its restriction to $\partial X$. For the symbol of an elliptic
+  family the second is more natural, because the symbol is given at infinity,
+  that is on $\partial X$, and the boundary term is then built from
+  $a^{-1}\nabla a$ alone. When the bundles are trivial with trivial connections,
+  the interior term vanishes and the whole class is carried by the odd Chern
+  form of the symbol on the cosphere bundle; this is the form of the index formula
+  used in \cref{ch:eta}.
+\end{discussion}
+
 \begin{remark}\label{families:rem:conormal}
   The formula can be obtained by letting $\rho$ tend to the characteristic
   function of $X$. Let $x$ be a boundary defining function and
@@ -1575,6 +1883,19 @@ orientation convention, it is often absorbed into it, as in the form
 $\Ch(\ind A)=\int\Td\cdot\Ch(\sigma(A))$. We explain how the theorem follows
 from \cref{families:thm:AS-K}; the topological inputs (C1) and (C4) below are
 not proved here.
+
+\begin{discussion}
+  Where does the Todd class come from? Apply $\Ch$ to each arrow of
+  \cref{families:fig:roadmap}. The extension $j_*\Theta_*$ is harmless, and
+  $\beta_N^{-1}$ becomes integration over $\R^{2N}$ up to a sign. The Thom map $\tau$
+  multiplies by $\lambda_{\mathcal V}$, and in cohomology this becomes ``integrate
+  over the normal directions'' only up to a correction factor: the fibre integral of
+  $\Ch(\lambda_{\mathcal V})$ is not $\pm1$ but $\pm\Td(\mathcal V\otimes\C)^{-1}$.
+  Since $\mathcal V$ is a complement of $T(M/B)$, this correction is
+  $\Td(T(M/B)\otimes\C)$. In other words, the Todd class measures the failure of
+  the Chern character to commute with the Thom isomorphism
+  (\cref{families:rem:todd-thom}).
+\end{discussion}
 
 \begin{proof}[Derivation from \cref{families:thm:AS-K}]
   We use the following properties of the Chern character of

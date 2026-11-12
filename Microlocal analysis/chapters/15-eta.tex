@@ -13,6 +13,16 @@
 \providecommand{\Psipteta}[1]{\Psi^{#1}_{\mathrm{pt}}}
 \providecommand{\PsiptT}[1]{\Psi^{#1}_{\mathrm{pt},\mathcal{T}}}
 
+A fully elliptic product-type operator has two symbols: an ordinary principal
+symbol, and a base family of invertible operators on the fibres. The
+Atiyah--Singer formula integrates a characteristic form built from the principal
+symbol. One would like to add a similar contribution from the base family, namely
+its odd Chern character $\Tr((B^{-1}dB)^{2k+1})$. But $B^{-1}dB$ is a
+pseudodifferential operator of order $0$, not a trace class operator, so this
+trace does not exist. This chapter shows how to regularize it, and that the
+regularized form, the \emph{eta form}, is exactly the missing term in the index
+formula.
+
 The index formula for product-type operators involves, besides the familiar
 Atiyah--Singer integrand, a `regularized odd Chern character' of the base family,
 which we call an eta form. In this chapter we first construct the necessary
@@ -40,6 +50,12 @@ on $Z$ and a Hermitian structure on $E$, so that operators act on $L^2(Z;E)$; th
 trace does not depend on these choices.
 
 \section{The trace on operators of low order}\label{eta:sec:trace}
+
+The regularization is modelled on the zeta function: $\sum_{k\ge1}k^{-s}$ diverges
+at $s=0$, but it converges for $\Re s>1$ and has a meromorphic continuation, whose
+value at $s=0$ is a sensible substitute for the divergent sum. To imitate this we
+multiply an operator $A$ by a family $E(s)$ of order $s$, take the trace where it
+converges, and continue in $s$. For this we need operators of complex order.
 
 \subsection{Operators of complex order} Recall (\cref{ch:distributions,ch:conormal})
 that the classical symbols of order $m$ on $\R^d$ are exactly the functions of the
@@ -249,7 +265,25 @@ $S^{-\infty}$, because $\psi_i\equiv1$ near $\supp\phi_i$; this gives
 \eqref{eta:eq:seeley-residue}.
 \end{proof}
 
+\begin{discussion}
+  The proof shows where the poles come from. In polar coordinates the trace is an
+  integral $\int^\infty r^{m+s+d-1}(\cdots)\,dr$ over the size $r=\abs\xi$ of the
+  covector. Each homogeneous term of the symbol contributes a power of $r$, and
+  $\int_1^\infty r^{\lambda-1}dr=-1/\lambda$ continues meromorphically with a
+  simple pole at $\lambda=0$. The pole at $s=s_j$ comes from the one term of the
+  symbol which, at $s=s_j$, has homogeneity exactly $-d$, the borderline case
+  for integrability in $\xi\in\R^d$. Its residue is therefore a \emph{local}
+  quantity, an integral over the cosphere bundle of one term of the symbol.
+\end{discussion}
+
 \section{The residue trace and the regularized trace}\label{eta:sec:residue}
+
+Seeley's theorem gives two numbers for each operator $A$ of integral order: the
+residue of $\Tr(AE(s))$ at $s=0$ and its finite part. The residue is a genuine
+trace on the whole algebra, but it vanishes on trace class operators. The finite
+part extends the ordinary trace, but it is not a trace. The interplay between the
+two, the trace-defect formula (\cref{eta:lem:trace-defect}), is what produces the
+eta forms.
 
 \begin{proposition}\label{eta:prop:residue}
 For $A\in\Psido{m}(Z;E)$, $m\in\Z$, and any holomorphic family $A(s)$ of order $m+s$
@@ -309,6 +343,21 @@ particular on smoothing operators. From the proof of \cref{eta:thm:seeley} the
 Laurent coefficients of $\Tr(AE(s))$ at $s=0$ are given by convergent integrals of
 the (Taylor coefficients of the) symbol of $AE(s)$, so $\Trbar_E$ is continuous on
 each $\Psido{m}(Z;E)$. However $\Trbar_E$ is not a trace, and it depends on $E$.
+
+\begin{question}
+  Is there a better choice: a trace on all of $\Psido{\Z}(Z;E)$ which extends
+  $\Tr$?
+\end{question}
+\begin{answer}
+  No. On the circle, $[e^{i\theta},e^{-i\theta}\Pi]$ is minus a rank one projection
+  (\cref{eta:ex:defect-check}), so any extension of $\Tr$ takes the value $-1$ on
+  this commutator of two operators of order $0$, and cannot vanish on all
+  commutators. Hence one must choose between keeping the trace property, as $\TrR$
+  does at the cost of vanishing on trace class operators, and extending $\Tr$, as
+  $\Trbar_E$ does at the cost of the trace property. The defect is local in the
+  symbols (\cref{eta:lem:trace-defect}), and this locality is the key to everything
+  that follows.
+\end{answer}
 
 \begin{lemma}\label{eta:lem:reg-dependence}
 If $E$ and $E'$ are admissible then $E'(s)=E(s)+sF(s)$ with $F$ an entire family of
@@ -465,8 +514,34 @@ Now $\sum_{k\ge0}\lambda_k^s=1+\zeta(-s)+h(s)$ with
 $h(s)=\sum_{k\ge1}(\lambda_k^s-k^s)$; since $\lambda_k^s-k^s=O(\abs s k^{\Re s-2})$,
 $h$ is holomorphic in $\Re s<1$ with $h(0)=0$. The Riemann zeta function is regular
 at $0$ with $\zeta(0)=-\frac12$, so the finite part (in fact the value) at $s=0$ is
-$\frac12$, and $\sum_{k\in\Z}\lambda_k^s=2\sum_{k\ge0}\lambda_k^s-1$ has value $0$.
+$\frac12$, and $\sum_{k\in\Z}\lambda_k^s=2\sum_{k\ge0}\lambda_k^s-1$ has value $0$
+(\cref{eta:fig:szego}).
 \end{proof}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[>=Latex,xscale=0.62]
+  \draw[->] (-8.6,0)--(8.9,0) node[right]{\small$k$};
+  \foreach \k in {-8,...,-1}{\draw[fill=white] (\k,0) circle (2.2pt);}
+  \foreach \k in {0,...,8}{\fill (\k,0) circle (2.2pt);
+    \draw[gray] (\k,0.15)--(\k,{0.15+1.4/sqrt(1+\k*\k)});}
+  \node[below] at (0,-0.15) {\small$0$};
+  \node[below] at (5,-0.15) {\small$\Ran\Pi$: $k\ge0$};
+  \node[below] at (-5,-0.15) {\small$\Ran(\Id-\Pi)$: $k<0$};
+  \node[right,align=left] at (2.2,1.25)
+    {\small weights $\lambda_k^s$ ($s<-1$)};
+  \node[align=center] at (0,-1.25)
+    {\small$\Trbar(\Pi)=\FP_{s=0}\sum_{k\ge0}\lambda_k^s=1+\zeta(0)=\tfrac12$,
+    \qquad$\Trbar(\Id)=\FP_{s=0}\sum_{k\in\Z}\lambda_k^s=0$};
+\end{tikzpicture}
+\caption[The regularized trace on the circle]{The Szeg\H{o} projector $\Pi$ keeps the
+Fourier modes $e^{ik\theta}$ with $k\ge0$ (filled dots). The family $E(s)$ weights
+the $k$-th mode by $\lambda_k^s$, $\lambda_k=(1+k^2)^{1/2}$; for $\Re s<-1$ the weighted
+traces converge, and their values at $s=0$, obtained by analytic continuation, are
+$\frac12$ for $\Pi$ and $0$ for $\Id$. ``Half of the modes'' of the circle have
+regularized dimension $\frac12$, and the full space has regularized dimension $0$.}
+\label{eta:fig:szego}
+\end{figure}
 
 \begin{example}\label{eta:ex:defect-check}
 Let $A$ be multiplication by $e^{i\theta}$ and $B=e^{-i\theta}\Pi$. Then $AB=\Pi$ and

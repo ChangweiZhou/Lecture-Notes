@@ -43,6 +43,11 @@ $n$, $\pi:T^*X\to X$ is the projection, and operators act on half-densities.
 
 \section{Pseudodifferential operators on conormal distributions}\label{hj:sec:psido}
 
+We first record what a pseudodifferential operator does to a conormal distribution.
+To leading order it simply multiplies the symbol by the principal symbol of the
+operator restricted to the conormal bundle; this already tells us where singular
+solutions can live.
+
 \begin{theorem}\label{hj:thm:psido-conormal}
   Let $Y\subset X$ be a closed embedded submanifold and
   $A\in\Psido{m'}(X;\Omegah)$ properly supported.  Then
@@ -86,6 +91,15 @@ $p|_{N^*Y}\sigma_m(u)=0$ modulo lower order, so $p$ must vanish on $N^*Y$.
   characteristic on an open cone $\Gamma\subset N^*Y\setminus0$ if
   $\Gamma\subset\Sigma(P)$.
 \end{definition}
+
+\begin{discussion}
+A conormal distribution to $Y$ oscillates only in the directions conormal to $Y$:
+locally it is a superposition of plane waves $e^{ix\cdot\xi}$ with $\xi\in N^*Y$. For
+$Pu$ to be smoother than expected, $P$ must annihilate these plane waves to leading
+order at high frequency, i.e.\ $p$ must vanish on $N^*Y$. For the wave operator this
+says that a singular wave front must move at the speed of light; for an elliptic
+operator it never happens.
+\end{discussion}
 
 \begin{corollary}\label{hj:cor:char-lower}
   If $Y$ is characteristic for $P$ on the open cone $\Gamma$, and
@@ -131,6 +145,14 @@ singular solutions do exist.
 \end{example}
 
 \section{Symplectic geometry}\label{hj:sec:symplectic}
+
+The eikonal equation $p(x,dh)=0$ is a non-linear first-order equation for $h$. The
+classical way to solve it is to stop thinking of $h$ and to think of the graph of
+$dh$ in $T^*X$ instead: this is an $n$-dimensional submanifold on which the
+canonical two-form vanishes, and it must lie in $\{p=0\}$. Constructing such
+submanifolds is a question about ordinary differential equations (the flow of the
+Hamilton vector field), which is what the symplectic language below makes
+systematic.
 
 \subsection{The canonical forms}
 The cotangent bundle carries a canonical one-form $\alpha$, defined by
@@ -322,6 +344,44 @@ a $\Lambda$ must be a union of integral curves of $H_p$.
   there, and $h=h'$ since they agree on $H$.
 \end{proof}
 
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}[>=Stealth,scale=1.1]
+    \fill[gray!15] (-2.4,-0.8) rectangle (2.4,1.1);
+    \foreach \a in {-2.0,-1.6,...,2.05}{
+      \draw[thick,gray!70!black] ({\a-0.8*(-0.45*\a+0.1)},-0.8) --
+        ({\a+2.5*(-0.45*\a+0.1)},2.5);
+    }
+    \draw[very thick] (-2.8,0) -- (2.8,0) node[right]{$H=\{t=0\}$};
+    \fill (0.222,2.222) circle (1.6pt);
+    \node[right,font=\small] at (0.35,2.25) {rays cross: $\pi|_\Lambda$ not injective};
+    \node[font=\small] at (-1.85,0.85) {$O$};
+    \node[below,font=\small] at (1.4,-0.85) {rays $=\pi(\text{integral curves of }H_p)$};
+    \draw[->] (-3.1,-0.8) -- (-3.1,2.4) node[above]{$t$};
+  \end{tikzpicture}
+  \caption{The Hamilton--Jacobi construction, projected to $X$. The data $f$ on $H$
+  and the equation $p=0$ determine the initial manifold $\Lambda_0$ over $H$; the
+  integral curves of $H_p$ through $\Lambda_0$ project to ``rays'' crossing $H$
+  transversally, by \eqref{hj:eq:transversal}. In a neighbourhood $O$ of $\bar x$
+  (shaded) the rays do not meet, the flow-out $\Lambda$ is the graph of $dh$, and $h$
+  solves the eikonal equation. Further away rays may cross; there $\Lambda$ is no longer
+  a graph, which is the starting point of \cref{hj:sec:lagrangian}.}
+  \label{hj:fig:flowout}
+\end{figure}
+
+\begin{question}
+What is the role of the transversality condition \eqref{hj:eq:transversal}?
+\end{question}
+\begin{answer}
+It says that the rays leave $H$ instead of running along it
+(\cref{hj:fig:flowout}). This is what makes the projection of the flow-out
+$\Lambda$ a local diffeomorphism near $\bar x$, so that $\Lambda$ is a graph. It is
+the analogue of the requirement, for the Cauchy problem of a linear first-order
+equation, that the initial surface be non-characteristic. If $H_p$ were tangent to
+the fibres of $\pi$ over $H$, the flow-out would not be determined by the data on $H$,
+and the eikonal equation could have no solution or many.
+\end{answer}
+
 Note that \eqref{hj:eq:transversal} implies $d_{\mathrm{fib}}p(\bar z)\ne0$;
 conversely, if $d_{\mathrm{fib}}p(\bar z)\neq0$ then $\pi_*H_p(\bar z)\neq0$ and
 hypersurfaces $H$ satisfying \eqref{hj:eq:transversal} exist.
@@ -455,6 +515,16 @@ $(-i\mathcal L_{H_p}+p_s)\sigma_m(u)=0$, a first-order ordinary differential
 equation along the integral curves of $H_p$ in $\Gamma$; the lower order terms
 are then removed by solving inhomogeneous transport equations.  To set up the
 initial value problem we need restriction to a transversal hypersurface.
+
+\begin{discussion}
+This is the mathematical form of geometrical optics. The eikonal equation
+($p=0$ on $N^*Y$) says where the wave front goes; the transport equation says how
+the amplitude changes along each ray. The Lie derivative of a half-density measures
+how a bundle of nearby rays spreads or focuses, so the amplitude decreases where rays
+spread and increases where they focus, and the subprincipal symbol adds a damping or
+phase term. Each successive order of the symbol is found by integrating the same ODE
+with a source term, so the whole construction reduces to linear ODEs along rays.
+\end{discussion}
 
 \subsection{Restriction to a transversal hypersurface}
 Let $t\in\CI(X)$ be real with $dt\neq0$ on $H=\{t=0\}$.  Restriction of
@@ -632,7 +702,35 @@ solutions we need a class of distributions associated with an arbitrary conic
 Lagrangian submanifold.  In this section we develop the necessary symplectic
 geometry: every conic Lagrangian is locally \emph{parametrized} by a
 non-degenerate phase function, and any two parametrizations are related in a
-precise way.
+precise way. \Cref{hj:fig:lagrangian-roadmap} shows how the results of this section
+and the next fit together.
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}[
+      box/.style={draw,rounded corners,align=center,font=\footnotesize,inner sep=3pt},>=Stealth]
+    \node[box] (ex) at (0,0) {minimal phases exist\\ (\cref{hj:thm:param-exists})};
+    \node[box] (red) at (0,-1.5) {reduction to a minimal phase\\
+      (\cref{hj:lem:reduce}, \cref{hj:prop:sp-reduction})};
+    \node[box] (eq) at (0,-3) {minimal phases are equivalent\\ (\cref{hj:thm:equivalence})};
+    \node[box] (ind) at (5.0,-0.6) {$\Ic{m}(X,\Lambda)$ does not depend\\ on the phase
+      (\cref{hj:thm:independence})};
+    \node[box] (sgn) at (5.0,-2.9) {$\sgn\varphi''_{\theta\theta}$ changes in\\
+      a controlled way (\cref{hj:cor:signature})};
+    \node[box] (sym) at (9.3,-1.75) {Maslov bundle and\\ principal symbol
+      (\cref{hj:thm:lagrangian-symbol})};
+    \draw[->] (ex) -- (ind);
+    \draw[->] (red) -- (ind);
+    \draw[->] (eq) -- (ind);
+    \draw[->] (red) -- (sgn);
+    \draw[->] (eq) -- (sgn);
+    \draw[->] (ind) -- (sym);
+    \draw[->] (sgn) -- (sym);
+  \end{tikzpicture}
+  \caption{Logic of the theory of Lagrangian distributions. Geometric results on
+  phase functions (left) feed into the analytic definitions (right).}
+  \label{hj:fig:lagrangian-roadmap}
+\end{figure}
 
 \subsection{Conic Lagrangian submanifolds}
 For $t>0$ let $M_t:T^*X\to T^*X$, $M_t(x,\xi)=(x,t\xi)$, be the fibre dilation,
@@ -666,6 +764,43 @@ a conic Lagrangian: unlike the Lagrangians of \cref{hj:lem:graph}, a conic
 Lagrangian is never locally a graph over $X$.  For $\Lambda=N^*Y\setminus0$,
 $K\equiv\operatorname{codim}Y$.  Points where $K(\lambda)$ jumps up project
 to the \emph{caustic} of $\Lambda$.
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}[>=Stealth,scale=1.1]
+    \draw[->] (-3,0) -- (1.6,0) node[right]{$x$};
+    \draw[->] (0,-1.9) -- (0,1.9) node[above]{$\xi$};
+    \draw[very thick,domain=-1.7:1.7,smooth,variable=\s] plot ({-\s*\s},{\s});
+    \node[right] at (-2.89,1.85) {$\Lambda=\{x=-\xi^2\}$};
+    \fill (0,0) circle (1.8pt);
+    \draw[->,densely dashed] (-1.69,1.3) -- (-1.69,0.1);
+    \draw[->,densely dashed] (-1.69,-1.3) -- (-1.69,-0.1);
+    \draw[very thick,gray] (-3,-2.25) -- (0,-2.25);
+    \fill[gray] (0,-2.25) circle (1.8pt) node[right,black,font=\small]{caustic};
+    \node[below,font=\small] at (-1.5,-2.3) {two points of $\Lambda$ over each $x<0$};
+    \node[font=\small] at (1.0,-1.2) {no point};
+    \node[font=\small] at (1.0,-1.55) {over $x>0$};
+  \end{tikzpicture}
+  \caption{A Lagrangian curve with a fold (a non-homogeneous model, the Airy
+  case). Away from $\xi=0$, $\Lambda$ is the union of the graphs of $dh_\pm$,
+  $h_\pm(x)=\mp\frac23(-x)^{3/2}$, with $dh_\pm=\pm(-x)^{1/2}\,dx$; at the fold point the projection to $x$ is
+  singular, so $K$ jumps from $0$ to $1$, and its image is the caustic. The phase
+  $\varphi(x,\theta)=x\theta+\frac13\theta^3$ parametrizes all of $\Lambda$:
+  $\pa_\theta\varphi=0$ gives $x=-\theta^2$, $\xi=\theta$, and
+  $\varphi''_{\theta\theta}=2\theta$ changes sign at the fold.}
+  \label{hj:fig:fold}
+\end{figure}
+
+\begin{discussion}
+Why phase functions? Over a region where $\pi|_\Lambda$ is a diffeomorphism,
+$\Lambda$ is the graph of $dh$ and the natural distributions are $e^{ih}a$; over a
+fold this description fails (\cref{hj:fig:fold}). The remedy, as in the Fourier
+representation $\delta(x)=\int e^{ix\cdot\xi}\,\dbar\xi$ of a distribution whose
+Lagrangian $T^*_0\R^n$ is not a graph at all, is to add auxiliary variables
+$\theta$: $\Lambda$ becomes the image of the critical set of $\varphi(x,\theta)$ in
+$\theta$, and that critical set can be smooth even where the projection to $X$ is
+not. The homogeneity in $\theta$ is the conic version of the same idea.
+\end{discussion}
 
 Conic Lagrangians in the characteristic variety arise as flow-outs, just as in
 the proof of \cref{hj:thm:HJ}; this does not require the projection to $X$ to
@@ -1085,6 +1220,21 @@ is a submanifold of dimension $n-1$ near $(\bar x,\bar z)$.
   locally constant, and $\sgn D_i\equiv r_i=N_i-K\pmod2$.
 \end{proof}
 
+\begin{question}
+The number $N$ of phase variables is not determined by $\Lambda$. Why does this
+not matter?
+\end{question}
+\begin{answer}
+Extra phase variables in which the phase is a non-degenerate quadratic form can be
+added (\cref{hj:ex:add-variables}) or removed by stationary phase
+(\cref{hj:prop:sp-reduction}). Removing $r$ such variables multiplies the amplitude
+by $(2\pi)^{-\frac r2}e^{\frac{i\pi}4\sgn D}|\det D|^{-\frac12}$ and raises its order
+by $\frac r2$. The order convention $\mu_N=m+\frac n4-\frac N2$ absorbs the change of
+order, the half-density $d_{C_\varphi}$ absorbs $|\det D|$, and the factor
+$e^{\frac{i\pi}4\sgn D}$ is what the Maslov bundle of
+\cref{hj:sec:lagrangian-symbol} keeps track of.
+\end{answer}
+
 \section{Lagrangian distributions}\label{hj:sec:lagrangian-dist}
 
 \subsection{Oscillatory integrals}
@@ -1420,7 +1570,7 @@ rest (\cref{hj:ex:keller}).
 
 \begin{figure}[ht]
   \centering
-  \begin{tikzpicture}[scale=1.35]
+  \begin{tikzpicture}[scale=1.0]
     \draw[->,gray] (-2.6,0)--(2.6,0) node[right]{$x$};
     \draw[->,gray] (0,-0.2)--(0,3.6) node[above]{$y$};
     \foreach \t/\c in {0/black,0.6/black,1/black,1.7/black}{
@@ -1429,12 +1579,30 @@ rest (\cref{hj:ex:keller}).
     }
     \draw[dashed,domain=-1.12:1.12,samples=80,smooth,variable=\u]
       plot ({-\u*\u*\u},{1+1.5*\u*\u});
+    \fill (0,1) circle (1.5pt);
     \node[right] at (2.1,2.2) {$C_0=C$};
     \node[left] at (-0.6,2.95) {$C_{1.7}$};
     \node[right] at (1.42,2.9) {$\mathcal K$};
+    \node[below] at (0,-0.25) {fronts $C_t$};
+  \end{tikzpicture}\hfill
+  \begin{tikzpicture}[scale=1.0]
+    \draw[->,gray] (-2.6,0)--(2.6,0) node[right]{$x$};
+    \draw[->,gray] (0,-0.2)--(0,3.6) node[above]{$y$};
+    \foreach \u in {-2.2,-1.98,...,2.25}{
+      \draw[gray] ({\u},{\u*\u/2}) --
+        ({\u-2.8*\u/sqrt(1+\u*\u)},{\u*\u/2+2.8/sqrt(1+\u*\u)});
+    }
+    \draw[thick,domain=-2.2:2.2,samples=80,smooth,variable=\u] plot ({\u},{\u*\u/2});
+    \draw[dashed,thick,domain=-1.12:1.12,samples=80,smooth,variable=\u]
+      plot ({-\u*\u*\u},{1+1.5*\u*\u});
+    \fill (0,1) circle (1.5pt);
+    \node[below] at (0,-0.25) {rays (normals to $C$)};
   \end{tikzpicture}
-  \caption{The parallel curves $C_t$ of the parabola for $t=0,\,0.6,\,1,\,1.7$
-  and the caustic $\mathcal K$ (dashed), projected to the $(x,y)$-plane.}
+  \caption{Keller's example, projected to the $(x,y)$-plane. Left: the parallel
+  curves $C_t$ of the parabola for $t=0,\,0.6,\,1,\,1.7$ and the caustic $\mathcal K$
+  (dashed). Right: the light rays, i.e.\ the projections of the null
+  bicharacteristics making up $\Lambda$, are the normal lines of $C$; their envelope is
+  the caustic. The dot is the cusp $(0,1)$ of $\mathcal K$, reached at $t=1$.}
   \label{hj:fig:keller}
 \end{figure}
 
@@ -1531,6 +1699,22 @@ through the caustic, with principal symbol satisfying a transport equation
 along $\Lambda$.)
 
 \section{The principal symbol and the Maslov bundle}\label{hj:sec:lagrangian-symbol}
+
+For conormal distributions the principal symbol is a half-density on $N^*Y$. For a
+general Lagrangian the amplitude $a$ restricted to $C_\varphi$ depends on the phase
+$\varphi$, and Keller's example shows the two ways in which it does: through a
+Jacobian, absorbed by working with half-densities, and through the factor
+$e^{\frac{i\pi}4\sgn\varphi''_{\theta\theta}}$, absorbed by a flat line bundle.
+
+\begin{discussion}
+In the model of \cref{hj:fig:fold}, $\varphi''_{\theta\theta}=2\theta$, so
+$\sgn\varphi''_{\theta\theta}=\pm1$ on the two sheets. Stationary phase in $\theta$
+turns the Airy integral $\int e^{i(x\theta+\theta^3/3)}\,d\theta$, for $x<0$, into a
+sum of two terms $e^{ih_\pm(x)}$ with amplitudes containing $e^{\pm\frac{i\pi}4}$: the
+two sheets differ by the phase $e^{\frac{i\pi}2}$, exactly as in Keller's example.
+The Maslov bundle records these factors once and for all, so that the principal
+symbol becomes an invariant object on $\Lambda$.
+\end{discussion}
 
 \subsection{The density on the critical set}
 Let $\varphi$ be a non-degenerate phase function on $\Gamma\subset
@@ -1748,6 +1932,16 @@ $k$, no normalization makes it the identity for all submanifolds at once.
 \end{remark}
 
 \section{Oscillatory testing}\label{hj:sec:testing}
+
+\begin{discussion}
+The idea is that of the wavefront set itself. To decide whether $u$ is singular at
+$(x,\xi)$ one localizes near $x$ and takes the Fourier transform in the direction
+$\xi$. Here we localize with $\nu$ and replace the linear phase $x\cdot\xi$ by a
+non-linear phase $f$ with $df(\bar x)=\bar\xi$, chosen so that its graph meets
+$\Lambda$ transversally at $\bar\lambda$. Then stationary phase picks out the single
+point $\bar\lambda$, and the leading coefficient of the resulting symbol in $s$ is the
+value of $\sigma_m(u)$ there.
+\end{discussion}
 
 The symbol of a conormal distribution is obtained by a Fourier transform across
 the submanifold.  For a Lagrangian distribution there is an analogous

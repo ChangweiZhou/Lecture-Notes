@@ -3,6 +3,16 @@
 \providecommand{\conesupp}{\operatorname{cone\,supp}}% cone support of a symbol
 \providecommand{\Ell}{\operatorname{Ell}}% elliptic set
 
+A distribution can fail to be smooth at a point, and the singular support
+records where this happens. Microlocal analysis asks a finer question: in
+which \emph{frequency directions} is it singular? The Heaviside function
+$H(x_1)$ on $\R^2$ is singular along the line $\{x_1=0\}$, but only in the
+directions $\pm dx_1$ normal to that line; after a cut-off its Fourier
+transform decays rapidly in every other direction. Recording points together
+with directions gives a subset of the cotangent bundle, and
+pseudodifferential operators turn out to be exactly the right tools to
+detect and manipulate such sets.
+
 The pseudodifferential operators of \cref{ch:euclidean} are not local: the
 support of $Au$ is in general not contained in the support of $u$. They are,
 however, \emph{pseudolocal}: they do not create new singularities. This
@@ -58,7 +68,8 @@ and $\eps>0$ we use the open cones
 \end{equation*}
 A set $W\subset\R^p\times(\R^n\setminus0)$ is \emph{conic} if
 $(x,\xi)\in W\Rightarrow(x,t\xi)\in W$ for all $t>0$. Every conic
-neighbourhood of $(\bar x,\bar\xi)$ contains some $\Gamma_\eps(\bar x,\bar\xi)$.
+neighbourhood of $(\bar x,\bar\xi)$ contains some $\Gamma_\eps(\bar x,\bar\xi)$
+(see \cref{microlocal:fig:cone}).
 For a conic set $W$ we put $W^-=\{(x,-\xi);(x,\xi)\in W\}$. We shall often use
 the elementary inequality
 \begin{equation}\label{microlocal:eq:angle}
@@ -94,6 +105,10 @@ $AB-\Id,\ BA-\Id\in\Psido{-\infty}(\R^n)$.
 
 % ======================================================================
 \section{Supports and singular supports}\label{microlocal:sec:supports}
+
+Before we refine singularities by directions, we record how an operator moves
+supports, and introduce the singular support, which the wavefront set will
+later refine.
 
 Recall from \cref{ch:distributions} that the support $\supp u$ of
 $u\in\cSp(\R^n)$ is the complement of the largest open set on which $u$
@@ -182,7 +197,10 @@ the second because $u$ is smooth if it is smooth near each point.
 % ======================================================================
 \section{Pseudolocality}\label{microlocal:sec:pseudolocal}
 
-The first observation is that the kernel of a pseudodifferential operator is
+A pseudodifferential operator may spread supports, but it cannot create
+singularities. The reason is visible in the Schwartz kernel: all of its
+singularity sits on the diagonal (\cref{microlocal:fig:kernel}). The first
+observation is that the kernel of a pseudodifferential operator is
 smooth, and rapidly decreasing, away from the diagonal.
 
 \begin{lemma}\label{microlocal:lem:off-diagonal}
@@ -240,6 +258,43 @@ smooth, and rapidly decreasing, away from the diagonal.
   estimates of \cref{microlocal:lem:off-diagonal}.
 \end{proof}
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9,>=Latex]
+  \fill[gray!12] (-0.55,0)--(4.5,5.05)--(5,5.05)--(5,4.45)--(0.55,0)--cycle;
+  \draw[thin] (0,0) rectangle (5,5);
+  \draw[->] (0,0)--(5.4,0) node[right]{$x$};
+  \draw[->] (0,0)--(0,5.4) node[above]{$y$};
+  \draw[dashed] (0.55,0)--(5,4.45);
+  \draw[dashed] (0,0.55)--(4.45,5);
+  \draw[very thick] (0,0)--(5,5);
+  \node[rotate=45,above] at (2.1,2.1) {\small $\Diag$};
+  \fill[gray!40] (3.3,0.4) rectangle (4.6,1.6);
+  \draw (3.3,0.4) rectangle (4.6,1.6);
+  \node[align=center,font=\footnotesize] at (3.95,1.0) {$\supp\phi$\\[-1pt]$\times\supp\psi$};
+  \foreach \t in {1.2,3.6}{
+    \draw[->,thick] (\t,\t)--(\t+0.55,\t-0.55);
+    \draw[->,thick] (\t,\t)--(\t-0.55,\t+0.55);}
+  \node[font=\footnotesize] at (4.55,2.75) {$(\xi,-\xi)$};
+  \node[font=\footnotesize,align=left,anchor=west] at (5.6,3.6)
+    {singular part of $K_A$:\\ only on $\Diag$};
+  \node[font=\footnotesize,align=left,anchor=west] at (5.6,1.0)
+    {$K_{\phi A\psi}$ smooth and\\ rapidly decreasing};
+  \node[font=\footnotesize,align=left,anchor=west] at (5.6,2.3)
+    {band $\abs{x-y}<\delta$:\\ where $\mu(x-y)\neq0$};
+\end{tikzpicture}
+\caption[Pseudolocality: the kernel is singular only on the diagonal]{The
+Schwartz kernel $K_A$ of $A\in\Psido m(\R^n)$, drawn schematically for $n=1$.
+It is singular only on the diagonal $\Diag$. Cutting off to the band
+$\abs{x-y}<\delta$ (shaded) changes $A$ by a smoothing operator
+(\cref{microlocal:lem:off-diagonal}), and cut-offs $\phi$, $\psi$ with
+separated supports give $\phi A\psi\in\Psido{-\infty}$
+(\cref{microlocal:prop:kernel-singsupp}). The arrows indicate the wavefront
+set of $K_A$: covectors $(\xi,-\xi)$, normal to the diagonal
+(\cref{microlocal:prop:wf-kernel}).}
+\label{microlocal:fig:kernel}
+\end{figure}
+
 We also note how residual operators act on distributions of compact
 support.
 
@@ -280,8 +335,36 @@ support.
   Hence $\psi Au\in\CI$ and $\bar x\notin\singsupp(Au)$.
 \end{proof}
 
+\begin{question}
+  Differential operators are local, and pseudodifferential operators preserve
+  smoothness. Why are pseudodifferential operators not local as well?
+\end{question}
+\begin{answer}
+  Locality concerns supports, pseudolocality concerns singular supports. The
+  kernel of $\ang D^{-2}$ on $\R$ is $\frac12e^{-\abs{x-y}}$, which vanishes
+  nowhere, so $\ang D^{-2}$ moves supports everywhere. But this kernel is
+  smooth off the diagonal, so what $A$ adds far from $\supp u$ is smooth. The
+  proof above splits $u$ into a piece near $\bar x$ and a piece far away, and
+  the far piece only meets the smooth part of the kernel.
+\end{answer}
+
 % ======================================================================
 \section{Cone support and essential support}\label{microlocal:sec:ess}
+
+The symbol of an operator tells us how strongly it acts at each position and
+frequency. If the symbol is rapidly decreasing in a cone around
+$(\bar x,\bar\xi)$, the operator is negligible there. The cone support
+collects the points where this fails.
+
+\begin{discussion}
+  Why cones, and not ordinary neighbourhoods in $\R^p\times\R^n$? Smoothness
+  is a statement about large frequencies: changing a symbol on a bounded set of
+  $\xi$ only changes the operator by a smoothing one. As $\abs\xi\to\infty$ the
+  only information that survives is the direction $\xi/\abs\xi$. The cones
+  $\Gamma_\eps(\bar x,\bar\xi)$ are the neighbourhoods of a point in the
+  ``sphere at infinity'' of each fibre, and conic sets are those which see
+  only this direction.
+\end{discussion}
 
 \begin{definition}\label{microlocal:def:conesupp}
   The \emph{cone support} of $a\in S^m(\R^p;\R^n)$ is the set
@@ -470,6 +553,41 @@ $G_{z,\eps}=\Op(\gamma_{z,\eps})\in\Psido0(\R^n)$ satisfies
   G_{z,\eps}=\psi G_{z,\eps}
 \end{equation}
 for any $\psi\in\CIc(\R^n)$ equal to $1$ on $\{\abs{x-\bar x}\le\eps\}$.
+\Cref{microlocal:fig:cone} shows the support of $\gamma_{z,\eps}$ in one fibre.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.62,>=Latex]
+  % sector V_eps of half-angle 30 deg around direction 20 deg, beyond radius 1.5
+  \fill[gray!18] (20-32:1.5) arc (20-32:20+32:1.5) -- (20+32:7) arc (20+32:20-32:7) -- cycle;
+  \fill[gray!45] (20-15:3) arc (20-15:20+15:3) -- (20+15:7) arc (20+15:20-15:7) -- cycle;
+  \draw[->] (-2.2,0)--(7.6,0) node[right]{$\xi_1$};
+  \draw[->] (0,-2.2)--(0,6.2) node[above]{$\xi_2$};
+  \draw (20-32:0)--(20-32:7.3);
+  \draw (20+32:0)--(20+32:7.3);
+  \draw[dashed] (20-15:0)--(20-15:7.3);
+  \draw[dashed] (20+15:0)--(20+15:7.3);
+  \draw[dotted] (0,0) circle (1.5);
+  \draw[dotted] (0,0) circle (3);
+  \draw[->,very thick] (0,0)--(20:2.3);
+  \node[font=\footnotesize] at (20:2.3)[above left=-1pt] {$\bar\xi$};
+  \draw[thin] (0,0)--(160:1.5);
+  \node[font=\footnotesize,anchor=south east] at (160:1.5) {$\tfrac1{2\eps}$};
+  \draw[thin] (0,0)--(230:3);
+  \node[font=\footnotesize,anchor=north east] at (230:3) {$\tfrac1\eps$};
+  \node[font=\footnotesize] at (20+42:7.3) {$V_\eps(\bar\xi)$};
+  \node[font=\footnotesize,fill=white,inner sep=1pt] at (20:5.6) {$\gamma_{z,\eps}=1$};
+\end{tikzpicture}
+\caption[A conic neighbourhood and a microlocal cut-off]{One fibre
+$\{x\}\times\R^2_\xi$, $\abs{x-\bar x}<\eps/2$, of the cut-off
+$\gamma_{z,\eps}$ of \eqref{microlocal:eq:gamma}. The open cone
+$V_\eps(\bar\xi)$ is bounded by the solid rays, $V_{\eps/2}(\bar\xi)$ by the
+dashed rays. The symbol $\gamma_{z,\eps}$ vanishes outside the light gray
+region and equals $1$ on the dark region
+$V_{\eps/2}(\bar\xi)\cap\{\abs\xi\ge1/\eps\}$. Only the behaviour for large
+$\abs\xi$ matters, so near infinity the support is a cone.}
+\label{microlocal:fig:cone}
+\end{figure}
 
 \begin{lemma}[Microlocal cut-off]\label{microlocal:lem:cutoff}
   Let $W_1,W_2\subset\Tz{\R^n}$ be disjoint closed conic sets with $\pi(W_1)$
@@ -500,6 +618,12 @@ for any $\psi\in\CIc(\R^n)$ equal to $1$ on $\{\abs{x-\bar x}\le\eps\}$.
 % ======================================================================
 \section{The characteristic variety}\label{microlocal:sec:char}
 
+Global ellipticity asks the symbol to be large in every direction at every
+point. Microlocally we only ask this near one point of $\Tz{\R^n}$. The set
+where even this weak condition fails is the characteristic variety; it is the
+only place where an equation $Au=f$ can hide singularities of $u$
+(\cref{microlocal:thm:elliptic-regularity}).
+
 \begin{definition}\label{microlocal:def:elliptic}
   $A\in\Psido m(\R^n)$ is \emph{elliptic at} $(\bar x,\bar\xi)\in\Tz{\R^n}$
   if there is $\eps>0$ such that
@@ -517,7 +641,7 @@ C\ang\xi^{m-1}\le\frac\eps2\abs\xi^m$ for $\abs\xi$ large, so the condition
 holds for $a'$ with $\eps/2$ in place of $\eps$ (after shrinking the cone).
 Thus ellipticity at a point depends only on the principal symbol
 $\sigma_m(A)$; in particular $\sigma_R(A)$ may be used instead of
-$\sigma_L(A)$. Clearly $\Ell_m(A)$ is open and conic, so $\Char_m(A)$ is a
+$\sigma_L(A)$. By definition $\Ell_m(A)$ is open and conic, so $\Char_m(A)$ is a
 closed conic subset of $\Tz{\R^n}$. If $A$ is elliptic at $z$ then
 $\sigma_L(A)$ is not rapidly decreasing near $z$, so
 \begin{equation*}
@@ -529,6 +653,17 @@ $G_{z,\eps}$ in \eqref{microlocal:eq:G-cutoff} is elliptic at $z$. The
 operator $A$ is globally elliptic in the sense of \cref{ch:euclidean} if
 and only if the estimate in \cref{microlocal:def:elliptic} holds uniformly,
 with one $\eps$ for all $(\bar x,\bar\xi)$.
+
+\begin{discussion}
+  Two examples show the range of possibilities. The operator $\ang D^2$, with symbol
+  $\ang\xi^2=1+\abs\xi^2$, is elliptic everywhere: $\Char_2=\emptyset$. The
+  operator $D_{x_1}$ on $\R^2$ has symbol $\xi_1$, and
+  $\abs{\xi_1}\ge\eps\abs\xi$ near $(\bar x,\bar\xi)$ exactly when
+  $\bar\xi_1\ne0$. So $\Char_1(D_{x_1})=\{\xi_1=0\}$: the operator controls
+  every direction except the ones conormal to the lines $\{x_2=\text{const}\}$.
+  For such operators the behaviour on the characteristic variety is the subject
+  of \cref{microlocal:sec:propagation}.
+\end{discussion}
 
 \begin{proposition}\label{microlocal:prop:char-product}
   For $A\in\Psido m(\R^n)$ and $B\in\Psido{m'}(\R^n)$,
@@ -565,7 +700,13 @@ elliptic operator to that of a parametrix at a point.
 \end{proposition}
 \begin{proof}
   The last statement holds for any $B$ with the first property, as essential
-  supports are closed. Let $a=\sigma_L(A)$ and choose $\eps\in(0,\frac12)$
+  supports are closed. The idea is to reduce to the global parametrix of
+  \cref{ch:euclidean}. Away from $z$ we add to $A^*A$ a harmless elliptic
+  term, which makes it globally elliptic; inverting it gives a left
+  parametrix near $z$. A right parametrix is obtained in the same way, and
+  a standard algebraic argument shows that the two agree near $z$.
+
+  Let $a=\sigma_L(A)$ and choose $\eps\in(0,\frac12)$
   and $c_0>0$ such that $\abs a\ge c_0\abs\xi^m$ on
   $\Gamma_{2\eps}(z)\cap\{\abs\xi\ge1/(2\eps)\}$. Let $\gamma=\gamma_{z,\eps}$
   and $L=\Op(\gamma)$. Then $z\notin\WFp(\Id-L)$ by
@@ -594,7 +735,7 @@ elliptic operator to that of a parametrix at a point.
   microlocal parametrix.
 
   In the same way $J'=(\Id-L)\Lambda+AA^*$ is globally elliptic; if $H'$ is
-  a parametrix, $JH'-\Id=E_2\in\Psido{-\infty}$, then $B_2=A^*H'$ satisfies
+  a parametrix, $J'H'-\Id=E_2\in\Psido{-\infty}$, then $B_2=A^*H'$ satisfies
   $AB_2-\Id=E_2-(\Id-L)\Lambda H'$, so $z\notin\WFp(AB_2-\Id)$. Write
   $R_1=B_1A-\Id$ and $R_2=AB_2-\Id$. Then
   \begin{equation*}
@@ -610,6 +751,12 @@ an operator whose essential support does not contain $z$
 
 % ======================================================================
 \section{Coordinate invariance}\label{microlocal:sec:coordinates}
+
+To use pseudodifferential operators on manifolds we must know that a change
+of coordinates turns them into pseudodifferential operators, and how their
+symbols transform. The answer is that the principal symbol behaves like a
+function on the cotangent bundle. We first set up pull-backs of compactly
+supported distributions by diffeomorphisms.
 
 For an open set $\Omega\subset\R^n$ let $\CIc(\Omega)$ be the smooth functions
 with compact support in $\Omega$ and
@@ -679,6 +826,16 @@ which is a diffeomorphism, linear and invertible on each fibre. (In the
 language of \cref{ch:manifolds}, $\chi_F$ is the inverse of the cotangent map
 $F^*:T^*_{F(x)}\Omega'\to T^*_x\Omega$, $\eta\mapsto DF(x)^t\eta$.)
 
+\begin{discussion}
+  Why does $\xi$ transform by $(DF^t)^{-1}$ rather than by $DF$? In the
+  oscillatory factor $e^{i(x-y)\cdot\xi}$ the frequency variable is paired with
+  a displacement $x-y$. Near the diagonal $F(x)-F(y)\approx DF(x)(x-y)$, so
+  keeping the phase $(x-y)\cdot\xi$ unchanged forces
+  $\xi=DF(x)^t\eta$. Thus $\xi$ is a covector, a linear form on displacements,
+  and $(x,\xi)$ is a point of the cotangent bundle. This is the computation
+  behind the matrix $T(x',y')$ in the proof below.
+\end{discussion}
+
 \begin{theorem}[Coordinate invariance]\label{microlocal:thm:coordinates}
   Let $F:\Omega\to\Omega'$ be a diffeomorphism of open subsets of $\R^n$ and
   $A\in\Psido m(\R^n)$ an operator whose kernel has compact support in
@@ -695,6 +852,12 @@ $F^*:T^*_{F(x)}\Omega'\to T^*_x\Omega$, $\eta\mapsto DF(x)^t\eta$.)
   outside compact subsets of $\Omega$, $\Omega'$ respectively.
 \end{theorem}
 \begin{proof}
+  The proof has three steps. First we split $A=A_1+A_2$, where $A_2$ is
+  smoothing and $A_1$ has kernel supported near the diagonal. Then we change
+  variables in the oscillatory integral for $A_1$ and check that the new
+  amplitude is a symbol. Finally we read off the principal symbol and the
+  essential support from the new amplitude.
+
   Let $K\subset\Omega$ be compact with $\supp K_A\subset K\times K$, and let
   $\psi\in\CIc(\Omega)$ equal $1$ near $K$. Then $\psi A=A$, so
   $a=\sigma_L(A)$ satisfies $a=\psi a$ by uniqueness of the left symbol, and
@@ -801,8 +964,10 @@ choose local coordinates adapted to a particular problem.
 % ======================================================================
 \section{The wavefront set}\label{microlocal:sec:wf}
 
-We first define the wavefront set for distributions of compact support and
-then localize.
+We now use operators as probes. An operator elliptic at $z$ ``sees'' the
+frequencies of $u$ near $z$; if some such probe returns a smooth function, $u$
+is smooth microlocally at $z$. We first define the wavefront set for
+distributions of compact support and then localize.
 
 \begin{definition}\label{microlocal:def:wf-compact}
   For $u\in\CmIc(\R^n)$,
@@ -813,7 +978,20 @@ then localize.
 
 Thus $z\notin\WF(u)$ if and only if there is $A\in\Psido0(\R^n)$, elliptic at
 $z$, with $Au\in\CI(\R^n)$. As an intersection of closed conic sets,
-$\WF(u)\subset\Tz{\R^n}$ is closed and conic. The wavefront set refines the
+$\WF(u)\subset\Tz{\R^n}$ is closed and conic.
+
+\begin{discussion}
+  A good test operator is the microlocal cut-off $G_{z,\eps}$ of
+  \eqref{microlocal:eq:G-cutoff}: it keeps the part of $u$ with $x$ near
+  $\bar x$ and frequency in a narrow cone around $\bar\xi$, and discards the
+  rest. So $z\notin\WF(u)$ says, roughly, that this ``microlocalized piece'' of
+  $u$ is smooth. In \cref{microlocal:sec:fourier} we make this precise: it
+  means that the Fourier transform of a localization of $u$ decays rapidly in
+  a cone around $\bar\xi$. \Cref{microlocal:fig:wf-examples} shows three
+  typical wavefront sets.
+\end{discussion}
+
+The wavefront set refines the
 singular support. Let $\pi:\Tz{\R^n}\to\R^n$ be the projection.
 
 \begin{proposition}\label{microlocal:prop:wf-singsupp}
@@ -949,7 +1127,7 @@ the following extension consistent.
 
   (ii) By (i), $\WF(u)\cap\pi^{-1}(U)=\WF(\phi u)\cap\pi^{-1}(U)$ on the open
   set $U=\{\phi\ne0\}$, so $\WF(u)$ is closed, being locally closed; it is
-  clearly conic. Also $\bar x\notin\singsupp u$ if and only if
+  conic as a union of conic sets. Also $\bar x\notin\singsupp u$ if and only if
   $\bar x\notin\singsupp(\phi u)$ for some (any) $\phi$ as in (i), so the
   second statement follows from \cref{microlocal:prop:wf-singsupp}.
 
@@ -992,6 +1170,21 @@ result.
 In particular, if $A$ is elliptic at every point (that is,
 $\Char_m(A)=\emptyset$), then $\WF(u)=\WF(Au)$. For instance $\WF(u)$
 is unchanged by the Fourier multipliers $\ang D^s$.
+
+\begin{discussion}
+  \Cref{microlocal:thm:microlocality,microlocal:thm:elliptic-regularity}
+  together say
+  \begin{equation*}
+    \WF(Au)\subset\WF(u)\subset\WF(Au)\cup\Char_m(A).
+  \end{equation*}
+  A pseudodifferential operator cannot create singularities, nor move them in
+  position or direction; and where it is elliptic it cannot destroy them
+  either. All the room for $u$ to be singular while $Au$ is smooth lies in
+  $\Char_m(A)$. For $A=D_{x_1}$ on $\R^2$ this is the set $\{\xi_1=0\}$, and
+  indeed $u=H(x_2)$ has $D_{x_1}u=0$ while $\WF(u)$ is non-empty and lies in
+  $\{\xi_1=0\}$. What happens inside the characteristic variety is the
+  subject of \cref{microlocal:sec:propagation}.
+\end{discussion}
 
 % ======================================================================
 \section{The wavefront set and the Fourier transform}\label{microlocal:sec:fourier}
@@ -1103,6 +1296,56 @@ cone in $\R^n\setminus0$, and $\WF(v)\subset\supp v\times\Sigma(v)$.
   $\Sigma(u)\ne\emptyset$, since otherwise $\hat u\in\cS$ by
   \cref{microlocal:lem:fourier-global}(i).
 \end{example}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,scale=1]
+  \begin{scope}
+    \fill (0,0) circle (1.5pt);
+    \foreach \a in {0,30,...,330} \draw[->] (0,0)--(\a:0.9);
+    \node at (0,-1.8) {\small (a) $\delta_0$};
+  \end{scope}
+  \begin{scope}[xshift=4.2cm]
+    \fill[gray!15] (0,-1.3) rectangle (1.4,1.3);
+    \draw[very thick] (0,-1.3)--(0,1.3);
+    \foreach \y in {-1,-0.5,0,0.5,1} \draw[<->] (-0.55,\y)--(0.55,\y);
+    \node at (0.7,1.6) {\scriptsize $u=1$};
+    \node at (-0.7,1.6) {\scriptsize $u=0$};
+    \node at (0,-1.8) {\small (b) $H(x_1)$};
+  \end{scope}
+  \begin{scope}[xshift=8.6cm]
+    \fill[gray!15] (0,0) circle (1);
+    \draw[very thick] (0,0) circle (1);
+    \foreach \a in {0,30,...,330} \draw[<->] (\a:0.65)--(\a:1.35);
+    \node at (0,-1.8) {\small (c) $\chi_{\mathbb B}$};
+  \end{scope}
+\end{tikzpicture}
+\caption[Wavefront sets of three distributions on $\R^2$]{Wavefront sets of
+three distributions on $\R^2$, drawn as covectors attached to points of the
+base. (a) $\WF(\delta_0)=\{0\}\times(\R^2\setminus0)$: all directions at the
+origin (\cref{microlocal:ex:delta}). (b) For the Heaviside function
+$H(x_1)$ the wavefront set is
+$\{(0,x_2;\xi_1,0);\ \xi_1\ne0\}$: only the directions normal to the jump.
+(c) For the characteristic function of the unit disc, the covectors normal
+to the circle. In (b) and (c) the wavefront set is the conormal bundle of the
+curve of discontinuity minus its zero section; such distributions are studied
+in \cref{ch:conormal}.}
+\label{microlocal:fig:wf-examples}
+\end{figure}
+
+\begin{question}
+  The Fourier characterization is concrete. Why did we define the wavefront
+  set through pseudodifferential operators instead?
+\end{question}
+\begin{answer}
+  Invariance. A diffeomorphism does not act simply on Fourier transforms, so
+  it is not clear from \cref{microlocal:prop:fourier-char} that $\WF(u)$
+  transforms as a subset of the cotangent bundle. With the operator
+  definition this follows almost at once from the coordinate invariance of
+  the calculus (\cref{microlocal:thm:coordinates}), as we see in the next
+  section. The Fourier description, on the other hand, is the convenient tool
+  for products, restrictions and push-forwards.
+\end{answer}
 
 \begin{corollary}\label{microlocal:cor:wf-conj}
   For $u\in\cSp(\R^n)$, $\WF(\bar u)=\WF(u)^-$.
@@ -1250,6 +1493,19 @@ essential supports of the operators.
 In particular $\WFp(A)$ and $\WF(K_A)$ determine each other, and
 $\WFp(A)=\emptyset$ if and only if $K_A\in\CI(\R^{2n})$.
 
+\begin{discussion}
+  The covectors $(\xi,-\xi)$ at $(x,x)$ are exactly those which vanish on the
+  tangent vectors $(v,v)$ of the diagonal, that is, the conormal bundle of
+  $\Diag$ (\cref{microlocal:fig:kernel}). This is the sign which makes the
+  kernel $\int e^{i(x-y)\cdot\xi}a\,\dbar\xi$ oscillate in $x$ with frequency
+  $\xi$ and in $y$ with frequency $-\xi$. To make the identity operator
+  correspond to the identity relation one flips the sign of the second
+  covector; this is the convention behind $\WFp(K)$ in
+  \cref{microlocal:sec:relation}. Kernels of pseudodifferential operators are
+  thus distributions whose wavefront set lies in the conormal bundle of a
+  submanifold; \cref{ch:conormal} studies such distributions in general.
+\end{discussion}
+
 % ======================================================================
 \section{The calculus of wavefront sets: pairing}\label{microlocal:sec:pairing}
 
@@ -1268,9 +1524,36 @@ operations:
 The last was treated in \cref{microlocal:sec:diffeo}. Restriction and
 diffeomorphisms are special cases of pull-back and projection is a special
 case of push-forward; conversely, we shall express the three fundamental
-operations in terms of the elementary ones. Throughout, all distributions
+operations in terms of the elementary ones (\cref{microlocal:fig:operations}).
+Throughout, all distributions
 have compact support; by the local nature of the wavefront set this is not
 a serious restriction.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,
+  box/.style={draw,rounded corners=2pt,align=center,font=\small,inner sep=4pt}]
+  \node[box] (E) at (0,0) {elementary operations:
+    exterior product $u\boxtimes v$, diffeomorphisms $F^*$,\\
+    restriction $\iota^*$ (\cref{microlocal:thm:restriction}),
+    projection $(\pi_1)_*$ (\cref{microlocal:prop:projection})};
+  \node[box] (P) at (-4.3,-2) {products\\ $u_1u_2=\iota^*L^*(u_1\boxtimes u_2)$};
+  \node[box] (B) at (0,-2) {pull-back\\ $F^*u=\iota^*H^*(\chi\boxtimes u)$};
+  \node[box] (F) at (4.3,-2) {push-forward\\ $F_*u=(\pi_2)_*\tilde H^*(u\boxtimes\delta)$};
+  \node[box] (R) at (-2.15,-4) {wavefront relation\\
+    $Au=(\pi_1)_*\bigl(K\cdot(\chi\boxtimes u)\bigr)$};
+  \draw[->] (E)--(P); \draw[->] (E)--(B); \draw[->] (E)--(F);
+  \draw[->] (P)--(R);
+  \draw[->] (E.west)--++(-2.3,0)|-(R.west) node[pos=0.25,left,font=\footnotesize]{$(\pi_1)_*$};
+\end{tikzpicture}
+\caption[The calculus of wavefront sets]{How the operations of
+\cref{microlocal:sec:pairing,microlocal:sec:elementary,microlocal:sec:products,microlocal:sec:pullback,microlocal:sec:pushforward,microlocal:sec:relation}
+are built from each other. Products and pull-backs are restrictions, after a
+linear change of variables, of exterior products; push-forward is a
+projection of the pull-back of $u\boxtimes\delta$; and the action of a
+general kernel is a projection of a product.}
+\label{microlocal:fig:operations}
+\end{figure}
 
 The pairing $\int u_1u_2\,dx$ of two distributions is the first example of an
 operation which requires a condition on wavefront sets. We give Melrose's
@@ -1342,8 +1625,8 @@ We need a transposition identity.
   Existence of $A$ follows from \cref{microlocal:lem:cutoff} with
   $W_1=\WF(u_2)^-$, $W_2=\WF(u_1)$. By microlocality and
   $\WFp((\Id-A)^t)=\WFp(\Id-A)^-$ (\cref{microlocal:prop:ess}), $Au_1$ and
-  $(\Id-A)^tu_2$ are smooth, so $P(u_1,u_2)$ is defined; it is clearly
-  independent of $\psi$. If $A'$ is another choice, $D=A-A'$ satisfies
+  $(\Id-A)^tu_2$ are smooth, so $P(u_1,u_2)$ is defined; it does not depend
+  on $\psi$, since $\psi=1$ near the supports. If $A'$ is another choice, $D=A-A'$ satisfies
   $\WFp(D)\cap\WF(u_1)=\emptyset$, and since $D=(\Id-A')-(\Id-A)$ also
   $\WFp(D)\cap\WF(u_2)^-=\emptyset$, that is
   $\WFp(D^t)\cap\WF(u_2)=\emptyset$. The difference of the two expressions is
@@ -1370,8 +1653,25 @@ condition becomes simply $\WF(u_1)\cap\WF(u_2)=\emptyset$, and
 $\pair{u_1}{u_2}=\pair{Au_1}{u_2}+\pair{u_1}{(\Id-A^*)u_2}$ for any $A$ with
 $\WFp(A)\cap\WF(u_1)=\emptyset=\WFp(\Id-A)\cap\WF(u_2)$.
 
+\begin{discussion}
+  The idea of the definition is to split the frequencies. The operator $A$
+  removes the singular directions of $u_1$, and $\Id-A$ those of $u_2$; in
+  each of the two terms one factor is smooth, so the pairing makes sense. The
+  condition \eqref{microlocal:eq:pairing-cond} is what allows such a split.
+  The minus sign has a Fourier explanation: $\int u_1u_2\,dx$ is
+  $\int\hat u_1(\xi)\hat u_2(-\xi)\,\dbar\xi$ by \eqref{microlocal:eq:parseval},
+  so trouble arises only if $\hat u_1$ is large at $\xi$ and $\hat u_2$ is large
+  at $-\xi$. For example $\int\delta_0\cdot\delta_0$ is meaningless, and indeed
+  $\WF(\delta_0)$ contains both $\xi$ and $-\xi$.
+\end{discussion}
+
 % ======================================================================
 \section{Exterior products, restriction and projection}\label{microlocal:sec:elementary}
+
+These three operations are the building blocks of
+\cref{microlocal:fig:operations}. Exterior products are always defined;
+restriction needs a condition on the wavefront set; projection is always
+defined but can only keep singularities that are conormal to the fibres.
 
 \subsection{Exterior product}
 The exterior product $u_1\boxtimes u_2$ of $u_1\in\CmIc(\R^p)$ and
@@ -1542,7 +1842,31 @@ $\iota^*w=\cF^{-1}g_w\in\cSp(\R^p)$.
 One can picture this as follows: of $\WF(u)$ only the part over $Y$
 survives, and the covector $(\xi,\eta)$ is projected to its component $\xi$
 along $Y$; the hypothesis guarantees that no non-zero covector is projected
-to zero.
+to zero (\cref{microlocal:fig:restriction}).
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,scale=0.8]
+  \fill[gray!25] (0,0)--(-1.1,3.3)--(1.1,3.3)--cycle;
+  \fill[gray!25] (0,0)--(-1.1,-3.3)--(1.1,-3.3)--cycle;
+  \draw[->] (-4,0)--(4.3,0) node[right]{$\xi$};
+  \draw[->] (0,-3.4)--(0,3.6) node[above]{$\eta$};
+  \node[font=\footnotesize,align=center] at (-1.95,2.7) {$C_\delta$:\\ forbidden};
+  \draw[->,very thick] (0,0)--(2.4,2.2) node[above right=-2pt]{$(\xi,\eta)\in\WF(u)$};
+  \draw[dashed] (2.4,2.2)--(2.4,0);
+  \draw[->,very thick] (0,0)--(2.4,0);
+  \node[below,font=\footnotesize] at (2.4,0) {$\xi\in\WF(\iota^*u)$};
+  \draw[->,thick,gray] (0,0)--(0,2.6);
+  \node[font=\footnotesize,anchor=west] at (0.15,3.15) {$N^*Y$};
+\end{tikzpicture}
+\caption[Restriction to a submanifold]{The fibre of $T^*\R^{p+k}$ over a point
+$(x,0)\in Y=\{y=0\}$, schematically with $p=k=1$. The vertical axis is the
+conormal direction $N^*_xY$. If $\WF(u)$ does not meet $N^*Y$, then near $Y$
+it avoids a whole cone $C_\delta=\{\abs\xi\le\delta\abs\eta\}$ (shaded), and
+by \cref{microlocal:thm:restriction} the set $\WF(\iota^*u)$ is contained in
+the set of projections $\xi$ of covectors $(\xi,\eta)\in\WF(u)$ over $Y$.}
+\label{microlocal:fig:restriction}
+\end{figure}
 
 \subsection{Projection}
 Let $\pi_1:\R^{p+k}\to\R^p$, $\pi_1(x,y)=x$. For $u\in\CmIc(\R^{p+k})$ define
@@ -1603,7 +1927,9 @@ at all.
 % ======================================================================
 \section{Products of distributions}\label{microlocal:sec:products}
 
-We express the product as ``$u_1(x)u_2(x+y)$ restricted to $y=0$''. Let
+The product of two distributions is not defined in general: $\delta_0^2$ has
+no sensible meaning. The wavefront set gives a simple sufficient condition,
+the same as for the pairing. We express the product as ``$u_1(x)u_2(x+y)$ restricted to $y=0$''. Let
 $L:\R^{2n}\to\R^{2n}$ be the linear map $L(x,y)=(x,x+y)$, with $\det L=1$
 and transpose $DL^t(\xi,\eta)=(\xi+\eta,\eta)$.
 
@@ -1668,6 +1994,22 @@ Note that $\xi_1+\xi_2\ne0$ in the last set, by the hypothesis.
   \end{equation*}
   and \cref{microlocal:prop:exterior} gives the three sets.
 \end{proof}
+
+\begin{question}
+  On $\R^2$, $\delta_0^2$ is not defined. Why is the product
+  $\delta(x_1)\delta(x_2)$ of two distributions which are both singular at the
+  origin defined?
+\end{question}
+\begin{answer}
+  Up to a cut-off, $u_1=\delta(x_1)$ has
+  $\WF(u_1)=\{(0,x_2;\xi_1,0);\ \xi_1\ne0\}$, and $u_2=\delta(x_2)$ has
+  $\WF(u_2)=\{(x_1,0;0,\xi_2);\ \xi_2\ne0\}$. At the origin the covectors
+  $(\xi_1,0)$ and $-(0,\xi_2)$ are never equal, so the hypothesis of
+  \cref{microlocal:thm:products} holds. The product is $\delta_0$, and part (iv)
+  allows all covectors $(\xi_1,\xi_2)\ne0$ at the origin, as it must. For
+  $\delta_0$ times itself, every covector $\xi$ at the origin is matched by
+  $-\xi$, and the hypothesis fails.
+\end{answer}
 
 \begin{remark}\label{microlocal:rem:product-fourier}
   If the stronger condition $\Sigma(u_1)\cap(-\Sigma(u_2))=\emptyset$ holds,
@@ -1872,7 +2214,10 @@ $\WF(F_*u)\subset\WFp(K)\circ\WF(u)\cup\{(y,\eta);\ (y,x;\eta,0)\in\WF(K),\ x\in
 % ======================================================================
 \section{The wavefront relation}\label{microlocal:sec:relation}
 
-One serious application of these results is to general operators with
+A pseudodifferential operator keeps every singularity where it is. A general
+operator, such as the solution operator of the wave equation, moves
+singularities around. The wavefront set of its kernel, read as a relation on
+$T^*$, says where each singularity can go. One serious application of these results is to general operators with
 distributional kernels. Let $\Omega_1\subset\R^n$, $\Omega_2\subset\R^m$ be open
 and $K\in\CmIc(\Omega_1\times\Omega_2)$. Then $K$ defines an operator
 \begin{equation*}
@@ -1914,8 +2259,8 @@ We regard $\WFp(K)$ as a relation: for $W\subset\Tz{\Omega_2}$,
   product condition of \cref{microlocal:thm:products} fails only at points
   $(x,y;0,-\eta)\in\WF(K)$ with $(y,\eta)\in\WF(u)$, which are excluded by
   \eqref{microlocal:eq:relation-cond}. If $u$ is smooth the product is
-  $K\cdot(\chi\otimes u)$ and
-  $(\pi_1)_*(K\cdot(\chi\otimes u))(\phi)=K(\chi\phi\boxtimes u)=K(\phi\boxtimes
+  the usual product of $K$ with the smooth function $\chi\boxtimes u$, and
+  $(\pi_1)_*(K\cdot(\chi\boxtimes u))(\phi)=K(\chi\phi\boxtimes u)=K(\phi\boxtimes
   u)$, so $Au$ agrees with the previous definition. By
   \cref{microlocal:thm:products}(iv), a point of
   $\WF(K\cdot(\chi\boxtimes u))$ has the form $(x,y;\zeta_1+\zeta_2)$ where
@@ -1929,6 +2274,17 @@ We regard $\WFp(K)$ as a relation: for $W\subset\Tz{\Omega_2}$,
   $\eta_1=-\eta_2$, so $(x,y;\xi,-\eta_2)\in\WF(K)$ with
   $(y,\eta_2)\in\WF(u)$, that is $(x,\xi)\in\WFp(K)\circ\WF(u)$.
 \end{proof}
+
+\begin{discussion}
+  The simplest example is a translation, $Au(x)=u(x-a)$, with kernel
+  $K=\delta(x-y-a)$ (cut off to have compact support). As for $\delta$ composed
+  with a linear map, $\WF(K)=\{(x,x-a;\xi,-\xi)\}$, so
+  $\WFp(K)=\{((x,\xi),(x-a,\xi))\}$, and the theorem says that a singularity of
+  $u$ at $(y,\eta)$ can only produce a singularity of $Au$ at $(y+a,\eta)$. The
+  sign change in the definition of $\WFp(K)$ is what makes this the graph of a
+  map, and not of its composition with $\xi\mapsto-\xi$. The second set in the
+  theorem, coming from covectors $(\xi,0)$ in $\WF(K)$, is empty here.
+\end{discussion}
 
 \begin{remark}\label{microlocal:rem:relation-psido}
   If $K=K_B$ for some $B\in\Psido m(\R^n)$ with kernel of compact support in
@@ -2037,8 +2393,8 @@ $\hat v=f\in L^2$.
 \end{definition}
 
 Thus $z\notin\WF_s(u)$ if and only if some $A\in\Psido0(\R^n)$ which is
-elliptic at $z$ satisfies $Au\in H^s$; the analogy with
-\cref{microlocal:def:wf-compact} is evident, and the proofs below follow those
+elliptic at $z$ satisfies $Au\in H^s$. The definition is
+\cref{microlocal:def:wf-compact} with $\CI$ replaced by $H^s$, and the proofs below follow those
 of \cref{microlocal:sec:wf}, with the Sobolev boundedness of
 pseudodifferential operators added.
 
@@ -2531,6 +2887,17 @@ this means that $\Ham p(z)$ is not a multiple of $\varrho(z)$. By
 $dp=0$) the null bicharacteristic stays in a single ray; since wavefront sets
 are conic, the propagation theorem below then holds trivially.
 
+\begin{discussion}
+  Why should singularities follow the Hamilton flow of $p$? Think of a wave
+  packet $u$ concentrated near $x_0$ with frequency near $\xi_0$, where
+  $p(x_0,\xi_0)=0$. Then $Pu$ is small only if $u$ moves in the way prescribed
+  by Hamilton's equations \eqref{microlocal:eq:hamilton} with Hamiltonian $p$:
+  the position moves with velocity $\pa_\xi p$, the frequency changes at rate
+  $-\pa_xp$. This is the ``geometric optics'' picture: high-frequency waves
+  behave like classical particles. The propagation theorem is the precise
+  version of this heuristic for wavefront sets.
+\end{discussion}
+
 \subsection{A homogeneous flow box}
 Near a point where $\Ham p$ is not radial we can straighten out $\Ham p$ in
 a way compatible with dilations. For $z=(x,\xi)\in\Tz{\R^n}$ we write
@@ -2615,9 +2982,14 @@ closed cones with compact base, contained in $W$.
 % ======================================================================
 \section{Propagation of singularities}\label{microlocal:sec:propagation}
 
+Elliptic regularity says nothing on the characteristic variety. There,
+singularities of $u$ can exist although $Pu$ is smooth, as for travelling
+waves. The theorem below says that they cannot appear or disappear at
+random: they travel along curves determined by the principal symbol alone.
 We can now state and prove H\"ormander's theorem: for an operator with
 real homogeneous principal symbol, singularities of solutions of $Pu=f$ which
-are not caused by singularities of $f$ propagate along null bicharacteristics.
+are not caused by singularities of $f$ propagate along null bicharacteristics
+(\cref{microlocal:fig:propagation}).
 
 \begin{theorem}[Propagation of singularities]\label{microlocal:thm:propagation}
   Let $P\in\Psido m(\R^n)$ have real homogeneous principal symbol $p$, and let
@@ -2651,8 +3023,45 @@ follows.
   $\WF_s(u)\setminus\WF_{s-m+1}(Pu)$.
 \end{corollary}
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,scale=0.9]
+  \draw[->] (-0.3,0)--(10.2,0) node[right]{$x_1$};
+  \draw[->] (0,-1.8)--(0,1.8) node[above]{$x_2$};
+  \fill[gray!30] (2,-0.25) rectangle (3.4,0.25);
+  \fill[gray!30] (6.6,-0.25) rectangle (8,0.25);
+  \draw[very thick] (2,0)--(8,0);
+  \foreach \x in {2.3,3.0,3.7,4.4,5.1,5.8,6.5,7.2,7.8}
+     \draw[<->] (\x,-0.55)--(\x,0.55);
+  \node[font=\footnotesize] at (2.7,-1.4) {$\WF(Pu)$};
+  \node[font=\footnotesize] at (7.3,-1.4) {$\WF(Pu)$};
+  \node[font=\footnotesize,align=center] at (5.1,1.35) {$\WF(u)\setminus\WF(Pu)$: one null\\[-1pt] bicharacteristic, $x_1\in(a,b)$};
+  \draw[->,thick] (4.4,-1.3)--(5.8,-1.3) node[midway,below,font=\footnotesize]{$\Ham p=\pa_{x_1}$};
+  \node[font=\footnotesize] at (2,-0.8) {$a'$};
+  \node[font=\footnotesize] at (3.4,-0.8) {$a$};
+  \node[font=\footnotesize] at (6.6,-0.8) {$b$};
+  \node[font=\footnotesize] at (8,-0.8) {$b'$};
+\end{tikzpicture}
+\caption[A null bicharacteristic carrying a singularity]{Propagation of
+singularities for $P=D_{x_1}$ on $\R^2$, with $p=\xi_1$, $\Sigma(P)=\{\xi_1=0\}$
+and null bicharacteristics $t\mapsto(x_1+t,x_2;0,\xi_2)$. Let
+$u=\phi(x_1)H(x_2)$ with $\phi\in\CIc(\R)$, $\phi=1$ on $[a,b]$,
+$\supp\phi=[a',b']$, and $\phi'\neq0$ on $(a',a)\cup(b,b')$. The arrows show
+$\WF(u)$, the covectors $(0,\pm\xi_2)$ over the segment $[a',b']\times\{0\}$.
+Since $Pu=-i\phi'(x_1)H(x_2)$, $\WF(Pu)$ lies over the two gray pieces. As
+\cref{microlocal:cor:propagation} predicts, a singularity of $u$ can begin or
+end only where $Pu$ is singular; in between it runs along a whole null
+bicharacteristic.}
+\label{microlocal:fig:propagation}
+\end{figure}
+
 The heart of the matter is the following local statement for first order
-operators, proved by a positive commutator argument.
+operators, proved by a positive commutator argument. It says that regularity
+of order $s$ can be pushed a short distance backwards along $\gamma$, onto
+the point $z_0$, provided we already know regularity of order $s-\frac12$ at
+$z_0$. Iterating in steps of $\frac12$ then gives the theorem. The idea of the
+proof is explained in \cref{microlocal:rem:commutator}, which the reader may
+wish to read first.
 
 \begin{proposition}\label{microlocal:prop:propagation-local}
   Let $P\in\Psido1(\R^n)$ have real homogeneous principal symbol $p$, let
@@ -2670,6 +3079,13 @@ operators, proved by a positive commutator argument.
 \end{proposition}
 
 \begin{proof}
+  The proof has six steps. We reduce to $s=0$ and to the forward direction
+  (Step 1), straighten $\Ham p$ near $\gamma$ (Step 2), build a symbol $a$
+  with $\Ham pa+qa$ equal to a square plus an error supported where $u$
+  is already known to be regular (Step 3, see \cref{microlocal:fig:commutator}),
+  quantize (Step 4), derive an $L^2$ estimate for regularized operators
+  (Step 5) and pass to the limit (Step 6).
+
   \emph{Step 1: reductions.} The operator $-P$ has real principal symbol $-p$,
   $\Ham{-p}=-\Ham p$, and its integral curve through $z_0$ is $t\mapsto\gamma(-t)$;
   since $\WF_s(-Pu)=\WF_s(Pu)$, the last statement follows from the first
@@ -2797,6 +3213,39 @@ operators, proved by a positive commutator argument.
   $\nu_\infty=1$ if $\abs\xi\ge2R_1/c_\Theta$, so $b_\infty\ge c_0/\sqrt2$ on
   $\Gamma_0\cap\{\abs\xi\ge2R_1/c_\Theta\}$.
 
+  \begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[>=Latex,xscale=5,yscale=1]
+    \def\dd{0.4}
+    \fill[gray!25] (0.5,0) rectangle (1,3.2);
+    \draw[->] (-0.55,0)--(1.25,0) node[right]{$\tau$};
+    \draw[->] (0,0)--(0,3.4);
+    \draw[very thick,domain=-0.399:0.5,samples=60,smooth]
+      plot (\x,{8*exp(-1/(\x+\dd))});
+    \draw[very thick,domain=0.5:1,samples=40,smooth]
+      plot (\x,{8*exp(-1/(\x+\dd))*(0.5*(1+cos(deg(pi*(\x-0.5)/0.5))))^2});
+    \draw[very thick] (-0.55,0)--(-0.4,0);
+    \draw[very thick] (1,0)--(1.2,0);
+    \foreach \t/\l in {-0.4/{-\delta'},0/{0},0.5/{\delta/2},1/{\delta}}
+      {\draw (\t,0.06)--(\t,-0.06) node[below,font=\footnotesize]{$\l$};}
+    \fill (0,0) circle (0.7pt) node[above left,font=\footnotesize]{$z_0$};
+    \node[font=\footnotesize] at (0.75,2.9) {$\supp e_0$};
+    \node[font=\footnotesize,anchor=west] at (-0.5,2.2) {$a_0=\chi_0(\tau)^2h(\tau)$};
+    \draw[<->] (0.003,-0.75)--(1,-0.75) node[midway,below,font=\footnotesize]
+      {$u\in H^s$ microlocally (hypothesis)};
+    \draw[<->] (-0.4,-1.45)--(1,-1.45) node[midway,below,font=\footnotesize]
+      {$u\in H^{s-\frac12}$ microlocally};
+  \end{tikzpicture}
+  \caption[The commutant in the propagation proof]{The symbol $a_0$ of Step 3
+  along the bicharacteristic through $z_0$ (where $g=1$). The weight
+  $h(\tau)=e^{-1/(\tau+\delta')}$ increases so fast that $\Ham pa_0+qa_0>0$
+  wherever $\chi_0(\tau)=1$; this gives the square $b^2$, which controls $u$
+  at $z_0$. The cut-off $\chi_0$ makes $a_0$ decrease on
+  $[\delta/2,\delta]$, producing the error $e_0$ of the wrong sign, but there
+  $u$ is already known to be in $H^s$.}
+  \label{microlocal:fig:commutator}
+  \end{figure}
+
   \emph{Step 4: the operators.} For a real symbol $c\in S^0$ let
   $\Op_s(c)=\frac12(\Op(c)+\Op(c)^*)$, which is self-adjoint and has
   $\sigma_L(\Op_s(c))-c\in S^{-1}$. Let
@@ -2897,6 +3346,35 @@ operators, proved by a positive commutator argument.
   that the identity \eqref{microlocal:eq:transport-identity} holds exactly,
   uniformly in $\ell$.
 \end{remark}
+
+\begin{question}
+  Where was it used that the principal symbol $p$ is real?
+\end{question}
+\begin{answer}
+  In Step 2. Because $\sigma_1(P^*)=\bar p=p$, the operator
+  $P_I=\frac1{2i}(P-P^*)$ has order $0$, so the term $2P_IA_\ell$ in
+  $\frac1i(A_\ell P-P^*A_\ell)$ has the same order as the commutator term and
+  can be absorbed by the weight $h$. If $p$ had a non-zero imaginary part,
+  $2P_IA_\ell$ would be of order $1$, larger than $i[P,A_\ell]$, and its sign
+  would govern the estimate. The conclusion then changes: for the elliptic
+  operator $D_{x_1}+iD_{x_2}$, for example, there is no characteristic set
+  and nothing propagates at all.
+\end{answer}
+
+The proof of the theorem combines the local step with two further
+arguments: an induction on the Sobolev order, and an approximation by nearby
+bicharacteristics to pass from $\WF_s$ to $\WF$.
+\begin{equation*}
+\begin{tikzcd}[column sep=5em,row sep=large,cells={nodes={font=\small}}]
+  \text{\cref{microlocal:prop:propagation-local}}
+    \arrow[r,"\text{induction on }s"]
+  & \text{(ii) for }\WF_s
+    \arrow[r,"\text{all }s\text{; nearby }\gamma"]
+  & \text{(iii) for }\WF\arrow[d]\\
+  & \text{reduction to }m=1\text{; }u\in H^{-\infty}\arrow[u]
+  & \text{\cref{microlocal:cor:propagation}}
+\end{tikzcd}
+\end{equation*}
 
 \begin{proof}[Proof of \cref{microlocal:thm:propagation}]
   (i) is elliptic regularity (\cref{microlocal:thm:elliptic-regularity} and

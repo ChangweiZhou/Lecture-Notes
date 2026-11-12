@@ -7,6 +7,7 @@
 \providecommand{\Rat}[1]{\mathcal{R}^{#1}}
 \providecommand{\cJ}{\mathcal{J}}
 \providecommand{\Fin}{\mathcal{F}}
+\usetikzlibrary{decorations.markings}
 
 An elliptic differential operator on a compact manifold \emph{with boundary} has, in
 general, an infinite-dimensional null space. The basic problem of the theory of elliptic
@@ -37,6 +38,48 @@ the boundary defines a Fredholm boundary problem $\{u;\ \Pi(u|_{\pa X})=0\}$ pre
 when $\Pi$ restricted to the range of $\PiC$ is Fredholm, with index the relative index
 of the two projections, and give a symbolic criterion for this which is the analogue of
 the Lopatinski--Shapiro condition.
+\Cref{boundary:fig:roadmap} shows how these steps depend on each other.
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}[
+      box/.style={draw,rounded corners,align=center,font=\small,inner sep=4pt},
+      >=Stealth, node distance=8mm]
+    \node[box] (jump) at (0,0) {jump formula\\ (\cref{boundary:sec:jump})};
+    \node[box] (dirac) at (0,-1.6) {Dirac type:\\ rational symbols};
+    \node[box] (layer) at (4,-0.8) {layer potentials smooth\\ up to $H$ (\cref{boundary:thm:layer})};
+    \node[box] (div) at (8.6,-0.8) {Calder\'on projector,\\ dividing case};
+    \node[box] (gen) at (0,-3.4) {parametrix on $\Xt$ +\\ generalized inverses};
+    \node[box] (right) at (4,-3.4) {right inverses for\\ $D$ and $D^*$, Green's formula};
+    \node[box] (cal) at (8.6,-3.4) {Calder\'on projector\\ (\cref{boundary:thm:calderon})};
+    \node[box] (fred) at (8.6,-5.2) {Fredholm boundary problems,\\ relative index};
+    \draw[->] (jump) -- (layer);
+    \draw[->] (dirac) -- (layer);
+    \draw[->] (layer) -- (div);
+    \draw[->] (gen) -- (right);
+    \draw[->] (right) -- (cal);
+    \draw[->] (layer) -- (cal);
+    \draw[->] (cal) -- (fred);
+    \draw[->,dashed] (div) -- node[right,font=\footnotesize]{model} (cal);
+  \end{tikzpicture}
+  \caption{Logic of the chapter. The upper row is the model case of a dividing
+  hypersurface, where $D$ is invertible; the lower row repeats the construction on a
+  manifold with boundary, where only a parametrix is available and finite-rank
+  smoothing errors must be removed by functional analysis.}
+  \label{boundary:fig:roadmap}
+\end{figure}
+
+\begin{discussion}
+Why Calder\'on's approach? For an elliptic operator on a closed manifold the
+symbol calculus produces a parametrix, and everything follows. On a manifold with
+boundary the interior symbol knows nothing about the boundary, so a boundary
+condition has to be imposed by hand. Calder\'on's idea is to move the whole problem
+to the boundary: first describe exactly which boundary values solutions can have
+(the range of a projection $\PiC$), and then ask how a proposed boundary condition
+interacts with that range. Both questions are answered by pseudodifferential
+operators on the closed manifold $\pa X$, where the calculus of \cref{ch:manifolds}
+applies.
+\end{discussion}
 
 Throughout, $\Psido{m}(Y;E,F)$ for a compact manifold $Y$ without boundary is as in
 \cref{ch:manifolds}; ``classical'' means that the local full symbols are
@@ -45,6 +88,11 @@ homogeneous function on $T^*Y\setminus0$. A manifold is always assumed paracompa
 Hausdorff, and vector bundles are complex.
 
 \section{Manifolds with boundary}\label{boundary:sec:manifolds}
+
+We begin with the basic definitions. The one idea to retain from this section is
+that a compact manifold with boundary always sits inside a compact manifold without
+boundary, its double, so that functions and operators on $X$ can be obtained by
+restriction from a closed manifold.
 
 The local model for a manifold with boundary is the half-space
 \begin{equation*}
@@ -116,6 +164,43 @@ and $-\rho$ on the second near $\pa X$, and $\CI(X)=\CI(\Xt)|_X$. Vector bundles
 $X$ double in the same way (using the collar to identify $E$ near $\pa X$ with the
 pull-back of $E|_{\pa X}$). Thus all the usual objects --- tensor bundles, densities,
 differential operators --- may be obtained by restriction from $\Xt$.
+\Cref{boundary:fig:double} shows the construction.
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}[scale=1.05,>=Stealth]
+    \fill[gray!25] (0,-1) rectangle (1.2,1);
+    \fill[gray!10] (-1.2,-1) rectangle (0,1);
+    \draw[thick] (0,-1) -- (3,-1) arc (-90:90:1) -- (0,1);
+    \draw[thick,dashed] (0,1) -- (-3,1) arc (90:270:1) -- (0,-1);
+    \draw[thick] (0,0) ellipse (0.3 and 1);
+    \draw[densely dotted] (1.2,0) ellipse (0.3 and 1);
+    \draw[densely dotted] (-1.2,0) ellipse (0.3 and 1);
+    \node at (2.75,0) {$X=\{x\ge0\}$};
+    \node at (-2.6,0) {$\{x\le0\}$};
+    \node[above] at (0,1) {$\pa X=\{x=0\}$};
+    \node[below,font=\small] at (0.6,-1.05) {collar};
+    \node[below,font=\small] at (-0.6,-1.05) {mirror};
+    \draw[->] (-1.6,-1.75) -- (1.8,-1.75) node[right]{$x$};
+    \draw (0,-1.68) -- (0,-1.82) node[below,font=\footnotesize]{$0$};
+    \draw (1.2,-1.68) -- (1.2,-1.82) node[below,font=\footnotesize]{$\epsilon$};
+    \draw (-1.2,-1.68) -- (-1.2,-1.82) node[below,font=\footnotesize]{$-\epsilon$};
+  \end{tikzpicture}
+  \caption{The double $\Xt$ of $X$. The collar $C\cong[0,\epsilon)\times\pa X$
+  (dark) is reflected to the second copy (light, dashed outline); the function $x$
+  equals $\rho$ on the first copy and $-\rho$ on the second, and $X=\{x\ge0\}$.}
+  \label{boundary:fig:double}
+\end{figure}
+
+\begin{discussion}
+The double is a device, not an object of interest: any closed manifold $\Xt$
+containing $X$ as $\{x\ge0\}$ would do, and nothing below depends on the choice. Its
+purpose is to make the calculus of \cref{ch:manifolds} available. The price is that
+we must keep track of \emph{which side} of $\pa X$ an object lives on. Much of the
+next three sections is bookkeeping of exactly this kind: a distribution on $\Xt$ may
+be restricted to $X$, or it may be supported in $X$, and the two notions differ by
+terms concentrated on $\pa X$.
+\end{discussion}
 
 \section{Smooth functions}\label{boundary:sec:smooth}
 
@@ -310,6 +395,17 @@ $\varphi\in\CIc(X^\circ;\Omega)$, so $\supp u\cap X^\circ=\emptyset$ and $\supp 
 Both maps from $\CI(X)$ into distributions are injective; we regard the map into
 $\CmI(X)$ as an identification, but \emph{not} the map $u\mapsto u_c$.
 
+\begin{discussion}
+The model to keep in mind is $X=[0,\infty)\subset\R$ and the constant function $1$.
+As an extendible distribution it is just $1$: it only sees test functions vanishing
+to infinite order at $0$, and its derivative is $0$. As a supported distribution it is
+the Heaviside function $1_c=H(x)$, whose derivative is $\delta(x)$. The bottom row of
+\cref{boundary:prop:exact} says that this is the only kind of discrepancy: two
+supported distributions with the same restriction to $X$ differ by a distribution
+supported on $\pa X$. Green's formula, in the form of the jump formula below, computes
+the discrepancy for derivatives of smooth functions.
+\end{discussion}
+
 \subsection*{Actions of differential operators}
 Let $E,F$ be vector bundles over $X$ and $P\in\Diff{m}(X;E,F)$. Its transpose
 $P^t\in\Diff{m}(X;F^*\otimes\Omega,E^*\otimes\Omega)$ is defined by $\int_X\pair{P^t\varphi}{u}=
@@ -388,6 +484,19 @@ The right side does not depend on the choice of $x$: if $x'=ax$ with $a>0$ then 
 $\pa X$, $\sigma_1(D)(dx')=a\sigma_1(D)(dx)$ while $\delta(x')=a^{-1}\delta(x)$. In
 the sequel we write $b$ for the restriction map, $bu=u|_{\pa X}$.
 
+\begin{question}
+Why does only the boundary value $bu$ appear in \eqref{boundary:eq:jump}, and not the
+normal derivatives of $u$?
+\end{question}
+\begin{answer}
+A first-order operator differentiates the Heaviside factor in $u_c=H(x)u$ at most
+once, producing $\delta(x)$ times the value of $u$ at $x=0$. Higher normal
+derivatives of $u$ enter only through $D_x^l(Hu)$ with $l\ge2$, as in the proof of
+\cref{boundary:prop:jump}, and they come with derivatives $D_x^j\delta(x)$ of the
+delta function. This is why first-order operators, and in particular Dirac operators,
+need only one piece of boundary data.
+\end{answer}
+
 The same discussion applies to an embedded hypersurface $H$ with a defining function
 $x$ in a manifold without boundary: if $u$ is smooth on each of the two sides
 $\{\pm x\ge0\}$ near $H$ (i.e.\ $u|_{\{\pm x>0\}}$ extends smoothly to $\{\pm x\ge0\}$),
@@ -425,6 +534,10 @@ whose Taylor coefficients vanish) and $u_0=0$ gives $u_k=0$ for all $k$.
 \end{proof}
 
 \section{Sobolev spaces}\label{boundary:sec:sobolev}
+
+Boundary values of solutions will in general only lie in a Sobolev space, typically
+$H^{-\frac12}(\pa X)$ for $L^2$ solutions, so we need Sobolev spaces on $X$ and the
+regularity of layers $v\,\delta(x)$ on a hypersurface.
 
 As for smooth functions, the (extendible) Sobolev spaces on a compact manifold with
 boundary $X\subset\Xt$ are defined by restriction,
@@ -525,6 +638,12 @@ H^{-\frac12}$.
 
 \section{Generalized Dirac operators}\label{boundary:sec:dirac}
 
+From now on we restrict to first-order operators whose symbol squares to the metric.
+The reason is analytic: for such operators the symbol of a parametrix is a
+\emph{rational} function of the fibre variables (\cref{boundary:lem:rational}), and
+this is what makes the boundary analysis of \cref{boundary:sec:rational} possible by
+a residue computation.
+
 For $D\in\Diff{1}(M;V_1,V_2)$, in local coordinates and trivializations
 $D=\sum_jA_j(z)D_{z_j}+A'(z)$, and the principal symbol is
 $\sigma_1(D)(z,\zeta)=\sum_jA_j(z)\zeta_j$, linear in $\zeta\in T^*_zM$.
@@ -575,7 +694,10 @@ Hermitian bundle with connection, is of Dirac type; this is the origin of the na
 \section{Dividing hypersurfaces}\label{boundary:sec:dividing}
 
 To isolate the essential idea of Calder\'on we first consider the following
-situation.
+situation, in which no boundary is present at all: a hypersurface $H$ cuts a closed
+manifold $M$ into two pieces, and we compare solutions of $Du=0$ on the two sides
+(\cref{boundary:fig:dividing}). Because $D$ is assumed invertible on $M$, all
+smoothing errors disappear and the construction is completely explicit.
 
 \medskip\noindent\textbf{Standing hypotheses (dividing case).} $M$ is a compact
 Riemannian manifold without boundary, $D\in\Diff{1}(M;V_1,V_2)$ is a generalized
@@ -641,6 +763,40 @@ By \eqref{boundary:eq:jump-two}, for $u\in\mathcal{N}_H$,
 \begin{equation}\label{boundary:eq:jump-solutions}
 Du=\frac1i\sigma(dx)\big(b_+u-b_-u\big)\,\delta(x)\in\CI(H;V_2)\,\delta(x).
 \end{equation}
+So a piecewise solution is a global solution of $Du=0$ except for a layer on $H$,
+whose density is (up to the invertible factor $\frac1i\sigma(dx)$) the jump of $u$
+across $H$. The idea is to run this backwards: given a layer, apply $D^{-1}$.
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}[>=Stealth]
+    \begin{scope}
+      \fill[gray!15] (-1.6,0) arc (180:0:1.6 and 1.6) -- (1.6,0) arc (0:180:1.6 and 0.45);
+      \draw[thick] (0,0) circle (1.6);
+      \draw[thick] (-1.6,0) arc (180:360:1.6 and 0.45);
+      \draw[thick,dashed] (1.6,0) arc (0:180:1.6 and 0.45);
+      \node at (-0.3,0.95) {$M_+$};
+      \node at (0,-1.05) {$M_-$};
+      \node[right] at (1.6,-0.15) {$H=\{x=0\}$};
+      \draw[->,thick] (0.5,-0.43) -- (0.5,0.3) node[right,font=\small]{$\nu$};
+    \end{scope}
+    \begin{scope}[xshift=5.6cm]
+      \draw[->] (-2.2,-0.8) -- (2.4,-0.8) node[right]{$x$};
+      \draw[->] (0,-1.0) -- (0,1.7) node[above]{$u$};
+      \draw[thick,domain=-2:0,smooth,variable=\s] plot ({\s},{-0.2+0.25*sin(deg(1.6*\s))+0.1*\s});
+      \draw[thick,domain=0:2.1,smooth,variable=\s] plot ({\s},{0.9+0.3*sin(deg(1.3*\s+0.6))-0.169});
+      \fill (0,-0.2) circle (1.5pt) node[left,font=\small]{$b_-u$};
+      \fill (0,0.900) circle (1.5pt) node[left,font=\small]{$b_+u$};
+      \draw[<->,densely dotted] (0.25,-0.2) -- node[right,font=\small]{jump} (0.25,0.9);
+    \end{scope}
+  \end{tikzpicture}
+  \caption{Left: a hypersurface $H$ dividing a closed manifold $M$ into $M_+$ and
+  $M_-$, with unit conormal $\nu=dx/|dx|$. Right: a piecewise solution
+  $u\in\mathcal N_H$ along a curve crossing $H$. It is smooth up to $H$ from each
+  side, and by \eqref{boundary:eq:jump-solutions} $Du$ is a layer on $H$ whose
+  density is determined by the jump $b_+u-b_-u$.}
+  \label{boundary:fig:dividing}
+\end{figure}
 
 \begin{proposition}\label{boundary:prop:layer-iso}
 Under the standing hypotheses, $D:\mathcal{N}_H\to\CI(H;V_2)\,\delta(x)$ is an
@@ -663,7 +819,31 @@ place of $D^{-1}$ (for instance for $\Op(\ang{\zeta}^{-1})$ in $\R^n$, $n\ge2$, 
 result is not smooth up to $H$); it depends on the special form of the symbol of
 $D^{-1}$, which we now examine.
 
+\begin{discussion}
+The phenomenon is already visible in $\R^n=\R_x\times\R^{n-1}_y$. If $Q=\Op(q)$ with
+$q$ independent of $z$, then $Q(w\,\delta(x))$ has partial Fourier transform in $y$
+equal to $\hat w(\eta)$ times the inverse Fourier transform in $\xi$ of
+$\xi\mapsto q(\xi,\eta)$. For the Dirac-type symbol $q=1/(1+\xi^2+|\eta|^2)$ (that of
+$(1+\Delta)^{-1}$; a Dirac parametrix has $\tau(\zeta)$ in the numerator) this is
+$e^{-\ang\eta|x|}/(2\ang\eta)$: a function which is smooth on each side of $x=0$,
+with a corner at $x=0$. The reason is that $q$ is a rational function of $\xi$, and
+the inverse Fourier transform for $x>0$ is a residue at the pole $\xi_+=i\ang\eta$ in
+the upper half plane (\cref{boundary:fig:contour}). For $q=(1+\xi^2+|\eta|^2)^{-1/2}$,
+on the other hand, the inverse Fourier transform is $\pi^{-1}K_0(\ang\eta|x|)$, with
+$K_0$ the modified Bessel function, which has a logarithmic singularity at $x=0$:
+the branch cut of the square root replaces the pole. \Cref{boundary:sec:rational}
+carries out the residue argument with variable coefficients.
+\end{discussion}
+
 \section{Rational symbols and layer potentials}\label{boundary:sec:rational}
+
+This section proves the regularity of layer potentials, \cref{boundary:thm:layer}.
+The proof has three steps. First, the symbol of a parametrix of a Dirac-type
+operator agrees, to any finite order, with a rational function of $\zeta$
+(\cref{boundary:lem:rational}). Second, the inverse Fourier transform of a rational
+function in the normal variable $\xi$ is a residue, which is smooth up to $x=0$ and
+whose value at $x=0$ is a classical symbol in $\eta$ (\cref{boundary:lem:contour}).
+Third, the remainder, of very negative order, is handled by absolute convergence.
 
 \subsection*{Symbols over a closed set}
 Let $W\subset\R^n$ be open and $K\subset W$ closed in $\R^n$ (we shall take $K$ a
@@ -766,6 +946,31 @@ i\operatorname*{Res}_{\xi=\xi_+(z',\eta)}\big(e^{ix\xi}\rho(z',\xi,\eta)\big),
 where $\gamma$ is a positively oriented circle in $\{\operatorname{Im}\xi>0\}$
 enclosing $\xi_+(z',\eta)$ but not $\xi_-(z',\eta)$; similarly
 $G^-_\rho(z',x,\eta)=-i\operatorname{Res}_{\xi=\xi_-}(e^{ix\xi}\rho)$ for $x\le0$.
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}[>=Stealth,scale=1.1]
+    \fill[gray!12] (-3,0) rectangle (3,2.1);
+    \draw[->] (-3.2,0) -- (3.3,0) node[right]{$\operatorname{Re}\xi$};
+    \draw[->] (0,-2.1) -- (0,2.3) node[above]{$\operatorname{Im}\xi$};
+    \fill (1.0,1.2) circle (1.6pt) node[above right=1pt,font=\small]{$\xi_+$};
+    \fill (1.0,-1.2) circle (1.6pt) node[right=2pt,font=\small]{$\xi_-$};
+    \draw[thick,postaction={decorate},decoration={markings,mark=at position 0.25 with {\arrow{Stealth}}}]
+      (1.0,1.2) circle (0.55);
+    \node at (1.75,1.75) {$\gamma$};
+    \draw[densely dotted] (1.0,0) -- (1.0,0.65);
+    \draw[densely dotted] (1.0,-0.02) -- (1.0,-1.2);
+    \draw[decorate,decoration={brace,amplitude=4pt,mirror}] (1.65,0.02) -- node[right=4pt,font=\small]{$\ge c\ang\eta$} (1.65,1.18);
+    \node[font=\small,align=left] at (-1.8,1.5) {$|e^{ix\xi}|\le1$\\ for $x\ge0$};
+  \end{tikzpicture}
+  \caption{The two roots $\xi_\pm$ of $1+g(z',\xi,\eta)=0$ lie at distance
+  $\ge c\ang\eta$ from the real axis, one in each half plane. For $x>0$ the factor
+  $e^{ix\xi}$ is bounded in the upper half plane (shaded), so the inverse Fourier
+  transform of a rational symbol is the residue at $\xi_+$, computed by integrating
+  over the small circle $\gamma$; this is $G^+_\rho$, which is visibly smooth in
+  $x\ge0$ up to $x=0$.}
+  \label{boundary:fig:contour}
+\end{figure}
 
 \begin{lemma}\label{boundary:lem:contour}
 Let $\rho\in\Rat{r}$, $r\le-1$, and let $L\subset W$ be compact.
@@ -990,6 +1195,41 @@ frequencies. This is as it should be: $Du=0$ means $u$ is holomorphic in $x+iy$,
 $e^{\eta(x+iy)}$ is bounded in $x>0$ precisely when $\eta<0$.
 \end{example}
 
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}[>=Stealth,scale=1.1]
+    \draw[thick] (-2.6,-0.65) -- (3.2,0.8) node[right]{$b_+(\mathcal N_+)=\Ran\PiC$};
+    \draw[thick] (1.5,2.25) -- (-1.1,-1.65) node[below]{$b_-(\mathcal N_-)=\Nul\PiC$};
+    \fill (0,0) circle (1.3pt);
+    \coordinate (v) at (3.0,1.8);
+    \coordinate (p) at (2.16,0.54);
+    \coordinate (q) at (0.84,1.26);
+    \draw[->,thick] (0,0) -- (v) node[above right]{$v$};
+    \draw[->,thick] (0,0) -- (p) node[below right]{$\PiC v$};
+    \draw[->] (0,0) -- (q) node[left]{$(\Id-\PiC)v$};
+    \draw[densely dashed] (q) -- (v) -- (p);
+  \end{tikzpicture}
+  \caption{The Calder\'on projector in the dividing case. Every smooth section $v$ on
+  $H$ splits uniquely as the boundary value of a solution on $M_+$ plus the boundary
+  value of a solution on $M_-$; $\PiC$ projects onto the first summand \emph{along}
+  the second. The two subspaces are in general not orthogonal, so $\PiC$ is an
+  oblique projection.}
+  \label{boundary:fig:calderon}
+\end{figure}
+
+\begin{question}
+Why is $\PiC$ not simply the orthogonal projection onto $b_+(\mathcal N_+)$?
+\end{question}
+\begin{answer}
+In the dividing case both the range and the null space of $\PiC$ are forced on us
+(\cref{boundary:fig:calderon}), and nothing makes $b_+(\mathcal N_+)$ and
+$b_-(\mathcal N_-)$ orthogonal in $L^2(H;V)$. They are orthogonal ``to leading
+order'': $\sigma_0(\PiC)$ is the orthogonal projection onto an eigenspace of a
+self-adjoint involution, so $\PiC-\PiC^*\in\Psido{-1}(H;V)$. For a manifold with
+boundary only the range is forced, and one can choose the projection to be
+self-adjoint (\cref{boundary:ex:orthogonal-calderon}).
+\end{answer}
+
 \subsection*{The Poisson operator and a right inverse}
 The proof shows that
 \begin{equation*}
@@ -1023,6 +1263,17 @@ must work with parametrices; to correct their errors we use some abstract functi
 analysis. Let $\mathcal H$ be a separable Hilbert space, $\Lin=\Lin(\mathcal H)$,
 $\Kpt=\Kpt(\mathcal H)$ the compact operators and $\Fin=\Fin(\mathcal H)$ the
 finite-rank operators, so $\Kpt$ is the norm closure of $\Fin$.
+
+\begin{discussion}
+Why not simply work modulo compact operators? Because we want to keep
+regularity. A parametrix leaves an error which is smoothing, and when we correct
+it by a finite-rank term (to get an exact inverse on a complement of the null space,
+say) we want the correction to be smoothing as well, so that it maps $L^2$ into
+$\CI$. A bi-ideal is an abstract class of ``small'' operators with exactly the
+closure properties needed for this: \cref{boundary:prop:gen-inverse} shows that a
+generalized inverse of $\Id+A$, $A$ in the bi-ideal, differs from $\Id$ by an element
+of the same bi-ideal, and the null-space projections are in it too.
+\end{discussion}
 
 \begin{definition}\label{boundary:def:biideal}
 A subspace $\cJ\subset\Lin$ with a Fr\'echet topology given by norms
@@ -1187,6 +1438,17 @@ $|\zeta|^2$, this follows from the unique continuation theorem of Aronszajn for 
 second-order operators, applied after extending the Dirac structure a little across
 the boundary near a boundary point; see the Notes. We simply assume it.
 \end{remark}
+
+\begin{discussion}
+Unique continuation plays the role that invertibility of $D$ on $M$ played in the
+dividing case. A section vanishing to infinite order at $\pa X$ is ``invisible'' from
+the boundary: it has zero boundary values, and its extension by zero is smooth on
+$\Xt$. \eqref{boundary:eq:UC} says that no such section solves $Du=0$ or $D^*f=0$.
+The first half makes a solution determined by its boundary value
+(\cref{boundary:lem:beta}); the second half, via
+\cref{boundary:prop:surjective}, makes $D$ surjective, so that a right inverse
+exists.
+\end{discussion}
 
 For $f\in L^2(X;V_2)$ set
 \begin{equation*}
@@ -1466,6 +1728,16 @@ b\circ I=P+B$ where $B$ has kernel $-QR'(y',y)$, $(y',y)\in Y\times Y$, which is
 
 \section{The Calder\'on projector}\label{boundary:sec:calderon}
 
+We now assemble the pieces. The argument has three steps. (1) The representation
+formula and Green's formula with a right inverse for $D^*$ express every $L^2$
+solution exactly through its boundary value
+(\cref{boundary:prop:exact-repr}). (2) Applying the boundary value map gives a
+classical operator $P$ on $\pa X$ which is the identity on Cauchy data up to a
+smoothing error and maps onto Cauchy data up to a smoothing error
+(\cref{boundary:lem:almost-projection}). (3) An abstract result of
+\cref{ch:manifolds} corrects such an ``almost projection'' to an honest
+pseudodifferential projection with the right range.
+
 We continue with the standing hypotheses of \cref{boundary:sec:right-inverse},
 including \eqref{boundary:eq:UC}. Recall that $P\in\Psido0(Y;V)$, $Y=\pa X$,
 $V=V_1|_Y$, is the classical operator defined in \eqref{boundary:eq:P}, and
@@ -1576,6 +1848,20 @@ In particular the range of $\PiC$ and its null space are both infinite-dimension
 (if $\dim X\ge2$): the boundary values of solutions form ``half'' of all sections.
 \end{remark}
 
+\begin{question}
+Where exactly was the assumption that $D$ is of Dirac type used?
+\end{question}
+\begin{answer}
+In three places. Most importantly in \cref{boundary:thm:layer}: the symbol of a
+parametrix is rational in the normal variable, so layer potentials are smooth up to
+the boundary and their boundary values are classical pseudodifferential operators.
+Second, in the symbol formula \eqref{boundary:eq:calderon-symbol}, through the
+Clifford relations. Third, in the justification of \eqref{boundary:eq:UC}. For
+general elliptic operators Seeley proved that the Calder\'on projector is still
+pseudodifferential; the rational structure is then replaced by the
+\emph{transmission property} of the symbol of the parametrix (see the Notes).
+\end{answer}
+
 \section{Pseudodifferential boundary conditions}\label{boundary:sec:bc}
 
 We continue under the hypotheses of \cref{boundary:thm:calderon}, and fix a Calder\'on
@@ -1663,6 +1949,20 @@ $\Pi=\Id$ (the Dirichlet condition $bu=0$) $T_\Pi$ is injective with cokernel
 $(\Id-\PiC)\CI$; neither is Fredholm (if $\dim X\ge2$), in accordance with
 \cref{boundary:rem:calderon-cases}(2).
 \end{example}
+
+\begin{discussion}
+The unit disc (\cref{boundary:ex:disc,boundary:ex:disc-index}) shows the whole
+picture in Fourier modes $e^{ik\theta}$ on the boundary circle. Holomorphic
+functions have boundary values with only $k\ge0$, so $\Cau$ is ``half'' of
+$\CI(\pa X)$. The boundary condition $\Pi_N$ asks that the modes $k\ge N$ vanish. For
+$N>0$ the modes $0\le k<N$ survive (null space of dimension $N$); for $N<0$ the
+condition also asks that the modes $N\le k<0$ vanish, which solutions satisfy
+automatically, so the condition is $|N|$ conditions too many (cokernel of dimension
+$|N|$). The Dirichlet condition $\Pi=\Id$ asks infinitely many conditions too many,
+and $\Pi=0$ infinitely many too few. A good boundary condition must therefore be
+``as large as'' $\Id-\PiC$, at least at the level of principal symbols; this is the
+symbolic criterion below.
+\end{discussion}
 
 \subsection*{A symbolic criterion}
 The operator $T_\Pi$ is a ``Toeplitz-type'' operator between the ranges of two

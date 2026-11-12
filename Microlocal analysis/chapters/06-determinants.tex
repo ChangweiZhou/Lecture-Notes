@@ -8,6 +8,15 @@
 \providecommand{\FP}{\operatorname*{FP}}
 \providecommand{\Ell}{\operatorname{Ell}}
 
+For a linear map between finite-dimensional spaces three numbers are
+always available: the trace, the determinant, and the index
+$\dim(\text{domain})-\dim(\text{target})$. The trace vanishes on
+commutators, the determinant is multiplicative and detects invertibility,
+and the index of a square matrix is zero. This chapter asks how much of this
+survives for operators on $L^2(\R^n)$, and finds that the failures are as
+interesting as the successes: the trace does not extend to all operators,
+and the precise way in which it fails computes the index.
+
 In this chapter we use the isotropic calculus of \cref{ch:isotropic} as a
 laboratory for three closely related constructions: traces, determinants and
 the index. On the residual algebra $\Psiiso{-\infty}(\R^n)$, whose elements
@@ -23,7 +32,29 @@ residue trace and an exterior derivation. These ingredients give a formula for
 the index of an elliptic operator, an obstruction to inverting families of
 elliptic operators by smoothing perturbations, and finally the determinant
 line bundle of such a family, together with a natural connection whose
-curvature is that obstruction.
+curvature is that obstruction. \Cref{determinants:fig:roadmap} shows how
+these constructions depend on each other.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzcd}[column sep=1.6em,row sep=1.6em,cells={font=\small}]
+  \text{trace }\Tr\text{ on }\Psiiso{-\infty}\arrow[r]\arrow[d]
+  & \text{Fredholm determinant }\detFr\arrow[r]
+  & \text{analytic Fredholm}\arrow[d]\\
+  \text{complex powers }H(z)\arrow[d]\arrow[r]
+  & \text{residue trace }\TrRes\arrow[d]
+  & \text{resolvent and spectrum}\\
+  \text{regularized trace }\TrReg{H}\arrow[r]
+  & \text{trace defect formula}\arrow[r]\arrow[d]
+  & \text{index formula}\\
+  & \text{variation form }\beta\arrow[r]
+  & \text{determinant bundle}
+\end{tikzcd}
+\caption[Roadmap of the chapter on traces and determinants]{Roadmap of the
+chapter. The top row uses only the residual algebra; the lower rows use
+complex powers to go beyond it.}
+\label{determinants:fig:roadmap}
+\end{figure}
 
 \section{Setup}\label{determinants:sec:setup}
 
@@ -233,6 +264,11 @@ For $E\in\Psiiso{-\infty}$ we have $\norm{E}_{\Lin(L^2)}\le\norm{E}_{L^2(\R^{2n}
 
 \section{Traces on the residual algebra}\label{determinants:sec:traces}
 
+We start with the simplest invariant. For matrices the trace is
+characterized by linearity, the commutator identity and normalization; we
+show that the same characterization singles out a unique continuous trace on
+$\Psiiso{-\infty}(\R^n)$, given by integrating the kernel over the diagonal.
+
 \subsection*{Matrices}
 On the algebra $M(N;\C)$ of $N\times N$ matrices, $\tr A=\sum_iA_{ii}$
 satisfies $\tr(AB)=\sum_{i,k}A_{ik}B_{ki}=\tr(BA)$, that is,
@@ -337,7 +373,22 @@ is essentially the only continuous trace on the residual algebra.
   statement then follows from \cref{determinants:lem:trace-property}.
 \end{proof}
 
+\begin{discussion}
+A useful way to think of $\Psiiso{-\infty}(\R^n)$ is through the Hermite
+basis $u_\alpha$. By \cref{determinants:lem:approx}, a residual operator $E$
+is the same as an infinite matrix $(e_{\alpha\beta})$ whose entries decay
+faster than any power of $|\alpha|+|\beta|$. For such matrices the trace
+$\sum_\alpha e_{\alpha\alpha}$ converges absolutely and is the limit of the
+traces of the finite truncations $\pi_NE\pi_N$. Most statements in this and
+the next section are proved by exactly this reduction to finite matrices,
+followed by a limit.
+\end{discussion}
+
 \section{The Fredholm determinant}\label{determinants:sec:determinant}
+
+The determinant of $\Id+E$ cannot be defined as a product over a basis,
+since there are infinitely many factors. Instead we use the derivative of
+$\log\det$, which is a trace, and integrate it along a path.
 
 For matrices, $\det:M(N;\C)\to\C$ is multiplicative, $\det\Id=1$, and
 $\GL(N;\C)=\{A;\det A\ne0\}$. Multiplicativity and normalization do not
@@ -381,6 +432,48 @@ finite dimensional analogue, gives path independence directly.
   If $c:[0,1]\to\{\abs{c}\le2\}\setminus\Lambda$ is a smooth path from $0$ to
   $1$, then $\Id+c(s)E$ is the required path.
 \end{proof}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex]
+  % (a) the c-plane
+  \begin{scope}
+    \fill[gray!10] (0,0) circle (2);
+    \draw (0,0) circle (2);
+    \draw[->,gray] (-2.3,0) -- (2.4,0) node[right,black] {\small $\operatorname{Re}c$};
+    \draw[->,gray] (0,-2.3) -- (0,2.4) node[above,black] {\small $\operatorname{Im}c$};
+    \foreach \p in {(0.5,0),(-0.9,0.8),(1.3,-0.9),(-1.2,-1.1),(0.7,1.2)}
+      \node at \p {\small $\times$};
+    \fill (0,0) circle (1.6pt) node[below left] {\small $0$};
+    \fill (1,0) circle (1.6pt) node[below right] {\small $1$};
+    \draw[thick,->] (0,0) .. controls (0.15,0.6) and (0.8,0.55) .. (1,0);
+    \node at (0.3,0.95) {\small $c(s)$};
+    \node[above right] at (1.35,1.45) {\small $|c|\le2$};
+    \node at (0,-2.75) {\small (a) $\Lambda$ ($\times$) is finite};
+  \end{scope}
+  % (b) the residual group
+  \begin{scope}[xshift=6.6cm]
+    \fill[gray!10] (-2.4,-2) rectangle (2.4,2);
+    \draw (-2.4,-2) rectangle (2.4,2);
+    \draw[very thick,gray] (-2.4,0.6) .. controls (-1,1.4) and (0,-0.2) .. (0.8,2);
+    \draw[very thick,gray] (0.3,-2) .. controls (0.6,-0.6) and (1.6,0.2) .. (2.4,-0.4);
+    \node[gray!60!black] at (1.45,-1.45) {\small $\detFr=0$};
+    \fill (-1.5,-1.2) circle (1.6pt) node[below] {\small $\Id$};
+    \fill (1.6,1.2) circle (1.6pt) node[right] {\small $\Id+E$};
+    \draw[thick,->] (-1.5,-1.2) .. controls (-0.5,-0.6) and (0.2,0.2) .. (1.6,1.2);
+    \node at (0.15,-0.55) {\small $\gamma$};
+    \node at (0,-2.75) {\small (b) a path in $\Giso{-\infty}$};
+  \end{scope}
+\end{tikzpicture}
+\caption[Paths in the residual group]{(a) The proof of
+\cref{determinants:lem:connected}: the values of $c$ for which $\Id+cE$ is
+not invertible form a finite set in $\{|c|\le2\}$, which a path from $0$ to
+$1$ can avoid. (b) Schematic picture of $\Id+\Psiiso{-\infty}(\R^n)$: the
+non-invertible operators form a (singular) hypersurface, the zero set of
+$\detFr$, and $\detFr(\Id+E)$ is defined by integrating
+$\Tr(\gamma^{-1}\gamma')$ along any path $\gamma$ from $\Id$ that avoids it.}
+\label{determinants:fig:det-path}
+\end{figure}
 
 \begin{lemma}\label{determinants:lem:path-limit}
   Let $\gamma(s)=\Id+E(s)$, $s\in[0,1]$, be a path in $\Giso{-\infty}(\R^n)$
@@ -432,7 +525,23 @@ finite dimensional analogue, gives path independence directly.
 \end{definition}
 
 By \cref{determinants:lem:connected,determinants:lem:path-limit} this is well
-defined. Concatenating a path from $\Id$ to $G_1$ with a path $\delta$ in
+defined (see \cref{determinants:fig:det-path}).
+
+\begin{question}
+Why not simply define $\detFr(\Id+E)=\prod_j(1+\lambda_j)$, the product
+over the eigenvalues $\lambda_j$ of $E$?
+\end{question}
+\begin{answer}
+This is in fact correct for trace class $E$ (a theorem of Lidskii), but
+proving it requires a good deal of spectral theory of non-self-adjoint
+compact operators, and the product formula is awkward for proving
+multiplicativity or holomorphy. The path definition uses only the trace
+property and finite-dimensional determinants, and the limit formula of
+\cref{determinants:lem:path-limit} shows directly that it agrees with the
+determinants of the finite truncations $\pi_NE\pi_N$.
+\end{answer}
+
+\noindent Concatenating a path from $\Id$ to $G_1$ with a path $\delta$ in
 $\Giso{-\infty}$ from $G_1$ to $G_2$ gives
 \begin{equation}\label{determinants:eq:det-variation}
   \detFr(G_2)=\detFr(G_1)\exp\Bigl(\int_\delta\alpha\Bigr).
@@ -596,6 +705,18 @@ $\Ran(A)$ is closed with orthocomplement $\Nul(A^*)$ there.
   constant, hence constant.
 \end{proof}
 
+\begin{discussion}
+For matrices $\Tr([A,B])=0$, so formula \eqref{determinants:eq:index-trace}
+recovers the fact that a square matrix has index zero. In infinite
+dimensions neither $A$ nor $B$ need be of trace class, and $[A,B]$ can have
+non-zero trace even though it is a commutator. The index measures exactly
+this failure of the trace property. The rest of the chapter makes this
+precise: once the trace is extended (as the regularized trace) to all of
+$\Psiisoph{\Z}$, its failure to vanish on commutators is a local
+expression in the symbols, and so is the index
+(\cref{determinants:thm:index-formula}).
+\end{discussion}
+
 \begin{proposition}\label{determinants:prop:invertible-perturbation}
   Let $A\in\Psiisoph{m}(\R^n;\C^N)$ be elliptic with $\ind(A)=0$. Then there is
   a finite rank $F\in\Psiiso{-\infty}(\R^n;\C^N)$ such that $A+sF$ is
@@ -641,6 +762,11 @@ is well defined. We return to it in \cref{determinants:sec:index-formula}.
 
 \section{Analytic Fredholm theory}\label{determinants:sec:fredholm}
 
+The determinant turns questions about invertibility of operators into
+questions about zeros of a scalar function. For a holomorphic family
+$\Id+A(z)$ that function is holomorphic, so its zeros are isolated, and the
+inverse can only blow up at isolated points.
+
 A family $M(z)$ with values in $\Psiiso{-\infty}$ is \emph{meromorphic} near
 $p$ if $M(z)=\sum_{k=1}^K(z-p)^{-k}M_{-k}+M_0(z)$ with $M_{-k}\in\Psiiso{-\infty}$
 and $M_0$ a holomorphic family; we say it has \emph{finite rank singular part}
@@ -680,7 +806,11 @@ if the $M_{-k}$ have finite rank.
 
 This result for smoothing operators, which really follows from the
 corresponding result for matrices, implies the analogous statement for
-holomorphic families of elliptic operators.
+holomorphic families of elliptic operators. The idea of the proof is to
+perturb by a fixed finite rank operator $F$ so as to make $A(z)+F$
+invertible near a point; then $A(z)=(A(z)+F)(\Id-C(z)F)$, and the second
+factor is a residual perturbation of the identity, to which
+\cref{determinants:lem:fredholm-alt} applies.
 
 \begin{proposition}\label{determinants:prop:analytic-fredholm}
   Let $\Omega\subset\C$ be open and connected, $h$ holomorphic on $\Omega$, and
@@ -767,6 +897,44 @@ expansion in terms of homogeneous functions of degrees $m-j$ and $-j$.
 Note also that $\Ran R_k\subset\Ran R_{k-1}\subset\dots\subset\Ran R_1$ and
 $\Nul R_k\supset\dots\supset\Nul R_1$; precisely, $u\in\Ran R_p$, $p\ge1$, if
 and only if $u=A^{p-1}u_1$ for some $u_1\in\Ran R_1$.
+
+\begin{discussion}
+In the notation of the proof, $P=-R_1$ is minus the residue of the
+resolvent at $\tilde\lambda$, so by the residue theorem
+\begin{equation*}
+  P=-\frac1{2\pi i}\oint_{|\lambda-\tilde\lambda|=\eps}(A-\lambda)^{-1}\,d\lambda
+\end{equation*}
+for small $\eps>0$ (\cref{determinants:fig:resolvent}). This is the usual
+Riesz projection of spectral theory. Here no self-adjointness is assumed, so
+eigenvalues may be complex and the eigenspaces need not be orthogonal; the
+analytic Fredholm theorem still guarantees that the spectrum is discrete
+and that each generalized eigenspace is finite dimensional.
+\end{discussion}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex]
+  \draw[->,gray] (-1,0) -- (8,0) node[right,black] {\small $\operatorname{Re}\lambda$};
+  \draw[->,gray] (0,-1.6) -- (0,2.0) node[above,black] {\small $\operatorname{Im}\lambda$};
+  \foreach \p in {(1.2,0.3),(2.0,-0.5),(2.9,0.9),(3.6,-0.2),(4.6,0.6),(5.9,-0.9),(6.4,0.4),(6.9,-0.3),(7.4,1.0)}
+    \fill \p circle (1.8pt);
+  \fill (3.6,-0.2) circle (1.8pt);
+  \node[below] at (3.6,-0.25) {\small $\tilde\lambda$};
+  \draw[thick,->] (3.6,-0.2) ++(0:0.55) arc (0:350:0.55);
+  \node at (4.3,-1.2) {\small $|\lambda-\tilde\lambda|=\eps$};
+  \node at (-0.45,1.35) {\small $\times$};
+  \node[above] at (-0.45,1.4) {\small $\lambda'$};
+  \node[align=left,font=\small] at (2.2,-1.35) {$\Spec(A)$ discrete};
+\end{tikzpicture}
+\caption[Spectrum and resolvent]{The spectrum of an elliptic $A$ of
+positive order satisfying the hypothesis of
+\cref{determinants:prop:resolvent} is a discrete set (dots) in $\C$; at
+$\lambda'$ ($\times$) both $A-\lambda'$ and its adjoint are injective. The
+resolvent $(A-\lambda)^{-1}$ is meromorphic, and integrating it around a
+small circle about $\tilde\lambda\in\Spec(A)$ gives $-2\pi i$ times the
+projection $P$ onto the generalized eigenspace $E_{\tilde\lambda}$.}
+\label{determinants:fig:resolvent}
+\end{figure}
 
 \section{The residue trace}\label{determinants:sec:residue}
 
@@ -878,7 +1046,39 @@ $z=0$ only depends on $A(0)$, and it vanishes unless $m\in\Z$, $m\ge-2n$.
   use it.
 \end{remark}
 
+\begin{discussion}
+Why does the residue trace see only one term of the symbol? Integrating a
+symbol term of homogeneity $\mu$ over $|Z|\ge1$ in $\R^{2n}$ gives
+$\int_1^\infty r^{\mu+2n-1}\,dr$. This converges for $\mu<-2n$, diverges
+like a power for $\mu>-2n$, and diverges \emph{logarithmically} exactly when
+$\mu=-2n$. Inserting the regularizer $\ang{Z}^z$ turns a power divergence
+into a pole at a non-zero value of $z$, harmless at $z=0$, while the
+logarithmic divergence becomes a pole at $z=0$. So the residue at $z=0$
+records the coefficient of the logarithmic divergence, which is the
+integral of the homogeneous term of degree $-2n$ over the sphere.
+\end{discussion}
+
+\begin{question}
+Every residual operator, indeed every operator of order less than $-2n$, has
+residue trace zero. Is the residue trace then useless on trace class
+operators?
+\end{question}
+\begin{answer}
+Yes, and this is the point. On operators of very negative order the
+ordinary trace is available, and the residue trace vanishes because
+$\Tr(A(z))$ has no pole at $z=0$. The residue trace is a trace on the
+\emph{quotient} $\Psiisoph{\Z}/\Psiiso{-\infty}$, where no non-zero
+multiple of the ordinary trace makes sense. It complements the ordinary
+trace rather than extending it.
+\end{answer}
+
 \section{Exterior derivation}\label{determinants:sec:derivation}
+
+The regularized trace of the next section depends on a choice of
+regularizing family $A(z)$, and its failure to be a trace is governed by the
+derivative $\dot A$ of the family at $z=0$. Commutation with $\dot A$, which
+is essentially the logarithm of an elliptic operator of order one, is the
+``exterior derivation'' introduced here.
 
 \begin{definition}\label{determinants:def:regularizer}
   A \emph{regularizing family} is an entire holomorphic family $A(z)$ of order
@@ -973,6 +1173,16 @@ In particular, if $B$ has non-integral order, $\TrReg{A}(B)$ is independent of
 $A$. The regularized trace is \emph{not} a trace; its failure to be one is
 measured by the residue trace and the exterior derivation.
 
+\begin{discussion}
+The trace defect formula below is easy to remember. For $\Re z\ll0$ the
+trace property gives $\Tr([B_1,B_2]A(z))=\Tr(B_1[B_2,A(z)])$. The
+commutator $[B_2,A(z)]$ vanishes at $z=0$, so it is $z$ times something,
+and that something is $-D_AB_2$ at $z=0$. A factor $z$ times a function with
+a simple pole leaves a finite value, the residue. So the defect is a
+residue trace: it is computed from finitely many terms of the symbols and
+is local.
+\end{discussion}
+
 \begin{proposition}[Trace defect formula]\label{determinants:prop:trace-defect}
   For a regularizing family $A(z)$ and $B_1,B_2\in\Psiisoph{\Z}(\R^n;\C^N)$,
   \begin{equation}\label{determinants:eq:trace-defect}
@@ -1061,7 +1271,22 @@ $A_{y_0}+F$ is invertible then so is $A_y+F$ for $y$ near $y_0$, with inverse
 a smooth family in $\Psiisoph{0}$ by \cref{determinants:lem:local-inversion}.
 The issue is the global existence of a smooth (or even continuous) choice.
 
-Operator-valued differential forms are handled in the obvious way: if
+\begin{question}
+If every $A_y$ can be made invertible by a smoothing perturbation, why can
+we not just patch the local choices together with a partition of unity?
+\end{question}
+\begin{answer}
+Invertibility is not preserved by taking convex combinations: if $A_y+F_1$
+and $A_y+F_2$ are invertible, $A_y+\frac12(F_1+F_2)$ need not be. The local
+choices can be compared only through the group $\Giso{-\infty}$, by
+$A_y+F_2=(A_y+F_1)(\Id+X_y)$, and the obstruction to patching them lives in
+the topology of the transition functions $\Id+X_y$. Taking determinants of
+these turns them into $\C^*$-valued functions, that is, into the transition
+functions of a line bundle, and the obstruction becomes its first Chern
+class (\cref{determinants:sec:det-bundle}).
+\end{answer}
+
+Operator-valued differential forms are handled coefficientwise: if
 $\omega=\sum\omega_j\,dy_j$ and $\eta=\sum\eta_k\,dy_k$ in local coordinates,
 $\omega\wedge\eta=\sum_{j,k}\omega_j\eta_k\,dy_j\wedge dy_k$, and $\TrRes$ and
 $\TrReg{H}$ are applied coefficientwise. Let $a_y=[A_y]\in\mathcal A^0$ and let
@@ -1131,7 +1356,20 @@ The determinant bundle was introduced by Quillen \cite{Quillen} for families of
 Cauchy--Riemann operators. Recall that $\detFr$ is a character of
 $\Giso{-\infty}$: $\detFr(AB)=\detFr(A)\detFr(B)$. Instead of trying to extend
 it multiplicatively to $\Giso{0}$ (see \cref{determinants:rem:no-extension}),
-we consider all its possible values at once. Write
+we consider all its possible values at once.
+
+\begin{discussion}
+An invertible $A\in G^0$ has no preferred determinant. But if we change $A$
+to $A(\Id+E)$ with $\Id+E\in G^{-\infty}$, the ``determinant'' ought to be
+multiplied by $\detFr(\Id+E)$. The relation
+\eqref{determinants:eq:det-equivalence} below records exactly this rule.
+Over each class $a=[A]$ the possible values then form a complex line, not a
+number. As $a$ varies these lines fit together into a line bundle, and the
+question whether a multiplicative determinant exists becomes the question
+whether this bundle is trivial.
+\end{discussion}
+
+Write
 $G^0=\Giso{0}(\R^n;\C^N)$ and $G^{-\infty}=\Giso{-\infty}(\R^n;\C^N)$; the
 latter is a normal subgroup of $G^0$, and $\mathcal G=G^0/G^{-\infty}$ is the
 set of classes $a=[A]\in\mathcal A^0$ of invertible operators, which by
@@ -1187,7 +1425,8 @@ invertible lifts exist near every point of $Y$.
   \cref{determinants:thm:det-entire}, and the cocycle condition holds
   automatically since all sections live in the same space $\mathcal D_Y$.
   Hence the local trivializations $s_{\tilde A}$ define a smooth line bundle
-  structure, clearly unique. A global invertible lift gives a global
+  structure, which is unique since a line bundle structure is determined by
+  a family of local non-vanishing smooth sections. A global invertible lift gives a global
   non-vanishing section.
 \end{proof}
 

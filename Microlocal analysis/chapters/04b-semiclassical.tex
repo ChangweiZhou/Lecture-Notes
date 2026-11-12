@@ -10,6 +10,15 @@
 \providecommand{\Qcl}[2]{\mathcal{Q}^{#1}_{#2}}
 \providecommand{\Amp}[2]{\mathcal{A}^{#1}_{#2}}
 
+On a compact manifold an elliptic operator is invertible only up to smoothing
+operators, and the obstruction to inverting it exactly is its index. In index
+theory one often wants the opposite situation: a way to turn symbolic data
+into operators which are \emph{exactly} invertible, or exactly projections.
+The semiclassical calculus provides this. One introduces a small parameter
+$\eps$ and quantizes symbols at frequencies of size $1/\eps$; as
+$\eps\downarrow0$ the operators behave more and more like their symbols, and
+the errors become small in norm, not merely compact.
+
 In this chapter we study one-parameter families of pseudodifferential
 operators $A_\eps$, $0<\eps\le1$, which degenerate in a controlled way as
 $\eps\downarrow0$: the \emph{semiclassical} families. The model is the
@@ -64,8 +73,55 @@ Laplacian, so that $(1+\Delta_y)e^{-iy\cdot\zeta}=\ang\zeta^2e^{-iy\cdot\zeta}$.
 The parameter $\eps$ always ranges over $[0,1]$ (for symbols) or $(0,1]$ (for
 operators).
 
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.1,>=Stealth]
+  \fill[gray!8] (0,-2) rectangle (4,2);
+  \draw[thick] (0,-2) rectangle (4,2);
+  \draw[->] (0,0) -- (4.5,0) node[right] {$\eps$};
+  \node[below] at (4,-2) {$1$};
+  \node[below] at (0,-2) {$0$};
+  \node[left,font=\small] at (-0.1,0) {$\eta=0$};
+  \foreach \t in {0.15,0.3,0.6,1.2}{
+    \draw[dashed,gray] (0,0) -- (4,{min(2,4*\t)});
+    \draw[dashed,gray] (0,0) -- (4,{-min(2,4*\t)});
+  }
+  \draw[line width=2.2pt] (0,-2) -- (0,2);
+  \node[left,align=right,font=\small] at (-0.1,1.1) {$\eps=0$:\\ $\ssl(A)(x,\eta)$};
+  \draw[line width=2.2pt,gray] (0,2) -- (4,2);
+  \draw[line width=2.2pt,gray] (0,-2) -- (4,-2);
+  \node[above,font=\small] at (2,2.05) {$\abs\eta=\infty$: $\tilde\sigma_m(A)$};
+  \fill (0,2) circle (2.2pt); \fill (0,-2) circle (2.2pt);
+  \node[right,font=\small,align=left] at (4.1,1.4) {fixed $\xi$:\\ $\eta=\eps\xi$};
+  \draw[thick] (2.8,-2) -- (2.8,2);
+  \node[fill=gray!8,inner sep=1pt,font=\small] at (2.8,-1.2) {$A_\eps$};
+\end{tikzpicture}
+\caption{Semiclassical symbols as functions of $\eps$ and the rescaled
+frequency $\eta=\eps\xi$ (the $\eta$-axis compactified, $x$ suppressed). At
+fixed $\eps>0$ (vertical line) we see an ordinary operator $A_\eps$, whose
+principal symbol is read off at $\abs\eta=\infty$. A fixed classical
+frequency $\xi$ moves along a ray (dashed) into $\eta=0$ as $\eps\downarrow0$,
+so the semiclassical regime is $\abs\xi\sim1/\eps$. The semiclassical symbol
+lives on the left edge $\eps=0$, the uniform principal symbol on the top and
+bottom edges; they must agree at the corners (dots), see
+\cref{semiclassical:prop:symbol-maps}.}
+\label{semiclassical:fig:regimes}
+\end{figure}
+
+\begin{discussion}
+There are two independent ways for a semiclassical symbol to be ``small'':
+vanishing at $\eps=0$, and decay as $\abs\eta\to\infty$
+(\cref{semiclassical:fig:regimes}). The usual calculus only sees the second;
+its errors are smoothing, hence compact, but not small. The semiclassical
+calculus controls both, and the residual errors are smoothing \emph{and}
+$O(\eps^\infty)$, so for small $\eps$ they can be removed by a Neumann series.
+This is the source of all the exact statements in the chapter.
+\end{discussion}
+
 % ======================================================================
 \section{Semiclassical symbols}\label{semiclassical:sec:symbols}
+We first set up symbols depending smoothly on $\eps$ up to $\eps=0$, and the
+asymptotic summation that controls the two kinds of error simultaneously.
 
 \begin{definition}\label{semiclassical:def:symbols}
   For $m\in\R$ the space $\Ssl m(\R^p;\R^n)$ of \emph{semiclassical symbols of
@@ -270,6 +326,10 @@ $\sum_{j\le k}\eps^j(b_j)_{k-j}$.
 
 % ======================================================================
 \section{Semiclassical quantization on \texorpdfstring{$\R^n$}{Rn}}\label{semiclassical:sec:quantization}
+Quantizing at the rescaled frequency is a simple substitution, but the
+composition formula has to be redone, because the Euclidean estimates are not
+uniform in $\eps$. The key is an exact oscillatory integral formula for the
+symbol of a composite, from which the expansion in powers of $\eps$ follows.
 
 \begin{definition}\label{semiclassical:def:psisl}
   For $a\in\Ssl m(\R^n)$ and $0<\eps\le1$ the \emph{semiclassical
@@ -312,6 +372,16 @@ as follows from \eqref{semiclassical:eq:quantization} by the change of variables
 $\eta=\eps\xi$. So as $\eps\downarrow0$ the kernel concentrates at the diagonal,
 on the scale $\abs{x-y}\sim\eps$; this is studied in
 \cref{semiclassical:sec:residual}.
+
+\begin{discussion}
+Formula \eqref{semiclassical:eq:kernel} is the heart of the matter. An
+ordinary pseudodifferential operator has a kernel singular on the diagonal and
+smooth away from it. A semiclassical family has, in addition, a length scale:
+its kernel is spread over a neighbourhood of width $\eps$ of the diagonal,
+like an approximate identity $\eps^{-n}\phi((x-y)/\eps)$. As $\eps\downarrow0$
+it therefore acts more and more locally, and only the values of the symbol
+near each point matter; this is why the symbols multiply in the limit.
+\end{discussion}
 
 \begin{example}\label{semiclassical:ex:differential}
   $\Op_\eps(1)=\Id$, $\Op_\eps(f(x))$ is multiplication by $f\in\CIb(\R^n)$, and
@@ -721,6 +791,20 @@ all the seminorms of that proposition, to infinite order at $\eps=0$.
   $a\in\eps^\infty\Ssl{-\infty}$ by \cref{semiclassical:lem:residual-symbols}(iii).
 \end{proof}
 
+\begin{question}
+Why is the residual ideal $\eps^\infty\Psisl{-\infty}$ and not simply the
+smoothing families $\Psisl{-\infty}$?
+\end{question}
+\begin{answer}
+Because $\Psisl{-\infty}$ is not small. For example
+$\Op_\eps(e^{-\abs\eta^2})$ is smoothing for every $\eps$, but its semiclassical
+symbol is not zero and its $L^2$ norm equals one for every $\eps$: it is the
+Fourier multiplier $e^{-\eps^2\abs\xi^2}$, which tends to the identity as
+$\eps\downarrow0$. Only families which are both smoothing and $O(\eps^\infty)$
+are negligible in every sense, and these are exactly the families with smooth
+kernels vanishing to infinite order at $\eps=0$.
+\end{answer}
+
 \begin{corollary}\label{semiclassical:cor:localization}
   Let $A\in\Psisl m(\R^n)$ and $\phi,\psi\in\CIb(\R^n)$. Then
   $\phi A\psi\in\Psisl m(\R^n)$; if $A=\Op_\eps(a)$ then
@@ -828,8 +912,59 @@ for the full expansion from this point of view.
   \cref{ch:semiclassical-index}. The identification of the interior of the front face
   with $TX$, and hence of the domain of the semiclassical symbol with $T^*X$,
   depends on the choice of the parameter $\eps$ up to a positive multiple; see
-  \cref{semiclassical:rem:sl-cotangent}.
+  \cref{semiclassical:rem:sl-cotangent}. The two spaces are sketched in
+  \cref{semiclassical:fig:double-space}.
 \end{remark}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.0,>=Stealth]
+  % before blow-up
+  \begin{scope}
+    \fill[gray!10] (-2.2,0) rectangle (2.2,2.4);
+    \draw[->] (-2.3,0) -- (2.5,0) node[right] {$x-y$};
+    \draw[->] (0,0) -- (0,2.7) node[above] {$\eps$};
+    \begin{scope}
+      \clip (-2.2,0) rectangle (2.2,2.4);
+      \foreach \a in {20,55,80,100,125,160}{
+        \draw[dashed,gray] (0,0) -- (\a:4);
+      }
+    \end{scope}
+    \fill (0,0) circle (2.2pt);
+    \node[below,font=\small] at (0,-0.05) {$\{0\}\times\Diag$};
+    \node[font=\small,align=center] at (0,-1.4) {$[0,1]\times X^2$ (normal slice)};
+  \end{scope}
+  \draw[->,thick] (2.9,1.2) -- node[above,font=\small] {blow up} (4.0,1.2);
+  % after blow-up
+  \begin{scope}[xshift=6.9cm]
+    \fill[gray!10] (-2.2,0) rectangle (2.2,2.4);
+    \fill[white] (0.9,0) arc (0:180:0.9) -- cycle;
+    \draw[very thick] (0.9,0) arc (0:180:0.9);
+    \draw[very thick] (-2.2,0) -- (-0.9,0);
+    \draw[very thick] (0.9,0) -- (2.2,0);
+    \begin{scope}
+      \clip (-2.2,0) rectangle (2.2,2.4);
+      \foreach \a in {20,55,80,100,125,160}{
+        \draw[dashed,gray] (\a:0.9) -- (\a:4);
+      }
+    \end{scope}
+    \node[font=\small] at (0,0.4) {ff};
+    \node[below,font=\small,align=center] at (-1.55,-0.05) {lifted\\$\{\eps=0\}$};
+    \node[below,font=\small,align=center] at (1.55,-0.05) {lifted\\$\{\eps=0\}$};
+    \node[font=\small,align=center] at (0,-1.4) {$[[0,1]\times X^2;\{0\}\times\Diag]$};
+  \end{scope}
+\end{tikzpicture}
+\caption{The semiclassical double space, in a two-dimensional slice transverse
+to the diagonal. Left: the kernel $\eps^{-n}K(\eps,x,(x-y)/\eps)$ is singular only
+at $\{0\}\times\Diag$ (dot); it is constant along the dashed rays
+$x-y=\eps Z$. Right: after blowing up, the rays are separated and end at
+different points of the front face ff, whose interior is parametrized by
+$Z=(x-y)/\eps\in\R^n$. Semiclassical smoothing kernels are smooth here,
+vanish to infinite order at the lifted face $\{\eps=0\}$, and their
+restriction to ff is the inverse Fourier transform of the semiclassical
+symbol.}
+\label{semiclassical:fig:double-space}
+\end{figure}
 
 % ======================================================================
 \section{Symbols, ellipticity and boundedness}\label{semiclassical:sec:symbol-maps}
@@ -893,6 +1028,11 @@ and $\tilde\sigma_2=[\abs\eta^2]$.
   $\tilde a$ and satisfies $a(0)=b$.
 \end{proof}
 
+In terms of \cref{semiclassical:fig:regimes}, the joint symbol records a
+representative on the left edge $\eps=0$ together with the leading behaviour
+along the top and bottom edges $\abs\eta=\infty$, and the compatibility
+condition is that the two agree at the corners where these edges meet.
+
 \begin{remark}\label{semiclassical:rem:classical}
   If $A\in\Psislph{m}(\R^n)$, the uniform principal symbol is
   represented by the leading homogeneous term $a_0$ of
@@ -948,6 +1088,17 @@ and $\tilde\sigma_2=[\abs\eta^2]$.
   $\eps\le\frac12\eps_0$, hence lies in $\eps^N\Ssl{-1}$ for every $N$; similarly
   for $ba-\Id$.
 \end{proof}
+
+\begin{discussion}
+Semiclassical ellipticity is stronger than ellipticity of each $A_\eps$,
+because (i) asks for invertibility of $\ssl(A)$ at \emph{all} points of
+$T^*\R^n$, not only near infinity. For the positive Laplacian $\Delta$, the
+family $\eps^2\Delta+1=\Op_\eps(\abs\eta^2+1)$ is elliptic, and indeed
+invertible for every $\eps$. The family $\eps^2\Delta-1=\Op_\eps(\abs\eta^2-1)$
+is not: each $A_\eps$ is elliptic in the usual sense, but $\ssl(A)$ vanishes on
+the sphere $\abs\eta=1$. This is the Helmholtz operator at frequency $1/\eps$,
+whose solutions oscillate at exactly the scale the calculus is designed to see.
+\end{discussion}
 
 Note that (i) alone implies (ii) for $\eps$ small; condition (ii) is only needed
 to control the family for $\eps$ away from $0$. As usual, one may simply restrict
@@ -1156,6 +1307,11 @@ but only the leading term is invariantly meaningful.
 
 % ======================================================================
 \section{Semiclassical families on manifolds}\label{semiclassical:sec:manifolds}
+
+The calculus on $\R^n$ is local and coordinate invariant, so it transfers to
+manifolds exactly as in \cref{ch:manifolds}. The only new feature is the
+behaviour of kernels away from the diagonal: they must not only be smooth, but
+also vanish to infinite order as $\eps\downarrow0$.
 
 Throughout this section $X$ is a compact manifold of dimension $n$ and $E$, $F$,
 $G$ are complex vector bundles over $X$; notation is as in \cref{ch:manifolds}.
@@ -1533,6 +1689,22 @@ $\ssl(A)$ is invertible at every point and elliptic in the usual sense.
   on $X$.
 \end{proof}
 
+Compare with the classical case (\cref{manifolds:thm:parametrix}). There the
+parametrix errors are smoothing, hence compact, and one obtains only the
+Fredholm property. Here they are also $O(\eps^\infty)$ in norm, and a Neumann
+series removes them for small $\eps$. The logic is:
+\begin{equation*}
+\begin{tikzcd}[column sep=large,row sep=large]
+\sigma_{\eps,m}(A)\ \text{invertible}\arrow[r,"\text{quantize, sum}"]
+&B,\ AB-\Id\in\eps^\infty\Psisl{-\infty}\arrow[d,"\norm{AB-\Id}=O(\eps^\infty)"]\\
+A_\eps^{-1}=G_\eps,\ G-B\in\eps^\infty\Psisl{-\infty}
+&\Id+R_\eps\ \text{invertible for }\eps<\eps_0\arrow[l,"\text{Neumann series}"']
+\end{tikzcd}
+\end{equation*}
+In particular the index of an elliptic semiclassical family vanishes for
+small $\eps$; the topology now sits entirely in the symbol, and this is what
+the starting point of \cref{ch:semiclassical-index}.
+
 \begin{corollary}\label{semiclassical:cor:G}
   Let $a\in\cS(T^*X;\hom(E))$ be such that $\Id+a(x,\xi)$ is invertible for all
   $(x,\xi)\in T^*X$, and let $A\in\Psisl{-\infty}(X;E)$ with $\ssl(A)=a$. Then there
@@ -1592,6 +1764,29 @@ oscillator used in the isotropic calculus, and it is what is needed to define
 the even semiclassical index map in \cref{ch:semiclassical-index}. Throughout,
 $X$ is compact and $E$ is a hermitian vector bundle over $X$; $L^2(X;E)$ is
 defined using a smooth positive density.
+
+The construction follows the classical one of \cref{manifolds:sec:projections}
+(\cref{semiclassical:fig:projection}): quantize the symbol, improve it by
+Newton's iteration until $P^2-P$ is residual, and then remove the residual
+error by a contour integral, which is now possible because the error is small
+in norm for small $\eps$.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzcd}[column sep=large,row sep=large]
+p,\ p^2=p\arrow[r,"q_\eps"]
+&P_1,\ P_1^2-P_1\in\eps\Psisl{-1}\arrow[r,"\text{Newton}"]
+&P_j,\ P_j^2-P_j\in\eps^{2^{j-1}}\Psisl{-2^{j-1}}\arrow[d,"\text{asymptotic sum}"]\\
+&\Pi_\eps^2=\Pi_\eps\ (\eps<\eps_0)
+&P_\infty,\ P_\infty^2-P_\infty\in\eps^\infty\Psisl{-\infty}\arrow[l,"\text{Riesz projection}"']
+\end{tikzcd}
+\caption{Quantization of a projection-valued symbol
+(\cref{semiclassical:thm:projection}). Each step keeps the joint symbol equal
+to $p$. The last step (\cref{semiclassical:lem:riesz}) uses that the error is
+$O(\eps^\infty)$ in norm, so the spectrum of $P_\infty$ stays away from the
+circle $\abs{\lambda-1}=\frac12$.}
+\label{semiclassical:fig:projection}
+\end{figure}
 
 \begin{lemma}\label{semiclassical:lem:riesz}
   Let $P\in\Psisl0(X;E)$ be such that $P^2-P\in\eps^\infty\Psisl{-\infty}(X;E)$. Then there
@@ -1820,6 +2015,16 @@ $b(z,z',\tilde z,\tilde\zeta)$ satisfying the estimates
   $B(0,\cdot)$ to be independent of $\delta$), and $\sad(B)=0$ if and only if
   $B(0,\cdot)=0$, i.e.\ $B=\delta B'$ with $B'\in\mathcal K_{\mathrm{ad}}$ by Taylor's formula.
 \end{proof}
+
+\begin{discussion}
+The adiabatic symbol is no longer a function but an operator: for each
+covector $(\tilde z,\tilde\zeta)$ in the rescaled directions, it is a smoothing
+operator in the remaining variables $z$. In the limit $\delta\downarrow0$ the
+family becomes ``commutative'' in $\tilde z$ only, and stays genuinely
+non-commutative in $z$. This is the right structure for a fibration: one
+rescales the base and keeps the operators on the fibres, and the adiabatic
+symbol is a family of fibre operators parametrized by $T^*$ of the base.
+\end{discussion}
 
 The adiabatic calculus is invariant under \emph{fibred} changes of coordinates,
 i.e.\ diffeomorphisms which preserve the projection onto the $\tilde z$ variables.

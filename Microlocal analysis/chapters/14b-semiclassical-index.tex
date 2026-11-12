@@ -18,6 +18,15 @@
 \providecommand{\Hev}{H^{\mathrm{ev}}}
 \providecommand{\Ssl}[1]{S^{#1}_{\mathrm{sl}}}
 
+Quantum mechanics suggests a direct way to go from a symbol to an operator
+without losing information: put a Planck constant $\epsilon$ in front of the
+momentum. As $\epsilon\to0$ the operator $\Ope(q)$ ``becomes'' its symbol $q$:
+products of operators become products of symbols, and the Schwartz kernel
+collapses onto the diagonal. This chapter uses that limit to build an index map
+straight from compactly supported symbols, shows that it agrees with the analytic
+index, and uses the harmonic oscillator to compute the one ingredient of the
+families index theorem that \cref{ch:families} had to import.
+
 In \cref{ch:families} the families index theorem of Atiyah and Singer was proved
 in K-theory by embedding a fibration $\phi:M\to B$ into a trivial fibration
 $\R^N\times B\to B$ and using three properties of the analytic index:
@@ -77,6 +86,26 @@ perturbations of the identity by smoothing operators. The required passage from
 families of operators on the varying fibres $Z_b$ to maps into a fixed group
 $\Ginf(Y;F)$ is made in \cref{scindex:sec:smoothing} by an explicit isometric
 embedding of the fibres into a torus.
+
+\begin{discussion}
+  The construction of the semiclassical index has four steps, each of which is
+  elementary:
+  \begin{equation*}
+    \begin{tikzcd}[column sep=large]
+      x\arrow[r,mapsto,"\text{\small Milnor}"]&e_{a,b}
+      \arrow[r,mapsto,"\text{\small quantize}"]&\mathfrak E(\epsilon)
+      \arrow[r,mapsto,"\text{\small compare}"]&d(\mathfrak E(\epsilon),p_0)\in K^0(B).
+    \end{tikzcd}
+  \end{equation*}
+  Here $x=[(E_+,E_-,a)]$, $e_{a,b}$ is an idempotent-valued symbol and
+  $\mathfrak E(\epsilon)$ an idempotent family of operators.
+  The first arrow is pure linear algebra (\cref{scindex:lem:milnor}), the second
+  is semiclassical quantization followed by a correction which makes the operator
+  an exact idempotent (\cref{scindex:prop:quantize}), and the third compares two
+  infinite rank idempotents which differ by a smoothing operator
+  (\cref{scindex:def:d}). Only the second step involves analysis, and for small
+  $\epsilon$ it is essentially local.
+\end{discussion}
 
 \section{Setting and recollections}\label{scindex:sec:setting}
 
@@ -201,7 +230,29 @@ $\epsilon\in(0,1]$. Its kernel is $\epsilon^{-n}\check q(\epsilon,z,(z-z')/
 \epsilon)$, where $\check q$ is the inverse Fourier transform in the last
 variable (\eqref{semiclassical:eq:kernel}). If $q$ is Schwartz in $\zeta$ the
 kernel concentrates, as $\epsilon\downarrow0$, in an $\epsilon$-neighbourhood of
-the diagonal. The results of \cref{ch:semiclassical} are stated for compact
+the diagonal (\cref{scindex:fig:kernel}).
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[>=Latex,xscale=1.4,yscale=0.65]
+  \draw[->] (-3.4,0)--(3.6,0) node[right]{\small$z-z'$};
+  \draw[->] (0,-0.2)--(0,4.4);
+  \draw[thick,gray!50,smooth,domain=-3.2:3.2,samples=80] plot (\x,{exp(-(\x)^2)});
+  \draw[thick,gray,smooth,domain=-3.2:3.2,samples=120] plot (\x,{2*exp(-(2*\x)^2)});
+  \draw[thick,black,smooth,domain=-3.2:3.2,samples=160] plot (\x,{4*exp(-(4*\x)^2)});
+  \node[right] at (1.05,0.55) {\small$\epsilon=1$};
+  \node[right] at (0.5,1.5) {\small$\epsilon=\tfrac12$};
+  \node[right] at (0.22,3.6) {\small$\epsilon=\tfrac14$};
+  \node[left] at (-0.1,4.2) {\small$\epsilon^{-n}\check q\bigl((z-z')/\epsilon\bigr)$};
+\end{tikzpicture}
+\caption[Concentration of semiclassical kernels]{The Schwartz kernel of
+$\Ope(q)$ for a symbol $q$ which is Schwartz in $\zeta$, plotted across the
+diagonal for $n=1$ and three values of $\epsilon$. Its integral is fixed, while its
+width is $O(\epsilon)$. This is why constructions with semiclassical families are
+local for small $\epsilon$, and why excision is trivial for the semiclassical
+index (\cref{scindex:rem:excision-trivial}).}
+\label{scindex:fig:kernel}
+\end{figure} The results of \cref{ch:semiclassical} are stated for compact
 manifolds; since all constructions are local
 (\cref{semiclassical:lem:structure}), they hold for families with kernels
 supported over a fixed compact subset of a non-compact fibred manifold, which is
@@ -386,6 +437,17 @@ in $K^{-1}(B)$. (Melrose does this by showing that the Hilbert bundle with fibre
 $L^2(Z_b;E_b)$ has a smooth orthonormal frame; see \cref{scindex:ex:frame}. The
 following embedding is more elementary.)
 
+\begin{discussion}
+  The difficulty addressed in this section is bookkeeping, not analysis. In
+  \cref{ch:index,ch:bott}, classes in $K^{-1}(B)$ are homotopy classes of maps
+  from $B$ into one fixed group $\Ginf(Y;F)$. A family $g_b$ of invertible
+  operators on the fibres $Z_b$ is not such a map, because the Hilbert spaces
+  $L^2(Z_b;E_b)$ change with $b$. We fix this by embedding all of them
+  isometrically and smoothly into one space $L^2(\Torus^N;\C^R)$, using the
+  embedding of the fibration into a torus already used in \cref{ch:families}, and
+  then check that nothing depends on the embedding.
+\end{discussion}
+
 \subsection{Admissible embeddings}
 \begin{definition}\label{scindex:def:admissible}
   Let $K\subset M$ be compact and $W\supset K$ open. An \emph{admissible
@@ -559,6 +621,20 @@ defined. (The construction is that of the Bott map \eqref{scindex:eq:bott-map},
 applied to $e$, followed by subtraction of the same construction for $p_0$; the
 two infinite rank contributions cancel.)
 
+\begin{question}
+  Why not define the relative index simply as $[\Ran e]-[\Ran p_0]$?
+\end{question}
+\begin{answer}
+  Both ranges are infinite-dimensional, so their difference is meaningless as it
+  stands. What is finite is the \emph{discrepancy} between them, and the loop
+  $g_{e,p_0}$ packages it: it is the identity plus a smoothing family, so it
+  defines a class in $K^{-2}(B)$, and the Toeplitz index converts that class into
+  an honest element of $K^0(B)$. The test case is
+  \ref{scindex:d-finite}: if $e=p_0+\Pi$ with $\Pi$ a finite rank idempotent
+  orthogonal to $p_0$, then $d(e,p_0)$ is $[\Ran\Pi]$, as the naive formula
+  suggests.
+\end{answer}
+
 \begin{proposition}\label{scindex:prop:d}
   \begin{enumerate}[label=(d\arabic*)]
   \item\label{scindex:d-homotopy} If $e_t$, $t\in[0,1]$, is a smooth family of
@@ -696,6 +772,18 @@ family as a relative index.
 The idempotent $e_{A,B}$ is the image of the class of $A$ under the boundary map
 in algebraic K-theory, in the explicit form due to Milnor. For an invertible
 $A$ it is trivial; in general it measures the failure of $B$ to be an inverse.
+
+\begin{discussion}
+  To see why $e_{A,B}$ carries the index, take $A$ a Fredholm operator and $B$ a
+  parametrix with $R_+=\Pi_{\Nul A}$ and $R_-=\Pi_{\Nul A^*}$, the orthogonal
+  projections onto the null space and the cokernel. Then $e_{A,B}$ differs from
+  $p_0$ by adding $\Nul A$ in the $H_+$ slot and removing $\Nul A^*$ from the
+  $H_-$ slot, so its ``relative rank'' is $\dim\Nul A-\dim\Nul A^*$. The point of
+  Milnor's formula is that it is a polynomial in $A$ and $B$. A polynomial can be
+  applied equally well to symbols and to operators, and semiclassical quantization
+  is multiplicative to leading order; this is what makes the comparison with the
+  analytic index in \cref{scindex:sec:analytic} short.
+\end{discussion}
 
 \subsection{Quantization of idempotents}
 Let $\phi:M\to B$ be a fibration, $E\to M$, and $p_0\in\CI(M;\End E)$ an
@@ -959,6 +1047,44 @@ In this section $\phi:M\to B$ is a fibration of compact manifolds. We first
 express the analytic index bundle as a relative index of idempotents, using
 \cref{scindex:lem:milnor} at the operator level.
 
+\begin{discussion}
+  The idea of the comparison is shown in \cref{scindex:fig:deform}. Quantize
+  the symbol $a$ semiclassically to an elliptic family $A(\epsilon)$, with a
+  semiclassical parametrix $B(\epsilon)$. For each fixed $\epsilon>0$ the Milnor
+  idempotent $e_{A(\epsilon),B(\epsilon)}$ computes the analytic index
+  (\cref{scindex:prop:index-relative}). As $\epsilon\downarrow0$ the same
+  idempotent is a semiclassical quantization of the symbol-level idempotent
+  $e_{a,b}$, so for small $\epsilon$ it computes the semiclassical index. The
+  relative index cannot change along the path, so the two indices agree.
+\end{discussion}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[>=Latex]
+  \draw[->,thick] (0,0)--(10.4,0) node[right]{\small$\epsilon$};
+  \draw (0.3,0.12)--(0.3,-0.12) node[below]{\small$0$};
+  \draw (9.7,0.12)--(9.7,-0.12) node[below]{\small$1$};
+  \node[draw,rounded corners,align=center,fill=gray!10] (L) at (1.5,1.3)
+    {\small symbol level\\\small$e_{a,b}$ on $T^*(M/B)$};
+  \node[draw,rounded corners,align=center,fill=gray!10] (R) at (8.4,1.3)
+    {\small operator level\\\small$e_{A(\epsilon),B(\epsilon)}$, $A(\epsilon)$ elliptic};
+  \node[align=center] (M) at (5,2.7)
+    {\small $d\bigl(e_{A(\epsilon),B(\epsilon)},p_0\bigr)$\\\small independent of $\epsilon$};
+  \draw[->] (M)--(L) node[midway,above left]{\small$\epsilon\downarrow0$};
+  \draw[->] (M)--(R) node[midway,above right]{\small$\epsilon>0$};
+  \draw[decorate,decoration={brace,amplitude=4pt,mirror}] (0.35,-0.45)--(2.6,-0.45)
+    node[midway,below=3pt]{\small$\epsilon$ small: $\Indsl{}(x)$};
+  \draw[decorate,decoration={brace,amplitude=4pt,mirror}] (0.35,-1.15)--(9.7,-1.15)
+    node[midway,below=3pt]{\small every $\epsilon\in(0,1]$: $\inda(x)$};
+\end{tikzpicture}
+\caption[From operator to symbol]{The semiclassical limit deforms an elliptic
+family into its symbol. For every $\epsilon\in(0,1]$ the relative index of the
+Milnor idempotent is the analytic index (right); for small $\epsilon$ the
+idempotent is a semiclassical quantization of its symbol, and the relative index
+is the semiclassical index (left). This is \cref{scindex:thm:analytic=sl}.}
+\label{scindex:fig:deform}
+\end{figure}
+
 \begin{proposition}\label{scindex:prop:index-relative}
   Let $A\in\Psido0(M/B;E_+,E_-)$ be elliptic and let $B\in\Psido0(M/B;E_-,E_+)$
   satisfy $R_+=\Id-BA\in\Psido{-\infty}(M/B;E_+)$ and $R_-=\Id-AB\in
@@ -1147,6 +1273,47 @@ The proof occupies the rest of this subsection. We first describe the model on a
 single fibre, then compare the semiclassical quantization with the harmonic
 oscillator.
 
+\begin{discussion}
+  Here is the whole argument in heuristic form. On one fibre $\R^k$ the Thom
+  symbol is Clifford multiplication by $w+i\xi$. Its quantization is, up to a
+  factor, the operator $D+D^*$ of the Koszul complex of the harmonic oscillator,
+  whose square is $H-k+2\deg$. On odd forms this is invertible; on even forms its
+  null space is spanned by the Gaussian ground state $u_0=\pi^{-k/4}e^{-\abs
+  w^2/2}$. So the index on each fibre is the line $\C u_0$. Semiclassical
+  quantization at scale $\epsilon$ gives the same operator after the dilation
+  $w\mapsto\epsilon^{-1/2}w$, with ground state a Gaussian of width
+  $\epsilon^{1/2}$. Finally, the Gaussian depends only on $\abs w$, so it is
+  invariant under the structure group $O(k)$ and defines a nowhere vanishing
+  section of the line bundle of ground states over $M$
+  (\cref{scindex:fig:gaussian}). That line bundle is therefore trivial.
+\end{discussion}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[>=Latex,scale=1.05]
+  % base M drawn as a curve
+  \draw[thick] plot[smooth,tension=0.7] coordinates {(0,0) (2,0.35) (4,0.1) (6,0.45) (8,0.2)};
+  \node[right] at (8,0.2) {$M$};
+  \foreach \px/\py/\a in {0.8/0.24/12, 2.4/0.33/-4, 4.0/0.1/0, 5.6/0.42/8, 7.2/0.31/-6}{
+    \begin{scope}[shift={(\px,\py)},rotate=\a]
+      \draw[gray] (0,-1.15)--(0,1.15);
+      \fill[gray!35,smooth,domain=-1.1:1.1,samples=60,variable=\t]
+        plot ({0.9*exp(-(\t*\t)/0.08)},\t) -- (0,1.1) -- (0,-1.1) -- cycle;
+      \draw[smooth,domain=-1.1:1.1,samples=60,variable=\t] plot ({0.9*exp(-(\t*\t)/0.08)},\t);
+    \end{scope}}
+  \node[gray] at (0.55,1.45) {\small$\mathcal V_m$};
+  \draw[<->] (3.8,-0.18)--(3.8,0.38);
+  \draw[gray] (3.8,-0.18)--(3.3,-0.75);
+  \node[below left] at (3.4,-0.7) {\small width $\sim\epsilon^{1/2}$};
+\end{tikzpicture}
+\caption[The bundle of ground states]{The rescaled Gaussian ground state
+$U_\epsilon^{-1}u_0$ on each normal fibre $\mathcal V_m$ (drawn as a profile
+over the fibre). Because $u_0$ is invariant under $O(k)$, these profiles fit
+together into a smooth nowhere vanishing section over $M$, so the index bundle of
+the Thom class is canonically the trivial line bundle.}
+\label{scindex:fig:gaussian}
+\end{figure}
+
 \subsection{The model}
 On $\R^k$, with variables $X=(w,\xi)\in\R^{2k}$, let $\Lambda=\Lambda\C^k=
 \Lambda^{\mathrm{ev}}\oplus\Lambda^{\mathrm{odd}}$ with its standard Hermitian
@@ -1245,6 +1412,19 @@ Koszul complex of the harmonic oscillator. Conjugation by $U_\epsilon$ maps
 $\Psiiso{m}(\R^k)$ to itself, and an operator has a Schwartz kernel if and only if
 its conjugate does. We write $\Psiiso{-\infty}$ for the operators with Schwartz
 kernels, an ideal in $\bigcup_m\Psiiso m$ (\cref{isotropic:lem:residual-kernels,isotropic:thm:algebra}).
+
+\begin{question}
+  Why is the natural length scale $\epsilon^{1/2}$ rather than $\epsilon$?
+\end{question}
+\begin{answer}
+  The operator $\Ope(c)$ is built from multiplication by $w_j$ and from
+  $\epsilon D_{w_j}$. On a function varying on the length scale $L$, the first is of
+  size $L$ and the second of size $\epsilon/L$. They balance when $L^2=\epsilon$,
+  and this is the width of the ground state, just as for the semiclassical
+  harmonic oscillator $\abs w^2+\epsilon^2\Delta$. After the dilation $U_\epsilon$
+  the two terms have equal weight and the operator becomes the $\epsilon$-independent
+  oscillator, multiplied by $\epsilon^{1/2}$.
+\end{answer}
 
 \begin{lemma}\label{scindex:lem:thom-parametrix}
   Let $A=\Ope(c)$ and $B_0=\Ope(b)$. For $\epsilon$ small there is
@@ -1455,6 +1635,7 @@ $\beta_N$.
 \end{proof}
 
 \begin{remark}[Comparison of the two proofs]\label{scindex:rem:compare}
+  See \cref{scindex:fig:compare}.
   Both proofs pass through the same diagram, the embedding of $M$ into
   $I^N\times B$ followed by the Thom homomorphism. In \cref{families:thm:AS-K} the
   analytic index was carried along it using (1) multiplicativity, proved with the
@@ -1473,11 +1654,56 @@ $\beta_N$.
   \Theta_*\circ\tau$.
 \end{remark}
 
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[>=Latex,
+  box/.style={draw,rounded corners,text width=5.2cm,align=center,font=\small,
+    inner sep=4pt,minimum height=1.25cm},
+  steplbl/.style={text width=2.4cm,align=center,font=\small\itshape}]
+  \node[font=\small\bfseries] at (0,0.9) {Excision proof (\cref{ch:families})};
+  \node[font=\small\bfseries] at (6.2,0.9) {Semiclassical proof (this chapter)};
+  \node[box] (a1) at (0,0) {multiplicativity (\cref{families:thm:mult})\\
+    + index of the Thom class \ref{families:TH}, \emph{imported}};
+  \node[box,fill=gray!12] (b1) at (6.2,0) {multiplicativity (\cref{families:thm:mult})\\
+    + harmonic oscillator (\cref{scindex:cor:TH})};
+  \node[box] (a2) at (0,-1.8) {excision for $\inda$\\ by comparing stabilized null
+    spaces (\cref{families:thm:excision})};
+  \node[box,fill=gray!12] (b2) at (6.2,-1.8) {$\inda=\Indsl{}$
+    (\cref{scindex:thm:analytic=sl}); excision for $\Indsl{}$ is trivial};
+  \node[box] (a3) at (0,-3.6) {normalization on $\Torus^N$ by multiplicativity
+    and the circle (\cref{families:prop:normalization})};
+  \node[box,fill=gray!12] (b3) at (6.2,-3.6) {normalization from the harmonic
+    oscillator on $\R^N$ (\cref{scindex:cor:normalization})};
+  \foreach \c in {a,b}{\draw[->] (\c1)--(\c2); \draw[->] (\c2)--(\c3);}
+  \node[steplbl,left] at (-2.85,0) {Thom step $\tau$};
+  \node[steplbl,left] at (-2.85,-1.8) {into the torus $j_*\Theta_*$};
+  \node[steplbl,left] at (-2.85,-3.6) {evaluate $\beta_N^{-1}$};
+\end{tikzpicture}
+\caption[Two proofs of the index theorem]{The two proofs of $\inda=\indt$ side by
+side. Both follow the arrows of \cref{families:fig:roadmap}; they differ in how
+each arrow is shown to preserve the index. The shaded steps are those where the
+semiclassical index replaces an analytic argument, and in particular the
+imported statement \ref{families:TH} is proved.}
+\label{scindex:fig:compare}
+\end{figure}
+
 \section{Multiplicativity and the adiabatic limit}\label{scindex:sec:adiabatic}
 
 This section describes, without complete proofs, how the remaining ingredient,
 \eqref{scindex:eq:thom-sl}, and more generally the multiplicativity of the
 semiclassical index, can be obtained by semiclassical methods.
+
+\begin{discussion}
+  In an \emph{adiabatic limit} one makes an operator semiclassical in some
+  directions only. For a tower $\tilde M\to M\to B$ one lets the kernels
+  concentrate at the diagonal in the directions of $M/B$ while keeping them
+  general along the fibres of $\tilde M\to M$. The limiting symbol is
+  then not a matrix-valued function but a family of operators on the fibres of
+  $\tilde M\to M$, parametrized by covectors of $M/B$. Quantizing first in the
+  fibres and then in the base, or all at once, are two faces of one family, and
+  the index cannot change between them; this is the multiplicativity
+  \eqref{scindex:eq:mult-sl}.
+\end{discussion}
 
 \subsection{Iterated fibrations}
 Consider a tower $\tilde M\xrightarrow{\tilde\phi}M\xrightarrow{\phi}B$ of

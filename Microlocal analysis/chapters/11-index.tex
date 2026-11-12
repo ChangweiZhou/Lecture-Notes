@@ -8,6 +8,15 @@
 \providecommand{\wind}{\operatorname{wind}}
 \providecommand{\Iso}{\operatorname{Iso}}
 
+An elliptic operator on a compact manifold is Fredholm: its null space and its
+cokernel are finite dimensional. Neither dimension is stable. A small
+perturbation can create or destroy solutions of $Au=0$. Their difference, the
+index, does not move. This stability is the reason the index can be computed
+from topological data, and this chapter explains where it comes from. It also
+builds the first tools for the computation: K-theory, Chern forms and the
+simplest index formula, for Toeplitz operators on the circle.
+\Cref{index:fig:roadmap} shows how the sections fit together.
+
 This chapter opens the part of the book devoted to index theory. Let $X$ be a
 compact manifold without boundary and $E$, $F$ complex vector bundles over $X$.
 By \cref{ch:manifolds} an elliptic operator $A\in\Psido{m}(X;E,F)$ has a
@@ -34,7 +43,44 @@ show that families of elliptic operators with vanishing ``families index'' can
 be perturbed to be invertible, and that the matrix groups can be deformed away
 inside the invertible Toeplitz operators.
 
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[
+  box/.style={draw,rounded corners,align=center,font=\small,
+    inner sep=4pt,text width=3.4cm},
+  >=Stealth]
+\node[box] (tr) at (0,0) {index as a trace\\ \cref{index:sec:trace}};
+\node[box] (ho) at (4.6,0) {homotopy invariance\\ \cref{index:sec:homotopy}};
+\node[box] (sy) at (9.2,0) {index depends only on\\ the class of $\sigma_m(A)$};
+\node[box] (K)  at (9.2,-2) {K-theory via $\Ginf$\\ and loops, \cref{index:sec:K}};
+\node[box] (ch) at (4.6,-2) {Chern forms,\\ determinant, \cref{index:sec:chern}};
+\node[box] (to) at (0,-2) {Toeplitz index\\ $=-\wind$, \cref{index:sec:toeplitz}};
+\node[box] (fa) at (0,-4) {perturbing families,\\ \cref{index:sec:families}};
+\node[box] (de) at (4.6,-4) {deforming $\GL(N,\C)$\\ away, \cref{index:sec:deform}};
+\node[box,dashed] (bo) at (9.2,-4) {Bott periodicity\\ \cref{ch:bott}};
+\draw[->] (tr)--(ho);
+\draw[->] (ho)--(sy);
+\draw[->] (sy)--node[right,font=\footnotesize]{organize classes}(K);
+\draw[->] (K)--(ch);
+\draw[->] (ch)--node[above,font=\footnotesize]{$u_1$}(to);
+\draw[->] (to)--(fa);
+\draw[->] (fa)--(de);
+\draw[->] (de)--(bo);
+\end{tikzpicture}
+\caption{The logic of \cref{ch:index}. The trace formula gives homotopy
+invariance; homotopy invariance leads to K-theory; the first Chern form $u_1$
+computes the Toeplitz index as a winding number; the last two sections prepare the
+proof of Bott periodicity in \cref{ch:bott}.}
+\label{index:fig:roadmap}
+\end{figure}
+
 \section{The index as a trace}\label{index:sec:trace}
+
+The index is the difference of two dimensions. Dimensions of finite rank
+projections are traces (\cref{index:lem:proj-trace}), and traces of smoothing
+operators depend continuously on the operator. So the first step is to write
+the index as a difference of traces of smoothing operators built from a
+parametrix.
 
 \subsection{What we use from earlier chapters}
 Throughout, $X$ is a compact manifold without boundary, of positive dimension,
@@ -167,7 +213,7 @@ finite rank projections.
   between Hilbert spaces. Let $B:L^2(X;F)\to\Hs m(X;E)$ be its inverse on
   $A(\Hs m)$, extended by zero on $\Nul(A^*)$. By the open mapping theorem $B$
   is bounded, and \eqref{index:eq:gen-inverse} holds on $L^2$. These four
-  identities clearly determine $B$. Substituting
+  identities determine $B$. Substituting
   $\Id=AB_0+R'$ on the right and $\Id=B_0A+R$ on the left,
   \begin{align*}
     B&=B(AB_0+R')=(\Id-\pi)B_0+BR'
@@ -207,6 +253,19 @@ generalized inverse is a parametrix in the sense of \eqref{index:eq:parametrix}.
   by \cref{index:lem:trace-commute}.
 \end{proof}
 
+\begin{question}
+  In finite dimensions, how does \eqref{index:eq:trace-formula} reproduce the
+  familiar formula for the index?
+\end{question}
+\begin{answer}
+  Let $A:\C^n\to\C^m$ and let $B:\C^m\to\C^n$ be any linear map. Then
+  $\Tr(\Id_n-BA)-\Tr(\Id_m-AB)=n-m$, because $\Tr(AB)=\Tr(BA)$. By rank--nullity,
+  $n-m=\dim\Nul A-\dim(\C^m/A\C^n)$. In infinite dimensions $n-m$ becomes
+  ``$\infty-\infty$''. The parametrix makes $\Id-BA$ and $\Id-AB$ smoothing, hence
+  trace class, so the two infinite traces of the identity cancel before any trace
+  is taken.
+\end{answer}
+
 \begin{remark}\label{index:rem:sign}
   The right side of \eqref{index:eq:trace-formula} is $\Tr([A,B])$ in a formal
   sense: $\Id-BA$ and $\Id-AB$ are individually trace class, but $AB$ and $BA$
@@ -215,6 +274,11 @@ generalized inverse is a parametrix in the sense of \eqref{index:eq:parametrix}.
 \end{remark}
 
 \section{Homotopy invariance of the index}\label{index:sec:homotopy}
+
+\Cref{index:thm:trace-formula} writes the index as a continuous function of the
+operator, as long as the parametrix can be chosen continuously. A continuous
+integer-valued function on an interval is constant. So the only work is to
+construct parametrices that depend smoothly on a parameter.
 
 \subsection{Smooth families}
 Let $Z$ be a manifold, possibly with boundary or corners (we mostly use
@@ -297,6 +361,44 @@ record the consequences we need.
   continuous integer-valued function on $[0,1]$. Hence it is constant.
 \end{proof}
 
+\begin{discussion}
+  Where was ellipticity used? Only in producing the smooth family of
+  parametrices $B_t$. If ellipticity fails at one time $t_0$, then $\Id-B_tA_t$
+  cannot be smoothing near $t_0$, the traces are undefined, and the index can
+  jump. \Cref{index:fig:winding} shows the typical picture for the Toeplitz
+  operators of \cref{index:sec:toeplitz}: along the family of symbols
+  $a_t(\theta)=(1-t)+te^{i\theta}$ the index is $0$ for $t<\frac12$ and $-1$ for
+  $t>\frac12$, and at $t=\frac12$ the symbol vanishes at one point.
+\end{discussion}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.3,>=Stealth]
+\draw[->,gray] (-1.3,0)--(1.5,0) node[right]{\small$\Re$};
+\draw[->,gray] (0,-1.2)--(0,1.2) node[above]{\small$\Im$};
+\fill (0,0) circle (1.2pt) node[below left]{\small$0$};
+\foreach \t/\s in {0.2/densely dotted,0.35/densely dotted}{
+  \draw[thick,\s] ({1-\t},0) circle (\t);}
+\draw[very thick] (0.5,0) circle (0.5);
+\fill[white] (0,0) circle (1.6pt); \draw (0,0) circle (1.6pt);
+\foreach \t in {0.7,0.9}{\draw[thick,dashed] ({1-\t},0) circle (\t);}
+\fill (1,0) circle (1.2pt) node[below right]{\small$1$};
+\node[font=\footnotesize,align=left,anchor=west] at (2.2,0.9)
+  {dotted: $t<\frac12$, $\wind=0$, $\ind_{\mathcal T}=0$};
+\node[font=\footnotesize,align=left,anchor=west] at (2.2,0.45)
+  {solid: $t=\frac12$, passes through $0$};
+\node[font=\footnotesize,align=left,anchor=west] at (2.2,0)
+  {dashed: $t>\frac12$, $\wind=1$, $\ind_{\mathcal T}=-1$};
+\end{tikzpicture}
+\caption{The images in $\C$ of the symbols $a_t(\theta)=(1-t)+te^{i\theta}$,
+circles of centre $1-t$ and radius $t$. As long as the curve avoids $0$ (the
+symbol is elliptic) its winding number about $0$, and with it the index of
+$T_{a_t}$ (\cref{index:thm:toeplitz-index}), cannot change. The only way to
+change the index is to pass through a non-elliptic symbol, here at
+$t=\frac12$.}
+\label{index:fig:winding}
+\end{figure}
+
 \begin{remark}\label{index:rem:continuous}
   The same conclusion holds for families that are only continuous in $t$ (in
   the topology of $\Psido m$). One way to see this is to note that such a
@@ -352,6 +454,14 @@ the following.
 \end{remark}
 
 \section{Smoothing groups and K-theory}\label{index:sec:K}
+
+\Cref{index:cor:symbol} reduces the index to a function on homotopy classes of
+invertible symbols. To compute it we need a good way of organizing such classes.
+K-theory does this by ignoring the size of the matrices: a map $g$ into
+$\GL(N,\C)$ is identified with its \emph{stabilization}
+$g\oplus\Id\in\GL(N+1,\C)$. The group $\Ginf(Y;E)$ of invertible smoothing
+perturbations of the identity contains all the groups $\GL(N,\C)$, nested inside
+each other, so it performs this stabilization automatically.
 
 \subsection{Odd K-theory}
 Let $Y$ be a compact manifold of positive dimension and $E$ a vector bundle
@@ -421,6 +531,19 @@ $s\in[0,1]$ once $N$ is large.
   The middle term is the direct sum description.
 \end{proof}
 
+\begin{question}
+  The groups $\GL(N,\C)$ and $\Ginf(Y;E)$ are not commutative. Why is
+  $K^{-1}(X)$?
+\end{question}
+\begin{answer}
+  Because commutativity is only needed up to homotopy, and there is room to move.
+  The rotation $R_\theta$ slides $g'$ into a block $W_2$ orthogonal to the block
+  $W_1$ on which $g$ acts, and maps acting on orthogonal blocks commute. The room
+  comes from $\dim\CI(Y;E)=\infty$, which is why $\dim Y>0$ is assumed. Inside a
+  fixed $\GL(N,\C)$, with $g$ and $g'$ using all $N$ dimensions, there is no
+  such room and the argument fails.
+\end{answer}
+
 \begin{remark}\label{index:rem:pi-k}
   In terms of homotopy groups, the assertion that \eqref{index:eq:K1} is odd
   K-theory, i.e.\ that $\Ginf$ is a classifying space for $K^{-1}$, amounts
@@ -438,6 +561,14 @@ $s\in[0,1]$ once $N$ is large.
 \end{remark}
 
 \subsection{Even K-theory}
+Odd K-theory is built from invertible maps. Even K-theory, $K^0$, is usually
+built from vector bundles (\cref{ch:bott}). The bridge is the \emph{clutching
+construction}: a loop $g:\Sphere^1\to\GL(N,\C)$ glues the trivial bundles
+$\C^N$ over the two hemispheres of $\Sphere^2$ along the equator, and every
+bundle on $\Sphere^2$ arises in this way (\cref{bott:fig:clutching},
+\cref{bott:lem:sphere-clutching}). So loops of invertible maps are transition
+functions of bundles, and they give a model of even K-theory.
+
 Let $\Sphere^1=\{e^{i\theta}\}$ with base point $1$.
 
 \begin{definition}\label{index:def:K2}
@@ -573,6 +704,12 @@ $X\times\{1\}$. Such maps are naturally Schwartz functions on $X\times\R$.
 \end{remark}
 
 \section{Chern forms and the Fredholm determinant}\label{index:sec:chern}
+
+For a loop $g$ in $\GL(N,\C)$ the basic invariant is the winding number of
+$\det g$, which equals $\frac1{2\pi i}\int\tr(g^{-1}dg)$. This section builds the
+analogue on $\Ginf$, with the trace of smoothing operators in place of the matrix
+trace. The forms $\Tr((A^{-1}dA)^{2k-1})$ give de~Rham classes on the K-groups,
+and the first of them, integrated along paths, gives the Fredholm determinant.
 
 \subsection{Forms with values in smoothing operators}
 Since $\Ginf=\Ginf(Y;E)$ is an open subset of $\Id+\Psido{-\infty}(Y;E)$, we
@@ -789,6 +926,16 @@ $A\in\Ginf$ has a convex neighbourhood
 $\{A+b;\ \norm b_{L^2}<\norm{A^{-1}}^{-1}\}$ inside $\Ginf$. After
 reparametrization such a path is smooth.
 
+\begin{discussion}
+  In finite dimensions $d\log\det A=\tr(A^{-1}dA)$, so $\log\det A$ is the
+  integral of $\tr(A^{-1}dA)$ along a path from $\Id$ to $A$. The logarithm is
+  multivalued: two paths differ by a loop, and the integral over a loop is
+  $2\pi i$ times a winding number. The exponential does not see this ambiguity.
+  The same argument works on $\Ginf$ because \cref{index:prop:integrality} says
+  that the periods of $u_1$ lie in $2\pi i\Z$. We never need a trace of
+  $\log A$ or a product of eigenvalues.
+\end{discussion}
+
 \begin{theorem}\label{index:thm:det}
   For $A\in\Ginf(Y;E)$ let $\gamma:[0,1]\to\Ginf(Y;E)$ be any piecewise smooth
   path with $\gamma(0)=\Id$ and $\gamma(1)=A$, and set
@@ -949,7 +1096,43 @@ functions on ``half'' of $\Sphere^1$. The cotangent bundle is
 $T^*\Sphere^1=\Sphere^1\times\R_\xi$, and the Fourier variable $k$
 corresponds to $\xi$. This suggests that $S$ is microlocally the identity on
 the positive half $S^*_+\Sphere^1=\{\xi>0\}$ and zero on the negative half
-$S^*_-\Sphere^1$.
+$S^*_-\Sphere^1$ (\cref{index:fig:hardy}).
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[>=Stealth]
+\begin{scope}
+\draw[->,gray] (-3.3,0)--(3.4,0) node[right]{\small$k$};
+\foreach \k in {-3,...,-1}{\draw (\k*0.9,0) circle (2.2pt);}
+\foreach \k in {0,...,3}{\fill (\k*0.9,0) circle (2.2pt);}
+\foreach \k in {-3,...,3}{\node[below,font=\footnotesize] at (\k*0.9,-0.12){$\k$};}
+\draw[decorate,decoration={brace,amplitude=4pt}] (-0.1,0.25)--(2.8,0.25)
+  node[midway,above=4pt,font=\footnotesize]{$\Hardy$: kept by $S$};
+\draw[decorate,decoration={brace,amplitude=4pt}] (-2.8,0.25)--(-0.8,0.25)
+  node[midway,above=4pt,font=\footnotesize]{$\Hardym$: killed};
+\node[font=\small] at (0,-1.1) {(a) Fourier modes $e^{ik\theta}$};
+\end{scope}
+\begin{scope}[shift={(5.6,0.1)}]
+\draw[gray] (0,0) circle (0.9);
+\draw[very thick] (0,0) circle (1.45);
+\draw[thick,densely dashed] (0,0) circle (0.4);
+\foreach \a in {30,90,...,330}{
+  \draw[->] (\a:0.9)--(\a:1.4);
+  \draw[->,densely dashed] (\a:0.9)--(\a:0.45);}
+\draw (40:1.45)--(1.9,1.2) node[right,font=\footnotesize]{$S^*_+$: $\sigma_0(S)=1$};
+\draw (0:0.9)--(1.9,0) node[right,font=\footnotesize]{$\Sphere^1$ (zero section)};
+\draw (-60:0.4)--(1.9,-1.2) node[right,font=\footnotesize]{$S^*_-$: $\sigma_0(S)=0$};
+\node[font=\small] at (0.9,-1.95) {(b) $T^*\Sphere^1$, $\xi>0$ outward};
+\end{scope}
+\end{tikzpicture}
+\caption{The Szeg\H{o} projector. (a) On Fourier series, $S$ keeps the modes
+$k\ge0$ and kills the modes $k<0$. (b) The cotangent bundle
+$T^*\Sphere^1=\Sphere^1\times\R_\xi$, drawn with $\xi>0$ pointing outwards. The
+cosphere bundle has two components, $S^*_+$ (outer circle) and $S^*_-$ (inner
+circle); the principal symbol of $S$ is $1$ on the first and $0$ on the second
+(\cref{index:thm:szego}).}
+\label{index:fig:hardy}
+\end{figure}
 
 \begin{proposition}\label{index:prop:hardy}
   Restriction to the boundary is an isomorphism
@@ -1095,7 +1278,53 @@ null space the constants:
   \ind_{\mathcal T}(U)=-1,\qquad\ind_{\mathcal T}(L)=1.
 \end{equation*}
 More generally $U^k=T_{e^{ik\theta}}$ for $k\ge0$ has index $-k$ and
-$L^k=T_{e^{-ik\theta}}$ has index $k$.
+$L^k=T_{e^{-ik\theta}}$ has index $k$. \Cref{index:fig:shifts} shows the
+mechanism.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[>=Stealth]
+\begin{scope}
+\foreach \k in {0,...,4}{\fill (\k*1.1,0) circle (2.2pt);
+  \node[below,font=\footnotesize] at (\k*1.1,-0.1){$\k$};}
+\node at (5.3,0) {$\cdots$};
+\foreach \k in {0,...,3}{\draw[->,shorten >=3pt,shorten <=3pt]
+  (\k*1.1,0) to[bend left=45] (\k*1.1+1.1,0);}
+\draw[->,shorten >=3pt,shorten <=3pt] (4.4,0) to[bend left=45] (5.2,0.1);
+\draw (0,0) circle (5pt);
+\node[font=\footnotesize,align=center] at (0,-0.85) {not hit:\\ $\Hardy/U\Hardy=\C$};
+\node[font=\small] at (2.2,1.0) {$U$: $k\mapsto k+1$, \ $\ind_{\mathcal T}U=-1$};
+\end{scope}
+\begin{scope}[shift={(7.2,0)}]
+\foreach \k in {0,...,4}{\fill (\k*1.1,0) circle (2.2pt);
+  \node[below,font=\footnotesize] at (\k*1.1,-0.1){$\k$};}
+\node at (5.3,0) {$\cdots$};
+\foreach \k in {1,...,4}{\draw[->,shorten >=3pt,shorten <=3pt]
+  (\k*1.1,0) to[bend right=45] (\k*1.1-1.1,0);}
+\draw[->,shorten <=3pt] (0,0) -- (0,0.6) node[above,font=\footnotesize]{$0$};
+\node[font=\footnotesize,align=center] at (0,-0.85) {$\Nul L=\C$};
+\node[font=\small] at (2.6,1.0) {$L$: $k\mapsto k-1$, \ $\ind_{\mathcal T}L=1$};
+\end{scope}
+\end{tikzpicture}
+\caption{The shifts on the Hardy space, acting on the Fourier modes
+$e^{ik\theta}$, $k\ge0$. The forward shift $U$ is injective but misses the
+constants. The backward shift $L$ is surjective but kills the constants. On the
+full space $\CI(\Sphere^1)$, where $k$ runs over $\Z$, both are invertible.}
+\label{index:fig:shifts}
+\end{figure}
+
+\begin{question}
+  The shift $U$ is an isometry and its symbol $e^{i\theta}$ never vanishes. How
+  can it fail to be invertible?
+\end{question}
+\begin{answer}
+  An injective linear map of a finite dimensional space to itself is surjective,
+  but this is false in infinite dimensions (``Hilbert's hotel''). Ellipticity
+  only says that $U$ is invertible modulo smoothing operators, and the index
+  measures the remaining defect. Multiplication by $e^{i\theta}$ on all of
+  $\CI(\Sphere^1)$ is invertible; it is the restriction to half of the
+  frequencies, i.e.\ to half of $S^*\Sphere^1$, that creates the index.
+\end{answer}
 
 \begin{theorem}\label{index:thm:toeplitz-index}
   If $a\in\CI(\Sphere^1;\GL(N,\C))$ then the Toeplitz operator $T_a=SaS$ on
@@ -1123,6 +1352,15 @@ $L^k=T_{e^{-ik\theta}}$ has index $k$.
   $L^{-k}\oplus\Id\oplus\dots\oplus\Id$ if $k<0$. Its index is $-k$.
 \end{proof}
 
+\begin{discussion}
+  The proof follows a pattern that recurs in the rest of the book. First,
+  homotopy invariance reduces the problem to a symbol in a \emph{normal form},
+  here $\diag(e^{ik\theta},1,\dots,1)$. Second, the index of an explicit operator
+  with that symbol is computed by hand, here by counting Fourier modes. In
+  \cref{ch:bott} the same two steps are carried out for families, where the
+  simple homotopy above is replaced by Atiyah's linearization of loops.
+\end{discussion}
+
 \begin{remark}\label{index:rem:toeplitz-K}
   Via finite rank embeddings $\GL(N,\C)\hookrightarrow\Ginf$,
   \cref{index:thm:toeplitz-index} says that the Toeplitz index is the
@@ -1135,6 +1373,13 @@ $L^k=T_{e^{-ik\theta}}$ has index $k$.
 \end{remark}
 
 \section{Smoothing perturbations of elliptic families}\label{index:sec:families}
+
+An elliptic operator of index zero becomes invertible after adding a suitable
+finite rank smoothing operator. For a family $A(x)$ we would like to do this
+smoothly in $x$. Index zero at each point is necessary but not sufficient: the
+cokernels can twist into a non-trivial vector bundle as $x$ varies. This section
+shows that this twisting, measured by the families index, is the only
+obstruction.
 
 Throughout this section $X$ is a compact manifold (the parameter space,
 possibly with boundary). We use the standard $L^2$ structure on
@@ -1226,6 +1471,17 @@ null spaces and the bundle $F_r$ complementary to the range is the
 \emph{families index} of $A$, an element of $K^0(X)$. It is discussed in
 \cref{ch:families}.
 
+\begin{discussion}
+  Why cut off the first $2r+1$ Fourier modes? The null spaces $\Nul A(x)$ may
+  jump in dimension as $x$ varies, so they do not form a bundle. Composing with
+  $\Id-\pi_r$ forces the null space to be the \emph{fixed} space $\Ran(\pi_r)$
+  for every $x$ (\cref{index:lem:stabilized}(a)). All the variation is then
+  pushed into the complement $F_r(x)$ of the range, whose dimension is constant
+  because the index is. The trivial bundle $\Ran(\pi_r)$ and the bundle $F_r$
+  together carry exactly the information that a single number, the index,
+  carries for one operator.
+\end{discussion}
+
 \begin{theorem}\label{index:thm:perturb-family}
   Let $A\in\CI(X;\Psido0(\Sphere^1;\C^N))$ be a smooth family of elliptic
   operators. There is a smooth family $B\in\CI(X;\Psido{-\infty}(\Sphere^1;\C^N))$
@@ -1315,6 +1571,12 @@ invertible families. It is used in \cref{ch:bott}.
 
 \section{Deforming matrices away in the Toeplitz group}\label{index:sec:deform}
 
+In \cref{ch:bott} we show that the group of invertible Toeplitz operators is
+(weakly) contractible. A first obstacle is the copy of $\GL(N,\C)$ inside it:
+the constant matrices, which are not contractible in $\GL(N,\C)$ itself. The
+point of this section is that, after doubling $\C^N$ to $\C^{2N}$, the shifts
+$U$ and $L$ provide enough room to contract them.
+
 Let
 \begin{equation*}
   \tilde G^0_{\mathcal T}(\Sphere^1;\C^N)=\{A\in\PsiT0(\Sphere^1;\C^N);\
@@ -1349,7 +1611,19 @@ $g\mapsto\left(\begin{smallmatrix}g&0\\0&\Id_N\end{smallmatrix}\right)$.
   \begin{equation*}
     M_0=\begin{pmatrix}\Id-\pi_0+\pi_0g\pi_0&0\\0&\Id\end{pmatrix}.
   \end{equation*}
-  The homotopy has three stages, each depending smoothly on $g$.
+  The homotopy has three stages, each depending smoothly on $g$:
+  \begin{equation*}
+    \begin{tikzcd}[column sep=2.6em]
+      M_0 \arrow[r,"\text{Stage 1}"] &
+      M_{\pi/2} \arrow[r,"\text{Stage 2}"] &
+      \begin{pmatrix}g&0\\0&g^{-1}\end{pmatrix} \arrow[r,"\text{Stage 3}"] &
+      \Id .
+    \end{tikzcd}
+  \end{equation*}
+  In Stages 1 and 2 the Toeplitz structure is essential: the shifts move the
+  matrix $g$ off the constants, so that it can be traded for $g^{-1}$ in the
+  second block. Stage 3 is the finite dimensional fact that
+  $\diag(g,g^{-1})$ is connected to $\Id$ uniformly in $g$.
 
   \emph{Stage 1.} For $\tau\in[0,\pi/2]$ let
   \begin{equation*}
