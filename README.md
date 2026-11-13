@@ -39,13 +39,27 @@ maintained:
   - the Hochschild toolkit and Melrose--Nistor §§1–12 with the compressed
     proofs written out, including the double residue trace and the boundary
     maps;
-  - summaries of §§13–15 and a comparison with the b-calculus notes.
+  - summaries of §§13–15 and a comparison with the b-calculus notes;
+  - four appendices that make the notes self-contained for readers of
+    Loya's notes: the construction of the cusp calculus; homological algebra
+    (Wodzicki excision, Connes' HKR theorem, Künneth, Morita); holomorphic
+    families, the Wodzicki residue and the suspended eta invariant; and
+    convergence of the order spectral sequences.
+
+  The two steps Melrose--Nistor leave unproved are proved here: the boundary
+  connecting map of their Prop. 5 (without their multiplicative splitting),
+  and convergence for the Laurent symbol algebras for every dimension
+  (following Lauter--Moroianu's tri-filtered criterion and filling in their
+  Prop. 5.1). What remains quoted is standard background, listed in §2.5.
 
   Corrections are marked in the text. They include the following:
   - the homology statements assume a connected boundary, and for N
     boundary components the degree-two boundary map has rank N − 1;
   - dimension one needs separate treatment;
-  - the sign of the symbolic term in the index theorem is wrong;
+  - the signs of the symbolic and β terms in the index theorem are wrong,
+    and the eta formula in Prop. 17 has a wrong sign and a missing factor 2;
+  - the regular-value claim in Prop. 8 is false, which adds a local
+    correction to the eta term;
   - there are several smaller misprints.
 
 - `Lecture draft/Hochschild homology of pseudodifferential symbols (Brylinski-Getzler notes).tex`:
@@ -72,7 +86,7 @@ maintained:
   Quoted inputs are listed as (G1)–(G15). Corrections are marked in the text.
   They include the following:
   - the "in particular" description of HH by the cohomology of M is false in
-    general (for instance for M = S²);
+    general, for M = S² and even for M = T², where the Euler class vanishes;
   - the zeta-function constant depends on the order of the operator;
   - a sign in the formula for δ, the normalization of d¹, the sl(2) star
     operator, and the filtration used for cyclic homology.

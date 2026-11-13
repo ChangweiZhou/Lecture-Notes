@@ -545,6 +545,57 @@ of \S3; ``Hochschild cohomology'' for homology at the start of \S5; and
 ``\(m\) sufficiently large'' for ``\(-m\) sufficiently large'' in \S4. We
 note these where they occur.
 \end{enumerate}
+Figure~\ref{fig:bgmap} shows, for each section of \cite{BG}, where it is treated
+in these notes, which quoted inputs it relies on, and which of the corrections
+above concern it.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,
+  bg/.style={draw=blue!70!black,fill=blue!6,rounded corners=2pt,align=center,
+   font=\footnotesize,text width=25mm,minimum height=9mm,inner sep=2pt},
+  nt/.style={draw,fill=gray!12,rounded corners=2pt,align=center,
+   font=\footnotesize,text width=31mm,minimum height=9mm,inner sep=2pt},
+  gq/.style={draw=gray!60!black,fill=gray!20,rounded corners=1.5pt,font=\scriptsize,
+   inner sep=1.3pt},
+  cr/.style={circle,draw=red!70!black,text=red!70!black,font=\scriptsize,
+   inner sep=0.6pt,minimum size=4.2mm},
+  hd/.style={font=\footnotesize\bfseries,anchor=south}]
+ \node[hd] at (0,0.55) {BG};
+ \node[hd] at (3.55,0.55) {these notes};
+ \node[hd] at (7.75,0.55) {quoted inputs};
+ \node[hd] at (11.45,0.55) {corrections};
+ \foreach \y/\b/\n/\g/\c/\o in {
+  0/{\S1: quantum\\ algebras, \(E^1\), \(d^1\)}/{\S\ref{sec:BG1}\\ (with \S\S\ref{sec:HH}, \ref{sec:ss}, \ref{sec:star},
+   App.~\ref{app:connes})}/{G2,G3,G4}/{1,2,7}/0,
+  -1.25/{\S2: conic,\\ \(\delta\), degeneration}/{\S\ref{sec:BG2}\\ (with \S\ref{sec:poisson})}/{G3,G4,G6,G7}/{1,3,8,9,13}/0.21,
+  -2.5/{\S3: cyclic\\ homology}/{\S\ref{sec:BG3}\\ (with \S\ref{sec:HC})}/{G3,G4}/{2,13}/0,
+  -3.75/{\S4: symbols,\\ residue}/{\S\S\ref{sec:symbols}, \ref{sec:residue},
+   App.~\ref{app:mixed}\\ (examples: \S\ref{sec:examples})}/{G1,G2,G5,G8,G9,G10}/{4,5,6,9,10,11,13}/0.21,
+  -5/{\S\S4--5: diff.\ ops,\\ sheaves}/{\S\S\ref{sec:diffops}, \ref{sec:sheaf}}/{G5,G11,G12,G13,G14}/{12,13}/0.21}{
+  \node[bg] (b) at (0,\y) {\b};
+  \node[nt] (n) at (3.55,\y) {\n};
+  \draw[->,thick,blue!70!black] (b) -- (n);
+  \begin{scope}[shift={(5.75,\y)}]
+   \foreach \q [count=\i] in \g {\pgfmathtruncatemacro{\cc}{mod(\i-1,3)}
+    \pgfmathtruncatemacro{\rr}{(\i-1)/3}
+    \node[gq,anchor=west] at ({\cc*0.98},{\o-0.42*\rr}) {(\q)};}
+  \end{scope}
+  \begin{scope}[shift={(9.95,\y)}]
+   \foreach \q [count=\i] in \c {\node[cr] at ({(\i-1)*0.5},0) {\q};}
+  \end{scope}
+ }
+ \draw[gray!60] (5.55,0.45)--(5.55,-5.5);
+ \draw[gray!60] (9.7,0.45)--(9.7,-5.5);
+\end{tikzpicture}
+\caption[Map from BG to these notes]{How the five sections of \cite{BG} are
+treated here. Grey tags are the quoted inputs (G1)--(G14) of
+Section~\ref{subsec:quoted} on which the corresponding part relies; (G15) is
+used for comparison only. Red numbers refer to the list of corrections in
+Section~\ref{subsec:corrections}; only numbers~4 and~6 change statements.
+Number~13 collects misprints in several sections.}
+\label{fig:bgmap}
+\end{figure}
 
 \section{Hochschild homology for beginners}\label{sec:HH}
 
@@ -682,6 +733,50 @@ Picture an elementary chain \(a_0\otimes\dots\otimes a_k\) as \(k+1\) beads
 on a circle. The face \(d_i\) multiplies neighbouring beads \(i\) and
 \(i+1\), and \(d_k\) closes the necklace by multiplying the last bead with
 the first. The cyclic nature of \(d_k\) is why traces appear in degree zero.
+Figure~\ref{fig:necklace} draws two faces for \(k=3\).
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,
+  bead/.style={circle,draw,fill=white,inner sep=0.8pt,minimum size=6.5mm,font=\footnotesize},
+  bead0/.style={bead,draw=red!70!black,fill=red!8,thick}]
+ \begin{scope}
+  \draw[gray!60,thick] (0,0) circle (1);
+  \node[bead0] at (90:1) {\(a_0\)};
+  \node[bead] at (0:1) {\(a_1\)};
+  \node[bead] at (270:1) {\(a_2\)};
+  \node[bead] at (180:1) {\(a_3\)};
+  \draw[blue!70!black,thick,{Bar[width=4pt]}-{Bar[width=4pt]}] (-5:1.42) arc (-5:-85:1.42);
+  \draw[blue!70!black,thick,{Bar[width=4pt]}-{Bar[width=4pt]}] (175:1.42) arc (175:95:1.42);
+  \node[blue!70!black,font=\scriptsize] at (-45:1.7) {\(d_1\)};
+  \node[blue!70!black,font=\scriptsize] at (135:1.7) {\(d_3\)};
+  \node[font=\small,anchor=north] at (0,-1.55) {\(a_0\otimes a_1\otimes a_2\otimes a_3\)};
+ \end{scope}
+ \draw[->,thick] (2.0,0.35) -- node[above,font=\scriptsize]{\(d_1\)} (3.3,0.9);
+ \draw[->,thick] (2.0,-0.35) -- node[below,font=\scriptsize]{\(d_3\)} (3.3,-0.9);
+ \begin{scope}[shift={(5.1,1.2)},scale=0.8]
+  \draw[gray!60,thick] (0,0) circle (1);
+  \node[bead0] at (90:1) {\(a_0\)};
+  \node[bead,minimum size=7.5mm] at (-45:1) {\(a_1a_2\)};
+  \node[bead] at (195:1) {\(a_3\)};
+  \node[font=\small,anchor=west] at (1.6,0) {\(d_1:\ a_0\otimes a_1a_2\otimes a_3\)};
+ \end{scope}
+ \begin{scope}[shift={(5.1,-1.2)},scale=0.8]
+  \draw[gray!60,thick] (0,0) circle (1);
+  \node[bead0,minimum size=7.5mm] at (135:1) {\(a_3a_0\)};
+  \node[bead] at (15:1) {\(a_1\)};
+  \node[bead] at (270:1) {\(a_2\)};
+  \node[font=\small,anchor=west] at (1.6,0) {\(d_3:\ a_3a_0\otimes a_1\otimes a_2\)};
+ \end{scope}
+\end{tikzpicture}
+\caption[Hochschild chains as necklaces]{A Hochschild \(3\)-chain as a necklace,
+with the bead \(a_0\) (red) marking slot \(0\). The inner face \(d_1\) multiplies
+the neighbouring beads \(a_1\), \(a_2\). The last face \(d_3\) closes the
+necklace: it multiplies \(a_3\) with \(a_0\), in this order, and the product
+occupies slot \(0\). Then \(b=d_0-d_1+d_2-d_3\). In degree one,
+\(b(a_0\otimes a_1)=a_0a_1-a_1a_0\), so \(\HH_0=A/[A,A]\).}
+\label{fig:necklace}
+\end{figure}
 
 \subsection{The bar resolution and small resolutions}\label{subsec:barres}
 \emph{This subsection uses a little homological algebra and can be skimmed on a
@@ -736,7 +831,36 @@ becomes \(0\). Hence \(\HH_0(\C[x])=\C[x]\), \(\HH_1(\C[x])=\C[x]\), which is
 The same holds for \(A=\C[r,r^{-1}]\): after clearing a denominator
 \((rs)^N\), \(f(r,s)-f(r,r)\) is divisible by \(r-s\). Thus
 \(\HH_1(\C[r^{\pm1}])=\C[r^{\pm1}]\,dr\), and \(\HH_k=0\) for \(k\ge2\).
+Figure~\ref{fig:Cx} compares this computation with the bar resolution.
 \end{example}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzcd}[column sep=2.7em,row sep=2.1em,
+  cells={font=\small},labels={font=\scriptsize}]
+ |[font=\footnotesize,blue!70!black]|\text{Koszul} &[-1.2em] 0 \arrow[r] & A^e e_1 \arrow[r,"x-y"]
+  \arrow[d,blue!70!black,"\Phi"'] & A^e \arrow[r,"f\mapsto f(x{,}x)"] \arrow[d,equal] &
+  A \arrow[r] \arrow[d,equal] & 0\\
+ |[font=\footnotesize]|\text{bar} & A^{\otimes4} \arrow[r,"b'"] & A^{\otimes3} \arrow[r,"b'"] &
+  A\otimes A \arrow[r,"\mu"] & A \arrow[r] & 0\\[-0.4em]
+ |[font=\footnotesize,blue!70!black]|A\otimes_{A^e}\text{Koszul} & 0 \arrow[r] & A\,e_1 \arrow[r,"0"]
+  \arrow[d,blue!70!black,"a e_1\mapsto a\otimes x"'] & A \arrow[d,equal] & &\\
+ |[font=\footnotesize]|\text{Hochschild} & C_2 \arrow[r,"b"] & C_1=A\otimes A \arrow[r,"b=0"]
+  \arrow[d,red!70!black,"a_0\otimes a_1\mapsto a_0\,da_1"'] & C_0=A \arrow[d,red!70!black,equal] & &\\[-0.6em]
+ & & |[red!70!black]|\HH_1\cong A\,dx & |[red!70!black]|\HH_0=A & &
+\end{tikzcd}
+\caption[{\(\HH_*(\C[x])\): Koszul versus bar}]{Two resolutions of \(A=\C[x]\) by
+\(A^e=\C[x,y]\)-modules (Example~\ref{ex:Cx}). The two-term Koszul resolution
+maps to the bar resolution by \(\Phi(e_1)=1\otimes x\otimes1\), over the identity
+of \(A\); this is a chain map because \(b'(1\otimes x\otimes1)=x\otimes1-1\otimes x=(x-y)\cdot(1\otimes1)\)
+(the case \(n=1\) of the proof of Theorem~\ref{thm:HKRpoly}). After applying
+\(A\otimes_{A^e}\), the map \(x-y\) becomes \(0\), so the Koszul side has homology \(A\) in
+degrees \(0\) and \(1\) and nothing above; by the comparison theorem the Hochschild
+complex has the same homology. Since \(A\) is commutative, \(\HH_0=A\) and every
+linear functional is a trace; \(\HH_1\cong A\,dx\) by
+Proposition~\ref{prop:HH1}, through the class of \(a\otimes x\).}
+\label{fig:Cx}
+\end{figure}
 
 \subsection{The Hochschild--Kostant--Rosenberg theorem}\label{subsec:HKR}
 For a commutative algebra define the \emph{HKR map} and the
@@ -1529,6 +1653,52 @@ coordinates \(H_f=\sum_j(\pa_{\xi_j}f\,\pa_{x_j}-\pa_{x_j}f\,\pa_{\xi_j})\), and
 an operator is the classical motion that the operator quantizes; for
 instance on \(\R^2\), \(f=\frac12(x^2+\xi^2)\) gives \(H_f=\xi\pa_x-x\pa_\xi\), a
 rotation.
+Figure~\ref{fig:hamflow} draws the flow for a less symmetric \(f\).
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,x=2.15cm,y=1.75cm]
+ \draw[->] (-1.9,0)--(1.95,0) node[right] {\small \(x\)};
+ \draw[->] (0,-1.15)--(0,1.2) node[above] {\small \(\xi\)};
+ \draw[blue!70!black,thick] plot[smooth cycle] coordinates {(1.22,0.00) (1.22,0.08) (1.20,0.15) (1.18,0.21) (1.15,0.27) (1.11,0.31) (1.06,0.33) (1.02,0.35) (0.97,0.34) (0.92,0.33) (0.87,0.30) (0.83,0.26) (0.79,0.22) (0.76,0.17) (0.73,0.12) (0.72,0.06) (0.71,0.00) (0.72,-0.06) (0.73,-0.12) (0.76,-0.17) (0.79,-0.22) (0.83,-0.26) (0.87,-0.30) (0.92,-0.33) (0.97,-0.34) (1.02,-0.35) (1.06,-0.33) (1.11,-0.31) (1.15,-0.27) (1.18,-0.21) (1.20,-0.15) (1.22,-0.08)};
+ \draw[blue!70!black,thick] plot[smooth cycle] coordinates {(-0.71,0.00) (-0.72,0.06) (-0.73,0.12) (-0.76,0.17) (-0.79,0.22) (-0.83,0.26) (-0.87,0.30) (-0.92,0.33) (-0.97,0.34) (-1.02,0.35) (-1.06,0.33) (-1.11,0.31) (-1.15,0.27) (-1.18,0.21) (-1.20,0.15) (-1.22,0.08) (-1.22,0.00) (-1.22,-0.08) (-1.20,-0.15) (-1.18,-0.21) (-1.15,-0.27) (-1.11,-0.31) (-1.06,-0.33) (-1.02,-0.35) (-0.97,-0.34) (-0.92,-0.33) (-0.87,-0.30) (-0.83,-0.26) (-0.79,-0.22) (-0.76,-0.17) (-0.73,-0.12) (-0.72,-0.06)};
+ \draw[blue!70!black,thick] plot[smooth cycle] coordinates {(1.34,0.00) (1.33,0.13) (1.31,0.26) (1.27,0.37) (1.21,0.46) (1.14,0.52) (1.07,0.56) (0.98,0.57) (0.89,0.55) (0.81,0.51) (0.72,0.45) (0.65,0.39) (0.58,0.31) (0.52,0.24) (0.48,0.16) (0.46,0.08) (0.45,0.00) (0.46,-0.08) (0.48,-0.16) (0.52,-0.24) (0.58,-0.31) (0.65,-0.39) (0.72,-0.45) (0.81,-0.51) (0.89,-0.55) (0.98,-0.57) (1.07,-0.56) (1.14,-0.52) (1.21,-0.46) (1.27,-0.37) (1.31,-0.26) (1.33,-0.13)};
+ \draw[blue!70!black,thick] plot[smooth cycle] coordinates {(-0.45,0.00) (-0.46,0.08) (-0.48,0.16) (-0.52,0.24) (-0.58,0.31) (-0.65,0.39) (-0.72,0.45) (-0.81,0.51) (-0.89,0.55) (-0.98,0.57) (-1.07,0.56) (-1.14,0.52) (-1.21,0.46) (-1.27,0.37) (-1.31,0.26) (-1.33,0.13) (-1.34,0.00) (-1.33,-0.13) (-1.31,-0.26) (-1.27,-0.37) (-1.21,-0.46) (-1.14,-0.52) (-1.07,-0.56) (-0.98,-0.57) (-0.89,-0.55) (-0.81,-0.51) (-0.72,-0.45) (-0.65,-0.39) (-0.58,-0.31) (-0.52,-0.24) (-0.48,-0.16) (-0.46,-0.08)};
+ \draw[blue!70!black,thick] plot[smooth cycle] coordinates {(1.53,0.00) (1.52,0.18) (1.50,0.36) (1.46,0.52) (1.40,0.67) (1.33,0.78) (1.24,0.87) (1.14,0.93) (1.02,0.95) (0.90,0.94) (0.77,0.90) (0.62,0.84) (0.47,0.77) (0.32,0.70) (0.16,0.65) (0.00,0.63) (-0.16,0.65) (-0.32,0.70) (-0.47,0.77) (-0.62,0.84) (-0.77,0.90) (-0.90,0.94) (-1.02,0.95) (-1.14,0.93) (-1.24,0.87) (-1.33,0.78) (-1.40,0.67) (-1.46,0.52) (-1.50,0.36) (-1.52,0.18) (-1.53,0.00) (-1.52,-0.18) (-1.50,-0.36) (-1.46,-0.52) (-1.40,-0.67) (-1.33,-0.78) (-1.24,-0.87) (-1.14,-0.93) (-1.02,-0.95) (-0.90,-0.94) (-0.77,-0.90) (-0.62,-0.84) (-0.47,-0.77) (-0.32,-0.70) (-0.16,-0.65) (0.00,-0.63) (0.16,-0.65) (0.32,-0.70) (0.47,-0.77) (0.62,-0.84) (0.77,-0.90) (0.90,-0.94) (1.02,-0.95) (1.14,-0.93) (1.24,-0.87) (1.33,-0.78) (1.40,-0.67) (1.46,-0.52) (1.50,-0.36) (1.52,-0.18)};
+ \draw[gray!40!black,densely dashed,thick,domain=-90:90,samples=60,variable=\t]
+   plot ({sqrt(2)*cos(\t)},{sqrt(2)*cos(\t)*sin(\t)});
+ \draw[gray!40!black,densely dashed,thick,domain=-90:90,samples=60,variable=\t]
+   plot ({-sqrt(2)*cos(\t)},{sqrt(2)*cos(\t)*sin(\t)});
+ \foreach \xx/\yy in {1/0.35,1/0.57,-1/0.35,-1/0.57,0.02/0.63}{
+   \draw[->,blue!70!black,thick] (\xx-0.06,\yy)--(\xx+0.06,\yy);
+   \draw[->,blue!70!black,thick] (\xx+0.06,-\yy)--(\xx-0.06,-\yy);}
+ \fill (1,0) circle (1.3pt); \fill (-1,0) circle (1.3pt);
+ \fill[white] (0,0) circle (1.5pt); \draw (0,0) circle (1.5pt);
+ \coordinate (g) at (1.40,0.67);
+ \fill[red!70!black] (g) circle (1.6pt);
+ \draw[->,red!70!black,very thick] (g) -- ++(0.25,-0.5);
+ \node[red!70!black,font=\scriptsize,anchor=west] at (1.62,0.36) {\(H_p\)};
+ \node[red!70!black,font=\scriptsize,anchor=south] at (1.30,0.90)
+   {\(\gamma(t)\)};
+ \node[font=\footnotesize,anchor=west,align=left] at (1.62,-0.6)
+   {\(\frac{d}{dt}\,q(\gamma(t))=\{p,q\}\)\\[2pt] \(q=x\): \(\dot x=\xi\)};
+ \begin{scope}[yshift=-3.0cm]
+  \draw[->] (-1.9,0)--(1.95,0) node[right] {\small \(x\)};
+  \draw[gray!50!black,thick,domain=-1.72:1.72,samples=80]
+    plot (\x,{0.5*(\x*\x-1)*(\x*\x-1)/4});
+  \node[gray!40!black,font=\scriptsize,anchor=east] at (-1.75,0.45) {\(V(x)\)};
+ \end{scope}
+\end{tikzpicture}
+\caption[A Hamiltonian flow on \(T^*\R\)]{The Hamiltonian vector field of
+\(p(x,\xi)=\frac12\xi^2+V(x)\) on \(T^*\R\), for the double well
+\(V(x)=\frac14(x^2-1)^2\) (drawn below, not to scale). By the coordinate formula,
+\(H_p=\xi\pa_x-V'(x)\pa_\xi\): points move to the right where \(\xi>0\) and to the left
+where \(\xi<0\). Since \(H_pp=\{p,p\}=0\), the flow lines lie on level sets of \(p\)
+(blue); the dashed level through the origin separates the orbits around one well
+from those around both. For every \(q\), \(\{p,q\}=H_pq\) is the derivative of \(q\)
+along the flow; for \(q=x\) it is the velocity \(\xi\).}
+\label{fig:hamflow}
+\end{figure}
 
 The \emph{Poisson bivector} \(\pi\) is the antisymmetric form on covectors
 with \(\pi(df,dg)=\{f,g\}\). In coordinates
@@ -1588,8 +1758,34 @@ The duality \(k\leftrightarrow2-k\) is explained by a star operator. Define
 \[
  \delta=(-1)^{k-1}\,*d*\qquad\text{on \(k\)-forms on \(\R^2\)}.
 \]
-This is Brylinski's theorem in its smallest case. The rest of this section
-proves it in general.
+This is Brylinski's theorem in its smallest case
+(Figure~\ref{fig:deltaR2}). The rest of this section proves it in general.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzcd}[column sep=7.2em,row sep=2.5em,cells={font=\small},labels={font=\scriptsize}]
+ |[font=\footnotesize,gray!40!black]|\text{homology of }\delta: &[-4.5em]
+ |[red!70!black]|\C\,\omega & |[gray!40!black]|0 & |[gray!40!black]|0\\[-1.6em]
+ |[font=\footnotesize,blue!70!black]|(\Om^\bullet,\delta) &
+ \Om^2(\R^2) \arrow[r,blue!70!black,"\delta","h\,\omega\,\mapsto\,-dh"' black]
+   \arrow[d,"*"',"h\omega\mapsto h"] &
+ \Om^1(\R^2) \arrow[r,blue!70!black,"\delta","f\,dg\,\mapsto\,\{f{,}g\}"' black]
+   \arrow[d,"*"',"\mathrm{id}"] &
+ \Om^0(\R^2) \arrow[d,"*"',"f\mapsto f\omega"]\\
+ |[font=\footnotesize,red!70!black]|(\Om^\bullet,d) &
+ \Om^0(\R^2) \arrow[r,red!70!black,"d"] & \Om^1(\R^2) \arrow[r,red!70!black,"d"] & \Om^2(\R^2)\\[-1.6em]
+ |[font=\footnotesize,gray!40!black]|\text{de Rham}: &
+ |[red!70!black]|H^0=\C & |[gray!40!black]|H^1=0 & |[gray!40!black]|H^2=0
+\end{tikzcd}
+\caption[\(\delta\) and \(d\) on the plane]{The operator \(\delta=[\iota_\pi,d]\) on
+\(\R^2\), \(\omega=d\xi\wedge dx\). Top row: \(\delta\) lowers form degree by one,
+with \(\delta(h\,\omega)=-dh\), \(\delta(f\,dg)=\{f,g\}\) and \(\delta f=0\). The star
+operator (\(*1=\omega\), \(*\omega=1\), identity on \(1\)-forms) carries
+\(k\)-forms to \((2-k)\)-forms, and \(\delta=(-1)^{k-1}*d*\) on \(k\)-forms, so it turns
+the \(\delta\)-complex into the de Rham complex (bottom row). The only homology,
+\(\C\,\omega\) in degree \(2\), corresponds to the constants in degree~\(0\).}
+\label{fig:deltaR2}
+\end{figure}
 
 \subsection{The Koszul--Brylinski operator}\label{subsec:delta}
 Let \((X,\omega)\) be symplectic of dimension \(2n\), with Poisson bivector \(\pi\).
@@ -1867,9 +2063,49 @@ of degree \(0\) has no \(d\xi\) (which has degree \(1\)) and coefficients of deg
 \(0\) in \(\xi\), so it is a form on \(M\).
 \end{proof}
 
-The splitting in (2) depends on \(r\). Replacing \(r\) by \(ar\), with \(a>0\)
+Figure~\ref{fig:weights} summarizes the proposition. The splitting in (2) depends on \(r\). Replacing \(r\) by \(ar\), with \(a>0\)
 homogeneous of degree \(0\), changes \(\theta'\) by \(\theta''\wedge d\log a\), which does not
 change the class of \(\theta''\).
+
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,x=1.55cm,y=0.8cm]
+ \foreach \j in {0,...,4}{\node[font=\footnotesize] at (\j,2.75) {\(j=\j\)};}
+ \node[font=\footnotesize,anchor=east] at (-0.35,2.75) {form degree};
+ \foreach \c in {-2,...,2}{
+   \node[font=\footnotesize,anchor=east] at (-0.35,\c) {\(c=\c\)};
+   \ifnum\c=0
+    \foreach \j in {0,...,4}{\fill[red!70!black] (\j,\c) circle (2.6pt);}
+    \foreach \j in {0,...,3}{\draw[->,red!70!black,thick] (\j+0.12,\c)--(\j+0.88,\c);}
+   \else
+    \foreach \j in {0,...,4}{\fill[gray!55] (\j,\c) circle (2.2pt);}
+    \foreach \j in {0,...,3}{\draw[->,gray!50!black] (\j+0.12,\c)--(\j+0.88,\c);}
+   \fi}
+ \node[font=\scriptsize,gray!40!black,anchor=south] at (0.5,2.05) {\(d\)};
+ \draw[->,blue!70!black,thick,densely dashed] (2.88,0.88) to[bend left=50]
+   node[below,font=\scriptsize,inner sep=1pt]{\(\iota_R/c\)} (2.12,0.88);
+ \draw[->,blue!70!black,thick,densely dashed] (1.88,-2.12) to[bend left=50]
+   node[below,font=\scriptsize]{\(\iota_R/c\)} (1.12,-2.12);
+ \node[font=\scriptsize,anchor=west,align=left] at (4.4,1.5)
+   {\(\Lie_R=c\) on \(\Om^\bullet_{(c)}\)\\ \(d\iota_R+\iota_Rd=\Lie_R\)\\
+    \(c\ne0\): closed \(\theta=d(\iota_R\theta/c)\)};
+ \node[font=\scriptsize,anchor=west,align=left,red!70!black] at (4.4,0)
+   {\(\theta=\theta'+\theta''\wedge dr/r\)\\ \(H^j\cong H^j(S^*M\times S^1)\)};
+ \node[font=\scriptsize,anchor=west,gray!40!black] at (4.4,-1.5) {acyclic};
+ \draw[decorate,decoration={brace,amplitude=4pt},gray!50!black] (4.3,2.25)--(4.3,0.6);
+ \draw[decorate,decoration={brace,amplitude=4pt},gray!50!black] (4.3,-0.6)--(4.3,-2.25);
+\end{tikzpicture}
+\caption[Homogeneous de Rham cohomology]{The de Rham complex of \(\Tdot M\)
+splits by homogeneity: \(d\) preserves the degree \(c\) of homogeneity (rows) and
+raises the form degree \(j\) (columns). On the row \(c\) the Lie derivative
+\(\Lie_R\) is multiplication by \(c\), so Cartan's formula makes \(\iota_R/c\) a
+contracting homotopy for \(c\ne0\) (dashed): these rows are acyclic. Only the row
+\(c=0\) (red) has cohomology, that of \(S^*M\times S^1\)
+(Proposition~\ref{prop:homdR}). Under the star operator the same picture, with
+\(\delta\) and the homotopy \(\eps(\alpha)\), gives Theorem~\ref{thm:homog}.}
+\label{fig:weights}
+\end{figure}
 
 \begin{question}
 Why does the answer involve \(S^*M\times S^1\) rather than \(\Tdot M\), which is
@@ -1959,8 +2195,50 @@ On \(\R^2\), \(\{x,\xi\}=-1\), so
 multiplication by \(x\) and \(\xi\) to \(D_x=-i\pa_x\) is an isomorphism from the
 polynomials with the Moyal product onto the Weyl algebra \(A_1\) (the Weyl
 quantization), since \([D_x,x]=-i\). For comparison, the left-quantized product
-gives \(x\#\xi=x\xi\) and \(\xi\#x=x\xi-i\).
+gives \(x\#\xi=x\xi\) and \(\xi\#x=x\xi-i\). Figure~\ref{fig:moyal} compares the
+two products order by order.
 \end{example}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,
+  cell/.style={draw=gray!60,fill=gray!8,rounded corners=2pt,align=center,
+   font=\footnotesize,text width=32mm,minimum height=11mm,inner sep=2pt},
+  pb/.style={cell,draw=red!70!black,fill=red!6},
+  rl/.style={font=\footnotesize,align=right,anchor=east}]
+ \node[font=\footnotesize\bfseries] at (0,0.95) {\(\hb^0\)};
+ \node[font=\footnotesize\bfseries] at (3.7,0.95) {\(\hb^1\)};
+ \node[font=\footnotesize\bfseries] at (7.4,0.95) {\(\hb^2\)};
+ \node[rl] at (-2.1,0) {left quantization\\ \(a\#_\hb b\)};
+ \node[cell] at (0,0) {\(ab\)};
+ \node[pb] at (3.7,0) {\(-i\sum_j\pa_{\xi_j}a\,\pa_{x_j}b\)\\
+   \(=-\frac i2\{a,b\}+S(a,b)\)};
+ \node[cell] at (7.4,0) {\(\sum_{|\alpha|=2}\frac1{\alpha!}\pa_\xi^\alpha a\,D_x^\alpha b\)};
+ \node[rl] at (-2.1,-1.35) {Moyal\\ \(a\star b\)};
+ \node[cell] at (0,-1.35) {\(ab\)};
+ \node[pb] at (3.7,-1.35) {\(\frac1{2i}\,m\circ\Pi(a\otimes b)\)\\ \(=-\frac i2\{a,b\}\)};
+ \node[cell] at (7.4,-1.35) {\(\frac12\bigl(\frac1{2i}\bigr)^2m\circ\Pi^2(a\otimes b)\)\\
+   (symmetric in \(a\), \(b\))};
+ \node[rl] at (-2.1,-2.7) {commutator\\ (both products)};
+ \node[cell,fill=white] at (0,-2.7) {\(0\)};
+ \node[pb,fill=white] at (3.7,-2.7) {\(-i\{a,b\}\)};
+ \node[cell,fill=white] at (7.4,-2.7) {Moyal: \(0\),\\ so the error is \(O(\hb^3)\)};
+ \draw[->,thick,blue!70!black] (-1.5,-3.65) -- (9.2,-3.65);
+ \node[blue!70!black,font=\footnotesize,anchor=north] at (3.85,-3.7)
+   {on homogeneous \(a_p\), \(b_q\): \(P_l(a_p,b_q)\) has degree \(p+q-l\);
+    one power of \(\hb\) \(=\) one order lower};
+\end{tikzpicture}
+\caption[Left quantization versus Moyal]{The left-quantized composition
+formula and the Moyal product, sorted by powers of \(\hb\) (Sections~\ref{subsec:compstar}
+and~\ref{subsec:moyal}). Both start with the commutative product \(ab\). At
+order \(\hb\) both have antisymmetric part \(-\frac i2\{a,b\}\) (red), so both
+commutators begin with \(-i\hb\{a,b\}\); the left-quantized product also has a
+symmetric part \(S(a,b)\), which drops out of the computation of \(d^1\)
+(Theorem~\ref{thm:d1}). For the Moyal product the term of order \(\hb^l\) is
+\((-1)^l\) times its transpose (Proposition~\ref{prop:moyal}). Example: \(x\#\xi=x\xi\),
+\(\xi\#x=x\xi-i\), while \(x\star\xi=x\xi+\frac{i\hb}2\), \(\xi\star x=x\xi-\frac{i\hb}2\).}
+\label{fig:moyal}
+\end{figure}
 
 \subsection{Formal deformations and quantum algebras}\label{subsec:quantum}
 Let \(A\) be a commutative algebra, for instance \(\CI(X)\). Let
@@ -2854,8 +3132,68 @@ connected with \(\chi_{\mathrm{top}}(M)=0\), the sequence splits and
 \]
 When \(e\ne0\), classes cancel in pairs. In all cases
 \(\sum_k(-1)^k\dim\HH_k(\cP)=\chi_{\mathrm{top}}(S^*M\times S^1)=0\). These statements are checked on
-examples in Section~\ref{sec:examples}.
+examples in Section~\ref{sec:examples}, and Figure~\ref{fig:gysin} shows the
+cases \(M=S^2\) and \(M=T^2\).
 \end{correction}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,
+  cls/.style={circle,draw,fill=blue!12,inner sep=0pt,minimum size=4.6mm,font=\scriptsize},
+  dead/.style={cls,fill=gray!15,draw=gray!60,text=gray!60}]
+ % ---------- S^2 Gysin
+ \begin{scope}
+  \node[font=\small] at (1.1,2.0) {(a) \(M=S^2\), \(e\neq0\)};
+  \foreach \p in {0,1,2}{\node[font=\scriptsize] at (1.1*\p,-0.55) {\(p=\p\)};}
+  \node[font=\scriptsize,anchor=east] at (-0.35,0) {\(\pi^*H^p(M)\)};
+  \node[font=\scriptsize,anchor=east] at (-0.35,1.2) {\(\pi_*\!:H^{p}(M)\)};
+  \node[cls] at (0,0) {1};
+  \node[dead] (b2) at (2.2,0) {1};
+  \node[dead] (t0) at (0,1.2) {1};
+  \node[cls] at (2.2,1.2) {1};
+  \draw[->,red!70!black,thick] (t0) -- node[above right=-2pt,font=\scriptsize]{\(e\)} (b2);
+  \node[font=\scriptsize,align=center] at (1.1,-1.2)
+   {\(H^*(S^*S^2)\): \(\C\) in degrees \(0,3\)\\ (\(S^*S^2\cong\R P^3\))};
+ \end{scope}
+ % ---------- T^2 Gysin
+ \begin{scope}[xshift=6.9cm]
+  \node[font=\small] at (1.1,2.0) {(b) \(M=T^2\), \(e=0\)};
+  \foreach \p in {0,1,2}{\node[font=\scriptsize] at (1.1*\p,-0.55) {\(p=\p\)};}
+  \node[font=\scriptsize,anchor=east] at (-0.35,0) {\(\pi^*H^p(M)\)};
+  \node[font=\scriptsize,anchor=east] at (-0.35,1.2) {\(\pi_*\!:H^{p}(M)\)};
+  \foreach \p/\b in {0/1,1/2,2/1}{\node[cls] at (1.1*\p,0) {\b}; \node[cls] at (1.1*\p,1.2) {\b};}
+  \draw[->,gray!50!black,densely dashed] (0.15,1.05) -- node[above right=-2pt,font=\scriptsize]{\(e=0\)} (2.05,0.15);
+  \node[font=\scriptsize,align=center] at (1.1,-1.2)
+   {\(H^*(S^*T^2)\): dimensions \(1,3,3,1\)\\ (\(S^*T^2\cong T^3\))};
+ \end{scope}
+ % ---------- bar charts
+ \foreach \xs/\nm/\sc/\good/\bad/\hgt in {0/S^2/0.7/{1,1,0,1,1}/{1,1,1,0,0}/1.0,6.9/T^2/0.2/{1,4,6,4,1}/{3,3,1,0,0}/1.5}{
+ \begin{scope}[xshift=\xs cm,yshift=-3.85cm]
+  \draw (-0.4,0)--(4.2,0);
+  \foreach \v [count=\i] in \good {
+    \fill[blue!60] ({(\i-1)*0.9-0.16},0) rectangle ++(0.15,\v*\sc);
+    \node[blue!70!black,font=\tiny,anchor=south] at ({(\i-1)*0.9-0.09},\v*\sc) {\v};}
+  \foreach \v [count=\i] in \bad {
+    \draw[red!70!black,thick] ({(\i-1)*0.9+0.03},0) rectangle ++(0.15,\v*\sc);
+    \node[red!70!black,font=\tiny,anchor=south] at ({(\i-1)*0.9+0.12},\v*\sc) {\v};}
+  \foreach \k in {0,...,4}{\node[font=\scriptsize] at ({\k*0.9},-0.25) {\(\k\)};}
+  \node[font=\scriptsize,anchor=west] at (4.25,-0.25) {\(k\)};
+  \node[font=\scriptsize,anchor=south west] at (-0.4,\hgt) {\(\dim\HH_k(\cP(\nm))\)};
+ \end{scope}}
+\end{tikzpicture}
+\caption[The Gysin sequence and BG's ``in particular'']{Correction~\ref{corr:gysin}
+for \(n=2\). Top: the Gysin sequence of the circle bundle \(S^*M\to M\), drawn in
+two rows. A class of \(H^p(M)\) in the bottom row gives, by \(\pi^*\), a class of
+degree \(p\) on \(S^*M\); a class in the top row is the image under \(\pi_*\) of a
+class of degree \(p+1\). The Euler class maps column \(p\) of the top row to column
+\(p+2\) of the bottom row, and the classes it pairs off (grey) do not contribute. (a) For \(S^2\),
+\(e\) is \(2\) times a generator, and only degrees \(0\) and \(3\) survive. (b) For \(T^2\),
+\(e=0\) and nothing cancels. Bottom: \(\dim\HH_k(\cP)=\dim H^{4-k}(S^*M\times S^1)\)
+(blue) against BG's \(\dim H^{1-k}(M)\oplus H^{2-k}(M)\) (red). The formula fails for
+\(S^2\), and for \(T^2\) as well although \(e=0\); for \(T^2\) and \(k=0\) it gives
+\(3\) instead of \(1\).}
+\label{fig:gysin}
+\end{figure}
 
 \begin{bgremark}[Hypotheses]\label{rem:hyp}
 (1) The uniqueness of the residue needs \(M\) connected and \(n\ge2\); BG say this in
@@ -3036,10 +3374,46 @@ depend on the coordinates.
 \begin{proof}
 The form \(\iota_R(f\vol)\) is homogeneous of degree \(0\) and closed:
 \(d\iota_R(f\vol)=\Lie_R(f\vol)-\iota_Rd(f\vol)=(-n+n)f\vol=0\). So its integral over a section of
-the rays does not depend on the section (Stokes, with compact \(x\)-support). On
+the rays does not depend on the section (Stokes, with compact \(x\)-support; Figure~\ref{fig:sections}). On
 \(\{|\xi|=1\}\), \(|\iota_R\vol|=|\iota_R(d\xi_1\wedge\dots\wedge d\xi_n)|\,|dx|=dS\,dx\). A change of coordinates
 induces a map of \(\Tdot U\) preserving \(\omega\), \(R\) and the principal symbol.
 \end{proof}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,scale=1.0]
+ \fill[gray!10] (-2.6,-2.4) rectangle (2.6,2.4);
+ \fill[blue!12,even odd rule,domain=0:360,samples=120,variable=\t]
+   plot ({(1.75+0.3*sin(3*\t)+0.12*cos(5*\t))*cos(\t)},{(1.75+0.3*sin(3*\t)+0.12*cos(5*\t))*sin(\t)})
+   (0,0) circle (1);
+ \foreach \a in {0,30,...,330}{
+   \draw[->,gray!50!black] ({0.35*cos(\a)},{0.35*sin(\a)}) -- ({2.35*cos(\a)},{2.35*sin(\a)});}
+ \draw[red!70!black,very thick] (0,0) circle (1);
+ \draw[blue!70!black,very thick,domain=0:360,samples=120,variable=\t]
+   plot ({(1.75+0.3*sin(3*\t)+0.12*cos(5*\t))*cos(\t)},{(1.75+0.3*sin(3*\t)+0.12*cos(5*\t))*sin(\t)});
+ \fill[white] (0,0) circle (3pt); \draw (0,0) circle (3pt);
+ \draw[red!70!black,thin] (-1.75,-1.95) -- (-0.6,-0.8);
+ \node[red!70!black,font=\small,fill=gray!10,inner sep=1pt] at (-1.9,-2.05) {\(|\xi|=1\)};
+ \node[blue!70!black,font=\small,fill=gray!10,inner sep=1pt] at (-1.95,1.95) {\(\Sigma\)};
+ \node[font=\small,anchor=north] at (0,-2.5) {fibre \(T^*_xU\setminus0\)};
+ \node[font=\small,anchor=west,align=left] at (3.0,1.2)
+   {\(f\) homogeneous of degree \(-n\):\\[2pt]
+    \(\iota_R(f\vol)\) has degree \(0\) and\\
+    \(d\,\iota_R(f\vol)=(\Lie_R-\iota_Rd)(f\vol)=0\)};
+ \node[font=\small,anchor=west,align=left] at (3.0,-0.75)
+   {Stokes on the shaded region:\\[2pt]
+    \(\displaystyle\int_{\{|\xi|=1\}}f\,\iota_R\vol=\int_{\Sigma}f\,\iota_R\vol\)};
+\end{tikzpicture}
+\caption[The residue density on sections of the rays]{Lemma~\ref{lem:Sintegral}
+in one fibre. The integrand of the residue is \(\iota_R(f\,\vol)\) with
+\(f=a_{-n}\) homogeneous of degree \(-n\). It is closed, and since
+\(\Lie_R\vol=n\vol\) it is also homogeneous of degree \(0\). So its integral over the
+unit cosphere (red) equals its integral over any other section \(\Sigma\) of the rays
+(blue): by Stokes' theorem on the region between them (shaded, taken over all \(x\)
+in the compact \(x\)-support). So the integral does not depend on the section of the rays used to
+represent \(S^*U\), nor on the coordinates.}
+\label{fig:sections}
+\end{figure}
 
 \begin{theorem}[The residue]\label{thm:residue}
 Let \(M\) be closed. There is a unique linear functional \(\res\) on \(\cP\) with
@@ -3202,7 +3576,41 @@ times the term of degree \(-n\) of the symbol of \(P\), since \(A^0=1\). By (G8)
 the full symbol of \(P\) in the \(i\)-th chart.
 \end{proof}
 
-The functional \(\res\) is the \emph{Wodzicki--Guillemin residue}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,x=1.3cm,y=1cm]
+ \fill[blue!8] (3,-1.3) rectangle (5.2,1.3);
+ \draw[blue!70!black,densely dashed] (3,-1.3)--(3,1.3);
+ \node[blue!70!black,font=\scriptsize,align=center] at (4.15,0.85)
+   {\(\operatorname{Re}s>\frac{k+n}m\):\\ trace class};
+ \draw[->] (-3.4,0)--(5.4,0) node[right] {\small \(\operatorname{Re}s\)};
+ \draw[->] (0,-1.4)--(0,1.5) node[above] {\small \(\operatorname{Im}s\)};
+ \foreach \x in {3,2,-1,-2,-3}{
+   \draw[gray!50!black,thick] (\x-0.08,-0.08)--(\x+0.08,0.08) (\x-0.08,0.08)--(\x+0.08,-0.08);}
+ \node[font=\scriptsize] at (1,0.25) {\(\cdots\)};
+ \draw[red!70!black,very thick] (-0.11,-0.11)--(0.11,0.11) (-0.11,0.11)--(0.11,-0.11);
+ \node[font=\scriptsize,anchor=north west,fill=white,inner sep=1pt] at (3.08,-0.12) {\(s_0=\frac{k+n}m\)};
+ \node[font=\scriptsize,anchor=north] at (2,-0.15) {\(s_1\)};
+ \node[font=\scriptsize,anchor=north] at (-1,-0.15) {\(-\frac1m\)};
+ \node[font=\scriptsize,anchor=north] at (-2,-0.15) {\(-\frac2m\)};
+ \node[font=\scriptsize,anchor=north] at (-3,-0.15) {\(\cdots\)};
+ \node[red!70!black,font=\scriptsize,anchor=south east,align=center] at (-0.1,0.2)
+   {\(s=0\ (j=k+n)\):\\ \(\Res=\frac1m\res(P)\)};
+ \draw[<->,gray!50!black] (2,-0.85)--node[below,font=\scriptsize]{\(\frac1m\)}(3,-0.85);
+\end{tikzpicture}
+\caption[Poles of \(\Tr(PA^{-s})\)]{Possible poles of \(\zeta(s)=\Tr(PA^{-s})\), for
+\(P\) of order \(k\) and \(A\) of order \(m\) (Lemma~\ref{lem:seeley} and
+Proposition~\ref{prop:zeta}). The symbol of \(PA^{-s}\) has order \(\mu(s)=k-ms\), and
+\(\zeta\) is holomorphic where \(\operatorname{Re}\mu(s)<-n\) (shaded). Its term of
+degree \(\mu(s)-j\) can give a simple pole where \(\mu(s)=j-n\), that is at
+\(s_j=(k+n-j)/m\), spaced \(1/m\) apart (crosses). At \(s=0\) the term involved is the
+term \(p_{-n}\) of the symbol of \(P\), since \(A^0=1\), and the residue is
+\(\frac1m\res(P)\). The factor \(\frac1m\) is the one discussed in
+Correction~\ref{corr:zeta}.}
+\label{fig:zetapoles}
+\end{figure}
+
+Figure~\ref{fig:zetapoles} shows where the poles can lie. The functional \(\res\) is the \emph{Wodzicki--Guillemin residue}
 \cite{Wodzicki-residue,Guillemin}; the factor \((2\pi)^{-n}\) is included by some
 authors and not by others. BG mention that the trace was first observed by Adler
 \cite{Adler} for \(M=\R\), in the theory of the KdV equation.
@@ -3647,7 +4055,46 @@ spectral sequences of \(\cP\) and of \(\cE\) identifies this with \(\HH_*(\cP)\)
 these arguments and treat the whole of this subsection as quoted background. The
 point of the method is structural: the circle in the answer for symbols is the
 fibre \(\C^\times\) of the complexified cotangent bundle, and the local computation is a
-statement about holonomic modules.
+statement about holonomic modules. Figure~\ref{fig:poincare} sets the three
+versions of the argument side by side.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,
+  pr/.style={draw=blue!70!black,fill=blue!6,rounded corners=2pt,align=center,
+   font=\scriptsize,text width=35mm,minimum height=10mm,inner sep=2pt},
+  qu/.style={pr,draw=red!70!black,fill=red!4,dashed},
+  rl/.style={font=\scriptsize\itshape,align=right,anchor=east,text width=17mm},
+  hd/.style={font=\footnotesize\bfseries,align=center}]
+ \node[hd] at (0,0.85) {de Rham (Weil)};
+ \node[hd] at (4,0.85) {differential operators};
+ \node[hd] at (8,0.85) {symbols (microlocal)};
+ \node[rl] at (-1.95,0) {local object};
+ \node[rl] at (-1.95,-1.45) {Poincaré lemma};
+ \node[rl] at (-1.95,-2.9) {gluing};
+ \node[rl] at (-1.95,-4.35) {global answer};
+ \node[pr] (a1) at (0,0) {\(\Om^\bullet(U)\), \(U\) an arc};
+ \node[pr] (a2) at (0,-1.45) {\(H^*(U)=\C\) in degree \(0\)\\ (Lemma~\ref{lem:weilrows})};
+ \node[pr] (a3) at (0,-2.9) {partitions of unity,\\ Čech--de Rham double complex};
+ \node[pr] (a4) at (0,-4.35) {\(H^*_{\mathrm{dR}}(S^1)\cong\check H^*\)\\ (Theorem~\ref{thm:weilS1})};
+ \node[pr] (b1) at (4,0) {\(C_\bullet(\cD(U))\), \(b\)};
+ \node[pr] (b2) at (4,-1.45) {\(\HH_*(\cD(U))=\C\) in degree \(2n\)\\ (Theorem~\ref{thm:DU})};
+ \node[qu] (b3) at (4,-2.9) {\(\mathcal C^\bullet\simeq\C_M[2n]\), localization\\ (G12), Remark~\ref{rem:sheafgap}};
+ \node[pr] (b4) at (4,-4.35) {\(\HH_k(\cD(M))\cong H^{2n-k}(M)\)\\ (Theorem~\ref{thm:DM}, via (G11))};
+ \node[qu] (c1) at (8,0) {\(C_\bullet(\cE_{\R}(U))\),\\ \(U\subset\Tdot M_{\C}/\C^\times\) (G13)};
+ \node[qu] (c2) at (8,-1.45) {\(\HH_*(\cE_{\R}(U))=\C\) in degree \(2n\)\\ (Background~\ref{bg:micro})};
+ \node[qu] (c3) at (8,-2.9) {sheaf theory on \(S^*M\times\C^\times\)\\ (Background~\ref{bg:microthm})};
+ \node[pr] (c4) at (8,-4.35) {\(\HH_k(\cP)\cong H^{2n-k}(S^*M\times S^1)\)\\ (Theorem~\ref{thm:HHP})};
+ \foreach \c in {a,b,c}{\foreach \i/\j in {1/2,2/3,3/4}{\draw[->,gray!50!black] (\c\i)--(\c\j);}}
+\end{tikzpicture}
+\caption[Local-to-global: three Poincaré lemmas]{The sheaf-theoretic method of
+Section~\ref{sec:sheaf} in three settings. Each column computes a local
+invariant on small open sets (a ``Poincaré lemma'') and glues. Solid blue boxes
+are proved in these notes; dashed red boxes are quoted. For symbols the global
+answer is proved here by the spectral sequence (Section~\ref{sec:symbols}); BG's
+derivation of it from the microlocal Poincaré lemma is not checked here.}
+\label{fig:poincare}
+\end{figure}
 
 \section{Worked examples}\label{sec:examples}
 
