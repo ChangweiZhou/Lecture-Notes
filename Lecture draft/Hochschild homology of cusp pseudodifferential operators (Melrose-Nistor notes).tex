@@ -88,6 +88,7 @@ operators I. Manifolds with boundary}}
 \author{Expository notes on Melrose--Nistor}
 \date{}
 
+\newcommand{\Lser}[1]{(\!(#1)\!)}
 \begin{document}
 \hypersetup{pageanchor=false}
 \maketitle
@@ -206,16 +207,18 @@ choices (a quantization, a boundary defining function and a normal
 fibration) there are isomorphisms \cite[(13)--(15)]{MN}
 \begin{equation}\label{eq:structure}
 \begin{gathered}
- \Is\cong\dCI(\Y)[q]],\qquad \As\cong x^{-\Z}\CI(\Y)[q]],\\
- \Id\cong\Psis^{-\infty}(\partial X)[[x],\qquad
- \Ad\cong\Psis^{\Z}(\partial X)[[x],\qquad
- \Ads\cong\CI(\Zb)[[x,q^{-1}].
+ \Is\cong\dCI(\Y)\Lser{q^{-1}},\qquad \As\cong x^{-\Z}\CI(\Y)\Lser{q^{-1}},\\
+ \Id\cong\Psis^{-\infty}(\partial X)\Lser{x},\qquad
+ \Ad\cong\Psis^{\Z}(\partial X)\Lser{x},\qquad
+ \Ads\cong\CI(\Zb)\Lser{x,q^{-1}}.
 \end{gathered}
 \end{equation}
 Here \(q=\sigma_1(Q)\) is the symbol of a positive elliptic \(Q\in
-\Psic^1(X)\), and \([q]]\) denotes Laurent series in \(q^{-1}\), with powers
-of \(q\) bounded above. Likewise \([[x]\) denotes Laurent series in \(x\),
-with powers of \(x\) bounded below. The products are star products. In the
+\Psic^1(X)\), and \(\Lser{q^{-1}}\) denotes Laurent series in \(q^{-1}\), with powers
+of \(q\) bounded above. Likewise \(\Lser{x}\) denotes Laurent series in \(x\),
+with powers of \(x\) bounded below. (MN write these as \([q]]\) and
+\([[x]\); we use the standard notation for formal Laurent series.) The
+products are star products. In the
 indicial algebras the Laurent variable does not commute with the suspended
 operators:
 \begin{equation}\label{eq:twist}
@@ -513,6 +516,13 @@ and for Dirac operators it is the APS eta invariant.
 \item[(B8)] \emph{Wodzicki residue} \cite{Wodzicki-residue,Guillemin-residue}:
 it is a trace, given by the local formula
 \((2\pi)^{-n}\int_{S^*M}a_{-n}\,\nu\), and independent of \(Q\).
+\item[(B9)] \emph{The boundary connecting map} \cite[Prop.~5]{MN}: part
+(3) of Proposition~\ref{prop:boundaryLES}, i.e.\ that the connecting map
+\(\HH_k(\Ads)\to\HH_{k-1}(\Is)\) is a non-zero universal multiple of the
+de Rham connecting map on the summand without \(d\theta_\partial\) and
+vanishes on the other summand. MN's proof uses a multiplicative splitting
+\(s_0\) that we could not reconstruct (Remark~\ref{rem:s0}); we quote
+this statement rather than claim a proof.
 \end{enumerate}
 
 \subsection{Corrections and unstated hypotheses}\label{subsec:errata}
@@ -1031,7 +1041,7 @@ More precisely, a choice of normal fibration identifies a collar with
 \([0,\epsilon)\times\partial X\). The Taylor series of the kernel at
 \(\mathrm{ff}_c\) then gives \cite[Prop.~25]{MN}
 \begin{equation}\label{eq:taylor}
- x^{-\Z}\Psic^{\Z}(X)/x^\infty\Psic^{\Z}(X)\ \cong\ \Psis^{\Z}(\partial X)[[x],
+ x^{-\Z}\Psic^{\Z}(X)/x^\infty\Psic^{\Z}(X)\ \cong\ \Psis^{\Z}(\partial X)\Lser{x},
  \qquad A\sim\sum_{j\ge-p}x^jA_{(j)} .
 \end{equation}
 Here the powers of \(x\) are written \emph{on the left}, and MN write
@@ -1049,7 +1059,7 @@ Let \(g\in\Psis^m(\partial X)\), acting on functions of \((t,y)\) with
 \item \([\lx,g]=-\sum_{k\ge1}\frac1k\,x^k\,\mathrm{ad}_t^k(g)\), where
 \(\mathrm{ad}_t^k(g)\) has indicial family \((-i\partial_\tau)^k\In(g)\).
 \end{enumerate}
-The associated graded algebra of \(\Psis(\partial X)[[x]\) for the
+The associated graded algebra of \(\Psis(\partial X)\Lser{x}\) for the
 \(x\)-filtration is commutative modulo \(\Psi(\partial X)\). Its Poisson
 bracket is \(\{x,\tau\}=-x^2\), that is, \(\{t,\tau\}=1\).
 \end{lemma}
@@ -1572,10 +1582,10 @@ Throughout this section \(M\) is a compact manifold with boundary, and
 \([0,\epsilon)_x\times\partial M\). We consider the three algebras of the
 Taylor sequence \cite[(25)]{MN},
 \begin{equation}\label{eq:taylorfun}
- 0\to\dCI(M)\to x^{-\Z}\CI(M)\to\CI(\partial M)[[x]\to0,
+ 0\to\dCI(M)\to x^{-\Z}\CI(M)\to\CI(\partial M)\Lser{x}\to0,
 \end{equation}
 where the last map takes the Taylor series at \(\partial M\) in the collar
-and \(\CI(\partial M)[[x]\) is the algebra of formal Laurent series
+and \(\CI(\partial M)\Lser{x}\) is the algebra of formal Laurent series
 \(\sum_{k\ge-p}f_kx^k\).
 
 \subsection{H-unitality of the flat functions}
@@ -1627,7 +1637,7 @@ is what makes \(x^{(0)}\) and \(x^{(1)}\) comparable.
 \end{remark}
 
 The algebra \(x^{-\Z}\CI(M)\) is unital, and so is
-\(\CI(\partial M)[[x]\). By excision (B4), \eqref{eq:taylorfun} gives a
+\(\CI(\partial M)\Lser{x}\). By excision (B4), \eqref{eq:taylorfun} gives a
 long exact sequence in Hochschild homology.
 
 \subsection{Hochschild homology of the three function algebras}
@@ -1636,8 +1646,8 @@ The HKR map \(\chi\) is defined on the chains of all three algebras
 \begin{align*}
  \chi&:\dCI(M^{k+1})\to\dCI(M;\Lambda^k),\\
  \chi&:x_0^{-\Z}\cdots x_k^{-\Z}\CI(M^{k+1})\to x^{-\Z}\CI(M;\Lambda^k),\\
- \chi&:\CI((\partial M)^{k+1})[[x_0,\dots,x_k]\to
- \CI(\partial M;\Lambda^k)[[x]\oplus\CI(\partial M;\Lambda^{k-1})[[x]
+ \chi&:\CI((\partial M)^{k+1})\Lser{x_0,\dots,x_k}\to
+ \CI(\partial M;\Lambda^k)\Lser{x}\oplus\CI(\partial M;\Lambda^{k-1})\Lser{x}
  \,\frac{dx}{x^2} .
 \end{align*}
 (MN print \(M\) for \(\partial M\) in the last target.) In the last line a
@@ -1653,7 +1663,7 @@ sequence of \eqref{eq:taylorfun} splits into the short exact sequences
 \cite[(28)]{MN}
 \[
  0\to\dCI(M;\Lambda^k)\to x^{-\Z}\CI(M;\Lambda^k)\to
- \CI(\partial M;\Lambda^k)[[x]\oplus\CI(\partial M;\Lambda^{k-1})[[x]\,
+ \CI(\partial M;\Lambda^k)\Lser{x}\oplus\CI(\partial M;\Lambda^{k-1})\Lser{x}\,
  \frac{dx}{x}\to0 .
 \]
 \end{lemma}
@@ -1661,7 +1671,7 @@ sequence of \eqref{eq:taylorfun} splits into the short exact sequences
 \begin{proof}
 For \(\dCI(M)\) the HKR isomorphism is Connes' theorem in its flat form
 (B5). For the formal Laurent series, the Künneth formula (B6) reduces the
-problem to \(\CI(\partial M)\) (Connes) and to \(\C[[x]\). The algebra
+problem to \(\CI(\partial M)\) (Connes) and to \(\C\Lser{x}\). The algebra
 \(\C[[x]]\) has the Koszul resolution
 \[
  0\to\C[[x,x']]\xrightarrow{\,x-x'\,}\C[[x,x']]\to\C[[x]]\to0
@@ -1669,7 +1679,7 @@ problem to \(\CI(\partial M)\) (Connes) and to \(\C[[x]\). The algebra
 by free modules over \(\C[[x]]\widehat\otimes\C[[x]]=\C[[x,x']]\). It gives
 \(\HH_0=\C[[x]]\), \(\HH_1=\C[[x]]\,dx\), and \(\HH_k=0\) for \(k\ge2\).
 Inverting the central element \(x\) is an exact localization, so the same
-holds for \(\C[[x]\) with Laurent coefficients. Now the HKR maps commute
+holds for \(\C\Lser{x}\) with Laurent coefficients. Now the HKR maps commute
 with the maps of \eqref{eq:taylorfun}, since restriction to Taylor series
 commutes with \(d\). By the five lemma, the HKR map for the middle algebra
 \(x^{-\Z}\CI(M)\) is also an isomorphism. Finally, the right-hand map at
@@ -1946,7 +1956,7 @@ identification shows that \(\Trs\) is Wodzicki's residue.
 \end{proposition}
 
 \begin{proof}
-\(\Ads\cong\CI(Z)[[x,q^{-1}]\) consists of formal Laurent series in \(x\)
+\(\Ads\cong\CI(Z)\Lser{x,q^{-1}}\) consists of formal Laurent series in \(x\)
 of complete symbols over \(\partial X\). The proof of
 Proposition~\ref{prop:As} applies with formal Laurent forms on the formal
 neighbourhood of \({}^cT^*_{\partial X}X\setminus0\). The homogeneous
@@ -1957,7 +1967,7 @@ dimension of \(Z\times\Ssig\times\Sd\) is \(2n\). Since \(Z\times\Ssig
 \times\Sd\) is closed, Poincar\'e duality gives the cohomology statement.
 \end{proof}
 
-\begin{proposition}[MN Proposition 5]\label{prop:boundaryLES}
+\begin{proposition}[MN Proposition 5; part (3) quoted as (B9)]\label{prop:boundaryLES}
 The ideal \(\Is\) is H-unital. Under the isomorphisms of
 Propositions~\ref{prop:As}, \ref{prop:Is} and \ref{prop:Ads}, the long
 exact sequence of \(0\to\Is\to\As\to\Ads\to0\) is the direct sum of the
@@ -2024,7 +2034,7 @@ sequences and of the isomorphisms of Propositions~\ref{prop:As},
 \ref{prop:Is}, \ref{prop:Ads} \cite[p.~15]{MN}.
 \end{proof}
 
-\begin{remark}[On the splitting \(s_0\)]
+\begin{remark}[On the splitting \(s_0\)]\label{rem:s0}
 The existence of a multiplicative splitting \(s_0\) is asserted in
 \cite{MN} without details. We were unable to reconstruct it for formal
 Laurent series in \(x\), since an element of \(\As\) has only finitely
@@ -2033,8 +2043,14 @@ uses is the leading-symbol computation of \(\sigma_*\) on
 \(E^2\). For that it suffices to have a splitting that is multiplicative
 modulo terms of lower order and modulo \(\Is\). The constant \(\pm i\) in
 (3) (MN write \(\imath\)) is irrelevant for everything that follows, which
-uses only kernels and images. We therefore regard (3) as established up
-to this point of detail.
+uses only kernels and images. We have not supplied such a splitting or an
+alternative argument, so the proof of (3) above is a sketch of MN's
+argument and not a complete proof. We treat (3) as the quoted input (B9).
+Every result below that uses the boundary map of \(0\to\Is\to\As\to
+\Ads\to0\) depends on (B9), in particular Lemma~\ref{lem:pstar}'s
+identification and the corrected homology tables in
+Section~\ref{sec:AdA} and Examples~\ref{ex:cylinder}
+and~\ref{ex:intervalHH}.
 \end{remark}
 
 \section{The indicial algebra \texorpdfstring{\(\Id\)}{Id} (MN \S4)}
@@ -2046,7 +2062,7 @@ Let \(\partial X\) be a point; for instance \(X=[0,1)\). Then
 By \eqref{eq:Inkernel} it is isomorphic to \(\cS(\R_\tau)\) with
 pointwise multiplication, and
 \[
- \Id\cong\cS(\R_\tau)[[x],\qquad A\sim\sum_{j\ge-p}x^ja_j(\tau),
+ \Id\cong\cS(\R_\tau)\Lser{x},\qquad A\sim\sum_{j\ge-p}x^ja_j(\tau),
 \]
 with the product determined by the twist (Lemma~\ref{lem:twist}). Let us
 make the product explicit to second order. For \(a,b\in\cS(\R_\tau)\)
@@ -2192,7 +2208,7 @@ In a product collar, the variable \(x=1/t\) commutes with operators acting
 only in \(y\). Hence, componentwise,
 \[
  \Id\cong\bigoplus_{j=1}^N\Psi^{-\infty}(H_j)\widehat\otimes
- \bigl(\cS(\R_\tau)[[x]\bigr)\qquad\text{\cite[p.~16]{MN}}.
+ \bigl(\cS(\R_\tau)\Lser{x}\bigr)\qquad\text{\cite[p.~16]{MN}}.
 \]
 Since \(\Psi^{-\infty}(H)=\CI(H)\widehat\otimes\CI(H)\) is of the form
 in Lemma~\ref{lem:Hunital}, Morita invariance for smoothing kernels
@@ -3108,7 +3124,7 @@ operator \cite[Prop.~15]{MN}.
 
 \begin{example}[A boundary index in dimension one]\label{ex:bindex}
 Let \(n=1\) with one boundary point. The algebra \(\Ads=\CI(\{\pm\})
-[[x,q^{-1}]\) splits as \(\Ads^+\oplus\Ads^-\) by the central idempotents
+\Lser{x,q^{-1}}\) splits as \(\Ads^+\oplus\Ads^-\) by the central idempotents
 \(1_\pm\), the symbols that are \(1\) for \(\pm\tau>0\). For \(k\in\Z\) let
 \[
  A=x^k1_++1_-,\qquad A^{-1}=x^{-k}1_++1_- .
@@ -3442,16 +3458,18 @@ symbolic term.
 \begin{example}[First order operators on an interval]\label{ex:interval-index}
 Let \(X\) be the compactification of \(\R_u\) at both ends by \(1/|u|\).
 So \(X\cong[-1,1]\), \(n=1\), \(N=2\), and near the ends \(x=1/|u|\) and
-\(t=|u|\). Let \(a\in\CI(\R)\) with \(a(u)=a_\pm\) for \(\pm u>R\), and
-consider
+\(t=|u|\). Let \(a\in\CI(\R;\R)\) be real-valued, with \(a(u)=a_\pm\) for
+\(\pm u>R\) and \(a_\pm\neq0\), and consider
 \[
  A=\partial_u+a(u)\in\Psic^1(X).
 \]
 \emph{Full ellipticity.} The principal symbol is \(i\xi\ne0\). At the right
 end \(t=u\), so \(A=\partial_t+a_+\) and \(\In(A,\tau)=e^{i\tau t}(\partial_t
 +a_+)e^{-i\tau t}=a_+-i\tau\). At the left end \(t=-u\), so
-\(A=-\partial_t+a_-\) and \(\In(A,\tau)=a_-+i\tau\). Both are invertible
-for all real \(\tau\) if and only if \(a_+a_-\ne0\).
+\(A=-\partial_t+a_-\) and \(\In(A,\tau)=a_-+i\tau\). Since \(a_\pm\) are
+real and non-zero, both are invertible for all real \(\tau\). (For complex
+\(a_\pm\) this fails: \(a_+=i\) gives \(a_+-i\tau=0\) at \(\tau=1\). Reality
+of \(a\) is also used below for the formal adjoint \(-\partial_u+a\).)
 
 \emph{Index directly.} A solution of \(Au=0\) is a multiple of
 \(\exp(-\int a)\). It lies in \(\dCI(X)\) (rapid decay as \(|u|\to\infty\))

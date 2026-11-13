@@ -54,6 +54,7 @@
 \author{Changwei Zhou}
 \date{}
 
+\newcommand{\Lser}[1]{(\!(#1)\!)}
 \begin{document}
 \hypersetup{pageanchor=false}
 \maketitle
@@ -249,7 +250,7 @@ b-calculus'' \cite[pp.~3--4]{MN}. The present notes carry this out. The
 differences are as follows.
 \begin{enumerate}
 \item \emph{Twist.} In the cusp case the boundary algebras are Laurent
-series \(\Psi_{\mathrm{sus}}(\partial X)[[x]\) in which \(x\) and the
+series \(\Psi_{\mathrm{sus}}(\partial X)\Lser{x}\) in which \(x\) and the
 suspension variable satisfy \([x,\partial_t]=x^2\) \cite[(14)]{MN}; to
 leading order the twist is a derivation. In the b-case,
 \(x^{-1}Ax\) has indicial family \(I(A,\lambda-i)\)
@@ -2073,7 +2074,7 @@ gives \eqref{eq:taylorcomp}.
 
 \begin{definition}[Twisted Laurent series and the Taylor map]
 For an algebra \(\mathcal B\) of entire families, closed under
-\(\alpha\), let \(\mathcal B[[x;\alpha]\) be the space of formal series
+\(\alpha\), let \(\mathcal B\Lser{x;\alpha}\) be the space of formal series
 \(\sum_{k\geq-\ell}x^kb_k\), \(b_k\in\mathcal B\), with the product
 \begin{equation}\label{eq:skew}
  (x^ja)(x^kb)=x^{j+k}\alpha^k(a)\,b,\qquad
@@ -2088,7 +2089,7 @@ Every coefficient of a product is a finite sum. For
 \(\beta_k=s^{-k}\kappa_k\), let \(b_k\) be the Mellin transform of
 \(\beta_k\), and define
 \[
- T_H(A)=\sum_{k\geq-\ell}x^kb_k\in B_H[[x;\alpha],\qquad
+ T_H(A)=\sum_{k\geq-\ell}x^kb_k\in B_H\Lser{x;\alpha},\qquad
  T=(T_H)_H .
 \]
 The term \(x^kb_k\) is the operator \(x^k\circ b_k(xD_x)\) on \(M_H\): its
@@ -2098,10 +2099,10 @@ kernel is \(x^k\beta_k(s)=x'^k\kappa_k(s)\).
 \begin{proposition}[Structure of \(\Idb\)]\label{prop:structure}
 The Taylor map
 \[
- T:x^{-\Z}\Psi_b^{-\infty}(X)\longrightarrow\bigoplus_HB_H[[x;\alpha]
+ T:x^{-\Z}\Psi_b^{-\infty}(X)\longrightarrow\bigoplus_HB_H\Lser{x;\alpha}
 \]
 is a surjective algebra homomorphism with kernel \(\Ib\). It is
-continuous on each piece \(x^{-\ell}\Psi_b^{-\infty}(X)\). Hence \(\Idb\cong\bigoplus_HB_H[[x;\alpha]\). In addition,
+continuous on each piece \(x^{-\ell}\Psi_b^{-\infty}(X)\). Hence \(\Idb\cong\bigoplus_HB_H\Lser{x;\alpha}\). In addition,
 \(T(D(A))=\sum_kx^k\,i\partial_\lambda b_k\), and the constant term of
 \(T_H(A)\) is \(I_H(A,\cdot)\) when \(A\in\Psi_b^{-\infty}(X)\).
 \end{proposition}
@@ -2161,8 +2162,8 @@ The last assertions follow from Lemma~\ref{lem:conj}.
 
 \begin{proposition}[Structure of \(\Adb\)]\label{prop:structureA}
 The Taylor map extends to a surjective homomorphism
-\(x^{-\Z}\Psi_b^{\Z}(X)\to\bigoplus_HB'_H[[x;\alpha]\) with kernel
-\(x^\infty\Psi_b^{\Z}(X)\), so that \(\Adb\cong\bigoplus_HB'_H[[x;\alpha]\).
+\(x^{-\Z}\Psi_b^{\Z}(X)\to\bigoplus_HB'_H\Lser{x;\alpha}\) with kernel
+\(x^\infty\Psi_b^{\Z}(X)\), so that \(\Adb\cong\bigoplus_HB'_H\Lser{x;\alpha}\).
 \end{proposition}
 
 \begin{proof}
@@ -2230,7 +2231,7 @@ every \(K\). Conversely, given \(\sum_{k\geq-\ell}x^ka_k\) with
 Let \(\partial X=\{0\}\). Then \(B=\cE\), \(B'\) is the algebra of entire
 functions of \(\lambda\) with classical symbol expansions on strips, and
 \[
- \Idb\cong\cE[[x;\alpha]
+ \Idb\cong\cE\Lser{x;\alpha}
  =\Bigl\{\sum_{k\geq-\ell}x^k\,b_k(xD_x):b_k\in\cE\Bigr\}.
 \]
 The rule \eqref{eq:skew} is
@@ -2292,7 +2293,7 @@ any finer Fréchet topology for which the inclusion is continuous, by the
 open mapping theorem. For example, \(\Ib\) has the same topology whether it is regarded
 as \(\dot C^\infty(X^2)\) or as a subspace of \(x^{-N}\Psi_b^N\).
 
-For \(R=B[[x;\alpha]\) the completed tensor products of nuclear Fréchet
+For \(R=B\Lser{x;\alpha}\) the completed tensor products of nuclear Fréchet
 spaces commute with countable products. A \(k\)-chain is therefore a family
 \((c_{\mathbf j})\) indexed by multi-indices \(\mathbf j=(j_0,\dots,j_k)\)
 with all \(j_i\geq-N\) for some \(N\), where \(c_{\mathbf j}\in
@@ -2389,7 +2390,7 @@ is a continuous contraction of the \(b'\)-complex. This applies to
 \(\Psi^{-\infty}(H)=C^\infty(H)\widehat\otimes C^\infty(H)\) and to
 \(\Ib=\dot C^\infty(X)\widehat\otimes\dot C^\infty(X)\), with the pairings
 given by \(\nu_\partial\) and \(\mu_b\).
-\item[(b)] Let \(B=\cE(\Psi^{-\infty}(H))\) and let \(R\) be \(B[[x;\alpha]\),
+\item[(b)] Let \(B=\cE(\Psi^{-\infty}(H))\) and let \(R\) be \(B\Lser{x;\alpha}\),
 \(B\rtimes_\alpha\Z=\bigoplus_kx^kB\), or the same algebras with \(\cE\) in
 place of \(B\). Let \(\phi(\zeta)=e^{-\zeta^2}\). On the component
 \(\mathbf j=(j_0,\dots,j_k)\) define \(EF\) as the component
@@ -2405,7 +2406,7 @@ of the old slot \(0\), and \(\int_H\psi\tilde\psi\,\nu_\partial=1\). Then
 preserves weights and pole bounds.
 \end{enumerate}
 Consequently \(\Ib\), \(\Psi^{-\infty}(H)\), \(\Idb\), \(B\rtimes_\alpha\Z\),
-\(\cE[[x;\alpha]\) and \(\cE\rtimes_\alpha\Z\) are topologically H-unital.
+\(\cE\Lser{x;\alpha}\) and \(\cE\rtimes_\alpha\Z\) are topologically H-unital.
 \end{lemma}
 
 \begin{proof}
@@ -2530,7 +2531,7 @@ Lemma~\ref{lem:morita} with \(\mathfrak A=\C\), for which \(C(\C)\) is
 
 \section{The boundary ideal}\label{sec:Id}
 
-We first treat the scalar model \(\cE[[x;\alpha]\) of
+We first treat the scalar model \(\cE\Lser{x;\alpha}\) of
 Example~\ref{ex:model}. The general case then follows by
 Lemma~\ref{lem:morita}.
 
@@ -2660,7 +2661,7 @@ Proposition~\ref{prop:generators}(a). The shift preserves \(d\lambda\).
 \subsection{The weight decomposition}
 
 \begin{proposition}[Nonzero weights are acyclic]\label{prop:weights}
-Let \(R=B[[x;\alpha]\) with \(B=\cE\) or \(B=\cE(\Psi^{-\infty}(H))\). Then:
+Let \(R=B\Lser{x;\alpha}\) with \(B=\cE\) or \(B=\cE(\Psi^{-\infty}(H))\). Then:
 \begin{enumerate}
 \item[(a)] \(C(R)=C^{(0)}(R)\oplus C^{\neq0}(R)\) as complexes, where
 \(C^{(0)}(R)\) consists of the components of weight zero;
@@ -2754,7 +2755,7 @@ bases in degrees \(0\) and \(1\). This uses (Q1) and (Q2).
 \begin{proof}
 By Proposition~\ref{prop:structure}, \(\Idb=\bigoplus_HR_H\). Excision for
 the split ideals \(R_H\) (Theorem~\ref{thm:excision}) reduces the
-computation to a single \(R_H=B_H[[x;\alpha]\).
+computation to a single \(R_H=B_H\Lser{x;\alpha}\).
 Proposition~\ref{prop:weights} reduces it further to the weight-zero part
 of \(B_H\rtimes_\alpha\Z=\Psi^{-\infty}(H)\widehat\otimes(\cE\rtimes_\alpha
 \Z)\). Lemma~\ref{lem:morita}, applied weight by weight, reduces it to
@@ -4095,10 +4096,10 @@ orthogonal projections \(\pi,\pi'\) onto \(N_A,N_{A^*}\) lie in \(\Ib\), and
 (i) Let \(B_0\in\Psi_b^{-m}\) be a small-calculus parametrix, so
 \(AB_0=1-R_0\) with \(R_0\in\Psi_b^{-\infty}\). The proof of
 Lemma~\ref{lem:invertible} inverts \(T(A)\) in
-\(\bigoplus_HB'_H[[x;\alpha]\), with nonnegative powers only and constant
+\(\bigoplus_HB'_H\Lser{x;\alpha}\), with nonnegative powers only and constant
 term \(a_H^{-1}\in B'_H\) (Lemma~\ref{lem:autoinv}). Since \(B_H\) is an ideal
 in \(B'_H\), the series \(T(A)^{-1}T(R_0)\) lies in
-\(\bigoplus_HB_H[[x;\alpha]\) and has nonnegative powers only. By
+\(\bigoplus_HB_H\Lser{x;\alpha}\) and has nonnegative powers only. By
 Proposition~\ref{prop:structure} it is \(T(B_1)\) for some
 \(B_1\in\Psi_b^{-\infty}\). Put \(B=B_0+B_1\). Then \(AB-1\in\Psi_b^{-\infty}\),
 and \(T(AB-1)=-T(R_0)+T(A)T(B_1)=0\) by Proposition~\ref{prop:structureA}.
