@@ -698,6 +698,11 @@ Proposition~\ref{ha:prop:Idconv}.
 \end{enumerate}
 In summary, the following remain quoted or only sketched:
 \begin{itemize}
+\item the identification of the first differential with the Poisson
+boundary (Proposition~\ref{prop:d1}, cited from \cite{MelroseMicro} with a
+sketch) and Brylinski's symplectic star (Proposition~\ref{prop:star},
+quoted from \cite{Brylinski}); every \(E^2\) computation in these notes,
+including (B10), uses them;
 \item the uniform calculus on cylinders (Background
 fact~\ref{cc:bg:uniform});
 \item the nuclear-space facts (F1)--(F3) of Appendix~\ref{ha:sec};
@@ -802,7 +807,7 @@ facts they use and which of the items above affect them.
  \node[font=\scriptsize,anchor=west] at (12.5,0) {items};
  \draw[gray] (0,-0.3)--(14.3,-0.3);
  \foreach \r/\lab/\cols/\cor in {
-   1/{\(\Is\), \(\As\) (Props.~\ref{prop:As}, \ref{prop:Is})}/{1,5,6,10}/{4},
+   1/{\(\Is\), \(\As\) (Props.~\ref{prop:As}, \ref{prop:Is})}/{1,4,5,6,9,10}/{4},
    2/{\(\Ads\), boundary sequence (Props.~\ref{prop:Ads}, \ref{prop:boundaryLES})}/{1,4,5,6,9,10}/{--},
    3/{\(\Id\), \(\cI\) (Props.~\ref{prop:Id}, \ref{prop:I})}/{1,3,4,5,6}/{1},
    4/{residue functionals (\S\ref{sec:residues})}/{3,7,8}/{2, 8, 9, 11},
@@ -830,8 +835,12 @@ through Corollary~\ref{ha:cor:homog} and the shuffle map, which is why
 the second row also carries (B6). The boundary connecting map (B9) is
 proved (Theorem~\ref{ha:thm:bdry}), and with (B10) it is a statement
 about the homology groups. (The index formula uses the trace
-computations of Section~\ref{sec:AdA}, not the homology groups.) Each row
-also uses the rows above it, as in Figure~\ref{fig:roadmap}. Items 3 (not
+computations of Section~\ref{sec:AdA}, not the homology groups.) Each row from the third on also uses the rows above it, as in
+Figure~\ref{fig:roadmap}; the first two rows depend on each other, since
+the statement for \(\As\) is obtained from the one for \(\Ads\) through
+excision and the boundary connecting map
+(Proposition~\ref{ha:prop:equiv}), which is why the first row also
+carries (B4) and (B9). Items 3 (not
 used elsewhere), 10 (the foundations behind (B1)) and 12 (misprints) are
 not shown. The row for \(\Id\) uses the convergence of its \(x\)-adic
 spectral sequence (Proposition~\ref{ha:prop:Idconv}).}

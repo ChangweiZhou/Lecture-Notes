@@ -38,9 +38,10 @@ bounds) are replaced by Lemma~\ref{ha:lem:stageE1}.
 suspended symbol algebra, hypothesis H3 of \cite{LauterMoroianu}, is
 proved in full (Proposition~\ref{su:prop:degS}).
 \cite[Prop.~5.1]{LauterMoroianu} only indicates the ingredients (central
-multiplication operators, contractions with derivations, and an exact
-sequence), and says they are enough; we use the first two, add a weight,
-and do not need the exact sequence.
+multiplication operators, contractions and Lie derivatives along
+derivations, and an exact sequence), and says they are enough; we use the
+first two, organized through the weight of a single Lie derivative, and
+do not need the exact sequence.
 \end{enumerate}
 
 \emph{The idea.} Lemma~\ref{ha:lem:WL} loses poles because it measures
@@ -267,14 +268,15 @@ chain space is \(\bigcup_N\fA_{N}^{\hot(k+1)}\), which is the chain space
 of Section~\ref{subsec:chains}, so their Hochschild homology is the one of
 these notes, and excision (Theorem~\ref{ha:thm:excision}) applies to it.
 The index \(l\) makes their filtered pieces complete, which is what a
-stage does here. Their hypotheses correspond to ours as follows. H1 is
-our (H1), with the same loss of one pole; H2 (vanishing of \(E^2\) off
-the critical line) follows from (H1) here
-(Theorem~\ref{su:thm:criterion}(1)); H3 together with their
-Corollary~B.8 is our (H3) together with Lemma~\ref{su:lem:strict}; H4 and
-H5 (HKR with bounds on \(l\), their Lemmas~B.6 and~B.7) are replaced by
-(H4), which Lemma~\ref{ha:lem:stageE1} gives in the stages; and H6 is
-summability, automatic in a stage. Proposition~\ref{su:prop:step} and
+stage does here. Their hypotheses correspond to ours as follows. Our
+(H1), which assumes only \(b\alpha\in F_{p-2}\), combines their H1, H2
+(vanishing of \(E^2\) off the critical line) and part of H4, with the
+same loss of one pole. Their H3, fed by their Corollary~B.8 (which uses
+their Lemma~B.7), is our (H3) together with Lemma~\ref{su:lem:strict}.
+Their H4 and H5 (HKR with bounds on \(l\), their Lemma~B.6) are replaced
+by (H4), which Lemma~\ref{ha:lem:stageE1} gives in the stages; their
+Lemma~B.7 also enters their H1 through their Proposition~5.2. Their H6
+is summability, automatic in a stage. Proposition~\ref{su:prop:step} and
 Theorem~\ref{su:thm:criterion} follow their Proposition~B.3 and
 Theorem~B.4. The price of using stages is Lemma~\ref{ha:lem:mixed}(b);
 the price of their index \(l\) is HKR with bounds on \(l\), for which
@@ -380,7 +382,11 @@ homogeneity \(c\). So \(\mathcal L_{\tau\partial_\tau}=c-(d_F\iota_{R'}+
 \iota_{R'}d_F)\) on \(\Omh{}_{(c)}\).
 \end{proof}
 
-So \(E^2(\Ssym)\) is not concentrated on a line, and
+Lemma~\ref{su:lem:E2S} by itself does not decide where \(E^2(\Ssym)\)
+lives, since \(d\tau\wedge\mathfrak a\) lies on the same line as
+\(\mathfrak a\). But the classes \(\tau^c\,\omega_H^d/d!\), \(c\ge0\), where \(\omega_H\) is
+the symplectic form of \(T^*H\) and \(d=\dim H\), survive and lie on the lines \(p-k=c-d\), so
+\(E^2(\Ssym)\) is not concentrated on a line, and
 Proposition~\ref{ha:prop:algconv} does not apply to \(\Ssym\)
 (Remark~\ref{su:rem:HS}). What we need is that there are no higher
 differentials.
