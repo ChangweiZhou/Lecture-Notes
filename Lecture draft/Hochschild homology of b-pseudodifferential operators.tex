@@ -287,9 +287,12 @@ algebras.
 \emph{Novelty.} We have not located a published computation of the
 Hochschild homology of the b-calculus operator algebra.
 Theorem~\ref{thm:full} should therefore be read as a careful execution of
-the programme suggested in \cite{MN}, not as a known result. The symbol
-part (v) is the b-groupoid case of the Benameur--Nistor theorem
-\cite{BNsymbols,BNfamilies}.
+the programme suggested in \cite{MN}, not as a known result. The answer
+for the symbol part (v) agrees with the one stated by Benameur and Nistor
+for groupoid symbol algebras \cite{BNsymbols,BNfamilies}; our proof,
+including convergence, does not use theirs. Lauter and Moroianu
+\cite{LauterMoroianu} compute the Hochschild homology of the fibered-cusp
+calculus, which includes the cusp calculus but not the b-calculus.
 
 \subsection{Status of the proofs}\label{subsec:status}
 The proofs use the inputs listed below. The references to
@@ -544,9 +547,12 @@ for which the homology has a finite-dimensional geometric description.
 It is the b-groupoid specialization of the Laurent symbol algebras studied in
 \cite{BNsymbols,BNfamilies}.
 
-\emph{Status of the result.} Theorem~\ref{thm:main} is the
-b-groupoid specialization of the Benameur--Nistor calculation
-\cite{BNsymbols,BNfamilies}. We give the scalar calculation
+\emph{Status of the result.} The answer in Theorem~\ref{thm:main} agrees
+with the one stated by Benameur and Nistor for the b-groupoid
+\cite{BNsymbols,BNfamilies}. Our proof is independent of theirs: their
+convergence argument takes the inductive-limit chain complex to be
+complete, which it is not in general, so we do not rely on it. We give the
+scalar calculation
 in the chain model of Section~\ref{subsec:chainmodel}. The
 global HKR proof is in Lemma~\ref{lem:smooth-HKR}. The fixed coefficient
 stages in Section~\ref{subsec:conv} give convergence.
@@ -1546,9 +1552,10 @@ kind of local model their hypotheses require; we have not compared it with
 their precise formulation beyond this. The global Morita lemma removes the
 coefficient bundle \(E\).
 
-\emph{Spectral sequence.} The Laurent HKR identification and the
-convergent order spectral sequence of \cite{BNsymbols,BNfamilies}
-give the same cohomology groups as the calculation here.
+\emph{Spectral sequence.} The Laurent HKR identification and the order
+spectral sequence of \cite{BNsymbols,BNfamilies} lead to the same
+cohomology groups as the calculation here. We do not use their
+convergence argument; convergence is proved in Section~\ref{subsec:conv}.
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:main}]
@@ -5733,6 +5740,11 @@ R. B. Melrose,
 R. B. Melrose,
 \emph{The Atiyah--Patodi--Singer Index Theorem},
 Research Notes in Mathematics 4, A K Peters, 1993.
+
+\bibitem{LauterMoroianu}
+R. Lauter and S. Moroianu,
+\emph{Homology of pseudodifferential operators on manifolds with fibered
+cusps}, Trans. Amer. Math. Soc. \textbf{355} (2003), 3009--3046.
 
 \bibitem{MN}
 R. B. Melrose and V. Nistor,
