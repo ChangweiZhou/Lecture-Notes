@@ -132,7 +132,8 @@ the circle, and its microlocal inputs are stated precisely and quoted. We
 record a number of corrections to \cite{BG}. The two that change
 statements are these: the ``in particular'' description of
 \(\HH_*(\cP)\) by the cohomology of \(M\) in the main theorem is false in
-general, for instance for \(M=S^2\); and the constant in the
+general, for instance for \(M=S^2\) and for \(M=T^2\), and it contradicts BG's own
+\(\HH_0(\cP)\cong\C\) whenever \(b_{n-1}(M)\ne0\); and the constant in the
 zeta-function formula for the residue depends on the order of the
 operator \(A\), not only on \(\dim M\). The others concern signs,
 normalizations and misprints. Section~\ref{subsec:quoted} lists what is
@@ -406,8 +407,11 @@ transforms by a formal series of differential operators, each lowering
 the degree of homogeneity, whose top term is the pull-back of the
 principal symbol; (d) Schwartz kernels are smooth off the diagonal, so
 an operator \(\phi A\psi\) with \(\supp\phi\cap\supp\psi=\varnothing\) is
-smoothing. We prove the consequence (e), the global star product, in
-Proposition~\ref{prop:globalstar}.
+smoothing; (e) an elliptic element of \(\cP\) (one with invertible principal
+symbol) is invertible in \(\cP\), by the parametrix construction of
+\cite[\S``Pseudodifferential parametrices'']{LoyaAS}; this is used for the operator
+\(T\) of Appendix~\ref{app:mixed}. We prove the further consequence, the global
+star product, in Proposition~\ref{prop:globalstar}.
 \item[(G2)] \emph{Nuclear spaces} \cite[Chs.~43, 50, 51]{Treves}. For
 manifolds \(X\), \(Y\), \(\CI(X)\hot\CI(Y)=\CI(X\times Y)\), where \(\hot\) is
 the completed projective tensor product. The functor \(E\hot(\cdot)\), for
@@ -440,8 +444,10 @@ a holomorphic family (Background~\ref{bg:seeley}).
 \cite{Wodzicki-excision,Loday}: \(\CI_c(M)\) and \(\Psi^{-\infty}(M)\) are H-unital;
 an H-unital ideal gives a long exact sequence in Hochschild homology; and
 \(\HH_*(\Psi^{-\infty}(M))\cong\HH_*(\C)\). These are used only in remarks.
-\item[(G10)] \emph{The Milnor sequence} \cite[\S3.5]{Weibel}, used only for
-periodic cyclic homology.
+\item[(G10)] \emph{The Milnor sequence} \cite[\S3.5]{Weibel}: for a tower of
+complexes with surjective maps, \(0\to\varprojlim^1H_{k+1}\to H_k(\varprojlim)\to\varprojlim H_k\to0\). It is
+used for periodic cyclic homology and in the discussion of BG's convergence
+argument (Remark~\ref{rem:convergence}).
 \item[(G11)] \emph{HKR for fibrewise polynomial functions on \(T^*M\)}. It
 is used only for differential operators on a general manifold
 (Theorem~\ref{thm:DM}); we prove it when \(M\) is an open subset of \(\R^n\).
@@ -451,7 +457,9 @@ of algebras \cite{Teleman,Brylinski-examples}. It is used in
 Section~\ref{sec:sheaf} only.
 \item[(G13)] \emph{Microlocal analysis} \cite{SKK,Kashiwara-book,KashiwaraKawai,Brylinski-examples}:
 the sheaves \(\cE\), \(\cE^\infty\), \(\cE_{\R}\) and the four results listed
-in Background~\ref{bg:micro}. They are used in Section~\ref{subsec:micro}
+in Background~\ref{bg:micro}; also the existence of a real-analytic structure on
+every smooth manifold, compatible with its smooth structure (Whitney), and of a
+complexification \(M\hookrightarrow M_{\C}\). They are used in Section~\ref{subsec:micro}
 only.
 \item[(G14)] \emph{Algebraic de Rham theory}: Grothendieck's comparison
 theorem \cite{Grothendieck}, the Lefschetz principle, and the proposition of
@@ -479,33 +487,37 @@ verified at the place indicated.
 \(1/k!\). With the identification drawn in BG's diagram it becomes
 \(\hb/(ik)\) on \(k\)-forms, and \(B\) becomes \((k+1)d\)
 (Correction~\ref{corr:normalization}).
-\item \emph{The \(\mathfrak{sl}(2)\) star operator.} The matrix identity
-used to prove \(*^2=1\) in \cite[\S2]{BG} is false: the exponential equals
-\(-1\), so BG's \(*\) squares to \(\pm1\). The trigonometric expansion in
-the proof of their Proposition~(1) needs a factor of \(i\) removed. The
-conclusions hold up to non-zero constants (Correction~\ref{corr:sl2}).
+\item \emph{The \(\mathfrak{sl}(2)\) star operator.} BG's data are internally
+inconsistent: with their relations the operator
+\(\exp(\frac{\pi i}2(\eps(\omega)+\eps^*(\omega)))\) is not of finite order, and the matrix
+identity used to prove \(*^2=1\) is false (the exponential is \(-1\)). The consistent
+fix is to drop the factor \(i\), which gives \(*^2=(-1)^{d-1}\) on irreducible
+\(\mathfrak{sl}(2)\)-components of dimension \(d\). The conclusions hold up to non-zero
+constants (Correction~\ref{corr:sl2}).
 \item \emph{The ``in particular'' of the main theorem.} The claim
 \(\HH_*(\cP)\cong H^{n-*-1}(M)\oplus H^{n-*}(M)\) for \(n>1\) in
-\cite[\S4, Thm.~(1)]{BG} is false in general; it fails for \(M=S^2\). The
-correct statement uses the Gysin sequence and holds when the Euler class
-vanishes (Correction~\ref{corr:gysin}).
+\cite[\S4, Thm.~(1)]{BG}, stated for general \(M\) (and for \(\cP_c\)), is false. It
+fails for \(M=S^2\), and also when the Euler class vanishes: for \(M=T^2\) and \(k=0\)
+it gives \(\C^3\) instead of \(\C\). It contradicts BG's own \(\HH_0(\cP)\cong\C\) whenever
+\(b_{n-1}(M)\ne0\). A correct description, valid when the Euler class vanishes, comes
+from the Gysin sequence (Correction~\ref{corr:gysin}).
 \item \emph{The filtration for cyclic homology.} The filtration
 \(F_m(\cP[u])=\sum_ju^jF_{m+2j}(\cP)\) of \cite[\S4]{BG} is not preserved
 by \(u^{-1}B\). It should be \(\sum_ju^jF_{m-2j}(\cP)\)
 (Correction~\ref{corr:cyclicfilt}).
 \item \emph{The zeta-function constant.} In \cite[\S4, Prop.~(2)]{BG}
 the constant in \(\Res_{s=0}\Tr(PA^{-s})=c\,R(P)\) depends on the order
-\(m\) of \(A\): it is proportional to \(1/m\). The value \(c=2\pi\) asserted
-in the proof of Prop.~(1) depends on normalizations that are not fixed
-there (Correction~\ref{corr:zeta}).
-\item \emph{Quantum algebras.} The parity condition
-\(\varphi_i(a,b)=(-1)^i\varphi_i(b,a)\) is not satisfied by the
-left-quantized symbol product and is never needed; and
-\(a\star b-b\star a=(\hb/i)\{a,b\}\) holds only to first order
+\(m\) of \(A\): it is proportional to \(1/m\). The assertion ``\(c=2\pi\)'' at the end of the
+proof of Prop.~(1) is unclear, and under either reading we obtain a different
+constant (Correction~\ref{corr:zeta}).
+\item \emph{Quantum algebras.} BG never specify the quantization used for
+\(\cP\), and the parity condition \(\varphi_i(a,b)=(-1)^i\varphi_i(b,a)\) is never used (it
+fails, for instance, for the left-quantized product). Also
+\(a\star b-b\star a=(\hb/i)\{a,b\}\) holds only up to \(O(\hb^3)\)
 (Remark~\ref{rem:parity}).
-\item \emph{Darboux and the conic structure.} The conic Darboux map goes
-onto an open \emph{conic subset} of \(\Tdot\R^n\) and commutes with the
-dilations. The flow is \(T_t=\exp((\log t)\mathcal R)\), not \(\exp(t\mathcal R)\)
+\item \emph{Darboux and the conic structure.} BG's conic Darboux lemma does not
+say that the symplectomorphism commutes with the dilations, which is what is
+used; its image is an open conic subset of \(\Tdot\R^n\). The flow is \(T_t=\exp((\log t)\mathcal R)\), not \(\exp(t\mathcal R)\)
 (Remark~\ref{rem:darboux}).
 \item \emph{Convergence.} The convergence argument in \cite[\S\S2,4]{BG}
 appeals to Mittag-Leffler without the required estimates, and it depends
@@ -513,8 +525,8 @@ on the completion used for the chains. We prove convergence for two chain
 models and show that they give the same homology
 (Remark~\ref{rem:convergence}).
 \item \emph{Higher residues.} The cochain \(T\alpha\) of \cite[\S4]{BG} is
-defined by a leading-order formula and is not a Hochschild cocycle as
-written. We give the precise statement, as a functional on \(\HH_m(\cP)\)
+defined by a leading-order formula and is not shown to be a Hochschild
+cocycle. We give the precise statement, as a functional on \(\HH_m(\cP)\)
 (Remark~\ref{rem:higherres}).
 \item \emph{Hypotheses.} Uniqueness of the residue needs \(M\) connected
 and \(n\ge2\) (BG say so in the text, not in the proposition). Statements
@@ -672,6 +684,20 @@ on a circle. The face \(d_i\) multiplies neighbouring beads \(i\) and
 the first. The cyclic nature of \(d_k\) is why traces appear in degree zero.
 
 \subsection{The bar resolution and small resolutions}\label{subsec:barres}
+\emph{This subsection uses a little homological algebra and can be skimmed on a
+first reading; its only output used later is Example~\ref{ex:Cx} and the proof of
+Theorem~\ref{thm:HKRpoly}.} Here is what is needed. A module is \emph{free} if it has
+a basis. A \emph{free resolution} of a module \(N\) is an exact sequence
+\(\cdots\to P_1\to P_0\to N\to0\) with every \(P_k\) free; think of it as a presentation of
+\(N\) by generators (\(P_0\)), relations (\(P_1\)), relations between relations, and so on.
+If \(P_\bullet\to N\) is a free resolution of a right \(R\)-module and \(L\) is a left
+\(R\)-module, the homology of the complex \(P_\bullet\otimes_RL\) is called
+\(\Tor^R_\bullet(N,L)\). The \emph{comparison theorem} (G4) says that any two free (or
+projective) resolutions of \(N\) are chain homotopy equivalent, by maps covering the
+identity of \(N\), so \(\Tor\) does not depend on the resolution. In practice: to
+compute \(\Tor\), choose the smallest resolution you can find. We apply this with
+\(R=A^e\), \(N=L=A\).
+
 Let \(A^e=A\otimes A^{\mathrm{op}}\). An \(A\)-bimodule is the same thing as a
 left \(A^e\)-module, with \((a\otimes b)\cdot m=amb\). Put
 \(B_k(A)=A\otimes A^{\otimes k}\otimes A\) (free \(A^e\)-modules), with the
@@ -718,15 +744,15 @@ For a commutative algebra define the \emph{HKR map} and the
 \begin{equation}\label{eq:HKR}
  \chi(a_0\otimes\dots\otimes a_k)=\frac1{k!}\,a_0\,da_1\wedge\dots\wedge da_k,
  \qquad
- \varphi(a_0;a_1,\dots,a_k)=\sum_{\sigma\in\mathfrak S_k}\sgn(\sigma)\,
+ \operatorname{Alt}(a_0;a_1,\dots,a_k)=\sum_{\sigma\in\mathfrak S_k}\sgn(\sigma)\,
  a_0\otimes a_{\sigma(1)}\otimes\dots\otimes a_{\sigma(k)} .
 \end{equation}
 The factor \(1/k!\) is a normalization; it matters for the constants in
 Section~\ref{sec:BG1} (Correction~\ref{corr:normalization}).
 
 \begin{lemma}\label{lem:chi}
-For a commutative algebra, \(\chi\circ b=0\), \(b\circ\varphi=0\), and
-\(\chi\varphi(a_0;a_1,\dots,a_k)=a_0\,da_1\wedge\dots\wedge da_k\).
+For a commutative algebra, \(\chi\circ b=0\), \(b\circ\operatorname{Alt}=0\), and
+\(\chi\operatorname{Alt}(a_0;a_1,\dots,a_k)=a_0\,da_1\wedge\dots\wedge da_k\).
 \end{lemma}
 
 \begin{proof}
@@ -744,11 +770,11 @@ da_{k-1}=T_k\). Hence
 \]
 The coefficient of \(T_1\) is \(1-1=0\), that of \(T_j\) for \(2\le j\le k-1\)
 is \((-1)^{j-1}+(-1)^j=0\), and that of \(T_k\) is
-\((-1)^{k-1}+(-1)^k=0\). For \(b\varphi\): the inner faces cancel in pairs,
+\((-1)^{k-1}+(-1)^k=0\). For \(b\operatorname{Alt}\): the inner faces cancel in pairs,
 \(\sigma\) against \(\sigma\circ(i\ i{+}1)\), because the algebra is
 commutative; and the face \(d_0\) for \(\sigma\) cancels \((-1)^kd_k\) for the
 cyclically shifted permutation, whose sign is \((-1)^{k-1}\sgn\sigma\). The
-third identity holds because each of the \(k!\) terms of \(\varphi\)
+third identity holds because each of the \(k!\) terms of \(\operatorname{Alt}\)
 contributes \(\frac1{k!}a_0\,da_1\wedge\dots\wedge da_k\) after reordering
 the wedge product.
 \end{proof}
@@ -757,7 +783,7 @@ the wedge product.
 \label{thm:HKRpoly}
 Let \(A=\C[x_1,\dots,x_n]\). Then \(\chi\) induces isomorphisms
 \(\HH_k(A)\cong\Om^k_A=A\otimes\Lambda^k\C^n\), with inverse
-\(a_0\,dx_{i_1}\wedge\dots\wedge dx_{i_k}\mapsto[\varphi(a_0;x_{i_1},\dots,x_{i_k})]\).
+\(a_0\,dx_{i_1}\wedge\dots\wedge dx_{i_k}\mapsto[\operatorname{Alt}(a_0;x_{i_1},\dots,x_{i_k})]\).
 \end{theorem}
 
 \begin{proof}
@@ -769,9 +795,9 @@ basis \(e_{i_1}\wedge\dots\wedge e_{i_k}\), and
  f\,e_{i_1}\wedge\dots\widehat{e_{i_j}}\dots\wedge e_{i_k},
 \]
 augmented by \(K_0=A^e\to A\), \(f\mapsto f(x,x)\). In the variables
-\(u=x-y\), \(v=y\), \(\pa\) is contraction with \(\sum_iu_i\,\pa/\pa e_i\).
-Let \(h(f\,e_I)=\sum_i\frac{\pa f}{\pa u_i}e_i\wedge e_I\). Then
-\(\pa h+h\pa\) multiplies \(f\,e_I\) by (degree of \(f\) in \(u\)) \(+|I|\),
+\(w=x-y\), \(v=y\), \(\pa\) is contraction with \(\sum_iu_i\,\pa/\pa e_i\).
+Let \(h(f\,e_I)=\sum_i\frac{\pa f}{\pa w_i}e_i\wedge e_I\). Then
+\(\pa h+h\pa\) multiplies \(f\,e_I\) by (degree of \(f\) in \(w\)) \(+|I|\),
 the usual Euler identity. So \(K\) is exact except in degree \(0\), where
 the homology is \(\C[v]\cong A\) through \(f\mapsto f(x,x)\). Thus \(K\) is a
 free resolution of \(A\).
@@ -786,9 +812,9 @@ antisymmetrization. By the comparison theorem it induces an isomorphism
 on homology after \(A\otimes_{A^e}\). On the Koszul side
 \(A\otimes_{A^e}K=A\otimes\Lambda\C^n\) with zero differential, since
 \(x_i-y_i\) acts as \(0\). On the Hochschild side \(\Phi\) becomes
-\(a_0\,e_I\mapsto\varphi(a_0;x_{i_1},\dots,x_{i_k})\). So the classes
-\(\varphi(a_0;x_{i_1},\dots,x_{i_k})\) form a basis of \(\HH_k(A)\) over
-the basis of \(A\otimes\Lambda^k\), and \(\chi\varphi=\mathrm{id}\) by
+\(a_0\,e_I\mapsto\operatorname{Alt}(a_0;x_{i_1},\dots,x_{i_k})\). So the classes
+\(\operatorname{Alt}(a_0;x_{i_1},\dots,x_{i_k})\) form a basis of \(\HH_k(A)\) over
+the basis of \(A\otimes\Lambda^k\), and \(\chi\operatorname{Alt}=\mathrm{id}\) by
 Lemma~\ref{lem:chi}.
 \end{proof}
 
@@ -894,8 +920,8 @@ tensor product \(\hot\). For manifolds,
 \]
 and the face maps become restrictions to diagonals:
 \[
- (d_iu)(z_0,\dots,z_{k-1})=u(z_0,\dots,z_i,z_i,\dots,z_{k-1})\ (i<k),\qquad
- (d_ku)(z_0,\dots,z_{k-1})=u(z_0,\dots,z_{k-1},z_0).
+ (d_iu)(z_0,\dots,z_{k-1})=c(z_0,\dots,z_i,z_i,\dots,z_{k-1})\ (i<k),\qquad
+ (d_ku)(z_0,\dots,z_{k-1})=c(z_0,\dots,z_{k-1},z_0).
 \]
 The HKR map extends by continuity. In local coordinates
 \[
@@ -1484,9 +1510,14 @@ The Jacobi identity can be checked directly, but Lemma~\ref{lem:commutator}
 gives a proof without computation. The commutator satisfies the Jacobi
 identity, and \(\sigma([A,[B,C]])=(-i)^2\{a,\{b,c\}\}\). So the Jacobi identity
 holds for principal symbols, that is, for all homogeneous functions on
-\(\Tdot\R^n\). It is a differential identity in \(a,b,c\), and the jets at a point
-of homogeneous functions of any fixed degree are arbitrary, so it holds for
-all smooth functions.
+\(\Tdot\R^n\). It is a trilinear differential identity in \(a,b,c\). The jets at a point
+\((x_0,\xi_0)\), \(\xi_0\ne0\), of homogeneous functions of a \emph{fixed} degree are not
+arbitrary (Euler's relation fixes the radial derivatives), but finite sums of
+homogeneous functions of different integer degrees have arbitrary jets of any
+finite order: restricted to a small conic neighbourhood, \(|\xi|^j\) for
+\(j=0,1,\dots,J\) times functions on the sphere bundle already gives every
+polynomial of degree \(\le J\) in \(|\xi|-|\xi_0|\). By multilinearity the identity holds
+for such sums, hence for all smooth functions.
 
 \subsection{The symplectic form and Hamiltonian vector fields on \texorpdfstring{\(T^*\R^n\)}{T*Rn}}
 \label{subsec:symplecticRn}
@@ -1746,14 +1777,23 @@ BG deduce \(*_{\mathrm{BG}}^2=1\) from the identity
  \begin{pmatrix}1&0\\0&1\end{pmatrix}.
 \]
 In fact, for \(J=\bigl(\begin{smallmatrix}0&1\\1&0\end{smallmatrix}\bigr)\) we have \(J^2=1\) and
-\(\exp(\pi iJ)=\cos\pi+i\sin\pi\,J=-1\). In an irreducible representation of
-\(\mathfrak{sl}(2)\) of dimension \(d\), \(\exp(\pi i(T_++T_-))=(-1)^{d-1}\), so
-\(*_{\mathrm{BG}}^2=\pm1\) on the isotypic components. For \(n=1\), on the span of
-\(1\) and \(\omega\), \(*_{\mathrm{BG}}1=i\omega\) and \(*_{\mathrm{BG}}^2=-1\). Similarly, with
-the commutation relations stated in the proof of BG's Proposition~(1), the
-series \(\sum_j\frac{(ti)^j}{j!}\ad(L+L^*)^j\) gives hyperbolic functions of \(t\),
-not \(\cos t\) and \(\sin t\); the factor \(i\) must be dropped (or the relations
-changed by a factor \(i\)). None of this affects the conclusions, since only
+\(\exp(\pi iJ)=\cos\pi+i\sin\pi\,J=-1\). Worse, BG's data are not consistent with
+their matrix model. They match \(\eps(\omega)\) with \(T_+\) and \(n-k\) with
+\(T_0=\mathrm{diag}(1,-1)\); but \([T_0,T_+]=2T_+\), while \([n-k,\eps(\omega)]=-2\eps(\omega)\), since
+\(\eps(\omega)\) raises \(k\). With our \(L^*=-\iota_\pi\) (so that \([L,L^*]=n-k\) by
+Lemma~\ref{lem:sl2}), take \(n=1\) and the span of \(1\) and \(\omega\): \(L1=\omega\),
+\(L^*\omega=-\iota_\pi\omega=-1\), so \(X=L+L^*\) satisfies \(X^2=-1\) there. Then
+\[
+ *_{\mathrm{BG}}1=\exp\bigl(\tfrac{\pi}2iX\bigr)1=\cosh\tfrac\pi2+i\sinh\tfrac\pi2\,\omega ,
+\]
+and \(*_{\mathrm{BG}}\) is not of finite order. (The value \(*_{\mathrm{BG}}1=i\omega\), \(*_{\mathrm{BG}}^2=-1\)
+holds only in BG's matrix model.) The same issue appears in the proof of their
+Proposition~(1): the series \(\sum_j\frac{(ti)^j}{j!}\ad(L+L^*)^j\) gives hyperbolic
+functions of \(t\), not \(\cos t\) and \(\sin t\). The consistent fix is to drop the factor
+\(i\): \(*'=\exp(\frac\pi2(L+L^*))\). Then \(*'1=\omega\), \(*'\omega=-1\), and in general
+\(*'^2=\exp(\pi(L+L^*))=(-1)^{d-1}\) on an irreducible component of dimension \(d\),
+since \(L+L^*\) acts there as a rotation generator with eigenvalues
+\(i(d-1),i(d-3),\dots\). None of this affects the conclusions, since only
 the fact that \(*\) is invertible and intertwines \(\delta\) with \(d\) up to
 non-zero constants is used. We work with Brylinski's operator of
 Section~\ref{subsec:star}, for which everything is proved above. (For it one
@@ -1958,10 +1998,12 @@ products. The Moyal product on \(\R^{2n}\) is a quantum algebra in the sense
 of BG, by Proposition~\ref{prop:moyal}; the left-quantized product is not.
 
 \begin{bgremark}[Quantum algebras]\label{rem:parity}
-(1) The parity condition \(P_l(a,b)=(-1)^lP_l(b,a)\) of \cite[\S1]{BG} is not
-satisfied by the product of \(\cP\) in the left quantization, which BG use in
-\S4: there \(P_1(a,b)=-i\sum\pa_{\xi_j}a\,\pa_{x_j}b\) is not antisymmetric. The
-condition is never used. The proof of Theorem~\ref{thm:d1} shows that only
+(1) BG do not say which quantization they use for \(\cP\); their formula
+\(a\star b\sim ab+\{a,b\}/2i+\cdots\) in \S4 is of symmetric (Weyl) type. The parity
+condition \(P_l(a,b)=(-1)^lP_l(b,a)\) of \cite[\S1]{BG} holds for such products, but not,
+for instance, for the left-quantized product of Section~\ref{subsec:symbolstar},
+where \(P_1(a,b)=-i\sum\pa_{\xi_j}a\,\pa_{x_j}b\) is not antisymmetric. The point is that
+the condition is never used. The proof of Theorem~\ref{thm:d1} shows that only
 \(P_0=ab\) and the antisymmetric part of \(P_1\) enter. (2) BG write that one
 should think of a quantum algebra as a deformation with
 \(a\star b-b\star a=\frac\hb i\{a,b\}\). Under the parity condition this holds
@@ -2041,8 +2083,10 @@ Lemma~\ref{lem:commutator}.
 The associativity identities
 \(\sum_{l+l'=N}P_l(P_{l'}(a,b),c)=\sum_{l+l'=N}P_l(a,P_{l'}(b,c))\) hold for
 homogeneous \(a,b,c\), by associativity of \(\cP\) and comparison of degrees. They
-are identities between polydifferential operators, and jets at a point of
-homogeneous functions are arbitrary, so they hold for all smooth functions.
+are identities between polydifferential operators, multilinear in \(a,b,c\), and
+sums of homogeneous functions of finitely many integer degrees have arbitrary
+finite jets at points of \(Y\) (Section~\ref{subsec:fromcomm}), so they hold for all
+smooth functions.
 \end{proof}
 
 \subsection{Chain models for \texorpdfstring{\(\cP\)}{P}}\label{subsec:chainmodels}
@@ -2056,7 +2100,7 @@ functions on \(Y^{k+1}\) homogeneous of degree \(I_j\) in the \(j\)-th factor, a
 \emph{Model I} (the standard continuous chains) is
 \(C_k(\cP)=\varinjlim_N\cP_N^{\hot(k+1)}\). \emph{Model II} (BG's chains) is
 \[
- \Chat_k(\cP)=\Bigl\{u=\sum_{m\le M}u_m:\ u_m\in C_{m,k}\Bigr\},\qquad
+ \Chat_k(\cP)=\Bigl\{c=\sum_{m\le M}c_m:\ c_m\in C_{m,k}\Bigr\},\qquad
  C_{m,k}=\bigoplus_{|I|=m}\CI_{(I)}(Y^{k+1})\ \text{(finite sums)}.
 \]
 In both, \(b\) is the Hochschild boundary of \(\star\). In Model II,
@@ -2066,7 +2110,7 @@ restricts to the diagonal.
 
 \begin{lemma}\label{lem:models}
 Model I is a subcomplex of Model II, and both are filtered by total order,
-\(F_p=\{u:\ u_m=0\text{ for }m>p\}\). Model II is complete in the sense of
+\(F_p=\{c:\ c_m=0\text{ for }m>p\}\). Model II is complete in the sense of
 Section~\ref{subsec:filtered}. Both have the same associated graded complex
 \(\bigoplus_mC_{m,\bullet}\) with \(b_0\).
 \end{lemma}
@@ -2075,7 +2119,7 @@ Section~\ref{subsec:filtered}. Both have the same associated graded complex
 By (G2), \(\cP_N^{\hot(k+1)}=\prod\CI_{(I)}(Y^{k+1})\), the product over \(I\) with all
 \(I_j\le N\). For fixed total order \(m\) there are finitely many such \(I\), since
 \(I_j\ge m-kN\). So an element of \(\cP_N^{\hot(k+1)}\) is a formal sum
-\(\sum_{m\le(k+1)N}u_m\) with \(u_m\in C_{m,k}\). The face maps are given by the
+\(\sum_{m\le(k+1)N}c_m\) with \(c_m\in C_{m,k}\). The face maps are given by the
 star product, which on homogeneous components is the formula of
 Proposition~\ref{prop:globalstar}. In Model II the order-\(m\) component of \(bu\)
 is the finite sum \(\sum_lb_lu_{m+l}\), and \(b^2=0\) because it holds on algebraic
@@ -2177,7 +2221,7 @@ as in \cite{BG}.
 It suffices to compute \(d^1\) on forms \(\theta=a_0\,da_1\wedge\dots\wedge da_k\), which
 span \(\Om^k\) (for \(\CI(X)\), use a partition of unity and coordinate functions,
 or an embedding of \(X\) in \(\R^N\)). By Lemma~\ref{lem:chi},
-\(F=\varphi(a_0;a_1,\dots,a_k)\) is a \(b_0\)-cycle with \(\chi(F)=\theta\), so
+\(F=\operatorname{Alt}(a_0;a_1,\dots,a_k)\) is a \(b_0\)-cycle with \(\chi(F)=\theta\), so
 \(d^1\theta=\hb\,\chi(b_1F)\).
 
 Split \(P_1=S+\kappa\{\cdot,\cdot\}\) with \(S\) symmetric and \(\kappa=-i/2\).
@@ -2220,7 +2264,7 @@ of quantization, drops out. Only the Poisson bracket survives. It also proves
 
 \begin{correction}[Normalizations]\label{corr:normalization}
 BG identify chains with forms through the diagram of \cite[\S1]{BG}: a chain
-is first antisymmetrized, \(E(a_0,\dots,a_m)=\frac1{m!}\varphi(a_0;a_1,\dots,a_m)\),
+is first antisymmetrized, \(E(a_0,\dots,a_m)=\frac1{m!}\operatorname{Alt}(a_0;a_1,\dots,a_m)\),
 and an antisymmetric chain is then sent to \(a_0\,da_1\wedge\dots\wedge da_m\). The
 composite chains \(\to\) forms is \(\chi'=m!\,\chi\), and the inverse sends
 \(\theta\) to \(E(a_0,\dots,a_m)\). With this identification the computation above
@@ -2335,10 +2379,10 @@ are determined by their values on \(S^*_xM\). (b) In the coordinate
 
 \begin{bgremark}[Darboux and the flow]\label{rem:darboux}
 BG's conic Darboux lemma states that each point has a conic neighbourhood \(U\)
-and a symplectomorphism \(\phi:U\to\Tdot\R^n\). What is true and used is that \(\phi\)
-maps \(U\) onto an open \emph{conic subset} of \(\Tdot\R^n\) and commutes with the
-dilations (G6), \cite[\S21.1]{Hormander3}; it cannot be onto \(\Tdot\R^n\) in
-general. Also BG write \(T_t=\exp tR\); the flow at time \(s\) of \(R\) is
+and a symplectomorphism \(\phi:U\to\Tdot\R^n\). This is an imprecision rather than an
+error: what is used is that \(\phi\) can be chosen to \emph{commute with the dilations},
+and that is not stated; its image is then an open conic subset of \(\Tdot\R^n\) (G6),
+\cite[\S21.1]{Hormander3}. Also BG write \(T_t=\exp tR\); the flow at time \(s\) of \(R\) is
 dilation by \(e^s\), so \(T_t=\exp((\log t)R)\). For \(X=\Tdot M\) we never need
 the conic Darboux lemma: canonical coordinates are homogeneous Darboux
 coordinates.
@@ -2789,7 +2833,11 @@ BG add: ``In particular, if \(n>1\), this is isomorphic to
 \(H^{n-*-1}(M)\oplus H^{n-*}(M)\).''
 
 \begin{correction}[The cohomology of \(S^*M\)]\label{corr:gysin}
-This is false in general. For \(M=S^2\), \(S^*S^2\cong SO(3)\cong\R P^3\), whose real
+This is false in general, and not only because of the Euler class. BG state it for
+every \(M\) with \(n>1\) (and for \(\cP_c\)). For \(k=0\) it gives
+\(H^{n-1}(M)\oplus H^n(M)\), which contradicts BG's own \(\HH_0(\cP)\cong\C\) for connected
+closed \(M\) whenever \(b_{n-1}(M)\ne0\); for \(M=T^2\) it gives \(H^1\oplus H^2=\C^3\) instead of
+\(\C\), although the Euler class of \(T^2\) vanishes. For \(M=S^2\), \(S^*S^2\cong SO(3)\cong\R P^3\), whose real
 cohomology is \(\C\) in degrees \(0\) and \(3\). So \(S^*S^2\times S^1\) has cohomology \(\C\) in degrees
 \(0\), \(1\), \(3\), \(4\), and \(\dim\HH_k(\cP(S^2))=1,1,0,1,1\) for \(k=0,\dots,4\). BG's formula gives
 \(1,1,1,0,0\). The correct statement comes from the Gysin sequence (G5) of the
@@ -2800,12 +2848,12 @@ sphere bundle \(S^*M\to M\), with fibre \(S^{n-1}\):
 \]
 where \(o\) is the orientation local system of \(M\) and \(e\) is the Euler class of \(T^*M\).
 If \(e=0\) in real cohomology, for instance if \(n\) is odd or if \(M\) is closed and
-connected with \(\chi(M)=0\), the sequence splits and
+connected with \(\chi_{\mathrm{top}}(M)=0\), the sequence splits and
 \[
  \HH_k(\cP)\cong H^{2n-k}(M)\oplus H^{2n-k-1}(M)\oplus H^{n-k+1}(M;o)\oplus H^{n-k}(M;o).
 \]
 When \(e\ne0\), classes cancel in pairs. In all cases
-\(\sum_k(-1)^k\dim\HH_k(\cP)=\chi(S^*M\times S^1)=0\). These statements are checked on
+\(\sum_k(-1)^k\dim\HH_k(\cP)=\chi_{\mathrm{top}}(S^*M\times S^1)=0\). These statements are checked on
 examples in Section~\ref{sec:examples}.
 \end{correction}
 
@@ -2849,8 +2897,8 @@ continuous on each \(\CI_{(j)}(Y)\).
 \end{lemma}
 
 \begin{proof}
-Let \(u=\sum_{q\le Q}u_q\in\Chat_1\). Then \(\tau(bu)=\sum_{m<p\le Q}\tau((bu)_p)\) is a finite sum,
-and \((bu)_p=\sum_lb_lu_{p+l}\) is finite. Each \(u_q\) is a finite sum of elements of
+Let \(c=\sum_{q\le Q}c_q\in\Chat_1\). Then \(\tau(bu)=\sum_{m<p\le Q}\tau((bu)_p)\) is a finite sum,
+and \((bu)_p=\sum_lb_lu_{p+l}\) is finite. Each \(c_q\) is a finite sum of elements of
 \(\CI_{(I)}(Y^2)\), on which \(\tau\circ b_l\) is continuous, and on the dense subspace of
 algebraic tensors \(\tau\circ b\) vanishes since \(b(a\otimes a')=[a,a']\).
 \end{proof}
@@ -2930,16 +2978,16 @@ Let \(U\subset\R^n\) be connected and \(n\ge2\). Every trace \(\tau\) on \(\cP_c
 \end{proposition}
 
 \begin{proof}
-Let \(\chi(\xi)\) be smooth, \(0\) near \(0\) and \(1\) for \(|\xi|\ge1\). Products of \(\chi\) with homogeneous
-functions are classical symbols, and changing \(\chi\) changes them by symbols of order
+Let \(\varpi(\xi)\) be smooth, \(0\) near \(0\) and \(1\) for \(|\xi|\ge1\). Products of \(\varpi\) with homogeneous
+functions are classical symbols, and changing \(\varpi\) changes them by symbols of order
 \(-\infty\), which are \(0\) in \(\cP\).
 
 \emph{Step 1: degrees \(j\ne-n\).} Let \(p_j\) be homogeneous of degree \(j\) with compact
 \(x\)-support. By Euler's identity \(\sum_k\pa_{\xi_k}(\xi_kp_j)=(j+n)p_j\). So
-\(P_{\chi p_j}=\sum_k\frac{-i}{j+n}[\tilde\psi x_k,P_{\chi\xi_kp_j}]\) by Lemma~\ref{lem:xDcomm}, the
-terms with \(\pa\chi\) having order \(-\infty\). Hence \(\tau(P_{\chi p_j})=0\). The same works for a
+\(P_{\varpi p_j}=\sum_k\frac{-i}{j+n}[\tilde\psi x_k,P_{\varpi\xi_kp_j}]\) by Lemma~\ref{lem:xDcomm}, the
+terms with \(\pa\varpi\) having order \(-\infty\). Hence \(\tau(P_{\varpi p_j})=0\). The same works for a
 whole tail \(q\sim\sum_{j\le-n-1}q_j\): let \(b_k\) be a symbol with expansion
-\(\sum_j\frac{-i}{j+n}\chi\xi_kq_j\) (Borel); then \(P_q=\sum_k[\tilde\psi x_k,P_{b_k}]\) and \(\tau(P_q)=0\).
+\(\sum_j\frac{-i}{j+n}\varpi\xi_kq_j\) (Borel); then \(P_q=\sum_k[\tilde\psi x_k,P_{b_k}]\) and \(\tau(P_q)=0\).
 Since an element of \(\cP_c(U)\) has finitely many terms of degree \(>-n\), \(\tau\) depends
 only on the term of degree \(-n\).
 
@@ -2951,22 +2999,27 @@ compact support, with \(\Delta_Sw=p-\varrho/|S^{n-1}|\) on \(S^{n-1}\). Let \(g\
 \(\nabla_Sw\) on \(S^{n-1}\). For a tangential field \(g(r\theta)=r^{1-n}V(\theta)\) one has
 \(\operatorname{div}g=r^{-n}\operatorname{div}_SV\), so
 \(\sum_k\pa_{\xi_k}g_k=|\xi|^{-n}\Delta_Sw=p-\varrho|\xi|^{-n}/|S^{n-1}|\). By Lemma~\ref{lem:xDcomm},
-\(\tau(P_{\chi p})=\tau(P_{\chi\varrho|\xi|^{-n}})/|S^{n-1}|\). Next, fix \(\chi_0\in\CI_c(U)\) with
-\(\int\chi_0=1\), and let \(\nu=\int_U\varrho\,dx\). Since \(U\) is connected, the compactly
-supported function \(\varrho-\nu\chi_0\) has integral zero and so is
+\(\tau(P_{\varpi p})=\tau(P_{\varpi\varrho|\xi|^{-n}})/|S^{n-1}|\). Next, fix \(\vartheta_0\in\CI_c(U)\) with
+\(\int\vartheta_0=1\), and let \(\nu=\int_U\varrho\,dx\). Since \(U\) is connected, the compactly
+supported function \(\varrho-\nu\vartheta_0\) has integral zero and so is
 \(\sum_k\pa_{x_k}\beta_k\) with \(\beta_k\in\CI_c(U)\) (compactly supported de Rham cohomology in top
 degree, G5). By Lemma~\ref{lem:xDcomm} again,
 \[
- \tau(P_{\chi p})=\nu\,\tau(P_{g_0}),\qquad g_0=\chi_0(x)\chi(\xi)|\xi|^{-n}/|S^{n-1}| .
+ \tau(P_{\varpi p})=\nu\,\tau(P_{g_0}),\qquad g_0=\vartheta_0(x)\varpi(\xi)|\xi|^{-n}/|S^{n-1}| .
 \]
-Since \(\tau_U(P_{\chi p})=(2\pi)^{-n}\nu\), we get \(\tau=c_U\tau_U\) on such elements, with
+Since \(\tau_U(P_{\varpi p})=(2\pi)^{-n}\nu\), we get \(\tau=c_U\tau_U\) on such elements, with
 \(c_U=(2\pi)^n\tau(P_{g_0})\). With Step~1, \(\tau=c_U\tau_U\) on \(\cP_c(U)\).
 \end{proof}
 
-For \(n=1\) Step~2 fails: \(S^0\) has two points. The same argument shows that every trace
-on \(\cP_c(U)\), \(U\subset\R\) an interval, is a combination of
-\(\tau^\pm_U(P_a)=(2\pi)^{-1}\int_Ua_{-1}(x,\pm1)\,dx\), each of which is a trace, because
-Lemma~\ref{lem:divergence} holds on each half-line separately.
+For \(n=1\) Step~2 fails: \(S^0\) has two points. Let \(U\subset\R\) be an interval and
+\(\tau^\pm_U(P_a)=(2\pi)^{-1}\int_Ua_{-1}(x,\pm1)\,dx\). Each \(\tau^\pm_U\) is a trace, because the proof
+of Proposition~\ref{prop:localtrace} works on each half-line \(\pm\xi>0\) separately
+(Lemma~\ref{lem:divergence} for \(n=1\) says \(\pa_\xi h=0\)). Every trace \(\tau\) on \(\cP_c(U)\) is a
+combination \(c_+\tau^+_U+c_-\tau^-_U\): Step~1 is unchanged, and a term of degree \(-1\) is
+\(p=p_+(x)\mathbf 1_+|\xi|^{-1}+p_-(x)\mathbf 1_-|\xi|^{-1}\), with \(\mathbf 1_\pm\) the characteristic functions of \(\pm\xi>0\);
+applying the \(x\)-part of Step~2 to \(p_+\) and \(p_-\) separately gives
+\(\tau(P_{\varpi p})=\nu_+\tau(P_{g_+})+\nu_-\tau(P_{g_-})\), with \(\nu_\pm=\int p_\pm\,dx\) and
+\(g_\pm=\vartheta_0(x)\varpi(\xi)\mathbf 1_\pm|\xi|^{-1}\).
 
 \subsection{The global residue}\label{subsec:globalres}
 
@@ -3005,8 +3058,18 @@ Then \(\tau_U\) and \(\tau_{U'}\) restrict to traces on \(\cP_c(B)\) (Propositio
 so \(\tau_{U'}=c\,\tau_U\) there if \(n\ge2\) (Proposition~\ref{prop:uniquechart}). To find \(c\), take \(A\in\cP_c(B)\) of
 order \(-n\) with \(\int_{S^*B}\sigma_{-n}(A)\iota_R\vol\ne0\). In both charts the term of degree
 \(-n\) of the full symbol is the principal symbol (G1(c)), so by
-Lemma~\ref{lem:Sintegral} \(\tau_U(A)=\tau_{U'}(A)\), and \(c=1\). For \(n=1\) apply the same argument
-to \(\tau^\pm\). By a partition of unity inside \(U\cap U'\), \(\tau_U=\tau_{U'}\) on \(\cP_c(U\cap U')\).
+Lemma~\ref{lem:Sintegral} \(\tau_U(A)=\tau_{U'}(A)\), and \(c=1\).
+
+\emph{The case \(n=1\).} Fix an orientation of \(M\) (every \(1\)-manifold is orientable) and
+use oriented charts only. A change of oriented coordinates \(x'=\phi(x)\), \(\phi'>0\),
+sends \(\xi\) to \(\xi/\phi'(x)\), so it preserves the half-lines \(\pm\xi>0\). Now
+\(\tau^+_{U'}=c_+\tau^+_U+c_-\tau^-_U\) on \(\cP_c(B)\). Testing on an element of order \(-1\) whose
+principal symbol is supported in \(\xi<0\) gives \(c_-=0\), because \(\tau^+_{U'}\) vanishes on it
+(the half-lines are preserved). Testing on one with principal symbol supported in
+\(\xi>0\) and Lemma~\ref{lem:Sintegral}, applied on the half-line, gives \(c_+=1\). The same
+holds for \(\tau^-\).
+
+In all dimensions, then, by a partition of unity inside \(U\cap U'\), \(\tau_U=\tau_{U'}\) (respectively \(\tau^\pm_U=\tau^\pm_{U'}\)) on \(\cP_c(U\cap U')\).
 
 \emph{Definition.} Choose charts \(U_i\) and a partition of unity \(\phi_i\), and put
 \(\res(A)=\sum_i\tau_{U_i}(\phi_iA)\). By invariance on overlaps, inserting a second partition
@@ -3034,9 +3097,12 @@ Let \(\tau\) be a trace. With charts \(U_i\) and a partition of unity, \(\tau(A)
 and \(\tau=c_i\tau_{U_i}\) on \(\cP_c(U_i)\) by Proposition~\ref{prop:uniquechart} (take connected
 charts). If \(U_i\cap U_j\ne\varnothing\), testing on an element supported in a small ball
 inside \(U_i\cap U_j\) with non-zero residue gives \(c_i=c_j\). Since \(M\) is connected, all
-\(c_i\) agree, and \(\tau=c\,\res\). For \(n=1\) argue in the same way with
-\(\tau^\pm\); on a connected \(1\)-manifold \(\xi>0\) and \(\xi<0\) are globally defined, since
-\(1\)-manifolds are orientable.
+\(c_i\) agree, and \(\tau=c\,\res\). For \(n=1\), orient \(M\) and use oriented charts, so that
+\(\xi>0\) and \(\xi<0\) are globally defined and preserved by changes of chart (proof of
+Theorem~\ref{thm:residue}). On each chart \(\tau=c^+_i\tau^+_{U_i}+c^-_i\tau^-_{U_i}\). On an overlap,
+testing on elements supported in a small ball with principal symbol supported in
+\(\xi>0\) (respectively \(\xi<0\)) gives \(c^+_i=c^+_j\) (respectively \(c^-_i=c^-_j\)), and
+connectedness gives \(\tau=c^+\res^++c^-\res^-\).
 \end{proof}
 
 \begin{remark}
@@ -3068,13 +3134,17 @@ Every class has a representative \(a\) of order \(\le-n\). Then \(\Theta[a]=[a_{
 
 \begin{correction}[Constants in BG's Proposition]\label{corr:zeta}
 (1) BG normalize \(R_M\) to take the value \(1\) on the orientation class of
-\(H^{2n-1}(S^*M)\), derive \(R(a)=c\int_{S^*M}a_{-n}\,\iota(R)\omega^n\), and state that ``it can be
-shown that \(c=2\pi\)''. The constant depends on the normalizations of the HKR map
+\(H^{2n-1}(S^*M)\), show that it is proportional to \(\int_{S^*M}a_{-n}\,\iota(R)\omega^n\) (their
+Prop.~(1) as printed has no constant), and end the proof with ``in fact, it can be
+shown that \(c=2\pi\)''. It is not clear which \(c\) is meant. If it is the constant
+relating \(R_M\) to the integral: The constant depends on the normalizations of the HKR map
 (Correction~\ref{corr:normalization}), of the star operator
 (Correction~\ref{corr:sl2}) and of the orientation, none of which is fixed in
 \cite{BG}. With the conventions of these notes, Proposition~\ref{prop:resTheta}
-gives \(R_M=-(2\pi)^n\res=-\frac1{n!}\int a_{-n}\iota_R\omega^n\), so \(c=-1/n!\). We were unable to
-reproduce \(c=2\pi\).
+gives \(R_M=-(2\pi)^n\res=-\frac1{n!}\int a_{-n}\iota_R\omega^n\), so the constant is \(-1/n!\). If
+it is the \(c\) of their Prop.~(2), with \(R(P)=\int a_{-n}\iota(R)\omega^n\), then
+Proposition~\ref{prop:zeta} gives \(c=(2\pi)^{-n}/(m\cdot n!)\), up to the orientation sign.
+Neither is \(2\pi\).
 (2) In BG's Proposition~(2), the constant in \(\Res_{s=0}\Tr(PA^{-s})=c\,R(P)\) depends
 on the order \(m\) of \(A\), not only on \(\dim M\): by Proposition~\ref{prop:zeta},
 \(\Res_{s=0}\Tr(PA^{-s})=\frac1m\res(P)\). For instance, replacing \(A\) by \(A^2\) halves the
@@ -3178,9 +3248,9 @@ with \(\eps^*(df)\) for \(\pm\iota_{H_f}\) and \(d\xi'\) for \(\iota_R\vol\).
 BG write the Hochschild cochain attached to \(\alpha\) as
 \((T\alpha)(a_0,\dots,a_m)=\int_{S^*M}\mathrm{Res}_m(a_0\,da_1\wedge\dots\wedge da_m)\wedge\alpha\), where
 \(\mathrm{Res}_m\) keeps only the part of homogeneity \(m-n\). As a multilinear functional on \(\cP\)
-this is not a Hochschild cocycle in general: \((T\alpha)\circ b\) involves all the \(P_l\) through
-the components of \(b\) that land in homogeneity \(m-n\), and only the \(b_0\) and \(b_1\) parts
-are controlled (the former by \(\chi\circ b_0=0\), the latter by \(d\alpha=0\) and Stokes). BG
+this is not shown to be a Hochschild cocycle, and there is no reason to expect it to
+be one: \((T\alpha)\circ b\) involves all the \(P_l\) through the components of \(b\) that land in
+homogeneity \(m-n\), and only the \(b_0\) and \(b_1\) parts are controlled (the former by \(\chi\circ b_0=0\), the latter by \(d\alpha=0\) and Stokes). BG
 describe \(T\alpha\) only through its image in the first page, and the precise
 statement is Proposition~\ref{prop:higher}: the formula evaluates a class on its
 representative of order \(\le m-n\). Note also that \(T\alpha\) only accounts for the summand
@@ -3325,16 +3395,16 @@ contractible sets with contractible (or empty) intersections is called \emph{goo
 
 \emph{Čech cohomology.} Let \(\check C^0=\C^3\ni(f_0,f_1,f_2)\) (a constant on each arc),
 \(\check C^1=\C^3\ni(g_{01},g_{02},g_{12})\) (a constant on each intersection), and
-\(\delta(f)_{ij}=f_j-f_i\). The kernel of \(\delta\) consists of the constant triples, and the image is
-two-dimensional. So \(\check H^0=\C\) and \(\check H^1=\C^3/\Ran\delta=\C\): the same as \(H^*_{\mathrm{dR}}(S^1)\). Weil's
+\(\check d(f)_{ij}=f_j-f_i\). The kernel of \(\check d\) consists of the constant triples, and the image is
+two-dimensional. So \(\check H^0=\C\) and \(\check H^1=\C^3/\Ran\check d=\C\): the same as \(H^*_{\mathrm{dR}}(S^1)\). Weil's
 theorem explains why.
 
 \emph{The double complex.} Put \(K^{p,q}=\bigoplus_{|I|=p+1}\Om^q(U_I)\) for \(p=0,1\): forms on the arcs
 (\(p=0\)) and on the intersections (\(p=1\)). There are two differentials, \(d\) on forms and
-\(\delta\) (restriction and difference).
+\(\check d\) (restriction and difference).
 
 \begin{lemma}\label{lem:weilrows}
-\textup{(Rows)} For each \(q\), \(0\to\Om^q(S^1)\to K^{0,q}\xrightarrow{\delta}K^{1,q}\to0\) is exact.
+\textup{(Rows)} For each \(q\), \(0\to\Om^q(S^1)\to K^{0,q}\xrightarrow{\check d}K^{1,q}\to0\) is exact.
 \textup{(Columns)} For each \(p\), \(K^{p,\bullet}\) has cohomology \(\check C^p\) in degree \(0\) (locally
 constant functions, which are constant) and \(0\) in degree \(1\).
 \end{lemma}
@@ -3349,18 +3419,32 @@ Poincaré lemma on arcs: a closed \(1\)-form on an interval is exact, and a func
 \(df=0\) on an interval is constant.
 \end{proof}
 
+Before the proof we recall three standard notions. A chain map \(f:C\to D\) is a
+\emph{quasi-isomorphism} if it induces isomorphisms on all cohomology groups. Its
+\emph{mapping cone} is the complex \(\mathrm{Cone}(f)^m=C^m\oplus D^{m-1}\) with differential
+\((x,y)\mapsto(dx,f(x)-dy)\); there is a long exact sequence
+\(\cdots\to H^{m-1}(D)\to H^m(\mathrm{Cone}(f))\to H^m(C)\xrightarrow{f}H^m(D)\to\cdots\), obtained from the
+short exact sequence \(0\to D[-1]\to\mathrm{Cone}(f)\to C\to0\). So if \(f\) is onto with kernel
+\(Z\), the inclusion \(Z\to\mathrm{Cone}(f)\), \(x\mapsto(x,0)\), is a quasi-isomorphism: the quotient
+\(\mathrm{Cone}(f)/Z\) is the cone of the isomorphism \(C/Z\to D\) induced by \(f\), and the cone of
+an isomorphism \(g\) is acyclic (a cycle \((x,y)\) has \(g(x)=dy\), and it is the boundary of
+\((g^{-1}y,0)\)); then use the long exact sequence of \(0\to Z\to\mathrm{Cone}(f)\to\mathrm{Cone}(f)/Z\to0\). The \emph{five lemma} says that a map between two long exact
+sequences that is an isomorphism at four out of every five consecutive places is an
+isomorphism at the fifth. These are in any text on homological algebra
+\cite[Ch.~1]{Weibel}.
+
 \begin{theorem}[Weil, on the circle]\label{thm:weilS1}
 \(H^*_{\mathrm{dR}}(S^1)\cong\check H^*(\{U_i\};\C)\).
 \end{theorem}
 
 \begin{proof}
 Let \(T\) be the total complex, \(T^m=K^{0,m}\oplus K^{1,m-1}\), with differential
-\((x,y)\mapsto(dx,\delta x-dy)\). This is the mapping cone of the chain map
-\(\delta:K^{0,\bullet}\to K^{1,\bullet}\), shifted. By the rows, \(\delta\) is onto with kernel \(\Om^\bullet(S^1)\), so the
+\((x,y)\mapsto(dx,\check d x-dy)\). This is the mapping cone of the chain map
+\(\check d:K^{0,\bullet}\to K^{1,\bullet}\). By the rows, \(\check d\) is onto with kernel \(\Om^\bullet(S^1)\), so the
 inclusion \(\Om^\bullet(S^1)\to T\), \(x\mapsto(x,0)\), is a quasi-isomorphism (a cone of a surjection is
 quasi-isomorphic to its kernel). By the columns, the inclusions of constants
 \(\check C^p\to K^{p,\bullet}\) are quasi-isomorphisms, so the induced map from the cone of
-\(\delta:\check C^0\to\check C^1\), which computes \(\check H^*\), to \(T\) is a quasi-isomorphism by the five lemma
+\(\check d:\check C^0\to\check C^1\), which computes \(\check H^*\), to \(T\) is a quasi-isomorphism by the five lemma
 applied to the long exact sequences of the cones.
 \end{proof}
 
@@ -3386,13 +3470,13 @@ applied to the long exact sequences of the cones.
   \node (k11) at (4.4,-0.4) {\(K^{1,1}\)};
   \node (c0) at (2.4,2.7) {\(\check C^0\)};
   \node (c1) at (4.4,2.7) {\(\check C^1\)};
-  \draw[->] (a0)--(k00); \draw[->] (k00)--node[above,font=\scriptsize]{\(\delta\)}(k10);
-  \draw[->] (a1)--(k01); \draw[->] (k01)--node[above,font=\scriptsize]{\(\delta\)}(k11);
+  \draw[->] (a0)--(k00); \draw[->] (k00)--node[above,font=\scriptsize]{\(\check d\)}(k10);
+  \draw[->] (a1)--(k01); \draw[->] (k01)--node[above,font=\scriptsize]{\(\check d\)}(k11);
   \draw[->] (a0)--node[left,font=\scriptsize]{\(d\)}(a1);
   \draw[->] (k00)--node[left,font=\scriptsize]{\(d\)}(k01);
   \draw[->] (k10)--node[right,font=\scriptsize]{\(d\)}(k11);
   \draw[->] (c0)--(k00); \draw[->] (c1)--(k10);
-  \draw[->] (c0)--node[above,font=\scriptsize]{\(\delta\)}(c1);
+  \draw[->] (c0)--node[above,font=\scriptsize]{\(\check d\)}(c1);
   \node[font=\scriptsize,align=center,blue!60!black] at (2.2,-1.3) {rows exact:\\ partition of unity};
   \node[font=\scriptsize,align=center,red!60!black] at (6.0,1.9) {columns exact:\\ Poincaré lemma};
   \node[font=\small] at (2.4,-2.35) {(b) the Čech--de Rham double complex};
@@ -3455,6 +3539,14 @@ In the derived category of sheaves on \(M\),
 \(\mathcal C^{\lambda,\bullet}\simeq\bigoplus_{j\ge0}\C_M[2n+2j]\). Consequently, granting the identification of
 global chains with hypercohomology, \(\HC_N(\cD(M))\cong\bigoplus_{j\ge0}H^{2n-N+2j}(M)\).
 \end{proposition}
+
+\emph{The following argument uses the derived category of sheaves (G12) and may be
+skipped on a first reading.} Roughly, the derived category is obtained from
+complexes of sheaves by declaring quasi-isomorphisms to be isomorphisms; in it a
+complex whose cohomology sheaves are \(\C_M\) in a single degree is isomorphic to
+\(\C_M\) shifted to that degree, and an exact sequence of complexes gives a
+``distinguished triangle'', which splits when one of its maps has a one-sided
+inverse. Nothing else from the theory is used.
 
 \begin{proof}[Argument (in the derived category, (G12))]
 Since \(-2n\) is the highest degree with a non-zero cohomology sheaf, there is a
@@ -3572,15 +3664,15 @@ and \(\xi<0\), and \(S^*S^1\times S^1\) is two tori (Figure~\ref{fig:SMS1}). So
 \[
  \dim\HH_k(\cP(S^1))=2,\ 4,\ 2\qquad(k=0,1,2),\qquad \HH_k=0\ (k\ge3).
 \]
-Let \(\chi_\pm\) be the characteristic function of \(\pm\xi>0\); it is homogeneous of degree \(0\) and
+Let \(\mathbf 1_\pm\) be the characteristic function of \(\pm\xi>0\); it is homogeneous of degree \(0\) and
 smooth on \(\Tdot S^1\) (it is the symbol of the projection onto non-negative or
 negative Fourier modes, modulo smoothing).
 
 \emph{Degree \(0\).} The leading term of a \(0\)-cycle has order \(k-n=-1\). The two classes are
 detected by the traces \(\res^\pm(A)=(2\pi)^{-1}\int_0^{2\pi}a_{-1}(x,\pm1)\,dx\). For example
-\(A=(1+D^2)^{-1/2}\) has \(a_{-1}=|\xi|^{-1}\), so \(\res^\pm(A)=1\) and \(\res(A)=2\). By
-Proposition~\ref{prop:zeta} with \(P=A\) and \(A\) itself as the operator of order \(m=1\),
-\(\Res_{s=0}\Tr(A^{-1-s})=\res(A)=2\). Directly, \(\Tr(A^{-1-s})=\sum_{k\in\Z}\langle k\rangle^{-1-s}\), and
+\(P=(1+D^2)^{-1/2}\), of order \(-1\), has \(p_{-1}=|\xi|^{-1}\), so \(\res^\pm(P)=1\) and \(\res(P)=2\). Let
+\(Q=\langle D\rangle=(1+D^2)^{1/2}\), elliptic of order \(m=1\). By Proposition~\ref{prop:zeta},
+\(\Res_{s=0}\Tr(PQ^{-s})=\res(P)=2\). Directly, \(\Tr(PQ^{-s})=\sum_{k\in\Z}\langle k\rangle^{-1-s}\), and
 \(\sum_{k}\langle k\rangle^{-1-s}=2\int_1^\infty t^{-1-s}\,dt+O(1)=2/s+O(1)\). The difference \(\res^+-\res^-\) is a
 trace that is not a multiple of \(\res\), which shows that \(n\ge2\) is needed in
 Theorem~\ref{thm:unique}.
@@ -3590,14 +3682,14 @@ identity on \(1\)-forms in dimension \(2\) (Section~\ref{subsec:poissonR2}). On 
 the closed homogeneous \(1\)-forms of degree \(0\) are spanned, modulo exact ones, by \(dx\) and
 \(d\xi/\xi=dr/r\). So \(\HH_1\) has the four classes with leading terms
 \[
- -i\,\chi_\pm e^{-ix}\otimes e^{ix}\ \mapsto\ \chi_\pm\,dx,\qquad
- \chi_\pm\xi^{-1}\otimes\xi\ \mapsto\ \chi_\pm\,\frac{d\xi}\xi .
+ -i\,\mathbf 1_\pm e^{-ix}\otimes e^{ix}\ \mapsto\ \mathbf 1_\pm\,dx,\qquad
+ \mathbf 1_\pm\xi^{-1}\otimes\xi\ \mapsto\ \mathbf 1_\pm\,\frac{d\xi}\xi .
 \]
 (Here \(\xi\) is the symbol of \(D\), and \(e^{\pm ix}\) are multiplication operators.)
 
-\emph{Degree \(2\).} The leading term has order \(1\), and \(*^{-1}(\chi_\pm)=\chi_\pm\omega\). The classes have leading
-terms \(-i\varphi(\chi_\pm e^{-ix};\xi,e^{ix})\), whose HKR image is
-\(-i\chi_\pm e^{-ix}\,d\xi\wedge(ie^{ix}dx)=\chi_\pm\omega\).
+\emph{Degree \(2\).} The leading term has order \(1\), and \(*^{-1}(\mathbf 1_\pm)=\mathbf 1_\pm\omega\). The classes have leading
+terms \(-i\operatorname{Alt}(\mathbf 1_\pm e^{-ix};\xi,e^{ix})\), whose HKR image is
+\(-i\mathbf 1_\pm e^{-ix}\,d\xi\wedge(ie^{ix}dx)=\mathbf 1_\pm\omega\).
 
 \emph{Cyclic.} By Theorem~\ref{thm:HCP}, \(\dim\HC_N=2,4,4,4,4,\dots\) for \(N=0,1,2,3,\dots\) (for
 \(N\ge2\), \(\HC_N\) is \(H^0\oplus H^2\) or \(H^1\) of the two tori), and \(\dim\HP_0=\dim\HP_1=4\).
@@ -3607,7 +3699,7 @@ Let \(M=T^2=\R^2/2\pi\Z^2\), \(n=2\). Then \(S^*T^2=T^2\times S^1=T^3\), and \(S
 \[
  \dim\HH_k(\cP(T^2))=\binom4{4-k}=1,\ 4,\ 6,\ 4,\ 1\qquad(k=0,\dots,4).
 \]
-\emph{Gysin check.} Since \(\chi(T^2)=0\), the formula of Correction~\ref{corr:gysin} applies:
+\emph{Gysin check.} Since \(\chi_{\mathrm{top}}(T^2)=0\), the formula of Correction~\ref{corr:gysin} applies:
 \(\HH_k\cong H^{4-k}\oplus H^{3-k}\oplus H^{3-k}\oplus H^{2-k}\) of \(T^2\), with dimensions
 \(0+0+0+1\), \(0+1+1+2\), \(1+2+2+1\), \(2+1+1+0\), \(1\), as it should be.
 
@@ -3627,7 +3719,7 @@ factor \(\frac12=\frac1m\) is the one missing from BG's Proposition~(2)
 \subsection{Spheres}\label{subsec:exspheres}
 By the Gysin sequence, the real cohomology of \(S^*S^n\) is:
 \begin{itemize}
-\item for \(n\) even, \(\C\) in degrees \(0\) and \(2n-1\) (the Euler class is \(\chi(S^n)=2\) times a
+\item for \(n\) even, \(\C\) in degrees \(0\) and \(2n-1\) (the Euler class is \(\chi_{\mathrm{top}}(S^n)=2\) times a
 generator, so \(H^0(S^n)\to H^n(S^n)\) is onto and the middle classes cancel);
 \item for \(n\) odd, \(\C\) in degrees \(0\), \(n-1\), \(n\), \(2n-1\) (the Euler class vanishes).
 \end{itemize}
@@ -3643,7 +3735,7 @@ For \(S^2\) this gives \(1,1,0,1,1\), and BG's formula \(H^{1-k}(S^2)\oplus H^{2
 
 \subsection{Dimension checks}\label{subsec:checks}
 Table~\ref{tab:checks} collects the dimensions. In each row the alternating sum is
-\(0=\chi(S^*M\times S^1)\), \(\HH_0\) has dimension equal to the number of residue traces, and
+\(0=\chi_{\mathrm{top}}(S^*M\times S^1)\), \(\HH_0\) has dimension equal to the number of residue traces, and
 \(\HH_{2n}\) has dimension equal to the number of components of \(S^*M\).
 
 \begin{table}[htbp]
@@ -3674,8 +3766,13 @@ By Theorem~\ref{thm:DU}, \(\HH_*(A_n)\) and \(\HH_*(\cD(\R^n))\) are \(\C\) in d
 Theorem~\ref{thm:DM} (which for \(M=S^1\) can be proved by the local computation and
 Fourier series, but we rely on (G11)) gives \(\HH_1(\cD(S^1))=\HH_2(\cD(S^1))=\C\) and \(\HH_0(\cD(S^1))=0\).
 The last statement can be checked by hand: \([\pa,f]=f'\), so functions with mean zero
-are commutators, and \(1=-i[e^{-ix}\pa,e^{ix}]\); then \([\pa,f\pa^k]=f'\pa^k\) and
-\([e^{-ix}\pa,e^{ix}\pa^k]=i\pa^k\) show that every differential operator is a sum of commutators.
+are commutators, and \(1=-i[e^{-ix}\pa,e^{ix}]\); then \([\pa,f\pa^k]=f'\pa^k\) shows that \(f\pa^k\) is a commutator if \(f\) has mean zero, and
+\[
+ [e^{-ix}\pa,e^{ix}\pa^k]=(\pa+i)\pa^k-(\pa-i)^k\pa=i(k+1)\pa^k+(\text{order}<k)
+\]
+shows that \(\pa^k\) is a commutator modulo operators of lower order (for \(k=1\) it is
+\(2i\pa\)). By induction on the order, every differential operator is a sum of
+commutators.
 So there is no trace on \(\cD(S^1)\), in contrast with \(\cP(S^1)\).
 
 \appendix
@@ -3695,10 +3792,10 @@ By (G2), \(C_k=\CI(M^{k+1})\), with the face maps of Section~\ref{subsec:topolog
 \subsection{Normalized chains}
 Let \(D_i=\{z_i=z_{i+1}\}\subset M^{k+1}\) for \(0\le i<k\), and \(D_k=\{z_k=z_0\}\). Put
 \[
- N_k=\{u\in C_k:\ u|_{D_i}=0,\ 0\le i<k\},\qquad M_k=\{u\in N_k:\ u|_{D_k}=0\},\qquad
+ N_k=\{c\in C_k:\ c|_{D_i}=0,\ 0\le i<k\},\qquad M_k=\{c\in N_k:\ c|_{D_k}=0\},\qquad
  B_k=d_{k+1}(N_{k+1}),
 \]
-with \(N_0=M_0=C_0\). If \(u\in N_k\), then \(d_iu=0\) for \(i<k\), so \(bu=(-1)^kd_ku\), and \(d_ku\in N_{k-1}\). So
+with \(N_0=M_0=C_0\). If \(c\in N_k\), then \(d_iu=0\) for \(i<k\), so \(bu=(-1)^kd_ku\), and \(d_ku\in N_{k-1}\). So
 \(N\) is a subcomplex; its \(k\)-cycles are \(M_k\), and its \(k\)-boundaries are \(B_k\subset M_k\).
 The same definitions apply to polynomial algebras, with \(\CI(M^{k+1})\) replaced by
 polynomials in \(z_0,\dots,z_k\).
@@ -3709,14 +3806,14 @@ is a boundary in \(C\) lies in \(B_k\).
 \end{proposition}
 
 \begin{proof}
-For \(j\ge0\) let \(J^j_m=\{u\in C_m:\ u|_{D_i}=0\text{ for }i<\min(j,m)\}\). One checks from the
+For \(j\ge0\) let \(J^j_m=\{c\in C_m:\ c|_{D_i}=0\text{ for }i<\min(j,m)\}\). One checks from the
 definitions that each \(J^j\) is a subcomplex, \(J^0=C\), and \(J^j_m=N_m\) for \(m\le j\). For
-\(m\ge j+1\) and \(u\in J^j_m\) put \(u'(z)=u(z_0,\dots,z_j,z_j,z_{j+2},\dots,z_m)\) and \(u''=u-u'\). Then
-\(u''\) vanishes on \(D_j\), so \(u''\in J^{j+1}_m\), and \(u'\) lies in the space \(V^j_m\) of elements of
+\(m\ge j+1\) and \(c\in J^j_m\) put \(c'(z)=c(z_0,\dots,z_j,z_j,z_{j+2},\dots,z_m)\) and \(c''=c-c'\). Then
+\(c''\) vanishes on \(D_j\), so \(c''\in J^{j+1}_m\), and \(c'\) lies in the space \(V^j_m\) of elements of
 \(J^j_m\) independent of \(z_{j+1}\) (\(V^j_m=0\) for \(m\le j\)). The decomposition is unique, so
 \(J^j=J^{j+1}\oplus V^j\). On \(V^j\), \(d_i=0\) for \(i<j\) and \(d_j=d_{j+1}\), so
 \(bu=\sum_{i\ge j+2}(-1)^id_iu\in V^j\): \(V^j\) is a subcomplex. Let
-\((Hu)(z_0,\dots,z_{m+1})=u(z_0,\dots,z_{j+1},z_{j+3},\dots,z_{m+1})\), inserting a dummy variable in
+\((Hu)(z_0,\dots,z_{m+1})=c(z_0,\dots,z_{j+1},z_{j+3},\dots,z_{m+1})\), inserting a dummy variable in
 position \(j+2\). Then \(d_{j+2}H=1\), \(d_iH=Hd_{i-1}\) for \(i\ge j+3\), and the faces \(d_i\), \(i\le j+1\),
 of \(Hu\) vanish or cancel as before. So \(bH+Hb=(-1)^j\) on \(V^j\), \(V^j\) is contractible, and
 \(J^{j+1}\subset J^j\) is a quasi-isomorphism. Hence \(H_k(C)\cong H_k(J^{k+1})=H_k(N)\).
@@ -3756,18 +3853,18 @@ alternating in the arguments \(j\), \(k\), and these transpositions generate \(\
 \end{proof}
 
 \begin{lemma}\label{lem:leading}
-Let \(u\in N_k\). Each monomial of the Taylor series of \(u\) in \(y\) at \(\Delta\) contains a component
+Let \(c\in N_k\). Each monomial of the Taylor series of \(c\) in \(y\) at \(\Delta\) contains a component
 of every \(y_j\), so the series starts in degree \(k\), with
-\(u_{(k)}=\sum_Iw_I(x)\,y_{1,i_1}\cdots y_{k,i_k}\), and \(\chi(u)=\frac1{k!}\sum_Iw_I\,dx^{i_1}\wedge\dots\wedge dx^{i_k}\).
-If \(u\in M_k\), then \(u_{(k)}(x;\cdot)\) is alternating, and \(\chi(u)(x)=0\) if and only if
-\(u_{(k)}(x;\cdot)=0\).
+\(c_{(k)}=\sum_Iw_I(x)\,y_{1,i_1}\cdots y_{k,i_k}\), and \(\chi(c)=\frac1{k!}\sum_Iw_I\,dx^{i_1}\wedge\dots\wedge dx^{i_k}\).
+If \(c\in M_k\), then \(c_{(k)}(x;\cdot)\) is alternating, and \(\chi(c)(x)=0\) if and only if
+\(c_{(k)}(x;\cdot)=0\).
 \end{lemma}
 
 \begin{proof}
 The Taylor series vanishes on each \(\{y_j=0\}\). Since \(z_l=x+y_1+\dots+y_l\),
 \(\pa_{z_l}=\pa_{y_l}-\pa_{y_{l+1}}\) (and \(\pa_{z_k}=\pa_{y_k}\)), and in
-\(\pa_{z_1^{i_1}}\cdots\pa_{z_k^{i_k}}u\) at \(y=0\) only the term in which each \(y_l\) is differentiated once
-survives. If \(u\in M_k\), \(u_{(k)}\) vanishes on \(\{y_1+\dots+y_k=0\}\); apply
+\(\pa_{z_1^{i_1}}\cdots\pa_{z_k^{i_k}}c\) at \(y=0\) only the term in which each \(y_l\) is differentiated once
+survives. If \(c\in M_k\), \(c_{(k)}\) vanishes on \(\{y_1+\dots+y_k=0\}\); apply
 Lemma~\ref{lem:antisym}.
 \end{proof}
 
@@ -3779,39 +3876,39 @@ Let \(k\ge1\) and \(m\ge k+1\). Let \(\mathcal M_m\) be the homogeneous polynomi
 \end{lemma}
 
 \begin{proof}
-Given \(q\in\mathcal M_m\), the polynomial chain \(u(z)=q(z_1-z_0,\dots,z_k-z_{k-1})\) lies in \(M_k\) of the
-polynomial algebra, and \(\chi(u)=0\) because \(m>k\). By Theorem~\ref{thm:HKRpoly} and
-Proposition~\ref{prop:normalized} for polynomials, \(u=d_{k+1}v\) with \(v\in N_{k+1}\). In the
+Given \(q\in\mathcal M_m\), the polynomial chain \(c(z)=q(z_1-z_0,\dots,z_k-z_{k-1})\) lies in \(M_k\) of the
+polynomial algebra, and \(\chi(c)=0\) because \(m>k\). By Theorem~\ref{thm:HKRpoly} and
+Proposition~\ref{prop:normalized} for polynomials, \(c=d_{k+1}v\) with \(v\in N_{k+1}\). In the
 coordinates \(x,y_1,\dots,y_{k+1}\) the component of \(v\) of degree \(0\) in \(x\) and \(m\) in \(y\) lies in
 \(\mathcal V_m\) (the conditions are homogeneous and linear), and \(R\) maps it to \(q\).
 \end{proof}
 
 \begin{lemma}\label{lem:local}
-Let \(k\ge1\) and \(u\in M_k\) with \(\chi(u)=0\). Every point \(p\in M^{k+1}\) has a neighbourhood on which
-\(u\) agrees with an element of \(B_k\).
+Let \(k\ge1\) and \(c\in M_k\) with \(\chi(c)=0\). Every point \(p\in M^{k+1}\) has a neighbourhood on which
+\(c\) agrees with an element of \(B_k\).
 \end{lemma}
 
 \begin{proof}
 If \(p\notin\Delta\), then \(p_j\ne p_{j+1}\) for some \(j<k\). Choose \(f\in\CI(M)\) with \(f(p_j)\ne f(p_{j+1})\) and
 \(\psi\in\CI(M^{k+1})\) equal to \(1\) near \(p\) and supported where \(f(z_j)\ne f(z_{j+1})\). Then
-\(g=\psi u/(f(z_j)-f(z_{j+1}))\in M_k\), and near \(p\), \(u=(f(z_j)-f(z_{j+1}))g\in B_k\) by
+\(g=\psi c/(f(z_j)-f(z_{j+1}))\in M_k\), and near \(p\), \(c=(f(z_j)-f(z_{j+1}))g\in B_k\) by
 Lemma~\ref{lem:Bmodule}(ii).
 
-Let \(p=(x_0,\dots,x_0)\). By Lemma~\ref{lem:leading} and \(\chi(u)=0\), the Taylor series of \(u\) at
-\(\Delta\) is \(\sum_{m\ge k+1}u_{(m)}\) with \(u_{(m)}\in\CI(U)\otimes\mathcal M_m\). Using a linear right inverse of \(R\),
-choose \(V_{(m)}\in\CI(U)\otimes\mathcal V_m\) with \(RV_{(m)}=u_{(m)}\). By Borel's lemma,
-\(V=\sum_m\chi_0(\lambda_m|y|)V_{(m)}\), with \(\chi_0\in\CI_c(\R)\) equal to \(1\) near \(0\) and \(\lambda_m\to\infty\) fast
+Let \(p=(x_0,\dots,x_0)\). By Lemma~\ref{lem:leading} and \(\chi(c)=0\), the Taylor series of \(c\) at
+\(\Delta\) is \(\sum_{m\ge k+1}c_{(m)}\) with \(c_{(m)}\in\CI(U)\otimes\mathcal M_m\). Using a linear right inverse of \(R\),
+choose \(V_{(m)}\in\CI(U)\otimes\mathcal V_m\) with \(RV_{(m)}=c_{(m)}\). By Borel's lemma,
+\(V=\sum_m\varpi(\lambda_m|y|)V_{(m)}\), with \(\varpi\in\CI_c(\R)\) equal to \(1\) near \(0\) and \(\lambda_m\to\infty\) fast
 enough, is smooth for \(x\in U\) and small \(y\), has Taylor series \(\sum V_{(m)}\), and vanishes on
 each \(\{y_j=0\}\). Let \(\Theta\) be a cut-off near \((x_0,\dots,x_0)\in M^{k+2}\), and \(v=\Theta V\), written in the
-variables \(z\). Then \(v\in N_{k+1}\), and \(s=d_{k+1}v\in B_k\) has the same Taylor series as \(u\) at \(\Delta\)
+variables \(z\). Then \(v\in N_{k+1}\), and \(s=d_{k+1}v\in B_k\) has the same Taylor series as \(c\) at \(\Delta\)
 near \(p\), because \(z_{k+1}=z_0\) means \(y_{k+1}=-(y_1+\dots+y_k)\).
 
-So \(g=u-s\in M_k\) vanishes to infinite order at \(\Delta\) near \(p\). Since \(U^{k+1}\) is convex,
+So \(g=c-s\in M_k\) vanishes to infinite order at \(\Delta\) near \(p\). Since \(U^{k+1}\) is convex,
 Taylor's formula along segments gives \(|\pa^\alpha g|\le C_{\alpha,N}|y|^N\) for all \(N\). Hence
 \(g_{j,i}=y_{j,i}g/|y|^2\), extended by \(0\) on \(\Delta\), is smooth and vanishes where \(g\) does. With
 \(f_i\in\CI(M)\) equal to the \(i\)-th coordinate near \(x_0\) and a cut-off \(\psi\) equal to \(1\) near \(p\),
 \(g=\sum_{j,i}(f_i(z_j)-f_i(z_{j-1}))\psi g_{j,i}\) near \(p\), which lies in \(B_k\) by
-Lemma~\ref{lem:Bmodule}(ii). So \(u=s+g\) agrees with an element of \(B_k\) near \(p\).
+Lemma~\ref{lem:Bmodule}(ii). So \(c=s+g\) agrees with an element of \(B_k\) near \(p\).
 \end{proof}
 
 \subsection{The theorem}
@@ -3819,12 +3916,12 @@ Lemma~\ref{lem:Bmodule}(ii). So \(u=s+g\) agrees with an element of \(B_k\) near
 For \(k=0\), \(b=0\) on \(C_1\), and \(\HH_0=\CI(M)\). Let \(k\ge1\). \(\chi_*\) is onto by Lemma~\ref{lem:chi}:
 every \(k\)-form is a finite sum \(\sum a_0\,df_1\wedge\dots\wedge df_k\), using the coordinate functions of an
 embedding \(M\subset\R^N\). By Proposition~\ref{prop:normalized}, a class is represented by
-\(u\in M_k\), and it vanishes if and only if \(u\in B_k\). Let \(\chi(u)=0\). By Lemma~\ref{lem:local} there
+\(c\in M_k\), and it vanishes if and only if \(c\in B_k\). Let \(\chi(c)=0\). By Lemma~\ref{lem:local} there
 are a locally finite partition of unity \(\sum_\beta\psi_\beta=1\) on \(M^{k+1}\) and elements \(s_\beta=d_{k+1}v_\beta\in B_k\)
-with \(u=s_\beta\) on \(\supp\psi_\beta\). By Lemma~\ref{lem:Bmodule}(i),
-\(u=\sum_\beta\psi_\beta s_\beta=d_{k+1}\bigl(\sum_\beta\tilde\psi_\beta v_\beta\bigr)\). The last sum is locally finite on
+with \(c=s_\beta\) on \(\supp\psi_\beta\). By Lemma~\ref{lem:Bmodule}(i),
+\(c=\sum_\beta\psi_\beta s_\beta=d_{k+1}\bigl(\sum_\beta\tilde\psi_\beta v_\beta\bigr)\). The last sum is locally finite on
 \(M^{k+2}\), since \(\tilde\psi_\beta\) depends only on the first \(k+1\) variables, and each term lies in \(N_{k+1}\).
-So \(u\in B_k\).
+So \(c\in B_k\).
 \end{proof}
 
 \section{The uncompleted chain model}\label{app:mixed}
@@ -3840,8 +3937,8 @@ whose stages are complete. Throughout, \(M\) is closed.
 \subsection{The mixed complex}
 Let \(\mathfrak B=\cP_0\subset\cP\) be the subalgebra of symbols of order \(\le0\), and \(\cA_N=\cP_N\). Fix
 an elliptic \(T\in\cP_{-1}\) with principal symbol \(r^{-1}\), \(r>0\) homogeneous of degree \(1\). It is
-invertible in \(\cP\) with inverse of order \(1\) (parametrix construction). Put \(u_N=T^{-N}\). Then
-\(\cA_N=\mathfrak Bu_N=u_N\mathfrak B\), since \(au_N^{-1}=aT^N\in\mathfrak B\) for \(a\in\cA_N\). The \emph{mixed
+invertible in \(\cP\) with inverse of order \(1\) (G1)(e). Then
+\(\cA_N=\mathfrak BT^{-N}=T^{-N}\mathfrak B\), since \(aT^{N}\in\mathfrak B\) for \(a\in\cA_N\). The \emph{mixed
 chains} are
 \[
  C_k(\mathfrak B,\cP)=\varinjlim_NS_{N,k},\qquad S_{N,k}=\cA_N\hot\mathfrak B^{\hot k},
@@ -3876,33 +3973,63 @@ and \(P_{-1}=Q_{-1}=\cP\), with \(b'=\mu\) the multiplication \(Q_0\to\cP\). The
 For \(P\), let \(P^{(N)}\subset P\) be the subcomplex of chains whose last slot lies in \(\cA_N\)
 (\(b'\) maps that slot into \(\mathfrak B\cA_N=\cA_N\)), with \(P^{(N)}_{-1}=\cP\). Define
 \[
- h_N(a_0\otimes\beta\otimes a)=(-1)^{k+1}a_0\otimes\beta\otimes au_N^{-1}\otimes u_N,\qquad h_N(a)=au_N^{-1}\otimes u_N ,
+ h_N(a_0\otimes\beta\otimes a)=(-1)^{k+1}a_0\otimes\beta\otimes aT^{N}\otimes T^{-N},\qquad h_N(a)=aT^{N}\otimes T^{-N} ,
 \]
-for \(\beta\in\mathfrak B^{\hot k}\), \(a\in\cA_N\). Since \(au_N^{-1}\in\mathfrak B\), \(h_N\) maps \(P^{(N)}_k\) to \(P^{(N)}_{k+1}\). In
+for \(\beta\in\mathfrak B^{\hot k}\), \(a\in\cA_N\). Since \(aT^{N}\in\mathfrak B\), \(h_N\) maps \(P^{(N)}_k\) to \(P^{(N)}_{k+1}\). In
 \(b'h_N+h_Nb'\), the faces not involving the last two slots cancel in pairs, the face
-merging \(au_N^{-1}\) with \(u_N\) returns \(a_0\otimes\beta\otimes a\), and the face merging the last entry
-\(b_k\) of \(\beta\) with \(au_N^{-1}\) cancels \(h_N\) of the last face of \(b'\), since
-\((b_ka)u_N^{-1}=b_k(au_N^{-1})\). So \(b'h_N+h_Nb'=1\) on \(P^{(N)}\), and every cycle of \(P\) lying in
+merging \(aT^{N}\) with \(T^{-N}\) returns \(a_0\otimes\beta\otimes a\), and the face merging the last entry
+\(b_k\) of \(\beta\) with \(aT^{N}\) cancels \(h_N\) of the last face of \(b'\), since
+\((b_ka)T^{N}=b_k(aT^{N})\). So \(b'h_N+h_Nb'=1\) on \(P^{(N)}\), and every cycle of \(P\) lying in
 some \(P^{(N)}\) is a boundary there.
 
 Index the stages by \(N\ge0\). Let \(V_0=\mathfrak B\) and \(V_N=\CI_{(N)}(Y)\) for \(N\ge1\), so that
 \(\cA_N=V_0\oplus\dots\oplus V_N\), a finite sum of closed subspaces. Put
 \(W_{k,N}=\bigoplus_{\max N_i=N}V_{N_1}\hot\cdots\hot V_{N_k}\); then
-\(\varinjlim_N\cA_N^{\hot k}=\bigoplus_NW_{k,N}\) algebraically. We construct a bimodule
-chain map \(g:Q\to P\) over the identity of \(\cP\), by induction on \(k\), with \(g_{-1}=g_0=1\). If
-\(g_{k-1}\) maps the generators \(1\otimes W_{k-1,N}\otimes1\) into \(P^{(\nu(k-1,N))}\), then for
-\(w\in W_{k,N}\) the element \(z(w)=g_{k-1}b'(1\otimes w\otimes1)\) is a cycle of the augmented complex lying in
-\(P^{(\nu)}\), \(\nu=N+\max_{N'\le2N}\nu(k-1,N')\), and we set \(g_k(1\otimes w\otimes1)=h_\nu(z(w))\), extended
-bimodule-linearly. This is continuous on each stage and satisfies \(b'g_k=g_{k-1}b'\) on
-generators, hence everywhere. In the same way one builds bimodule homotopies
-\(K:Q\to Q\) with \(b'K+Kb'=\iota g-1\), using \(s\), and \(H:P\to P\) with \(b'H+Hb'=g\iota-1\), using \(h_\nu\),
-where \(\iota:P\to Q\) is the inclusion.
+\(\varinjlim_N\cA_N^{\hot k}=\bigoplus_NW_{k,N}\) algebraically. We call \(1\otimes w\otimes1\), \(w\in W_{k,N}\),
+the \emph{generators} of \(Q_k\); \(Q_k\) is the closure of their bimodule span on each stage.
+A continuous linear map \(G\) defined on generators, with values in a stage of \(P\) or \(Q\)
+for each \(N\), extends uniquely to a continuous bimodule map by
+\(G(a\otimes w\otimes a')=a\,G(1\otimes w\otimes1)\,a'\): the right side is continuous and trilinear on
+\(\cA_M\times W_{k,N}\times\cA_M\), hence defined on \(\cA_M\hot W_{k,N}\hot\cA_M\) for every \(M\). Two continuous
+bimodule maps that agree on generators are equal. Note also that \(P^{(\nu)}\) is stable
+under left multiplication by \(\cP\), and that right multiplication by \(\cA_N\) maps
+\(P^{(\nu)}\) into \(P^{(\nu+N)}\).
 
-Finally, \(\rho(a_0\otimes w\otimes a)=aa_0\otimes w\) maps \(Q_k\) onto Model I chains \(C_k(\cP)\) and \(P_k\) onto
-\(C_k(\mathfrak B,\cP)\), with \(\rho b'=b\rho\) and \(\rho(aX)=\rho(Xa)\). For a bimodule map \(F\) between \(P\) and
-\(Q\), \(\bar F(a_0\otimes w)=\rho F(a_0\otimes w\otimes1)\) satisfies \(\bar F\rho=\rho F\). So \(\bar g\) is a chain map
-\(C(\cP)\to C(\mathfrak B,\cP)\), \(\bar\iota\) is the inclusion, and \(\bar K\), \(\bar H\) are homotopies
-\(\bar\iota\bar g\simeq1\), \(\bar g\bar\iota\simeq1\).
+\emph{The comparison map \(g:Q\to P\).} Put \(g_{-1}=1\) and \(g_0=1\) (\(P_0=Q_0\)). Let \(k\ge1\) and
+suppose that bimodule maps \(g_j\), \(j<k\), are constructed with \(b'g_j=g_{j-1}b'\), and that
+\(g_{k-1}\) maps \(1\otimes W_{k-1,N}\otimes1\) continuously into \(P^{(\nu(k-1,N))}\). For \(w\in W_{k,N}\),
+\(b'(1\otimes w\otimes1)\) is a sum of terms \(a\cdot(1\otimes w'\otimes1)\cdot a'\) with \(a,a'\in\cA_N\cup\{1\}\) and
+\(w'\in\cA_{2N}^{\hot(k-1)}\). Hence \(z(w)=g_{k-1}b'(1\otimes w\otimes1)\) lies in \(P^{(\nu)}\),
+\(\nu=\nu(k,N)=N+\max_{N'\le2N}\nu(k-1,N')\). It is a cycle of the augmented complex:
+\(b'z(w)=g_{k-2}b'b'(1\otimes w\otimes1)=0\) if \(k\ge2\), and \(\mu z(w)=\mu b'(1\otimes w\otimes1)=0\) if \(k=1\). Put
+\(g_k(1\otimes w\otimes1)=h_\nu(z(w))\). Then \(b'g_k(1\otimes w\otimes1)=z(w)-h_\nu b'z(w)=z(w)\), so the
+bimodule maps \(b'g_k\) and \(g_{k-1}b'\) agree on generators, hence everywhere.
+
+\emph{The homotopy \(K\) on \(Q\).} Let \(\iota:P\to Q\) be the inclusion. Put \(K_{-1}=K_0=0\);
+indeed \(\iota g-1=0\) in degrees \(-1\) and \(0\). For \(k\ge1\), suppose \(b'K_{j}+K_{j-1}b'=\iota g-1\) in
+degrees \(j<k\), and let \(y=(\iota g-1-K_{k-1}b')(1\otimes w\otimes1)\). Then
+\(b'y=(\iota g-1)b'(1\otimes w\otimes1)-b'K_{k-1}b'(1\otimes w\otimes1)=K_{k-2}b'b'(1\otimes w\otimes1)=0\), so
+\(b'sy=y-sb'y=y\). Define \(K_k(1\otimes w\otimes1)=s(y)\) and extend bimodule-linearly (\(s\) itself is
+not a bimodule map, but it is only applied to the value on a generator). Then
+\(b'K_k+K_{k-1}b'=\iota g-1\) on generators, and both sides are bimodule maps.
+
+\emph{The homotopy \(H\) on \(P\).} The generators of \(P_k\) are \(1\otimes\beta\otimes1\) with
+\(\beta\in\mathfrak B^{\hot k}=W_{k,0}\). With \(H_{-1}=H_0=0\) and, inductively,
+\(y=(g\iota-1-H_{k-1}b')(1\otimes\beta\otimes1)\), the same computation shows that \(y\) is a cycle. It lies
+in \(P^{(\nu)}\) for some \(\nu\) depending only on \(k\): \(g\iota(1\otimes\beta\otimes1)\in P^{(\nu(k,0))}\), and the
+faces of \(1\otimes\beta\otimes1\) only multiply by elements of \(\mathfrak B=\cA_0\). Put
+\(H_k(1\otimes\beta\otimes1)=h_\nu(y)\). Then \(b'H+Hb'=g\iota-1\).
+
+\emph{Descent.} The map \(\rho(a_0\otimes w\otimes a)=aa_0\otimes w\) sends \(Q_k\) onto the Model I chains
+\(C_k(\cP)\) and \(P_k\) onto \(C_k(\mathfrak B,\cP)\). One checks face by face that \(\rho b'=b\rho\): the
+face of \(b'\) merging the last two slots becomes the cyclic face \(d_k\) of \(b\). Moreover
+\(\rho(aX)=\rho(Xa)\) for \(a\in\cP\). For a continuous bimodule map \(F\) between \(P\) and \(Q\) (in
+either direction) put \(\bar F(a_0\otimes w)=\rho F(a_0\otimes w\otimes1)\). Then \(\bar F\rho=\rho F\), since
+\(\rho F(a_0\otimes w\otimes a)=\rho(F(a_0\otimes w\otimes1)a)=\rho(aF(a_0\otimes w\otimes1))=\rho F(aa_0\otimes w\otimes1)\).
+Since \(\rho\) is onto, \(\overline{FG}=\bar F\bar G\), and \(\bar F\) commutes with \(b\) when \(F\) commutes
+with \(b'\). Hence \(\bar g:C(\cP)\to C(\mathfrak B,\cP)\) is a chain map, \(\bar\iota\) is the inclusion, and
+\(b\bar K+\bar Kb=\bar\iota\bar g-1\), \(b\bar H+\bar Hb=\bar g\bar\iota-1\). So the inclusion is a chain
+homotopy equivalence.
 \end{proof}
 
 \subsection{Convergence for the mixed complex}
@@ -3937,9 +4064,10 @@ direct limit.
 \emph{Steps inside a stage.} Let \(c\) be a chain in \(S_N\) whose leading term \(c_p\), of order
 \(p\le N-2\) and \(p\ne k-n\), represents a \(d^1\)-cycle. Then \(\theta=\chi(c_p)\) satisfies \(\delta\theta=0\), and by
 Corollary~\ref{cor:commid} \(\theta=-i\delta\zeta\) with \(\zeta=i\,\alpha\wedge\theta/(p+n-k)\), homogeneous of degree
-\(p+1\le N-1\). Write \(\zeta\) as a sum of forms \(a_0\,da_1\wedge\dots\wedge da_k\) with \(a_1,\dots,a_k\) of order
+\(p+1\le N-1\). Write the \((k+1)\)-form \(\zeta\) as a sum of forms \(a_0\,da_1\wedge\dots\wedge da_{k+1}\) with
+\(a_1,\dots,a_{k+1}\) of order
 \(\le0\) (functions of degree \(0\) and \(r^{-1}\), using \(dr=-r^2d(r^{-1})\)) and \(a_0\) of degree \(\le N\). Then
-\(x=\sum\varphi(a_0;a_1,\dots,a_k)\) lies in \(S_N\), and the computation of Theorem~\ref{thm:d1}
+\(x=\sum\operatorname{Alt}(a_0;a_1,\dots,a_{k+1})\) lies in \(S_N\), and the computation of Theorem~\ref{thm:d1}
 gives \(\chi(b_1x)=-i\delta\zeta=\theta\). By Lemma~\ref{lem:stageE1}, \(c_p-b_1x=b_0y\) with \(y\) in \(S_N\). So
 step (P) can be carried out inside \(S_N\).
 
