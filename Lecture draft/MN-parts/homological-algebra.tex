@@ -1080,8 +1080,8 @@ This obstructs the \emph{method} (St), not convergence itself. For
 \(n=1\), Proposition~\ref{ha:prop:xadic} below proves that \(\Theta\) is an
 isomorphism. There the algebra is graded by the power of \(x\) plus the
 order, each correction step leaves a remainder whose lowest power of
-\(x\) is strictly higher than before, and so a cycle that starts one pole
-level inside a stage never produces a term at the lowest power
+\(x\) is strictly higher than before, and so a cycle that starts two pole
+levels inside a stage never produces a term at the lowest power
 \(x^{-L}\), which is where (St) fails.
 \end{example}
 
@@ -1570,7 +1570,7 @@ and lowers the order by at least \(\mu\): the twist contributes
 \((\mu,-\mu)\) as in Lemma~\ref{ha:lem:n1alg}, and the star product of
 the suspended symbols \((0,-l)\). So the steps of the proof of
 Proposition~\ref{ha:prop:xadic} still move to higher powers of \(x\) at
-bounded order, and stages with a margin would still suffice. What is
+bounded order, and stages with a margin might still suffice. What is
 missing is \(E^1\). The \(x\)-graded algebra is
 \(\mathcal S\otimes\C[x,x^{-1}]\) with
 \(\mathcal S=\Psis^{\Z}(\partial X)/\Psis^{-\infty}(\partial X)\) the
@@ -1585,8 +1585,9 @@ Proposition~\ref{prop:star} does not apply, and we cannot show that
 \(E^2\) lies on one line or that the sequence degenerates. In the order
 filtration the same terms \((0,-l)\) destroy the grading by \(J+p\), and
 the primitives of Lemma~\ref{ha:lem:WL} lower the lowest power of \(x\),
-while the terms \((0,-l)\) carry that power down to the next order. A
-tower of corrections then has unbounded poles. Its sum lies in the
+while the terms \((0,-l)\) carry that power down to the next order. The tower of corrections these
+steps produce can have unbounded poles; this does not show that (B10)
+fails. Its sum lies in the
 completion \(\widehat C\) of Proposition~\ref{ha:prop:laurent}(4), not in
 \(C(\mathfrak B,\Ads)\).
 \end{remark}
@@ -1605,7 +1606,8 @@ product of Lemma~\ref{ha:lem:n1alg} and \(D=-i\partial_\tau\)
 \(\Id^{\mathrm{pt}}=\cS(\R_\tau)\Lser{x}\) as an ideal, and has quotient
 the algebra \(\Ads\) of Lemma~\ref{ha:lem:n1alg} (with \(Z\) two points).
 
-\begin{proposition}[Convergence for \(\Id\)]\label{ha:prop:Idconv}
+\begin{proposition}[Convergence for \(\Id\); uses the sketched
+Lemma~\ref{ha:lem:mixed}(b)]\label{ha:prop:Idconv}
 There is a complex \(D_\partial\) quasi-isomorphic to \(C(\Id^{\mathrm
 {pt}})\) whose stages are complete for the \(x\)-adic filtration, whose
 \(E^1\) is the space of forms on \(\R_\tau\times\Sd\), Schwartz in
@@ -1679,24 +1681,30 @@ powers are \(J=1-k\).
 Benameur and Nistor \cite{BN} compute the Hochschild homology of algebras
 \(\mathcal A_L(G)=\mathcal O(M)\bigl(\Psi^\infty(G)/\Psi^{-\infty}(G)
 \bigr)\) of Laurent complete symbols on a groupoid \(G\) with units \(M\),
-under their assumptions (13) and (14), and prove that the spectral
+under their assumptions (13) and (14), and state that the spectral
 sequence degenerates at \(E^2\) and converges \cite[Thm.~6, Lemma~8]{BN}.
 For the cusp groupoid of \(X\) (base \(B\) a point) the assumptions hold:
 (13) is automatic, and (14) holds because, once \(x^{-1}\) is adjoined,
 the \(\mathcal O(X)\)-span of \(x^2\partial_x,\partial_y\) is that of
-\(\partial_x,\partial_y\). We cannot use this result to close (B10), for three reasons.
+\(\partial_x,\partial_y\). We cannot use this result to close (B10), for
+reasons (2) and (3) below; (1) is a caveat about \cite{BN}.
 \begin{enumerate}
-\item \emph{A different algebra.} By \cite[Thm.~4]{BN}, \(\mathcal
-A_L(G)\) does not depend on \(G\) under (13)--(14), so the cusp and the b
-groupoids of \(X\) would give the same algebra. For the algebras of these
-notes this is false. The b-symbol \(|(\xi_b,\eta)|\) is
-\(x^{-1}(\tau^2+x^2|\eta|^2)^{1/2}\) in cusp variables (\(\tau=x\xi_b\)), and
-no \(x^L\) times it is smooth on \(\cT\setminus0\) at \(x=\tau=0\), so it
-is not the principal symbol of an element of \(\As\). Hence either the
-algebra \(\mathcal A_L\) of \cite{BN} is larger than \(\As\) (a
-completion in which cusp and b-symbols are identified), or \cite[Thm.~4]{BN} does not apply to the cusp
-groupoid. In either case a comparison with \(\As\) would still be
-needed, and that comparison is the content of (B10).
+\item \emph{Theorem 4 of \cite{BN}.} By definition
+\(\mathcal A_L(G)=\mathcal O(M)\bigl(\Psi^\infty(G)/\Psi^{-\infty}(G)\bigr)\);
+for the cusp groupoid this is \(\As\). The b-groupoid of \(X\) also
+satisfies (13)--(14), so \cite[Thm.~4]{BN} asserts that \(\As\) and its
+b-analogue have the same image in
+\(\Psi^\infty_{\mathrm{prop}}(X^\circ)/\Psi^{-\infty}_{\mathrm{prop}}(X^\circ)\).
+This is false. The b-symbol \(|(\xi_b,\eta)|\) is
+\(x^{-1}(\tau^2+x^2|\eta|^2)^{1/2}\) in cusp variables (\(\tau=x\xi_b\)),
+and no \(x^L\) times it is smooth on \(\cT\setminus0\) at \(x=\tau=0\), so
+it is not the principal symbol of an element of \(\As\). The gap is the
+last step of the proof of \cite[Thm.~4]{BN}, which passes from equal
+closures to equal ranges. For \(B\) a point, Theorem~4 enters \cite{BN}
+only through the notation \(\mathcal A_L(F)\) in \cite[Lemma~7]{BN}, so this
+error does not by itself affect their result for \(\As\); it means that
+the input quoted from their earlier paper must be checked to concern the
+cusp groupoid.
 \item \emph{The base case is quoted.} For \(B\) a point, the case at
 hand, \cite{BN} do not give a proof but refer to an earlier paper for
 the \(E^2\) term and for \(\HH(\mathcal A_L(F))\) \cite[Lemma~5,
@@ -1713,6 +1721,6 @@ Example~\ref{ha:ex:obstruction}, so the vanishing hypothesis of
 \cite[Thm.~1]{BN} cannot be checked on them.
 \end{enumerate}
 So (B10) for \(n\ge2\) stays quoted. \cite{BN} assert the corresponding
-statement for their completed algebra, as \cite[p.~12]{MN} does for
-\(\As\).
+statement for \(\mathcal A_L(G)\), which for the cusp groupoid is
+\(\As\), as \cite[p.~12]{MN} does.
 \end{remark}
