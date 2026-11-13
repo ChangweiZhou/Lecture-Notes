@@ -1,0 +1,663 @@
+\section{Convergence for the Laurent symbol algebras}\label{su:sec}
+
+\providecommand{\fA}{\mathfrak A}
+\providecommand{\hot}{\mathbin{\widehat\otimes}}
+\newcommand{\Ssym}{\mathcal S}
+\newcommand{\Gsym}{\mathcal G}
+\newcommand{\Omh}{\Omega_{\mathrm h}}
+
+This appendix proves (B10) for every \(n\ge1\): the order spectral
+sequences of \(\Ads\) and \(\As\) converge, and the leading-symbol map
+\(\Theta\) is an isomorphism (Theorem~\ref{su:thm:B10}). This closes the
+gap described in Remarks~\ref{ha:rem:quoted} and~\ref{ha:rem:xadicfail}.
+
+The argument is due to Lauter and Moroianu \cite{LauterMoroianu}, who
+compute the Hochschild homology of the algebras of fibered cusp
+operators. Their fibered cusp structure is defined by a fibration
+\(\partial X\to Y\); when \(Y\) is a point, its vector fields are spanned
+by \(x^2\partial_x\) and \(\partial_y\), and it is the cusp structure of
+these notes. Their algebras \({}^\Phi\Is\), \({}^\Phi\As\),
+\({}^\Phi\fA_{\partial,\sigma}\) are then \(\Is\), \(\As\), \(\Ads\), and
+\cite[Thm.~5.3]{LauterMoroianu} with \(Y\) a point is
+Propositions~\ref{prop:Is}, \ref{prop:As} and~\ref{prop:Ads}, convergence
+included. The convergence rests on a criterion for spectral sequences with
+three filtrations \cite[Thm.~B.4]{LauterMoroianu}, whose hypotheses are
+verified in \cite[\S5]{LauterMoroianu}. We give the argument in the
+setting of these notes, with three changes.
+\begin{enumerate}
+\item We work in the stages of the mixed complexes of
+Lemma~\ref{ha:lem:mixed}, whose part (b) is now proved. In
+\cite{LauterMoroianu} the chain spaces are those of Benameur and Nistor
+\cite{BNcomplete}, which are
+the chain spaces of Section~\ref{subsec:chains}, and a third filtration
+index bounds the orders and poles of the individual tensor factors; a
+stage plays that role here (Remark~\ref{su:rem:LM}).
+\item The hypotheses that \cite{LauterMoroianu} call H4 and H5 (HKR with
+bounds) are replaced by Lemma~\ref{ha:lem:stageE1}.
+\item The degeneration at \(E^2\) of the order spectral sequence of the
+suspended symbol algebra, hypothesis H3 of \cite{LauterMoroianu}, is
+proved in full (Proposition~\ref{su:prop:degS}).
+\cite[Prop.~5.1]{LauterMoroianu} only indicates the ingredients (central
+multiplication operators, contractions with derivations, and an exact
+sequence), and says they are enough; we use the first two, add a weight,
+and do not need the exact sequence.
+\end{enumerate}
+
+\emph{The idea.} Lemma~\ref{ha:lem:WL} loses poles because it measures
+them in the ordinary forms. Measured by the total power of \(x\) in a
+chain, the primitive of an off-critical class loses at most one pole
+(Lemma~\ref{su:lem:H1}). The remainder then has a part with one extra
+pole. That part lives in the algebra graded by the power of \(x\), which
+is \(\Ssym\otimes\C[x,x^{-1}]\) with \(\Ssym\) the suspended symbol algebra
+and \(x\) central. If the order spectral sequence of that algebra
+degenerates at \(E^2\), the extra part can be removed order by order with
+no further loss of poles (Proposition~\ref{su:prop:step}). So all the
+corrections stay in one stage.
+
+\subsection{A convergence criterion}\label{su:subsec:criterion}
+
+\subsubsection*{Setting}
+Fix \(n\in\Z\). For \((L,M)\in\Z^2\), \(k\ge0\) and \(p\le M\),
+\(\Lambda\le L\) let \(K^{p,\Lambda}_{L,M;k}\) be vector spaces, with
+\(K^{p,\Lambda}_{L,M;k}\subset K^{p,\Lambda}_{L',M';k}\) for \(L\le L'\),
+\(M\le M'\). The \emph{stages} are
+\[
+ S_{L,M;k}=\prod_{p\le M,\ \Lambda\le L}K^{p,\Lambda}_{L,M;k},
+\]
+and \(C_k=\bigcup_{L,M}S_{L,M;k}\). We write \(c^{p,\Lambda}\) for the
+components of a chain \(c\), and call \(p\) the \emph{order} and
+\(\Lambda\) the \emph{pole}. Suppose given linear maps
+\(b_{m,l}:K^{p,\Lambda}_{L,M;k}\to K^{p-m-l,\Lambda-m}_{L,M;k-1}\) for
+\(m,l\ge0\), compatible with the inclusions, and put
+\[
+ (bc)^{p,\Lambda}=\sum_{m,l\ge0}b_{m,l}\,c^{p+m+l,\Lambda+m}.
+\]
+For \(c\in S_{L,M}\) the sum is finite, since \(p+m+l\le M\) and
+\(\Lambda+m\le L\). We assume \(b^2=0\). Then each stage is a subcomplex.
+Let \(S^{p,\Lambda}_{L,M}\subset S_{L,M}\) consist of the chains whose
+non-zero components have order \(\le p\) and pole \(\le\Lambda\); it is a
+subcomplex. Let \(F_pC\) be the chains with components of order \(\le
+p\), and \(c_p=(c^{p,\Lambda})_\Lambda\) the part of order \(p\). We write
+\(b_0=b_{0,0}\) and \(b_1=b_{1,0}+b_{0,1}\). The spectral sequence of
+\((C,F)\) has \(E^1_{p,k}=H_k\bigl(\prod_\Lambda K^{p,\Lambda}_{\bullet},
+b_0\bigr)\) (in the direct limit) and \(d^1\) induced by \(b_1\). Let
+\(G_\Lambda=\bigcup_{L,M}\prod_pK^{p,\Lambda}_{L,M}\) with the
+differential \(b^\partial=\sum_lb_{0,l}\). It is a complex, since
+\((b^\partial)^2\) is the part of \(b^2\) that preserves the pole. We
+filter it by order.
+
+\emph{Summability.} If \(c_j\in S_{L,M}\) for \(j\ge1\), in a fixed
+stage, and every component \((p,\Lambda)\) is non-zero for only finitely
+many \(c_j\), then \(\sum_jc_j\) is defined componentwise, and
+\(b\sum_jc_j=\sum_jbc_j\), because each component of \(b\) involves
+finitely many components. This holds, for example, if \(c_j\in
+F_{p_j}\) with \(p_j\to-\infty\). It is the hypothesis H6 of
+\cite{LauterMoroianu}.
+
+\subsubsection*{Hypotheses}
+\begin{enumerate}
+\item[(H1)] \emph{(Off-critical primitives losing one pole.)} Let
+\(p+1\le M-1\), \(\Lambda+1\le L-1\) and \(k\ne p+n\). If \(\alpha\in
+S^{p,\Lambda}_{L,M;k}\) and \(b\alpha\in F_{p-2}\), there is
+\(\beta\in S^{p+1,\Lambda+1}_{L,M;k+1}\) with \(\alpha-b\beta\in F_{p-1}\).
+\item[(H3)] \emph{(Degeneration in the pole-graded complexes.)} For every
+\(\Lambda\), the differentials \(d^r\), \(r\ge2\), of the spectral
+sequence of the filtered complex \(G_\Lambda\) vanish.
+\item[(H4)] \emph{(HKR in a stage.)} If \(p\le M-1\) and \(\Lambda\le
+L-1\), the inclusion of \((K^{p,\Lambda}_{L,M;\bullet},b_0)\) into
+\((\bigcup_{L',M'}K^{p,\Lambda}_{L',M';\bullet},b_0)\) is a
+quasi-isomorphism.
+\end{enumerate}
+The numbering follows \cite[App.~B]{LauterMoroianu}; see
+Remark~\ref{su:rem:LM}.
+
+\begin{lemma}[Strictness]\label{su:lem:strict}
+Let \((G,b)\) be a complex with an exhaustive increasing filtration
+\(F_p\), whose spectral sequence has \(d^r=0\) for all \(r\ge2\). If
+\(z\in F_p\) and \(z=bw\) with \(w\in F_{p+s}\) for some \(s\ge1\), then
+\(z\in b(F_{p+1})+F_{p-1}\).
+\end{lemma}
+
+\begin{proof}
+We use the standard description: with \(Z^r_p=\{x\in F_p:\ bx\in
+F_{p-r}\}\), one has \(E^r_p=Z^r_p/(Z^{r-1}_{p-1}+bZ^{r-1}_{p+r-1})\) and
+\(d^r[x]=[bx]\). Induct on \(s\); the case \(s=1\) is trivial. Let
+\(s\ge2\). Then \(w\in Z^s_{p+s}\), and \(d^s[w]=0\) says \(bw\in
+Z^{s-1}_{p-1}+bZ^{s-1}_{p+s-1}\). So \(z=z'+bw'\) with \(z'\in F_{p-1}\)
+and \(w'\in F_{p+s-1}\). Since \(bw'=z-z'\in F_p\), the induction
+hypothesis gives \(bw'\in b(F_{p+1})+F_{p-1}\).
+\end{proof}
+
+\begin{proposition}[Pole-preserving step; {\cite[Prop.~B.3]{LauterMoroianu}}]
+\label{su:prop:step}
+Assume (H1), (H3) and (H4). Let \(p+1\le M-1\), \(\Lambda+1\le L-1\),
+\(k\ne p+n\), and let \(\alpha\in S^{p,\Lambda}_{L,M;k}\) with
+\(b\alpha\in F_{p-2}\). Then there is \(\beta\in
+S^{p+1,\Lambda+1}_{L,M;k+1}\) with
+\[
+ \alpha-b\beta\in S^{p-1,\Lambda}_{L,M;k}.
+\]
+The order goes down by one, and the pole bound \(\Lambda\) is restored.
+\end{proposition}
+
+\begin{proof}
+For a chain \(c\) with poles \(\le\Lambda+1\) write \([c]_{\Lambda+1}=
+(c^{p',\Lambda+1})_{p'}\in G_{\Lambda+1}\) for its part of pole
+\(\Lambda+1\).
+
+\emph{Step 1.} By (H1) there is \(\beta_1\in S^{p+1,\Lambda+1}_{L,M}\)
+with \(R_1=\alpha-b\beta_1\in F_{p-1}\), so \(R_1\in
+S^{p-1,\Lambda+1}_{L,M}\). We show by induction on \(j\ge1\) that there
+are \(\beta_j\in S^{p+1,\Lambda+1}_{L,M}\) such that
+\(R_j=\alpha-b\beta_j\) satisfies
+\begin{equation}\label{su:eq:Rj}
+ [R_j]_{\Lambda+1}\in F_{p-j},\qquad R_j-[R_j]_{\Lambda+1}\in
+ S^{p-1,\Lambda}_{L,M},
+\end{equation}
+and \(\beta_{j+1}-\beta_j\in S^{p-j+1,\Lambda+1}_{L,M}\). For \(j=1\)
+this holds.
+
+\emph{Step 2.} Let \(z=[R_j]_{\Lambda+1}\). Since \(\alpha\) has no
+component of pole \(\Lambda+1\), and \(b_{m,l}\) lowers the pole by \(m\),
+\[
+ z=-b^\partial[\beta_j]_{\Lambda+1}.
+\]
+So \(z\in G_{\Lambda+1}\cap F_{p-j}\) is the boundary of an element of
+\(F_{p+1}\). By (H3) and Lemma~\ref{su:lem:strict}, applied in
+\(G_{\Lambda+1}\), there are \(y\in G_{\Lambda+1}\cap F_{p-j+1}\) and
+\(z'\in F_{p-j-1}\) with \(z=b^\partial y+z'\). The chain \(y\) may lie in
+a larger stage. Comparing components of order \(p-j+1\) and \(p-j\),
+\[
+ b_0y_{p-j+1}=0,\qquad z_{p-j}=b_{0,1}y_{p-j+1}+b_0y_{p-j}.
+\]
+By (H4) at \((p-j+1,\Lambda+1)\) there is a \(b_0\)-cycle \(\xi\in
+K^{p-j+1,\Lambda+1}_{L,M}\) with \(\xi-y_{p-j+1}=b_0v\) for some \(v\) in
+a larger stage. Since \(b_0b_{0,1}+b_{0,1}b_0=0\) (a component of
+\((b^\partial)^2=0\)),
+\[
+ z_{p-j}-b_{0,1}\xi=b_0\bigl(y_{p-j}+b_{0,1}v\bigr).
+\]
+The left side lies in \(K^{p-j,\Lambda+1}_{L,M}\), so by (H4) it equals
+\(b_0\eta\) with \(\eta\in K^{p-j,\Lambda+1}_{L,M}\). Put
+\(\beta_{j+1}=\beta_j+\xi+\eta\). The part of pole \(\Lambda+1\) of
+\(R_{j+1}=R_j-b(\xi+\eta)\) is \(z-b^\partial(\xi+\eta)\). Its component
+of order \(p-j+1\) is \(-b_0\xi=0\), and that of order \(p-j\) is
+\(z_{p-j}-b_{0,1}\xi-b_0\eta=0\). The rest of \(b(\xi+\eta)\) comes from
+the \(b_{m,l}\) with \(m\ge1\). It has pole \(\le\Lambda\) and order
+\(\le p-j+1-m\le p-1\). This proves \eqref{su:eq:Rj} for \(j+1\).
+
+\emph{Step 3.} The series \(\beta=\beta_1+\sum_{j\ge1}(\beta_{j+1}-
+\beta_j)\) is summable in \(S^{p+1,\Lambda+1}_{L,M}\). The components of
+\(R_j\) stabilize as \(j\to\infty\), so \(\alpha-b\beta=\lim R_j\)
+componentwise. By \eqref{su:eq:Rj}, a component of pole \(\Lambda+1\)
+vanishes in the limit, and the other components have order \(\le p-1\).
+\end{proof}
+
+\begin{theorem}[Convergence criterion; {\cite[Thm.~B.4]{LauterMoroianu}}]
+\label{su:thm:criterion}
+In the setting above, assume (H1), (H3) and (H4). Then:
+\begin{enumerate}
+\item \(E^2_{p,k}=0\) for \(p\ne k-n\), so \(d^r=0\) for \(r\ge2\);
+\item every class in \(H_k(C)\) has a representative in \(F_{k-n}C_k\),
+and \(\Theta[c]=[c_{k-n}]\in E^2_{k-n,k}\) is well defined;
+\item \(\Theta:H_k(C)\to E^2_{k-n,k}\) is an isomorphism.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Finitely many chains lie in a common stage, and a stage can be enlarged at
+will. We therefore always choose stages with \(L\) and \(M\) at least two
+larger than the poles and orders that occur, so that the margin
+conditions of (H1) and Proposition~\ref{su:prop:step} hold.
+
+(1) Let \(x\) be a \(b_0\)-cycle of order \(p\), degree \(k\), with
+\(d^1[x]=0\), so \(b_1x=-b_0y\) with \(y\) of order \(p-1\). Then
+\(c=x+y\) has \(bc\in F_{p-2}\). If \(p\ne k-n\), (H1) gives \(\beta\in
+F_{p+1}\) with \(c-b\beta\in F_{p-1}\). The components of order \(p+1\)
+and \(p\) give \(b_0\beta_{p+1}=0\) and \(x=b_1\beta_{p+1}+b_0\beta_p\),
+so \([x]=d^1[\beta_{p+1}]=0\) in \(E^2\). Since \(d^r\) maps
+\(E^r_{p,k}\) to \(E^r_{p-r,k-1}\), both can be non-zero only if
+\(r=1\).
+
+(2) A cycle \(c\in F_P\) with \(P>k-n\) satisfies \(bc=0\in F_{P-2}\),
+and (H1) gives a homologous cycle in \(F_{P-1}\). After finitely many
+steps \(c\in F_{k-n}\). For such a cycle, \(b_0c_{k-n}=0\) and
+\(b_1c_{k-n}=-b_0c_{k-n-1}\), so \([c_{k-n}]\in E^2\). If moreover
+\(c=be\) with \(e\in F_s\) and \(s\ge k+2-n\), then \(be\in F_{s-2}\) and
+\(k+1\ne s+n\), so (H1) replaces \(e\) by \(e-b\beta\in F_{s-1}\), which
+has the same boundary. Once \(s=k+1-n\), \(c_{k-n}=b_1e_{k+1-n}+
+b_0e_{k-n}\) with \(b_0e_{k+1-n}=0\), so \([c_{k-n}]=d^1[e_{k+1-n}]=0\).
+
+(3) \emph{Injectivity.} Let \(c\in F_{k-n}\) be a cycle with
+\([c_{k-n}]=0\) in \(E^2\). Then \(c_{k-n}=b_1y'+b_0y''\), where \(y'\) is
+a \(b_0\)-cycle of order \(k-n+1\) and \(y''\) has order \(k-n\). So
+\(c^{(0)}=c-b(y'+y'')\in F_{k-n-1}\) is a cycle. Choose a stage
+\(S_{L,M}\) containing it, with poles \(\le\Lambda\), \(\Lambda+1\le L-1\)
+and \(k-n+1\le M-1\). For \(j\ge0\) the cycle \(c^{(j)}\) lies in
+\(S^{k-n-1-j,\Lambda}_{L,M}\), and \(k\ne(k-n-1-j)+n\). So
+Proposition~\ref{su:prop:step} gives \(\beta^{(j)}\in
+S^{k-n-j,\Lambda+1}_{L,M}\) with \(c^{(j+1)}=c^{(j)}-b\beta^{(j)}\in
+S^{k-n-2-j,\Lambda}_{L,M}\), again a cycle. The series
+\(\sum_j\beta^{(j)}\) is summable in \(S_{L,M}\), and
+\(c^{(0)}=b\sum_j\beta^{(j)}\), since the components of \(c^{(j)}\)
+vanish in the limit. Hence \(c\) is a boundary.
+
+\emph{Surjectivity.} Let \(x\) be a \(b_0\)-cycle of order \(k-n\) with
+\(d^1[x]=0\), and \(y\) of order \(k-n-1\) with \(b_1x=-b_0y\). Choose a
+stage as before containing \(x\) and \(y\), and put \(c_1=x+y\). Then
+\(bc_1\in S^{k-n-2,\Lambda}_{L,M;k-1}\), and \(k-1\ne(k-n-2)+n\).
+Inductively, suppose \(c_j\) has leading term \(x\) and \(bc_j\in
+S^{k-n-1-j,\Lambda}_{L,M}\). Proposition~\ref{su:prop:step}, applied to
+\(\alpha=bc_j\) (a cycle, of degree \(k-1\), off the critical line), gives
+\(\beta_j\in S^{k-n-j,\Lambda+1}_{L,M}\) with \(b(c_j-\beta_j)\in
+S^{k-n-2-j,\Lambda}_{L,M}\). Put \(c_{j+1}=c_j-\beta_j\). The limit
+\(c=c_1-\sum_j\beta_j\) exists in \(S_{L,M}\), is a cycle, and has
+leading term \(x\), because every \(\beta_j\) has order \(\le k-n-1\). So
+\(\Theta[c]=[x]\).
+\end{proof}
+
+\begin{remark}[Comparison with {\cite[App.~B]{LauterMoroianu}}]
+\label{su:rem:LM}
+Lauter and Moroianu filter the chains of \cite{BNcomplete} by three
+indices:
+the total order \(i\), the total pole \(j\) (the sum of the pole orders of
+the factors, which can be negative) and an index \(l\) bounding every
+partial sum of the orders and of the pole orders of the factors. Their
+chain space is \(\bigcup_N\fA_{N}^{\hot(k+1)}\), which is the chain space
+of Section~\ref{subsec:chains}, so their Hochschild homology is the one of
+these notes, and excision (Theorem~\ref{ha:thm:excision}) applies to it.
+The index \(l\) makes their filtered pieces complete, which is what a
+stage does here. Their hypotheses correspond to ours as follows. H1 is
+our (H1), with the same loss of one pole; H2 (vanishing of \(E^2\) off
+the critical line) follows from (H1) here
+(Theorem~\ref{su:thm:criterion}(1)); H3 together with their
+Corollary~B.8 is our (H3) together with Lemma~\ref{su:lem:strict}; H4 and
+H5 (HKR with bounds on \(l\), their Lemmas~B.6 and~B.7) are replaced by
+(H4), which Lemma~\ref{ha:lem:stageE1} gives in the stages; and H6 is
+summability, automatic in a stage. Proposition~\ref{su:prop:step} and
+Theorem~\ref{su:thm:criterion} follow their Proposition~B.3 and
+Theorem~B.4. The price of using stages is Lemma~\ref{ha:lem:mixed}(b);
+the price of their index \(l\) is HKR with bounds on \(l\), for which
+\cite{LauterMoroianu} give a short indication (an explicit homotopy to the
+small complex), which we have not checked in detail.
+\end{remark}
+
+\subsection{The suspended symbol algebra}\label{su:subsec:S}
+
+Let \(H=\partial X\), of dimension \(d=n-1\), and
+\(W=T^*H\times\R_\tau\). Then \(Z=\Zb\) is the sphere bundle of \(W\), and
+homogeneous functions of degree \(p\) on \(W\setminus0\) are \(r^p\)
+times functions on \(Z\). Let
+\[
+ \Ssym=\Psis^{\Z}(H)/\Psis^{-\infty}(H),
+\]
+filtered by order. (\(\Ssym\) is not the Schwartz space.) We use the
+following facts.
+\begin{enumerate}
+\item[(S1)] A quantization, given by (K1) of Background
+fact~\ref{cc:bg:uniform} and Borel's lemma, identifies \(\Ssym_{\le m}\)
+with \(\prod_{p\le m}\mathcal G^p(W)\), the products of homogeneous
+functions on
+\(W\setminus0\). The product is a star product with \(P_0(a,b)=ab\) and
+\(P_1(a,b)-P_1(b,a)=-i\{a,b\}_H\), where \(\{\cdot,\cdot\}_H\) is the
+Poisson bracket of \(T^*H\), with \(\tau\) as a parameter. Indeed, by
+Proposition~\ref{cc:prop:indicial} the normal operator is multiplicative
+and \(\sigma(N(A))=\sigma(A)|_{x=0}\), and at \(x=0\) the cusp bracket
+\eqref{eq:poisson} reduces to \(\{\cdot,\cdot\}_H\).
+\item[(S2)] Let \(\hat\tau\in\Ssym\) have indicial family \(\tau\) (it is
+\(-D_t\)). It is central, because \(\In\) is multiplicative. Let
+\(D=\mathrm{ad}_t\). It is a derivation of order \(-1\), with
+\(\In(Da)=-i\partial_\tau\In(a)\) (Lemma~\ref{cc:lem:sus}), so
+\(D\hat\tau=-i\). Put \(T=i\hat\tau D\). It is a derivation, since
+\(\hat\tau\) is central, and \(\In(Ta)=\tau\partial_\tau\In(a)\). On
+principal symbols \(D\) acts by \(-i\partial_\tau\) and \(T\) by the
+vector field \(\tau\partial_\tau\).
+\item[(S3)] With \(\Ssym\) as a filtered nuclear algebra
+(\(\Ssym_N=\Ssym_{\le N}\)) and the chains of
+Section~\ref{subsec:chains}, the spectral sequence of the order
+filtration has \(E^1_{p,k}\) equal, via \(\chi\), to the homogeneous
+\(k\)-forms of degree \(p\) on \(W\setminus0\)
+(Corollary~\ref{ha:cor:homog} with \(R=\CI(Z)\)), and \(d^1=-i\delta_H\),
+where \(\delta_H\) is the Koszul--Brylinski differential of the Poisson
+structure of \(T^*H\) (Proposition~\ref{prop:d1} and (S1)). The function
+\(\tau\) is a Casimir.
+\end{enumerate}
+
+Let \(\Omh\) be the forms \(\omega\) on \(W\setminus0\) with
+\(\iota_{\partial_\tau}\omega=0\), i.e.\ those not containing \(d\tau\),
+and \(\Omh^k{}_{(p)}\) those of degree \(k\) and homogeneity \(p\). Every
+form is uniquely \(\omega=\alpha+d\tau\wedge\beta\) with \(\alpha,\beta\in
+\Omh\).
+
+\begin{lemma}[The \(E^2\) term of \(\Ssym\)]\label{su:lem:E2S}
+\textup{(i)} \(\delta_H\) preserves \(\Omh\) and anticommutes with
+\(d\tau\wedge\). Hence
+\[
+ E^2_{p,k}(\Ssym)=\mathfrak a_{p,k}\oplus d\tau\wedge\mathfrak
+ a_{p-1,k-1},\qquad\mathfrak a_{p,k}=H_k\bigl(\Omh{}_{(\bullet)},
+ \delta_H\bigr)_{p},
+\]
+the homology at \(\Omh^k{}_{(p)}\) of \(\delta_H:\Omh^k{}_{(p)}\to
+\Omh^{k-1}{}_{(p-1)}\).
+
+\textup{(ii)} The Lie derivative \(\mathcal L_{\tau\partial_\tau}\) acts
+on \(\mathfrak a_{p,k}\) as multiplication by \(c=p+d-k\).
+\end{lemma}
+
+\begin{proof}
+(i) The bivector \(\Pi_H\) of \(T^*H\) has no \(\partial_\tau\)
+component and does not depend on \(\tau\). So \(\iota_{\Pi_H}\)
+commutes with \(\iota_{\partial_\tau}\) and with \(d\tau\wedge\), and
+\(\mathcal L_{\partial_\tau}\Pi_H=0\). From
+\(\delta_H=\iota_{\Pi_H}d-d\,\iota_{\Pi_H}\) and Cartan's formula
+\(\iota_{\partial_\tau}d+d\iota_{\partial_\tau}=\mathcal
+L_{\partial_\tau}\) one finds \(\iota_{\partial_\tau}\delta_H=
+-\delta_H\iota_{\partial_\tau}\) and \(\delta_H(d\tau\wedge\omega)=
+-d\tau\wedge\delta_H\omega\). The first identity shows that \(\Omh\) is a
+subcomplex. So \((E^1,d^1)\) is the direct sum of \((\Omh,-i\delta_H)\) and
+\(d\tau\wedge(\Omh,-i\delta_H)\); the form \(d\tau\) has homogeneity
+one.
+
+(ii) On \(\Omh\) write \(d=d_F+d\tau\wedge\partial_\tau\), where \(d_F\)
+is the exterior derivative of \(T^*H\), with \(\tau\) as a parameter, and
+maps \(\Omh\) to itself. On \(\Omh\), \([\iota_{\Pi_H},d\tau\wedge
+\partial_\tau]=0\), so \(\delta_H\) is the Koszul--Brylinski differential
+of the symplectic manifold \(T^*H\), applied with \(\tau\) as a
+parameter. Let \(*\) be the symplectic star of \(T^*H\), applied
+pointwise to \(\Omh\). By Proposition~\ref{prop:star}, \(\delta_H=
+(-1)^{k-1}*^{-1}d_F*\) on \(\Omh^k\), and \(*\) maps
+\(\Omh^k{}_{(p)}\) onto \(\Omh^{2d-k}{}_{(p+d-k)}\), because the
+symplectic form \(d\eta\wedge dy\) has homogeneity one. The vector field
+\(\tau\partial_\tau\) preserves \(d\eta\wedge dy\) and \(\Omh\), so
+\(\mathcal L_{\tau\partial_\tau}\) commutes with \(*\), \(d_F\) and
+\(\delta_H\). Hence it suffices to show that \(\mathcal
+L_{\tau\partial_\tau}=c\) on the \(d_F\)-cohomology of \(\Omh{}_{(c)}\).
+Let \(R'=\eta\cdot\partial_\eta\). It has no \(\partial_\tau\) component
+and does not depend on \(\tau\), so \(\iota_{R'}\) preserves \(\Omh\)
+and \(\mathcal L_{R'}=d_F\iota_{R'}+\iota_{R'}d_F\) on \(\Omh\). The radial
+field is \(R=R'+\tau\partial_\tau\), and \(\mathcal L_R=c\) on forms of
+homogeneity \(c\). So \(\mathcal L_{\tau\partial_\tau}=c-(d_F\iota_{R'}+
+\iota_{R'}d_F)\) on \(\Omh{}_{(c)}\).
+\end{proof}
+
+So \(E^2(\Ssym)\) is not concentrated on a line, and
+Proposition~\ref{ha:prop:algconv} does not apply to \(\Ssym\)
+(Remark~\ref{su:rem:HS}). What we need is that there are no higher
+differentials.
+
+\begin{proposition}[Degeneration for \(\Ssym\); compare
+{\cite[Prop.~5.1]{LauterMoroianu}}]\label{su:prop:degS}
+The differentials \(d^r\), \(r\ge2\), of the order spectral sequence of
+\(\Ssym\) vanish.
+\end{proposition}
+
+\begin{proof}
+\emph{Three operators on chains.} Let \(s_i\) insert \(\hat\tau\) after
+the \(i\)-th slot, and
+\begin{gather*}
+ \varepsilon(a_0\otimes\dots\otimes a_k)=\sum_{i=0}^k(-1)^is_i(a_0\otimes
+ \dots\otimes a_k),\qquad\iota=i_D,\\
+ \mathcal L_T(a_0\otimes\dots\otimes a_k)=\sum_ja_0\otimes\dots\otimes
+ Ta_j\otimes\dots\otimes a_k .
+\end{gather*}
+These are continuous on stages. They satisfy
+\[
+ b\varepsilon+\varepsilon b=0,\qquad b\iota+\iota b=0,\qquad
+ \iota\varepsilon+\varepsilon\iota=D(\hat\tau)=-i,\qquad
+ b\mathcal L_T=\mathcal L_Tb .
+\]
+The second is Lemma~\ref{lem:iD} and the fourth holds because \(T\) is a
+derivation. For the first, the faces of \(bs_i\) that do not touch
+\(\hat\tau\) cancel against \(\varepsilon b\). Among the faces that do,
+\(\hat\tau\) multiplies the entry on its left or on its right. Merging
+into \(a_{i+1}\) from \(s_i\) and from \(s_{i+1}\) gives the same chain,
+because \(\hat\tau\) is central, with opposite signs. The two remaining
+terms, \(a_0\hat\tau\otimes\cdots\) from \(s_0\) and
+\(\hat\tau a_0\otimes\cdots\) from the last face of \(s_k\), also cancel.
+For the third, \(i_Ds_0=D(\hat\tau)\cdot\) (the entry \(a_0D(\hat\tau)\)
+in slot \(0\)), and \(i_Ds_i=s_{i-1}i_D\) for \(i\ge1\), so
+\(\iota\varepsilon=-i-\varepsilon\iota\). (We also checked these
+identities symbolically, with a free algebra and a central variable.)
+
+The operators are filtered of degrees \(+1\), \(-1\), \(0\), since
+\(\hat\tau\), \(D\), \(T\) have orders \(1\), \(-1\), \(0\). So they act on
+every page \(E^r\), they commute or anticommute with \(d^r\), and the
+identity \(\iota\varepsilon+\varepsilon\iota=-i\) holds on every page.
+On \(E^1\), through \(\chi\): \(\varepsilon\) is \(d\tau\wedge\), since
+\(\chi(s_i(a_0\otimes\dots\otimes a_k))=\frac{(-1)^i}{(k+1)!}\,d\tau\wedge
+a_0\,da_1\wedge\dots\wedge da_k\) for the leading symbols; \(\iota\) is
+\(-i\,\iota_{\partial_\tau}\), as one sees on the antisymmetrizations
+\(\varphi(a_0;a_1,\dots,a_k)\), which represent all classes
+(Lemma~\ref{ha:lem:chi}); and \(\mathcal L_T\) is \(\mathcal
+L_{\tau\partial_\tau}\). On \(E^2\), in the decomposition of
+Lemma~\ref{su:lem:E2S}, \(\iota\) vanishes on \(\mathfrak a\),
+\(\varepsilon\) maps \(\mathfrak a_{p-1,k-1}\) onto the second summand of
+\(E^2_{p,k}\), and \(\mathcal L_T=p+d-k\) on \(\mathfrak a_{p,k}\).
+
+\emph{Induction.} Suppose \(d^2=\dots=d^{r-1}=0\) for some \(r\ge2\), so
+that \(E^r=E^2\) with the same operators. Let \(a\in\mathfrak a_{p,k}\),
+and write \(d^ra=a'+\varepsilon a''\) with \(a'\in\mathfrak
+a_{p-r,k-1}\), \(a''\in\mathfrak a_{p-r-1,k-2}\). Since \(\iota a=0\), also
+\(\iota d^ra=\mp d^r\iota a=0\). On the other hand \(\iota a'=0\) and
+\(\iota\varepsilon a''=-ia''-\varepsilon\iota a''=-ia''\). So \(a''=0\).
+Next, \(\mathcal L_T\) commutes with \(d^r\), and it acts by \(p+d-k\) on
+\(a\) and by \(p-r+d-k+1\) on \(a'\). These differ, so \(a'=0\). Hence
+\(d^r=0\) on \(\mathfrak a\), and \(d^r\varepsilon a=\mp\varepsilon
+d^ra=0\). So \(d^r=0\).
+\end{proof}
+
+The weight \(\mathcal L_T\) separates the classes of \(\mathfrak a\) on
+different lines \(p-k=\mathrm{const}\); the pair \(\varepsilon,\iota\)
+separates \(\mathfrak a\) from \(d\tau\wedge\mathfrak a\), which carry
+the same weight on adjacent lines. These are the ``exterior product by a
+central function'' and ``contraction with a derivation'' of
+\cite[Prop.~5.1]{LauterMoroianu}, with \(f=\tau\) and \(V=\partial_\tau\).
+
+\begin{remark}[The size of \(E^2(\Ssym)\); sketch, not used]
+\label{su:rem:HS}
+By Lemma~\ref{su:lem:E2S}, \(\mathfrak a_{p,k}\) is the cohomology in
+degree \(2d-k\) of the complex \((\Omh{}_{(c)},d_F)\), \(c=p+d-k\), the
+leafwise de Rham complex of the foliation \(\{\tau=\mathrm{const}\}\) in
+homogeneity \(c\). Passing to \(Z\), it becomes a complex of b-forms for
+the hypersurface \(\{\tau=0\}=S^*H\subset Z\), weighted by \(s^{-c}\)
+with \(s=\tau/|(\eta,\tau)|\). The Taylor coefficients at \(\{s=0\}\)
+contribute only when \(c\in\{0,1,2,\dots\}\), and a Mayer--Vietoris
+argument gives \(H^j(Z)\oplus H^{j-1}(S^*H)\) for \(c\ge0\) and
+\(H^{j-d}(H)\oplus H^{j-d}(H)\) (one Thom class for each hemisphere
+\(\pm\tau>0\)) for \(c<0\). In particular \(E^2(\Ssym)\) is non-zero on
+every line \(p-k=\mathrm{const}\). We have not written out the details,
+and nothing above uses them.
+\end{remark}
+
+\begin{remark}[The inner Euler derivation]\label{su:rem:euler}
+In \(\Ads\) the element \(u=x^{-1}\hat\tau\) (pole one, order one) gives
+an inner derivation with
+\[
+ [u,x^ja]=-i\,x^j\bigl(j+\tau\partial_\tau\bigr)a,\qquad a\in\Ssym,
+\]
+exactly, with \(\tau\partial_\tau\) acting on indicial families. Indeed,
+by Proposition~\ref{cc:prop:taylor}, \([x^{-1},a]=\mathrm{ad}_t(a)\) and
+\(x^{-1}\hat\tau x=\hat\tau-ix\), so \([u,x]=-ix\) and
+\([u,a]=\mathrm{ad}_t(a)\hat\tau=-i\,Ta\). So \(\mathcal L_T\) of the proof
+above is the restriction to \(\Ssym\) of an inner derivation of \(\Ads\),
+up to \(x\partial_x\). We use \(T\) only through its action on
+\(E^2(\Ssym)\), where it is semisimple. On chains it is not: on
+homogeneous functions \(\tau\partial_\tau-\lambda\) is a first order
+operator along the meridians of \(Z\) from \(\{\tau=0\}\) to
+\(\{\eta=0\}\), with regular singular points at both ends. For generic
+\(\lambda\) it is injective, but its range has infinite codimension:
+solvability requires the vanishing of a Mellin transform along each
+meridian. So the inner derivation alone does not give a chain-level
+splitting by weight, and we do not use it in the proof.
+\end{remark}
+
+\subsection{Convergence for \texorpdfstring{\(\Ads\)}{Ads} and
+\texorpdfstring{\(\As\)}{As}}\label{su:subsec:B10}
+
+Let \(\fA=\Ads\), with the mixed complex \(C(\mathfrak B,\fA)\) of
+Lemma~\ref{ha:lem:mixed}. By Proposition~\ref{cc:prop:taylor},
+\(\fA=\Ssym\Lser{x}\), with coefficients of bounded order, and with the
+product
+\begin{equation}\label{su:eq:twist}
+ (x^jg)(x^lh)=\sum_{i\ge0}\binom{l+i-1}{i}x^{j+l+i}\,\mathrm{ad}_t^i(g)\,h .
+\end{equation}
+By (S1), \(\fA_{L,M}=\prod_{J\ge-L,\,p\le M}x^J\mathcal G^p(W)\), and
+\(\mathfrak B=\fA_{0,0}\). By (F3) a stage \(S_{L,M;k}=\fA_{L,M}\hot
+\mathfrak B^{\hot k}\) is the product of the spaces
+\(\mathcal G^{p_0}\hot\dots\hot\mathcal G^{p_k}\cong\CI(Z^{k+1})\) over
+the multi-degrees \(((J_0,p_0),\dots,(J_k,p_k))\) with \(J_0\ge-L\),
+\(p_0\le M\) and \(J_r\ge0\), \(p_r\le0\) for \(r\ge1\). Group them by
+the total order \(\sum p_r\) and the total pole \(-\sum J_r\). For given
+totals only finitely many multi-degrees occur. Let
+\(K^{p,\Lambda}_{L,M;k}\) be the product of those of total order \(p\) and
+total pole \(\Lambda\). Then \(S_{L,M;k}=\prod_{p\le M,\Lambda\le L}
+K^{p,\Lambda}_{L,M;k}\). In \eqref{su:eq:twist} the term \(i\) raises the
+power of \(x\) by \(i\) and lowers the order by at least \(i\). So the
+Hochschild differential, which is continuous on stages, decomposes as
+\(b=\sum_{m,l\ge0}b_{m,l}\), with \(b_{m,l}\) lowering the pole by \(m\)
+and the order by \(m+l\). This is the setting of
+Section~\ref{su:subsec:criterion}. Here \(b_0=b_{0,0}\) is the Hochschild
+differential of the commutative algebra of leading terms, and
+\(b^\partial=\sum_lb_{0,l}\) is that of
+\[
+ \Gsym=\Ssym\otimes\C[x,x^{-1}],
+\]
+with \(x\) central, because the terms of \eqref{su:eq:twist} with \(i=0\)
+are \(x^{j+l}gh\). So \(G_\Lambda\) is the part of total \(x\)-degree
+\(-\Lambda\) of the mixed complex \(C(\mathfrak B_\Gsym,\Gsym)\),
+\(\mathfrak B_\Gsym=\Ssym_{\le0}[x]\).
+
+Give \(x^a\) the weight \(a\) and \(dx\) the weight \(1\), and let
+\(\Omega^k_{p,\Lambda}\) be the homogeneous formal \(k\)-forms of degree
+\(p\) and weight \(-\Lambda\) on \(\cT\setminus0\) near
+\(x=0\), that is, \(x^{-\Lambda}\alpha+x^{-\Lambda-1}dx\wedge\alpha'\) with
+\(\alpha,\alpha'\) homogeneous forms on \(W\setminus0\).
+
+\begin{lemma}[(H4) for \(\Ads\)]\label{su:lem:H4}
+\(\chi\) identifies the \(b_0\)-homology of
+\(\bigcup_{L,M}K^{p,\Lambda}_{L,M}\) with \(\Omega_{p,\Lambda}\). If \(p\le
+M-1\) and \(\Lambda\le L-1\), the same holds for
+\(K^{p,\Lambda}_{L,M}\). In particular (H4) holds.
+\end{lemma}
+
+\begin{proof}
+The complex \(\bigl(\prod_\Lambda K^{p,\Lambda}_{L,M},b_0\bigr)\) is the
+part of order \(p\) of the graded complex of the stage. By
+Lemma~\ref{ha:lem:stageE1}, for \(p\le M-1\) its homology is, via
+\(\chi\), the space of homogeneous formal forms of degree \(p\) of the
+form \(\sum_{a\ge-L}x^a(\alpha_a+dx\wedge\alpha'_a)\). Since \(b_0\) and
+\(\chi\) preserve the weight, this identification holds weight by weight.
+The forms of weight \(-\Lambda\) in that space are
+\(x^{-\Lambda}\alpha+x^{-\Lambda-1}dx\wedge\alpha'\), subject to
+\(-\Lambda\ge-L\) and \(-\Lambda-1\ge-L\); for \(\Lambda\le L-1\) this is
+all of \(\Omega_{p,\Lambda}\). The inclusions of stages induce the
+identity on forms.
+\end{proof}
+
+\begin{lemma}[(H1) for \(\Ads\); {\cite[Prop.~5.2]{LauterMoroianu}}]
+\label{su:lem:H1}
+(H1) holds for \(\Ads\).
+\end{lemma}
+
+\begin{proof}
+Let \(\alpha\in S^{p,\Lambda}_{L,M;k}\) with \(b\alpha\in F_{p-2}\),
+\(k\ne p+n\), \(p+1\le M-1\), \(\Lambda+1\le L-1\). Then
+\(b_0\alpha_p=0\) and \(b_1\alpha_p=-b_0\alpha_{p-1}\), so the form
+\(\theta=\chi(\alpha_p)\) satisfies \(\delta\theta=0\), by
+Proposition~\ref{prop:d1} (applied to mixed chains as in the proof of
+Theorem~\ref{ha:thm:conv}). It is homogeneous of degree \(p\) and has
+weights \(\ge-\Lambda\).
+
+\emph{Weights and cusp forms.} In the coframe \(dx/x^2,dy,d\tau,d\eta\)
+the cusp symplectic form \(\omega=d\tau\wedge dx/x^2+d\eta\wedge dy\) has
+constant coefficients, so the symplectic star \(*\) maps a coframe
+monomial to \(\pm\) a coframe monomial, and it preserves the space
+\(x^{-\Lambda}\Omega_c\) of formal forms \(\sum_{a\ge-\Lambda}x^a
+(\cdots)\) written in this coframe. So does \(\iota_R\). The monomial
+\(dx/x^2\) has weight \(-1\), and the others weight \(0\). Hence a form of
+weights \(\ge-\Lambda\) lies in \(x^{-\Lambda}\Omega_c\) (write
+\(x^bdx=x^{b+2}dx/x^2\), with \(b+2\ge-\Lambda+1\)), and every form in
+\(x^{-\Lambda}\Omega_c\) has weights \(\ge-\Lambda-1\).
+
+\emph{The primitive.} As in the proof of Theorem~\ref{ha:thm:conv},
+\(*\theta\) is closed and homogeneous of degree \(w=p+n-k\ne0\), and
+\(\zeta=*^{-1}(\iota_R*\theta)/w\) satisfies \(\delta\zeta=(-1)^k\theta\)
+(Proposition~\ref{prop:star}). It is homogeneous of degree \(p+1\), and it
+lies in \(x^{-\Lambda}\Omega_c\), so it has weights \(\ge-\Lambda-1\).
+By Lemma~\ref{su:lem:H4}, applied to each weight \(-\Lambda'\) with
+\(\Lambda'\le\Lambda+1\le L-1\), there is a \(b_0\)-cycle \(\beta_0\in
+\prod_{\Lambda'\le\Lambda+1}K^{p+1,\Lambda'}_{L,M}\) with
+\(\chi(\beta_0)=(-1)^ki\zeta\), so that \(\chi(b_1\beta_0)=-i\delta
+\chi(\beta_0)=\theta\). Then \(\alpha_p-b_1\beta_0\) is a \(b_0\)-cycle in
+\(\prod_{\Lambda'\le\Lambda+1}K^{p,\Lambda'}_{L,M}\) with \(\chi=0\), so by
+Lemma~\ref{su:lem:H4} it is \(b_0\gamma\) with \(\gamma\) in the same
+product. Put \(\beta=\beta_0+\gamma\in S^{p+1,\Lambda+1}_{L,M}\). The
+components of \(\alpha-b\beta\) of order \(p+1\) and \(p\) are
+\(-b_0\beta_0=0\) and \(\alpha_p-b_1\beta_0-b_0\gamma=0\).
+\end{proof}
+
+This is where the one-pole loss enters: \(\zeta\) contains
+\(dx/x^2\), of weight \(-1\). Measured in ordinary forms that is a loss
+of two poles (Lemma~\ref{ha:lem:WL}). It is a loss of one in the total
+power of \(x\), and Proposition~\ref{su:prop:step} recovers it.
+
+\begin{lemma}[(H3) for \(\Ads\)]\label{su:lem:H3}
+(H3) holds for \(\Ads\).
+\end{lemma}
+
+\begin{proof}
+Let \(C(\Gsym)=\varinjlim_N\Gsym_N^{\hot(k+1)}\), with
+\(\Gsym_N=\Ssym_{\le N}\otimes\mathrm{span}\{x^j:|j|\le N\}\), filtered by
+order and graded by the total power of \(x\). The complex \(G_\Lambda\) is
+a subcomplex of its part of degree \(-\Lambda\). Both have \(E^1\) equal,
+via \(\chi\), to \(\Omega_{\bullet,\Lambda}\): for \(G_\Lambda\) by
+Lemma~\ref{su:lem:H4}, and for \(C(\Gsym)\) by
+Corollary~\ref{ha:cor:homog}, Proposition~\ref{ha:prop:kunneth} and
+Theorem~\ref{ha:thm:poly}, the graded algebra being
+\(\CI(Z)\otimes\C[r,r^{-1}]\otimes\C[x,x^{-1}]\). A filtered chain map
+that is an isomorphism on \(E^1\) is an isomorphism on every \(E^r\). So
+it suffices to prove that \(d^r=0\), \(r\ge2\), for \(C(\Gsym)\).
+
+Let \(\Sigma\subset C(\C[x,x^{-1}])\) be the span of the cycles \(x^J\)
+and \(x^{J-1}\otimes x\), \(J\in\Z\), a complex with zero differential.
+The shuffle map gives a chain map \(C(\Ssym)\otimes\Sigma\to C(\Gsym)\)
+(Background fact~\ref{ha:bg:EZ}). It preserves the order and the power of
+\(x\). The spectral sequence of \(C(\Ssym)\otimes\Sigma\), filtered by
+the order of the first factor, is \(E^r(\Ssym)\otimes\Sigma\). On
+\(E^1\) the map is \(\theta\otimes x^J\mapsto x^J\theta\),
+\(\theta\otimes x^{J-1}\otimes x\mapsto\theta\wedge x^{J-1}dx\)
+(Proposition~\ref{ha:prop:kunneth}), which is an isomorphism onto the
+\(E^1\) of \(C(\Gsym)\). So the two spectral sequences agree from \(E^1\)
+on, and Proposition~\ref{su:prop:degS} gives \(d^r=0\) for \(r\ge2\).
+\end{proof}
+
+\begin{theorem}[(B10) for all \(n\)]\label{su:thm:B10}
+For every \(n\ge1\), the leading-symbol maps
+\[
+ \Theta:\HH_k(\Ads)\to E^2_{k-n,k}(\Ads),\qquad
+ \Theta:\HH_k(\As)\to E^2_{k-n,k}(\As)
+\]
+are isomorphisms, and the order spectral sequences degenerate at \(E^2\).
+Consequently Propositions~\ref{prop:As}, \ref{prop:Ads}
+and~\ref{prop:boundaryLES} hold without quoted input.
+\end{theorem}
+
+\begin{proof}
+For \(\Ads\), Lemmas~\ref{su:lem:H4}, \ref{su:lem:H1} and~\ref{su:lem:H3}
+verify the hypotheses of Theorem~\ref{su:thm:criterion} for the mixed
+complex \(C(\mathfrak B,\Ads)\), with \(n=\dim X\). That theorem gives the
+isomorphism for the homology of the mixed complex, and
+Lemma~\ref{ha:lem:mixed}(b) identifies this homology with
+\(\HH(\Ads)\). Its \(E^2\) term is that of Proposition~\ref{prop:Ads}, and
+\(\Theta\) is the map of Proposition~\ref{ha:prop:laurent}(1). The
+statement for \(\As\) follows from Proposition~\ref{ha:prop:equiv}, which
+also gives Proposition~\ref{prop:boundaryLES} with the constant
+\((-1)^ki\).
+\end{proof}
+
+For \(n=1\) the algebra \(\Ssym\) is commutative and
+Proposition~\ref{su:prop:degS} is trivial; Theorem~\ref{su:thm:B10} then
+gives a second proof of Proposition~\ref{ha:prop:xadic}. The obstruction
+of Example~\ref{ha:ex:obstruction} does not arise: it concerns classes at
+the lowest pole of a stage, and the margins \(\Lambda+1\le L-1\) keep all
+chains of the proof away from it.

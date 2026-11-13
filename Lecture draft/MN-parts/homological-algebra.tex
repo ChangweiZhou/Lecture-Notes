@@ -35,9 +35,12 @@ closed symbol algebra and for \(\Is\) (Theorem~\ref{ha:thm:conv}). For
 and convergence for \(\Ads\) are equivalent
 (Proposition~\ref{ha:prop:equiv}), and we prove both for \(n=1\) by the
 \(x\)-adic filtration (Proposition~\ref{ha:prop:xadic},
-Corollary~\ref{ha:cor:n1}). For \(n\ge2\) the remaining step is quoted
-from \cite[p.~12]{MN}. The \(x\)-adic spectral sequence of \(\Id\)
-converges (Proposition~\ref{ha:prop:Idconv}).
+Corollary~\ref{ha:cor:n1}). For every \(n\) convergence is proved in
+Appendix~\ref{su:sec} (Theorem~\ref{su:thm:B10}), following Lauter and
+Moroianu \cite{LauterMoroianu}; this is item (B10). The \(x\)-adic
+spectral sequence of \(\Id\) converges (Proposition~\ref{ha:prop:Idconv}).
+All of this uses the mixed complexes of Lemma~\ref{ha:lem:mixed}, which is
+proved in full.
 \item The boundary connecting map of \cite[Prop.~5(3)]{MN}, item (B9), is
 proved by a leading-symbol argument with a linear lift
 (Lemma~\ref{ha:lem:connlead}, Theorem~\ref{ha:thm:bdry}).
@@ -924,28 +927,96 @@ only finitely many multidegrees occur. So \(S_{L,M}\) consists of all
 series in the total order bounded above by \(M\), and \(b\) commutes with
 convergent sums.
 
-(b) We sketch the argument of \cite{HHb}, which uses nothing specific to
-the b-calculus. Consider the augmented bar complexes of
-\(\fA\)-bimodules
+(b) The argument is that of \cite{HHb}, which uses nothing specific to
+the b-calculus; we give it in full. Write \(\fA_N=\fA_{N,N}\) and
+\(u_N=x^{-N}T^{-N}\) (\(u_N=T^{-N}\) for \(\cA_M\)). By (a),
+\(\fA_N=\mathfrak Bu_N\), and \(u_N^{-1}=T^Nx^N\in\mathfrak B\). The
+chain spaces are \(C_k(\fA)=\varinjlim_N\fA_N^{\hot(k+1)}\) and
+\(C_k(\mathfrak B,\fA)=\varinjlim_N\fA_N\hot\mathfrak B^{\hot k}\).
+
+\emph{Complements.} \(\fA_{N-1}\) has a closed complement \(V_N\) in
+\(\fA_N\) (\(V_0=\mathfrak B\)). For \(\Ads\), whose stages are products
+of their homogeneous components \(x^jq^m\CI(Z)\), take the product of
+the components with \(m=N\) or \(j=-N\). For \(\As\), take the
+components of order \(N\) together with
+\(x^{-N}\chi_0\pi_0^*(f|_{x=0})\), \(f\) running over the coefficients of
+order \(<N\), with \(\pi_0\) the collar projection and \(\chi_0\) a
+cut-off; for \(\cA_M\), the components of order \(N\). Then
+\(\fA_N^{\hot k}=\bigoplus_{N_i\le N}V_{N_1}\hot\cdots\hot V_{N_k}\), a
+finite direct sum of closed subspaces, and \(W_{k,N}=\bigoplus_{\max
+N_i=N}V_{N_1}\hot\cdots\hot V_{N_k}\) gives
+\(\varinjlim_N\fA_N^{\hot k}=\bigoplus_NW_{k,N}\) algebraically.
+
+\emph{Two resolutions.} Let \(Q_k=\varinjlim_N\fA_N^{\hot(k+2)}\) and
+\(P_k=\varinjlim_N\fA_N\hot\mathfrak B^{\hot k}\hot\fA_N\subset Q_k\)
+(\(k\ge0\)), with the bar differential \(b'\), and put
+\(P_{-1}=Q_{-1}=\fA\) with \(b'=\mu\) the multiplication \(Q_0\to\fA\).
+These are complexes of \(\fA\)-bimodules (acting on the outer slots), and
+\(b'\) is a bimodule map; \(P\) is a subcomplex because \(\mathfrak B\) is
+a subalgebra. The left contraction \(s(a_0\otimes\dots\otimes a_{k+1})=
+1\otimes a_0\otimes\dots\otimes a_{k+1}\), \(s(a)=1\otimes a\) on
+\(Q_{-1}\), satisfies \(b's+sb'=1\) on \(Q\). For \(P\) let
+\(P^{(N)}\subset P\) be the subcomplex of chains whose last slot lies in
+\(\fA_N\) (\(b'\) maps that slot into \(\mathfrak B\fA_N=\fA_N\)), with
+\(P^{(N)}_{-1}=\fA\). On \(P^{(N)}\) put
 \[
- P_k=\fA\hot\mathfrak B^{\hot k}\hot\fA,\qquad Q_k=\fA\hot\fA^{\hot k}
- \hot\fA\qquad(k\ge0),
+ h_N(a_0\otimes\beta\otimes a)=(-1)^{k+1}a_0\otimes\beta\otimes
+ au_N^{-1}\otimes u_N,\qquad h_N(a)=au_N^{-1}\otimes u_N\ \ (a\in
+ P_{-1}),
 \]
-with differential \(b'\) and augmentation given by multiplication. On the
-part of \(P\) whose last slot lies in \(\mathfrak Bu\), the maps
-\(h_k(a\otimes\beta\otimes bu)=(-1)^{k+1}a\otimes\beta\otimes b\otimes u\)
-and \(h_{-1}(a)=au^{-1}\otimes u\) form a contraction. With \(u=1\) the
-same formula contracts \(Q\). So both are resolutions of \(\fA\), free on
-generators \(1\otimes\beta\otimes1\). Comparison maps \(P\rightleftarrows
-Q\) over the identity and the bimodule homotopies are built recursively
-on generators by lifting cycles with these contractions. The choices are
-made linear and continuous stage by stage. For this one uses that
-\(\fA_{N,N}\) has a continuous complement in \(\fA_{N+1,N+1}\): remove the
-top-order term, then the lowest boundary coefficient of each remaining
-homogeneous term, extended into the collar with a cut-off. Finally
-\(a\otimes\beta\otimes a'\mapsto a'a\otimes\beta\) turns \(P\) into
-\(C(\mathfrak B,\fA)\) and \(Q\) into \(C(\fA)\), and the comparison maps
-and homotopies descend.
+for \(\beta\in\mathfrak B^{\hot k}\), \(a\in\fA_N\). Here
+\(au_N^{-1}\in\mathfrak B\), so \(h_N\) maps \(P^{(N)}_k\) to
+\(P^{(N)}_{k+1}\). A direct computation gives \(b'h_N+h_Nb'=1\) on
+\(P^{(N)}\): the faces of \(b'h_N(a_0\otimes\beta\otimes a)\) that do not
+involve the last two slots cancel those of \(h_Nb'\), the face merging
+\(au_N^{-1}\) with \(u_N\) gives \(a_0\otimes\beta\otimes a\), and the
+face merging \(\beta\)'s last entry \(b_k\) with \(au_N^{-1}\) cancels
+\(h_N\) of the last face of \(b'\), because \((b_ka)u_N^{-1}=b_k(au_N^{-1})\).
+(It is important that \(u_N\) is the same in both terms; this is why we
+work in \(P^{(N)}\).)
+
+\emph{Comparison maps.} Let \(\iota:P\to Q\) be the inclusion. We
+construct a bimodule chain map \(g:Q\to P\) over the identity of \(\fA\).
+Put \(g_{-1}=1\) and \(g_0=1\) (\(P_0=Q_0\)). Let \(k\ge1\), and suppose
+\(g_{k-1}\) is constructed, continuous on stages, and maps the
+generators \(1\otimes W_{k-1,N}\otimes1\) into \(P^{(\nu(k-1,N))}\) for
+some \(\nu(k-1,N)\). For \(w\in W_{k,N}\), \(b'(1\otimes w\otimes1)\) is a
+sum of terms \(a\cdot(1\otimes w'\otimes1)\cdot a'\) with \(a,a'\in\fA_N\)
+and \(w'\in\fA_{2N}^{\hot(k-1)}\), so \(z(w)=g_{k-1}b'(1\otimes
+w\otimes1)\) lies in \(P^{(\nu)}\) with
+\(\nu=\nu(k,N)=N+\max_{N'\le2N}\nu(k-1,N')\). It is a cycle of the
+augmented complex: \(b'z(w)=g_{k-2}b'b'(\cdot)=0\) for \(k\ge2\), and
+\(\mu z(w)=\mu b'(1\otimes w\otimes1)=0\) for \(k=1\). Put
+\(g_k(1\otimes w\otimes1)=h_\nu(z(w))\), so that
+\(b'g_k(1\otimes w\otimes1)=z(w)\), and extend by
+\(g_k(a\otimes w\otimes a')=a\,g_k(1\otimes w\otimes1)\,a'\). Since
+multiplication is continuous on stages, this is continuous on each
+\(\fA_N\hot W_{k,N}\hot\fA_N\), hence well defined on \(Q_k\). Both
+\(b'g_k\) and \(g_{k-1}b'\) are bimodule maps that agree on generators,
+so \(g\) is a chain map. In the same way one builds bimodule homotopies
+\(K:Q_k\to Q_{k+1}\) with \(b'K+Kb'=\iota g-1\), by
+\(K_k(1\otimes w\otimes1)=s\bigl((\iota g-1-K_{k-1}b')(1\otimes
+w\otimes1)\bigr)\) (\(K_{-1}=K_0=0\)), and \(H:P_k\to P_{k+1}\) with
+\(b'H+Hb'=g\iota-1\), by the same formula with \(h_\nu\) in place of
+\(s\), \(\nu\) being chosen, as for \(g\), so that the argument lies in
+\(P^{(\nu)}\); the generators of \(P_k\) are \(1\otimes\beta\otimes1\),
+\(\beta\in\mathfrak B^{\hot k}=W_{k,0}\). In each case the argument of
+\(s\) or \(h_\nu\) is a cycle by the inductive hypothesis.
+
+\emph{Descent.} The map \(\rho(a_0\otimes w\otimes a)=aa_0\otimes w\)
+maps \(Q_k\) onto \(C_k(\fA)\) and \(P_k\) onto \(C_k(\mathfrak B,\fA)\),
+and \(\rho b'=b\rho\) (the face merging the last two slots of the bar
+complex becomes the last face \(d_k\) of \(b\)). Moreover
+\(\rho(aX)=\rho(Xa)\) for \(a\in\fA\). For a bimodule map \(F\) between
+\(P\) and \(Q\) (in either direction) define \(\bar F(a_0\otimes w)=
+\rho F(a_0\otimes w\otimes1)\). Then \(\bar F\rho=\rho F\): on elementary
+tensors, \(\rho F(a_0\otimes w\otimes a)=\rho(F(a_0\otimes w\otimes1)a)
+=\rho(aF(a_0\otimes w\otimes1))=\bar F(aa_0\otimes w)\), and both sides
+are continuous. Hence \(\bar g\) is a chain map \(C(\fA)\to
+C(\mathfrak B,\fA)\), \(\bar\iota\) is the inclusion, and \(\bar K\),
+\(\bar H\) are homotopies \(\bar\iota\bar g\simeq1\),
+\(\bar g\bar\iota\simeq1\). So the inclusion is a chain homotopy
+equivalence.
 \end{proof}
 
 \begin{lemma}[Fixed-stage \(E^1\)]\label{ha:lem:stageE1}
@@ -1048,7 +1119,8 @@ leading-symbol map.
 \subsubsection*{The Laurent algebras \(\As\), \(\Ads\) and the cusp twist}
 In \cite{HHb} condition (St) is verified for the b-calculus analogues of
 \(\As\) and \(\Ads\) \cite[Lemma ``Lifts in a fixed coefficient
-stage'']{HHb}. The cusp version fails. By Lemma~\ref{ha:lem:stageE1} the
+stage'']{HHb}. The cusp version fails. (Convergence nevertheless holds;
+it is proved by a different argument in Appendix~\ref{su:sec}.) By Lemma~\ref{ha:lem:stageE1} the
 stage \(E^1\) of \(\As\) consists of \(x^{-L}\) times ordinary forms. The
 symplectic star, however, preserves \(x^{-L}\) times \emph{cusp} forms.
 
@@ -1077,8 +1149,9 @@ of \(\mathcal L_{x\partial_x}=-L\) on the leading coefficient used in
 raises the power of \(x\), so it is nilpotent on the leading coefficient.
 
 This obstructs the \emph{method} (St), not convergence itself. For
-\(n=1\), Proposition~\ref{ha:prop:xadic} below proves that \(\Theta\) is an
-isomorphism. There the algebra is graded by the power of \(x\) plus the
+every \(n\), Theorem~\ref{su:thm:B10} proves that \(\Theta\) is an
+isomorphism, and for \(n=1\) so does Proposition~\ref{ha:prop:xadic}
+below. There the algebra is graded by the power of \(x\) plus the
 order, each correction step leaves a remainder whose lowest power of
 \(x\) is strictly higher than before, and so a cycle that starts two pole
 levels inside a stage never produces a term at the lowest power
@@ -1146,27 +1219,28 @@ Proposition~\ref{ha:prop:algconv}, compatibly with \(\Theta\).
 \end{proof}
 
 
-\begin{remark}[What remains quoted]\label{ha:rem:quoted}
+\begin{remark}[The last step of the convergence, (B10)]\label{ha:rem:quoted}
 Proposition~\ref{ha:prop:laurent} reduces the convergence for \(\As\) and
 \(\Ads\) to one statement. Corrections whose poles grow by up to two per
 order (part (3)) must be replaceable by corrections with a uniform pole
 bound. Equivalently, there are no phantom classes
 \(\bigcap_pF_p\HH_k\ne0\), and the towers in (3) can be completed in
 \(C(\mathfrak B,\fA)\). By Proposition~\ref{ha:prop:equiv} below it is
-enough to prove this for one of the two algebras, and for \(n=1\) it is
-proved (Proposition~\ref{ha:prop:xadic} and Corollary~\ref{ha:cor:n1}).
-For \(n\ge2\), MN assert it (``as in the boundaryless case'',
-\cite[p.~12]{MN}), and we have not proved it. Three routes fail: the
-fixed-stage argument of \cite{HHb} (Example~\ref{ha:ex:obstruction}), the
-\(x\)-adic filtration, whose \(E^1\) term is not known
+enough to prove this for one of the two algebras. MN assert it (``as in
+the boundaryless case'', \cite[p.~12]{MN}). It is item (B10) of
+Section~\ref{subsec:background}, and it is now proved for every \(n\):
+for \(n=1\) by Proposition~\ref{ha:prop:xadic} and
+Corollary~\ref{ha:cor:n1}, and for all \(n\) by Theorem~\ref{su:thm:B10},
+which follows Lauter and Moroianu \cite{LauterMoroianu}. Three other
+routes do not work: the fixed-stage argument of \cite{HHb}
+(Example~\ref{ha:ex:obstruction}), the \(x\)-adic filtration as a whole,
+whose \(E^1\) term needs \(\HH\) of the suspended symbol algebra
 (Remark~\ref{ha:rem:xadicfail}), and an import from Benameur--Nistor
-\cite{BN} (Remark~\ref{ha:rem:BN}). In these notes, for \(n\ge2\),
-Propositions~\ref{prop:As} and~\ref{prop:Ads}, and everything that depends
-on them, therefore rest on this quoted step. It is item (B10) of
-Section~\ref{subsec:background}. By contrast, Theorem~\ref{ha:thm:conv}
-establishes convergence for \(\Is\) and for the closed case without it,
-and the boundary connecting map (B9) is proved without it
-(Theorem~\ref{ha:thm:bdry}).
+\cite{BN} (Remark~\ref{ha:rem:BN}). The proof of
+Theorem~\ref{su:thm:B10} uses the \(x\)-grading only for the part of a
+remainder with one extra pole, and it needs from the suspended symbol
+algebra only the degeneration of its order spectral sequence, not its
+homology.
 \end{remark}
 
 \subsection{The boundary connecting map (B9)}\label{ha:subsec:B9}
@@ -1564,32 +1638,36 @@ Proposition~\ref{ha:prop:xadic} and Proposition~\ref{ha:prop:equiv}.
 \end{proof}
 
 \begin{remark}[The \(x\)-adic filtration for \(n\ge2\)]\label{ha:rem:xadicfail}
-For \(n\ge2\) the \(x\)-adic filtration of \(\Ads\) still exists. Each
+For \(n\ge2\) the \(x\)-adic filtration of \(\Ads\) still exists, and it
+is the starting point of the proof in Appendix~\ref{su:sec}. Each
 correction in the product raises the power of \(x\) by some \(\mu\ge0\)
 and lowers the order by at least \(\mu\): the twist contributes
 \((\mu,-\mu)\) as in Lemma~\ref{ha:lem:n1alg}, and the star product of
-the suspended symbols \((0,-l)\). So the steps of the proof of
-Proposition~\ref{ha:prop:xadic} still move to higher powers of \(x\) at
-bounded order, and stages with a margin might still suffice. What is
-missing is \(E^1\). The \(x\)-graded algebra is
-\(\mathcal S\otimes\C[x,x^{-1}]\) with
+the suspended symbols \((0,-l)\). So the sum of the power of \(x\) and the
+order never increases, and as the power of \(x\) grows the order is forced
+down. The \(x\)-graded algebra is \(\mathcal S\otimes\C[x,x^{-1}]\), with
 \(\mathcal S=\Psis^{\Z}(\partial X)/\Psis^{-\infty}(\partial X)\) the
-suspended symbol algebra, which is not commutative for \(n\ge2\). By
-Proposition~\ref{ha:prop:kunneth}, \(E^1\) would be
-\(\HH(\mathcal S)\otimes\Omega(\C[x,x^{-1}])\), and \(\HH(\mathcal S)\) is
-not computed anywhere in these notes. Its order spectral sequence has
-\(E^1\) the homogeneous forms on \((T^*\partial X\times\R_\tau)\setminus0\)
-and \(d^1=-i\delta\) for the Poisson structure of \(T^*\partial X\), of
-which \(\tau\) is a Casimir. That Poisson structure is not symplectic, so
-Proposition~\ref{prop:star} does not apply, and we cannot show that
-\(E^2\) lies on one line or that the sequence degenerates. In the order
-filtration the same terms \((0,-l)\) destroy the grading by \(J+p\), and
-the primitives of Lemma~\ref{ha:lem:WL} lower the lowest power of \(x\),
-while the terms \((0,-l)\) carry that power down to the next order. The tower of corrections these
-steps produce can have unbounded poles; this does not show that (B10)
-fails. Its sum lies in the
-completion \(\widehat C\) of Proposition~\ref{ha:prop:laurent}(4), not in
-\(C(\mathfrak B,\Ads)\).
+suspended symbol algebra and \(x\) central. It is not commutative for
+\(n\ge2\). Running the proof of Proposition~\ref{ha:prop:xadic} with the
+\(x\)-adic filtration alone would need its \(E^1\) term
+\(\HH(\mathcal S)\otimes\Omega(\C[x,x^{-1}])\) and the action of the twist
+on it. That is more than is needed, and more than is easy: the order
+spectral sequence of \(\mathcal S\) has \(E^1\) the homogeneous forms on
+\((T^*\partial X\times\R_\tau)\setminus0\) and \(d^1=-i\delta\) for the
+Poisson structure of \(T^*\partial X\), of which \(\tau\) is a Casimir;
+that structure is not symplectic, and its \(E^2\) term is not
+concentrated on one line (Lemma~\ref{su:lem:E2S},
+Remark~\ref{su:rem:HS}). In the order filtration of \(\Ads\), on the
+other hand, the primitives of Lemma~\ref{ha:lem:WL} lower the lowest power
+of \(x\), and the terms \((0,-l)\) carry that power down to the next
+order, so the towers of Proposition~\ref{ha:prop:laurent}(3) can have
+unbounded poles. Appendix~\ref{su:sec} combines the two filtrations, as
+Lauter and Moroianu do \cite{LauterMoroianu}: it runs the order
+filtration, measures poles by the total power of \(x\) (so that a step
+loses at most one pole), and removes the part with the extra pole using
+the \(x\)-graded algebra. For that it needs only that the order spectral
+sequence of \(\mathcal S\) degenerates at \(E^2\)
+(Proposition~\ref{su:prop:degS}), not \(\HH(\mathcal S)\).
 \end{remark}
 
 \subsection{The \texorpdfstring{\(x\)}{x}-adic spectral sequence of
@@ -1606,8 +1684,7 @@ product of Lemma~\ref{ha:lem:n1alg} and \(D=-i\partial_\tau\)
 \(\Id^{\mathrm{pt}}=\cS(\R_\tau)\Lser{x}\) as an ideal, and has quotient
 the algebra \(\Ads\) of Lemma~\ref{ha:lem:n1alg} (with \(Z\) two points).
 
-\begin{proposition}[Convergence for \(\Id\); uses the sketched
-Lemma~\ref{ha:lem:mixed}(b)]\label{ha:prop:Idconv}
+\begin{proposition}[Convergence for \(\Id\)]\label{ha:prop:Idconv}
 There is a complex \(D_\partial\) quasi-isomorphic to \(C(\Id^{\mathrm
 {pt}})\) whose stages are complete for the \(x\)-adic filtration, whose
 \(E^1\) is the space of forms on \(\R_\tau\times\Sd\), Schwartz in
@@ -1687,7 +1764,8 @@ For the cusp groupoid of \(X\) (base \(B\) a point) the assumptions hold:
 (13) is automatic, and (14) holds because, once \(x^{-1}\) is adjoined,
 the \(\mathcal O(X)\)-span of \(x^2\partial_x,\partial_y\) is that of
 \(\partial_x,\partial_y\). We cannot use this result to close (B10), for
-reasons (2) and (3) below; (1) is a caveat about \cite{BN}.
+reasons (2) and (3) below; (1) is a caveat about \cite{BN}. (The gap is
+now closed by a different route, Theorem~\ref{su:thm:B10}.)
 \begin{enumerate}
 \item \emph{Theorem 4 of \cite{BN}.} By definition
 \(\mathcal A_L(G)=\mathcal O(M)\bigl(\Psi^\infty(G)/\Psi^{-\infty}(G)\bigr)\);
@@ -1720,7 +1798,15 @@ know, the stages of the mixed complex, have the stray \(E^2\) classes of
 Example~\ref{ha:ex:obstruction}, so the vanishing hypothesis of
 \cite[Thm.~1]{BN} cannot be checked on them.
 \end{enumerate}
-So (B10) for \(n\ge2\) stays quoted. \cite{BN} assert the corresponding
-statement for \(\mathcal A_L(G)\), which for the cusp groupoid is
-\(\As\), as \cite[p.~12]{MN} does.
+So \cite{BN} does not give (B10); they assert the corresponding statement
+for \(\mathcal A_L(G)\), which for the cusp groupoid is \(\As\), as
+\cite[p.~12]{MN} does. Lauter and Moroianu make the same point about
+completeness. They note \cite[\S5]{LauterMoroianu} that, as observed by
+Benameur and Nistor \cite{BNcomplete}, the spectral sequence argument
+computes the \(E^2\) term and that it degenerates there, and that
+convergence is the non-trivial part, because the pole filtration enters
+the definition of the chain spaces. They prove convergence for the
+fibered cusp algebras with their criterion \cite[Thm.~B.4]{LauterMoroianu}.
+Appendix~\ref{su:sec} adapts that proof; it is how (B10) is proved in
+these notes.
 \end{remark}

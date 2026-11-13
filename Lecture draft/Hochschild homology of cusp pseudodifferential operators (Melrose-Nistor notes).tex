@@ -131,19 +131,21 @@ closed case \cite[(3), (5)]{MN}. The regular value claimed in
 \cite[Prop.~8]{MN} is wrong in general, and as a consequence the eta term of
 the index formula carries a local correction \(\delta_Q\), which vanishes in
 the cases we treat. We verify the corrected formula on explicit examples.
-Three appendices prove most of the background that \cite{MN} quote: the
+Four appendices prove most of the background that \cite{MN} quote: the
 construction of the cusp calculus and its Fredholm theory
 (Appendix~\ref{cc:sec:cusp}); Wodzicki excision, Connes' theorem, the
 K\"unneth and Morita statements and the convergence of the spectral
-sequences (Appendix~\ref{ha:sec}); and the holomorphic families, residue
-traces and the suspended eta invariant (Appendix~\ref{tr:sec}).
+sequences (Appendix~\ref{ha:sec}); the holomorphic families, residue
+traces and the suspended eta invariant (Appendix~\ref{tr:sec}); and the
+convergence for the Laurent symbol algebras (Appendix~\ref{su:sec}).
 We also prove the boundary connecting map of \cite[Prop.~5]{MN}, by a
 leading-symbol argument with a linear lift instead of MN's multiplicative
-splitting. Section~\ref{subsec:background} lists what is still quoted.
-The main gap is the convergence of the order spectral sequence for the
-Laurent symbol algebras when \(\dim X\ge2\). The argument used for the
-b-calculus fails there. We show that convergence for \(\As\) and for
-\(\Ads\) are equivalent, and we prove both for \(\dim X=1\).
+splitting, and the convergence of the order spectral sequences of the
+Laurent symbol algebras in every dimension. The argument used for the
+b-calculus fails there; we adapt instead the convergence criterion of
+Lauter and Moroianu \cite{LauterMoroianu}, and supply a full proof of the
+degeneration it needs for the suspended symbol algebra.
+Section~\ref{subsec:background} lists what is still quoted.
 \end{abstract}
 
 \section{Overview and roadmap}\label{sec:overview}
@@ -344,15 +346,17 @@ manifolds \(Z\times\Ssig\) and \(Z\times\Ssig\times\Sd\). For example
  \HH_k(\As)\cong H^{2n-k}(Y\times\Ssig)\oplus H^{2n-k-1}(Z\times\Ssig).
 \]
 The precise sources of the hypotheses are discussed in
-Corrections~\ref{corr:components} and~\ref{corr:n1}. The proof rests on
-one quoted input, the last step of the convergence for \(\Ads\), or
-equivalently for \(\As\) (B10; Proposition~\ref{ha:prop:equiv}). This
-step is proved for \(n=1\) (Corollary~\ref{ha:cor:n1}) but not for the
-case \(n\ge2\) of Theorem~\ref{thm:main}. The boundary connecting map (B9)
-is proved (Theorem~\ref{ha:thm:bdry}), and everything else the proof uses
-is proved in the appendices (Section~\ref{subsec:background}), except
-Lemma~\ref{ha:lem:mixed}(b), whose proof is sketched after \cite{HHb}. The proof
-of Theorem~\ref{thm:main} occupies
+Corrections~\ref{corr:components} and~\ref{corr:n1}. The last step of
+the convergence for \(\Ads\) and \(\As\), which \cite{MN} assert without
+proof, is item (B10); it is proved in Appendix~\ref{su:sec}
+(Theorem~\ref{su:thm:B10}), following Lauter and Moroianu
+\cite{LauterMoroianu}, whose results on fibered cusp operators contain
+the homology of \(\Is\), \(\As\) and \(\Ads\) as the case of a point base.
+The boundary connecting map (B9) is proved (Theorem~\ref{ha:thm:bdry}).
+Everything else the proof of Theorem~\ref{thm:main} uses is proved in
+the appendices, apart from the standard inputs listed as quoted or
+sketched in Section~\ref{subsec:background} (Figure~\ref{fig:deps}).
+The proof occupies
 Sections~\ref{sec:functions}--\ref{sec:AdA}.
 
 \subsection{The index formula}\label{subsec:indexintro}
@@ -426,7 +430,7 @@ follow \cite[\S\S9--12]{MN} and prove the index formula.
 Section~\ref{sec:examples} contains worked examples.
 Section~\ref{sec:other} summarizes \cite[\S\S13--15]{MN}.
 Section~\ref{sec:comparison} compares the cusp and b-calculi and cites the
-companion notes \cite{HHb}. Appendices~\ref{cc:sec:cusp}--\ref{tr:sec}
+companion notes \cite{HHb}. Appendices~\ref{cc:sec:cusp}--\ref{su:sec}
 prove the background facts (B1)--(B10) of Section~\ref{subsec:background},
 apart from the inputs listed there as quoted. The main text can be read
 without them: each step that uses a background fact names the appendix
@@ -565,7 +569,7 @@ and on cochains \(i_D\varphi=\varphi\circ i_D\). For a \(0\)-cochain
 
 \subsection{Background facts: where they are proved}\label{subsec:background}
 The paper \cite{MN} quotes the analytic foundations of the cusp calculus
-and the homological tools. Appendices~\ref{cc:sec:cusp}--\ref{tr:sec}
+and the homological tools. Appendices~\ref{cc:sec:cusp}--\ref{su:sec}
 prove most of them. For each item we state the fact as it is used, say
 which appendix result proves it, and record what remains quoted. Every
 step in the main text that uses one of these facts says so.
@@ -665,37 +669,35 @@ Theorem~\ref{ha:thm:bdry} gives \(\Theta_{\Is}\circ\partial=(-1)^ki\,
 (\delta_{\mathrm{dR}}\oplus0)\circ\Theta_{\partial,\sigma}\) for the
 leading-symbol maps, with no convergence hypothesis. Read as a statement
 about the isomorphisms of Propositions~\ref{prop:Is} and~\ref{prop:Ads},
-it needs \(\Theta_{\partial,\sigma}\) to be an isomorphism, which is (B10).
+it needs \(\Theta_{\partial,\sigma}\) to be an isomorphism, which is (B10),
+now proved.
 \item[(B10)] \emph{Convergence for the Laurent symbol algebras.} The order
 spectral sequences of \(\As\) and \(\Ads\) converge, so that
 \(\HH_k\) is isomorphic to \(E^2_{k-n,k}\) by the leading symbol.
-\emph{Proved}: the algebraic convergence statement
-(Proposition~\ref{ha:prop:algconv}), completeness through mixed complexes
-(Lemma~\ref{ha:lem:mixed}; part (b) is sketched after \cite{HHb}), convergence for the closed symbol algebra and
-for \(\Is\) (Theorem~\ref{ha:thm:conv}), the partial result
-Proposition~\ref{ha:prop:laurent} for \(\As\) and \(\Ads\), the
-equivalence of the statements for \(\As\) and for \(\Ads\)
-(Proposition~\ref{ha:prop:equiv}), and both statements for \(n=1\)
+\emph{Proved}, for every \(n\ge1\): Theorem~\ref{su:thm:B10}, which
+adapts the convergence criterion of Lauter and Moroianu
+\cite[Thm.~B.4]{LauterMoroianu} (Theorem~\ref{su:thm:criterion}) and
+proves the degeneration at \(E^2\) for the suspended symbol algebra that
+it needs (Proposition~\ref{su:prop:degS}). It uses the algebraic
+convergence statement (Proposition~\ref{ha:prop:algconv}), the mixed
+complexes (Lemma~\ref{ha:lem:mixed}, now proved in full), the stage
+\(E^1\) (Lemma~\ref{ha:lem:stageE1}) and the equivalence of the
+statements for \(\As\) and for \(\Ads\) (Proposition~\ref{ha:prop:equiv}).
+Also proved: convergence for the closed symbol algebra and for \(\Is\)
+(Theorem~\ref{ha:thm:conv}), the partial result
+Proposition~\ref{ha:prop:laurent}, and a separate proof for \(n=1\)
 (Proposition~\ref{ha:prop:xadic}, Corollary~\ref{ha:cor:n1}). The stage
 argument used for the b-calculus in \cite{HHb} fails here, because the
 cusp Lie derivative \(\mathcal L_{x^2\partial_x}\) is nilpotent on leading
-coefficients (Example~\ref{ha:ex:obstruction}). For \(n\ge2\) neither the
-\(x\)-adic filtration (Remark~\ref{ha:rem:xadicfail}) nor the theorem of
-Benameur--Nistor \cite{BN} (Remark~\ref{ha:rem:BN}) closes the gap.
-\emph{Quoted}, for \(n\ge2\): the remaining step, from \cite[p.~12]{MN}
+coefficients (Example~\ref{ha:ex:obstruction}); neither the \(x\)-adic
+filtration alone (Remark~\ref{ha:rem:xadicfail}) nor the theorem of
+Benameur--Nistor \cite{BN} (Remark~\ref{ha:rem:BN}) gives (B10)
 (Remark~\ref{ha:rem:quoted}). The analogous question for the \(x\)-adic
-spectral sequence of \(\Id\) is settled: Proposition~\ref{ha:prop:Idconv}
-proves its convergence.
+spectral sequence of \(\Id\) is settled by
+Proposition~\ref{ha:prop:Idconv}.
 \end{enumerate}
 In summary, the following remain quoted or only sketched:
 \begin{itemize}
-\item (B10) for \(n\ge2\): the last step of the convergence for \(\Ads\),
-equivalently for \(\As\) (Remark~\ref{ha:rem:quoted},
-Proposition~\ref{ha:prop:equiv});
-\item Lemma~\ref{ha:lem:mixed}(b), the comparison of mixed complexes,
-sketched after \cite{HHb}; Theorems~\ref{ha:thm:conv} and~\ref{ha:thm:bdry} (through \(\Theta_{\Is}\)),
-Proposition~\ref{ha:prop:xadic} and Proposition~\ref{ha:prop:Idconv}
-use it;
 \item the uniform calculus on cylinders (Background
 fact~\ref{cc:bg:uniform});
 \item the nuclear-space facts (F1)--(F3) of Appendix~\ref{ha:sec};
@@ -796,22 +798,19 @@ facts they use and which of the items above affect them.
 \begin{tikzpicture}[font=\footnotesize]
  \def\cx#1{\fpeval{6.45+0.62*(#1-1)}}
  \foreach \c in {3,6,7} \fill[orange!15] (\cx{\c}-0.29,0.35) rectangle (\cx{\c}+0.29,-5.0);
- \foreach \c in {10} \fill[red!12] (\cx{\c}-0.29,0.35) rectangle (\cx{\c}+0.29,-5.0);
  \foreach \i in {1,...,10} \node[font=\scriptsize,inner sep=0pt] at (\cx{\i},0) {B\i};
  \node[font=\scriptsize,anchor=west] at (12.5,0) {items};
  \draw[gray] (0,-0.3)--(14.3,-0.3);
  \foreach \r/\lab/\cols/\cor in {
    1/{\(\Is\), \(\As\) (Props.~\ref{prop:As}, \ref{prop:Is})}/{1,5,6,10}/{4},
-   2/{\(\Ads\), boundary sequence (Props.~\ref{prop:Ads}, \ref{prop:boundaryLES})}/{1,4,5,9,10}/{--},
+   2/{\(\Ads\), boundary sequence (Props.~\ref{prop:Ads}, \ref{prop:boundaryLES})}/{1,4,5,6,9,10}/{--},
    3/{\(\Id\), \(\cI\) (Props.~\ref{prop:Id}, \ref{prop:I})}/{1,3,4,5,6}/{1},
    4/{residue functionals (\S\ref{sec:residues})}/{3,7,8}/{2, 8, 9, 11},
    5/{\(\Ad\), \(\cA\), Thm.~\ref{thm:main} (Props.~\ref{prop:Ad}, \ref{prop:HHA})}/{3,4,9,10}/{1, 2},
    6/{index formula (Lemma~\ref{lem:fedosov}, Thm.~\ref{thm:index})}/{2,3,6}/{5, 6},
    7/{eta term, reduced formula (Prop.~\ref{prop:eta}, Thm.~\ref{thm:reduced})}/{3,7}/{6, 7, 9}}{
    \node[anchor=west] at (0,-0.65*\r) {\lab};
-   \foreach \c in \cols {
-     \ifnum\c>9 \fill[red!70!black] (\cx{\c},-0.65*\r) circle (2.6pt);
-     \else \fill[blue!70!black] (\cx{\c},-0.65*\r) circle (2.6pt);\fi}
+   \foreach \c in \cols {\fill[blue!70!black] (\cx{\c},-0.65*\r) circle (2.6pt);}
    \node[anchor=west] at (12.5,-0.65*\r) {\cor};
    \draw[gray!40] (0,-0.65*\r-0.325)--(14.3,-0.65*\r-0.325);
  }
@@ -820,23 +819,22 @@ facts they use and which of the items above affect them.
 main results use which background facts of
 Section~\ref{subsec:background} (dots), and which items of the list in
 Section~\ref{subsec:errata} concern them (last column). Blue dots: facts
-proved in Appendices~\ref{cc:sec:cusp}--\ref{tr:sec}; on an orange column
+proved in Appendices~\ref{cc:sec:cusp}--\ref{su:sec}; on an orange column
 the proof uses a step that is sketched or quoted ((B3): the calculus with
 holomorphic parameters; (B6): Eilenberg--Zilber and Morita for H-unital
-ideals with bundles; (B7): the inputs of the eta identification). The
-red column is quoted: (B10), the last step of the convergence for
-\(\As\) and \(\Ads\) when \(n\ge2\) (Remark~\ref{ha:rem:quoted}); for
-\(n=1\) it is proved (Corollary~\ref{ha:cor:n1}). Everything built on the
-homology of \(\As\) and \(\Ads\), including the corrected groups of
-\(\cA\), rests on it when \(n\ge2\). The boundary connecting map (B9) is
-proved (Theorem~\ref{ha:thm:bdry}); as a statement about the homology
-groups it is used together with (B10). (The index formula uses the trace
+ideals with bundles; (B7): the inputs of the eta identification). No
+column is quoted outright. In particular (B10), the convergence for
+\(\As\) and \(\Ads\), is proved for every \(n\)
+(Theorem~\ref{su:thm:B10}); its proof uses the Eilenberg--Zilber theorem
+through Corollary~\ref{ha:cor:homog} and the shuffle map, which is why
+the second row also carries (B6). The boundary connecting map (B9) is
+proved (Theorem~\ref{ha:thm:bdry}), and with (B10) it is a statement
+about the homology groups. (The index formula uses the trace
 computations of Section~\ref{sec:AdA}, not the homology groups.) Each row
 also uses the rows above it, as in Figure~\ref{fig:roadmap}. Items 3 (not
 used elsewhere), 10 (the foundations behind (B1)) and 12 (misprints) are
 not shown. The row for \(\Id\) uses the convergence of its \(x\)-adic
-spectral sequence, which is proved (Proposition~\ref{ha:prop:Idconv}),
-modulo the sketched Lemma~\ref{ha:lem:mixed}(b).}
+spectral sequence (Proposition~\ref{ha:prop:Idconv}).}
 \label{fig:deps}
 \end{figure}
 
@@ -1825,20 +1823,22 @@ case'' \cite[p.~12]{MN}. In the b-calculus this is proved in
 \(\mathcal L_{x^2\partial_x}\) raises the power of \(x\), so it is nilpotent
 on leading coefficients, and a cycle such as \(x^{-L}|\tau|^p\) has no
 primitive in its own stage although it is exact in the direct limit
-(Example~\ref{ha:ex:obstruction}). What survives is
+(Example~\ref{ha:ex:obstruction}). What survives of that argument is
 Proposition~\ref{ha:prop:laurent}: representatives on the critical line
 exist, \(\Theta\) is well defined, and the corrections can be found if
 the pole bound is allowed to grow by two at each order. Convergence for
 \(\As\) and convergence for \(\Ads\) are equivalent
-(Proposition~\ref{ha:prop:equiv}). For \(n=1\) both hold: the
-\(x\)-adic filtration of \(\Ads\), in stages with a margin of two poles,
-proves it (Proposition~\ref{ha:prop:xadic}, Corollary~\ref{ha:cor:n1}).
-For \(n\ge2\) the remaining step, a uniform pole bound, is quoted from
-\cite[p.~12]{MN} (Remark~\ref{ha:rem:quoted}); it is item (B10) of
-Section~\ref{subsec:background}. In what follows, for \(n\ge2\),
-\emph{convergence for \(\As\) and \(\Ads\) is to be read as resting on
-(B10)}. For \(\Is\) (rapid vanishing at the boundary) and for the closed
-case no issue arises.
+(Proposition~\ref{ha:prop:equiv}). For \(n=1\) both hold by the
+\(x\)-adic filtration of \(\Ads\), in stages with a margin of two poles
+(Proposition~\ref{ha:prop:xadic}, Corollary~\ref{ha:cor:n1}). For every
+\(n\) they are proved in Appendix~\ref{su:sec}, after Lauter and
+Moroianu \cite{LauterMoroianu}: measured by the total power of \(x\) in a
+chain, an off-critical step loses only one pole, and the part of the
+remainder with the extra pole can be removed in the algebra graded by
+the power of \(x\), whose order spectral sequence degenerates at
+\(E^2\) (Theorem~\ref{su:thm:B10}). This is item (B10) of
+Section~\ref{subsec:background}. For \(\Is\) (rapid vanishing at the
+boundary) and for the closed case no issue arises.
 \end{remark}
 
 \subsection{The Poisson differential and the symplectic star}
@@ -2287,9 +2287,9 @@ which vanishes for \(p\ne k-n\) by Proposition~\ref{prop:homog}. For
 \emph{Degeneration and convergence.} \(E^2\) is concentrated on the line
 \(p=k-n\). Proposition~\ref{ha:prop:laurent} then shows that every class
 has a representative on that line and that the leading-symbol map
-\(\Theta\) is well defined. For \(n=1\), \(\Theta\) is an isomorphism by
-Corollary~\ref{ha:cor:n1}. For \(n\ge2\) this is the quoted step (B10)
-(Remark~\ref{rem:poles}, Remark~\ref{ha:rem:quoted}).
+\(\Theta\) is well defined. It is an isomorphism, and the spectral
+sequence degenerates at \(E^2\), by Theorem~\ref{su:thm:B10}; this is
+(B10), and for \(n=1\) there is also Corollary~\ref{ha:cor:n1}.
 
 \emph{Duality.} \(Y\times\Ssig\) is a compact oriented
 \(2n\)-manifold with boundary \(Z\times\Ssig\). It is oriented by the
@@ -2358,9 +2358,9 @@ identification shows that \(\Trs\) is Wodzicki's residue.
 star product) consists of formal Laurent series in \(x\)
 of complete symbols over \(\partial X\). The proof of
 Proposition~\ref{prop:As} applies with formal Laurent forms on the formal
-neighbourhood of \({}^cT^*_{\partial X}X\setminus0\), including its
-reliance on (B10) for convergence when \(n\ge2\); for \(n=1\) convergence
-is Proposition~\ref{ha:prop:xadic}. The homogeneous
+neighbourhood of \({}^cT^*_{\partial X}X\setminus0\). Convergence is
+Theorem~\ref{su:thm:B10} (for \(n=1\) also
+Proposition~\ref{ha:prop:xadic}). The homogeneous
 de Rham cohomology is generated over \(H^*(Z)\) by \(1\), \(d\log r\),
 \(d\log x\) and \(d\log x\wedge d\log r\) \cite[p.~13]{MN}
 (Lemma~\ref{lem:formaldR} and Proposition~\ref{prop:homog}). The total
@@ -2387,9 +2387,9 @@ without \(d\theta_\partial\), and vanishes on the summand
 \((-1)^ki\).
 \end{enumerate}
 For the leading-symbol maps \(\Theta\) these three statements hold
-without any convergence hypothesis. They are statements about the
-isomorphisms of Propositions~\ref{prop:As} and~\ref{prop:Ads} for \(n=1\),
-and for \(n\ge2\) given (B10).
+without any convergence hypothesis. By (B10)
+(Theorem~\ref{su:thm:B10}) they are statements about the isomorphisms of
+Propositions~\ref{prop:As} and~\ref{prop:Ads}, for every \(n\).
 \end{proposition}
 
 \begin{proof}
@@ -2417,9 +2417,8 @@ HKR turns \(\lambda\) into a cycle. Then \(b\tilde c\in D\) represents
 \(0\to\text{flat}\to\text{Laurent}\to\text{formal}\to0\) applied to
 \(*\chi(c_{k-n})\), up to the sign \((-1)^{k-1}\). On a class
 \(\beta\wedge dx/x\) it vanishes, because \(\chi_0\beta\wedge dx/x\) is a
-closed lift. If \(\Theta_{\partial,\sigma}\) is an isomorphism, this is
-(3); this holds for \(n=1\) (Proposition~\ref{ha:prop:xadic}) and, for
-\(n\ge2\), it is (B10).
+closed lift. Since \(\Theta_{\partial,\sigma}\) is an isomorphism
+(Theorem~\ref{su:thm:B10}), this is (3).
 \end{proof}
 
 \begin{remark}[On the splitting \(s_0\)]\label{rem:s0}
@@ -2927,8 +2926,8 @@ and similarly \(\HH^0(\Is)\cong H^0(Y\times\Ssig)\cong\C^2\) for connected
 \cite[(16)]{MN} and \cite[Lemma~12]{MN} require \(n\ge2\), exactly as
 Wodzicki's uniqueness of the residue does. The cohomological formulas of
 Theorem~\ref{thm:main} for \(\Is\), \(\As\), \(\Ads\) remain true for
-\(n=1\), with \(Z_j\) disconnected. For \(n=1\) they do not depend on the
-quoted step (B10) (Corollary~\ref{ha:cor:n1}).
+\(n=1\), with \(Z_j\) disconnected; for \(n=1\) the convergence they
+need has the separate proof of Corollary~\ref{ha:cor:n1}.
 \end{correction}
 
 \subsection{The regularized interior residue \texorpdfstring{\(\hTrs\)}{}}
@@ -3513,10 +3512,9 @@ intervals, and \(Z\) consists of four points. The same bookkeeping
 Here \(\partial_{\cA}\) on \(\HH^1(\Id)=\C^2\) has rank one: the two
 classes \(\delta(d\theta_\sigma(1_{j,+}+1_{j,-}))\), \(j=0,1\), are
 opposite, since \(1_{0,\pm}+1_{1,\pm}\) is the restriction of
-\(1_{Y_\pm}\). Since \(n=1\), these numbers use no quoted convergence
-step: the homology of \(\As\) and \(\Ads\) is
-Corollary~\ref{ha:cor:n1}, and the boundary map is
-Theorem~\ref{ha:thm:bdry}.
+\(1_{Y_\pm}\). Here the homology of \(\As\) and \(\Ads\) is also given by
+the elementary argument of Corollary~\ref{ha:cor:n1}, and the boundary
+map is Theorem~\ref{ha:thm:bdry}.
 \end{example}
 
 \section{Morita invariance and bundles (MN \S9)}\label{sec:morita}
@@ -4393,6 +4391,7 @@ leading terms they agree.
 \input{MN-parts/cusp-calculus}
 \input{MN-parts/homological-algebra}
 \input{MN-parts/traces}
+\input{MN-parts/suspended}
 
 \section*{Acknowledgement of sources}
 \addcontentsline{toc}{section}{Acknowledgement of sources}
@@ -4400,7 +4399,9 @@ The mathematics in these notes is that of Melrose and Nistor \cite{MN}. The
 spectral sequence and HKR arguments follow \cite[Ch.~10]{MelroseMicro}.
 The Hochschild tools, the contraction lemmas and the comparison with the
 b-calculus follow the companion notes \cite{HHb}. The appendices adapt
-\cite{MelroseMicro}, \cite{Wodzicki} and \cite{HHb}, as indicated there.
+\cite{MelroseMicro}, \cite{Wodzicki} and \cite{HHb}, as indicated there;
+the convergence proof of Appendix~\ref{su:sec} adapts Lauter and
+Moroianu \cite{LauterMoroianu}.
 Corrections and the worked examples are our own and are marked as such.
 
 \begin{thebibliography}{99}
@@ -4420,6 +4421,12 @@ Comm. Math. Phys. \textbf{107} (1986), 103--163.
 M.-T. Benameur and V. Nistor,
 \emph{Homology of algebras of families of pseudodifferential operators},
 J. Funct. Anal. \textbf{205} (2003), 1--36; arXiv:math/0201198.
+
+\bibitem{BNcomplete}
+M.-T. Benameur and V. Nistor,
+\emph{Homology of complete symbols and non-commutative geometry}, in
+\emph{Quantization of Singular Symplectic Quotients} (N.~P. Landsman et
+al., eds.), Progr. Math. 198, Birkh\"auser, 2001, 21--46.
 
 \bibitem{Brylinski}
 J.-L. Brylinski,
@@ -4452,6 +4459,12 @@ operators.tex}).
 M. Karoubi,
 \emph{Formule de K\"unneth en homologie cyclique I et II},
 C. R. Acad. Sci. Paris \textbf{303} (1986), 527--530 and 595--598.
+
+\bibitem{LauterMoroianu}
+R. Lauter and S. Moroianu,
+\emph{Homology of pseudodifferential operators on manifolds with fibered
+cusps},
+Trans. Amer. Math. Soc. \textbf{355} (2003), 3009--3046.
 
 \bibitem{Loday}
 J.-L. Loday,
