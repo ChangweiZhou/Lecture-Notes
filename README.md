@@ -1,6 +1,6 @@
 # Lecture Notes
 
-Three proof-focused manuscripts and one set of expository notes are
+Three proof-focused manuscripts and two sets of expository notes are
 maintained:
 
 - `Lecture draft/Lecture draft.tex`: the b-calculus, Fredholm theory on
@@ -48,12 +48,42 @@ maintained:
   - the sign of the symbolic term in the index theorem is wrong;
   - there are several smaller misprints.
 
+- `Lecture draft/Hochschild homology of pseudodifferential symbols (Brylinski-Getzler notes).tex`:
+  expository notes on Brylinski--Getzler, *The homology of algebras of
+  pseudo-differential symbols and the non-commutative residue* (K-Theory 1,
+  1987), which computes HH and HC of the symbol algebra Ψ^Z(M)/Ψ^{-∞}(M) as
+  the cohomology of S*M × S¹. The notes cover:
+  - background written for readers of Loya's notes: Hochschild and cyclic
+    homology from traces and the polynomial ring upward, a primer on spectral
+    sequences, Poisson geometry and the operator δ starting from
+    σ([P,Q]) = −i{p,q}, and star products starting from the composition
+    formula and the Moyal product;
+  - BG §§1–5 with the compressed proofs written out: the first differential
+    d¹ = −iδ with its constant, Brylinski's symplectic star, the commutator
+    identity for conformal Hamiltonian fields, and degeneration and convergence
+    for two chain models;
+  - the residue, with an elementary proof that every trace on the symbol
+    algebra is a multiple of it (M connected, n ≥ 2), its zeta-function
+    interpretation, and the higher residues;
+  - differential operators and the Weyl algebra (the "Poincaré lemma"), and the
+    sheaf-theoretic method, explained through Weil's proof on the circle;
+  - worked examples: the circle, tori and spheres.
+
+  Quoted inputs are listed as (G1)–(G15). Corrections are marked in the text.
+  They include the following:
+  - the "in particular" description of HH by the cohomology of M is false in
+    general (for instance for M = S²);
+  - the zeta-function constant depends on the order of the operator;
+  - a sign in the formula for δ, the normalization of d¹, the sl(2) star
+    operator, and the filtration used for cyclic homology.
+
 Compiled releases, with stable contents and figure lists, are available here:
 
 - [Heat Kernels and Index Theory](<output/pdf/Atiyah-Singer index theorem.pdf>)
 - [Notes on the b-Calculus and the APS Index Theorem](<output/pdf/Lecture draft.pdf>)
 - [Hochschild Homology of the b-Calculus](<output/pdf/Hochschild homology of b-pseudodifferential operators.pdf>)
 - [Hochschild Homology of the Cusp Calculus (Melrose–Nistor notes)](<output/pdf/Hochschild homology of cusp pseudodifferential operators (Melrose-Nistor notes).pdf>)
+- [Expository Notes on Brylinski–Getzler](<output/pdf/Hochschild homology of pseudodifferential symbols (Brylinski-Getzler notes).pdf>)
 
 ## Origin
 
@@ -110,4 +140,4 @@ make
 
 The build uses `latexmk` with pdfLaTeX until references, tables of contents,
 and lists of figures stabilize. Intermediate files go to `tmp/pdfs/`; the
-three release PDFs in `output/pdf/` are intentionally tracked.
+release PDFs in `output/pdf/` are intentionally tracked.
