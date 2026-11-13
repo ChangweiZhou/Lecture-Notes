@@ -669,7 +669,9 @@ In summary, the following remain quoted or only sketched:
 \begin{itemize}
 \item (B9), part (3) of \cite[Prop.~5]{MN};
 \item (B10), the last step of the convergence for \(\As\) and \(\Ads\)
-(Remark~\ref{ha:rem:quoted});
+(Remark~\ref{ha:rem:quoted}), and, in the same spirit, the assumption in
+the proof of Proposition~\ref{prop:Idpoint} that the corrections of the
+\(x\)-adic filtration of \(\Id\) can be kept in a fixed pole stage;
 \item the uniform calculus on cylinders (Background
 fact~\ref{cc:bg:uniform});
 \item the nuclear-space facts (F1)--(F3) of Appendix~\ref{ha:sec};
@@ -719,11 +721,12 @@ definitions \cite[(90), (91)]{MN} the index theorem reads
 \item \emph{The eta term.} The last line of the proof of
 \cite[Prop.~17]{MN} should read \(\etab(A)=2\bTr(A_0^{-1}[t,A_0])\).
 The proposition needs \(Q\) to be asymptotically translation invariant
-(Correction~\ref{corr:eta}).
+(Correction~\ref{corr:eta}), and by item~\ref{item:Prop8reg} its
+conclusion becomes \(\etab(A)=\eta(A_0)+\delta_Q(A)\).
 \item \emph{The residue on the suspended algebra.} The identification of the
 residue with \(\bTr([t,B])\) in \cite[Prop.~8]{MN} fails, for instance when
-\(\partial X\) is a point; the same parity argument applies to
-\(Q_0^{-n}\) on any boundary (Remark~\ref{rem:Prop8}). We use the residue
+\(\partial X\) is a point (Remark~\ref{rem:Prop8}); a parity argument
+of the same kind applies to \(Q_0^{-n}\) on any boundary. We use the residue
 itself.
 \item\label{item:Prop8reg} \emph{The regular value in MN Proposition~8.}
 \cite[Prop.~8]{MN} also asserts that the regular value at \(s=0\) of
@@ -805,7 +808,10 @@ homology of \(\As\) and \(\Ads\), or on the boundary map of
 rests on them. (The index formula uses the trace computations of
 Section~\ref{sec:AdA}, not the homology groups.) Each row also uses the rows
 above it, as in Figure~\ref{fig:roadmap}. Items 3 (not used elsewhere), 10
-(the foundations behind (B1)) and 12 (misprints) are not shown.}
+(the foundations behind (B1)) and 12 (misprints) are not shown. The row
+for \(\Id\), and through it the rows that use \(\HH(\Id)\), also rests on
+the pole-stage assumption in the proof of Proposition~\ref{prop:Idpoint},
+which is of the same kind as (B10).}
 \label{fig:deps}
 \end{figure}
 
@@ -2968,8 +2974,9 @@ integral for \(\operatorname{Re}s\) large) is meromorphic, and
 where \(\widetilde\Tr(B)=(2\pi)^{-n}\int b_{-n}\) is the Wodzicki residue of
 \(B\) regarded as an operator on \(\R\times H\) (\(n=\dim H+1\)), and
 \(\gamma_B(s)\) is the sum over \(\tau\to\pm\infty\) of the coefficients of
-\(|\tau|^{-n-s}\) (after integration over the fibres of \(T^*H\)) in the
-symbol of \(BQ_0^{-s}\). The correction \(\gamma_B'(0)\) is local, and it
+\(|\tau|^{-1-s}\) in the fibre integral over \(T^*H\) of the symbol of
+\(BQ_0^{-s}\) (before integration the relevant term has homogeneity
+\(-n-s\)). The correction \(\gamma_B'(0)\) is local, and it
 is not zero in general.
 \end{proposition}
 
@@ -3871,8 +3878,13 @@ functional of the boundary symbols of \(A\) and \(Q\). It vanishes:
 \item when the terms of homogeneity \(-n-s\) of these two symbols are odd
 in \(\tau\); in particular when \(\partial X\) is a point and \(Q_0^{-s}\)
 is even in \(\tau\) (Example~\ref{ex:interval-index});
-\item when \(n\) is odd and \(A\) is a differential operator
-(Remark~\ref{tr:rem:parity}, a sketch);
+\item when \(n\) is odd, \(A\) is a differential operator, and \(Q_0^{-s}\)
+has parity type \(+1\), e.g.\ complex powers of a differential operator or
+the family of Proposition~\ref{tr:prop:Q} (Remark~\ref{tr:rem:parity}, a
+sketch). The parity hypothesis on \(Q\) is needed: for \(n=1\),
+\(A=\partial_t+a\) and \(Q\) with indicial symbol
+\(\langle\tau\rangle+\tau/2\) one finds \(\delta_Q=i\log3/\pi\neq0\) at
+that end;
 \item when \(A_0=\sigma(i\tau+B_\partial)\) is in APS normal form and
 \(Q_0^{-s}=(D_t^2+B_\partial^2)^{-s/2}\) (Proposition~\ref{tr:prop:etabar}(ii));
 \item when \(A\) is a Dirac operator compatible with a Clifford structure
@@ -4001,8 +4013,9 @@ in the interior and vanishes near the boundary \cite[p.~33]{MN}.
 \begin{theorem}[Reduced index theorem, MN (99)--(100), corrected]
 \label{thm:reduced}
 Let \(A\in\Psic^m(X;E)\) be fully elliptic and translation invariant near
-the boundary, with normal indicial family \(A_0\). Let \(Q\) be positive,
-translation invariant near the boundary and commuting with \(A\) there.
+the boundary, with normal indicial family \(A_0\). Let \(Q=(A^*A+1)^{1/2m}\); it is positive,
+translation invariant near the boundary and commutes with \(A\) there.
+(The proof uses Lemma~\ref{lem:betaQ}, which is specific to this \(Q\).)
 Then
 \begin{gather*}
  \Ind(A)=\AS(A)-\tfrac12\bigl(\eta(A_0)+\delta_Q(A)\bigr),\\
