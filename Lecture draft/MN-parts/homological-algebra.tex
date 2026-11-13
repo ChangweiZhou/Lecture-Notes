@@ -6,8 +6,8 @@
 \providecommand{\Om}{\Omega}
 \providecommand{\dOm}{\dot\Omega}
 
-This appendix proves the homological background facts (B4), (B5) and (B6)
-of Section~\ref{subsec:background}, and it analyses the convergence of the
+This appendix proves the homological background facts (B4), (B5), (B6)
+and (B9) of Section~\ref{subsec:background}, and it analyses the convergence of the
 order spectral sequence, which Remark~\ref{rem:poles} only summarises. The
 arguments are adapted from Wodzicki \cite{Wodzicki}, from
 \cite[Ch.~10]{MelroseMicro} and from the companion notes \cite{HHb}; we
@@ -31,8 +31,16 @@ closed symbol algebra and for \(\Is\) (Theorem~\ref{ha:thm:conv}). For
 \(\As\) and \(\Ads\) the b-calculus argument of \cite{HHb} does
 \emph{not} carry over, because of the cusp twist
 (Example~\ref{ha:ex:obstruction}). We prove what survives
-(Proposition~\ref{ha:prop:laurent}). The remaining step is quoted from
-\cite[p.~12]{MN}.
+(Proposition~\ref{ha:prop:laurent}), we show that convergence for \(\As\)
+and convergence for \(\Ads\) are equivalent
+(Proposition~\ref{ha:prop:equiv}), and we prove both for \(n=1\) by the
+\(x\)-adic filtration (Proposition~\ref{ha:prop:xadic},
+Corollary~\ref{ha:cor:n1}). For \(n\ge2\) the remaining step is quoted
+from \cite[p.~12]{MN}. The \(x\)-adic spectral sequence of \(\Id\)
+converges (Proposition~\ref{ha:prop:Idconv}).
+\item The boundary connecting map of \cite[Prop.~5(3)]{MN}, item (B9), is
+proved by a leading-symbol argument with a linear lift
+(Lemma~\ref{ha:lem:connlead}, Theorem~\ref{ha:thm:bdry}).
 \end{itemize}
 
 \subsection{Chains and three facts about nuclear spaces}\label{ha:subsec:facts}
@@ -1067,6 +1075,14 @@ reaches the leading coefficient when \(L\ne0\). That is the invertibility
 of \(\mathcal L_{x\partial_x}=-L\) on the leading coefficient used in
 \cite{HHb}. In the cusp case its replacement \(\mathcal L_{x^2\partial_x}\)
 raises the power of \(x\), so it is nilpotent on the leading coefficient.
+
+This obstructs the \emph{method} (St), not convergence itself. For
+\(n=1\), Proposition~\ref{ha:prop:xadic} below proves that \(\Theta\) is an
+isomorphism. There the algebra is graded by the power of \(x\) plus the
+order, each correction step leaves a remainder whose lowest power of
+\(x\) is strictly higher than before, and so a cycle that starts one pole
+level inside a stage never produces a term at the lowest power
+\(x^{-L}\), which is where (St) fails.
 \end{example}
 
 The same computation in general dimension shows that \(\delta\) of a stage
@@ -1129,18 +1145,574 @@ is complete, and its graded pieces and \(E^2\) agree with those of
 Proposition~\ref{ha:prop:algconv}, compatibly with \(\Theta\).
 \end{proof}
 
+
 \begin{remark}[What remains quoted]\label{ha:rem:quoted}
 Proposition~\ref{ha:prop:laurent} reduces the convergence for \(\As\) and
 \(\Ads\) to one statement. Corrections whose poles grow by up to two per
 order (part (3)) must be replaceable by corrections with a uniform pole
 bound. Equivalently, there are no phantom classes
 \(\bigcap_pF_p\HH_k\ne0\), and the towers in (3) can be completed in
-\(C(\mathfrak B,\fA)\). MN assert this (``as in the boundaryless case'',
-\cite[p.~12]{MN}). We have not proved it. The fixed-stage argument of
-\cite{HHb} cannot prove it, by Example~\ref{ha:ex:obstruction}. In these
-notes Propositions~\ref{prop:As} and~\ref{prop:Ads}, and everything that
-depends on them, therefore rest on this quoted step. By contrast,
-Theorem~\ref{ha:thm:conv} establishes convergence for \(\Is\) and for the
-closed case without it. This quoted step is item (B10) of
-Section~\ref{subsec:background}.
+\(C(\mathfrak B,\fA)\). By Proposition~\ref{ha:prop:equiv} below it is
+enough to prove this for one of the two algebras, and for \(n=1\) it is
+proved (Proposition~\ref{ha:prop:xadic} and Corollary~\ref{ha:cor:n1}).
+For \(n\ge2\), MN assert it (``as in the boundaryless case'',
+\cite[p.~12]{MN}), and we have not proved it. Three routes fail: the
+fixed-stage argument of \cite{HHb} (Example~\ref{ha:ex:obstruction}), the
+\(x\)-adic filtration, whose \(E^1\) term is not known
+(Remark~\ref{ha:rem:xadicfail}), and an import from Benameur--Nistor
+\cite{BN} (Remark~\ref{ha:rem:BN}). In these notes, for \(n\ge2\),
+Propositions~\ref{prop:As} and~\ref{prop:Ads}, and everything that depends
+on them, therefore rest on this quoted step. It is item (B10) of
+Section~\ref{subsec:background}. By contrast, Theorem~\ref{ha:thm:conv}
+establishes convergence for \(\Is\) and for the closed case without it,
+and the boundary connecting map (B9) is proved without it
+(Theorem~\ref{ha:thm:bdry}).
+\end{remark}
+
+\subsection{The boundary connecting map (B9)}\label{ha:subsec:B9}
+
+MN compute the connecting map of \(0\to\Is\to\As\to\Ads\to0\) with a
+multiplicative splitting \(\Ads\to\As\), which we could not construct
+(Remark~\ref{rem:s0}). The leading part of a connecting map only needs a
+\emph{linear} lift, chosen so that its top component is a \(b_0\)-cycle.
+The following lemma is stated for complexes of the kind considered in
+Proposition~\ref{ha:prop:algconv}; it uses no completeness.
+
+\begin{lemma}[Leading part of a connecting map]\label{ha:lem:connlead}
+Let \(0\to K\xrightarrow{\iota}C\xrightarrow{\pi}C''\to0\) be chain maps
+between complexes of series as in Proposition~\ref{ha:prop:algconv}, with
+\(b=\sum_{l\ge0}b_l\) in each. Suppose that \(\iota\) and \(\pi\) map
+\(C_{p,k}\)-components to \(C_{p,k}\)-components, that
+\(0\to K_{p,k}\to C_{p,k}\to C''_{p,k}\to0\) is exact for all \(p,k\), that
+\(\pi\) maps \(F_pC_k\) onto \(F_pC''_k\) for every \(p\), and that
+\(\pi_*:E^1_{p,k}(C)\to E^1_{p,k}(C'')\) is onto for all \(p,k\).
+\begin{enumerate}
+\item The sequence \(0\to E^1(K)\to E^1(C)\to E^1(C'')\to0\) is exact.
+It is a short exact sequence of complexes for \(d^1\); let
+\(\partial^1:E^2_{p,k}(C'')\to E^2_{p-1,k-1}(K)\) be its connecting map.
+\item Let \(c\in F_pC''_k\) be a cycle. There is \(\tilde c\in F_pC_k\) with
+\(\pi\tilde c=c\) and \(b_0\tilde c_p=0\). For every such \(\tilde c\),
+the chain \(b\tilde c\) is a cycle of \(K\) lying in \(F_{p-1}K_{k-1}\),
+its component \((b\tilde c)_{p-1}\) is a \(b_0\)-cycle, and its class in
+\(E^2_{p-1,k-1}(K)\) is \(\partial^1\) of the class of \(c_p\) in
+\(E^2_{p,k}(C'')\).
+\item Suppose moreover that \(E^2(K)\) and \(E^2(C'')\) vanish off the
+line \(p=k-n\), and let \(\Theta_K\), \(\Theta_{C''}\) be the maps of
+Proposition~\ref{ha:prop:algconv}(1). Then, with \(\partial\) the
+connecting map of the long exact homology sequence,
+\[
+ \Theta_K\circ\partial=\partial^1\circ\Theta_{C''}:\ H_k(C'')\to
+ E^2_{k-1-n,k-1}(K).
+\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) For fixed \(p\) the long exact sequence of
+\(0\to(K_{p,\bullet},b_0)\to(C_{p,\bullet},b_0)\to(C''_{p,\bullet},b_0)\to0\)
+has zero connecting maps, because \(\pi_*\) is onto in every degree. The
+maps commute with \(d^1\), since \(\iota\) and \(\pi\) commute with \(b\)
+and preserve components, hence commute with each \(b_l\).
+
+(2) Since \(c\) is a cycle, \(b_0c_p=0\). Choose a \(b_0\)-cycle \(z\in
+C_{p,k}\) with \(\pi_*[z]=[c_p]\) in \(E^1(C'')\). Then \(c_p-\pi z=b_0w''\)
+with \(w''\in C''_{p,k+1}\). Lift \(w''\) to \(w\in C_{p,k+1}\) and put
+\(\tilde c_p=z+b_0w\). Then \(b_0\tilde c_p=0\) and \(\pi\tilde c_p=c_p\).
+Lift \(c-c_p\in F_{p-1}C''_k\) to \(t\in F_{p-1}C_k\), and put
+\(\tilde c=\tilde c_p+t\).
+
+Now let \(\tilde c\) be any lift with \(b_0\tilde c_p=0\). Since
+\(\pi b\tilde c=bc=0\), the chain \(b\tilde c\) lies in \(K\), and it is a
+cycle. Its component of order \(p\) is \(b_0\tilde c_p=0\), so \(b\tilde
+c\in F_{p-1}\), and its component of order \(p-1\) is
+\(e=b_1\tilde c_p+b_0\tilde c_{p-1}\). The order-\((p-1)\) component of
+\(b(b\tilde c)=0\) is \(b_0e\), so \(e\) is a \(b_0\)-cycle. In
+\(E^1(C)\), \(\iota_*[e]=[b_1\tilde c_p]=d^1[\tilde c_p]\). Here
+\([\tilde c_p]\) lifts \([c_p]\), and \([c_p]\) is a \(d^1\)-cycle because
+\(b_1c_p=-b_0c_{p-1}\). By the definition of the connecting map (the snake
+lemma), \([e]\) represents \(\partial^1\) of the class of \(c_p\).
+
+(3) By Proposition~\ref{ha:prop:algconv}(1) a class of \(H_k(C'')\) has a
+representative \(c\in F_{k-n}\). By the snake lemma \(\partial[c]=[b\tilde
+c]\) for any lift \(\tilde c\). Take \(\tilde c\) as in (2) with \(p=k-n\).
+Then \(b\tilde c\in F_{(k-1)-n}K_{k-1}\) represents \(\partial[c]\), and
+its leading component represents \(\partial^1[c_{k-n}]\) by (2).
+\end{proof}
+
+Nothing in the lemma is multiplicative. The lift is constructed through
+\(E^1\), by Borel's lemma in the application. The fact that the lift is
+not an algebra map affects only the components of \(b\tilde c\) of
+order \(\le p-2\), and those do not enter \(\Theta_K\).
+
+\begin{theorem}[{The boundary connecting map; \cite[Prop.~5(3)]{MN}}]
+\label{ha:thm:bdry}
+Let \(\partial:\HH_k(\Ads)\to\HH_{k-1}(\Is)\) be the connecting map of
+\(0\to\Is\to\As\to\Ads\to0\). Let \(\Theta_{\partial,\sigma}:\HH_k(\Ads)\to
+E^2_{k-n,k}(\Ads)\) be the leading-symbol map of
+Proposition~\ref{ha:prop:laurent}(1), and \(\Theta_{\Is}:
+\HH_{k-1}(\Is)\to E^2_{k-1-n,k-1}(\Is)\) the isomorphism of
+Theorem~\ref{ha:thm:conv}. Identify, through the symplectic star,
+\[
+ E^2_{k-n,k}(\Ads)\cong H^{2n-k}(Z\times\Ssig)\oplus H^{2n-k-1}(Z\times\Ssig)
+ \,d\theta_\partial,\qquad
+ E^2_{k-1-n,k-1}(\Is)\cong\Hrel^{2n-k+1}(Y\times\Ssig),
+\]
+as in Propositions~\ref{prop:Ads} and~\ref{prop:Is}. Then
+\[
+ \Theta_{\Is}\circ\partial=(-1)^k\,i\,\bigl(\delta_{\mathrm{dR}}\oplus0
+ \bigr)\circ\Theta_{\partial,\sigma},
+\]
+where \(\delta_{\mathrm{dR}}:H^{2n-k}(Z\times\Ssig)\to\Hrel^{2n-k+1}(Y
+\times\Ssig)\) is the connecting map of the pair. No convergence
+statement for \(\As\) or \(\Ads\) is used.
+\end{theorem}
+
+\begin{proof}
+\emph{The complexes.} Let \(C=C(\mathfrak B,\As)\) and \(C''=C(\mathfrak
+B_\partial,\Ads)\) be the mixed complexes, let \(\pi:C\to C''\) be the
+Taylor map, and let \(D=\ker\pi\), as in the proof of
+Theorem~\ref{ha:thm:conv}. Choose the quantization of \(\Ads\) induced by
+that of \(\As\). Then \(\pi\) takes the homogeneous component of order
+\(p\) of a chain to the homogeneous component of order \(p\) of its image,
+and \(D_{p,k}\) is the kernel on \(C_{p,k}\). The map \(\pi\) is onto on
+every stage, by (F1) and Borel's lemma, hence onto \(F_pC''_k\) and onto
+each \(C''_{p,k}\). The inclusions of \(0\to D\to C\to C''\to0\) into
+\(0\to\cK\to C(\As)\to C(\Ads)\to0\) are quasi-isomorphisms
+(Lemma~\ref{ha:lem:mixed}(b) and the five lemma), and \(C(\Is)\to\cK\) is
+one by Theorem~\ref{ha:thm:excision}. By naturality of the long exact
+sequences, \(\partial\) is the connecting map of \(0\to D\to C\to
+C''\to0\), and \(\Theta_{\Is}\) is computed in \(D\)
+(Theorem~\ref{ha:thm:conv}).
+
+\emph{The \(E^1\) and \(E^2\) terms.} By Lemma~\ref{ha:lem:stageE1} and
+the proof of Theorem~\ref{ha:thm:conv}, in the direct limit over stages
+\(\chi\) identifies \(E^1_{p,k}\) of \(D\), \(C\), \(C''\) with the flat,
+Laurent and formal Laurent homogeneous \(k\)-forms of degree \(p\) on
+\(\cT\setminus0\), and \(\pi_*\) with Taylor expansion at \(x=0\). Taylor
+expansion of forms is onto by Borel's lemma. So
+Lemma~\ref{ha:lem:connlead} applies. By Proposition~\ref{prop:d1}
+(applied to mixed chains as in the proof of Theorem~\ref{ha:thm:conv}),
+\(d^1=-i\delta\) in all three complexes. The connecting map of
+\((-i\delta)\)-complexes is \(-i\) times that of \(\delta\)-complexes, so
+\[
+ \partial^1[\mu]=-i\,\partial_\delta[\mu],\qquad
+ \partial_\delta[\mu]=[\delta\lambda],
+\]
+for any Laurent homogeneous form \(\lambda\) whose Taylor series is
+\(\mu\). The \(E^2\) terms of \(D\) and \(C''\) vanish off the line
+\(p=k-n\) (Propositions~\ref{prop:Is} and~\ref{prop:Ads}), so
+Lemma~\ref{ha:lem:connlead}(3) gives \(\Theta_{\Is}\circ\partial=
+-i\,\partial_\delta\circ\Theta_{\partial,\sigma}\).
+
+\emph{From \(\delta\) to \(d\).} The symplectic star is defined by the
+cusp symplectic form, which is smooth and non-degenerate as a cusp form.
+So it acts on flat, Laurent and formal Laurent forms, and it commutes with
+Taylor expansion. On \(k\)-forms \(\delta=(-1)^{k-1}*^{-1}d\,*\)
+(Proposition~\ref{prop:star}). If \(\mu\) is a formal Laurent \(k\)-form
+with \(\delta\mu=0\) and \(\lambda\) a Laurent lift, then \(*\lambda\) is a
+Laurent lift of \(*\mu\), and \(*\delta\lambda=(-1)^{k-1}d(*\lambda)\).
+Hence \(*\,\partial_\delta[\mu]=(-1)^{k-1}\partial_d[*\mu]\), where
+\(\partial_d\) is the connecting map of the de Rham complexes of
+homogeneous forms of degree \(0\) (the degree of \(*\mu\) for \(\mu\) on
+the critical line). Altogether, with the identifications through \(*\),
+\(\Theta_{\Is}\circ\partial=-i(-1)^{k-1}\partial_d\circ
+\Theta_{\partial,\sigma}=(-1)^ki\,\partial_d\circ\Theta_{\partial,\sigma}\).
+
+\emph{The de Rham connecting map.} Homogeneous forms of degree \(0\) are
+pulled back from \(Y\times\Ssig\) (Proposition~\ref{prop:homog}), and the
+flat, Laurent and formal versions correspond to the three complexes of
+Proposition~\ref{prop:dR} for \(M=Y\times\Ssig\), with boundary
+\(Z\times\Ssig\); this is \eqref{eq:bH}. Let \(\pi_0\) be the projection
+of the collar of \(Y\times\Ssig\) onto \(Z\times\Ssig\), and \(\chi_0\) a
+cut-off equal to \(1\) near the boundary, as in the proof of
+Proposition~\ref{prop:dR}. A class without \(d\theta_\partial=[dx/x]\) is
+represented by the formal form \(\pi_0^*\beta\), with \(\beta\) closed on
+\(Z\times\Ssig\). It has the Laurent lift \(\chi_0\pi_0^*\beta\), and
+\(d(\chi_0\pi_0^*\beta)=d\chi_0\wedge\pi_0^*\beta\) is supported in the
+interior. Its class in \(\Hrel\) is \(\delta_{\mathrm{dR}}[\beta]\), by
+the definition of the connecting map of the pair (the flat complex
+computes \(\Hrel\), Proposition~\ref{prop:dR}). A class
+\(\beta\wedge dx/x\) has the Laurent lift \(\chi_0\pi_0^*\beta\wedge
+dx/x\), which is closed because \(d\chi_0\) is a multiple of \(dx\) in
+the collar. So \(\partial_d\) vanishes on it.
+\end{proof}
+
+\begin{proposition}[The two convergence statements are equivalent]
+\label{ha:prop:equiv}
+For every \(n\ge1\) the following are equivalent:
+\begin{enumerate}
+\item \(\Theta:\HH_k(\As)\to E^2_{k-n,k}(\As)\) is an isomorphism for all
+\(k\);
+\item \(\Theta:\HH_k(\Ads)\to E^2_{k-n,k}(\Ads)\) is an isomorphism for
+all \(k\).
+\end{enumerate}
+If they hold, then Proposition~\ref{prop:boundaryLES} holds as stated,
+with the constant \((-1)^ki\) in part (3).
+\end{proposition}
+
+\begin{proof}
+Consider the ladder whose top row is the long exact sequence
+\[
+ \cdots\to\HH_k(\Is)\to\HH_k(\As)\to\HH_k(\Ads)\xrightarrow{\partial}
+ \HH_{k-1}(\Is)\to\cdots
+\]
+(Theorem~\ref{ha:thm:excision}; \(\Is\) is H-unital by
+Proposition~\ref{prop:Is}). The bottom row is the long exact sequence of
+\(d^1\)-homology of the short exact sequence of complexes
+\(0\to E^1(D)\to E^1(C)\to E^1(C'')\to0\) of
+Lemma~\ref{ha:lem:connlead}(1). Since \(d^1\) maps \((p,k)\) to
+\((p-1,k-1)\), this sequence splits into the sequences of the lines
+\(p-k=\mathrm{const}\). We keep the line \(p=k-n\):
+\[
+ \cdots\to E^2_{k-n,k}(\Is)\to E^2_{k-n,k}(\As)\to E^2_{k-n,k}(\Ads)
+ \xrightarrow{\partial^1}E^2_{k-1-n,k-1}(\Is)\to\cdots .
+\]
+It is exact. The vertical maps are the maps \(\Theta\). They are defined
+by Proposition~\ref{ha:prop:laurent}(1) for \(\As\) and \(\Ads\), and
+Theorem~\ref{ha:thm:conv} shows that \(\Theta\) is an isomorphism for
+\(\Is\). The squares with the maps induced by \(\Is\to\As\to\Ads\)
+commute: these maps preserve the order filtration and the components, so
+they take a representative in \(F_{k-n}\) to one, and its leading term to
+the leading term of the image. The square with the connecting maps
+commutes by Lemma~\ref{ha:lem:connlead}(3), applied as in the proof of
+Theorem~\ref{ha:thm:bdry}. The five lemma, applied with \(\HH_k(\As)\) or
+with \(\HH_k(\Ads)\) in the middle, gives (2)\(\Rightarrow\)(1) and
+(1)\(\Rightarrow\)(2). The last statement follows from the
+naturality just used, for parts (1) and (2) of
+Proposition~\ref{prop:boundaryLES}, and from Theorem~\ref{ha:thm:bdry}
+for part (3).
+\end{proof}
+
+\subsection{Dimension one: the \texorpdfstring{\(x\)}{x}-adic filtration}
+\label{ha:subsec:xadic}
+
+For \(n=1\) the boundary symbol algebra is commutative, and the
+\(x\)-adic filtration settles (B10). Let \(\partial X\) consist of \(N\)
+points. Then \(Z\) consists of \(2N\) points \(z\), one for each boundary
+point and each sign \(\varepsilon_z=\pm\) of \(\tau\). Put \(s=|\tau|^{-1}\).
+
+\begin{lemma}[\(\Ads\) for \(n=1\)]\label{ha:lem:n1alg}
+As a vector space, \(\Ads\) is the space of series \(\sum_{j\ge-L,\,r\ge
+-M}c_{jr}x^js^r\) with \(c_{jr}\in\C^Z\). The product is determined by
+\[
+ (x^ja)(x^kb)=\sum_{\mu\ge0}c_{k,\mu}\,x^{j+k+\mu}(D^\mu a)\,b,\qquad
+ a,b\in\C^Z\Lser{s},\qquad D=\varepsilon_z\,i\,s^2\partial_s\ \text{at }z,
+\]
+with constants \(c_{k,\mu}\) such that \(c_{k,0}=1\) and \(c_{k,1}=k\).
+In particular \(\Ads\) is graded by \(g=J+p\), where \(J\) is the power
+of \(x\) and \(p\) the order (\(x^js^r\) has \(J=j\), \(p=-r\)).
+\end{lemma}
+
+\begin{proof}
+For a point, \(\Psis^{\Z}/\Psis^{-\infty}\) is, through \(\In\), the
+algebra of classical symbols in \(\tau\) modulo \(\cS(\R)\), with the
+pointwise product \eqref{eq:Inkernel}. Its elements are pairs of formal
+Laurent series in \(s\), at \(\tau=+\infty\) and at \(\tau=-\infty\). Let
+\(D=\mathrm{ad}_t\). By Lemma~\ref{lem:twist}(1), \(D\) acts on indicial
+families by \(-i\partial_\tau\), which is \(\varepsilon_zis^2\partial_s\)
+in the variable \(s\). By Lemma~\ref{lem:twist}(2),
+\([x,a]=-x\,(Da)\,x\), that is, \(ax=xa+x(Da)x\). Iterating gives
+\(ax=\sum_{\mu\ge0}x^{\mu+1}D^\mu a\), and by induction on \(k\ge0\) an
+expansion \(ax^k=\sum_\mu c_{k,\mu}x^{k+\mu}D^\mu a\) with \(c_{k,0}=1\),
+\(c_{k,1}=k\). For \(k<0\) one starts from \(ax^{-1}=x^{-1}a-Da\), which
+is \([t,a]=Da\). Each term \(x^\mu D^\mu\) raises the power of \(x\) by
+\(\mu\) and lowers the order by \(\mu\), so \(J+p\) is additive.
+\end{proof}
+
+Use the mixed complex of Lemma~\ref{ha:lem:mixed}, with \(\mathfrak
+B_\partial=\C^Z[[s]][[x]]\) and stages \(S_{L,M}\) (coefficients in
+\(x^{-L}s^{-M}\C^Z[[s]][[x]]\)). A chain has a \emph{bidegree}
+\((J,p)\): the total power of \(x\) and the total order. By (F3),
+\(S_{L,M,k}\) is the product of its bihomogeneous components, and each
+component space is finite dimensional (the exponents in slot \(0\) are
+\(\ge-L\), \(\ge-M\), the others \(\ge0\)). By
+Lemma~\ref{ha:lem:n1alg}, \(b=\sum_{\mu\ge0}b_\mu\) with \(b_\mu\) of
+bidegree \((\mu,-\mu)\). So \(S_{L,M}=\prod_gS^g_{L,M}\), where
+\(S^g\) consists of the chains with \(J+p=g\), and on \(S^g\) the power of
+\(x\) determines the bidegree. Filter \(S^g_{L,M}\) by \(J\). Each
+\(S^g_{L,M}\) is the product of its finite-dimensional pieces of fixed
+\(J\), with \(J\) bounded below, so this filtration is complete.
+
+For forms, give \(x^as^r\,dx^{\epsilon_1}ds^{\epsilon_2}\) the bidegree
+\((a+\epsilon_1,-r-\epsilon_2)\). Let \(\Omega(J,p)\) be the span of the
+monomial forms of bidegree \((J,p)\) (on each \(z\)), and
+\(\Omega_{L,M}(J,p)\) the span of those with \(a\ge-L\), \(r\ge-M\).
+Call \((J,p)\) \emph{full} for \((L,M)\) if \(J\ge-L+1\) and \(p\le M-1\).
+Then \(\Omega_{L,M}(J,p)=\Omega(J,p)\) for full \((J,p)\).
+
+\begin{lemma}\label{ha:lem:n1E1}
+\textup{(a)} \(\chi\) identifies the \(b_0\)-homology of \(S_{L,M}\) in
+bidegree \((J,p)\) with \(\Omega^k_{L,M}(J,p)\), and \(b_1\) induces
+\(-i\delta\), where \(\delta\) is the Koszul--Brylinski differential of
+\eqref{eq:poisson} (\(n=1\)).
+
+\textup{(b)} \(\delta\) has bidegree \((1,-1)\). If \(\theta\in\Omega^k(J,p)\)
+satisfies \(\delta\theta=0\) and \((J,p)\ne(1-k,k-1)\), then
+\(\theta=\delta\zeta\) with \(\zeta\in\Omega^{k+1}(J-1,p+1)\). In bidegree
+\((1-k,k-1)\) the \(\delta\)-homology is \(H^{2-k}(Z\times\Ssig\times\Sd)\)
+(on each \(z\), the images under \(*^{-1}\) of \(1\), \(dx/x\),
+\(ds/s\), \(dx/x\wedge ds/s\)), as in Proposition~\ref{prop:Ads}.
+\end{lemma}
+
+\begin{proof}
+(a) The \(x\)-graded algebra of \(\mathfrak B_\partial\) is the commutative
+algebra \(R=\C^Z[[s]][x]\), and the graded coefficient module is \(uR\),
+\(u=x^{-L}s^{-M}\), free of rank one with equal actions. So the graded
+complex is the Hochschild complex of \(R\) shifted by \(u\), as in
+Lemma~\ref{ha:lem:stageE1}. HKR holds for \(\C^Z[[s]]\)
+(Theorem~\ref{ha:thm:variants}, formal series over the finite set \(Z\))
+and survives tensoring with \(\C[x]\) (Proposition~\ref{ha:prop:kunneth}).
+Since \(b_0\) and \(\chi\) preserve the bidegree, the identification holds
+in each bidegree. For \(d^1\): the expansion of Lemma~\ref{ha:lem:n1alg}
+has \(P_0(f,g)=fg\) and \(P_1(f,g)=x^2(\partial_xg)(Df)\) (with \(D\)
+acting on the \(s\)-variable), so \(P_1(f,g)-P_1(g,f)=-i\{f,g\}\) with
+\(\{f,g\}=\partial_\tau f\,x^2\partial_xg-x^2\partial_xf\,\partial_\tau g\).
+Proposition~\ref{prop:d1} applies, as in the proof of
+Theorem~\ref{ha:thm:conv}.
+
+(b) The Poisson bivector \(x^2\partial_\tau\wedge\partial_x\) has
+bidegree \((1,-1)\), and so does \(\delta\). The symplectic form
+\(\omega=d\tau\wedge dx/x^2=\mp ds\wedge dx/(s^2x^2)\) has bidegree
+\((-1,1)\). In dimension two \(*1=\omega\), \(*\omega=1\), and \(*\) maps
+\(dx\) and \(ds\) to constant multiples of themselves (the computation in
+the proof of Proposition~\ref{prop:Idpoint}). So \(*\) maps
+\(\Omega^k(J,p)\) onto \(\Omega^{2-k}\bigl((J,p)+(k-1)(1,-1)\bigr)\). The de
+Rham differential preserves the bidegree. On \(\Omega(J',p')\),
+\(\mathcal L_{x\partial_x}=J'\) and \(\mathcal L_{s\partial_s}=-p'\), so by
+Cartan's formula \(\iota_{x\partial_x}/J'\) (if \(J'\ne0\)) or
+\(-\iota_{s\partial_s}/p'\) (if \(p'\ne0\)) is a contracting homotopy
+that preserves the bidegree. For \((J',p')=(0,0)\) the forms \(1\),
+\(dx/x\), \(ds/s\), \(dx/x\wedge ds/s\) are closed and not exact. Now
+\(\delta=(-1)^{k-1}*^{-1}d*\) on \(k\)-forms (Proposition~\ref{prop:star}).
+If \(\delta\theta=0\) and \((J,p)+(k-1)(1,-1)\ne(0,0)\), then
+\(*\theta=d\eta\) with \(\eta\) of the same bidegree as \(*\theta\),
+and \(\zeta=(-1)^k*^{-1}\eta\) is a \((k+1)\)-form with
+\(\delta\zeta=(-1)^k*^{-1}d(*\zeta)=*^{-1}d\eta=\theta\). Its bidegree is that of \(\eta\) minus
+\(k(1,-1)\), namely \((J-1,p+1)\).
+\end{proof}
+
+\begin{proposition}[Convergence for \(n=1\)]\label{ha:prop:xadic}
+Let \(n=1\). Then \(\Theta:\HH_k(\Ads)\to E^2_{k-1,k}(\Ads)\) is an
+isomorphism for every \(k\). Thus \(\HH_k(\Ads)\cong
+H^{2-k}(Z\times\Ssig\times\Sd)\), and \(\HH_k(\Ads)=0\) for \(k\ge3\).
+\end{proposition}
+
+\begin{proof}
+\emph{Step (P\('\)).} Fix \(L,M,g\) and a cycle \(c\in S^g_{L,M,k}\) whose
+components have \(J\ge J_0\), where \((J_0-1,g-J_0+1)\) is full. Suppose
+that \(g\ne0\) or \(J_0\ne1-k\). The component \(c_{J_0}\) is a
+\(b_0\)-cycle, and \(b_1c_{J_0}+b_0c_{J_0+1}=0\). So
+\(\theta=\chi(c_{J_0})\) satisfies \(\delta\theta=0\), and by
+Lemma~\ref{ha:lem:n1E1}(b) \(\theta=-i\delta\zeta\) with \(\zeta\) of
+bidegree \((J_0-1,g-J_0+1)\). This bidegree is full, so \(\zeta\in
+\Omega_{L,M}\), and by Lemma~\ref{ha:lem:n1E1}(a) there is a
+\(b_0\)-cycle \(x'\in S^g_{L,M}\) of power \(J_0-1\) with
+\(\chi(x')=\zeta\). Then \(c_{J_0}-b_1x'\) has zero class in the stage
+\(E^1\), so it equals \(b_0y'\) with \(y'\in S^g_{L,M}\) of power \(J_0\).
+The cycle \(c-b(x'+y')\) has components with \(J\ge J_0+1\): the
+components of \(b x'\) and \(by'\) of power \(J_0-1\) and \(J_0\) are
+\(b_0x'=0\) and \(b_1x'+b_0y'=c_{J_0}\). The bidegree
+\((J_0,g-J_0)\) is again full.
+
+\emph{Off the critical part.} If \(g\ne0\), repeating (P\('\)) gives
+corrections \(x'+y'\) of increasing power of \(x\). Their sum \(e\)
+converges in the complete space \(S^g_{L,M,k+1}\), and \(c=be\), since
+each component of \(be\) involves finitely many terms. If \(g=0\), the
+same repetition brings \(c\) to a homologous cycle with components of
+power \(J\ge1-k\), i.e.\ of order \(p=-J\le k-1=k-n\), as long as
+\(J_0\le1-k\); if \(J_0>1-k\) it shows that \(c\) is a boundary.
+
+\emph{Isomorphism.} Let \([c]\in\HH_k(\Ads)\). By
+Lemma~\ref{ha:lem:mixed}(b), \(c\) can be taken in a stage \(S_{L,M}\);
+we regard it as a chain of \(S_{L+2,M+2}\). All its components then lie
+in bidegrees \((J,p)\) with \((J-1,p+1)\) full for \((L+2,M+2)\). The
+components with \(g\ne0\) are boundaries in \(S_{L+2,M+2}\), and the sum
+of their primitives over \(g\) is an element of the product
+\(S_{L+2,M+2,k+1}\). So \([c]\) is represented by a cycle \(c'\in S^0\)
+with components of order \(\le k-1\), whose leading term is the
+component of bidegree \((1-k,k-1)\); this is
+Proposition~\ref{ha:prop:laurent}(1), and \(\Theta[c]\) is the class of
+that component. If \(\Theta[c]=0\), the class \(\theta\) of that
+component is \(-i\delta\zeta\) with \(\zeta\in\Omega(-k,k)\). This
+bidegree is full, because the component lies at power \(1-k\ge J_0\ge-L\)
+and order \(k-1\le-J_0\le M\), where \(J_0\) is the lowest power of
+\(c^0\) (if \(J_0>1-k\), then \(c^0\) is already a boundary). One more step (P\('\)) followed by the off-critical repetition
+shows \(c'=be\). So \(\Theta\) is injective. For surjectivity, let
+\(\theta\in\Omega^k(1-k,k-1)\) with \(\delta\theta=0\). Choose \(L,M\) such
+that \((-k,k)\) and \((1-k,k-1)\) are full, and a \(b_0\)-cycle
+\(x'\in S^0_{L,M}\) of power \(1-k\) with \(\chi(x')=\theta\). Since
+\(\delta\theta=0\), \(b_1x'=-b_0y'\) with \(y'\) of power \(2-k\) (the
+stage \(E^1\) is \(\Omega_{L,M}\) in every bidegree). The \((k-1)\)-cycle
+\(b(x'+y')\) has components of power \(\ge3-k\), so it lies off the
+critical power \(2-k\) of \((k-1)\)-chains, and the repetition above
+writes it as \(be\) with \(e\) of power \(\ge2-k\). Then \(x'+y'-e\) is a
+cycle with \(\Theta=[\theta]\).
+
+The \(E^2\) term is that of Lemma~\ref{ha:lem:n1E1}(b), and it is the
+\(E^2\) of Proposition~\ref{prop:Ads}, because the two computations use
+the same forms and the same \(\delta\).
+\end{proof}
+
+\begin{corollary}[(B10) for \(n=1\)]\label{ha:cor:n1}
+For \(n=1\), \(\Theta\) is an isomorphism for \(\As\) and for \(\Ads\).
+Propositions~\ref{prop:As}, \ref{prop:Ads} and~\ref{prop:boundaryLES}
+hold for \(n=1\) without quoted input.
+\end{corollary}
+
+\begin{proof}
+Proposition~\ref{ha:prop:xadic} and Proposition~\ref{ha:prop:equiv}.
+\end{proof}
+
+\begin{remark}[The \(x\)-adic filtration for \(n\ge2\)]\label{ha:rem:xadicfail}
+For \(n\ge2\) the \(x\)-adic filtration of \(\Ads\) still exists. Each
+correction in the product raises the power of \(x\) by some \(\mu\ge0\)
+and lowers the order by at least \(\mu\): the twist contributes
+\((\mu,-\mu)\) as in Lemma~\ref{ha:lem:n1alg}, and the star product of
+the suspended symbols \((0,-l)\). So the steps of the proof of
+Proposition~\ref{ha:prop:xadic} still move to higher powers of \(x\) at
+bounded order, and stages with a margin would still suffice. What is
+missing is \(E^1\). The \(x\)-graded algebra is
+\(\mathcal S\otimes\C[x,x^{-1}]\) with
+\(\mathcal S=\Psis^{\Z}(\partial X)/\Psis^{-\infty}(\partial X)\) the
+suspended symbol algebra, which is not commutative for \(n\ge2\). By
+Proposition~\ref{ha:prop:kunneth}, \(E^1\) would be
+\(\HH(\mathcal S)\otimes\Omega(\C[x,x^{-1}])\), and \(\HH(\mathcal S)\) is
+not computed anywhere in these notes. Its order spectral sequence has
+\(E^1\) the homogeneous forms on \((T^*\partial X\times\R_\tau)\setminus0\)
+and \(d^1=-i\delta\) for the Poisson structure of \(T^*\partial X\), of
+which \(\tau\) is a Casimir. That Poisson structure is not symplectic, so
+Proposition~\ref{prop:star} does not apply, and we cannot show that
+\(E^2\) lies on one line or that the sequence degenerates. In the order
+filtration the same terms \((0,-l)\) destroy the grading by \(J+p\), and
+the primitives of Lemma~\ref{ha:lem:WL} lower the lowest power of \(x\),
+while the terms \((0,-l)\) carry that power down to the next order. A
+tower of corrections then has unbounded poles. Its sum lies in the
+completion \(\widehat C\) of Proposition~\ref{ha:prop:laurent}(4), not in
+\(C(\mathfrak B,\Ads)\).
+\end{remark}
+
+\subsection{The \texorpdfstring{\(x\)}{x}-adic spectral sequence of
+\texorpdfstring{\(\Id\)}{Id}}\label{ha:subsec:Id}
+
+The proof of Proposition~\ref{prop:Idpoint} assumed that the corrections
+of the \(x\)-adic filtration of \(\Id\) can be kept in a fixed pole stage.
+The margin argument of Proposition~\ref{ha:prop:xadic} proves this, once
+a complete model is available. Let \(\partial X\) be a point. Let
+\(\mathcal P\) (the algebra \(\Ad\) of a boundary point) be the algebra of series \(\sum_{j\ge-L}x^ja_j\),
+\(a_j\) classical symbols in \(\tau\) of order \(\le M\), with the
+product of Lemma~\ref{ha:lem:n1alg} and \(D=-i\partial_\tau\)
+(Lemma~\ref{lem:twist}). It is unital, contains
+\(\Id^{\mathrm{pt}}=\cS(\R_\tau)\Lser{x}\) as an ideal, and has quotient
+the algebra \(\Ads\) of Lemma~\ref{ha:lem:n1alg} (with \(Z\) two points).
+
+\begin{proposition}[Convergence for \(\Id\)]\label{ha:prop:Idconv}
+There is a complex \(D_\partial\) quasi-isomorphic to \(C(\Id^{\mathrm
+{pt}})\) whose stages are complete for the \(x\)-adic filtration, whose
+\(E^1\) is the space of forms on \(\R_\tau\times\Sd\), Schwartz in
+\(\tau\) and formal Laurent in \(x\), and whose \(d^1\) is \(-i\delta\)
+for \(\{x,\tau\}=-x^2\). The \(E^2\) term vanishes except at
+\((J,k)=(1,0)\) and \((0,1)\), and taking the component of power
+\(J=1-k\) of a suitable representative is an isomorphism
+\(\HH_k(\Id^{\mathrm{pt}})\to E^2_{J=1-k,k}\).
+\end{proposition}
+
+\begin{proof}
+\emph{The model.} Let \(\mathfrak B_d\subset\mathcal P\) be the
+pole-free elements of order \(\le0\), a subalgebra by the product formula,
+and \(\mathcal P_{L,M}=x^{-L}\{\text{order}\le M\}[[x]]\). With
+\(T=\langle\tau\rangle^{-1}\in\mathfrak B_d\), which is invertible in
+\(\mathcal P\) (elements of power \(0\) multiply pointwise), and
+\(u=x^{-L}T^{-M}\), one has \(\mathcal P_{L,M}=\mathfrak B_du=u\mathfrak
+B_d\), and \(\mathcal P_{N,N}\) has a continuous complement in
+\(\mathcal P_{N+1,N+1}\). These are the only inputs of the proof of
+Lemma~\ref{ha:lem:mixed}(b), which therefore applies: the mixed complex
+\(C(\mathfrak B_d,\mathcal P)\) computes \(\HH(\mathcal P)\).
+The full-symbol map to \(C(\mathfrak B_\partial,\Ads)\) is onto on every
+stage (Borel's lemma in \(s\) at \(\tau=\pm\infty\)). Let \(D_\partial\) be
+its kernel. \(\Id^{\mathrm{pt}}\) is H-unital (the contraction at the end
+of the proof of Proposition~\ref{prop:Idpoint}), so, exactly as in the
+proof of Theorem~\ref{ha:thm:conv}, excision and the five lemma show that
+\(D_\partial\) computes \(\HH(\Id^{\mathrm{pt}})\).
+
+\emph{Completeness and \(E^1\).} In a stage, the chains of fixed total
+power \(J\) involve finitely many powers in the individual slots, and the
+stage is the product over these, by (F3). So the \(x\)-adic filtration of
+each stage of \(D_\partial\) (a closed subspace) is complete. Classical
+symbols of order \(\le0\) are the smooth functions on the radial
+compactification \(\overline\R\), a closed interval. By
+Theorem~\ref{ha:thm:connes}, Proposition~\ref{ha:prop:kunneth} and the
+shift by \(u\) (as in Lemma~\ref{ha:lem:n1E1}(a)), the stage \(E^1\) of
+\(C(\mathfrak B_d,\mathcal P)\) in power \(J\) is \(u\) times the
+forms of power \(J\) on \(\overline\R\times\) (formal \(x\)-line). The
+full-symbol map induces Taylor expansion at the two ends of
+\(\overline\R\), which is onto (Borel), so the stage \(E^1\) of
+\(D_\partial\) is the kernel: forms that are flat at the ends, i.e.\
+Schwartz in \(\tau\). The weight \(\langle\tau\rangle^M\) in \(u\) does
+not change this space. In power \(J\ge-L+1\) all such forms of power
+\(J\) occur. By Lemma~\ref{lem:twist} and Proposition~\ref{prop:d1},
+\(d^1=-i\delta\), as in Lemma~\ref{ha:lem:n1E1}(a).
+
+\emph{\(E^2\) with primitives one power lower.} As in
+Lemma~\ref{ha:lem:n1E1}(b), \(*\) maps \(k\)-forms of power \(J\) to
+\((2-k)\)-forms of power \(J+k-1\). The de Rham complex of forms Schwartz
+in \(\tau\) and formal Laurent in \(x\) splits by the power of \(x\). In
+power \(j\ne0\) it is contracted by the homotopy of
+Lemma~\ref{lem:formaldR}, which preserves \(j\). In power \(0\) its
+cohomology is \(H^\bullet_c(\R)\otimes\{1,dx/x\}\), in degrees \(1\) and
+\(2\) (a Schwartz function with integral zero is the derivative of a
+Schwartz function). Hence a \(\delta\)-closed \(k\)-form \(\theta\) of
+power \(J\) with \((J,k)\ne(1,0),(0,1)\) is \(\delta\zeta\) with \(\zeta\)
+of power \(J-1\), and the two exceptional groups are the ones computed in
+Proposition~\ref{prop:Idpoint}.
+
+\emph{Convergence.} Now repeat the proof of
+Proposition~\ref{ha:prop:xadic} with the power of \(x\) alone (there is no
+grading by the order, and none is needed): start from a cycle in a stage
+\(S_{L,M}\), regard it in the stage with \(L+2\), and perform the steps
+(P\('\)). Every primitive has power at least \(-L-1\ge-(L+2)+1\), so it
+lies in the stage, every remainder has a strictly higher lowest power,
+and the series of corrections converges by completeness. The critical
+powers are \(J=1-k\).
+\end{proof}
+
+\begin{remark}[Benameur--Nistor]\label{ha:rem:BN}
+Benameur and Nistor \cite{BN} compute the Hochschild homology of algebras
+\(\mathcal A_L(G)=\mathcal O(M)\bigl(\Psi^\infty(G)/\Psi^{-\infty}(G)
+\bigr)\) of Laurent complete symbols on a groupoid \(G\) with units \(M\),
+under their assumptions (13) and (14), and prove that the spectral
+sequence degenerates at \(E^2\) and converges \cite[Thm.~6, Lemma~8]{BN}.
+For the cusp groupoid of \(X\) (base \(B\) a point) the assumptions hold:
+(13) is automatic, and (14) holds because, once \(x^{-1}\) is adjoined,
+the \(\mathcal O(X)\)-span of \(x^2\partial_x,\partial_y\) is that of
+\(\partial_x,\partial_y\). We cannot use this result to close (B10), for three reasons.
+\begin{enumerate}
+\item \emph{A different algebra.} By \cite[Thm.~4]{BN}, \(\mathcal
+A_L(G)\) does not depend on \(G\) under (13)--(14), so the cusp and the b
+groupoids of \(X\) would give the same algebra. For the algebras of these
+notes this is false. The b-symbol \(|(\xi_b,\eta)|\) is
+\(x^{-1}(\tau^2+x^2|\eta|^2)^{1/2}\) in cusp variables (\(\tau=x\xi_b\)), and
+no \(x^L\) times it is smooth on \(\cT\setminus0\) at \(x=\tau=0\), so it
+is not the principal symbol of an element of \(\As\). Hence either the
+algebra \(\mathcal A_L\) of \cite{BN} is larger than \(\As\) (a
+completion in which cusp and b-symbols are identified), or \cite[Thm.~4]{BN} does not apply to the cusp
+groupoid. In either case a comparison with \(\As\) would still be
+needed, and that comparison is the content of (B10).
+\item \emph{The base case is quoted.} For \(B\) a point, the case at
+hand, \cite{BN} do not give a proof but refer to an earlier paper for
+the \(E^2\) term and for \(\HH(\mathcal A_L(F))\) \cite[Lemma~5,
+Lemma~7]{BN}.
+\item \emph{Completeness.} The chains of \cite[(8)]{BN} are
+\(\varinjlim_n(F^n_{n,n})^{\widehat\otimes(q+1)}\), stages in which the
+pole bound and the order bound grow together, as in
+Section~\ref{subsec:chains}. The proof of \cite[Thm.~1]{BN} uses
+\(H(A)=\varprojlim_pH(A)/F_pH(A)\) for this inductive limit, and the
+inductive limit is not complete (the example after
+Proposition~\ref{ha:prop:algconv}). The complete subcomplexes that we
+know, the stages of the mixed complex, have the stray \(E^2\) classes of
+Example~\ref{ha:ex:obstruction}, so the vanishing hypothesis of
+\cite[Thm.~1]{BN} cannot be checked on them.
+\end{enumerate}
+So (B10) for \(n\ge2\) stays quoted. \cite{BN} assert the corresponding
+statement for their completed algebra, as \cite[p.~12]{MN} does for
+\(\As\).
 \end{remark}
