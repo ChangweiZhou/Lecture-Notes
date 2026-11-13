@@ -127,8 +127,19 @@ are these. The homology statements in \cite[(16)]{MN} tacitly assume that
 components the boundary map in degree two has rank \(N-1\), not \(0\). The
 signs of the symbolic terms in the index theorem \cite[(93)]{MN} are
 inconsistent with the paper's own formula \cite[(87)]{MN} and with the
-closed case \cite[(3), (5)]{MN}. We verify the corrected formula on
-explicit examples.
+closed case \cite[(3), (5)]{MN}. The regular value claimed in
+\cite[Prop.~8]{MN} is wrong in general, and as a consequence the eta term of
+the index formula carries a local correction \(\delta_Q\), which vanishes in
+the cases we treat. We verify the corrected formula on explicit examples.
+Three appendices prove most of the background that \cite{MN} quote: the
+construction of the cusp calculus and its Fredholm theory
+(Appendix~\ref{cc:sec:cusp}); Wodzicki excision, Connes' theorem, the
+K\"unneth and Morita statements and the convergence of the spectral
+sequences (Appendix~\ref{ha:sec}); and the holomorphic families, residue
+traces and the suspended eta invariant (Appendix~\ref{tr:sec}).
+Section~\ref{subsec:background} lists what is still quoted. The main gap
+is the convergence of the order spectral sequences for the Laurent symbol
+algebras, where the argument used for the b-calculus fails.
 \end{abstract}
 
 \section{Overview and roadmap}\label{sec:overview}
@@ -204,7 +215,7 @@ The two quotient maps out of \(\cA\) are the \emph{full symbol}
 in \(x\), and the \emph{indicial map} \(\In\), which records the Taylor
 series at \(\partial X\) of the kernel at the cusp front face. After
 choices (a quantization, a boundary defining function and a normal
-fibration) there are isomorphisms \cite[(13)--(15)]{MN}
+fibration) there are isomorphisms of vector spaces \cite[(13)--(15)]{MN}
 \begin{equation}\label{eq:structure}
 \begin{gathered}
  \Is\cong\dCI(\Y)\Lser{q^{-1}},\qquad \As\cong x^{-\Z}\CI(\Y)\Lser{q^{-1}},\\
@@ -216,11 +227,15 @@ fibration) there are isomorphisms \cite[(13)--(15)]{MN}
 Here \(q=\sigma_1(Q)\) is the symbol of a positive elliptic \(Q\in
 \Psic^1(X)\), and \(\Lser{q^{-1}}\) denotes Laurent series in \(q^{-1}\), with powers
 of \(q\) bounded above. Likewise \(\Lser{x}\) denotes Laurent series in \(x\),
-with powers of \(x\) bounded below. (MN write these as \([q]]\) and
+with powers of \(x\) bounded below; in \(\Psis^{\Z}(\partial X)\Lser{x}\)
+the coefficients are moreover required to have bounded order (see
+\eqref{eq:taylor}). (MN write these as \([q]]\) and
 \([[x]\); we use the standard notation for formal Laurent series.)
 Figure~\ref{fig:lattice} places the two filtrations and their residual
-ideals side by side. The
-products are star products. In the
+ideals side by side. The isomorphisms \eqref{eq:structure} are linear
+(Propositions~\ref{cc:prop:quant} and~\ref{cc:prop:taylor}); the products
+on the right-hand sides are the products of \(\cA\) and its quotients
+transported through them, that is, star products. In the
 indicial algebras the Laurent variable does not commute with the suspended
 operators:
 \begin{equation}\label{eq:twist}
@@ -325,12 +340,17 @@ manifolds \(Z\times\Ssig\) and \(Z\times\Ssig\times\Sd\). For example
  \HH_k(\As)\cong H^{2n-k}(Y\times\Ssig)\oplus H^{2n-k-1}(Z\times\Ssig).
 \]
 The precise sources of the hypotheses are discussed in
-Corrections~\ref{corr:components} and~\ref{corr:n1}. The proof of
+Corrections~\ref{corr:components} and~\ref{corr:n1}. The proof rests on two
+quoted inputs, the boundary connecting map (B9) and the last step of the
+convergence for \(\As\) and \(\Ads\) (B10); everything else it uses is
+proved in the appendices (Section~\ref{subsec:background}). The proof of
 Theorem~\ref{thm:main} occupies Sections~\ref{sec:functions}--\ref{sec:AdA}.
 
 \subsection{The index formula}\label{subsec:indexintro}
 A matrix \(A\) of elements of \(x^{-\Z}\Psic^{\Z}(X)\) is \emph{fully
-elliptic} if its image in (a matrix algebra over) \(\cA\) is invertible.
+elliptic} if its image in (a matrix algebra over) \(\cA\) is invertible,
+with the orders matched: for \(A\in x^{-p}\Psic^m\) the inverse is the
+class of an element of \(x^p\Psic^{-m}\) (Theorem~\ref{cc:thm:parametrix}).
 For an operator of order \(m\) this means two things: \(A\) is elliptic as
 a cusp operator, and its indicial family \(\In(A,\tau)\) is invertible for
 every real \(\tau\). Such an operator is Fredholm on \(\dCI(X)\), and
@@ -361,16 +381,22 @@ the pseudodifferential APS formula (Theorem~\ref{thm:reduced}):
 \begin{equation}\label{eq:reducedintro}
  \Ind(A)=\AS(A)-\tfrac12\etab(A),\qquad
  \AS(A)=\TrR\bigl(A[\lQ,A^{-1}]\bigr),\qquad
- \etab(A)=2\,\bTr\bigl(A_0^{-1}[t,A_0]\bigr).
+ \etab(A)=\eta(A_0)+\delta_Q(A).
 \end{equation}
-Here \(A_0=\In(A)\), \(t=1/x\) is the suspension variable, \(\bTr\) is
+Here \(A_0=\In(A)\), \(t=1/x\) is the suspension variable,
+\(\eta(A_0)=2\,\bTr\bigl(A_0^{-1}[t,A_0]\bigr)\), \(\bTr\) is
 Melrose's regularized trace on the suspended algebra, and in terms of the
 indicial variable
 \[
- \etab(A)=\frac1{\pi i}\,\overline{\int_{\R}}\Tr\Bigl(A_0(\tau)^{-1}
+ \eta(A_0)=\frac1{\pi i}\,\overline{\int_{\R}}\Tr\Bigl(A_0(\tau)^{-1}
  \frac{dA_0(\tau)}{d\tau}\Bigr)\,d\tau .
 \]
-For a Dirac operator in APS normal form this is the Atiyah--Patodi--Singer
+The term \(\delta_Q(A)\) is a local functional of the boundary symbols of
+\(A\) and \(Q\). It comes from the corrected form of \cite[Prop.~8]{MN}
+(item~\ref{item:Prop8reg} of Section~\ref{subsec:errata}), and it vanishes
+in the cases treated in Section~\ref{sec:examples}
+(Proposition~\ref{prop:eta}). For a Dirac operator in APS normal form
+\(\eta(A_0)\) is the Atiyah--Patodi--Singer
 eta invariant of the boundary operator (Corollary~\ref{cor:Dirac}). In MN,
 \cite[(22)--(24)]{MN} and \cite[(100)]{MN}, the Atiyah--Singer term is
 written \(\TrR(A^{-1}[\lQ,A])\), which is \(-\AS(A)\). The sign is wrong;
@@ -379,8 +405,9 @@ Section~\ref{sec:examples}.
 
 \subsection{Organization and how to read these notes}
 Section~\ref{sec:conventions} fixes conventions and gives the dictionary to
-MN's notation. It also lists the background facts that we quote, and it
-collects the corrections. Section~\ref{sec:closed} treats the closed case
+MN's notation. It also lists the background facts, with the appendix
+results that prove them and what remains quoted, and it collects the
+corrections. Section~\ref{sec:closed} treats the closed case
 (Brylinski--Getzler, Wodzicki), which is the template for everything else.
 Section~\ref{sec:cusp} introduces the cusp calculus, starting from the
 half-line. Section~\ref{sec:hhtools} assembles the homological toolkit.
@@ -390,7 +417,11 @@ follow \cite[\S\S9--12]{MN} and prove the index formula.
 Section~\ref{sec:examples} contains worked examples.
 Section~\ref{sec:other} summarizes \cite[\S\S13--15]{MN}.
 Section~\ref{sec:comparison} compares the cusp and b-calculi and cites the
-companion notes \cite{HHb}.
+companion notes \cite{HHb}. Appendices~\ref{cc:sec:cusp}--\ref{tr:sec}
+prove the background facts (B1)--(B8) of Section~\ref{subsec:background},
+apart from the inputs listed there as quoted. The main text can be read
+without them: each step that uses a background fact names the appendix
+result that proves it.
 
 Figure~\ref{fig:roadmap} shows the logical dependencies.
 
@@ -481,9 +512,12 @@ the b-indicial variable \(\lambda\) of \cite{Notes,HHb}}. In the b-calculus
 \(\lambda\) may be complex. In the cusp calculus only real \(\tau\) occurs.
 
 \subsection{Densities and traces}\label{subsec:traces}
-Kernels are taken with respect to a cusp density, equal to
-\(x^{-2}dx\,\nu_\partial=dt\,\nu_\partial\) near the boundary, where
-\(\nu_\partial\) is a smooth positive density on \(\partial X\). We use
+Kernels are taken with respect to a cusp density \(\nu_c\) in the right
+variable, equal to \(x^{-2}dx\,\nu_\partial=dt\,\nu_\partial\) near the
+boundary, where \(\nu_\partial\) is a smooth positive density on
+\(\partial X\). This is the convention of Appendix~\ref{cc:sec:cusp}; MN
+normalize kernels as cusp half-densities \cite[(118)]{MN}, which gives
+the same operator spaces (Section~\ref{subsec:double}). We use
 the following functionals; complex parameters are written \(s\) (for
 powers of \(Q\)) and \(z\) (for powers of \(x\)).
 \begin{center}
@@ -520,53 +554,139 @@ and on cochains \(i_D\varphi=\varphi\circ i_D\). For a \(0\)-cochain
  (i_D\varphi)(A,B)=\varphi\bigl(AD(B)\bigr).
 \]
 
-\subsection{Background facts quoted}\label{subsec:background}
-We do not reprove the analytic foundations of the cusp calculus or
-Wodzicki's excision theorem. Every step that uses one of the following
-facts says so.
+\subsection{Background facts: where they are proved}\label{subsec:background}
+The paper \cite{MN} quotes the analytic foundations of the cusp calculus
+and the homological tools. Appendices~\ref{cc:sec:cusp}--\ref{tr:sec}
+prove most of them. For each item we state the fact as it is used, say
+which appendix result proves it, and record what remains quoted. Every
+step in the main text that uses one of these facts says so.
 \begin{enumerate}
-\item[(B1)] \emph{Cusp calculus.} The cusp operators form a filtered
-algebra. It has the symbol sequence \cite[(11)]{MN}, the indicial
-sequence \cite[(12)]{MN}, a global quantization map \cite[Prop.~24]{MN},
-and the Taylor series isomorphism at the front face
-\cite[Prop.~25]{MN}. Conjugation by \(x^z\) preserves orders. References:
-\cite[App.~A]{MN}, \cite{MazzeoMelrose,MelroseFibrations}.
+\item[(B1)] \emph{Cusp calculus.} The cusp operators form a doubly filtered
+\(*\)-algebra, and conjugation by \(x^z\) preserves both filtrations. There
+are the symbol sequence \cite[(11)]{MN}, the indicial sequence
+\cite[(12)]{MN}, a global quantization map \cite[Prop.~24]{MN}, which
+gives the \emph{linear} isomorphisms \cite[(13)]{MN}, and the Taylor series
+isomorphism at the front face \cite[Prop.~25]{MN}, which is an algebra
+isomorphism for the twisted product. \emph{Proved}:
+Theorem~\ref{cc:thm:comp}, Propositions~\ref{cc:prop:symbol},
+\ref{cc:prop:indicial}, \ref{cc:prop:quant}, \ref{cc:prop:taylor},
+\ref{cc:prop:conj}; agreement with \cite[Def.~2]{MN} is
+Proposition~\ref{cc:prop:MNdef}, and the lift of b-operators
+\cite[Prop.~26]{MN} is Proposition~\ref{cc:prop:transcendental}.
+\emph{Quoted}: the standard uniform pseudodifferential calculus on the
+cylinder \(\R\times\partial X\) (Background fact~\ref{cc:bg:uniform}), and
+the density half of \cite[Prop.~26]{MN} (Remark~\ref{cc:rem:density}),
+which is not used.
 \item[(B2)] \emph{Fredholm theory.} A fully elliptic element of
-\(x^{-\Z}\Psic^{\Z}(X;E)\) is Fredholm on \(\dCI(X;E)\) and on the cusp
-Sobolev spaces. It has a generalized inverse in the calculus, and its
-kernel and cokernel lie in \(\dCI\) \cite[p.~4, \S12]{MN},
-\cite{MazzeoMelrose}.
-\item[(B3)] \emph{Complex powers and meromorphy.} If \(Q\in\Psic^1(X)\)
-is positive, elliptic and invertible, then \(Q^{-s}\) is an entire family
-of order \(-s\). For holomorphic families \(A(s,z)\) of fixed order, the
-function \(\Tr(A(s,z)x^zQ^{-s})\) is meromorphic, with at most simple
-poles on the lines \(s=m+n-k\) and \(z=-p+1-j\) \cite[Lemma~4, App.~B]{MN}.
+\(x^{-p}\Psic^m(X;E)\) has an inverse modulo \(\cI\) in
+\(x^p\Psic^{-m}(X;E)\). It is Fredholm on \(\dCI(X;E)\) and on the cusp
+Sobolev spaces, its kernel and cokernel lie in \(\dCI\), and it has a
+generalized inverse in the calculus \cite[p.~4, \S12]{MN}. \emph{Proved}:
+Theorems~\ref{cc:thm:parametrix} and~\ref{cc:thm:fredholm}.
+\item[(B3)] \emph{Holomorphic families and meromorphy.} \cite[Lemma~4,
+App.~B]{MN} use the complex powers \(Q^{-s}\) of a positive elliptic
+\(Q\in\Psic^1(X)\), and the meromorphy of \(\Tr(A(s,z)x^zQ^{-s})\), with at
+most simple poles on the lines \(s=m+n-k\) and \(z=-p+1-j\). \emph{Proved}
+in the form (B3\('\)) of Appendix~\ref{tr:sec}: any admissible family
+\(Q(s)\) of order \(-s\) with \(Q(0)=\mathrm{Id}\) may replace \(Q^{-s}\)
+(Proposition~\ref{tr:prop:Q} constructs one explicitly);
+Theorem~\ref{tr:thm:mero} proves the two-variable meromorphy and identifies
+the residues, and Proposition~\ref{tr:prop:transfer} shows which results
+of Sections~\ref{sec:residues}--\ref{sec:index} hold for such families. In
+the main text \(Q^{-s}\) may be read as any admissible family, with the
+single change noted after Proposition~\ref{prop:IF}. \emph{Quoted
+(sketched)}: the cusp calculus with holomorphic parameters
+(Lemmas~\ref{tr:lem:holcalc}(1) and~\ref{tr:lem:cuspcalc}).
 \item[(B4)] \emph{Wodzicki excision.} A short exact sequence of
 topological algebras whose kernel is topologically H-unital gives a long
 exact sequence in continuous Hochschild homology \cite{Wodzicki}.
+\emph{Proved}: Theorem~\ref{ha:thm:excision}, with
+Lemma~\ref{ha:lem:exact} for the exactness of the chain spaces.
+\emph{Quoted}: the facts (F1)--(F3) about nuclear Fr\'echet spaces
+\cite{Treves}.
 \item[(B5)] \emph{Connes' theorem.} The Hochschild--Kostant--Rosenberg map
 gives \(\HH_k(\CI(M))\cong\CI(M;\Lambda^k)\) for compact manifolds,
-possibly with boundary or corners \cite{Connes}. A self-contained proof
-for closed \(M\) is in \cite[Ch.~10]{MelroseMicro}; for manifolds with
-boundary the proof is the same.
-\item[(B6)] \emph{Künneth and Morita.} The topological Künneth formula
-holds for nuclear algebras \cite{Karoubi}. Hochschild homology is Morita
-invariant for full corners \(eM_N(A)e\) \cite{Connes,Loday}.
+possibly with boundary or corners, and similarly for the formal, Laurent,
+flat and Schwartz coefficient algebras \cite{Connes}. \emph{Proved}:
+Theorems~\ref{ha:thm:connes} and~\ref{ha:thm:variants}, and
+Corollary~\ref{ha:cor:homog} for homogeneous functions.
+\item[(B6)] \emph{K\"unneth and Morita.} The K\"unneth formula in the
+form used, and Morita invariance for matrices, smoothing-kernel algebras
+and full corners \(eM_N(\mathfrak A)e\) \cite{Connes,Loday}. \emph{Proved}:
+Proposition~\ref{ha:prop:kunneth} and Corollary~\ref{ha:cor:homog}
+(K\"unneth); Lemma~\ref{ha:lem:morita}, Proposition~\ref{ha:prop:corner}
+and Remark~\ref{ha:rem:bundles} (Morita). \emph{Quoted}: the
+Eilenberg--Zilber theorem (Background fact~\ref{ha:bg:EZ}); and Morita
+invariance for the H-unital ideals with bundle coefficients, which is only
+sketched in Remark~\ref{ha:rem:bundles}. The topological K\"unneth formula
+of \cite{Karoubi} is not needed.
 \item[(B7)] \emph{The suspended algebra} \cite{MelroseEta}. The
-regularized trace \(\bTr\) is a trace on \(\Psis^{\Z}\). The eta invariant
-is \(\eta(A)=(\pi i)^{-1}\overline{\int}\Tr(A^{-1}\partial_\tau A)\,d\tau\),
-and for Dirac operators it is the APS eta invariant.
+regularized trace \(\bTr\) is a trace on \(\Psis^{\Z}\); its regularization
+by a holomorphic family carries a local correction (this corrects
+\cite[Prop.~8]{MN}); the eta invariant
+\(\eta(A)=(\pi i)^{-1}\overline{\int}\Tr(A^{-1}\partial_\tau A)\,d\tau\)
+is the APS eta invariant for Dirac operators; and \(\etab=\eta(A_0)+
+\delta_Q\). \emph{Proved}: Theorems~\ref{tr:thm:bTr},
+\ref{tr:thm:susreg}, \ref{tr:thm:Dirac} and
+Proposition~\ref{tr:prop:etabar}(i). \emph{Quoted}: in
+Theorem~\ref{tr:thm:Dirac}, the small-time heat expansion and the
+regularity of \(\eta_B(s)\) at \(s=0\) from \cite{Notes}; in
+Proposition~\ref{tr:prop:etabar}(ii), the fact that
+\((D_t^2+B^2)^{-s/2}\) is an entire suspended family (Seeley's complex
+powers with a parameter \cite{Seeley}); the parity argument of
+Remark~\ref{tr:rem:parity} (sketch); and, in Remark~\ref{tr:rem:plusone},
+the local cancellation of Bismut--Freed \cite{BismutFreed}.
 \item[(B8)] \emph{Wodzicki residue} \cite{Wodzicki-residue,Guillemin-residue}:
 it is a trace, given by the local formula
-\((2\pi)^{-n}\int_{S^*M}a_{-n}\,\nu\), and independent of \(Q\).
+\((2\pi)^{-n}\int_{S^*M}a_{-n}\,\nu\), independent of \(Q\), and for
+\(n\ge2\) unique among traces vanishing on smoothing operators.
+\emph{Proved}: Theorem~\ref{tr:thm:res} and
+Proposition~\ref{tr:prop:unique}. \emph{Quoted, not used}: Wodzicki's
+stronger uniqueness, that every trace on \(\Psi^{\Z}\) vanishes on
+\(\Psi^{-\infty}\).
 \item[(B9)] \emph{The boundary connecting map} \cite[Prop.~5]{MN}: part
 (3) of Proposition~\ref{prop:boundaryLES}, i.e.\ that the connecting map
 \(\HH_k(\Ads)\to\HH_{k-1}(\Is)\) is a non-zero universal multiple of the
 de Rham connecting map on the summand without \(d\theta_\partial\) and
 vanishes on the other summand. MN's proof uses a multiplicative splitting
-\(s_0\) that we could not reconstruct (Remark~\ref{rem:s0}); we quote
-this statement rather than claim a proof.
+\(s_0\) that we could not reconstruct (Remark~\ref{rem:s0}). \emph{Quoted}.
+\item[(B10)] \emph{Convergence for the Laurent symbol algebras.} The order
+spectral sequences of \(\As\) and \(\Ads\) converge, so that
+\(\HH_k\) is isomorphic to \(E^2_{k-n,k}\) by the leading symbol.
+\emph{Proved}: the algebraic convergence statement
+(Proposition~\ref{ha:prop:algconv}), completeness through mixed complexes
+(Lemma~\ref{ha:lem:mixed}), convergence for the closed symbol algebra and
+for \(\Is\) (Theorem~\ref{ha:thm:conv}), and the partial result
+Proposition~\ref{ha:prop:laurent} for \(\As\) and \(\Ads\). The stage
+argument used for the b-calculus in \cite{HHb} fails here, because the
+cusp Lie derivative \(\mathcal L_{x^2\partial_x}\) is nilpotent on leading
+coefficients (Example~\ref{ha:ex:obstruction}). \emph{Quoted}: the
+remaining step, from \cite[p.~12]{MN} (Remark~\ref{ha:rem:quoted}). (The
+\(x\)-adic spectral sequence of \(\Id\) raises a similar but milder
+question, discussed in the proof of Proposition~\ref{prop:Idpoint}.)
 \end{enumerate}
+In summary, the following remain quoted or only sketched:
+\begin{itemize}
+\item (B9), part (3) of \cite[Prop.~5]{MN};
+\item (B10), the last step of the convergence for \(\As\) and \(\Ads\)
+(Remark~\ref{ha:rem:quoted});
+\item the uniform calculus on cylinders (Background
+fact~\ref{cc:bg:uniform});
+\item the nuclear-space facts (F1)--(F3) of Appendix~\ref{ha:sec};
+\item the Eilenberg--Zilber theorem (Background fact~\ref{ha:bg:EZ});
+\item Morita invariance for the H-unital ideals with bundle coefficients
+(sketched in Remark~\ref{ha:rem:bundles});
+\item the calculus with holomorphic parameters
+(Lemmas~\ref{tr:lem:holcalc}(1) and~\ref{tr:lem:cuspcalc}, sketched);
+\item the inputs of the eta identification: the heat expansion and the
+regularity of \(\eta_B\) in Theorem~\ref{tr:thm:Dirac} \cite{Notes}, the
+entire suspended family in Proposition~\ref{tr:prop:etabar}(ii)
+\cite{Seeley}, the parity sketch of Remark~\ref{tr:rem:parity}, and
+Bismut--Freed in Remark~\ref{tr:rem:plusone} \cite{BismutFreed};
+\item Wodzicki's stronger uniqueness of the residue (not used);
+\item the density half of \cite[Prop.~26]{MN} (Remark~\ref{cc:rem:density};
+not used).
+\end{itemize}
 
 \subsection{Corrections and unstated hypotheses}\label{subsec:errata}
 For convenience we list here the points where we disagree with the text of
@@ -605,6 +725,20 @@ residue with \(\bTr([t,B])\) in \cite[Prop.~8]{MN} fails, for instance when
 \(\partial X\) is a point; the same parity argument applies to
 \(Q_0^{-n}\) on any boundary (Remark~\ref{rem:Prop8}). We use the residue
 itself.
+\item\label{item:Prop8reg} \emph{The regular value in MN Proposition~8.}
+\cite[Prop.~8]{MN} also asserts that the regular value at \(s=0\) of
+\(\bTr(BQ_0^{-s})\) is \(\bTr(B)\). This is false in general: for
+\(\partial X\) a point and \(B=\langle D_t\rangle\) the two differ by
+\(-1/2\pi\) (Example~\ref{tr:ex:counter}). The regular value is
+\(\bTr(B)+\gamma'(0)/2\pi\), with a local correction \(\gamma'(0)\)
+(Theorem~\ref{tr:thm:susreg}, Correction~\ref{tr:corr:Prop8}). The error
+propagates to \cite[Cor.~2]{MN}, which acquires the correction term
+(Corollary~\ref{cor:Tr61}(2)), and to \cite[Prop.~17]{MN}, which becomes
+\(\etab(A)=\eta(A_0)+\delta_Q(A)\) with \(\delta_Q\) local
+(Proposition~\ref{prop:eta}). The correction \(\delta_Q\) vanishes in the
+cases used in Section~\ref{sec:examples}, including the interval example
+(Example~\ref{ex:interval-index}). It is compensated by \(\beta_Q\) in
+general, since the index does not depend on \(Q\).
 \item \emph{The compactification in Appendix A.} The map
 \cite[(130)]{MN} gives \([-1,1]\) the wrong smooth structure at the
 endpoints for the cusp calculus. One must compactify by \(1/z\)
@@ -619,44 +753,59 @@ proof of Lemma~9. Also the factor \(2\) in \cite[(80)]{MN}: in fact
 \(C(0)=[\lx,\lQ]\).
 \end{enumerate}
 To avoid a clash with the eta invariant, we write \(\beta_Q\) for the
-functional MN call \(\beta\) in \cite[(91)]{MN}.
+functional MN call \(\beta\) in \cite[(91)]{MN}. Two further points are
+not corrections to \cite{MN} but concern our use of the appendices. For a
+general admissible family \(Q(s)\) in place of \(Q^{-s}\),
+Proposition~\ref{prop:IF} acquires a coboundary term, which does not
+affect the index (Remark~\ref{rem:IFkappa}). And the chain model of
+Section~\ref{subsec:chains} is not complete for the order filtration, so
+the convergence arguments must be run in the mixed complexes of
+Appendix~\ref{ha:sec} (Remark~\ref{rem:poles}).
 Figure~\ref{fig:deps} records, for the main results, which background
 facts they use and which of the items above affect them.
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[font=\footnotesize]
- \def\cx#1{\fpeval{6.6+0.6*(#1-1)}}
- \fill[red!10] (\cx{9}-0.3,0.35) rectangle (\cx{9}+0.3,-5.0);
- \foreach \i in {1,...,9} \node[font=\scriptsize] at (\cx{\i},0) {(B\i)};
- \node[font=\scriptsize,anchor=west] at (11.8,0) {items};
- \draw[gray] (0,-0.3)--(13.1,-0.3);
+ \def\cx#1{\fpeval{6.45+0.62*(#1-1)}}
+ \foreach \c in {3,6,7} \fill[orange!15] (\cx{\c}-0.29,0.35) rectangle (\cx{\c}+0.29,-5.0);
+ \foreach \c in {9,10} \fill[red!12] (\cx{\c}-0.29,0.35) rectangle (\cx{\c}+0.29,-5.0);
+ \foreach \i in {1,...,10} \node[font=\scriptsize,inner sep=0pt] at (\cx{\i},0) {B\i};
+ \node[font=\scriptsize,anchor=west] at (12.5,0) {items};
+ \draw[gray] (0,-0.3)--(14.3,-0.3);
  \foreach \r/\lab/\cols/\cor in {
-   1/{\(\Is\), \(\As\) (Props.~\ref{prop:As}, \ref{prop:Is})}/{1,5,6}/{4},
-   2/{\(\Ads\), boundary sequence (Props.~\ref{prop:Ads}, \ref{prop:boundaryLES})}/{1,4,5,9}/{--},
+   1/{\(\Is\), \(\As\) (Props.~\ref{prop:As}, \ref{prop:Is})}/{1,5,6,10}/{4},
+   2/{\(\Ads\), boundary sequence (Props.~\ref{prop:Ads}, \ref{prop:boundaryLES})}/{1,4,5,9,10}/{--},
    3/{\(\Id\), \(\cI\) (Props.~\ref{prop:Id}, \ref{prop:I})}/{1,3,4,5,6}/{1},
-   4/{residue functionals (\S\ref{sec:residues})}/{3,8}/{2, 8, 10},
-   5/{\(\Ad\), \(\cA\), Thm.~\ref{thm:main} (Props.~\ref{prop:Ad}, \ref{prop:HHA})}/{3,4,9}/{1, 2},
+   4/{residue functionals (\S\ref{sec:residues})}/{3,7,8}/{2, 8, 9, 11},
+   5/{\(\Ad\), \(\cA\), Thm.~\ref{thm:main} (Props.~\ref{prop:Ad}, \ref{prop:HHA})}/{3,4,9,10}/{1, 2},
    6/{index formula (Lemma~\ref{lem:fedosov}, Thm.~\ref{thm:index})}/{2,3,6}/{5, 6},
-   7/{eta term, reduced formula (Prop.~\ref{prop:eta}, Thm.~\ref{thm:reduced})}/{3,7}/{6, 7}}{
+   7/{eta term, reduced formula (Prop.~\ref{prop:eta}, Thm.~\ref{thm:reduced})}/{3,7}/{6, 7, 9}}{
    \node[anchor=west] at (0,-0.65*\r) {\lab};
    \foreach \c in \cols {
-     \ifnum\c=9 \fill[red!70!black] (\cx{\c},-0.65*\r) circle (2.6pt);
+     \ifnum\c>8 \fill[red!70!black] (\cx{\c},-0.65*\r) circle (2.6pt);
      \else \fill[blue!70!black] (\cx{\c},-0.65*\r) circle (2.6pt);\fi}
-   \node[anchor=west] at (11.8,-0.65*\r) {\cor};
-   \draw[gray!40] (0,-0.65*\r-0.325)--(13.1,-0.65*\r-0.325);
+   \node[anchor=west] at (12.5,-0.65*\r) {\cor};
+   \draw[gray!40] (0,-0.65*\r-0.325)--(14.3,-0.65*\r-0.325);
  }
 \end{tikzpicture}
 \caption[Background facts and corrections used by the main results]{Which
 main results use which background facts of
 Section~\ref{subsec:background} (dots), and which items of the list in
-Section~\ref{subsec:errata} concern them (last column). The red column
-is (B9), part~(3) of MN Proposition~5, which we quote but do not prove
-(Remark~\ref{rem:s0}); everything built on the boundary map of
+Section~\ref{subsec:errata} concern them (last column). Blue dots: facts
+proved in Appendices~\ref{cc:sec:cusp}--\ref{tr:sec}; on an orange column
+the proof uses a step that is sketched or quoted ((B3): the calculus with
+holomorphic parameters; (B6): Eilenberg--Zilber and Morita for H-unital
+ideals with bundles; (B7): the inputs of the eta identification). Red
+columns are quoted: (B9), part~(3) of MN Proposition~5
+(Remark~\ref{rem:s0}), and (B10), the last step of the convergence for
+\(\As\) and \(\Ads\) (Remark~\ref{ha:rem:quoted}). Everything built on the
+homology of \(\As\) and \(\Ads\), or on the boundary map of
 \(0\to\Is\to\As\to\Ads\to0\), including the corrected groups of \(\cA\),
-rests on it. Each row also uses the rows above it, as in
-Figure~\ref{fig:roadmap}. Items 3 (not used elsewhere), 9 (the
-foundations behind (B1)) and 11 (misprints) are not shown.}
+rests on them. (The index formula uses the trace computations of
+Section~\ref{sec:AdA}, not the homology groups.) Each row also uses the rows
+above it, as in Figure~\ref{fig:roadmap}. Items 3 (not used elsewhere), 10
+(the foundations behind (B1)) and 12 (misprints) are not shown.}
 \label{fig:deps}
 \end{figure}
 
@@ -725,7 +874,7 @@ Let \(Q\in\Psi^1(M)\) be positive, elliptic and invertible. For
 \(\operatorname{Re}s>m+n\) and extends meromorphically with simple poles.
 Wodzicki's residue is \(\TrR(A)=\Res_{s=0}\Tr(AQ^{-s})\) \cite[(2)]{MN}.
 It is a trace, independent of \(Q\), vanishes on \(\Psi^{-\infty}\), and
-is given locally by (B8):
+is given locally by (B8) (Theorem~\ref{tr:thm:res}):
 \begin{equation}\label{eq:wodzicki}
  \TrR(A)=(2\pi)^{-n}\int_{S^*M}a_{-n}\,\nu,\qquad
  \nu=\iota_{R}\,\frac{\omega^n}{n!}\ \text{up to the orientation convention,}
@@ -891,8 +1040,10 @@ The second expression equals \(+1\) here.
 
 This section collects the facts about cusp operators that \cite{MN} uses.
 It follows \cite[App.~A--C]{MN}, \cite{MazzeoMelrose} and
-\cite{MelroseFibrations}. We begin with the half-line, where everything is
-explicit.
+\cite{MelroseFibrations}. It is an informal tour: the proofs are in
+Appendix~\ref{cc:sec:cusp}, which constructs the calculus directly on the
+cylinder \(\R_t\times\partial X\) and does not use the triple space. We
+begin with the half-line, where everything is explicit.
 
 \subsection{Cusp structures and cusp vector fields}\label{subsec:cuspstructure}
 A \emph{cusp structure} on \(X\) is a choice of boundary defining
@@ -1060,7 +1211,29 @@ conormal of order \(m\) at the lifted diagonal, smooth up to
 \cite[Def.~2]{MN}. In particular their restriction to \(\mathrm{ff}_c\) is
 rapidly decreasing as \(|\mu|\to\infty\). The kernels in
 \(\Psic^{-\infty}\) that vanish to infinite order also at \(\mathrm{ff}_c\)
-are those of \(\cI\) \cite[Def.~1]{MN}.
+are those of \(\cI\) \cite[Def.~1]{MN}. Proofs: Lemma~\ref{cc:lem:coords}
+(coordinates on \(X_c^2\)), Proposition~\ref{cc:prop:MNdef} (agreement of
+this description with the construction of Appendix~\ref{cc:sec:cusp}) and
+Lemma~\ref{cc:lem:residual} (the ideal \(\cI\)). There kernels are
+normalized by the right cusp density \(\nu_c\), equal to
+\(x^{-2}dx\,\nu_\partial\) near \(\partial X\)
+(Section~\ref{cc:subsec:conventions}); MN use half-densities
+\cite[(118)]{MN}. Passing from one to the other multiplies the kernel by
+\((\nu_c(z')/\nu_c(z))^{1/2}\). Near \(\mathrm{ff}_c\) this is
+\(1-x\mu\) times a smooth positive function of \((y,y')\), and at the other
+faces it grows at most polynomially, where the kernels vanish to infinite
+order. So the two conventions define the same spaces of operators.
+
+\emph{Cut-offs and pseudolocality.} We often multiply operators by
+cut-off functions. Pseudolocality at the boundary, in the form
+\(\phi A\psi\in\cI\) when \(\supp\phi\cap\supp\psi=\varnothing\), holds
+only for cut-offs that are functions of \(x\) alone
+(Lemma~\ref{cc:lem:local}(1)). If \(\phi\) and \(\psi\) depend on \(y\),
+then \(\phi A\psi\) is smoothing but restricts to \(\mathrm{ff}_c\) as
+\(\phi|_{\partial X}N(A)\psi|_{\partial X}\), which need not vanish, so it is
+in \(\Psic^{-\infty}\) but not in \(\cI\). All the cut-offs used in the
+main text to localize near or away from \(\partial X\) are functions of
+\(x\).
 
 \begin{figure}[htbp]
 \centering
@@ -1131,10 +1304,13 @@ where \(\mathcal G^m(\cT)\) is the space of smooth functions on
 \(\cT\setminus0\) that are homogeneous of degree \(m\). The symbol of a
 product is the product of the symbols, and
 \(\sigma_{m+m'-1}([A,B])=-i\{\sigma_m(A),\sigma_{m'}(B)\}\) with the
-bracket \eqref{eq:poisson}. A global quantization
-\(x^{-\Z}S^{\Z}(\cT)\to x^{-\Z}\Psic^{\Z}(X)\) exists \cite[Prop.~24]{MN}.
-It induces the isomorphisms \eqref{eq:structure} for \(\Is\) and \(\As\),
-and a star product
+bracket \eqref{eq:poisson} (Proposition~\ref{cc:prop:symbol}). A global
+quantization \(x^{-\Z}S^{\Z}(\cT)\to x^{-\Z}\Psic^{\Z}(X)\) exists
+\cite[Prop.~24]{MN} (Proposition~\ref{cc:prop:quant}). It is linear, not
+multiplicative. It induces the isomorphisms \eqref{eq:structure} for
+\(\Is\) and \(\As\) \cite[(13)]{MN}, which are isomorphisms of vector
+spaces, and transporting the product of \(\As\) through them gives a star
+product
 \[
  a\star b=\sum_{j\ge0}P_j(a,b),\qquad P_0(a,b)=ab,\qquad
  P_1(a,b)-P_1(b,a)=-i\{a,b\} \qquad\text{\cite[(137)--(138)]{MN}},
@@ -1161,15 +1337,20 @@ indicial map gives \cite[(12)]{MN}
  0\to x\Psic^m(X)\to\Psic^m(X)\xrightarrow{\In}\Psis^m(\partial X)\to0 .
 \]
 More precisely, a choice of normal fibration identifies a collar with
-\([0,\epsilon)\times\partial X\). The Taylor series of the kernel at
-\(\mathrm{ff}_c\) then gives \cite[Prop.~25]{MN}
+\([0,\epsilon)\times\partial X\). The Taylor series \(\mathsf T\) of the
+kernel at \(\mathrm{ff}_c\) then gives \cite[Prop.~25]{MN}
 \begin{equation}\label{eq:taylor}
- x^{-\Z}\Psic^{\Z}(X)/x^\infty\Psic^{\Z}(X)\ \cong\ \Psis^{\Z}(\partial X)\Lser{x},
+ \mathsf T:\ x^{-\Z}\Psic^{\Z}(X)/x^\infty\Psic^{\Z}(X)\ \cong\ \Psis^{\Z}(\partial X)\Lser{x},
  \qquad A\sim\sum_{j\ge-p}x^jA_{(j)} .
 \end{equation}
-Here the powers of \(x\) are written \emph{on the left}, and MN write
+Here \(\Psis^{\Z}(\partial X)\Lser{x}=\bigcup_m\Psis^m(\partial X)\Lser{x}\)
+consists of the Laurent series \emph{whose coefficients have bounded
+order}, the powers of \(x\) are written \emph{on the left}, and MN write
 \(A_{-j}\) for our \(A_{(j)}\) \cite[(53)]{MN}. The product on the right
-is not the naive one, because \(x\) does not commute with \(\Psis\).
+is not the naive one, because \(x\) does not commute with \(\Psis\); with
+the twisted product of Proposition~\ref{cc:prop:taylor}, \(\mathsf T\) is
+an algebra isomorphism (Proposition~\ref{cc:prop:taylor}; the exact
+indicial sequence is Proposition~\ref{cc:prop:indicial}).
 
 \begin{lemma}[The cusp twist]\label{lem:twist}
 Let \(g\in\Psis^m(\partial X)\), acting on functions of \((t,y)\) with
@@ -1182,6 +1363,8 @@ Let \(g\in\Psis^m(\partial X)\), acting on functions of \((t,y)\) with
 \item \([\lx,g]=-\sum_{k\ge1}\frac1k\,x^k\,\mathrm{ad}_t^k(g)\), where
 \(\mathrm{ad}_t^k(g)\) has indicial family \((-i\partial_\tau)^k\In(g)\).
 \end{enumerate}
+Parts (1) and (2) are also proved in Lemma~\ref{cc:lem:sus} and
+Proposition~\ref{cc:prop:conj}.
 The associated graded algebra of \(\Psis(\partial X)\Lser{x}\) for the
 \(x\)-filtration is commutative modulo \(\Psi(\partial X)\). Its Poisson
 bracket is \(\{x,\tau\}=-x^2\), that is, \(\{t,\tau\}=1\).
@@ -1285,7 +1468,9 @@ of the b-defining function changes \(x\) to
 on each component, this is the same cusp structure. In general the two
 structures are related by Lemma~\ref{lem:cuspvf} up to the isotopy of
 \cite[Lemma~19]{MN}. MN quote that b-pseudodifferential operators lift
-to cusp operators and that the lifts are dense \cite[Prop.~26]{MN}.
+to cusp operators and that the lifts are dense \cite[Prop.~26]{MN}. The
+first statement is Proposition~\ref{cc:prop:transcendental}; the density
+is not proved here and not used (Remark~\ref{cc:rem:density}).
 
 Two features of the lift explain why it is useful.
 \begin{enumerate}
@@ -1301,7 +1486,8 @@ no higher terms.
 A b-operator whose indicial family is invertible on \(\R\) (that is, Fredholm
 on \(L^2_b\)) therefore lifts to a fully elliptic cusp operator. The cusp
 index formula applies to it, and its eta term is the b-eta invariant of
-the indicial family. The b-Laurent algebra \(x_b^{-\Z}\Psi_b^{\Z}\) would
+the indicial family, up to the local correction \(\delta_Q\) of
+Proposition~\ref{prop:eta}. The b-Laurent algebra \(x_b^{-\Z}\Psi_b^{\Z}\) would
 require invertibility for \emph{all} \(\lambda\in\C\)
 (Section~\ref{sec:comparison}). This is the ``problem with completeness''
 mentioned in \cite[p.~3]{MN}. Note also that Laurent series in \(x_b\) and
@@ -1331,8 +1517,10 @@ only invertibility on \(\R\) is needed.
 An element of \(x^{-p}\Psic^m(X)\) is \emph{elliptic} if its principal
 symbol (after removing \(x^{-p}\)) is invertible on \(\cT\setminus0\). It
 is \emph{fully elliptic} if, in addition, its leading indicial family is
-invertible for all real \(\tau\); in the Laurent setting this is
-invertibility in \(\cA\) (B2).
+invertible for all real \(\tau\). In the Laurent setting this is
+invertibility in \(\cA\) with matched orders: \(A\in x^{-p}\Psic^m(X)\) is
+fully elliptic if and only if there is \(B\in x^p\Psic^{-m}(X)\) with
+\(AB-1,BA-1\in\cI\) (Theorem~\ref{cc:thm:parametrix}, (B2)).
 
 \begin{remark}[Exact cusp metrics]\label{rem:cuspmetric}
 \cite[App.~B]{MN} writes an exact cusp metric as \(dx^2/x^4+h/x^2\). The
@@ -1351,7 +1539,10 @@ a metric with cylindrical ends. Its Laplacian has cusp symbol
 
 For a positive invertible elliptic \(Q\in\Psic^1(X)\), such as
 \((\Delta_g+1)^{1/2}\) for the metric of Remark~\ref{rem:cuspmetric}, the
-complex powers \(Q^{-s}\) form an entire family of order \(-s\) (B3). The
+complex powers \(Q^{-s}\) form an entire family of order \(-s\) (B3).
+Appendix~\ref{tr:sec} avoids the spectral theory of \(Q\): any admissible
+family \(Q(s)\) of order \(-s\) with \(Q(0)=\mathrm{Id}\) can be used
+(Proposition~\ref{tr:prop:Q}, Definition~\ref{tr:def:cuspfam}). The
 formal logarithm
 \[
  \lQ=\frac{d}{ds}Q^s\Big|_{s=0}
@@ -1393,7 +1584,9 @@ sequence
  0\to\cK_\bullet\to C_\bullet(\mathfrak A)\to C_\bullet(\mathfrak A/J)\to0
 \end{equation}
 is exact. Here \(\cK_k\) is the closed span of the chains with at least one
-entry in \(J\) \cite[Lemma ``Exactness of chain spaces'']{HHb}.
+entry in \(J\) \cite[Lemma ``Exactness of chain spaces'']{HHb}; see
+Lemma~\ref{ha:lem:exact} for a proof that needs no continuous section of
+\(\mathfrak A\to\mathfrak A/J\).
 
 \subsection{H-unitality and excision}\label{subsec:excision}
 An algebra \(J\) is \emph{H-unital} if its bar complex \((C_\bullet(J),b')\)
@@ -1402,7 +1595,7 @@ a continuous contraction \(E\) with \(b'E+Eb'=1\). A unital algebra is
 H-unital, with \(E(a_0\otimes\dots\otimes a_k)=1\otimes a_0\otimes\dots
 \otimes a_k\).
 
-\begin{background}[Wodzicki's excision theorem, (B4)]\label{bg:excision}
+\begin{background}[Wodzicki's excision theorem, (B4); proved in Theorem~\ref{ha:thm:excision}]\label{bg:excision}
 If \(J\subset\mathfrak A\) is a closed ideal that is topologically
 H-unital, then \(C_\bullet(J)\to\cK_\bullet\) is a quasi-isomorphism. Hence
 \eqref{eq:chainses} gives a long exact sequence
@@ -1415,14 +1608,12 @@ To compute \(\partial[c]\), lift the cycle \(c\) to a chain \(\tilde c\) of
 class.
 \end{background}
 
-\emph{Idea of the proof.} The obstruction to \(C(J)\to\cK\) being a
-quasi-isomorphism lies in chains whose \emph{interior} entries come from
-\(\mathfrak A\) while some entry lies in \(J\). Wodzicki filters \(\cK\) by
-the position of the first entry from \(J\). The associated graded pieces
-are of the form \((\text{bar complex of }J)\otimes(\text{chains of
-}\mathfrak A)\). They are acyclic precisely when \(J\) is H-unital. The
-topological version needs the contraction to be continuous, and this is
-what Lemma~\ref{lem:Hunital} provides.
+The proof, by filtering \(\cK\) by the position of the entries from \(J\)
+and contracting the graded pieces with the bar contraction of \(J\), is
+Theorem~\ref{ha:thm:excision}; Example~\ref{ha:ex:noexcision} shows what
+goes wrong without H-unitality. The topological version needs the
+contraction to be continuous, and this is what Lemma~\ref{lem:Hunital}
+provides.
 
 \begin{lemma}[Connecting maps on cocycles]\label{lem:conn}
 Under the hypotheses of \ref{bg:excision}, let \(\varphi\) be a
@@ -1518,8 +1709,8 @@ The contraction is \cite[Lemma ``Explicit contractions'']{HHb}:
 \(d_0E=1\) because \((v\otimes\psi)(\tilde\psi\otimes w)=v\otimes w\), and
 \(d_{i+1}E=Ed_i\) for \(i\ge0\), so \(b'E+Eb'=1\). The homology statement is
 Morita invariance for the smoothing kernels
-\cite[Lemma ``Morita invariance for smoothing kernels'']{HHb}, applied with
-\(\mathfrak A=\C\).
+(Lemma~\ref{ha:lem:morita}, adapted from \cite[Lemma ``Morita invariance
+for smoothing kernels'']{HHb}), applied with \(\mathfrak A=\C\).
 \end{proof}
 
 \subsection{The Hochschild--Kostant--Rosenberg map and Connes' theorem}
@@ -1534,7 +1725,7 @@ satisfies \(\chi\circ b=0\). Conversely the antisymmetrization
 \otimes f_{\sigma(1)}\otimes\dots\otimes f_{\sigma(k)}\) is a cycle with
 \(\chi\varphi(f_0;f_1,\dots,f_k)=f_0\,df_1\wedge\dots\wedge df_k\).
 
-\begin{background}[Connes' theorem, (B5)]\label{bg:connes}
+\begin{background}[Connes' theorem, (B5); proved in Theorems~\ref{ha:thm:connes} and~\ref{ha:thm:variants}]\label{bg:connes}
 For a compact manifold \(M\), possibly with boundary or corners, \(\chi\)
 induces isomorphisms \(\HH_k(\CI(M))\cong\CI(M;\Lambda^k)\) and
 \(\HH_k(\dCI(M))\cong\dCI(M;\Lambda^k)\). The same holds, fibrewise, for
@@ -1542,21 +1733,22 @@ smooth functions on a manifold with values in a commutative nuclear
 algebra of Laurent or formal series.
 \end{background}
 
-A self-contained proof for closed \(M\) is
-\cite[Thm.~``Connes'']{MelroseMicro}. It has three steps: reduction to
-normalized chains, a local argument near the diagonal using Taylor
-expansion and the polynomial HKR theorem (proved by a Koszul resolution),
-and patching. Boundaries of normalized chains form a
-\(\CI(M^{k+1})\)-module, and this makes the patching possible. Nothing
-changes for manifolds with boundary. For \(\dCI(M)\) all the constructions
-preserve infinite-order vanishing at the boundary faces.
+The proof for compact manifolds with corners, adapted from
+\cite[Ch.~10]{MelroseMicro}, is Theorem~\ref{ha:thm:connes}. The formal,
+Laurent, flat and Schwartz versions are Theorem~\ref{ha:thm:variants}, and
+the version for homogeneous functions on a cone bundle, which is what the
+symbol algebras need, is Corollary~\ref{ha:cor:homog}.
 
 \subsection{Filtered complexes and the convergence of spectral sequences}
 \label{subsec:convergence}
 Let \(C_k=\{\sum_{p\le P}c_p:\ c_p\in C_{p,k}\}\) be a complex of formal
 sums, bounded above in \(p\), with differential \(b=\sum_{l\ge0}b_l\),
 where \(b_l:C_{p,k}\to C_{p-l,k-1}\). The filtration \(F_p=\{c:\ c_q=0\
-\text{for}\ q>p\}\) is exhaustive, separated and complete. Put
+\text{for}\ q>p\}\) is exhaustive and separated, and we assume it is
+complete. (This assumption is not automatic: the chain model of
+Section~\ref{subsec:chains} is \emph{not} complete for the order
+filtration, and completeness is restored by passing to the mixed complexes
+of Lemma~\ref{ha:lem:mixed}; see Remark~\ref{rem:poles}.) Put
 \(E^1_{p,k}=H_k(C_{p,\bullet},b_0)\). Then \(b_1\) induces
 \(d^1:E^1_{p,k}\to E^1_{p-1,k-1}\), and we write \(E^2=H(E^1,d^1)\).
 
@@ -1572,42 +1764,46 @@ is an isomorphism. All differentials \(d^r\), \(r\ge2\), vanish.
 \end{proposition}
 
 \begin{proof}
-We recall the key step. Suppose \(c\in F_pC_k\) satisfies \(b_0c_p=0\) and
-\(b_1c_p+b_0c_{p-1}=0\), and the class of \(c_p\) in \(E^2_{p,k}\)
-vanishes. Then \([c_p]=d^1[x]\) for a \(b_0\)-cycle \(x\in C_{p+1,k+1}\),
-so \(c_p-b_1x=b_0y\) with \(y\in C_{p,k+1}\). The components of
-\(b(x+y)\) of order \(p+1\) and \(p\) are \(b_0x=0\) and
-\(b_1x+b_0y=c_p\), so \(c-b(x+y)\in F_{p-1}\). Since \(E^2\) is concentrated
-on the line \(p=k-n\), repeating this step lowers the order of any cycle
-to \(k-n\). It also shows that a cycle with vanishing \(E^2\)-class is a
-boundary: the corrections form a series in decreasing orders, which
-converges by completeness. Surjectivity is the same argument applied to
-the obstruction \(bc^{(r)}\), whose order decreases. Finally \(d^r\) maps
-\((p,k)\) to \((p-r,k-1)\), off the line \(p=k-n\) for \(r\ge2\). The
-details are in \cite[Ch.~10]{MelroseMicro}.
+This is Proposition~\ref{ha:prop:algconv}, where the proof is given in
+full. The key step lowers the order of a cycle whose leading term has
+vanishing \(E^2\)-class by subtracting \(b(x+y)\), with \(x\) a
+\(b_0\)-cycle one order up and \(y\) a correction at the same order;
+completeness is used to sum the resulting series of corrections, and the
+higher differentials vanish because they leave the line \(p=k-n\).
 \end{proof}
 
-\begin{remark}[Pole orders]\label{rem:poles}
-For the symbol algebras with Laurent singularities at the boundary
-(\(\As\) and \(\Ads\)) the chain spaces are unions over pole bounds
-\(N\) of complete spaces. Proposition~\ref{prop:convergence} applies in
-each piece provided the corrections \(x,y\) in its proof can be chosen
-\emph{without increasing the pole bound}. MN do not discuss this; they
-say convergence ``follows directly, as in the boundaryless case''
-\cite[p.~12]{MN}. The corrections are built from three things: the HKR
-lift \(\varphi\), which preserves pole orders; the de Rham homotopies of
-Section~\ref{sec:functions}, which pair Taylor coefficients of the same
-\(x\)-degree and so preserve pole orders; and the symplectic star, whose
-factors \(x^{\pm2}\) cancel between \(*\) and \(*^{-1}\). The one point
-that requires care is the inverse of \(b_0\) on boundaries of the
-commutative complex, where Connes' patching argument multiplies by
-non-smooth Laurent factors. A complete treatment of the parallel point
-for the b-calculus, by mixed complexes, is given in \cite[\S``Convergence
-and degeneration'']{HHb}. It applies here with the cusp Poisson structure
-in place of the b-structure. We do not repeat it, and in what follows
-\emph{convergence for \(\As\) and \(\Ads\) is to be read as resting on
-that argument}. For \(\Is\) (rapid vanishing at the boundary) and for the
-closed case no issue arises.
+\begin{remark}[Completeness and pole orders]\label{rem:poles}
+Proposition~\ref{prop:convergence} needs a complete filtration, and the
+chain model of Section~\ref{subsec:chains} is not complete: a series such
+as \(\sum_jr^j\otimes r^{-2j}\) has total orders tending to \(-\infty\)
+but lies in no single \(\mathfrak A_N^{\widehat\otimes2}\)
+(Appendix~\ref{ha:sec}, after Proposition~\ref{ha:prop:algconv}). The
+remedy, taken from \cite[\S``Convergence and degeneration'']{HHb}, is to
+compute with the mixed complexes \(C(\mathfrak B,\mathfrak A)\) of
+Lemma~\ref{ha:lem:mixed}, whose stages are complete and which compute
+\(\HH(\mathfrak A)\). For the closed symbol algebra and for \(\Is\) this
+gives convergence (Theorem~\ref{ha:thm:conv}).
+
+For the algebras with Laurent singularities at the boundary (\(\As\) and
+\(\Ads\)) one also needs the corrections in the proof to stay in a fixed
+pole stage. MN say convergence ``follows directly, as in the boundaryless
+case'' \cite[p.~12]{MN}. In the b-calculus this is proved in
+\cite[\S``Convergence and degeneration'']{HHb}, using the invertibility of
+\(\mathcal L_{x\partial_x}\) on leading coefficients. That argument does
+\emph{not} apply with the cusp Poisson structure: the cusp Lie derivative
+\(\mathcal L_{x^2\partial_x}\) raises the power of \(x\), so it is nilpotent
+on leading coefficients, and a cycle such as \(x^{-L}|\tau|^p\) has no
+primitive in its own stage although it is exact in the direct limit
+(Example~\ref{ha:ex:obstruction}). What survives is
+Proposition~\ref{ha:prop:laurent}: representatives on the critical line
+exist, \(\Theta\) is well defined, and the corrections can be found if
+the pole bound is allowed to grow by two at each order. The remaining
+step, a uniform pole bound, is quoted from \cite[p.~12]{MN}
+(Remark~\ref{ha:rem:quoted}); it is item (B10) of
+Section~\ref{subsec:background}. In what follows \emph{convergence for
+\(\As\) and \(\Ads\) is to be read as resting on (B10)}. For \(\Is\)
+(rapid vanishing at the boundary) and for the closed case no issue
+arises.
 \end{remark}
 
 \subsection{The Poisson differential and the symplectic star}
@@ -1709,14 +1905,14 @@ Adapted from \cite[Ch.~10]{MelroseMicro}.}
 \subsection{Morita invariance}\label{subsec:morita}
 If \(e\in M_N(\mathfrak A)\) is an idempotent not contained in any proper
 two-sided ideal, then \(eM_N(\mathfrak A)e\) is Morita equivalent to
-\(\mathfrak A\) and has the same Hochschild homology (B6). The trace map
-\(\Tr_*:C(M_N(\mathfrak A))\to C(\mathfrak A)\) gives the isomorphism
-\cite[Prop.~13]{MN}, \cite{Loday}. For an algebra of the form
+\(\mathfrak A\) and has the same Hochschild homology (B6)
+\cite[Prop.~13]{MN}, \cite{Loday}. For matrices and for algebras
 \(\mathcal K\widehat\otimes\mathfrak A\) as in Lemma~\ref{lem:Hunital},
-the generalized trace gives the isomorphism
-\(\HH(\mathcal K\widehat\otimes\mathfrak A)\cong\HH(\mathfrak A)\) even when
-\(\mathfrak A\) is only H-unital \cite[Lemma ``Morita invariance for
-smoothing kernels'']{HHb}. We use this with \(\mathcal K=\Psi^{-\infty}(
+with \(\mathfrak A\) unital or only H-unital, the generalized trace
+\(\Tr_*\) is a quasi-isomorphism (Lemma~\ref{ha:lem:morita}, adapted from
+\cite[Lemma ``Morita invariance for smoothing kernels'']{HHb}). Full
+corners are Proposition~\ref{ha:prop:corner}, and the application to
+bundles is Remark~\ref{ha:rem:bundles}. We use the smoothing-kernel case with \(\mathcal K=\Psi^{-\infty}(
 \partial X)\) to remove the boundary smoothing operators in
 Section~\ref{sec:indicial}.
 
@@ -1802,8 +1998,8 @@ is what makes \(x^{(0)}\) and \(x^{(1)}\) comparable.
 \end{remark}
 
 The algebra \(x^{-\Z}\CI(M)\) is unital, and so is
-\(\CI(\partial M)\Lser{x}\). By excision (B4), \eqref{eq:taylorfun} gives a
-long exact sequence in Hochschild homology.
+\(\CI(\partial M)\Lser{x}\). By excision (B4, Theorem~\ref{ha:thm:excision}),
+\eqref{eq:taylorfun} gives a long exact sequence in Hochschild homology.
 
 \subsection{Hochschild homology of the three function algebras}
 The HKR map \(\chi\) is defined on the chains of all three algebras
@@ -1834,24 +2030,17 @@ sequence of \eqref{eq:taylorfun} splits into the short exact sequences
 \end{lemma}
 
 \begin{proof}
-For \(\dCI(M)\) the HKR isomorphism is Connes' theorem in its flat form
-(B5). For the formal Laurent series, the Künneth formula (B6) reduces the
-problem to \(\CI(\partial M)\) (Connes) and to \(\C\Lser{x}\). The algebra
-\(\C[[x]]\) has the Koszul resolution
-\[
- 0\to\C[[x,x']]\xrightarrow{\,x-x'\,}\C[[x,x']]\to\C[[x]]\to0
-\]
-by free modules over \(\C[[x]]\widehat\otimes\C[[x]]=\C[[x,x']]\). It gives
-\(\HH_0=\C[[x]]\), \(\HH_1=\C[[x]]\,dx\), and \(\HH_k=0\) for \(k\ge2\).
-Inverting the central element \(x\) is an exact localization, so the same
-holds for \(\C\Lser{x}\) with Laurent coefficients. Now the HKR maps commute
-with the maps of \eqref{eq:taylorfun}, since restriction to Taylor series
-commutes with \(d\). By the five lemma, the HKR map for the middle algebra
-\(x^{-\Z}\CI(M)\) is also an isomorphism. Finally, the right-hand map at
-the level of forms is surjective by Borel's lemma (every formal Laurent
-form is the Taylor series of a Laurent form). So the connecting maps
-vanish, and the long exact sequence breaks into the displayed short exact
-sequences.
+The HKR maps for the three algebras are isomorphisms by
+Theorem~\ref{ha:thm:variants} (the flat, Laurent and formal Laurent cases
+of (B5)); for \(\C\Lser{x}\) this is the Koszul computation \(\HH_0=
+\C\Lser{x}\), \(\HH_1=\C\Lser{x}\,dx\), \(\HH_k=0\) for \(k\ge2\). No
+K\"unneth formula for formal Laurent series is needed. The HKR maps
+commute with the maps of \eqref{eq:taylorfun}, since restriction to Taylor
+series commutes with \(d\) (Theorem~\ref{ha:thm:variants}). Finally, the
+right-hand map at the level of forms is surjective by Borel's lemma (every
+formal Laurent form is the Taylor series of a Laurent form). So the
+connecting maps vanish, and the long exact sequence breaks into the
+displayed short exact sequences.
 \end{proof}
 
 \subsection{Weighted de Rham cohomology}
@@ -2017,7 +2206,8 @@ H^{2n-k-1}(Z\times\Ssig)\), and by duality
 \end{proposition}
 
 \begin{proof}
-\emph{Chains and filtration.} By the quantization (B1),
+\emph{Chains and filtration.} By the quantization (B1,
+Proposition~\ref{cc:prop:quant}), as vector spaces,
 \[
  \As\cong\varinjlim_{m,N}x^{-N}\prod_{j\le m}\mathcal G^j(\cT),
 \]
@@ -2032,9 +2222,11 @@ of Section~\ref{subsec:convergence}.
 
 \emph{\(E^1\).} The differential \(b_0\) is the Hochschild differential of
 the commutative algebra \(x^{-\Z}\mathcal G(\cT)\). By
-Lemma~\ref{lem:fun}, applied fibrewise and combined with Connes' theorem
-on the sphere bundle (B5), \(E^1_{p,k}\cong x^{-\Z}\mathcal G^p(\cT;
-\Lambda^k)\), the homogeneous Laurent \(k\)-forms of degree \(p\).
+Corollary~\ref{ha:cor:homog} (Connes' theorem (B5) for Laurent functions on
+the sphere bundle, with a radial variable), \(E^1_{p,k}\cong
+x^{-\Z}\mathcal G^p(\cT;\Lambda^k)\), the homogeneous Laurent \(k\)-forms of
+degree \(p\); in the mixed complexes of Remark~\ref{rem:poles} this is
+Lemma~\ref{ha:lem:stageE1}.
 
 \emph{\(d^1\).} By Proposition~\ref{prop:d1}, \(d^1=-i\delta\), where
 \(\delta\) is the Koszul--Brylinski differential of the cusp Poisson
@@ -2058,8 +2250,10 @@ which vanishes for \(p\ne k-n\) by Proposition~\ref{prop:homog}. For
 \(p=k-n\) it equals \({}^bH^{2n-k}(Y\times\Ssig)\) by \eqref{eq:bH}.
 
 \emph{Degeneration and convergence.} \(E^2\) is concentrated on the line
-\(p=k-n\), so Proposition~\ref{prop:convergence} applies (with
-Remark~\ref{rem:poles}).
+\(p=k-n\). Proposition~\ref{ha:prop:laurent} then shows that every class
+has a representative on that line and that the leading-symbol map
+\(\Theta\) is well defined. That \(\Theta\) is an isomorphism is the quoted
+step (B10) (Remark~\ref{rem:poles}, Remark~\ref{ha:rem:quoted}).
 
 \emph{Duality.} \(Y\times\Ssig\) is a compact oriented
 \(2n\)-manifold with boundary \(Z\times\Ssig\). It is oriented by the
@@ -2090,13 +2284,16 @@ de Rham cohomology of the Laurent forms, which picks up the boundary term
 \begin{proof}
 The computation is that of Proposition~\ref{prop:As} with flat forms in
 place of Laurent forms. By Proposition~\ref{prop:dR} these give relative
-cohomology. Here no pole orders occur, so the convergence argument of the
-closed case applies verbatim. For H-unitality, filter the bar complex by
-order. Its \(E^1\) term is the bar homology of the commutative algebra
+cohomology. Here no pole orders occur, and convergence is proved in
+Theorem~\ref{ha:thm:conv}, using the mixed complexes of
+Lemma~\ref{ha:lem:mixed}. For H-unitality, one can filter the bar complex
+by order. Its \(E^1\) term is the bar homology of the commutative algebra
 \(\dCI\)-valued in homogeneous functions. This vanishes by
 Lemma~\ref{lem:flatHunital}, whose contraction \eqref{eq:E} only involves
-the base variables and preserves homogeneity. By completeness the bar
-complex of \(\Is\) is acyclic. Alternatively, use the contraction
+the base variables and preserves homogeneity. Concluding that the bar
+complex of \(\Is\) is acyclic needs completeness, which the chain model
+lacks (Remark~\ref{rem:poles}), so we prefer the direct argument: use the
+contraction
 \eqref{eq:E} directly with a quantization in which \(\mathrm{Id}\) has
 full symbol \(1\) and which is a left quantization in the collar. Then
 the cut-off factor in \eqref{eq:E} is independent of the fibre variable
@@ -2121,9 +2318,11 @@ identification shows that \(\Trs\) is Wodzicki's residue.
 \end{proposition}
 
 \begin{proof}
-\(\Ads\cong\CI(Z)\Lser{x,q^{-1}}\) consists of formal Laurent series in \(x\)
+\(\Ads\cong\CI(Z)\Lser{x,q^{-1}}\) (as vector spaces, with the transported
+star product) consists of formal Laurent series in \(x\)
 of complete symbols over \(\partial X\). The proof of
-Proposition~\ref{prop:As} applies with formal Laurent forms on the formal
+Proposition~\ref{prop:As}, including its reliance on (B10) for
+convergence, applies with formal Laurent forms on the formal
 neighbourhood of \({}^cT^*_{\partial X}X\setminus0\). The homogeneous
 de Rham cohomology is generated over \(H^*(Z)\) by \(1\), \(d\log r\),
 \(d\log x\) and \(d\log x\wedge d\log r\) \cite[p.~13]{MN}
@@ -2177,7 +2376,10 @@ Since \(s_0\) is multiplicative, \(bs-sb\) can be computed term by term,
 and the only defect comes from moving \(\varphi\) past \(s_0(f_1)\). Up to
 the convention for the cyclic face this gives \(\sigma=[b,s]\). The chain
 \(\sigma(z)\) lies in \(\cK\), because \([\varphi,\cdot\,]\) is supported
-where \(d\varphi\ne0\), in the interior. So \(\sigma_*\) is the connecting
+where \(d\varphi\ne0\), in the interior. (Here \(\varphi\) is a function of
+\(x\) alone, so pseudolocality applies: \([\varphi,P]\) is a compactly
+supported interior operator modulo \(\cI\), by
+Lemma~\ref{cc:lem:local}(1),(2).) So \(\sigma_*\) is the connecting
 map. It lowers order by one, and on leading symbols
 \[
  \chi\bigl(\sigma(z)\bigr)=-i\,\iota_{H_\varphi}\chi(z)\qquad\text{for
@@ -2273,7 +2475,8 @@ where \(a_1\) is the coefficient of \(x^1\). \(\HH_1(\Id)\cong\C\), generated by
 sums in increasing powers of \(x\), complete in that direction, and \(b\)
 raises \(x\)-degree. The associated graded algebra is the commutative
 algebra \(\cS(\R_\tau)[x,x^{-1}]\) (a graded piece for each power of
-\(x\)). By HKR (B5) and Lemma~\ref{lem:fun},
+\(x\)). By HKR (B5) for Schwartz and formal Laurent coefficients
+(Theorem~\ref{ha:thm:variants}) and Lemma~\ref{lem:fun},
 \[
  E^1\cong\bigl\{\text{forms on }\R_\tau\times(\text{punctured formal disc})
  \text{, Schwartz in }\tau\text{, Laurent in }x\bigr\}
@@ -2304,8 +2507,15 @@ class determined by \(\int g_0\,d\tau\).
 The \(E^2\) term sits in \(x\)-degree \(1\) for \(k=0\) and in \(x\)-degree
 \(0\) for \(k=1\). Higher differentials raise \(x\)-degree by \(r\ge2\)
 and lower \(k\) by one, so they vanish. Convergence holds by
-completeness in the direction of increasing powers of \(x\), and here the
-corrections never increase pole orders.
+completeness in the direction of increasing powers of \(x\). Unlike the
+order filtration of Remark~\ref{rem:poles}, the filtration here is by the
+powers of \(x\) themselves. In a fixed pole stage (each tensor factor in
+\(x^{-L}\cS(\R)[[x]]\)) only finitely many multidegrees have a given total
+\(x\)-degree, so each stage is complete. As in \cite{MN}, we take for
+granted that the corrections can be kept in a fixed stage. The obstruction
+of Example~\ref{ha:ex:obstruction} concerns the order filtration and does
+not apply directly here, but Appendix~\ref{ha:sec} does not treat this
+case.
 
 \emph{The generators.} Lemma~\ref{lem:commutators}(3) shows directly that
 the \(x^1\)-coefficient of a commutator is a derivative, so its integral
@@ -2377,7 +2587,7 @@ only in \(y\). Hence, componentwise,
 \]
 Since \(\Psi^{-\infty}(H)=\CI(H)\widehat\otimes\CI(H)\) is of the form
 in Lemma~\ref{lem:Hunital}, Morita invariance for smoothing kernels
-(Section~\ref{subsec:morita}) removes it. MN use the Künneth formula
+(Lemma~\ref{ha:lem:morita}) removes it. MN use the Künneth formula
 \cite{Karoubi} for the same purpose.
 
 \begin{proposition}[MN Proposition 6, for \(N\) components]\label{prop:Id}
@@ -2457,8 +2667,8 @@ For \(A\in x^p\Psic^m(X)\) put
 \]
 \end{definition}
 
-By (B3), \(Z\) is holomorphic for \(\operatorname{Re}z>-p+1\) and
-\(\operatorname{Re}s>m+n\). It extends meromorphically, with at most
+By (B3) (Theorem~\ref{tr:thm:mero}), \(Z\) is holomorphic for
+\(\operatorname{Re}z>-p+1\) and \(\operatorname{Re}s>m+n\). It extends meromorphically, with at most
 simple poles on the lines \(z=-p+1-j\) and \(s=m+n-k\), \(j,k\in\N_0\)
 \cite[Lemma~4]{MN}. The reason for the shift \(-p+1\) in \(z\) is that the
 cusp density is \(x^{-2}dx\,\nu_\partial\): the integral \(\int_0x^{z+p}
@@ -2603,7 +2813,8 @@ For \(A\) with kernel supported in \((X^\circ)^2\), choose \(Q'\in
 \Psi^1(2X)\) positive and elliptic with \(Q'A-QA\) smoothing. Then
 \(\Tr(AQ^{-s})-\Tr(AQ'^{-s})\) is regular at \(0\), so \(\Trs(A)=\TrR(A)\).
 Such operators are dense in \(\Is\), and both sides are continuous. The
-formula is the local formula (B8). The singular density \(x^{-2}\) comes
+formula is the local formula (B8) (Theorems~\ref{tr:thm:res}
+and~\ref{tr:thm:mero}(1)). The singular density \(x^{-2}\) comes
 from \(\omega^n\), which contains \(dx/x^2\).
 \end{proof}
 
@@ -2659,13 +2870,19 @@ kernel of \(x^kc(D_t)Q^{-s}\) is \(x^k(2\pi)^{-1}\int c(\tau)\langle\tau
 up to terms that are holomorphic near the origin. The first factor has a
 pole at \(z=0\) only if \(k=1\), with residue \(1\). The second factor has
 a pole at \(s=0\) with residue \((2\pi)^{-1}(c_{-1}(1)+c_{-1}(-1))\), and
-regular value \(\bTr(c)\). So, for \(k=1\),
-\[
+regular value \(\bTr(c)+\gamma'(0)/2\pi\) (Proposition~\ref{prop:Tr8}).
+Writing \(c\sim\sum_jc^\pm_j|\tau|^j\) as \(\tau\to\pm\infty\) and
+expanding \(\langle\tau\rangle^{-s}=|\tau|^{-s}\sum_l\binom{-s/2}{l}
+\tau^{-2l}\), one finds \(\gamma'(0)=\sum_{l\ge1}\frac{(-1)^l}{2l}
+(c^+_{2l-1}+c^-_{2l-1})\). So, for \(k=1\),
+\begin{gather*}
  \Trds(A)=\frac{c_{-1}(1)+c_{-1}(-1)}{2\pi},\qquad
- \hTrd(A)=\bTr(c),\qquad
+ \hTrd(A)=\bTr(c)+\frac{\gamma'(0)}{2\pi},\\
  \hTrs(A)=\FP_{z=0}\!\int_0^1\varphi\,x^{z-1}dx\cdot\Trds(A),
-\]
-and for \(k\ne1\), \(\Trds(A)=\hTrd(A)=0\). This illustrates
+\end{gather*}
+and for \(k\ne1\), \(\Trds(A)=\hTrd(A)=0\). The correction vanishes if
+\(c\) has order \(\le0\); for \(c=\langle\tau\rangle\) it is
+\(-1/2\pi\) (Example~\ref{tr:ex:counter}). This illustrates
 Lemma~\ref{lem:Trdsformula} and Corollary~\ref{cor:Tr61}. The functional
 \(\hTrs\) is a residue in the fibre variable with a Hadamard finite part
 in \(x\), and \(\hTrd\) is a regularized trace in the fibre variable with
@@ -2725,45 +2942,45 @@ On the diagonal of \(X_c^2\) the kernel of \(A\) is \(B\,\nu\) with
 \(\int x^zB\,x^{-2}dx\,\nu_\partial\) comes from \(k=1\) and equals
 \(\int_{\partial X}B_{(1)}\nu_\partial\). This is the kernel of
 \(A_{(1)}\) at \(\{0\}\times\Delta_{\partial X}\) integrated over the
-boundary, which is \(\bTr(A_{(1)})\) by Fourier inversion. The trace
-property was proved in Proposition~\ref{prop:Idpoint}. Independence is as
-in Lemma~\ref{lem:Trds}.
+boundary, which is \(\bTr(A_{(1)})\) by Fourier inversion
+(Theorem~\ref{tr:thm:mero}(2)). The trace property was proved in
+Proposition~\ref{prop:Idpoint}. Independence is as in
+Lemma~\ref{lem:Trds}.
 \end{proof}
 
 Melrose's regularization of \(\bTr\) to all of \(\Psis^{\Z}(H)\)
-\cite{MelroseEta} works as follows \cite[(58)--(59)]{MN}. For
-\(B\in\Psis^m(H)\) and \(p\ge m+\dim H+2\), the function
-\(h_p(\tau)=\Tr\bigl(\partial_\tau^pB(\tau)\bigr)\) is defined. Integrate it
-\(p+1\) times:
-\[
- \int_{-T}^T\int_0^{\tau_p}\cdots\int_0^{\tau_1}h_p\,d\tau\,d\tau_1\cdots
- d\tau_p\sim\sum_jc_jT^j+P(T)\log T ,
-\]
-and put \(\bTr(B)=c_0/2\pi\). Changing \(p\) changes the inner integral by
-a polynomial, which does not affect \(c_0\). The functional \(\bTr\) is a
-trace on \(\Psis^{\Z}(H)\): for \(p\) large, \(h_p([A,B])=\sum_l\binom pl
-\Tr[\partial^lA,\partial^{p-l}B]=0\), because each commutator is of total
-order less than \(-\dim H\).
+\cite{MelroseEta}, \cite[(58)--(59)]{MN}, takes \(p\) large, integrates
+\(h_p(\tau)=\Tr(\partial_\tau^pB(\tau))\) \(p\) times from \(0\), and takes
+\((2\pi)^{-1}\) times the constant term of \(\int_{-T}^T\) as
+\(T\to\infty\) (Definition~\ref{tr:def:bTr}). It does not depend on \(p\),
+it vanishes on odd families, and it is a trace on \(\Psis^{\Z}(H)\)
+(Theorem~\ref{tr:thm:bTr}).
 
-\begin{proposition}[MN Proposition 8]\label{prop:Tr8}
-Let \(Q_0=(D_t^2+\Delta_H+1)^{1/2}\). For \(B\in\Psis^m(H)\), the function
-\(\bTr(BQ_0^{-s})\) is meromorphic, and
+\begin{proposition}[MN Proposition 8, corrected]\label{prop:Tr8}
+Let \(Q_0=(D_t^2+\Delta_H+1)^{1/2}\), or more generally let \(Q_0(s)\) be a
+holomorphic suspended family of order \(-s\) with \(Q_0(0)=\mathrm{Id}\).
+For \(B\in\Psis^m(H)\), the function \(\bTr(BQ_0^{-s})\) (defined by the
+integral for \(\operatorname{Re}s\) large) is meromorphic, and
 \[
- s\,\bTr(BQ_0^{-s})=\widetilde{\Tr}(B)+s\,\bTr(B)+O(s^2),
+ s\,\bTr(BQ_0^{-s})=\widetilde{\Tr}(B)+s\Bigl(\bTr(B)+\frac{\gamma_B'(0)}
+ {2\pi}\Bigr)+O(s^2),
 \]
 where \(\widetilde\Tr(B)=(2\pi)^{-n}\int b_{-n}\) is the Wodzicki residue of
-\(B\) regarded as an operator on \(\R\times H\) (\(n=\dim H+1\)).
+\(B\) regarded as an operator on \(\R\times H\) (\(n=\dim H+1\)), and
+\(\gamma_B(s)\) is the sum over \(\tau\to\pm\infty\) of the coefficients of
+\(|\tau|^{-n-s}\) (after integration over the fibres of \(T^*H\)) in the
+symbol of \(BQ_0^{-s}\). The correction \(\gamma_B'(0)\) is local, and it
+is not zero in general.
 \end{proposition}
 
 \begin{proof}
-Apply the definition with \(BQ_0^{-s}\) in place of \(B\). The function
-\(h_p(\tau;s)\) is entire in \(s\) and has an expansion
-\(\sum_kd_k^\pm(s)|\tau|^{m-p+n-1-s-k}\) as \(\tau\to\pm\infty\), with
-holomorphic coefficients. Integrating \(p+1\) times produces a simple pole
-at \(s=0\) from the terms that become \(|T|^{-s}\). Its residue is the sum
-of the coefficients of \(|\tau|^{-1}\) in \(\Tr B(\tau)\) at
-\(\pm\infty\), divided by \(2\pi\); this is the residue of \(B\) on
-\(\R\times H\). The regular value is \(\bTr(B)\).
+This is Theorem~\ref{tr:thm:susreg} with \(C(s)=BQ_0^{-s}\). The residue is
+\(\gamma_B(0)/2\pi=\widetilde\Tr(B)\). For the regular value one compares
+the \(p\)-fold integration by parts in the definition of \(\bTr\) with the
+continuation in \(s\); the boundary terms produce \(\gamma_B'(0)\).
+\cite[Prop.~8]{MN} omits this term. For \(H\) a point and
+\(B=\langle D_t\rangle\), \(\gamma_B(s)=1-s\), so the regular value is
+\(\bTr(B)-1/2\pi\) (Example~\ref{tr:ex:counter}).
 \end{proof}
 
 \begin{remark}[The functional in MN Proposition 8]\label{rem:Prop8}
@@ -2774,23 +2991,35 @@ The residue is \((2\pi)^{-1}(1+1)=1/\pi\), whereas \(\In([t,B])=
 general \(\bTr([t,B])\) picks out the difference of the
 \(|\tau|^0\)-coefficients at \(\pm\infty\), not the \(|\tau|^{-1}\)
 coefficients.) Only the residue description is used later, through
-Corollary~\ref{cor:Tr61}, so we take it as the definition.
+Corollary~\ref{cor:Tr61}, so we take it as the definition. The other claim
+of \cite[Prop.~8]{MN}, about the regular value, is corrected in
+Proposition~\ref{prop:Tr8} (item~\ref{item:Prop8reg} of
+Section~\ref{subsec:errata}).
 \end{remark}
 
-\begin{corollary}[MN Corollaries 1 and 2]\label{cor:Tr61}
+\begin{corollary}[MN Corollaries 1 and 2; (2) corrected]\label{cor:Tr61}
 For \(A\in x^{-\Z}\Psic^{\Z}(X)\):
 \begin{enumerate}
 \item \(\Trds(A)=\widetilde\Tr(A_{(1)})\), the residue of
 \(\Trd(AQ^{-s})\) at \(s=0\) \cite[(61)]{MN};
-\item if \(Q\) is asymptotically translation invariant, \(\In(Q)=Q_0\),
-then \(\hTrd(A)=\bTr(A_{(1)})\).
+\item if \(Q\) is translation invariant to all orders at \(\partial X\),
+with Taylor series \(Q_0^{-s}\) at the front face, then
+\[
+ \hTrd(A)=\bTr(A_{(1)})+\frac{\gamma'_{A_{(1)}}(0)}{2\pi},
+\]
+with the local correction \(\gamma_{A_{(1)}}\) of
+Proposition~\ref{prop:Tr8}, computed from \(A_{(1)}Q_0^{-s}\). \cite{MN}
+state this without the correction term.
 \end{enumerate}
 \end{corollary}
 
 \begin{proof}
-If \(\In(Q)=Q_0\) and \(Q\) is translation invariant to all orders, then
-\((AQ^{-s})_{(1)}=A_{(1)}Q_0^{-s}\), and Proposition~\ref{prop:Tr8}
-applies. In general the residue does not depend on \(Q\).
+If \(Q\) is translation invariant to all orders, then
+\((AQ^{-s})_{(1)}=A_{(1)}Q_0^{-s}\), and by Lemma~\ref{lem:LR} and
+Theorem~\ref{tr:thm:mero}(2), \(\hTrd(A)\) is the regular value at \(s=0\)
+of \(\bTr(A_{(1)}Q_0^{-s})\). Proposition~\ref{prop:Tr8} applies
+(Correction~\ref{tr:corr:Prop8}). In general the residue does not depend
+on \(Q\).
 \end{proof}
 
 \begin{lemma}[MN Lemma 11]\label{lem:hTrdQ}
@@ -3265,7 +3494,9 @@ projection onto \(E\). Then \(x^{-\Z}\Psic^{\Z}(X;E)=eM_N(x^{-\Z}
 \Psic^{\Z}(X))e\), and similarly for all the quotient algebras and ideals.
 The idempotent \(e\) lies in no proper two-sided ideal, so each corner
 algebra is Morita equivalent to the trivial-bundle algebra, and the
-Hochschild groups are the same (B6) \cite[Prop.~13]{MN}. In the symbol
+Hochschild groups are the same (B6) \cite[Prop.~13]{MN}
+(Proposition~\ref{ha:prop:corner} and Remark~\ref{ha:rem:bundles}; for the
+H-unital ideals the bundle version is sketched there). In the symbol
 algebras this replaces \(x^{-\Z}\mathcal G(\cT)\) by
 \(x^{-\Z}\mathcal G(\cT;\hom E)\), and the HKR map uses the fibre trace.
 All trace functionals extend by composing with the fibre trace \(\tr\).
@@ -3412,7 +3643,8 @@ If \(A\) is fully elliptic and \(B\in x^{-\Z}\Psic^{\Z}(X;E)\) satisfies
 \end{lemma}
 
 \begin{proof}
-By (B2), \(A\) has a generalized inverse \(B_0\) with \(AB_0=1-\Pi_1\) and
+By (B2) (Theorem~\ref{cc:thm:fredholm}(3)), \(A\) has a generalized
+inverse \(B_0\) with \(AB_0=1-\Pi_1\) and
 \(B_0A=1-\Pi_0\), where \(\Pi_0\) projects onto \(\ker A\) and \(\Pi_1\)
 onto a complement of the range. Both are finite rank and lie in \(\cI\).
 Then
@@ -3464,6 +3696,23 @@ Since \(\Trds\) is a trace, the last term equals
 \((\hTrd+\hTrs)(B\widetilde D(A)+\widetilde D(A)B)\). Finally \(\IF\)
 vanishes if an argument lies in \(\cI\).
 \end{proof}
+
+\begin{remark}[General regularizing families]\label{rem:IFkappa}
+The proof uses that \(Q^{-s}\) is a one-parameter group, through
+\(L_2'(0)+L_3'(0)=0\). If \(Q^{-s}\) is replaced by an arbitrary admissible
+family \(Q(s)\) (Appendix~\ref{tr:sec}), then \(Q(s)Q(u)-Q(s+u)=su\,W\),
+and Proposition~\ref{tr:prop:transfer}(2) shows that
+\[
+ \IF_Q(A,B)=\tfrac12\bigl(\hTrd+\hTrs\bigr)\bigl(B\widetilde D(A)+
+ \widetilde D(A)B\bigr)+\tfrac12\Trds\bigl([A,B]\kappa_Q\bigr),\qquad
+ \kappa_Q=Q''(0)-Q'(0)^2\in\Psic^0 .
+\]
+The extra term is the coboundary of \(C\mapsto\frac12\Trds(C\kappa_Q)\). It
+vanishes when \([A,B]\in\cI\) (indeed when \([A,B]\in\Is+\Id\)), in
+particular when \([B]=[A]^{-1}\) in \(\cA\), and it vanishes identically
+for genuine complex powers. So Theorem~\ref{thm:index} and everything
+after it hold verbatim for any admissible family.
+\end{remark}
 
 \begin{correction}[The sign of \(\widetilde D\)]\label{corr:Dtilde}
 \cite[(21)]{MN} defines \(\widetilde D(A)=[\lQ-\lx,A]\), while
@@ -3547,7 +3796,9 @@ should be \(\TrR(A[\lQ,A^{-1}])=-\TrR(A^{-1}[\lQ,A])\). The sign of the
 eta term is correct; see Example~\ref{ex:interval-index}. Identifying
 \(\etab\) with the eta invariant of \cite{MelroseEta} assumes that its
 parametrization of the suspended variable agrees with MN Definition~4;
-reversing that parametrization reverses the sign. The interval example
+reversing that parametrization reverses the sign. (Here \(\etab\) is
+identified with \(\eta(A_0)\) up to the local term \(\delta_Q\) of
+Proposition~\ref{prop:eta}.) The interval example
 and the Atiyah--Patodi--Singer convention support the choice made here.
 \end{correction}
 
@@ -3557,25 +3808,25 @@ becomes of them under the hypotheses of Theorem~\ref{thm:reduced} below.
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[>=Latex,font=\footnotesize,
-  cell/.style={draw,rounded corners=2pt,align=center,text width=3.7cm,
+  cell/.style={draw,rounded corners=2pt,align=center,text width=4.2cm,
     minimum height=11mm,inner sep=3pt}]
- \node[draw,rounded corners=2pt,fill=gray!8,inner sep=4pt] (top) at (3.1,2.6)
+ \node[draw,rounded corners=2pt,fill=gray!8,inner sep=4pt] (top) at (3.3,2.6)
    {\(\IF(A,A^{-1})=\tfrac12(\hTrd+\hTrs)\bigl(A^{-1}\widetilde D(A)+
     \widetilde D(A)A^{-1}\bigr)\),\quad \(\widetilde D=D_{\lx}-D_{\lQ}\)};
  \node[font=\small] at (1.0,1.5) {\(D_{\lx}\)};
- \node[font=\small] at (5.2,1.5) {\(-D_{\lQ}\)};
- \node[font=\small,anchor=east] at (-1.1,0.2) {\(\hTrd\)};
- \node[font=\small,anchor=east] at (-1.1,-1.2) {\(\hTrs\)};
+ \node[font=\small] at (5.7,1.5) {\(-D_{\lQ}\)};
+ \node[font=\small,anchor=east] at (-1.35,0.2) {\(\hTrd\)};
+ \node[font=\small,anchor=east] at (-1.35,-1.2) {\(\hTrs\)};
  \node[cell] (dx) at (1.0,0.2) {\(-\tfrac12\etab(A)\)\\[1pt]
-   {\color{gray!40!black}\(=-\tfrac12\eta(A_0)\), Prop.~\ref{prop:eta}}};
- \node[cell,draw=red!70!black] (dq) at (5.2,0.2) {{\color{red!70!black}\(-\beta_Q(A)\)}\\[1pt]
+   {\scriptsize\color{gray!40!black}\(=-\tfrac12\bigl(\eta(A_0)+\delta_Q\bigr)\), Prop.~\ref{prop:eta}}};
+ \node[cell,draw=red!70!black] (dq) at (5.7,0.2) {{\color{red!70!black}\(-\beta_Q(A)\)}\\[1pt]
    {\color{gray!40!black}\(=0\), Lemma~\ref{lem:betaQ}}};
  \node[cell] (sx) at (1.0,-1.2) {\(\gamma(A)\)\\[1pt]
    {\color{gray!40!black}\(=0\), Lemma~\ref{lem:gamma}}};
- \node[cell,draw=red!70!black] (sq) at (5.2,-1.2) {{\color{red!70!black}\(-\bAS(A)=\AS(A)\)}\\[1pt]
+ \node[cell,draw=red!70!black] (sq) at (5.7,-1.2) {{\color{red!70!black}\(-\bAS(A)=\AS(A)\)}\\[1pt]
    {\color{gray!40!black}\(=\TrR(A[\lQ,A^{-1}])\)}};
  \node[draw,very thick,blue!70!black,rounded corners=2pt,inner sep=4pt,text=black]
-   (ind) at (10.4,-0.5) {\(\Ind(A)=\AS(A)-\tfrac12\eta(A_0)\)};
+   (ind) at (11.2,-0.5) {\(\Ind(A)=\AS(A)-\tfrac12\bigl(\eta(A_0)+\delta_Q\bigr)\)};
  \draw[->,thick,blue!70!black] (dx.north) -- (1.0,1.0) -| (ind.north);
  \draw[->,thick,blue!70!black] (sq.east) -| (ind.south);
  \draw[->,gray] (dq.east) -- ++(0.35,0) node[right,font=\scriptsize] {\(0\)};
@@ -3590,74 +3841,109 @@ red carry the signs corrected from \cite[(93)]{MN}
 (Correction~\ref{corr:ASsign}). For \(A\) fully elliptic and translation
 invariant near the boundary with normal indicial family, and \(Q\) as in
 Theorem~\ref{thm:reduced}, the grey annotations apply: \(\gamma\) and
-\(\beta_Q\) vanish, \(\etab\) is the eta invariant of \(A_0\), and the
-result is the reduced formula.}
+\(\beta_Q\) vanish, \(\etab\) is the eta invariant of \(A_0\) plus the
+local correction \(\delta_Q\) coming from \cite[Prop.~8]{MN}
+(item~\ref{item:Prop8reg} of Section~\ref{subsec:errata}), and the result
+is the reduced formula. In the examples of Section~\ref{sec:examples},
+\(\delta_Q=0\).}
 \label{fig:fourterms}
 \end{figure}
 
 \subsection{The eta term}
 
-\begin{proposition}[MN Proposition 17]\label{prop:eta}
-Let \(A\in\Psic^m(X;E)\) be fully elliptic, and let \(Q\) be
-asymptotically translation invariant. Let \(A_0=\In(A)\in\Psis^m(\partial
-X;E)\) and \(t=1/x\). Then
+\begin{proposition}[MN Proposition 17, corrected]\label{prop:eta}
+Let \(A\in\Psic^m(X;E)\) be fully elliptic, and let \(Q\) be translation
+invariant to all orders at \(\partial X\), with Taylor series \(Q_0^{-s}\)
+at the front face. Let \(A_0=\In(A)\in\Psis^m(\partial X;E)\) and
+\(t=1/x\). Then
 \[
- \etab(A)=2\,\bTr\bigl(A_0^{-1}[t,A_0]\bigr)=\frac1{\pi i}\,
+ \etab(A)=\eta(A_0)+\delta_Q(A),\qquad
+ \eta(A_0)=2\,\bTr\bigl(A_0^{-1}[t,A_0]\bigr)=\frac1{\pi i}\,
  \overline{\int_{\R}}\Tr\bigl(A_0(\tau)^{-1}\partial_\tau A_0(\tau)\bigr)
  d\tau ,
 \]
-which is Melrose's eta invariant \(\eta(A_0)\) of \cite{MelroseEta}, (B7).
+where \(\eta(A_0)\) is Melrose's eta invariant of \cite{MelroseEta}, (B7),
+and \(\delta_Q(A)=(2\pi)^{-1}\gamma'(0)\), with \(\gamma\) the correction
+of Proposition~\ref{prop:Tr8} computed from \(A_0^{-1}[t,A_0]Q_0^{-s}\)
+and \([t,A_0]A_0^{-1}Q_0^{-s}\). The term \(\delta_Q(A)\) is a local
+functional of the boundary symbols of \(A\) and \(Q\). It vanishes:
+\begin{enumerate}
+\item when the terms of homogeneity \(-n-s\) of these two symbols are odd
+in \(\tau\); in particular when \(\partial X\) is a point and \(Q_0^{-s}\)
+is even in \(\tau\) (Example~\ref{ex:interval-index});
+\item when \(n\) is odd and \(A\) is a differential operator
+(Remark~\ref{tr:rem:parity}, a sketch);
+\item when \(A_0=\sigma(i\tau+B_\partial)\) is in APS normal form and
+\(Q_0^{-s}=(D_t^2+B_\partial^2)^{-s/2}\) (Proposition~\ref{tr:prop:etabar}(ii));
+\item when \(A\) is a Dirac operator compatible with a Clifford structure
+and \(Q=(A^*A+1)^{1/2}\) (Remark~\ref{tr:rem:plusone}, quoting
+Bismut--Freed \cite{BismutFreed}).
+\end{enumerate}
 \end{proposition}
 
 \begin{proof}
-A parametrix \(B\in\Psic^{-m}\) has \(\In(B)=A_0^{-1}\). By
+This is Proposition~\ref{tr:prop:etabar}(i). In outline: a parametrix
+\(B\in\Psic^{-m}\) has \(\In(B)=A_0^{-1}\). By
 Lemma~\ref{lem:twist}(3), \([\lx,A]\in x\Psic^{m-1}\) with
 \(\In(x^{-1}[\lx,A])=-[t,A_0]\) \cite[(95)]{MN}. Since \(x\) commutes with
 everything to leading order, the coefficient of \(x^1\) in \(B[\lx,A]\) is
-\(-A_0^{-1}[t,A_0]\), and in \([\lx,A]B\) it is \(-[t,A_0]A_0^{-1}\). By
-Corollary~\ref{cor:Tr61}(2),
+\(-C_1\), \(C_1=A_0^{-1}[t,A_0]\), and in \([\lx,A]B\) it is \(-C_2\),
+\(C_2=[t,A_0]A_0^{-1}\). By the corrected Corollary~\ref{cor:Tr61}(2),
 \[
- \hTrd(B[\lx,A])=-\bTr(A_0^{-1}[t,A_0])=-\bTr([t,A_0]A_0^{-1})
- =\hTrd([\lx,A]B),
+ \etab(A)=\bTr(C_1)+\bTr(C_2)+\frac{\gamma_{C_1}'(0)+\gamma_{C_2}'(0)}{2\pi},
 \]
-using that \(\bTr\) is a trace on \(\Psis^{\Z}\) (B7). Hence
-\(\etab(A)=-(-2\bTr(A_0^{-1}[t,A_0]))=2\bTr(A_0^{-1}[t,A_0])\). By
-\eqref{eq:Inkernel}, \(\In([t,A_0])=-i\partial_\tau A_0\). So
-\(2\bTr(A_0^{-1}[t,A_0])=2(2\pi)^{-1}\overline\int\Tr(A_0^{-1}(-i)\partial_\tau
-A_0)\,d\tau\), which is the second expression.
+and \(\bTr(C_2)=\bTr(C_1)\) because \(\bTr\) is a trace on \(\Psis^{\Z}\)
+(Theorem~\ref{tr:thm:bTr}). By \eqref{eq:Inkernel},
+\(\In([t,A_0])=-i\partial_\tau A_0\), so \(2\bTr(C_1)=2(2\pi)^{-1}
+\overline\int\Tr(A_0^{-1}(-i)\partial_\tau A_0)\,d\tau\), which is the
+second expression for \(\eta(A_0)\). For (1): \(\gamma(s)\) is the sum of
+the values at \(\tau=+1\) and \(\tau=-1\) of the fibre integrals of the
+terms of homogeneity \(-n-s\), which cancel for odd terms. If
+\(\partial X\) is a point, that term of \(C_jQ_0^{-s}\) is the product of
+the principal symbols, \(-im\tau^{-1}\) times that of \(Q_0^{-s}\), since
+\(C_j=-iA_0^{-1}\partial_\tau A_0\) up to order; it is odd when
+\(Q_0^{-s}\) is even. For (2)--(4) see the cited results.
 \end{proof}
 
 \begin{correction}[The proof of MN Proposition 17]\label{corr:eta}
 The proof in \cite{MN} correctly obtains
-\(\hTrd(B[\lx,A])=-\bTr(A_0^{-1}[t,A_0])=\hTrd([\lx,A]B)\), but then
+\(\hTrd(B[\lx,A])=-\bTr(A_0^{-1}[t,A_0])=\hTrd([\lx,A]B)\), up to the local
+correction of Corollary~\ref{cor:Tr61}(2), but then
 concludes \(\etab(A)=-\bTr(A_0^{-1}[t,A_0])\). With definition
-\cite[(89)]{MN} the conclusion is \(2\bTr(A_0^{-1}[t,A_0])\), in agreement
-with \cite[(24)]{MN}, where \([\lx,A_0]\) should read \([t,A_0]\). Also,
+\cite[(89)]{MN} the conclusion is \(2\bTr(A_0^{-1}[t,A_0])+\delta_Q(A)\), in
+agreement with \cite[(24)]{MN} when \(\delta_Q=0\); there \([\lx,A_0]\)
+should read \([t,A_0]\). Also,
 the proof cites \cite[(54)]{MN}; what is needed is \cite[Cor.~2]{MN},
-which assumes that \(Q\) is asymptotically translation invariant. For
+in its corrected form, which assumes that \(Q\) is translation invariant to
+all orders at the boundary. For
 general \(Q\), Lemma~\ref{lem:hTrdQ} gives
-\(\etab(A;Q)=\eta(A_0)+\Trds\bigl((A^{-1}[\lx,A]+[\lx,A]A^{-1})
-\log(Q/Q_{\mathrm{ti}})\bigr)\), with \(Q_{\mathrm{ti}}\) asymptotically
-translation invariant. The correction is compensated by \(\beta_Q\), since
-the index does not depend on \(Q\).
+\(\etab(A;Q)=\eta(A_0)+\delta_{Q_{\mathrm{ti}}}(A)+\Trds\bigl((A^{-1}[\lx,A]
++[\lx,A]A^{-1})\log(Q/Q_{\mathrm{ti}})\bigr)\), with \(Q_{\mathrm{ti}}\)
+translation invariant to all orders. The corrections are compensated by
+\(\beta_Q\), since the index does not depend on \(Q\).
 \end{correction}
 
 \begin{corollary}[MN Corollary 3]\label{cor:Dirac}
 Suppose that near the boundary \(A=\sigma(-\partial_t+B_\partial)\), with
-\(\sigma\) a unitary bundle map and \(B_\partial\) self-adjoint on
-\(\partial X\) with \(0\notin\operatorname{spec}B_\partial\). This is the
+\(\sigma\) a unitary bundle map and \(B_\partial\) a self-adjoint first-order
+elliptic differential operator on \(\partial X\) with
+\(0\notin\operatorname{spec}B_\partial\). This is the
 APS normal form \(\sigma(\partial_u+B_\partial)\) in the inward normal
-variable \(u=-t\). Then \(\etab(A)=\eta_{\mathrm{APS}}(B_\partial)=
-\sum_\lambda\sgn\lambda\) (regularized).
+variable \(u=-t\). Then \(\eta(A_0)=\eta_{\mathrm{APS}}(B_\partial)=
+\sum_\lambda\sgn\lambda\) (regularized). If \(Q\) is as in
+Proposition~\ref{prop:eta}(3) or~(4), then also \(\etab(A)=
+\eta_{\mathrm{APS}}(B_\partial)\).
 \end{corollary}
 
 \begin{proof}
-\(\In(A,\tau)=e^{i\tau t}Ae^{-i\tau t}=\sigma(i\tau+B_\partial)\). On the
-\(\lambda\)-eigenspace,
+\(\In(A,\tau)=e^{i\tau t}Ae^{-i\tau t}=\sigma(i\tau+B_\partial)\). Formally,
+on the \(\lambda\)-eigenspace
 \(\Tr(A_0^{-1}\partial_\tau A_0)=i/(\lambda+i\tau)=(i\lambda+\tau)/
-(\lambda^2+\tau^2)\). The odd part integrates to zero over \([-T,T]\), and
+(\lambda^2+\tau^2)\); the odd part integrates to zero over \([-T,T]\), and
 \((\pi i)^{-1}\int i\lambda/(\lambda^2+\tau^2)\,d\tau=\sgn\lambda\). The
-regularized sum is the eta invariant (B7).
+proof that the regularized sum is \(\eta_{B_\partial}(0)\) is
+Theorem~\ref{tr:thm:Dirac}. The last statement is
+Proposition~\ref{prop:eta}(3),(4).
 \end{proof}
 
 \subsection{Simplifications}
@@ -3718,17 +4004,20 @@ Let \(A\in\Psic^m(X;E)\) be fully elliptic and translation invariant near
 the boundary, with normal indicial family \(A_0\). Let \(Q\) be positive,
 translation invariant near the boundary and commuting with \(A\) there.
 Then
-\[
- \Ind(A)=\AS(A)-\tfrac12\eta(A_0),\qquad
+\begin{gather*}
+ \Ind(A)=\AS(A)-\tfrac12\bigl(\eta(A_0)+\delta_Q(A)\bigr),\\
  \AS(A)=\TrR\bigl(A[\lQ,A^{-1}]\bigr)=-\TrR\bigl(A^{-1}[\lQ,A]\bigr),
-\]
-where the residue integral converges and \(\eta(A_0)\) is as in
-Proposition~\ref{prop:eta}.
+\end{gather*}
+where the residue integral converges, and \(\eta(A_0)\) and the local
+correction \(\delta_Q(A)\) are as in Proposition~\ref{prop:eta}. In
+particular \(\Ind(A)=\AS(A)-\frac12\eta(A_0)\) whenever \(\delta_Q(A)=0\),
+for instance in the cases (1)--(4) of Proposition~\ref{prop:eta}.
+\cite[(99)--(100)]{MN} state the formula without \(\delta_Q\).
 \end{theorem}
 
 \begin{proof}
 By Lemmas~\ref{lem:gamma} and~\ref{lem:betaQ}, \(\gamma=\beta_Q=0\), and
-by Proposition~\ref{prop:eta}, \(\etab(A)=\eta(A_0)\). The two terms of
+by Proposition~\ref{prop:eta}, \(\etab(A)=\eta(A_0)+\delta_Q(A)\). The two terms of
 \(\AS\) agree, because \(\hTrs([C_1,C_2])=-\Trds(C_1[\lx,C_2])\) vanishes
 for \(C_2=[\lQ,A]\in x^2\Psic\) (Lemma~\ref{lem:17}).
 \end{proof}
@@ -3782,8 +4071,9 @@ symbolic term.
 of \(Au=0\) decays at both ends, so \(\ker A\ne0\). Middle: the indicial
 families \(a_+-i\tau\) (right end) and \(a_-+i\tau\) (left end) trace
 vertical lines, which miss \(0\) because \(a_\pm\) are real and non-zero.
-Right: since \(\AS(A)=0\) and the ends contribute \(\eta=-\sgn a_+\) and
-\(\eta=\sgn a_-\), the formula \(\Ind A=\AS(A)-\frac12\eta(A_0)\) gives
+Right: since \(\AS(A)=0\), \(\delta_Q=0\) and the ends contribute
+\(\eta=-\sgn a_+\) and \(\eta=\sgn a_-\), the formula
+\(\Ind A=\AS(A)-\frac12\eta(A_0)\) gives
 \(\tfrac12(\sgn a_+-\sgn a_-)\) in all four cases.}
 \label{fig:interval}
 \end{figure}
@@ -3819,8 +4109,21 @@ there and Theorem~\ref{thm:reduced} applies. The symbol of \([\lQ,A]\) is
 \(-i\{\log\langle\xi\rangle+c_{-1}+\cdots,\,i\xi+a\}\), of order \(-1\),
 because the principal symbol \(i\xi\) of \(A\) does not depend on \(u\).
 So \(A^{-1}[\lQ,A]\) has order \(-2\), and its residue density
-(homogeneity \(-n=-1\)) vanishes: \(\AS(A)=0\). By
-Proposition~\ref{prop:eta}, at the right end
+(homogeneity \(-n=-1\)) vanishes: \(\AS(A)=0\).
+
+\emph{The correction \(\delta_Q\) vanishes.} Here \(\partial X\) consists
+of two points, so \(d=0\), and near each end \(Q_0^{-s}=(\tau^2+a_\pm^2+
+1)^{-s/2}\) is even in \(\tau\). At the right end \(C_1=C_2=
+A_0^{-1}[t,A_0]=-(a_+-i\tau)^{-1}=-(a_++i\tau)/(a_+^2+\tau^2)\), whose
+expansion begins with \(-i\tau^{-1}\). The term of homogeneity \(-1-s\) of
+\(C_1Q_0^{-s}\) is therefore \(-i\tau^{-1}|\tau|^{-s}\), which is odd in
+\(\tau\): its values at \(\tau=\pm1\) cancel, so \(\gamma(s)\equiv0\) in
+Proposition~\ref{prop:Tr8} (Theorem~\ref{tr:thm:susreg}). The left end is
+the same, with \(C_1=(a_-+i\tau)^{-1}\). Hence \(\delta_Q(A)=0\) exactly,
+by case (1) of Proposition~\ref{prop:eta} (this is also an instance of the
+parity statement (2), with \(n=1\), but the computation here is complete),
+and \(\etab(A)=\eta(A_0)\). By Proposition~\ref{prop:eta}, at the right
+end
 \[
  \eta=\frac1{\pi i}\int\frac{-i}{a_+-i\tau}\,d\tau=-\frac1\pi\int
  \frac{a_++i\tau}{a_+^2+\tau^2}\,d\tau=-\sgn a_+ ,
@@ -3849,7 +4152,12 @@ Corollary~\ref{cor:Dirac} give
 \[
  \Ind\eth^+=\AS(\eth)+\nu-\tfrac12\eta(\eth_\partial),
 \]
-where \(\nu\) is the interior correction of \cite[(110)]{MN}. This is the
+where \(\nu\) is the interior correction of \cite[(110)]{MN}. Here we take
+\(Q=(\eth^*\eth+1)^{1/2}\); the correction \(\delta_Q\) of
+Proposition~\ref{prop:eta} vanishes by Remark~\ref{tr:rem:plusone}, which
+quotes the local cancellation of Bismut--Freed \cite{BismutFreed}. For a
+general first-order \(\eth_\partial\) a local term
+\(-\frac12\delta_Q\) would remain. This is the
 APS theorem in the invertible case. The term
 \(\AS\) is the residue form of the Atiyah--Singer integrand, by the
 local index theorem. MN do not evaluate it further.
@@ -4036,13 +4344,25 @@ powers of \(x\)'']{HHb}. This is Melrose's b-trace defect formula. The
 two regularizations differ (\(x^z\) versus \(x_b^z=e^{-z/x}\)), but on the
 leading terms they agree.
 
+\appendix
+% The parts are found both when compiling from "Lecture draft/" and when
+% latexmk runs from the repository root (see the Makefile target mn).
+\makeatletter
+\providecommand*\input@path{}
+\g@addto@macro\input@path{{Lecture draft/}}
+\makeatother
+\input{MN-parts/cusp-calculus}
+\input{MN-parts/homological-algebra}
+\input{MN-parts/traces}
+
 \section*{Acknowledgement of sources}
 \addcontentsline{toc}{section}{Acknowledgement of sources}
 The mathematics in these notes is that of Melrose and Nistor \cite{MN}. The
 spectral sequence and HKR arguments follow \cite[Ch.~10]{MelroseMicro}.
 The Hochschild tools, the contraction lemmas and the comparison with the
-b-calculus follow the companion notes \cite{HHb}. Corrections and the
-worked examples are our own and are marked as such.
+b-calculus follow the companion notes \cite{HHb}. The appendices adapt
+\cite{MelroseMicro}, \cite{Wodzicki} and \cite{HHb}, as indicated there.
+Corrections and the worked examples are our own and are marked as such.
 
 \begin{thebibliography}{99}
 
@@ -4050,6 +4370,12 @@ worked examples are our own and are marked as such.
 M.~F. Atiyah, V.~K. Patodi and I.~M. Singer,
 \emph{Spectral asymmetry and Riemannian geometry I},
 Math. Proc. Cambridge Philos. Soc. \textbf{77} (1975), 43--69.
+
+\bibitem{BismutFreed}
+J.-M. Bismut and D.~S. Freed,
+\emph{The analysis of elliptic families. II. Dirac operators, eta
+invariants, and the holonomy theorem},
+Comm. Math. Phys. \textbf{107} (1986), 103--163.
 
 \bibitem{Brylinski}
 J.-L. Brylinski,
@@ -4112,8 +4438,10 @@ Physics} (L. H\"ormander and A. Melin, eds.), Birkh\"auser, 1996,
 
 \bibitem{MelroseMicro}
 R.~B. Melrose,
-\emph{Introduction to Microlocal Analysis}, lecture notes, chapters
-``Traces, determinants and the index'' and ``Hochschild homology''.
+\emph{Introduction to Microlocal Analysis}, lecture notes for a book in
+preparation, Massachusetts Institute of Technology. The whole book is
+used; we cite it by chapter, among them the chapters ``Hochschild
+homology'' and ``Traces, determinants and the index''.
 
 \bibitem{MN}
 R.~B. Melrose and V. Nistor,
@@ -4133,6 +4461,12 @@ Penn State preprint, 1994 (reference [20] of \cite{MN}).
 \bibitem{Notes}
 \emph{Notes on the b-Calculus and the APS Index Theorem}, based on lectures
 by P. Loya, companion notes in this repository.
+
+\bibitem{Seeley}
+R.~T. Seeley,
+\emph{Complex powers of an elliptic operator}, in \emph{Singular
+Integrals}, Proc. Sympos. Pure Math. \textbf{10}, Amer. Math. Soc.,
+Providence, RI, 1967, 288--307.
 
 \bibitem{Treves}
 F. Tr\`eves,

@@ -49,16 +49,19 @@ and the regularity of \(\eta_B(s)\) at \(s=0\). Only
 Proposition~\ref{tr:prop:etabar}(ii) uses complex powers, and only on the
 boundary. Every quoted step is marked.
 
-Two statements of the notes need correction; we prove the corrected forms.
+Two statements need correction; we prove the corrected forms, which the
+main text states.
 \begin{enumerate}
 \item The regular value at \(s=0\) of \(\bTr(BQ_0^{-s})\) is \emph{not} in
-general \(\bTr(B)\) \cite[Prop.~8]{MN} (Proposition~\ref{prop:Tr8}). There
+general \(\bTr(B)\), as claimed in \cite[Prop.~8]{MN}. There
 is a local correction term (Theorem~\ref{tr:thm:susreg},
-Example~\ref{tr:ex:counter}). It propagates to
+Example~\ref{tr:ex:counter}; corrected statement
+Proposition~\ref{prop:Tr8}). It propagates to
 Corollary~\ref{cor:Tr61}(2) and Proposition~\ref{prop:eta}; see
 Correction~\ref{tr:corr:Prop8}.
-\item For a general family \(Q(s)\), Proposition~\ref{prop:IF} acquires an
-extra coboundary term \(\frac12\Trds([A,B]\kappa_Q)\). This term vanishes
+\item If \(Q^{-s}\) is replaced by a general family \(Q(s)\), then
+Proposition~\ref{prop:IF} acquires an extra coboundary term,
+\(\frac12\Trds([A,B]\kappa_Q)\) (Remark~\ref{rem:IFkappa}). This term vanishes
 when \([A,B]\in\cI\), so the index theorem is unaffected
 (Proposition~\ref{tr:prop:transfer}).
 \end{enumerate}
@@ -88,7 +91,7 @@ of degree \(\mu-j\) and \(|a-\sum_{j<J}a_{\mu-j}|\le C_J|\zeta|^{\operatorname{R
 A change of \(\rho\) multiplies \(\beta(w)\) by a holomorphic power of a
 positive smooth function. So the definition does not depend on \(\rho\).
 
-\begin{lemma}[Seeley's computation]\label{tr:lem:polar}
+\begin{lemma}[Seeley's computation \cite{Seeley}]\label{tr:lem:polar}
 Let \(a(w)\) be a holomorphic family of order \(\mu(w)\), with compact
 support in \(u\). Then \(I(w;u)=\int_{\R^N}a(w;u,\zeta)\,d\zeta\) is
 holomorphic on \(\{\operatorname{Re}\mu(w)<-N\}\). For every \(J\in\N\),
@@ -1068,7 +1071,7 @@ The residue statement of \cite[Prop.~8]{MN}
 of \(\bTr(BQ_0^{-s})\) at \(s=0\) is \(\bTr(B)\) is false in general
 (Example~\ref{tr:ex:counter}). The correct statement is
 Theorem~\ref{tr:thm:susreg} with \(C(s)=BQ_0(s)\). Correspondingly,
-Corollary~\ref{cor:Tr61}(2) must read
+Corollary~\ref{cor:Tr61}(2) reads
 \[
  \hTrd(A)=\bTr\bigl(A_{(1)}\bigr)+\frac{\gamma_{A_{(1)}}'(0)}{2\pi},
 \]
@@ -1203,7 +1206,7 @@ term \(\pi(1-2a)=\pi\eta_B(0)\).
 Let \(A\in\Psic^m(X;E,F)\) be fully elliptic, with \(A_0=\In(A)\), and let
 \(Q\) be admissible and translation invariant to all orders at
 \(\partial X\), with Taylor series \(Q_0(s)\) (on \(E\) and on \(F\)).
-\begin{enumerate}
+\begin{enumerate}\renewcommand{\labelenumi}{(\roman{enumi})}
 \item \(\etab(A)=\eta(A_0)+\delta_Q(A)\), where
 \(\delta_Q(A)=(2\pi)^{-1}\gamma'(0)\) and \(\gamma\) is computed in
 Theorem~\ref{tr:thm:susreg} from \(A_0^{-1}[t,A_0]Q_0(s)\) and
@@ -1215,15 +1218,15 @@ vanishes when \(n\) is odd and \(A\) is a differential operator (sketch).
 \(\sigma(D_t^2+B^2)^{-s/2}\sigma^{-1}\) on \(F\). Then
 \(\etab(A)=\eta(A_0)=\eta_B(0)\). Such \(Q\) exist if one quotes the fact
 that \((D_t^2+B^2)^{-s/2}\) is an entire family in \(\Psis^{-s}(H)\)
-(Seeley's complex powers with the parameter \(\tau\), quoted:
-\cite[App.~B]{MN}). Then take
+(Seeley's complex powers \cite{Seeley} with the parameter \(\tau\),
+quoted: \cite[App.~B]{MN}). Then take
 \(Q(s)=\tilde\omega Q_0(s)\omega+Q_X(s)(1-\omega)\), with \(Q_X\) from
 Proposition~\ref{tr:prop:Q}.
 \end{enumerate}
 \end{proposition}
 
 \begin{proof}
-(1) As in the proof of Proposition~\ref{prop:eta},
+(i) As in the proof of Proposition~\ref{prop:eta},
 \((A^{-1}[\lx,A])_{(1)}=-A_0^{-1}[t,A_0]=:-C_1\) and
 \(([\lx,A]A^{-1})_{(1)}=-[t,A_0]A_0^{-1}=:-C_2\). By
 Correction~\ref{tr:corr:Prop8}, \(\etab(A)=-\hTrd(A^{-1}[\lx,A]+[\lx,A]
@@ -1231,7 +1234,7 @@ A^{-1})=\bTr(C_1)+\bTr(C_2)+(2\pi)^{-1}\gamma'_{C_1+C_2}(0)\). By
 Theorem~\ref{tr:thm:bTr}(3), \(\bTr(C_2)=\bTr(C_1)\), and
 \(2\bTr(C_1)=\eta(A_0)\).
 
-(2) We have \(C_1=(B+i\tau)^{-1}\) and \(C_2=\sigma C_1\sigma^{-1}\), so
+(ii) We have \(C_1=(B+i\tau)^{-1}\) and \(C_2=\sigma C_1\sigma^{-1}\), so
 \(\Tr(C_2Q_0^F(s))=\Tr(C_1Q_0^E(s))\). For \(\operatorname{Re}s>d\), the
 eigenvalue sum and the \(\tau\)-integral converge absolutely. The odd part
 integrates to \(0\), and
@@ -1261,7 +1264,7 @@ above (for \(|\lambda|>1\)) gives
 where the \(a_j\) are the heat coefficients of \(\theta(t)\). For Dirac
 operators compatible with a Clifford structure,
 \(\theta(t)=O(t^{1/2})\) as \(t\downarrow0\) (local cancellation of
-Bismut--Freed, quoted). So all \(a_j\) with \(j\le d\) vanish, and
+Bismut--Freed \cite{BismutFreed}, quoted). So all \(a_j\) with \(j\le d\) vanish, and
 \(\etab(A)=\eta_B(0)\) also for this \(Q\). For general first-order \(B\)
 the extra terms need not vanish. They are local and are compensated in the
 index formula by \(\beta_Q\) (Proposition~\ref{tr:prop:transfer}(3)).
@@ -1275,7 +1278,8 @@ The cusp picture has \(x_b=e^{-1/x}\), so \(u=-t\) and
 \(\partial_u=-\partial_t\). Hence \(A=\sigma(-\partial_t+B)\) with
 \(\sigma=c(du)\) and \(B=A^+\), and Theorem~\ref{tr:thm:Dirac} gives
 \(\eta(A_0)=\eta(A^+)\). Thus the corrected formula
-\(\Ind A=\AS(A)-\frac12\eta(A_0)\) of Theorem~\ref{thm:reduced} reproduces
+\(\Ind A=\AS(A)-\frac12\eta(A_0)\) of Theorem~\ref{thm:reduced}, in which
+\(\delta_Q=0\) here (Remark~\ref{tr:rem:plusone}), reproduces
 APS (with \(h=0\)). The sign of the eta term is fixed by the indicial
 convention \eqref{eq:Indef}, \(\In(A,\tau)=e^{i\tau t}Ae^{-i\tau t}\); with
 \(e^{-i\tau t}Ae^{i\tau t}\) instead, \(\eta(A_0)\) would change sign. This
