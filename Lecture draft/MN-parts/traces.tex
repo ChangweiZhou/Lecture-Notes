@@ -1,0 +1,1283 @@
+\section{Holomorphic families, residue traces and the suspended eta invariant}
+\label{tr:sec}
+
+\providecommand{\trOp}{\operatorname{Op}}
+\providecommand{\trOpc}{\operatorname{Op}_c}
+\providecommand{\trang}[1]{\langle #1\rangle}
+\providecommand{\trbint}{\overline{\int}}
+\providecommand{\trres}{\operatorname{res}}
+\providecommand{\trTrt}{\widetilde{\Tr}}
+\providecommand{\trRN}[1]{\overline{\R^{#1}}}
+\providecommand{\trP}{\mathcal P}
+\providecommand{\trad}{\operatorname{ad}}
+
+This appendix proves the background items (B3), (B7) and (B8) of
+Section~\ref{subsec:background}. We follow the route of
+\cite[Chs.~6 and 15]{MelroseMicro}. Instead of the complex powers
+\(Q^{-s}\) we use \emph{any} holomorphic family \(Q(s)\) of order \(-s\) with
+\(Q(0)=\mathrm{Id}\). Such families are written down explicitly, and nothing
+about the spectral theory of \(Q\) is needed. The items are proved in the
+following forms.
+\begin{itemize}
+\item[(B3\('\))] Proposition~\ref{tr:prop:Q} constructs an admissible family
+\(Q(s)\) in the cusp calculus. Its indicial family is translation
+invariant. Theorem~\ref{tr:thm:mero} proves the two-variable meromorphy of
+\(\Tr(A(s,z)x^z)\) for holomorphic families \(A(s,z)\) of order \(m-s\),
+with simple poles on the lines \(s=m+n-k\), \(z=1-p-j\), and identifies the
+residues. Proposition~\ref{tr:prop:transfer} lists which results of
+Sections~\ref{sec:residues}--\ref{sec:index} hold with \(Q(s)\) in place of
+\(Q^{-s}\). It also explains why the final results do not depend on the
+family.
+\item[(B7\('\))] Theorem~\ref{tr:thm:bTr}: \(\bTr\) is a trace on
+\(\Psis^{\Z}(H)\). Theorem~\ref{tr:thm:susreg} computes the
+regularization of \(\bTr\) by a holomorphic family; this corrects
+\cite[Prop.~8]{MN}. Theorem~\ref{tr:thm:Dirac}: for operators in APS
+normal form,
+\(\eta(A_0)=(\pi i)^{-1}\overline{\int}\Tr(A_0^{-1}\partial_\tau A_0)\,d\tau\)
+is the APS eta invariant \(\eta_{B}(0)\). Proposition~\ref{tr:prop:etabar}
+relates the functional \(\etab\) of \cite[(89)]{MN} to \(\eta(A_0)\).
+\item[(B8\('\))] Theorem~\ref{tr:thm:res}: the residue is a trace. It is
+given by the local formula and does not depend on the coordinates or on the
+regularizing family. Proposition~\ref{tr:prop:unique} proves uniqueness for
+\(n\ge2\) (for traces vanishing on smoothing operators).
+\end{itemize}
+The quoted inputs are these. From (B1) we use the local structure of the
+cusp and suspended calculi: composition, symbols, the Taylor series at the
+front face, and inverses of invertible elliptic suspended families. From
+\cite{Notes} we use the small-time heat expansion of \(\Tr(Be^{-tB^2})\)
+and the regularity of \(\eta_B(s)\) at \(s=0\). Only
+Proposition~\ref{tr:prop:etabar}(ii) uses complex powers, and only on the
+boundary. Every quoted step is marked.
+
+Two statements of the notes need correction; we prove the corrected forms.
+\begin{enumerate}
+\item The regular value at \(s=0\) of \(\bTr(BQ_0^{-s})\) is \emph{not} in
+general \(\bTr(B)\) \cite[Prop.~8]{MN} (Proposition~\ref{prop:Tr8}). There
+is a local correction term (Theorem~\ref{tr:thm:susreg},
+Example~\ref{tr:ex:counter}). It propagates to
+Corollary~\ref{cor:Tr61}(2) and Proposition~\ref{prop:eta}; see
+Correction~\ref{tr:corr:Prop8}.
+\item For a general family \(Q(s)\), Proposition~\ref{prop:IF} acquires an
+extra coboundary term \(\frac12\Trds([A,B]\kappa_Q)\). This term vanishes
+when \([A,B]\in\cI\), so the index theorem is unaffected
+(Proposition~\ref{tr:prop:transfer}).
+\end{enumerate}
+
+\subsection{Symbols of complex order, traces and Seeley's computation}
+\label{tr:subsec:prelim}
+
+Let \(\trRN N\) be the radial compactification of \(\R^N\). Let
+\(\rho\in\CI(\trRN N)\) be a boundary defining function that is positive on
+\(\R^N\) and equal to \(|\zeta|^{-1}\) for \(|\zeta|\ge1\).
+
+\begin{definition}\label{tr:def:sym}
+Let \(U\subset\R^k\) be open and \(\mu\in\C\). A \emph{classical symbol of
+order \(\mu\)} on \(U\times\R^N\) is a function \(a=\rho^{-\mu}\beta\) with
+\(\beta\in\CI(U\times\trRN N;M(r,\C))\). The Taylor series of \(\beta\) in
+\(1/|\zeta|\) at the sphere at infinity gives the expansion
+\(a\sim\sum_{j\ge0}a_{\mu-j}\), where
+\(a_{\mu-j}(u,\zeta)=|\zeta|^{\mu-j}\beta_j(u,\zeta/|\zeta|)\) is homogeneous
+of degree \(\mu-j\) and \(|a-\sum_{j<J}a_{\mu-j}|\le C_J|\zeta|^{\operatorname{Re}
+\mu-J}\) for \(|\zeta|\ge1\), locally uniformly in \(u\). Let
+\(\Omega\subset\C^l\) be open and \(\mu:\Omega\to\C\) holomorphic. A
+\emph{holomorphic family of order \(\mu(w)\)} is
+\(a(w)=\rho^{-\mu(w)}\beta(w)\) with \(\beta\in\CI(\Omega\times U\times
+\trRN N)\) holomorphic in \(w\).
+\end{definition}
+
+A change of \(\rho\) multiplies \(\beta(w)\) by a holomorphic power of a
+positive smooth function. So the definition does not depend on \(\rho\).
+
+\begin{lemma}[Seeley's computation]\label{tr:lem:polar}
+Let \(a(w)\) be a holomorphic family of order \(\mu(w)\), with compact
+support in \(u\). Then \(I(w;u)=\int_{\R^N}a(w;u,\zeta)\,d\zeta\) is
+holomorphic on \(\{\operatorname{Re}\mu(w)<-N\}\). For every \(J\in\N\),
+\[
+ I(w;u)=\sum_{j<J}\frac{1}{j-N-\mu(w)}\int_{S^{N-1}}a_{\mu(w)-j}(w;u,\theta)
+ \,d\theta+I_J(w;u),
+\]
+where \(I_J\) is holomorphic on \(\{\operatorname{Re}\mu(w)<J-N\}\) and smooth
+in \(u\). In particular, if \(\mu(w)=m-s\) with \(w=(s,z')\), then \(I\) is
+meromorphic in \(w\) with at most simple poles on the hyperplanes
+\(s=m+N-j\). The residue there is \(\int_{S^{N-1}}a_{-N}\,d\theta\), where
+\(a_{-N}\) is the term of homogeneity \(-N\) of the symbol \(a(w)\) at
+\(s=m+N-j\).
+\end{lemma}
+
+\begin{proof}
+The integral over \(|\zeta|\le1\) is holomorphic for all \(w\). For
+\(|\zeta|\ge1\) write \(\zeta=\theta/r\), \(r\in(0,1]\), so that
+\(d\zeta=r^{-N-1}dr\,d\theta\) and \(a=r^{-\mu}\beta(w;u,r,\theta)\). Taylor's
+formula gives \(\beta=\sum_{j<J}r^j\beta_j+r^J\beta_{(J)}\), with all terms
+smooth and holomorphic. For \(\operatorname{Re}\mu<-N\),
+\(\int_0^1r^{j-\mu-N-1}dr=(j-N-\mu)^{-1}\). The remainder
+\(\int_{S^{N-1}}\int_0^1r^{J-\mu-N-1}\beta_{(J)}\,dr\,d\theta\) is
+holomorphic for \(\operatorname{Re}\mu<J-N\). Since
+\(a_{\mu-j}(\theta)=\beta_j(\theta)\) on \(|\theta|=1\), this proves the
+formula. The expressions for different \(J\) agree where both are defined,
+so they define the continuation.
+\end{proof}
+
+\begin{lemma}\label{tr:lem:tc}
+Let \(M\) be a closed manifold of dimension \(N\) and \(E\to M\) a bundle.
+\begin{enumerate}
+\item If \(A\in\Psi^\mu(M;E)\) with \(\operatorname{Re}\mu<-N\), then \(A\)
+is of trace class, its kernel is continuous, and
+\(\Tr A=\int_M\tr K_A|_\Delta\). If \(A=\phi\trOp(a)\psi\) in a chart, with
+\(\phi,\psi\in\CI_c(U)\), then
+\(\Tr A=(2\pi)^{-N}\int\!\!\int\phi\psi\tr a\,d\zeta\,du\).
+\item If \(A\in\Psi^{\mu_1}\), \(B\in\Psi^{\mu_2}\) and
+\(\operatorname{Re}(\mu_1+\mu_2)<-N\), then \(\Tr(AB)=\Tr(BA)\).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(Adapted from \cite[Ch.~15]{MelroseMicro}.) (1) With a partition of unity,
+\(A\) is a finite sum of operators \(\phi\trOp(a)\psi\) plus a smoothing
+operator. For a smoothing operator the statement is standard. Write
+\(a=a'\trang\zeta^{\mu/2}\), with \(a'\) of order \(\mu/2\). In the left
+quantization \(\trOp(a')\trang D^{\mu/2}=\trOp(a)\) exactly. The operator
+\(\trang D^{\mu/2}\psi\) is Hilbert--Schmidt, because \(\trang
+\zeta^{\operatorname{Re}\mu/2}\in L^2\). The operator \(\phi\trOp(a')\) is
+Hilbert--Schmidt, because its kernel has \(L^2\) norm in \(u'\) at most
+\(\|a'(u,\cdot)\|_{L^2}\). So \(A\) is of trace class. Its trace is the
+pairing of the two kernels. Since \(a\) is integrable in \(\zeta\), this
+pairing is \(\int K_A(u,u)\,du\).
+
+(2) Regard the operators as elements of the H\"ormander classes
+\(\Psi^{\operatorname{Re}\mu}_{\mathrm H}\). The argument of (1) bounds the
+trace norm of \(\phi\trOp(a)\psi\) by \(C\sup|a|\trang\zeta^{-\nu}\) for
+\(\nu<-N\). So \(\Tr\) is continuous on \(\Psi^\nu_{\mathrm H}\), \(\nu<-N\).
+Cut off the local symbols of \(A\) to \(\chi(\epsilon\zeta)a\), keeping the
+part of \(A\) away from the diagonal. This gives smoothing operators
+\(A_\epsilon\to A\) in \(\Psi^{\operatorname{Re}\mu_1+\delta}_{\mathrm H}\)
+for every \(\delta>0\). Choose \(\delta\) with
+\(\operatorname{Re}(\mu_1+\mu_2)+\delta<-N\). Then \(\Tr(AB)=\lim\Tr(A_\epsilon
+B)=\lim\Tr(BA_\epsilon)=\Tr(BA)\).
+\end{proof}
+
+\subsection{The Wodzicki residue: item (B8)}\label{tr:subsec:res}
+
+Let \(M\) be closed, of dimension \(N\). (In (B8), \(N=n\).)
+
+\begin{definition}\label{tr:def:holM}
+Let \(\Omega\subset\C^l\) be open and \(\mu\) holomorphic on \(\Omega\). A
+family \(A(w)\in\Psi^{\mu(w)}(M;E)\) is \emph{holomorphic of order \(\mu\)}
+if the following hold.
+\begin{enumerate}
+\item For \(\chi\in\CI(M^2)\) vanishing near the diagonal, \(\chi K_{A(w)}\)
+is holomorphic with values in \(\CI(M^2)\).
+\item In every chart over which \(E\) is trivial, and for \(\phi,\psi\in
+\CI_c(U)\), one has \(\phi A(w)\psi=\phi\trOp(a(w))\psi+R(w)\). Here \(a(w)\)
+is a holomorphic family of classical symbols of order \(\mu(w)\), and
+\(R(w)\) is a holomorphic family of smoothing operators.
+\end{enumerate}
+An \emph{admissible family} is an entire family \(Q(s)\) of order \(-s\)
+with \(Q(0)=\mathrm{Id}\) whose principal symbol is scalar, \(q_s\,
+\mathrm{Id}_E\).
+\end{definition}
+
+\begin{lemma}\label{tr:lem:holcalc}
+\begin{enumerate}
+\item Products of holomorphic families are holomorphic families, and the
+orders add.
+\item (Division.) If \(F(s)\) is holomorphic of order \(\mu(s)\) and
+\(F(s_0)=0\), then \(F(s)=(s-s_0)F_1(s)\), with \(F_1\) holomorphic of order
+\(\mu(s)\). In two variables: if \(F(s,z)\) vanishes on \(\{s=0\}\cup
+\{z=0\}\), then \(F=szF_2\). If \(F(0,0)=0\), then \(F=sF_3+zF_4\). All
+the \(F_i\) are holomorphic of order \(\mu\).
+\item If the principal symbol of a holomorphic family of order \(\mu\)
+vanishes identically, it is a holomorphic family of order \(\mu-1\).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) is the composition theorem with holomorphic parameters. The composition
+integral and the Borel summation of the symbol expansion can be carried out
+locally uniformly in \(w\) \cite[Ch.~15]{MelroseMicro}. We do not repeat
+the argument.
+
+(2) Away from the diagonal, divide the holomorphic kernel. Near the
+diagonal, \(\phi F(s_0)\psi=0\) forces \(\rho^{-\mu(s_0)}\beta(s_0)\in
+S^{-\infty}\), so \(\beta(s_0)\) vanishes to infinite order at the sphere at
+infinity. Then \(S(s)=\phi\trOp(\rho^{-\mu(s)}\beta(s_0))\psi\) is a
+holomorphic \emph{smoothing} family. Replace \(\beta(s)\) by
+\(\beta(s)-\beta(s_0)\) and \(R(s)\) by \(R(s)+S(s)\). Both now vanish at
+\(s_0\), and both are divisible by \(s-s_0\) by Cauchy's formula. For two
+variables: if \(F(0,z)=0\), then \(F=sF_1\) with \(z\) a parameter. Then
+\(F_1(s,0)=0\) for \(s\ne0\), hence for all \(s\), and \(F_1=zF_2\). If
+\(F(0,0)=0\), apply the one-variable statement to \(F(s,z)-F(0,z)\) and to
+\(F(0,z)\).
+
+(3) We have \(\beta|_{\rho=0}=0\), so \(\beta=\rho\beta'\).
+\end{proof}
+
+\begin{proposition}\label{tr:prop:QM}
+Choose charts \(U_i\) trivializing \(E\), a subordinate partition of unity
+\(\phi_i\), and \(\psi_i\in\CI_c(U_i)\) with \(\psi_i=1\) near
+\(\supp\phi_i\). Then
+\[
+ Q_M(s)=\sum_i\phi_i\trOp\bigl(\trang\zeta^{-s}\bigr)\psi_i ,
+ \qquad\trang\zeta=(1+|\zeta|^2)^{1/2},
+\]
+is an admissible family. Its principal symbol is
+\(q_s=\sum_i\phi_i|\zeta|_{(i)}^{-s}\), where \(|\zeta|_{(i)}\) is the
+Euclidean length in the coordinates of \(U_i\).
+\end{proposition}
+
+\begin{proof}
+Each term is an entire family of order \(-s\). Since \(\trOp(1)=
+\mathrm{Id}\), we get \(Q_M(0)=\sum_i\phi_i\psi_i=\sum_i\phi_i=\mathrm{Id}\).
+\end{proof}
+
+Complex powers \(Q^{-s}\) of a positive elliptic \(Q\in\Psi^1\), when they
+are available, are also admissible. We do not need them.
+
+\begin{theorem}[The residue trace]\label{tr:thm:res}
+Let \(A\in\Psi^m(M;E)\), \(m\in\Z\). Let \(A(s)\) be a holomorphic family of
+order \(m-s\) on a connected open set \(\Omega\ni0\) that meets
+\(\{\operatorname{Re}s>m+N\}\), with \(A(0)=A\). For instance
+\(A(s)=AQ(s)\) with \(Q\) admissible. Then \(\Tr A(s)\) extends from
+\(\{\operatorname{Re}s>m+N\}\cap\Omega\) to a meromorphic function on
+\(\Omega\). It has at most simple poles, at \(s\in m+N-\N_0\), and
+\begin{equation}\label{tr:eq:res}
+ \Res_{s=0}\Tr A(s)=\TrR(A):=(2\pi)^{-N}\sum_i\int_{U_i}\phi_i(u)
+ \int_{|\zeta|=1}\tr a^{(i)}_{-N}(u,\zeta)\,dS(\zeta)\,du ,
+\end{equation}
+where \(a^{(i)}_{-N}\) is the term of homogeneity \(-N\) of the full symbol
+of \(A\) in the chart \(U_i\). Consequently:
+\begin{enumerate}
+\item \(\TrR(A)\) does not depend on the family \(A(s)\), in particular not
+on \(Q\).
+\item (Coordinate invariance.) The density
+\(\bigl(\int_{|\zeta|=1}\tr a_{-N}(u,\zeta)\,dS\bigr)|du|\) on \(M\) does not
+depend on the chart or on the trivialization of \(E\). On \(S^*M\) it is
+the fibre integral of \(\tr a_{-N}\,|\iota_R(\omega^N/N!)|\), where \(R\)
+is the radial vector field. This is the formula (B8) and \eqref{eq:wodzicki}.
+\item (Trace.) \(\TrR([A,B])=0\) for all \(A,B\in\Psi^{\Z}(M;E)\).
+\item \(\TrR\) vanishes on \(\Psi^{m}\) for \(m<-N\), in particular on
+\(\Psi^{-\infty}\).
+\item Let \(Q\) be admissible. Then \([A,Q(s)]=sM_A(s)\), where \(M_A\) is
+holomorphic of order \(m-1-s\). The map
+\(D_QA:=M_A(0)=\frac{d}{ds}[A,Q(s)]|_{s=0}\) is a derivation of order
+\(-1\), and \(\TrR(D_QA)=0\).
+\item Let \(\widehat\Tr_Q(A)\) be the regular value of \(\Tr(AQ(s))\) at
+\(s=0\). Then \(\widehat\Tr_Q([A,B])=\TrR(A\,D_QB)\). If \(Q'=Q+sF\) is
+another admissible family, then \(\widehat\Tr_{Q'}(A)=\widehat\Tr_Q(A)+
+\TrR(AF(0))\).
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Write \(A(s)=\sum_i\phi_iA(s)\psi_i+\sum_i\phi_iA(s)(1-\psi_i)\). The second
+sum is a holomorphic smoothing family whose kernel vanishes near the
+diagonal. So its trace vanishes. By Definition~\ref{tr:def:holM} and
+Lemma~\ref{tr:lem:tc}(1),
+\(\Tr(\phi_iA(s)\psi_i)=(2\pi)^{-N}\int\phi_i(u)\int a^{(i)}(s;u,\zeta)\,
+d\zeta\,du+\Tr R_i(s)\). Here \(\Tr R_i(s)\) is entire, and we have used
+that \(\psi_i=1\) near \(\supp\phi_i\). Lemma~\ref{tr:lem:polar} gives the
+continuation and the poles. At \(s=0\) the residue is the integral of
+\(a^{(i)}_{-N}(0)\), the term of homogeneity \(-N\) of the symbol of
+\(A(0)=A\). This proves \eqref{tr:eq:res} and (1).
+
+(2) The left side of \eqref{tr:eq:res} is intrinsic. Apply it to \(\phi A\)
+with \(\phi\in\CI_c(U_i\cap U_j)\) arbitrary. The two local densities then
+have the same integral against every \(\phi\), so they agree. In
+coordinates, \(\omega^N/N!=\pm d\zeta\wedge du\). Contracting with
+\(R=\zeta\cdot\partial_\zeta\) and restricting to \(|\zeta|=1\) gives
+\(\pm dS\,du\). For \(h\) homogeneous of degree \(-N\), the form
+\(\iota_R(h\,d\zeta)\) is closed on \(\R^N\setminus0\). So the fibre integral
+does not depend on the choice of section of \(T^*M\setminus0\to S^*M\).
+
+(3) Let \(A\in\Psi^{m_1}\), \(B\in\Psi^{m_2}\) and let \(Q\) be admissible. For
+\(\operatorname{Re}s\) large, Lemma~\ref{tr:lem:tc}(2) gives
+\(\Tr([A,B]Q(s))=\Tr(ABQ(s))-\Tr(AQ(s)B)=\Tr(A[B,Q(s)])\). The family
+\([B,Q(s)]\) vanishes at \(s=0\), so it equals \(sM_B(s)\) by
+Lemma~\ref{tr:lem:holcalc}. Hence \(\Tr([A,B]Q(s))=s\Tr(AM_B(s))\) has no
+pole at \(0\).
+
+(4) There is no pole if \(m<-N\).
+
+(5) The principal symbol of \([A,Q(s)]\) of order \(m-s\) is
+\([\sigma_m(A),q_s\mathrm{Id}]=0\). By Lemma~\ref{tr:lem:holcalc}(3),(2),
+\([A,Q(s)]=sM_A(s)\) with \(M_A\) of order \(m-1-s\). Differentiating
+\([AB,Q]=[A,Q]B+A[B,Q]\) shows that \(D_Q\) is a derivation. Finally,
+\(\TrR(D_QA)=\Res_{s=0}\Tr(M_A(s))\) by \eqref{tr:eq:res}. For
+\(\operatorname{Re}s\) large, \(\Tr(M_A(s))=s^{-1}\Tr([A,Q(s)])=0\).
+
+(6) By the proof of (3), \(\Tr([A,B]Q(s))=s\Tr(AM_B(s))\). Its value at
+\(0\) is \(\Res_{s=0}\Tr(AM_B(s))=\TrR(AM_B(0))\). For the last statement,
+\(\Tr(AQ'(s))=\Tr(AQ(s))+s\Tr(AF(s))\), and \(F(0)\) has order \(0\).
+\end{proof}
+
+Formally \(Q(s)=e^{-s\lQ}\), so \(\lQ=-Q'(0)\) and \(D_QA=[A,Q'(0)]=
+[\lQ,A]\). This is the derivation of \cite[\S6]{MN} and of
+Lemma~\ref{lem:closeddefect}. Part (6) is that lemma. The principal symbol
+of \(D_QA\) is \(-i\{\log q,a\}\) with
+\(\log q:=-\partial_sq_s|_{s=0}\), at least when the full symbol of \(Q\)
+is scalar in the chosen trivializations. In general a matrix commutator
+term of lower order may be present \cite[Ch.~15]{MelroseMicro}.
+
+\begin{remark}\label{tr:rem:sign}
+Melrose regularizes with families \(E(s)\) of order \(+s\) and obtains
+\(-\TrR\) \cite[Ch.~15]{MelroseMicro}. With the convention of order \(-s\)
+used here and in \cite{MN}, the residue \(\TrR\) is \emph{plus} the
+Wodzicki--Guillemin residue \cite{Wodzicki-residue,Guillemin-residue}.
+\end{remark}
+
+\begin{proposition}[Uniqueness]\label{tr:prop:unique}
+Let \(M\) be connected and \(N\ge2\). Every trace \(\tau\) on
+\(\Psi^{\Z}(M)\) that vanishes on \(\Psi^{-\infty}(M)\) is a multiple of
+\(\TrR\).
+\end{proposition}
+
+\begin{proof}
+Work in a coordinate ball \(U\). For a symbol \(a\) with \(u\)-support in a
+compact set \(K\subset U\), put \(P_a=\trOp(a)\psi\), with \(\psi\in
+\CI_c(U)\) equal to \(1\) near \(K\). Let \(\tilde\psi\in\CI_c(U)\) be equal
+to \(1\) near \(\supp\psi\). In the left quantization, \([u_k,\trOp(a)]=
+i\trOp(\partial_{\zeta_k}a)\) and \([D_{u_k},\trOp(a)]=\trOp(D_{u_k}a)\)
+exactly. Hence
+\begin{equation}\label{tr:eq:comm}
+ [\tilde\psi u_k,P_a]=iP_{\partial_{\zeta_k}a},\qquad
+ [\tilde\psi D_{u_k},P_a]\equiv P_{D_{u_k}a}\pmod{\Psi^{-\infty}} .
+\end{equation}
+The error in the second relation is \(\trOp(a)(D_{u_k}\psi)\). Its kernel
+vanishes near the diagonal, so it is smoothing.
+
+\emph{Step 1: degrees \(j\ne-N\).} Let \(p_j\) be homogeneous of degree
+\(j\in\Z\) with \(u\)-support in \(K\), and let \(\chi(\zeta)\) be equal to
+\(0\) near \(0\) and to \(1\) for \(|\zeta|\ge1\). By Euler's identity,
+\(\sum_k\partial_{\zeta_k}(\zeta_k\chi p_j)=(j+N)\chi p_j+r\), where \(r\)
+has compact support in \(\zeta\). By \eqref{tr:eq:comm}, \(P_{\chi p_j}\) is
+a sum of commutators modulo \(\Psi^{-\infty}\), so \(\tau(P_{\chi p_j})=0\).
+The same applies to symbols \(q\in S^{-N-1}\). Write \(q\sim\sum_{j\le-N-1}
+q_j\) and let \(b_k\) be an asymptotic sum of the symbols
+\(-i(j+N)^{-1}\zeta_k\chi q_j\). Then \(P_q-\sum_k[\tilde\psi u_k,P_{b_k}]\in
+\Psi^{-\infty}\), so \(\tau(P_q)=0\).
+
+\emph{Step 2: degree \(-N\).} Let \(p\) be homogeneous of degree \(-N\) with
+\(u\)-support in \(K\). Put \(\varrho(u)=\int_{S^{N-1}}p(u,\theta)\,d\theta\).
+Since \(N\ge2\), the sphere is connected, and we can solve
+\(\Delta_{S}w(u,\cdot)=p(u,\cdot)-\varrho(u)/|S^{N-1}|\) on \(S^{N-1}\),
+smoothly in \(u\) and with compact support in \(u\). Extend \(\nabla_Sw\) to
+a vector field \(g\) that is tangent to the spheres and homogeneous of degree
+\(1-N\). Then \(\operatorname{div}_\zeta g=|\zeta|^{-N}\Delta_Sw\). So
+\(p-\varrho(u)|\zeta|^{-N}/|S^{N-1}|=\sum_k\partial_{\zeta_k}g_k\). Next fix
+\(\chi_0\in\CI_c(U)\) with \(\int\chi_0=1\) and put \(\nu=\int_U\varrho\,
+du\). The function \(\varrho-\nu\chi_0\) has compact support and integral
+\(0\) on the ball \(U\), so it equals \(\sum_k\partial_{u_k}b_k\) with
+\(b_k\in\CI_c(U)\). By \eqref{tr:eq:comm},
+\[
+ \tau(P_{\chi p})=\nu\,\tau(P_{\chi g_0}),\qquad
+ g_0=\chi_0(u)|\zeta|^{-N}/|S^{N-1}| .
+\]
+Since \(\TrR(P_{\chi p})=(2\pi)^{-N}\nu\), this gives
+\(\tau(P_{\chi p})=c_U\TrR(P_{\chi p})\) with
+\(c_U=(2\pi)^N\tau(P_{\chi g_0})\).
+
+\emph{Step 3: globalization.} With a partition of unity and Steps 1--2,
+\(\tau(A)=\sum_ic_{U_i}\TrR(\phi_iA\psi_i)\). If \(U_i\cap U_j\neq
+\emptyset\), choose an operator localized in a small ball inside
+\(U_i\cap U_j\) with non-zero residue. This shows \(c_{U_i}=c_{U_j}\). Since
+\(M\) is connected, all the constants agree.
+\end{proof}
+
+For \(N=1\) the sphere \(S^0\) has two points. A homogeneous function of
+degree \(0\) on \(\R\setminus0\) has derivative \(0\), and there are two
+independent residues, one for each sign of \(\xi\). This is
+Correction~\ref{corr:n1}. Wodzicki shows that every trace vanishes on
+\(\Psi^{-\infty}\) (quoted: \cite{Wodzicki-residue}). We do not use this.
+
+\subsection{Holomorphic families in the cusp calculus: item (B3)}
+\label{tr:subsec:cusp}
+
+Fix a collar \([0,\epsilon)_x\times\partial X\) and put \(t=1/x\). We use
+(B1) in the following form (cf.\ Sections~\ref{subsec:double}
+and~\ref{subsec:symbols}). Let \(V\subset\R^{n-1}\) be a chart of
+\(\partial X\) over which \(E\) is trivial, and let \(\phi,\psi\) be
+supported in \([0,\epsilon)\times V\), with \(\psi=1\) near \(\supp\phi\). If
+\(A\in x^p\Psic^m(X;E)\), then
+\begin{equation}\label{tr:eq:Opc}
+\begin{gathered}
+ \phi A\psi=\phi\,\trOpc(x^pb)\,\psi+R,\\
+ \trOpc(a)u(t,y)=(2\pi)^{-n}\!\int\! e^{i(t-t')\tau+i(y-y')\cdot\eta}
+ a(1/t,y,\tau,\eta)\,u(t',y')\,dt'\,dy'\,d\tau\,d\eta .
+\end{gathered}
+\end{equation}
+Here \(b\) is a classical symbol of order \(m\) in \(\zeta=(\tau,\eta)\), with
+coefficients smooth in \((x,y)\in[0,\epsilon)\times V\), and
+\(R\in x^p\Psic^{-\infty}(X;E)\). Interior charts have the usual
+description, and \(A-\sum_i\phi_iA\psi_i\in x^p\Psic^{-\infty}\). The kernel
+of an element of \(x^p\Psic^{-\infty}\) restricted to the diagonal is \(x^p g\,
+x^{-2}|dx\,dy|\) with \(g\) smooth up to \(x=0\). The Taylor series
+\eqref{eq:taylor} of \(A\) at the front face is computed from the Taylor
+series of \(x^pb\) in \(x\) (powers of \(x\) on the left). The coefficient
+\(A_{(j)}\in\Psis^m(\partial X)\) has local symbol equal to the coefficient
+of \(x^j\) in \(x^pb\). Finally, if \(C\in x^p\Psic^\mu\) with
+\(\operatorname{Re}\mu<-n\) and \(\operatorname{Re}z>1-p\), then \(Cx^z\) is of
+trace class and \(\Tr(Cx^z)=\int_Xx^z\tr K_C|_\Delta\) (the proof of
+Lemma~\ref{tr:lem:tc}(1) applies).
+
+\begin{definition}\label{tr:def:cuspfam}
+A family \(A(w)\in x^p\Psic^{\mu(w)}(X;E)\), \(w\in\Omega\subset\C^l\), is
+\emph{holomorphic} if the following hold. In boundary charts
+\eqref{tr:eq:Opc} holds with \(b=b(w)\) a holomorphic family of classical
+symbols of order \(\mu(w)\), with coefficients smooth up to \(x=0\), and
+with \(R=R(w)\) holomorphic in the Fr\'echet space \(x^p\Psic^{-\infty}\). The
+analogous statement holds in interior charts. And \(A(w)-\sum_i\phi_iA(w)
+\psi_i\) is holomorphic in \(x^p\Psic^{-\infty}\). An \emph{admissible
+family} is an entire family \(Q(s)\in\Psic^{-s}(X;E)\) with
+\(Q(0)=\mathrm{Id}\) and scalar principal symbol.
+\end{definition}
+
+\begin{lemma}\label{tr:lem:cuspcalc}
+\begin{enumerate}
+\item Products of holomorphic families are holomorphic. Orders and weights
+add.
+\item The division statements and part (3) of Lemma~\ref{tr:lem:holcalc}
+hold verbatim.
+\item If \(A(w)\) is holomorphic in \(x^p\Psic^{\mu(w)}\), then
+\(x^zA(w)x^{-z}\) is holomorphic in \((w,z)\) in \(x^p\Psic^{\mu(w)}\), and
+\(\partial_z(x^zAx^{-z})|_{z=0}=[\lx,A]\in x^{p+1}\Psic^{\mu-1}\).
+\item Let \(Q_0(w)\in\Psis^{\mu(w)}(\partial X)\) be holomorphic
+(Definition~\ref{tr:def:sus}). Let \(\omega,\tilde\omega\in
+\CI_c([0,\epsilon))\) be equal to \(1\) near \(0\), with \(\tilde\omega=1\)
+on \(\supp\omega\). Then \(\tilde\omega Q_0(w)\omega\) (acting in \((t,y)\))
+is holomorphic in \(\Psic^{\mu(w)}\), and its Taylor series at the front
+face is \(Q_0(w)\).
+\item All the families act holomorphically on \(\dCI(X;E)\).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}[Proof (sketch; (B1) with parameters)]
+For (1), (4) and (5), the single-operator statements of (B1) hold with
+holomorphic dependence on parameters, as in Lemma~\ref{tr:lem:holcalc}(1).
+For (4): \(\tilde\omega(x')-1\) and \(\omega(x)-1\) vanish to infinite order
+at the front face, where \(x'/x\to1\). For (2), the proof of
+Lemma~\ref{tr:lem:holcalc}(2),(3) uses only the form of the symbols. For (3),
+the kernel of \(x^zAx^{-z}\) is \((x/x')^zK_A\). Near the front face,
+\((x/x')^z=(t'/t)^z=(1-xT)^z\) with \(T=t-t'\). This is smooth and entire
+in \(z\) for \(|xT|<1\), and of polynomial growth in \(T\) elsewhere. The
+kernel is rapidly decreasing in \(T\) there. The \(z\)-derivative at \(0\)
+is \(\log(x/x')K_A\), which is \([\lx,A]\). Its leading term is computed in
+Lemma~\ref{lem:twist}(3).
+\end{proof}
+
+\begin{proposition}[An explicit admissible family]\label{tr:prop:Q}
+Let \(\{\chi_i(y)\}\) be a partition of unity on \(\partial X\) subordinate
+to charts \(V_i\) over which \(E\) is trivial, and let \(\tilde\chi_i=1\)
+near \(\supp\chi_i\). Let \(\omega,\tilde\omega\) be as in
+Lemma~\ref{tr:lem:cuspcalc}(4). Let \(\{\phi_k\}\) be interior cut-offs
+with \(\sum_i\omega\chi_i+\sum_k\phi_k=1\), and let \(\psi_k=1\) near
+\(\supp\phi_k\). Put
+\[
+ Q(s)=\sum_i\omega\chi_i\,\trOpc\bigl(\trang\zeta^{-s}\bigr)\,
+ \tilde\omega\tilde\chi_i+\sum_k\phi_k\trOp\bigl(\trang\xi^{-s}\bigr)\psi_k .
+\]
+Then \(Q\) is an admissible family in \(\Psic^{-s}(X;E)\). It is
+translation invariant to all orders at \(\partial X\): its Taylor series at
+the front face is
+\[
+ Q_0(s)=\sum_i\chi_i\,\trOp_{t,y}\bigl(\trang{(\tau,\eta)}^{-s}\bigr)\,
+ \tilde\chi_i\in\Psis^{-s}(\partial X;E),\qquad Q_0(0)=\mathrm{Id}.
+\]
+\end{proposition}
+
+\begin{proof}
+The symbol \(\trang\zeta^{-s}=\rho^{s}\cdot(\rho\trang\zeta)^{-s}\) is an
+entire family of order \(-s\) that does not depend on \((x,y)\). So each term
+is an entire family by \eqref{tr:eq:Opc} and
+Lemma~\ref{tr:lem:cuspcalc}(4). Its principal symbol is the positive scalar
+\(\omega\sum_i\chi_i|\zeta|_{(i)}^{-s}+\sum_k\phi_k|\xi|_{(k)}^{-s}\).
+Since \(\trOpc(1)=\mathrm{Id}\), we get \(Q(0)=\sum_i\omega\chi_i
+\tilde\omega\tilde\chi_i+\sum_k\phi_k\psi_k=\mathrm{Id}\). The interior terms
+have kernels supported away from the front face. The Taylor series of
+the boundary terms is given by Lemma~\ref{tr:lem:cuspcalc}(4).
+\end{proof}
+
+\begin{proposition}[The derivation \(D_Q\)]\label{tr:prop:DQ}
+Let \(Q\) be admissible and \(A\in x^p\Psic^m(X;E)\).
+\begin{enumerate}
+\item \([A,Q(s)]=sM_A(s)\), where \(M_A\) is holomorphic of order
+\(m-1-s\) and weight \(x^p\). Put
+\[
+ D_QA:=M_A(0)=\frac{d}{ds}[A,Q(s)]\Big|_{s=0}=[\lQ,A],\qquad
+ \lQ:=-Q'(0).
+\]
+Here \(Q'(0)\) is an operator on \(\dCI(X;E)\). It is not in the calculus.
+\item \(D_Q\) is a derivation of \(x^{-\Z}\Psic^{\Z}(X;E)\). It maps
+\(x^p\Psic^m\) into \(x^p\Psic^{m-1}\) and preserves \(\cI\), \(\Is\) and
+\(\Id\). For genuine complex powers it is the derivation
+\(\frac{d}{ds}Q^sAQ^{-s}|_{s=0}\) of Section~\ref{sec:derivations}.
+\item If \(Q\) has Taylor series \(Q_0(s)\) at the front face, then
+\(\In(D_QA)=D_{Q_0}\In(A)\), where \(D_{Q_0}B=\frac{d}{ds}[B,Q_0(s)]|_{s=0}\)
+on \(\Psis^{\Z}(\partial X)\).
+\item If \(\tilde Q\) is another admissible family, then \(\tilde Q-Q=sF(s)\)
+with \(F(0)\in\Psic^0\). Hence
+\[
+ D_{\tilde Q}=D_Q+[L,\cdot\,],\qquad L=-F(0)=:\log\tilde Q-\lQ\in
+ \Psic^0(X;E),
+\]
+and the two derivations differ by an inner derivation.
+\item \(Q(s)Q(u)-Q(s+u)=su\,W(s,u)\), where \(W\) is holomorphic of order
+\(-(s+u)\). The operator
+\[
+ \kappa_Q:=-W(0,0)=Q''(0)-Q'(0)^2\in\Psic^0(X;E)
+\]
+is in the calculus. For genuine complex powers \(\kappa_Q=0\).
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(1) and (2) are proved as Theorem~\ref{tr:thm:res}(5), using
+Lemma~\ref{tr:lem:cuspcalc}(2). The ideals are preserved because \(M_A(s)\)
+is a family of the same type as \(A\). (3) Take Taylor series at the front
+face. (4) Use the division lemma. (5) Both \(Q(s)Q(u)\) and \(Q(s+u)\) are
+holomorphic families of order \(-(s+u)\), and their difference vanishes on
+\(\{s=0\}\cup\{u=0\}\). Apply \(\partial_s\partial_u\) at \((0,0)\) as
+operators on \(\dCI\) (Lemma~\ref{tr:lem:cuspcalc}(5)).
+\end{proof}
+
+\begin{theorem}[Two-variable meromorphy]\label{tr:thm:mero}
+Let \(m,p\in\Z\). Let \(\Omega\subset\C^2\) be a connected open set
+containing points of \(\{\operatorname{Re}s>m+n,\ \operatorname{Re}z>1-p\}\),
+and let \(A(s,z)\in x^p\Psic^{m-s}(X;E)\) be holomorphic on \(\Omega\). Then
+\(F(s,z)=\Tr(A(s,z)x^z)=\Tr(x^zA(s,z))\) extends meromorphically to
+\(\Omega\). Near every point it has the form
+\(\sum_{\epsilon_1,\epsilon_2\in\{0,1\}}h_{\epsilon_1\epsilon_2}(s,z)\,
+(s-s_k)^{-\epsilon_1}(z-z_j)^{-\epsilon_2}\) with \(h\) holomorphic,
+\(s_k=m+n-k\) and \(z_j=1-p-j\), \(k,j\in\N_0\). Thus \(F\) has at most simple
+poles on these lines, and \(sz\,F\) is holomorphic near \((0,0)\).
+Moreover:
+\begin{enumerate}
+\item (Residue in \(s\).) \(\Res_{s=0}F(s,z)=(2\pi)^{-n}\int_{\Y}x^z\tr
+a_{-n}(0,z)\,{}^c\nu\), where \(a_{-n}(0,z)\) is the term of homogeneity
+\(-n\) of the cusp symbol of \(A(0,z)\), and \({}^c\nu\) is the density of
+Lemma~\ref{lem:Trs} (\(x^{-2}dx\,dy\,dS\) in boundary charts). It depends
+only on \(A(0,\cdot)\). For \(A(0,z)\in\Is\) it is \(\Trs(A(0,z)x^z)\).
+\item (Residue in \(z\).) \(\Res_{z=0}F(s,z)\) depends only on \(A(s,0)\).
+For \(\operatorname{Re}s>m+n\) it equals
+\[
+ \Res_{z=0}F(s,z)=\frac1{2\pi}\int_{\R}\Tr_{\partial X}\bigl(A(s,0)_{(1)}(\tau)
+ \bigr)\,d\tau .
+\]
+\item (Double residue.) The coefficient of \((sz)^{-1}\) is
+\(\Res_{z=0}\Res_{s=0}F=\Res_{s=0}\Res_{z=0}F=\Trds(A(0,0))\), the
+functional of Lemma~\ref{lem:Trdsformula}.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+For \(\operatorname{Re}s>m+n\) and \(\operatorname{Re}z>1-p\),
+\(F=\int_Xx^z\tr K_{A}|_\Delta=\sum\int x^z\tr K_{\phi_iA\psi_i}|_\Delta\),
+because \(A-\sum\phi_iA\psi_i\) has kernel vanishing near the diagonal. The
+interior terms are entire in \(z\) and are treated in \(s\) as in
+Theorem~\ref{tr:thm:res}. In a boundary chart, by \eqref{tr:eq:Opc} and
+\(dt=x^{-2}dx\),
+\begin{gather*}
+ \int x^z\tr K_{\phi A\psi}|_\Delta=\int_0^\epsilon\!\!\int_Vx^{z+p-2}
+ D(s,z;x,y)\,dy\,dx,\\
+ D=(2\pi)^{-n}\!\int\phi\tr b(s,z;x,y,\zeta)\,d\zeta+g(s,z;x,y),
+\end{gather*}
+with \(g\) smooth up to \(x=0\) and holomorphic. By
+Lemma~\ref{tr:lem:polar}, \(D=\sum_{k<K}d_k(s,z;x,y)/(s-s_k)+D^{(K)}\), with
+all terms smooth in \((x,y)\) up to \(x=0\), compactly supported, and
+holomorphic in \((s,z)\). The term \(D^{(K)}\) is holomorphic for
+\(\operatorname{Re}s>m+n-K\). For a smooth compactly supported \(h(x)\)
+depending holomorphically on parameters,
+\[
+ \int_0^\epsilon x^{z+p-2}h(x)\,dx=\sum_{j<J}\frac{h^{(j)}(0)}{j!\,(z-z_j)}
+ +(\text{holomorphic for }\operatorname{Re}z>z_J).
+\]
+Applying this to each term gives the local form of \(F\).
+
+(1) The residue at \(s=0\) is the contribution of \(k=m+n\). It is the
+integral over \((x,y)\) of
+\[
+ x^{z+p-2}(2\pi)^{-n}\int_{S^{n-1}}\phi\tr b_{-n}(0,z)\,dS .
+\]
+The term \(b_{-n}(0,z)\) is the homogeneous term of degree \(-n\) of the
+symbol of \(A(0,z)\) (Lemma~\ref{tr:lem:polar}).
+
+(2) The pole at \(z=0\) comes from \(j=1-p\). Its residue is the Taylor
+coefficient of \(x^{1-p}\) in \(D(s,0)\), that is, the coefficient of
+\(x^1\) in the diagonal density \(x^pD\) of \(A(s,0)\). For
+\(\operatorname{Re}s>m+n\) the coefficient is
+\((2\pi)^{-n}\int(x^pb)_{(1)}\,d\zeta=(2\pi)^{-1}\int[(2\pi)^{1-n}\int
+(x^pb)_{(1)}\,d\eta]\,d\tau\), plus the corresponding coefficient of the
+residual part. By (B1) this is the value on the diagonal of the convolution
+kernel of \(A(s,0)_{(1)}(\tau)\), integrated over \(\tau\). Integration over
+\(y\) gives the formula.
+
+(3) In the local form, the coefficient of \((sz)^{-1}\) does not depend on
+the order of the residues. Taking the \(z\)-residue of (1) picks the
+coefficient of \(x^1\) in \(a_{-n}(0,0)\). This is the formula of
+Lemma~\ref{lem:Trdsformula}.
+\end{proof}
+
+\begin{proposition}[Transfer to the functionals of MN]\label{tr:prop:transfer}
+Let \(Q\) be admissible. Define \(Z(A;s,z)=\frac12\bigl(\Tr(Ax^zQ(s))+
+\Tr(AQ(s)x^z)\bigr)\), the functionals \(\Trds\), \(\hTrd\), \(\hTrs\) by
+\eqref{eq:44}, \(\widetilde Z(A;z)=Z(A;z,z)\), \(\Bf\) and
+\(\IF=\IF_Q\) as in Sections~\ref{sec:boundaryindex}--\ref{sec:index}, and
+\([\lQ,\cdot\,]:=D_Q\). Then:
+\begin{enumerate}
+\item Lemmas~\ref{lem:LR}, \ref{lem:Trds}, \ref{lem:Trs},
+\ref{lem:Trdsformula}, \ref{lem:hTrs}, \ref{lem:Trd}, \ref{lem:hTrdQ},
+\ref{lem:TrdsD}, \ref{lem:17}, \ref{lem:fedosov},
+Corollary~\ref{cor:Tr61}(1), Proposition~\ref{prop:Bf}, and the closed-case
+Lemma~\ref{lem:closeddefect} and Proposition~\ref{prop:closedindex} hold as
+stated. In Lemma~\ref{lem:hTrdQ}, \(\log(Q'/Q)\) is replaced by
+\(\log Q'-\lQ=-F(0)\), where \(Q'=Q+sF\).
+\item Proposition~\ref{prop:IF} holds in the form
+\[
+ \IF_Q(A,B)=\tfrac12\bigl(\hTrd+\hTrs\bigr)\bigl(B\widetilde D(A)+
+ \widetilde D(A)B\bigr)+\tfrac12\Trds\bigl([A,B]\kappa_Q\bigr).
+\]
+The last term is the Hochschild coboundary of the \(0\)-cochain
+\(C\mapsto\frac12\Trds(C\kappa_Q)\) on \(\cA\). It vanishes if \([A,B]\in
+\Is+\Id\), in particular if \([B]=[A]^{-1}\) in \(\cA\). It vanishes
+identically for genuine complex powers. Hence Theorem~\ref{thm:index} and
+its corollaries hold verbatim.
+\item (Independence.) \(\Trds\) and \(\hTrs\) do not depend on \(Q\).
+\(\hTrd\) changes by \(-\Trds(\,\cdot\,L)\) with \(L=\log Q'-\lQ\),
+\(D_Q\) changes by the inner derivation \([L,\cdot\,]\), and \(\IF_Q\)
+changes by a coboundary. Hence all Hochschild classes and the index are
+independent of the family.
+\end{enumerate}
+\end{proposition}
+
+The notes use the inverse powers \(Q^{s}\) at five places: Lemmas
+\ref{lem:LR}, \ref{lem:Trds}, \ref{lem:TrdsD}, Proposition~\ref{prop:Bf}
+and Proposition~\ref{prop:IF}. The proof replaces each conjugation by
+\(Q^{\pm s}\) with a division identity. We need two lemmas.
+
+\begin{lemma}\label{tr:lem:diag}
+Let \(E(z)\in x^q\Psic^{k-z}\) be a holomorphic family near \(0\), and put
+\(E^\flat=\frac{d}{dz}\bigl(E(z)-E(0)Q(z)\bigr)|_{z=0}\in x^q\Psic^k\). Then
+\[
+ z^2\Tr(E(z)x^z)=\Trds(E(0))+z\Bigl(\bigl(\hTrd+\hTrs\bigr)(E(0))+
+ \Trds(E^\flat)\Bigr)+O(z^2).
+\]
+\end{lemma}
+
+\begin{proof}
+Write \(E(z)=E(0)Q(z)+zE_1(z)\), so that \(E_1(0)=E^\flat\). Then
+\(\Tr(E(z)x^z)=\Tr(E(0)Q(z)x^z)+z\Tr(E_1(z)x^z)\). The first term is
+\(Z^R(E(0);z,z)\). By Lemma~\ref{lem:LR} it differs from \(Z(E(0);z,z)\) by
+\(\frac12z^2\Tr(E(0)P_1(z,z)x^z)\), and \(z^2\) times this is \(O(z^2)\).
+Then use \eqref{eq:44} with \(s=z\). For the second term,
+\(z^2\Tr(E_1(z)x^z)=\Trds(E_1(0))+O(z)\) by
+Theorem~\ref{tr:thm:mero}(3), applied to the two-variable family
+\((s,z)\mapsto E_1(s)\) and restricted to the diagonal.
+\end{proof}
+
+\begin{lemma}\label{tr:lem:commexp}
+Let \(\mathcal Q(z)\in\Psic^{-z}\) be holomorphic with
+\(\mathcal Q(0)=\mathrm{Id}\). Put \(L(z)=z^{-1}(x^zAx^{-z}-A)\) and
+\(N(z)=z^{-1}[A,\mathcal Q(z)]\). Then
+\[
+ \Tr\bigl([A,B]\mathcal Q(z)x^z\bigr)=z\Tr\bigl(E(z)x^z\bigr),\qquad
+ E=B\bigl(\mathcal QL-N\bigr),\qquad E(0)=B\widetilde D(A),
+\]
+where \(\widetilde D=[\lx,\cdot\,]-D_{\mathcal Q}\) and
+\(D_{\mathcal Q}A=N(0)\).
+\end{lemma}
+
+\begin{proof}
+For \(\operatorname{Re}z\) large, \(\Tr([A,B]\mathcal Qx^z)=
+\Tr(B[\mathcal Qx^z,A])\) by the trace property. Moreover
+\([\mathcal Qx^z,A]=\mathcal Q[x^z,A]+[\mathcal Q,A]x^z=z(\mathcal QL-N)x^z\).
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{tr:prop:transfer}]
+(1) \emph{Lemma~\ref{lem:LR}.} The difference is \(Z^R-Z^L=\Tr(A[Q(s),x^z])\),
+and \([Q(s),x^z]=P(s,z)x^z\) with \(P=Q(s)-x^zQ(s)x^{-z}\). The family \(P\)
+vanishes for \(z=0\), and also for \(s=0\) because \(Q(0)=\mathrm{Id}\). So
+\(P=sz\,P_1\) by Lemma~\ref{tr:lem:cuspcalc}(2), and
+\(Z^R-Z^L=sz\Tr(AP_1x^z)\). The rest of the proof is verbatim.
+
+\emph{Lemma~\ref{lem:Trds}.} We have
+\(Z^L([A,B])=\Tr(A[B,x^zQ(s)])\) and \([B,x^zQ(s)]=x^zK(s,z)\) with
+\(K=(x^{-z}Bx^z)Q(s)-Q(s)B\). Then \(K(0,0)=0\), so \(K=sK_1+zK_2\), and
+\(sz\,Z^L([A,B])=s\cdot sz\Tr(C_1x^z)+z\cdot sz\Tr(C_2x^z)\) with
+\(C_i=Ax^zK_ix^{-z}\). Both terms vanish at \((0,0)\) by
+Theorem~\ref{tr:thm:mero}. For a change of family use \(Q'=Q+sF\) in place
+of \(Q'^{-s}=(1+sC(s))Q^{-s}\). Vanishing on \(\Is+\Id\) follows from
+Theorem~\ref{tr:thm:mero}(1),(2).
+
+\emph{Lemmas~\ref{lem:Trs}, \ref{lem:Trdsformula}, \ref{lem:hTrs},
+\ref{lem:Trd} and Corollary~\ref{cor:Tr61}(1).} These are
+Theorem~\ref{tr:thm:mero}(1)--(3) together with the locality of the
+residues. Independence of \(Q\) holds because a residue at \(s=0\) depends
+only on the value of the family at \(s=0\). Theorem~\ref{tr:thm:res}
+identifies \(\Trs\) with Wodzicki's residue on the double \(2X\).
+
+\emph{Lemma~\ref{lem:hTrdQ}.} We have \(sz\,Z(A;Q')=sz\,Z(A;Q)+s\cdot
+sz\,Z(AF(s))\). Comparing the coefficients of \(s\) gives
+\(\hTrd(A;Q')=\hTrd(A;Q)+\Trds(AF(0))\).
+
+\emph{Lemma~\ref{lem:TrdsD}.} Write \([B,Q(s)]=sM_B(s)\). Then
+\(M_B(0)=[B,Q'(0)]=[\lQ,B]=D_QB\). By Theorem~\ref{tr:thm:mero}(3),
+\(\Trds(D_QB)\) is the double residue of \(\Tr(M_B(s)x^z)\). For
+\(\operatorname{Re}s\) large, \(s\Tr(M_B(s)x^z)=\Tr(BQ(s)x^z)-\Tr(Bx^zQ(s))
+=\Tr(B[Q(s),x^z])=sz\Tr(BP_1(s,z)x^z)\). So \(sz\Tr(M_Bx^z)=z\cdot
+sz\Tr(BP_1x^z)\), which vanishes at \((0,0)\). For
+\([\lx,B]\), write \(x^wBx^{-w}=B+wL_B(w)\). Then
+\(w\Tr(L_B(w)x^zQ(s))=\Tr(Bx^z(x^{-w}Q(s)x^w-Q(s)))\), and
+\(x^{-w}Q(s)x^w-Q(s)=wsP'(w,s)\), because it vanishes at \(w=0\) and at
+\(s=0\). So \(sz\Tr(L_B(0)x^zQ(s))=s\cdot sz\Tr(Bx^zP'(0,s))\), and the
+double residue of \(L_B(0)=[\lx,B]\) vanishes.
+
+\emph{Lemma~\ref{lem:17}.} In the first line,
+\(\Trd([A,B]Q(s))=\Trd(A[B,Q(s)])=s\Trd(AM_B(s))\), with \(M_B\) as in the
+previous paragraph. By Theorem~\ref{tr:thm:mero}(3) its value at \(s=0\) is
+\(\Trds(AM_B(0))=\Trds(A[\lQ,B])\). The second line does not involve \(Q\).
+
+\emph{Proposition~\ref{prop:Bf} and Lemma~\ref{lem:fedosov}.} Note that
+\(\Tr([A,B]x^zQ(z))=\Tr([A,B]\mathcal Q_L(z)x^z)\) with
+\(\mathcal Q_L=x^zQ(z)x^{-z}\), and that \(D_{\mathcal Q_L}=D_Q\) because
+\(\mathcal Q_L'(0)=Q'(0)\). Apply Lemma~\ref{tr:lem:commexp} with
+\(\mathcal Q=\mathcal Q_L\) and with \(\mathcal Q=Q\), and then
+Lemma~\ref{tr:lem:diag}. This gives
+\begin{align*}
+ 2\widetilde Z([A,B];z)&=\sum_{\mathcal Q\in\{\mathcal Q_L,Q\}}z\Tr
+ \bigl(E_{\mathcal Q}(z)x^z\bigr)\\
+ &=\frac{2\Trds(B\widetilde DA)}{z}+
+ \sum_{\mathcal Q}\Bigl((\hTrd+\hTrs)(B\widetilde DA)+
+ \Trds(E^\flat_{\mathcal Q})\Bigr)+O(z).
+\end{align*}
+So \(\Bf(A,B)=\Trds(B\widetilde DA)\), as in Proposition~\ref{prop:Bf}.
+Lemma~\ref{lem:fedosov} only uses that \(\widetilde Z(C;\cdot)\) is entire
+with value \(\Tr C\) at \(0\) for \(C\in\cI\). This holds because
+\(Q(0)=\mathrm{Id}\).
+
+(2) By the display above,
+\(\IF_Q(A,B)=(\hTrd+\hTrs)(B\widetilde DA)+\frac12\Trds(E^\flat_{\mathcal
+Q_L}+E^\flat_Q)\). We compute \(E^\flat=E'(0)+E(0)\ell\), with
+\(\ell=\lQ=-Q'(0)\), as an identity of operators on \(\dCI\). Write
+\(\trad_x=[\lx,\cdot\,]\), \(\trad_\ell=[\ell,\cdot\,]\) and
+\(X=\trad_xA\). Then \(L(0)=X\), \(L'(0)=\frac12\trad_x^2A\),
+\(N(0)=\trad_\ell A\) and \(N'(0)=\frac12[A,\mathcal Q''(0)]\). By
+Proposition~\ref{tr:prop:DQ}(5), \(Q''(0)=\ell^2+\kappa_Q\) and
+\(\mathcal Q_L''(0)=\ell^2+\kappa_Q-2[\lx,\ell]\). A direct computation
+gives
+\[
+ E^\flat_Q=B\Bigl(\tfrac12\trad_x^2A-\trad_\ell\trad_xA+\tfrac12
+ \trad_\ell^2A-\tfrac12[A,\kappa_Q]\Bigr),\qquad
+ E^\flat_{\mathcal Q_L}=E^\flat_Q+B\bigl[A,[\lx,\ell]\bigr].
+\]
+Here we used \(-\frac12[A,\ell^2]-(\trad_\ell A)\ell=\frac12\trad_\ell^2A\).
+By the Jacobi identity, \(\trad_x\trad_\ell-\trad_\ell\trad_x=
+\trad_{[\lx,\ell]}\), and
+\(\widetilde D=\trad_x-\trad_\ell\). Hence
+\[
+ E^\flat_Q+E^\flat_{\mathcal Q_L}=B\bigl(\widetilde D^2A-[A,\kappa_Q]\bigr).
+\]
+By Lemma~\ref{lem:TrdsD} and the trace property,
+\(\Trds(B\widetilde D^2A)=-\Trds(\widetilde DB\,\widetilde DA)\). By
+Lemma~\ref{lem:17},
+\(\frac12(\hTrd+\hTrs)([\widetilde DA,B])=-\frac12\Trds(\widetilde DA\,
+\widetilde DB)\). Combining,
+\[
+ \IF_Q(A,B)=\tfrac12(\hTrd+\hTrs)(B\widetilde DA+\widetilde DA\,B)
+ -\tfrac12\Trds(B[A,\kappa_Q]),
+\]
+and \(-\Trds(B[A,\kappa_Q])=\Trds([A,B]\kappa_Q)\). The vanishing statements
+hold because \(\Trds\) vanishes on \(\Is+\Id\supset\cI\).
+
+(3) This follows from (1), (2), Proposition~\ref{tr:prop:DQ}(4) and
+Lemma~\ref{lem:iD}.
+\end{proof}
+
+\subsection{The regularized trace on the suspended algebra: item (B7)}
+\label{tr:subsec:sus}
+
+Let \(H\) be a closed manifold of dimension \(d\). In the applications
+\(H=\partial X\) and \(d=n-1\).
+
+\begin{definition}\label{tr:def:sus}
+For \(\mu\in\C\), \(\Psis^\mu(H;E)\) is the space of families
+\(\R\ni\tau\mapsto C(\tau)\in\Psi^\mu(H;E)\) of the following form. For a
+partition of unity \(\phi_i\) subordinate to charts and \(\psi_i\) as
+before,
+\[
+ C(\tau)-\sum_i\phi_i\trOp_y\bigl(c^{(i)}(\cdot,\tau,\cdot)\bigr)\psi_i\in
+ \cS\bigl(\R;\Psi^{-\infty}(H;E)\bigr),
+\]
+where each \(c^{(i)}(y,\tau,\eta)\) is a classical symbol of order \(\mu\) in
+\(\zeta=(\tau,\eta)\in\R^{1+d}\). Holomorphic families are defined as in
+Definition~\ref{tr:def:holM}.
+\end{definition}
+
+By \eqref{eq:Inkernel} these are the indicial families of
+translation-invariant operators on \(\R_t\times H\) with rapidly decreasing
+convolution kernels. Composition is pointwise in \(\tau\), and
+\(\In([t,C])=-i\partial_\tau C\). We quote from (B1) and
+\cite{MelroseEta}: \(\Psis^{\Z}\) is an algebra; \(\partial_\tau\) maps
+\(\Psis^\mu\) to \(\Psis^{\mu-1}\); and if \(A\in\Psis^m\) is elliptic in
+\((\tau,\eta)\) and \(A(\tau)\) is invertible for all \(\tau\), then
+\(A^{-1}\in\Psis^{-m}\). For fixed \(\tau\), \(C(\tau)\in\Psi^\mu(H)\).
+
+\begin{lemma}\label{tr:lem:susTr}
+Let \(C(s)\in\Psis^{\mu(s)}(H;E)\) be holomorphic on \(\Omega\) with
+\(\operatorname{Re}\mu<-d\). Then \(f(\tau;s)=\Tr C(s)(\tau)\) is a
+holomorphic family of classical symbols on \(\R\) of order \(\mu(s)+d\):
+\begin{gather*}
+ f(\tau;s)\sim\sum_{j\ge0}f^\pm_j(s)|\tau|^{\mu(s)+d-j},\quad\tau\to\pm\infty,\\
+ f^\pm_j(s)=(2\pi)^{-d}\sum_i\int\!\!\int\phi_i\tr
+ c^{(i)}_{\mu(s)-j}(s;y,\pm1,\omega)\,d\omega\,dy .
+\end{gather*}
+The remainders are \(O(|\tau|^{\operatorname{Re}\mu+d-J})\), locally
+uniformly in \(s\).
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{tr:lem:tc}, \(f=(2\pi)^{-d}\sum_i\int\!\!\int\phi_i\tr
+c^{(i)}(s;y,\tau,\eta)\,d\eta\,dy\) plus a Schwartz function of \(\tau\).
+Split \(c=\sum_{j<J}(1-\chi(\zeta))c_{\mu-j}+r_J\), where \(\chi\) is supported
+in \(|\zeta|<\frac12\). For \(|\tau|\ge1\) substitute \(\eta=|\tau|\omega\).
+By homogeneity, \(\int c_{\mu-j}(y,\tau,\eta)\,d\eta=|\tau|^{\mu-j+d}\int
+c_{\mu-j}(y,\pm1,\omega)\,d\omega\). This integral converges since
+\(\operatorname{Re}(\mu-j)<-d\). Finally
+\(\int|r_J|\,d\eta\le C\int\trang{(\tau,\eta)}^{\operatorname{Re}\mu-J}
+d\eta\le C'\trang\tau^{\operatorname{Re}\mu-J+d}\).
+\end{proof}
+
+\paragraph{Regularized integrals.}
+Let \(\trP\) be the space of \(u\in\CI(\R)\) such that, for every \(N\),
+\(u(\tau)=\sum c^\pm_{\gamma,l}|\tau|^\gamma(\log|\tau|)^l+O(|\tau|^{-N})\)
+for \(\pm\tau\ge1\). The sum is finite, over \(\operatorname{Re}\gamma>-N\)
+and \(l\in\N_0\). Using \(\int_1^T\tau^\gamma(\log\tau)^l\,d\tau\), one sees
+that for \(u\in\trP\),
+\[
+ \int_{-T}^Tu\,d\tau=\sum d_{\gamma,l}T^\gamma(\log T)^l+c+o(1),\qquad
+ T\to\infty,
+\]
+with a finite sum over \(\operatorname{Re}\gamma\ge0\), \((\gamma,l)\ne(0,0)\).
+We put \(\trbint u\,d\tau:=c\).
+
+\begin{lemma}\label{tr:lem:bint}
+\begin{enumerate}
+\item \(\trbint\) is linear. It equals \(\int\) on integrable elements of
+\(\trP\). It vanishes on polynomials and on odd functions.
+\item \(\trP\) is closed under multiplication by \(\tau\) and under
+\(I:u\mapsto\int_0^\tau u\). Classical symbols of any order lie in
+\(\trP\). The negative powers in the expansion of \(Iu\) are obtained by
+integrating the expansion of \(u\) term by term.
+\item Let \(u\in\CI(\R)\) with \(u^{(k)}\in\trP\) for \(0\le k\le p\). Let
+\(e^\pm_k\) be the coefficient of \(|\tau|^{-1-k}\) (without logarithm) in
+\(u^{(k)}\) at \(\pm\infty\). Then
+\[
+ \trbint u\,d\tau=\frac{(-1)^p}{p!}\trbint\tau^pu^{(p)}\,d\tau+
+ \sum_{k=0}^{p-1}\frac{(-1)^k}{(k+1)!}\bigl(e^+_k+(-1)^ke^-_k\bigr).
+\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) and (2) are immediate from the definitions. For the last part of (2),
+\(\int_0^\tau=\int_0^1+\int_1^\tau\), and a constant of integration affects
+only the power \(\tau^0\). For (3), integrate by parts \(p\) times on
+\([-T,T]\):
+\[
+ \int_{-T}^Tu=\sum_{k<p}\frac{(-1)^k}{(k+1)!}\bigl[\tau^{k+1}u^{(k)}\bigr]_{-T}^T
+ +\frac{(-1)^p}{p!}\int_{-T}^T\tau^pu^{(p)} .
+\]
+Now take constant terms. The constant term of \(T^{k+1}u^{(k)}(T)\) is
+\(e^+_k\). That of \((-T)^{k+1}u^{(k)}(-T)\) is \((-1)^{k+1}e^-_k\).
+\end{proof}
+
+\begin{lemma}[Finite parts of holomorphic families]\label{tr:lem:FP}
+Let \(f(\cdot;s)\) be a holomorphic family of classical symbols on \(\R\) of
+order \(\mu_0-s\), \(\mu_0\in\Z\), on a connected open set \(\Omega\ni0\)
+meeting \(\{\operatorname{Re}s>\mu_0+1\}\). Then \(\int f(\tau;s)\,d\tau\)
+extends meromorphically to \(\Omega\), with at most simple poles at
+\(s\in\mu_0+1-\N_0\). Let \(j_0=\mu_0+1\) and
+\(e(s)=f^+_{j_0}(s)+f^-_{j_0}(s)\), with \(e=0\) if \(j_0<0\). Then
+\[
+ \Res_{s=0}\int f\,d\tau=e(0),\qquad
+ \FP_{s=0}\int f\,d\tau=\trbint f(\tau;0)\,d\tau+e'(0).
+\]
+\end{lemma}
+
+\begin{proof}
+Write \(f=\sum_{j<J}\chi_\pm f^\pm_j(s)|\tau|^{\mu_0-s-j}+r_J\), where
+\(\chi_\pm\) is the indicator of \(\{\pm\tau\ge1\}\) and \(r_J\) is
+holomorphic with values in \(L^1\) for \(J>\operatorname{Re}\mu_0+2\). Since
+\(\int_1^\infty\tau^{\mu_0-s-j}\,d\tau=(s-(\mu_0+1-j))^{-1}\), the
+continuation is
+\[
+ \int_{-1}^1f+\sum_{j<J,\pm}\frac{f^\pm_j(s)}{s-(\mu_0+1-j)}+
+ \int\Bigl(r_J-\chi_{[-1,1]}\sum_{j<J}(\ldots)\Bigr).
+\]
+Here the last integral is holomorphic. At \(s=0\) the term \(j_0\)
+contributes \(e(s)/s=e(0)/s+e'(0)+O(s)\). The other terms are holomorphic
+near \(0\). On the other hand, \(\trbint f(\cdot;0)\) is given by the same
+expression at \(s=0\), with the \(j_0\) term replaced by \(0\), because
+\(\int_1^T\tau^{-1}d\tau=\log T\) has constant term \(0\). For \(j\ne j_0\),
+\(\int_1^T\tau^{\mu_0-j}\) has constant term \(-(\mu_0-j+1)^{-1}\), which is
+the value at \(s=0\) of the continued term.
+\end{proof}
+
+\begin{definition}[Melrose's regularized trace]\label{tr:def:bTr}
+For \(C\in\Psis^m(H;E)\), \(m\in\Z\), choose \(p\in\N_0\) with \(p\ge
+m+d+1\) and put \(h_p(\tau)=\Tr\bigl(\partial_\tau^pC(\tau)\bigr)\). This
+is a classical symbol of order \(m+d-p<0\) by Lemma~\ref{tr:lem:susTr}.
+Define
+\[
+ \bTr(C)=\frac1{2\pi}\trbint I^ph_p\,d\tau .
+\]
+This is the definition \cite[(58)--(59)]{MN}: \(I^ph_p\) is the \(p\)-fold
+integral from \(0\), and \(\trbint\) takes the constant term of
+\(\int_{-T}^T\).
+\end{definition}
+
+\begin{theorem}[The trace property, (B7)]\label{tr:thm:bTr}
+\begin{enumerate}
+\item \(\bTr(C)\) does not depend on \(p\). If \(m<-d-1\), then
+\(\bTr(C)=(2\pi)^{-1}\int\Tr C(\tau)\,d\tau\). In particular \(\bTr\) is the
+functional of Lemma~\ref{lem:Trd} on \(\Psis^{-\infty}\).
+\item If \(C(-\tau)=-C(\tau)\), then \(\bTr(C)=0\).
+\item \(\bTr([A,B])=0\) for all \(A,B\in\Psis^{\Z}(H;E)\). Thus \(\bTr\) is
+a trace on \(\Psis^{\Z}(H;E)\).
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(1) We have \(h_{p+1}=h_p'\), so \(I^{p+1}h_{p+1}=I^p(h_p-h_p(0))=
+I^ph_p-h_p(0)\tau^p/p!\). A polynomial has \(\trbint=0\). If \(m<-d-1\),
+then \(\Tr C(\tau)\) is integrable and differs from \(I^ph_p\) by its
+Taylor polynomial of degree \(p-1\) at \(0\).
+
+(2) Then \(h_p\) has parity \((-1)^{p+1}\). Each integration from \(0\)
+reverses the parity, so \(I^ph_p\) is odd, and \(\int_{-T}^T\) of it
+vanishes.
+
+(3) Let \(A\in\Psis^{m_1}\) and \(B\in\Psis^{m_2}\), and take \(p>m_1+m_2+d\).
+Since composition is pointwise in \(\tau\),
+\[
+ \partial_\tau^p[A,B](\tau)=\sum_{l=0}^p\binom pl\bigl[\partial_\tau^lA(\tau),
+ \partial_\tau^{p-l}B(\tau)\bigr].
+\]
+Each commutator is a commutator of operators on \(H\) of orders adding to
+\(m_1+m_2-p<-d\). By Lemma~\ref{tr:lem:tc}(2) its trace vanishes. So
+\(h_p\equiv0\) and \(\bTr([A,B])=0\).
+\end{proof}
+
+The \emph{suspended residue} of \(C\in\Psis^m(H;E)\) is the Wodzicki
+residue of \(C\), regarded as a translation-invariant operator on
+\(\R\times H\), per unit length in \(t\):
+\[
+ \trTrt(C)=(2\pi)^{-(d+1)}\sum_i\int\phi_i\int_{S^d}\tr c^{(i)}_{-1-d}
+ (y,\zeta)\,dS(\zeta)\,dy .
+\]
+
+\begin{theorem}[Holomorphic regularization of \(\bTr\)]\label{tr:thm:susreg}
+Let \(C(s)\in\Psis^{m-s}(H;E)\), \(m\in\Z\), be holomorphic for
+\(\operatorname{Re}s>-\frac12\). For instance \(C(s)=CQ_0(s)\) with
+\(Q_0\) a holomorphic suspended family of order \(-s\) and
+\(Q_0(0)=\mathrm{Id}\). Put
+\[
+ c^\pm(s)=(2\pi)^{-d}\sum_i\int\!\!\int\phi_i\tr c^{(i)}_{-1-d-s}(s;y,\pm1,
+ \omega)\,d\omega\,dy,\qquad\gamma(s)=c^+(s)+c^-(s),
+\]
+where \(c_{-1-d-s}(s)\) is the homogeneous term of degree \(-1-d-s\) of the
+symbol of \(C(s)\). Then \(G(s)=(2\pi)^{-1}\int\Tr C(s)(\tau)\,d\tau\),
+defined for \(\operatorname{Re}s>m+d+1\), extends meromorphically to
+\(\operatorname{Re}s>-\frac12\). Moreover
+\[
+ \Res_{s=0}G=\frac{\gamma(0)}{2\pi}=\trTrt(C(0)),\qquad
+ \FP_{s=0}G=\bTr(C(0))+\frac{\gamma'(0)}{2\pi}.
+\]
+The correction \(\gamma'(0)\) is a local functional of the symbols of
+\(C(s)\) near \(s=0\).
+\end{theorem}
+
+\begin{proof}
+Fix \(p\ge m+d+2\). On \(\operatorname{Re}s>-\frac12\) the family
+\(\partial_\tau^pC(s)\) has order with real part \(<-d\). By
+Lemma~\ref{tr:lem:susTr}, \(h_p(\cdot;s)=\Tr\partial_\tau^pC(s)\) is a
+holomorphic family of classical symbols of order \(m-s+d-p\). Its
+homogeneous term of degree \(-1-d-s-p\) is \(\partial_\tau^pc_{-1-d-s}\).
+Differentiation under the integral sign is legitimate since
+\(\operatorname{Re}s>-1\). Hence the coefficient \(a^\pm(s)\) of
+\(|\tau|^{-1-p-s}\) in \(h_p\) is the coefficient produced by
+\(\partial_\tau^p(c^\pm(s)|\tau|^{-1-s})\):
+\[
+ a^+(s)=(-1)^p(1+s)_pc^+(s),\qquad a^-(s)=(1+s)_pc^-(s),\qquad
+ (1+s)_p=\prod_{k=1}^p(k+s).
+\]
+
+For \(\operatorname{Re}s>m+d+1\) and \(s\) outside a discrete set, the
+function \(f_s=\Tr C(s)\) is integrable and \(f_s-I^ph_p(\cdot;s)\) is a
+polynomial. By Lemma~\ref{tr:lem:bint}(3) (with no boundary constants,
+since no exponent equals \(-1-k\)),
+\[
+ G(s)=\frac1{2\pi}\frac{(-1)^p}{p!}\trbint\tau^ph_p(\tau;s)\,d\tau .
+\]
+The family \(\tau^ph_p(\cdot;s)\) is a holomorphic family of classical
+symbols of order \(m+d-s\). The coefficient of \(|\tau|^{-1-s}\) in it is
+\(\epsilon(s)=a^+(s)+(-1)^pa^-(s)=(-1)^p(1+s)_p\gamma(s)\). By
+Lemma~\ref{tr:lem:FP},
+\begin{gather*}
+ \Res_{s=0}G=\frac{(1+s)_p\gamma(s)}{2\pi\,p!}\Big|_{s=0}=\frac{\gamma(0)}{2\pi},\\
+ \FP_{s=0}G=\frac1{2\pi}\Bigl(\frac{(-1)^p}{p!}\trbint\tau^ph_p(\tau;0)\,d\tau
+ +H_p\gamma(0)+\gamma'(0)\Bigr),
+\end{gather*}
+where \(H_p=\sum_{k=1}^p\frac1k\) is the derivative of \((1+s)_p/p!\) at
+\(s=0\). Now evaluate \(\bTr(C(0))=(2\pi)^{-1}\trbint I^ph_p(\cdot;0)\) with
+Lemma~\ref{tr:lem:bint}(3), taking \(u=I^ph_p\). The coefficient of
+\(|\tau|^{-1}\) in \(u\) is \(b^+=(-1)^pa^+(0)/p!\) at \(+\infty\) and
+\(b^-=a^-(0)/p!\) at \(-\infty\). Then \(e^+_k=(-1)^kk!\,b^+\) and
+\(e^-_k=k!\,b^-\). The boundary sum is
+\[
+ H_p(b^++b^-)=H_p\tfrac{(-1)^p}{p!}\epsilon(0)=H_p\gamma(0).
+\]
+So
+\(\FP_{s=0}G-\bTr(C(0))=\gamma'(0)/2\pi\).
+
+Finally, let \(g\) be homogeneous of degree \(-(d+1)\) on
+\(\R^{d+1}\setminus0\). The substitution \(\zeta=(\tau,\tau\omega)\) in
+\(\int_{1\le|\zeta|\le e}g\,d\zeta=\int_{S^d}g\,dS\) gives
+\(\int_{S^d}g\,dS=\int g(1,\omega)\,d\omega+\int g(-1,\omega)\,d\omega\).
+Hence \(\gamma(0)=2\pi\,\trTrt(C(0))\).
+\end{proof}
+
+\begin{example}[\(\FP\ne\bTr\)]\label{tr:ex:counter}
+Let \(H\) be a point, \(C=\trang\tau\) (the indicial family of
+\(\trang{D_t}=Q_0\)), and \(Q_0(s)=\trang\tau^{-s}\). Then
+\(\int_\R\trang\tau^{1-s}\,d\tau=\sqrt\pi\,\Gamma(\frac{s-2}2)/
+\Gamma(\frac{s-1}2)=\frac1s+\log2-\frac12+O(s)\). On the other hand,
+\(\int_{-T}^T\trang\tau\,d\tau=T^2+\log T+\log2+\frac12+o(1)\). So
+\[
+ \FP_{s=0}\,\frac1{2\pi}\int\trang\tau^{1-s}d\tau=\frac{\log2-\frac12}{2\pi}
+ \ne\frac{\log2+\frac12}{2\pi}=\bTr(\trang\tau).
+\]
+This agrees with Theorem~\ref{tr:thm:susreg}. The coefficient of
+\(|\tau|^{-1-s}\) in \(\trang\tau^{1-s}\) is \(\frac{1-s}2\) at each end,
+so \(\gamma(s)=1-s\), \(\gamma(0)/2\pi=1/2\pi\) is the residue, and the
+correction is \(\gamma'(0)/2\pi=-1/2\pi\).
+\end{example}
+
+\begin{correction}[MN Proposition 8, Corollary 2 and Proposition 17]
+\label{tr:corr:Prop8}
+The residue statement of \cite[Prop.~8]{MN}
+(Proposition~\ref{prop:Tr8}) is correct. The claim that the regular value
+of \(\bTr(BQ_0^{-s})\) at \(s=0\) is \(\bTr(B)\) is false in general
+(Example~\ref{tr:ex:counter}). The correct statement is
+Theorem~\ref{tr:thm:susreg} with \(C(s)=BQ_0(s)\). Correspondingly,
+Corollary~\ref{cor:Tr61}(2) must read
+\[
+ \hTrd(A)=\bTr\bigl(A_{(1)}\bigr)+\frac{\gamma_{A_{(1)}}'(0)}{2\pi},
+\]
+where \(\gamma_{A_{(1)}}\) is computed from \(A_{(1)}Q_0(s)\). Here \(Q\)
+is translation invariant to all orders at \(\partial X\), with Taylor series
+\(Q_0(s)\). Indeed, by Lemma~\ref{lem:LR} and
+Theorem~\ref{tr:thm:mero}(2), \(\hTrd(A)\) is the regular value at \(s=0\)
+of \((2\pi)^{-1}\int\Tr\bigl(A_{(1)}Q_0(s)\bigr)\,d\tau\), because
+\((AQ(s))_{(1)}=A_{(1)}Q_0(s)\). Proposition~\ref{prop:eta} then holds with
+a local correction; see Proposition~\ref{tr:prop:etabar}.
+\end{correction}
+
+\begin{remark}[Parity (sketch)]\label{tr:rem:parity}
+Say that a symbol of order \(\mu\) has \emph{parity type} \(\varepsilon\) if
+\(c_{\mu-k}(y,-\zeta)=\varepsilon(-1)^kc_{\mu-k}(y,\zeta)\) for all \(k\).
+Differential operators of order \(m\), their parametrices, \(\partial_\tau\)
+of them, and the family \(\trang\zeta^{-s}\) have this property. The types
+are \((-1)^m\), \((-1)^m\), \((-1)^{m-1}\) and \(+1\). The property is
+preserved by composition and by changes of coordinates on \(H\), since the
+terms of the composition and coordinate-change formulas are
+\(\partial_\zeta^\alpha\) of symbols multiplied by polynomials in \(\zeta\)
+of matching parity. For \(C=A_0^{-1}[t,A_0]\) with \(A_0\) the indicial
+family of a differential operator, \(C\,Q_0(s)\) has type \(-1\). Its term
+of degree \(-1-d-s\) has \(k=d\), so
+\(c^+(s)+c^-(s)=(1+(-1)^{d+1})\int c(1,\omega)\,d\omega\). This vanishes
+when \(d\) is even, that is, when \(n=\dim X\) is \emph{odd}. In that case
+\(\gamma\equiv0\). In the APS case, \(n\) even, parity alone does not kill
+\(\gamma\).
+\end{remark}
+
+\subsection{The eta invariant and Dirac operators}\label{tr:subsec:eta}
+
+\begin{definition}\label{tr:def:eta}
+Let \(A\in\Psis^m(H;E,F)\) be elliptic and invertible. Then
+\(A^{-1}\partial_\tau A\in\Psis^{-1}(H;E)\), and Melrose's eta invariant
+\cite{MelroseEta} is
+\[
+ \eta(A)=\frac1{\pi i}\overline{\int_\R}\Tr\bigl(A^{-1}\partial_\tau A
+ \bigr)\,d\tau:=\frac{2\pi}{\pi i}\,\bTr\bigl(A^{-1}\partial_\tau A\bigr)
+ =2\,\bTr\bigl(A^{-1}[t,A]\bigr).
+\]
+The last equality uses \(\In([t,A])=-i\partial_\tau A\) from
+\eqref{eq:Inkernel}. The notation \(\overline{\int}\Tr(\cdot)\,d\tau\) always
+means \(2\pi\bTr\). The pointwise trace exists only for \(d=0\).
+\end{definition}
+
+\begin{theorem}[Dirac operators, (B7)]\label{tr:thm:Dirac}
+Let \(B\) be a self-adjoint, invertible, first-order elliptic differential
+operator on \(H\). Let \(\sigma:E\to F\) be a unitary bundle isomorphism,
+and let \(A_0(\tau)=\sigma(i\tau+B)\). This is the indicial family of
+\(\sigma(-\partial_t+B)\), the APS normal form \(\sigma(\partial_u+B)\) in
+\(u=-t\) of Corollary~\ref{cor:Dirac}. Then
+\[
+ \eta(A_0)=\eta_B(0),\qquad\eta_B(s)=\sum_{\lambda\in\operatorname{spec}B}
+ \sgn\lambda\,|\lambda|^{-s}.
+\]
+\end{theorem}
+
+\begin{proof}
+We have \([t,A_0]=-i\partial_\tau A_0=\sigma\), so
+\(A_0^{-1}[t,A_0]=(B+i\tau)^{-1}=:C\in\Psis^{-1}(H;E)\). Split
+\(C=C_e+C_o\) with \(C_e(\tau)=B(B^2+\tau^2)^{-1}\) and
+\(C_o(\tau)=-i\tau(B^2+\tau^2)^{-1}\). Both lie in \(\Psis^{-1}\). By
+Theorem~\ref{tr:thm:bTr}(2), \(\bTr(C)=\bTr(C_e)\). We must show
+\(\bTr(C_e)=\frac12\eta_B(0)\).
+
+Let \(\theta(t)=\Tr(Be^{-tB^2})=\sum_\lambda\lambda e^{-t\lambda^2}\). It
+decays exponentially as \(t\to\infty\). From \cite[Section ``The eta invariant'']{Notes}
+we quote the small-time expansion \(\theta(t)\sim\sum_{k\ge0}a_kt^{(k-d-1)/2}\)
+as \(t\downarrow0\). We also quote the Mellin representation
+\(\Gamma(\frac{s+1}2)\eta_B(s)=\int_0^\infty t^{(s-1)/2}\theta(t)\,dt\)
+and the regularity of \(\eta_B\) at \(0\), which is equivalent to \(a_d=0\).
+Split \(\theta=\sum_{k<K}a_kt^{(k-d-1)/2}+r_K\) on \((0,1]\), with
+\(K>d+1\). Then
+\begin{equation}\label{tr:eq:etaMellin}
+ \sqrt\pi\,\eta_B(0)=\int_1^\infty\frac{\theta}{\sqrt t}\,dt+\int_0^1
+ \frac{r_K}{\sqrt t}\,dt+\sum_{k<K,\,k\ne d}\frac{2a_k}{k-d}.
+\end{equation}
+
+Fix \(q>(d+1)/2\), put \(p=2q\), and let
+\(E_q(x)=e^{-x}-\sum_{k<q}(-x)^k/k!\). Define
+\(F(\tau)=\int_0^\infty\theta(t)E_q(t\tau^2)\,dt\). The integral converges:
+near \(t=0\), \(E_q=O(t^q)\) and \(\theta=O(t^{-(d+1)/2})\). The polynomial
+part of \(E_q(t\tau^2)\) has degree \(<p\) in \(\tau\). Differentiation
+under the integral and Fubini over the eigenvalues give
+\[
+ F^{(p)}(\tau)=\int_0^\infty\theta(t)\,\partial_\tau^pe^{-t\tau^2}\,dt=
+ \sum_\lambda\partial_\tau^p\frac{\lambda}{\lambda^2+\tau^2}=\Tr\bigl(\partial
+ _\tau^pC_e(\tau)\bigr)=h_p .
+\]
+The series converges absolutely because \(\sum|\lambda|^{-p-1}<\infty\). So
+\(F-I^ph_p\) is a polynomial, and \(\bTr(C_e)=(2\pi)^{-1}\trbint F\,d\tau\).
+
+By Fubini and the substitution \(u=\sqrt t\,\tau\),
+\[
+ \int_{-T}^TF\,d\tau=\int_0^\infty\theta(t)\,t^{-1/2}W(T\sqrt t)\,dt,
+ \qquad W(R)=\int_{-R}^RE_q(u^2)\,du=\sqrt\pi-\sum_{l<q}c_lR^{2l+1}+e(R),
+\]
+with \(c_l=2(-1)^l/(l!(2l+1))\) and \(e(R)=-2\int_R^\infty e^{-u^2}du\).
+The function \(e\) is bounded and decays faster than any power. We find the
+constant term as \(T\to\infty\) piece by piece.
+\begin{itemize}
+\item On \([1,\infty)\):
+\(\int_1^\infty\theta\,t^{-1/2}W(T\sqrt t)=\sqrt\pi\int_1^\infty\theta
+t^{-1/2}-\sum_lc_lT^{2l+1}\int_1^\infty\theta t^l+o(1)\). The constant term
+is \(\sqrt\pi\int_1^\infty\theta t^{-1/2}\).
+\item The remainder \(r_K\) on \((0,1]\) gives
+\(\sqrt\pi\int_0^1r_Kt^{-1/2}\) by the same argument. The \(e\)-term tends
+to \(0\) by dominated convergence.
+\item For \(a_kt^\beta\), \(\beta=(k-d-1)/2\), substitute \(R=T\sqrt t\):
+\[
+ \int_0^1t^{\beta-1/2}W(T\sqrt t)\,dt=2T^{-2\beta-1}\int_0^TR^{2\beta}W(R)\,dR .
+\]
+Insert \(W=\sqrt\pi-\sum_lc_lR^{2l+1}+e\) on \([1,T]\). If \(k\ne d\), the
+only constant term is \(2\sqrt\pi/(2\beta+1)=2\sqrt\pi/(k-d)\). The other
+terms are non-zero powers of \(T\), possibly times \(\log T\), or
+\(o(1)\). The term \(k=d\) is absent because \(a_d=0\).
+\end{itemize}
+Comparing with \eqref{tr:eq:etaMellin}, \(\trbint F\,d\tau=\sqrt\pi\cdot
+\sqrt\pi\,\eta_B(0)=\pi\eta_B(0)\). Hence \(\bTr(C)=\frac12\eta_B(0)\) and
+\(\eta(A_0)=2\bTr(C)=\eta_B(0)\).
+\end{proof}
+
+The proof also shows the formal identity
+\(\pi^{-1}\int(\lambda+i\tau)^{-1}d\tau=\sgn\lambda\) of
+Corollary~\ref{cor:Dirac}, now with the regularization made precise. As a
+numerical check, take \(H=S^1\) and \(B=D_\theta+a\), \(0<a<1\). The partial
+integrals \(\int_{-T}^TF\) computed from the spectrum \(\Z+a\) have constant
+term \(\pi(1-2a)=\pi\eta_B(0)\).
+
+\begin{proposition}[The functional \(\etab\) of MN (89)]\label{tr:prop:etabar}
+Let \(A\in\Psic^m(X;E,F)\) be fully elliptic, with \(A_0=\In(A)\), and let
+\(Q\) be admissible and translation invariant to all orders at
+\(\partial X\), with Taylor series \(Q_0(s)\) (on \(E\) and on \(F\)).
+\begin{enumerate}
+\item \(\etab(A)=\eta(A_0)+\delta_Q(A)\), where
+\(\delta_Q(A)=(2\pi)^{-1}\gamma'(0)\) and \(\gamma\) is computed in
+Theorem~\ref{tr:thm:susreg} from \(A_0^{-1}[t,A_0]Q_0(s)\) and
+\([t,A_0]A_0^{-1}Q_0(s)\). The correction \(\delta_Q(A)\) is a local
+functional of the boundary symbols. By Remark~\ref{tr:rem:parity} it
+vanishes when \(n\) is odd and \(A\) is a differential operator (sketch).
+\item In the situation of Theorem~\ref{tr:thm:Dirac}, suppose that
+\(Q_0(s)=(D_t^2+B^2)^{-s/2}\) on \(E\) and
+\(\sigma(D_t^2+B^2)^{-s/2}\sigma^{-1}\) on \(F\). Then
+\(\etab(A)=\eta(A_0)=\eta_B(0)\). Such \(Q\) exist if one quotes the fact
+that \((D_t^2+B^2)^{-s/2}\) is an entire family in \(\Psis^{-s}(H)\)
+(Seeley's complex powers with the parameter \(\tau\), quoted:
+\cite[App.~B]{MN}). Then take
+\(Q(s)=\tilde\omega Q_0(s)\omega+Q_X(s)(1-\omega)\), with \(Q_X\) from
+Proposition~\ref{tr:prop:Q}.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(1) As in the proof of Proposition~\ref{prop:eta},
+\((A^{-1}[\lx,A])_{(1)}=-A_0^{-1}[t,A_0]=:-C_1\) and
+\(([\lx,A]A^{-1})_{(1)}=-[t,A_0]A_0^{-1}=:-C_2\). By
+Correction~\ref{tr:corr:Prop8}, \(\etab(A)=-\hTrd(A^{-1}[\lx,A]+[\lx,A]
+A^{-1})=\bTr(C_1)+\bTr(C_2)+(2\pi)^{-1}\gamma'_{C_1+C_2}(0)\). By
+Theorem~\ref{tr:thm:bTr}(3), \(\bTr(C_2)=\bTr(C_1)\), and
+\(2\bTr(C_1)=\eta(A_0)\).
+
+(2) We have \(C_1=(B+i\tau)^{-1}\) and \(C_2=\sigma C_1\sigma^{-1}\), so
+\(\Tr(C_2Q_0^F(s))=\Tr(C_1Q_0^E(s))\). For \(\operatorname{Re}s>d\), the
+eigenvalue sum and the \(\tau\)-integral converge absolutely. The odd part
+integrates to \(0\), and
+\[
+ \frac1{2\pi}\int\Tr\bigl(C_1(B^2+\tau^2)^{-s/2}\bigr)d\tau=\frac1{2\pi}
+ \sum_\lambda\lambda\int_\R(\lambda^2+\tau^2)^{-1-s/2}d\tau=
+ \frac{\Gamma(\frac{1+s}2)}{2\sqrt\pi\,\Gamma(1+\frac s2)}\,\eta_B(s).
+\]
+This is regular at \(s=0\) with value \(\frac12\eta_B(0)\). By
+Correction~\ref{tr:corr:Prop8} (before the comparison with \(\bTr\)),
+\(\hTrd(A^{-1}[\lx,A])=\hTrd([\lx,A]A^{-1})=-\frac12\eta_B(0)\). So
+\(\etab(A)=\eta_B(0)\), which is \(\eta(A_0)\) by
+Theorem~\ref{tr:thm:Dirac}. For the construction of \(Q\): the family is
+admissible since \(\tilde\omega\omega=\omega\), and the term
+\(Q_X(s)(1-\omega)\) has kernel supported away from the front face.
+\end{proof}
+
+\begin{remark}[The regularizer \((A^*A+1)^{1/2}\) (sketch)]\label{tr:rem:plusone}
+Theorem~\ref{thm:reduced} uses \(Q=(A^*A+1)^{1/2m}\), whose indicial family
+is \((D_t^2+B^2+1)^{1/2}\) for \(A\) as in Theorem~\ref{tr:thm:Dirac}.
+Expanding \((1+(\tau^2+B^2)^{-1})^{-s/2}\) binomially in the computation
+above (for \(|\lambda|>1\)) gives
+\[
+ \etab(A)=\eta_B(0)+\frac{1}{\sqrt\pi}\sum_{1\le k\le d/2}\frac{(-1)^k}
+ {k\cdot k!}\,a_{d-2k},
+\]
+where the \(a_j\) are the heat coefficients of \(\theta(t)\). For Dirac
+operators compatible with a Clifford structure,
+\(\theta(t)=O(t^{1/2})\) as \(t\downarrow0\) (local cancellation of
+Bismut--Freed, quoted). So all \(a_j\) with \(j\le d\) vanish, and
+\(\etab(A)=\eta_B(0)\) also for this \(Q\). For general first-order \(B\)
+the extra terms need not vanish. They are local and are compensated in the
+index formula by \(\beta_Q\) (Proposition~\ref{tr:prop:transfer}(3)).
+\end{remark}
+
+\begin{remark}[Signs]\label{tr:rem:signs}
+In \cite{Notes} the APS operator is \(P=c(du)(\partial_u+A^+)\) near the
+boundary, with \(u=\log x_b\to-\infty\) on the end, and
+\(\operatorname{ind}P=\int\hat A\operatorname{ch}-\frac12(\eta(A^+)+h)\).
+The cusp picture has \(x_b=e^{-1/x}\), so \(u=-t\) and
+\(\partial_u=-\partial_t\). Hence \(A=\sigma(-\partial_t+B)\) with
+\(\sigma=c(du)\) and \(B=A^+\), and Theorem~\ref{tr:thm:Dirac} gives
+\(\eta(A_0)=\eta(A^+)\). Thus the corrected formula
+\(\Ind A=\AS(A)-\frac12\eta(A_0)\) of Theorem~\ref{thm:reduced} reproduces
+APS (with \(h=0\)). The sign of the eta term is fixed by the indicial
+convention \eqref{eq:Indef}, \(\In(A,\tau)=e^{i\tau t}Ae^{-i\tau t}\); with
+\(e^{-i\tau t}Ae^{i\tau t}\) instead, \(\eta(A_0)\) would change sign. This
+confirms the sign of the eta term in Correction~\ref{corr:ASsign}.
+\end{remark}
