@@ -217,7 +217,9 @@ Here \(q=\sigma_1(Q)\) is the symbol of a positive elliptic \(Q\in
 \Psic^1(X)\), and \(\Lser{q^{-1}}\) denotes Laurent series in \(q^{-1}\), with powers
 of \(q\) bounded above. Likewise \(\Lser{x}\) denotes Laurent series in \(x\),
 with powers of \(x\) bounded below. (MN write these as \([q]]\) and
-\([[x]\); we use the standard notation for formal Laurent series.) The
+\([[x]\); we use the standard notation for formal Laurent series.)
+Figure~\ref{fig:lattice} places the two filtrations and their residual
+ideals side by side. The
 products are star products. In the
 indicial algebras the Laurent variable does not commute with the suspended
 operators:
@@ -228,6 +230,47 @@ where \(t\) is the linear variable of the suspension \(\R_t\times\partial
 X\). The relation \eqref{eq:twist} is the \emph{cusp twist}. We explain it
 in Section~\ref{subsec:twist}; it is responsible for most of the
 differences from the b-calculus (Section~\ref{sec:comparison}).
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,scale=0.6]
+ \fill[gray!15] (-1,1) rectangle (3.35,-3.35);
+ \fill[blue!12] (3.65,-3.35) rectangle (4.35,3.4);
+ \fill[red!10] (-3.4,-3.65) rectangle (3.35,-4.35);
+ \fill[gray!55] (3.65,-3.65) rectangle (4.35,-4.35);
+ \foreach \k in {-3,...,3}{\foreach \m in {-3,...,3}{\fill[gray!60] (\k,\m) circle (1.6pt);}}
+ \draw[->] (-3.4,4.0)--(4.6,4.0) node[right] {\small \(k\) (power of \(x\))};
+ \draw[->] (-4.0,-3.4)--(-4.0,3.7) node[left] {\small \(m\) (order)};
+ \foreach \k in {-3,...,3} \node[font=\scriptsize,above] at (\k,4.0) {\(\k\)};
+ \node[font=\scriptsize,above] at (4,4.0) {\(\infty\)};
+ \foreach \m in {-3,...,3} \node[font=\scriptsize,left] at (-4.0,\m) {\(\m\)};
+ \node[font=\scriptsize,left] at (-4.0,-4) {\(-\infty\)};
+ \fill (-1,1) circle (3pt);
+ \node[font=\footnotesize,anchor=south east,fill=white,inner sep=1pt] at (-1.1,1.1) {\(x^k\Psic^m\)};
+ \draw[->,very thick,blue!70!black] (-1,1)--(-1,0.12);
+ \node[font=\scriptsize,blue!70!black,anchor=east] at (-1.1,0.45) {\(D_{\lQ}\)};
+ \draw[->,very thick,red!70!black] (-1,1)--(-0.12,0.12);
+ \node[font=\scriptsize,red!70!black,anchor=west] at (-0.4,0.75) {\(D_{\lx}\)};
+ \node[font=\footnotesize,align=left,anchor=west] at (4.6,1.0)
+   {\(\Is=x^\infty\Psic^{\Z}/\cI\)\\[1pt] \(\cong\dCI(\Y)\Lser{q^{-1}}\)};
+ \node[font=\footnotesize,anchor=north] at (0,-4.45)
+   {\(\Id=x^{-\Z}\Psic^{-\infty}/\cI\cong\Psis^{-\infty}(\partial X)\Lser{x}\)};
+ \node[font=\footnotesize,anchor=west] at (4.6,-4.0) {\(\cI=\bigcap_{k,m}x^k\Psic^m\)};
+\end{tikzpicture}
+\caption[The two filtrations and the residual ideals]{The two filtrations
+of \(x^{-\Z}\Psic^{\Z}(X)\). The dot at \((k,m)\) stands for
+\(x^k\Psic^m(X)\), which contains \(x^{k'}\Psic^{m'}(X)\) for \(k'\ge k\)
+and \(m'\le m\) (shaded, for \((k,m)=(-1,1)\)). Every element lies in such a
+quadrant: powers of \(x\) are bounded below, as in \(\Lser{x}\), and orders
+are bounded above, as in \(\Lser{q^{-1}}\). The residual edges are
+\(k=\infty\), giving \(\Is\) (blue), and \(m=-\infty\), giving \(\Id\)
+(red); the corner \(\cI\) is divided out, so \(\Is\cap\Id=0\) in \(\cA\).
+Then \(\As=\cA/\Id\) forgets the bottom edge, \(\Ad=\cA/\Is\) the right
+edge, and \(\Ads\) both. Arrows: on symbols \(D_{\lQ}\) lowers the order by
+one, and \(D_{\lx}\) lowers the order by one and raises the power of \(x\)
+by one (Section~\ref{sec:derivations}).}
+\label{fig:lattice}
+\end{figure}
 
 \subsection{The main homological results}\label{subsec:mainresults}
 Write \(Y=\Y\) for the cosphere bundle of the cusp cotangent bundle; it
@@ -577,6 +620,45 @@ proof of Lemma~9. Also the factor \(2\) in \cite[(80)]{MN}: in fact
 \end{enumerate}
 To avoid a clash with the eta invariant, we write \(\beta_Q\) for the
 functional MN call \(\beta\) in \cite[(91)]{MN}.
+Figure~\ref{fig:deps} records, for the main results, which background
+facts they use and which of the items above affect them.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[font=\footnotesize]
+ \def\cx#1{\fpeval{6.6+0.6*(#1-1)}}
+ \fill[red!10] (\cx{9}-0.3,0.35) rectangle (\cx{9}+0.3,-5.0);
+ \foreach \i in {1,...,9} \node[font=\scriptsize] at (\cx{\i},0) {(B\i)};
+ \node[font=\scriptsize,anchor=west] at (11.8,0) {items};
+ \draw[gray] (0,-0.3)--(13.1,-0.3);
+ \foreach \r/\lab/\cols/\cor in {
+   1/{\(\Is\), \(\As\) (Props.~\ref{prop:As}, \ref{prop:Is})}/{1,5,6}/{4},
+   2/{\(\Ads\), boundary sequence (Props.~\ref{prop:Ads}, \ref{prop:boundaryLES})}/{1,4,5,9}/{--},
+   3/{\(\Id\), \(\cI\) (Props.~\ref{prop:Id}, \ref{prop:I})}/{1,3,4,5,6}/{1},
+   4/{residue functionals (\S\ref{sec:residues})}/{3,8}/{2, 8, 10},
+   5/{\(\Ad\), \(\cA\), Thm.~\ref{thm:main} (Props.~\ref{prop:Ad}, \ref{prop:HHA})}/{3,4,9}/{1, 2},
+   6/{index formula (Lemma~\ref{lem:fedosov}, Thm.~\ref{thm:index})}/{2,3,6}/{5, 6},
+   7/{eta term, reduced formula (Prop.~\ref{prop:eta}, Thm.~\ref{thm:reduced})}/{3,7}/{6, 7}}{
+   \node[anchor=west] at (0,-0.65*\r) {\lab};
+   \foreach \c in \cols {
+     \ifnum\c=9 \fill[red!70!black] (\cx{\c},-0.65*\r) circle (2.6pt);
+     \else \fill[blue!70!black] (\cx{\c},-0.65*\r) circle (2.6pt);\fi}
+   \node[anchor=west] at (11.8,-0.65*\r) {\cor};
+   \draw[gray!40] (0,-0.65*\r-0.325)--(13.1,-0.65*\r-0.325);
+ }
+\end{tikzpicture}
+\caption[Background facts and corrections used by the main results]{Which
+main results use which background facts of
+Section~\ref{subsec:background} (dots), and which items of the list in
+Section~\ref{subsec:errata} concern them (last column). The red column
+is (B9), part~(3) of MN Proposition~5, which we quote but do not prove
+(Remark~\ref{rem:s0}); everything built on the boundary map of
+\(0\to\Is\to\As\to\Ads\to0\), including the corrected groups of \(\cA\),
+rests on it. Each row also uses the rows above it, as in
+Figure~\ref{fig:roadmap}. Items 3 (not used elsewhere), 9 (the
+foundations behind (B1)) and 11 (misprints) are not shown.}
+\label{fig:deps}
+\end{figure}
 
 \section{The closed case: Brylinski--Getzler and Wodzicki}\label{sec:closed}
 
@@ -754,6 +836,47 @@ contributes a finite rank term. Hence
 \]
 In symbol terms, \(A[\lQ,B]\) has \(a_{-1}(\theta,\xi)=-\xi^{-1}\) for
 \(\xi>0\) and \(0\) for \(\xi<0\). Only \(\TrR^+\) contributes.
+Figure~\ref{fig:circle} shows both computations.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,font=\footnotesize]
+ \def\s{1.05}
+ % top row: action of A on modes
+ \draw[gray] (-4.5*\s,2.2)--(4.5*\s,2.2);
+ \foreach \k in {-4,...,4}{\fill (\k*\s,2.2) circle (2pt);
+   \node[below] at (\k*\s,2.15) {\(e_{\k}\)};}
+ \foreach \k in {0,...,3} \draw[->,thick,blue!70!black] (\k*\s+0.08,2.32) to[bend left=50] (\k*\s+\s-0.08,2.32);
+ \foreach \k in {-4,...,-1} \draw[->,gray!60!black] (\k*\s-0.1,2.32) .. controls (\k*\s-0.3,2.85) and (\k*\s+0.3,2.85) .. (\k*\s+0.1,2.32);
+ \draw[red!70!black,thick] (0,2.2) circle (4pt);
+ \node[blue!70!black,anchor=south] at (2*\s,2.85) {\(Ae_k=e_{k+1}\) \((k\ge0)\)};
+ \node[gray!40!black,anchor=south] at (-2.5*\s,2.85) {\(Ae_k=e_k\) \((k<0)\)};
+ \node[red!70!black,anchor=north,align=center] at (0,1.75) {\(e_0\notin\operatorname{ran}A\)};
+ % bottom row: eigenvalues of A[log Q,B]
+ \draw[->] (-4.6*\s,0)--(4.8*\s,0) node[right] {\(k\)};
+ \draw[->] (0,-1.75)--(0,0.45);
+ \draw (-0.08,-1.5)--(0.08,-1.5) node[left,xshift=-2pt] {\(-1\)};
+ \draw[densely dashed,red!70!black,domain=0.85:4.5,samples=40,smooth]
+   plot (\x*\s,{-1.5/\x});
+ \foreach \k in {-4,...,-1} \fill[blue!70!black] (\k*\s,0) circle (2pt);
+ \foreach \k in {1,...,4}{
+   \pgfmathsetmacro{\v}{1.5*(ln(sqrt(1+(\k-1)^2))-ln(sqrt(1+\k^2)))}
+   \fill[blue!70!black] (\k*\s,\v) circle (2pt);}
+ \node[red!70!black,anchor=west] at (2.6*\s,-0.95) {\(-1/k\)};
+ \node[anchor=west,align=left] at (-4.5*\s,-1.0)
+   {eigenvalue of \(A[\lQ,B]\) on \(e_k\):\\ \(\log\langle k-1\rangle-\log\langle k\rangle\) for \(k\ge1\),\\ \(0\) for \(k\le-1\)};
+\end{tikzpicture}
+\caption[The Toeplitz-type operator on the circle]{The example of
+Section~\ref{subsec:circle}, \(A=e^{i\theta}\Pi+(1-\Pi)\). Top: \(A\)
+shifts the modes \(e_k\), \(k\ge0\), up by one and fixes the others, so
+\(A\) is injective, its range misses \(e_0\), and \(\Ind A=-1\). Bottom:
+\(A[\lQ,B]\) is diagonal on \(e_k\), \(k\ne0\), with eigenvalue
+\(-1/k+O(k^{-2})\) for \(k\ge1\) and \(0\) for \(k\le-1\) (\(e_0\) gives
+a finite rank term). The tail \(-1/k\) on one side only gives
+\(\TrR(A[\lQ,B])=-1=\Ind A\): only \(\TrR^+\) contributes, and the
+opposite order \(\TrR(A^{-1}[\lQ,A])\) gives \(+1\).}
+\label{fig:circle}
+\end{figure}
 
 \begin{discussion}
 The example fixes the sign convention for everything that follows:
@@ -1101,8 +1224,50 @@ for the order filtration (Section~\ref{sec:indicial}). In the b-calculus
 the corresponding relation is \(x^{-1}Ax=\alpha(A)\), where \(\alpha\) is
 the complex shift \(\lambda\mapsto\lambda-i\). This automorphism does
 \emph{not} become trivial on the associated graded algebra; see
-Section~\ref{sec:comparison}.
+Section~\ref{sec:comparison}. Figure~\ref{fig:twist} contrasts the two.
 \end{discussion}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,scale=0.85]
+ \begin{scope}
+  \draw[->] (-2.8,0)--(2.9,0) node[right] {\small \(\tau\in\R\)};
+  \draw[->] (0,-1.3)--(0,1.9);
+  \draw[very thick,blue!70!black,domain=-2.6:2.6,samples=80,smooth]
+    plot (\x,{1.4*exp(-\x*\x)});
+  \draw[thick,densely dashed,red!70!black,domain=-2.6:2.6,samples=80,smooth]
+    plot (\x,{-0.5*\x*1.4*exp(-\x*\x)});
+  \node[font=\scriptsize,blue!70!black,anchor=west] at (0.55,1.25) {\(\In(a,\tau)\)};
+  \node[font=\scriptsize,red!70!black,anchor=north west] at (0.75,-0.4)
+    {\(\propto x\,\partial_\tau\In(a,\tau)\)};
+  \node[font=\footnotesize,align=center] at (0,2.65)
+    {cusp: \(x^kax^{-k}=a+ik\,x\,a'+O(x^2)\)\\ \([x,\partial_t]=x^2\), \(t=1/x\)};
+ \end{scope}
+ \begin{scope}[xshift=7.2cm]
+  \draw[->] (-2.4,0)--(2.6,0) node[right] {\small \(\operatorname{Re}\lambda\)};
+  \draw[->] (0,-1.6)--(0,1.9) node[right] {\small \(\operatorname{Im}\lambda\)};
+  \draw[very thick,blue!70!black] (-2.2,0)--(2.2,0);
+  \draw[very thick,red!70!black,densely dashed] (-2.2,-1)--(2.2,-1);
+  \foreach \a in {-1.6,-0.6,0.6,1.6} \draw[->,thick,gray!40!black] (\a,-0.05)--(\a,-0.93);
+  \node[font=\scriptsize,anchor=west] at (2.25,-1) {\(\operatorname{Im}\lambda=-1\)};
+  \node[font=\scriptsize,anchor=north] at (-1.1,-1.08) {\(\lambda\mapsto\lambda-i\)};
+  \node[font=\footnotesize,align=center] at (0,2.65)
+    {b: \(I(x_b^{-1}Ax_b,\lambda)=I(A,\lambda-i)\)\\ \(\lambda\in\C\), \(I(A,\lambda)\) entire};
+ \end{scope}
+\end{tikzpicture}
+\caption[The cusp twist versus the b-twist]{Conjugation by powers of
+\(x\). Left, the cusp case (Lemmas~\ref{lem:twist}
+and~\ref{lem:commutators}): for \(a\) of \(x\)-degree zero,
+\(x^kax^{-k}=a+ik\,x\,a'+O(x^2)\), where \(a'\) has indicial family
+\(\partial_\tau\In(a,\tau)\). The correction (dashed) is a derivative in
+\(\tau\) and costs one power of \(x\), so it disappears in the associated
+graded algebra, which is commutative with Poisson bracket
+\(\{t,\tau\}=1\). Right, the b-case: conjugation by \(x_b\) evaluates the
+indicial family on the line \(\operatorname{Im}\lambda=-1\). This is a
+finite shift, an automorphism that survives in the associated graded
+algebra (Section~\ref{sec:comparison}).}
+\label{fig:twist}
+\end{figure}
 
 \subsection{The transcendental blow-up and the b-calculus}
 \label{subsec:transcendental}
@@ -2809,7 +2974,46 @@ Both right-hand sides vanish if \(A\) or \(B\) lies in \(\Is+\Id\). By
 Lemma~\ref{lem:conn}, Lemma~\ref{lem:17} computes the connecting maps of
 \(0\to\Id\to\Ad\to\Ads\to0\) and \(0\to\Is\to\As\to\Ads\to0\) on the
 traces \cite[(17)--(19)]{MN}. The corresponding statements hold for each
-boundary component separately.
+boundary component separately. Figure~\ref{fig:traces} puts
+Lemma~\ref{lem:17} next to the other trace defects of these notes.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,font=\footnotesize,
+  tr/.style={draw,rounded corners=2pt,fill=gray!8,align=center,inner sep=3pt,
+    minimum height=8mm,minimum width=2.4cm},
+  ex/.style={align=center},
+  co/.style={draw,rounded corners=2pt,align=center,inner sep=3pt,
+    minimum height=8mm,minimum width=2.9cm}]
+ \node[font=\small] at (0,0.9) {trace on an ideal};
+ \node[font=\small] at (4.3,0.9) {extension};
+ \node[font=\small] at (10.0,0.9) {coboundary};
+ \foreach \r/\a/\b/\c/\d/\col in {
+   0/{\(\Trs\) on \(\Is\)}/{\(\hTrs\): residue in \(s\),\\ finite part in \(z\)}/{\(b\hTrs=-i_{\lx}\Trds\)\\ on \(\Ads\)}/{\(x^z\leadsto-z\,D_{\lx}\)}/red,
+   1/{\(\Trd\) on \(\Id\)}/{\(\hTrd\): residue in \(z\),\\ finite part in \(s\)}/{\(b\hTrd=i_{\lQ}\Trds\)\\ on \(\Ads\)}/{\(Q^{-s}\leadsto s\,D_{\lQ}\)}/blue,
+   2/{\(\Tr\) on \(\cI\)}/{\(\Tr_c\): finite part\\ of \(\Tr(\cdot\,x^z)\) at \(z=0\)}/{\(b\Tr_c=-i_{\lx}\Trd\)\\ on \(\Id\)}/{\(x^z\leadsto-z\,D_{\lx}\)}/red,
+   3/{\(\Tr\) on \(\cI\)}/{\(\widehat\Tr\): finite part\\ of \(\widetilde Z(\cdot\,;z)\) at \(z=0\)}/{\(b\widehat\Tr=\IF\)\\ on \(\cA\)}/{both}/black}{
+   \node[tr] (a\r) at (0,-1.15*\r) {\a};
+   \node[ex] (b\r) at (4.3,-1.15*\r) {\b};
+   \node[co,draw=\col!70!black] (c\r) at (10.0,-1.15*\r) {\c};
+   \draw[->] (a\r)--(b\r);
+   \draw[->,thick,\col!70!black] (b\r)--node[above,font=\scriptsize]{\d}(c\r);
+ }
+\end{tikzpicture}
+\caption[Extensions of traces and their coboundaries]{Every boundary map
+in \cite{MN} is computed by Lemma~\ref{lem:conn}: extend a trace from an
+ideal by analytic continuation, then take the Hochschild coboundary
+\((b\varphi)(A,B)=\varphi([A,B])\). Commuting past the regularizer produces a
+derivation: \([B,Q^{-s}]=s\,M(s)Q^{-s}\) with \(M(0)=[\lQ,B]\), and
+\([B,x^z]=-z\,L(z)x^z\) with \(L(0)=[\lx,B]\). The factor \(s\) or \(z\)
+cancels the pole, leaving a residue of \(A\,D(B)\). Rows 1--2:
+Lemma~\ref{lem:17} \cite[(17)]{MN}; their sum is
+\(\Bf=(i_{\lQ}-i_{\lx})\Trds\) (Proposition~\ref{prop:Bf}). Row~3:
+Proposition~\ref{prop:I}. Row~4: Lemma~\ref{lem:fedosov} and
+Proposition~\ref{prop:IF}, where both derivations occur through
+\(\widetilde D=[\lx-\lQ,\cdot\,]\).}
+\label{fig:traces}
+\end{figure}
 
 \subsection{The algebra \texorpdfstring{\(\Ad\)}{Ad}}
 Since \(\Id\) is H-unital, \(0\to\Id\to\Ad\to\Ads\to0\) gives a long
@@ -2946,7 +3150,45 @@ and \(\HH^2(\cA)\) is smaller than \cite[(16)]{MN} claims by
 \(N-1\) dimensions. The same rank appears in the b-calculus
 \cite[Remark ``Several boundary components'']{HHb}. If \(X\) has \(c\)
 components, each with non-empty boundary, the rank is \(N-c\).
+Figure~\ref{fig:rank} illustrates the count.
 \end{correction}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,font=\footnotesize]
+ \fill[gray!15,even odd rule] (0,0) ellipse (2.5 and 1.55)
+   (-1.0,0.15) circle (0.6) (1.0,-0.1) circle (0.6);
+ \draw[very thick,blue!70!black] (0,0) ellipse (2.5 and 1.55);
+ \draw[very thick,blue!70!black] (-1.0,0.15) circle (0.6);
+ \draw[very thick,blue!70!black] (1.0,-0.1) circle (0.6);
+ \node at (0,-1.15) {\small \(Y\)};
+ \node[blue!70!black,anchor=south west] at (1.6,1.15) {\(Z_1\), \(c_1\)};
+ \node[blue!70!black] at (-1.0,0.15) {\(Z_2\), \(c_2\)};
+ \node[blue!70!black] at (1.0,-0.1) {\(Z_3\), \(c_3\)};
+ \begin{scope}[xshift=7.3cm]
+  \node[draw,rounded corners=2pt,align=center] (src) at (0,1.0)
+    {\(\C^N=\operatorname{span}\{d\theta_\sigma1_{Z_j}\}\subset H^1(Z\times\Ssig)\)\\
+     \(\textstyle\sum_jc_j\,d\theta_\sigma1_{Z_j}\)};
+  \node[draw,rounded corners=2pt] (tgt) at (0,-1.1) {\(\Hrel^2(Y\times\Ssig)\)};
+  \draw[->,thick,red!70!black] (src)--node[right]{\(\delta\), image of rank \(N-1\)}(tgt);
+  \node[align=left,anchor=west,blue!70!black] at (-3.1,-2.1)
+    {\(\ker\delta\): \(c_1=\dots=c_N\), the restriction of \(d\theta_\sigma\) from \(Y\times\Ssig\)};
+ \end{scope}
+\end{tikzpicture}
+\caption[The rank \(N-1\) phenomenon]{Why \(\HH^1(\Id)\to\HH^2(\As)\)
+has rank \(N-1\) (Proposition~\ref{prop:HHA}, Correction~\ref{corr:Prop12}),
+drawn schematically for \(N=3\), with the connected manifold \(Y\) shown as a
+planar domain whose boundary \(Z\) has components \(Z_1,Z_2,Z_3\). The class
+\(i_{\lx}\Tr_{\partial,j}\) goes to \(\pm\Phi_1(\delta(d\theta_\sigma1_{Z_j}))\),
+where \(\delta\) is the de Rham connecting map. A combination
+\(\sum_jc_jd\theta_\sigma1_{Z_j}\) lies in \(\ker\delta\) exactly when it
+is the restriction of a class on \(Y\times\Ssig\); since \(Y\) is connected
+(\(n\ge2\)) this means \(c_1=\dots=c_N\). Dually, by Stokes' theorem,
+\(\sum_j\int_{Z_j}\beta=0\) for every closed \(\beta\) on \(Y\). The
+kernel is spanned by \(i_{\lx}\Trd=\sum_ji_{\lx}\Tr_{\partial,j}\); MN's
+argument sees only this sum.}
+\label{fig:rank}
+\end{figure}
 
 \begin{discussion}
 \textbf{How the index formula comes out of the boundary maps.} The index
@@ -3309,6 +3551,50 @@ reversing that parametrization reverses the sign. The interval example
 and the Atiyah--Patodi--Singer convention support the choice made here.
 \end{correction}
 
+Figure~\ref{fig:fourterms} shows how the four terms arise and what
+becomes of them under the hypotheses of Theorem~\ref{thm:reduced} below.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,font=\footnotesize,
+  cell/.style={draw,rounded corners=2pt,align=center,text width=3.7cm,
+    minimum height=11mm,inner sep=3pt}]
+ \node[draw,rounded corners=2pt,fill=gray!8,inner sep=4pt] (top) at (3.1,2.6)
+   {\(\IF(A,A^{-1})=\tfrac12(\hTrd+\hTrs)\bigl(A^{-1}\widetilde D(A)+
+    \widetilde D(A)A^{-1}\bigr)\),\quad \(\widetilde D=D_{\lx}-D_{\lQ}\)};
+ \node[font=\small] at (1.0,1.5) {\(D_{\lx}\)};
+ \node[font=\small] at (5.2,1.5) {\(-D_{\lQ}\)};
+ \node[font=\small,anchor=east] at (-1.1,0.2) {\(\hTrd\)};
+ \node[font=\small,anchor=east] at (-1.1,-1.2) {\(\hTrs\)};
+ \node[cell] (dx) at (1.0,0.2) {\(-\tfrac12\etab(A)\)\\[1pt]
+   {\color{gray!40!black}\(=-\tfrac12\eta(A_0)\), Prop.~\ref{prop:eta}}};
+ \node[cell,draw=red!70!black] (dq) at (5.2,0.2) {{\color{red!70!black}\(-\beta_Q(A)\)}\\[1pt]
+   {\color{gray!40!black}\(=0\), Lemma~\ref{lem:betaQ}}};
+ \node[cell] (sx) at (1.0,-1.2) {\(\gamma(A)\)\\[1pt]
+   {\color{gray!40!black}\(=0\), Lemma~\ref{lem:gamma}}};
+ \node[cell,draw=red!70!black] (sq) at (5.2,-1.2) {{\color{red!70!black}\(-\bAS(A)=\AS(A)\)}\\[1pt]
+   {\color{gray!40!black}\(=\TrR(A[\lQ,A^{-1}])\)}};
+ \node[draw,very thick,blue!70!black,rounded corners=2pt,inner sep=4pt,text=black]
+   (ind) at (10.4,-0.5) {\(\Ind(A)=\AS(A)-\tfrac12\eta(A_0)\)};
+ \draw[->,thick,blue!70!black] (dx.north) -- (1.0,1.0) -| (ind.north);
+ \draw[->,thick,blue!70!black] (sq.east) -| (ind.south);
+ \draw[->,gray] (dq.east) -- ++(0.35,0) node[right,font=\scriptsize] {\(0\)};
+ \draw[->,gray] (sx.south) -- ++(0,-0.35) node[below,font=\scriptsize] {\(0\)};
+\end{tikzpicture}
+\caption[Assembling the index formula]{The four terms of
+Theorem~\ref{thm:index}. Inserting \(B=A^{-1}\) in
+Proposition~\ref{prop:IF} and splitting \(\widetilde D=D_{\lx}-D_{\lQ}\)
+gives one term for each pair of a regularized trace and a derivation:
+\(\Ind(A)=-\bAS(A)-\frac12\etab(A)-\beta_Q(A)+\gamma(A)\). The terms in
+red carry the signs corrected from \cite[(93)]{MN}
+(Correction~\ref{corr:ASsign}). For \(A\) fully elliptic and translation
+invariant near the boundary with normal indicial family, and \(Q\) as in
+Theorem~\ref{thm:reduced}, the grey annotations apply: \(\gamma\) and
+\(\beta_Q\) vanish, \(\etab\) is the eta invariant of \(A_0\), and the
+result is the reduced formula.}
+\label{fig:fourterms}
+\end{figure}
+
 \subsection{The eta term}
 
 \begin{proposition}[MN Proposition 17]\label{prop:eta}
@@ -3455,6 +3741,53 @@ This is Section~\ref{subsec:circle}. With \(A=e^{i\theta}\Pi+(1-\Pi)\),
 symbolic term.
 \end{example}
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Latex,font=\footnotesize]
+ \begin{scope}[scale=0.8]
+  \draw[->] (-3.3,0)--(3.5,0) node[right] {\(u\)};
+  \draw[->] (0,-1.3)--(0,1.9);
+  \draw[gray,densely dotted] (-3.2,0.9)--(3.2,0.9) (-3.2,-0.9)--(3.2,-0.9);
+  \node[anchor=west] at (3.2,0.9) {\(a_+\)};
+  \node[anchor=west] at (3.2,-0.9) {\(a_-\)};
+  \draw[very thick,blue!70!black,domain=-3.2:3.2,samples=80,smooth]
+    plot (\x,{0.9*tanh(1.6*\x)});
+  \draw[very thick,red!70!black,domain=-3.2:3.2,samples=80,smooth]
+    plot (\x,{1.6*cosh(1.6*\x)^(-0.5625)});
+  \node[blue!70!black,anchor=north west] at (-3.2,-0.95) {\(a(u)\)};
+  \node[red!70!black,anchor=south west] at (0.35,1.35) {\(e^{-\int_0^ua}\in\ker A\)};
+ \end{scope}
+ \begin{scope}[xshift=5.6cm,scale=0.8]
+  \draw[->] (-1.9,0)--(1.9,0) node[right] {\(\operatorname{Re}\)};
+  \draw[->] (0,-1.6)--(0,1.9) node[above] {\(\operatorname{Im}\)};
+  \fill (0,0) circle (1.8pt);
+  \draw[very thick,blue!70!black,->] (0.9,1.4)--(0.9,-1.4);
+  \draw[very thick,blue!70!black,->] (-0.9,-1.4)--(-0.9,1.4);
+  \node[anchor=west,align=left] at (0.95,-1.15) {\(a_+-i\tau\)};
+  \node[anchor=east,align=right] at (-0.95,1.15) {\(a_-+i\tau\)};
+ \end{scope}
+ \node[anchor=west] at (7.6,0.35) {%
+  \renewcommand{\arraystretch}{1.15}%
+  \begin{tabular}{cc|cc}
+   \(\sgn a_+\) & \(\sgn a_-\) & \(\Ind A\) & \(-\tfrac12\eta(A_0)\)\\\hline
+   \(+\) & \(-\) & \(1\) & \(1\)\\
+   \(-\) & \(+\) & \(-1\) & \(-1\)\\
+   \(+\) & \(+\) & \(0\) & \(0\)\\
+   \(-\) & \(-\) & \(0\) & \(0\)
+  \end{tabular}};
+\end{tikzpicture}
+\caption[The operator \(\partial_u+a(u)\) on the interval]{Example~\ref{ex:interval-index},
+\(A=\partial_u+a(u)\) with \(a\) real and \(a=a_\pm\neq0\) near
+\(u=\pm\infty\). Left: for \(a_+>0>a_-\) the solution \(e^{-\int_0^ua}\)
+of \(Au=0\) decays at both ends, so \(\ker A\ne0\). Middle: the indicial
+families \(a_+-i\tau\) (right end) and \(a_-+i\tau\) (left end) trace
+vertical lines, which miss \(0\) because \(a_\pm\) are real and non-zero.
+Right: since \(\AS(A)=0\) and the ends contribute \(\eta=-\sgn a_+\) and
+\(\eta=\sgn a_-\), the formula \(\Ind A=\AS(A)-\frac12\eta(A_0)\) gives
+\(\tfrac12(\sgn a_+-\sgn a_-)\) in all four cases.}
+\label{fig:interval}
+\end{figure}
+
 \begin{example}[First order operators on an interval]\label{ex:interval-index}
 Let \(X\) be the compactification of \(\R_u\) at both ends by \(1/|u|\).
 So \(X\cong[-1,1]\), \(n=1\), \(N=2\), and near the ends \(x=1/|u|\) and
@@ -3478,6 +3811,8 @@ condition is \(a_+<0<a_-\). Hence
 \[
  \Ind A=\tfrac12\bigl(\sgn a_+-\sgn a_-\bigr).
 \]
+Figure~\ref{fig:interval} shows the case \(a_+>0>a_-\) and the four sign
+cases.
 \emph{The formula.} Take \(Q=(A^*A+1)^{1/2}\). Near the ends
 \(A^*A=-\partial_u^2+a_\pm^2\) commutes with \(A\), so \(A\) is normal
 there and Theorem~\ref{thm:reduced} applies. The symbol of \([\lQ,A]\) is

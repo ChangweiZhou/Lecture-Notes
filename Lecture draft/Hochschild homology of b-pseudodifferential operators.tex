@@ -6,7 +6,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{microtype}
 \usepackage{tikz-cd}
-\usetikzlibrary{arrows.meta,positioning}
+\usetikzlibrary{arrows.meta,positioning,calc,decorations.markings,decorations.pathreplacing}
 \usepackage[hidelinks]{hyperref}
 \hypersetup{
   pdftitle={Hochschild Homology of the b-Calculus},
@@ -422,6 +422,48 @@ items listed for Section~\ref{sec:zeta}. No other inputs are assumed: the
 quoted inputs are exactly (Q0), (Q1), (Q2) and (C3), the optional \v Cech
 route assumes Lemma~\ref{lem:cech-descent} and is not used for
 Theorem~\ref{thm:full}, and the Rees--Fedosov discussion is heuristic.
+Figure~\ref{fig:inputs} tabulates these dependencies.
+
+\begin{figure}[tbp]
+\centering
+\begin{tikzpicture}[font=\small,x=1.12cm,y=0.62cm]
+ \foreach \c/\t/\a in {1/(i)/\Ib,2/(ii)/\Idb,3/(iii)/{x^{-\Z}\Psi_b^{-\infty}\!},
+   4/(iv)/\Isb,5/(v)/\Asb,6/(vi)/\Adsb,7/(vii)/\Adb,8/(viii)/\Ab,
+   9/(ix)/{x^{-\Z}\Psi_b^{\Z}}}{
+   \node[font=\footnotesize] at (\c,1.55) {\t};
+   \node[font=\scriptsize] at (\c,0.85) {\(\a\)};}
+ \node[font=\footnotesize] at (10.55,1.55) {Thm.~\ref{thm:indexgeneral}};
+ \node[font=\scriptsize] at (10.55,0.85) {index};
+ \fill[gray!8] (0.5,0.4) rectangle (11.15,-3.4);
+ \foreach \r in {0,-1,-2,-3} \draw[gray!45,thin] (0.5,\r)--(11.15,\r);
+ \foreach \c in {1,...,9} \draw[gray!45,thin] (\c,0.4)--(\c,-3.4);
+ \draw[gray!45,thin] (10.55,0.4)--(10.55,-3.4);
+ \draw[gray!60,thin] (3.5,1.9)--(3.5,-3.4) (6.5,1.9)--(6.5,-3.4)
+   (9.55,1.9)--(9.55,-3.4);
+ \foreach \r/\t in {0/(Q0),-1/(Q1),-2/(Q2),-3/(C3)}
+   \node[anchor=east,font=\footnotesize] at (0.4,\r) {\t};
+ % filled: used directly; open: only through part (ii)
+ \foreach \c/\r in {1/-3,
+   2/0,2/-1,2/-2,2/-3, 3/0,3/-1,3/-2,3/-3,
+   4/0,4/-1,4/-3, 5/0,5/-3, 6/0,6/-3,
+   7/0,7/-1,7/-3, 8/0,8/-1,8/-3,
+   9/0,9/-1,9/-3, 10.55/0,10.55/-3}
+   \fill[blue!70!black] (\c,\r) circle (3.2pt);
+ \foreach \c in {7,8}
+   \draw[blue!70!black,thick,fill=white] (\c,-2) circle (3pt);
+\end{tikzpicture}
+\caption[Quoted inputs used by each result]{The quoted inputs used by the
+parts of Theorem~\ref{thm:full} and by the index formula
+(Theorem~\ref{thm:indexgeneral}), read off from the dependency paragraph
+of Section~\ref{subsec:status}: (Q0) small b-composition, (Q1) excision, (Q2) crossed products,
+(C3) standard analysis and topology. A filled dot means that the input is
+used; an open dot means that it
+enters only through part (ii), on which parts (vii) and (viii) rely. Part
+(iii) also uses (i) and (ii), and part (ix) also uses (i) and
+Theorem~\ref{thm:WH}. The optional \v Cech route and the Rees--Fedosov
+discussion are not used.}
+\label{fig:inputs}
+\end{figure}
 
 \subsection{Organization}
 Part~\ref{part:symbols} keeps the computation for the symbol algebra
@@ -431,6 +473,63 @@ the Hochschild tools, and the ideals \(\Ib\), \(\Idb\) and
 \(x^{-\Z}\Psi_b^{-\infty}\). Part~\ref{part:assembly} assembles the
 remaining algebras and treats the index functional. Its last section proves
 the general index formula for fully elliptic operators of positive order.
+Figure~\ref{fig:roadmap} shows which results feed each part of
+Theorem~\ref{thm:full}.
+
+\begin{figure}[tbp]
+\centering
+\begin{tikzpicture}[>=Latex,thick,font=\small,
+  part/.style={draw,rounded corners=3pt,fill=blue!6,align=center,
+    inner sep=3pt,font=\footnotesize,minimum height=8.5mm},
+  tool/.style={draw=gray!70,fill=gray!10,align=center,inner sep=3pt,
+    font=\footnotesize,text width=#1},
+  feed/.style={->,gray!65!black,thin,dashed},
+  dep/.style={->,blue!70!black},
+  lab/.style={font=\scriptsize,inner sep=1.5pt,fill=white}]
+ \node[tool=4.1cm] (T1) at (2.3,0) {order spectral sequence: HKR,
+   \(\delta_b\), \(*_b\), weight \(0\) (Part~\ref{part:symbols},
+   Section~\ref{subsec:conv})};
+ \node[tool=3.7cm] (T2) at (7.9,0) {Taylor map \(T\), weights, crossed
+   product (Sections~\ref{sec:taylor}, \ref{sec:Id})};
+ \node[tool=2.9cm] (T3) at (12.1,0) {Morita lemma for smoothing kernels};
+ \node[part] (p4) at (0.4,-1.75) {(iv)\\\(\HH(\Isb)\)};
+ \node[part] (p5) at (2.3,-1.75) {(v)\\\(\HH(\Asb)\)};
+ \node[part] (p6) at (4.2,-1.75) {(vi)\\\(\HH(\Adsb)\)};
+ \node[part] (p2) at (7.9,-1.75) {(ii)\\\(\HH(\Idb)\)};
+ \node[part] (p1) at (12.2,-1.75) {(i)\\\(\HH(\Ib)\)};
+ \node[part] (p7) at (5.9,-3.45) {(vii)\\\(\HH(\Adb)\)};
+ \node[part] (p3) at (10.3,-3.45) {(iii)\\\(\HH(x^{-\Z}\Psi_b^{-\infty})\)};
+ \node[part] (p8) at (5.9,-5.15) {(viii)\\\(\HH(\Ab)\)};
+ \node[part] (p9) at (10.3,-5.15) {(ix)\\\(\HH(x^{-\Z}\Psi_b^{\Z})\)};
+ \draw[feed] (T1.south) ++(-1.6,0) -- (p4);
+ \draw[feed] (T1) -- (p5);
+ \draw[feed] (T1.south) ++(1.6,0) -- (p6);
+ \draw[feed] (T2) -- (p2);
+ \draw[feed] (T3) -- (p1);
+ \draw[dep] (p6) -- (p7);
+ \draw[dep] (p2) -- node[lab,below right=-1pt,pos=.55] {shift defect} (p7);
+ \draw[dep] (p1) -- (p3);
+ \draw[dep] (p2) -- node[lab,right=2pt,pos=.42] {b-trace defect} (p3);
+ \draw[dep] (p5.south) .. controls (2.3,-4.4) and (3.4,-5.15) .. (p8.west);
+ \draw[dep] (p7) -- node[lab,left=2pt]
+   {\(\partial^{\mathcal A}=\partial^\partial\circ p_*\)} (p8);
+ \draw[dep] (p2.south) .. controls (8.1,-3.9) and (7.6,-4.6) .. (p8.north east);
+ \draw[dep] (p8) -- node[lab,above] {index functional}
+   node[lab,below] {Theorem~\ref{thm:WH}} (p9);
+ \draw[dep] (p1.south) .. controls (12.3,-4.3) and (12.1,-5.15) .. (p9.east);
+\end{tikzpicture}
+\caption[Roadmap of the main theorem]{How the parts of
+Theorem~\ref{thm:full} are obtained. Grey boxes are the main tools; blue
+arrows mean ``is used to prove''. Parts (iv)--(vi) come from the order
+spectral sequence, (ii) from the twisted Laurent structure of \(\Idb\), and
+(i) from the Morita lemma. The extension
+\(0\to\Ib\to x^{-\Z}\Psi_b^{-\infty}\to\Idb\to0\) gives (iii), the indicial
+extension gives (vii), and the extension \(0\to\Idb\to\Ab\to\Asb\to0\),
+whose connecting maps factor through \(\Adsb\)
+(Proposition~\ref{prop:connA}(a)), gives (viii). Part (ix) uses the index
+functional on \(\HH_1(\Ab)\) and part (i).}
+\label{fig:roadmap}
+\end{figure}
 
 
 \part{The Laurent symbol algebra}\label{part:symbols}
@@ -1345,8 +1444,74 @@ The differential \(d^r\) maps \(E^r_{p,q}\) to \(E^r_{p-r,q+r-1}\). For
 source and target vanishes, and \(d^r=0\).
 \end{proof}
 
-The bidegree argument gives degeneration. Convergence to homology
-is proved in Section~\ref{subsec:conv}.
+The bidegree argument gives degeneration (Figure~\ref{fig:E2row}).
+Convergence to homology is proved in Section~\ref{subsec:conv}.
+
+\begin{figure}[tbp]
+\centering
+\begin{tikzpicture}[>=Latex,thick,font=\small]
+ % ---------- (a) the E^2 page ----------
+ \begin{scope}[x=.57cm,y=.72cm]
+  \fill[blue!8] (-3.5,-.38) rectangle (4.5,.38);
+  \foreach \p in {-3,...,4}\foreach \q in {-2,-1,1,2}
+    \draw[gray!70,thin] (\p,\q) circle (2.2pt);
+  \foreach \p in {-3,...,4}
+    \fill[blue!70!black] (\p,0) circle (3pt);
+  \draw[->,gray] (-3.8,-2.6)--(4.9,-2.6) node[right,black] {\(p\)};
+  \draw[->,gray] (-3.8,-2.6)--(-3.8,2.75) node[above,black] {\(q\)};
+  \foreach \q/\t in {-2/n-2,0/n,2/n+2}
+    \node[font=\footnotesize,anchor=east] at (-3.85,\q) {\(\t\)};
+  \draw[->,gray!60!black,shorten <=2pt,shorten >=2pt] (-2,0)
+    to[bend left=80,looseness=1.4] node[below,font=\footnotesize] {\(d^1\)} (-3,0);
+  \draw[->,red!70!black,shorten <=3pt,shorten >=3pt] (0,0)--(-2,1);
+  \node[red!70!black,font=\footnotesize,anchor=south west,inner sep=1pt]
+    at (-1.0,.5) {\(d^2\)};
+  \draw[->,red!70!black,shorten <=3pt,shorten >=3pt] (0,0)
+    to[bend right=12] (-3,2);
+  \node[red!70!black,font=\footnotesize,anchor=south] at (-2.0,2.05) {\(d^3\)};
+  \draw[->,red!70!black,shorten <=3pt,shorten >=3pt] (4,-1)--(2,0);
+  \node[red!70!black,font=\footnotesize,anchor=south west,inner sep=1pt]
+    at (3.1,-.45) {\(d^2\)};
+  \node[font=\footnotesize,anchor=west,blue!70!black] at (4.55,0)
+    {\(E^2_{p,n}\)};
+  \node at (.5,-3.45) {(a) \(E^2\) lives on the row \(q=n\)};
+ \end{scope}
+ % ---------- (b) the order filtration in degree k ----------
+ \begin{scope}[xshift=6.5cm,y=.72cm]
+  \fill[blue!6] (-.35,-2.5) rectangle (.35,1.1);
+  \draw[->,gray] (0,-2.75)--(0,2.8) node[above,black] {total order \(p\)};
+  \draw[blue!70!black,line width=1.5pt] (-.3,0)--(.3,0);
+  \node[font=\footnotesize,anchor=east,blue!70!black] at (-.35,0) {\(k-n\)};
+  \draw[thin] (-.2,1.1)--(.2,1.1);
+  \node[font=\footnotesize,anchor=east] at (-.35,1.1) {\(M-2\)};
+  \foreach \y/\z in {2.4/1.75,1.75/1.1,1.1/.45}
+    \draw[->,thin,shorten <=1pt,shorten >=1pt] (.15,\y)--(.15,\z);
+  \foreach \y/\z in {-.15/-.8,-.8/-1.45,-1.45/-2.1}
+    \draw[->,thin,blue!70!black,shorten <=1pt,shorten >=1pt] (.15,\y)--(.15,\z);
+  \node[font=\footnotesize,anchor=west,text width=3.6cm] at (.5,1.75)
+    {finitely many steps (P) bring a cycle down to order \(k-n\)};
+  \node[font=\footnotesize,anchor=west] at (.5,0)
+    {\(\Theta[c]=[c_{k-n}]\in E^2_{k-n,k}\)};
+  \node[font=\footnotesize,anchor=west,text width=3.6cm] at (.5,-1.6)
+    {below \(k-n\): steps (P) stay in one stage
+     \(A_{L,M}\widehat\otimes B^{\widehat\otimes k}\), and their sum
+     converges there};
+  \node at (2.0,-3.45) {(b) the order filtration in degree \(k\)};
+ \end{scope}
+\end{tikzpicture}
+\caption[The order spectral sequence and its convergence]{(a) The
+\(E^2\)-page of Proposition~\ref{prop:E2}: only the row \(q=n\) is nonzero
+(blue). The differential \(d^1=i\delta_b\) acts along rows; for \(r\geq2\),
+\(d^r:E^r_{p,q}\to E^r_{p-r,q+r-1}\) leaves the row, so its source or its
+target vanishes. (b) The convergence argument of Section~\ref{subsec:conv}
+(Proposition~\ref{prop:algconv}) in Hochschild degree \(k\). Cycles are
+reduced to order \(k-n\) by finitely many steps (P); the infinite
+corrections below \(k-n\) are made in a fixed mixed stage, with \(M\) so
+large that all their orders are at most \(M-2\) (shaded), where
+Lemma~\ref{lem:mixed-lifts} keeps them in the stage and
+Lemma~\ref{lem:mixed-symbols} makes their sum converge.}
+\label{fig:E2row}
+\end{figure}
 
 \begin{proposition}[Source dictionary]\label{prop:hypotheses}
 The algebra \(\cA_{b,L}(X;E)\) is the one-face b-groupoid specialization of
@@ -1897,7 +2062,74 @@ coordinates
 in which \(\mathrm{ff}_H=\{x'=0\}\), \(\mathrm{lb}=\{s=0\}\) and the lifted
 diagonal is \(\Delta_b=\{s=1,\ y=y'\}\). Near \(\mathrm{rb}\) one uses
 \((x,s'=x'/x,y,y')\) instead. We write
-\(K_A=\kappa_A(x',s,y,y')\) in these coordinates.
+\(K_A=\kappa_A(x',s,y,y')\) in these coordinates
+(Figure~\ref{fig:bdouble}).
+
+\begin{figure}[tbp]
+\centering
+\begin{tikzpicture}[>=Latex,thick,font=\small]
+ % ---------- (a) the corner of X_b^2 ----------
+ \begin{scope}
+  \def\R{1.25}\def\W{3.7}
+  \fill[gray!8] (0,\R) arc[start angle=90,end angle=0,radius=\R]
+    --(\W,0)--(\W,\W)--(0,\W)--cycle;
+  \foreach \a in {9,19,30,60,71,81}
+    \draw[gray!55,thin] (\a:\R)--({\a}:{min(\W/cos(\a),\W/sin(\a))});
+  \draw (0,\R)--(0,\W) (\R,0)--(\W,0);
+  \draw[red!70!black,line width=1.4pt] (0,\R) arc[start angle=90,end angle=0,radius=\R];
+  \draw[blue!70!black,very thick] (45:\R)--(\W,\W)
+    node[above right,inner sep=1pt] {\(\Delta_b=\{s=1\}\)};
+  \fill[blue!70!black] (45:\R) circle (1.8pt);
+  \draw[->,gray] (\W,0)--(\W+.3,0) node[right,black] {\(x\)};
+  \draw[->,gray] (0,\W)--(0,\W+.3) node[above,black] {\(x'\)};
+  \node[anchor=east,align=right,font=\footnotesize] at (-.05,2.6)
+    {\(\mathrm{lb}\)\\\(s=0\)};
+  \node[anchor=north,font=\footnotesize] at (2.6,-.05) {\(\mathrm{rb}\)};
+  \node[red!70!black,anchor=north east,inner sep=1pt] at (40:{\R-.06})
+    {\(\mathrm{ff}_H\)};
+  \node[font=\footnotesize,fill=gray!8,inner sep=1pt] at (1.25,3.0) {\(z<0\)};
+  \node[font=\footnotesize,fill=gray!8,inner sep=1pt] at (3.05,1.25) {\(z>0\)};
+  \draw[->,thin,red!70!black] (64:{\R+.05})--(64:{\R+.85})
+    node[above left=-2pt,font=\footnotesize,fill=gray!8,inner sep=1pt]
+    {\(x'^{k}\kappa_k\)};
+  \node at (1.85,-.9) {(a) near \(\mathrm{ff}_H\) in \(X_b^2\)};
+ \end{scope}
+ % ---------- (b) the front face as the line of z ----------
+ \begin{scope}[xshift=8.3cm,yshift=.55cm]
+  \draw[->,gray] (-3.1,0)--(3.2,0) node[right,black] {\(z\)};
+  \draw[->,gray] (0,0)--(0,2.5);
+  \draw[blue!70!black,very thick,domain=-3:3,samples=70]
+    plot (\x,{1.5*exp(-1.1*\x*\x)});
+  \draw[red!70!black,very thick,dashed,domain=-3:3,samples=70]
+    plot (\x,{1.5*exp(-\x-1.1*\x*\x)});
+  \node[blue!70!black,font=\footnotesize,anchor=west] at (.75,1.05)
+    {\(\kappa_A(0,e^z)\)};
+  \node[red!70!black,font=\footnotesize,anchor=east] at (-.95,1.85)
+    {\(e^{-z}\kappa_A(0,e^z)\)};
+  \node[font=\footnotesize,below] at (-2.5,-.05) {\(\to\mathrm{lb}\)};
+  \node[font=\footnotesize,below] at (2.5,-.05) {\(\to\mathrm{rb}\)};
+  \node[font=\footnotesize,below] at (0,-.05) {\(0\)};
+  \node[font=\footnotesize,align=center] at (0,-1.05)
+    {\(I_H(A,\lambda)=\int e^{-iz\lambda}\kappa_A(0,e^z)\,dz\),\quad
+     \(e^{-z}\kappa_A\mapsto I_H(A,\lambda-i)\)};
+  \node at (0,-1.65) {(b) restriction to \(\mathrm{ff}_H\)};
+ \end{scope}
+\end{tikzpicture}
+\caption[The b-double space near a front face]{(a) Near
+\(\mathrm{ff}_H\) the projective coordinates \eqref{eq:proj} are
+\(s=x/x'\), \(z=\log s\) and \(x'\). The grey rays are the level sets of
+\(z\); the lifted diagonal \(\Delta_b\) is \(z=0\), and \(z\to-\infty\) at
+\(\mathrm{lb}=\{s=0\}\), \(z\to+\infty\) at \(\mathrm{rb}\). Kernels have
+Taylor expansions \(\kappa_A\sim\sum_kx'^k\kappa_k(s,y,y')\) at the
+front face (Lemma~\ref{lem:compff}); the arrow points in the direction of
+increasing \(x'\). (b) The restriction to
+\(\mathrm{ff}_H\), drawn for \(A\in\Psi_b^{-\infty}(X)\), is a convolution
+kernel in \(z\), and its Fourier transform is the indicial family
+\eqref{eq:indicial}. Conjugation by \(x\) multiplies the kernel by
+\(s^{-1}=e^{-z}\) (Lemma~\ref{lem:conj}), which shifts the indicial family
+by \(\lambda\mapsto\lambda-i\): this is the automorphism \(\alpha\).}
+\label{fig:bdouble}
+\end{figure}
 
 The space \(\Psi_b^{-\infty}(X)\) consists of the operators whose kernels
 lift to smooth functions on \(X_b^2\) that vanish to infinite order at
@@ -2630,6 +2862,69 @@ map with \(\chi_1\) after adjoining \(d\lambda\). In degree zero
 \end{proof}
 
 \subsection{Coinvariants of the shift}
+The shift \(\alpha\) is a translation in the imaginary direction, and on the
+Fourier side it is multiplication by \(e^{-z}\) (Lemma~\ref{lem:PW}); see
+Figure~\ref{fig:Eplane}.
+
+\begin{figure}[tbp]
+\centering
+\begin{tikzpicture}[>=Latex,thick,font=\small]
+ % ---------- (a) the lambda-plane ----------
+ \begin{scope}[x=.78cm,y=.95cm]
+  \fill[gray!6] (-3.3,-1.9) rectangle (3.3,1.9);
+  \fill[gray!14] (-3.3,-1.15) rectangle (3.3,1.15);
+  \draw[gray,thin,dashed] (-3.3,1.15)--(3.3,1.15) (-3.3,-1.15)--(3.3,-1.15);
+  \draw[->,gray] (-3.5,0)--(3.6,0) node[right,black] {\(\operatorname{Re}\lambda\)};
+  \draw[->,gray] (0,-2.1)--(0,2.15) node[above,black] {\(\operatorname{Im}\lambda\)};
+  \node[font=\footnotesize,anchor=west,fill=gray!14,inner sep=1pt] at (-3.2,.75)
+    {\(|\operatorname{Im}\lambda|\leq N\)};
+  \draw[blue!70!black,very thick,postaction={decorate},decoration={markings,
+    mark=at position .75 with {\arrow{Latex}}}] (-2.6,0)--(2.6,0);
+  \draw[blue!70!black,very thick,postaction={decorate},decoration={markings,
+    mark=at position .75 with {\arrow{Latex}}}] (-2.6,-1)--(2.6,-1);
+  \draw[blue!70!black,thin,dashed] (-2.6,0)--(-2.6,-1) (2.6,0)--(2.6,-1);
+  \node[font=\footnotesize,anchor=north] at (2.6,-1.0) {\(T\)};
+  \node[font=\footnotesize,anchor=north] at (-2.6,-1.0) {\(-T\)};
+  \node[font=\footnotesize,anchor=north west,inner sep=1pt] at (.03,-1.0) {\(-i\)};
+  \fill[red!70!black] (1.8,.85) circle (1.8pt) node[right,font=\footnotesize]
+    {\(\lambda_0\)};
+  \fill[red!70!black] (1.8,-.15) circle (1.8pt);
+  \draw[->,red!70!black,thin] (1.8,-.1)--(1.8,.78);
+  \node[red!70!black,font=\footnotesize,anchor=south] at (1.8,1.2)
+    {\(\alpha f(\lambda_0)=f(\lambda_0-i)\)};
+  \node at (0,-2.55) {(a) \(f\in\cE\) and the contour shift};
+ \end{scope}
+ % ---------- (b) the Fourier side ----------
+ \begin{scope}[xshift=6.6cm,yshift=.2cm,x=.82cm,y=.85cm]
+  \draw[->,gray] (-1.6,0)--(3.6,0) node[right,black] {\(z\)};
+  \draw[->,gray] (0,-1.85)--(0,1.65);
+  \draw[gray,thin,dashed] (-1.5,1)--(3.4,1);
+  \node[font=\footnotesize,anchor=east] at (-.05,1.12) {\(1\)};
+  \draw[blue!70!black,very thick,domain=-1.0:3.4,samples=60]
+    plot (\x,{1-exp(-\x)});
+  \fill[red!70!black] (0,0) circle (2pt);
+  \node[font=\footnotesize,blue!70!black,anchor=west] at (1.2,.45)
+    {\(1-e^{-z}\)};
+  \draw[<-,thin,red!70!black] (.08,-.1)--(.7,-.75)
+    node[right,font=\footnotesize,align=left,inner sep=1pt]
+    {simple zero:\\[-1pt]need \(\check f(0)=0\)};
+  \node at (1.0,-2.95) {(b) \(1-\alpha\) on the Fourier side};
+ \end{scope}
+\end{tikzpicture}
+\caption[The strip algebra and the coinvariants of the shift]{(a)
+Elements of \(\cE\) are entire and Schwartz on every strip
+\(|\operatorname{Im}\lambda|\leq N\). The shift \(\alpha f(\lambda)=
+f(\lambda-i)\) reads values one unit lower. Since the vertical sides of
+the rectangle contribute nothing as \(T\to\infty\), Cauchy's theorem gives
+\(\int_{\mathbb R}f(\lambda-i)\,d\lambda=\int_{\mathbb R}f\,d\lambda\), so
+\(\int_{\mathbb R}(1-\alpha)f\,d\lambda=0\). (b) Under
+Lemma~\ref{lem:PW}, \(1-\alpha\) is multiplication of \(\check f\) by
+\(1-e^{-z}\), which has a simple zero at \(z=0\) and no other real zero.
+Hence \(\check f/(1-e^{-z})\) lies in \(\Sexp\) exactly when
+\(\check f(0)=\frac1{2\pi}\int f\,d\lambda=0\), and
+\(\cE_\alpha\cong\C\) (Lemma~\ref{lem:coinv}).}
+\label{fig:Eplane}
+\end{figure}
 
 \begin{lemma}\label{lem:coinv}
 Let \(\alpha f(\lambda)=f(\lambda-i)\) on \(\cE\). Then
@@ -2659,6 +2954,72 @@ Proposition~\ref{prop:generators}(a). The shift preserves \(d\lambda\).
 \end{proof}
 
 \subsection{The weight decomposition}
+Figure~\ref{fig:weights} illustrates the product \eqref{eq:skew} and the
+weight grading of chains used below.
+
+\begin{figure}[tbp]
+\centering
+\begin{tikzpicture}[>=Latex,thick,font=\small]
+ % ---------- (a) a twisted Laurent series ----------
+ \begin{scope}[x=.74cm]
+  \foreach \k in {-2,-1}
+    \filldraw[draw=black!70,fill=red!8] (\k-.42,0) rectangle (\k+.42,.75);
+  \foreach \k in {0,...,4}
+    \filldraw[draw=black!70,fill=blue!6] (\k-.42,0) rectangle (\k+.42,.75);
+  \foreach \k in {-2,...,4}{
+    \node at (\k,.375) {\(b_{\k}\)};
+    \node[font=\footnotesize] at (\k,-.28) {\(\k\)};}
+  \draw[blue!70!black,line width=1.2pt] (-.42,0) rectangle (.42,.75);
+  \node at (5.05,.375) {\(\cdots\)};
+  \node[font=\footnotesize,anchor=east] at (-2.55,-.28) {\(k\):};
+  \draw[decorate,decoration={brace,amplitude=4pt}]
+    (-2.42,.9)--(-.58,.9) node[midway,above=4pt,font=\footnotesize,align=center]
+    {poles\\[-2pt]\(k\geq-\ell\)};
+  \draw[decorate,decoration={brace,amplitude=4pt}]
+    (.58,.9)--(5.3,.9) node[midway,above=4pt,font=\footnotesize]
+    {Taylor tail, all \(k\geq1\)};
+  \draw[<-,thin,blue!70!black] (0,-.48)--(0,-.85)
+    node[below,font=\footnotesize,align=center]
+    {constant term \(b_0\)\\[-1pt]\(=I_H(A,\cdot)\) if
+     \(A\in\Psi_b^{-\infty}\)};
+  \node[font=\footnotesize,align=center] at (1.4,-2.45)
+    {\((x^ja)(x^kb)=x^{j+k}\alpha^k(a)\,b\),\\
+     \(\alpha^k(a)(\lambda)=a(\lambda-ik)\)};
+  \node at (1.4,-3.35) {(a) \(T_H(A)=\sum_kx^kb_k\in B_H\Lser{x;\alpha}\)};
+ \end{scope}
+ % ---------- (b) weights of 1-chains ----------
+ \begin{scope}[xshift=8.4cm,yshift=-1.2cm,x=.52cm,y=.52cm]
+  \fill[gray!8] (-2.4,-2.4) rectangle (4.6,4.6);
+  \draw[gray,thin,dashed] (-2.4,-2.4)--(-2.4,4.6) (-2.4,-2.4)--(4.6,-2.4);
+  \foreach \g in {-3,-1,1,2,3}
+    \draw[gray!60,thin] ({max(-2.4,\g-4.6)},{\g-max(-2.4,\g-4.6)})
+      --({min(4.6,\g+2.4)},{\g-min(4.6,\g+2.4)});
+  \foreach \i in {-2,...,4}\foreach \j in {-2,...,4}
+    \fill[gray!70] (\i,\j) circle (1.3pt);
+  \draw[blue!70!black,very thick] (-2.4,2.4)--(2.4,-2.4);
+  \foreach \i in {-2,...,2} \fill[blue!70!black] (\i,-\i) circle (2.6pt);
+  \draw[->,gray] (-3.0,0)--(5.2,0) node[right,black] {\(j_0\)};
+  \draw[->,gray] (0,-3.0)--(0,5.2) node[above,black] {\(j_1\)};
+  \node[blue!70!black,font=\footnotesize,anchor=east,inner sep=2pt]
+    at (-2.45,2.45) {\(g=0\)};
+  \node[font=\footnotesize,anchor=west,fill=gray!8,inner sep=1pt] at (2.2,3.6)
+    {\(g\neq0\)};
+  \node[font=\footnotesize,anchor=east] at (-2.5,-2.75) {\(-\ell\)};
+  \node at (1.1,-4.25) {(b) exponents of a \(1\)-chain};
+ \end{scope}
+\end{tikzpicture}
+\caption[Twisted Laurent series and the weight grading]{(a) An element of
+\(B_H\Lser{x;\alpha}\) has finitely many negative powers and an infinite
+Taylor tail. Moving \(x^k\) to the left past \(a\) replaces \(a\) by
+\(\alpha^k(a)\), a complex shift by \(-ik\). (b) The exponents
+\((j_0,j_1)\), here with \(\ell=2\), of the components of a \(1\)-chain of
+\(B\Lser{x;\alpha}\) with pole bound \(\ell\) (shaded). Every face map
+preserves the weight \(g=j_0+j_1\) (grey lines). The weight-zero line
+(blue) contains only finitely many exponents, so weight-zero chains are
+chains of \(B\rtimes_\alpha\Z\), while every weight \(g\neq0\) is acyclic
+because \(L_h=-ig\) there (Proposition~\ref{prop:weights}).}
+\label{fig:weights}
+\end{figure}
 
 \begin{proposition}[Nonzero weights are acyclic]\label{prop:weights}
 Let \(R=B\Lser{x;\alpha}\) with \(B=\cE\) or \(B=\cE(\Psi^{-\infty}(H))\). Then:
@@ -2809,7 +3170,69 @@ We define the b-trace by
 \({}^b\Tr(A)=\operatorname{FP}_{w=0}\Tr(x^wA)\) for
 \(A\in x^{-\Z}\Psi_b^{-\infty}(X)\). On \(\Ib\) it is the trace, and on
 \(\Psi_b^{-\infty}\) it is the b-trace of \cite[Sect.~``The b-trace
-defect'']{Notes}.
+defect'']{Notes}. Figure~\ref{fig:btrace} shows where the pole at \(w=0\)
+comes from.
+
+\begin{figure}[tbp]
+\centering
+\begin{tikzpicture}[>=Latex,thick,font=\small]
+ % ---------- (a) the diagonal meets ff ----------
+ \begin{scope}
+  \def\R{1.1}\def\W{3.3}
+  \fill[gray!8] (0,\R) arc[start angle=90,end angle=0,radius=\R]
+    --(\W,0)--(\W,\W)--(0,\W)--cycle;
+  \draw (0,\R)--(0,\W) (\R,0)--(\W,0);
+  \draw[red!70!black,line width=1.4pt] (0,\R) arc[start angle=90,end angle=0,radius=\R];
+  \draw[blue!70!black,very thick] (45:\R)--(\W,\W)
+    node[above,inner sep=2pt] {\(\Delta_b\)};
+  \fill[blue!70!black] (45:\R) circle (2pt);
+  \draw[->,thin] (2.75,1.75)--(1.75,.75);
+  \node[font=\footnotesize,anchor=west] at (2.75,1.75) {\(x\to0\)};
+  \node[red!70!black,font=\footnotesize] at (15:{\R+.3}) {\(\mathrm{ff}\)};
+  \node[anchor=east,font=\footnotesize] at (-.05,2.3) {\(\mathrm{lb}\)};
+  \node[anchor=north,font=\footnotesize] at (2.3,-.05) {\(\mathrm{rb}\)};
+  \draw[<-,thin] ($(45:\R)+(-.1,-.1)$)--(-.3,-.45)
+    node[below,font=\footnotesize,align=center]
+    {\(\kappa_0(1,y,y)=\frac1{2\pi}\int b_0\,d\lambda\)};
+  \node[font=\footnotesize,align=center] at (1.6,-1.65)
+    {\(K_A(p,p)\sim\sum_{k\geq-\ell}x^k\kappa_k(1,y,y)\)};
+  \node at (1.6,-2.3) {(a) the diagonal value};
+ \end{scope}
+ % ---------- (b) the w-plane ----------
+ \begin{scope}[xshift=7.8cm,yshift=.9cm,x=.68cm,y=.8cm]
+  \fill[gray!12] (2,-1.6) rectangle (4.6,1.6);
+  \draw[gray,thin,dashed] (2,-1.6)--(2,1.6);
+  \draw[->,gray] (-4.4,0)--(4.9,0) node[right,black] {\(\operatorname{Re}w\)};
+  \draw[->,gray] (0,-1.75)--(0,1.85) node[above,black] {\(\operatorname{Im}w\)};
+  \foreach \w in {-3,-2,-1,1,2}{
+    \draw[red!70!black] (\w-.12,-.12)--(\w+.12,.12) (\w-.12,.12)--(\w+.12,-.12);
+    \node[font=\footnotesize,below] at (\w,-.12) {\(\w\)};}
+  \draw[red!70!black,line width=1.4pt] (-.15,-.15)--(.15,.15) (-.15,.15)--(.15,-.15);
+  \draw[blue!70!black,thin] (0,0) circle (.38);
+  \draw[blue!70!black,thin] (-1.2,.62)--(-.3,.25);
+  \node[font=\footnotesize] at (-4.0,.3) {\(\cdots\)};
+  \node[font=\footnotesize,anchor=south,fill=gray!12,inner sep=1pt]
+    at (3.3,.75) {holomorphic};
+  \node[font=\footnotesize,anchor=north,fill=gray!12,inner sep=1pt] at (3.4,-.5) {\(\operatorname{Re}w>\ell\)};
+  \node[font=\footnotesize,align=center,blue!70!black,anchor=south]
+    at (-2.0,.5) {\(\operatorname{Res}_{w=0}=\sum_H\Tr_{\partial,H}\)\\
+     \(\operatorname{FP}_{w=0}={}^b\Tr\)};
+  \node at (0,-2.5) {(b) poles of \(\Tr(x^wA)\), \(\ell=2\)};
+ \end{scope}
+\end{tikzpicture}
+\caption[The diagonal residue and the b-trace]{(a) The lifted diagonal
+meets the front face at one point. Along \(\Delta_b\) the diagonal value
+of the kernel of \(A\in x^{-\ell}\Psi_b^{-\infty}(X)\) has a Laurent
+expansion in \(x\), and its constant coefficient is the inverse Fourier
+transform of \(b_0\) at \(z=0\) \eqref{eq:diagvalue}. (b) The term \(x^k\)
+contributes \(\varepsilon^{w+k}/(w+k)\) to \(\Tr(x^wA)\), so there are at
+most simple poles at \(w=-k\), \(k\geq-\ell\) (Lemma~\ref{lem:residue}).
+The residue at \(w=0\) is the boundary trace and the finite part is the
+b-trace. For a commutator, \(\Tr(x^w[A,B])=w\,\Tr(x^wC(w)B)\) is regular
+at \(0\), with value \(\sum_H\Tr_{\partial,H}(D(A)B)\)
+(Theorem~\ref{thm:defect}).}
+\label{fig:btrace}
+\end{figure}
 
 \begin{theorem}[b-trace defect]\label{thm:defect}
 For \(A,B\in x^{-\Z}\Psi_b^{-\infty}(X)\) with \(T_H(A)=\sum x^ka_k\) and
@@ -3842,7 +4265,7 @@ and the naturality of \(\Theta\), the map \(\partial^{\mathcal A}_2\) is
 \(\beta\mapsto(2\pi)^{-n}(\int_{Z_H}\beta)_H\) on the summand \(H^{2n-2}(Y)\) of
 \(\HH_2(\Asb)\), and it vanishes on the other summands. By Stokes' theorem,
 \(\sum_H\int_{Z_H}\beta=\int_Yd\beta=0\), which recovers the bound of
-Proposition~\ref{prop:connA}(c). Exactness of
+Proposition~\ref{prop:connA}(c) (Figure~\ref{fig:periods}). Exactness of
 \(H^{2n-2}(Y)\to H^{2n-2}(\partial Y)\to H^{2n-1}(Y,\partial Y)\), together
 with Lefschetz duality \(H^{2n-1}(Y,\partial Y)\cong H_0(Y)\) (C3), shows
 that the image is the kernel of the sum map
@@ -3857,6 +4280,99 @@ cosphere bundle. For each \(H\) separately, the class
 sum over all \(H\) does. We mention this only for comparison.
 \end{remark}
 
+\begin{figure}[tbp]
+\centering
+\begin{tikzpicture}[>=Latex,thick,font=\small]
+ % ---------- (a) Y and its boundary pieces ----------
+ \begin{scope}
+  \fill[gray!8,even odd rule] (0,0) ellipse (2.5 and 1.55)
+    (-1.05,.15) ellipse (.55 and .38) (1.05,-.2) ellipse (.55 and .38);
+  \draw[red!70!black,line width=1.3pt,postaction={decorate},decoration={markings,
+    mark=at position .3 with {\arrow{Latex}}}] (0,0) ellipse (2.5 and 1.55);
+  \draw[red!70!black,line width=1.3pt,postaction={decorate},decoration={markings,
+    mark=at position .3 with {\arrowreversed{Latex}}}] (-1.05,.15) ellipse (.55 and .38);
+  \draw[red!70!black,line width=1.3pt,postaction={decorate},decoration={markings,
+    mark=at position .3 with {\arrowreversed{Latex}}}] (1.05,-.2) ellipse (.55 and .38);
+  \node[red!70!black,font=\footnotesize] at (-2.45,1.25) {\(Z_{H_1}\)};
+  \node[red!70!black,font=\footnotesize] at (-1.05,.15) {\(Z_{H_2}\)};
+  \node[red!70!black,font=\footnotesize] at (1.05,-.2) {\(Z_{H_3}\)};
+  \node at (.15,.95) {\(Y\)};
+  \node[font=\footnotesize] at (-.2,-.95) {\(\beta\), \(d\beta=0\)};
+  \node at (0,-2.05) {(a) \(Y\) with \(N=3\) boundary pieces};
+ \end{scope}
+ \draw[->,thin] (2.75,.3)--node[above,font=\footnotesize]
+   {\(\beta\mapsto(\int_{Z_H}\beta)_H\)} (5.15,.3);
+ % ---------- (b) the image in C^N ----------
+ \begin{scope}[xshift=7.6cm,yshift=.1cm]
+  \draw[->,gray] (0,0)--(-1.15,-.85) node[below left=-2pt,black,font=\footnotesize] {\(c_1\)};
+  \draw[->,gray] (0,0)--(2.3,0) node[right,black,font=\footnotesize] {\(c_2\)};
+  \draw[->,gray] (0,0)--(0,1.75) node[above,black,font=\footnotesize] {\(c_3\)};
+  \fill[blue!70!black,opacity=.18] (-.4,-1.1)--(-2.0,.5)--(.4,1.1)--(2.0,-.5)--cycle;
+  \draw[blue!70!black,thin] (-.4,-1.1)--(-2.0,.5)--(.4,1.1)--(2.0,-.5)--cycle;
+  \node[blue!70!black,font=\footnotesize,anchor=west] at (1.25,.85) {\(\sum_Hc_H=0\)};
+  \node at (0,-2.05) {(b) the image in \(\C^N\)};
+ \end{scope}
+\end{tikzpicture}
+\caption[Boundary periods and the rank \(N-1\)]{A schematic of the
+boundary period map in Remark~\ref{rem:MNcomponents}. (a) \(Y=\Sbstar\) is
+connected, and its boundary \(Z\) has one piece \(Z_H\) over each
+component \(H\) of \(\partial X\), oriented as part of \(\partial Y\). (b)
+For a closed \(\beta\) of degree \(2n-2\), Stokes' theorem gives
+\(\sum_H\int_{Z_H}\beta=\int_Yd\beta=0\), so the periods lie in the
+hyperplane \(\sum_Hc_H=0\); for connected \(X\) and \(n\geq2\), Lefschetz
+duality shows that they fill it. Up to the
+factor \((2\pi)^{-n}\) this is \(\partial^{\mathcal A}_2\) on
+\(H^{2n-2}(Y)\), so its rank is \(N-1\).}
+\label{fig:periods}
+\end{figure}
+
+\begin{figure}[tbp]
+\centering
+\begin{tikzpicture}[>=Latex,thick,font=\small,
+  lab/.style={font=\footnotesize,inner sep=2pt}]
+ \node (z0) at (0,0) {\(0\)};
+ \node (A2) at (1.9,0) {\(\HH_2(\Ab)\)};
+ \node (S2) at (4.7,0) {\(\HH_2(\Asb)\)};
+ \node (D1) at (8.9,0) {\(\HH_1(\Idb)\cong\C^N\)};
+ \node (A1) at (1.9,-1.9) {\(\HH_1(\Ab)\)};
+ \node (S1) at (4.7,-1.9) {\(\HH_1(\Asb)\)};
+ \node (D0) at (8.9,-1.9) {\(\HH_0(\Idb)\cong\C^N\)};
+ \node (A0) at (1.9,-3.8) {\(\HH_0(\Ab)\)};
+ \node (S0) at (4.7,-3.8) {\(\HH_0(\Asb)\)};
+ \node (z1) at (6.8,-3.8) {\(0\)};
+ \node (I0) at (-1.6,-1.9) {\(\HH_0(\Ib)\cong\C\)};
+ \draw[->] (z0)--(A2);
+ \draw[->] (A2)--(S2);
+ \draw[->,red!70!black] (S2)--node[lab,above]{\(\partial^{\mathcal A}_2\)}
+   node[lab,below]{rank \(N-1\)} (D1);
+ \draw[->] (A1)--(S1);
+ \draw[->,red!70!black] (S1)--node[lab,above]{\(\partial^{\mathcal A}_1\)}
+   node[lab,below]{onto} (D0);
+ \draw[->] (A0)--(S0);
+ \draw[->] (S0)--(z1);
+ \draw[->,blue!70!black,rounded corners=6pt] (D1.south)--++(0,-.55)
+   -- node[lab,above,pos=.62]{image \(\cong\operatorname{coker}
+   \partial^{\mathcal A}_2\cong\C\)} ($(A1.north)+(0,.4)$)--(A1.north);
+ \draw[->,blue!70!black,rounded corners=6pt] (D0.south)--++(0,-.55)
+   -- node[lab,above,pos=.62]{\(0\)} ($(A0.north)+(0,.4)$)--(A0.north);
+ \draw[->,dashed] (A1)--node[lab,above]{\(\partial\)} (I0);
+\end{tikzpicture}
+\caption[The long exact sequence for \(\Ab\)]{The long exact sequence of
+\(0\to\Idb\to\Ab\to\Asb\to0\) in low degrees, using
+\(\HH_k(\Idb)=0\) for \(k\geq2\). The connecting map
+\(\partial^{\mathcal A}_1\) is onto, so \(\HH_0(\Idb)\to\HH_0(\Ab)\)
+vanishes; \(\partial^{\mathcal A}_2\) has rank \(N-1\), so a copy of
+\(\C\) survives in \(\HH_1(\Ab)\). Hence
+\(\HH_2(\Ab)\cong\ker\partial^{\mathcal A}_2\),
+\(\HH_1(\Ab)\cong\operatorname{coker}\partial^{\mathcal A}_2\oplus
+\ker\partial^{\mathcal A}_1\) and \(\HH_0(\Ab)\cong\HH_0(\Asb)\). The
+dashed arrow is the connecting map of
+\(0\to\Ib\to x^{-\Z}\Psi_b^{\Z}\to\Ab\to0\) (the index functional); on the
+image of \(\HH_1(\Idb)\) it is induced by \(-\sum_H\varphi_H\)
+(Proposition~\ref{prop:connA}(b)).}
+\label{fig:LESA}
+\end{figure}
+
 \begin{proof}[Proof of Theorem~\textup{\ref{thm:full}}]
 (i) is Proposition~\ref{prop:I}, (ii) is Theorem~\ref{thm:Id}, and (iii) is
 Theorem~\ref{thm:Laurentres}. (iv) and (vi) are
@@ -3870,7 +4386,8 @@ map \(\Theta\), \(\partial^{\mathcal A}_1\) is
 \(\beta\mapsto-i(2\pi)^{-n}(\int_{Z_H}\beta)_H\) on the summand
 \(H^{2n-2}(Z)\cong\C^N\) of \(\HH_1(\Asb)\) and vanishes on the other
 summands. The rank of \(\partial^{\mathcal A}_2\) is \(N-1\)
-(Remark~\ref{rem:MNcomponents}). Use also \(\HH_*(\Idb)\). This gives \(\HH_0(\Ab)\cong\HH_0(\Asb)\),
+(Remark~\ref{rem:MNcomponents}). Use also \(\HH_*(\Idb)\)
+(Figure~\ref{fig:LESA}). This gives \(\HH_0(\Ab)\cong\HH_0(\Asb)\),
 \(\HH_1(\Ab)\cong\operatorname{coker}\partial^{\mathcal A}_2\oplus
 \ker\partial^{\mathcal A}_1\), and \(\HH_2(\Ab)\cong\ker\partial^{\mathcal
 A}_2\). (ix) follows from Corollary~\ref{cor:IF} and the long exact
@@ -4549,8 +5066,8 @@ construction.
 
 For \(\operatorname{Re}z>0\), set
 \(P_0^{-z}=\frac{i}{2\pi}\int_\Gamma\mu^{-z}(P_0-\mu)^{-1}\,d\mu\), with the
-principal branch. By the spectral theorem this agrees with the functional
-calculus, and \(e^{-tP_0}=\frac{i}{2\pi}\int_\Gamma e^{-t\mu}(P_0-\mu)^{-1}
+principal branch (Figure~\ref{fig:contour}). By the spectral theorem this
+agrees with the functional calculus, and \(e^{-tP_0}=\frac{i}{2\pi}\int_\Gamma e^{-t\mu}(P_0-\mu)^{-1}
 \,d\mu\) for \(t>0\). From \eqref{eq:seeley} and Lemma~\ref{lem:seeley},
 \begin{gather*}
  \frac{i}{2\pi}\int_\Gamma\mu^{-z}q_{-2m-j}\,d\mu=\sigma_{-2mz-j}(z),\qquad
@@ -4570,6 +5087,83 @@ and homogeneous of degree \(-2mz-j\) for \(|\zeta|\geq1\). Moreover
 \(\sigma_{-j}(0)=0\) for \(j\geq1\), because only \(l\geq2\) occurs and
 \(\binom{z+l-2}{l-1}=z(z+1)\cdots(z+l-2)/(l-1)!\) vanishes at \(z=0\); and
 \(\sigma_0(0)=1\).
+
+\begin{figure}[tbp]
+\centering
+\begin{tikzpicture}[>=Latex,thick,font=\small]
+ % ---------- (a) the contour Gamma ----------
+ \begin{scope}
+  \def\th{24}\def\rh{.65}
+  \begin{scope}
+   \clip (-1.6,-2.0) rectangle (4.6,2.0);
+   \fill[gray!10] (-1.6,-2.0) rectangle (4.6,2.0);
+   \fill[white] (0,0) -- (\th:5.2) arc[start angle=\th,end angle=-\th,radius=5.2]
+     -- cycle;
+   \fill[gray!10] (0,0) circle (\rh);
+  \end{scope}
+  \draw[->,gray] (-1.6,0)--(4.8,0) node[right,black] {\(\operatorname{Re}\mu\)};
+  \draw[->,gray] (0,-2.0)--(0,2.15) node[above,black] {\(\operatorname{Im}\mu\)};
+  \draw[blue!70!black,very thick,postaction={decorate},decoration={markings,
+    mark=at position .45 with {\arrow{Latex}}}]
+    (\th:4.6) -- (\th:\rh);
+  \draw[blue!70!black,very thick,postaction={decorate},decoration={markings,
+    mark=at position .5 with {\arrow{Latex}}}]
+    (\th:\rh) arc[start angle=\th,end angle=-\th,radius=\rh];
+  \draw[blue!70!black,very thick,postaction={decorate},decoration={markings,
+    mark=at position .55 with {\arrow{Latex}}}]
+    (-\th:\rh) -- (-\th:4.6);
+  \foreach \e in {1.45,1.95,2.3,2.85,3.3,3.9,4.35}
+    \fill[red!70!black] (\e,0) circle (1.8pt);
+  \node[red!70!black,font=\footnotesize,anchor=north] at (1.45,-.08) {\(c_0\)};
+  \draw[thin] (1.8,0) arc[start angle=0,end angle=\th,radius=1.8];
+  \node[font=\footnotesize] at (12:2.15) {\(\theta\)};
+  \draw[thin] (0,0)--(150:\rh);
+  \node[font=\footnotesize,anchor=south east,inner sep=1pt] at (150:\rh) {\(\rho\)};
+  \node[blue!70!black,font=\footnotesize] at (3.6,2.1) {\(\Gamma\)};
+  \node[font=\footnotesize,fill=gray!10,inner sep=1pt] at (-.9,1.45) {\(\Lambda\)};
+  \node at (1.5,-2.5) {(a) the contour \(\Gamma=\partial(\C\setminus\Lambda)\)};
+ \end{scope}
+ % ---------- (b) the b-zeta function ----------
+ \begin{scope}[xshift=7.9cm,x=1.25cm]
+  \fill[gray!8] (-1,-1.9) rectangle (2.75,1.9);
+  \fill[blue!7] (1.5,-1.9) rectangle (2.75,1.9);
+  \draw[gray,thin,dashed] (-1,-1.9)--(-1,1.9);
+  \draw[->,gray] (-1.3,0)--(2.95,0) node[right,black] {\(\operatorname{Re}z\)};
+  \draw[->,gray] (0,-1.9)--(0,2.05) node[above,black] {\(\operatorname{Im}z\)};
+  \foreach \w/\t in {1.5/\frac32,1/1,.5/\frac12,-.5/-\frac12}{
+    \draw[red!70!black] (\w-.08,-.1)--(\w+.08,.1) (\w-.08,.1)--(\w+.08,-.1);
+    \node[font=\footnotesize,below] at (\w,-.1) {\(\t\)};}
+  \draw[blue!70!black,fill=white] (0,0) circle (2.4pt);
+  \node[font=\footnotesize,anchor=south west,inner sep=1pt,blue!70!black]
+    at (.04,.08) {\(\zeta_P(0)\)};
+  \draw[blue!70!black,thick,postaction={decorate},decoration={markings,
+    mark=at position .8 with {\arrow{Latex}}}] (2.1,-1.75)--(2.1,1.75);
+  \draw[blue!70!black,thick,dashed] (-.25,-1.75)--(-.25,1.75);
+  \draw[->,thin,blue!70!black] (2.0,1.35)--(-.15,1.35);
+  \node[font=\footnotesize,anchor=south,fill=gray!8,inner sep=1pt] at (.95,1.4)
+    {Mellin inversion};
+  \node[font=\footnotesize,anchor=north] at (-1,-1.92) {\(-1\)};
+  \node[font=\footnotesize,anchor=north] at (2.1,-1.92) {\(c\)};
+  \node[font=\footnotesize,anchor=north] at (-.25,-1.92) {\(-\gamma\)};
+  \node at (.9,-2.5) {(b) \(\zeta_P\) for \(n=3\), \(m=1\)};
+ \end{scope}
+\end{tikzpicture}
+\caption[The resolvent contour and the b-zeta function]{(a) The
+spectrum of \(P_0\) lies in \([c_0,\infty)\) (red dots). The resolvent is
+controlled on \(\Lambda\) (grey), and \(\Gamma\) runs counterclockwise
+around \([c_0,\infty)\): in along the ray \(re^{i\theta}\), around the arc
+of radius \(\rho\), and out along \(re^{-i\theta}\). (b) The b-zeta
+function \(\zeta_P(z)={}^b\Tr(P_0^{-z})\) is defined by the trace for
+\(\operatorname{Re}z>n/2m\) (blue) and continues meromorphically to
+\(\operatorname{Re}z>-1\), with simple poles only at the points
+\((n-j)/2m\neq0\) and no pole at \(0\) (Theorem~\ref{thm:bzeta}). Moving
+the line of Mellin inversion from \(\operatorname{Re}z=c\) to
+\(\operatorname{Re}z=-\gamma\), \(0<\gamma<1/2m\), picks up the poles of
+\(\Gamma(z)\zeta_P(z)t^{-z}\) with \(\operatorname{Re}z\geq0\); the one at
+\(z=0\), from \(\Gamma\), gives the constant term \(\zeta_P(0)\) of
+\({}^b\Tr(e^{-tP})\).}
+\label{fig:contour}
+\end{figure}
 
 \begin{proposition}[Complex powers]\label{prop:cp}
 For every \(J>4m\), the formula
@@ -4889,6 +5483,7 @@ in \(\mathcal R^{-K}_\delta\) for every \(K\) (the kernel of \(A\) is
 \ref{prop:cp} and~\ref{prop:MS} go through unchanged. The kernel of \(A\) is
 spanned by \(1/\cosh u\in L^2\), and \(\ker A^*\), spanned by \(\cosh u\),
 is trivial in \(L^2\). Hence \(\operatorname{Ind}A=1\).
+Figure~\ref{fig:signcheck} shows the data of this example.
 
 Near \(x=0\) we have \(\partial_u=x(1-x)\partial_x\), and \(\tanh u\to-1\), so
 \(a_0(\lambda)=i\lambda-1\) by \eqref{eq:IxDx}. Near \(x=1\), with
@@ -4912,6 +5507,68 @@ have the same normal operators. So
 \cite[Thm.~8.6]{LoyaThesis} would give \(-1\). The order-zero case gives the
 same sign: see Remark~\ref{rem:WHconsistency}.
 \end{example}
+
+\begin{figure}[tbp]
+\centering
+\begin{tikzpicture}[>=Latex,thick,font=\small]
+ % ---------- (a) the functions on the line ----------
+ \begin{scope}[x=.62cm,y=1.25cm]
+  \draw[->,gray] (-4.6,0)--(4.8,0) node[right,black] {\(u\)};
+  \draw[->,gray] (0,-1.3)--(0,1.45);
+  \draw[gray,thin,dashed] (-4.4,1)--(4.4,1) (-4.4,-1)--(4.4,-1);
+  \node[font=\footnotesize,anchor=east] at (-4.45,1) {\(1\)};
+  \node[font=\footnotesize,anchor=east] at (-4.45,-1) {\(-1\)};
+  \draw[gray!60!black,thick,dashed,domain=-4.4:4.4,samples=80]
+    plot (\x,{1-2/(cosh(\x)*cosh(\x))});
+  \draw[blue!70!black,very thick,domain=-4.4:4.4,samples=80]
+    plot (\x,{tanh(\x)});
+  \draw[red!70!black,very thick,domain=-4.4:4.4,samples=80]
+    plot (\x,{1/cosh(\x)});
+  \node[blue!70!black,font=\footnotesize,anchor=west] at (2.0,.72) {\(\tanh u\)};
+  \node[red!70!black,font=\footnotesize,anchor=south east] at (-.3,1.0)
+    {\(\operatorname{sech}u\in\ker A\)};
+  \node[gray!60!black,font=\footnotesize,anchor=west] at (.55,-.72)
+    {\(1-2\operatorname{sech}^2u\)};
+  \node[font=\footnotesize,anchor=north] at (-3.6,-1.05) {\(x\to0\)};
+  \node[font=\footnotesize,anchor=north] at (3.6,-1.05) {\(x\to1\)};
+  \node at (0,-1.85) {(a) \(A=\partial_u+\tanh u\) on \(\mathbb R_u\)};
+ \end{scope}
+ % ---------- (b) the indicial families ----------
+ \begin{scope}[xshift=7.2cm,yshift=.15cm,x=.8cm,y=.95cm]
+  \fill[gray!8] (-2.9,-1.5) rectangle (2.9,1.5);
+  \draw[->,gray] (-3.1,0)--(3.2,0) node[right,black] {\(\operatorname{Re}\lambda\)};
+  \draw[->,gray] (0,-1.55)--(0,1.7) node[above,black] {\(\operatorname{Im}\lambda\)};
+  \draw[blue!70!black,very thick,postaction={decorate},decoration={markings,
+    mark=at position .8 with {\arrow{Latex}}}] (-2.9,0)--(2.9,0);
+  \fill[red!70!black] (0,-1) circle (2.2pt);
+  \node[red!70!black,font=\footnotesize,anchor=west] at (.1,-1)
+    {\(\lambda=-i\)};
+  \node[font=\footnotesize,anchor=south,fill=gray!8,inner sep=1pt,align=center]
+    at (-1.25,.3) {\(a_0=i\lambda-1\)\\at \(x=0\)};
+  \node[font=\footnotesize,anchor=south,fill=gray!8,inner sep=1pt,align=center]
+    at (1.4,.3) {\(a_1=-i\lambda+1\)\\at \(x=1\)};
+  \node[font=\footnotesize,align=center] at (0,-2.2)
+    {\(\eta_b(a_0)=\eta_b(a_1)=-1\),\\
+     \(-\frac12(\eta_b(a_0)+\eta_b(a_1))=+1\)};
+  \node at (0,-3.05) {(b) the boundary families};
+ \end{scope}
+\end{tikzpicture}
+\caption[The sign check \(\partial_u+\tanh u\)]{Example~\ref{ex:signcheck}.
+(a) With \(u=\log(x/(1-x))\), the end \(x\to0\) is \(u\to-\infty\) and
+\(x\to1\) is \(u\to+\infty\). The potential \(\tanh u\) (blue) tends to
+\(\mp1\) at the two ends. The kernel of \(A\) is spanned by
+\(\operatorname{sech}u\) (red), which is in \(L^2\), while
+\(\ker A^*\) is spanned by \(\cosh u\notin L^2\); so
+\(\operatorname{Ind}A=1\). The potential \(1-2\operatorname{sech}^2u\) of
+\(A^*A\) (dashed) and the constant potential \(1\) of \(AA^*\) agree at
+both ends, so \(h(t)\) is an ordinary trace; its small-time expansion has
+no constant term, and the interior term vanishes. (b) Both indicial families
+vanish at \(\lambda=-i\), so \(A\) is not fully elliptic, but they are
+invertible on \(\mathbb R\). Each has \(\eta_b=-1\), and the boundary term
+\(+1\) gives \(\operatorname{Ind}A=1\) with the sign of
+Theorem~\ref{thm:indexgeneral}.}
+\label{fig:signcheck}
+\end{figure}
 
 \begin{remark}[Order zero and Theorem~\ref{thm:WH}]\label{rem:WHconsistency}
 This remark is a consistency check, and we only indicate the argument.
