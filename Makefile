@@ -4,9 +4,9 @@ TEXDIR := Lecture draft
 BUILDDIR := tmp/pdfs
 PDFDIR := output/pdf
 
-.PHONY: all as aps hochschild clean
+.PHONY: all as aps hochschild mn clean
 
-all: as aps hochschild
+all: as aps hochschild mn
 
 as:
 	mkdir -p "$(BUILDDIR)/as" "$(PDFDIR)"
@@ -22,6 +22,11 @@ hochschild:
 	mkdir -p "$(BUILDDIR)/hochschild" "$(PDFDIR)"
 	$(LATEXMK) $(FLAGS) -outdir="$(BUILDDIR)/hochschild" "$(TEXDIR)/Hochschild homology of b-pseudodifferential operators.tex"
 	cp "$(BUILDDIR)/hochschild/Hochschild homology of b-pseudodifferential operators.pdf" "$(PDFDIR)/Hochschild homology of b-pseudodifferential operators.pdf"
+
+mn:
+	mkdir -p "$(BUILDDIR)/mn" "$(PDFDIR)"
+	$(LATEXMK) $(FLAGS) -outdir="$(BUILDDIR)/mn" "$(TEXDIR)/Hochschild homology of cusp pseudodifferential operators (Melrose-Nistor notes).tex"
+	cp "$(BUILDDIR)/mn/Hochschild homology of cusp pseudodifferential operators (Melrose-Nistor notes).pdf" "$(PDFDIR)/Hochschild homology of cusp pseudodifferential operators (Melrose-Nistor notes).pdf"
 
 clean:
 	rm -rf "$(BUILDDIR)"

@@ -1,6 +1,7 @@
 # Lecture Notes
 
-Three proof-focused manuscripts are maintained:
+Three proof-focused manuscripts and one set of expository notes are
+maintained:
 
 - `Lecture draft/Lecture draft.tex`: the b-calculus, Fredholm theory on
   closed manifolds and cylindrical ends, the APS spectral boundary problem,
@@ -27,12 +28,32 @@ Three proof-focused manuscripts are maintained:
   The general index formula follows the arguments of Loya's 1998 thesis.
   The optional Čech route and the Rees–Fedosov discussion are auxiliary;
   the main proof does not use them.
+- `Lecture draft/Hochschild homology of cusp pseudodifferential operators (Melrose-Nistor notes).tex`:
+  expository notes on Melrose--Nistor, *Homology of pseudodifferential
+  operators I. Manifolds with boundary* (arXiv funct-an/9606005), which
+  treats the cusp calculus. The notes cover:
+  - model cases first: closed manifolds, the half-line, the interval and
+    the cylinder;
+  - the cusp calculus, the cusp twist [x, ∂_t] = x² and the transcendental
+    blow-up to the b-calculus;
+  - the Hochschild toolkit and Melrose--Nistor §§1–12 with the compressed
+    proofs written out, including the double residue trace and the boundary
+    maps;
+  - summaries of §§13–15 and a comparison with the b-calculus notes.
+
+  Corrections are marked in the text. They include the following:
+  - the homology statements assume a connected boundary, and for N
+    boundary components the degree-two boundary map has rank N − 1;
+  - dimension one needs separate treatment;
+  - the sign of the symbolic term in the index theorem is wrong;
+  - there are several smaller misprints.
 
 Compiled releases, with stable contents and figure lists, are available here:
 
 - [Heat Kernels and Index Theory](<output/pdf/Atiyah-Singer index theorem.pdf>)
 - [Notes on the b-Calculus and the APS Index Theorem](<output/pdf/Lecture draft.pdf>)
 - [Hochschild Homology of the b-Calculus](<output/pdf/Hochschild homology of b-pseudodifferential operators.pdf>)
+- [Hochschild Homology of the Cusp Calculus (Melrose–Nistor notes)](<output/pdf/Hochschild homology of cusp pseudodifferential operators (Melrose-Nistor notes).pdf>)
 
 ## Origin
 
