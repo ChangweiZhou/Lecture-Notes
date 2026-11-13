@@ -1,0 +1,1145 @@
+\section{Homological algebra}\label{sec:ha}
+
+\providecommand{\fA}{\mathfrak A}
+\providecommand{\hot}{\mathbin{\widehat\otimes}}
+\providecommand{\Sh}{\operatorname{Sh}}
+\providecommand{\Om}{\Omega}
+\providecommand{\dOm}{\dot\Omega}
+
+This appendix proves the homological background facts (B4), (B5) and (B6)
+of Section~\ref{subsec:background}, and it analyses the convergence of the
+order spectral sequence, which Remark~\ref{rem:poles} only summarises. The
+arguments are adapted from Wodzicki \cite{Wodzicki}, from
+\cite[Ch.~10]{MelroseMicro} and from the companion notes \cite{HHb}; we
+say in each place what is taken from where. The status of each item is as
+follows.
+\begin{itemize}
+\item (B4), Wodzicki excision: proved in full
+(Theorem~\ref{ha:thm:excision}), using three stated facts about nuclear
+spaces, (F1)--(F3) below.
+\item (B5), Connes' theorem: proved for \(\CI(M)\), \(M\) compact with
+corners (Theorem~\ref{ha:thm:connes}), and for the formal, Laurent and
+flat coefficient algebras of the notes (Theorem~\ref{ha:thm:variants}).
+\item (B6): the Künneth formula is proved in the form used
+(Proposition~\ref{ha:prop:kunneth}); the Eilenberg--Zilber theorem is
+quoted. Morita invariance for matrices, smoothing-kernel algebras and
+full corners is proved (Lemma~\ref{ha:lem:morita},
+Proposition~\ref{ha:prop:corner}).
+\item Convergence: the algebraic convergence proposition is proved
+(Proposition~\ref{ha:prop:algconv}), and so is convergence for the
+closed symbol algebra and for \(\Is\) (Theorem~\ref{ha:thm:conv}). For
+\(\As\) and \(\Ads\) the b-calculus argument of \cite{HHb} does
+\emph{not} carry over, because of the cusp twist
+(Example~\ref{ha:ex:obstruction}). We prove what survives
+(Proposition~\ref{ha:prop:laurent}). The remaining step is quoted from
+\cite[p.~12]{MN}.
+\end{itemize}
+
+\subsection{Chains and three facts about nuclear spaces}\label{ha:subsec:facts}
+
+We use the chain model of Section~\ref{subsec:chains}. A \emph{filtered
+nuclear algebra} is an increasing union \(\fA=\bigcup_{N\ge0}\fA_N\) of
+nuclear Fr\'echet spaces, each closed in the next, such that
+multiplication maps \(\fA_N\times\fA_M\to\fA_{N+M}\) continuously. Its
+chain spaces are \(C_k(\fA)=\varinjlim_N\fA_N^{\hot(k+1)}\), and \(d_i\),
+\(b\), \(b'\) are as in Section~\ref{subsec:chains}. A nuclear Fr\'echet
+algebra is the case \(\fA_N=\fA\). A closed ideal \(J\) and the quotient
+\(\fA/J\) have the pieces \(J_N=J\cap\fA_N\) and \(\fA_N/J_N\). Homology
+is always taken algebraically. Filtered colimits of vector spaces are
+exact, so homology commutes with \(\varinjlim_N\). In the proofs below we
+therefore work with one level \(N\) at a time and suppress \(N\), except
+where a map changes the level. We use the following facts
+\cite[Chs.~43, 50, 51]{Treves}.
+\begin{enumerate}
+\item[(F1)] Closed subspaces and Hausdorff quotients of nuclear Fr\'echet
+spaces are nuclear Fr\'echet. If \(E\) is nuclear Fr\'echet and
+\(0\to F'\to F\to F''\to0\) is an exact sequence of Fr\'echet spaces, then
+\(0\to E\hot F'\to E\hot F\to E\hot F''\to0\) is exact.
+\item[(F2)] (Kernel theorem.) For compact manifolds with corners
+\(\CI(M)\hot\CI(N)=\CI(M\times N)\). The same holds for \(\dCI\), and
+\(\cS(\R^a)\hot\cS(\R^b)=\cS(\R^{a+b})\).
+\item[(F3)] If \(E\) is nuclear Fr\'echet, then \(E\hot\prod_jF_j=
+\prod_jE\hot F_j\) for countable products of Fr\'echet spaces. For
+example \(\CI(N)[[x]]^{\hot(k+1)}=\CI(N^{k+1})[[x_0,\dots,x_k]]\).
+\end{enumerate}
+
+\begin{lemma}[Exactness of chain spaces]\label{ha:lem:exact}
+Let \(J\subset\fA\) be a closed ideal. For \(0\le s\le n\) put
+\[
+ H^s_n=\sum_{i\le s}\fA^{\hot i}\hot J\hot\fA^{\hot(n-i)}
+ \subset\fA^{\hot(n+1)},
+\]
+the algebraic sum of the images, which are injective by (F1). Put
+\(H^s_n=H^n_n\) for \(s>n\). Then:
+\begin{enumerate}
+\item \(\fA^{\hot(n+1)}\to(\fA/J)^{\hot(n+1)}\) is onto, with kernel
+\(H^n_n\);
+\item \(H^s_n/H^{s-1}_n\cong(\fA/J)^{\hot s}\hot J\hot\fA^{\hot(n-s)}\) for
+\(1\le s\le n\);
+\item \(J^{\hot q}\hot\fA^{\hot r}/J^{\hot(q+1)}\hot\fA^{\hot(r-1)}\cong
+J^{\hot q}\hot(\fA/J)\hot\fA^{\hot(r-1)}\) for \(q,r\ge1\).
+\end{enumerate}
+The same holds for filtered nuclear algebras, with \(\varinjlim_N\)
+applied throughout.
+\end{lemma}
+
+\begin{proof}
+(3) is (F1) applied to \(0\to J\to\fA\to\fA/J\to0\) tensored with nuclear
+factors. For (1) and (2), let \(\pi_s:\fA^{\hot(n+1)}\to(\fA/J)^{\hot s}
+\hot\fA^{\hot(n+1-s)}\) project the first \(s\) factors. We show by
+induction that \(\ker\pi_s=H^{s-1}_n\). For \(s=1\) this is (F1). Write
+\(\pi_{s+1}=\pi'\circ\pi_s\), where \(\pi'\) projects the factor in slot
+\(s\). By (F1), \(\ker\pi'=(\fA/J)^{\hot s}\hot J\hot\fA^{\hot(n-s)}\),
+and \(\pi_s\) maps \(\fA^{\hot s}\hot J\hot\fA^{\hot(n-s)}\) onto it.
+Hence \(\ker\pi_{s+1}=\ker\pi_s+\fA^{\hot s}\hot J\hot\fA^{\hot(n-s)}=
+H^s_n\). The case \(s=n+1\) is (1), and surjectivity is (F1) again. For
+(2), \(\pi_s\) restricted to \(H^s_n\) has kernel \(H^{s-1}_n\) and image
+\(\pi_s(\fA^{\hot s}\hot J\hot\fA^{\hot(n-s)})=(\fA/J)^{\hot s}\hot J\hot
+\fA^{\hot(n-s)}\).
+\end{proof}
+
+In particular \(\cK_n=H^n_n\) in \eqref{eq:chainses}. No continuous linear
+section of \(\fA\to\fA/J\) is needed; the Taylor maps of the notes have
+none.
+
+\begin{definition}\label{ha:def:Hunital}
+\(J\) is \emph{topologically H-unital} if there are continuous maps
+\(E:J_N^{\hot(k+1)}\to J_N^{\hot(k+2)}\), for all \(N\) and \(k\ge0\), with
+\(b'E+Eb'=1\) (where \(b'=0\) on \(C_0\)). We call \(E\) an \emph{extra
+degeneracy} if moreover \(d_0E=1\) and \(d_{i+1}E=Ed_i\) for \(0\le i<k\);
+then \(b'E+Eb'=1\) holds automatically.
+\end{definition}
+
+A unital algebra has the extra degeneracy \(E(c)=1\otimes c\). The
+contractions of Lemmas~\ref{lem:Hunital} and~\ref{lem:flatHunital} are
+extra degeneracies. If \(J\) is topologically H-unital, then the bar
+complex is acyclic in degree \(0\) as well: \(b'E=1\) on \(C_0(J)\) says
+that multiplication \(J\hot J\to J\) is onto. If \(E_1\), \(E_2\) are extra
+degeneracies of \(J_1\), \(J_2\), then \(E_1\otimes E_2\) is an extra
+degeneracy of \(J_1\hot J_2\), because the face maps of \(J_1\hot J_2\)
+are the tensor products of the face maps.
+
+\subsection{Wodzicki's excision theorem (B4)}\label{ha:subsec:excision}
+
+Throughout this subsection \(J\subset\fA\) is a closed ideal of a filtered
+nuclear algebra, and \(J\) is topologically H-unital with contraction
+\(E\). We start with the case in which excision fails.
+
+\begin{example}[Failure without H-unitality]\label{ha:ex:noexcision}
+Let \(\fA=\C[x]\) (with algebraic tensor products) and \(J=x\C[x]\). Here
+\(J\) is not H-unital, since \(J^2=x^2\C[x]\ne J\). The algebras are
+commutative, so \(\HH_1(\fA)=\C[x]\,dx\) by HKR
+(Theorem~\ref{ha:thm:poly}) and \(\HH_1(\fA/J)=\HH_1(\C)=0\). If excision
+held, \(\HH_1(J)\to\HH_1(\fA)\) would be onto. But the HKR form of a chain
+\(\sum a\otimes c\) with \(a,c\in J\) is \(\sum a\,dc\in x\C[x]\,dx\), so
+the image misses \([dx]\).
+\end{example}
+
+The proof has two steps. Let \(\cK'_n=J\hot\fA^{\hot n}\) be the chains
+whose first entry lies in \(J\). It is a subcomplex of \(\cK\): the faces
+\(d_0\) and \(d_n\) put \(a_0a_1\) or \(a_na_0\) in slot \(0\), and both
+lie in \(J\). We show that \(C(J)\subset\cK'\) and \(\cK'\subset\cK\) are
+quasi-isomorphisms. The first step uses the bar complex of \(J\) directly.
+The second needs it with coefficients.
+
+\begin{lemma}[Bar complex with coefficients]\label{ha:lem:barW}
+Let \(W\) be a left \(\fA\)-module which is a filtered nuclear space, with
+continuous action \(\fA_N\times W_M\to W_{N+M}\), such that \(J\cdot W=0\).
+Put \(P_m=J\hot\fA^{\hot m}\hot W\) for \(m\ge0\), with
+\[
+ b'_W(a_0\otimes\dots\otimes a_m\otimes w)=\sum_{i=0}^{m-1}(-1)^i
+ a_0\otimes\dots\otimes a_ia_{i+1}\otimes\dots\otimes w+(-1)^m
+ a_0\otimes\dots\otimes a_{m-1}\otimes a_mw .
+\]
+Then \((P_\bullet,b'_W)\) is acyclic, in degree \(0\) included.
+\end{lemma}
+
+\begin{proof}
+\(P\) is the two-sided bar complex of the right module \(J\) and the left
+module \(W\), so \(b_W'^2=0\). For \(0\le r\le m\) let \(G^r_m=J^{\hot(m+1-r)}
+\hot\fA^{\hot r}\hot W\), the chains whose first \(m+1-r\) entries lie in
+\(J\), and put \(G^r_m=P_m\) for \(r>m\). Then \(G^r\) is a subcomplex. A
+face inside the initial \(J\)-block keeps the block, of length \(m-r\) in
+degree \(m-1\), so it lands in \(G^r_{m-1}\). The face joining the last
+block entry to the next entry gives an element of \(J\), and lands in
+\(G^{r-1}_{m-1}\). A face joining two later entries, or the module face,
+keeps the block and lands in \(G^{r-1}_{m-1}\). If \(r=0\) the module face
+is \(a_mw=0\), because \(a_m\in J\).
+
+So \(G^0=(C_\bullet(J),b')\hot W\) is acyclic, with contraction
+\(E\otimes1\). For \(r\ge1\), Lemma~\ref{ha:lem:exact}(3) gives
+\(G^r_m/G^{r-1}_m\cong J^{\hot(m+1-r)}\hot(\fA/J)\hot\fA^{\hot(r-1)}\hot W\).
+By the list above, only the faces inside the block survive in the
+quotient. Hence \(G^r/G^{r-1}\) is the bar complex of \(J\) (in degrees
+\(m-r\ge0\)) tensored with spectators. Let \(\tilde E\) apply \(E\) to the
+block. It maps \(G^{r-1}\) to \(G^{r-1}\), since it lengthens the block,
+and \(b\tilde E+\tilde Eb\equiv(b'E+Eb')\otimes1=1\) modulo \(G^{r-1}\).
+So each \(G^r/G^{r-1}\) is acyclic. Since \(G^{m+1}_j=P_j\) for \(j\le
+m+1\), we get \(H_m(P)=H_m(G^{m+1})\cong H_m(G^0)=0\).
+\end{proof}
+
+\begin{proposition}[First step]\label{ha:prop:stepA}
+The inclusion \(C(J)\to\cK'\) is a quasi-isomorphism.
+\end{proposition}
+
+\begin{proof}
+Filter \(\cK'\) as in the previous proof: \(G^r_n=J^{\hot(n+1-r)}\hot
+\fA^{\hot r}\) for \(r\le n\), and \(G^r_n=\cK'_n\) for \(r>n\). Then
+\(G^0=C(J)\). The faces behave as before. The cyclic face \(d_n\) puts
+\(a_na_0\in J\) in front and keeps the block, so it lands in
+\(G^{r-1}_{n-1}\) when \(r\ge1\), and in \(G^0_{n-1}\) when \(r=0\). The
+quotients \(G^r/G^{r-1}\), \(r\ge1\), are bar complexes of \(J\) tensored
+with spectators. They are acyclic by the contraction \(\tilde E\) of the
+previous proof. Since \(G^r_n=\cK'_n\) for \(r\ge n\), we get
+\(H_n(C(J))=H_n(G^0)\cong H_n(G^{n+1})=H_n(\cK')\).
+\end{proof}
+
+\begin{proposition}[Second step]\label{ha:prop:stepB}
+The inclusion \(\cK'\to\cK\) is a quasi-isomorphism.
+\end{proposition}
+
+\begin{proof}
+Use the subspaces \(H^s_n\) of Lemma~\ref{ha:lem:exact}: chains with an
+entry from \(J\) in one of the first \(s+1\) slots. Then \(H^0=\cK'\) and
+\(H^n_n=\cK_n\). Each \(H^s\) is a subcomplex. Indeed, let \(a_i\in J\)
+with \(i\le s\). A face \(d_j\) with \(j<i\) moves it to slot \(i-1\); the
+faces \(d_{i-1}\), \(d_i\) and \(d_n\) produce an element of \(J\) in a
+slot \(\le i\); the other faces leave slot \(i\) alone. Fix \(s\ge1\). By
+Lemma~\ref{ha:lem:exact}(2),
+\[
+ H^s_n/H^{s-1}_n\cong(\fA/J)^{\hot s}\hot J\hot\fA^{\hot(n-s)} .
+\]
+Write an element as \(\bar a_0\otimes\dots\otimes\bar a_{s-1}\otimes a_s
+\otimes\dots\otimes a_n\) with \(a_s\in J\). The faces \(d_j\), \(j\le
+s-1\), produce an element of \(J\) in a slot \(\le s-1\), so they vanish
+on the quotient. The faces \(d_j\), \(s\le j\le n-1\), multiply
+neighbours in the segment \((a_s,\dots,a_n)\). The cyclic face puts
+\(\overline{a_na_0}\) in slot \(0\), that is, it lets \(a_n\) act on the
+left of \(W=(\fA/J)^{\hot s}\), through the first factor. This action
+kills \(J\). Moving \((\bar a_0,\dots,\bar a_{s-1})\) to the end
+identifies \(H^s/H^{s-1}\) with the complex \(P(W)\) of
+Lemma~\ref{ha:lem:barW}, of degree \(n-s\), and the differential with
+\((-1)^sb'_W\). (For \(n=s\) the cyclic face gives \(a_sa_0\in J\) in slot
+\(0\), which lies in \(H^0\subset H^{s-1}\).) By Lemma~\ref{ha:lem:barW} each
+quotient is acyclic. The filtration is finite in each degree, so the
+inclusion \(H^0\subset H^n\) is a quasi-isomorphism near degree \(n\).
+\end{proof}
+
+\begin{theorem}[Wodzicki excision, (B4)]\label{ha:thm:excision}
+Let \(J\subset\fA\) be a closed ideal of a filtered nuclear algebra, and
+suppose that \(J\) is topologically H-unital. Then \(C(J)\to\cK\) is a
+quasi-isomorphism, and there is a long exact sequence
+\[
+ \cdots\to\HH_k(J)\to\HH_k(\fA)\to\HH_k(\fA/J)\xrightarrow{\ \partial\ }
+ \HH_{k-1}(J)\to\cdots .
+\]
+To compute \(\partial[c]\), lift the cycle \(c\) to a chain \(\tilde c\)
+of \(\fA\) (Lemma~\ref{ha:lem:exact}(1)); then \(b\tilde c\in\cK\) is a
+cycle, and \(\partial[c]\) is its class in \(H(\cK)\cong\HH(J)\).
+\end{theorem}
+
+\begin{proof}
+Propositions~\ref{ha:prop:stepA} and~\ref{ha:prop:stepB} give the
+quasi-isomorphism. Lemma~\ref{ha:lem:exact}(1) gives the short exact
+sequence \eqref{eq:chainses}. Its long exact sequence, with \(H(\cK)\)
+replaced by \(\HH(J)\), is the stated one, and the description of
+\(\partial\) is the snake lemma.
+\end{proof}
+
+This is Background Fact~\ref{bg:excision}. Lemma~\ref{lem:conn} on
+cocycles follows from it as shown there. The theorem uses neither a unit
+in \(\fA\) nor a section of \(\fA\to\fA/J\). For algebras with algebraic
+tensor products the same proof applies, with (F1) replaced by the
+exactness of \(\otimes\) over \(\C\).
+
+\subsection{Connes' theorem (B5)}\label{ha:subsec:connes}
+
+We adapt \cite[Ch.~10, ``Smooth functions'']{MelroseMicro}, and add what
+is needed for boundaries and corners. Let \(M\) be a compact manifold with
+corners of dimension \(n\). Its charts are open subsets of
+\([0,\infty)^l\times\R^{n-l}\). By (F2), \(C_k=\CI(M^{k+1})\), and the face
+maps are restrictions:
+\[
+ (d_iu)(z_0,\dots,z_{k-1})=u(z_0,\dots,z_i,z_i,\dots,z_{k-1}),\qquad
+ (d_ku)(z_0,\dots,z_{k-1})=u(z_0,\dots,z_{k-1},z_0).
+\]
+The HKR map is, in local coordinates,
+\[
+ \chi(u)(x)=\frac1{k!}\sum_{j_1,\dots,j_k}
+ \frac{\partial^ku}{\partial z_1^{j_1}\cdots\partial z_k^{j_k}}(x,\dots,x)\,
+ dx^{j_1}\wedge\dots\wedge dx^{j_k},
+\]
+with one-sided derivatives at the boundary. On elementary tensors
+\(\chi(a_0\otimes\dots\otimes a_k)=\frac1{k!}a_0\,da_1\wedge\dots\wedge
+da_k\). Put \(\varphi(a_0;a_1,\dots,a_k)=\sum_{\sigma\in\mathfrak S_k}
+\sgn(\sigma)\,a_0\otimes a_{\sigma(1)}\otimes\dots\otimes a_{\sigma(k)}\).
+
+\begin{lemma}\label{ha:lem:chi}
+\(\chi\circ b=0\), \(b\varphi(a_0;a_1,\dots,a_k)=0\) and
+\(\chi\varphi(a_0;a_1,\dots,a_k)=a_0\,da_1\wedge\dots\wedge da_k\). In
+particular \(\chi_*:\HH_k(\CI(M))\to\Om^k(M)\) is onto.
+\end{lemma}
+
+\begin{proof}
+All three identities are algebraic for elementary tensors. Put
+\(T_i=a_0a_i\,da_1\wedge\dots\widehat{da_i}\dots\wedge da_k\). By the Leibniz
+rule, \((k-1)!\,\chi(b(a_0\otimes\dots\otimes a_k))=T_1+\sum_{i=1}^{k-1}
+(-1)^i(T_i+T_{i+1})+(-1)^kT_k=0\). In \(b\varphi\) the inner faces cancel in
+pairs (\(\sigma\) against \(\sigma\circ(i\ i{+}1)\)), and \(d_0\) for
+\(\sigma\) cancels \((-1)^kd_k\) for the cyclically shifted permutation,
+whose sign is \((-1)^{k-1}\sgn\sigma\). The third identity is clear. Since
+\(\chi\circ b\) is continuous and the algebraic tensor product is dense,
+\(\chi\circ b=0\) on all chains. Every \(k\)-form is a finite sum
+\(\sum a_0\,df_1\wedge\dots\wedge df_k\): use a partition of unity
+\(\sum\rho_\beta=1\) subordinate to charts and global functions
+\(f^\beta_i\) equal to the coordinates of the chart on
+\(\supp\rho_\beta\).
+\end{proof}
+
+\begin{theorem}[HKR for polynomials \cite{MelroseMicro,Loday}]
+\label{ha:thm:poly}
+For \(\fA=\C[x_1,\dots,x_n]\), with algebraic tensor products, \(\chi\)
+induces \(\HH_k(\fA)\cong\fA\otimes\Lambda^k\C^n\), with inverse
+\(a_0\,dx^{i_1}\wedge\dots\wedge dx^{i_k}\mapsto\varphi(a_0;x_{i_1},
+\dots,x_{i_k})\). The same holds for \(\C[r,r^{-1}]\), with
+\(\HH_0=\C[r^{\pm1}]\), \(\HH_1=\C[r^{\pm1}]\,dr\), \(\HH_k=0\) for \(k\ge2\).
+\end{theorem}
+
+\begin{proof}
+\(\HH_k(\fA)=\operatorname{Tor}^{\fA^e}_k(\fA,\fA)\), computed by the bar
+resolution \(P_k=\fA^{\otimes(k+2)}\), which is contracted by \(1\otimes\).
+The Koszul complex \(K_k=\C[x,y]\otimes\Lambda^k\C^n\), with
+\(\partial e_i=x_i-y_i\), is a second free resolution. In the variables
+\(u=x-y\), \(v=y\), \(\partial\) is contraction with the Euler field
+\(\sum u_i\partial_{u_i}\), so the exterior derivative in \(u\) divided by
+the degree in \(u\) contracts \(K\) in positive \(u\)-degree; the
+augmentation is \(f\mapsto f(x,x)\). The map
+\(e_{i_1}\wedge\dots\wedge e_{i_k}\mapsto\sum_\sigma\sgn\sigma\,1\otimes
+x_{i_{\sigma(1)}}\otimes\dots\otimes x_{i_{\sigma(k)}}\otimes1\) is a
+chain map \(K\to P\) over the identity: the inner faces cancel in pairs,
+and the outer faces give \(\sum_l(-1)^{l-1}(x_{i_l}-y_{i_l})\) times the
+smaller antisymmetrization. By the comparison theorem it induces an
+isomorphism after \(\fA\otimes_{\fA^e}\), where the Koszul side has zero
+differential. This gives the inverse map \(\varphi\), and
+\(\chi\varphi=1\) by Lemma~\ref{ha:lem:chi}. For \(\C[r^{\pm1}]\) the
+resolution is \(0\to\fA^e\xrightarrow{r-s}\fA^e\to\fA\to0\). It is exact
+because \(r-s\) is not a zero divisor and \(f(r,s)-f(r,r)\) is divisible
+by \(r-s\) (clear the denominator \((rs)^N\) first).
+\end{proof}
+
+\subsubsection*{Normalized chains}
+The next three results are algebraic and hold verbatim for \(\CI(M)\), for
+the polynomial algebras, and for the formal and Laurent algebras of
+Theorem~\ref{ha:thm:variants}. Let \(D_i=\{z_i=z_{i+1}\}\subset M^{k+1}\)
+for \(0\le i<k\) and \(D_k=\{z_k=z_0\}\), and
+\begin{gather*}
+ N_k=\{u\in C_k:\ u|_{D_i}=0,\ 0\le i<k\},\qquad M_k=\{u\in N_k:\
+ u|_{D_k}=0\}\quad(k\ge1),\\
+ B_k=d_{k+1}(N_{k+1}),\qquad N_0=M_0=C_0 .
+\end{gather*}
+If \(u\in N_k\) then \(bu=(-1)^kd_ku\), and \(d_ku\in N_{k-1}\). So \(N\) is
+a subcomplex. Moreover \(B_k\subset M_k\), and \(H_k(N)=M_k/B_k\).
+
+\begin{proposition}[{\cite[Ch.~10]{MelroseMicro}}]\label{ha:prop:normalized}
+\(N\subset C\) is a quasi-isomorphism. Hence \(\HH_k=M_k/B_k\), and an
+element of \(M_k\) that is a boundary in \(C\) lies in \(B_k\).
+\end{proposition}
+
+\begin{proof}
+Let \(J^j_m=\{u\in C_m:\ u|_{D_i}=0\text{ for }i<\min(j,m)\}\); each
+\(J^j\) is a subcomplex, \(J^0=C\), and \(J^j_m=N_m\) for \(m\le j\). For
+\(m\ge j+1\), every \(u\in J^j_m\) splits uniquely as \(u=u'+u''\), where
+\(u'(z)=u(z_0,\dots,z_j,z_j,z_{j+2},\dots,z_m)\) does not depend on
+\(z_{j+1}\) and \(u''=u-u'\in J^{j+1}_m\). Let \(V^j_m\) be the
+\(u\in J^j_m\) that do not depend on \(z_{j+1}\) (and \(V^j_m=0\) for
+\(m\le j\)). Then \(J^j=J^{j+1}\oplus V^j\) as graded spaces. On \(V^j\)
+the faces \(d_i\), \(i<j\), vanish, and \(d_j=d_{j+1}\), so
+\(bu=\sum_{i\ge j+2}(-1)^id_iu\in V^j\). The map
+\((Hu)(z_0,\dots,z_{m+1})=u(z_0,\dots,z_{j+1},z_{j+3},\dots,z_{m+1})\),
+which inserts a dummy variable in position \(j+2\), satisfies
+\(d_{j+2}H=1\) and \(d_iH=Hd_{i-1}\) for \(i\ge j+3\). Hence
+\(bH+Hb=(-1)^j\) on \(V^j\), so \(V^j\) is a contractible subcomplex, and
+\(J^{j+1}\subset J^j\) is a quasi-isomorphism. Therefore \(H_k(C)\cong
+H_k(J^{k+1})=H_k(N)\).
+\end{proof}
+
+\begin{lemma}\label{ha:lem:Bmodule}
+\textup{(i)} \(B_k\) is a \(\CI(M^{k+1})\)-submodule of \(M_k\).
+\textup{(ii)} If \(f\in\CI(M)\) and \(g\in M_k\), then
+\((f(z_j)-f(z_{j+1}))g\in B_k\) for \(0\le j<k\), and
+\((f(z_k)-f(z_0))g\in B_k\).
+\end{lemma}
+
+\begin{proof}
+(i) If \(v\in N_{k+1}\) and \(\psi\in\CI(M^{k+1})\), then
+\(\tilde\psi v\in N_{k+1}\) with \(\tilde\psi(z_0,\dots,z_{k+1})=
+\psi(z_0,\dots,z_k)\), and \(d_{k+1}(\tilde\psi v)=\psi\,d_{k+1}v\). (ii)
+For \(j<k\) let \(w=(-1)^{j+1}(f(z_j)-f(z_{j+1}))\,g(z_0,\dots,z_j,
+z_{j+2},\dots,z_{k+1})\in C_{k+1}\). All faces of \(w\) vanish except
+\(d_{j+1}\), because \(g\in M_k\) and because of the first factor. So
+\(bw=(f(z_j)-f(z_{j+1}))g\). This lies in \(M_k\) and is a boundary, hence
+in \(B_k\) by Proposition~\ref{ha:prop:normalized}. The last case is the
+sum of the others.
+\end{proof}
+
+\begin{example}[The model \(k=1\)]\label{ha:ex:k1}
+Let \(M=[0,1]\) and \(u\in M_1\), so \(u(z_0,z_0)=0\) and
+\(u=(z_1-z_0)w\). Then \(\chi(u)=w(x,x)\,dx\). If \(\chi(u)=0\), then
+\(u=(z_1-z_0)^2g\) with \(g\) smooth, and \(u=d_2v\) for
+\(v(z_0,z_1,z_2)=-(z_1-z_0)(z_2-z_1)g(z_0,z_1)\in N_2\). So \(u\in B_1\), and
+\(\HH_1(\CI([0,1]))=\Om^1([0,1])\). The proof below does the same in
+general: Taylor expansion at the diagonal, a polynomial lift, and
+division of a flat remainder.
+\end{example}
+
+\subsubsection*{The local structure of normalized cycles}
+Near a point \((x_0,\dots,x_0)\) of the diagonal \(\Delta\) choose a chart
+around \(x_0\) whose image \(U\) is a \emph{convex} subset of
+\([0,\infty)^l\times\R^{n-l}\), and use the coordinates
+\[
+ x=z_0,\qquad y_j=z_j-z_{j-1}\quad(1\le j\le k)
+\]
+on \(U^{k+1}\). Then \(D_{j-1}=\{y_j=0\}\), \(D_k=\{y_1+\dots+y_k=0\}\) and
+\(\Delta=\{y=0\}\). The set \(U^{k+1}\) is convex with non-empty interior,
+so the Taylor series in \(y\) at points of \(\Delta\) of a smooth function
+on it is determined by the function. It vanishes on a linear subspace
+\(S\) if the function vanishes on \(S\cap U^{k+1}\), because \(S\cap
+U^{k+1}\) is convex with non-empty interior in \(S\) and contains
+\(\Delta\cap U^{k+1}\). This replaces the use of Hadamard's lemma in
+\cite{MelroseMicro}, whose integration paths can leave a half-space.
+
+\begin{lemma}\label{ha:lem:antisym}
+A \(k\)-linear form \(q\) on \(\R^n\) satisfies
+\(q(y_1,\dots,y_{k-1},-(y_1+\dots+y_{k-1}))\equiv0\) if and only if it is
+alternating.
+\end{lemma}
+
+\begin{proof}
+If \(q\) is alternating the expression is \(-\sum_{j<k}q(y_1,\dots,
+y_{k-1},y_j)=0\). Conversely, the terms \(q(y_1,\dots,y_{k-1},y_j)\) have
+distinct multidegrees, so each vanishes. Thus \(q\) is alternating in the
+arguments \(j,k\), and these transpositions generate \(\mathfrak S_k\).
+\end{proof}
+
+\begin{lemma}\label{ha:lem:leading}
+Let \(u\in N_k\). The Taylor series of \(u\) at \(\Delta\) in \(y\) has
+coefficients smooth in \(x\in U\). Each of its monomials contains a
+component of every \(y_j\). Its part of degree \(k\) is
+\(u_{(k)}=\sum_Iw_I(x)\,y_{1,i_1}\cdots y_{k,i_k}\), and
+\(\chi(u)=\frac1{k!}\sum_Iw_I\,dx^{i_1}\wedge\dots\wedge dx^{i_k}\). If
+\(u\in M_k\), then \(u_{(k)}(x;\cdot)\) is alternating, and \(\chi(u)(x)=0\)
+if and only if \(u_{(k)}(x;\cdot)=0\).
+\end{lemma}
+
+\begin{proof}
+The Taylor series vanishes on each \(\{y_j=0\}\), which gives the first
+claim. Since \(z_l=x+y_1+\dots+y_l\), we have \(\partial_{z_l}=
+\partial_{y_l}-\partial_{y_{l+1}}\) (and \(\partial_{z_k}=\partial_{y_k}\)).
+In \(\partial_{z_1^{i_1}}\cdots\partial_{z_k^{i_k}}u\) at \(y=0\) only the
+term in which each \(y_l\) is differentiated once survives, and it equals
+\(w_I(x)\). If \(u\in M_k\), then \(u_{(k)}\) vanishes on
+\(\{y_1+\dots+y_k=0\}\); apply Lemma~\ref{ha:lem:antisym}.
+\end{proof}
+
+\begin{lemma}[{\cite[Ch.~10]{MelroseMicro}}]\label{ha:lem:polylift}
+Let \(k\ge1\), \(m\ge k+1\). Let \(\mathcal M_m\) be the homogeneous
+polynomials of degree \(m\) in \((y_1,\dots,y_k)\) vanishing on each
+\(\{y_j=0\}\) and on \(\{y_1+\dots+y_k=0\}\). Let \(\mathcal V_m\) be the
+homogeneous polynomials of degree \(m\) in \((y_1,\dots,y_{k+1})\)
+vanishing on each \(\{y_j=0\}\). Then \(R:\mathcal V_m\to\mathcal M_m\),
+\((RV)(y_1,\dots,y_k)=V(y_1,\dots,y_k,-(y_1+\dots+y_k))\), is onto.
+\end{lemma}
+
+\begin{proof}
+Given \(q\in\mathcal M_m\), the polynomial chain \(u(z)=q(z_1-z_0,\dots,
+z_k-z_{k-1})\) lies in \(M_k\) and \(\chi(u)=0\). By
+Theorem~\ref{ha:thm:poly} and Proposition~\ref{ha:prop:normalized} for
+polynomials, \(u=d_{k+1}v\) with \(v\in N_{k+1}\). Write \(v\) in the
+coordinates \(x,y_1,\dots,y_{k+1}\). Its component of degree \(0\) in
+\(x\) and \(m\) in \(y\) lies in \(\mathcal V_m\), and \(R\) maps it to
+\(q\).
+\end{proof}
+
+\begin{lemma}\label{ha:lem:local}
+Let \(k\ge1\) and \(u\in M_k\) with \(\chi(u)=0\). Every point \(p\in
+M^{k+1}\) has a neighbourhood on which \(u\) agrees with an element of
+\(B_k\).
+\end{lemma}
+
+\begin{proof}
+If \(p\notin\Delta\), then \(p_j\ne p_{j+1}\) for some \(j<k\). Choose
+\(f\in\CI(M)\) with \(f(p_j)\ne f(p_{j+1})\), and \(\psi\in\CI(M^{k+1})\)
+equal to \(1\) near \(p\) and supported where \(f(z_j)\ne f(z_{j+1})\).
+Then \(g=\psi u/(f(z_j)-f(z_{j+1}))\in M_k\), and near \(p\),
+\(u=(f(z_j)-f(z_{j+1}))g\in B_k\) by Lemma~\ref{ha:lem:Bmodule}.
+
+Let \(p=(x_0,\dots,x_0)\). By Lemma~\ref{ha:lem:leading} and \(\chi(u)=0\),
+the Taylor series of \(u\) at \(\Delta\) is \(\sum_{m\ge k+1}u_{(m)}\) with
+\(u_{(m)}\in\CI(U)\otimes\mathcal M_m\). Using a linear right inverse of
+\(R\), choose \(V_{(m)}\in\CI(U)\otimes\mathcal V_m\) with
+\(RV_{(m)}=u_{(m)}\). By Borel's lemma, \(V=\sum_m\chi_0(\lambda_m|y|)
+V_{(m)}\), with \(\chi_0\in\CI_c(\R)\) equal to \(1\) near \(0\) and
+\(\lambda_m\to\infty\) fast enough, is smooth for \(x\in U\) up to the
+boundary and small \(y\in(\R^n)^{k+1}\). It has Taylor series
+\(\sum V_{(m)}\) and vanishes on each \(\{y_j=0\}\). Let \(\Theta\) be a
+cut-off near \((x_0,\dots,x_0)\in M^{k+2}\), and let \(v=\Theta V\),
+written in \(z\). Then \(v\in N_{k+1}\). The chain \(s=d_{k+1}v\in B_k\)
+has the same Taylor series as \(u\) at \(\Delta\) near \(p\), since
+\(z_{k+1}=z_0\) means \(y_{k+1}=-(y_1+\dots+y_k)\).
+
+So \(g=u-s\in M_k\) vanishes to infinite order at \(\Delta\) near \(p\).
+For \(z\in U^{k+1}\) the segment from \((z_0,\dots,z_0)\) to \(z\) lies in
+\(U^{k+1}\), by convexity. Taylor's formula along it gives
+\(|\partial^\alpha g(z)|\le C_{\alpha,N}|y|^N\) for all \(N\). Hence
+\(g_{j,i}=y_{j,i}g/|y|^2\), extended by \(0\) on \(\Delta\), is smooth up
+to the boundary, and it vanishes where \(g\) does. Let \(f_i\in\CI(M)\)
+equal the \(i\)-th coordinate near \(x_0\), and let \(\psi\) be a cut-off
+equal to \(1\) near \(p\). Then near \(p\),
+\(g=\sum_{j,i}y_{j,i}g_{j,i}=\sum_{j,i}(f_i(z_j)-f_i(z_{j-1}))\psi
+g_{j,i}\), which lies in \(B_k\) by Lemma~\ref{ha:lem:Bmodule}. So
+\(u=s+g\) agrees with an element of \(B_k\) near \(p\).
+\end{proof}
+
+\begin{theorem}[Connes, (B5)]\label{ha:thm:connes}
+For a compact manifold with corners \(M\), \(\chi\) induces isomorphisms
+\(\HH_k(\CI(M))\cong\Om^k(M)\).
+\end{theorem}
+
+\begin{proof}
+For \(k=0\), \(b=0\) on \(C_1\). For \(k\ge1\), \(\chi_*\) is onto by
+Lemma~\ref{ha:lem:chi}. By Proposition~\ref{ha:prop:normalized} a class is
+represented by \(u\in M_k\), and it vanishes if and only if \(u\in B_k\).
+If \(\chi(u)=0\), Lemma~\ref{ha:lem:local} and compactness give a finite
+partition of unity \(\sum\psi_\beta=1\) on \(M^{k+1}\) and
+\(s_\beta\in B_k\) with \(u=s_\beta\) on \(\supp\psi_\beta\). Then
+\(u=\sum_\beta\psi_\beta s_\beta\in B_k\) by Lemma~\ref{ha:lem:Bmodule}(i).
+\end{proof}
+
+\subsubsection*{The coefficient algebras of the notes}
+Let \(N\) be a compact manifold with corners and \(x\) a formal variable.
+Let \(M\) be a compact manifold with boundary, with boundary defining
+function \(x\) and a collar \([0,\epsilon)\times\partial M\). We consider
+\[
+ \CI(N)[[x]],\qquad \CI(N)\Lser{x},\qquad x^{-\Z}\CI(M),\qquad\dCI(M).
+\]
+The localized algebras are filtered nuclear with pieces \(x^{-L}\CI(N)
+[[x]]\) and \(x^{-L}\CI(M)\). By (F2) and (F3) their chains are
+\(\CI(N^{k+1})[[x_0,\dots,x_k]]\), the unions over \(L\) of
+\((x_0\cdots x_k)^{-L}\) times the previous chains, and \(\dCI(M^{k+1})\).
+The forms are \(\Om(N)[[x]]\oplus\Om(N)[[x]]\,dx\) (with \(d\) the formal
+differential), the corresponding Laurent forms, \(x^{-\Z}\Om(M)\), and the
+flat forms \(\dOm(M)\). The HKR map is given by the same formula.
+
+\begin{theorem}[HKR for the coefficient algebras, (B5)]
+\label{ha:thm:variants}
+For each of the four algebras \(\chi\) induces an isomorphism of
+\(\HH_k\) onto the \(k\)-forms just listed. The isomorphisms commute with
+Taylor expansion at \(\partial M\) in the collar. The same holds for
+\(\cS(\R^d)\), whose forms are the Schwartz forms.
+\end{theorem}
+
+\begin{proof}
+\emph{Formal series.} Run the proof of Theorem~\ref{ha:thm:connes} with
+\(x\) as an extra coordinate in which everything is a formal power series.
+Normalized chains and Lemma~\ref{ha:lem:Bmodule} are algebraic.
+Differences \(x_j-x_{j-1}\) are formal variables, and a series in
+\(x_0,\dots,x_k\) is a series in \(x_0\) and the differences. Points of
+\(N^{k+1}\) off the \(N\)-diagonal are treated as before. Near the
+\(N\)-diagonal, expand in all differences, lift with
+Lemma~\ref{ha:lem:polylift} (polynomials in the \(N\)-coordinates and
+\(x\)), and apply Borel's lemma only in the \(N\)-differences. For each
+fixed monomial in \(x_0\) and the \(x\)-differences this is a convergent
+Borel sum; choose \(\lambda_m\) to control all monomials of degree \(\le
+m\). Every coefficient of the remainder \(g\) is then flat at the
+\(N\)-diagonal, so it can be divided by \(|y_N|^2\) coefficientwise. If
+\(\dim N=0\) the remainder is \(0\).
+
+\emph{Laurent coefficients.} Let \(R\) be \(\CI(M)\) or \(\CI(N)[[x]]\)
+and \(R'=R[x^{-1}]\). Proposition~\ref{ha:prop:normalized} holds for
+\(R'\) as stated. Let \(u\in M_k(R')\) with \(\chi(u)=0\), and write
+\(u=fv\) with \(f=(x_0\cdots x_k)^{-L}\) and \(v\in C_k(R)\). Multiplication
+by \(f\) is injective, so \(v\in M_k(R)\). By Lemma~\ref{ha:lem:leading},
+\(v=O(|y|^k)\) at \(\Delta\), so the degree-\(k\) Taylor part of \(fv\) is
+\(f|_\Delta v_{(k)}\) and \(\chi(u)=x^{-(k+1)L}\chi(v)\) (as an identity of
+forms on the interior, hence of Laurent forms). So \(\chi(v)=0\), hence
+\(v=d_{k+1}w\) with \(w\in N_{k+1}(R)\), and \(u=d_{k+1}(\tilde fw)\in
+B_k(R')\), where \(\tilde f(z_0,\dots,z_{k+1})=f(z_0,\dots,z_k)\).
+Surjectivity is Lemma~\ref{ha:lem:chi} with \(a_0\in x^{-L}R\).
+
+\emph{Flat functions.} Taylor expansion in the collar gives the exact
+sequence \(0\to\dCI(M)\to\CI(M)\to\CI(\partial M)[[x]]\to0\) (Borel's
+lemma). Its kernel is topologically H-unital by
+Lemma~\ref{lem:flatHunital}, so Theorem~\ref{ha:thm:excision} gives a
+long exact sequence. The HKR maps commute with Taylor expansion, since
+both sides are computed from derivatives at the diagonal. The sequence of
+forms \(0\to\dOm\to\Om(M)\to\Om(\partial M)[[x]]\oplus\Om(\partial M)
+[[x]]\,dx\to0\) is exact, by Borel's lemma for forms. The HKR maps for the
+middle and right algebras are isomorphisms, so \(\HH_k(\CI(M))\to
+\HH_k(\CI(\partial M)[[x]])\) is onto for every \(k\). Hence the connecting
+maps vanish, \(\HH_k(\dCI(M))\) is the kernel, and \(\chi\) identifies it
+with \(\dOm^k(M)\). Finally \(\cS(\R^d)=\dCI(\overline{\R^d})\) for the
+radial compactification, a closed ball, and (F2) identifies the chains.
+\end{proof}
+
+Theorem~\ref{ha:thm:variants} is the scalar case of \cite[Lemma
+``Continuous HKR for the coefficient kernels'']{HHb}, which proves the flat
+case directly with a Koszul complex. The version with an adjoined
+polynomial or Laurent polynomial variable is
+Corollary~\ref{ha:cor:homog} below.
+
+\subsection{Künneth and Morita (B6)}\label{ha:subsec:B6}
+
+\subsubsection*{The Künneth formula}
+For unital algebras \(\fA,\mathfrak B\) the \emph{shuffle map} is
+\begin{multline*}
+ \mathrm{sh}\bigl((a_0\otimes\dots\otimes a_p)\otimes(b_0\otimes\dots
+ \otimes b_q)\bigr)\\
+ =\sum_{\sigma\in\Sh(p,q)}\sgn(\sigma)\,(a_0\otimes b_0)
+ \otimes\sigma\cdot\bigl(a_1\otimes1,\dots,a_p\otimes1,1\otimes b_1,\dots,
+ 1\otimes b_q\bigr),
+\end{multline*}
+where \(\sigma\) runs over the \((p,q)\)-shuffles: it puts the entries
+\(a_i\otimes1\) in positions \(\sigma(1)<\dots<\sigma(p)\) and the
+\(1\otimes b_j\) in order in the remaining positions.
+
+\begin{background}[Eilenberg--Zilber (quoted: \cite{Loday}, \S4.2)]
+\label{ha:bg:EZ}
+\(\mathrm{sh}:\operatorname{Tot}(C(\fA)\otimes C(\mathfrak B))\to
+C(\fA\otimes\mathfrak B)\) is a chain map and a chain homotopy
+equivalence. Its homotopy inverse (Alexander--Whitney) and both homotopies
+are given by universal finite formulas in the face maps and in the
+degeneracies \(s_i\) (insertion of \(1\) after slot \(i\)).
+\end{background}
+
+Because the formulas are universal and finite, the same holds for unital
+filtered nuclear algebras with completed tensor products, using
+\(C_k(\fA\hot\mathfrak B)=\fA^{\hot(k+1)}\hot\mathfrak B^{\hot(k+1)}\).
+
+\begin{proposition}[Künneth, (B6)]\label{ha:prop:kunneth}
+Let \(\fA\) be a unital filtered nuclear algebra and \(\mathfrak B\) a
+unital algebra of countable dimension. Put \(C_k(\fA\otimes\mathfrak B)=
+\fA^{\hot(k+1)}\otimes\mathfrak B^{\otimes(k+1)}\). Then
+\[
+ \HH_n(\fA\otimes\mathfrak B)\cong\bigoplus_{p+q=n}\HH_p(\fA)\otimes
+ \HH_q(\mathfrak B),
+\]
+induced by \(\mathrm{sh}\). If both algebras are commutative, then
+\(\chi(\mathrm{sh}(\alpha\otimes\beta))=\chi(\alpha)\wedge\chi(\beta)\).
+\end{proposition}
+
+\begin{proof}
+By Background Fact~\ref{ha:bg:EZ}, \(\mathrm{sh}\) is a quasi-isomorphism.
+The complex \(C(\fA)\otimes C(\mathfrak B)\) is an algebraic tensor product
+of complexes over \(\C\), so its homology is \(H(C(\fA))\otimes
+H(C(\mathfrak B))\). For the last statement, each of the
+\(\binom{p+q}p\) shuffles contributes
+\(a_0b_0\,da_1\wedge\dots\wedge da_p\wedge db_1\wedge\dots\wedge db_q\),
+since the sign of the reordering cancels \(\sgn\sigma\). Multiplying by
+\(1/(p+q)!\) gives \(\frac1{p!q!}(a_0\,da_1\wedge\cdots)\wedge(b_0\,db_1
+\wedge\cdots)\).
+\end{proof}
+
+For two nuclear Fr\'echet algebras the topological Künneth formula needs
+a further condition on the boundaries (quoted: \cite{Karoubi}); the notes
+do not need it. What they need is the following.
+
+\begin{corollary}[HKR with a radial variable]\label{ha:cor:homog}
+Let \(R\) be one of the algebras of Theorems~\ref{ha:thm:connes}
+and~\ref{ha:thm:variants}, and let \(\mathfrak B=\C[r,r^{-1}]\) (\(r\) of
+weight \(1\)) or \(\C[t]\) (\(t\) of weight \(-1\)). Grade
+\(C(R\otimes\mathfrak B)\) by total weight. Then \(\chi\) induces, in each
+weight \(w\),
+\[
+ \HH_k(R\otimes\mathfrak B)_{(w)}\cong\bigl(\Om^k(R)\otimes\mathfrak B
+ \oplus\Om^{k-1}(R)\otimes\mathfrak B\,d\varrho\bigr)_{(w)},\qquad
+ \varrho\in\{r,t\},
+\]
+where \(d\varrho\) has the weight of \(\varrho\). In particular, if \(V\to
+Y\) is a vector bundle with a fibre norm and \(R=\CI(SV)\) (or its Laurent,
+formal or flat version), the chains of total homogeneity \(p\) have
+homology the homogeneous \(k\)-forms of degree \(p\) on \(V\setminus0\).
+\end{corollary}
+
+\begin{proof}
+For unital \(R\) combine Proposition~\ref{ha:prop:kunneth} with
+Theorems~\ref{ha:thm:poly}, \ref{ha:thm:connes}
+and~\ref{ha:thm:variants}. Every map preserves the weight. For
+\(\dCI(M)\otimes\mathfrak B\) use the Taylor sequence tensored with
+\(\mathfrak B\) and argue as in the flat case of
+Theorem~\ref{ha:thm:variants}. The kernel has the extra degeneracy
+\(E\otimes(1\otimes\cdot)\), the tensor product of extra degeneracies. A
+homogeneous form of degree \(p\) on \(V\setminus0\cong SV\times(0,\infty)
+_r\) is \(r^p(\alpha+\beta\wedge dr/r)\) with \(\alpha,\beta\) forms on
+\(SV\), and a homogeneous function of degree \(p\) is \(r^p\) times a
+function on \(SV\).
+\end{proof}
+
+\subsubsection*{Morita invariance}
+
+\begin{lemma}[Morita for smoothing kernels; adapted from {\cite[Lemma
+``Morita invariance for smoothing kernels'']{HHb}}]\label{ha:lem:morita}
+Let \(\mathcal K=V\hot W\) be as in Lemma~\ref{lem:Hunital}, with
+\(\langle\psi,\tilde\psi\rangle=1\), \(e=\tilde\psi\otimes\psi\) and
+\(\Tr(v\otimes w)=\langle w,v\rangle\). Let \(\fA\) be unital or
+topologically H-unital. Then
+\begin{gather*}
+ \iota(a_0\otimes\dots\otimes a_k)=(e\otimes a_0)\otimes\dots\otimes
+ (e\otimes a_k),\\
+ \Tr_*\bigl((\kappa_0\otimes a_0)\otimes\dots\otimes
+ (\kappa_k\otimes a_k)\bigr)=\Tr(\kappa_0\cdots\kappa_k)\,a_0\otimes\dots
+ \otimes a_k
+\end{gather*}
+are chain maps between \(C(\fA)\) and \(C(\mathcal K\hot\fA)\), with
+\(\Tr_*\iota=1\), and \(\Tr_*\) is a quasi-isomorphism. For
+\(V=\C^N\), \(W=(\C^N)^*\) this gives \(\HH(M_N(\fA))\cong\HH(\fA)\).
+\end{lemma}
+
+\begin{proof}
+Write a chain as \((v_0\otimes w_0\otimes a_0)\otimes\dots\otimes(v_k
+\otimes w_k\otimes a_k)\) and rearrange it as the \emph{letters}
+\(\ell_i=w_i\otimes v_{i+1}\in U=W\hot V\) (indices mod \(k+1\)) together
+with \(a_0\otimes\dots\otimes a_k\). Let \(\varepsilon(w\otimes v)=
+\langle w,v\rangle\). Since \((v_i\otimes w_i)(v_{i+1}\otimes w_{i+1})=
+\varepsilon(\ell_i)\,v_i\otimes w_{i+1}\), the face \(d_i\) applies
+\(\varepsilon\) to \(\ell_i\), deletes it, and multiplies \(a_i\) with
+\(a_{i+1}\) (for \(i=k\), \(a_ka_0\) in slot \(0\)); the other letters are
+unchanged. Split \(U=\C u_0\oplus U'\) with \(u_0=\psi\otimes\tilde\psi\)
+and \(U'=\ker\varepsilon\). The number \(m\) of letters in \(U'\) is
+preserved by \(b\), so \(C=\bigoplus_mC^{(m)}\).
+
+If \(m=0\), every letter is \(u_0\), every slot is \(\tilde\psi\otimes
+\psi=e\), and \(C^{(0)}=\iota C(\fA)\) with the differential of \(\fA\).
+The projection onto \(C^{(0)}\) replaces each letter \(\ell\) by
+\(\varepsilon(\ell)u_0\), that is, it is \(\iota\Tr_*\), since
+\(\prod_i\varepsilon(\ell_i)=\Tr(\kappa_0\cdots\kappa_k)\).
+
+If \(m\ge1\), filter by the position \(w\) of the last \(U'\)-letter. A
+face \(d_i\) with \(i<w\) lowers \(w\), \(d_w\) vanishes, and \(d_i\) with
+\(i>w\) keeps \(w\). On the associated graded complex only the faces
+\(d_{w+1},\dots,d_k\) survive. They multiply neighbours in the block
+\((a_{w+1},\dots,a_k,a_0)\), of length \(k-w+1\ge1\), with signs
+\(\pm(-1)^{i-w-1}\). So the graded complex is the bar complex of \(\fA\)
+tensored with spectators, and it is contracted by \(1\otimes\) or by
+\(E\), inserted in front of the block. The filtration is finite in each
+degree, so \(C^{(m)}\) is acyclic for \(m\ge1\).
+\end{proof}
+
+For full corners we use a homotopy that we have not found written out in
+this form; it is the chain-level version of \cite[\S1.2]{Loday}. Let
+\(T\) be an algebra containing \(e,P,Q\) with \(e^2=e\), \(PQ=e\),
+\(eP=P\) and \(Qe=Q\). Then \(a\mapsto QaP\) is an algebra map
+\(eTe\to T\).
+
+\begin{lemma}\label{ha:lem:PQ}
+Let \(\phi_0,\phi_1:C(eTe)\to C(T)\) be induced by the inclusion and by
+\(a\mapsto QaP\). For \(0\le j\le k\) put
+\[
+ h_j(a_0\otimes\dots\otimes a_k)=a_0P\otimes Qa_1P\otimes\dots\otimes
+ Qa_jP\otimes Q\otimes a_{j+1}\otimes\dots\otimes a_k,
+\]
+and \(H=\sum_j(-1)^jh_j\). Then \(bH+Hb=\phi_0-\phi_1\).
+\end{lemma}
+
+\begin{proof}
+Use \(a_iPQ=a_i\) and \(QaPQ=Qa\) for \(a,a_i\in eTe\). In \(h_j\) the
+face \(d_i\) multiplies two transformed entries if \(i<j\), giving
+\(h_{j-1}d_i\). If \(i>j+1\) it multiplies two original entries (or
+\(a_k\) with \(a_0P\)), giving \(h_jd_{i-1}\). The remaining faces satisfy
+\[
+ d_0h_0=1,\qquad d_{k+1}h_k=\phi_1,\qquad d_jh_j=d_jh_{j-1}\ (j\ge1),
+\]
+both sides of the last being \((\dots,Qa_{j-1}P,Qa_j,a_{j+1},\dots)\). The
+terms with \(i\in\{j,j+1\}\) in \(bH\) therefore telescope to
+\(d_0h_0-d_{k+1}h_k=\phi_0-\phi_1\). The terms with \(i<j\) or \(i>j+1\)
+add up to \(-Hb\). (We also checked the identity by computer algebra for
+\(k\le4\).)
+\end{proof}
+
+\begin{proposition}[Morita for full corners, (B6)]\label{ha:prop:corner}
+Let \(S\) be a unital filtered nuclear algebra and \(f\in S\) an
+idempotent. Suppose there are \(u_1,\dots,u_m\in Sf\) and
+\(v_1,\dots,v_m\in fS\) with \(\sum_ju_jv_j=1\). Then the inclusion
+\(fSf\to S\) induces an isomorphism \(\HH(fSf)\cong\HH(S)\). Its inverse
+is induced by
+\(\theta(s_0\otimes\dots\otimes s_k)=\sum_{i_0,\dots,i_k}v_{i_0}s_0u_{i_1}
+\otimes v_{i_1}s_1u_{i_2}\otimes\dots\otimes v_{i_k}s_ku_{i_0}\).
+\end{proposition}
+
+\begin{proof}
+In \(T=M_{1+m}(S)\), with indices \(0,\dots,m\), take \(e=E_{00}\),
+\(P=\sum_ju_jE_{0j}\) and \(Q=\sum_jv_jE_{j0}\). Then \(PQ=e\), \(eTe=S\),
+and \(QsP=\sum_{i,j}v_isu_jE_{ij}\). By Lemma~\ref{ha:lem:PQ} and the
+generalized trace \(\Tr_*:C(M_{1+m}(S))\to C(S)\) (a chain map with
+\(\Tr_*\phi_0=1\)), \(1\simeq\Tr_*\phi_1=\theta\) on \(C(S)\). The image of
+\(\theta\) lies in \(C(fSf)\). In \(T'=M_{1+m}(fSf)\) take \(e'=fE_{00}\),
+\(P'=\sum_jfu_jE_{0j}\) and \(Q'=\sum_jv_jfE_{j0}\). All entries lie in
+\(fSf\), \(P'Q'=e'\), and \(Q'aP'=\sum v_iau_jE_{ij}\) for \(a\in fSf\).
+The same argument gives \(1\simeq\theta\) on \(C(fSf)\).
+\end{proof}
+
+\begin{remark}[Bundles]\label{ha:rem:bundles}
+For a subbundle \(E\subset X\times\C^N\) of positive rank, with orthogonal
+projection \(e\), the hypothesis holds in \(S=M_N(\CI(X))\subset
+M_N(\fA)\), for every algebra \(\fA\) of the notes. Take a partition of
+unity \(\sum\rho_\alpha^2=1\) and unit sections \(s_\alpha\) of \(E\) on
+\(\supp\rho_\alpha\), and put \(u_{\alpha,i}=\rho_\alpha e_is_\alpha^*\) and
+\(v_{\alpha,i}=\rho_\alpha s_\alpha e_i^*\). Then \(u_{\alpha,i}e=
+u_{\alpha,i}\), \(ev_{\alpha,i}=v_{\alpha,i}\) and \(\sum_{\alpha,i}
+u_{\alpha,i}v_{\alpha,i}=1\). With Lemma~\ref{ha:lem:morita} this gives
+\(\HH(eM_N(\fA)e)\cong\HH(\fA)\) for the unital algebras of the notes, as
+used in Section~\ref{sec:morita}. For the ideals \(J\) (\(\cI\), \(\Is\),
+\(\Id\)) the five lemma and Theorem~\ref{ha:thm:excision} give the same,
+provided \(eM_N(J)e\) is topologically H-unital. This holds because the
+contractions of Lemmas~\ref{lem:Hunital}, \ref{lem:flatHunital} and
+Propositions~\ref{prop:Is}, \ref{prop:Id} are defined by kernels and can
+be written with bundle coefficients (sketch).
+\end{remark}
+
+\subsection{Convergence of the order spectral sequence}
+\label{ha:subsec:conv}
+
+\subsubsection*{The algebraic statement}
+Let \((C_\bullet,b)\) be a complex in which each \(C_k\) is a subspace of
+the space of series \(c=\sum_{p\le P}c_p\), \(c_p\in C_{p,k}\), containing
+each \(C_{p,k}\), with \(b=\sum_{l\ge0}b_l\) and \(b_l:C_{p,k}\to
+C_{p-l,k-1}\). Put \(F_pC=\{c:\ c_q=0\ \text{for}\ q>p\}\),
+\(E^1_{p,k}=H_k(C_{p,\bullet},b_0)\), and let \(d^1\) be induced by \(b_1\).
+Comparing degrees in \(b^2=0\) gives \(\sum_{i+j=l}b_ib_j=0\), so \(d^1\) is
+well defined, \((d^1)^2=0\), and \(E^2=H(E^1,d^1)\). The filtration is
+\emph{complete} if every series \(\sum_je_j\) with \(e_j\in F_{p_j}C_k\),
+\(\sup p_j<\infty\) and \(p_j\to-\infty\) defines an element of \(C_k\), and
+\(b\) commutes with such sums.
+
+\begin{proposition}[Algebraic convergence {\cite[Ch.~10]{MelroseMicro}}]
+\label{ha:prop:algconv}
+Suppose that, for an integer \(n\), \(E^2_{p,k}=0\) whenever \(p\ne k-n\).
+\begin{enumerate}
+\item Every class in \(H_k(C,b)\) has a representative in \(F_{k-n}C_k\),
+and \(\Theta[c]=[c_{k-n}]\in E^2_{k-n,k}\) is well defined.
+\item \(\ker\Theta=\bigcap_pF_pH_k\), where \(F_pH_k\) is the image of
+\(H_k(F_pC)\).
+\end{enumerate}
+If the filtration is complete, then \(\Theta:H_k(C,b)\to E^2_{k-n,k}\) is an
+isomorphism, and all differentials \(d^r\), \(r\ge2\), vanish.
+\end{proposition}
+
+\begin{proof}
+\emph{Step (P).} Let \(c\in F_pC_k\) with \(b_0c_p=0\) and \(b_1c_p+b_0
+c_{p-1}=0\), and suppose \([c_p]=0\) in \(E^2_{p,k}\). Then \([c_p]=d^1[x]\)
+for a \(b_0\)-cycle \(x\in C_{p+1,k+1}\), so \(c_p-b_1x=b_0y\) with
+\(y\in C_{p,k+1}\). The components of \(b(x+y)\) of order \(p+1\) and \(p\)
+are \(b_0x=0\) and \(b_1x+b_0y=c_p\). Hence \(c-b(x+y)\in F_{p-1}\).
+
+\emph{(1).} If \(c\in F_PC_k\) is a cycle and \(P>k-n\), then
+\(E^2_{P,k}=0\), so (P) lowers \(P\); after finitely many steps \(c\in
+F_{k-n}\). If \(c\in F_{k-n}\) is a cycle, then \(b_0c_{k-n}=0\) and
+\(b_1c_{k-n}=-b_0c_{k-n-1}\), so \(c_{k-n}\) defines a class in \(E^2\). Let
+\(c=be\in F_{k-n}\) with \(e\in F_q\). If \(q>k+1-n\), then (P) applies
+to \(e\), since \(b_0e_q=(be)_q=0\), \(b_1e_q+b_0e_{q-1}=(be)_{q-1}=0\) and
+\(E^2_{q,k+1}=0\). It replaces \(e\) by an element of \(F_{q-1}\) with the
+same boundary. Once \(q\le k+1-n\), \(c_{k-n}=b_1e_{k+1-n}+b_0e_{k-n}\), so
+\([c_{k-n}]=d^1[e_{k+1-n}]=0\) in \(E^2\).
+
+\emph{(2).} If \([c]\in F_{k-n-1}H_k\), then \(\Theta[c]=0\) by (1).
+Conversely, if \(c\in F_{k-n}\) and \([c_{k-n}]=0\), then (P) gives a
+homologous cycle in \(F_{k-n-1}\). Since \(E^2_{p,k}=0\) for \(p<k-n\),
+repeating (P) finitely often reaches any \(F_p\).
+
+\emph{Injectivity.} In the situation of (2), the repeated steps give
+\(e_p\in F_{p+1}C_{k+1}\), \(p=k-n,k-n-1,\dots\), with \(c-b\sum_{p\ge
+P}e_p\in F_{P-1}\). By completeness \(c=b\sum_pe_p\).
+
+\emph{Surjectivity.} Let \(x\in C_{k-n,k}\) be a \(b_0\)-cycle with
+\(d^1[x]=0\). Then \(b_1x=-b_0y\), and \(c^{(1)}=x+y\) has \(bc^{(1)}\in
+F_{k-n-2}\). If \(z=bc^{(r)}\in F_p\), \(p=k-n-r-1\), then \(z\) is a cycle
+and \(p\ne(k-1)-n\), so (P) gives \(x',y'\) of order \(\le p+1<k-n\) with
+\(z-b(x'+y')\in F_{p-1}\). Put \(c^{(r+1)}=c^{(r)}-x'-y'\). By completeness
+\(c=\lim c^{(r)}\) exists, \(bc=0\) and \(\Theta[c]=[x]\).
+
+\emph{Degeneration.} \(d^r\) maps \(E^r_{p,k}\) to \(E^r_{p-r,k-1}\). Both
+can be non-zero only if \(p=k-n\) and \(p-r=k-1-n\), that is, \(r=1\).
+\end{proof}
+
+This is Proposition~\ref{prop:convergence} with its proof completed.
+Parts (1) and (2) need no completeness and hold in direct limits. The
+chain model of Section~\ref{subsec:chains} is \emph{not} complete. In
+\(C_1(\fA)=\varinjlim_N\fA_N^{\hot2}\) the series
+\(\sum_{j\ge1}r^j\otimes r^{-2j}\) has total orders \(-j\to-\infty\), but
+its first entries have unbounded order, so it lies in no
+\(\fA_N^{\hot2}\). Following \cite[\S``Convergence and
+degeneration'']{HHb}, we restore completeness with mixed complexes.
+
+\subsubsection*{Mixed complexes}
+Let \(\fA\) be one of
+\begin{itemize}
+\item the symbol algebra \(\cA_M\) of a closed manifold \(M\)
+(Section~\ref{sec:closed});
+\item \(\As\), or \(\Ads\);
+\end{itemize}
+with \(n\) the dimension of the underlying manifold. Let \(\mathfrak
+B\subset\fA\) be the subalgebra of symbols of order \(\le0\) without
+poles (for \(\Ads\), the Taylor image of that subalgebra of \(\As\)). Let
+\(\fA_{L,M}\) be the elements with pole order \(\le L\) and order \(\le
+M\) (\(L=0\) for \(\cA_M\)). The \emph{mixed chains} are
+\[
+ C_k(\mathfrak B,\fA)=\varinjlim_{L,M}S_{L,M,k},\qquad
+ S_{L,M,k}=\fA_{L,M}\hot\mathfrak B^{\hot k},
+\]
+with the Hochschild differential with coefficients in the
+\(\mathfrak B\)-bimodule \(\fA\): \(d_0\) and \(d_k\) put \(a_0b_1\) and
+\(b_ka_0\) in slot \(0\), and the inner faces multiply in \(\mathfrak B\).
+
+\begin{lemma}[Adapted from {\cite[Lemma ``A mixed complex for Laurent
+complete symbols'']{HHb}}]\label{ha:lem:mixed}
+\textup{(a)} Each \(S_{L,M}\) is a subcomplex. With the order filtration
+it is complete in the sense of Proposition~\ref{ha:prop:algconv}.
+\textup{(b)} The inclusion \(C(\mathfrak B,\fA)\to C(\fA)\) is a
+quasi-isomorphism.
+\end{lemma}
+
+\begin{proof}
+(a) Let \(T\in\mathfrak B\) be a symbol of order \(-1\) without poles,
+elliptic with principal symbol \(q^{-1}\) (from (B3)). Its inverse in
+\(\fA\) has order \(1\) and no poles. Put \(u=u_{L,M}=x^{-L}T^{-M}\). By
+(B1), conjugation by \(x^{\pm L}\) preserves orders and smooth
+coefficients. (In the cusp calculus \([x,P]\in x^2\Psic^{m-1}\), even
+better than in the b-calculus.) Hence \(\fA_{L,M}=\mathfrak Bu=u\mathfrak
+B\): for \(a\in\fA_{L,M}\), \(au^{-1}=x^{-L}(x^La)T^Mx^L\) is the conjugate
+by \(x^{-L}\) of a pole-free symbol of order \(\le0\). So \(\fA_{L,M}\) is
+a \(\mathfrak B\)-bimodule and \(S_{L,M}\) is a subcomplex. A quantization
+(B1) identifies \(\fA_{L,M}\) and \(\mathfrak B\) with products of their
+homogeneous components, and the product with the star product
+\(\sum_lP_l\), \(P_l\) lowering the order by \(l\). By (F3), \(S_{L,M,k}\)
+is the product over multidegrees \((j_0,\dots,j_k)\), \(j_0\le M\),
+\(j_i\le0\), of the homogeneous tensor components. At a fixed total order
+only finitely many multidegrees occur. So \(S_{L,M}\) consists of all
+series in the total order bounded above by \(M\), and \(b\) commutes with
+convergent sums.
+
+(b) We sketch the argument of \cite{HHb}, which uses nothing specific to
+the b-calculus. Consider the augmented bar complexes of
+\(\fA\)-bimodules
+\[
+ P_k=\fA\hot\mathfrak B^{\hot k}\hot\fA,\qquad Q_k=\fA\hot\fA^{\hot k}
+ \hot\fA\qquad(k\ge0),
+\]
+with differential \(b'\) and augmentation given by multiplication. On the
+part of \(P\) whose last slot lies in \(\mathfrak Bu\), the maps
+\(h_k(a\otimes\beta\otimes bu)=(-1)^{k+1}a\otimes\beta\otimes b\otimes u\)
+and \(h_{-1}(a)=au^{-1}\otimes u\) form a contraction. With \(u=1\) the
+same formula contracts \(Q\). So both are resolutions of \(\fA\), free on
+generators \(1\otimes\beta\otimes1\). Comparison maps \(P\rightleftarrows
+Q\) over the identity and the bimodule homotopies are built recursively
+on generators by lifting cycles with these contractions. The choices are
+made linear and continuous stage by stage. For this one uses that
+\(\fA_{N,N}\) has a continuous complement in \(\fA_{N+1,N+1}\): remove the
+top-order term, then the lowest boundary coefficient of each remaining
+homogeneous term, extended into the collar with a cut-off. Finally
+\(a\otimes\beta\otimes a'\mapsto a'a\otimes\beta\) turns \(P\) into
+\(C(\mathfrak B,\fA)\) and \(Q\) into \(C(\fA)\), and the comparison maps
+and homotopies descend.
+\end{proof}
+
+\begin{lemma}[Fixed-stage \(E^1\)]\label{ha:lem:stageE1}
+Let \(q\le M-1\). The \(b_0\)-homology of \(S_{L,M}\) at total order \(q\)
+is, via \(\chi\), the space of homogeneous \(k\)-forms of degree \(q\) on
+the cotangent bundle minus its zero section, with coefficients
+\begin{itemize}
+\item smooth, for \(\cA_M\);
+\item in \(x^{-L}\Om\), i.e.\ \(x^{-L}\) times \emph{ordinary} smooth forms
+on \(\cT\setminus0\) (generated by \(dx,dy,d\tau,d\eta\)), for \(\As\);
+\item in the formal analogue, for \(\Ads\).
+\end{itemize}
+The inclusions of stages induce the obvious inclusions of forms. In the
+direct limit one gets all smooth, Laurent and formal Laurent homogeneous
+forms, which is the \(E^1\) of Proposition~\ref{prop:As}.
+\end{lemma}
+
+\begin{proof}
+The associated graded algebra of \(\mathfrak B\) is \(\CI(Y)[t]\), with
+\(Y\) the cosphere bundle, \(t=r^{-1}\) of weight \(-1\), and \(\CI(Y)\)
+replaced by its formal version for \(\Ads\). The graded coefficient module
+is \(x^{-L}t^{-M}\CI(Y)[t]\), free of rank one with equal left and right
+actions. So its Hochschild complex is that of \(\CI(Y)[t]\) shifted by
+\(x^{-L}t^{-M}\), and Corollary~\ref{ha:cor:homog} gives \(x^{-L}t^{-M}\)
+times forms in \(\Om(Y)[t]\oplus\Om(Y)[t]\,dt\). A homogeneous form of
+degree \(q\) is \(t^{-q}(\alpha-\beta\wedge dt/t)\), and lies there if and
+only if \(M-q\ge0\) and \(M-q-1\ge0\). The forms on \(Y\) are ordinary
+forms, since \(\mathfrak B\) has smooth coefficients.
+\end{proof}
+
+\subsubsection*{The stage argument}
+
+\begin{proposition}[Adapted from {\cite[\S``Convergence and
+degeneration'']{HHb}}]\label{ha:prop:stage}
+Let \(D\subset C(\mathfrak B,\fA)\) be a subcomplex with closed
+subcomplexes \(D_{L,M}=D\cap S_{L,M}\), and suppose:
+\begin{enumerate}
+\item[(E2)] the \(E^2\) term of \(D\) vanishes off the line \(p=k-n\);
+\item[(St)] for \(L\ge L_0\) and every \(M\), step (P) of
+Proposition~\ref{ha:prop:algconv} can be carried out inside \(D_{L,M}\)
+whenever \(p\le M-2\) and \(p\ne k-n\).
+\end{enumerate}
+Then \(\Theta:H_k(D)\to E^2_{k-n,k}(D)\) is an isomorphism, and
+\(d^r=0\) for \(r\ge2\).
+\end{proposition}
+
+\begin{proof}
+Parts (1) and (2) of Proposition~\ref{ha:prop:algconv} hold in the direct
+limit. For injectivity, let \(c\in F_{k-n}\) be a cycle with
+\([c_{k-n}]=0\). Perform one step (P) in the direct limit and choose a
+stage \(D_{L,M}\) containing the remainder, with \(L\ge L_0\) and \(M\)
+so large that all later orders are \(\le M-2\). All later steps are off
+the critical line, so by (St) they stay in \(D_{L,M}\), and the infinite
+sum converges there by Lemma~\ref{ha:lem:mixed}(a). For surjectivity,
+choose \(x\) and \(y\) in the direct limit, then a stage containing them,
+and continue in the same way. Degeneration is as before.
+\end{proof}
+
+\begin{theorem}[Convergence for \(\cA_M\) and \(\Is\)]\label{ha:thm:conv}
+For the symbol algebra \(\cA_M\) of a closed manifold, and for \(\Is\),
+the order spectral sequence converges and degenerates at \(E^2\).
+\(\Theta\) is an isomorphism \(\HH_k\to E^2_{k-n,k}\), given by the leading
+symbol of a representative in \(F_{k-n}\).
+\end{theorem}
+
+\begin{proof}
+\emph{\(\cA_M\).} Take \(D=C(\mathfrak B,\cA_M)\), which computes
+\(\HH(\cA_M)\) by Lemma~\ref{ha:lem:mixed}(b). (E2) is
+Propositions~\ref{prop:d1}, \ref{prop:star} and~\ref{prop:homog}. For
+(St), let \(\theta\) be the HKR form of \(c_p\). It is homogeneous of
+degree \(p\) and \(\delta\theta=0\). Then \(*\theta\) is closed and
+homogeneous of degree \(w=p+n-k\ne0\). By Cartan's formula \(\eta=
+\iota_R(*\theta)/w\) satisfies \(d\eta=*\theta\), and \(\zeta=*^{-1}\eta\)
+is homogeneous of degree \(p+1\le M-1\) with \(\delta\zeta=\pm\theta\). By
+Lemma~\ref{ha:lem:stageE1}, \(\pm i\zeta\) is the class of a \(b_0\)-cycle
+\(x\) in the same stage at order \(p+1\), with \(d^1[x]=[c_p]\) (the
+proof of Proposition~\ref{prop:d1} applies to mixed chains: it only uses
+the leading symbols in each slot). Then \(c_p-b_1x\) has zero class in the
+stage \(E^1\) at order \(p\le M-1\), so it is \(b_0y\) with \(y\) in the
+stage.
+
+\emph{\(\Is\).} \(\Is\) is H-unital (Proposition~\ref{prop:Is}). By
+Theorem~\ref{ha:thm:excision}, \(C(\Is)\) is quasi-isomorphic to the kernel
+\(\cK\) of the Taylor map \(C(\As)\to C(\Ads)\). Let \(D\) be the kernel
+of the Taylor map \(C(\mathfrak B,\As)\to C(\mathfrak B_\partial,\Ads)\).
+The Taylor maps are onto on every stage, by (F1) and Borel's lemma. So
+Lemma~\ref{ha:lem:mixed}(b), for \(\As\) and \(\Ads\), and the five lemma
+show that \(D\to\cK\) is a quasi-isomorphism. The Taylor map is also onto
+on the stage \(E^1\) (Borel's lemma for forms). So the stage \(E^1\) of
+\(D\) at orders \(q\le M-1\) is the space of all flat homogeneous forms
+of degree \(q\). The operators \(*\), \(*^{-1}\) and \(\iota_R\) preserve
+flat forms: \(*\) only introduces the factors \(x^{\pm2}\). So the
+argument for \(\cA_M\) applies without change and gives (St). (E2) is the
+\(E^2\) computation of Proposition~\ref{prop:Is}. The maps between the
+three complexes preserve the order and induce the flat HKR
+identification on graded pieces. So the resulting isomorphism is the
+leading-symbol map.
+\end{proof}
+
+\subsubsection*{The Laurent algebras \(\As\), \(\Ads\) and the cusp twist}
+In \cite{HHb} condition (St) is verified for the b-calculus analogues of
+\(\As\) and \(\Ads\) \cite[Lemma ``Lifts in a fixed coefficient
+stage'']{HHb}. The cusp version fails. By Lemma~\ref{ha:lem:stageE1} the
+stage \(E^1\) of \(\As\) consists of \(x^{-L}\) times ordinary forms. The
+symplectic star, however, preserves \(x^{-L}\) times \emph{cusp} forms.
+
+\begin{example}[The stage obstruction, \(n=1\)]\label{ha:ex:obstruction}
+Let \(n=1\) and work near one boundary point, with coordinates \((x,\tau)\)
+and \(\{a,b\}=\partial_\tau a\,x^2\partial_xb-x^2\partial_xa\,
+\partial_\tau b\). The critical line is \(p=k-1\). Fix \(L\), \(M\) and
+\(p\le M-2\) with \(p\ne-1\). The \(0\)-form \(\theta=x^{-L}|\tau|^p\) lies
+in the stage \(E^1_{p,0}\), and \(d^1\theta=0\). The stage \(1\)-forms of
+degree \(p+1\) are \(\zeta=x^{-L}(a\,d\tau+c\,dx)\) with \(a,c\) smooth and
+homogeneous of degrees \(p\) and \(p+1\). For \(1\)-forms
+\(\delta(f\,dg)=\{f,g\}\), so
+\[
+ \delta\zeta=\{x^{-L}a,\tau\}+\{x^{-L}c,x\}=-x^2\partial_x(x^{-L}a)+
+ x^{2-L}\partial_\tau c\ \in\ x^{1-L}\CI .
+\]
+Hence \(\theta\) is not in the image, and \([\theta]\ne0\) in the stage
+\(E^2_{p,0}\), although \([\theta]=0\) in the direct limit:
+\(\theta=\delta\bigl(x^{-L-1}|\tau|^p\,d\tau/(L+1)\bigr)\). So (St) fails in
+every stage. In the b-calculus the same computation, with
+\(x\partial_\xi\wedge\partial_x\) in place of \(x^2\partial_\tau\wedge
+\partial_x\), gives \(-x\partial_x(x^{-L}a)=Lx^{-L}a+O(x^{1-L})\). This
+reaches the leading coefficient when \(L\ne0\). That is the invertibility
+of \(\mathcal L_{x\partial_x}=-L\) on the leading coefficient used in
+\cite{HHb}. In the cusp case its replacement \(\mathcal L_{x^2\partial_x}\)
+raises the power of \(x\), so it is nilpotent on the leading coefficient.
+\end{example}
+
+The same computation in general dimension shows that \(\delta\) of a stage
+form never reaches the leading coefficient \(x^{-L}\) through the
+\((x,\tau)\)-part of the Poisson structure. On leading coefficients only
+the boundary part \(\partial_\eta\wedge\partial_y\) acts, and for it
+\(\tau\) is a Casimir. So the stage \(E^2\) off the critical line contains
+classes such as \(x^{-L}|\tau|^p\) in every stage. We do not need a
+precise description. Under the transcendental change \(\rho=e^{-1/x}\), which
+turns the cusp structure into a b-structure
+(Section~\ref{sec:cusp}), one has \(x^{-L}=(\log1/\rho)^L\). So the cusp
+Laurent algebras are b-algebras with \emph{logarithmic} coefficients, on
+which \(\rho\partial_\rho\) acts nilpotently. What survives is the
+following.
+
+\begin{lemma}\label{ha:lem:WL}
+Let \(\theta\in x^{-L}\Om^k\) be homogeneous of degree \(p\ne k-n\) with
+\(\delta\theta=0\). Then \(\theta=\delta\zeta\) with \(\zeta\in
+x^{-L-2}\Om^{k+1}\) homogeneous of degree \(p+1\).
+\end{lemma}
+
+\begin{proof}
+Let \(\Om_c\) be the smooth cusp forms, generated by \(dx/x^2,dy,d\tau,
+d\eta\). Then \(\Om\subset\Om_c\subset x^{-2}\Om\). The cusp symplectic form
+is a smooth non-degenerate cusp \(2\)-form, so \(*\) and \(*^{-1}\) preserve
+\(x^{-L}\Om_c\), and so does \(\iota_R\). The construction in the proof of
+Theorem~\ref{ha:thm:conv} gives \(\zeta\in x^{-L}\Om_c\subset
+x^{-L-2}\Om\).
+\end{proof}
+
+\begin{proposition}[Partial convergence for \(\As\) and \(\Ads\)]
+\label{ha:prop:laurent}
+Let \(\fA=\As\) or \(\Ads\), with the mixed complex
+\(C(\mathfrak B,\fA)\), which computes \(\HH(\fA)\).
+\begin{enumerate}
+\item Every class in \(\HH_k(\fA)\) has a representative in
+\(F_{k-n}\), and \(\Theta:\HH_k(\fA)\to E^2_{k-n,k}\) is well defined.
+Here \(E^2\) is the one computed in Propositions~\ref{prop:As}
+and~\ref{prop:Ads}.
+\item \(\ker\Theta=\bigcap_pF_p\HH_k(\fA)\).
+\item Let \(x\in S_{L,M}\) be a \(b_0\)-cycle of order \(k-n\le M-2\)
+with \(d^1[x]=0\). For every \(r\ge1\) there is \(c^{(r)}\in
+S_{L+2r,M}\) with leading term \(x\) and \(bc^{(r)}\in F_{k-n-r-1}\).
+\item \(\Theta\) is an isomorphism if and only if \(\HH_k(\fA)\to
+H_k(\widehat C)\) is one. Here \(\widehat C\) is the complex of series
+\(\sum_{p\le P}c_p\) in which each \(c_p\) lies in some stage, with no
+uniform bound on the poles.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(1) and (2) are Proposition~\ref{ha:prop:algconv}(1),(2), which need no
+completeness. For (3), \([b_1x]=0\) already in the stage \(E^1\), by the
+injectivity in Lemma~\ref{ha:lem:stageE1}. Each later step (P) is off the
+critical line. By Lemma~\ref{ha:lem:WL} its primitive lies in
+\(x^{-L'-2}\Om\), so the corrections lie in the stage \(L'+2\). For (4):
+\(\widehat C\) is a complex because each \(b_l\) preserves the stages. It
+is complete, and its graded pieces and \(E^2\) agree with those of
+\(C(\mathfrak B,\fA)\). So \(H_k(\widehat C)\cong E^2_{k-n,k}\) by
+Proposition~\ref{ha:prop:algconv}, compatibly with \(\Theta\).
+\end{proof}
+
+\begin{remark}[What remains quoted]\label{ha:rem:quoted}
+Proposition~\ref{ha:prop:laurent} reduces the convergence for \(\As\) and
+\(\Ads\) to one statement. Corrections whose poles grow by up to two per
+order (part (3)) must be replaceable by corrections with a uniform pole
+bound. Equivalently, there are no phantom classes
+\(\bigcap_pF_p\HH_k\ne0\), and the towers in (3) can be completed in
+\(C(\mathfrak B,\fA)\). MN assert this (``as in the boundaryless case'',
+\cite[p.~12]{MN}). We have not proved it. The fixed-stage argument of
+\cite{HHb} cannot prove it, by Example~\ref{ha:ex:obstruction}. In these
+notes Propositions~\ref{prop:As} and~\ref{prop:Ads}, and everything that
+depends on them, therefore rest on this quoted step. By contrast,
+Theorem~\ref{ha:thm:conv} establishes convergence for \(\Is\) and for the
+closed case without it.
+\end{remark}

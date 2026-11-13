@@ -1,0 +1,1302 @@
+\section{The cusp calculus}\label{cc:sec:cusp}
+\providecommand{\ccK}{\mathfrak K}
+\providecommand{\Psiu}{\Psi_{\mathrm u}}
+\providecommand{\PsicT}{\Psi_{c,T}}
+\providecommand{\ccM}{\mathcal M}
+\providecommand{\ffc}{\mathrm{ff}_c}
+\providecommand{\ffb}{\mathrm{ff}_b}
+\providecommand{\adt}{\operatorname{ad}_t}
+\providecommand{\CIb}{C^\infty_{\mathrm b}}
+\providecommand{\ccS}{S_{\mathrm{cl}}}
+
+This appendix proves the background facts (B1) and (B2) of
+Section~\ref{subsec:background}, as they are stated there. We construct
+the cusp calculus, prove that it is a doubly filtered algebra, and derive
+the symbol sequence \cite[(11)]{MN}, the indicial sequence
+\cite[(12)]{MN}, the global quantization \cite[Prop.~24]{MN}, the Taylor
+series isomorphism \cite[Prop.~25]{MN} and the invariance of orders under
+conjugation by \(x^z\). We then prove the Fredholm theorem (B2).
+
+\paragraph{What is proved and what is quoted.} We quote one thing: the
+standard calculus of pseudodifferential operators on the cylinder
+\(\R\times H\), \(H\) closed, with symbol estimates uniform in the
+cylinder variable (Background fact~\ref{cc:bg:uniform}). This is a
+boundaryless calculus. It is the calculus of \cite[Ch.~2]{MelroseMicro}
+on \(\R^n\), transplanted to \(\R\times H\) by a partition of unity on
+\(H\), and it contains nothing about cusps. Every statement that is
+specific to the cusp calculus is proved here, except the density
+statement in \cite[Prop.~26]{MN} (Remark~\ref{cc:rem:density}), which the
+notes do not use.
+
+\paragraph{Strategy.} The usual route to composition is the triple space
+\cite{MazzeoMelrose}. We avoid it. Near the boundary a cusp operator is an
+operator on the cylinder \(\R_t\times\partial X\), \(t=1/x\), whose kernel
+is a smooth function of \(x=1/t\) with values in suspended kernels. We
+show (Lemma~\ref{cc:lem:char}) that this smoothness is equivalent to
+stability of the operator under the derivation \(\delta=t^2[\partial_t,
+\cdot\,]\). The derivation obeys a Leibniz rule
+(Lemma~\ref{cc:lem:identities}). Composition is then reduced to the
+uniform calculus, with no new estimates.
+
+\subsection{Conventions}\label{cc:subsec:conventions}
+\(X\) is a compact manifold with boundary, of dimension \(n\), with a cusp
+structure (Section~\ref{subsec:cuspstructure}) represented by the
+boundary defining function \(x\). We fix a collar
+\([0,\epsilon)_x\times\partial X\hookrightarrow X\) whose first coordinate
+is \(x\) (a normal fibration). On the collar \(t=1/x\), so the collar is
+the end \(\{t>1/\epsilon\}\) of the cylinder \(\R_t\times\partial X\). We
+fix a smooth positive density \(\nu_\partial\) on \(\partial X\) and a cusp
+density \(\nu_c\) on \(X\), smooth and positive in the interior and equal
+to \(x^{-2}dx\,\nu_\partial=dt\,\nu_\partial\) on the collar. Operators are
+identified with their kernels with respect to \(\nu_c\) in the second
+variable:
+\[
+ Au(z)=\int_XK_A(z,z')u(z')\,\nu_c(z').
+\]
+\(\dCI(X)\) is the space of smooth functions vanishing to infinite order at
+\(\partial X\), and \(\dCI(X^2)\) the space of smooth functions on \(X^2\)
+vanishing to infinite order at \(\partial(X^2)\). Since \(x'^{-2}\) is a
+smooth weight, a kernel lies in \(\dCI(X^2)\) with respect to \(\nu_c\) if
+and only if it does with respect to a smooth density.
+
+The cusp cotangent coordinates are \((x,y,\tau,\eta)\) as in
+\eqref{eq:cuspcovector}. So \(\tau\) is the symbol of \(x^2D_x=-D_t\). If
+\(\sigma\) denotes the covariable dual to \(t\), then \(\tau=-\sigma\).
+Orders are integers, as in \cite{MN}. Nothing changes for real orders.
+
+We write the proofs for scalar operators and connected \(\partial X\).
+Several boundary components are handled one at a time. For bundles \(E\),
+we trivialize \(E\) over the collar as the pull-back of
+\(E|_{\partial X}\); kernels then take values in
+\(\operatorname{Hom}(E)\), and every argument below applies entrywise.
+
+\subsection{Background: conormal kernels and the uniform calculus on a
+cylinder}\label{cc:subsec:background}
+Let \(H\) be a closed manifold of dimension \(n-1\) with a smooth positive
+density \(\nu_H\). In the application \(H=\partial X\).
+
+\begin{definition}[Suspended kernels]\label{cc:def:K}
+For \(m\in\Z\), \(\ccK^m(H)\) is the space of distributions \(\kappa\) on
+\(\R_\mu\times H\times H\) such that
+\begin{enumerate}
+\item away from \(\{0\}\times\Delta_H\), \(\kappa\) is smooth, and for
+every \(N\) and every derivative \(\partial^\alpha\) in \((\mu,y,y')\),
+\(\langle\mu\rangle^N\partial^\alpha\kappa\) is bounded on
+\(\{|\mu|\ge1\}\);
+\item near each point of \(\{0\}\times\Delta_H\), in local coordinates
+\(y\) on \(H\) and modulo a smooth function,
+\begin{equation}\label{cc:eq:Kquant}
+ \kappa(\mu,y,y')=(2\pi)^{-n}\int_{\R^n}e^{-i\mu\tau+i(y-y')\cdot\eta}\,
+ a(y,\tau,\eta)\,d\tau\,d\eta ,
+\end{equation}
+with \(a\) a classical symbol of order \(m\) in \(\zeta=(\tau,\eta)\).
+\end{enumerate}
+The leading part of \(a\) is a well-defined function
+\(\sigma_m(\kappa)\) on \((T^*H\times\R_\tau)\setminus0\), homogeneous of
+degree \(m\): the principal symbol. We give \(\ccK^m(H)\) its usual Fr\'echet
+topology and put \(\ccK^{-\infty}(H)=\bigcap_m\ccK^m(H)\).
+\end{definition}
+
+\begin{definition}[The suspended algebra]\label{cc:def:sus}
+\(\Psis^m(H)\) is the space of operators on \(\R_t\times H\) given by
+convolution in \(t\) with some \(\kappa\in\ccK^m(H)\):
+\[
+ (\kappa*u)(t,y)=\int_\R\int_H\kappa(t-t',y,y')u(t',y')\,\nu_H(y')\,dt' .
+\]
+Its \emph{indicial family} is the Fourier transform
+\begin{equation}\label{cc:eq:In}
+ \In(\kappa,\tau)=\int_\R e^{i\tau\mu}\kappa(\mu,\cdot,\cdot)\,d\mu,
+ \qquad\tau\in\R ,
+\end{equation}
+a family of pseudodifferential operators on \(H\). In local coordinates its
+full symbol is \(a(y,\tau,\eta)\), by \eqref{cc:eq:Kquant}. This is
+\eqref{eq:Inkernel}.
+\end{definition}
+
+The sign in the exponent of \eqref{cc:eq:Kquant} makes \(\tau\) the cusp
+covariable. For example \(-D_t=x^2D_x\) has convolution kernel
+\(i\delta'(\mu)=(2\pi)^{-1}\int\tau e^{-i\mu\tau}d\tau\), so
+\(\In(x^2D_x,\tau)=\tau\).
+
+\begin{definition}[Uniform operators]\label{cc:def:U}
+\(\Psiu^m(\R\times H)\) is the space of operators on \(\R_t\times H\)
+whose kernel, with respect to \(dt'\,\nu_H(y')\), has the form
+\[
+ K(t,t',y,y')=\widetilde K(t,t-t',y,y'),\qquad
+ \widetilde K\in\CIb\bigl(\R_t;\ccK^m(H)\bigr),
+\]
+where \(\CIb(\R;F)\) is the space of smooth maps into the Fr\'echet
+space \(F\) all of whose derivatives are bounded in every seminorm. The
+principal symbol is \(\sigma_m(A)(t,\cdot)=\sigma_m(\widetilde K(t))\).
+We write \(\mu=t-t'\) throughout.
+\end{definition}
+
+Translation invariant elements of \(\Psiu^m\) are exactly the elements of
+\(\Psis^m(H)\): there \(\widetilde K(t,\mu)=\kappa(\mu)\).
+
+\begin{background}[Uniform calculus on a cylinder; quoted]
+\label{cc:bg:uniform}
+The following are standard \cite[Ch.~2, Ch.~4]{MelroseMicro}.
+\begin{enumerate}
+\item[(K1)] \emph{Conormal kernels.} \(\ccK^m\subset\ccK^{m+1}\) and
+\(\ccK^{-\infty}(H)=\cS(\R_\mu;\CI(H\times H))\). The map
+\(\sigma_m\) is continuous, and its kernel is \(\ccK^{m-1}\), with the
+topology of \(\ccK^{m-1}\) equal to the one induced from \(\ccK^m\). There are
+continuous linear maps \(\mathrm{Op}:\ccS^m\to\ccK^m\) (\(\ccS^m\) the
+classical symbols of order \(m\) on \(T^*H\times\R_\tau\)) and
+\(\Sigma:\ccK^m\to\ccS^m\) such that \(\sigma_m(\mathrm{Op}(a))\) is the
+leading part of \(a\), \(\mathrm{Op}(\ccS^{-\infty})\subset
+\ccK^{-\infty}\), and \(\kappa-\mathrm{Op}(\Sigma\kappa)\in
+\ccK^{-\infty}\) depends continuously on \(\kappa\). Multiplication by
+\(\mu\) maps \(\ccK^m\) to \(\ccK^{m-1}\), with
+\(\sigma_{m-1}(\mu\kappa)=-i\partial_\tau\sigma_m(\kappa)\).
+Multiplication by a smooth function \(g(\mu)\) with
+\(|\partial_\mu^bg|\le C_b\langle\mu\rangle^{N}\) for all \(b\) is
+continuous on \(\ccK^m\), jointly continuous in \((g,\kappa)\) for \(g\) in
+such a bounded set, and \(\sigma_m(g\kappa)=g(0)\sigma_m(\kappa)\).
+\item[(K2)] \emph{Fourier transform.} For \(\kappa\in\ccK^m(H)\),
+\(\In(\kappa,\tau)\) is a smooth family of operators
+\(H^s(H)\to H^{s-m}(H)\), and the norms of \(\partial_\tau^j\In(\kappa,
+\tau)\) are bounded by \(C\langle\tau\rangle^{|m|}\), where \(C\) is a
+seminorm of \(\kappa\). The map \(\kappa\mapsto\In(\kappa,\cdot)\) is an
+isomorphism from \(\ccK^{-\infty}(H)\) onto
+\(\cS(\R_\tau;\CI(H\times H))\).
+\item[(K3)] \emph{Composition.} If \(A\in\Psiu^m\) and \(B\in\Psiu^{m'}\),
+then \(AB\in\Psiu^{m+m'}\), \(\supp K_{AB}\subset\supp K_A\circ\supp
+K_B\) and \(\sigma_{m+m'}(AB)=\sigma_m(A)\sigma_{m'}(B)\). The formal
+adjoint \(A^*\) and the transpose \(A^t\) (with respect to
+\(dt\,\nu_H\)) lie in \(\Psiu^m\), and \(\sigma_m(A^*)=
+\overline{\sigma_m(A)}\). These operations are continuous in the
+seminorms of \(\widetilde K\), and so preserve smooth and holomorphic
+dependence on parameters.
+\item[(K4)] \emph{Mapping.} \(A\in\Psiu^m\) maps \(\cS(\R\times H)\) to
+itself and \(H^s(\R\times H)\) to \(H^{s-m}(\R\times H)\) continuously,
+with norms bounded by seminorms of \(\widetilde K\).
+\end{enumerate}
+\end{background}
+
+\begin{lemma}\label{cc:lem:sus}
+\(\Psis^{\Z}(H)\) is a filtered algebra, and
+\(\In(\kappa_1*\kappa_2,\tau)=\In(\kappa_1,\tau)\In(\kappa_2,\tau)\). If
+\(\kappa\in\Psis^m(H)\), then \(\adt\kappa=[t,\kappa]\) has kernel
+\(\mu\kappa\in\ccK^{m-1}(H)\), and
+\(\In([t,\kappa],\tau)=-i\partial_\tau\In(\kappa,\tau)\).
+\end{lemma}
+
+\begin{proof}
+By (K3) the composite of two translation invariant elements of \(\Psiu\)
+lies in \(\Psiu\), and it is translation invariant. The Fourier transform
+of a convolution is the product of the Fourier transforms. The kernel of
+\(t\kappa-\kappa t\) is \((t-t')\kappa(t-t')=\mu\kappa\), and
+\(\int e^{i\tau\mu}\mu\kappa\,d\mu=-i\partial_\tau\In(\kappa,\tau)\).
+\end{proof}
+
+\subsection{The b- and cusp double spaces}\label{cc:subsec:double}
+We use the blow-up formalism of Paul's notes \cite{Notes}. Near the corner
+\(\partial X\times\partial X\) of \(X^2\) we use the coordinates
+\((x,y,x',y')\). The b-double space is
+\(X_b^2=[X^2;\partial X\times\partial X]\). Away from the left boundary
+face \(\mathrm{lb}\) it has projective coordinates
+\[
+ (x,\ s=x'/x,\ y,\ y'),\qquad \ffb=\{x=0\},\quad \mathrm{rb}=\{s=0\},
+\]
+and the lifted diagonal is \(\{s=1,\ y=y'\}\). On the interior of
+\(\ffb\) the coordinate \(s\in(0,\infty)\) is the ratio of the two
+defining functions. A change \(x\mapsto ax+O(x^2)\) with \(a>0\) constant
+does not change \(s|_{\ffb}\). A change with \(a=a(y)\) replaces it by
+\(a(y')s/a(y)\). So the \emph{fibre diagonal}
+\[
+ \Phi=\ffb\cap\{s=1\}=\{x=0,\ s=1\}\cong\partial X\times\partial X
+\]
+is fixed by the cusp structure, as in \cite[(116)]{MN}. It is a
+p-submanifold: a point of the half-plane \(\{x\ge0\}\) times
+\(\partial X^2\). The \emph{cusp double space} is
+\(X_c^2=[X_b^2;\Phi]\), with new boundary hypersurface \(\ffc\).
+
+\begin{lemma}[Coordinates on \(X_c^2\)]\label{cc:lem:coords}
+Put \(\mu=1/x-1/x'=t-t'\).
+\begin{enumerate}
+\item Near the interior of \(\ffc\), \((x,\mu,y,y')\) are coordinates on
+\(X_c^2\), with \(\ffc=\{x=0\}\), \(\mu\in\R\). In them
+\(x'=x/(1-x\mu)\).
+\item Near the corner \(\ffc\cap\ffb\) where \(\mu\to+\infty\)
+(respectively \(-\infty\)), the functions \(\rho_b=1/|\mu|\) and
+\(\rho_c=x|\mu|\), together with \((y,y')\), are coordinates; \(\rho_b\)
+defines \(\ffb\) and \(\rho_c\) defines \(\ffc\).
+\item The lifted diagonal is \(\Delta_c=\{\mu=0,\ y=y'\}\). It meets
+\(\partial X_c^2\) only in the interior of \(\ffc\), transversally
+\textup{\cite[Lemma~22]{MN}}.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+The blow-up of the point \((x,s)=(0,1)\) of the half-plane has the
+projective coordinates \((x,W)\), \(W=(s-1)/x\), valid where
+\(|s-1|\le Cx\) and with \(\ffc=\{x=0\}\). It also has
+\((r,w)=(x/(s-1),s-1)\) for \(s>1\), with \(\ffb=\{r=0\}\) and
+\(\ffc=\{w=0\}\); the case \(s<1\) is the same with \(|w|\). Since
+\(x'=sx\),
+\[
+ \mu=\frac1x-\frac1{sx}=\frac{s-1}{sx}=\frac{W}{1+xW},\qquad
+ W=\frac{\mu}{1-x\mu},\qquad x'=x(1+xW)=\frac{x}{1-x\mu} .
+\]
+So \((x,W)\mapsto(x,\mu)\) is a diffeomorphism where \(s>0\), which is (1).
+In the second chart \(x=rw\) and \(s=1+w\), so
+\(\mu=1/((1+w)r)\), \(\rho_b=1/\mu=(1+w)r\) and \(\rho_c=x\mu=w/(1+w)\).
+These are \(r\) and \(w\) up to smooth factors that do not vanish, which
+is (2). The diagonal is \(\{s=1,\ y=y'\}=\{W=0,\ y=y'\}=\{\mu=0,\ y=y'\}\),
+which gives (3).
+\end{proof}
+
+\begin{lemma}[Rapid decay at \(\ffb\) is Schwartz decay in \(\mu\)]
+\label{cc:lem:decay}
+Let \(f\) be a smooth function on a neighbourhood of \(\ffc\) in \(X_c^2\).
+Then \(f\) vanishes to infinite order at \(\ffb\) if and only if, in the
+coordinates of Lemma~\ref{cc:lem:coords}(1),
+\(\partial_x^a\partial_\mu^b\partial_{y,y'}^\gamma f=
+O(\langle\mu\rangle^{-N})\) for all \(a,b,\gamma,N\), uniformly in
+\(x\). In other words, \(f\) is a smooth function of \(x\) up to \(x=0\)
+with values in \(\cS(\R_\mu;\CI(\partial X^2))\).
+\end{lemma}
+
+\begin{proof}
+Only the corners of Lemma~\ref{cc:lem:coords}(2) matter. Take
+\(\mu>0\). There \(x=\rho_b\rho_c\) and \(\mu=1/\rho_b\), so
+\[
+ \partial_{\rho_c}=\rho_b\,\partial_x,\qquad
+ \partial_{\rho_b}=\rho_c\,\partial_x-\mu^2\partial_\mu .
+\]
+If all \(\partial_x^a\partial_\mu^bf\) are \(O(\mu^{-\infty})\), then every
+\(\partial_{\rho_b}^j\partial_{\rho_c}^kf\) is a finite sum of such terms
+multiplied by polynomials in \(\mu\), \(\rho_b\) and \(\rho_c\le1\). So
+it is \(O(\rho_b^\infty)\), and \(f\) extends smoothly to
+\(\rho_b=0\) with infinite order vanishing. Conversely
+\(\partial_x=\rho_b^{-1}\partial_{\rho_c}\) and
+\(\partial_\mu=-\rho_b^2\partial_{\rho_b}+\rho_b\rho_c\partial_{\rho_c}\).
+If \(f=O(\rho_b^\infty)\) with all derivatives, then each
+\(\partial_x^a\partial_\mu^bf\) is \(O(\rho_b^\infty)=O(\mu^{-\infty})\).
+\end{proof}
+
+\subsection{The model: the half-line and the end of a cylinder}
+\label{cc:subsec:model}
+We first treat a neighbourhood of the boundary. The reader should keep
+\(H=\mathrm{pt}\) in mind. Then \(\R\times H=\R_t\), the end \(\{t>T\}\)
+is the half-line \(X=[0,1/T)_x\) in \(x=1/t\), \(\ccK^m(\mathrm{pt})\) is
+the space of distributions on \(\R_\mu\) that are classical conormal at
+\(0\) and Schwartz at infinity, and every kernel below is a function of
+\((t,t')\) or of \((x,\mu)\). For general \(H\) the variables
+\((y,y')\in H^2\) are carried along inside \(\ccK^m(H)\). We suppress them
+from the notation; every formula below holds verbatim.
+
+Fix \(T\ge1\). On \(\{t>0\}\) put \(x=1/t\). In the coordinates
+\((x,\mu)\), the kernel of an operator \(A\) with kernel supported in
+\(\{t>0\}\) is
+\[
+ k_A(x,\mu)=\widetilde K_A(1/x,\mu) .
+\]
+
+\begin{definition}[The model cusp class]\label{cc:def:model}
+Let \(\delta(A)=t^2[\partial_t,A]\). Then \(\PsicT^m\) is the set of
+\(A\in\Psiu^m(\R\times H)\) such that
+\begin{enumerate}
+\item \(\supp K_A\subset\{t\ge T,\ t'\ge T\}\), and
+\item \(\delta^j(A)\in\Psiu^m(\R\times H)\) for every \(j\ge0\).
+\end{enumerate}
+\end{definition}
+
+The commutator \([\partial_t,A]\) has kernel
+\((\partial_t+\partial_{t'})K_A\), by integration by parts. In the
+coordinates \((t,\mu)\) this is \(\partial_t\widetilde K_A\) at fixed
+\(\mu\). Since \(t^2\partial_t=-\partial_x\), we get
+\begin{equation}\label{cc:eq:delta}
+ k_{\delta(A)}=-\partial_xk_A .
+\end{equation}
+
+\begin{lemma}[Characterization]\label{cc:lem:char}
+Let \(A\in\Psiu^m\) have kernel supported in \(\{t\ge T,\ t'\ge T\}\). Then
+\(A\in\PsicT^m\) if and only if \(k_A\) extends from \((0,1/T]\) to a
+smooth map \([0,1/T]\to\ccK^m(H)\). Conversely, every
+\(k\in\CI([0,\infty);\ccK^m(H))\) with \(\supp k\subset\{x\le1/T,\
+x\mu\le1-xT\}\) is \(k_A\) for a unique \(A\in\PsicT^m\).
+\end{lemma}
+
+The support condition \(x\mu\le1-xT\) says exactly that \(t'\ge T\).
+
+\begin{proof}
+If \(A\in\PsicT^m\), then by \eqref{cc:eq:delta} every
+\(\partial_x^jk_A\) is bounded in \(\ccK^m\) on \((0,1/T]\). A smooth map
+\(f:(0,b]\to F\) into a Fr\'echet space, all of whose derivatives are
+bounded, extends to \(\CI([0,b];F)\). Indeed, by the mean value inequality
+in each seminorm, each \(f^{(j)}\) is Lipschitz. So it extends
+continuously to \(0\), and \(f^{(j)}(x)-f^{(j)}(0)=\int_0^xf^{(j+1)}\)
+shows that the extension of \(f^{(j+1)}\) is the derivative of that of
+\(f^{(j)}\). Conversely, if \(k\) is smooth on \([0,1/T]\), then all
+\(\partial_x^jk\) are bounded. Since \(\partial_t=-x^2\partial_x\), the
+function \(\widetilde K(t)=k(1/t)\) has bounded \(t\)-derivatives, so
+\(A\in\Psiu^m\). By \eqref{cc:eq:delta}, \(\delta^j(A)\in\Psiu^m\) for all
+\(j\).
+\end{proof}
+
+By Lemmas~\ref{cc:lem:coords} and~\ref{cc:lem:decay}, the condition
+of Lemma~\ref{cc:lem:char} says that the lifted kernel on \(X_c^2\) is
+conormal to \(\Delta_c\), smooth up to \(\ffc\) and vanishing to infinite
+order at \(\ffb\). This is the condition of \cite[Def.~2]{MN} near
+\(\ffc\).
+
+\begin{definition}[Multipliers]\label{cc:def:mult}
+\(\ccM_T\) is the set of smooth functions \(M(x,\mu)\) on
+\(\Omega_T=\{0\le x<2/T,\ x\mu<1-xT/2\}\) (that is, \(t>T/2\) and
+\(t'>T/2\)) such that \(|\partial_x^a\partial_\mu^bM|\le
+C_{ab}\langle\mu\rangle^{N_{ab}}\) on \(\Omega_T\) for all \(a,b\). For
+\(A\in\PsicT^m\), \(MA\) denotes the operator with kernel \(Mk_A\).
+\end{definition}
+
+\begin{lemma}[Multipliers]\label{cc:lem:mult}
+If \(M\in\ccM_T\) and \(A\in\PsicT^m\), then \(MA\in\PsicT^m\). If
+\(M=\mu^lM'\) with \(M'\in\ccM_T\), then \(MA\in\PsicT^{m-l}\). If \(M\)
+depends holomorphically on a parameter \(z\), with the bounds locally
+uniform in \(z\), then so does \(k_{MA}\). The following lie in \(\ccM_T\):
+\begin{enumerate}
+\item \(\mu\), the multiplier of \(\adt A=[t,A]\);
+\item \((t/t')^z=(1-x\mu)^{-z}\), \(z\in\C\), the multiplier of
+\(W_z(A)=t^zAt^{-z}\);
+\item \(e^{i\tau\mu}\), \(\tau\in\R\), the multiplier of
+\(e^{i\tau t}Ae^{-i\tau t}\);
+\item \(\chi(t')=\chi(1/x-\mu)\), for \(\chi\in\CI(\R)\) with \(\chi'\)
+compactly supported.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Let \(\theta\in\CI(\R)\) vanish on \((-\infty,3T/4]\) and equal \(1\) on
+\([T,\infty)\). Since \(k_A(x,\mu)\) vanishes unless \(t'=1/x-\mu\ge T\),
+we have \(Mk_A=g\,k_A\) with \(g(x,\mu)=\theta(1/x-\mu)M(x,\mu)\), extended
+by \(0\). The derivative \(\partial_x\theta(1/x-\mu)=
+-x^{-2}\theta'(1/x-\mu)\) is supported where \(1/x\le|\mu|+T\), so
+\(x^{-2}\le(|\mu|+T)^2\). The same holds for all derivatives. Hence \(g\)
+is smooth on \([0,1/T]\times\R\) with all derivatives polynomially bounded
+in \(\mu\). By (K1), \(x\mapsto g(x,\cdot)k_A(x)\) is a smooth map into
+\(\ccK^m\) (into \(\ccK^{m-l}\) when \(M=\mu^lM'\)), holomorphic in \(z\)
+when \(M\) is. Its support is that of \(k_A\). So \(MA\in\PsicT^m\) by
+Lemma~\ref{cc:lem:char}.
+
+For the examples: (1) and (3) are clear. For (2), on \(\Omega_T\) we have
+\(1-x\mu=t'/t>0\), and
+\[
+ \frac t{t'}=1+\frac\mu{t'}\le1+\frac{2|\mu|}T,\qquad
+ \frac{t'}t=1-\frac\mu t\le1+\frac{2|\mu|}T .
+\]
+Every derivative \(\partial_x^a\partial_\mu^b(1-x\mu)^{-z}\) is a
+polynomial in \((x,\mu)\) times \((1-x\mu)^{-z-a-b}\), and is therefore
+polynomially bounded. The kernel of \(t^zAt^{-z}\) is
+\(t^zK_At'^{-z}=(t/t')^zK_A\). For (4), the derivatives of
+\(\chi(1/x-\mu)\) are handled as those of \(\theta\) above.
+\end{proof}
+
+\begin{lemma}[Derivation identities]\label{cc:lem:identities}
+For \(A,B\in\PsicT\) and \(z\in\C\),
+\begin{align*}
+ \delta(AB)&=\delta(A)B+W_2(A)\,\delta(B), &
+ \delta\circ\adt&=\adt\circ\delta,\\
+ \delta\circ W_z&=W_z\circ\delta-z\,W_{z+1}\circ\adt, &
+ \delta(A^*)&=W_2\bigl(\delta(A)^*\bigr),\qquad W_z(A^*)=(W_{-\bar z}A)^* .
+\end{align*}
+\end{lemma}
+
+\begin{proof}
+\(\delta(AB)=t^2[\partial_t,A]B+t^2A[\partial_t,B]=\delta(A)B+
+(t^2At^{-2})(t^2[\partial_t,B])\). Next,
+\([\partial_t,[t,A]]=[t,[\partial_t,A]]\) because \([\partial_t,t]=1\) is
+central, and \(t^2\) commutes with \(t\). For the third identity,
+\[
+ t^2[\partial_t,t^zAt^{-z}]=zt^{z+1}At^{-z}+t^{z+2}[\partial_t,A]t^{-z}
+ -zt^{z+2}At^{-z-1}=W_z(\delta A)-zt^{z+1}[t,A]t^{-z-1} .
+\]
+Finally \([\partial_t,A^*]=[\partial_t,A]^*\), since \(\partial_t^*=
+-\partial_t\). So \(\delta(A^*)=t^2(t^{-2}\delta(A))^*=
+t^2\delta(A)^*t^{-2}\), and \(t^zA^*t^{-z}=(t^{-\bar z}At^{\bar z})^*\).
+\end{proof}
+
+\begin{theorem}[Model calculus]\label{cc:thm:model}
+\(\PsicT^{\Z}\) is a filtered \(*\)-algebra:
+\(\PsicT^m\PsicT^{m'}\subset\PsicT^{m+m'}\) and
+\((\PsicT^m)^*=\PsicT^m\). The principal symbol is multiplicative. It is
+a smooth function of \((x,y,\tau,\eta)\) up to \(x=0\). The operators
+\(W_z\), \(e^{i\tau t}\cdot e^{-i\tau t}\) and \(\adt\) map \(\PsicT^m\)
+to \(\PsicT^m\), \(\PsicT^m\) and \(\PsicT^{m-1}\) respectively.
+Multiplication by \(f\in\CI([0,1/T]_x\times H)\) vanishing near
+\(x=1/T\), and cusp differential operators of order \(m\) with such
+coefficients, lie in \(\PsicT^m\).
+\end{theorem}
+
+\begin{proof}
+\emph{Composition.} We show by induction on \(j\) that
+\(\delta^j(AB)\in\Psiu^{m+m'}\) for all \(A\in\PsicT^m\) and
+\(B\in\PsicT^{m'}\). For \(j=0\) this is (K3), which also gives the
+support condition. By Lemma~\ref{cc:lem:identities},
+\[
+ \delta^{j+1}(AB)=\delta^j\bigl(\delta(A)B\bigr)
+ +\delta^j\bigl(W_2(A)\delta(B)\bigr).
+\]
+Here \(\delta(A)\) and \(W_2(A)\) lie in \(\PsicT^m\)
+(Definition~\ref{cc:def:model} and Lemma~\ref{cc:lem:mult}), and
+\(\delta(B)\in\PsicT^{m'}\). So the induction hypothesis applies to both
+terms.
+
+\emph{Adjoints.} We show by induction on \(j\) that
+\(\delta^i(A^*)\in\Psiu^m\) for all \(i\le j\) and all
+\(A\in\PsicT^m\). The case \(j=0\) is (K3). By
+Lemma~\ref{cc:lem:identities}, \(\delta^{j+1}(A^*)=\delta^j
+W_2(C)\) with \(C=\delta(A)^*\). Repeated use of the third identity
+writes \(\delta^jW_2(C)\) as a linear combination of
+\(W_{2+a}\adt^a\delta^{j-a}(C)\), \(0\le a\le j\). By the induction
+hypothesis applied to \(\delta(A)\in\PsicT^m\), we have
+\(\delta^{j-a}(C)\in\Psiu^m\). The multipliers of \(\adt\) and \(W_z\)
+preserve \(\Psiu^m\) on kernels supported in \(\{t,t'\ge T\}\), by the
+first paragraph of the proof of Lemma~\ref{cc:lem:mult}. So
+\(\delta^{j+1}(A^*)\in\Psiu^m\).
+
+\emph{Symbols and the rest.} By (K3), \(\sigma(AB)=\sigma(A)\sigma(B)\).
+By Lemma~\ref{cc:lem:char} and the continuity of \(\sigma_m\) in (K1),
+\(\sigma_m(A)\) is \(\sigma_m(k_A(x))\), a smooth function of \(x\)
+up to \(0\). The statements about \(W_z\), the conjugation by \(e^{i\tau
+t}\) and \(\adt\) are Lemma~\ref{cc:lem:mult}. Multiplication by \(f\) has
+kernel \(f(x,y)\delta(\mu)\delta_H(y,y')\), which is smooth in \(x\) with
+values in \(\ccK^0\). The vector fields \(x^2\partial_x=-\partial_t\) and
+\(\partial_{y_j}\) have kernels \(-\delta'(\mu)\) and derivatives of
+\(\delta_H\), independent of \(x\). A cusp differential operator is a sum
+of products of these, so it lies in \(\PsicT^m\) by the composition
+result.
+\end{proof}
+
+\begin{lemma}[Cut-off translation invariant operators]
+\label{cc:lem:cutoff}
+Let \(\chi\in\CI(\R)\) vanish on \((-\infty,T]\) and equal \(1\) on
+\([2T,\infty)\). Let \(\hat k\in\CI([0,\infty);\ccK^m(H))\) vanish for
+\(x\ge1/(2T)\). Then the operator \(A\) with kernel
+\(\chi(t)\chi(t')\hat k(1/t,t-t')\) lies in \(\PsicT^m\), and
+\(k_A-\hat k\) vanishes to infinite order at \(x=0\) in
+\(\ccK^m\). In particular \(\chi\kappa\chi\in\PsicT^m\) for
+\(\kappa\in\Psis^m(H)\), with \(k_{\chi\kappa\chi}=\kappa+O(x^\infty)\).
+\end{lemma}
+
+\begin{proof}
+We have \(k_A=\chi(1/x)\chi(1/x-\mu)\hat k\). Here \(\chi(1/x)=1\) for
+\(x<1/(2T)\), and \(\chi(1/x-\mu)\) is a multiplier, as in
+Lemma~\ref{cc:lem:mult}(4). So \(A\in\PsicT^m\). The function
+\(1-\chi(1/x-\mu)\) is supported where \(\mu\ge1/x-2T\ge1/(2x)\) for small
+\(x\). There \(\langle\mu\rangle^{-N}\le(2x)^N\). Since \(\hat k(x)\) is
+Schwartz away from \(\mu=0\), uniformly with all \(x\)-derivatives,
+\((1-\chi(1/x-\mu))\hat k\) is \(O(x^N)\) in \(\ccK^m\) for every
+\(N\), together with its \(x\)-derivatives.
+\end{proof}
+
+\begin{example}[The half-line, explicitly]\label{cc:ex:halfline}
+Take \(H=\mathrm{pt}\), so that \(X=[0,1/T)_x\). Let \(\kappa(\mu)=
+\frac12e^{-|\mu|}\), the kernel of \((D_t^2+1)^{-1}\in\Psis^{-2}\), with
+\(\In(\kappa,\tau)=(1+\tau^2)^{-1}\). By Lemma~\ref{cc:lem:cutoff},
+\(A=\chi(D_t^2+1)^{-1}\chi\in\PsicT^{-2}\), with
+\[
+ k_A(x,\mu)=\tfrac12e^{-|\mu|}\,\chi(1/x)\,\chi(1/x-\mu)
+ =\tfrac12e^{-|\mu|}+O(x^\infty).
+\]
+Conjugation by \(x=1/t\) multiplies the kernel by \((1-x\mu)^{-1}\)
+(Lemma~\ref{cc:lem:mult}(2) with \(z=1\)):
+\[
+ k_{x^{-1}Ax}=\frac{k_A}{1-x\mu}\sim\sum_{p\ge0}x^p\mu^p\,\tfrac12e^{-|\mu|},
+ \qquad\text{so}\qquad
+ x^{-1}Ax\sim\sum_{p\ge0}x^p\,\adt^p(A).
+\]
+The leading correction \(x\,\adt A\) has order \(-3\). By
+Lemma~\ref{cc:lem:sus} its indicial family is
+\(-i\partial_\tau(1+\tau^2)^{-1}=2i\tau(1+\tau^2)^{-2}\), the derivative
+in \(\tau\) predicted by the twist of Lemma~\ref{lem:twist}. The
+operator \(x^2D_x+c=-D_t+c\) of Example~\ref{ex:dt} has kernel
+\(i\delta'(\mu)+c\,\delta(\mu)\) on the collar, independent of \(x\). If
+\(c\notin\R\), its inverse on \(\R_t\) is convolution with
+\(\kappa_c(\mu)=-i\,e^{ic\mu}\mathbf 1_{\mu>0}\) when
+\(\operatorname{Im}c>0\), and with \(\kappa_c(\mu)=i\,e^{ic\mu}
+\mathbf 1_{\mu<0}\) when \(\operatorname{Im}c<0\). This kernel decays
+exponentially, lies in \(\ccK^{-1}\), and
+\(\In(\kappa_c,\tau)=(\tau+c)^{-1}\).
+\end{example}
+
+\subsection{The cusp calculus on \texorpdfstring{\(X\)}{X}}
+\label{cc:subsec:global}
+Transplant operators on \(\{t>1/\epsilon\}\times\partial X\) to the
+collar via \(t=1/x\). Since \(\nu_c=dt\,\nu_\partial\) there, kernels
+correspond. We write \(\iota_*B\) for the operator on \(X\) defined by
+\(B\in\PsicT^m(\R\times\partial X)\) when \(T>1/\epsilon\).
+
+\begin{definition}[Cusp pseudodifferential operators]\label{cc:def:Psic}
+\(\Psic^m(X)\) is the space of operators \(A\) with
+\[
+ K_A=K_{\iota_*B}+K_0+K_R ,
+\]
+where \(B\in\PsicT^m(\R\times\partial X)\) for some \(T>1/\epsilon\),
+\(K_0\) is the kernel of a classical pseudodifferential operator of order
+\(m\) with compact support in \(X^\circ\times X^\circ\), and
+\(K_R\in\dCI(X^2)\). We put \(\Psic^{-\infty}=\bigcap_m\Psic^m\) and
+\(x^{-\Z}\Psic^{\Z}(X)=\bigcup_{p,m}x^{-p}\Psic^m(X)\).
+\end{definition}
+
+\begin{proposition}[Agreement with \cite{MN}]\label{cc:prop:MNdef}
+\(\Psic^m(X)\) is the space of \cite[Def.~2]{MN}: the operators whose
+kernels, lifted to \(X_c^2\), are classical conormal of order \(m\) at
+\(\Delta_c\), smooth up to \(\ffc\), and vanishing to infinite order at
+all other boundary hypersurfaces. Here kernels are normalized with respect
+to \(\nu_c\) in the right factor, instead of the half-density
+normalization of \cite[(118)]{MN}.
+\end{proposition}
+
+\begin{proof}
+Away from a neighbourhood of \(\ffc\), the blow-down \(X_c^2\to X^2\) is
+the blow-down of \(X_b^2\) away from \(\Phi\). There the condition of
+\cite{MN} means: conormal at the interior diagonal, and vanishing to
+infinite order at \(\mathrm{lb}\), \(\mathrm{rb}\) and \(\ffb\), that is,
+\(\dCI\) on \(X^2\) near the corner. This is also what
+Definition~\ref{cc:def:Psic} gives there. Indeed \(K_0\) is conormal in
+the interior, \(K_R\) is \(\dCI\), and on the region \(\{x|\mu|\ge c\}\),
+which is away from \(\ffc\), the kernel \(k_B\) is \(O(\mu^{-\infty})\)
+with all derivatives. There \(x^{-1}\) and \(x'^{-1}\) are bounded by a
+multiple of \(|\mu|\), and \(\partial_x|_{x'}=\partial_x|_\mu-
+x^{-2}\partial_\mu\) and \(\partial_{x'}=x'^{-2}\partial_\mu\). So \(k_B\)
+is \(O((xx')^\infty)\) with all derivatives. Near \(\ffc\), both
+definitions say that, in the coordinates \((x,\mu,y,y')\), the kernel is a
+smooth function of \(x\in[0,\delta)\) with values in \(\ccK^m(\partial
+X)\). For \cite{MN} this follows from Lemmas~\ref{cc:lem:coords}
+and~\ref{cc:lem:decay}. Conormality at a submanifold transversal to the
+boundary is defined by smooth extension across \(\ffc\), which is
+smoothness in \(x\). For us it is Lemma~\ref{cc:lem:char}. Given an
+operator of the type in \cite{MN}, multiply its kernel by
+\(\chi(t)\chi(t')\) as in Lemma~\ref{cc:lem:cutoff}. This gives an element
+of \(\iota_*\PsicT^m\). The remainder is supported where \(x\) or \(x'\) is
+bounded below, and is the sum of a compactly supported interior
+pseudodifferential operator and a \(\dCI(X^2)\) kernel.
+\end{proof}
+
+We use cut-off functions of \(x\) alone. For \(0<a<b\), a function
+\(\phi=\phi(x)\) is \emph{of type} \((a,b)\) if \(\phi=1\) for \(x\le a\)
+and \(\phi=0\) for \(x\ge b\).
+
+\begin{lemma}[Localization and mapping]\label{cc:lem:local}
+Let \(A\in\Psic^m(X)\).
+\begin{enumerate}
+\item If \(\phi,\psi\in\CI(X)\) are functions of \(x\) with
+\(\supp\phi\cap\supp\psi=\emptyset\), then \(\phi A\psi\) has kernel in
+\(\dCI(X^2)\).
+\item If \(\phi,\psi\in\CI(X)\) are functions of \(x\) vanishing for
+\(x\ge1/T\), \(T>1/\epsilon\), then \(\phi A\psi\in
+\iota_*\PsicT^m+\dCI(X^2)\). If they have compact support in \(X^\circ\),
+then \(\phi A\psi\) is a compactly supported classical pseudodifferential
+operator of order \(m\), modulo \(\dCI(X^2)\).
+\item \(A\) maps \(\dCI(X)\) to \(\dCI(X)\) and \(\CI(X)\) to
+\(\CI(X)\) continuously. For \(u\in\CI(X)\), \((Au)|_{\partial X}\) depends
+only on \(u|_{\partial X}\):
+\begin{equation}\label{cc:eq:restriction}
+ (Au)|_{\partial X}=A_\partial\bigl(u|_{\partial X}\bigr),\qquad
+ A_\partial=\In(k_B(0),0)\ \text{has kernel}\ \int_\R k_B(0,\mu)\,d\mu .
+\end{equation}
+\item \(A^*\) and \(A^t\), with respect to \(\nu_c\), lie in \(\Psic^m(X)\).
+If \(K_R\in\dCI(X^2)\), then the operators \(AR\) and \(RA\) have kernels
+in \(\dCI(X^2)\), where \(R\) is the operator with kernel \(K_R\).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) Only the term \(\iota_*B\) needs proof. If \(\phi=0\) for \(x\ge b\)
+and \(\psi=0\) for \(x\le b'\), with \(b<b'\), then on the support
+\(\mu=1/x-1/x'\ge1/x-1/b'\ge c/x\). So the kernel is in the region of
+the proof of Proposition~\ref{cc:prop:MNdef}, where it is
+\(O((xx')^\infty)\) with all derivatives. The case with the roles of
+\(\phi\) and \(\psi\) exchanged is the same.
+
+(2) \(\phi\,\iota_*B\,\psi=\iota_*(\phi B\psi)\in\iota_*\PsicT^m\) by
+Theorem~\ref{cc:thm:model}. The term \(\phi K_0\psi\) is a compactly
+supported interior operator whose kernel is supported in
+\(\{t,t'\ge T\}\). Its \(k\) is smooth in \(x\) and vanishes near
+\(x=0\), so it lies in \(\iota_*\PsicT^m\). The interior case is the same,
+since on a compact subset of \(X^\circ\) the kernel \(k_B\) is a classical
+conormal distribution.
+
+(3) Under \(t=1/x\), \(\dCI\) functions supported in the collar correspond
+to restrictions to \(\{t\ge T\}\) of elements of \(\cS(\R\times
+\partial X)\). Indeed \(\partial_t=-x^2\partial_x\) and
+\(\partial_x=-t^2\partial_t\), so rapid decay of all \(t\)-derivatives is
+equivalent to infinite order vanishing of all \(x\)-derivatives. Hence (K4)
+gives the \(\dCI\) statement for \(\iota_*B\). The other two terms are
+clear. For \(u\in\CI(X)\) supported in the collar,
+\[
+ (\iota_*Bu)(x,y)=\int\!\!\int k_B(x,\mu,y,y')\,
+ u\Bigl(\frac x{1-x\mu},y'\Bigr)\,d\mu\,\nu_\partial(y').
+\]
+The function \(u(x/(1-x\mu),y')\) lies in \(\ccM_T\), because
+\(\partial_x^a\partial_\mu^b(x/(1-x\mu))\) is polynomially bounded on
+\(\Omega_T\). By (K1), the integrand is smooth in \(x\) with values in
+\(\ccK^m\). Integration over \(\mu\) and \(y'\) is continuous from
+\(\ccK^m\) to \(\CI(\partial X)\), by (K2) at \(\tau=0\). So \(\iota_*Bu\) is
+smooth up to \(x=0\). At \(x=0\) the integrand is
+\(k_B(0,\mu,y,y')u(0,y')\), which is \eqref{cc:eq:restriction}. The
+terms \(K_0\) and \(K_R\) contribute functions vanishing near
+\(\partial X\).
+
+(4) For \(\iota_*B\) this is Theorem~\ref{cc:thm:model}. The transpose
+is \(A^t=\overline{(\bar A)^*}\), where \(\bar A\) has kernel
+\(\overline{K_A}\). The other terms are clear. \(AR\) has kernel
+\((A\otimes1)K_R\), which lies in \(\dCI(X^2)=\dCI(X)\widehat\otimes
+\dCI(X)\) \cite{Treves} by (3). \(RA\) has kernel \((1\otimes A^t)K_R\).
+\end{proof}
+
+\begin{lemma}\label{cc:lem:residual}
+\(x^\infty\Psic^{-\infty}(X)=\bigcap_Nx^N\Psic^{-\infty}(X)\) is the space
+of operators with kernels in \(\dCI(X^2)\). This is the ideal \(\cI\) of
+the notes.
+\end{lemma}
+
+\begin{proof}
+One inclusion holds by definition. Conversely, let \(A\in
+x^N\Psic^{-\infty}\) for every \(N\). Then the Taylor coefficients of
+\(k_B\) at \(x=0\) all vanish. They do not depend on the decomposition,
+since the other two terms contribute \(0\) near \(x=0\) or
+\(O(x^\infty)\). So \(k_B=O(x^\infty)\) in
+\(\ccK^{-\infty}=\cS(\R_\mu;\CI)\). Since
+\(1/x'=1/x-\mu\le x^{-1}+|\mu|\), every negative power of \(x'\) is
+bounded by a polynomial in \(x^{-1}\) and \(|\mu|\). The derivatives
+\(\partial_x|_{x'}\) and \(\partial_{x'}\) bring in only such factors. So
+\(K_{\iota_*B}=O((xx')^\infty)\) with all derivatives.
+\end{proof}
+
+\begin{theorem}[The cusp calculus is a doubly filtered algebra]
+\label{cc:thm:comp}
+\begin{enumerate}
+\item \(\Psic^m(X)\,\Psic^{m'}(X)\subset\Psic^{m+m'}(X)\), and
+\(\Psic^m(X)\) is closed under adjoints and transposes.
+\item For \(A\in\Psic^m(X)\) and \(z\in\C\), \(x^{-z}Ax^z\in\Psic^m(X)\)
+depends holomorphically on \(z\), and \(x^{-z}Ax^z-A\in x\Psic^{m-1}(X)\).
+\item \(x^k\Psic^m(X)\cdot x^l\Psic^{m'}(X)\subset x^{k+l}\Psic^{m+m'}
+(X)\) for \(k,l\in\Z\). So \(x^{-\Z}\Psic^{\Z}(X)\) is an algebra filtered
+by order and by powers of \(x\), and \(\cI=x^\infty\Psic^{-\infty}(X)\) is
+a two-sided ideal in it.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(1) Fix \(T>2/\epsilon\) and choose \(\rho_\partial\) of type
+\((1/(8T),1/(4T))\) and \(\tilde\rho_\partial\) of type \((1/(2T),1/T)\),
+so that \(\supp\rho_\partial\cap\supp(1-\tilde\rho_\partial)=\emptyset\).
+Then \(\rho_0=1-\rho_\partial\) vanishes for \(x\le1/(8T)\). Let
+\(\tilde\rho_0=1-\phi\) with \(\phi\) of type \((1/(32T),1/(16T))\); it is
+equal to \(1\) near \(\supp\rho_0\) and vanishes near \(\partial X\). By Lemma~\ref{cc:lem:local}(1), for every
+\(A\in\Psic^m\),
+\[
+ A\equiv\rho_\partial A\tilde\rho_\partial+\rho_0A\tilde\rho_0
+ \mod\dCI(X^2),
+\]
+and by Lemma~\ref{cc:lem:local}(2) the two terms are of collar type
+(\(\iota_*\PsicT\)) and of interior type, modulo \(\dCI\). By
+Lemma~\ref{cc:lem:local}(4) the \(\dCI\) terms form an ideal. So it is
+enough to compose terms of the two types. Two collar terms compose by
+Theorem~\ref{cc:thm:model}, and two interior terms by the interior
+calculus. For a mixed product
+\(\rho_\partial A\tilde\rho_\partial\cdot\rho_0A'\tilde\rho_0\), the
+function \(\tilde\rho_\partial\rho_0\) is supported in
+\(\{1/(8T)\le x\le1/T\}\). Let \(\theta\) be a function of \(x\),
+supported in \(\{1/(16T)<x<2/T\}\) and equal to \(1\) near that
+set. Then, modulo \(\dCI\) (Lemma~\ref{cc:lem:local}(1)),
+\(\tilde\rho_\partial\rho_0A'\tilde\rho_0\equiv
+\tilde\rho_\partial\rho_0A'\theta\), and this lies in
+\(\iota_*\Psi_{c,T/2}^{m'}\) by Lemma~\ref{cc:lem:local}(2), since
+\(T/2>1/\epsilon\). So the product is a product of collar terms. The
+other mixed product is treated in the same way. Adjoints and transposes are
+Lemma~\ref{cc:lem:local}(4).
+
+(2) On the collar \(x^{-z}=t^z\), so
+\(x^{-z}\iota_*Bx^z=\iota_*W_z(B)\in\iota_*\PsicT^m\), holomorphic in \(z\)
+(Lemma~\ref{cc:lem:mult}). Taylor's formula with integral remainder in
+\(w=x\mu\) gives
+\begin{equation}\label{cc:eq:binom}
+ (1-x\mu)^{-z}=\sum_{p<N}\binom{z+p-1}{p}x^p\mu^p+x^N\mu^Nr_N(x,\mu;z),
+\end{equation}
+where \(r_N=\binom{z+N-1}{N}N\int_0^1(1-s)^{N-1}(1-sx\mu)^{-z-N}\,ds\).
+Here \((1-sx\mu)^{-1}\le\max(1,(1-x\mu)^{-1})\), so \(r_N\in\ccM_T\). With
+\(N=1\) this gives \(W_z(B)-B=x\cdot(\mu r_1)B\in x\PsicT^{m-1}\). The
+interior term \(A_0\) changes by \(x^{-z}[A_0,x^z]\), which is a
+compactly supported interior operator of order \(m-1\). The \(\dCI\) term
+is multiplied by \((x'/x)^z\) and stays in \(\dCI\).
+
+(3) \(x^kAx^lB=x^{k+l}(x^{-l}Ax^l)B\), by (1) and (2). The ideal property
+follows from Lemma~\ref{cc:lem:local}(4) and Lemma~\ref{cc:lem:residual}.
+\end{proof}
+
+\subsection{The symbol sequence and the quantization map}
+\label{cc:subsec:symbol}
+Let \(\ccS^m(\cT)\) be the classical symbols of order \(m\) on the
+bundle \(\cT\), smooth up to \(x=0\). Let \(\mathcal G^m(\cT)\) be the
+smooth functions on \(\cT\setminus0\) that are homogeneous of degree
+\(m\). Over the collar,
+\(\cT\cong[0,\epsilon)\times T^*\partial X\times\R_\tau\), and over the
+interior \(\cT=T^*X^\circ\) with \(\tau=x^2\xi\).
+
+\begin{proposition}[The symbol sequence {\cite[(11)]{MN}}]
+\label{cc:prop:symbol}
+There is a principal symbol map \(\sigma_m:\Psic^m(X)\to\mathcal
+G^m(\cT)\). It is the usual principal symbol over \(X^\circ\), and the
+sequence
+\[
+ 0\longrightarrow\Psic^{m-1}(X)\hookrightarrow\Psic^m(X)
+ \xrightarrow{\ \sigma_m\ }\mathcal G^m(\cT)\longrightarrow0
+\]
+is exact. Moreover
+\(\sigma_{m+m'}(AB)=\sigma_m(A)\sigma_{m'}(B)\),
+\(\sigma_m(A^*)=\overline{\sigma_m(A)}\) and
+\(\sigma_m(x^{-z}Ax^z)=\sigma_m(A)\).
+\end{proposition}
+
+\begin{proof}
+On the collar, set \(\sigma_m(A)=\sigma_m(k_B(x))\). In the interior,
+take the usual symbol of \(K_0\). These agree over the overlap. Over the
+interior of the collar, \(k_B(x)\) is the kernel of \(\iota_*B\) written
+in the coordinates \((t,y)\), and its symbol is the usual one, written in
+the covariable \(-\tau\) dual to \(t\), which is \(x^2\xi\) dual to
+\(x\). By Lemma~\ref{cc:lem:char} and (K1) the result is smooth up to
+\(x=0\) on \(\cT\). Multiplicativity and the adjoint formula hold in the
+model by Theorem~\ref{cc:thm:model}, and in the interior by the standard
+calculus. By the reduction in the proof of Theorem~\ref{cc:thm:comp}(1),
+they hold globally. The conjugation formula follows from
+Theorem~\ref{cc:thm:comp}(2). For exactness: if \(\sigma_m(A)=0\), then
+\(\sigma_m(k_B(x))=0\) for all \(x\), so \(k_B\) is a smooth map into
+\(\ccK^m\) with values in the closed subspace \(\ccK^{m-1}\). Its
+difference quotients and their limits stay in that subspace, and the
+topologies agree by (K1). So \(k_B\in\CI([0,1/T];\ccK^{m-1})\). The
+interior term is handled in the same way. Surjectivity follows from Proposition~\ref{cc:prop:quant}.
+\end{proof}
+
+\begin{proposition}[Global quantization {\cite[Prop.~24]{MN}}]
+\label{cc:prop:quant}
+There is a linear map
+\[
+ q:x^{-\Z}\ccS^{\Z}(\cT)\longrightarrow x^{-\Z}\Psic^{\Z}(X)
+\]
+with \(q(x^k\ccS^m)\subset x^k\Psic^m\), \(q(x^ka)=x^kq(a)\),
+\(\sigma_m(q(a))=a_m\) (the leading part), and \(q(\ccS^{-\infty})\subset
+\Psic^{-\infty}\). For every \(A\in\Psic^m\) there is an \(a\in
+\ccS^m\), unique modulo \(\ccS^{-\infty}\), with \(A-q(a)\in
+\Psic^{-\infty}\). So \(q\) induces linear isomorphisms
+\[
+ \frac{x^{-\Z}\ccS^{\Z}(\cT)}{x^{-\Z}\ccS^{-\infty}(\cT)}
+ \cong\frac{x^{-\Z}\Psic^{\Z}(X)}{x^{-\Z}\Psic^{-\infty}(X)},\qquad
+ \frac{x^{\infty}\ccS^{\Z}(\cT)}{x^{\infty}\ccS^{-\infty}(\cT)}
+ \cong\frac{x^{\infty}\Psic^{\Z}(X)}{x^\infty\Psic^{-\infty}(X)} .
+\]
+Given \(Q\in\Psic^1\) with positive principal symbol \(\mathsf q\), the
+left-hand sides are \(x^{-\Z}\CI(\Y)\Lser{\mathsf q^{-1}}\) and
+\(\dCI(\Y)\Lser{\mathsf q^{-1}}\), which gives the isomorphisms
+\cite[(13)]{MN} for \(\As\) and \(\Is\) as vector spaces.
+\end{proposition}
+
+\begin{proof}
+Choose \(\rho_\partial,\tilde\rho_\partial\) as in the proof of
+Theorem~\ref{cc:thm:comp}, a finite interior atlas, and a partition of
+unity \(\rho_\partial+\sum_i\rho_i=1\) with \(\tilde\rho_i=1\) near
+\(\supp\rho_i\). Define
+\[
+ q(a)=\tilde\rho_\partial\,\iota_*\mathrm{Op}_x(\rho_\partial a)\,
+ \tilde\rho_\partial+\sum_i\tilde\rho_i\,\mathrm{Op}_i(\rho_ia)\,
+ \tilde\rho_i .
+\]
+Here \(\mathrm{Op}_i\) is the left quantization in the chart \(i\), and
+\(\mathrm{Op}_x(b)\) is the operator with kernel \(k(x,\mu)=
+\mathrm{Op}(b(x,\cdot))(\mu)\) from (K1), placed on the cylinder by
+Lemma~\ref{cc:lem:cutoff}. It is smooth in \(x\) since \(\mathrm{Op}\) is
+continuous and linear. Since \(x\) is the left variable, \(q(xa)=xq(a)\);
+we set \(q(x^{-k}a)=x^{-k}q(a)\). The symbol identity is (K1).
+
+Given \(A\in\Psic^m\), let \(a_m\) be any element of \(\ccS^m\) with
+leading part \(\sigma_m(A)\). Then \(A-q(a_m)\in\Psic^{m-1}\) by
+Proposition~\ref{cc:prop:symbol}. Repeating, we obtain \(a_{m-j}\in
+\ccS^{m-j}\) with \(A-q(\sum_{j<N}a_{m-j})\in\Psic^{m-N}\). Let \(a\sim
+\sum a_{m-j}\) by Borel's lemma, applied to symbols depending smoothly on
+\(x\). Then \(A-q(a)\in\bigcap_N\Psic^{m-N}\). Uniqueness: if \(q(a)\in
+\Psic^{-\infty}\), then \(\sigma(q(a))=0\) at every order, so \(a\in
+\ccS^{-\infty}\). If \(a=O(x^\infty)\), then \(q(a)\in x^\infty\Psic\),
+since its kernel is \(O(x^\infty)\) and Lemma~\ref{cc:lem:char} applies.
+Conversely, if \(A\in x^\infty\Psic^m\), then for each \(N\),
+\(A=x^NA_N\) and \(a\equiv x^Na_N\) mod \(\ccS^{-\infty}\). So every
+homogeneous term of \(a\) is \(O(x^\infty)\), and a Borel sum of these
+terms gives \(a'\in x^\infty\ccS^m\) with \(a-a'\in\ccS^{-\infty}\). Then
+\(A-q(a')\in x^\infty\Psic^m\cap\Psic^{-\infty}=x^\infty\Psic^{-\infty}\);
+the last equality holds because the Taylor coefficients at \(x=0\) of a
+smooth map into \(\ccK^{-\infty}\) are the same whether computed in
+\(\ccK^{-\infty}\) or in \(\ccK^m\). So the isomorphism respects the
+\(x^\infty\) subspaces. Finally, a classical
+symbol modulo \(\ccS^{-\infty}\) is the same as its sequence of
+homogeneous terms \(a_{m-j}=\mathsf q^{m-j}\cdot(a_{m-j}\mathsf
+q^{j-m})\), with \(a_{m-j}\mathsf q^{j-m}\) a function on
+\(\Y\). Any such sequence is realized, by Borel's lemma.
+\end{proof}
+
+\begin{lemma}[Asymptotic summation]\label{cc:lem:borel}
+If \(A_j\in\Psic^{m-j}\), there is \(A\in\Psic^m\) with
+\(A-\sum_{j<N}A_j\in\Psic^{m-N}\) for all \(N\). If \(R_j\in
+x^j\Psic^m\), there is \(S\in\Psic^m\) with \(S-\sum_{j<N}R_j\in
+x^N\Psic^m\) for all \(N\).
+\end{lemma}
+
+\begin{proof}
+For the first statement, write \(A_j=q(a_j)\) modulo
+\(\Psic^{-\infty}\), sum the symbols, and set \(A=q(a)\). The second
+statement is Borel's lemma for the Taylor series at \(x=0\) of the
+kernels \(k_{R_j}\in x^j\CI([0,1/T];\ccK^m)\), followed by
+Lemma~\ref{cc:lem:cutoff}. An operator whose \(k\) vanishes to order
+\(N\) at \(x=0\) lies in \(x^N\Psic^m\), by Taylor's formula with
+remainder.
+\end{proof}
+
+\subsection{The indicial family, the normal operator and Taylor series}
+\label{cc:subsec:indicial}
+
+\begin{definition}[Normal operator and indicial family]\label{cc:def:normal}
+For \(A\in\Psic^m(X)\) with collar term \(\iota_*B\), the \emph{normal
+operator} is \(N(A)=k_B(0)\in\ccK^m(\partial X)\), regarded as an element
+of \(\Psis^m(\partial X)\). The \emph{indicial family} is
+\(\In(A,\tau)=\In(N(A),\tau)\).
+\end{definition}
+
+\(N(A)\) does not depend on the decomposition, since the other terms
+contribute \(0\) or \(O(x^\infty)\) at \(x=0\). Concretely, \(N(A)\) is the
+restriction of the lifted kernel to \(\ffc\), a convolution kernel in
+\(\mu\) by Lemma~\ref{cc:lem:coords}.
+
+\begin{proposition}[The indicial sequence {\cite[(12)]{MN}}]
+\label{cc:prop:indicial}
+\begin{enumerate}
+\item \textup{(MN's definition.)} For \(\tau\in\R\),
+\(\In(A,\tau)=\bigl(e^{i\tau/x}Ae^{-i\tau/x}\bigr)_\partial\), with
+\((\cdot)_\partial\) as in \eqref{cc:eq:restriction}. This is
+\eqref{eq:Indef}.
+\item \(N(AB)=N(A)N(B)\), \(\In(AB,\tau)=\In(A,\tau)\In(B,\tau)\),
+\(N(A^*)=N(A)^*\) and \(N(x^{-z}Ax^z)=N(A)\).
+\item The sequence
+\(0\to x\Psic^m(X)\hookrightarrow\Psic^m(X)\xrightarrow{N}\Psis^m(\partial X)
+\to0\) is exact.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(1) \(e^{i\tau/x}=e^{i\tau t}\), so the conjugated operator has collar
+kernel \(e^{i\tau\mu}k_B\) (Lemma~\ref{cc:lem:mult}(3)). By
+\eqref{cc:eq:restriction}, its boundary operator has kernel
+\(\int e^{i\tau\mu}k_B(0,\mu)\,d\mu=\In(N(A),\tau)\).
+
+(2) By Lemma~\ref{cc:lem:local}(3), \(((AB)u)|_\partial=A_\partial
+((Bu)|_\partial)=A_\partial B_\partial(u|_\partial)\). Every element of
+\(\CI(\partial X)\) is a restriction, so \((AB)_\partial=A_\partial
+B_\partial\). Applying this to the conjugates by \(e^{i\tau t}\) gives
+\(\In(AB,\tau)=\In(A,\tau)\In(B,\tau)\). Since the Fourier transform
+\eqref{cc:eq:In} is injective, \(N(AB)=N(A)N(B)\). For the adjoint: the
+kernel of \(B^*\) is \(\overline{K_B(t',t)}\), so
+\(k_{B^*}(x,\mu)=\overline{k_B(x/(1-x\mu),-\mu)}\) for \(x>0\). Since
+\(k_{B^*}\) is smooth up to \(x=0\) (Theorem~\ref{cc:thm:model}), its value
+at \(x=0\) is the limit, \(\overline{k_B(0,-\mu)}\), which is the kernel
+of \(N(A)^*\). The last statement follows from
+Theorem~\ref{cc:thm:comp}(2) and part (3), since \(x\Psic\subset\ker N\).
+
+(3) If \(A=xA'\), then \(k_B=xk_{B'}\) vanishes at \(x=0\). Conversely,
+if \(N(A)=0\), then \(k_B=xk_1\) with \(k_1=\int_0^1\partial_xk_B(sx)\,ds
+\in\CI([0,1/T];\ccK^m)\), which has the same support. So
+\(\iota_*B=x\,\iota_*B_1\), while \(K_0\) and \(K_R\) are \(x\) times terms
+of the same type. Surjectivity: \(N(\chi\kappa\chi)=\kappa\) by
+Lemma~\ref{cc:lem:cutoff}.
+\end{proof}
+
+\begin{proposition}[Conjugation and the twist]\label{cc:prop:conj}
+Let \(A\in\Psic^m(X)\) have collar term \(\iota_*B\), and let \(z\in\C\),
+\(N\in\N\). Then
+\[
+ x^{-z}(\iota_*B)x^z-\sum_{i<N}\binom{z+i-1}{i}x^i\,\iota_*\bigl(\adt^i
+ B\bigr)\in x^N\iota_*\PsicT^{m-N} .
+\]
+Hence conjugation by \(x^z\) preserves orders and \(x\)-orders, changes
+neither \(\sigma\) nor \(N\), and acts on Taylor series at \(\ffc\)
+(Proposition~\ref{cc:prop:taylor}) by
+\(\mathsf T(x^{-z}Ax^z)=\sum_i\binom{z+i-1}{i}x^i\adt^i\mathsf T(A)\),
+with \(\adt\) acting on the coefficients. On the collar,
+\([x,\partial_t]=x^2\), and for \(\kappa\in\Psis^m(\partial X)\),
+\(\In([t,\kappa],\tau)=-i\partial_\tau\In(\kappa,\tau)\) and
+\(x^{-1}\kappa x=\sum_{i\ge0}x^i\adt^i(\kappa)\) as Taylor series at
+\(\ffc\).
+\end{proposition}
+
+Here \(\binom{z+i-1}{i}=z(z+1)\cdots(z+i-1)/i!\).
+
+\begin{proof}
+Multiply \(k_B\) by \eqref{cc:eq:binom}. The term \(x^i\mu^ik_B\) is the
+kernel of \(x^i\adt^i(B)\), and the remainder
+\(x^N\mu^Nr_Nk_B\) lies in \(x^N\PsicT^{m-N}\) by
+Lemma~\ref{cc:lem:mult}. The remaining statements about orders,
+\(\sigma\) and \(N\) are Theorem~\ref{cc:thm:comp}(2) and
+Propositions~\ref{cc:prop:symbol} and~\ref{cc:prop:indicial}. For the
+twist: on the collar \([1/t,\partial_t]u=-\partial_t(1/t)\,u=t^{-2}u=
+x^2u\). The indicial family of \([t,\kappa]\) is given by
+Lemma~\ref{cc:lem:sus}. The formula for \(x^{-1}\kappa x\) is the case
+\(z=1\), applied to \(\chi\kappa\chi\) (Lemma~\ref{cc:lem:cutoff}).
+\end{proof}
+
+\begin{proposition}[Taylor series at the front face {\cite[Prop.~25]{MN}}]
+\label{cc:prop:taylor}
+For \(A\in x^{-k}\Psic^m(X)\), let
+\[
+ \mathsf T(A)=x^{-k}\sum_{j\ge0}x^j\,\frac1{j!}\,\partial_x^jk_{B}(0)
+ \in\Psis^m(\partial X)\Lser{x},
+\]
+where \(x^kA\) has collar term \(\iota_*B\). Write
+\(\Psis^{\Z}(\partial X)\Lser{x}=\bigcup_m\Psis^m(\partial X)\Lser{x}\),
+the series whose coefficients have bounded order. Then:
+\begin{enumerate}
+\item \(\mathsf T\) is well defined, surjective onto
+\(\Psis^{\Z}(\partial X)\Lser{x}\), respects the order filtration, and has
+kernel \(x^\infty\Psic^{\Z}(X)\).
+\item \(\mathsf T(AB)=\mathsf T(A)\cdot\mathsf T(B)\) for the associative
+product on \(\Psis^{\Z}(\partial X)\Lser{x}\) determined by
+\[
+ (x^jg)(x^lh)=\sum_{i\ge0}\binom{l+i-1}{i}x^{j+l+i}\,\adt^i(g)\,h,
+ \qquad j,l\in\Z ,
+\]
+with the powers of \(x\) written on the left. In particular
+\(x^{-1}\partial_tx=\partial_t-x\), that is, \([x,\partial_t]=x^2\).
+\end{enumerate}
+Hence \(x^{-\Z}\Psic^{\Z}(X)/x^\infty\Psic^{\Z}(X)\cong
+\Psis^{\Z}(\partial X)\Lser{x}\) as algebras, and the restrictions give
+\cite[(14)]{MN}.
+\end{proposition}
+
+For \(l\le0\) only finitely many terms are non-zero. The series in
+\(i\) makes sense in \(\Psis\Lser{x}\), because \(x^i\) raises the
+\(x\)-order by \(i\).
+
+\begin{proof}
+(1) Well-definedness is as for \(N\). Surjectivity is
+Lemma~\ref{cc:lem:borel} together with Lemma~\ref{cc:lem:cutoff}. If
+\(\mathsf T(A)=0\), then \(k_B=O(x^\infty)\), so \(A\in x^N\Psic^m\) for
+every \(N\), by Proposition~\ref{cc:prop:indicial}(3) applied repeatedly.
+
+(2) Take \(k=0\) for both factors; the general case follows by
+Theorem~\ref{cc:thm:comp}(3). Let \(\chi=\chi(x)\) be a cut-off of type
+\((a,b)\) with small \(b\). By Proposition~\ref{cc:prop:indicial}(3)
+applied repeatedly, and Lemma~\ref{cc:lem:cutoff},
+\(A\equiv\sum_{j<N}x^j\chi g_j\chi\) and \(B\equiv\sum_{l<N}x^l\chi
+h_l\chi\) modulo \(x^N\Psic\), where \(\mathsf T(A)=\sum x^jg_j\) and
+\(\mathsf T(B)=\sum x^lh_l\). By Proposition~\ref{cc:prop:conj},
+\[
+ x^j\chi g_j\chi\,x^l\chi h_l\chi\equiv\sum_{i<N}\binom{l+i-1}{i}
+ x^{j+l+i}\,\chi\adt^i(g_j)\chi\,\chi h_l\chi \mod x^N\Psic ,
+\]
+using that \(\chi\) commutes with \(t\). It remains to show that
+\(\mathsf T(\chi g\chi\,\chi h\chi)=gh\) for \(g,h\in\Psis\). The kernel of
+\(\chi g\chi^2h\chi-\chi(gh)\chi\) is
+\[
+ -\chi(t)\chi(t')\int\kappa_g(t-s)\bigl(1-\chi(s)^2\bigr)\kappa_h(s-t')\,
+ ds .
+\]
+The integrand is supported in a bounded set of \(s\), so for large
+\(t\) the factor \(\kappa_g(t-s)\) is evaluated far from \(0\) and is
+\(O(t^{-\infty})\) with all derivatives. If \(|\mu|\) is large, then
+either \(t'=t-\mu\) is large, and \(\kappa_h(s-t')\) is small, or \(t\) is
+large compared with \(|\mu|\). So the kernel, written as a function of
+\((x,\mu)\), is smooth and \(O(x^N\langle\mu\rangle^{-N})\) for every
+\(N\), with all derivatives. That is, its \(k\) is \(O(x^\infty)\) in
+\(\ccK^{-\infty}\). By Lemma~\ref{cc:lem:cutoff},
+\(\mathsf T(\chi(gh)\chi)=gh\). The identity \(x^{-1}\partial_tx=
+\partial_t-x\) follows from \(\adt\partial_t=[t,\partial_t]=-1\) and
+\(\adt^2\partial_t=0\). Associativity of the product is inherited from
+\(\Psic\).
+\end{proof}
+
+\begin{proposition}[Lifting b-operators {\cite[Prop.~26]{MN}}, first part]
+\label{cc:prop:transcendental}
+Let \(x_b=e^{-1/x}\), and let \(A\) be in the small b-calculus
+\(\Psi_b^m(X)\) of \cite{Notes}, defined with respect to \(x_b\). Then
+\(A\in\Psic^m(X)\), and \(\mathsf T(A)=N_b(A)\) is constant in \(x\):
+the cusp normal operator is the b-normal operator, and
+\(\In(A,\tau)=I(A,\tau)\) for \(\tau\in\R\).
+\end{proposition}
+
+\begin{proof}
+The b-density \(dx_b'/x_b'\) equals \(dx'/x'^2\), so kernels with respect
+to it are kernels with respect to \(\nu_c\). Near \(\ffb\), use the
+coordinates \(x_b\) and \(z=\log(x_b/x_b')\). Then \(z=-1/x+1/x'=-\mu\).
+A small b-kernel is \(K_b(x_b,z,y,y')\), smooth in \(x_b\), conormal at
+\(\{z=0,\ y=y'\}\), and \(O(e^{-N|z|})\) for every \(N\) together with its
+derivatives. This is infinite order vanishing at \(\mathrm{lb}\) and
+\(\mathrm{rb}\), where \(x_b'/x_b=e^{-z}\to0\) or \(\infty\). So
+\(x_b\mapsto K_b(x_b,\cdot)\) is smooth with values in \(\ccK^m\), and
+\[
+ k(x,\mu)=K_b\bigl(e^{-1/x},-\mu\bigr)
+\]
+is smooth in \(x\) up to \(0\), since \(e^{-1/x}\) is. It equals
+\(K_b(0,-\mu)\) modulo \(O(x^\infty)\), because \(e^{-1/x}\) vanishes to
+infinite order. Away from \(\ffb\), infinite order vanishing in \(x_b\)
+implies it in \(x\), since \(x_b^N=e^{-N/x}\). The indicial families agree
+by \eqref{cc:eq:In} and the identification of
+Section~\ref{subsec:indicialvariable}.
+\end{proof}
+
+\begin{remark}\label{cc:rem:density}
+The second part of \cite[Prop.~26]{MN}, density of the lifts, is not
+proved here and is not used in the notes. The cusp structure induced by
+\(x=1/\log(1/x_b)\) depends on \(x_b\) only through its boundary
+restriction, as discussed in Section~\ref{subsec:transcendental}.
+\end{remark}
+
+\subsection{Fredholm theory}\label{cc:subsec:fredholm}
+
+\begin{definition}\label{cc:def:fullyelliptic}
+\(A\in x^{-p}\Psic^m(X;E)\) is \emph{fully elliptic} if
+\(\sigma_m(x^pA)\) is invertible on \(\cT\setminus0\) and
+\(\In(x^pA,\tau)\) is invertible on \(\CI(\partial X;E)\) for every
+\(\tau\in\R\).
+\end{definition}
+
+By Propositions~\ref{cc:prop:symbol} and~\ref{cc:prop:indicial}, using
+\(x^pA\) or \(Ax^p\) here makes no difference.
+
+\begin{lemma}[Inverses in the suspended algebra]\label{cc:lem:susinv}
+Let \(\kappa\in\Psis^m(H)\) be elliptic, that is, \(\sigma_m(\kappa)\) is
+invertible on \((T^*H\times\R)\setminus0\). Suppose that
+\(\In(\kappa,\tau)\) is invertible for every \(\tau\in\R\). Then there is
+\(\gamma\in\Psis^{-m}(H)\) with \(\kappa\gamma=\gamma\kappa=1\), and
+\(\In(\gamma,\tau)=\In(\kappa,\tau)^{-1}\).
+\end{lemma}
+
+\begin{proof}
+\emph{Parametrix.} Let \(b_0\in\ccS^{-m}\) be equal to
+\(\sigma_m(\kappa)^{-1}\) for \(|\zeta|\ge1\), and put
+\(\beta_0=\mathrm{Op}(b_0)\). By (K1) and Lemma~\ref{cc:lem:sus},
+\(\kappa*\beta_0=1-\rho\) with \(\rho\in\Psis^{-1}\). Let \(\beta\) be an
+asymptotic sum of \(\beta_0*\rho^{*j}\), which exists by (K1). Then
+\(\kappa*\beta-1\in\Psis^{-\infty}\). In the same way a left parametrix
+exists, and the two differ by \(\Psis^{-\infty}\). So
+\[
+ \In(\kappa)\In(\beta)=1-S,\qquad\In(\beta)\In(\kappa)=1-S',\qquad
+ S,S'\in\cS\bigl(\R_\tau;\Psi^{-\infty}(H)\bigr),
+\]
+by (K2).
+
+\emph{The inverse.} Let \(G(\tau)=\In(\kappa,\tau)^{-1}\). From the two
+identities, \(\In(\beta)=G(1-S)\) and \(\In(\beta)=(1-S')G\), so
+\[
+ G=\In(\beta)+S'G=\In(\beta)+S'\In(\beta)+S'GS .
+\]
+By (K2), \(\In(\kappa,\tau)\) is a smooth family of bounded maps
+\(H^{s+m}(H)\to H^s(H)\). So \(G\) is smooth, with
+\(\partial_\tau G=-G(\partial_\tau\In\kappa)G\). For \(|\tau|\) large,
+\(\|S(\tau)\|_{H^s\to H^s}<\frac12\). So \(G=\In(\beta)(1-S)^{-1}\) is
+bounded \(H^s\to H^{s+m}\) by \(C\langle\tau\rangle^{|m|}\), by (K2). On compact sets of \(\tau\) it is bounded by continuity. (Here
+\(\In(\kappa,\tau)\) is elliptic on \(H\), so its inverse on \(\CI\) is
+also its inverse \(H^s\to H^{s+m}\).) Since \(\partial_\tau\In(\kappa)\)
+has order \(m-1\), the formula for \(\partial_\tau G\) and induction show
+that all \(\partial_\tau^jG\) are polynomially bounded as maps \(H^s\to
+H^{s+m}\). Since \(S\) and \(S'\) are Schwartz in \(\tau\) as maps
+\(H^{-M}\to H^M\) for every \(M\), the family \(S'GS\) is Schwartz in
+\(\tau\) with values in \(\Psi^{-\infty}(H)\). By (K2) it is
+\(\In(\gamma')\) for some \(\gamma'\in\Psis^{-\infty}\). Let
+\(\sigma'\in\Psis^{-\infty}\) be the element with \(\In(\sigma')=S'\).
+Then \(\gamma=\beta+\sigma'*\beta+\gamma'\in\Psis^{-m}\), and its
+indicial family is \(G\). Hence \(\kappa\gamma=\gamma\kappa=1\), by injectivity of the
+Fourier transform.
+\end{proof}
+
+\begin{definition}[Cusp Sobolev spaces]\label{cc:def:sobolev}
+For \(s\in\R\), \(H^s_c(X)\) is the space of \(u\in H^s_{\mathrm{loc}}
+(X^\circ)\) such that \(\rho_0u\in H^s\) and \(\rho_\partial u\),
+transplanted to the cylinder \(\R\times\partial X\), lies in
+\(H^s(\R\times\partial X)\). Here \(\rho_\partial,\rho_0\) are as in the
+proof of Theorem~\ref{cc:thm:comp}. For \(r\in\R\) we also use
+\(x^rH^s_c(X)\). Note that \(H^0_c(X)=L^2(X,\nu_c)\).
+\end{definition}
+
+\begin{lemma}\label{cc:lem:sobolev}
+\begin{enumerate}
+\item \(A\in x^p\Psic^m(X)\) is bounded \(x^rH^s_c\to x^{r+p}H^{s-m}_c\)
+for all \(r,s\).
+\item \(\bigcap_{r,s}x^rH^s_c(X)=\dCI(X)\).
+\item An operator \(R\) with kernel in \(\dCI(X^2)\) maps
+\(\bigcup_{r,s}x^rH^s_c\) to \(\dCI(X)\). It is compact on every
+\(x^rH^s_c\).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) By Theorem~\ref{cc:thm:comp}(2), \(x^{-r-p}Ax^r\in\Psic^m\). So we may
+take \(r=p=0\). Then the collar term is bounded by (K4), and the other two
+terms are bounded by the interior calculus.
+
+(2) If \(u\) lies in every \(x^rH^s_c\), then on the cylinder
+\(t^N\rho_\partial u\in H^s\) for all \(N,s\). By Sobolev embedding,
+all \(\partial_t^j\partial_y^\alpha u\) are \(O(t^{-\infty})\). Since
+\(\partial_x=-t^2\partial_t\), all \(x\)-derivatives are \(O(x^\infty)\).
+The converse is clear.
+
+(3) The space \(x^rH^s_c\) is dual to \(x^{-r}H^{-s}_c\) under the
+\(L^2(\nu_c)\) pairing. For \(v\in x^rH^s_c\),
+\(Rv(z)=\langle K_R(z,\cdot),v\rangle\). So every \(\dCI\) seminorm of
+\(Rv\) is bounded by a seminorm of \(K_R\) times \(\|v\|\). In particular
+\(\|R\|_{x^rH^s_c\to x^rH^s_c}\) is bounded by a \(\dCI(X^2)\) seminorm
+of \(K_R\). Finite sums \(\sum\phi_i(z)\psi_i(z')\) with
+\(\phi_i,\psi_i\in\dCI(X)\) are dense in \(\dCI(X^2)\) \cite{Treves}. So
+\(R\) is a norm limit of finite rank operators, and hence compact.
+\end{proof}
+
+\begin{theorem}[Parametrix]\label{cc:thm:parametrix}
+If \(A\in\Psic^m(X;E)\) is fully elliptic, there is \(Q\in
+\Psic^{-m}(X;E)\) with
+\[
+ AQ=1-R,\qquad QA=1-R',\qquad R,R'\in x^\infty\Psic^{-\infty}(X;E)
+ =\{\text{kernels in }\dCI(X^2)\}.
+\]
+Conversely, if \(A\in x^{-p}\Psic^m\) has \(B\in x^p\Psic^{-m}\) with
+\(AB-1,BA-1\in\cI\), then \(A\) is fully elliptic. So full ellipticity is
+invertibility in \(\cA=x^{-\Z}\Psic^{\Z}/\cI\), with the orders matched.
+\end{theorem}
+
+\begin{proof}
+\emph{Symbolic step.} Let \(Q_1=q(b)\) with \(b\) equal to
+\(\sigma_m(A)^{-1}\) away from the zero section. Then \(AQ_1=1-R_1\) with
+\(R_1\in\Psic^{-1}\) (Proposition~\ref{cc:prop:symbol}). Let
+\(S_1\sim\sum_{j\ge1}R_1^j\) (Lemma~\ref{cc:lem:borel}), and put
+\(Q_2=Q_1(1+S_1)\). As below, \((1-R_1)(1+S_1)-1\in\Psic^{-N}\) for every
+\(N\), so \(AQ_2=1-R_2\) with \(R_2\in\Psic^{-\infty}\).
+
+\emph{Indicial step.} By Proposition~\ref{cc:prop:indicial},
+\(N(A)\in\Psis^m(\partial X)\) satisfies the hypotheses of
+Lemma~\ref{cc:lem:susinv}. Its symbol is \(\sigma_m(A)|_{x=0}\). Let
+\(\gamma=N(A)^{-1}\in\Psis^{-m}\), and put
+\(Q_3=Q_2+\chi(\gamma N(R_2))\chi\), with \(\chi\) as in
+Lemma~\ref{cc:lem:cutoff}. The added term lies in \(\Psic^{-\infty}\), and
+\[
+ N(AQ_3)=1-N(R_2)+N(A)\gamma N(R_2)=1 .
+\]
+So \(AQ_3=1-R_3\) with \(R_3\in\Psic^{-\infty}\) and \(N(R_3)=0\), that is,
+\(R_3\in x\Psic^{-\infty}\) by Proposition~\ref{cc:prop:indicial}(3).
+
+\emph{Boundary Neumann series.} By Theorem~\ref{cc:thm:comp},
+\(R_3^j\in x^j\Psic^{-\infty}\). Let \(S_3\sim\sum_{j\ge1}R_3^j\) in the
+sense of Lemma~\ref{cc:lem:borel}, with \(S_3\in\Psic^{-\infty}\). Put \(Q=Q_3(1+S_3)\). Since
+\((1-R_3)(1+\sum_{1\le j\le N}R_3^j)=1-R_3^{N+1}\), we get
+\(AQ-1=(1-R_3)(1+S_3)-1\in x^{N}\Psic^{-\infty}\) for every \(N\). By
+Lemma~\ref{cc:lem:residual} it has kernel in \(\dCI(X^2)\). A left parametrix \(Q'\) is constructed in
+the same way, and \(Q'-Q=Q'(1-AQ)-(1-Q'A)Q\in\cI\). So \(Q\) is a two-sided
+parametrix.
+
+\emph{Converse.} Write \(A=x^{-p}A'\) and \(B=B'x^p\). Then
+\(A'B'\equiv x^pABx^{-p}\equiv1\) mod \(\cI\). Taking \(\sigma_0\) and
+\(N\) gives \(\sigma(A')\sigma(B')=1\) and \(N(A')N(B')=1\), and similarly
+in the other order.
+\end{proof}
+
+\begin{theorem}[Fredholm theory, (B2)]\label{cc:thm:fredholm}
+Let \(A\in x^{-p}\Psic^m(X;E)\) be fully elliptic. Then:
+\begin{enumerate}
+\item \(\ker A\) and \(\ker A^*\) (adjoint with respect to
+\(L^2(X,\nu_c;E)\)) are finite dimensional subspaces of \(\dCI(X;E)\). For
+every \(r,s\in\R\), \(A:x^rH^s_c\to x^{r-p}H^{s-m}_c\) is Fredholm, with
+kernel \(\ker A\) and range \(\{f:\langle f,v\rangle=0\ \text{for all}\
+v\in\ker A^*\}\). In particular its index does not depend on \(r\) or
+\(s\).
+\item \(A:\dCI(X;E)\to\dCI(X;E)\) is Fredholm, with the same kernel and the
+range described in \textup{(1)}.
+\item \textup{(Generalized inverse.)} There is \(B_0\in x^p\Psic^{-m}
+(X;E)\) with
+\[
+ AB_0=1-\Pi_1,\qquad B_0A=1-\Pi_0 .
+\]
+Here \(\Pi_0\) is the \(L^2(\nu_c)\)-orthogonal projection onto \(\ker A\),
+and \(\Pi_1=x^{-p}\Pi_1'x^p\), with \(\Pi'_1\) the orthogonal projection
+onto \(\ker(x^pA)^*\). Both are finite rank projections with kernels in
+\(\dCI(X^2)\), that is, in \(\cI\). \(\Pi_1\) projects onto a complement of
+the range of \(A\) on \(\dCI\).
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Put \(A'=x^pA\in\Psic^m\). It is fully elliptic, and \((A')^*=A^*x^p\) is
+fully elliptic too: its symbol and normal operator are the adjoints
+(Propositions~\ref{cc:prop:symbol} and~\ref{cc:prop:indicial}). Let \(Q\)
+be a parametrix for \(A'\) as in Theorem~\ref{cc:thm:parametrix}.
+
+(1) Conjugating by \(x^r\) (Theorem~\ref{cc:thm:comp}(2)) and using
+Lemma~\ref{cc:lem:sobolev}(1), \(A':x^rH^s_c\to x^rH^{s-m}_c\) and \(Q\) in
+the reverse direction are bounded. Then \(A'Q-1\) and \(QA'-1\) are compact
+by Lemma~\ref{cc:lem:sobolev}(3), so \(A'\) is Fredholm. If \(A'u=0\) with
+\(u\in x^rH^s_c\), then \(u=R'u\in\dCI\) by
+Lemma~\ref{cc:lem:sobolev}(3). So the kernel is a finite dimensional
+subspace of \(\dCI\), independent of \(r,s\). The same applies to
+\((A')^*\), and hence to \(\ker A^*=x^p\ker(A')^*\subset\dCI\). The range
+of a Fredholm operator is closed. By duality between \(x^rH^{s-m}_c\) and
+\(x^{-r}H^{m-s}_c\), it is the annihilator of the kernel of the adjoint,
+and that kernel is \(\ker(A')^*\). Finally, \(A=x^{-p}A'\) and
+multiplication by \(x^{-p}\) is an isomorphism \(x^rH^{s-m}_c\to
+x^{r-p}H^{s-m}_c\).
+
+(2) If \(f\in\dCI\) is orthogonal to \(\ker A^*\), then by (1) \(f=Au\)
+for some \(u\) in some \(x^rH^s_c\). Then \(u=QA'u+R'u=Qx^pf+R'u\in\dCI\),
+because \(Q\) preserves \(\dCI\) (Lemma~\ref{cc:lem:local}(3)) and \(R'u\in
+\dCI\). So the range on \(\dCI\) is closed, of finite codimension, and
+\(A\) is Fredholm on \(\dCI\).
+
+(3) We follow the closed case \cite[Ch.~4]{MelroseMicro}. Let
+\(\Pi_0\), \(\Pi'_1\) be the orthogonal projections onto \(\ker A'\) and
+\(\ker(A')^*\). Their kernels are \(\sum_ie_i(z)\overline{e_i(z')}\) for
+orthonormal bases \(e_i\subset\dCI\), so they lie in \(\dCI(X^2)\). Let
+\(G:L^2_c\to H^m_c\) be the inverse of \(A':\ker(A')^\perp\cap H^m_c\to
+\operatorname{Ran}A'\), extended by \(0\) on \(\ker(A')^*\). Then
+\(GA'=1-\Pi_0\) and \(A'G=1-\Pi_1'\), and
+\begin{align*}
+ G&=(QA'+R')G=Q(1-\Pi_1')+R'G,\\
+ R'G&=R'G(A'Q+R)=R'(1-\Pi_0)Q+R'GR .
+\end{align*}
+The terms \(Q\Pi'_1\), \(R'Q\) and \(R'\Pi_0Q\) have kernels in \(\dCI(X^2)\)
+by Lemma~\ref{cc:lem:local}(4). The kernel of \(R'GR\) is
+\[
+ (z,z')\longmapsto\int_XK_{R'}(z,w)\,\bigl(G\,K_R(\cdot,z')\bigr)(w)\,
+ \nu_c(w).
+\]
+Here \(z'\mapsto K_R(\cdot,z')\) and \(z\mapsto K_{R'}(z,\cdot)\) are smooth
+maps into \(L^2(\nu_c)\) all of whose derivatives vanish to infinite order
+at \(\partial X\), and \(G\) is bounded on \(L^2(\nu_c)\). So this kernel
+lies in \(\dCI(X^2)\). Hence
+\(G\in Q+\dCI(X^2)\subset\Psic^{-m}\). Put \(B_0=Gx^p\in x^p\Psic^{-m}\).
+Then \(B_0A=GA'=1-\Pi_0\) and \(AB_0=x^{-p}A'Gx^p=1-x^{-p}\Pi_1'x^p\). The
+kernel of \(x^{-p}\Pi'_1x^p\) is \(x^{-p}\Pi'_1(z,z')x'^p\), which still
+lies in \(\dCI(X^2)\). Its range \(x^{-p}\ker(A')^*\) is a complement of
+\(\operatorname{Ran}A=x^{-p}\operatorname{Ran}A'\).
+\end{proof}
+
+This is exactly what Lemma~\ref{lem:fedosov} uses: \(B_0\) represents
+\([A]^{-1}\) in \(\cA\), and \(\Pi_0,\Pi_1\in\cI\) have finite rank.
+
+\subsection{Summary}\label{cc:subsec:summary}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{p{0.44\textwidth}p{0.47\textwidth}}
+ statement & where proved\\\hline
+ (B1) doubly filtered algebra, adjoints &
+ Theorem~\ref{cc:thm:comp} (via Theorem~\ref{cc:thm:model})\\
+ (B1) symbol sequence \cite[(11)]{MN} & Proposition~\ref{cc:prop:symbol}\\
+ (B1) indicial sequence \cite[(12)]{MN}, \(N(A)\in\Psis\) &
+ Proposition~\ref{cc:prop:indicial}\\
+ (B1) quantization \cite[Prop.~24]{MN}, (13) &
+ Proposition~\ref{cc:prop:quant}\\
+ (B1) Taylor series \cite[Prop.~25]{MN}, (14), twist &
+ Propositions~\ref{cc:prop:taylor}, \ref{cc:prop:conj}\\
+ (B1) conjugation by \(x^z\) & Theorem~\ref{cc:thm:comp}(2),
+ Proposition~\ref{cc:prop:conj}\\
+ \cite[Def.~2]{MN} via \(X_c^2\) & Proposition~\ref{cc:prop:MNdef}\\
+ \cite[Prop.~26]{MN}, lift of b-operators &
+ Proposition~\ref{cc:prop:transcendental} (density not proved)\\
+ (B2) Fredholm, generalized inverse, \(\dCI\) kernels &
+ Theorems~\ref{cc:thm:parametrix}, \ref{cc:thm:fredholm}\\
+ quoted: uniform calculus on \(\R\times H\) &
+ Background fact~\ref{cc:bg:uniform}\\
+\end{tabular}
+\end{center}
